@@ -6,7 +6,7 @@ import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-import { DEFAULT_SIZE, ICON_SIZE_RATIO, resolveAvatarColors } from './utils';
+import { DEFAULT_SIZE } from './utils';
 
 export type Props = ViewProps & {
   /**
@@ -50,10 +50,6 @@ const Avatar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { background, textColor } = resolveAvatarColors({
-    theme,
-    color: customColor,
-  });
 
   return (
     <View
@@ -62,14 +58,18 @@ const Avatar = ({
           width: size,
           height: size,
           borderRadius: cornerFull,
-          backgroundColor: background,
+          backgroundColor: theme.colors.primaryContainer,
         },
         styles.container,
-        style ?? {},
+        style,
       ]}
       {...rest}
     >
-      <Icon source={icon} color={textColor} size={size * ICON_SIZE_RATIO} />
+      <Icon
+        source={icon}
+        color={customColor ?? theme.colors.onPrimaryContainer}
+        size={size * 0.6}
+      />
     </View>
   );
 };

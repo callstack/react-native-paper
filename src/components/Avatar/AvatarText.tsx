@@ -1,7 +1,7 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
-import { DEFAULT_SIZE, resolveAvatarColors } from './utils';
+import { DEFAULT_SIZE } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
@@ -62,10 +62,6 @@ const AvatarText = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { background, textColor } = resolveAvatarColors({
-    theme,
-    color: customColor,
-  });
   const { fontScale } = useWindowDimensions();
 
   return (
@@ -75,19 +71,20 @@ const AvatarText = ({
           width: size,
           height: size,
           borderRadius: cornerFull,
-          backgroundColor: background,
+          backgroundColor: theme.colors.primaryContainer,
         },
         styles.container,
-        style ?? {},
+        style,
       ]}
       {...rest}
     >
       <Text
+        variant="titleMedium"
+        theme={themeOverrides}
         style={[
           styles.text,
-          theme.fonts.titleMedium,
           {
-            color: textColor,
+            color: customColor ?? theme.colors.onPrimaryContainer,
             fontSize: size / 2,
             lineHeight: size / fontScale,
           },

@@ -8,7 +8,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import { DEFAULT_SIZE, resolveAvatarColors } from './utils';
+import { DEFAULT_SIZE } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
@@ -88,7 +88,6 @@ const AvatarImage = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { background } = resolveAvatarColors({ theme });
 
   return (
     <View
@@ -97,7 +96,7 @@ const AvatarImage = ({
           width: size,
           height: size,
           borderRadius: cornerFull,
-          backgroundColor: background,
+          backgroundColor: theme.colors.primaryContainer,
         },
         style,
       ]}

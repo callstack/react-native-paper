@@ -14,7 +14,7 @@ exports[`renders avatar with icon 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      undefined,
     ]
   }
 >
@@ -148,7 +148,7 @@ exports[`renders avatar with text 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      undefined,
     ]
   }
 >
@@ -161,18 +161,9 @@ exports[`renders avatar with text 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
-          {
-            "textAlign": "center",
-            "textAlignVertical": "center",
-          },
           {
             "fontFamily": "System",
             "fontSize": 16,
@@ -180,12 +171,18 @@ exports[`renders avatar with text 1`] = `
             "letterSpacing": 0.15,
             "lineHeight": 24,
           },
-          {
-            "color": "rgba(33, 0, 93, 1)",
-            "fontSize": 32,
-            "lineHeight": 64,
-          },
-          undefined,
+          [
+            {
+              "textAlign": "center",
+              "textAlignVertical": "center",
+            },
+            {
+              "color": "rgba(33, 0, 93, 1)",
+              "fontSize": 32,
+              "lineHeight": 64,
+            },
+            undefined,
+          ],
         ],
       ]
     }
@@ -224,18 +221,9 @@ exports[`renders avatar with text and custom background color 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
-          {
-            "textAlign": "center",
-            "textAlignVertical": "center",
-          },
           {
             "fontFamily": "System",
             "fontSize": 16,
@@ -243,12 +231,18 @@ exports[`renders avatar with text and custom background color 1`] = `
             "letterSpacing": 0.15,
             "lineHeight": 24,
           },
-          {
-            "color": "rgba(33, 0, 93, 1)",
-            "fontSize": 32,
-            "lineHeight": 64,
-          },
-          undefined,
+          [
+            {
+              "textAlign": "center",
+              "textAlignVertical": "center",
+            },
+            {
+              "color": "rgba(33, 0, 93, 1)",
+              "fontSize": 32,
+              "lineHeight": 64,
+            },
+            undefined,
+          ],
         ],
       ]
     }
@@ -272,7 +266,7 @@ exports[`renders avatar with text and custom colors 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      undefined,
     ]
   }
 >
@@ -285,18 +279,9 @@ exports[`renders avatar with text and custom colors 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
-          {
-            "textAlign": "center",
-            "textAlignVertical": "center",
-          },
           {
             "fontFamily": "System",
             "fontSize": 16,
@@ -304,12 +289,18 @@ exports[`renders avatar with text and custom colors 1`] = `
             "letterSpacing": 0.15,
             "lineHeight": 24,
           },
-          {
-            "color": "#FFFFFF",
-            "fontSize": 32,
-            "lineHeight": 64,
-          },
-          undefined,
+          [
+            {
+              "textAlign": "center",
+              "textAlignVertical": "center",
+            },
+            {
+              "color": "#FFFFFF",
+              "fontSize": 32,
+              "lineHeight": 64,
+            },
+            undefined,
+          ],
         ],
       ]
     }
@@ -333,7 +324,7 @@ exports[`renders avatar with text and custom size 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      undefined,
     ]
   }
 >
@@ -346,18 +337,9 @@ exports[`renders avatar with text and custom size 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
-          {
-            "textAlign": "center",
-            "textAlignVertical": "center",
-          },
           {
             "fontFamily": "System",
             "fontSize": 16,
@@ -365,12 +347,18 @@ exports[`renders avatar with text and custom size 1`] = `
             "letterSpacing": 0.15,
             "lineHeight": 24,
           },
-          {
-            "color": "rgba(33, 0, 93, 1)",
-            "fontSize": 48,
-            "lineHeight": 96,
-          },
-          undefined,
+          [
+            {
+              "textAlign": "center",
+              "textAlignVertical": "center",
+            },
+            {
+              "color": "rgba(33, 0, 93, 1)",
+              "fontSize": 48,
+              "lineHeight": 96,
+            },
+            undefined,
+          ],
         ],
       ]
     }
