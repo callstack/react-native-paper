@@ -68,6 +68,15 @@ export type Props<T extends string = string> = {
    * `'extra-small'`, `'small'`, `'medium'`, `'large'` or `'extra-large'`.
    */
   size?: ConnectedButtonGroupSize;
+  /**
+   * Accessible name for the group.
+   */
+  'aria-label'?: string;
+  /**
+   * `nativeID` of the element which provides the accessible name for the
+   * group, such as a heading. Supported on Android and web.
+   */
+  'aria-labelledby'?: string;
   style?: StyleProp<ViewStyle>;
   /**
    * testID to be used on tests.
@@ -125,6 +134,8 @@ const ConnectedButtonGroup = <T extends string = string>({
   buttons,
   multiSelect,
   size = 'small',
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   style,
   testID,
   theme: themeOverrides,
@@ -135,6 +146,8 @@ const ConnectedButtonGroup = <T extends string = string>({
   return (
     <View
       role={multiSelect ? 'group' : 'radiogroup'}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
       style={[styles.row, { columnGap: betweenSpace }, style]}
       testID={testID}
     >

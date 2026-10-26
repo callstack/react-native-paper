@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
@@ -253,6 +253,30 @@ it('marks multi-select buttons with the checkbox role', async () => {
   );
 
   expect(screen.getByTestId('walk')).toHaveProp('role', 'checkbox');
+});
+
+it('names the group with aria-label or aria-labelledby', async () => {
+  await render(
+    <>
+      <ConnectedButtonGroup
+        aria-label="Travel mode"
+        value="walk"
+        onValueChange={() => {}}
+        buttons={buttons}
+      />
+      <Text nativeID="sort-label">Sort by</Text>
+      <ConnectedButtonGroup
+        multiSelect
+        aria-labelledby="sort-label"
+        value={['walk']}
+        onValueChange={() => {}}
+        buttons={buttons}
+      />
+    </>
+  );
+
+  expect(screen.getByLabelText('Travel mode')).toHaveProp('role', 'radiogroup');
+  expect(screen.getByLabelText('Sort by')).toHaveProp('role', 'group');
 });
 
 it('morphs only the connected corners of each position', async () => {
