@@ -428,18 +428,18 @@ const Button = ({
   const containerColor =
     backgroundOpacity < 1 ? 'transparent' : backgroundColor;
 
-  // Snap rather than cross-fade when a transparent container is involved — see
-  // `getButtonTransitionDuration`.
-  const previousContainerColorRef = React.useRef(containerColor);
+  // Snap rather than animate when a transparent container is involved.
+  const [committedContainerColor, setCommittedContainerColor] =
+    React.useState(containerColor);
   React.useEffect(() => {
-    previousContainerColorRef.current = containerColor;
+    setCommittedContainerColor(containerColor);
   }, [containerColor]);
 
   const surfaceTransitionDuration = getButtonTransitionDuration({
     theme,
     pressed,
     containerColor,
-    previousContainerColor: previousContainerColorRef.current,
+    previousContainerColor: committedContainerColor,
   });
 
   // The clip carries the same animated radius as the `Surface`, so the ripple

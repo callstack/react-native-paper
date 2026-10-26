@@ -885,8 +885,6 @@ describe('getButtonTransitionDuration', () => {
     ).toBe(scaled('short4'));
   });
 
-  // Fading to or from `transparent` interpolates through gray, which is what
-  // made a mode switch leave `outlined` looking like a filled gray button.
   it('snaps when the container becomes transparent', () => {
     expect(
       getButtonTransitionDuration({
