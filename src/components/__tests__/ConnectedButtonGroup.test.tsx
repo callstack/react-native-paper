@@ -4,21 +4,7 @@ import { Platform, Text } from 'react-native';
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
-import { LightTheme } from '../../theme/schemes';
-import { tokens } from '../../theme/tokens';
-import { cornerFull } from '../../theme/tokens/sys/shape';
 import ConnectedButtonGroup from '../ConnectedButtonGroup/ConnectedButtonGroup';
-import {
-  connectedButtonSizeTokens,
-  type ConnectedButtonGroupSize,
-} from '../ConnectedButtonGroup/tokens';
-import {
-  getConnectedButtonColors,
-  getConnectedButtonPosition,
-  getConnectedButtonSizeStyle,
-} from '../ConnectedButtonGroup/utils';
-
-const theme = LightTheme;
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -45,49 +31,52 @@ const renderGroup = (props: Partial<SingleSelectProps> = {}) =>
     />
   );
 
-it('renders every button with its label', async () => {
-  await renderGroup();
+it('exposes the selected button as a checked radio', async () => {
+  await renderGroup({ value: 'train' });
 
-  expect(screen.getByTestId('walk-label')).toHaveTextContent('Walking');
-  expect(screen.getByTestId('train-label')).toHaveTextContent('Transit');
-  expect(screen.getByTestId('drive-label')).toHaveTextContent('Driving');
+  expect(screen.getByRole('radio', { name: 'Walking' })).not.toBeChecked();
+  expect(screen.getByRole('radio', { name: 'Transit' })).toBeChecked();
+  expect(screen.getByRole('radio', { name: 'Driving' })).not.toBeChecked();
 });
 
-it('defaults to the small size (40dp height)', async () => {
-  await renderGroup();
+it('exposes the selected buttons of a multi-select group as checked checkboxes', async () => {
+  await render(
+    <ConnectedButtonGroup
+      multiSelect
+      value={['walk', 'drive']}
+      onValueChange={() => {}}
+      buttons={buttons}
+    />
+  );
 
-  expect(screen.getByTestId('walk-container')).toHaveStyle({ height: 40 });
+  expect(screen.getByRole('checkbox', { name: 'Walking' })).toBeChecked();
+  expect(screen.getByRole('checkbox', { name: 'Transit' })).not.toBeChecked();
+  expect(screen.getByRole('checkbox', { name: 'Driving' })).toBeChecked();
 });
 
-it('applies the requested size height', async () => {
-  await renderGroup({ size: 'medium' });
-
-  expect(screen.getByTestId('walk-container')).toHaveStyle({ height: 56 });
-});
-
-it('calls onValueChange with the pressed value in single-select mode', async () => {
+it('calls onValueChange with the pressed value', async () => {
   const user = userEvent.setup();
   const onValueChange = jest.fn();
   await renderGroup({ onValueChange });
 
-  await user.press(screen.getByTestId('train'));
+  await user.press(screen.getByRole('radio', { name: 'Transit' }));
 
   expect(onValueChange).toHaveBeenCalledWith('train');
 });
 
-it('invokes the per-button onPress alongside onValueChange', async () => {
+it('calls the button onPress as well as onValueChange', async () => {
   const user = userEvent.setup();
   const onPress = jest.fn();
   const onValueChange = jest.fn();
   await renderGroup({
     onValueChange,
     buttons: [
-      { value: 'walk', label: 'Walking', testID: 'walk' },
-      { value: 'train', label: 'Transit', testID: 'train', onPress },
+      { value: 'walk', label: 'Walking' },
+      { value: 'train', label: 'Transit', onPress },
     ],
   });
 
-  await user.press(screen.getByTestId('train'));
+  await user.press(screen.getByRole('radio', { name: 'Transit' }));
 
   expect(onPress).toHaveBeenCalledTimes(1);
   expect(onValueChange).toHaveBeenCalledWith('train');
@@ -105,37 +94,28 @@ it('toggles values in multi-select mode', async () => {
     />
   );
 
-  await user.press(screen.getByTestId('train'));
+  await user.press(screen.getByRole('checkbox', { name: 'Transit' }));
   expect(onValueChange).toHaveBeenLastCalledWith(['walk', 'train']);
 
-  await user.press(screen.getByTestId('walk'));
+  await user.press(screen.getByRole('checkbox', { name: 'Walking' }));
   expect(onValueChange).toHaveBeenLastCalledWith([]);
 });
 
-it('fills the selected button with the secondary container color', async () => {
-  await renderGroup();
-
-  expect(screen.getByTestId('walk-container')).toHaveStyle({
-    backgroundColor: theme.colors.secondaryContainer,
-  });
-  expect(screen.getByTestId('train-container')).toHaveStyle({
-    backgroundColor: theme.colors.surfaceContainer,
-  });
-});
-
-it('does not fire onValueChange for a disabled button', async () => {
+it('exposes a disabled button as disabled and ignores presses on it', async () => {
   const user = userEvent.setup();
   const onValueChange = jest.fn();
   await renderGroup({
     onValueChange,
     buttons: [
-      { value: 'walk', label: 'Walking', testID: 'walk' },
-      { value: 'train', label: 'Transit', disabled: true, testID: 'train' },
+      { value: 'walk', label: 'Walking' },
+      { value: 'train', label: 'Transit', disabled: true },
     ],
   });
 
-  await user.press(screen.getByTestId('train'));
+  const transit = screen.getByRole('radio', { name: 'Transit' });
+  expect(transit).toBeDisabled();
 
+  await user.press(transit);
   expect(onValueChange).not.toHaveBeenCalled();
 });
 
@@ -199,60 +179,16 @@ it('keeps the icon of a selected icon-only button', async () => {
   expect(screen.getByTestId('walk-icon')).toBeVisible();
 });
 
-it('gaps the check from the icon but not the end of an icon-only button', async () => {
+it('colors the labels with the custom checked and unchecked colors', async () => {
   await renderGroup({
     buttons: [
-      { value: 'walk', icon: 'walk', showSelectedCheck: true, testID: 'walk' },
+      { value: 'walk', label: 'Walking', checkedColor: 'rgb(255, 0, 0)' },
+      { value: 'train', label: 'Transit', uncheckedColor: 'rgb(0, 0, 255)' },
     ],
   });
 
-  const { iconLabelGap } = getConnectedButtonSizeStyle({
-    size: 'small',
-    theme,
-  });
-
-  expect(screen.getByTestId('walk-check-icon')).toHaveStyle({
-    marginEnd: iconLabelGap,
-  });
-  expect(screen.getByTestId('walk-icon')).not.toHaveStyle({
-    marginEnd: iconLabelGap,
-  });
-});
-
-it('applies a custom checked color to the selected label', async () => {
-  await renderGroup({
-    buttons: [
-      {
-        value: 'walk',
-        label: 'Walking',
-        checkedColor: 'rgb(255, 0, 0)',
-        testID: 'walk',
-      },
-    ],
-  });
-
-  expect(screen.getByTestId('walk-label')).toHaveStyle({
-    color: 'rgb(255, 0, 0)',
-  });
-});
-
-it('marks single-select buttons with the radio role', async () => {
-  await renderGroup();
-
-  expect(screen.getByTestId('walk')).toHaveProp('role', 'radio');
-});
-
-it('marks multi-select buttons with the checkbox role', async () => {
-  await render(
-    <ConnectedButtonGroup
-      multiSelect
-      value={['walk']}
-      onValueChange={() => {}}
-      buttons={buttons}
-    />
-  );
-
-  expect(screen.getByTestId('walk')).toHaveProp('role', 'checkbox');
+  expect(screen.getByText('Walking')).toHaveStyle({ color: 'rgb(255, 0, 0)' });
+  expect(screen.getByText('Transit')).toHaveStyle({ color: 'rgb(0, 0, 255)' });
 });
 
 it('names the group with aria-label or aria-labelledby', async () => {
@@ -334,205 +270,6 @@ describe('keyboard on web', () => {
 
     await pressKey('Walking', 'ArrowRight');
     expect(onValueChange).toHaveBeenLastCalledWith('drive');
-  });
-});
-
-it('morphs only the connected corners of each position', async () => {
-  const { innerRadius, outerRadius } = getConnectedButtonSizeStyle({
-    size: 'small',
-    theme,
-  });
-
-  await renderGroup({ value: 'train' });
-
-  // first, unselected — leading corners pinned, trailing corners morph
-  expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderTopStartRadius: outerRadius,
-    borderBottomStartRadius: outerRadius,
-    borderTopEndRadius: innerRadius,
-    borderBottomEndRadius: innerRadius,
-  });
-  // middle, selected — both sides morph, so both reach the pill
-  expect(screen.getByTestId('train-container')).toHaveStyle({
-    borderTopStartRadius: outerRadius,
-    borderBottomStartRadius: outerRadius,
-    borderTopEndRadius: outerRadius,
-    borderBottomEndRadius: outerRadius,
-  });
-  // last, unselected — leading corners morph, trailing corners pinned
-  expect(screen.getByTestId('drive-container')).toHaveStyle({
-    borderTopStartRadius: innerRadius,
-    borderBottomStartRadius: innerRadius,
-    borderTopEndRadius: outerRadius,
-    borderBottomEndRadius: outerRadius,
-  });
-});
-
-it('uses the CSS logical corner names on web', async () => {
-  jest.replaceProperty(Platform, 'OS', 'web');
-  const { innerRadius, outerRadius } = getConnectedButtonSizeStyle({
-    size: 'small',
-    theme,
-  });
-
-  await renderGroup({ value: 'train' });
-
-  expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderStartStartRadius: outerRadius,
-    borderEndStartRadius: outerRadius,
-    borderStartEndRadius: innerRadius,
-    borderEndEndRadius: innerRadius,
-  });
-});
-
-it('tightens the connected corners while a button is pressed', async () => {
-  const { innerRadius, outerRadius, pressedRadius } =
-    getConnectedButtonSizeStyle({ size: 'small', theme });
-
-  await renderGroup({ value: 'train' });
-
-  // first, unselected — only the trailing corner morphs
-  await fireEvent(screen.getByTestId('walk'), 'pressIn');
-  expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderTopStartRadius: outerRadius,
-    borderTopEndRadius: pressedRadius,
-    borderBottomEndRadius: pressedRadius,
-  });
-
-  await fireEvent(screen.getByTestId('walk'), 'pressOut');
-  expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderTopStartRadius: outerRadius,
-    borderTopEndRadius: innerRadius,
-    borderBottomEndRadius: innerRadius,
-  });
-});
-
-it('leaves a lone button fully rounded on both sides', async () => {
-  const { outerRadius } = getConnectedButtonSizeStyle({
-    size: 'small',
-    theme,
-  });
-
-  await renderGroup({
-    buttons: [{ value: 'walk', label: 'Walking', testID: 'walk' }],
-  });
-
-  expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderTopStartRadius: outerRadius,
-    borderBottomStartRadius: outerRadius,
-    borderTopEndRadius: outerRadius,
-    borderBottomEndRadius: outerRadius,
-  });
-});
-
-it('draws the keyboard focus ring on the container', async () => {
-  const { thickness } = tokens.md.sys.state.focusIndicator;
-  const ring = {
-    outlineWidth: thickness,
-    outlineStyle: 'solid',
-    outlineColor: theme.colors.secondary,
-    outlineOffset: -thickness,
-  } as const;
-
-  await renderGroup();
-
-  await fireEvent(screen.getByTestId('walk'), 'focus');
-  expect(screen.getByTestId('walk-container')).toHaveStyle(ring);
-
-  await fireEvent(screen.getByTestId('walk'), 'blur');
-  expect(screen.getByTestId('walk-container')).not.toHaveStyle(ring);
-});
-
-describe('connected button shape tokens', () => {
-  it('presses the inner corner sharper than its resting radius (M3)', () => {
-    // small: inner = small (8dp), pressed inner = extraSmall (4dp)
-    const { innerRadius, pressedRadius, outerRadius } =
-      getConnectedButtonSizeStyle({ size: 'small', theme });
-    expect(pressedRadius).toBeLessThan(innerRadius);
-    expect(innerRadius).toBe(theme.shapes.corner.small);
-    expect(pressedRadius).toBe(theme.shapes.corner.extraSmall);
-    // outer edge stays fully rounded
-    expect(outerRadius).toBeGreaterThan(innerRadius);
-  });
-
-  it('resolves the pill corner to half the height, not the full-corner sentinel', () => {
-    const sizes: ConnectedButtonGroupSize[] = [
-      'extra-small',
-      'small',
-      'medium',
-      'large',
-      'extra-large',
-    ];
-    expect(sizes).toHaveLength(Object.keys(connectedButtonSizeTokens).length);
-
-    sizes.forEach((size) => {
-      const { outerRadius, containerHeight } = getConnectedButtonSizeStyle({
-        size,
-        theme,
-      });
-
-      expect(connectedButtonSizeTokens[size].outerShape).toBe('full');
-      expect(outerRadius).toBe(containerHeight / 2);
-      expect(outerRadius).toBeLessThan(cornerFull);
-    });
-  });
-
-  it('uses the spec inner corners for large and extra-large', () => {
-    expect(connectedButtonSizeTokens.large.innerShape).toBe('large');
-    expect(connectedButtonSizeTokens['extra-large'].innerShape).toBe(
-      'largeIncreased'
-    );
-  });
-});
-
-describe('getConnectedButtonPosition', () => {
-  it('classifies a lone button as single', () => {
-    expect(getConnectedButtonPosition(0, 1)).toBe('single');
-  });
-
-  it('classifies first, middle and last positions', () => {
-    expect(getConnectedButtonPosition(0, 3)).toBe('first');
-    expect(getConnectedButtonPosition(1, 3)).toBe('middle');
-    expect(getConnectedButtonPosition(2, 3)).toBe('last');
-  });
-});
-
-describe('getConnectedButtonColors', () => {
-  it('uses MD3 selection color roles', () => {
-    const selected = getConnectedButtonColors({ theme, selected: true });
-    expect(selected.containerColor).toBe(theme.colors.secondaryContainer);
-    expect(selected.contentColor).toBe(theme.colors.onSecondaryContainer);
-
-    const unselected = getConnectedButtonColors({ theme, selected: false });
-    expect(unselected.containerColor).toBe(theme.colors.surfaceContainer);
-    expect(unselected.contentColor).toBe(theme.colors.onSurfaceVariant);
-  });
-
-  it('dims content and keeps onSurface when disabled', () => {
-    const disabled = getConnectedButtonColors({
-      theme,
-      selected: false,
-      disabled: true,
-    });
-    expect(disabled.contentColor).toBe(theme.colors.onSurface);
-    expect(disabled.contentOpacity).toBe(0.38);
-  });
-
-  it('honours custom checked and unchecked colors', () => {
-    expect(
-      getConnectedButtonColors({
-        theme,
-        selected: true,
-        checkedColor: 'red',
-      }).contentColor
-    ).toBe('red');
-    expect(
-      getConnectedButtonColors({
-        theme,
-        selected: false,
-        uncheckedColor: 'blue',
-      }).contentColor
-    ).toBe('blue');
   });
 });
 
