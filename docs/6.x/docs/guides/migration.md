@@ -292,8 +292,6 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 ```diff
 <Avatar.Icon
   icon="account"
-- style={{ backgroundColor: '#ffcc00' }}
-+ style={{ backgroundColor: '#ffcc00' }}
 + color="#000000"
 />
 ```
