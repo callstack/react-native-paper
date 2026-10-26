@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
+import { tokens } from '../../theme/tokens';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import ConnectedButtonGroup from '../ConnectedButtonGroup/ConnectedButtonGroup';
 import {
@@ -340,6 +341,24 @@ it('leaves a lone button fully rounded on both sides', async () => {
     borderTopEndRadius: outerRadius,
     borderBottomEndRadius: outerRadius,
   });
+});
+
+it('draws the keyboard focus ring on the container', async () => {
+  const { thickness } = tokens.md.sys.state.focusIndicator;
+  const ring = {
+    outlineWidth: thickness,
+    outlineStyle: 'solid',
+    outlineColor: theme.colors.secondary,
+    outlineOffset: -thickness,
+  } as const;
+
+  await renderGroup();
+
+  await fireEvent(screen.getByTestId('walk'), 'focus');
+  expect(screen.getByTestId('walk-container')).toHaveStyle(ring);
+
+  await fireEvent(screen.getByTestId('walk'), 'blur');
+  expect(screen.getByTestId('walk-container')).not.toHaveStyle(ring);
 });
 
 describe('connected button shape tokens', () => {

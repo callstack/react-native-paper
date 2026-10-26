@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
-import type { GestureResponderEvent, ViewStyle } from 'react-native';
+import type {
+  GestureResponderEvent,
+  NativeSyntheticEvent,
+  TargetedEvent,
+  ViewStyle,
+} from 'react-native';
 
 import Animated, {
   cubicBezier,
@@ -20,10 +25,14 @@ import {
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { tokens } from '../../theme/tokens';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+
+const FOCUS_RING_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
 
 const getCornerRadiusProps = () =>
   Platform.OS === 'web'
@@ -127,6 +136,27 @@ const ConnectedButton = ({
     [onPress]
   );
 
+  const [focusVisible, setFocusVisible] = React.useState(false);
+  const handleFocus = React.useCallback(
+    (event: NativeSyntheticEvent<TargetedEvent>) => {
+      setFocusVisible(isKeyboardFocusEvent(event));
+    },
+    []
+  );
+  const handleBlur = React.useCallback(() => {
+    setFocusVisible(false);
+  }, []);
+
+  const focusRingStyle: ViewStyle | null =
+    focusVisible && !disabled
+      ? {
+          outlineWidth: FOCUS_RING_THICKNESS,
+          outlineStyle: 'solid',
+          outlineColor: theme.colors.secondary,
+          outlineOffset: -FOCUS_RING_THICKNESS,
+        }
+      : null;
+
   const { start: animateStart, end: animateEnd } = morphingCorners[position];
 
   const morphRadius = pressed ? pressedRadius : restRadius;
@@ -188,6 +218,7 @@ const ConnectedButton = ({
           backgroundColor: containerBackground,
         },
         shapeStyle,
+        focusRingStyle,
         style,
       ]}
     >
@@ -210,13 +241,15 @@ const ConnectedButton = ({
         onPress={handlePress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         disabled={disabled}
         background={background}
         aria-label={ariaLabel}
         aria-disabled={disabled}
         aria-checked={checked}
         role={multiSelect ? 'checkbox' : 'radio'}
-        style={styles.ripple}
+        style={[styles.ripple, Platform.OS === 'web' && styles.webNoOutline]}
         theme={theme}
         testID={testID}
       >
@@ -285,6 +318,10 @@ const styles = StyleSheet.create({
   },
   ripple: {
     flex: 1,
+  },
+  webNoOutline: {
+    outlineStyle: 'solid',
+    outlineWidth: 0,
   },
   content: {
     flexDirection: 'row',

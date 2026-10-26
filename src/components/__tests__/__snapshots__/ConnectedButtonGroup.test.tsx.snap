@@ -34,6 +34,7 @@ exports[`renders connected button group 1`] = `
           "borderTopEndRadius": 20,
           "borderTopStartRadius": 20,
         },
+        null,
         undefined,
       ]
     }
@@ -75,9 +76,12 @@ exports[`renders connected button group 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
       testID="walk"
@@ -159,6 +163,7 @@ exports[`renders connected button group 1`] = `
           "borderTopEndRadius": 8,
           "borderTopStartRadius": 8,
         },
+        null,
         undefined,
       ]
     }
@@ -200,9 +205,12 @@ exports[`renders connected button group 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
       testID="train"
@@ -284,6 +292,7 @@ exports[`renders connected button group 1`] = `
           "borderTopEndRadius": 20,
           "borderTopStartRadius": 8,
         },
+        null,
         undefined,
       ]
     }
@@ -325,9 +334,12 @@ exports[`renders connected button group 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
       testID="drive"
@@ -427,6 +439,7 @@ exports[`renders disabled connected button group 1`] = `
           "borderTopEndRadius": 20,
           "borderTopStartRadius": 20,
         },
+        null,
         undefined,
       ]
     }
@@ -486,9 +499,12 @@ exports[`renders disabled connected button group 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
       testID="walk"
@@ -570,6 +586,7 @@ exports[`renders disabled connected button group 1`] = `
           "borderTopEndRadius": 8,
           "borderTopStartRadius": 8,
         },
+        null,
         undefined,
       ]
     }
@@ -629,9 +646,12 @@ exports[`renders disabled connected button group 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
       testID="train"
@@ -713,6 +733,7 @@ exports[`renders disabled connected button group 1`] = `
           "borderTopEndRadius": 20,
           "borderTopStartRadius": 8,
         },
+        null,
         undefined,
       ]
     }
@@ -772,9 +793,12 @@ exports[`renders disabled connected button group 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
       testID="drive"
@@ -874,6 +898,7 @@ exports[`renders large connected button group 1`] = `
           "borderTopEndRadius": 48,
           "borderTopStartRadius": 48,
         },
+        null,
         undefined,
       ]
     }
@@ -915,9 +940,12 @@ exports[`renders large connected button group 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
       testID="walk"
@@ -999,6 +1027,7 @@ exports[`renders large connected button group 1`] = `
           "borderTopEndRadius": 16,
           "borderTopStartRadius": 16,
         },
+        null,
         undefined,
       ]
     }
@@ -1040,9 +1069,12 @@ exports[`renders large connected button group 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
       testID="train"
@@ -1124,6 +1156,7 @@ exports[`renders large connected button group 1`] = `
           "borderTopEndRadius": 48,
           "borderTopStartRadius": 16,
         },
+        null,
         undefined,
       ]
     }
@@ -1165,9 +1198,12 @@ exports[`renders large connected button group 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
       testID="drive"
@@ -1267,6 +1303,7 @@ exports[`renders multi-select connected button group with icons 1`] = `
           "borderTopEndRadius": 20,
           "borderTopStartRadius": 20,
         },
+        null,
         undefined,
       ]
     }
@@ -1308,9 +1345,12 @@ exports[`renders multi-select connected button group with icons 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
     >
@@ -1398,6 +1438,7 @@ exports[`renders multi-select connected button group with icons 1`] = `
           "borderTopEndRadius": 20,
           "borderTopStartRadius": 8,
         },
+        null,
         undefined,
       ]
     }
@@ -1439,9 +1480,12 @@ exports[`renders multi-select connected button group with icons 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "flex": 1,
-          },
+          [
+            {
+              "flex": 1,
+            },
+            false,
+          ],
         ]
       }
     >
