@@ -63,6 +63,9 @@ const ConnectedButton = ({
   style,
   labelStyle,
   testID,
+  ref,
+  tabIndex,
+  onKeyDown,
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -212,7 +215,10 @@ const ConnectedButton = ({
         />
       ) : null}
       <TouchableRipple
+        ref={ref}
         borderless
+        tabIndex={tabIndex}
+        onKeyDown={onKeyDown}
         onPress={handlePress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}

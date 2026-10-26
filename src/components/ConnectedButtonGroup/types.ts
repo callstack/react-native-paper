@@ -1,8 +1,10 @@
+import type { KeyboardEvent, Ref } from 'react';
 import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
   TextStyle,
+  View,
   ViewStyle,
 } from 'react-native';
 
@@ -113,6 +115,18 @@ export type ConnectedButtonProps = Omit<ConnectedButtonConfig, 'value'> & {
    * Size of the button, matching the parent group.
    */
   size: ConnectedButtonGroupSize;
+  /**
+   * Ref to the focusable element of the button.
+   */
+  ref?: Ref<View>;
+  /**
+   * Whether the button is a Tab stop.
+   */
+  tabIndex?: 0 | -1;
+  /**
+   * Called when a key goes down while the button has focus. Web only.
+   */
+  onKeyDown?: (event: KeyboardEvent<HTMLElement>) => void;
   /**
    * @optional
    */

@@ -279,6 +279,64 @@ it('names the group with aria-label or aria-labelledby', async () => {
   expect(screen.getByLabelText('Sort by')).toHaveProp('role', 'group');
 });
 
+describe('keyboard on web', () => {
+  const pressKey = (name: string, key: string) =>
+    fireEvent(screen.getByRole('radio', { name }), 'keyDown', {
+      key,
+      preventDefault: () => {},
+    });
+
+  it('keeps one Tab stop, on the checked radio', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await renderGroup({ value: 'train' });
+
+    expect(screen.getByRole('radio', { name: 'Walking' })).toHaveProp(
+      'tabIndex',
+      -1
+    );
+    expect(screen.getByRole('radio', { name: 'Transit' })).toHaveProp(
+      'tabIndex',
+      0
+    );
+    expect(screen.getByRole('radio', { name: 'Driving' })).toHaveProp(
+      'tabIndex',
+      -1
+    );
+  });
+
+  it('moves the selection with the arrow keys and wraps around', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onValueChange = jest.fn();
+    await renderGroup({ value: 'train', onValueChange });
+
+    await pressKey('Transit', 'ArrowRight');
+    expect(onValueChange).toHaveBeenLastCalledWith('drive');
+
+    await pressKey('Transit', 'ArrowUp');
+    expect(onValueChange).toHaveBeenLastCalledWith('walk');
+
+    await pressKey('Walking', 'ArrowLeft');
+    expect(onValueChange).toHaveBeenLastCalledWith('drive');
+  });
+
+  it('skips disabled buttons', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onValueChange = jest.fn();
+    await renderGroup({
+      value: 'walk',
+      onValueChange,
+      buttons: [
+        { value: 'walk', label: 'Walking' },
+        { value: 'train', label: 'Transit', disabled: true },
+        { value: 'drive', label: 'Driving' },
+      ],
+    });
+
+    await pressKey('Walking', 'ArrowRight');
+    expect(onValueChange).toHaveBeenLastCalledWith('drive');
+  });
+});
+
 it('morphs only the connected corners of each position', async () => {
   const { innerRadius, outerRadius } = getConnectedButtonSizeStyle({
     size: 'small',

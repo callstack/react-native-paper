@@ -1,4 +1,5 @@
-import { StyleSheet, View } from 'react-native';
+import * as React from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
 import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 
 import ConnectedButton from './ConnectedButton';
@@ -8,6 +9,7 @@ import {
 } from './tokens';
 import type { ConnectedButtonConfig } from './types';
 import { getConnectedButtonPosition } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 
@@ -141,7 +143,52 @@ const ConnectedButtonGroup = <T extends string = string>({
   theme: themeOverrides,
 }: Props<T>) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const { betweenSpace } = connectedButtonSizeTokens[size];
+  const buttonRefs = React.useRef<(View | null)[]>([]);
+
+  // A single-select group on web follows the WAI-ARIA radio group pattern:
+  // one Tab stop on the checked button, and the arrow keys move the selection.
+  const rovesFocus = Platform.OS === 'web' && !multiSelect;
+  const checkedIndex = buttons.findIndex(
+    (item) => !item.disabled && item.value === value
+  );
+  const tabStopIndex =
+    checkedIndex === -1
+      ? buttons.findIndex((item) => !item.disabled)
+      : checkedIndex;
+
+  const handleArrowKey = (
+    index: number,
+    event: React.KeyboardEvent<HTMLElement>
+  ) => {
+    const [previousKey, nextKey] =
+      direction === 'rtl'
+        ? ['ArrowRight', 'ArrowLeft']
+        : ['ArrowLeft', 'ArrowRight'];
+    const step =
+      event.key === nextKey || event.key === 'ArrowDown'
+        ? 1
+        : event.key === previousKey || event.key === 'ArrowUp'
+          ? -1
+          : 0;
+    if (step === 0) {
+      return;
+    }
+
+    event.preventDefault();
+    for (let offset = 1; offset < buttons.length; offset++) {
+      const nextIndex =
+        (index + step * offset + buttons.length) % buttons.length;
+      const next = buttons[nextIndex];
+      if (next && !next.disabled) {
+        buttonRefs.current[nextIndex]?.focus();
+        // @ts-expect-error: TS doesn't preserve types after destructuring, so the type isn't inferred correctly
+        onValueChange(next.value);
+        return;
+      }
+    }
+  };
 
   return (
     <View
@@ -175,6 +222,15 @@ const ConnectedButtonGroup = <T extends string = string>({
         return (
           <ConnectedButton
             key={`${item.value}-${index}`}
+            ref={(node) => {
+              buttonRefs.current[index] = node;
+            }}
+            tabIndex={
+              rovesFocus ? (index === tabStopIndex ? 0 : -1) : undefined
+            }
+            onKeyDown={
+              rovesFocus ? (event) => handleArrowKey(index, event) : undefined
+            }
             position={position}
             size={size}
             checked={checked}
