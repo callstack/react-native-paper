@@ -9,7 +9,6 @@ import type {
 import type { ConnectedButtonGroupSize } from './tokens';
 import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
-import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 /**
  * Position of a button within the connected group. Determines which corners
@@ -67,11 +66,6 @@ export type ConnectedButtonConfig<T extends string = string> = {
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
-  /**
-   * Sets additional distance outside of the button in which a press can be
-   * detected.
-   */
-  hitSlop?: TouchableRippleProps['hitSlop'];
   /**
    * Callback that is called when the button is pressed, in addition to the
    * group's `onValueChange`.

@@ -56,7 +56,6 @@ export type Props<T extends string = string> = {
    * - `uncheckedColor`: custom color for the unselected label and icon
    * - `showSelectedCheck`: show an optional check icon to indicate the selected state
    * - `background`: type of background drawable to display the feedback (Android)
-   * - `hitSlop`: additional distance outside of the button in which a press can be detected
    * - `onPress`: callback that is called when the button is pressed
    * - `labelMaxFontSizeMultiplier`: the largest possible scale a label font can reach
    * - `style`: pass additional styles for the button
@@ -174,7 +173,6 @@ const ConnectedButtonGroup = <T extends string = string>({
             checkedColor={item.checkedColor}
             uncheckedColor={item.uncheckedColor}
             background={item.background}
-            hitSlop={item.hitSlop}
             aria-label={item['aria-label']}
             onPress={handlePress}
             labelMaxFontSizeMultiplier={item.labelMaxFontSizeMultiplier}

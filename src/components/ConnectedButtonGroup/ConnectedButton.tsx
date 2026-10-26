@@ -59,7 +59,6 @@ const ConnectedButton = ({
   'aria-label': ariaLabel,
   onPress,
   labelMaxFontSizeMultiplier,
-  hitSlop,
   style,
   labelStyle,
   testID,
@@ -217,7 +216,6 @@ const ConnectedButton = ({
         aria-disabled={disabled}
         aria-checked={checked}
         role={multiSelect ? 'checkbox' : 'radio'}
-        hitSlop={hitSlop}
         style={styles.ripple}
         theme={theme}
         testID={testID}
