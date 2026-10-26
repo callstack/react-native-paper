@@ -29,7 +29,6 @@ import { useInternalTheme } from '../core/theming';
 import type { Elevation, ThemeProp } from '../theme/types';
 
 const DEFAULT_MAX_WIDTH = 960;
-const ICON_SIZE = 40;
 
 type AnimationFinishedCallback = (result: { finished: boolean }) => void;
 
@@ -244,7 +243,7 @@ const Banner = ({
           <View style={styles.content}>
             {icon ? (
               <View style={styles.icon}>
-                <Icon source={icon} size={ICON_SIZE} />
+                <Icon source={icon} size={40} />
               </View>
             ) : null}
             <Text
