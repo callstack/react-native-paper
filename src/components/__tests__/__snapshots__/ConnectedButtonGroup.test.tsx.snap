@@ -29,10 +29,10 @@ exports[`renders connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderEndEndRadius": 20,
-          "borderEndStartRadius": 20,
-          "borderStartEndRadius": 20,
-          "borderStartStartRadius": 20,
+          "borderBottomEndRadius": 20,
+          "borderBottomStartRadius": 20,
+          "borderTopEndRadius": 20,
+          "borderTopStartRadius": 20,
         },
         undefined,
       ]
@@ -154,10 +154,10 @@ exports[`renders connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderEndEndRadius": 8,
-          "borderEndStartRadius": 8,
-          "borderStartEndRadius": 8,
-          "borderStartStartRadius": 8,
+          "borderBottomEndRadius": 8,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 8,
+          "borderTopStartRadius": 8,
         },
         undefined,
       ]
@@ -279,10 +279,10 @@ exports[`renders connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderEndEndRadius": 20,
-          "borderEndStartRadius": 8,
-          "borderStartEndRadius": 20,
-          "borderStartStartRadius": 8,
+          "borderBottomEndRadius": 20,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 20,
+          "borderTopStartRadius": 8,
         },
         undefined,
       ]
@@ -422,10 +422,10 @@ exports[`renders disabled connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderEndEndRadius": 20,
-          "borderEndStartRadius": 20,
-          "borderStartEndRadius": 20,
-          "borderStartStartRadius": 20,
+          "borderBottomEndRadius": 20,
+          "borderBottomStartRadius": 20,
+          "borderTopEndRadius": 20,
+          "borderTopStartRadius": 20,
         },
         undefined,
       ]
@@ -565,10 +565,10 @@ exports[`renders disabled connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderEndEndRadius": 8,
-          "borderEndStartRadius": 8,
-          "borderStartEndRadius": 8,
-          "borderStartStartRadius": 8,
+          "borderBottomEndRadius": 8,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 8,
+          "borderTopStartRadius": 8,
         },
         undefined,
       ]
@@ -708,10 +708,10 @@ exports[`renders disabled connected button group 1`] = `
           "minWidth": 48,
         },
         {
-          "borderEndEndRadius": 20,
-          "borderEndStartRadius": 8,
-          "borderStartEndRadius": 20,
-          "borderStartStartRadius": 8,
+          "borderBottomEndRadius": 20,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 20,
+          "borderTopStartRadius": 8,
         },
         undefined,
       ]
@@ -869,10 +869,10 @@ exports[`renders large connected button group 1`] = `
           "minWidth": 96,
         },
         {
-          "borderEndEndRadius": 48,
-          "borderEndStartRadius": 48,
-          "borderStartEndRadius": 48,
-          "borderStartStartRadius": 48,
+          "borderBottomEndRadius": 48,
+          "borderBottomStartRadius": 48,
+          "borderTopEndRadius": 48,
+          "borderTopStartRadius": 48,
         },
         undefined,
       ]
@@ -994,10 +994,10 @@ exports[`renders large connected button group 1`] = `
           "minWidth": 96,
         },
         {
-          "borderEndEndRadius": 16,
-          "borderEndStartRadius": 16,
-          "borderStartEndRadius": 16,
-          "borderStartStartRadius": 16,
+          "borderBottomEndRadius": 16,
+          "borderBottomStartRadius": 16,
+          "borderTopEndRadius": 16,
+          "borderTopStartRadius": 16,
         },
         undefined,
       ]
@@ -1119,10 +1119,10 @@ exports[`renders large connected button group 1`] = `
           "minWidth": 96,
         },
         {
-          "borderEndEndRadius": 48,
-          "borderEndStartRadius": 16,
-          "borderStartEndRadius": 48,
-          "borderStartStartRadius": 16,
+          "borderBottomEndRadius": 48,
+          "borderBottomStartRadius": 16,
+          "borderTopEndRadius": 48,
+          "borderTopStartRadius": 16,
         },
         undefined,
       ]
@@ -1262,10 +1262,10 @@ exports[`renders multi-select connected button group with icons 1`] = `
           "minWidth": 48,
         },
         {
-          "borderEndEndRadius": 20,
-          "borderEndStartRadius": 20,
-          "borderStartEndRadius": 20,
-          "borderStartStartRadius": 20,
+          "borderBottomEndRadius": 20,
+          "borderBottomStartRadius": 20,
+          "borderTopEndRadius": 20,
+          "borderTopStartRadius": 20,
         },
         undefined,
       ]
@@ -1393,10 +1393,10 @@ exports[`renders multi-select connected button group with icons 1`] = `
           "minWidth": 48,
         },
         {
-          "borderEndEndRadius": 20,
-          "borderEndStartRadius": 8,
-          "borderStartEndRadius": 20,
-          "borderStartStartRadius": 8,
+          "borderBottomEndRadius": 20,
+          "borderBottomStartRadius": 8,
+          "borderTopEndRadius": 20,
+          "borderTopStartRadius": 8,
         },
         undefined,
       ]

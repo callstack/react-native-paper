@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type { GestureResponderEvent, ViewStyle } from 'react-native';
 
 import Animated, {
@@ -24,6 +24,21 @@ import { toRawSpring } from '../../theme/tokens/sys/motion';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+
+const getCornerRadiusProps = () =>
+  Platform.OS === 'web'
+    ? ({
+        topStart: 'borderStartStartRadius',
+        bottomStart: 'borderEndStartRadius',
+        topEnd: 'borderStartEndRadius',
+        bottomEnd: 'borderEndEndRadius',
+      } as const)
+    : ({
+        topStart: 'borderTopStartRadius',
+        bottomStart: 'borderBottomStartRadius',
+        topEnd: 'borderTopEndRadius',
+        bottomEnd: 'borderBottomEndRadius',
+      } as const);
 
 /**
  * A single button within a {@link ConnectedButtonGroup}. Not exported on its
@@ -119,17 +134,13 @@ const ConnectedButton = ({
   const startRadius = animateStart ? morphRadius : outerRadius;
   const endRadius = animateEnd ? morphRadius : outerRadius;
 
+  const { topStart, bottomStart, topEnd, bottomEnd } = getCornerRadiusProps();
   const shapeStyle: CSSStyle<ViewStyle> = {
-    borderStartStartRadius: startRadius,
-    borderEndStartRadius: startRadius,
-    borderStartEndRadius: endRadius,
-    borderEndEndRadius: endRadius,
-    transitionProperty: [
-      'borderStartStartRadius',
-      'borderEndStartRadius',
-      'borderStartEndRadius',
-      'borderEndEndRadius',
-    ],
+    [topStart]: startRadius,
+    [bottomStart]: startRadius,
+    [topEnd]: endRadius,
+    [bottomEnd]: endRadius,
+    transitionProperty: [topStart, bottomStart, topEnd, bottomEnd],
     transitionDuration: reduceMotion ? 0 : theme.motion.duration.short3,
     transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
   };

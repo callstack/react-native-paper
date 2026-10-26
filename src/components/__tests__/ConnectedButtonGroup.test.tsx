@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
@@ -17,6 +18,10 @@ import {
 } from '../ConnectedButtonGroup/utils';
 
 const theme = LightTheme;
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 type SingleSelectProps = Extract<
   React.ComponentProps<typeof ConnectedButtonGroup>,
@@ -257,20 +262,43 @@ it('morphs only the connected corners of each position', async () => {
 
   await renderGroup({ value: 'train' });
 
-  // first, unselected — leading corner pinned, trailing corner morphs
+  // first, unselected — leading corners pinned, trailing corners morph
   expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderStartStartRadius: outerRadius,
-    borderStartEndRadius: innerRadius,
+    borderTopStartRadius: outerRadius,
+    borderBottomStartRadius: outerRadius,
+    borderTopEndRadius: innerRadius,
+    borderBottomEndRadius: innerRadius,
   });
   // middle, selected — both sides morph, so both reach the pill
   expect(screen.getByTestId('train-container')).toHaveStyle({
-    borderStartStartRadius: outerRadius,
-    borderStartEndRadius: outerRadius,
+    borderTopStartRadius: outerRadius,
+    borderBottomStartRadius: outerRadius,
+    borderTopEndRadius: outerRadius,
+    borderBottomEndRadius: outerRadius,
   });
-  // last, unselected — leading corner morphs, trailing corner pinned
+  // last, unselected — leading corners morph, trailing corners pinned
   expect(screen.getByTestId('drive-container')).toHaveStyle({
-    borderStartStartRadius: innerRadius,
-    borderStartEndRadius: outerRadius,
+    borderTopStartRadius: innerRadius,
+    borderBottomStartRadius: innerRadius,
+    borderTopEndRadius: outerRadius,
+    borderBottomEndRadius: outerRadius,
+  });
+});
+
+it('uses the CSS logical corner names on web', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  const { innerRadius, outerRadius } = getConnectedButtonSizeStyle({
+    size: 'small',
+    theme,
+  });
+
+  await renderGroup({ value: 'train' });
+
+  expect(screen.getByTestId('walk-container')).toHaveStyle({
+    borderStartStartRadius: outerRadius,
+    borderEndStartRadius: outerRadius,
+    borderStartEndRadius: innerRadius,
+    borderEndEndRadius: innerRadius,
   });
 });
 
@@ -283,14 +311,16 @@ it('tightens the connected corners while a button is pressed', async () => {
   // first, unselected — only the trailing corner morphs
   await fireEvent(screen.getByTestId('walk'), 'pressIn');
   expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderStartStartRadius: outerRadius,
-    borderStartEndRadius: pressedRadius,
+    borderTopStartRadius: outerRadius,
+    borderTopEndRadius: pressedRadius,
+    borderBottomEndRadius: pressedRadius,
   });
 
   await fireEvent(screen.getByTestId('walk'), 'pressOut');
   expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderStartStartRadius: outerRadius,
-    borderStartEndRadius: innerRadius,
+    borderTopStartRadius: outerRadius,
+    borderTopEndRadius: innerRadius,
+    borderBottomEndRadius: innerRadius,
   });
 });
 
@@ -305,8 +335,10 @@ it('leaves a lone button fully rounded on both sides', async () => {
   });
 
   expect(screen.getByTestId('walk-container')).toHaveStyle({
-    borderStartStartRadius: outerRadius,
-    borderStartEndRadius: outerRadius,
+    borderTopStartRadius: outerRadius,
+    borderBottomStartRadius: outerRadius,
+    borderTopEndRadius: outerRadius,
+    borderBottomEndRadius: outerRadius,
   });
 });
 
