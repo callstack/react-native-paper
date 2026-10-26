@@ -157,8 +157,8 @@ it('shows the selection check only on the selected button', async () => {
     ],
   });
 
-  expect(screen.getByTestId('walk-check-icon')).toBeTruthy();
-  expect(screen.queryByTestId('train-check-icon')).toBeNull();
+  expect(screen.getByTestId('walk-check-icon')).toBeVisible();
+  expect(screen.getByTestId('train-check-icon')).not.toBeVisible();
 });
 
 it('swaps the leading icon for the selection check on labelled buttons', async () => {
@@ -181,11 +181,11 @@ it('swaps the leading icon for the selection check on labelled buttons', async (
     ],
   });
 
-  expect(screen.getByTestId('walk-check-icon')).toBeTruthy();
-  expect(screen.queryByTestId('walk-icon')).toBeNull();
+  expect(screen.getByTestId('walk-check-icon')).toBeVisible();
+  expect(screen.getByTestId('walk-icon')).not.toBeVisible();
 
-  expect(screen.getByTestId('train-icon')).toBeTruthy();
-  expect(screen.queryByTestId('train-check-icon')).toBeNull();
+  expect(screen.getByTestId('train-icon')).toBeVisible();
+  expect(screen.getByTestId('train-check-icon')).not.toBeVisible();
 });
 
 it('keeps the icon of a selected icon-only button', async () => {
@@ -195,8 +195,8 @@ it('keeps the icon of a selected icon-only button', async () => {
     ],
   });
 
-  expect(screen.getByTestId('walk-check-icon')).toBeTruthy();
-  expect(screen.getByTestId('walk-icon')).toBeTruthy();
+  expect(screen.getByTestId('walk-check-icon')).toBeVisible();
+  expect(screen.getByTestId('walk-icon')).toBeVisible();
 });
 
 it('gaps the check from the icon but not the end of an icon-only button', async () => {

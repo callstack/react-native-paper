@@ -7,14 +7,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Animated, {
-  cubicBezier,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-  type CSSStyle,
-} from 'react-native-reanimated';
+import Animated, { cubicBezier, type CSSStyle } from 'react-native-reanimated';
 
 import type { ConnectedButtonProps as Props } from './types';
 import {
@@ -26,7 +19,6 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
-import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -99,22 +91,20 @@ const ConnectedButton = ({
   // parity: the check scales in and takes the place of the leading icon on a
   // labelled button, while an icon-only button keeps its icon alongside it.
   const showCheck = Boolean(checked && showSelectedCheck);
-  const showIcon = Boolean(icon) && !(label && showCheck);
-  const checkScale = useSharedValue(showCheck ? 1 : 0);
+  const swapsIcon = Boolean(icon && label && showSelectedCheck);
+  const revealsCheck = Boolean(showSelectedCheck) && !swapsIcon;
 
   const reduceMotion = useReduceMotion();
-  const springConfig = React.useMemo(
-    () => ({
-      ...toRawSpring(theme.motion.spring.fast.spatial),
-      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
-    }),
-    [theme.motion.spring.fast.spatial, reduceMotion]
-  );
-
-  React.useEffect(() => {
-    // Springs to the value it already holds on mount, which is a no-op.
-    checkScale.value = withSpring(showCheck ? 1 : 0, springConfig);
-  }, [showCheck, checkScale, springConfig]);
+  const transition = {
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.short3,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+  };
+  const getShownStyle = (shown: boolean): CSSStyle<ViewStyle> => ({
+    opacity: shown ? 1 : 0,
+    transform: [{ scale: shown ? 1 : 0 }],
+    transitionProperty: ['opacity', 'transform'],
+    ...transition,
+  });
 
   // Only the pressed flag is tracked here; the radius is derived from it and
   // the props below, so no handler writes a radius directly.
@@ -170,35 +160,20 @@ const ConnectedButton = ({
     [topEnd]: endRadius,
     [bottomEnd]: endRadius,
     transitionProperty: [topStart, bottomStart, topEnd, bottomEnd],
-    transitionDuration: reduceMotion ? 0 : theme.motion.duration.short3,
-    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+    ...transition,
   };
-
-  const checkIconStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: checkScale.value }],
-  }));
-
-  // The mirror of `checkIconStyle`, and it cannot be flattened to a constant.
-  // `useAnimatedStyle` caches its initial style from the component's *first*
-  // render, so whichever of the two remounts is painted at that cached value
-  // before the animation can take over. The icon only has something to grow
-  // from because `checkScale` still holds the previous selection when it
-  // mounts — see the effect above, whose after-paint timing is load-bearing.
-  // Icon-only buttons show both at once and never swap, so they stay at 1.
-  const hasLabel = Boolean(label);
-  const leadingIconStyle = useAnimatedStyle(
-    () => ({
-      transform: [{ scale: hasLabel ? 1 - checkScale.value : 1 }],
-    }),
-    [hasLabel]
-  );
 
   // A gap is needed before the label, and between the check and the leading
   // icon when an icon-only button shows both. The last element in the row
   // never gets one, or the content would sit off-centre.
   const gap = { marginEnd: sizeStyle.iconLabelGap };
-  const checkGap = label || (showCheck && showIcon) ? gap : null;
   const leadingIconGap = label ? gap : null;
+
+  const checkRevealStyle: CSSStyle<ViewStyle> = {
+    width: showCheck ? sizeStyle.iconSize + sizeStyle.iconLabelGap : 0,
+    transitionProperty: ['width'],
+    ...transition,
+  };
 
   // When the container is translucent (disabled), the fill is drawn by the
   // overlay below, so the base view stays transparent.
@@ -264,29 +239,52 @@ const ConnectedButton = ({
             },
           ]}
         >
-          {showCheck ? (
-            <Animated.View
-              testID={getTestID(testID, 'check-icon')}
-              style={[checkGap, checkIconStyle]}
-            >
-              <Icon
-                source="check"
-                size={sizeStyle.iconSize}
-                color={colors.contentColor}
-              />
+          {swapsIcon ? (
+            <View style={gap}>
+              <Animated.View
+                testID={getTestID(testID, 'icon')}
+                style={getShownStyle(!showCheck)}
+              >
+                <Icon
+                  source={icon}
+                  size={sizeStyle.iconSize}
+                  color={colors.contentColor}
+                />
+              </Animated.View>
+              <Animated.View
+                testID={getTestID(testID, 'check-icon')}
+                style={[StyleSheet.absoluteFill, getShownStyle(showCheck)]}
+              >
+                <Icon
+                  source="check"
+                  size={sizeStyle.iconSize}
+                  color={colors.contentColor}
+                />
+              </Animated.View>
+            </View>
+          ) : null}
+          {revealsCheck ? (
+            <Animated.View style={[styles.checkReveal, checkRevealStyle]}>
+              <Animated.View
+                testID={getTestID(testID, 'check-icon')}
+                style={[gap, getShownStyle(showCheck)]}
+              >
+                <Icon
+                  source="check"
+                  size={sizeStyle.iconSize}
+                  color={colors.contentColor}
+                />
+              </Animated.View>
             </Animated.View>
           ) : null}
-          {showIcon ? (
-            <Animated.View
-              testID={getTestID(testID, 'icon')}
-              style={[leadingIconGap, leadingIconStyle]}
-            >
+          {icon && !swapsIcon ? (
+            <View testID={getTestID(testID, 'icon')} style={leadingIconGap}>
               <Icon
                 source={icon}
                 size={sizeStyle.iconSize}
                 color={colors.contentColor}
               />
-            </Animated.View>
+            </View>
           ) : null}
           {label ? (
             <Text
@@ -311,7 +309,7 @@ const styles = StyleSheet.create({
   container: {
     // `flex: 1` (basis 0), like `SegmentedButtonItem`, so every button in the
     // group is the same width. With a content-derived basis the row reflows
-    // whenever the selection check mounts or unmounts, which reads as the
+    // whenever the selection check appears or disappears, which reads as the
     // buttons snapping to a new width on every tap.
     flex: 1,
     overflow: 'hidden',
@@ -327,6 +325,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  checkReveal: {
+    alignItems: 'flex-start',
+    overflow: 'hidden',
   },
   label: {
     flexShrink: 1,
