@@ -1,9 +1,8 @@
 import { PlatformColor, StyleSheet } from 'react-native';
 
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 import color from 'color';
-import * as Reanimated from 'react-native-reanimated';
 
 import { LocaleProvider } from '../../core/locale';
 import { render, screen } from '../../test-utils';
@@ -12,7 +11,6 @@ import { pink500, white } from '../../theme/colors';
 import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import { shadow } from '../../theme/tokens/sys/elevation';
-import { toRawSpring } from '../../theme/tokens/sys/motion';
 import Button from '../Button/Button';
 import { Tokens } from '../Button/tokens';
 import {
@@ -25,20 +23,6 @@ import {
   getButtonTransitionDuration,
 } from '../Button/utils';
 import type { ButtonLabelVariant, ButtonSize } from '../Button/utils';
-
-jest.mock('react-native-reanimated', () => {
-  const ReanimatedModule = jest.requireActual<
-    typeof import('react-native-reanimated')
-  >('react-native-reanimated');
-
-  return {
-    __esModule: true,
-    ...ReanimatedModule,
-    default: ReanimatedModule.default,
-    // Wrapped so the shape-morph tests can observe the spring targets.
-    withSpring: jest.fn(ReanimatedModule.withSpring),
-  };
-});
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -1348,50 +1332,37 @@ describe('touch target', () => {
 });
 
 describe('shape morph animation', () => {
-  beforeEach(() => {
-    jest.mocked(Reanimated.withSpring).mockClear();
-  });
-
-  const springTargets = (
-    spy: jest.MockedFunction<typeof Reanimated.withSpring>
-  ) => spy.mock.calls.map((call) => call[0]);
-
-  it('springs the corner radius to corner.small on press in', async () => {
-    const spy = jest.mocked(Reanimated.withSpring);
+  // `filled` has no outline, so the touchable's radius is the container's.
+  it('moves the corner to corner.small while pressed', async () => {
     await render(
       <Button shape="round" size="small" onPress={() => {}} testID="button">
         {null}
       </Button>
     );
-    spy.mockClear();
     await fireEvent(screen.getByTestId('button'), 'onPressIn');
-    expect(springTargets(spy)).toContain(LightTheme.shapes.corner.small);
-    spy.mockClear();
+    expect(screen.getByTestId('button')).toHaveStyle({
+      borderRadius: LightTheme.shapes.corner.small,
+    });
   });
 
-  it('springs the corner radius back to the resting pill radius on press out', async () => {
-    const spy = jest.mocked(Reanimated.withSpring);
+  it('returns to the resting pill radius on press out', async () => {
     await render(
       <Button shape="round" size="small" onPress={() => {}} testID="button">
         {null}
       </Button>
     );
-    spy.mockClear();
+    await fireEvent(screen.getByTestId('button'), 'onPressIn');
     await fireEvent(screen.getByTestId('button'), 'onPressOut');
     // small round resting radius = minHeight (40) / 2 = 20
-    expect(springTargets(spy)).toContain(20);
-    spy.mockClear();
+    expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 20 });
   });
 
-  it('animates between round and square radii when toggled (no spring on mount)', async () => {
-    const spy = jest.mocked(Reanimated.withSpring);
+  it('switches between round and square radii when selected flips', async () => {
     await render(
       <Button shape="square" size="large" onPress={() => {}} testID="button">
         {null}
       </Button>
     );
-    // Mount snaps to the resting radius — no spring.
-    expect(spy).not.toHaveBeenCalled();
     await screen.rerender(
       <Button
         shape="square"
@@ -1404,60 +1375,35 @@ describe('shape morph animation', () => {
       </Button>
     );
     // selected flips square -> round; large round resting radius = 96 / 2 = 48
-    expect(springTargets(spy)).toContain(48);
-    spy.mockClear();
+    expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 48 });
   });
 
   it('morphs a default button, with no size or shape passed', async () => {
-    const spy = jest.mocked(Reanimated.withSpring);
     await render(
       <Button onPress={() => {}} testID="button">
         Default
       </Button>
     );
-    spy.mockClear();
     await fireEvent(screen.getByTestId('button'), 'onPressIn');
-    expect(springTargets(spy)).toContain(LightTheme.shapes.corner.small);
-    spy.mockClear();
+    expect(screen.getByTestId('button')).toHaveStyle({
+      borderRadius: LightTheme.shapes.corner.small,
+    });
   });
 
   it('reads the pressed corner from the size tokens', async () => {
-    const spy = jest.mocked(Reanimated.withSpring);
     await render(
       <Button shape="round" size="large" onPress={() => {}} testID="button">
         {null}
       </Button>
     );
-    spy.mockClear();
     await fireEvent(screen.getByTestId('button'), 'onPressIn');
     // A large button presses to `large` (16dp), not the small sizes' 8dp.
-    expect(springTargets(spy)).toContain(LightTheme.shapes.corner.large);
-    spy.mockClear();
-  });
-
-  it('springs with the same spatial config as the rest of the library', async () => {
-    const spy = jest.mocked(Reanimated.withSpring);
-    await render(
-      <Button shape="round" size="small" onPress={() => {}} testID="button">
-        {null}
-      </Button>
-    );
-    spy.mockClear();
-    await fireEvent(screen.getByTestId('button'), 'onPressIn');
-
-    // Same spring FAB and Switch use, so the overshoot matches them.
-    const { damping, stiffness } = toRawSpring(
-      LightTheme.motion.spring.fast.spatial
-    );
-    expect(spy).toHaveBeenCalledWith(
-      expect.any(Number),
-      expect.objectContaining({ damping, stiffness })
-    );
-    spy.mockClear();
+    expect(screen.getByTestId('button')).toHaveStyle({
+      borderRadius: LightTheme.shapes.corner.large,
+    });
   });
 
   it('skips the press morph under reduce motion', async () => {
-    const spy = jest.mocked(Reanimated.withSpring);
     await render(
       <ReduceMotionContext.Provider value={true}>
         <Button shape="round" size="small" onPress={() => {}} testID="button">
@@ -1465,14 +1411,11 @@ describe('shape morph animation', () => {
         </Button>
       </ReduceMotionContext.Provider>
     );
-    spy.mockClear();
     await fireEvent(screen.getByTestId('button'), 'onPressIn');
-    expect(spy).not.toHaveBeenCalled();
-    spy.mockClear();
+    expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 20 });
   });
 
   it('does not morph when animateShape is false', async () => {
-    const spy = jest.mocked(Reanimated.withSpring);
     await render(
       <Button
         shape="round"
@@ -1484,14 +1427,11 @@ describe('shape morph animation', () => {
         {null}
       </Button>
     );
-    spy.mockClear();
     await fireEvent(screen.getByTestId('button'), 'onPressIn');
-    expect(spy).not.toHaveBeenCalled();
-    spy.mockClear();
+    expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 20 });
   });
 
-  it('snaps instead of springing when animateShape is false and selected flips', async () => {
-    const spy = jest.mocked(Reanimated.withSpring);
+  it('still changes the shape when animateShape is false and selected flips', async () => {
     await render(
       <Button shape="square" size="large" animateShape={false} testID="button">
         {null}
@@ -1509,13 +1449,6 @@ describe('shape morph animation', () => {
       </Button>
     );
 
-    // The shape still changes to the flipped radius, it just doesn't animate.
-    expect(spy).not.toHaveBeenCalled();
-    // A direct shared-value write reaches the style on the next frame.
-    await jest.runAllTimersAsync();
-    expect(Reanimated.getAnimatedStyle(containerOf('button'))).toMatchObject({
-      borderRadius: 48,
-    });
-    spy.mockClear();
+    expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 48 });
   });
 });

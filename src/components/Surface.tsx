@@ -6,6 +6,7 @@ import Animated, {
   cubicBezier,
   isSharedValue,
   type AnimatedStyle,
+  type CSSTransitionTimingFunction,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
@@ -95,6 +96,15 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
      * milliseconds.
      */
     transitionDuration?: number;
+    /**
+     * Duration of the `borderRadius` transition in milliseconds. Undefined
+     * means no transition.
+     */
+    shapeTransitionDuration?: number;
+    /**
+     * Timing function of the `borderRadius` transition.
+     */
+    shapeTransitionTimingFunction?: CSSTransitionTimingFunction;
     /**
      * Style of the Surface.
      *
@@ -191,6 +201,8 @@ const Surface = ({
   testID,
   mode = 'elevated',
   transitionDuration: customTransitionDuration,
+  shapeTransitionDuration,
+  shapeTransitionTimingFunction,
   ref,
   ...rest
 }: Props) => {
@@ -203,8 +215,13 @@ const Surface = ({
 
   const backgroundStyle = { backgroundColor };
 
+  // A CSS transition can't animate a value set by the animated style.
+  const transitionsRadius =
+    shapeTransitionDuration !== undefined && typeof borderRadius === 'number';
+  const radiusStyles = transitionsRadius ? [{ borderRadius }] : [];
+
   const shapeProps = {
-    borderRadius,
+    ...(transitionsRadius ? null : { borderRadius }),
     borderBottomEndRadius,
     borderBottomLeftRadius,
     borderBottomRightRadius,
@@ -230,21 +247,51 @@ const Surface = ({
   const transitionDuration =
     customTransitionDuration ??
     theme.motion.duration.short3 * theme.animation.scale;
-  const transitionDurationStyle: AnimatedStyle<ViewStyle> = {
-    transitionDuration,
-  };
   const transitionTimingFunction = cubicBezier(...theme.motion.easing.standard);
-  const transitionProperty =
+  const colorTransitionProperty =
     // FIXME: Reanimated can't animate PlatformColor and DynamicColorIOS
     typeof backgroundColor === 'string' ? ['backgroundColor' as const] : [];
+
+  const getTransitionStyles = (
+    shadowProperties: (
+      | 'boxShadow'
+      | 'elevation'
+      | 'shadowOpacity'
+      | 'shadowOffset'
+      | 'shadowRadius'
+    )[]
+  ) => {
+    const properties = [...colorTransitionProperty, ...shadowProperties];
+    const transitionStyle: AnimatedStyle<ViewStyle> = {
+      transitionTimingFunction:
+        transitionsRadius && shapeTransitionTimingFunction !== undefined
+          ? [
+              ...properties.map(() => transitionTimingFunction),
+              shapeTransitionTimingFunction,
+            ]
+          : transitionTimingFunction,
+      transitionProperty: transitionsRadius
+        ? [...properties, 'borderRadius']
+        : properties,
+    };
+    const transitionDurationStyle: AnimatedStyle<ViewStyle> = {
+      transitionDuration:
+        transitionsRadius && shapeTransitionDuration !== undefined
+          ? [
+              ...properties.map(() => transitionDuration),
+              shapeTransitionDuration,
+            ]
+          : transitionDuration,
+    };
+    return { transitionStyle, transitionDurationStyle };
+  };
 
   if (Platform.OS === 'web') {
     const [elevationShadow] = shadow(elevation, theme.colors.shadow);
 
-    const transitionStyle: AnimatedStyle<ViewStyle> = {
-      transitionTimingFunction,
-      transitionProperty: [...transitionProperty, 'boxShadow'],
-    };
+    const { transitionStyle, transitionDurationStyle } = getTransitionStyles([
+      'boxShadow',
+    ]);
 
     return (
       <Animated.View
@@ -258,6 +305,7 @@ const Surface = ({
           transitionDurationStyle,
           backgroundStyle,
           visualStyle,
+          ...radiusStyles,
           isElevated ? elevationShadow : null,
         ]}
       >
@@ -269,10 +317,9 @@ const Surface = ({
   if (Platform.OS === 'android') {
     const elevationAndroid = androidElevationLevels[elevation];
 
-    const transitionStyle: AnimatedStyle<ViewStyle> = {
-      transitionTimingFunction,
-      transitionProperty: [...transitionProperty, 'elevation'],
-    };
+    const { transitionStyle, transitionDurationStyle } = getTransitionStyles([
+      'elevation',
+    ]);
 
     return (
       <Animated.View
@@ -285,6 +332,7 @@ const Surface = ({
           transitionDurationStyle,
           backgroundStyle,
           visualStyle,
+          ...radiusStyles,
           isElevated && { elevation: elevationAndroid },
         ]}
       >
@@ -295,15 +343,11 @@ const Surface = ({
 
   const [spotShadow, ambientShadow] = shadow(elevation, theme.colors.shadow);
 
-  const transitionStyle: AnimatedStyle<ViewStyle> = {
-    transitionTimingFunction,
-    transitionProperty: [
-      ...transitionProperty,
-      'shadowOpacity',
-      'shadowOffset',
-      'shadowRadius',
-    ],
-  };
+  const { transitionStyle, transitionDurationStyle } = getTransitionStyles([
+    'shadowOpacity',
+    'shadowOffset',
+    'shadowRadius',
+  ]);
 
   return (
     <Animated.View
@@ -315,6 +359,7 @@ const Surface = ({
         transitionDurationStyle,
         backgroundStyle,
         visualStyle,
+        ...radiusStyles,
         isElevated && spotShadow,
       ]}
       testID={testID}
@@ -328,6 +373,7 @@ const Surface = ({
             transitionDurationStyle,
             backgroundStyle,
             shadowVisualStyle,
+            ...radiusStyles,
             ambientShadow,
           ]}
         />

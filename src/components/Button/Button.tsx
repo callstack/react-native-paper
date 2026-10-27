@@ -11,12 +11,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Reanimated, {
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from 'react-native-reanimated';
+import Reanimated, { linear } from 'react-native-reanimated';
 
 import {
   getButtonColors,
@@ -32,7 +27,7 @@ import type { ButtonMode, ButtonShape, ButtonSize } from './utils';
 import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { toRawSpring } from '../../theme/tokens/sys/motion';
+import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
@@ -82,7 +77,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Whether the container animates its corner radius. Defaults to `true`.
    *
-   * When `true` the corner springs to the pressed shape while the button is
+   * When `true` the corner animates to the pressed shape while the button is
    * pressed, and animates between the two shapes as `selected` changes. When
    * `false` the shape still changes, it just snaps instead of animating, and
    * there is no press morph at all.
@@ -280,9 +275,6 @@ const Button = ({
   });
 
   const reduceMotion = useReduceMotion();
-  const reanimatedReduceMotion = reduceMotion
-    ? ReduceMotion.Always
-    : ReduceMotion.Never;
 
   const isElevationEntitled = !disabled && isMode('elevated');
 
@@ -308,86 +300,50 @@ const Button = ({
   const effectiveHitSlop =
     hitSlop === undefined ? getButtonHitSlop(size) : hitSlop;
 
-  // Shape morph: animate the corner on press (→ the pressed shape token) and on
-  // the `selected`/shape toggle.
-  const animateShape = animateShapeProp;
-  // A press morph under reduce-motion would pop instantly rather than animate,
-  // so skip it; a `selected` change still snaps to the new shape.
-  const morphOnPress = animateShape && !reduceMotion;
+  // A CSS transition shaped like the MD3 fast spatial spring animates the
+  // corner. Under reduce motion, or with `animateShape` off, it snaps.
+  const animatesShape = animateShapeProp && !reduceMotion;
   // `round` resolves to the `cornerFull` sentinel, so use the real pill radius
-  // (half the container height) instead: it keeps the spring bounded and lets
-  // the ripple clip match the container exactly.
+  // (half the container height) instead: it keeps the transition bounded and
+  // lets the ripple clip match the container exactly.
   const restingRadius =
     effectiveShape === 'round'
       ? sizeStyle.minHeight / 2
       : getButtonShapeRadius({ size, shape, theme, selected: toggleSelected });
-  const pressedRadius = getButtonPressedRadius({ size, theme });
-  const animatedRadius = useSharedValue(restingRadius);
-  const restingRadiusRef = React.useRef(restingRadius);
-  const isRadiusMountedRef = React.useRef(false);
+  const radius =
+    animatesShape && pressed
+      ? getButtonPressedRadius({ size, theme })
+      : restingRadius;
+  const shapeSpring = React.useMemo(() => {
+    const { points, duration } = toSpringCurve(
+      theme.motion.spring.fast.spatial
+    );
+    return { timingFunction: linear(...points), duration };
+  }, [theme.motion.spring.fast.spatial]);
+  const shapeTransitionDuration = animatesShape
+    ? shapeSpring.duration * theme.animation.scale
+    : 0;
 
-  // The morph stays imperative: a press can interrupt it mid-flight, which a
-  // duration-based transition can't express.
-  const radiusSpringConfig = React.useMemo(
-    () => ({
-      ...toRawSpring(theme.motion.spring.fast.spatial),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [theme.motion.spring.fast.spatial, reanimatedReduceMotion]
-  );
-
-  const springRadiusTo = React.useCallback(
-    (toValue: number) => {
-      animatedRadius.value = withSpring(toValue, radiusSpringConfig);
-    },
-    [animatedRadius, radiusSpringConfig]
-  );
+  const tracksPress = animatesShape || isElevationEntitled;
 
   const handlePressIn = React.useCallback(
     (e: GestureResponderEvent) => {
       onPressIn?.(e);
-      if (morphOnPress) {
-        springRadiusTo(pressedRadius);
-      }
-      if (isElevationEntitled) {
+      if (tracksPress) {
         setPressed(true);
       }
     },
-    [
-      onPressIn,
-      morphOnPress,
-      springRadiusTo,
-      pressedRadius,
-      isElevationEntitled,
-    ]
+    [onPressIn, tracksPress]
   );
 
   const handlePressOut = React.useCallback(
     (e: GestureResponderEvent) => {
       onPressOut?.(e);
-      if (morphOnPress) {
-        springRadiusTo(restingRadiusRef.current);
-      }
-      if (isElevationEntitled) {
-        setPressed(false);
-      }
+      // Unconditional, so a stale `pressed` can't stick.
+      setPressed(false);
     },
-    [onPressOut, morphOnPress, springRadiusTo, isElevationEntitled]
+    [onPressOut]
   );
-
-  // Snap on mount; animate when a toggle/shape change moves the resting radius.
-  React.useEffect(() => {
-    restingRadiusRef.current = restingRadius;
-    if (!isRadiusMountedRef.current) {
-      isRadiusMountedRef.current = true;
-      return;
-    }
-    if (animateShape) {
-      springRadiusTo(restingRadius);
-    } else {
-      animatedRadius.value = restingRadius;
-    }
-  }, [restingRadius, animateShape, animatedRadius, springRadiusTo]);
 
   const {
     backgroundColor,
@@ -442,8 +398,8 @@ const Button = ({
     previousContainerColor: committedContainerColor,
   });
 
-  // The clip carries the same animated radius as the `Surface`, so the ripple
-  // and the disabled overlay follow the morph.
+  // The clip carries the same radius transition as the `Surface`, so the
+  // ripple and the disabled overlay follow the morph.
   //
   // TODO: revisit the focus ring's placement once #5084 lands.
   // https://github.com/callstack/react-native-paper/pull/5084 adds MD3 keyboard
@@ -453,15 +409,18 @@ const Button = ({
   // `focusRing="outward"` and warns an outward ring is trimmed by "any clipping
   // ancestor sized to its content", which is exactly this view. Button will
   // likely need `focusRing="inward"`, or the ring on the outer view.
-  const clipStyle = useAnimatedStyle(
-    () => ({ borderRadius: animatedRadius.value }),
-    [animatedRadius]
-  );
+  const shapeTransitionStyle = {
+    transitionProperty: 'borderRadius',
+    transitionDuration: shapeTransitionDuration,
+    transitionTimingFunction: shapeSpring.timingFunction,
+  } as const;
 
-  const innerClipStyle = useAnimatedStyle(
-    () => ({ borderRadius: Math.max(0, animatedRadius.value - borderWidth) }),
-    [animatedRadius, borderWidth]
-  );
+  const clipStyle = { ...shapeTransitionStyle, borderRadius: radius };
+
+  const innerClipStyle = {
+    ...shapeTransitionStyle,
+    borderRadius: Math.max(0, radius - borderWidth),
+  };
 
   const outlineStyle = React.useMemo(
     () => ({ backgroundColor: containerColor, borderColor, borderWidth }),
@@ -496,9 +455,11 @@ const Button = ({
       {...rest}
       ref={ref}
       backgroundColor={containerColor}
-      borderRadius={animatedRadius}
+      borderRadius={radius}
       elevation={elevation}
       transitionDuration={surfaceTransitionDuration}
+      shapeTransitionDuration={shapeTransitionDuration}
+      shapeTransitionTimingFunction={shapeSpring.timingFunction}
       style={[styles.button, style]}
     >
       <Reanimated.View style={[styles.clip, outlineStyle, clipStyle]}>
