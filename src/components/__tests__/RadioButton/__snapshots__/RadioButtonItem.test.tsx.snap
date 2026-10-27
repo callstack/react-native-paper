@@ -134,7 +134,28 @@ exports[`can render leading radio button control 1`] = `
               },
             ]
           }
-        />
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "borderRadius": 5,
+                  "height": 10,
+                  "width": 10,
+                },
+                {
+                  "backgroundColor": "rgba(73, 69, 79, 1)",
+                  "transform": [
+                    {
+                      "scale": 0,
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+        </View>
       </View>
     </View>
     <Text
@@ -349,7 +370,28 @@ exports[`renders unchecked 1`] = `
               },
             ]
           }
-        />
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "borderRadius": 5,
+                  "height": 10,
+                  "width": 10,
+                },
+                {
+                  "backgroundColor": "rgba(73, 69, 79, 1)",
+                  "transform": [
+                    {
+                      "scale": 0,
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+        </View>
       </View>
     </View>
   </View>

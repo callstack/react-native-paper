@@ -80,7 +80,28 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
           },
         ]
       }
-    />
+    >
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "borderRadius": 5,
+              "height": 10,
+              "width": 10,
+            },
+            {
+              "backgroundColor": "rgba(73, 69, 79, 1)",
+              "transform": [
+                {
+                  "scale": 0,
+                },
+              ],
+            },
+          ]
+        }
+      />
+    </View>
   </View>
 </View>
 `;
@@ -164,7 +185,28 @@ exports[`RadioButton renders properly 1`] = `
           },
         ]
       }
-    />
+    >
+      <View
+        collapsable={false}
+        style={
+          [
+            {
+              "borderRadius": 5,
+              "height": 10,
+              "width": 10,
+            },
+            {
+              "backgroundColor": "rgba(73, 69, 79, 1)",
+              "transform": [
+                {
+                  "scale": 0,
+                },
+              ],
+            },
+          ]
+        }
+      />
+    </View>
   </View>
 </View>
 `;
@@ -260,8 +302,6 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
             },
             {
               "backgroundColor": "rgba(103, 80, 164, 1)",
-            },
-            {
               "transform": [
                 {
                   "scale": 1,

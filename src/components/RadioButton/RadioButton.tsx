@@ -1,14 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { GestureResponderEvent } from 'react-native';
+import type { GestureResponderEvent, ViewStyle } from 'react-native';
 
-import Animated, {
-  Easing,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { cubicBezier, type CSSStyle } from 'react-native-reanimated';
 
 import { RadioButtonContext } from './RadioButtonGroup';
 import { RadioButtonTokens } from './tokens';
@@ -126,47 +120,6 @@ const RadioButton = ({
     }) === 'checked';
 
   const reduceMotion = useReduceMotion();
-  const reanimatedReduceMotion = reduceMotion
-    ? ReduceMotion.Always
-    : ReduceMotion.Never;
-
-  // Single selection animation path: the dot scales in (with a slight
-  // overshoot) when the radio becomes checked. The ring outline stays a
-  // constant width. Keyed on `checked` (not `status`) so radios driven by a
-  // `RadioButton.Group` animate too.
-  const dotScale = useSharedValue(1);
-  const isFirstRendering = React.useRef<boolean>(true);
-
-  const dotTimingConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration.short3,
-      easing: Easing.bezier(...theme.motion.easing.standard),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [
-      theme.motion.duration.short3,
-      theme.motion.easing.standard,
-      reanimatedReduceMotion,
-    ]
-  );
-
-  React.useEffect(() => {
-    // Do not run animation on very first rendering
-    if (isFirstRendering.current) {
-      isFirstRendering.current = false;
-      return;
-    }
-
-    if (checked) {
-      // Jump to the overshoot value, then settle back to 1.
-      dotScale.value = 1.2;
-      dotScale.value = withTiming(1, dotTimingConfig);
-    }
-  }, [checked, dotScale, dotTimingConfig]);
-
-  const dotAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: dotScale.value }],
-  }));
 
   const { selectionControlColor, selectionControlOpacity } =
     getSelectionControlColor({
@@ -177,6 +130,14 @@ const RadioButton = ({
       customColor: rest.color,
       customUncheckedColor: rest.uncheckedColor,
     });
+
+  const dotStyle: CSSStyle<ViewStyle> = {
+    backgroundColor: selectionControlColor,
+    transform: [{ scale: checked ? 1 : 0 }],
+    transitionProperty: 'transform',
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.short3,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+  };
 
   // When `accessible={false}` is passed (typically by `RadioButton.Item`,
   // which owns the a11y tree for the wrapped row), suppress our own role and
@@ -228,15 +189,7 @@ const RadioButton = ({
             },
           ]}
         >
-          {checked ? (
-            <Animated.View
-              style={[
-                styles.dot,
-                { backgroundColor: selectionControlColor },
-                dotAnimatedStyle,
-              ]}
-            />
-          ) : null}
+          <Animated.View style={[styles.dot, dotStyle]} />
         </View>
       </View>
     </TouchableRipple>
