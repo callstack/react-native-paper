@@ -56,6 +56,14 @@ export type Props = ViewProps & {
    */
   source: AvatarImageSource;
   /**
+   * Identity of the image that a function `source` renders, for example the
+   * user id. When it changes, a failed function source loads again instead of
+   * keeping `fallback`. Without it, `fallback` stays after a function source
+   * fails. Other sources do not use it, because their `uri` or module id
+   * identifies them.
+   */
+  sourceKey?: string | number;
+  /**
    * Size of the avatar.
    */
   size?: number;
@@ -144,6 +152,7 @@ export type Props = ViewProps & {
 const AvatarImage = ({
   size = DEFAULT_SIZE,
   source,
+  sourceKey: sourceKeyProp,
   fallback,
   alt,
   'aria-label': ariaLabel,
@@ -172,7 +181,7 @@ const AvatarImage = ({
     description === undefined
       ? { accessible: false as const }
       : { alt: description, 'aria-label': description };
-  const sourceKey = getAvatarImageSourceKey(source);
+  const sourceKey = getAvatarImageSourceKey(source, sourceKeyProp);
   const [failedSource, setFailedSource] = React.useState<{ key: unknown }>();
   const hasError =
     failedSource !== undefined && Object.is(failedSource.key, sourceKey);

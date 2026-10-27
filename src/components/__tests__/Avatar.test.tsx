@@ -1,4 +1,5 @@
 import { Image, StyleSheet } from 'react-native';
+import type { ImageProps } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
@@ -520,6 +521,56 @@ describe('AvatarImage fallback', () => {
 
     expect(screen.getByText('JD', hidden)).toBeTruthy();
     expect(screen.queryByTestId('custom-image')).toBeNull();
+  });
+
+  it('retries a failed function source when sourceKey changes', async () => {
+    const renderSource = ({
+      style,
+      onError,
+    }: {
+      style: object;
+      onError?: ImageProps['onError'];
+    }) => (
+      <Image
+        testID="custom-image"
+        source={{ uri: 'avatar.png' }}
+        style={style}
+        onError={onError}
+        accessibilityIgnoresInvertColors
+      />
+    );
+    const fallback = ({ size }: { size: number }) => (
+      <Avatar.Text size={size} label="JD" />
+    );
+    const { rerender } = await render(
+      <Avatar.Image
+        source={renderSource}
+        sourceKey="user-1"
+        fallback={fallback}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('custom-image'), 'onError');
+    expect(screen.queryByTestId('custom-image')).toBeNull();
+
+    await rerender(
+      <Avatar.Image
+        source={renderSource}
+        sourceKey="user-1"
+        fallback={fallback}
+      />
+    );
+    expect(screen.queryByTestId('custom-image')).toBeNull();
+
+    await rerender(
+      <Avatar.Image
+        source={renderSource}
+        sourceKey="user-2"
+        fallback={fallback}
+      />
+    );
+    expect(screen.getByTestId('custom-image')).toBeTruthy();
+    expect(screen.queryByText('JD', hidden)).toBeNull();
   });
 
   it('keeps the fallback when a function source identity changes', async () => {

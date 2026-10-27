@@ -1,5 +1,6 @@
 import type { AccessibilityRole, ColorValue } from 'react-native';
 
+import type { AvatarImageSource } from './AvatarImage';
 import { white } from '../../theme/colors';
 import type { InternalTheme } from '../../theme/types';
 import { contentColorFor } from '../../theme/utils/color';
@@ -79,11 +80,15 @@ export const getAvatarRole = (accessibilityRole?: AccessibilityRole) =>
 
 /**
  * Identity for retrying a failed avatar image.
- * Function sources are keyed stably so inline renderers do not reset state.
+ * Function sources use `sourceKey`, or one stable key without it, so inline
+ * renderers do not reset state.
  */
-export const getAvatarImageSourceKey = (source: unknown) => {
+export const getAvatarImageSourceKey = (
+  source: AvatarImageSource,
+  sourceKey?: string | number
+) => {
   if (typeof source === 'function') {
-    return 'function';
+    return sourceKey ?? 'function';
   }
 
   if (

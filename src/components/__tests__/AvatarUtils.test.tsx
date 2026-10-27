@@ -119,6 +119,17 @@ describe('getAvatarImageSourceKey', () => {
     );
   });
 
+  it('keys function sources by sourceKey when it is set', () => {
+    expect(getAvatarImageSourceKey(() => null, 'user-1')).toBe('user-1');
+    expect(getAvatarImageSourceKey(() => null, 'user-2')).not.toBe(
+      getAvatarImageSourceKey(() => null, 'user-1')
+    );
+  });
+
+  it('ignores sourceKey for uri sources', () => {
+    expect(getAvatarImageSourceKey({ uri: 'a.png' }, 'user-1')).toBe('a.png');
+  });
+
   it('uses the value for module ids', () => {
     expect(getAvatarImageSourceKey(1)).toBe(1);
   });
