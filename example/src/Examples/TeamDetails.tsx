@@ -219,8 +219,10 @@ const ThemeBasedOnSourceColor = () => {
           safeAreaInsets={{ bottom: insets.bottom }}
           navigationState={{ index, routes }}
           onTabPress={({ route }) => {
-            const i = routes.findIndex((r) => r.key === route.key);
-            if (i !== -1 && i !== index) setIndex(i);
+            const nextIndex = routes.findIndex(
+              (tabRoute) => tabRoute.key === route.key
+            );
+            if (nextIndex !== -1 && nextIndex !== index) setIndex(nextIndex);
           }}
           labelMaxFontSizeMultiplier={2}
         />

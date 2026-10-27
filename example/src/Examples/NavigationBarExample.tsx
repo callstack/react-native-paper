@@ -70,7 +70,9 @@ const NavigationBarExample = () => {
         labeled={labeled}
         variant={variant}
         onTabPress={({ route }) => {
-          const nextIndex = routes.findIndex((r) => r.key === route.key);
+          const nextIndex = routes.findIndex(
+            (tabRoute) => tabRoute.key === route.key
+          );
           if (nextIndex !== -1) {
             setIndex(nextIndex);
           }
