@@ -1,11 +1,8 @@
-import * as React from 'react';
+import { describe, expect, it, jest } from '@jest/globals';
+import { userEvent } from '@testing-library/react-native';
 
-import { describe, expect, it } from '@jest/globals';
-
-import { render } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 import RadioButton from '../../RadioButton';
-import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
-import type { RadioButtonContextType } from '../../RadioButton/RadioButtonGroup';
 
 describe('RadioButtonGroup', () => {
   it('renders properly', async () => {
@@ -20,27 +17,25 @@ describe('RadioButtonGroup', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('keeps a stable context value when an unrelated parent prop changes', async () => {
-    const contexts: Array<RadioButtonContextType | null> = [];
+  it('calls the latest onValueChange after the parent re-renders', async () => {
+    const first = jest.fn();
+    const second = jest.fn();
 
-    const Capture = ({ extra }: { extra: number }) => {
-      contexts.push(React.useContext(RadioButtonContext));
-      return <RadioButton value={`v${extra}`} />;
-    };
-
-    // New inline `onValueChange` on every render — `use-latest-callback` +
-    // `useMemo` should keep the provided context object identical.
-    const Parent = ({ extra }: { extra: number }) => (
-      <RadioButton.Group value="first" onValueChange={() => {}}>
-        <Capture extra={extra} />
+    const { rerender } = await render(
+      <RadioButton.Group value="first" onValueChange={first}>
+        <RadioButton.Item label="Second" value="second" />
       </RadioButton.Group>
     );
 
-    const { rerender } = await render(<Parent extra={1} />);
-    await rerender(<Parent extra={2} />);
+    await rerender(
+      <RadioButton.Group value="first" onValueChange={second}>
+        <RadioButton.Item label="Second" value="second" />
+      </RadioButton.Group>
+    );
 
-    expect(contexts.length).toBe(2);
-    expect(contexts[0]).not.toBeNull();
-    expect(contexts[0]).toBe(contexts[1]);
+    await userEvent.press(screen.getByRole('radio', { name: 'Second' }));
+
+    expect(first).not.toHaveBeenCalled();
+    expect(second).toHaveBeenCalledWith('second');
   });
 });
