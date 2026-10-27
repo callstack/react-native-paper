@@ -93,8 +93,7 @@ const AvatarText = ({
         styles.container,
         restStyle,
       ]}
-      accessible
-      {...(!hasCustomLabel && { 'aria-label': label })}
+      {...(hasCustomLabel && { accessible: true })}
       {...rest}
     >
       <Text
@@ -110,7 +109,9 @@ const AvatarText = ({
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
-        aria-hidden
+        {...(hasCustomLabel
+          ? { 'aria-hidden': true }
+          : { 'aria-label': label })}
       >
         {avatarInitials}
       </Text>

@@ -285,6 +285,23 @@ it('hides text avatar initials from assistive tech', async () => {
   });
 });
 
+it('reads the full label from the text of an unlabelled text avatar', async () => {
+  const tree = (await render(<Avatar.Text label="ABC" />)).toJSON();
+
+  expect(tree).not.toMatchObject({ props: { accessible: true } });
+  expect(tree).toMatchObject({
+    children: [
+      {
+        props: { 'aria-label': 'ABC' },
+        children: ['AB'],
+      },
+    ],
+  });
+  expect(tree).not.toMatchObject({
+    children: [{ props: { 'aria-hidden': true } }],
+  });
+});
+
 it('makes a labelled icon avatar an accessibility element', async () => {
   const tree = (
     await render(<Avatar.Icon icon="folder" accessibilityLabel="Folder" />)
