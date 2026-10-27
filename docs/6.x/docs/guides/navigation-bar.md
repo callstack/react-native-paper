@@ -1,11 +1,11 @@
 ---
-title: Using BottomNavigation with React Navigation
+title: Using NavigationBar with React Navigation
 ---
 
 Build a Material Design bottom tab bar by combining two pieces:
 
 - `@react-navigation/bottom-tabs` handles routing, state, and screen options.
-- `NavigationBar` renders the Material 3 tab bar (ripple, badges, and stacked or horizontal item layouts).
+- `NavigationBar` renders the Material 3 navigation bar (state layers, badges, and stacked or horizontal item layouts).
 
 :::info
 Install [`@react-navigation/native`](https://reactnavigation.org/docs/getting-started) and [`@react-navigation/bottom-tabs`](https://reactnavigation.org/docs/bottom-tab-navigator) first.

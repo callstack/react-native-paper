@@ -24,8 +24,6 @@ function SettingsScreen() {
 }
 
 const MyTabs = createBottomTabNavigator({
-  screenOptions: {
-  },
   tabBar: ({ navigation, state, descriptors, insets }) => (
     <NavigationBar
       navigationState={state}
@@ -125,8 +123,6 @@ export default function App() {
     <Provider>
       <NavigationContainer>
         <Tab.Navigator
-          screenOptions={{
-          }}
           tabBar={({ navigation, state, descriptors, insets }) => (
             <NavigationBar
               navigationState={state}
@@ -139,12 +135,12 @@ export default function App() {
                 });
 
                 if (!event.defaultPrevented) {
-                navigation.dispatch({
-                  ...CommonActions.navigate(route.name, route.params),
-                  target: state.key,
-                });
-              }
-            }}
+                  navigation.dispatch({
+                    ...CommonActions.navigate(route.name, route.params),
+                    target: state.key,
+                  });
+                }
+              }}
               renderIcon={({ route, focused, color }) =>
                 descriptors[route.key].options.tabBarIcon?.({
                   focused,
