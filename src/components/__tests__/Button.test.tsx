@@ -24,6 +24,21 @@ it('renders text button by default', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it.each([true, false])(
+  'exposes aria-expanded=%s on the interactive button',
+  async (expanded) => {
+    await render(
+      <Button aria-expanded={expanded} onPress={() => {}}>
+        Show details
+      </Button>
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'Show details', expanded })
+    ).toBeEnabled();
+  }
+);
+
 it('renders text button with mode', async () => {
   const tree = (
     await render(<Button mode="text">Text Button</Button>)
