@@ -160,6 +160,7 @@ exports[`renders avatar with text 1`] = `
   <Text
     aria-label="XD"
     numberOfLines={1}
+    role="img"
     style={
       [
         {
@@ -222,6 +223,7 @@ exports[`renders avatar with text and custom background color 1`] = `
   <Text
     aria-label="XD"
     numberOfLines={1}
+    role="img"
     style={
       [
         {
@@ -284,6 +286,7 @@ exports[`renders avatar with text and custom colors 1`] = `
   <Text
     aria-label="XD"
     numberOfLines={1}
+    role="img"
     style={
       [
         {
@@ -346,6 +349,7 @@ exports[`renders avatar with text and custom size 1`] = `
   <Text
     aria-label="XD"
     numberOfLines={1}
+    role="img"
     style={
       [
         {

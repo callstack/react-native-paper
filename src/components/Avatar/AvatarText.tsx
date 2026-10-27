@@ -1,7 +1,7 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
-import { DEFAULT_SIZE, resolveAvatarColors } from './utils';
+import { DEFAULT_SIZE, getAvatarRole, resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
@@ -93,7 +93,10 @@ const AvatarText = ({
         styles.container,
         restStyle,
       ]}
-      {...(hasCustomLabel && { accessible: true })}
+      {...(hasCustomLabel && {
+        accessible: true,
+        ...getAvatarRole(rest.accessibilityRole),
+      })}
       {...rest}
     >
       <Text
@@ -111,7 +114,7 @@ const AvatarText = ({
         maxFontSizeMultiplier={maxFontSizeMultiplier}
         {...(hasCustomLabel
           ? { 'aria-hidden': true }
-          : { 'aria-label': label })}
+          : { 'aria-label': label, role: 'img' as const })}
       >
         {avatarInitials}
       </Text>

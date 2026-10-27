@@ -269,6 +269,7 @@ it('hides text avatar initials from assistive tech', async () => {
     )
   ).toJSON();
 
+  expect(tree).not.toMatchObject({ props: { role: 'img' } });
   expect(tree).toMatchObject({
     props: {
       accessible: true,
@@ -292,13 +293,23 @@ it('reads the full label from the text of an unlabelled text avatar', async () =
   expect(tree).toMatchObject({
     children: [
       {
-        props: { 'aria-label': 'ABC' },
+        props: { 'aria-label': 'ABC', role: 'img' },
         children: ['AB'],
       },
     ],
   });
   expect(tree).not.toMatchObject({
     children: [{ props: { 'aria-hidden': true } }],
+  });
+});
+
+it('gives a labelled text avatar host the img role', async () => {
+  const tree = (
+    await render(<Avatar.Text label="JD" aria-label="Jane Doe" />)
+  ).toJSON();
+
+  expect(tree).toMatchObject({
+    props: { accessible: true, 'aria-label': 'Jane Doe', role: 'img' },
   });
 });
 
@@ -313,6 +324,7 @@ it('makes a labelled icon avatar an accessibility element', async () => {
     props: {
       accessible: true,
       accessibilityLabel: 'Folder',
+      role: 'img',
     },
   });
 });
@@ -563,6 +575,7 @@ describe('AvatarImage fallback', () => {
       props: {
         accessible: true,
         'aria-label': 'Jane Doe',
+        role: 'img',
       },
     });
   });

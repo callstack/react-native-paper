@@ -11,6 +11,7 @@ import type {
 import {
   DEFAULT_SIZE,
   getAvatarImageSourceKey,
+  getAvatarRole,
   resolveAvatarColors,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -186,7 +187,11 @@ const AvatarImage = ({
   const hostA11y = showImage
     ? { accessible: false, importantForAccessibility: 'no' as const }
     : description !== undefined
-      ? { accessible: true, 'aria-label': description }
+      ? {
+          accessible: true,
+          'aria-label': description,
+          ...getAvatarRole(rest.accessibilityRole),
+        }
       : {};
 
   return (

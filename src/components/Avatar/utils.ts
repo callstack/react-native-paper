@@ -1,4 +1,4 @@
-import type { ColorValue } from 'react-native';
+import type { AccessibilityRole, ColorValue } from 'react-native';
 
 import { white } from '../../theme/colors';
 import type { InternalTheme } from '../../theme/types';
@@ -68,6 +68,14 @@ export const resolveAvatarColors = ({
 
   return { background, textColor: white };
 };
+
+/**
+ * `role="img"` for a labelled avatar, because web does not expose a name on
+ * an element without a role. `role` wins over `accessibilityRole`, so a
+ * custom `accessibilityRole` is kept.
+ */
+export const getAvatarRole = (accessibilityRole?: AccessibilityRole) =>
+  accessibilityRole === undefined ? { role: 'img' as const } : {};
 
 /**
  * Identity for retrying a failed avatar image.
