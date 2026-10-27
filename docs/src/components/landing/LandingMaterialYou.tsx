@@ -23,6 +23,7 @@ export default function LandingMaterialYou() {
           <img
             alt="Material You components"
             className="m6ymebm"
+            loading="lazy"
             src={asset('images/material-you.png')}
           />
         </div>

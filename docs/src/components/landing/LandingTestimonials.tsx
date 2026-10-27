@@ -45,10 +45,6 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-/**
- * homepage/Testimonials.js, across two bands: a heading section and a
- * full-bleed track holding components/Testimonial.js cards in the Slider.
- */
 export default function LandingTestimonials() {
   return (
     <>
@@ -82,7 +78,10 @@ export default function LandingTestimonials() {
                   rel="noreferrer noopener"
                   target="_blank"
                 >
-                  <img alt="" src={asset('images/icons/twitter.svg')} />
+                  <img
+                    alt={`${testimonial.name} on Twitter`}
+                    src={asset('images/icons/twitter.svg')}
+                  />
                 </a>
               </div>
               <div className="c1htk8me">{testimonial.quote}</div>

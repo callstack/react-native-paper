@@ -1,9 +1,6 @@
 import type { PrismTheme } from 'prism-react-renderer';
 
-/** utils/editorTheme.js. `plain` is applied inline by prism-react-renderer. */
 const editorTheme: PrismTheme = {
-  // The source also puts the font, size and radius here; `PrismThemeEntry`
-  // only carries colour, so they live in the snippet's own styles instead.
   plain: {
     backgroundColor: '#202C32',
     color: 'rgb(170, 176, 179)',
@@ -56,7 +53,6 @@ const editorTheme: PrismTheme = {
   ],
 };
 
-/** The monochrome variant the "Standard React code" panel uses. */
 export const grayTheme: PrismTheme = {
   plain: { ...editorTheme.plain },
   styles: [

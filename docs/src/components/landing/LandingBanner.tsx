@@ -1,9 +1,5 @@
 import LandingSection from './LandingSection';
 
-/**
- * Header.js in the source. The paper logo and GitHub link that flank it there
- * are already provided by the docs navbar, so only the call to action remains.
- */
 export default function LandingBanner() {
   return (
     <LandingSection variant="sl968z4" innerClassName="sdarceo">

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Linking, ScrollView, StyleSheet, View } from 'react-native';
 
+import { useVersion, withBase } from '@rspress/core/dist/runtime/index.js';
 import { BrowserOnly } from '@rspress/core/runtime';
 import {
   Appbar,
@@ -18,11 +19,10 @@ import {
 
 import { grayTheme } from './editorTheme';
 import LandingCodeSnippet from './LandingCodeSnippet';
-import LandingSection, { asset, docsHref } from './LandingSection';
+import LandingSection, { asset } from './LandingSection';
 import { prepareThemes } from '../../utils/themes';
+import { getNextRoute } from '../../utils/versionRoutes';
 
-// The original sample referenced a non-existent `TouchableWithNativeFeedback`
-// and was missing a comma in the StyleSheet object; both corrected here.
 const standardReact = `
 const Touchable = Platform.OS === 'ios' ?
   TouchableOpacity :
@@ -56,7 +56,7 @@ const withPaper = `
 
 `;
 
-const snippet = `<View style={ customStyle.box }>
+const snippet = (isNext: boolean) => `<View style={ customStyle.box }>
   <Text variant='headlineSmall'>
     Sign up to our newsletter!
   </Text>
@@ -76,10 +76,10 @@ const snippet = `<View style={ customStyle.box }>
   </Chip>
   <Chip
     onPress={
-     toggleMD3
+     toggleMaterialYou
     }
     style={{ marginRight: 8 }}
-    selected={ isV3 }
+    selected={ isMaterialYou }
   >
     Material You
   </Chip>
@@ -88,12 +88,12 @@ const snippet = `<View style={ customStyle.box }>
   <TextInput
     style={{ marginTop: 15 }}
     label='Outlined input'
-    mode='outlined'
+    ${isNext ? "variant='outlined'" : "mode='outlined'"}
   />
   <TextInput
     style={{ marginTop: 15 }}
     label='Flat input'
-    mode='flat'
+    ${isNext ? "variant='filled'" : "mode='flat'"}
   />
   <Button
     style={{ marginTop: 15 }}
@@ -120,13 +120,6 @@ const snippet = `<View style={ customStyle.box }>
   Hey there! I'm a Snackbar.
 </Snackbar>`;
 
-/**
- * The source's second chip switches the demo between MD2 and MD3. Paper 6
- * renders MD3 components only, so the chip switches the palette instead:
- * on, a Material You scheme derived from the page's own purple; off, the MD2
- * colours the source hands its editor (`#6200ee` light, `#64DAC5` dark).
- * Component shapes stay MD3 either way - that part needs Paper 5.
- */
 const materialYouColors = prepareThemes({ primary: '#21005d' });
 
 const md2Colors = {
@@ -160,16 +153,6 @@ const md2Colors = {
   },
 };
 
-/**
- * MD2 squared most surfaces off at 4dp and kept chips as 16dp pills, where
- * MD3 rounds everything much further. `TextInput`'s radius is a constant in
- * Paper 6 rather than a token, so the fields stay MD3-round either way.
- */
-/**
- * MD2 fills its Appbar with the primary colour in both modes and picks the
- * contrasting content colour: white on the light theme's `#6200ee`, black on
- * the dark theme's `#64DAC5`.
- */
 const md2OnAppbar = '#ffffff';
 const md2OnAppbarMuted = 'rgba(255, 255, 255, 0.7)';
 const md2OnAppbarDark = '#000000';
@@ -189,7 +172,6 @@ const md2Corners = {
   extraExtraLarge: 4,
 };
 
-// `customStyle` and the transformCode wrapper from the source's exampleCode.js.
 const styles = StyleSheet.create({
   box: {
     padding: 15,
@@ -205,8 +187,6 @@ const styles = StyleSheet.create({
   chip: {
     marginRight: 8,
   },
-  // The ScrollContainer the source nests under the Appbar: a fixed 600px
-  // viewport, so the demo scrolls inside the phone instead of overflowing it.
   scroll: {
     height: 600,
     marginBottom: -30,
@@ -220,8 +200,6 @@ const styles = StyleSheet.create({
   md2AppbarDark: {
     backgroundColor: md2Colors.dark.primary,
   },
-  // The preset's `body *` would stretch these to 1.5; MD2 runs them at 24/16.
-  // MD2's `Title` is 20px where Paper 6's closest variant, titleLarge, is 22.
   md2Heading: {
     fontSize: 20,
   },
@@ -249,6 +227,8 @@ const styles = StyleSheet.create({
   },
 });
 
+const APPBAR_DOC = '/docs/components/Appbar/Appbar';
+
 type DemoProps = {
   isDarkTheme: boolean;
   onToggleTheme: () => void;
@@ -263,13 +243,17 @@ const Demo = ({
   onToggleMaterialYou,
 }: DemoProps) => {
   const theme = useTheme();
+  const version = useVersion() || '5.x';
   const [showSnack, setShowSnack] = React.useState(false);
+
+  const appbarHref = withBase(
+    version === '6.x' ? getNextRoute(APPBAR_DOC) : APPBAR_DOC
+  );
 
   const toggleSnack = () => setShowSnack((visible) => !visible);
 
   return (
     <View>
-      {/* `statusBarHeight: 47` leaves the frame's notch clear of the title. */}
       <Appbar.Header
         statusBarHeight={47}
         style={
@@ -306,9 +290,7 @@ const Demo = ({
         <Appbar.Action
           color={isMaterialYou ? undefined : md2AppbarContent(isDarkTheme)}
           icon="open-in-new"
-          onPress={() =>
-            void Linking.openURL(docsHref('docs/components/Appbar/'))
-          }
+          onPress={() => void Linking.openURL(appbarHref)}
         />
       </Appbar.Header>
       <ScrollView
@@ -360,13 +342,10 @@ const Demo = ({
           </Button>
         </View>
       </ScrollView>
-      {/* Anchored to the outer View rather than the scroll content: the
-          source's container carries `marginBottom: -30`, so the box the
-          Snackbar sits at the bottom of is 681px, not the 600px viewport. */}
       <Snackbar
         visible={showSnack}
-        onDismiss={toggleSnack}
-        action={{ label: 'Dismiss', onPress: toggleSnack }}
+        onDismiss={() => setShowSnack(false)}
+        action={{ label: 'Dismiss', onPress: () => {} }}
         duration={Snackbar.DURATION_LONG}
       >
         Hey there! I&apos;m a Snackbar.
@@ -405,6 +384,8 @@ const ThemedDemo = () => {
 };
 
 export default function LandingCode() {
+  const isNext = (useVersion() || '5.x') === '6.x';
+
   return (
     <LandingSection variant="shegl68" innerClassName="i1vg0a03">
       <div className="hhlgf0c">
@@ -458,7 +439,7 @@ export default function LandingCode() {
               mobile.
             </p>
             <div className="landing-editor__codebox">
-              <LandingCodeSnippet code={snippet} numbered />
+              <LandingCodeSnippet code={snippet(isNext)} numbered />
             </div>
             <img
               alt=""

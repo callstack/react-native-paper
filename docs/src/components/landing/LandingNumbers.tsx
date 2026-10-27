@@ -1,35 +1,19 @@
 import { useEffect, useState } from 'react';
 
 import LandingSection, { asset } from './LandingSection';
-
-const PAPER_STATS_API =
-  'https://paper-github-stats-h6ah15j9p.vercel.app/api/github-stats';
-
-type Stats = { stars: number; commits: number; weeklyDownloads: number };
-
-/** Shown until the API responds, same values as the landing page source. */
-const fallbackData: Stats = {
-  stars: 7371,
-  commits: 1306,
-  weeklyDownloads: 55300,
-};
+import { fallbackStats, loadStats, type LandingStats } from './stats';
 
 export default function LandingNumbers() {
-  const [data, setData] = useState<Stats>(fallbackData);
+  const [data, setData] = useState<LandingStats>(fallbackStats);
 
   useEffect(() => {
     let cancelled = false;
 
     const load = async () => {
-      try {
-        const response = await fetch(PAPER_STATS_API);
-        const json = await response.json();
+      const stats = await loadStats();
 
-        if (!cancelled) {
-          setData(json);
-        }
-      } catch (error) {
-        console.error('Error while fetching numbers', error);
+      if (!cancelled) {
+        setData(stats);
       }
     };
 
