@@ -289,13 +289,13 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 
 `RadioButton` renders one Material 3 circular radio control on every platform. The platform-specific components and their prop types are gone. On iOS checked controls no longer render a checkmark; they use the same ring-and-dot indicator as other platforms. `RadioButton` now also forwards `TouchableRipple` props (`accessible`, `onFocus`, `onBlur`, `borderless`, `rippleColor`, ...).
 
-The control now occupies a 48×48dp layout box instead of 40×40dp, so rows containing it may become 8dp taller. The 20dp radio indicator is unchanged. The minimum touch target is part of the layout on every platform, rather than an invisible area added with `hitSlop`.
+The control now occupies a 48×48dp layout box instead of 36×36dp, so rows containing it may become 12dp taller. The 20dp radio indicator is unchanged. `RadioButton.Item` rows grow from 52dp to 64dp.
 
-| v5                                               | v6                                                                      |
-| ------------------------------------------------ | ----------------------------------------------------------------------- |
-| `RadioButton.Android`, `RadioButton.IOS`         | `RadioButton`                                                           |
-| `RadioButtonAndroidProps`, `RadioButtonIOSProps` | `RadioButtonProps`                                                      |
-| `RadioButton.Item` `mode="android" \| "ios"`     | `mode` removed; `RadioButton.Item` always renders `RadioButton`         |
+| v5                                               | v6                                                                       |
+| ------------------------------------------------ | ------------------------------------------------------------------------ |
+| `RadioButton.Android`, `RadioButton.IOS`         | `RadioButton`                                                            |
+| `RadioButtonAndroidProps`, `RadioButtonIOSProps` | `RadioButtonProps`                                                       |
+| `RadioButton.Item` `mode="android" \| "ios"`     | `mode` removed; `RadioButton.Item` always renders `RadioButton`          |
 | n/a                                              | new `error` (uses `theme.colors.error`) and `style` (touch-target style) |
 
 ```diff
