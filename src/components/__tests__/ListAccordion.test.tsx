@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { render, screen } from '../../test-utils';
+import { render, screen, within } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import ListAccordion from '../List/ListAccordion';
@@ -147,6 +147,35 @@ describe('ListAccordion', () => {
     await expect(render(<ListAccordionTest />)).rejects.toThrow(
       'List.Accordion is used inside a List.AccordionGroup without specifying an id prop.'
     );
+  });
+});
+
+describe('ListAccordionGroup', () => {
+  it('expands the accordion with id={0} and keeps id={1} collapsed when expandedId={0}', async () => {
+    await render(
+      <ListAccordionGroup expandedId={0}>
+        <ListAccordion title="Accordion 0" id={0}>
+          <ListItem title="Item 0" />
+        </ListAccordion>
+        <ListAccordion title="Accordion 1" id={1}>
+          <ListItem title="Item 1" />
+        </ListAccordion>
+      </ListAccordionGroup>
+    );
+
+    expect(
+      within(screen.getByRole('button', { expanded: true })).getByText(
+        'Accordion 0'
+      )
+    ).toBeOnTheScreen();
+    expect(screen.getByText('Item 0')).toBeOnTheScreen();
+
+    expect(
+      within(screen.getByRole('button', { expanded: false })).getByText(
+        'Accordion 1'
+      )
+    ).toBeOnTheScreen();
+    expect(screen.queryByText('Item 1')).not.toBeOnTheScreen();
   });
 });
 
