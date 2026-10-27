@@ -1,6 +1,6 @@
-import { PlatformColor, StyleSheet } from 'react-native';
+import { Platform, PlatformColor, StyleSheet } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 import color from 'color';
 
@@ -26,6 +26,10 @@ import {
 import type { ButtonLabelVariant, ButtonSize } from '../Button/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 const styles = StyleSheet.create({
   flexing: {
@@ -695,6 +699,19 @@ describe('selected prop', () => {
     );
 
     expect(screen.getByTestId('button')).toBeSelected();
+  });
+
+  it('announces the toggle state with aria-pressed on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Button testID="button" selected onPress={() => {}}>
+        X
+      </Button>
+    );
+
+    expect(screen.getByTestId('button')).toHaveProp('aria-pressed', true);
+    expect(screen.getByTestId('button')).not.toHaveProp('aria-selected');
   });
 
   it('flips a round button into the square radius when selected', async () => {

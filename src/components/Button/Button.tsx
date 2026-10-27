@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -97,7 +97,8 @@ export type Props = Omit<ViewProps, 'style'> & {
    *   its `mode`, which differ between `false` and `true`.
    * - When `true` the `shape` is flipped: `'round'` renders square and vice
    *   versa, and an `outlined` button drops its outline.
-   * - `aria-selected` is set so screen readers announce the toggle state.
+   * - Screen readers announce the toggle state: `aria-pressed` on web,
+   *   `aria-selected` on native.
    *
    * Ignored on `mode="text"`, which MD3 gives no toggle.
    */
@@ -289,9 +290,15 @@ const Button = ({
     : 0;
 
   // MD3 defines no text toggle, so `selected` is inert on `mode="text"`: no
-  // toggle colors, no shape flip, and no `aria-selected`. Every other use of
+  // toggle colors, no shape flip, and no toggle state. Every other use of
   // the toggle state goes through this value.
   const toggleSelected = isMode('text') ? undefined : selected;
+  // ARIA has no `aria-selected` on the button role, and React Native's types
+  // have no `aria-pressed`.
+  const toggleStateProps =
+    Platform.OS === 'web'
+      ? { 'aria-pressed': toggleSelected }
+      : { 'aria-selected': toggleSelected };
 
   // When the button is `selected`, flip the requested shape so the
   // unselected/selected pair contrasts visually (round ↔ square).
@@ -483,7 +490,7 @@ const Button = ({
           accessibilityHint={accessibilityHint}
           role={role}
           aria-disabled={disabled}
-          aria-selected={toggleSelected}
+          {...toggleStateProps}
           accessible={accessible}
           hitSlop={effectiveHitSlop}
           disabled={disabled}
