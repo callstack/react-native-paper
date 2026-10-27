@@ -17,6 +17,14 @@ const colors = {
   uncheckedColor: 'onSurfaceVariant',
   disabledColor: 'onSurface',
   errorColor: 'error',
+  // hover & focus tint by selection; pressing inverts it
+  checkedHoverStateLayerColor: 'primary',
+  checkedFocusStateLayerColor: 'primary',
+  checkedPressedStateLayerColor: 'onSurface',
+  uncheckedHoverStateLayerColor: 'onSurface',
+  uncheckedFocusStateLayerColor: 'onSurface',
+  uncheckedPressedStateLayerColor: 'primary',
+  errorStateLayerColor: 'error',
 } as const satisfies Record<string, ColorRole>;
 
 export const RadioButtonTokens = { ...sizes, ...colors };

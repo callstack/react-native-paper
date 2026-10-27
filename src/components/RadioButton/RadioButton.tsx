@@ -1,15 +1,29 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type { GestureResponderEvent, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import type {
+  GestureResponderEvent,
+  MouseEvent,
+  NativeSyntheticEvent,
+  TargetedEvent,
+  ViewStyle,
+} from 'react-native';
 
 import Animated, { cubicBezier, type CSSStyle } from 'react-native-reanimated';
 
 import { RadioButtonContext } from './RadioButtonGroup';
 import { RadioButtonTokens } from './tokens';
-import { getSelectionControlColor, handlePress, isChecked } from './utils';
+import {
+  getSelectionControlColor,
+  getSelectionStateLayer,
+  handlePress,
+  isChecked,
+  getInteraction,
+} from './utils';
+import { SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import type { PressableStateCallbackType } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -107,10 +121,20 @@ const RadioButton = ({
   status,
   testID,
   error,
+  onFocus,
+  onBlur,
+  onHoverIn,
+  onHoverOut,
+  onPressIn,
+  onPressOut,
+  rippleColor,
+  background,
+  underlayColor,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const context = React.useContext(RadioButtonContext);
+  const { rippleEffectEnabled } = React.useContext(SettingsContext);
 
   const checked =
     isChecked({
@@ -120,6 +144,10 @@ const RadioButton = ({
     }) === 'checked';
 
   const reduceMotion = useReduceMotion();
+
+  const [focused, setFocused] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
 
   const { selectionControlColor, selectionControlOpacity } =
     getSelectionControlColor({
@@ -138,6 +166,105 @@ const RadioButton = ({
     transitionDuration: reduceMotion ? 0 : theme.motion.duration.short3,
     transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
   };
+
+  const platformOwnsPress =
+    rippleColor != null ||
+    (Platform.OS === 'android' && background != null) ||
+    (Platform.OS === 'ios' && underlayColor != null);
+
+  const ownsPress =
+    !disabled && !platformOwnsPress && Boolean(rippleEffectEnabled);
+
+  const platformPressProps = {
+    background,
+    underlayColor,
+    rippleColor: platformOwnsPress ? rippleColor : 'transparent',
+  };
+
+  const interaction = getInteraction({
+    pressed: pressed && ownsPress,
+    focused,
+    hovered,
+  });
+
+  const stateLayerProps = {
+    theme,
+    checked,
+    disabled,
+    error,
+    customColor: rest.color,
+    customUncheckedColor: rest.uncheckedColor,
+  };
+
+  const stateLayer = getSelectionStateLayer({
+    ...stateLayerProps,
+    interaction,
+  });
+
+  const stateLayerColor = getSelectionStateLayer({
+    ...stateLayerProps,
+    interaction: interaction ?? 'hovered',
+  }).color;
+
+  const stateLayerStyle: CSSStyle<ViewStyle> = {
+    backgroundColor: stateLayerColor,
+    opacity: stateLayer.opacity,
+    transitionProperty: 'opacity',
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.short2,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+  };
+
+  const handleFocus = React.useCallback(
+    (e: NativeSyntheticEvent<TargetedEvent>) => {
+      if (!disabled && isKeyboardFocusEvent(e)) {
+        setFocused(true);
+      }
+      onFocus?.(e);
+    },
+    [disabled, onFocus]
+  );
+
+  const handleBlur = React.useCallback(
+    (e: NativeSyntheticEvent<TargetedEvent>) => {
+      setFocused(false);
+      onBlur?.(e);
+    },
+    [onBlur]
+  );
+
+  const handleHoverIn = React.useCallback(
+    (e: MouseEvent) => {
+      setHovered(true);
+      onHoverIn?.(e);
+    },
+    [onHoverIn]
+  );
+
+  const handleHoverOut = React.useCallback(
+    (e: MouseEvent) => {
+      setHovered(false);
+      onHoverOut?.(e);
+    },
+    [onHoverOut]
+  );
+
+  const handlePressIn = React.useCallback(
+    (e: GestureResponderEvent) => {
+      if (ownsPress) {
+        setPressed(true);
+      }
+      onPressIn?.(e);
+    },
+    [onPressIn, ownsPress]
+  );
+
+  const handlePressOut = React.useCallback(
+    (e: GestureResponderEvent) => {
+      setPressed(false);
+      onPressOut?.(e);
+    },
+    [onPressOut]
+  );
 
   // When `accessible={false}` is passed (typically by `RadioButton.Item`,
   // which owns the a11y tree for the wrapped row), suppress our own role and
@@ -165,6 +292,13 @@ const RadioButton = ({
     <TouchableRipple
       {...restProps}
       borderless
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onHoverIn={handleHoverIn}
+      onHoverOut={handleHoverOut}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      {...platformPressProps}
       onPress={(event) => {
         handlePress({
           onPress,
@@ -180,6 +314,11 @@ const RadioButton = ({
       theme={theme}
     >
       <View pointerEvents="none" style={styles.stateLayer}>
+        <Animated.View
+          pointerEvents="none"
+          testID={testID ? `${testID}-state-layer` : undefined}
+          style={[styles.stateLayerFill, stateLayerStyle]}
+        />
         <View
           style={[
             styles.radio,
@@ -212,6 +351,12 @@ const styles = StyleSheet.create({
     borderRadius: stateLayerSize / 2,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  stateLayerFill: {
+    position: 'absolute',
+    width: stateLayerSize,
+    height: stateLayerSize,
+    borderRadius: stateLayerSize / 2,
   },
   radio: {
     height: ringSize,
