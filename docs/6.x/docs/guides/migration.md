@@ -291,6 +291,10 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 
 The control now occupies a 48×48dp layout box instead of 36×36dp, so rows containing it may become 12dp taller. The 20dp radio indicator is unchanged. `RadioButton.Item` rows grow from 52dp to 64dp.
 
+#### Interaction state colors
+
+Interaction states are now painted as a Material Design 3 state layer on every platform, so the tint follows the spec: hover & focus fill a flat 40dp layer behind the indicator with `primary` when checked and `onSurface` when not, and press inverts the two. An `error` radio stays on `error` throughout and `color`/`uncheckedColor` replace the role they already override on the ring, so custom radio no longer picks up `primary` halo. The platform ripple is turned off to make room for it; passing `rippleColor` on any platform, `background` on Android or `underlayColor` on iOS turns it back on and disables the built-in press. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` still suppresses both.
+
 | v5                                               | v6                                                                       |
 | ------------------------------------------------ | ------------------------------------------------------------------------ |
 | `RadioButton.Android`, `RadioButton.IOS`         | `RadioButton`                                                            |
