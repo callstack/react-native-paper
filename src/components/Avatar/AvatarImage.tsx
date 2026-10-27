@@ -227,7 +227,11 @@ const AvatarImage = ({
           {...imageA11y}
         />
       ) : null}
-      {!showImage ? fallback({ size }) : null}
+      {!showImage ? (
+        <View aria-hidden={description !== undefined}>
+          {fallback({ size })}
+        </View>
+      ) : null}
     </View>
   );
 };

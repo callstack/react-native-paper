@@ -567,6 +567,36 @@ describe('AvatarImage fallback', () => {
     });
   });
 
+  it('hides the fallback behind a described host', async () => {
+    await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        alt="Jane Doe"
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    expect(screen.queryByText('JD')).toBeNull();
+    expect(screen.getByText('JD', hidden)).toBeTruthy();
+  });
+
+  it('keeps the fallback readable when the host has no description', async () => {
+    await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    expect(screen.getByText('JD')).toBeTruthy();
+  });
+
   it('moves an aliased description onto the host when fallback is shown', async () => {
     const { toJSON } = await render(
       <Avatar.Image
