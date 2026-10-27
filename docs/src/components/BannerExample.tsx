@@ -6,8 +6,8 @@ import { BrowserOnly } from '@rspress/core/runtime';
 import {
   Avatar,
   Button,
-  FAB,
   DarkTheme,
+  FAB,
   LightTheme,
   ProgressBar,
   Provider,
