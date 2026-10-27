@@ -1,5 +1,7 @@
-import { Dimensions, PixelRatio, Platform, StyleSheet } from 'react-native';
-import type { LayoutRectangle, StyleProp, ViewStyle } from 'react-native';
+import { Dimensions, PixelRatio, Platform } from 'react-native';
+import type { LayoutRectangle } from 'react-native';
+
+import type { Direction } from '../../core/locale';
 
 type ChildrenMeasurement = {
   width: number;
@@ -14,14 +16,6 @@ export type Measurement = {
   children: ChildrenMeasurement;
   tooltip: TooltipLayout;
   measured: boolean;
-};
-
-export type TooltipChildProps = {
-  style: StyleProp<ViewStyle>;
-  disabled?: boolean;
-  onPress?: () => void;
-  onHoverIn?: () => void;
-  onHoverOut?: () => void;
 };
 
 const EDGE_MARGIN = 8;
@@ -92,50 +86,20 @@ const getTooltipYPosition = (
   return childrenY + childrenHeight;
 };
 
-const getChildrenMeasures = (
-  style: StyleProp<ViewStyle>,
-  measures: ChildrenMeasurement
-): ChildrenMeasurement => {
-  const { position, top, bottom, left, right } = StyleSheet.flatten(style);
-
-  if (position === 'absolute') {
-    let pageX = 0;
-    let pageY = measures.pageY;
-    let height = 0;
-    let width = 0;
-    if (typeof left === 'number') {
-      pageX = left;
-      width = 0;
-    }
-    if (typeof right === 'number') {
-      pageX = measures.width - right;
-      width = 0;
-    }
-    if (typeof top === 'number') {
-      pageY = pageY + top;
-    }
-    if (typeof bottom === 'number') {
-      pageY = pageY - bottom;
-    }
-
-    return { pageX, pageY, width, height };
-  }
-
-  return measures;
-};
-
 export const getTooltipPosition = (
   { children, tooltip, measured }: Measurement,
-  childStyle?: StyleProp<ViewStyle>
+  direction: Direction = 'ltr'
 ): {} | { left: number; top: number } => {
   if (!measured) return {};
-  let measures = children;
-  if (childStyle) {
-    measures = getChildrenMeasures(childStyle, children);
-  }
 
-  const left = getTooltipXPosition(measures, tooltip);
-  const top = getTooltipYPosition(measures, tooltip);
+  let left = getTooltipXPosition(children, tooltip);
+  const top = getTooltipYPosition(children, tooltip);
+
+  if (direction === 'rtl') {
+    const trailingOffset =
+      Dimensions.get('window').width - tooltip.width - left;
+    left = Platform.OS === 'web' ? -trailingOffset : trailingOffset;
+  }
 
   return Platform.OS === 'web'
     ? { left, top }

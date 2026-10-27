@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Dimensions, StyleSheet, Platform, View } from 'react-native';
+import {
+  Dimensions,
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from 'react-native';
 import type { PointerEvent, ViewStyle } from 'react-native';
 
 import Animated from 'react-native-reanimated';
@@ -7,6 +13,7 @@ import Animated from 'react-native-reanimated';
 import { takeSingletonSlot, useTooltipFade } from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
@@ -21,8 +28,8 @@ export type TooltipTriggerProps = {
   onLongPress?: () => void;
   onPressOut?: () => void;
   delayLongPress?: number;
-  onHoverIn?: () => void;
-  onHoverOut?: () => void;
+  'aria-label'?: string;
+  'aria-describedby'?: string;
 };
 
 export type Props = {
@@ -89,11 +96,13 @@ const Tooltip = ({
   titleMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
   // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
+  const tooltipId = React.useId();
 
   const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -181,6 +190,9 @@ const Tooltip = ({
     onLongPress: handleTouchStart,
     onPressOut: handleTouchEnd,
     delayLongPress: enterTouchDelay,
+    ...(Platform.OS === 'web'
+      ? { 'aria-describedby': tooltipId }
+      : { 'aria-label': title }),
   };
 
   return (
@@ -188,13 +200,16 @@ const Tooltip = ({
       {rendered && (
         <Portal>
           <Animated.View
+            id={tooltipId}
+            nativeID={tooltipId}
+            role="tooltip"
             onLayout={onLayout}
             pointerEvents="none"
             style={[
               styles.tooltip,
               {
                 backgroundColor: theme.colors[Tokens.plain.container],
-                ...getTooltipPosition(measurement),
+                ...getTooltipPosition(measurement, direction),
                 borderRadius: theme.shapes.corner[Tokens.plain.shape],
               },
               fadeStyle,
@@ -213,14 +228,27 @@ const Tooltip = ({
           </Animated.View>
         </Portal>
       )}
-      <View
-        ref={childrenWrapperRef}
-        collapsable={false}
-        style={styles.pressContainer}
-        {...wrapperPointerProps}
-      >
-        {children(triggerProps)}
-      </View>
+      {Platform.OS === 'web' ? (
+        <View
+          ref={childrenWrapperRef}
+          collapsable={false}
+          style={styles.pressContainer}
+          {...wrapperPointerProps}
+        >
+          {children(triggerProps)}
+        </View>
+      ) : (
+        <Pressable
+          ref={childrenWrapperRef}
+          collapsable={false}
+          style={styles.pressContainer}
+          onLongPress={handleTouchStart}
+          onPressOut={handleTouchEnd}
+          delayLongPress={enterTouchDelay}
+        >
+          {children(triggerProps)}
+        </Pressable>
+      )}
     </>
   );
 };

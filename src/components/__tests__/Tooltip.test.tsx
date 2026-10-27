@@ -182,6 +182,58 @@ describe('Tooltip', () => {
       });
     });
 
+    describe('anchor that ignores the trigger props', () => {
+      it('shows the tooltip on long press as the wrapper handles it', async () => {
+        jest
+          .spyOn(View.prototype, 'measure')
+          .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
+
+        // An anchor like `Avatar.Text` never receives the handlers, so the
+        // wrapper has to keep handling the long press for it.
+        const { getByText, findByText } = await render(
+          <PaperProvider>
+            <Tooltip title="some tooltip text">
+              {() => (
+                <View>
+                  <Text>dummy component</Text>
+                </View>
+              )}
+            </Tooltip>
+          </PaperProvider>
+        );
+
+        await user.longPress(getTrigger(getByText));
+
+        expect(await findByText('some tooltip text')).toBeTruthy();
+      });
+    });
+
+    describe('accessibility', () => {
+      it('names the trigger with the title so it is announceable', async () => {
+        const {
+          wrapper: { getByText },
+        } = await setup();
+
+        expect(getTrigger(getByText)).toHaveAccessibleName('some tooltip text');
+
+        await user.longPress(getTrigger(getByText));
+
+        expect(getTooltipContainer(getByText)).toHaveProp('role', 'tooltip');
+      });
+
+      it('keeps the label the consumer writes after the spread', async () => {
+        const {
+          wrapper: { getByText },
+        } = await setup({
+          children: (props: TooltipTriggerProps) => (
+            <DummyComponent {...props} aria-label="Own label" />
+          ),
+        });
+
+        expect(getTrigger(getByText)).toHaveAccessibleName('Own label');
+      });
+    });
+
     describe('pressOut', () => {
       it('hides the tooltip when the user stop pressing the component', async () => {
         const {
@@ -276,6 +328,39 @@ describe('Tooltip', () => {
           expect(getTooltipContainer(getByText)).toHaveStyle({
             left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
             top: 250, // pageY (200) + height (50)
+          });
+        });
+      });
+
+      describe('When the locale is RTL', () => {
+        it('mirrors the position to the trailing edge', async () => {
+          jest
+            .spyOn(View.prototype, 'measure')
+            .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
+
+          const { getByText, findByText } = await render(
+            <PaperProvider direction="rtl">
+              <Tooltip title="some tooltip text">
+                {(props: TooltipTriggerProps) => <DummyComponent {...props} />}
+              </Tooltip>
+            </PaperProvider>
+          );
+
+          await user.longPress(getTrigger(getByText));
+
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
+            nativeEvent: {
+              layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
+            },
+          });
+
+          // `measure` reports the physical left edge, while native resolves
+          // `left` from the leading (right) edge in RTL, so what the tooltip
+          // needs is its distance to the trailing edge.
+          expect(getTooltipContainer(getByText)).toHaveStyle({
+            left: 50, // LAYOUT_WIDTH (360) - TOOLTIP_WIDTH (100) - left (210)
+            top: 250,
           });
         });
       });
@@ -470,6 +555,29 @@ describe('Tooltip', () => {
       });
     });
 
+    describe('accessibility', () => {
+      it('describes the trigger with the tooltip so it is announced', async () => {
+        const {
+          wrapper: { getByText },
+        } = await setup({ enterTouchDelay: 0 });
+
+        await act(async () => {
+          await fireEvent(getTrigger(getByText), 'pointerEnter');
+        });
+        await runTimers(0);
+
+        // The id comes from `useId`, so the link is checked by reading it back.
+        // eslint-disable-next-line no-restricted-syntax -- cross-check the link
+        const describedBy = getTrigger(getByText).props['aria-describedby'];
+
+        expect(describedBy).toEqual(expect.any(String));
+        expect(getTooltipContainer(getByText)).toHaveProp(
+          'nativeID',
+          describedBy
+        );
+      });
+    });
+
     describe('Tooltip position', () => {
       const LAYOUT_WIDTH = 360;
       const LAYOUT_HEIGHT = 705;
@@ -605,6 +713,10 @@ describe('Tooltip.Rich', () => {
     return surface;
   };
 
+  const getTooltipElement = (
+    getByText: Awaited<ReturnType<typeof render>>['getByText']
+  ) => getSurface(getByText).parent?.parent;
+
   const runTimers = async (ms = 1000) => {
     await act(async () => {
       await jest.advanceTimersByTimeAsync(ms);
@@ -733,6 +845,26 @@ describe('Tooltip.Rich', () => {
       expect(queryByText('Body text')).toBeNull();
     });
 
+    it('names the trigger with the title and content', async () => {
+      const {
+        wrapper: { getByText },
+      } = await setup({ title: 'Heading' });
+
+      expect(getTrigger(getByText)).toHaveAccessibleName('Heading. Body text');
+    });
+
+    it('registers the trigger with page coordinates', async () => {
+      const {
+        wrapper: { getByText },
+      } = await setup();
+
+      const measureInWindow = jest.spyOn(View.prototype, 'measureInWindow');
+
+      await user.press(getTrigger(getByText));
+
+      expect(measureInWindow).not.toHaveBeenCalled();
+    });
+
     it('dismisses the open tooltip when another tooltip trigger is pressed', async () => {
       jest
         .spyOn(View.prototype, 'measure')
@@ -851,6 +983,121 @@ describe('Tooltip.Rich', () => {
       await runTimers(500);
 
       expect(getByText('Body text')).toBeTruthy();
+    });
+
+    it('keeps the tooltip open when the hovered trigger is pressed', async () => {
+      const {
+        wrapper: { getByText, queryByText },
+      } = await setup({ enterTouchDelay: 0, leaveTouchDelay: 500 });
+
+      const trigger = getTrigger(getByText);
+      await act(async () => {
+        await fireEvent(trigger, 'pointerEnter');
+      });
+      await runTimers(0);
+      expect(getByText('Body text')).toBeTruthy();
+
+      // The pointer never left the trigger, so the click must not close the
+      // tooltip: nothing would bring it back until the pointer leaves first
+      await user.press(trigger);
+      await runTimers(); // exit fade -> would have unmounted a closed tooltip
+
+      expect(getByText('Body text')).toBeTruthy();
+
+      await act(async () => {
+        await fireEvent(trigger, 'pointerLeave');
+      });
+      await runTimers(500); // leave delay -> hide intent
+      await runTimers(); // exit fade -> unmount
+
+      expect(queryByText('Body text')).toBeNull();
+    });
+
+    it('describes the trigger with the tooltip so it is announced', async () => {
+      const {
+        wrapper: { getByText },
+      } = await setup({ enterTouchDelay: 0 });
+
+      await act(async () => {
+        await fireEvent(getTrigger(getByText), 'pointerEnter');
+      });
+      await runTimers(0);
+
+      // The tooltip element is what a screen reader reads and the trigger
+      // points at it so it is announced on focus
+      expect(getTrigger(getByText)).toHaveProp(
+        'aria-describedby',
+        expect.any(String)
+      );
+      expect(getTooltipElement(getByText)).toHaveProp('role', 'tooltip');
+      expect(getTooltipElement(getByText)).toHaveProp(
+        'nativeID',
+        expect.any(String)
+      );
+    });
+
+    it('closes on Escape without reopening from the focus it returns', async () => {
+      // The tooltip listens for Escape on the document, which the native test
+      // renderer has none of: stand in just enough of it to reach the listener
+      const listeners: Array<(event: { key?: string }) => void> = [];
+      Reflect.defineProperty(globalThis, 'document', {
+        value: {
+          addEventListener: (
+            type: string,
+            listener: (event: { key?: string }) => void
+          ) => {
+            if (type === 'keyup') listeners.push(listener);
+          },
+          removeEventListener: (type: string) => {
+            if (type === 'keyup') listeners.length = 0;
+          },
+        },
+        configurable: true,
+        writable: true,
+      });
+
+      try {
+        const {
+          wrapper: { getByText, queryByText, unmount },
+        } = await setup({ leaveTouchDelay: 500 });
+        const trigger = getTrigger(getByText);
+
+        await act(async () => {
+          await fireEvent(trigger, 'focus');
+        });
+        expect(getByText('Body text')).toBeTruthy();
+
+        await act(() => {
+          listeners.forEach((listener) => listener({ key: 'Escape' }));
+        });
+        await runTimers(); // hide intent
+        await runTimers(); // exit fade -> unmount
+
+        expect(queryByText('Body text')).toBeNull();
+
+        // Dismissing puts focus back on the trigger, whose `onFocus` opens the
+        // tooltip again unless that one focus is ignored.
+        await act(async () => {
+          await fireEvent(trigger, 'focus');
+        });
+        await runTimers();
+
+        expect(queryByText('Body text')).toBeNull();
+
+        // A focus after the pointer or focus has moved elsewhere works again.
+        await act(async () => {
+          await fireEvent(trigger, 'blur');
+          await fireEvent(trigger, 'focus');
+        });
+
+        expect(getByText('Body text')).toBeTruthy();
+
+        // Unmount while the stand-in is still in place: the effect cleanup
+        // removes the Escape listener through it.
+        await unmount();
+      } finally {
+        Reflect.deleteProperty(globalThis, 'document');
+      }
     });
   });
 });

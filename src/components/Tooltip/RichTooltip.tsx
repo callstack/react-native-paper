@@ -18,8 +18,10 @@ import {
   forwardPressToTriggerAt,
   subscribeToTriggerRefresh,
 } from './hooks';
+import type { TooltipHostElement } from './hooks';
 import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
@@ -29,16 +31,22 @@ import Text from '../Typography/Text';
 
 const AnimatedSurface = Reanimated.createAnimatedComponent(Surface);
 
+// Tooltip renders in a portal at the end of document, so keyboard
+// users reach its actions by moving focus into 1st focusable element
+const FOCUSABLE_SELECTOR =
+  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 /**
  * Props passed to the `children` render function. Spread them onto the trigger
  * element (and merge with your own handlers when you have them).
  */
 export type TooltipRichTriggerProps = {
   onPress?: () => void;
-  onHoverIn?: () => void;
-  onHoverOut?: () => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  onKeyDown?: (event: { key?: string }) => void;
+  'aria-label'?: string;
+  'aria-describedby'?: string;
 };
 
 export type Props = {
@@ -137,11 +145,18 @@ const RichTooltip = ({
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
   // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
+  const tooltipId = React.useId();
+  // Web only: a non-touch pointer sits on the trigger
+  const hoveringRef = React.useRef(false);
+  const tooltipRef = React.useRef<TooltipHostElement>(null);
+  // Web only: set while dismiss is returning focus to the trigger
+  const refocusAfterDismissRef = React.useRef(false);
 
   const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -194,11 +209,32 @@ const RichTooltip = ({
     hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [clearShowTimer, leaveTouchDelay]);
 
+  // Web only: tooltip opens on trigger focus, so it has to ignore the focus
+  // that Escape itself causes; later focus (or any blur) re-arms it
+  const handleFocus = React.useCallback(() => {
+    if (refocusAfterDismissRef.current) {
+      refocusAfterDismissRef.current = false;
+      return;
+    }
+    show();
+  }, [show]);
+
+  const handleBlur = React.useCallback(() => {
+    refocusAfterDismissRef.current = false;
+    scheduleHide();
+  }, [scheduleHide]);
+
   // Mobile: a tap toggles the tooltip.
   // takeSingletonSlot must be called outside the setVisible updater — calling
   // setVisible inside an updater queues it for a later render, so the dismiss
   // of the stale slot would undo the show on the same cycle.
   const handlePress = React.useCallback(() => {
+    if (Platform.OS === 'web' && visible && hoveringRef.current) {
+      clearShowTimer();
+      clearHideTimer();
+      return;
+    }
+
     if (!visible) {
       takeSingletonSlot(() => setVisible(false));
       setVisible(true);
@@ -209,14 +245,24 @@ const RichTooltip = ({
     clearHideTimer();
   }, [visible, clearShowTimer, clearHideTimer]);
 
-  // Web: open on hover (with a short enter delay) and on keyboard focus.
-  const handleHoverIn = React.useCallback(() => {
-    clearHideTimer();
-    showTimer.current = setTimeout(() => {
-      takeSingletonSlot(() => setVisible(false));
-      setVisible(true);
-    }, enterTouchDelay);
-  }, [clearHideTimer, enterTouchDelay]);
+  // Web: open on hover (with a short enter delay) and on keyboard focus. Touch
+  // pointer is skipped - tap both enters & presses and only the press half
+  // should act so taps keep toggling the tooltip
+  const handlePointerEnter = React.useCallback(
+    (e?: PointerEvent) => {
+      if (e?.nativeEvent?.pointerType === 'touch') {
+        return;
+      }
+
+      hoveringRef.current = true;
+      clearHideTimer();
+      showTimer.current = setTimeout(() => {
+        takeSingletonSlot(() => setVisible(false));
+        setVisible(true);
+      }, enterTouchDelay);
+    },
+    [clearHideTimer, enterTouchDelay]
+  );
 
   // On web, pointer events on the wrapper View handle hover without going
   // through RNW's Pressable lock/unlock mechanism that caused flicker.
@@ -240,6 +286,8 @@ const RichTooltip = ({
           }
         }
       }
+
+      hoveringRef.current = false;
       scheduleHide();
     },
     [scheduleHide, childrenWrapperRef]
@@ -247,19 +295,91 @@ const RichTooltip = ({
 
   const wrapperPointerProps =
     Platform.OS === 'web'
-      ? { onPointerEnter: handleHoverIn, onPointerLeave: handlePointerLeave }
+      ? {
+          onPointerEnter: handlePointerEnter,
+          onPointerLeave: handlePointerLeave,
+        }
       : {};
+
+  // Web only: `Tab` walks the document, and the tooltip renders in a portal at
+  // its end, so the trigger needs a key that moves focus into the actions.
+  const focusTooltipContent = React.useCallback(() => {
+    // The tooltip mounts through the portal on the render that opens it, so
+    // wait for that commit: from this one the node isn't reachable yet and
+    // focus requested while it's missing is simply lost
+    setTimeout(() => {
+      tooltipRef.current?.querySelector?.(FOCUSABLE_SELECTOR)?.focus?.();
+    }, 0);
+  }, []);
+
+  const focusTrigger = React.useCallback(() => {
+    const wrapper = childrenWrapperRef.current;
+    (wrapper?.querySelector?.(FOCUSABLE_SELECTOR) ?? wrapper)?.focus?.();
+  }, [childrenWrapperRef]);
+
+  const handleKeyDown = React.useCallback(
+    (event: { key?: string }) => {
+      if (event.key === 'ArrowDown') {
+        show();
+        focusTooltipContent();
+      }
+    },
+    [show, focusTooltipContent]
+  );
+
+  // Web: Escape dismisses the tooltip the way the backdrop does on touch and
+  // puts focus back on the trigger so it's not lost
+  const handleKeypress = React.useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        refocusAfterDismissRef.current = true;
+        hide();
+        focusTrigger();
+      }
+    },
+    [hide, focusTrigger]
+  );
+
+  React.useEffect(() => {
+    if (Platform.OS !== 'web' || !visible || !('document' in global)) {
+      return;
+    }
+
+    document.addEventListener('keyup', handleKeypress);
+
+    return () => document.removeEventListener('keyup', handleKeypress);
+  }, [visible, handleKeypress]);
+
+  // accessible name for trigger without its own label
+  const description =
+    typeof content === 'string'
+      ? [title, content].filter(Boolean).join('. ')
+      : title;
 
   const triggerProps: TooltipRichTriggerProps =
     Platform.OS === 'web'
-      ? { onPress: handlePress, onFocus: show, onBlur: scheduleHide }
-      : { onPress: handlePress };
+      ? {
+          onPress: handlePress,
+          onFocus: handleFocus,
+          onBlur: handleBlur,
+          onKeyDown: handleKeyDown,
+          'aria-describedby': tooltipId,
+        }
+      : { onPress: handlePress, 'aria-label': description };
 
-  // Web only: keep the tooltip open while the pointer travels from the trigger
-  // into the tooltip (and re-schedule the hide once it leaves the tooltip).
-  const tooltipHoverProps =
+  // Web only: keep the tooltip open while the pointer or the focus travels from
+  // the trigger into the tooltip, and re-schedule the hide once it leaves. A
+  // plain `View` carries these — a `Pressable` would be focusable and merge its
+  // children into one accessibility element on iOS, so the title, the content
+  // and the actions would stop being reachable on their own.
+  const tooltipInteractionProps =
     Platform.OS === 'web'
-      ? { onHoverIn: clearHideTimer, onHoverOut: scheduleHide }
+      ? {
+          onHoverIn: clearHideTimer,
+          onHoverOut: scheduleHide,
+          onFocus: clearHideTimer,
+          onBlur: scheduleHide,
+        }
       : {};
 
   // Mobile: stable id + ref for the latest handlePress, used by the global
@@ -272,15 +392,17 @@ const RichTooltip = ({
 
   const updateTriggerRegistration = React.useCallback(() => {
     if (Platform.OS === 'web') return;
-    childrenWrapperRef.current?.measureInWindow?.((x, y, width, height) => {
-      registerRichTrigger(triggerId, {
-        pageX: x,
-        pageY: y,
-        width,
-        height,
-        onPress: () => handlePressRef.current(),
-      });
-    });
+    childrenWrapperRef.current?.measure(
+      (_x, _y, width, height, pageX, pageY) => {
+        registerRichTrigger(triggerId, {
+          pageX,
+          pageY,
+          width,
+          height,
+          onPress: () => handlePressRef.current(),
+        });
+      }
+    );
   }, [childrenWrapperRef, triggerId]);
 
   React.useEffect(() => {
@@ -318,11 +440,18 @@ const RichTooltip = ({
             style={StyleSheet.absoluteFill}
           />
           <Reanimated.View
+            ref={tooltipRef}
+            id={tooltipId}
+            nativeID={tooltipId}
+            role="tooltip"
             onLayout={onLayout}
             pointerEvents="box-none"
-            style={[styles.container, getTooltipPosition(measurement)]}
+            style={[
+              styles.container,
+              getTooltipPosition(measurement, direction),
+            ]}
           >
-            <Pressable {...tooltipHoverProps}>
+            <View {...tooltipInteractionProps}>
               <AnimatedSurface
                 elevation={Tokens.rich.elevation}
                 backgroundColor={theme.colors[Tokens.rich.container]}
@@ -359,7 +488,7 @@ const RichTooltip = ({
                   </View>
                 ) : null}
               </AnimatedSurface>
-            </Pressable>
+            </View>
           </Reanimated.View>
         </Portal>
       )}

@@ -141,7 +141,10 @@ export type { Props as TouchableRippleProps } from './components/TouchableRipple
 export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
-export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
+export type {
+  Props as TooltipProps,
+  TooltipTriggerProps,
+} from './components/Tooltip/Tooltip';
 export type {
   Props as TooltipRichProps,
   TooltipRichTriggerProps,
