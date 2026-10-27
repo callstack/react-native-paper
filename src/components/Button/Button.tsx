@@ -317,7 +317,7 @@ const Button = ({
   const restingRadius =
     effectiveShape === 'round'
       ? sizeStyle.minHeight / 2
-      : getButtonShapeRadius({ size, shape, theme, selected: toggleSelected });
+      : getButtonShapeRadius({ size, shape: effectiveShape, theme });
   const radius =
     animatesShape && pressed
       ? getButtonPressedRadius({ size, theme })

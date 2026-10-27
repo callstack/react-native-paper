@@ -102,31 +102,22 @@ export const getEffectiveButtonShape = (
 };
 
 /**
- * Corner radius for the requested shape, read from the component tokens and
- * resolved against the theme shape tokens. `round` is the full-pill radius;
- * `square` uses a per-size smaller corner. A selected button resolves against
- * the `selectedContainerShape*` token pair, after the shape flip above.
+ * Corner radius for a shape, read from the component tokens and resolved
+ * against the theme shape tokens. `round` is the full-pill radius; `square`
+ * uses a per-size smaller corner. Pass the shape after the `selected` flip.
  */
 export const getButtonShapeRadius = ({
   size,
   shape,
   theme,
-  selected,
 }: {
   size: ButtonSize;
   shape: ButtonShape;
   theme: InternalTheme;
-  selected?: boolean;
 }): number => {
   const t = Tokens.sizes[size];
   const token =
-    getEffectiveButtonShape(shape, selected) === 'round'
-      ? selected
-        ? t.selectedContainerShapeRound
-        : t.containerShapeRound
-      : selected
-        ? t.selectedContainerShapeSquare
-        : t.containerShapeSquare;
+    shape === 'round' ? t.containerShapeRound : t.containerShapeSquare;
   return resolveCornerRadius(theme, token);
 };
 

@@ -24,8 +24,6 @@ type ButtonSizeTokens = {
    * 8dp for XS/S, 12dp for M, 16dp for L/XL.
    */
   pressedContainerShape: ShapeToken;
-  selectedContainerShapeRound: ShapeToken;
-  selectedContainerShapeSquare: ShapeToken;
 };
 
 const sizes = {
@@ -41,8 +39,6 @@ const sizes = {
     containerShapeRound: 'full',
     containerShapeSquare: 'medium',
     pressedContainerShape: 'small',
-    selectedContainerShapeRound: 'full',
-    selectedContainerShapeSquare: 'medium',
   },
   small: {
     containerHeight: 40,
@@ -56,8 +52,6 @@ const sizes = {
     containerShapeRound: 'full',
     containerShapeSquare: 'medium',
     pressedContainerShape: 'small',
-    selectedContainerShapeRound: 'full',
-    selectedContainerShapeSquare: 'medium',
   },
   medium: {
     containerHeight: 56,
@@ -71,8 +65,6 @@ const sizes = {
     containerShapeRound: 'full',
     containerShapeSquare: 'large',
     pressedContainerShape: 'medium',
-    selectedContainerShapeRound: 'full',
-    selectedContainerShapeSquare: 'large',
   },
   large: {
     containerHeight: 96,
@@ -86,8 +78,6 @@ const sizes = {
     containerShapeRound: 'full',
     containerShapeSquare: 'extraLarge',
     pressedContainerShape: 'large',
-    selectedContainerShapeRound: 'full',
-    selectedContainerShapeSquare: 'extraLarge',
   },
   'extra-large': {
     containerHeight: 136,
@@ -101,8 +91,6 @@ const sizes = {
     containerShapeRound: 'full',
     containerShapeSquare: 'extraLarge',
     pressedContainerShape: 'large',
-    selectedContainerShapeRound: 'full',
-    selectedContainerShapeSquare: 'extraLarge',
   },
 } as const satisfies Record<ButtonSize, ButtonSizeTokens>;
 
