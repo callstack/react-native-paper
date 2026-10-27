@@ -74,8 +74,7 @@ Hardcoded default test IDs have been removed for the components listed below:
 
 - `Appbar.Content`: `appbar-content`
 - `Appbar.Header`: `appbar-header`
-- `BottomNavigation`: `bottom-navigation`
-- `BottomNavigation.Bar`: `bottom-navigation-bar`
+- `NavigationBar`: `bottom-navigation` and `bottom-navigation-bar` (v5 `BottomNavigation` and `BottomNavigation.Bar`)
 - `Button`: `button`
 - `Card`: `card`
 - `Chip`: `chip`
@@ -99,7 +98,6 @@ If you were relying on internal test IDs, update your tests not to rely on inter
 
 Some components now accept explicit `testID` props for their interactable elements:
 
-- `BottomNavigation`: `barTestID` for the internal `BottomNavigation.Bar`, replacing the previous `${testID}-bar` derivation.
 - `Chip`: `closeIconTestID` for the close icon button.
 - `Dialog` and `Modal`: `overlayTestID` for the overlay displayed behind the content.
 - `Menu`: `overlayTestID` for the overlay displayed behind the menu.
@@ -118,16 +116,18 @@ The `style.elevation` property is no longer supported. Use the `elevated` prop t
 
 `BottomNavigation` has been removed. Paper no longer ships a component that owns your tab scenes; the Material 3 navigation bar is now `NavigationBar`, a standalone bar you render next to your own navigator (React Navigation, or your own state).
 
-| v5                                                                    | v6                                                                    |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `BottomNavigation`, `BottomNavigation.Bar`                            | `NavigationBar`                                                       |
-| `BottomNavigationProps`, `BottomNavigationRoute`                      | `NavigationBarProps`, `NavigationBarRoute`                            |
-| `BottomNavigation.SceneMap`, `renderScene`, `onIndexChange`           | render the active scene yourself, alongside the bar                   |
-| `getLazy`, `route.lazy`                                               | removed — the bar no longer owns the scenes                           |
-| `sceneAnimationEnabled`, `sceneAnimationType`, `sceneAnimationEasing`  | removed with the scene container                                      |
+| v5                                                                    | v6                                                                       |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `BottomNavigation`, `BottomNavigation.Bar`                            | `NavigationBar`                                                          |
+| `BottomNavigationProps`, `BottomNavigationRoute`                      | `NavigationBarProps`, `NavigationBarRoute`                               |
+| `BottomNavigation.SceneMap`, `renderScene`, `onIndexChange`           | render the active scene yourself, alongside the bar                      |
+| `getLazy`, `route.lazy`                                               | removed (the bar no longer owns the scenes)                              |
+| `sceneAnimationEnabled`, `sceneAnimationType`, `sceneAnimationEasing` | removed with the scene container                                         |
 | `shifting`                                                            | removed (including the active-icon shift and inactive-label transitions) |
-| `barStyle`                                                            | `style`                                                               |
-| n/a                                                                   | new `variant` (`'stacked' \| 'horizontal'`) for the item layout       |
+| `barStyle`                                                            | `style`                                                                  |
+| `animationEasing`                                                     | removed (the indicator uses M3 motion from the theme)                |
+| `barStyle` with `Animated.Value`                                      | `style` with static styles only                                          |
+| n/a                                                                   | new `variant` (`'stacked' \| 'horizontal'`) for the item layout          |
 
 ```diff
 - <BottomNavigation
@@ -145,6 +145,39 @@ The `style.elevation` property is no longer supported. Use the `elevated` prop t
 +   />
 + </>
 ```
+
+`onTabPress` & `onTabLongPress` callbacks receive only pressed `route`. The v5 event object also carried `preventDefault()` & `defaultPrevented`, so code that reads them now throws `preventDefault is not a function`. The bar never navigates on its own, so navigator's own `tabPress` event decides whether press is handled:
+
+```diff
+  tabBar={({ navigation, state, descriptors, insets }) => (
+    <NavigationBar
+      navigationState={state}
+      safeAreaInsets={insets}
+-     onTabPress={({ route, preventDefault }) => {
++     onTabPress={({ route }) => {
+        const event = navigation.emit({
+          type: 'tabPress',
+          target: route.key,
+          canPreventDefault: true,
+        });
+
+-       if (event.defaultPrevented) {
+-         preventDefault();
+-       } else {
++       if (!event.defaultPrevented) {
+          navigation.dispatch({
+            ...CommonActions.navigate(route.name, route.params),
+            target: state.key,
+          });
+        }
+      }}
+    />
+  )}
+```
+
+The `animationEasing` prop is gone along with animation it configured. Active indicator now follows the motion from theme (`theme.motion`) and honors reduce motion preference.
+
+Unlike v5 `barStyle`, the `style` prop no longer accepts `Animated.Value` or `Animated.AnimatedInterpolation`. Pass static styles.
 
 `NavigationBar` also does not set a default `testID`. If your tests looked up `bottom-navigation-bar` (or its `-container` / `-content` / `-content-wrapper` children), pass a `testID` explicitly.
 

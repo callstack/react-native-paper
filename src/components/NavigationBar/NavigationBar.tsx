@@ -3,12 +3,13 @@ import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type { ColorValue, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import Animated, {
+  cubicBezier,
+  type CSSStyle,
   Easing,
   ReduceMotion,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -29,15 +30,14 @@ import {
   getActiveTintColor,
   getInactiveTintColor,
   getLabelColor,
+  getStateLayerColor,
 } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { Theme, ThemeProp } from '../../theme/types';
-import { getStateLayer } from '../../theme/utils/state';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
-import { splitStyles } from '../../utils/splitStyles';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
 import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
@@ -62,8 +62,6 @@ type NavigationState<Route extends BaseRoute> = {
   routes: Route[];
 };
 
-type TabPressEvent = object;
-
 type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
   key: string;
   route: Route;
@@ -71,23 +69,14 @@ type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
   borderless?: boolean;
   centered?: boolean;
   rippleColor?: ColorValue;
+  onKeyDown?: (event: TabKeyboardEvent) => void;
 };
 
-const rootLayoutStyleProperties: (keyof ViewStyle)[] = [
-  'position',
-  'alignSelf',
-  'top',
-  'right',
-  'bottom',
-  'left',
-  'start',
-  'end',
-  'flex',
-  'flexShrink',
-  'flexGrow',
-  'width',
-  'height',
-];
+type TabKeyboardEvent = {
+  key: string;
+  currentTarget: unknown;
+  preventDefault: () => void;
+};
 
 export type Props<Route extends BaseRoute> = {
   /**
@@ -163,7 +152,8 @@ export type Props<Route extends BaseRoute> = {
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
-   * Uses `route['aria-label']` by default.
+   * Uses `route['aria-label']`, falling back to the label text (`getLabelText`)
+   * so icon-only tabs keep an accessible name.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
@@ -181,11 +171,11 @@ export type Props<Route extends BaseRoute> = {
   /**
    * Function to execute on tab press. It receives the route for the pressed tab. Use this to update the navigation state.
    */
-  onTabPress: (props: { route: Route } & TabPressEvent) => void;
+  onTabPress: (props: { route: Route }) => void;
   /**
    * Function to execute on tab long press. It receives the route for the pressed tab
    */
-  onTabLongPress?: (props: { route: Route } & TabPressEvent) => void;
+  onTabLongPress?: (props: { route: Route }) => void;
   /**
    * Custom color for icon and label in the active tab.
    */
@@ -297,44 +287,30 @@ const NavigationBarItem = <Route extends BaseRoute>({
   theme,
 }: ItemProps<Route>) => {
   const { colors } = theme;
+  const { direction } = useLocale();
 
   const [hovered, setHovered] = React.useState(false);
   const [keyboardFocused, setKeyboardFocused] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
 
   const reduceMotion = useReduceMotion();
-  const reanimatedReduceMotion = reduceMotion
-    ? ReduceMotion.Always
-    : ReduceMotion.Never;
 
-  // Selection progress for the active indicator: 1 when focused, 0 otherwise.
-  // Each item springs its own progress from its `focused` prop, so there's no
-  // shared animation array to keep in sync.
-  const progress = useSharedValue(focused ? 1 : 0);
-  const isFirstRender = React.useRef(true);
+  const indicatorTransition: CSSStyle<ViewStyle> = {
+    opacity: focused ? 1 : 0,
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.medium2,
+    transitionProperty: ['opacity', 'transform'],
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.emphasized),
+  };
 
-  React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    progress.value = withSpring(focused ? 1 : 0, {
-      ...toRawSpring(theme.motion.spring.fast.spatial),
-      reduceMotion: reanimatedReduceMotion,
-    });
-  }, [focused, progress, theme.motion, reanimatedReduceMotion]);
+  const stackedIndicatorStyle: CSSStyle<ViewStyle> = {
+    ...indicatorTransition,
+    transform: [{ scaleX: focused ? 1 : 0.5 }],
+  };
 
-  // The active indicator is always mounted and cross-fades via opacity (the
-  // stacked layout also scales it horizontally 0.5 → 1, the horizontal layout
-  // scales it 0.8 → 1).
-  const stackedIndicatorAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: progress.value,
-    transform: [{ scaleX: 0.5 + progress.value * 0.5 }],
-  }));
-  const horizontalIndicatorAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: progress.value,
-    transform: [{ scale: 0.8 + progress.value * 0.2 }],
-  }));
+  const horizontalIndicatorStyle: CSSStyle<ViewStyle> = {
+    ...indicatorTransition,
+    transform: [{ scale: focused ? 1 : 0.8 }],
+  };
 
   const iconColor = focused ? activeTintColor : inactiveTintColor;
   const labelColor = getLabelColor({
@@ -355,24 +331,62 @@ const NavigationBarItem = <Route extends BaseRoute>({
 
   const font = theme.fonts.labelMedium;
 
-  // MD3 state layer: visible on hover (8%) and focus/press (10%). Both active
-  // and inactive items use the on-secondary-container role.
-  const stateLayer = pressed
-    ? getStateLayer(theme, colorRoles.stateLayer, 'pressed')
-    : keyboardFocused
-      ? getStateLayer(theme, colorRoles.stateLayer, 'focused')
-      : hovered
-        ? getStateLayer(theme, colorRoles.stateLayer, 'hovered')
-        : null;
-  const stateLayerColor = stateLayer
-    ? { backgroundColor: stateLayer.color, opacity: stateLayer.opacity }
-    : null;
+  const stateLayerColor = getStateLayerColor({
+    theme,
+    pressed,
+    keyboardFocused,
+    hovered,
+  });
+
+  // React Native Web activates only `button`s with Space and keeps `role="tab"`
+  // out of the tab order, so Space and the arrow keys the tabs pattern expects
+  // are handled here. Native focus systems do not deliver these keys.
+  const handleKeyDown = (event: TabKeyboardEvent) => {
+    const { currentTarget, key } = event;
+
+    if (!(currentTarget instanceof HTMLElement)) return;
+
+    const tabs =
+      currentTarget.parentElement?.querySelectorAll<HTMLElement>(
+        '[role="tab"]'
+      );
+
+    if (!tabs || tabs.length === 0) return;
+
+    const index = Array.prototype.indexOf.call(tabs, currentTarget);
+    const step = direction === 'rtl' ? -1 : 1;
+    let nextIndex: number | undefined;
+
+    switch (key) {
+      // `Enter` is activated by React Native Web, `Space` is not
+      case ' ':
+      case 'Spacebar':
+        event.preventDefault();
+        onPress();
+        return;
+      case 'ArrowRight':
+        nextIndex = (index + step + tabs.length) % tabs.length;
+        break;
+      case 'ArrowLeft':
+        nextIndex = (index - step + tabs.length) % tabs.length;
+        break;
+      case 'Home':
+        nextIndex = 0;
+        break;
+      case 'End':
+        nextIndex = tabs.length - 1;
+        break;
+      default:
+        return;
+    }
+
+    if (nextIndex !== undefined && nextIndex !== index) {
+      event.preventDefault();
+      tabs[nextIndex]?.focus();
+    }
+  };
 
   const itemTestID = getTestID({ route });
-  const indicatorTestID = itemTestID
-    ? `${itemTestID}-active-indicator`
-    : undefined;
-  const stateLayerTestID = itemTestID ? `${itemTestID}-state-layer` : undefined;
 
   // The horizontal arrangement places the label beside the icon and only
   // applies when labels are shown; otherwise it falls back to stacked icon-only.
@@ -428,19 +442,15 @@ const NavigationBarItem = <Route extends BaseRoute>({
     >
       <View style={styles.iconContainer}>
         <Animated.View
-          testID={indicatorTestID}
           style={[
             styles.stackedIndicator,
             { backgroundColor: colors[colorRoles.activeIndicator] },
-            stackedIndicatorAnimatedStyle,
+            stackedIndicatorStyle,
             activeIndicatorStyle,
           ]}
         />
         <View pointerEvents="none" style={styles.stateLayerWrapper}>
-          <View
-            testID={stateLayerTestID}
-            style={[styles.stateLayer, stateLayerColor]}
-          />
+          <View style={[styles.stateLayer, stateLayerColor]} />
         </View>
         <View style={styles.iconWrapper}>{icon}</View>
         {tabBadge}
@@ -455,22 +465,17 @@ const NavigationBarItem = <Route extends BaseRoute>({
 
   const horizontalContent = (
     <View pointerEvents="none" style={styles.horizontalContainer}>
-      <View
-        testID={itemTestID ? `${itemTestID}-horizontal-item` : undefined}
-        style={styles.horizontalItem}
-      >
+      <View style={styles.horizontalItem}>
         <Animated.View
-          testID={indicatorTestID}
           style={[
             StyleSheet.absoluteFill,
             styles.horizontalIndicator,
             { backgroundColor: colors[colorRoles.activeIndicator] },
-            horizontalIndicatorAnimatedStyle,
+            horizontalIndicatorStyle,
             activeIndicatorStyle,
           ]}
         />
         <View
-          testID={stateLayerTestID}
           style={[
             StyleSheet.absoluteFill,
             styles.horizontalIndicator,
@@ -508,6 +513,8 @@ const NavigationBarItem = <Route extends BaseRoute>({
     'aria-label': getAccessibilityLabel({ route }),
     role: Platform.OS === 'ios' ? 'button' : 'tab',
     'aria-selected': focused,
+    focusable: Platform.OS === 'web' ? true : undefined,
+    onKeyDown: Platform.OS === 'web' ? handleKeyDown : undefined,
     style: horizontal ? styles.horizontalTouchable : styles.item,
     children: horizontal ? horizontalContent : stackedContent,
   });
@@ -589,7 +596,8 @@ const NavigationBar = <Route extends BaseRoute>({
   ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
-  getAccessibilityLabel = ({ route }: { route: Route }) => route['aria-label'],
+  getAccessibilityLabel = ({ route }: { route: Route }) =>
+    route['aria-label'] ?? getLabelText({ route }),
   getTestID = ({ route }: { route: Route }) => route.testID,
   activeColor,
   inactiveColor,
@@ -674,18 +682,6 @@ const NavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  const flattenedStyle = StyleSheet.flatten(style) || {};
-  const [surfaceStyle, rootLayoutStyle] = splitStyles(
-    flattenedStyle,
-    (property) =>
-      rootLayoutStyleProperties.includes(property) ||
-      property.startsWith('margin')
-  );
-
-  const customBackground = surfaceStyle.backgroundColor;
-
-  const backgroundColor = customBackground || colors.surfaceContainer;
-
   const activeTintColor = getActiveTintColor({
     activeColor,
     theme,
@@ -709,7 +705,8 @@ const NavigationBar = <Route extends BaseRoute>({
     <Animated.View
       style={[
         styles.bar,
-        rootLayoutStyle,
+        { backgroundColor: colors[colorRoles.container] },
+        style,
         // When the keyboard hides the bar, slide it down by its own height and
         // absolutely position it so the content can sit below.
         keyboardHidesNavigationBar ? barAnimatedStyle : null,
@@ -723,60 +720,53 @@ const NavigationBar = <Route extends BaseRoute>({
           : 'none'
       }
       onLayout={onLayout}
-      testID={testID ? `${testID}-container` : undefined}
+      testID={testID}
     >
-      <View testID={testID} style={surfaceStyle}>
+      <View style={styles.barContent}>
         <View
-          style={[styles.barContent, { backgroundColor }]}
-          testID={testID ? `${testID}-content` : undefined}
+          key={`items-${variant === 'horizontal' && labeled ? 'horizontal' : 'stacked'}`}
+          style={[
+            styles.items,
+            variant === 'horizontal' && labeled ? styles.horizontalItems : null,
+            {
+              marginBottom: insets.bottom,
+              marginHorizontal: Math.max(insets.left, insets.right),
+            },
+            compact && {
+              maxWidth: maxTabBarWidth,
+            },
+          ]}
+          role={'tablist'}
         >
-          <View
-            style={[
-              styles.items,
-              variant === 'horizontal' && labeled
-                ? styles.horizontalItems
-                : null,
-              {
-                marginBottom: insets.bottom,
-                marginHorizontal: Math.max(insets.left, insets.right),
-              },
-              compact && {
-                maxWidth: maxTabBarWidth,
-              },
-            ]}
-            role={'tablist'}
-            testID={testID ? `${testID}-content-wrapper` : undefined}
-          >
-            {routes.map((route, index) => {
-              const focused = navigationState.index === index;
+          {routes.map((route, index) => {
+            const focused = navigationState.index === index;
 
-              return (
-                <NavigationBarItem
-                  key={route.key}
-                  route={route}
-                  focused={focused}
-                  labeled={labeled}
-                  variant={variant}
-                  activeTintColor={activeTintColor}
-                  inactiveTintColor={inactiveTintColor}
-                  activeColor={activeColor}
-                  inactiveColor={inactiveColor}
-                  renderIcon={renderIcon}
-                  renderLabel={renderLabel}
-                  renderTouchable={renderTouchable}
-                  getLabelText={getLabelText}
-                  getBadge={getBadge}
-                  getTestID={getTestID}
-                  getAccessibilityLabel={getAccessibilityLabel}
-                  onPress={() => onTabPress(eventForIndex(index))}
-                  onLongPress={() => onTabLongPress?.(eventForIndex(index))}
-                  activeIndicatorStyle={activeIndicatorStyle}
-                  labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-                  theme={theme}
-                />
-              );
-            })}
-          </View>
+            return (
+              <NavigationBarItem
+                key={route.key}
+                route={route}
+                focused={focused}
+                labeled={labeled}
+                variant={variant}
+                activeTintColor={activeTintColor}
+                inactiveTintColor={inactiveTintColor}
+                activeColor={activeColor}
+                inactiveColor={inactiveColor}
+                renderIcon={renderIcon}
+                renderLabel={renderLabel}
+                renderTouchable={renderTouchable}
+                getLabelText={getLabelText}
+                getBadge={getBadge}
+                getTestID={getTestID}
+                getAccessibilityLabel={getAccessibilityLabel}
+                onPress={() => onTabPress(eventForIndex(index))}
+                onLongPress={() => onTabLongPress?.(eventForIndex(index))}
+                activeIndicatorStyle={activeIndicatorStyle}
+                labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+                theme={theme}
+              />
+            );
+          })}
         </View>
       </View>
     </Animated.View>
@@ -834,7 +824,6 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     height: 16,
-    paddingBottom: 2,
   },
   // eslint-disable-next-line react-native/no-color-literals
   label: {

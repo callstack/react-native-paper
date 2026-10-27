@@ -1,4 +1,4 @@
-import type { ColorRole, TypescaleKey } from '../../theme/types';
+import type { ColorRole } from '../../theme/types';
 
 /**
  * Resolved M3 "flexible navigation bar" spec values.
@@ -24,8 +24,6 @@ export const ICON_LABEL_GAP = 4;
 // Tab width clamps used by the `compact` layout (dp).
 export const MIN_TAB_WIDTH = 96;
 export const MAX_TAB_WIDTH = 168;
-
-export const LABEL_TYPESCALE: TypescaleKey = 'labelMedium';
 
 /**
  * Color roles per the M3 spec. `activeLabel` is `secondary` (changed from
