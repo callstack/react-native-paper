@@ -1,19 +1,24 @@
+import { useVersion, withBase } from '@rspress/core/dist/runtime/index.js';
+
 import LandingSection, { asset } from './LandingSection';
+import { getNextRoute } from '../../utils/versionRoutes';
 
 type LinkProps = { to: string; children: React.ReactNode };
 
-/** components/Link.js in the source. */
+const GETTING_STARTED = '/docs/guides/getting-started';
+
 const Link = ({ to, children }: LinkProps) => (
   <a href={to} rel="noreferrer noopener" target="_blank">
     {children}
   </a>
 );
 
-/**
- * components/Footer.js. The copy is carried over verbatim, outdated year and
- * docs URL included - refreshing the landing copy is a separate task.
- */
 export default function LandingFooter() {
+  const version = useVersion() || '5.x';
+  const docsHref = withBase(
+    version === '6.x' ? getNextRoute(GETTING_STARTED) : GETTING_STARTED
+  );
+
   return (
     <LandingSection dark variant="s7sbtf9">
       <div className="cf3elge">
@@ -34,9 +39,7 @@ export default function LandingFooter() {
               </Link>
             </li>
             <li>
-              <Link to="https://callstack.github.io/react-native-paper/index.html">
-                Docs
-              </Link>
+              <a href={docsHref}>Docs</a>
             </li>
             <li>
               <Link to="https://twitter.com/rn_paper">Twitter</Link>
@@ -66,7 +69,7 @@ export default function LandingFooter() {
         <div className="c1od1uwn">
           Created with love by:
           <Link to="https://callstack.com/">
-            <img alt="" src={asset('images/icons/callstack.svg')} />
+            <img alt="Callstack" src={asset('images/icons/callstack.svg')} />
           </Link>
         </div>
       </div>

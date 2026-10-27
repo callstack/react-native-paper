@@ -1,17 +1,5 @@
-/*
- * Extracted verbatim from the compiled stylesheet served by
- * reactnativepaper.com, the linaria output of
- * callstack-internal/paper-landing-page. Class names are the generated
- * linaria hashes, so the markup in src/components/landing mirrors the
- * original DOM in order to use them.
- *
- * Only class-scoped rules are included; the original's global `html`, `body`
- * and `*` resets are reproduced scoped to `.landing` in landing.css so they
- * cannot leak into the docs site. The one image URL has been repointed at our
- * vendored copy.
- *
- * Do not hand-edit: regenerate from the source site if the design changes.
- */
+/* Generated file: the compiled linaria output of
+   callstack-internal/paper-landing-page. Do not hand-edit. */
 .sq6c5at{padding:60px 30px;background:var(--sq6c5at-0);color:var(--sq6c5at-1);background-position:-5px 10px}
 @media (min-width:992px){.sq6c5at{padding:60px 15px}}
 .l1qehd68{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAMklEQVRYhe3PoQ0AIBRDwQbNEszAOuw/B/kGg0WRu+SZugYAgA/1sWb14lm7FgAAOJJsjOUBe5fO1bAAAAAASUVORK5CYII=)}

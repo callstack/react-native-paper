@@ -5,7 +5,6 @@ import LandingSection, { asset } from './LandingSection';
 
 type PlayerProps = { name: string };
 
-/** LookAndFeel.js `PlayerContainer` — capped at 297x630 to hold the ratio. */
 const poster = (name: string): CSSVars => ({
   '--p626bjh-0': `url(${asset(`videos/${name}-poster.png`)})`,
 });
@@ -14,9 +13,18 @@ const Player = ({ name }: PlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 
-  const handleBegin = () => {
-    void videoRef.current?.play();
-    setPlaying(true);
+  const toggle = () => {
+    const video = videoRef.current;
+
+    if (!video) {
+      return;
+    }
+
+    if (video.paused) {
+      void video.play();
+    } else {
+      video.pause();
+    }
   };
 
   return (
@@ -25,23 +33,29 @@ const Player = ({ name }: PlayerProps) => {
         className="py956vk"
         loop
         muted
+        onPause={() => setPlaying(false)}
+        onPlay={() => setPlaying(true)}
         playsInline
         poster={asset(`videos/${name}-poster.png`)}
         preload="none"
         ref={videoRef}
       >
-        <source src={asset(`videos/${name}.webm`)} type="video/webm" />
         <source src={asset(`videos/${name}.mp4`)} type="video/mp4" />
       </video>
-      {playing ? null : (
-        <div className="p2eysq8" onClick={handleBegin} role="presentation">
-          <img
-            alt="Play"
-            className="p18nt66k"
-            src={asset('images/icons/play.svg')}
-          />
-        </div>
-      )}
+      <button
+        aria-label={playing ? 'Pause video' : 'Play video'}
+        className="p2eysq8"
+        onClick={toggle}
+        style={
+          {
+            '--p2eysq8-0': playing ? '0' : '1',
+            '--p2eysq8-1': 'auto',
+          } as CSSVars
+        }
+        type="button"
+      >
+        <img alt="" className="p18nt66k" src={asset('images/icons/play.svg')} />
+      </button>
     </div>
   );
 };

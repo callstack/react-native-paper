@@ -7,7 +7,6 @@ const WHITE = '#ffffff';
 const GREY = '#d8d8d8';
 const NEAR_BLACK = '#414757';
 
-/** components/Button.js — `b1qn7xxj` reads six custom properties. */
 const variants: Record<'dark' | 'light', CSSVars> = {
   dark: {
     '--b1qn7xxj-0': PRIMARY,
@@ -42,17 +41,13 @@ export default function LandingButton({
 }: Props) {
   return (
     <a
+      className="b1qn7xxj"
       href={href}
       rel={external ? 'noopener noreferrer' : undefined}
+      style={variants[dark ? 'dark' : 'light']}
       target={external ? '_blank' : undefined}
     >
-      <button
-        className="b1qn7xxj"
-        style={variants[dark ? 'dark' : 'light']}
-        type="button"
-      >
-        {children}
-      </button>
+      {children}
     </a>
   );
 }

@@ -4,47 +4,45 @@ import { useVersion, withBase } from '@rspress/core/dist/runtime/index.js';
 
 import LandingButton from './LandingButton';
 import LandingSection, { asset } from './LandingSection';
+import { loadStats } from './stats';
 import { getNextRoute } from '../../utils/versionRoutes';
 
 const REPO = 'https://github.com/callstack/react-native-paper';
 const GETTING_STARTED = '/docs/guides/getting-started';
 const STARS_FALLBACK = '3000+';
+const STARS_CACHE_KEY = 'cachedGithubStars';
 
-/** Mirrors fetchStars.js from the landing page source. */
 function useGithubStars() {
-  const [stars, setStars] = useState<string>(() => {
-    try {
-      return localStorage.getItem('cachedGithubStars') ?? STARS_FALLBACK;
-    } catch {
-      return STARS_FALLBACK;
-    }
-  });
+  const [stars, setStars] = useState(STARS_FALLBACK);
 
   useEffect(() => {
     let cancelled = false;
 
+    try {
+      const cached = localStorage.getItem(STARS_CACHE_KEY);
+
+      if (cached) {
+        setStars(cached);
+      }
+    } catch {
+      // Storage can be unavailable.
+    }
+
     const load = async () => {
+      const { stars: count } = await loadStats();
+
+      if (cancelled) {
+        return;
+      }
+
+      const next = String(count);
+
+      setStars(next);
+
       try {
-        const response = await fetch(
-          'https://api.github.com/repos/callstack/react-native-paper'
-        );
-        const json = await response.json();
-
-        if (cancelled || typeof json?.stargazers_count !== 'number') {
-          return;
-        }
-
-        const count = String(json.stargazers_count);
-
-        setStars(count);
-
-        try {
-          localStorage.setItem('cachedGithubStars', count);
-        } catch {
-          // Storage can be unavailable; the count is non-essential.
-        }
+        localStorage.setItem(STARS_CACHE_KEY, next);
       } catch {
-        // Keep whatever value is already rendered.
+        // Storage can be unavailable.
       }
     };
 

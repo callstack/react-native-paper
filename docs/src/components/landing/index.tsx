@@ -10,7 +10,6 @@ import LandingMaterialYou from './LandingMaterialYou';
 import LandingNumbers from './LandingNumbers';
 import LandingTestimonials from './LandingTestimonials';
 
-/** Section order follows src/pages/index.js in the landing page source. */
 export default function Landing() {
   return (
     <main className="landing">
