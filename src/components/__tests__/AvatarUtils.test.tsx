@@ -1,7 +1,7 @@
 import type { OpaqueColorValue } from 'react-native';
 import { PlatformColor } from 'react-native';
 
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 
 import { red50, red500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
@@ -74,7 +74,8 @@ describe('resolveAvatarColors', () => {
     });
   });
 
-  it('falls back to onSurface for an unknown PlatformColor', () => {
+  it('falls back to white and warns once for an unknown PlatformColor', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const theme = LightTheme;
     const platformColor = PlatformColor('@android:color/holo_blue_bright');
 
@@ -82,8 +83,13 @@ describe('resolveAvatarColors', () => {
       resolveAvatarColors({ theme, backgroundColor: platformColor })
     ).toEqual({
       background: platformColor,
-      textColor: theme.colors.onSurface,
+      textColor: '#ffffff',
     });
+    resolveAvatarColors({ theme, backgroundColor: platformColor });
+
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('`color`'));
+    warn.mockRestore();
   });
 
   it('lets an explicit color override derived content color', () => {

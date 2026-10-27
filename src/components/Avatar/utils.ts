@@ -8,6 +8,8 @@ import getContrastingColor from '../../utils/getContrastingColor';
 export const DEFAULT_SIZE = 64;
 export const ICON_SIZE_RATIO = 0.6;
 
+let hasWarnedUnresolvedBackground = false;
+
 export type ResolvedAvatarColors = {
   background: ColorValue;
   textColor: ColorValue;
@@ -23,8 +25,8 @@ export type ResolvedAvatarColors = {
  *   per-user colors have no on- role).
  * - Opaque custom values (`PlatformColor` / `DynamicColorIOS`) go through
  *   `contentColorFor`: a theme-role token pairs with its on-color; anything
- *   else falls back to `onSurface`. Pass `color` when that fallback is not
- *   appropriate.
+ *   else falls back to white and warns once in development, because its
+ *   contrast cannot be checked. Pass `color` for such backgrounds.
  */
 export const resolveAvatarColors = ({
   theme,
@@ -53,7 +55,18 @@ export const resolveAvatarColors = ({
     };
   }
 
-  return { background, textColor: contentColorFor(theme, background) };
+  if (Object.values(theme.colors).includes(background)) {
+    return { background, textColor: contentColorFor(theme, background) };
+  }
+
+  if (process.env.NODE_ENV !== 'production' && !hasWarnedUnresolvedBackground) {
+    hasWarnedUnresolvedBackground = true;
+    console.warn(
+      'Avatar: the custom backgroundColor is a dynamic color that is not in the theme, so its contrast cannot be checked. Pass `color` to set a readable content color.'
+    );
+  }
+
+  return { background, textColor: white };
 };
 
 /**

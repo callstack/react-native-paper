@@ -27,7 +27,9 @@ export type Props = ViewProps & {
    * paired with a contrasting text color when `color` is not set: string
    * values use a luminance heuristic, while opaque/dynamic values
    * (`PlatformColor` / `DynamicColorIOS`) are paired with a theme role's
-   * `on-` color, falling back to `onSurface`.
+   * `on-` color, falling back to white. Pass `color` for a dynamic
+   * background that is not in the theme, because its contrast cannot be
+   * checked.
    */
   style?: StyleProp<ViewStyle>;
   /**
