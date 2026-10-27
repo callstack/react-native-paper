@@ -57,6 +57,17 @@ export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle => {
   };
 };
 
+/** The content box sits inside the outline, so the outline can't grow it. */
+export const getButtonContentBoxStyle = (
+  sizeStyle: ButtonSizeStyle,
+  borderWidth: number
+) => ({
+  minHeight: sizeStyle.minHeight - borderWidth * 2,
+  paddingStart: sizeStyle.paddingStart - borderWidth,
+  paddingEnd: sizeStyle.paddingEnd - borderWidth,
+  gap: sizeStyle.iconGap,
+});
+
 /**
  * Slop that brings the touch target up to the size's `outerBoundHeight`,
  * expanding outside the container.

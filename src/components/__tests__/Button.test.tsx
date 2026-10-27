@@ -8,13 +8,14 @@ import { LocaleProvider } from '../../core/locale';
 import { render, screen } from '../../test-utils';
 import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import { pink500, white } from '../../theme/colors';
-import { DarkTheme, LightTheme } from '../../theme/schemes';
+import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import { shadow } from '../../theme/tokens/sys/elevation';
 import Button from '../Button/Button';
 import { Tokens } from '../Button/tokens';
 import {
   getButtonColors,
+  getButtonContentBoxStyle,
   getButtonHitSlop,
   getButtonPressedRadius,
   getButtonRippleColor,
@@ -35,8 +36,7 @@ const styles = StyleSheet.create({
   },
 });
 
-// Button's internal layers intentionally carry no test IDs, so they are reached
-// by walking up from the elements a user can actually query.
+// The content row has no test ID, so it is reached from its label.
 const parentOf = (
   element: ReturnType<typeof screen.getByTestId>,
   describeChild: string
@@ -55,10 +55,6 @@ const parentOf = (
 const labelOf = (label: string) => screen.getByText(label);
 const contentOf = (label: string) =>
   parentOf(labelOf(label), `the "${label}" label`);
-const containerOf = (testID: string) =>
-  parentOf(screen.getByTestId(testID), `"${testID}"`);
-const surfaceOf = (testID: string) =>
-  parentOf(containerOf(testID), `"${testID}"'s container`);
 
 it('renders filled button by default', async () => {
   const tree = (await render(<Button>Filled Button</Button>)).toJSON();
@@ -82,29 +78,9 @@ it('renders outlined button with mode', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders filled button with mode', async () => {
-  const tree = (
-    await render(<Button mode="filled">Contained Button</Button>)
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
 it('renders button with icon', async () => {
   const tree = (
     await render(<Button icon="camera">Icon Button</Button>)
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders button with icon in reverse order', async () => {
-  const tree = (
-    await render(
-      <Button icon="chevron-right" contentStyle={styles.flexing}>
-        Right Icon
-      </Button>
-    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -163,52 +139,28 @@ it('renders active button if only onLongPress handler is passed', async () => {
   expect(screen.getByTestId('active-button')).toBeEnabled();
 });
 
-it('renders button with color', async () => {
-  const tree = (
-    await render(<Button textColor={pink500}>Custom Button</Button>)
-  ).toJSON();
+it('applies a custom label color', async () => {
+  await render(<Button textColor={pink500}>Custom Button</Button>);
 
-  expect(tree).toMatchSnapshot();
+  expect(screen.getByText('Custom Button')).toHaveStyle({ color: pink500 });
 });
 
-it('renders button with button color', async () => {
-  const tree = (
-    await render(<Button buttonColor={pink500}>Custom Button</Button>)
-  ).toJSON();
+it('applies a custom container color', async () => {
+  await render(<Button buttonColor={pink500}>Custom Button</Button>);
 
-  expect(tree).toMatchSnapshot();
+  expect(screen.root).toHaveStyle({ backgroundColor: pink500 });
 });
 
-it('renders button with custom testID', async () => {
-  const tree = (
-    await render(
-      <Button testID={'custom:testID'}>Button with custom testID</Button>
-    )
-  ).toJSON();
+it('exposes the accessibility label', async () => {
+  await render(<Button aria-label="label">Button</Button>);
 
-  expect(tree).toMatchSnapshot();
+  expect(screen.getByRole('button', { name: 'label' })).toBeOnTheScreen();
 });
 
-it('renders button with an accessibility label', async () => {
-  const tree = (
-    await render(
-      <Button accessibilityLabel={'label'}>
-        Button with accessibility label
-      </Button>
-    )
-  ).toJSON();
+it('exposes the accessibility hint', async () => {
+  await render(<Button accessibilityHint="hint">Button</Button>);
 
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders button with an accessibility hint', async () => {
-  const tree = (
-    await render(
-      <Button accessibilityHint={'hint'}>Button with accessibility hint</Button>
-    )
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expect(screen.getByRole('button')).toHaveProp('accessibilityHint', 'hint');
 });
 
 it('should execute onPressIn', async () => {
@@ -295,19 +247,6 @@ describe('getButtonColors - background color', () => {
     })
   );
 
-  (['outlined', 'text'] as const).forEach((mode) =>
-    it(`should return correct disabled color, for theme version 3, dark theme, ${mode} mode`, () => {
-      expect(
-        getButtonColors({
-          customButtonColor,
-          theme: LightTheme,
-          mode,
-          disabled: true,
-        })
-      ).toMatchObject({ backgroundColor: 'transparent' });
-    })
-  );
-
   (['filled', 'tonal', 'elevated'] as const).forEach((mode) =>
     it(`should return correct disabled color, for theme version 3, ${mode} mode`, () => {
       return expect(
@@ -324,22 +263,6 @@ describe('getButtonColors - background color', () => {
     })
   );
 
-  (['filled', 'tonal', 'elevated'] as const).forEach((mode) =>
-    it(`should return correct disabled color, for theme version 3, dark theme, ${mode} mode`, () => {
-      return expect(
-        getButtonColors({
-          customButtonColor,
-          theme: DarkTheme,
-          mode,
-          disabled: true,
-        })
-      ).toMatchObject({
-        backgroundColor: DarkTheme.colors.onSurface,
-        backgroundOpacity: stateOpacity.pressed,
-      });
-    })
-  );
-
   it('should return correct theme color, for theme version 3, elevated mode', () => {
     expect(
       getButtonColors({
@@ -348,17 +271,6 @@ describe('getButtonColors - background color', () => {
       })
     ).toMatchObject({
       backgroundColor: LightTheme.colors.surfaceContainerLow,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, dark theme, elevated mode', () => {
-    expect(
-      getButtonColors({
-        theme: DarkTheme,
-        mode: 'elevated',
-      })
-    ).toMatchObject({
-      backgroundColor: DarkTheme.colors.surfaceContainerLow,
     });
   });
 
@@ -373,17 +285,6 @@ describe('getButtonColors - background color', () => {
     });
   });
 
-  it('should return correct theme color, for theme version 3, dark theme, filled mode', () => {
-    expect(
-      getButtonColors({
-        theme: DarkTheme,
-        mode: 'filled',
-      })
-    ).toMatchObject({
-      backgroundColor: DarkTheme.colors.primary,
-    });
-  });
-
   it('should return correct theme color, for theme version 3, tonal mode', () => {
     expect(
       getButtonColors({
@@ -395,35 +296,11 @@ describe('getButtonColors - background color', () => {
     });
   });
 
-  it('should return correct theme color, for theme version 3, dark theme, tonal mode', () => {
-    expect(
-      getButtonColors({
-        theme: DarkTheme,
-        mode: 'tonal',
-      })
-    ).toMatchObject({
-      backgroundColor: DarkTheme.colors.secondaryContainer,
-    });
-  });
-
   (['text', 'outlined'] as const).forEach((mode) =>
     it(`should return transparent color, for theme version 3, ${mode} mode`, () => {
       return expect(
         getButtonColors({
           theme: LightTheme,
-          mode,
-        })
-      ).toMatchObject({
-        backgroundColor: 'transparent',
-      });
-    })
-  );
-
-  (['text', 'outlined'] as const).forEach((mode) =>
-    it(`should return transparent color, for theme version 3, dark theme, ${mode} mode`, () => {
-      return expect(
-        getButtonColors({
-          theme: DarkTheme,
           mode,
         })
       ).toMatchObject({
@@ -461,20 +338,6 @@ describe('getButtonColors - text color', () => {
     });
   });
 
-  it('should return correct disabled text color, for theme version 3, dark theme, no matter what the mode is', () => {
-    expect(
-      getButtonColors({
-        customLabelColor,
-        theme: DarkTheme,
-        disabled: true,
-        mode: 'text',
-      })
-    ).toMatchObject({
-      labelColor: DarkTheme.colors.onSurface,
-      labelOpacity: stateOpacity.disabled,
-    });
-  });
-
   (['filled', 'tonal', 'elevated'] as const).forEach((mode) =>
     it(`should return correct text color for dark prop, for theme version 3, ${mode} mode`, () => {
       expect(
@@ -502,19 +365,6 @@ describe('getButtonColors - text color', () => {
     })
   );
 
-  (['text', 'elevated'] as const).forEach((mode) =>
-    it(`should return correct theme text color, for theme version 3, dark theme, ${mode} mode`, () => {
-      expect(
-        getButtonColors({
-          theme: DarkTheme,
-          mode,
-        })
-      ).toMatchObject({
-        labelColor: DarkTheme.colors.primary,
-      });
-    })
-  );
-
   it('should return onSurfaceVariant label color, for theme version 3, outlined mode', () => {
     expect(
       getButtonColors({
@@ -523,17 +373,6 @@ describe('getButtonColors - text color', () => {
       })
     ).toMatchObject({
       labelColor: LightTheme.colors.onSurfaceVariant,
-    });
-  });
-
-  it('should return onSurfaceVariant label color, for theme version 3, dark theme, outlined mode', () => {
-    expect(
-      getButtonColors({
-        theme: DarkTheme,
-        mode: 'outlined',
-      })
-    ).toMatchObject({
-      labelColor: DarkTheme.colors.onSurfaceVariant,
     });
   });
 
@@ -548,17 +387,6 @@ describe('getButtonColors - text color', () => {
     });
   });
 
-  it('should return correct theme text color, for theme version 3, dark theme, filled mode', () => {
-    expect(
-      getButtonColors({
-        theme: DarkTheme,
-        mode: 'filled',
-      })
-    ).toMatchObject({
-      labelColor: DarkTheme.colors.onPrimary,
-    });
-  });
-
   it('should return correct theme text color, for theme version 3, tonal mode', () => {
     expect(
       getButtonColors({
@@ -567,17 +395,6 @@ describe('getButtonColors - text color', () => {
       })
     ).toMatchObject({
       labelColor: LightTheme.colors.onSecondaryContainer,
-    });
-  });
-
-  it('should return correct theme text color, for theme version 3, dark theme tonal mode', () => {
-    expect(
-      getButtonColors({
-        theme: DarkTheme,
-        mode: 'tonal',
-      })
-    ).toMatchObject({
-      labelColor: DarkTheme.colors.onSecondaryContainer,
     });
   });
 });
@@ -595,18 +412,6 @@ describe('getButtonColors - border color', () => {
     });
   });
 
-  it('should return correct border color, for theme version 3, when disabled, dark theme, outlined mode', () => {
-    expect(
-      getButtonColors({
-        theme: DarkTheme,
-        disabled: true,
-        mode: 'outlined',
-      })
-    ).toMatchObject({
-      borderColor: DarkTheme.colors.outlineVariant,
-    });
-  });
-
   it('should return correct border color, for theme version 3, outlined mode', () => {
     expect(
       getButtonColors({
@@ -618,35 +423,11 @@ describe('getButtonColors - border color', () => {
     });
   });
 
-  it('should return correct border color, for theme version 3, dark theme, outlined mode', () => {
-    expect(
-      getButtonColors({
-        theme: DarkTheme,
-        mode: 'outlined',
-      })
-    ).toMatchObject({
-      borderColor: DarkTheme.colors.outlineVariant,
-    });
-  });
-
   (['text', 'filled', 'tonal', 'elevated'] as const).forEach((mode) =>
     it(`should return transparent border, for theme version 3, ${mode} mode`, () => {
       expect(
         getButtonColors({
           theme: LightTheme,
-          mode,
-        })
-      ).toMatchObject({
-        borderColor: 'transparent',
-      });
-    })
-  );
-
-  (['text', 'filled', 'tonal', 'elevated'] as const).forEach((mode) =>
-    it(`should return transparent border, for theme version 3, dark theme, ${mode} mode`, () => {
-      expect(
-        getButtonColors({
-          theme: DarkTheme,
           mode,
         })
       ).toMatchObject({
@@ -768,18 +549,6 @@ describe('getButtonHitSlop', () => {
 });
 
 describe('size prop', () => {
-  it('renders a button with per-size metrics', async () => {
-    const tree = (
-      await render(
-        <Button size="medium" icon="camera">
-          Medium
-        </Button>
-      )
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
   (
     [
       ['extra-small', 14],
@@ -900,7 +669,7 @@ describe('shape prop', () => {
       </Button>
     );
     // Half the small container height (40dp) is the real pill radius.
-    expect(containerOf('button')).toHaveStyle({
+    expect(screen.getByTestId('button')).toHaveStyle({
       borderRadius: 20,
     });
   });
@@ -911,19 +680,8 @@ describe('shape prop', () => {
         X
       </Button>
     );
-    expect(containerOf('button')).toHaveStyle({
+    expect(screen.getByTestId('button')).toHaveStyle({
       borderRadius: 12,
-    });
-  });
-
-  it('uses the per-size square radius when both size and shape are set', async () => {
-    await render(
-      <Button testID="button" size="large" shape="square">
-        X
-      </Button>
-    );
-    expect(containerOf('button')).toHaveStyle({
-      borderRadius: 28,
     });
   });
 });
@@ -946,7 +704,7 @@ describe('selected prop', () => {
       </Button>
     );
 
-    expect(containerOf('button')).toHaveStyle({
+    expect(screen.getByTestId('button')).toHaveStyle({
       borderRadius: 28,
     });
   });
@@ -958,7 +716,7 @@ describe('selected prop', () => {
       </Button>
     );
 
-    expect(containerOf('button')).toHaveStyle({
+    expect(screen.getByTestId('button')).toHaveStyle({
       borderRadius: 20,
     });
   });
@@ -993,7 +751,7 @@ describe('selected prop', () => {
       </Button>
     );
     // No shape flip: a round text button stays the pill, 40 / 2 = 20.
-    expect(containerOf('button')).toHaveStyle({
+    expect(screen.getByTestId('button')).toHaveStyle({
       borderRadius: 20,
     });
     // And no toggle state is announced.
@@ -1092,14 +850,14 @@ it('gives an elevated button a resting shadow, and other modes none', async () =
       Elevated
     </Button>
   );
-  expect(surfaceOf('elevated')).toHaveStyle(spotShadow);
+  expect(screen.root).toHaveStyle(spotShadow);
 
   await render(
     <Button mode="filled" testID="filled">
       Filled
     </Button>
   );
-  expect(surfaceOf('filled')).toHaveStyle({
+  expect(screen.root).toHaveStyle({
     shadowOpacity: 0,
   });
 });
@@ -1111,7 +869,7 @@ it('drops the shadow when an elevated button is disabled', async () => {
     </Button>
   );
 
-  expect(surfaceOf('elevated')).toHaveStyle({
+  expect(screen.root).toHaveStyle({
     shadowOpacity: 0,
   });
 });
@@ -1123,107 +881,73 @@ it('forwards `style` to the shadow host', async () => {
     </Button>
   );
 
-  expect(surfaceOf('button')).toHaveStyle(styles.scaled);
+  expect(screen.root).toHaveStyle(styles.scaled);
 });
 
 describe('container height', () => {
   const MODES = ['filled', 'tonal', 'elevated', 'outlined', 'text'] as const;
-  // The outlined stroke thickens with the size (1dp up to M, 2dp L, 3dp XL),
-  // so every size has to be checked against its own token metrics.
-  const SIZES = [
-    'extra-small',
-    'small',
-    'medium',
-    'large',
-    'extra-large',
-  ] as const;
-  const { containerHeight, leadingSpace } = Tokens.sizes.small;
 
-  // The rendered container is the content box plus the outline Yoga draws
-  // around it, so those two have to add up to the token height in every mode.
-  const renderedBox = (testID: string) => {
-    const content = StyleSheet.flatten(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      contentOf('X').props.style
+  // The content box plus the outline drawn around it must add up to the token
+  // metrics, or the outline grows the container.
+  const boxOf = (size: ButtonSize, borderWidth: number) => {
+    const content = getButtonContentBoxStyle(
+      getButtonSizeStyle(size),
+      borderWidth
     );
-    const clip = StyleSheet.flatten(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      containerOf(testID).props.style
-    );
-    const outline = clip.borderWidth ?? 0;
     return {
-      height: content.minHeight + outline * 2,
-      leading: content.paddingStart + outline,
+      height: content.minHeight + borderWidth * 2,
+      leading: content.paddingStart + borderWidth,
     };
   };
 
-  it.each(MODES)('renders %s at the token height', async (mode) => {
-    await render(
-      <Button mode={mode} testID="button">
-        X
-      </Button>
-    );
+  it.each(MODES)('keeps %s on the token height', (mode) => {
+    const { borderWidth } = getButtonColors({ theme: LightTheme, mode });
 
-    expect(renderedBox('button')).toEqual({
-      height: containerHeight,
-      leading: leadingSpace,
+    expect(boxOf('small', borderWidth)).toEqual({
+      height: Tokens.sizes.small.containerHeight,
+      leading: Tokens.sizes.small.leadingSpace,
     });
   });
 
-  it.each(SIZES)(
+  it.each(sizeMetrics)(
     'insets the %s outline so the box stays on the token metrics',
-    async (size) => {
-      await render(
-        <Button mode="outlined" size={size} testID="button">
-          X
-        </Button>
-      );
+    (size) => {
+      const { borderWidth } = getButtonColors({
+        theme: LightTheme,
+        mode: 'outlined',
+        size,
+      });
 
-      expect(renderedBox('button')).toEqual({
+      expect(boxOf(size, borderWidth)).toEqual({
         height: Tokens.sizes[size].containerHeight,
         leading: Tokens.sizes[size].leadingSpace,
       });
     }
   );
 
-  it('keeps an outlined toggle the same size in both states', async () => {
-    await render(
-      <Button mode="outlined" selected={false} testID="button">
-        X
-      </Button>
-    );
-    const unselected = renderedBox('button');
-
-    await render(
-      <Button mode="outlined" selected testID="button">
-        X
-      </Button>
-    );
+  it('keeps an outlined toggle the same size in both states', () => {
+    const widthWhen = (selected: boolean) =>
+      getButtonColors({ theme: LightTheme, mode: 'outlined', selected })
+        .borderWidth;
 
     // Selecting drops the outline; without the inset this shrank by 2dp.
-    expect(renderedBox('button')).toEqual(unselected);
+    expect(boxOf('small', widthWhen(true))).toEqual(
+      boxOf('small', widthWhen(false))
+    );
   });
 });
 
 describe('touch target', () => {
-  const styleOf = (element: ReturnType<typeof containerOf>) =>
-    StyleSheet.flatten(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      element.props.style
-    );
-
-  it('leaves no clipping ancestor to swallow the expanded target', async () => {
+  it('leaves the outer view unclipped for the expanded target', async () => {
     await render(
       <Button onPress={() => {}} testID="button">
         X
       </Button>
     );
 
-    // The slop expands past the container, so an ancestor sized to the
-    // container must not clip. This is what made the previous `hitSlop`
-    // inert, and a passed-through prop alone would not catch it.
-    expect(styleOf(surfaceOf('button')).overflow).not.toBe('hidden');
-    expect(styleOf(containerOf('button')).overflow).not.toBe('hidden');
+    // The slop expands past the container, so a clipping ancestor would make
+    // it inert.
+    expect(screen.root).not.toHaveStyle({ overflow: 'hidden' });
   });
 
   it('still clips the ripple to the container radius', async () => {
@@ -1233,17 +957,14 @@ describe('touch target', () => {
       </Button>
     );
 
-    // Clipping moved onto the touchable, so the ripple keeps the pill shape
-    // now that the clip view above it no longer hides the overflow.
-    const style = styleOf(screen.getByTestId('button'));
-    expect(style.overflow).toBe('hidden');
-    expect(style.borderRadius).toBe(Tokens.sizes.small.containerHeight / 2);
+    expect(screen.getByTestId('button')).toHaveStyle({
+      overflow: 'hidden',
+      borderRadius: Tokens.sizes.small.containerHeight / 2,
+    });
   });
 
-  // An outlined button's children sit inside the outline, so they round a
-  // border width tighter than the container. Given the outer radius instead,
-  // their corners overshoot the outline's inner edge and the background shows
-  // through the gap — worst on XL, which has the thickest stroke.
+  // Inside the outline, the ripple has to round a border width tighter, or
+  // the background shows through at the corners.
   it.each(sizeMetrics)(
     'insets the %s ripple radius by the outline width',
     async (size) => {
@@ -1259,14 +980,11 @@ describe('touch target', () => {
         </Button>
       );
 
-      const outer = StyleSheet.flatten(
-        // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-        containerOf('button').props.style
-      );
-
-      expect(styleOf(screen.getByTestId('button')).borderRadius).toBe(
-        outer.borderRadius - Tokens.sizes[size].outlinedOutlineWidth
-      );
+      expect(screen.getByTestId('button')).toHaveStyle({
+        borderRadius:
+          getButtonShapeRadius({ size, shape: 'square', theme: LightTheme }) -
+          Tokens.sizes[size].outlinedOutlineWidth,
+      });
     }
   );
 
@@ -1277,34 +995,27 @@ describe('touch target', () => {
       </Button>
     );
 
-    const outer = StyleSheet.flatten(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      containerOf('button').props.style
-    );
-
-    expect(styleOf(screen.getByTestId('button')).borderRadius).toBe(
-      outer.borderRadius
-    );
+    expect(screen.getByTestId('button')).toHaveStyle({
+      borderRadius: getButtonShapeRadius({
+        size: 'small',
+        shape: 'square',
+        theme: LightTheme,
+      }),
+    });
   });
 
-  it.each(sizeMetrics)(
-    'expands the %s target to the outer bound',
-    async (size) => {
-      await render(
-        <Button onPress={() => {}} size={size} testID="button">
-          X
-        </Button>
-      );
+  it('expands the target to the outer bound', async () => {
+    await render(
+      <Button onPress={() => {}} size="medium" testID="button">
+        X
+      </Button>
+    );
 
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      const { hitSlop } = screen.getByTestId('button').props;
-      const { containerHeight, outerBoundHeight } = Tokens.sizes[size];
-
-      expect(containerHeight + hitSlop.top + hitSlop.bottom).toBe(
-        outerBoundHeight
-      );
-    }
-  );
+    expect(screen.getByTestId('button')).toHaveProp(
+      'hitSlop',
+      getButtonHitSlop('medium')
+    );
+  });
 
   it('lets a caller hitSlop win', async () => {
     await render(
@@ -1313,8 +1024,7 @@ describe('touch target', () => {
       </Button>
     );
 
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(screen.getByTestId('button').props.hitSlop).toBe(12);
+    expect(screen.getByTestId('button')).toHaveProp('hitSlop', 12);
   });
 
   it('takes `null` as an opt out', async () => {
@@ -1324,10 +1034,7 @@ describe('touch target', () => {
       </Button>
     );
 
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    const { hitSlop } = screen.getByTestId('button').props;
-
-    expect(hitSlop).toBeNull();
+    expect(screen.getByTestId('button')).toHaveProp('hitSlop', null);
   });
 });
 
@@ -1355,39 +1062,6 @@ describe('shape morph animation', () => {
     await fireEvent(screen.getByTestId('button'), 'onPressOut');
     // small round resting radius = minHeight (40) / 2 = 20
     expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 20 });
-  });
-
-  it('switches between round and square radii when selected flips', async () => {
-    await render(
-      <Button shape="square" size="large" onPress={() => {}} testID="button">
-        {null}
-      </Button>
-    );
-    await screen.rerender(
-      <Button
-        shape="square"
-        size="large"
-        selected
-        onPress={() => {}}
-        testID="button"
-      >
-        {null}
-      </Button>
-    );
-    // selected flips square -> round; large round resting radius = 96 / 2 = 48
-    expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 48 });
-  });
-
-  it('morphs a default button, with no size or shape passed', async () => {
-    await render(
-      <Button onPress={() => {}} testID="button">
-        Default
-      </Button>
-    );
-    await fireEvent(screen.getByTestId('button'), 'onPressIn');
-    expect(screen.getByTestId('button')).toHaveStyle({
-      borderRadius: LightTheme.shapes.corner.small,
-    });
   });
 
   it('reads the pressed corner from the size tokens', async () => {

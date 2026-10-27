@@ -15,6 +15,7 @@ import Reanimated, { linear } from 'react-native-reanimated';
 
 import {
   getButtonColors,
+  getButtonContentBoxStyle,
   getButtonHitSlop,
   getButtonPressedRadius,
   getButtonRippleColor,
@@ -433,12 +434,7 @@ const Button = ({
   );
 
   const contentBoxStyle = React.useMemo(
-    () => ({
-      minHeight: sizeStyle.minHeight - borderWidth * 2,
-      paddingStart: sizeStyle.paddingStart - borderWidth,
-      paddingEnd: sizeStyle.paddingEnd - borderWidth,
-      gap: sizeStyle.iconGap,
-    }),
+    () => getButtonContentBoxStyle(sizeStyle, borderWidth),
     [sizeStyle, borderWidth]
   );
 
