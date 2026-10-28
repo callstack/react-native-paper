@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import * as Reanimated from 'react-native-reanimated';
+import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { LocaleProvider } from '../../../core/locale';
 import PaperProvider from '../../../core/PaperProvider';
@@ -11,21 +11,6 @@ import { LightTheme } from '../../../theme/schemes';
 import Checkbox from '../../Checkbox';
 import type { DataTableColumn } from '../../DataTable/columns';
 import DataTable from '../../DataTable/DataTable';
-
-// `withTiming` cannot be spied on in place - the module's exports are not
-// configurable - so wrap it here, the way FABExtended.test.tsx wraps `measure`.
-jest.mock('react-native-reanimated', () => {
-  const ReanimatedModule = jest.requireActual<
-    typeof import('react-native-reanimated')
-  >('react-native-reanimated');
-
-  return {
-    __esModule: true,
-    ...ReanimatedModule,
-    default: ReanimatedModule.default,
-    withTiming: jest.fn(ReanimatedModule.withTiming),
-  };
-});
 
 const columns: readonly DataTableColumn[] = [
   { key: 'name', flex: 2 },
@@ -76,6 +61,19 @@ const hidden = { includeHiddenElements: true };
 const cellText = (testID: string) =>
   within(screen.getByTestId(testID, hidden)).getByText(/\S/);
 
+// The sort indicator is hidden from the accessibility tree and has no testID
+// of its own, so reach it as the first child of its title.
+const sortIndicator = (testID: string) => {
+  // eslint-disable-next-line testing-library/no-node-access -- the indicator is hidden and has no testID, and only its animated style is under test.
+  const [indicator] = screen.getByTestId(testID).children;
+
+  if (indicator == null || typeof indicator === 'string') {
+    throw new Error(`${testID} renders no sort indicator`);
+  }
+
+  return indicator;
+};
+
 const mockFontScale = (fontScale: number) => {
   jest.mocked(useWindowDimensions).mockReturnValue({
     fontScale,
@@ -88,7 +86,6 @@ const mockFontScale = (fontScale: number) => {
 afterEach(() => {
   Platform.OS = 'ios';
   mockFontScale(1);
-  jest.mocked(Reanimated.withTiming).mockClear();
 });
 
 describe('DataTable', () => {
@@ -763,68 +760,66 @@ describe('DataTable.Title', () => {
     expect(screen.getByTestId('title')).toHaveProp('aria-sort', 'none');
   });
 
-  it('does not rotate the sort indicator on first render', async () => {
-    const withTiming = jest.mocked(Reanimated.withTiming);
-
+  it('points the sort indicator the right way from the first render', async () => {
     await render(
-      <DataTable.Title onPress={() => {}} sortDirection="descending">
+      <DataTable.Title
+        testID="title"
+        onPress={() => {}}
+        sortDirection="descending"
+      >
         Calories
       </DataTable.Title>
     );
 
-    // The indicator starts at the right angle rather than spinning into it.
-    expect(withTiming).not.toHaveBeenCalled();
+    expect(getAnimatedStyle(sortIndicator('title'))).toMatchObject({
+      transform: [{ rotate: '180deg' }],
+    });
   });
 
   it('rotates the sort indicator when the direction changes', async () => {
-    const withTiming = jest.mocked(Reanimated.withTiming);
-
     const view = await render(
-      <DataTable.Title onPress={() => {}} sortDirection="ascending">
+      <DataTable.Title
+        testID="title"
+        onPress={() => {}}
+        sortDirection="ascending"
+      >
         Calories
       </DataTable.Title>
     );
 
     await view.rerender(
-      <DataTable.Title onPress={() => {}} sortDirection="descending">
+      <DataTable.Title
+        testID="title"
+        onPress={() => {}}
+        sortDirection="descending"
+      >
         Calories
       </DataTable.Title>
     );
 
-    expect(withTiming).toHaveBeenCalledWith(
-      180,
-      expect.objectContaining({
-        duration: LightTheme.motion.duration.short3,
-        reduceMotion: Reanimated.ReduceMotion.Never,
-      })
-    );
+    expect(getAnimatedStyle(sortIndicator('title'))).toMatchObject({
+      transform: [{ rotate: '180deg' }],
+      transitionProperty: 'transform',
+      transitionDuration: LightTheme.motion.duration.short3,
+    });
   });
 
-  it('tells Reanimated to suppress the rotation under reduced motion', async () => {
-    const withTiming = jest.mocked(Reanimated.withTiming);
-
-    const view = await render(
+  it('skips the rotation under reduced motion', async () => {
+    await render(
       <PaperProvider reduceMotion="on">
-        <DataTable.Title onPress={() => {}} sortDirection="ascending">
+        <DataTable.Title
+          testID="title"
+          onPress={() => {}}
+          sortDirection="ascending"
+        >
           Calories
         </DataTable.Title>
       </PaperProvider>
     );
 
-    await view.rerender(
-      <PaperProvider reduceMotion="on">
-        <DataTable.Title onPress={() => {}} sortDirection="descending">
-          Calories
-        </DataTable.Title>
-      </PaperProvider>
-    );
-
-    expect(withTiming).toHaveBeenCalledWith(
-      180,
-      expect.objectContaining({
-        reduceMotion: Reanimated.ReduceMotion.Always,
-      })
-    );
+    expect(getAnimatedStyle(sortIndicator('title'))).toMatchObject({
+      transitionDuration: 0,
+    });
   });
 });
 

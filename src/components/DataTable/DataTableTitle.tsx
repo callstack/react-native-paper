@@ -14,13 +14,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Animated, {
-  Easing,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { cubicBezier, type CSSStyle } from 'react-native-reanimated';
 
 import type { ColumnLayoutProps } from './columns';
 import { useAlignStyles, useColumn } from './DataTableColumnsContext';
@@ -158,32 +152,6 @@ const DataTableTitle = ({
   const alignStyles = useAlignStyles(resolved.align, resolved.numeric);
   const lines = useReflowedNumberOfLines(numberOfLines);
 
-  const rotation = useSharedValue(sortDirection === 'ascending' ? 0 : 180);
-  const isFirstRender = React.useRef(true);
-
-  const { duration, easing } = theme.motion;
-
-  const timingConfig = React.useMemo(
-    () => ({
-      duration: duration.short3,
-      easing: Easing.bezier(...easing.standard),
-      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
-    }),
-    [duration.short3, easing.standard, reduceMotion]
-  );
-
-  React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
-    rotation.value = withTiming(
-      sortDirection === 'ascending' ? 0 : 180,
-      timingConfig
-    );
-  }, [sortDirection, rotation, timingConfig]);
-
   const columnLabel = getElementLabel({ 'aria-label': ariaLabel, children });
 
   const registerColumnLabel =
@@ -227,13 +195,16 @@ const DataTableTitle = ({
 
   const alphaTextColor = theme.colors.onSurfaceVariant;
 
-  const iconAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${rotation.value}deg` }],
-  }));
+  const iconStyle: CSSStyle<ViewStyle> = {
+    transform: [{ rotate: sortDirection === 'ascending' ? '0deg' : '180deg' }],
+    transitionProperty: 'transform',
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.short3,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+  };
 
   const icon = sortDirection ? (
     <Animated.View
-      style={[styles.icon, iconAnimatedStyle]}
+      style={[styles.icon, iconStyle]}
       {...(Platform.OS === 'web'
         ? { 'aria-hidden': true }
         : { importantForAccessibility: 'no-hide-descendants' as const })}
