@@ -7,25 +7,19 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import type { Props as DataTableCellProps } from './DataTableCell';
 import { withColumnIndices } from './DataTableColumnsContext';
 import {
   DataTableContext,
   DataTableRowContext,
   RowIndexContext,
 } from './DataTableContext';
+import type { RegisteredCell } from './DataTableContext';
 import {
   HORIZONTAL_PADDING,
   ROW_MIN_HEIGHT,
   ROW_VERTICAL_PADDING,
 } from './tokens';
-import {
-  composeCellLabel,
-  composeRowLabel,
-  getExplicitLabel,
-  getNodeText,
-  isDataTableElement,
-} from './utils';
+import { composeRowLabel } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -38,7 +32,9 @@ export type Props = Omit<
   'children'
 > & {
   /**
-   * Content of the `DataTableRow`.
+   * Content of the `DataTableRow`. Put all content in `DataTable.Cell`s: on
+   * iOS and Android a row of plain-text cells is announced as one item, and
+   * content outside a cell would be hidden with the cells.
    */
   children: React.ReactNode;
   /**
@@ -134,69 +130,50 @@ const DataTableRow = ({
     onPressOut,
   });
 
-  const columnLabels = table?.columnLabels;
+  // Table roles convey nothing on iOS or Android, so the label has to.
+  const collectsCells =
+    Platform.OS !== 'web' &&
+    table?.nativeFocusMode !== 'cell' &&
+    accessible !== false;
+
+  const [cells, setCells] = React.useState<ReadonlyMap<string, RegisteredCell>>(
+    () => new Map()
+  );
+
+  const registerCell = React.useCallback((id: string, cell: RegisteredCell) => {
+    setCells((previous) => new Map(previous).set(id, cell));
+
+    return () =>
+      setCells((previous) => {
+        const next = new Map(previous);
+        next.delete(id);
+        return next;
+      });
+  }, []);
 
   // Collapsing a row is only safe when every cell is plain text and none is
   // separately interactive, or its content would be out of reach.
   const { cellLabels, describable } = React.useMemo(() => {
-    const cellLabels: Array<string | undefined> = [];
-    let describable = true;
+    const indexed: Array<string | undefined> = [];
+    const unindexed: Array<string | undefined> = [];
+    let describable = cells.size > 0;
 
-    React.Children.forEach(children, (child, position) => {
-      if (child == null || typeof child === 'boolean') {
-        return;
-      }
-
-      if (!isDataTableElement<DataTableCellProps>(child, 'DataTable.Cell')) {
-        describable = false;
-        return;
-      }
-
-      const { column } = child.props;
-      const columnIndex = typeof column === 'number' ? column : position;
-
-      if (
-        hasTouchHandler({
-          onPress: child.props.onPress,
-          onLongPress: child.props.onLongPress,
-          onPressIn: child.props.onPressIn,
-          onPressOut: child.props.onPressOut,
-        })
-      ) {
+    cells.forEach((cell) => {
+      if (!cell.describable) {
         describable = false;
       }
 
-      // An element renders verbatim and carries its own semantics, which may
-      // include being interactive. A label on the cell says nothing about that,
-      // so it cannot make the content safe to hide.
-      if (React.isValidElement(child.props.children)) {
-        describable = false;
+      if (cell.index == null) {
+        unindexed.push(cell.label);
+      } else {
+        indexed[cell.index] = cell.label;
       }
-
-      const explicit = getExplicitLabel(child.props);
-      const text = getNodeText(child.props.children);
-
-      if (explicit == null && text == null) {
-        describable = false;
-      }
-
-      cellLabels[columnIndex] =
-        explicit ??
-        composeCellLabel({
-          columnLabel: columnLabels?.[columnIndex],
-          value: text,
-        });
     });
 
-    return { cellLabels, describable };
-  }, [children, columnLabels]);
+    return { cellLabels: [...indexed, ...unindexed], describable };
+  }, [cells]);
 
-  const rowIsFocusUnit =
-    // Table roles convey nothing on iOS or Android, so the label has to.
-    Platform.OS !== 'web' &&
-    table?.nativeFocusMode !== 'cell' &&
-    accessible !== false &&
-    describable;
+  const rowIsFocusUnit = collectsCells && describable;
 
   const label =
     ariaLabel ??
@@ -210,8 +187,12 @@ const DataTableRow = ({
       : undefined);
 
   const rowContext = React.useMemo(
-    () => ({ header: false, rowIsFocusUnit }),
-    [rowIsFocusUnit]
+    () => ({
+      header: false,
+      rowIsFocusUnit,
+      registerCell: collectsCells ? registerCell : undefined,
+    }),
+    [rowIsFocusUnit, collectsCells, registerCell]
   );
 
   const structuralProps = {

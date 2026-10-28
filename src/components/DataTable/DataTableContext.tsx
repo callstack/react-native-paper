@@ -30,10 +30,28 @@ export type DataTableContextValue = {
 export const DataTableContext =
   React.createContext<DataTableContextValue | null>(null);
 
+/**
+ * What a cell tells its row, so the row can announce every cell at once
+ * without reading its own children.
+ */
+export type RegisteredCell = {
+  /** Column position of the cell, when it is known. */
+  index?: number;
+  /** The cell's name as part of the row, column name included. */
+  label?: string;
+  /** Plain text and not interactive, so it is safe to hide behind the row. */
+  describable: boolean;
+};
+
 export type DataTableRowContextValue = {
   /** This is the header row, so its cells are column headers. */
   header: boolean;
   rowIsFocusUnit: boolean;
+  /**
+   * Set while the row can become one accessibility element. Returns the
+   * function that unregisters the cell.
+   */
+  registerCell?: (id: string, cell: RegisteredCell) => () => void;
 };
 
 export const DataTableRowContext =

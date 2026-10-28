@@ -143,6 +143,27 @@ describe('DataTable.Row', () => {
     ).toBeOnTheScreen();
   });
 
+  it('names a cell a consumer component renders, not just an inline one', async () => {
+    const CaloriesCell = ({ value }: { value: number }) => (
+      <DataTable.Cell numeric>{value}</DataTable.Cell>
+    );
+
+    await render(
+      <Table>
+        <DataTable.Row>
+          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          <CaloriesCell value={159} />
+        </DataTable.Row>
+      </Table>
+    );
+
+    expect(
+      screen.getByRole('row', {
+        name: 'Dessert, Frozen yogurt, Calories, 159, row 3 of 6',
+      })
+    ).toBeOnTheScreen();
+  });
+
   it('does not repeat the column name when a cell carries its own label', async () => {
     await render(
       <Table>

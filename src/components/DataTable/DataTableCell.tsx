@@ -11,7 +11,12 @@ import type { ColumnLayoutProps } from './columns';
 import { useAlignStyles, useColumn } from './DataTableColumnsContext';
 import { DataTableContext, DataTableRowContext } from './DataTableContext';
 import useReflowedNumberOfLines from './useReflowedNumberOfLines';
-import { composeCellLabel, getElementLabel } from './utils';
+import {
+  composeCellLabel,
+  getElementLabel,
+  getExplicitLabel,
+  getNodeText,
+} from './utils';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import webAriaProps from '../../utils/webAriaProps';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -142,6 +147,33 @@ const DataTableCell = ({
     resolved.index == null ? undefined : table?.columnLabels?.[resolved.index];
 
   const value = getElementLabel({ 'aria-label': ariaLabel, children });
+
+  const explicitLabel = getExplicitLabel({
+    'aria-label': ariaLabel,
+    accessibilityLabel: rest.accessibilityLabel,
+  });
+  const text = getNodeText(children);
+
+  const registerCell = row?.registerCell;
+  const cellId = React.useId();
+
+  const describable =
+    !interactive &&
+    !React.isValidElement(children) &&
+    (explicitLabel != null || text != null);
+
+  const labelInRow =
+    explicitLabel ?? composeCellLabel({ columnLabel, value: text });
+
+  React.useLayoutEffect(
+    () =>
+      registerCell?.(cellId, {
+        index: resolved.index,
+        label: labelInRow,
+        describable,
+      }),
+    [registerCell, cellId, resolved.index, labelInRow, describable]
+  );
 
   const isWeb = Platform.OS === 'web';
 
