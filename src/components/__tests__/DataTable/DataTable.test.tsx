@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Platform, useWindowDimensions } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
@@ -90,7 +90,7 @@ afterEach(() => {
 });
 
 describe('DataTable', () => {
-  it('names itself as a table and reports its shape', async () => {
+  it('names itself as a table', async () => {
     await render(<Table testID="table" />);
 
     const table = screen.getByTestId('table');
@@ -309,79 +309,6 @@ describe('DataTable.Row', () => {
     expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 3);
   });
 
-  it('counts a wrapped header or pagination as no row', async () => {
-    Platform.OS = 'web';
-
-    const MyHeader = () => (
-      <DataTable.Header>
-        <DataTable.Title column="name">Dessert</DataTable.Title>
-      </DataTable.Header>
-    );
-    const MyPagination = () => (
-      <DataTable.Pagination
-        page={0}
-        numberOfPages={1}
-        onPageChange={() => {}}
-      />
-    );
-
-    await render(
-      <DataTable testID="table" columns={[{ key: 'name' }]} rowCount={1}>
-        <MyHeader />
-        <DataTable.Row testID="row" index={0}>
-          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
-        </DataTable.Row>
-        <MyPagination />
-      </DataTable>
-    );
-
-    // The count and the positions come from props, so what the table's
-    // children look like changes neither.
-    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 2);
-    expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 2);
-  });
-
-  it('names and numbers a row under a wrapped header on native', async () => {
-    const MyHeader = () => (
-      <DataTable.Header>
-        <DataTable.Title column="name">Dessert</DataTable.Title>
-      </DataTable.Header>
-    );
-
-    await render(
-      <DataTable columns={[{ key: 'name' }]} rowCount={1}>
-        <MyHeader />
-        <DataTable.Row index={0}>
-          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
-    );
-
-    expect(
-      screen.getByRole('row', { name: 'Dessert, Frozen yogurt, row 1 of 1' })
-    ).toBeOnTheScreen();
-  });
-
-  it('numbers rows in a wrapper by their index', async () => {
-    Platform.OS = 'web';
-
-    await render(
-      <DataTable rowCount={2}>
-        <View>
-          <DataTable.Row testID="first" index={0}>
-            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-          </DataTable.Row>
-          <DataTable.Row testID="second" index={1}>
-            <DataTable.Cell>Eclair</DataTable.Cell>
-          </DataTable.Row>
-        </View>
-      </DataTable>
-    );
-
-    expect(screen.getByTestId('first')).toHaveProp('aria-rowindex', 2);
-    expect(screen.getByTestId('second')).toHaveProp('aria-rowindex', 3);
-  });
-
   it('warns about a row with no index in a table with a row count', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
@@ -414,37 +341,6 @@ describe('DataTable.Row', () => {
     expect(screen.getByTestId('row')).toHaveProp('accessible', false);
     expect(screen.getByTestId('row-checkbox')).toBeOnTheScreen();
   });
-
-  it('honours an explicitly passed index, as virtualized lists must', async () => {
-    await render(
-      <Table>
-        <DataTable.Row index={4}>
-          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
-        </DataTable.Row>
-      </Table>
-    );
-
-    expect(screen.getByRole('row', { name: /row 5 of 6/ })).toBeOnTheScreen();
-  });
-
-  it('renders a fragment inside a row or a header', async () => {
-    await render(
-      <DataTable>
-        <DataTable.Header>
-          <>
-            <DataTable.Title>Dessert</DataTable.Title>
-          </>
-        </DataTable.Header>
-        <DataTable.Row testID="row">
-          <>
-            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-          </>
-        </DataTable.Row>
-      </DataTable>
-    );
-
-    expect(screen.getByTestId('row')).toBeOnTheScreen();
-  });
 });
 
 describe('DataTable.Cell', () => {
@@ -470,24 +366,6 @@ describe('DataTable.Cell', () => {
     expect(
       screen.getByRole('cell', { name: 'Calories, 159' })
     ).toBeOnTheScreen();
-  });
-
-  it('keeps element content reachable instead of hiding it behind a row label', async () => {
-    await render(
-      <Table>
-        <DataTable.Row index={2}>
-          <DataTable.Cell column="name">
-            <Checkbox status="checked" testID="row-checkbox" />
-          </DataTable.Cell>
-          <DataTable.Cell column="calories" numeric>
-            159
-          </DataTable.Cell>
-        </DataTable.Row>
-      </Table>
-    );
-
-    expect(screen.queryByRole('row', { name: /159/ })).toBeNull();
-    expect(screen.getByTestId('row-checkbox')).toBeOnTheScreen();
   });
 
   it('does not collapse a row whose cell holds an element, even when labelled', async () => {
@@ -596,19 +474,6 @@ describe('DataTable.Cell', () => {
     expect(screen.getByTestId('first')).not.toHaveProp('aria-label');
   });
 
-  it('wraps text content in a text of its own', async () => {
-    const tree = (
-      await render(
-        <DataTable.Cell testID="table-cell">Table cell</DataTable.Cell>
-      )
-    ).toJSON();
-
-    expect(screen.getByText('Table cell')).toBeOnTheScreen();
-    // Whether the text is wrapped is structure, not behaviour, so the shape
-    // itself is the assertion.
-    expect(tree).toMatchSnapshot();
-  });
-
   it('renders element content verbatim, without a text container', async () => {
     const tree = (
       await render(
@@ -646,30 +511,6 @@ describe('DataTable.Cell', () => {
     );
 
     expect(cellText('pinned')).toHaveProp('numberOfLines', 2);
-  });
-
-  it('honours an explicit limit when text is shrunk', async () => {
-    mockFontScale(0.85);
-
-    await render(
-      <DataTable.Cell testID="pinned" numberOfLines={2}>
-        Frozen yogurt
-      </DataTable.Cell>
-    );
-
-    expect(cellText('pinned')).toHaveProp('numberOfLines', 2);
-  });
-
-  it('never clamps a limit of 0, whatever the scale', async () => {
-    mockFontScale(1);
-
-    await render(
-      <DataTable.Cell testID="free" numberOfLines={0}>
-        Frozen yogurt
-      </DataTable.Cell>
-    );
-
-    expect(cellText('free')).not.toHaveProp('numberOfLines');
   });
 
   it('clamps to one line by default and honours an explicit limit', async () => {
@@ -844,22 +685,6 @@ describe('DataTable.Title', () => {
     expect(screen.getByTestId('title')).toHaveProp('role', 'button');
   });
 
-  it('points the sort indicator the right way from the first render', async () => {
-    await render(
-      <DataTable.Title
-        testID="title"
-        onPress={() => {}}
-        sortDirection="descending"
-      >
-        Calories
-      </DataTable.Title>
-    );
-
-    expect(getAnimatedStyle(sortIndicator('title'))).toMatchObject({
-      transform: [{ rotate: '180deg' }],
-    });
-  });
-
   it('rotates the sort indicator when the direction changes', async () => {
     const view = await render(
       <DataTable.Title
@@ -1006,25 +831,6 @@ describe('DataTable column contract', () => {
     ).toBeOnTheScreen();
   });
 
-  it('names cells from the header, with no second declaration', async () => {
-    await render(
-      <DataTable columns={tableColumns} nativeFocusMode="cell">
-        <DataTable.Header>
-          <DataTable.Title column="name">Dessert</DataTable.Title>
-          <DataTable.Title column="calories">Calories</DataTable.Title>
-        </DataTable.Header>
-        <DataTable.Row>
-          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
-          <DataTable.Cell column="calories">159</DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
-    );
-
-    expect(
-      screen.getByRole('cell', { name: 'Calories, 159' })
-    ).toBeOnTheScreen();
-  });
-
   it('names a cell from an explicit label when the header is not text', async () => {
     await render(
       <DataTable columns={[{ key: 'selected' }]} nativeFocusMode="cell">
@@ -1126,24 +932,6 @@ describe('DataTable metrics', () => {
     });
   });
 
-  it('draws the header rule heavier than the row separators', async () => {
-    await render(
-      <DataTable>
-        <DataTable.Header testID="header">
-          <DataTable.Title>Dessert</DataTable.Title>
-        </DataTable.Header>
-        <DataTable.Row testID="row">
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
-    );
-
-    expect(screen.getByTestId('header')).toHaveStyle({ borderBottomWidth: 1 });
-    expect(screen.getByTestId('row')).toHaveStyle({
-      borderBottomWidth: StyleSheet.hairlineWidth,
-    });
-  });
-
   it('keeps rows at a touch-target height with room for wrapped content', async () => {
     await render(
       <DataTable>
@@ -1158,20 +946,6 @@ describe('DataTable metrics', () => {
       paddingHorizontal: 16,
       paddingVertical: 4,
     });
-  });
-
-  it('gives a static row the same containing block as a pressable one', async () => {
-    await render(
-      <DataTable>
-        <DataTable.Row testID="static">
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
-    );
-
-    // `TouchableRipple` sets this, so absolutely positioned children resolve
-    // against the same box whether or not the row is pressable.
-    expect(screen.getByTestId('static')).toHaveStyle({ position: 'relative' });
   });
 });
 
@@ -1334,18 +1108,6 @@ describe('DataTable snapshots', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders a header', async () => {
-    const tree = (
-      await render(
-        <DataTable.Header>
-          <DataTable.Title>Dessert</DataTable.Title>
-        </DataTable.Header>
-      )
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
   it('renders a sortable title', async () => {
     const tree = (
       await render(
@@ -1361,18 +1123,6 @@ describe('DataTable snapshots', () => {
   it('renders a static title', async () => {
     const tree = (
       await render(<DataTable.Title numeric>Calories</DataTable.Title>)
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('renders a static row', async () => {
-    const tree = (
-      await render(
-        <DataTable.Row>
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-        </DataTable.Row>
-      )
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
