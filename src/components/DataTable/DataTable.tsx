@@ -10,7 +10,6 @@ import type { NativeFocusMode } from './DataTableContext';
 import DataTableHeader, {
   DataTableHeader as _DataTableHeader,
 } from './DataTableHeader';
-import type { Props as DataTableHeaderProps } from './DataTableHeader';
 import DataTablePagination, {
   DataTablePagination as _DataTablePagination,
 } from './DataTablePagination';
@@ -24,7 +23,6 @@ import {
   isDataTableElement,
   isGroupingContainer,
   isNeverRow,
-  readColumnLabels,
 } from './utils';
 import type { FormatRowPosition } from './utils';
 import webAriaProps from '../../utils/webAriaProps';
@@ -36,7 +34,8 @@ export type Props = ViewProps & {
   children: React.ReactNode;
   /**
    * Shared column definitions. The header and every row read width and
-   * alignment from here.
+   * alignment from here. Every `DataTable.Title` and `DataTable.Cell` then
+   * needs `column`.
    */
   columns?: readonly DataTableColumn[];
   /**
@@ -135,16 +134,16 @@ export type Props = ViewProps & {
  *       firstRowIndex={from}
  *     >
  *       <DataTable.Header>
- *         <DataTable.Title>Dessert</DataTable.Title>
- *         <DataTable.Title>Calories</DataTable.Title>
- *         <DataTable.Title>Fat</DataTable.Title>
+ *         <DataTable.Title column="name">Dessert</DataTable.Title>
+ *         <DataTable.Title column="calories">Calories</DataTable.Title>
+ *         <DataTable.Title column="fat">Fat</DataTable.Title>
  *       </DataTable.Header>
  *
  *       {items.slice(from, to).map((item) => (
  *         <DataTable.Row key={item.key}>
- *           <DataTable.Cell>{item.name}</DataTable.Cell>
- *           <DataTable.Cell>{item.calories}</DataTable.Cell>
- *           <DataTable.Cell>{item.fat}</DataTable.Cell>
+ *           <DataTable.Cell column="name">{item.name}</DataTable.Cell>
+ *           <DataTable.Cell column="calories">{item.calories}</DataTable.Cell>
+ *           <DataTable.Cell column="fat">{item.fat}</DataTable.Cell>
  *         </DataTable.Row>
  *       ))}
  *
@@ -189,83 +188,99 @@ const DataTable = ({
 
   // Everything the rows need to know about the table has to be resolved while
   // rendering: an effect would leave the first render - the only one a server
-  // renders - with the wrong row indices and no column names.
-  const { rows, columnLabels, hasHeader, renderedRowCount } =
-    React.useMemo(() => {
-      let columnLabels: Array<string | undefined> = [];
-      let hasHeader = false;
-      let rendered = 0;
+  // renders - with the wrong row indices.
+  const { rows, hasHeader, renderedRowCount } = React.useMemo(() => {
+    let hasHeader = false;
+    let rendered = 0;
 
-      const number = (child: React.ReactNode) => (
-        <RowIndexContext.Provider value={firstRowIndex + rendered++}>
-          {child}
-        </RowIndexContext.Provider>
-      );
+    const number = (child: React.ReactNode) => (
+      <RowIndexContext.Provider value={firstRowIndex + rendered++}>
+        {child}
+      </RowIndexContext.Provider>
+    );
 
-      const walk = (nodes: React.ReactNode): React.ReactNode =>
-        React.Children.map(nodes, (child) => {
-          if (!React.isValidElement<{ children?: React.ReactNode }>(child)) {
-            return child;
-          }
+    const walk = (nodes: React.ReactNode): React.ReactNode =>
+      React.Children.map(nodes, (child) => {
+        if (!React.isValidElement<{ children?: React.ReactNode }>(child)) {
+          return child;
+        }
 
-          // Read before the guards below narrow `child` to `never`.
-          const {
-            type,
-            props: { children: nested },
-          } = child;
+        // Read before the guards below narrow `child` to `never`.
+        const {
+          type,
+          props: { children: nested },
+        } = child;
 
-          if (
-            isDataTableElement<DataTableHeaderProps>(child, 'DataTable.Header')
-          ) {
-            hasHeader = true;
-            columnLabels = readColumnLabels(nested);
-            return child;
-          }
+        if (isDataTableElement(child, 'DataTable.Header')) {
+          hasHeader = true;
+          return child;
+        }
 
-          if (isDataTableElement(child, 'DataTable.Pagination')) {
-            return child;
-          }
+        if (isDataTableElement(child, 'DataTable.Pagination')) {
+          return child;
+        }
 
-          if (isDataTableElement(child, 'DataTable.Row')) {
-            return number(child);
-          }
-
-          if (isNeverRow(child)) {
-            return child;
-          }
-
-          if (type === React.Fragment) {
-            return walk(nested);
-          }
-
-          if (isGroupingContainer(child) || containsTableStructure(nested)) {
-            void walk(nested);
-            return child;
-          }
-
-          // What is left renders out of sight - a row component of the
-          // consumer's own, most often - so it counts as one row. A row the
-          // table never sees at all, as a virtualized list renders, passes
-          // `index` itself.
+        if (isDataTableElement(child, 'DataTable.Row')) {
           return number(child);
-        });
+        }
 
-      const rows = walk(children);
+        if (isNeverRow(child)) {
+          return child;
+        }
 
-      return { rows, columnLabels, hasHeader, renderedRowCount: rendered };
-    }, [children, firstRowIndex]);
+        if (type === React.Fragment) {
+          return walk(nested);
+        }
+
+        if (isGroupingContainer(child) || containsTableStructure(nested)) {
+          void walk(nested);
+          return child;
+        }
+
+        // What is left renders out of sight - a row component of the
+        // consumer's own, most often - so it counts as one row. A row the
+        // table never sees at all, as a virtualized list renders, passes
+        // `index` itself.
+        return number(child);
+      });
+
+    const rows = walk(children);
+
+    return { rows, hasHeader, renderedRowCount: rendered };
+  }, [children, firstRowIndex]);
 
   const resolvedRowCount =
     rowCount ??
     (renderedRowCount > 0 ? firstRowIndex + renderedRowCount : undefined);
 
-  const columnCount =
-    columns?.length ?? (hasHeader ? columnLabels.length : undefined);
+  const [columnLabels, setColumnLabels] = React.useState<
+    ReadonlyArray<string | undefined>
+  >([]);
+
+  const registerColumnLabel = React.useCallback(
+    (index: number, label: string) => {
+      setColumnLabels((previous) => {
+        const next = [...previous];
+        next[index] = label;
+        return next;
+      });
+
+      return () =>
+        setColumnLabels((previous) => {
+          const next = [...previous];
+          next[index] = undefined;
+          return next;
+        });
+    },
+    []
+  );
 
   const tableContext = React.useMemo(
     () => ({
       rowCount: resolvedRowCount,
       columnLabels,
+      registerColumnLabel:
+        Platform.OS === 'web' ? undefined : registerColumnLabel,
       hasHeader,
       nativeFocusMode,
       formatRowPosition,
@@ -273,6 +288,7 @@ const DataTable = ({
     [
       resolvedRowCount,
       columnLabels,
+      registerColumnLabel,
       hasHeader,
       nativeFocusMode,
       formatRowPosition,
@@ -284,7 +300,9 @@ const DataTable = ({
       columns
         ? {
             columns,
-            byKey: new Map(columns.map((column) => [column.key, column])),
+            indexByKey: new Map(
+              columns.map((column, index) => [column.key, index])
+            ),
             layout,
           }
         : null,
@@ -307,7 +325,7 @@ const DataTable = ({
           resolvedRowCount == null
             ? undefined
             : resolvedRowCount + (hasHeader ? 1 : 0),
-        'aria-colcount': columnCount,
+        'aria-colcount': columns?.length,
       })}
       {...viewProps}
       style={[layout === 'fluid' && styles.fluid, style]}

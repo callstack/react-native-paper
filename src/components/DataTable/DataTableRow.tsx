@@ -7,7 +7,6 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import { withColumnIndices } from './DataTableColumnsContext';
 import {
   DataTableContext,
   DataTableRowContext,
@@ -225,7 +224,7 @@ const DataTableRow = ({
           }
         : null)}
     >
-      {withColumnIndices(children)}
+      {children}
     </View>
   );
 

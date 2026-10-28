@@ -91,22 +91,23 @@ const DataTableExample = () => {
         >
           <DataTable.Header>
             <DataTable.Title
+              column="name"
               sortDirection={sortAscending ? 'ascending' : 'descending'}
               onPress={() => setSortAscending(!sortAscending)}
             >
               Dessert
             </DataTable.Title>
-            <DataTable.Title numberOfLines={2}>
+            <DataTable.Title column="calories" numberOfLines={2}>
               Calories per piece
             </DataTable.Title>
-            <DataTable.Title>Fat (g)</DataTable.Title>
+            <DataTable.Title column="fat">Fat (g)</DataTable.Title>
           </DataTable.Header>
 
           {sortedItems.slice(from, to).map((item) => (
             <DataTable.Row key={item.key}>
-              <DataTable.Cell>{item.name}</DataTable.Cell>
-              <DataTable.Cell>{item.calories}</DataTable.Cell>
-              <DataTable.Cell>{item.fat}</DataTable.Cell>
+              <DataTable.Cell column="name">{item.name}</DataTable.Cell>
+              <DataTable.Cell column="calories">{item.calories}</DataTable.Cell>
+              <DataTable.Cell column="fat">{item.fat}</DataTable.Cell>
             </DataTable.Row>
           ))}
 

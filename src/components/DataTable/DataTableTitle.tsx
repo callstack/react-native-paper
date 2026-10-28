@@ -24,6 +24,7 @@ import Animated, {
 
 import type { ColumnLayoutProps } from './columns';
 import { useAlignStyles, useColumn } from './DataTableColumnsContext';
+import { DataTableContext } from './DataTableContext';
 import {
   LINE_HEIGHT,
   SORT_ICON_SIZE,
@@ -184,6 +185,18 @@ const DataTableTitle = ({
   }, [sortDirection, rotation, timingConfig]);
 
   const columnLabel = getElementLabel({ 'aria-label': ariaLabel, children });
+
+  const registerColumnLabel =
+    React.useContext(DataTableContext)?.registerColumnLabel;
+  const columnIndex = resolved.index;
+
+  React.useLayoutEffect(() => {
+    if (registerColumnLabel && columnIndex != null && columnLabel != null) {
+      return registerColumnLabel(columnIndex, columnLabel);
+    }
+
+    return undefined;
+  }, [registerColumnLabel, columnIndex, columnLabel]);
 
   const describable = !React.Children.toArray(children).some(
     React.isValidElement

@@ -12,37 +12,13 @@ import { useLocale } from '../../core/locale';
 
 export type ColumnsContextValue = {
   columns: readonly DataTableColumn[];
-  byKey: ReadonlyMap<string, DataTableColumn>;
+  indexByKey: ReadonlyMap<string, number>;
   layout: DataTableLayout;
 };
 
 export const ColumnsContext = React.createContext<ColumnsContextValue | null>(
   null
 );
-
-/**
- * The position of an element within its `DataTable.Header` or `DataTable.Row`.
- *
- * Published by the row rather than read from the child list, so it survives
- * consumer wrapper components - a `<NameCell />` that renders a
- * `DataTable.Cell` resolves its column just like an inline one.
- */
-export const ColumnIndexContext = React.createContext<number | null>(null);
-
-/**
- * Wraps each child in its positional index. Providers render no host node, so
- * this leaves layout and the rendered tree untouched.
- */
-export const withColumnIndices = (children: React.ReactNode) =>
-  React.Children.map(children, (child, index) =>
-    child == null ? (
-      child
-    ) : (
-      <ColumnIndexContext.Provider value={index}>
-        {child}
-      </ColumnIndexContext.Provider>
-    )
-  );
 
 export type ResolvedColumn = {
   style: ViewStyle;
@@ -54,6 +30,10 @@ export type ResolvedColumn = {
 
 /**
  * Resolves one cell's column: its shared definition and its layout style.
+ *
+ * The column comes from the `column` prop alone, never from the element's
+ * place among its siblings, so a title or cell inside a wrapper component or a
+ * fragment resolves just like an inline one.
  */
 export const useColumn = ({
   column,
@@ -65,21 +45,25 @@ export const useColumn = ({
   numeric,
 }: ColumnLayoutProps): ResolvedColumn => {
   const context = React.useContext(ColumnsContext);
-  const positional = React.useContext(ColumnIndexContext);
 
-  const index = typeof column === 'number' ? column : (positional ?? undefined);
-
-  const descriptor = React.useMemo(() => {
-    if (!context) {
-      return undefined;
+  if (process.env.NODE_ENV !== 'production' && context) {
+    if (column == null) {
+      console.warn(
+        'DataTable.Title and DataTable.Cell need `column` when the DataTable has `columns`, otherwise they get no column definition'
+      );
+    } else if (typeof column === 'string' && !context.indexByKey.has(column)) {
+      console.warn(`DataTable has no column with the key "${column}"`);
     }
+  }
 
-    if (typeof column === 'string') {
-      return context.byKey.get(column);
-    }
+  const index =
+    typeof column === 'number'
+      ? column
+      : column == null
+        ? undefined
+        : context?.indexByKey.get(column);
 
-    return index == null ? undefined : context.columns[index];
-  }, [context, column, index]);
+  const descriptor = index == null ? undefined : context?.columns[index];
 
   const resolvedNumeric = numeric ?? descriptor?.numeric ?? false;
   const resolvedAlign =

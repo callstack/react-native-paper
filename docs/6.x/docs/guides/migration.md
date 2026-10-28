@@ -451,6 +451,7 @@ Rows, cells and titles with no touch handler render a plain `View` instead of a 
 #### Screen reader announcements
 
 - new `rowCount`, `firstRowIndex` needed for correct row positions when paginating
+- on iOS and Android, a cell is announced with the title of its column, matched by `column`
 - `nativeFocusMode="cell"` gives one stop per cell instead of one per row
 - `accessible={false}` on a row opts that row out
 - `formatRowPosition` replaces the wording, or removes it with `null`
@@ -520,7 +521,7 @@ Rows, cells and titles with no touch handler render a plain `View` instead of a 
 #### Column definitions
 
 - `columns` on `DataTable` is new and optional
-- `column` on a title or cell selects one by key, and is only needed where position is unreliable
+- `column` on a title or cell selects a column by key, and is required when the table has `columns`
 
 ```tsx
 // Before (v5)
@@ -530,14 +531,19 @@ const styles = StyleSheet.create({ first: { flex: 2 } });
 <DataTable.Cell style={styles.first}>{item.name}</DataTable.Cell>
 
 // After (v6)
-const columns = [{ key: 'name', flex: 2 }, { key: 'calories', numeric: true }];
+const columns = [
+  { key: 'name', flex: 2 },
+  { key: 'calories', numeric: true },
+];
 
 <DataTable columns={columns}>
   <DataTable.Header>
-    <DataTable.Title>Dessert</DataTable.Title>
+    <DataTable.Title column="name">Dessert</DataTable.Title>
+    <DataTable.Title column="calories">Calories</DataTable.Title>
   </DataTable.Header>
   <DataTable.Row>
-    <DataTable.Cell>{item.name}</DataTable.Cell>
+    <DataTable.Cell column="name">{item.name}</DataTable.Cell>
+    <DataTable.Cell column="calories">{item.calories}</DataTable.Cell>
   </DataTable.Row>
 </DataTable>
 ```

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import { withColumnIndices } from './DataTableColumnsContext';
 import { DataTableRowContext } from './DataTableContext';
 import { HORIZONTAL_PADDING } from './tokens';
 import { useInternalTheme } from '../../core/theming';
@@ -69,7 +68,7 @@ const DataTableHeader = ({
         {...rest}
         style={[styles.header, { borderBottomColor }, style]}
       >
-        {withColumnIndices(children)}
+        {children}
       </View>
     </DataTableRowContext.Provider>
   );

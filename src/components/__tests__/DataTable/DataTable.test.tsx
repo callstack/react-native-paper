@@ -38,21 +38,36 @@ const columns: readonly DataTableColumn[] = [
   { key: 'calories', numeric: true },
 ];
 
+const tableColumns: readonly DataTableColumn[] = [
+  { key: 'name' },
+  { key: 'calories', numeric: true },
+];
+
 const Table = ({
   children,
   ...props
 }: Partial<React.ComponentProps<typeof DataTable>> = {}) => (
-  <DataTable aria-label="Nutrition" rowCount={6} firstRowIndex={2} {...props}>
+  <DataTable
+    aria-label="Nutrition"
+    columns={tableColumns}
+    rowCount={6}
+    firstRowIndex={2}
+    {...props}
+  >
     <DataTable.Header>
-      <DataTable.Title onPress={() => {}} sortDirection="ascending">
+      <DataTable.Title
+        column="name"
+        onPress={() => {}}
+        sortDirection="ascending"
+      >
         Dessert
       </DataTable.Title>
-      <DataTable.Title numeric>Calories</DataTable.Title>
+      <DataTable.Title column="calories">Calories</DataTable.Title>
     </DataTable.Header>
     {children ?? (
       <DataTable.Row testID="row">
-        <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-        <DataTable.Cell numeric>159</DataTable.Cell>
+        <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+        <DataTable.Cell column="calories">159</DataTable.Cell>
       </DataTable.Row>
     )}
   </DataTable>
@@ -145,13 +160,13 @@ describe('DataTable.Row', () => {
 
   it('names a cell a consumer component renders, not just an inline one', async () => {
     const CaloriesCell = ({ value }: { value: number }) => (
-      <DataTable.Cell numeric>{value}</DataTable.Cell>
+      <DataTable.Cell column="calories">{value}</DataTable.Cell>
     );
 
     await render(
       <Table>
         <DataTable.Row>
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
           <CaloriesCell value={159} />
         </DataTable.Row>
       </Table>
@@ -168,8 +183,10 @@ describe('DataTable.Row', () => {
     await render(
       <Table>
         <DataTable.Row>
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-          <DataTable.Cell aria-label="One fifty nine">159</DataTable.Cell>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+          <DataTable.Cell column="calories" aria-label="One fifty nine">
+            159
+          </DataTable.Cell>
         </DataTable.Row>
       </Table>
     );
@@ -194,8 +211,10 @@ describe('DataTable.Row', () => {
     await render(
       <Table>
         <DataTable.Row onPress={() => {}}>
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-          <DataTable.Cell numeric>159</DataTable.Cell>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+          <DataTable.Cell column="calories" numeric>
+            159
+          </DataTable.Cell>
         </DataTable.Row>
       </Table>
     );
@@ -207,12 +226,12 @@ describe('DataTable.Row', () => {
 
   it('leaves the position out when the total is unknown', async () => {
     await render(
-      <DataTable>
+      <DataTable columns={[{ key: 'name' }]}>
         <DataTable.Header>
-          <DataTable.Title>Dessert</DataTable.Title>
+          <DataTable.Title column="name">Dessert</DataTable.Title>
         </DataTable.Header>
         <DataTable.Row>
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
         </DataTable.Row>
       </DataTable>
     );
@@ -235,8 +254,8 @@ describe('DataTable.Row', () => {
   it('numbers a row a consumer component renders, not just an inline one', async () => {
     const NameRow = ({ name }: { name: string }) => (
       <DataTable.Row testID="row">
-        <DataTable.Cell>{name}</DataTable.Cell>
-        <DataTable.Cell numeric>159</DataTable.Cell>
+        <DataTable.Cell column="name">{name}</DataTable.Cell>
+        <DataTable.Cell column="calories">159</DataTable.Cell>
       </DataTable.Row>
     );
 
@@ -283,7 +302,9 @@ describe('DataTable.Row', () => {
   it('leaves the children of a row component as it was given them', async () => {
     const NameRow = ({ children }: { children: React.ReactNode }) => (
       <DataTable.Row testID="row">
-        <DataTable.Cell>{React.Children.only(children)}</DataTable.Cell>
+        <DataTable.Cell column="name">
+          {React.Children.only(children)}
+        </DataTable.Cell>
       </DataTable.Row>
     );
 
@@ -304,7 +325,7 @@ describe('DataTable.Row', () => {
     await render(
       <Table>
         <DataTable.Row testID="row" onPress={() => {}}>
-          <DataTable.Cell>
+          <DataTable.Cell column="name">
             <Checkbox status="checked" testID="row-checkbox" />
           </DataTable.Cell>
         </DataTable.Row>
@@ -321,7 +342,7 @@ describe('DataTable.Row', () => {
     await render(
       <Table>
         <DataTable.Row index={4}>
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
         </DataTable.Row>
       </Table>
     );
@@ -431,14 +452,14 @@ describe('DataTable.Row', () => {
     );
 
     await render(
-      <DataTable testID="table">
+      <DataTable testID="table" columns={[{ key: 'name' }]}>
         <Wrap>
           <DataTable.Header>
-            <DataTable.Title>Dessert</DataTable.Title>
+            <DataTable.Title column="name">Dessert</DataTable.Title>
           </DataTable.Header>
         </Wrap>
         <DataTable.Row testID="row">
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
         </DataTable.Row>
         <Wrap>
           <DataTable.Pagination
@@ -505,8 +526,12 @@ describe('DataTable.Cell', () => {
     await render(
       <Table>
         <DataTable.Row>
-          <DataTable.Cell onPress={() => {}}>Frozen yogurt</DataTable.Cell>
-          <DataTable.Cell numeric>159</DataTable.Cell>
+          <DataTable.Cell column="name" onPress={() => {}}>
+            Frozen yogurt
+          </DataTable.Cell>
+          <DataTable.Cell column="calories" numeric>
+            159
+          </DataTable.Cell>
         </DataTable.Row>
       </Table>
     );
@@ -525,10 +550,12 @@ describe('DataTable.Cell', () => {
     await render(
       <Table>
         <DataTable.Row>
-          <DataTable.Cell>
+          <DataTable.Cell column="name">
             <Checkbox status="checked" testID="row-checkbox" />
           </DataTable.Cell>
-          <DataTable.Cell numeric>159</DataTable.Cell>
+          <DataTable.Cell column="calories" numeric>
+            159
+          </DataTable.Cell>
         </DataTable.Row>
       </Table>
     );
@@ -541,8 +568,8 @@ describe('DataTable.Cell', () => {
     await render(
       <Table>
         <DataTable.Row>
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-          <DataTable.Cell aria-label="Selected">
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+          <DataTable.Cell column="calories" aria-label="Selected">
             <Checkbox
               status="unchecked"
               onPress={() => {}}
@@ -563,7 +590,7 @@ describe('DataTable.Cell', () => {
     await render(
       <Table nativeFocusMode="cell">
         <DataTable.Row>
-          <DataTable.Cell testID="cell" aria-label="Selected">
+          <DataTable.Cell column="name" testID="cell" aria-label="Selected">
             <Checkbox status="checked" testID="row-checkbox" />
           </DataTable.Cell>
         </DataTable.Row>
@@ -579,10 +606,12 @@ describe('DataTable.Cell', () => {
     await render(
       <Table>
         <DataTable.Row>
-          <DataTable.Cell testID="cell">
+          <DataTable.Cell column="name" testID="cell">
             <Checkbox status="checked" testID="row-checkbox" />
           </DataTable.Cell>
-          <DataTable.Cell numeric>159</DataTable.Cell>
+          <DataTable.Cell column="calories" numeric>
+            159
+          </DataTable.Cell>
         </DataTable.Row>
       </Table>
     );
@@ -597,7 +626,9 @@ describe('DataTable.Cell', () => {
     await render(
       <Table nativeFocusMode="cell">
         <DataTable.Row>
-          <DataTable.Cell aria-label="Ninety nine">99</DataTable.Cell>
+          <DataTable.Cell column="name" aria-label="Ninety nine">
+            99
+          </DataTable.Cell>
         </DataTable.Row>
       </Table>
     );
@@ -621,8 +652,10 @@ describe('DataTable.Cell', () => {
     await render(
       <Table>
         <DataTable.Row>
-          <DataTable.Cell testID="first">Frozen yogurt</DataTable.Cell>
-          <DataTable.Cell testID="second" numeric>
+          <DataTable.Cell column="name" testID="first">
+            Frozen yogurt
+          </DataTable.Cell>
+          <DataTable.Cell column="calories" testID="second" numeric>
             159
           </DataTable.Cell>
         </DataTable.Row>
@@ -802,12 +835,13 @@ describe('DataTable.Title', () => {
       <DataTable.Header>
         <DataTable.Title
           testID="sortable"
+          column={0}
           onPress={() => {}}
           sortDirection="ascending"
         >
           Dessert
         </DataTable.Title>
-        <DataTable.Title testID="plain" numeric>
+        <DataTable.Title testID="plain" column={1} numeric>
           Calories
         </DataTable.Title>
       </DataTable.Header>
@@ -940,31 +974,80 @@ describe('DataTable column contract', () => {
     expect(screen.getByTestId('cell', hidden)).toHaveStyle({ flex: 5 });
   });
 
-  it('resolves columns by position when no key is given', async () => {
+  it('resolves cells by key, not by their place among siblings', async () => {
+    Platform.OS = 'web';
+
     await render(
-      <DataTable columns={columns}>
+      <DataTable columns={tableColumns}>
         <DataTable.Row>
-          <DataTable.Cell testID="first">Frozen yogurt</DataTable.Cell>
-          <DataTable.Cell testID="second">159</DataTable.Cell>
+          <>
+            <DataTable.Cell testID="first" column="name">
+              Frozen yogurt
+            </DataTable.Cell>
+            <DataTable.Cell testID="second" column="calories">
+              159
+            </DataTable.Cell>
+          </>
         </DataTable.Row>
       </DataTable>
     );
 
-    expect(screen.getByTestId('first', hidden)).toHaveStyle({ flex: 2 });
-    // The second column declares no flex, so it falls back to 1.
-    expect(screen.getByTestId('second', hidden)).toHaveStyle({ flex: 1 });
+    // A fragment is one child to its row, so a positional guess would put
+    // both cells in the first column.
+    expect(screen.getByTestId('first')).toHaveProp('aria-colindex', 1);
+    expect(screen.getByTestId('second')).toHaveProp('aria-colindex', 2);
+    expect(cellText('second')).toHaveStyle({ textAlign: 'right' });
+  });
+
+  it('warns about a cell that names no column of the table', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(
+      <DataTable columns={columns}>
+        <DataTable.Row>
+          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          <DataTable.Cell column="fat">6</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+    );
+
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('`column`'));
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('"fat"'));
+
+    warn.mockRestore();
+  });
+
+  it('names cells from a title a consumer component renders', async () => {
+    const SortTitle = (props: React.ComponentProps<typeof DataTable.Title>) => (
+      <DataTable.Title onPress={() => {}} {...props} />
+    );
+
+    await render(
+      <DataTable columns={tableColumns} nativeFocusMode="cell">
+        <DataTable.Header>
+          <SortTitle column="name">Dessert</SortTitle>
+        </DataTable.Header>
+        <DataTable.Row>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+    );
+
+    expect(
+      screen.getByRole('cell', { name: 'Dessert, Frozen yogurt' })
+    ).toBeOnTheScreen();
   });
 
   it('names cells from the header, with no second declaration', async () => {
     await render(
-      <DataTable columns={columns} nativeFocusMode="cell">
+      <DataTable columns={tableColumns} nativeFocusMode="cell">
         <DataTable.Header>
-          <DataTable.Title>Dessert</DataTable.Title>
-          <DataTable.Title>Calories</DataTable.Title>
+          <DataTable.Title column="name">Dessert</DataTable.Title>
+          <DataTable.Title column="calories">Calories</DataTable.Title>
         </DataTable.Header>
         <DataTable.Row>
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-          <DataTable.Cell>159</DataTable.Cell>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+          <DataTable.Cell column="calories">159</DataTable.Cell>
         </DataTable.Row>
       </DataTable>
     );
@@ -976,14 +1059,14 @@ describe('DataTable column contract', () => {
 
   it('names a cell from an explicit label when the header is not text', async () => {
     await render(
-      <DataTable nativeFocusMode="cell">
+      <DataTable columns={[{ key: 'selected' }]} nativeFocusMode="cell">
         <DataTable.Header>
-          <DataTable.Title aria-label="Selected">
+          <DataTable.Title column="selected" aria-label="Selected">
             <Checkbox status="checked" />
           </DataTable.Title>
         </DataTable.Header>
         <DataTable.Row>
-          <DataTable.Cell>Yes</DataTable.Cell>
+          <DataTable.Cell column="selected">Yes</DataTable.Cell>
         </DataTable.Row>
       </DataTable>
     );
@@ -1024,7 +1107,7 @@ describe('DataTable column contract', () => {
           layout="fixed"
         >
           <DataTable.Row>
-            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+            <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
           </DataTable.Row>
         </DataTable>
       </>
@@ -1265,12 +1348,17 @@ describe('DataTable snapshots', () => {
   it('renders a table', async () => {
     const tree = (
       await render(
-        <DataTable aria-label="Nutrition" rowCount={6} firstRowIndex={2}>
+        <DataTable
+          aria-label="Nutrition"
+          columns={[{ key: 'name' }]}
+          rowCount={6}
+          firstRowIndex={2}
+        >
           <DataTable.Header>
-            <DataTable.Title>Dessert</DataTable.Title>
+            <DataTable.Title column="name">Dessert</DataTable.Title>
           </DataTable.Header>
           <DataTable.Row>
-            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+            <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
           </DataTable.Row>
         </DataTable>
       )

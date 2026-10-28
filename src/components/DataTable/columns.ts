@@ -56,6 +56,7 @@ export type DataTableLayout = 'fluid' | 'fixed';
 export type ColumnLayoutProps = {
   /**
    * Which column this belongs to - a `DataTableColumn` key, or a 0-based index.
+   * Required when the `DataTable` has `columns`.
    */
   column?: string | number;
   flex?: number;
