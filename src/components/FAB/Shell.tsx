@@ -17,12 +17,7 @@ import type { SharedValue } from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
 
 import Content from './Content';
-import {
-  Tokens,
-  FOCUS_RING_INSET,
-  FOCUS_RING_THICKNESS,
-  webNoOutline,
-} from './tokens';
+import { Tokens } from './tokens';
 import type { Size, Variant } from './tokens';
 import { useFocusRing } from './useFocusRing';
 import { getDimensions, resolveColors } from './utils';
@@ -31,6 +26,11 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
+import {
+  FOCUS_RING_INSET,
+  FOCUS_RING_THICKNESS,
+  webNoOutline,
+} from '../../utils/focusRing';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';

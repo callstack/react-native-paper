@@ -95,6 +95,7 @@ exports[`activity indicator snapshot test 1`] = `
     style={
       [
         {
+          "margin": 6,
           "overflow": "visible",
         },
         {
@@ -227,7 +228,6 @@ exports[`activity indicator snapshot test 1`] = `
     </View>
     <View
       collapsable={false}
-      pointerEvents="none"
       style={
         [
           {
@@ -240,11 +240,13 @@ exports[`activity indicator snapshot test 1`] = `
             "top": -5,
           },
           {
+            "opacity": 0,
+          },
+          {
             "borderColor": "rgba(98, 91, 113, 1)",
           },
           {
             "borderRadius": 25,
-            "opacity": 0,
           },
         ]
       }
@@ -576,6 +578,7 @@ exports[`renders searchbar in "view" mode 1`] = `
     style={
       [
         {
+          "margin": 6,
           "overflow": "visible",
         },
         {
@@ -708,7 +711,6 @@ exports[`renders searchbar in "view" mode 1`] = `
     </View>
     <View
       collapsable={false}
-      pointerEvents="none"
       style={
         [
           {
@@ -721,11 +723,13 @@ exports[`renders searchbar in "view" mode 1`] = `
             "top": -5,
           },
           {
+            "opacity": 0,
+          },
+          {
             "borderColor": "rgba(98, 91, 113, 1)",
           },
           {
             "borderRadius": 25,
-            "opacity": 0,
           },
         ]
       }
@@ -784,6 +788,7 @@ exports[`renders searchbar in "view" mode 1`] = `
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -916,7 +921,6 @@ exports[`renders searchbar in "view" mode 1`] = `
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -929,11 +933,13 @@ exports[`renders searchbar in "view" mode 1`] = `
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -1063,6 +1069,7 @@ exports[`renders with placeholder 1`] = `
     style={
       [
         {
+          "margin": 6,
           "overflow": "visible",
         },
         {
@@ -1195,7 +1202,6 @@ exports[`renders with placeholder 1`] = `
     </View>
     <View
       collapsable={false}
-      pointerEvents="none"
       style={
         [
           {
@@ -1208,11 +1214,13 @@ exports[`renders with placeholder 1`] = `
             "top": -5,
           },
           {
+            "opacity": 0,
+          },
+          {
             "borderColor": "rgba(98, 91, 113, 1)",
           },
           {
             "borderRadius": 25,
-            "opacity": 0,
           },
         ]
       }
@@ -1271,6 +1279,7 @@ exports[`renders with placeholder 1`] = `
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -1403,7 +1412,6 @@ exports[`renders with placeholder 1`] = `
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -1416,11 +1424,13 @@ exports[`renders with placeholder 1`] = `
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -1525,6 +1535,7 @@ exports[`renders with text 1`] = `
     style={
       [
         {
+          "margin": 6,
           "overflow": "visible",
         },
         {
@@ -1657,7 +1668,6 @@ exports[`renders with text 1`] = `
     </View>
     <View
       collapsable={false}
-      pointerEvents="none"
       style={
         [
           {
@@ -1670,11 +1680,13 @@ exports[`renders with text 1`] = `
             "top": -5,
           },
           {
+            "opacity": 0,
+          },
+          {
             "borderColor": "rgba(98, 91, 113, 1)",
           },
           {
             "borderRadius": 25,
-            "opacity": 0,
           },
         ]
       }
@@ -1729,6 +1741,7 @@ exports[`renders with text 1`] = `
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -1861,7 +1874,6 @@ exports[`renders with text 1`] = `
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -1874,11 +1886,13 @@ exports[`renders with text 1`] = `
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }

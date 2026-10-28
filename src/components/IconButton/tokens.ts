@@ -1,6 +1,3 @@
-import type { ViewStyle } from 'react-native';
-
-import { tokens } from '../../theme/tokens';
 import type { ColorRole } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
 
@@ -150,14 +147,6 @@ const disabled = {
 
 /** Extra-small and small icon buttons must meet a 48dp touch target. */
 const minTouchTarget = 48;
-
-const { thickness, outerOffset } = tokens.md.sys.state.focusIndicator;
-export const FOCUS_RING_THICKNESS = thickness;
-export const FOCUS_RING_OUTER_OFFSET = outerOffset;
-export const FOCUS_RING_INSET = outerOffset + thickness;
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-export const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export const IconButtonTokens = {
   sizes,

@@ -109,7 +109,7 @@ const IconButtonExample = () => {
             shape={shape}
             selected={selected}
             onPress={() => setSelected((value) => !value)}
-            accessibilityLabel="Playground icon button"
+            aria-label="Playground icon button"
           />
           <IconButton
             icon="camera"
@@ -119,6 +119,7 @@ const IconButtonExample = () => {
             shape={shape}
             disabled
             onPress={() => {}}
+            aria-label="Disabled icon button"
           />
           <IconButton
             icon="camera"
@@ -128,6 +129,7 @@ const IconButtonExample = () => {
             shape={shape}
             loading
             onPress={() => {}}
+            aria-label="Loading icon button"
           />
         </View>
         <Text variant="bodySmall" style={{ color: colors.onSurfaceVariant }}>
@@ -151,7 +153,7 @@ const IconButtonExample = () => {
               icon="star-outline"
               mode={colorMode}
               selected={false}
-              onPress={() => toggle(`${colorMode}-off`)}
+              onPress={() => {}}
             />
             <IconButton
               icon="star"
@@ -181,7 +183,7 @@ const IconButtonExample = () => {
               mode="filled"
               size={item}
               onPress={() => {}}
-              accessibilityLabel={`${item} icon button`}
+              aria-label={`${item} icon button`}
             />
           ))}
         </View>
@@ -196,7 +198,7 @@ const IconButtonExample = () => {
               mode="tonal"
               width={item}
               onPress={() => {}}
-              accessibilityLabel={`${item} width icon button`}
+              aria-label={`${item} width icon button`}
             />
           ))}
         </View>
@@ -286,6 +288,7 @@ const styles = StyleSheet.create({
   colorRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 8,
   },
   colorLabel: {
     width: 88,

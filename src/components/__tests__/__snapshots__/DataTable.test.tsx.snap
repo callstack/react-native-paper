@@ -686,6 +686,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -818,7 +819,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -831,11 +831,13 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -846,6 +848,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -978,7 +981,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -991,11 +993,13 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -1064,6 +1068,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -1196,7 +1201,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -1209,11 +1213,13 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -1224,6 +1230,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -1356,7 +1363,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -1369,11 +1375,13 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -1384,6 +1392,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -1516,7 +1525,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -1529,11 +1537,13 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -1544,6 +1554,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -1676,7 +1687,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -1689,11 +1699,13 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -1762,6 +1774,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -1894,7 +1907,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -1907,11 +1919,13 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -1922,6 +1936,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -2054,7 +2069,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -2067,11 +2081,13 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -2438,6 +2454,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -2570,7 +2587,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -2583,11 +2599,13 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -2598,6 +2616,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -2730,7 +2749,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -2743,11 +2761,13 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -2758,6 +2778,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -2890,7 +2911,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -2903,11 +2923,13 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }
@@ -2918,6 +2940,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       style={
         [
           {
+            "margin": 6,
             "overflow": "visible",
           },
           {
@@ -3050,7 +3073,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       </View>
       <View
         collapsable={false}
-        pointerEvents="none"
         style={
           [
             {
@@ -3063,11 +3085,13 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "top": -5,
             },
             {
+              "opacity": 0,
+            },
+            {
               "borderColor": "rgba(98, 91, 113, 1)",
             },
             {
               "borderRadius": 25,
-              "opacity": 0,
             },
           ]
         }

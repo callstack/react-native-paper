@@ -149,6 +149,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         style={
           [
             {
+              "margin": 6,
               "overflow": "visible",
             },
             {
@@ -292,7 +293,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         </View>
         <View
           collapsable={false}
-          pointerEvents="none"
           style={
             [
               {
@@ -305,11 +305,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                 "top": -5,
               },
               {
+                "opacity": 0,
+              },
+              {
                 "borderColor": "rgba(98, 91, 113, 1)",
               },
               {
                 "borderRadius": 25,
-                "opacity": 0,
               },
             ]
           }
@@ -380,6 +382,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         style={
           [
             {
+              "margin": 6,
               "overflow": "visible",
             },
             {
@@ -523,7 +526,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         </View>
         <View
           collapsable={false}
-          pointerEvents="none"
           style={
             [
               {
@@ -536,11 +538,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
                 "top": -5,
               },
               {
+                "opacity": 0,
+              },
+              {
                 "borderColor": "rgba(98, 91, 113, 1)",
               },
               {
                 "borderRadius": 25,
-                "opacity": 0,
               },
             ]
           }
@@ -707,6 +711,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         style={
           [
             {
+              "margin": 6,
               "overflow": "visible",
             },
             {
@@ -850,7 +855,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         </View>
         <View
           collapsable={false}
-          pointerEvents="none"
           style={
             [
               {
@@ -863,11 +867,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                 "top": -5,
               },
               {
+                "opacity": 0,
+              },
+              {
                 "borderColor": "rgba(98, 91, 113, 1)",
               },
               {
                 "borderRadius": 25,
-                "opacity": 0,
               },
             ]
           }
@@ -938,6 +944,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         style={
           [
             {
+              "margin": 6,
               "overflow": "visible",
             },
             {
@@ -1081,7 +1088,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         </View>
         <View
           collapsable={false}
-          pointerEvents="none"
           style={
             [
               {
@@ -1094,11 +1100,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                 "top": -5,
               },
               {
+                "opacity": 0,
+              },
+              {
                 "borderColor": "rgba(98, 91, 113, 1)",
               },
               {
                 "borderRadius": 25,
-                "opacity": 0,
               },
             ]
           }
@@ -1443,6 +1451,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         style={
           [
             {
+              "margin": 6,
               "overflow": "visible",
             },
             {
@@ -1586,7 +1595,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         </View>
         <View
           collapsable={false}
-          pointerEvents="none"
           style={
             [
               {
@@ -1599,11 +1607,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                 "top": -5,
               },
               {
+                "opacity": 0,
+              },
+              {
                 "borderColor": "rgba(98, 91, 113, 1)",
               },
               {
                 "borderRadius": 25,
-                "opacity": 0,
               },
             ]
           }
@@ -1674,6 +1684,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         style={
           [
             {
+              "margin": 6,
               "overflow": "visible",
             },
             {
@@ -1817,7 +1828,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         </View>
         <View
           collapsable={false}
-          pointerEvents="none"
           style={
             [
               {
@@ -1830,11 +1840,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
                 "top": -5,
               },
               {
+                "opacity": 0,
+              },
+              {
                 "borderColor": "rgba(98, 91, 113, 1)",
               },
               {
                 "borderRadius": 25,
-                "opacity": 0,
               },
             ]
           }
@@ -1981,6 +1993,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         style={
           [
             {
+              "margin": 6,
               "overflow": "visible",
             },
             {
@@ -2124,7 +2137,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         </View>
         <View
           collapsable={false}
-          pointerEvents="none"
           style={
             [
               {
@@ -2137,11 +2149,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                 "top": -5,
               },
               {
+                "opacity": 0,
+              },
+              {
                 "borderColor": "rgba(98, 91, 113, 1)",
               },
               {
                 "borderRadius": 25,
-                "opacity": 0,
               },
             ]
           }
@@ -2212,6 +2226,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         style={
           [
             {
+              "margin": 6,
               "overflow": "visible",
             },
             {
@@ -2355,7 +2370,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         </View>
         <View
           collapsable={false}
-          pointerEvents="none"
           style={
             [
               {
@@ -2368,11 +2382,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                 "top": -5,
               },
               {
+                "opacity": 0,
+              },
+              {
                 "borderColor": "rgba(98, 91, 113, 1)",
               },
               {
                 "borderRadius": 25,
-                "opacity": 0,
               },
             ]
           }

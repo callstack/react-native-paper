@@ -62,6 +62,7 @@ The following component style props no longer support overriding their backgroun
 - `Card`
 - `Chip`
 - `Dialog`
+- `IconButton`
 - `Menu`: `contentStyle`
 - `Searchbar`
 - `Snackbar`
@@ -545,6 +546,133 @@ An accordion with a `left` element now indents only its `List.Item` children. An
 ```
 
 `theme` set on `List.Accordion` no longer reaches its children either. Pass it to the child that needs the override.
+
+### IconButton
+
+`IconButton` now follows the Material 3 Expressive spec. The color modes, size API, and toggle `selected` behavior have changed. Passing the old numeric `size` (for example `size={24}`) crashes at runtime, because `size` is now a named token and `IconButtonTokens.sizes[24]` is `undefined`.
+
+#### Mode names
+
+- **`contained`** → **`filled`**
+- **`contained-tonal`** → **`tonal`**
+- Unspecified mode is now **`standard`** (no container fill), which matches the previous default.
+
+```tsx
+// Before (v5)
+<IconButton icon="camera" mode="contained" onPress={onPress} />
+<IconButton icon="camera" mode="contained-tonal" onPress={onPress} />
+
+// After (v6)
+<IconButton icon="camera" mode="filled" onPress={onPress} />
+<IconButton icon="camera" mode="tonal" onPress={onPress} />
+```
+
+#### Size
+
+`size` is a named scale: `'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge'`. It defaults to `'small'`, which still uses a 24dp icon.
+
+To set the glyph size in dp without changing the container scale, use `iconSize`.
+
+```tsx
+// Before (v5)
+<IconButton icon="camera" size={24} onPress={onPress} />
+<IconButton icon="camera" size={32} onPress={onPress} />
+
+// After (v6)
+<IconButton icon="camera" onPress={onPress} />
+<IconButton icon="camera" iconSize={32} onPress={onPress} />
+```
+
+```tsx
+// After (v6) — named container sizes
+<IconButton icon="plus" size="extraSmall" onPress={onPress} />
+<IconButton icon="plus" size="small" onPress={onPress} />
+<IconButton icon="plus" size="medium" onPress={onPress} />
+<IconButton icon="plus" size="large" onPress={onPress} />
+<IconButton icon="plus" size="extraLarge" onPress={onPress} />
+```
+
+#### Shape
+
+`style.borderRadius` no longer overrides the container corner. Use `shape`: `'round'` (default) or `'square'`. Toggle-ON inverts the resting shape; press uses a shared corner for both. Arbitrary radii from `style` are not supported.
+
+```tsx
+// Before (v5)
+<IconButton icon="camera" style={{ borderRadius: 0 }} onPress={onPress} />
+
+// After (v6)
+<IconButton icon="camera" shape="square" onPress={onPress} />
+```
+
+#### `Appbar.Action` and `Appbar.BackAction`
+
+`size` is no longer a numeric prop on `Appbar.Action` or `Appbar.BackAction`. They inherit `IconButton`'s named `size` (default `'small'`). Drop `size={24}`. For a custom glyph size, pass `iconSize`.
+
+```tsx
+// Before (v5)
+<Appbar.Action icon="magnify" size={24} onPress={onPress} />
+<Appbar.BackAction size={24} onPress={onPress} />
+
+// After (v6)
+<Appbar.Action icon="magnify" onPress={onPress} />
+<Appbar.BackAction onPress={onPress} />
+```
+
+#### `selected={false}` uses toggle-off colors
+
+`selected` is tri-state. Omit it for the default (non-toggle) colors. Pass `true` / `false` only for a toggle.
+
+For `filled`, the default and toggle-on containers use `primary`. Toggle-off (`selected={false}`) uses `surfaceContainer` instead of `primary`.
+
+```tsx
+// Before (v5) — selected={false} still used the default (non-toggle) colors
+<IconButton icon="star-outline" mode="contained" selected={false} onPress={onPress} />
+
+// After (v6) — omit selected unless the button is a toggle
+<IconButton icon="star-outline" mode="filled" onPress={onPress} />
+
+// After (v6) — explicit toggle off / on
+<IconButton
+  icon={isStarred ? 'star' : 'star-outline'}
+  mode="filled"
+  selected={isStarred}
+  onPress={toggleStarred}
+/>
+```
+
+#### `Card.Title` `right` props
+
+`Card.Title` still calls `right({ size: 24 })`. Do not spread those props onto `IconButton`: `size` is no longer a number. Ignore the callback argument, or pass it as `iconSize`.
+
+```tsx
+// Before (v5)
+<Card.Title
+  title="Card title"
+  right={(props) => (
+    <IconButton {...props} icon="dots-vertical" onPress={onPress} />
+  )}
+/>
+
+// After (v6)
+<Card.Title
+  title="Card title"
+  right={() => <IconButton icon="dots-vertical" onPress={onPress} />}
+/>
+```
+
+```tsx
+// After (v6) — keep the 24dp glyph from Card.Title
+<Card.Title
+  title="Card title"
+  right={(props) => (
+    <IconButton
+      icon="dots-vertical"
+      iconSize={props.size}
+      onPress={onPress}
+    />
+  )}
+/>
+```
 
 ### ToggleButton
 

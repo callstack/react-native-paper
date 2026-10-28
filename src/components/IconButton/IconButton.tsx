@@ -9,18 +9,22 @@ import type {
 
 import Animated, {
   type AnimatedStyle,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
+  cubicBezier,
+  type CSSStyle,
 } from 'react-native-reanimated';
 
-import { FOCUS_RING_INSET, FOCUS_RING_THICKNESS, webNoOutline } from './tokens';
 import type { Mode, Shape, Size, Width } from './tokens';
 import { getDimensions, getHitSlop, getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
+import {
+  FOCUS_RING_INSET,
+  FOCUS_RING_THICKNESS,
+  webNoOutline,
+} from '../../utils/focusRing';
+import hasTouchHandler from '../../utils/hasTouchHandler';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -115,26 +119,6 @@ export type Props = Omit<
   loading?: boolean;
 };
 
-const useFocusRing = () => {
-  const focusedSV = useSharedValue(false);
-
-  const onFocus = React.useCallback(() => {
-    if (
-      Platform.OS === 'web' &&
-      !document.activeElement?.matches(':focus-visible')
-    ) {
-      return;
-    }
-    focusedSV.value = true;
-  }, [focusedSV]);
-
-  const onBlur = React.useCallback(() => {
-    focusedSV.value = false;
-  }, [focusedSV]);
-
-  return { focusedSV, onFocus, onBlur };
-};
-
 /**
  * An icon button is a button which displays only an icon without a label.
  *
@@ -185,6 +169,8 @@ const IconButton = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
+  const [pressed, setPressed] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
 
@@ -214,92 +200,55 @@ const IconButton = ({
     outlineWidth: dimensions.outlineWidth,
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const flattenedStyle = StyleSheet.flatten(style as StyleProp<ViewStyle>);
-  const customRadius = flattenedStyle?.borderRadius;
-  const hasCustomRadius = typeof customRadius === 'number';
-  const restingRadius = hasCustomRadius
-    ? customRadius
+  const borderRadius = pressed
+    ? dimensions.pressedRadius
     : dimensions.restingRadius;
-  const pressedRadius = hasCustomRadius
-    ? customRadius
-    : dimensions.pressedRadius;
-
-  const radius = useSharedValue(restingRadius);
-  const isFirstRadiusSync = React.useRef(true);
-
-  const springTo = React.useCallback(
-    (target: number) => {
-      if (reduceMotion) {
-        radius.value = target;
-        return;
-      }
-      radius.value = withSpring(
-        target,
-        toRawSpring(theme.motion.spring.fast.spatial)
-      );
-    },
-    [radius, reduceMotion, theme]
-  );
-
-  React.useEffect(() => {
-    if (isFirstRadiusSync.current) {
-      isFirstRadiusSync.current = false;
-      radius.value = restingRadius;
-      return;
-    }
-    springTo(restingRadius);
-  }, [radius, restingRadius, springTo]);
+  const radiusStyle: CSSStyle<ViewStyle> = {
+    borderRadius,
+    transitionProperty: ['borderRadius'],
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.short4,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+  };
+  const focusRingRadiusStyle: CSSStyle<ViewStyle> = {
+    ...radiusStyle,
+    borderRadius: borderRadius + FOCUS_RING_INSET,
+  };
 
   const handlePressIn = (e: GestureResponderEvent) => {
-    springTo(pressedRadius);
+    setPressed(true);
     onPressInProp?.(e);
   };
 
   const handlePressOut = (e: GestureResponderEvent) => {
-    springTo(restingRadius);
+    setPressed(false);
     onPressOutProp?.(e);
   };
 
-  const { focusedSV, onFocus, onBlur } = useFocusRing();
-
   const handleFocus = (e: Parameters<NonNullable<typeof onFocusProp>>[0]) => {
-    onFocus();
+    if (isKeyboardFocusEvent(e)) {
+      setFocused(true);
+    }
     onFocusProp?.(e);
   };
 
   const handleBlur = (e: Parameters<NonNullable<typeof onBlurProp>>[0]) => {
-    onBlur();
+    setFocused(false);
     onBlurProp?.(e);
   };
 
-  const outerStyle = useAnimatedStyle(
-    () => ({
-      borderRadius: radius.value,
-    }),
-    [radius]
-  );
-
-  const clipStyle = useAnimatedStyle(
-    () => ({
-      borderRadius: radius.value,
-    }),
-    [radius]
-  );
-
-  const focusRingStyle = useAnimatedStyle(
-    () => ({
-      opacity: focusedSV.value ? 1 : 0,
-      borderRadius: radius.value + FOCUS_RING_INSET,
-    }),
-    [radius]
-  );
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress: rest.onLongPress,
+    onPressIn: onPressInProp,
+    onPressOut: onPressOutProp,
+  });
 
   const hitSlop = getHitSlop(dimensions.width, dimensions.height);
 
   return (
     <Animated.View
       ref={ref}
+      testID={testID ? `${testID}-container` : undefined}
       style={[
         styles.container,
         {
@@ -307,7 +256,7 @@ const IconButton = ({
           height: dimensions.height,
         },
         style,
-        outerStyle,
+        radiusStyle,
       ]}
     >
       <Animated.View
@@ -319,7 +268,7 @@ const IconButton = ({
             borderWidth,
             borderColor,
           },
-          clipStyle,
+          radiusStyle,
         ]}
       >
         {backgroundOpacity < 1 && (
@@ -335,8 +284,8 @@ const IconButton = ({
           borderless
           centered
           onPress={onPress}
-          onPressIn={onPress ? handlePressIn : onPressInProp}
-          onPressOut={onPress ? handlePressOut : onPressOutProp}
+          onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
+          onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
           onFocus={handleFocus}
           onBlur={handleBlur}
           aria-label={ariaLabel}
@@ -347,6 +296,7 @@ const IconButton = ({
           ]}
           role="button"
           aria-disabled={disabled}
+          aria-selected={selected}
           disabled={disabled}
           hitSlop={hitSlop}
           testID={testID}
@@ -360,17 +310,18 @@ const IconButton = ({
                 color={iconColor}
                 source={icon}
                 size={dimensions.iconSize}
+                testID={testID ? `${testID}-icon` : undefined}
               />
             )}
           </View>
         </TouchableRipple>
       </Animated.View>
       <Animated.View
-        pointerEvents="none"
         style={[
           styles.focusRing,
+          focused ? styles.focusRingVisible : styles.focusRingHidden,
           { borderColor: theme.colors.secondary },
-          focusRingStyle,
+          focusRingRadiusStyle,
         ]}
       />
     </Animated.View>
@@ -379,6 +330,7 @@ const IconButton = ({
 
 const styles = StyleSheet.create({
   container: {
+    margin: 6,
     overflow: 'visible',
   },
   clip: {
@@ -399,6 +351,12 @@ const styles = StyleSheet.create({
     bottom: -FOCUS_RING_INSET,
     borderWidth: FOCUS_RING_THICKNESS,
     pointerEvents: 'none',
+  },
+  focusRingVisible: {
+    opacity: 1,
+  },
+  focusRingHidden: {
+    opacity: 0,
   },
 });
 
