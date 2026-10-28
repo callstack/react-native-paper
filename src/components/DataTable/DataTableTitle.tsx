@@ -279,6 +279,36 @@ const DataTableTitle = ({
     );
   }
 
+  if (Platform.OS === 'web') {
+    const { 'aria-label': buttonLabel, ...headerProps } = structuralProps;
+    const { testID, ...buttonProps } = viewProps;
+
+    return (
+      <View
+        {...headerProps}
+        testID={testID}
+        style={[styles.header, resolved.style, style]}
+      >
+        <Pressable
+          {...buttonProps}
+          onPress={onPress}
+          disabled={disabled}
+          android_ripple={android_ripple}
+          android_disableSound={android_disableSound}
+          delayLongPress={delayLongPress}
+          pressRetentionOffset={pressRetentionOffset}
+          unstable_pressDelay={unstable_pressDelay}
+          testOnly_pressed={testOnly_pressed}
+          role="button"
+          aria-label={buttonLabel}
+          style={[styles.container, styles.button, alignStyles.container]}
+        >
+          {content}
+        </Pressable>
+      </View>
+    );
+  }
+
   return (
     <Pressable
       {...structuralProps}
@@ -305,6 +335,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: TITLE_VERTICAL_PADDING,
+  },
+
+  header: {
+    flexDirection: 'row',
+  },
+
+  button: {
+    flexGrow: 1,
   },
 
   cell: {

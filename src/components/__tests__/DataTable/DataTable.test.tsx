@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
+import { userEvent } from '@testing-library/react-native';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { LocaleProvider } from '../../../core/locale';
@@ -758,6 +759,50 @@ describe('DataTable.Title', () => {
     );
 
     expect(screen.getByTestId('title')).toHaveProp('aria-sort', 'none');
+  });
+
+  it('puts a button inside a sortable column header on the web', async () => {
+    Platform.OS = 'web';
+
+    const onPress = jest.fn();
+
+    await render(
+      <DataTable.Header>
+        <DataTable.Title
+          testID="title"
+          aria-label="Sort by dessert"
+          onPress={onPress}
+          sortDirection="ascending"
+        >
+          Dessert
+        </DataTable.Title>
+      </DataTable.Header>
+    );
+
+    const header = screen.getByTestId('title');
+    const button = within(header).getByRole('button', {
+      name: 'Sort by dessert',
+    });
+
+    expect(header).toHaveProp('role', 'columnheader');
+    expect(header).not.toHaveProp('aria-label');
+
+    await userEvent.press(button);
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps a sortable title one button on native', async () => {
+    await render(
+      <DataTable.Header>
+        <DataTable.Title testID="title" onPress={() => {}}>
+          Dessert
+        </DataTable.Title>
+      </DataTable.Header>
+    );
+
+    // Native has no column-header role, so the title itself is the control.
+    expect(screen.getByTestId('title')).toHaveProp('role', 'button');
   });
 
   it('points the sort indicator the right way from the first render', async () => {
