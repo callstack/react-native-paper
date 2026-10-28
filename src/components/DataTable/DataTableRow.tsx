@@ -34,6 +34,11 @@ export type Props = Omit<
   children: React.ReactNode;
   /**
    * Function to execute on press.
+   *
+   * On the web, a pressable row is clickable but is no Tab stop, because a
+   * table row cannot also be a button. Put a control in a cell, such as a
+   * `Checkbox` or a `Button`, so keyboard and screen reader users can reach
+   * the action.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
@@ -196,6 +201,9 @@ const DataTableRow = ({
     // whatever an interactive row holds.
     accessible: accessible ?? rowIsFocusUnit,
     'aria-label': label,
+    ...(Platform.OS === 'web' && interactive
+      ? { tabIndex: -1 as const }
+      : null),
   };
 
   const content = (

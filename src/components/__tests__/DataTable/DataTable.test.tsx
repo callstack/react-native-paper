@@ -215,6 +215,45 @@ describe('DataTable.Row', () => {
     ).toBeOnTheScreen();
   });
 
+  it('keeps a pressable row out of the tab order on the web', async () => {
+    Platform.OS = 'web';
+
+    const onPress = jest.fn<() => void>();
+
+    await render(
+      <Table>
+        <DataTable.Row testID="row" index={2} onPress={onPress}>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+        </DataTable.Row>
+      </Table>
+    );
+
+    const row = screen.getByTestId('row');
+
+    // A table row cannot also be a button, so it must not be a Tab stop that
+    // announces itself as a plain row. A click still presses it.
+    expect(row).toHaveProp('role', 'row');
+    expect(row).toHaveProp('tabIndex', -1);
+
+    await userEvent.press(row);
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('lets a consumer put a pressable row back in the tab order', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <Table>
+        <DataTable.Row testID="row" index={2} onPress={() => {}} tabIndex={0}>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+        </DataTable.Row>
+      </Table>
+    );
+
+    expect(screen.getByTestId('row')).toHaveProp('tabIndex', 0);
+  });
+
   it('leaves the position out when the row has no index', async () => {
     await render(
       <DataTable columns={[{ key: 'name' }]}>

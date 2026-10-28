@@ -448,6 +448,23 @@ Rows, cells and titles with no touch handler render a plain `View` instead of a 
 </DataTable.Row>
 ```
 
+On the web, a pressable row is clickable but is no longer a Tab stop, because a table row cannot also be a button. Put a control in a cell so keyboard and screen reader users can reach the action:
+
+```tsx
+<DataTable.Row onPress={() => toggle(item)}>
+  <DataTable.Cell column="selected">
+    <Checkbox
+      status={selected ? 'checked' : 'unchecked'}
+      onPress={() => toggle(item)}
+      aria-label={`Select ${item.name}`}
+    />
+  </DataTable.Cell>
+  <DataTable.Cell column="name">{item.name}</DataTable.Cell>
+</DataTable.Row>
+```
+
+Pass `tabIndex={0}` on the row to keep it a Tab stop anyway.
+
 #### Screen reader announcements
 
 - new `rowCount` on the table and `index` on each row give the row positions. On a page of a larger set, `index` counts from the start of the whole set
