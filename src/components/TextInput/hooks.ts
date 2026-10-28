@@ -27,9 +27,8 @@ import type { InternalTheme } from '../../theme/types';
 // The label float (top/translateX/fontSize/opacity) and the filled variant's
 // active indicator (scaleX) are both driven by a single boolean state
 // transition (focus/blur, or text appearing/disappearing) — not a continuous
-// or interruptible drag — so each ends up a plain discrete CSS transition
-// between two fixed values per property, with no shared progress value
-// needed. That keeps this on the CSS tier per the motion decision rule.
+// or interruptible drag — so each ends up a plain Reanimated CSS transition
+// between two fixed values per property, with no shared value needed.
 const useTextInputAnimation = ({
   variant,
   isRTL,
@@ -84,7 +83,10 @@ const useTextInputAnimation = ({
   const animatedContainerStyle: TextInputAnimationState['animatedContainerStyle'] =
     {
       opacity: isFloating ? 1 : 0,
-      ...getTransition(theme, 'opacity', 'short3', 'standard', reduceMotion),
+      // Opacity is exempt from reduced motion (see `useReduceMotion`'s
+      // contract), so this always animates — pass `false`, not
+      // `reduceMotion`.
+      ...getTransition(theme, 'opacity', 'short3', 'standard', false),
     };
 
   const animatedActiveOutlineStyle: TextInputAnimationState['animatedActiveOutlineStyle'] =

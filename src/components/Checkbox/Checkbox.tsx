@@ -145,12 +145,15 @@ const Checkbox = ({
     customUncheckedColor: uncheckedColor,
   });
 
+  // Opacity is exempt from reduced motion (see `useReduceMotion`'s
+  // contract), so the fill/outline cross-fade always animates — pass
+  // `false`, not `reduceMotion`.
   const fillTransition = getTransition<ViewStyle>(
     theme,
     ['opacity'],
     'short2',
     'standard',
-    reduceMotion
+    false
   );
 
   const checkTransition = getTransition<ViewStyle>(

@@ -2,7 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 
 import { expressiveMotion, getTransition } from '../tokens/sys/motion';
 
-const theme = { motion: expressiveMotion };
+const theme = { motion: expressiveMotion, animation: { scale: 1 } };
 
 describe('getTransition', () => {
   it('passes the property through unchanged for a single property', () => {
@@ -27,6 +27,24 @@ describe('getTransition', () => {
   it('zeroes the duration when reduceMotion is set, regardless of the token', () => {
     expect(
       getTransition(theme, 'opacity', 'short2', 'standard', true)
+        .transitionDuration
+    ).toBe(0);
+  });
+
+  it('multiplies the duration by theme.animation.scale', () => {
+    const scaledTheme = { motion: expressiveMotion, animation: { scale: 2 } };
+
+    expect(
+      getTransition(scaledTheme, 'opacity', 'short2', 'standard', false)
+        .transitionDuration
+    ).toBe(expressiveMotion.duration.short2 * 2);
+  });
+
+  it('gives a duration of 0 when theme.animation.scale is 0', () => {
+    const frozenTheme = { motion: expressiveMotion, animation: { scale: 0 } };
+
+    expect(
+      getTransition(frozenTheme, 'opacity', 'short2', 'standard', false)
         .transitionDuration
     ).toBe(0);
   });

@@ -7,7 +7,6 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
-import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
 import { getTransition } from '../theme/tokens/sys/motion';
 import { cornerFull } from '../theme/tokens/sys/shape';
 import type { ThemeProp } from '../theme/types';
@@ -61,7 +60,6 @@ const Badge = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const reduceMotion = useReduceMotion();
 
   const textColor = theme.colors.onError;
 
@@ -71,13 +69,9 @@ const Badge = ({
 
   const transitionStyle: CSSStyle<TextStyle> = {
     opacity: visible ? 1 : 0,
-    ...getTransition<TextStyle>(
-      theme,
-      'opacity',
-      'short3',
-      'standard',
-      reduceMotion
-    ),
+    // Opacity is exempt from reduced motion (see `useReduceMotion`'s
+    // contract), so this always animates — pass `false`, not `reduceMotion`.
+    ...getTransition<TextStyle>(theme, 'opacity', 'short3', 'standard', false),
   };
 
   return (
