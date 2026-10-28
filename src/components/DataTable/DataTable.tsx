@@ -5,7 +5,7 @@ import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 import type { DataTableColumn, DataTableLayout } from './columns';
 import DataTableCell from './DataTableCell';
 import { ColumnsContext } from './DataTableColumnsContext';
-import { DataTableContext, RowIndexContext } from './DataTableContext';
+import { DataTableContext } from './DataTableContext';
 import type { NativeFocusMode } from './DataTableContext';
 import DataTableHeader, {
   DataTableHeader as _DataTableHeader,
@@ -17,13 +17,7 @@ import DataTableRow, { DataTableRow as _DataTableRow } from './DataTableRow';
 import DataTableTitle, {
   DataTableTitle as _DataTableTitle,
 } from './DataTableTitle';
-import {
-  containsTableStructure,
-  defaultFormatRowPosition,
-  isDataTableElement,
-  isGroupingContainer,
-  isNeverRow,
-} from './utils';
+import { defaultFormatRowPosition } from './utils';
 import type { FormatRowPosition } from './utils';
 import webAriaProps from '../../utils/webAriaProps';
 
@@ -48,15 +42,14 @@ export type Props = ViewProps & {
   /**
    * Total number of rows in the data set, which can be larger than the number
    * rendered when the table is paginated or virtualized. Announced to screen
-   * readers as the row count.
+   * readers as the row count. Pass `index` on every `DataTable.Row` with it.
    */
   rowCount?: number;
   /**
-   * Index of the first *rendered* row within the data set. Set this alongside
-   * `rowCount` when showing a page of a larger set, so row positions are
-   * announced against the whole set rather than the page.
+   * Whether the table has a `DataTable.Header`. On the web the header is the
+   * first row, so it shifts the position of every data row by one.
    */
-  firstRowIndex?: number;
+  hasHeader?: boolean;
   /**
    * Where a screen reader stops when moving through the table on iOS and
    * Android, respectively. Defaults to `row`, which announces a whole row at
@@ -131,7 +124,6 @@ export type Props = ViewProps & {
  *       aria-label="Nutrition"
  *       columns={columns}
  *       rowCount={items.length}
- *       firstRowIndex={from}
  *     >
  *       <DataTable.Header>
  *         <DataTable.Title column="name">Dessert</DataTable.Title>
@@ -139,8 +131,8 @@ export type Props = ViewProps & {
  *         <DataTable.Title column="fat">Fat</DataTable.Title>
  *       </DataTable.Header>
  *
- *       {items.slice(from, to).map((item) => (
- *         <DataTable.Row key={item.key}>
+ *       {items.slice(from, to).map((item, i) => (
+ *         <DataTable.Row key={item.key} index={from + i}>
  *           <DataTable.Cell column="name">{item.name}</DataTable.Cell>
  *           <DataTable.Cell column="calories">{item.calories}</DataTable.Cell>
  *           <DataTable.Cell column="fat">{item.fat}</DataTable.Cell>
@@ -170,7 +162,7 @@ const DataTable = ({
   columns,
   layout = 'fluid',
   rowCount,
-  firstRowIndex = 0,
+  hasHeader = true,
   nativeFocusMode = 'row',
   formatRowPosition = defaultFormatRowPosition,
   style,
@@ -185,73 +177,6 @@ const DataTable = ({
       'DataTable with layout="fixed" needs a `width` or `minWidth` on every column, otherwise columns collapse to their content'
     );
   }
-
-  // Everything the rows need to know about the table has to be resolved while
-  // rendering: an effect would leave the first render - the only one a server
-  // renders - with the wrong row indices.
-  const { rows, hasHeader, renderedRowCount } = React.useMemo(() => {
-    let hasHeader = false;
-    let rendered = 0;
-
-    const number = (child: React.ReactNode) => (
-      <RowIndexContext.Provider value={firstRowIndex + rendered++}>
-        {child}
-      </RowIndexContext.Provider>
-    );
-
-    const walk = (nodes: React.ReactNode): React.ReactNode =>
-      React.Children.map(nodes, (child) => {
-        if (!React.isValidElement<{ children?: React.ReactNode }>(child)) {
-          return child;
-        }
-
-        // Read before the guards below narrow `child` to `never`.
-        const {
-          type,
-          props: { children: nested },
-        } = child;
-
-        if (isDataTableElement(child, 'DataTable.Header')) {
-          hasHeader = true;
-          return child;
-        }
-
-        if (isDataTableElement(child, 'DataTable.Pagination')) {
-          return child;
-        }
-
-        if (isDataTableElement(child, 'DataTable.Row')) {
-          return number(child);
-        }
-
-        if (isNeverRow(child)) {
-          return child;
-        }
-
-        if (type === React.Fragment) {
-          return walk(nested);
-        }
-
-        if (isGroupingContainer(child) || containsTableStructure(nested)) {
-          void walk(nested);
-          return child;
-        }
-
-        // What is left renders out of sight - a row component of the
-        // consumer's own, most often - so it counts as one row. A row the
-        // table never sees at all, as a virtualized list renders, passes
-        // `index` itself.
-        return number(child);
-      });
-
-    const rows = walk(children);
-
-    return { rows, hasHeader, renderedRowCount: rendered };
-  }, [children, firstRowIndex]);
-
-  const resolvedRowCount =
-    rowCount ??
-    (renderedRowCount > 0 ? firstRowIndex + renderedRowCount : undefined);
 
   const [columnLabels, setColumnLabels] = React.useState<
     ReadonlyArray<string | undefined>
@@ -277,7 +202,7 @@ const DataTable = ({
 
   const tableContext = React.useMemo(
     () => ({
-      rowCount: resolvedRowCount,
+      rowCount,
       columnLabels,
       registerColumnLabel:
         Platform.OS === 'web' ? undefined : registerColumnLabel,
@@ -286,7 +211,7 @@ const DataTable = ({
       formatRowPosition,
     }),
     [
-      resolvedRowCount,
+      rowCount,
       columnLabels,
       registerColumnLabel,
       hasHeader,
@@ -322,15 +247,13 @@ const DataTable = ({
       {...nameProps}
       {...webAriaProps({
         'aria-rowcount':
-          resolvedRowCount == null
-            ? undefined
-            : resolvedRowCount + (hasHeader ? 1 : 0),
+          rowCount == null ? undefined : rowCount + (hasHeader ? 1 : 0),
         'aria-colcount': columns?.length,
       })}
       {...viewProps}
       style={[layout === 'fluid' && styles.fluid, style]}
     >
-      {rows}
+      {children}
     </View>
   );
 

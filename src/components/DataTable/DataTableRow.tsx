@@ -7,11 +7,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import {
-  DataTableContext,
-  DataTableRowContext,
-  RowIndexContext,
-} from './DataTableContext';
+import { DataTableContext, DataTableRowContext } from './DataTableContext';
 import type { RegisteredCell } from './DataTableContext';
 import {
   HORIZONTAL_PADDING,
@@ -42,11 +38,8 @@ export type Props = Omit<
   onPress?: (e: GestureResponderEvent) => void;
   /**
    * Index of this row within the data set, counting from 0. Announced to
-   * screen readers as the row's position.
-   *
-   * Rows rendered among the `DataTable`'s own children are numbered by their
-   * position there; pass this for rows rendered outside it, as a virtualized
-   * list does.
+   * screen readers as the row's position. On a paginated page, pass the index
+   * within the whole set, not within the page.
    */
   index?: number;
   style?: StyleProp<ViewStyle>;
@@ -105,20 +98,15 @@ const DataTableRow = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const table = React.useContext(DataTableContext);
-  const position = React.useContext(RowIndexContext);
   const borderBottomColor = theme.colors.outlineVariant;
-
-  // A virtualized list renders rows outside the table's own child list, so
-  // those pass their index themselves.
-  const rowIndex = index ?? position ?? undefined;
 
   if (
     process.env.NODE_ENV !== 'production' &&
-    table != null &&
-    rowIndex == null
+    table?.rowCount != null &&
+    index == null
   ) {
     console.warn(
-      'DataTable.Row has no position: a row inside a wrapper, or in a list, needs `index`'
+      'DataTable.Row needs `index` when the DataTable has `rowCount`, otherwise its position is not announced'
     );
   }
 
@@ -179,7 +167,7 @@ const DataTableRow = ({
     (rowIsFocusUnit
       ? composeRowLabel({
           cellLabels,
-          rowIndex,
+          rowIndex: index,
           rowCount: table?.rowCount,
           formatRowPosition: table?.formatRowPosition,
         })
@@ -202,9 +190,7 @@ const DataTableRow = ({
         : ('button' as const),
     ...webAriaProps({
       'aria-rowindex':
-        rowIndex == null
-          ? undefined
-          : rowIndex + 1 + (table?.hasHeader ? 1 : 0),
+        index == null ? undefined : index + 1 + (table?.hasHeader ? 1 : 0),
     }),
     // Left unset, `Pressable` defaults it to `true`, which would swallow
     // whatever an interactive row holds.

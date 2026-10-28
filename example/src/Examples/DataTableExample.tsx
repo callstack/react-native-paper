@@ -87,7 +87,6 @@ const DataTableExample = () => {
           aria-label="Nutrition"
           columns={columns}
           rowCount={sortedItems.length}
-          firstRowIndex={from}
         >
           <DataTable.Header>
             <DataTable.Title
@@ -103,8 +102,8 @@ const DataTableExample = () => {
             <DataTable.Title column="fat">Fat (g)</DataTable.Title>
           </DataTable.Header>
 
-          {sortedItems.slice(from, to).map((item) => (
-            <DataTable.Row key={item.key}>
+          {sortedItems.slice(from, to).map((item, i) => (
+            <DataTable.Row key={item.key} index={from + i}>
               <DataTable.Cell column="name">{item.name}</DataTable.Cell>
               <DataTable.Cell column="calories">{item.calories}</DataTable.Cell>
               <DataTable.Cell column="fat">{item.fat}</DataTable.Cell>

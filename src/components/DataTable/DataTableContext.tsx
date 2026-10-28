@@ -64,12 +64,3 @@ export type DataTableRowContextValue = {
 
 export const DataTableRowContext =
   React.createContext<DataTableRowContextValue | null>(null);
-
-/**
- * The position of a row within the data set.
- *
- * Published by the table rather than cloned onto the child list, so it
- * survives consumer wrapper components - a `<NameRow />` that renders a
- * `DataTable.Row` is numbered just like an inline one.
- */
-export const RowIndexContext = React.createContext<number | null>(null);

@@ -450,12 +450,13 @@ Rows, cells and titles with no touch handler render a plain `View` instead of a 
 
 #### Screen reader announcements
 
-- new `rowCount`, `firstRowIndex` needed for correct row positions when paginating
+- new `rowCount` on the table and `index` on each row give the row positions. On a page of a larger set, `index` counts from the start of the whole set
+- new `hasHeader` defaults to `true`. Pass `hasHeader={false}` for a table without a `DataTable.Header`, or every row position on the web is one too high
 - on iOS and Android, a cell is announced with the title of its column, matched by `column`
 - `nativeFocusMode="cell"` gives one stop per cell instead of one per row
 - `accessible={false}` on a row opts that row out
 - `formatRowPosition` replaces the wording, or removes it with `null`
-- rows are numbered by their position among the table's rows. A component of your own counts as the one row. A row inside a `View` or a wrapper of your own is counted but not numbered: pass `index` on such a row.
+- the table does not count its children, so rows in a `View`, a fragment or a component of your own get the same position as inline rows
 
 ```tsx
 // Before (v5)
@@ -466,9 +467,11 @@ Rows, cells and titles with no touch handler render a plain `View` instead of a 
 </DataTable>
 
 // After (v6)
-<DataTable aria-label="Nutrition" rowCount={items.length} firstRowIndex={from}>
-  {items.slice(from, to).map((item) => (
-    <DataTable.Row key={item.key}>{/* ... */}</DataTable.Row>
+<DataTable aria-label="Nutrition" rowCount={items.length}>
+  {items.slice(from, to).map((item, i) => (
+    <DataTable.Row key={item.key} index={from + i}>
+      {/* ... */}
+    </DataTable.Row>
   ))}
 </DataTable>
 ```

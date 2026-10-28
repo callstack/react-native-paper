@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text as RNText,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import * as Reanimated from 'react-native-reanimated';
@@ -51,7 +45,6 @@ const Table = ({
     aria-label="Nutrition"
     columns={tableColumns}
     rowCount={6}
-    firstRowIndex={2}
     {...props}
   >
     <DataTable.Header>
@@ -65,7 +58,7 @@ const Table = ({
       <DataTable.Title column="calories">Calories</DataTable.Title>
     </DataTable.Header>
     {children ?? (
-      <DataTable.Row testID="row">
+      <DataTable.Row testID="row" index={2}>
         <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
         <DataTable.Cell column="calories">159</DataTable.Cell>
       </DataTable.Row>
@@ -165,7 +158,7 @@ describe('DataTable.Row', () => {
 
     await render(
       <Table>
-        <DataTable.Row>
+        <DataTable.Row index={2}>
           <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
           <CaloriesCell value={159} />
         </DataTable.Row>
@@ -182,7 +175,7 @@ describe('DataTable.Row', () => {
   it('does not repeat the column name when a cell carries its own label', async () => {
     await render(
       <Table>
-        <DataTable.Row>
+        <DataTable.Row index={2}>
           <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
           <DataTable.Cell column="calories" aria-label="One fifty nine">
             159
@@ -210,7 +203,7 @@ describe('DataTable.Row', () => {
   it('announces a pressable row as a button so it reads as activatable', async () => {
     await render(
       <Table>
-        <DataTable.Row onPress={() => {}}>
+        <DataTable.Row index={2} onPress={() => {}}>
           <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
           <DataTable.Cell column="calories" numeric>
             159
@@ -224,7 +217,7 @@ describe('DataTable.Row', () => {
     ).toBeOnTheScreen();
   });
 
-  it('leaves the position out when the total is unknown', async () => {
+  it('leaves the position out when the row has no index', async () => {
     await render(
       <DataTable columns={[{ key: 'name' }]}>
         <DataTable.Header>
@@ -236,9 +229,22 @@ describe('DataTable.Row', () => {
       </DataTable>
     );
 
-    // One rendered row, indexed from 0, so the count is derived as 1.
     expect(
-      screen.getByRole('row', { name: 'Dessert, Frozen yogurt, row 1 of 1' })
+      screen.getByRole('row', { name: 'Dessert, Frozen yogurt' })
+    ).toBeOnTheScreen();
+  });
+
+  it('leaves the total out when the table has no row count', async () => {
+    await render(
+      <DataTable columns={[{ key: 'name' }]}>
+        <DataTable.Row index={0}>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+    );
+
+    expect(
+      screen.getByRole('row', { name: 'Frozen yogurt, row 1' })
     ).toBeOnTheScreen();
   });
 
@@ -251,80 +257,114 @@ describe('DataTable.Row', () => {
     expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 4);
   });
 
-  it('numbers a row a consumer component renders, not just an inline one', async () => {
-    const NameRow = ({ name }: { name: string }) => (
-      <DataTable.Row testID="row">
-        <DataTable.Cell column="name">{name}</DataTable.Cell>
-        <DataTable.Cell column="calories">159</DataTable.Cell>
-      </DataTable.Row>
-    );
-
-    await render(
-      <Table>
-        <NameRow name="Frozen yogurt" />
-      </Table>
-    );
-
-    // The position reaches the row through context, so a wrapper component
-    // does not swallow it on the way down.
-    expect(
-      screen.getByRole('row', {
-        name: 'Dessert, Frozen yogurt, Calories, 159, row 3 of 6',
-      })
-    ).toBeOnTheScreen();
-  });
-
-  it('numbers a row component that takes children of its own', async () => {
+  it('does not offset rows when the table has no header', async () => {
     Platform.OS = 'web';
 
-    const NameRow = ({ children }: { children: React.ReactNode }) => (
-      <DataTable.Row testID="row">
-        <DataTable.Cell>{children}</DataTable.Cell>
-        <DataTable.Cell numeric>159</DataTable.Cell>
-      </DataTable.Row>
-    );
-
     await render(
-      <DataTable testID="table">
-        <DataTable.Header>
-          <DataTable.Title>Dessert</DataTable.Title>
-        </DataTable.Header>
-        <NameRow>Frozen yogurt</NameRow>
+      <DataTable testID="table" rowCount={6} hasHeader={false}>
+        <DataTable.Row testID="row" index={2}>
+          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+        </DataTable.Row>
       </DataTable>
     );
 
-    // Children make it a wrapper to look at, not one to look through: what it
-    // renders is a row, and the only row the table has.
-    expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 2);
-    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 2);
+    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 6);
+    expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 3);
   });
 
-  it('leaves the children of a row component as it was given them', async () => {
-    const NameRow = ({ children }: { children: React.ReactNode }) => (
-      <DataTable.Row testID="row">
-        <DataTable.Cell column="name">
-          {React.Children.only(children)}
-        </DataTable.Cell>
-      </DataTable.Row>
+  it('counts a wrapped header or pagination as no row', async () => {
+    Platform.OS = 'web';
+
+    const MyHeader = () => (
+      <DataTable.Header>
+        <DataTable.Title column="name">Dessert</DataTable.Title>
+      </DataTable.Header>
+    );
+    const MyPagination = () => (
+      <DataTable.Pagination
+        page={0}
+        numberOfPages={1}
+        onPageChange={() => {}}
+      />
     );
 
     await render(
-      <Table>
-        <NameRow>
-          <RNText>Frozen yogurt</RNText>
-        </NameRow>
-      </Table>
+      <DataTable testID="table" columns={[{ key: 'name' }]} rowCount={1}>
+        <MyHeader />
+        <DataTable.Row testID="row" index={0}>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+        </DataTable.Row>
+        <MyPagination />
+      </DataTable>
     );
 
-    // A component counting its own children must not be handed an array of
-    // one where it was written a single child.
-    expect(screen.getByText('Frozen yogurt')).toBeOnTheScreen();
+    // The count and the positions come from props, so what the table's
+    // children look like changes neither.
+    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 2);
+    expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 2);
+  });
+
+  it('names and numbers a row under a wrapped header on native', async () => {
+    const MyHeader = () => (
+      <DataTable.Header>
+        <DataTable.Title column="name">Dessert</DataTable.Title>
+      </DataTable.Header>
+    );
+
+    await render(
+      <DataTable columns={[{ key: 'name' }]} rowCount={1}>
+        <MyHeader />
+        <DataTable.Row index={0}>
+          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+    );
+
+    expect(
+      screen.getByRole('row', { name: 'Dessert, Frozen yogurt, row 1 of 1' })
+    ).toBeOnTheScreen();
+  });
+
+  it('numbers rows in a wrapper by their index', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <DataTable rowCount={2}>
+        <View>
+          <DataTable.Row testID="first" index={0}>
+            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+          </DataTable.Row>
+          <DataTable.Row testID="second" index={1}>
+            <DataTable.Cell>Eclair</DataTable.Cell>
+          </DataTable.Row>
+        </View>
+      </DataTable>
+    );
+
+    expect(screen.getByTestId('first')).toHaveProp('aria-rowindex', 2);
+    expect(screen.getByTestId('second')).toHaveProp('aria-rowindex', 3);
+  });
+
+  it('warns about a row with no index in a table with a row count', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(
+      <DataTable rowCount={1}>
+        <DataTable.Row>
+          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+    );
+
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('`index`'));
+
+    warn.mockRestore();
   });
 
   it('lets a control inside a pressable row keep its own stop', async () => {
     await render(
       <Table>
-        <DataTable.Row testID="row" onPress={() => {}}>
+        <DataTable.Row index={2} testID="row" onPress={() => {}}>
           <DataTable.Cell column="name">
             <Checkbox status="checked" testID="row-checkbox" />
           </DataTable.Cell>
@@ -348,157 +388,6 @@ describe('DataTable.Row', () => {
     );
 
     expect(screen.getByRole('row', { name: /row 5 of 6/ })).toBeOnTheScreen();
-  });
-
-  it('does not take an empty state beside the rows for a row', async () => {
-    Platform.OS = 'web';
-
-    await render(
-      <DataTable testID="table">
-        <DataTable.Header>
-          <DataTable.Title>Dessert</DataTable.Title>
-        </DataTable.Header>
-        <RNText>Only one dessert left</RNText>
-        <DataTable.Row testID="row">
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
-    );
-
-    // The text is neither counted nor allowed to push the row down a place.
-    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 2);
-    expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 2);
-  });
-
-  it('does not take an element inside an empty state for a row', async () => {
-    Platform.OS = 'web';
-
-    const Badge = () => <RNText>!</RNText>;
-
-    await render(
-      <DataTable testID="table">
-        <DataTable.Header>
-          <DataTable.Title>Dessert</DataTable.Title>
-        </DataTable.Header>
-        <RNText>
-          Only one dessert left <Badge />
-        </RNText>
-        <DataTable.Row testID="row">
-          <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
-    );
-
-    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 2);
-    expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 2);
-  });
-
-  it('counts rows grouped in a wrapper without rebuilding the wrapper', async () => {
-    Platform.OS = 'web';
-
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    await render(
-      <DataTable testID="table">
-        <DataTable.Header>
-          <DataTable.Title>Dessert</DataTable.Title>
-        </DataTable.Header>
-        <View>
-          <DataTable.Row testID="first" index={0}>
-            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-          </DataTable.Row>
-          <DataTable.Row testID="second" index={1}>
-            <DataTable.Cell>Eclair</DataTable.Cell>
-          </DataTable.Row>
-        </View>
-        <DataTable.Row testID="third">
-          <DataTable.Cell>Gingerbread</DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
-    );
-
-    expect(screen.getByTestId('first')).toHaveProp('aria-rowindex', 2);
-    expect(screen.getByTestId('second')).toHaveProp('aria-rowindex', 3);
-    expect(screen.getByTestId('third')).toHaveProp('aria-rowindex', 4);
-    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 4);
-    expect(warn).not.toHaveBeenCalled();
-
-    warn.mockRestore();
-  });
-
-  it('warns about a row in a wrapper that was given no index', async () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    await render(
-      <DataTable>
-        <View>
-          <DataTable.Row>
-            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-          </DataTable.Row>
-        </View>
-      </DataTable>
-    );
-
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('`index`'));
-
-    warn.mockRestore();
-  });
-
-  it('finds the header and pagination inside a wrapper it cannot see through', async () => {
-    Platform.OS = 'web';
-
-    const Wrap = ({ children }: { children: React.ReactNode }) => (
-      <View>{children}</View>
-    );
-
-    await render(
-      <DataTable testID="table" columns={[{ key: 'name' }]}>
-        <Wrap>
-          <DataTable.Header>
-            <DataTable.Title column="name">Dessert</DataTable.Title>
-          </DataTable.Header>
-        </Wrap>
-        <DataTable.Row testID="row">
-          <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
-        </DataTable.Row>
-        <Wrap>
-          <DataTable.Pagination
-            page={0}
-            numberOfPages={1}
-            onPageChange={() => {}}
-          />
-        </Wrap>
-      </DataTable>
-    );
-
-    // Neither wrapper holds a row, but each holds a part of the table - proof
-    // enough that it groups rather than renders a row of its own.
-    expect(screen.getByTestId('table')).toHaveProp('aria-colcount', 1);
-    expect(screen.getByTestId('table')).toHaveProp('aria-rowcount', 2);
-    expect(screen.getByTestId('row')).toHaveProp('aria-rowindex', 2);
-  });
-
-  it('numbers rows given in a fragment', async () => {
-    Platform.OS = 'web';
-
-    await render(
-      <DataTable testID="table">
-        <DataTable.Header>
-          <DataTable.Title>Dessert</DataTable.Title>
-        </DataTable.Header>
-        <>
-          <DataTable.Row testID="first">
-            <DataTable.Cell>Frozen yogurt</DataTable.Cell>
-          </DataTable.Row>
-          <DataTable.Row testID="second">
-            <DataTable.Cell>Eclair</DataTable.Cell>
-          </DataTable.Row>
-        </>
-      </DataTable>
-    );
-
-    expect(screen.getByTestId('first')).toHaveProp('aria-rowindex', 2);
-    expect(screen.getByTestId('second')).toHaveProp('aria-rowindex', 3);
   });
 
   it('renders a fragment inside a row or a header', async () => {
@@ -525,7 +414,7 @@ describe('DataTable.Cell', () => {
   it('falls back to per-cell focus when a cell is interactive', async () => {
     await render(
       <Table>
-        <DataTable.Row>
+        <DataTable.Row index={2}>
           <DataTable.Cell column="name" onPress={() => {}}>
             Frozen yogurt
           </DataTable.Cell>
@@ -549,7 +438,7 @@ describe('DataTable.Cell', () => {
   it('keeps element content reachable instead of hiding it behind a row label', async () => {
     await render(
       <Table>
-        <DataTable.Row>
+        <DataTable.Row index={2}>
           <DataTable.Cell column="name">
             <Checkbox status="checked" testID="row-checkbox" />
           </DataTable.Cell>
@@ -567,7 +456,7 @@ describe('DataTable.Cell', () => {
   it('does not collapse a row whose cell holds an element, even when labelled', async () => {
     await render(
       <Table>
-        <DataTable.Row>
+        <DataTable.Row index={2}>
           <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
           <DataTable.Cell column="calories" aria-label="Selected">
             <Checkbox
@@ -589,7 +478,7 @@ describe('DataTable.Cell', () => {
   it('does not wrap element content in an accessibility element of its own', async () => {
     await render(
       <Table nativeFocusMode="cell">
-        <DataTable.Row>
+        <DataTable.Row index={2}>
           <DataTable.Cell column="name" testID="cell" aria-label="Selected">
             <Checkbox status="checked" testID="row-checkbox" />
           </DataTable.Cell>
@@ -605,7 +494,7 @@ describe('DataTable.Cell', () => {
   it('does not name a cell after its column when it holds a control', async () => {
     await render(
       <Table>
-        <DataTable.Row>
+        <DataTable.Row index={2}>
           <DataTable.Cell column="name" testID="cell">
             <Checkbox status="checked" testID="row-checkbox" />
           </DataTable.Cell>
@@ -625,7 +514,7 @@ describe('DataTable.Cell', () => {
   it('treats a cell label as the complete name, not a value to decorate', async () => {
     await render(
       <Table nativeFocusMode="cell">
-        <DataTable.Row>
+        <DataTable.Row index={2}>
           <DataTable.Cell column="name" aria-label="Ninety nine">
             99
           </DataTable.Cell>
@@ -651,7 +540,7 @@ describe('DataTable.Cell', () => {
 
     await render(
       <Table>
-        <DataTable.Row>
+        <DataTable.Row index={2}>
           <DataTable.Cell column="name" testID="first">
             Frozen yogurt
           </DataTable.Cell>
@@ -1352,12 +1241,11 @@ describe('DataTable snapshots', () => {
           aria-label="Nutrition"
           columns={[{ key: 'name' }]}
           rowCount={6}
-          firstRowIndex={2}
         >
           <DataTable.Header>
             <DataTable.Title column="name">Dessert</DataTable.Title>
           </DataTable.Header>
-          <DataTable.Row>
+          <DataTable.Row index={2}>
             <DataTable.Cell column="name">Frozen yogurt</DataTable.Cell>
           </DataTable.Row>
         </DataTable>
