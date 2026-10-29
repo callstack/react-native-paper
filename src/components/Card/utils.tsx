@@ -10,7 +10,6 @@ type BorderRadiusStyles = Pick<
 >;
 
 export type CardActionChildProps = {
-  compact?: boolean;
   mode?: string;
   style?: StyleProp<ViewStyle>;
 };

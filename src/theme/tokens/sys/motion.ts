@@ -111,3 +111,54 @@ export function toRawSpring({
     mass: 1, // as per MD specs
   };
 }
+
+const SPRING_SETTLE_THRESHOLD = 0.001;
+const SPRING_SAMPLE_COUNT = 30;
+
+/**
+ * Samples a `SpringConfig` into evenly spaced progress points from 0 to 1,
+ * with the time the spring takes to settle in milliseconds.
+ *
+ * @example
+ * const { points, duration } = toSpringCurve(theme.motion.spring.fast.spatial);
+ *
+ * const style = {
+ *   transitionProperty: 'borderRadius',
+ *   transitionDuration: duration * theme.animation.scale,
+ *   transitionTimingFunction: linear(...points),
+ * };
+ */
+export function toSpringCurve(spring: SpringConfig): {
+  points: number[];
+  duration: number;
+} {
+  const { stiffness, damping, mass } = toRawSpring(spring);
+  const frequency = Math.sqrt(stiffness / mass);
+  const ratio = damping / (2 * Math.sqrt(stiffness * mass));
+  const settleTime =
+    Math.log(1 / SPRING_SETTLE_THRESHOLD) / (ratio * frequency);
+
+  const getPosition = (time: number) => {
+    if (ratio >= 1) {
+      return 1 - Math.exp(-frequency * time) * (1 + frequency * time);
+    }
+
+    const decay = ratio * frequency;
+    const dampedFrequency = frequency * Math.sqrt(1 - ratio * ratio);
+
+    return (
+      1 -
+      Math.exp(-decay * time) *
+        (Math.cos(dampedFrequency * time) +
+          (decay / dampedFrequency) * Math.sin(dampedFrequency * time))
+    );
+  };
+
+  const points = Array.from({ length: SPRING_SAMPLE_COUNT + 1 }, (_, index) =>
+    index === SPRING_SAMPLE_COUNT
+      ? 1
+      : getPosition((settleTime * index) / SPRING_SAMPLE_COUNT)
+  );
+
+  return { points, duration: settleTime * 1000 };
+}
