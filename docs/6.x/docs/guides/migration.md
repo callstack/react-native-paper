@@ -287,6 +287,39 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 
 ### Searchbar
 
+The `Searchbar` modes use the latest Material 3 terminology in Paper 6.x:
+
+- **`mode="bar"`** → **`mode="contained"`**
+- **`mode="view"`** → **`mode="divided"`**
+
+```tsx
+// Before (v5)
+<Searchbar mode="bar" value={query} onChangeText={setQuery} />
+<Searchbar mode="view" value={query} onChangeText={setQuery} />
+
+// After (v6)
+<Searchbar mode="contained" value={query} onChangeText={setQuery} />
+<Searchbar mode="divided" value={query} onChangeText={setQuery} />
+```
+
+The default `contained` mode adds 24dp horizontal margins and animates them to
+12dp while focused. To keep a full-width Searchbar, provide a margin for that
+axis; it replaces the built-in margin and disables the focus animation:
+
+```tsx
+<Searchbar
+  value={query}
+  onChangeText={setQuery}
+  style={{ marginHorizontal: 0 }}
+/>
+```
+
+Only a margin naming that axis - `marginHorizontal`, `marginStart`, `marginEnd`,
+`marginLeft` or `marginRight` - replaces the animated one. The `margin`
+shorthand is less specific, so the horizontal margins keep animating around it.
+Use `marginVertical` when you only need vertical spacing and want to keep the
+animated horizontal margins.
+
 The misspelled `traileringIcon` props have been renamed:
 
 - **`traileringIcon`** → **`trailingIcon`**

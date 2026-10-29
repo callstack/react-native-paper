@@ -6,22 +6,72 @@ import type {
   StyleProp,
   TextInputProps,
   TextStyle,
+  ViewStyle,
 } from 'react-native';
 
-import ActivityIndicator from './ActivityIndicator';
-import Divider from './Divider';
-import type { IconSource } from './Icon';
-import IconButton from './IconButton/IconButton';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
-import Surface from './Surface';
-import type { SurfaceStyle } from './Surface';
-import { useLocale } from '../core/locale';
-import { useInternalTheme } from '../core/theming';
-import { cornerNone } from '../theme/tokens/sys/shape';
-import type { Elevation, ThemeProp } from '../theme/types';
+import { cubicBezier, type CSSStyle } from 'react-native-reanimated';
+
+import { SearchbarTokens } from './tokens';
+import { getSearchbarColors, getSearchbarInputFont } from './utils';
+import { useLocale } from '../../core/locale';
+import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import type { Elevation, ThemeProp } from '../../theme/types';
+import { resolveCornerRadius } from '../../theme/utils/shape';
+import ActivityIndicator from '../ActivityIndicator';
+import Divider from '../Divider';
+import type { IconSource } from '../Icon';
+import IconButton from '../IconButton/IconButton';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Surface from '../Surface';
+import type { SurfaceStyle } from '../Surface';
 
 interface Style {
   marginRight: number;
+}
+
+/**
+ * The properties `Surface` transitions by default. A `transitionProperty` set
+ * through `style` replaces the one `Surface` applies, so the useful ones are
+ * repeated here next to the animated focus margin below. The list mirrors
+ * `Surface` and differs per platform because shadow properties do.
+ */
+type SurfaceTransitionProperty = keyof ViewStyle;
+
+const SURFACE_TRANSITION_PROPERTIES: SurfaceTransitionProperty[] =
+  Platform.select({
+    web: ['backgroundColor', 'boxShadow'],
+    android: ['backgroundColor', 'elevation'],
+    default: [
+      'backgroundColor',
+      'shadowOpacity',
+      'shadowOffset',
+      'shadowRadius',
+    ],
+  });
+
+/**
+ * Whether the blur event below moves focus to one of the bar's own buttons.
+ * react-native-web forwards the DOM blur event, whose `relatedTarget` names
+ * the element taking focus next, and the bar's DOM node is the only way to
+ * tell that it stayed inside. Native taps never blur the input, and the event
+ * can be missing altogether, so anything that is not a web event is a "no".
+ */
+function isFocusInsideBar(blurEvent: unknown, node: Element | null): boolean {
+  if (
+    Platform.OS !== 'web' ||
+    typeof blurEvent !== 'object' ||
+    blurEvent === null
+  ) {
+    return false;
+  }
+
+  const relatedTarget =
+    'relatedTarget' in blurEvent ? blurEvent.relatedTarget : undefined;
+
+  return (
+    relatedTarget instanceof Node && (node?.contains(relatedTarget) ?? false)
+  );
 }
 
 export type Props = Omit<TextInputProps, 'style'> & {
@@ -38,10 +88,17 @@ export type Props = Omit<TextInputProps, 'style'> & {
    */
   onChangeText?: (query: string) => void;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Search layout mode, the default value is "bar".
+   * Search layout mode, the default value is "contained".
+   * - `contained` - the recommended M3 Expressive style: a rounded bar
+   *   whose horizontal margins animate from 24dp down to 12dp on focus
+   *   (grow-wider effect). A `marginHorizontal`, `marginStart`, `marginEnd`,
+   *   `marginLeft` or `marginRight` set through `style` replaces the animated
+   *   margin on that side, so the bar keeps it. The `margin` shorthand does
+   *   not, since a per-axis margin takes precedence over it.
+   * - `divided` - a full-bleed search view with square corners and a bottom
+   *   `Divider`. Deprecated in M3 Expressive in favor of `contained`.
    */
-  mode?: 'bar' | 'view';
+  mode?: 'contained' | 'divided';
   /**
    * Icon name for the left icon button (see `onIconPress`).
    */
@@ -81,13 +138,11 @@ export type Props = Omit<TextInputProps, 'style'> & {
    */
   clearTestID?: string;
   /**
-   * @supported Available in v5.x with theme version 3
    * Icon name for the right trailing icon button.
-   * Works only when `mode` is set to "bar". It won't be displayed if `loading` is set to `true`.
+   * Works only when `mode` is set to "contained". It won't be displayed if `loading` is set to `true`.
    */
   trailingIcon?: IconSource;
   /**
-   * @supported Available in v5.x with theme version 3
    * Custom color for the right trailing icon, default will be derived from theme
    */
   trailingIconColor?: ColorValue;
@@ -104,9 +159,8 @@ export type Props = Omit<TextInputProps, 'style'> & {
    */
   trailingTestID?: string;
   /**
-   * @supported Available in v5.x with theme version 3
    * Callback which returns a React element to display on the right side.
-   * Works only when `mode` is set to "bar".
+   * Works only when `mode` is set to "contained".
    */
   right?: (props: {
     color: ColorValue;
@@ -114,13 +168,11 @@ export type Props = Omit<TextInputProps, 'style'> & {
     testID?: string;
   }) => React.ReactNode;
   /**
-   * @supported Available in v5.x with theme version 3
    * Whether to show `Divider` at the bottom of the search.
-   * Works only when `mode` is set to "view". True by default.
+   * Works only when `mode` is set to "divided". True by default.
    */
   showDivider?: boolean;
   /**
-   * @supported Available in v5.x with theme version 3
    * Changes Searchbar shadow and background on iOS and Android.
    */
   elevation?: Elevation;
@@ -128,6 +180,13 @@ export type Props = Omit<TextInputProps, 'style'> & {
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
+  /**
+   * Style of the Searchbar.
+   *
+   * Applied to the `Surface` that draws the bar, along with any Reanimated
+   * style. Background color and border radius should be set through the
+   * `theme` instead.
+   */
   style?: StyleProp<SurfaceStyle>;
   /**
    * Custom flag for replacing clear button with activity indicator.
@@ -184,12 +243,12 @@ const Searchbar = ({
   clearTestID,
   onClearIconPress,
   trailingIcon,
-  trailingIconColor,
+  trailingIconColor: customTrailingIconColor,
   trailingIconAccessibilityLabel,
   trailingTestID,
   onTrailingIconPress,
   right,
-  mode = 'bar',
+  mode = 'contained',
   showDivider = true,
   inputStyle,
   placeholder,
@@ -199,14 +258,14 @@ const Searchbar = ({
   value,
   loading = false,
   testID,
+  onFocus,
+  onBlur,
   ref,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-
   const { direction } = useLocale();
-  const { colors, fonts } = theme;
-
+  const reduceMotion = useReduceMotion();
   const root = React.useRef<TextInput>(null);
 
   React.useImperativeHandle(ref, () => ({
@@ -228,28 +287,107 @@ const Searchbar = ({
 
   const { dark } = theme;
 
-  const placeholderTextColor = theme.colors.onSurface;
-  const textColor = theme.colors.onSurfaceVariant;
-  const iconColor = customIconColor || theme.colors.onSurfaceVariant;
+  const {
+    containerColor,
+    inputColor,
+    placeholderColor,
+    leadingIconColor,
+    trailingIconColor,
+    cursorColor,
+    dividerColor,
+  } = React.useMemo(() => getSearchbarColors(theme), [theme]);
+  const iconColor = customIconColor || leadingIconColor;
 
-  const font = {
-    ...fonts.bodyLarge,
-    lineHeight: Platform.select({
-      ios: 0,
-      default: fonts.bodyLarge.lineHeight,
-    }),
-  };
+  const font = getSearchbarInputFont(theme);
 
-  const isBarMode = mode === 'bar';
+  const isContained = mode === 'contained';
   const inputTextAlign = direction === 'rtl' ? 'right' : 'left';
   const shouldRenderTrailingIcon =
-    isBarMode && trailingIcon && !loading && (!value || right !== undefined);
+    isContained && trailingIcon && !loading && (!value || right !== undefined);
+
+  const borderRadius = resolveCornerRadius(
+    theme,
+    isContained ? SearchbarTokens.contained : SearchbarTokens.divided
+  );
+
+  // A two-state transition, so a Reanimated CSS transition on a plain style
+  // placed before `style`, which lets the consumer override the margin.
+  const [focused, setFocused] = React.useState(false);
+  // Pressing one of the bar's own buttons blurs the input on web, and
+  // collapsing then moves the button out from under the pointer. The bar stays
+  // expanded until focus leaves it entirely.
+  const [focusHeldInside, setFocusHeldInside] = React.useState(false);
+  // An object ref would reach `Surface` as a `forwardedRef` prop. Typed as an
+  // `HTMLElement` so `focusout` resolves to a typed `FocusEvent` listener.
+  const barNodeRef = React.useRef<HTMLElement | null>(null);
+  const expanded = focused || focusHeldInside;
+
+  const handleBarRef = React.useCallback((instance: View | null) => {
+    // On web react-native-web resolves a view ref to the DOM node it rendered.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+    barNodeRef.current = instance as unknown as HTMLElement | null;
+  }, []);
+
+  React.useEffect(() => {
+    if (!focusHeldInside || Platform.OS !== 'web') {
+      return;
+    }
+
+    const node = barNodeRef.current;
+
+    const handleFocusOut = (event: FocusEvent) => {
+      const staysInside =
+        event.relatedTarget instanceof Node &&
+        !!node?.contains(event.relatedTarget);
+      if (!staysInside) {
+        setFocusHeldInside(false);
+      }
+    };
+
+    node?.addEventListener('focusout', handleFocusOut);
+    return () => node?.removeEventListener('focusout', handleFocusOut);
+  }, [focusHeldInside]);
+
+  const handleFocus: NonNullable<TextInputProps['onFocus']> = (e) => {
+    setFocused(true);
+    onFocus?.(e);
+  };
+
+  const handleBlur: NonNullable<TextInputProps['onBlur']> = (e) => {
+    setFocused(false);
+    setFocusHeldInside(isFocusInsideBar(e, barNodeRef.current));
+    onBlur?.(e);
+  };
+
+  const focusTransitionStyle: CSSStyle<ViewStyle> = {
+    marginHorizontal: expanded
+      ? SearchbarTokens.marginFocused
+      : SearchbarTokens.marginUnfocused,
+    transitionProperty: [
+      // RNW writes this out as CSS `margin-inline`, which web has to name.
+      'marginHorizontal',
+      ...(Platform.OS === 'web'
+        ? (['marginInline'] as SurfaceTransitionProperty[])
+        : []),
+      ...SURFACE_TRANSITION_PROPERTIES,
+    ],
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+  };
 
   return (
     <Surface
-      backgroundColor={theme.colors.surfaceContainerHigh}
-      borderRadius={isBarMode ? theme.shapes.corner.extraLarge : cornerNone}
-      style={[styles.container, style]}
+      ref={handleBarRef}
+      backgroundColor={containerColor}
+      borderRadius={borderRadius}
+      style={[
+        styles.container,
+        isContained ? focusTransitionStyle : null,
+        style,
+      ]}
+      // `Surface` applies its own duration after `style`, hence the prop.
+      transitionDuration={
+        reduceMotion ? 0 : theme.motion.duration.medium2 * theme.animation.scale
+      }
       elevation={elevation}
       theme={theme}
     >
@@ -277,17 +415,17 @@ const Searchbar = ({
         style={[
           styles.input,
           {
-            color: textColor,
+            color: inputColor,
             ...font,
             ...Platform.select({ web: { outline: 'none' } }),
             textAlign: inputTextAlign,
           },
-          isBarMode ? styles.barModeInput : styles.viewModeInput,
+          isContained ? styles.containedInput : styles.dividedInput,
           inputStyle,
         ]}
         placeholder={placeholder || ''}
-        placeholderTextColor={placeholderTextColor}
-        selectionColor={colors.primary}
+        placeholderTextColor={placeholderColor}
+        selectionColor={cursorColor}
         underlineColorAndroid="transparent"
         returnKeyType="search"
         keyboardAppearance={dark ? 'dark' : 'light'}
@@ -295,6 +433,8 @@ const Searchbar = ({
         ref={root}
         value={value}
         testID={testID}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...rest}
       />
       {loading ? (
@@ -314,7 +454,7 @@ const Searchbar = ({
           <IconButton
             borderless
             aria-label={clearAccessibilityLabel}
-            iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+            iconColor={value ? trailingIconColor : 'rgba(255, 255, 255, 0)'}
             onPress={handleClearPress}
             icon={
               clearIcon ||
@@ -327,9 +467,9 @@ const Searchbar = ({
                 />
               ))
             }
+            testID={clearTestID}
             role="button"
             theme={theme}
-            testID={clearTestID}
           />
         </View>
       )}
@@ -338,21 +478,26 @@ const Searchbar = ({
           role="button"
           borderless
           onPress={onTrailingIconPress}
-          iconColor={trailingIconColor || colors.onSurfaceVariant}
+          iconColor={customTrailingIconColor || trailingIconColor}
           icon={trailingIcon}
           aria-label={trailingIconAccessibilityLabel}
+          theme={theme}
           testID={trailingTestID}
         />
       ) : null}
-      {isBarMode &&
-        right?.({ color: textColor, style: styles.rightStyle, testID })}
-      {!isBarMode && showDivider && (
+      {isContained &&
+        right?.({
+          color: trailingIconColor,
+          style: styles.rightStyle,
+          testID,
+        })}
+      {!isContained && showDivider && (
         <Divider
           bold
           style={[
             styles.divider,
             {
-              backgroundColor: colors.outline,
+              backgroundColor: dividerColor,
             },
           ]}
         />
@@ -368,18 +513,17 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 18,
-    paddingLeft: 8,
+    paddingLeft: SearchbarTokens.inputPaddingHorizontal,
     alignSelf: 'stretch',
     minWidth: 0,
   },
-  barModeInput: {
+  containedInput: {
     paddingLeft: 0,
-    minHeight: 56,
+    minHeight: SearchbarTokens.minHeight,
   },
-  viewModeInput: {
+  dividedInput: {
     paddingLeft: 0,
-    minHeight: 72,
+    minHeight: SearchbarTokens.dividedMinHeight,
   },
   v3Loader: {
     marginHorizontal: 16,
