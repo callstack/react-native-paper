@@ -1,0 +1,340 @@
+@import './landing-vendor.css';
+
+.landing,
+.landing *,
+.landing *::before,
+.landing *::after {
+  box-sizing: border-box;
+}
+
+.landing {
+  color: #000;
+  background: #fff;
+  font-synthesis: weight style small-caps;
+  -webkit-font-smoothing: auto;
+  text-rendering: auto;
+}
+
+.landing .landing-editor__preview :is(h1, h2, h3, h4, h5, h6) {
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+}
+
+.landing .landing-editor__preview [role='img'] {
+  line-height: 1 !important;
+}
+
+.landing :where(h3, h4, h5, h6):where(:not(.landing-editor__preview *)) {
+  font-family: var(--rp-font-family) !important;
+}
+
+.landing :is(h1, h2, h3, h4, h5, h6):where(:not(.landing-editor__preview *)) * {
+  font-family: inherit;
+  line-height: inherit !important;
+}
+
+.landing h1,
+.landing h2,
+.landing h1 * {
+  font-feature-settings: normal !important;
+  font-variant-numeric: normal !important;
+}
+
+.landing,
+.landing * {
+  letter-spacing: normal !important;
+}
+
+.landing :where(h1, h2, h3, h4, h5, h6):where(:not(.landing-editor__preview *)) {
+  font-weight: bold !important;
+}
+
+.landing .cn49emr * {
+  line-height: inherit !important;
+}
+
+.landing .gwvv8a1 *,
+.landing .s152rxo6 * {
+  line-height: inherit !important;
+}
+
+.landing .s5mrc6w svg {
+  display: inline;
+  vertical-align: baseline;
+}
+
+:where(.landing) h1 {
+  margin-block: 0.67em;
+}
+
+:where(.landing) h2 {
+  margin-block: 0.83em;
+}
+
+:where(.landing) h3 {
+  margin-block: 1em;
+}
+
+:where(.landing) h4 {
+  margin-block: 1.33em;
+}
+
+:where(.landing) h5 {
+  margin-block: 1.67em;
+}
+
+:where(.landing) h6 {
+  margin-block: 2.33em;
+}
+
+:where(.landing) p {
+  margin-block: 1em;
+}
+
+@media (min-width: 925px) {
+  .landing .hmtzm5j {
+    width: 463px;
+  }
+}
+
+.landing h1:not(.hmtzm5j):not(.h1knnu89):where(:not(.landing-editor__preview *)),
+.landing h2:where(:not(.landing-editor__preview *)) {
+  line-height: normal !important;
+}
+
+.landing :where(h3, h4, h5, h6):where(:not(.landing-editor__preview *)) {
+  line-height: normal !important;
+}
+
+.landing .n1himknf h4 a {
+  text-decoration: underline;
+}
+
+.landing .hfwrvff a,
+.landing .cmn45yp h2,
+.landing .n1himknf h3 {
+  font-family: var(--ck-header-font-family) !important;
+}
+
+.landing .n1himknf h3 {
+  line-height: normal !important;
+}
+
+.landing .hv0shhd {
+  --hv0shhd-0: transparent;
+  --hv0shhd-1: none;
+  --hv0shhd-2: #000000;
+}
+
+.landing .h12yetm2 {
+  justify-content: center;
+}
+
+div#__rspress_root:has(> main.landing) {
+  padding-bottom: 0 !important;
+  background-image: none !important;
+}
+
+div#__rspress_root:has(> main.landing)::after {
+  content: none !important;
+}
+
+.landing-editor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.landing-editor__col {
+  position: relative;
+  flex: 0 0 50%;
+  max-width: 460px;
+}
+
+.landing-editor__icon {
+  align-self: start;
+  width: 65px;
+  height: auto;
+}
+
+.landing .landing-editor__heading {
+  margin-top: 30px;
+  margin-bottom: 0.67em;
+  text-align: left;
+}
+
+.landing .landing-editor__lede {
+  max-width: 400px;
+  margin-bottom: 50px;
+  color: #414757;
+  font-size: 18px !important;
+  line-height: 28px !important;
+}
+
+.landing-editor__codebox {
+  height: 400px;
+  max-width: 400px;
+  overflow: auto;
+  border-radius: 5px;
+  background: #202c32;
+}
+
+.landing .landing-editor__codebox > pre {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 0 0 20px;
+  overflow: visible !important;
+}
+
+.landing .landing-code--numbered {
+  position: relative;
+  counter-reset: token-line;
+  white-space: pre-wrap !important;
+}
+
+.landing .landing-code--numbered .token-line::before {
+  counter-increment: token-line;
+  content: counter(token-line);
+  position: absolute;
+  left: -10px;
+  overflow: visible;
+  color: rgb(84, 94, 104);
+}
+
+.landing .landing-code--numbered,
+.landing .landing-code--numbered * {
+  line-height: normal !important;
+}
+
+.landing-editor__ornament {
+  position: absolute;
+  top: 470px;
+  left: 425px;
+  display: block !important;
+  transform: rotate(0deg);
+}
+
+.landing-editor__phone {
+  position: relative;
+  flex: 0 0 auto;
+  width: 380px;
+  height: 793px;
+  bottom: -80px;
+}
+
+.landing-editor__frame {
+  position: relative;
+  z-index: 3;
+  display: block;
+  width: 380px;
+  height: 793px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.landing-editor__screen {
+  position: absolute;
+  top: 37px;
+  left: 30px;
+  width: 320px;
+  height: 710px;
+  background: #fff;
+}
+
+.landing-editor__preview {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(33, 0, 93, 1);
+  border-radius: 50px;
+}
+
+.landing-lookfeel__row--second {
+  margin-top: 60px;
+}
+
+.landing .i15993hv {
+  margin-left: 50%;
+}
+
+.landing-slider__swipe {
+  touch-action: pan-y;
+}
+
+.landing a.b1qn7xxj {
+  display: inline-flex;
+  align-items: center;
+}
+
+.landing .awvlien button {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.landing .awvlien button img {
+  display: block;
+  width: 100%;
+}
+
+.landing .p2eysq8 {
+  padding: 0;
+  border: 3px solid #21005d;
+  cursor: pointer;
+  appearance: none;
+}
+
+.landing .p2eysq8:focus-visible {
+  opacity: 1;
+  outline: 3px solid #fff;
+  outline-offset: -6px;
+}
+
+.landing .skghjfv,
+.landing .bpqw886,
+.landing .hz1a1q4 img,
+.landing .d1cbpza3 img {
+  display: inline !important;
+}
+
+.landing .d1cbpza3 {
+  line-height: normal !important;
+}
+
+.landing .d1cbpza3 p {
+  letter-spacing: normal !important;
+}
+
+.landing .d1cbpza3 img {
+  vertical-align: baseline;
+}
+
+.landing .c11ps6c6,
+.landing .c11ps6c6 .token-line {
+  line-height: normal !important;
+}
+
+.landing .seb0k0g,
+.landing .landing-code--numbered,
+.landing .c11ps6c6 .token,
+.landing .c11ps6c6 code {
+  font-family: var(--rp-font-family-mono) !important;
+}
+
+.landing .seb0k0g,
+.landing .seb0k0g *,
+.landing .landing-code--numbered,
+.landing .landing-code--numbered * {
+  font-weight: 400 !important;
+}
+
+.landing .c11ps6c6 > pre {
+  margin: 0;
+  width: 100%;
+}
