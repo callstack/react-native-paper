@@ -3,14 +3,16 @@
 
 ### Motivation
 
-<!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? -->
+<!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? Keep it concise and don't describe implementation details. -->
 
 ### Related issue
 
 <!-- If this pull request addresses an existing issue, link to the issue. If an issue is not present, describe the issue here. -->
 
+### Screenshots / Videos
+
+<!-- Provide screenshots or videos if the change affects UI, and Before/After comparisons if applicable. -->
+
 ### Test plan
 
-<!-- Describe the **steps to test this change**, so that a reviewer can verify it. Provide screenshots or videos if the change affects UI. -->
-
-<!-- Keep in mind that PR changes must pass lint, typecheck and tests. -->
+<!-- Describe the **steps to test this change manually**, so that a reviewer can verify it. Don't repeat checks already covered in automated tests. -->

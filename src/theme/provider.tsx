@@ -1,8 +1,8 @@
 import * as React from 'react';
-import type { ComponentType } from 'react';
 
 import { createTheming } from '@callstack/react-theme-provider';
 import type { $DeepPartial } from '@callstack/react-theme-provider';
+import isEqual from 'fast-deep-equal';
 
 import { DarkTheme, LightTheme } from './schemes';
 import type { Theme, NavigationTheme } from './types';
@@ -34,6 +34,7 @@ export const isPlatformColorSentinel = (v: unknown): boolean =>
 // merged output through bracket-notation assignment below.
 const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   if (
     !base ||
@@ -49,10 +50,11 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
     return (overrides ?? base) as T;
   }
   const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
-  for (const key of Object.keys(overrides as Record<string, unknown>)) {
+  for (const key of Object.keys(overrides)) {
     if (UNSAFE_KEYS.has(key)) {
       continue;
     }
+  for (const key of Object.keys(overrides)) {
     out[key] = safeMerge(
       (base as Record<string, unknown>)[key],
       (overrides as Record<string, unknown>)[key]
@@ -60,47 +62,36 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   }
   return out as T;
 };
+/* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
 
-/** Memoize `themeOverrides` at the call site; inline object literals defeat the memo. */
 export const useInternalTheme = (
   themeOverrides: $DeepPartial<Theme> | undefined
 ): Theme => {
   const theme = useThemeBase<Theme>();
+  const [overrides, setOverrides] = React.useState(themeOverrides);
+
+  if (!isEqual(overrides, themeOverrides)) {
+    setOverrides(themeOverrides);
+  }
+
   return React.useMemo(
-    () => (themeOverrides ? safeMerge(theme, themeOverrides) : theme),
-    [theme, themeOverrides]
+    () => (overrides ? safeMerge(theme, overrides) : theme),
+    [theme, overrides]
   );
-};
-
-export const withInternalTheme = <Props extends { theme: Theme }, C>(
-  WrappedComponent: ComponentType<Props & { theme: Theme }> & C
-) => withTheme<Props, C>(WrappedComponent);
-
-export const defaultThemes = {
-  light: LightTheme,
-  dark: DarkTheme,
-};
-
-export const getTheme = <Scheme extends boolean = false>(
-  isDark: Scheme = false as Scheme
-): (typeof defaultThemes)[Scheme extends true ? 'dark' : 'light'] => {
-  const scheme = isDark ? 'dark' : 'light';
-
-  return defaultThemes[scheme];
 };
 
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationLight: T;
   materialLight?: Theme;
 }): {
-  LightTheme: NavigationTheme;
+  LightTheme: T;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationDark: T;
   materialDark?: Theme;
 }): {
-  DarkTheme: NavigationTheme;
+  DarkTheme: T;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<

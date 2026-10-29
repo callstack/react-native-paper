@@ -7,5 +7,6 @@ export default function useLazyRef<T>(callback: () => T) {
     lazyRef.current = callback();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   return lazyRef as React.MutableRefObject<T>;
 }

@@ -10,11 +10,12 @@ export const isKeyboardFocusEvent = (
 ): boolean => {
   if (Platform.OS !== 'web') return true;
   try {
-    const target = e.currentTarget as unknown as {
-      matches?: (selector: string) => boolean;
-    };
-    if (typeof target.matches === 'function') {
-      return target.matches(':focus-visible');
+    const target: unknown = e.currentTarget;
+    if (typeof target === 'object' && target !== null && 'matches' in target) {
+      const { matches } = target;
+      if (typeof matches === 'function') {
+        return matches.call(target, ':focus-visible');
+      }
     }
   } catch {
     // older browsers throw on unknown selectors

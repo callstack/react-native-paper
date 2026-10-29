@@ -2,9 +2,310 @@
 title: Migration from Paper 5.x to 6.x
 ---
 
-TBC
+## General changes
+
+### Animations
+
+React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-reanimated/) for most animations instead of the built-in React Native `Animated` API. So make sure to install `react-native-reanimated` 4.3.0 or later and `react-native-worklets` 0.8.1 or later, then complete the Reanimated setup. See the [getting started guide](./getting-started) for Expo and Community CLI instructions.
+
+The following props now accept animated styles returned from `useAnimatedStyle`. They no longer accept `Animated.Value` or `Animated.AnimatedInterpolation` where these were previously supported:
+
+- `Appbar.Action` and `Appbar.BackAction`: `style`
+- `Badge`: `style`
+- `Banner`: `style`
+- `Button`: `style`
+- `Card`: `style`
+- `Chip`: `style`
+- `Dialog`: `style`
+- `Drawer.CollapsedItem`: `style`
+- `FAB` and `FAB.Extended`: `style`
+- `IconButton`: `style`
+- `Menu`: `contentStyle`
+- `Modal`: `contentContainerStyle`
+- `Searchbar`: `style`
+- `Snackbar`: `style`
+- `Surface`: `style`
+
+So you can use Reanimated's `useSharedValue` and `useAnimatedStyle` to animate these components instead of the React Native `Animated` API.
+
+```tsx
+import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+
+const MyComponent = () => {
+  const opacity = useSharedValue(1);
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
+
+  return <Card style={animatedStyle}>Button</Card>;
+};
+```
+
+### Elevation
+
+The `elevation` prop no longer accepts a React Native `Animated.Value` in the following components:
+
+- `Banner`
+- `Card`
+- `Searchbar`
+- `Snackbar`
+- `Surface`
+
+You can use an elevation level from `0` to `5` instead. Changes to the elevation level are animated automatically.
+
+### Styles
+
+The following component style props no longer support overriding their background color or border radius:
+
+- `Banner`
+- `Button`
+- `Card`
+- `Chip`
+- `Dialog`
+- `Menu`: `contentStyle`
+- `Searchbar`
+- `Snackbar`
+
+You can use the component's color prop where available, or override the corresponding theme colors.
+
+### Test IDs
+
+Hardcoded default test IDs have been removed for the components listed below:
+
+- `Appbar.Content`: `appbar-content`
+- `Appbar.Header`: `appbar-header`
+- `BottomNavigation`: `bottom-navigation`
+- `BottomNavigation.Bar`: `bottom-navigation-bar`
+- `Button`: `button`
+- `Card`: `card`
+- `Chip`: `chip`
+- `Drawer.CollapsedItem`: `drawer-collapsed-item`
+- `FAB`: `floating-action-button`
+- `FAB.Extended`: `extended-floating-action-button`
+- `FAB.Menu`: `floating-action-button-menu`
+- `IconButton`: `icon-button`
+- `Menu`: `menu`
+- `Menu.Item`: `menu-item`
+- `Modal`: `modal`
+- `ProgressBar`: `progress-bar`
+- `Searchbar`: `search-bar`
+- `Surface`: `surface`
+
+You can specify a `testID` explicitly to restore each component's own test ID.
+
+These components used to also derive test IDs for internal, implementation-only elements by appending a suffix to the `testID` prop (e.g. `${testID}-container`, `${testID}-icon`, `${testID}-outline`). They have been removed entirely.
+
+If you were relying on internal test IDs, update your tests not to rely on internal implementation details and only interact with elements or assert content your users can reach, e.g.: query by role, label, text etc., or `testID` props accepted by the component.
+
+Some components now accept explicit `testID` props for their interactable elements:
+
+- `BottomNavigation`: `barTestID` for the internal `BottomNavigation.Bar`, replacing the previous `${testID}-bar` derivation.
+- `Chip`: `closeIconTestID` for the close icon button.
+- `Dialog` and `Modal`: `overlayTestID` for the overlay displayed behind the content.
+- `Menu`: `overlayTestID` for the overlay displayed behind the menu.
+- `Searchbar`: `searchTestID`, `clearTestID`, and `trailingTestID` for the search, clear, and trailing icon buttons.
+- `Snackbar`: `iconTestID` for the icon button.
 
 ## Components
+
+### Appbar
+
+The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
+
+The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+
+### Surface
+
+- The `elevation` prop no longer accepts a React Native `Animated.Value`. Any `elevation` changes are animated automatically.
+- The `style` prop no longer configures elevation, background color, or border radius. Use these props instead:
+  - `elevation`
+  - `backgroundColor`
+  - `borderRadius`
+  - `borderBottomEndRadius`
+  - `borderBottomLeftRadius`
+  - `borderBottomRightRadius`
+  - `borderBottomStartRadius`
+  - `borderEndEndRadius`
+  - `borderEndStartRadius`
+  - `borderStartEndRadius`
+  - `borderStartStartRadius`
+  - `borderTopEndRadius`
+  - `borderTopLeftRadius`
+  - `borderTopRightRadius`
+  - `borderTopStartRadius`
+  - `borderCurve`
+- The `pointerEvents` prop is no longer supported as it's deprecated in React Native Web. You can specify `pointerEvents` in the `style` prop instead.
+- The `overflow: 'hidden'` style is no longer supported in `style` as it can clip shadows. You can nest a `View` inside the `Surface` and apply `overflow: 'hidden'` to that instead.
+- The default `testID` for `Surface` was removed. You can specify a `testID` explicitly if you need it.
+
+e.g.:
+
+```diff
+<Surface
+- style={{
+-   backgroundColor: 'red',
+-   borderRadius: 8,
+-   overflow: 'hidden',
+- }}
++ backgroundColor="red"
++ borderRadius={8}
+>
++ <View style={{ overflow: 'hidden' }}>
+    <Text>Content</Text>
++ </View>
+</Surface>
+```
+
+### Modal
+
+`Modal` now uses a `Portal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Modal`:
+
+```diff
+-<Portal>
+-  <Modal visible={visible} onDismiss={hideModal}>
+-    <Text>Content</Text>
+-  </Modal>
+-</Portal>
++<Modal visible={visible} onDismiss={hideModal}>
++  <Text>Content</Text>
++</Modal>
+```
+
+- The `contentContainerStyle` prop no longer configures the background color or any border radius property. We have added new props for these:
+  - `contentBackgroundColor`
+  - `contentBorderRadius`
+- We have added the `contentElevation` prop to configure the elevation of the modal content.
+
+e.g.:
+
+```diff
+<Modal
+  visible={visible}
+- contentContainerStyle={{
+-   backgroundColor: 'white',
+-   borderRadius: 8,
+-   padding: 20,
+- }}
++ contentBackgroundColor="white"
++ contentBorderRadius={8}
++ contentElevation={2}
++ contentContainerStyle={{ padding: 20 }}
+>
+  <Text>Content</Text>
+</Modal>
+```
+
+The modal content now has the `dialog` role, so it needs an accessible name. You can provide one with the new `aria-label` prop:
+
+```diff
+-<Modal visible={visible} onDismiss={hideModal}>
++<Modal visible={visible} onDismiss={hideModal} aria-label="Example modal">
+   <Text>Content</Text>
+ </Modal>
+```
+
+The overlay behind the content is now hidden from assistive technology. Instead, when the modal is `dismissable`, screen reader users can dismiss it with a visually hidden button inside the dialog.
+
+The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`, which is used for the button's accessibility label:
+
+```diff
+<Modal
+  visible={visible}
+  onDismiss={hideModal}
+- overlayAccessibilityLabel="Close"
++ dismissAccessibilityLabel="Close"
+>
+  <Text>Content</Text>
+</Modal>
+```
+
+Previously, the Android back button dismissed the modal when `dismissable` was `true`, even if `dismissableBackButton` was `false`. The `dismissableBackButton` prop can now prevent the modal from being dismissed via the back button independently of the `dismissable` prop.
+
+### Dialog
+
+`Dialog` now uses a `Portal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Dialog`:
+
+```diff
+-<Portal>
+-  <Dialog visible={visible} onDismiss={hideDialog}>
+-    <Dialog.Title>Alert</Dialog.Title>
+-  </Dialog>
+-</Portal>
++<Dialog visible={visible} onDismiss={hideDialog}>
++  <Dialog.Title>Alert</Dialog.Title>
++</Dialog>
+```
+
+The dialog now has the `dialog` role. On web, the dialog's accessible name is set automatically by `Dialog.Title`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
+
+```jsx
+<Dialog visible={visible} onDismiss={hideDialog} aria-label="Delete file">
+  <Dialog.Content>
+    <Text>Are you sure?</Text>
+  </Dialog.Content>
+</Dialog>
+```
+
+When the dialog is `dismissable`, screen reader users can dismiss it with a visually hidden button inside the dialog. You can change the button's accessibility label with the new `dismissAccessibilityLabel` prop.
+
+- The default elevation changed from level `1` to level `3`.
+- The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
+
+#### `Dialog.Actions`
+
+`Dialog.Actions` no longer injects `compact` on its buttons. To keep the previous behavior, you need to add the `compact` prop to each button:
+
+```tsx
+// Before (v5)
+<Dialog.Actions>
+  <Button onPress={hide}>Done</Button>
+</Dialog.Actions>
+
+// After (v6)
+<Dialog.Actions>
+  <Button compact onPress={hide}>
+    Done
+  </Button>
+</Dialog.Actions>
+```
+
+### Menu
+
+The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
+
+```diff
+<Menu
+  visible={visible}
+  onDismiss={closeMenu}
+  anchor={anchor}
+- overlayAccessibilityLabel="Close"
++ dismissAccessibilityLabel="Close"
+>
+  <Menu.Item title="Item" />
+</Menu>
+```
+
+### Searchbar
+
+The misspelled `traileringIcon` props have been renamed:
+
+- **`traileringIcon`** → **`trailingIcon`**
+- **`traileringIconColor`** → **`trailingIconColor`**
+- **`traileringIconAccessibilityLabel`** → **`trailingIconAccessibilityLabel`**
+- **`onTraileringIconPress`** → **`onTrailingIconPress`**
+
+```diff
+<Searchbar
+- traileringIcon="microphone"
+- traileringIconColor={colors.onSurfaceVariant}
+- traileringIconAccessibilityLabel="microphone button"
+- onTraileringIconPress={onMicrophonePress}
++ trailingIcon="microphone"
++ trailingIconColor={colors.onSurfaceVariant}
++ trailingIconAccessibilityLabel="microphone button"
++ onTrailingIconPress={onMicrophonePress}
+/>
+```
 
 ### TextInput
 
@@ -125,4 +426,150 @@ const theme = {
   theme={theme}
   style={{ fontSize: 16, color: '#1C1B1F' }}
 />
+```
+
+### Card
+
+#### `Card` layout
+
+`Card` and its related components have been reworked. Instead of injecting padding to its children, the `Card` component now adds a padding (`16dp`) around its content as well as a gap (`16dp`) between its children.
+
+For the related components:
+
+- `Card.Cover` and `Card.Actions` now apply negative margins to extend into the Card's edges:
+  - `Card.Cover` applies top, left and right margins for vertical cards and left, top, and bottom margins for horizontal cards.
+  - `Card.Actions` applies bottom, left, and right margins for vertical cards and left, bottom, and right margins for horizontal cards.
+- `Card.Title` and `Card.Content` no longer apply padding around them.
+
+This means, in a typical card layout, the Card will automatically apply the necessary spacing between these sections:
+
+```tsx
+<Card>
+  <Card.Cover source={cover} />
+  <Card.Title title="Card title" />
+  <Card.Content>
+    <Text>Card content</Text>
+  </Card.Content>
+  <Card.Actions>
+    <Button mode="contained">Action</Button>
+    <Button mode="outlined">Another Action</Button>
+  </Card.Actions>
+</Card>
+```
+
+So your existing layouts with the following structure will continue to work as before:
+
+- `Card` without `Card.Cover` or `Card.Actions`.
+- `Card` with `Card.Cover` at the top and/or `Card.Actions` at the bottom.
+
+If you have `Card.Cover` or `Card.Actions` in positions other than the top and bottom respectively, you will need to adjust their margins. For example, for a `Card.Cover` in the middle of the Card, you would need to set its top and bottom margins to zero:
+
+```tsx
+<Card>
+  <Card.Title title="Card title" />
+  <Card.Cover source={cover} style={{ marginTop: 0, marginBottom: 0 }} />
+  <Card.Content>
+    <Text>Card content</Text>
+  </Card.Content>
+</Card>
+```
+
+We have also added a `direction` prop to the `Card` component, which lets you arrange its items horizontally instead of the default vertical layout. So if you have custom `flexDirection` styles on the Card, you should replace them with the `direction` prop.
+
+```tsx
+// Before (v5)
+<Card style={{ flexDirection: 'row' }}>
+  <Card.Cover source={cover} style={{ width: 72, height: 72 }} />
+  <Card.Title title="Card title" />
+  <Card.Content>
+    <Text>Card content</Text>
+  </Card.Content>
+  <Card.Actions>
+    <Button mode="contained">Action</Button>
+    <Button mode="outlined">Another Action</Button>
+  </Card.Actions>
+</Card>
+
+// After (v6)
+<Card direction="horizontal">
+  <Card.Cover source={cover} style={{ width: 72, height: 72 }} />
+  <Card.Title title="Card title" />
+  <Card.Content>
+    <Text>Card content</Text>
+  </Card.Content>
+  <Card.Actions>
+    <Button mode="contained">Action</Button>
+    <Button mode="outlined">Another Action</Button>
+  </Card.Actions>
+</Card>
+```
+
+#### `Card.Actions`
+
+`Card.Actions` no longer injects `mode` on the buttons. To keep the previous behavior, you need to set `mode="outlined"` on the first button and `mode="contained"` on the rest:
+
+```tsx
+// Before (v5)
+<Card.Actions>
+  <Button>Cancel</Button>
+  <Button>Ok</Button>
+</Card.Actions>
+
+// After (v6)
+<Card.Actions>
+  <Button mode="outlined">Cancel</Button>
+  <Button mode="contained">Ok</Button>
+</Card.Actions>
+```
+
+### List
+
+#### `List.Accordion`
+
+An accordion with a `left` element now indents only its `List.Item` children. Anything else you put inside keeps its own padding, so indent it yourself to line it up with the items.
+
+```tsx
+// Before (v5)
+<List.Accordion title="Group" left={props => <List.Icon {...props} icon="folder" />}>
+  <View>
+    <Text>Custom row</Text>
+  </View>
+</List.Accordion>
+
+// After (v6)
+<List.Accordion title="Group" left={props => <List.Icon {...props} icon="folder" />}>
+  <View style={{ paddingLeft: 40 }}>
+    <Text>Custom row</Text>
+  </View>
+</List.Accordion>
+```
+
+`theme` set on `List.Accordion` no longer reaches its children either. Pass it to the child that needs the override.
+
+### ToggleButton
+
+`ToggleButton`, `ToggleButton.Group` and `ToggleButton.Row` were removed. For an
+icon-only toggle, use `IconButton` with the `selected` prop. For a set of
+mutually exclusive options, use `SegmentedButtons`.
+
+```tsx
+// Before (v5)
+<ToggleButton.Group value={value} onValueChange={setValue}>
+  <ToggleButton icon="format-bold" value="bold" />
+  <ToggleButton icon="format-italic" value="italic" />
+</ToggleButton.Group>
+
+// After (v6)
+<>
+  <IconButton
+    icon="format-bold"
+    selected={value === 'bold'}
+    onPress={() => setValue('bold')}
+  />
+  <IconButton
+    icon="format-italic"
+    selected={value === 'italic'}
+    onPress={() => setValue('italic')}
+  />
+</>
 ```

@@ -1,0 +1,5940 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal closes a non-dismissible modal when visible changes from true to false 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal closes a non-dismissible modal when visible changes from true to false 2`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal invokes onDismiss immediately when the backdrop is pressed 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal invokes onDismiss immediately when the backdrop is pressed 2`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal invokes onDismiss when the Android back button is pressed 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal invokes onDismiss when the Android back button is pressed 2`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal invokes onDismiss when the Android back button is pressed 3`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps a non-dismissible modal visible when the Android back button is pressed 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps a non-dismissible modal visible when the Android back button is pressed 2`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps a non-dismissible modal visible when the Android back button is pressed 3`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps a non-dismissible modal visible when the backdrop is pressed 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps a non-dismissible modal visible when the backdrop is pressed 2`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps a non-dismissible modal visible when the backdrop is pressed 3`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps the modal closed when visible changes back to false while opening 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 0,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps the modal open when visible changes back to true while closing 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps the modal open when visible changes back to true while closing 2`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal keeps the modal open when visible changes back to true while closing 3`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal receives appropriate top and bottom insets 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal runs the closing animation when visible changes to false after dismissing 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal runs the closing animation when visible changes to false after dismissing 2`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal runs the closing animation when visible changes to false after dismissing 3`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal runs the fade-in animation when visible changes from false to true 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 0,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal runs the fade-in animation when visible changes from false to true 2`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal runs the fade-out animation when visible changes from true to false 1`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;
+
+exports[`Modal runs the fade-out animation when visible changes from true to false 2`] = `
+<>
+  <View
+    aria-hidden={true}
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      aria-live="polite"
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={false}
+        aria-hidden={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "opacity": 0.32,
+            },
+            {},
+          ]
+        }
+        tabIndex={-1}
+        testID="backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 44,
+              "marginTop": 37,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          aria-modal={true}
+          collapsable={false}
+          role="dialog"
+          style={
+            [
+              {},
+              {
+                "justifyContent": "center",
+              },
+              {
+                "opacity": 1,
+              },
+              {},
+              undefined,
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": undefined,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0.55,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.19,
+                "shadowRadius": 0.79,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "pointerEvents": "none",
+                },
+                {},
+                {},
+                {
+                  "backgroundColor": "transparent",
+                },
+                {
+                  "borderBottomEndRadius": undefined,
+                  "borderBottomLeftRadius": undefined,
+                  "borderBottomRightRadius": undefined,
+                  "borderBottomStartRadius": undefined,
+                  "borderCurve": "continuous",
+                  "borderEndEndRadius": undefined,
+                  "borderEndStartRadius": undefined,
+                  "borderRadius": undefined,
+                  "borderStartEndRadius": undefined,
+                  "borderStartStartRadius": undefined,
+                  "borderTopEndRadius": undefined,
+                  "borderTopLeftRadius": undefined,
+                  "borderTopRightRadius": undefined,
+                  "borderTopStartRadius": undefined,
+                },
+                {
+                  "shadowColor": "rgba(0, 0, 0, 1)",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.039,
+                  "shadowRadius": 0.25,
+                },
+              ]
+            }
+          />
+          <View
+            accessibilityLabel="Close modal"
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
+            style={
+              {
+                "height": 1,
+                "position": "absolute",
+                "width": 1,
+              }
+            }
+            tabIndex={-1}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</>
+`;

@@ -2,8 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import type { ColorValue } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import type { Theme } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 
@@ -24,6 +23,10 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -34,7 +37,7 @@ export type Props = {
  * ```js
  * import * as React from 'react';
  * import { StyleSheet } from 'react-native';
- * import { Dialog, Portal, Text } from 'react-native-paper';
+ * import { Dialog, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -42,15 +45,13 @@ export type Props = {
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.Icon icon="alert" />
- *         <Dialog.Title style={styles.title}>This is a title</Dialog.Title>
- *         <Dialog.Content>
- *           <Text variant="bodyMedium">This is simple dialog</Text>
- *         </Dialog.Content>
- *       </Dialog>
- *     </Portal>
+ *     <Dialog visible={visible} onDismiss={hideDialog}>
+ *       <Dialog.Icon icon="alert" />
+ *       <Dialog.Title style={styles.title}>This is a title</Dialog.Title>
+ *       <Dialog.Content>
+ *         <Text variant="bodyMedium">This is simple dialog</Text>
+ *       </Dialog.Content>
+ *     </Dialog>
  *   );
  * };
  *
@@ -68,15 +69,16 @@ const DialogIcon = ({
   color,
   icon,
   theme: themeOverrides,
+  testID,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
 
   //@ts-ignore
   const iconColor = color || colors.secondary;
 
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.wrapper} testID={testID}>
       <Icon source={icon} color={iconColor} size={size} />
     </View>
   );
@@ -88,7 +90,8 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 24,
+    marginBottom: 16,
+    paddingTop: 0,
   },
 });
 

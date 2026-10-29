@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { DataTable } from 'react-native-paper';
 
-import { teamsList } from '../../utils';
+import { teamsList, type colorThemes } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
 const TeamsList = () => {
@@ -24,7 +24,10 @@ const TeamsList = () => {
             key={item.key}
             onPress={() =>
               navigation.navigate('TeamDetails', {
-                sourceColor: item.name.split(' ')[1].toLowerCase(),
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+                sourceColor: item.name
+                  .split(' ')[1]
+                  .toLowerCase() as keyof typeof colorThemes,
                 headerTitle: item.name,
                 darkMode: item.darkMode ?? false,
               })

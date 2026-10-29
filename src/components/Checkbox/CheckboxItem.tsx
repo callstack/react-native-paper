@@ -9,8 +9,8 @@ import type {
 
 import Checkbox from './Checkbox';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp, TypescaleKey } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
-import type { ThemeProp, TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -37,7 +37,7 @@ export type Props = {
    */
   onLongPress?: (e: GestureResponderEvent) => void;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -147,10 +147,10 @@ const CheckboxItem = ({
 
   const textAlign = isLeading ? 'right' : 'left';
 
-  const computedStyle = {
+  const computedStyle: TextStyle = {
     ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
-  } as TextStyle;
+  };
 
   return (
     <TouchableRipple
@@ -174,7 +174,6 @@ const CheckboxItem = ({
         {isLeading && checkbox}
         <Text
           variant={labelVariant}
-          testID={`${testID}-text`}
           maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
           style={[styles.label, computedStyle, labelStyle]}
         >

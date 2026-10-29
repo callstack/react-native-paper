@@ -1,5 +1,5 @@
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 import type { IconSource } from '../Icon';
 
 const stateOpacity = tokens.md.sys.state.opacity;
