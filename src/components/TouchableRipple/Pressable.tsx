@@ -28,6 +28,14 @@ export type PressableProps = Omit<
     | StyleProp<ViewStyle>
     | ((state: PressableStateCallbackType) => StyleProp<ViewStyle>)
     | undefined;
+  /**
+   * Called when a key goes down while the pressable has focus. Web only.
+   */
+  onKeyDown?: (event: React.KeyboardEvent<HTMLElement>) => void;
+  /**
+   * Called when a key comes up while the pressable has focus. Web only.
+   */
+  onKeyUp?: (event: React.KeyboardEvent<HTMLElement>) => void;
 };
 
 // @ts-expect-error React Native Web adds focused and hovered callback state fields that React Native omits.

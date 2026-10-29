@@ -101,6 +101,26 @@ export const themeColors = {
       borderColor: 'theme.colors.outline',
     },
   },
+  ConnectedButtonGroup: {
+    checked: {
+      '-': {
+        backgroundColor: 'theme.colors.secondaryContainer',
+        textColor: 'theme.colors.onSecondaryContainer',
+      },
+    },
+    unchecked: {
+      '-': {
+        backgroundColor: 'theme.colors.surfaceContainer',
+        textColor: 'theme.colors.onSurfaceVariant',
+      },
+    },
+    disabled: {
+      '-': {
+        backgroundColor: 'theme.colors.onSurface',
+        textColor: 'theme.colors.onSurface',
+      },
+    },
+  },
   Dialog: {
     '-': {
       backgroundColor: 'theme.colors.elevation.level3',
