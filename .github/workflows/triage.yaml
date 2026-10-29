@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'needs more info'
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -40,8 +40,8 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'needs repro'
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |

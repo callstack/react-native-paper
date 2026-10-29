@@ -90,13 +90,14 @@ const TextInputOutlined = ({
 
   const {
     fontSize: fontSizeStyle,
-    fontWeight,
+    fontWeight: fontWeightStyle,
     lineHeight: lineHeightStyle,
     height,
     backgroundColor = colors?.background,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
+  const fontWeight = fontWeightStyle ?? font.fontWeight;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
   const lineHeight =
     lineHeightStyle || (Platform.OS === 'web' ? fontSize * 1.2 : undefined);

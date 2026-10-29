@@ -10,43 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version-file: .nvmrc
+      - name: Setup
+        uses: ./.github/actions/setup
 
       - name: Setup Expo
-        uses: expo/expo-github-action@d300b960e9f91a8c59b2aaca92e89ad70b0785ac # v7
+        uses: expo/expo-github-action@c7b66a9c327a43a8fa7c0158e7f30d6040d2481e # v8.2.1
         with:
           expo-version: latest
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Restore dependencies
-        id: yarn-cache
-        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}-${{ hashFiles('**/package.json', '!node_modules/**') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
-            ${{ runner.os }}-yarn-
-
-      - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: |
-          sudo corepack enable
-          yarn --cwd example --immutable
-          yarn --immutable
-
-      - name: Cache dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684 # v4
-        with:
-          path: '**/node_modules'
-          key: ${{ steps.yarn-cache.outputs.cache-primary-key }}
 
       - name: Publish Expo app update
         working-directory: ./example

@@ -12,7 +12,7 @@ jobs:
     if: ${{ github.event.label.name == 'bug' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: react-navigation/check-versions-action@deac0a153b834fdda425028be69b2cf786dacc31 # v1.1.0
+      - uses: react-navigation/check-versions-action@1f7edac18020a4dc38c4d174bb04311b196f9b75 # v1.2.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           required-packages: |
