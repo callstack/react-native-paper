@@ -1,6 +1,6 @@
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 type CardMode = 'elevated' | 'outlined' | 'contained';
 
@@ -17,14 +17,10 @@ export type CardActionChildProps = {
 
 export const getCardCoverStyle = ({
   theme,
-  index: _index,
-  total: _total,
   borderRadiusStyles,
 }: {
   theme: InternalTheme;
   borderRadiusStyles: BorderRadiusStyles;
-  index?: number;
-  total?: number;
 }) => {
   if (Object.keys(borderRadiusStyles).length > 0) {
     return {

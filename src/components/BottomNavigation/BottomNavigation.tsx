@@ -1,4 +1,5 @@
 import * as React from 'react';
+// eslint-disable-next-line no-restricted-imports -- TODO: migrate BottomNavigation to Reanimated.
 import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
@@ -12,7 +13,7 @@ import useLatestCallback from 'use-latest-callback';
 import BottomNavigationBar from './BottomNavigationBar';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -251,6 +252,10 @@ export type Props<Route extends BaseRoute> = {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * testID for the underlying `BottomNavigation.Bar`.
+   */
+  barTestID?: string;
 };
 
 const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
@@ -262,9 +267,6 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
 /**
  * BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.
  * It is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).
- *
- * By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
  *
  * ## Usage
  * ```js
@@ -334,7 +336,8 @@ const BottomNavigation = <Route extends BaseRoute>({
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
-  testID = 'bottom-navigation',
+  testID,
+  barTestID,
   theme: themeOverrides,
   getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props<Route>) => {
@@ -578,7 +581,7 @@ const BottomNavigation = <Route extends BaseRoute>({
         safeAreaInsets={safeAreaInsets}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         compact={compact}
-        testID={`${testID}-bar`}
+        testID={barTestID}
         theme={theme}
       />
     </View>

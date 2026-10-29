@@ -12,12 +12,13 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { ListAccordionContext } from './ListAccordionContext';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
-import type { ListChildProps, Style } from './utils';
+import type { Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -67,7 +68,7 @@ export type Props = {
    */
   theme?: ThemeProp;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -241,6 +242,10 @@ const ListAccordion = ({
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
       : handlePressAction;
+
+  const hasLeft = left != null;
+  const accordionContext = React.useMemo(() => ({ hasLeft }), [hasLeft]);
+
   return (
     <View>
       <View style={{ backgroundColor: theme?.colors?.background }}>
@@ -324,23 +329,11 @@ const ListAccordion = ({
         </TouchableRipple>
       </View>
 
-      {isExpanded
-        ? React.Children.map(children, (child) => {
-            if (
-              left &&
-              React.isValidElement<ListChildProps>(child) &&
-              !child.props.left &&
-              !child.props.right
-            ) {
-              return React.cloneElement(child, {
-                style: [styles.child, child.props.style],
-                theme,
-              });
-            }
-
-            return child;
-          })
-        : null}
+      {isExpanded ? (
+        <ListAccordionContext.Provider value={accordionContext}>
+          {children}
+        </ListAccordionContext.Provider>
+      ) : null}
     </View>
   );
 };
@@ -373,9 +366,6 @@ const styles = StyleSheet.create({
   trailingItem: {
     marginVertical: 6,
     paddingLeft: 8,
-  },
-  child: {
-    paddingLeft: 40,
   },
   content: {
     flex: 1,

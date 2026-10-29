@@ -244,7 +244,8 @@ const ChipExample = () => {
                   accessibilityIgnoresInvertColors
                 />
               }
-              style={[styles.chip, styles.customBorderRadius]}
+              style={styles.chip}
+              theme={{ shapes: { corner: { small: 16 } } }}
             >
               Compact with custom border radius
             </Chip>
@@ -258,7 +259,8 @@ const ChipExample = () => {
                   accessibilityIgnoresInvertColors
                 />
               }
-              style={[styles.chip, styles.customBorderRadius]}
+              style={styles.chip}
+              theme={{ shapes: { corner: { small: 16 } } }}
             >
               Compact with custom border radius
             </Chip>
@@ -275,12 +277,15 @@ const ChipExample = () => {
             <Chip
               selected
               onPress={() => {}}
-              style={[
-                styles.chip,
-                {
-                  backgroundColor: color(customColor).alpha(0.2).rgb().string(),
+              style={styles.chip}
+              theme={{
+                colors: {
+                  secondaryContainer: color(customColor)
+                    .alpha(0.2)
+                    .rgb()
+                    .string(),
                 },
-              ]}
+              }}
               selectedColor={customColor}
             >
               Flat selected chip with custom color
@@ -296,12 +301,12 @@ const ChipExample = () => {
               selected
               mode="outlined"
               onPress={() => {}}
-              style={[
-                styles.chip,
-                {
-                  backgroundColor: color(customColor).alpha(0.2).rgb().string(),
+              style={styles.chip}
+              theme={{
+                colors: {
+                  surface: color(customColor).alpha(0.2).rgb().string(),
                 },
-              ]}
+              }}
               selectedColor={customColor}
             >
               Outlined selected chip with custom color
@@ -402,9 +407,6 @@ const styles = StyleSheet.create({
   fullWidthChip: {
     marginVertical: 4,
     marginHorizontal: 12,
-  },
-  customBorderRadius: {
-    borderRadius: 16,
   },
 });
 

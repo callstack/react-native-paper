@@ -149,9 +149,6 @@ export const screenshots = {
     filled: 'screenshots/text-input-filled.png',
     outlined: 'screenshots/text-input-outlined.png',
   },
-  ToggleButton: 'screenshots/toggle-button.png',
-  'ToggleButton.Group': 'screenshots/toggle-button-group.gif',
-  'ToggleButton.Row': 'screenshots/toggle-button-row.gif',
   Tooltip: 'screenshots/tooltip.png',
   TouchableRipple: 'screenshots/touchable-ripple.gif',
 };

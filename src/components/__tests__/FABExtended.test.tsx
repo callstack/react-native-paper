@@ -1,14 +1,68 @@
-import { expect, it, jest } from '@jest/globals';
+import * as React from 'react';
+import { Platform, View } from 'react-native';
+
+import { afterEach, expect, it, jest } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
+import * as Reanimated from 'react-native-reanimated';
 
 import { render, screen } from '../../test-utils';
 import FAB from '../FAB';
+
+jest.mock('react-native-reanimated', () => {
+  const ReanimatedModule = jest.requireActual<
+    typeof import('react-native-reanimated')
+  >('react-native-reanimated');
+
+  return {
+    __esModule: true,
+    ...ReanimatedModule,
+    default: ReanimatedModule.default,
+    measure: jest.fn(),
+  };
+});
+
+afterEach(() => {
+  jest.mocked(Reanimated.measure).mockReset();
+  jest.restoreAllMocks();
+});
 
 it('renders extended FAB expanded', async () => {
   const tree = (
     await render(<FAB.Extended icon="plus" label="New message" expanded />)
   ).toJSON();
   expect(tree).toMatchSnapshot();
+});
+
+it('expands to fit the measured label width', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  jest.mocked(Reanimated.measure).mockReturnValue({
+    x: 0,
+    y: 0,
+    width: 80,
+    height: 20,
+    pageX: 0,
+    pageY: 0,
+  });
+
+  const ref = React.createRef<View>();
+  await render(
+    <FAB.Extended
+      icon="plus"
+      label="New message"
+      expanded
+      style={{}}
+      ref={ref}
+    />
+  );
+  await jest.runAllTimersAsync();
+
+  if (!ref.current) {
+    throw new Error('Expected FAB ref to be attached');
+  }
+
+  expect(Reanimated.getAnimatedStyle(ref.current)).toMatchObject({
+    width: 144,
+  });
 });
 
 it('renders extended FAB collapsed', async () => {

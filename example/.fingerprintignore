@@ -1,0 +1,2 @@
+# built by pod install, would make the fingerprint differ from the one EAS computes
+**/expo-modules-jsi/apple/Products/**

@@ -18,7 +18,7 @@ npm install react-native-paper
 npm install react-native-safe-area-context
 ```
 
-Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
+Additionally for `iOS` platform there is a requirement to link the native parts of the library:
 
 ```bash
 npx pod-install

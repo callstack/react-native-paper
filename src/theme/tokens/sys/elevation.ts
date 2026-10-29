@@ -1,34 +1,11 @@
 // M3 elevation tokens and shadow builder per spec:
 // https://m3.material.io/styles/elevation/tokens
 
-import {
-  Animated,
-  Platform,
-  type ColorValue,
-  type ViewStyle,
-  type Animated as AnimatedNS,
-} from 'react-native';
+import { Platform, type ColorValue, type ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { isAnimatedValue } from '../../../utils/animations';
-import type { Elevation, ThemeElevation } from '../../types';
-
-type AnimatedNativeShadowStyle = {
-  shadowColor: ColorValue;
-  shadowOffset: {
-    width: AnimatedNS.Value;
-    height: AnimatedNS.AnimatedInterpolation<number>;
-  };
-  shadowOpacity: AnimatedNS.AnimatedInterpolation<number>;
-  shadowRadius: AnimatedNS.AnimatedInterpolation<number>;
-};
-
-type AnimatedBoxShadowStyle = {
-  boxShadow: AnimatedNS.AnimatedInterpolation<string | number>;
-};
-
-type AnimatedShadowStyle = AnimatedNativeShadowStyle | AnimatedBoxShadowStyle;
+import type { ThemeElevation } from '../../types';
 
 export const defaultElevation: ThemeElevation = {
   level0: 0,
@@ -38,8 +15,6 @@ export const defaultElevation: ThemeElevation = {
   level4: 4,
   level5: 5,
 };
-
-export const elevationInputRange: Elevation[] = Object.values(defaultElevation);
 
 export const androidElevationLevels = [0, 1, 3, 6, 8, 12];
 
@@ -110,7 +85,7 @@ const IOS_SHADOW_RADIUS_FACTOR = 0.5;
 const getShadowRadius = (blurRadius: number[]) =>
   blurRadius.map((radius) => round(radius * IOS_SHADOW_RADIUS_FACTOR));
 
-export const shadowLayers = [
+const shadowLayers = [
   {
     height: androidElevationLevels.map((dp) =>
       round(
@@ -130,94 +105,58 @@ export const shadowLayers = [
   },
 ];
 
-const getShadowColor = (shadowColor: ColorValue, shadowOpacity: number) => {
-  if (typeof shadowColor !== 'string') {
-    throw new Error(
-      `Expected a string shadow color on Web, but received a ${typeof shadowColor}.`
-    );
-  }
-
-  return color(shadowColor).alpha(shadowOpacity).rgb().string();
+type NativeShadowStyle = {
+  shadowColor: ColorValue;
+  shadowOpacity: number;
+  shadowOffset: {
+    width: number;
+    height: number;
+  };
+  shadowRadius: number;
 };
 
-const getBoxShadowValue = (elevation: number, layerColors: readonly string[]) =>
-  shadowLayers
-    .map(
-      (layer, index) =>
-        `0px ${layer.height[elevation]}px ${layer.blurRadius[elevation]}px ${layerColors[index]}`
-    )
-    .join(', ');
+type ShadowStyle =
+  | NativeShadowStyle
+  | { boxShadow: NonNullable<ViewStyle['boxShadow']> };
 
-export function shadow(elevation: number, shadowColor: ColorValue): ViewStyle;
-// eslint-disable-next-line no-redeclare
 export function shadow(
-  elevation: Animated.Value,
+  elevation: number,
   shadowColor: ColorValue
-): AnimatedShadowStyle;
-// eslint-disable-next-line no-redeclare
-export function shadow(
-  elevation: number | Animated.Value,
-  shadowColor: ColorValue
-): ViewStyle | AnimatedShadowStyle;
-// eslint-disable-next-line no-redeclare
-export function shadow(
-  elevation: number | Animated.Value = 0,
-  shadowColor: ColorValue
-): ViewStyle | AnimatedShadowStyle {
+): [ShadowStyle, NativeShadowStyle | undefined] {
   if (Platform.OS === 'web') {
-    const layerColors = shadowLayers.map((layer) =>
-      getShadowColor(shadowColor, layer.shadowOpacity)
-    );
-
-    if (isAnimatedValue(elevation)) {
-      return {
-        boxShadow: elevation.interpolate({
-          inputRange: elevationInputRange,
-          outputRange: elevationInputRange.map((value) =>
-            getBoxShadowValue(value, layerColors)
-          ),
-        }),
-      };
+    if (typeof shadowColor !== 'string') {
+      throw new Error(
+        `Expected a string shadow color on Web, but received a ${typeof shadowColor}.`
+      );
     }
 
-    return {
-      boxShadow: getBoxShadowValue(elevation, layerColors),
-    };
-  }
-
-  // For a single view, we can only draw one shadow
-  // So we pick the spot shadow, as it shows the depth
-  const [spotShadow] = shadowLayers;
-
-  if (isAnimatedValue(elevation)) {
-    return {
-      shadowColor,
-      shadowOffset: {
-        width: new Animated.Value(0),
-        height: elevation.interpolate({
-          inputRange: elevationInputRange,
-          outputRange: spotShadow.height,
-        }),
+    return [
+      {
+        boxShadow: shadowLayers
+          .map(
+            (layer) =>
+              `0px ${layer.height[elevation]}px ${layer.blurRadius[elevation]}px ${color(
+                shadowColor
+              )
+                .alpha(layer.shadowOpacity)
+                .rgb()
+                .string()}`
+          )
+          .join(', '),
       },
-      shadowOpacity: elevation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, spotShadow.shadowOpacity],
-        extrapolate: 'clamp',
-      }),
-      shadowRadius: elevation.interpolate({
-        inputRange: elevationInputRange,
-        outputRange: spotShadow.shadowRadius,
-      }),
-    };
+      undefined,
+    ];
   }
 
-  return {
+  const [spotShadow, ambientShadow] = shadowLayers.map((layer) => ({
     shadowColor,
-    shadowOpacity: elevation ? spotShadow.shadowOpacity : 0,
+    shadowOpacity: elevation ? layer.shadowOpacity : 0,
     shadowOffset: {
       width: 0,
-      height: spotShadow.height[elevation],
+      height: layer.height[elevation],
     },
-    shadowRadius: spotShadow.shadowRadius[elevation],
-  };
+    shadowRadius: layer.shadowRadius[elevation],
+  }));
+
+  return [spotShadow, ambientShadow];
 }
