@@ -36,6 +36,11 @@ export type Props = PressableProps & {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
+  /**
+   * Debounce time in milliseconds to prevent rapid successive presses.
+   * When set, subsequent onPress calls within this time window will be ignored.
+   */
+  debounce?: number;
 };
 
 const TouchableRipple = (
@@ -48,6 +53,7 @@ const TouchableRipple = (
     underlayColor,
     children,
     theme: themeOverrides,
+    debounce,
     ...rest
   }: Props,
   ref: React.ForwardedRef<View>
@@ -56,6 +62,24 @@ const TouchableRipple = (
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
+  const lastPressTime = React.useRef<number>(0);
+
+  const debouncedOnPress = React.useCallback(
+    (e: GestureResponderEvent) => {
+      if (!onPress) return;
+
+      if (debounce && debounce > 0) {
+        const now = Date.now();
+        if (now - lastPressTime.current < debounce) {
+          return; // Ignore this press as it's within the debounce window
+        }
+        lastPressTime.current = now;
+      }
+
+      onPress(e);
+    },
+    [onPress, debounce]
+  );
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -96,6 +120,7 @@ const TouchableRipple = (
         disabled={disabled}
         style={[borderless && styles.overflowHidden, style]}
         android_ripple={androidRipple}
+        onPress={debouncedOnPress}
       >
         {React.Children.only(children)}
       </Pressable>
@@ -108,8 +133,9 @@ const TouchableRipple = (
       ref={ref}
       disabled={disabled}
       style={[borderless && styles.overflowHidden, style]}
+      onPress={debouncedOnPress}
     >
-      {({ pressed }) => (
+      {({ pressed }: { pressed: boolean }) => (
         <>
           {pressed && rippleEffectEnabled && (
             <View
