@@ -171,6 +171,7 @@ const Button = ({
   textColor: customTextColor,
   children,
   'aria-label': ariaLabel,
+  'aria-expanded': ariaExpanded,
   accessibilityHint,
   role = 'button',
   hitSlop,
@@ -328,6 +329,7 @@ const Button = ({
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
         aria-label={ariaLabel}
+        aria-expanded={ariaExpanded}
         accessibilityHint={accessibilityHint}
         role={role}
         aria-disabled={disabled}
