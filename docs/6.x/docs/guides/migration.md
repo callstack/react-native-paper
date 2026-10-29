@@ -428,6 +428,146 @@ const theme = {
 />
 ```
 
+### DataTable
+
+The Paper 6.x `DataTable` adds table semantics. The structure it produces and the accessible names it exposes have both changed. Existing tables should still be working.
+
+#### Touch handling
+
+Rows, cells and titles with no touch handler render a plain `View` instead of a disabled touchable
+
+```tsx
+// Before (v5): announced as a disabled control
+<DataTable.Row>
+  <DataTable.Cell>{item.name}</DataTable.Cell>
+</DataTable.Row>
+
+// After (v6): pass a handler if the row is meant to be pressable
+<DataTable.Row onPress={() => select(item)}>
+  <DataTable.Cell>{item.name}</DataTable.Cell>
+</DataTable.Row>
+```
+
+On the web, a pressable row is clickable but is no longer a Tab stop, because a table row cannot also be a button. Put a control in a cell so keyboard and screen reader users can reach the action:
+
+```tsx
+<DataTable.Row onPress={() => toggle(item)}>
+  <DataTable.Cell column="selected">
+    <Checkbox
+      status={selected ? 'checked' : 'unchecked'}
+      onPress={() => toggle(item)}
+      aria-label={`Select ${item.name}`}
+    />
+  </DataTable.Cell>
+  <DataTable.Cell column="name">{item.name}</DataTable.Cell>
+</DataTable.Row>
+```
+
+Pass `tabIndex={0}` on the row to keep it a Tab stop anyway.
+
+#### Screen reader announcements
+
+- new `rowCount` on the table and `index` on each row give the row positions. On a page of a larger set, `index` counts from the start of the whole set
+- new `hasHeader` defaults to `true`. Pass `hasHeader={false}` for a table without a `DataTable.Header`, or every row position on the web is one too high
+- on iOS and Android, a cell is announced with the title of its column, matched by `column`
+- `nativeFocusMode="cell"` gives one stop per cell instead of one per row
+- `accessible={false}` on a row opts that row out
+- `formatRowPosition` replaces the wording, or removes it with `null`
+- the table does not count its children, so rows in a `View`, a fragment or a component of your own get the same position as inline rows
+
+```tsx
+// Before (v5)
+<DataTable>
+  {items.slice(from, to).map((item) => (
+    <DataTable.Row key={item.key}>{/* ... */}</DataTable.Row>
+  ))}
+</DataTable>
+
+// After (v6)
+<DataTable aria-label="Nutrition" rowCount={items.length}>
+  {items.slice(from, to).map((item, i) => (
+    <DataTable.Row key={item.key} index={from + i}>
+      {/* ... */}
+    </DataTable.Row>
+  ))}
+</DataTable>
+```
+
+#### Pagination labels
+
+- `labels` is new, and localizes every control
+- `aria-label="pagination-container"` and `aria-label="Options Select"` were removed: reach the controls by role or text, e.g. `getByRole('button', { name: 'Rows per page, 2' })`
+
+```tsx
+// After (v6)
+<DataTable.Pagination
+  labels={{
+    container: 'Paginacja',
+    previousPage: 'Poprzednia strona',
+    nextPage: 'Następna strona',
+    pageStatus: ({ page, numberOfPages }) =>
+      `Strona ${page} z ${numberOfPages}`,
+  }}
+  /* ... */
+/>
+```
+
+#### Alignment
+
+- `numeric` is unchanged, and now also applies tabular figures
+- `align` is new, accepts `'start'`, `'center'`, `'end'`
+
+```tsx
+// Before (v5): right-aligned
+<DataTable.Cell numeric>{item.calories}</DataTable.Cell>
+
+// After (v6): right-aligned, plus lined-up digits
+<DataTable.Cell numeric>{item.calories}</DataTable.Cell>
+
+// Centred, still with lined-up digits
+<DataTable.Cell numeric align="center">{item.calories}</DataTable.Cell>
+
+// Right-aligned text that is not numeric
+<DataTable.Cell align="end">{item.status}</DataTable.Cell>
+```
+
+`align` defaults to `'end'` for numeric columns and `'start'` otherwise.
+
+#### Text wrapping
+
+- **single line, always** → single line at the default font scale, unclamped above it
+- `numberOfLines` is honoured exactly at every font scale; pass `0` to never clamp
+
+#### Column definitions
+
+- `columns` on `DataTable` is new and optional
+- `column` on a title or cell selects a column by key, and is required when the table has `columns`
+
+```tsx
+// Before (v5)
+const styles = StyleSheet.create({ first: { flex: 2 } });
+
+<DataTable.Title style={styles.first}>Dessert</DataTable.Title>
+<DataTable.Cell style={styles.first}>{item.name}</DataTable.Cell>
+
+// After (v6)
+const columns = [
+  { key: 'name', flex: 2 },
+  { key: 'calories', numeric: true },
+];
+
+<DataTable columns={columns}>
+  <DataTable.Header>
+    <DataTable.Title column="name">Dessert</DataTable.Title>
+    <DataTable.Title column="calories">Calories</DataTable.Title>
+  </DataTable.Header>
+  <DataTable.Row>
+    <DataTable.Cell column="name">{item.name}</DataTable.Cell>
+    <DataTable.Cell column="calories">{item.calories}</DataTable.Cell>
+  </DataTable.Row>
+</DataTable>
+```
+
 ### Card
 
 #### `Card` layout

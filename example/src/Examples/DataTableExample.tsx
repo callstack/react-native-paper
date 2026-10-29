@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { DataTable, Card } from 'react-native-paper';
+import { Card, Checkbox, DataTable } from 'react-native-paper';
+import type { DataTableColumn } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -12,9 +13,21 @@ type ItemsState = Array<{
   fat: number;
 }>;
 
+// Declared once, outside the component: every title and cell reads its width
+// and alignment from here, and the reference has to stay stable.
+const columns: readonly DataTableColumn[] = [
+  { key: 'selected', width: 48 },
+  { key: 'name', flex: 2 },
+  { key: 'calories', numeric: true },
+  { key: 'fat', numeric: true },
+];
+
 const DataTableExample = () => {
   const [sortAscending, setSortAscending] = React.useState<boolean>(true);
   const [page, setPage] = React.useState<number>(0);
+  const [selected, setSelected] = React.useState<ReadonlySet<number>>(
+    () => new Set()
+  );
   const [items] = React.useState<ItemsState>([
     {
       key: 1,
@@ -71,29 +84,77 @@ const DataTableExample = () => {
     setPage(0);
   }, [itemsPerPage]);
 
+  const toggle = (key: number) =>
+    setSelected((previous) => {
+      const next = new Set(previous);
+
+      if (!next.delete(key)) {
+        next.add(key);
+      }
+
+      return next;
+    });
+
+  const allSelected = selected.size === items.length;
+
+  const toggleAll = () =>
+    setSelected(
+      allSelected ? new Set() : new Set(items.map((item) => item.key))
+    );
+
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
       <Card>
-        <DataTable>
+        <DataTable
+          aria-label="Nutrition"
+          columns={columns}
+          rowCount={sortedItems.length}
+        >
           <DataTable.Header>
+            <DataTable.Title column="selected" aria-label="Selected">
+              <Checkbox
+                status={
+                  allSelected
+                    ? 'checked'
+                    : selected.size > 0
+                      ? 'indeterminate'
+                      : 'unchecked'
+                }
+                onPress={toggleAll}
+                aria-label="Select all"
+              />
+            </DataTable.Title>
             <DataTable.Title
+              column="name"
               sortDirection={sortAscending ? 'ascending' : 'descending'}
               onPress={() => setSortAscending(!sortAscending)}
-              style={styles.first}
             >
               Dessert
             </DataTable.Title>
-            <DataTable.Title numberOfLines={2} numeric>
+            <DataTable.Title column="calories" numberOfLines={2}>
               Calories per piece
             </DataTable.Title>
-            <DataTable.Title numeric>Fat (g)</DataTable.Title>
+            <DataTable.Title column="fat">Fat (g)</DataTable.Title>
           </DataTable.Header>
 
-          {sortedItems.slice(from, to).map((item) => (
-            <DataTable.Row key={item.key}>
-              <DataTable.Cell style={styles.first}>{item.name}</DataTable.Cell>
-              <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-              <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+          {sortedItems.slice(from, to).map((item, i) => (
+            // The row is a pointer shortcut. On the web it is no Tab stop, so
+            // the checkbox is how keyboard and screen reader users select it.
+            <DataTable.Row
+              key={item.key}
+              index={from + i}
+              onPress={() => toggle(item.key)}
+            >
+              <DataTable.Cell column="selected">
+                <Checkbox
+                  status={selected.has(item.key) ? 'checked' : 'unchecked'}
+                  onPress={() => toggle(item.key)}
+                  aria-label={`Select ${item.name}`}
+                />
+              </DataTable.Cell>
+              <DataTable.Cell column="name">{item.name}</DataTable.Cell>
+              <DataTable.Cell column="calories">{item.calories}</DataTable.Cell>
+              <DataTable.Cell column="fat">{item.fat}</DataTable.Cell>
             </DataTable.Row>
           ))}
 
@@ -119,9 +180,6 @@ DataTableExample.title = 'Data Table';
 const styles = StyleSheet.create({
   content: {
     padding: 8,
-  },
-  first: {
-    flex: 2,
   },
 });
 
