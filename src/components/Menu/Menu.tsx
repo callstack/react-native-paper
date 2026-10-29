@@ -67,7 +67,7 @@ export type Props = {
   /**
    * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the menu.
    */
-  overlayAccessibilityLabel?: string;
+  dismissAccessibilityLabel?: string;
   /**
    * testID for the overlay that is displayed behind the menu.
    */
@@ -189,7 +189,7 @@ const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
 const Menu = ({
   visible,
   statusBarHeight,
-  overlayAccessibilityLabel = 'Close menu',
+  dismissAccessibilityLabel = 'Close menu',
   overlayTestID,
   testID,
   anchor,
@@ -681,7 +681,7 @@ const Menu = ({
       {rendered ? (
         <Portal>
           <Pressable
-            aria-label={overlayAccessibilityLabel}
+            aria-label={dismissAccessibilityLabel}
             role="button"
             onPress={onDismiss}
             pointerEvents={visible ? 'auto' : 'none'}
