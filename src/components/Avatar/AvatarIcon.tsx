@@ -1,14 +1,17 @@
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import {
+  DEFAULT_SIZE,
+  getAvatarRole,
+  ICON_SIZE_RATIO,
+  resolveAvatarColors,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
-import getContrastingColor from '../../utils/getContrastingColor';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-
-const defaultSize = 64;
 
 export type Props = ViewProps & {
   /**
@@ -20,9 +23,19 @@ export type Props = ViewProps & {
    */
   size?: number;
   /**
-   * Custom color for the icon.
+   * Custom color for the icon. Takes precedence over the automatic contrast
+   * color below.
    */
   color?: string;
+  /**
+   * Style for the icon container. A custom `backgroundColor` is
+   * automatically paired with a contrasting icon color when `color` is not
+   * set: string values use a luminance heuristic, while opaque/dynamic
+   * values (`PlatformColor` / `DynamicColorIOS`) are paired with a theme
+   * role's `on-` color, falling back to white. Pass `color` for a
+   * dynamic background that is not in the theme, because its contrast
+   * cannot be checked.
+   */
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -45,17 +58,21 @@ export type Props = ViewProps & {
  */
 const Avatar = ({
   icon,
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   style,
   theme: themeOverrides,
+  color: customColor,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
-    StyleSheet.flatten(style) || {};
-  const textColor =
-    rest.color ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
+  const { backgroundColor, ...restStyle } = StyleSheet.flatten(style) || {};
+  const { background, textColor } = resolveAvatarColors({
+    theme,
+    backgroundColor,
+    color: customColor,
+  });
+  const hasLabel =
+    rest.accessibilityLabel !== undefined || rest['aria-label'] !== undefined;
 
   return (
     <View
@@ -63,15 +80,19 @@ const Avatar = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
-          backgroundColor,
+          borderRadius: cornerFull,
+          backgroundColor: background,
         },
         styles.container,
         restStyle,
       ]}
+      {...(hasLabel && {
+        accessible: true,
+        ...getAvatarRole(rest.accessibilityRole),
+      })}
       {...rest}
     >
-      <Icon source={icon} color={textColor} size={size * 0.6} />
+      <Icon source={icon} color={textColor} size={size * ICON_SIZE_RATIO} />
     </View>
   );
 };
