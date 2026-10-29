@@ -54,7 +54,6 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
     if (UNSAFE_KEYS.has(key)) {
       continue;
     }
-  for (const key of Object.keys(overrides)) {
     out[key] = safeMerge(
       (base as Record<string, unknown>)[key],
       (overrides as Record<string, unknown>)[key]
