@@ -1,7 +1,9 @@
 import type { ColorValue, GestureResponderEvent } from 'react-native';
 
+import { RadioButtonTokens } from './tokens';
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../theme/types';
+import type { ColorRole, InternalTheme, StateLayer } from '../../theme/types';
+import { getStateLayer } from '../../theme/utils/state';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -41,59 +43,6 @@ export const isChecked = ({
   }
 };
 
-const getIOSCheckedColor = ({
-  theme,
-  disabled,
-  customColor,
-  error,
-}: {
-  theme: InternalTheme;
-  customColor?: ColorValue;
-  disabled?: boolean;
-  error?: boolean;
-}) => {
-  if (disabled) {
-    return theme.colors.primary;
-  }
-
-  if (customColor) {
-    return customColor;
-  }
-
-  if (error) {
-    return theme.colors.error;
-  }
-
-  return theme.colors.primary;
-};
-
-export const getSelectionControlIOSColor = ({
-  theme,
-  disabled,
-  customColor,
-  error,
-}: {
-  theme: InternalTheme;
-  disabled?: boolean;
-  customColor?: ColorValue;
-  error?: boolean;
-}) => {
-  const checkedColor = getIOSCheckedColor({
-    theme,
-    disabled,
-    customColor,
-    error,
-  });
-  const checkedColorOpacity = disabled
-    ? stateOpacity.disabled
-    : stateOpacity.enabled;
-
-  return {
-    checkedColor,
-    checkedColorOpacity,
-  };
-};
-
 export const getSelectionControlColor = ({
   theme,
   disabled,
@@ -113,17 +62,96 @@ export const getSelectionControlColor = ({
   const checkedColor = customColor
     ? customColor
     : error
-      ? theme.colors.error
-      : theme.colors.primary;
+      ? theme.colors[RadioButtonTokens.errorColor]
+      : theme.colors[RadioButtonTokens.checkedColor];
   const uncheckedColor = customUncheckedColor
     ? customUncheckedColor
     : error
-      ? theme.colors.error
-      : theme.colors.onSurfaceVariant;
+      ? theme.colors[RadioButtonTokens.errorColor]
+      : theme.colors[RadioButtonTokens.uncheckedColor];
   const color = disabled
-    ? theme.colors.onSurface
+    ? theme.colors[RadioButtonTokens.disabledColor]
     : checked
       ? checkedColor
       : uncheckedColor;
   return { selectionControlColor: color, selectionControlOpacity: opacity };
+};
+
+export type RadioButtonInteraction = 'hovered' | 'focused' | 'pressed';
+
+const stateLayerRoles: Record<
+  RadioButtonInteraction,
+  Record<'checked' | 'unchecked', ColorRole>
+> = {
+  hovered: {
+    checked: RadioButtonTokens.checkedHoverStateLayerColor,
+    unchecked: RadioButtonTokens.uncheckedHoverStateLayerColor,
+  },
+  focused: {
+    checked: RadioButtonTokens.checkedFocusStateLayerColor,
+    unchecked: RadioButtonTokens.uncheckedFocusStateLayerColor,
+  },
+  pressed: {
+    checked: RadioButtonTokens.checkedPressedStateLayerColor,
+    unchecked: RadioButtonTokens.uncheckedPressedStateLayerColor,
+  },
+};
+
+export const getInteraction = ({
+  pressed,
+  focused,
+  hovered,
+}: {
+  pressed: boolean;
+  focused: boolean;
+  hovered: boolean;
+}): RadioButtonInteraction | null => {
+  if (pressed) return 'pressed';
+  if (focused) return 'focused';
+  if (hovered) return 'hovered';
+  return null;
+};
+
+export const getSelectionStateLayer = ({
+  theme,
+  checked,
+  disabled,
+  error,
+  interaction,
+  customColor,
+  customUncheckedColor,
+}: {
+  theme: InternalTheme;
+  checked: boolean;
+  disabled?: boolean;
+  error?: boolean;
+  interaction: RadioButtonInteraction | null;
+  customColor?: ColorValue;
+  customUncheckedColor?: ColorValue;
+}): StateLayer => {
+  if (interaction === null || disabled) {
+    return { color: 'transparent', opacity: 0 };
+  }
+
+  // press previews the state being moved to, so the layer takes the opposite selection's color
+  const followsChecked = interaction === 'pressed' ? !checked : checked;
+  const custom = followsChecked ? customColor : customUncheckedColor;
+
+  if (custom) {
+    return { color: custom, opacity: stateOpacity[interaction] };
+  }
+
+  if (error) {
+    return getStateLayer(
+      theme,
+      RadioButtonTokens.errorStateLayerColor,
+      interaction
+    );
+  }
+
+  return getStateLayer(
+    theme,
+    stateLayerRoles[interaction][checked ? 'checked' : 'unchecked'],
+    interaction
+  );
 };
