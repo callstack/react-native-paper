@@ -285,6 +285,17 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 </Menu>
 ```
 
+### Avatar
+
+`Avatar.Icon` and `Avatar.Text` no longer derive their icon or text color from `style.backgroundColor`. Specify matching `color` explicitly when using custom background color.
+
+```diff
+<Avatar.Icon
+  icon="account"
++ color="#000000"
+/>
+```
+
 ### Searchbar
 
 The misspelled `traileringIcon` props have been renamed:
