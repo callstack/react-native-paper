@@ -40,7 +40,7 @@
     "test": "jest",
     "prepack": "bob build",
     "generate-mappings": "node ./scripts/generate-mappings.ts",
-    "release": "release-it --only-version",
+    "release": "release-it",
     "docs": "yarn --cwd docs",
     "example": "yarn --cwd example"
   },
