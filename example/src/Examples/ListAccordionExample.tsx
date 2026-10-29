@@ -29,6 +29,13 @@ const ListAccordionExample = () => {
         >
           <List.Item title="List item 1" />
         </List.Accordion>
+        <List.Accordion
+          left={(props) => <List.Icon {...props} icon="folder" />}
+          title="Selected"
+          selected
+        >
+          <List.Item title="List item 1" />
+        </List.Accordion>
       </List.Section>
       <Divider />
       <List.Section title="Expandable & multiline list item">
