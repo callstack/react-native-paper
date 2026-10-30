@@ -614,21 +614,21 @@ This most often shows up where the switch sits inside a row that owns the press.
 
 On web, such a row toggles with Enter but not with Space, because React Native Web only handles Space for elements with the `button` role.
 
-#### Selected icon color
+#### Icon color
 
-The icon inside a selected switch now uses `onPrimaryContainer` instead of `primary`, matching the Material Design 3 spec and improving its contrast against the handle. If you theme `Switch` with a partial `theme.colors` override, add `onPrimaryContainer` alongside the roles you already override. Omitted roles fall back to the app theme, which would leave the icon in the default palette.
+When selected, the icon inside the handle uses `onPrimaryContainer`. If you pass `Switch` a `theme` with a partial `theme.colors` override, include `onPrimaryContainer` with the roles you override, because omitted roles fall back to the app theme:
 
-```diff
- const switchTheme = {
-   colors: {
-     primary: theme.colors.tertiary,
-     onPrimary: theme.colors.onTertiary,
-     primaryContainer: theme.colors.tertiaryContainer,
-+    onPrimaryContainer: theme.colors.onTertiaryContainer,
-   },
- };
+```tsx
+const switchTheme = {
+  colors: {
+    primary: theme.colors.tertiary,
+    onPrimary: theme.colors.onTertiary,
+    primaryContainer: theme.colors.tertiaryContainer,
+    onPrimaryContainer: theme.colors.onTertiaryContainer,
+  },
+};
 ```
 
-#### Touch target height
+#### Size
 
-`Switch` now reserves the 48dp minimum touch target Material Design requires, so it occupies 48dp of height instead of 40dp. The painted track is still 52×32, but rows containing a switch may become slightly taller.
+`Switch` is drawn by Paper instead of the platform switch: a 52×32 track inside a 48dp tall touch target, so rows containing a switch may change height.
