@@ -616,16 +616,30 @@ On web, such a row toggles with Enter but not with Space, because React Native W
 
 #### Icon color
 
-When selected, the icon inside the handle uses `onPrimaryContainer`. If you pass `Switch` a `theme` with a partial `theme.colors` override, include `onPrimaryContainer` with the roles you override, because omitted roles fall back to the app theme:
+When selected, an icon set with `checkedIcon` uses `onPrimaryContainer`. If you set `checkedIcon` and pass a `theme` with a partial `theme.colors` override, include `onPrimaryContainer`, because omitted roles fall back to the app theme:
 
 ```tsx
-const switchTheme = {
-  colors: {
-    primary: theme.colors.tertiary,
-    onPrimary: theme.colors.onTertiary,
-    primaryContainer: theme.colors.tertiaryContainer,
-    onPrimaryContainer: theme.colors.onTertiaryContainer,
-  },
+import { Switch, useTheme } from 'react-native-paper';
+
+const TertiarySwitch = ({ value, onValueChange }) => {
+  const theme = useTheme();
+  const switchTheme = {
+    colors: {
+      primary: theme.colors.tertiary,
+      onPrimary: theme.colors.onTertiary,
+      primaryContainer: theme.colors.tertiaryContainer,
+      onPrimaryContainer: theme.colors.onTertiaryContainer,
+    },
+  };
+
+  return (
+    <Switch
+      value={value}
+      onValueChange={onValueChange}
+      checkedIcon="check"
+      theme={switchTheme}
+    />
+  );
 };
 ```
 
