@@ -586,4 +586,14 @@ Interaction states are now painted as a Material Design 3 state layer on every p
 
 #### Custom style target
 
-The `style` prop now applies to the checkbox's outer container rather than the pressable inside it, so layout styles such as `margin`, `position` and `transform` move the whole component, focus ring included. `width` and `height` no longer resize the 48dp tap target, and paint styles land on a different shape: a `backgroundColor` used to fill the circular pressable and now fills the square container around it. Resizing the tap target now lives on the new `tapTargetStyle` prop, which reaches the pressable itself.
+The `style` prop now applies to the checkbox's outer container rather than the pressable inside it, so layout styles such as `margin`, `position` and `transform` move the whole component, focus ring included. `width` and `height` no longer resize the 48dp touch target, and paint styles land on a different shape: a `backgroundColor` used to fill the circular pressable and now fills the square container around it.
+
+To keep a layout as dense as before, give the extra space back with a negative margin instead of shrinking the checkbox. It then takes up 40dp in the layout again, while its touch target stays 48dp:
+
+```tsx
+// Before (v5)
+<Checkbox status="checked" onPress={onPress} />
+
+// After (v6)
+<Checkbox status="checked" onPress={onPress} style={{ margin: -4 }} />
+```

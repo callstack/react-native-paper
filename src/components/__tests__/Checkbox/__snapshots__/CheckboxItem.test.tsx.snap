@@ -112,7 +112,6 @@ exports[`can render leading checkbox control 1`] = `
                 "width": 48,
               },
               undefined,
-              undefined,
             ],
           ]
         }
@@ -455,7 +454,6 @@ exports[`renders unchecked 1`] = `
                 "width": 48,
               },
               undefined,
-              undefined,
             ],
           ]
         }
@@ -759,7 +757,6 @@ exports[`should have maxFontSizeMultiplier set to 1.5 by default 1`] = `
                 "justifyContent": "center",
                 "width": 48,
               },
-              undefined,
               undefined,
             ],
           ]

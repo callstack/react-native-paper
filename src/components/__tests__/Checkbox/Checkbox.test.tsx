@@ -548,52 +548,20 @@ describe('Checkbox touch target', () => {
     expect(screen.getByRole('checkbox')).not.toHaveStyle({ marginTop: 12 });
   });
 
-  it('puts the tap target style on the pressable, over the built-in size', async () => {
+  it('keeps the 48dp touch target under a negative margin', async () => {
     await render(
       <Checkbox
         status="unchecked"
         onPress={() => {}}
         testID="checkbox"
-        tapTargetStyle={{ width: 60, height: 60 }}
+        style={{ margin: -4 }}
       />
     );
 
+    expect(screen.root).toHaveStyle({ margin: -4 });
     expect(screen.getByRole('checkbox')).toHaveStyle({
-      width: 60,
-      height: 60,
-    });
-    expect(screen.root).not.toHaveStyle({ width: 60 });
-  });
-
-  it('keeps the tap target style without a press handler', async () => {
-    await render(
-      <Checkbox
-        status="unchecked"
-        testID="checkbox"
-        tapTargetStyle={{ width: 60, height: 60 }}
-      />
-    );
-
-    expect(screen.getByRole('checkbox')).toHaveStyle({
-      width: 60,
-      height: 60,
-    });
-  });
-
-  it('keeps the tap target style on a disabled checkbox', async () => {
-    await render(
-      <Checkbox
-        status="unchecked"
-        onPress={() => {}}
-        disabled
-        testID="checkbox"
-        tapTargetStyle={{ width: 60, height: 60 }}
-      />
-    );
-
-    expect(screen.getByRole('checkbox')).toHaveStyle({
-      width: 60,
-      height: 60,
+      width: 48,
+      height: 48,
     });
   });
 });

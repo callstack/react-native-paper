@@ -79,16 +79,10 @@ export type Props = Omit<
   testID?: string;
   /**
    * Custom style for the checkbox's outer container. `width` and `height` here
-   * do not resize the tap target; `tapTargetStyle` does.
+   * do not resize the 48dp touch target. For a denser layout, use a negative
+   * margin, which reclaims layout space and keeps the touch target.
    */
   style?: StyleProp<ViewStyle>;
-  /**
-   * Custom style for the pressable that carries the 48dp tap target. Sizing it
-   * keeps the 24dp corner radius, and shrinking it clips the 40dp state layer.
-   * Margin, padding and transform belong in `style`: here they shift the
-   * pressable out from under the focus ring.
-   */
-  tapTargetStyle?: StyleProp<ViewStyle>;
   /**
    * Accessibility label for the checkbox, read by a screen reader in place of
    * a visible label. A standalone `Checkbox` has no label of its own, so it
@@ -159,7 +153,6 @@ const Checkbox = ({
   color,
   uncheckedColor,
   style,
-  tapTargetStyle,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -501,7 +494,6 @@ const Checkbox = ({
         style={[
           styles.tapTarget,
           Platform.OS === 'web' ? webNoOutline : undefined,
-          tapTargetStyle,
         ]}
       >
         <View pointerEvents="none" style={styles.tapTargetInner}>

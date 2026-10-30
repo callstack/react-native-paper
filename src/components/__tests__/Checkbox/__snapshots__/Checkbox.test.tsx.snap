@@ -59,7 +59,6 @@ exports[`renders Checkbox with custom testID 1`] = `
             "width": 48,
           },
           undefined,
-          undefined,
         ],
       ]
     }
@@ -275,7 +274,6 @@ exports[`renders checked Checkbox with color 1`] = `
             "width": 48,
           },
           undefined,
-          undefined,
         ],
       ]
     }
@@ -488,7 +486,6 @@ exports[`renders checked Checkbox with onPress 1`] = `
             "justifyContent": "center",
             "width": 48,
           },
-          undefined,
           undefined,
         ],
       ]
@@ -728,7 +725,6 @@ exports[`renders indeterminate Checkbox 1`] = `
             "width": 48,
           },
           undefined,
-          undefined,
         ],
       ]
     }
@@ -954,7 +950,6 @@ exports[`renders indeterminate Checkbox with color 1`] = `
             "width": 48,
           },
           undefined,
-          undefined,
         ],
       ]
     }
@@ -1154,7 +1149,6 @@ exports[`renders unchecked Checkbox with color 1`] = `
             "justifyContent": "center",
             "width": 48,
           },
-          undefined,
           undefined,
         ],
       ]
@@ -1368,7 +1362,6 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
             "justifyContent": "center",
             "width": 48,
           },
-          undefined,
           undefined,
         ],
       ]
