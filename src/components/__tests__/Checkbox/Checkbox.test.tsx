@@ -1,8 +1,8 @@
-import type { GestureResponderEvent } from 'react-native';
+import { type GestureResponderEvent, Platform } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
-import { render, screen, userEvent } from '../../../test-utils';
+import { fireEvent, render, screen, userEvent } from '../../../test-utils';
 import Checkbox from '../../Checkbox';
 
 afterEach(() => {
@@ -140,6 +140,116 @@ describe('Checkbox press', () => {
 
     expect(screen.getByRole('checkbox')).toBeDisabled();
   });
+});
+
+describe('Checkbox Space key', () => {
+  const key = (name: string, repeat = false) => ({
+    nativeEvent: { key: name, repeat },
+    preventDefault: jest.fn(),
+  });
+
+  const renderCheckbox = (
+    onPress: (e: GestureResponderEvent) => void,
+    disabled = false
+  ) =>
+    render(
+      <Checkbox
+        status="unchecked"
+        onPress={onPress}
+        disabled={disabled}
+        aria-label="Notify me"
+      />
+    );
+
+  it('toggles once on release on web, without scrolling the page', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await renderCheckbox(onPress);
+    const down = key(' ');
+    const held = key(' ', true);
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', down);
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', held);
+
+    expect(down.preventDefault).toHaveBeenCalled();
+    expect(held.preventDefault).toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('leaves Enter to React Native Web on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await renderCheckbox(onPress);
+    const enter = key('Enter');
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', enter);
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', enter);
+
+    expect(enter.preventDefault).not.toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('does not toggle when focus leaves before the release', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await renderCheckbox(onPress);
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+    await fireEvent(screen.getByRole('checkbox'), 'blur');
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('does not toggle once the checkbox becomes disabled', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await renderCheckbox(onPress);
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+    await screen.rerender(
+      <Checkbox
+        status="unchecked"
+        onPress={onPress}
+        disabled
+        aria-label="Notify me"
+      />
+    );
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPress).not.toHaveBeenCalled();
+
+    // The press started before it was disabled must not survive it either.
+    await screen.rerender(
+      <Checkbox status="unchecked" onPress={onPress} aria-label="Notify me" />
+    );
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it.each(['ios', 'android'] as const)(
+    'leaves the key alone on %s',
+    async (os) => {
+      jest.replaceProperty(Platform, 'OS', os);
+      const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+      await renderCheckbox(onPress);
+      const space = key(' ');
+
+      await fireEvent(screen.getByRole('checkbox'), 'keyDown', space);
+      await fireEvent(screen.getByRole('checkbox'), 'keyUp', space);
+
+      expect(space.preventDefault).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+    }
+  );
 });
 
 describe('Checkbox touch target', () => {

@@ -33,6 +33,7 @@ import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
@@ -379,6 +380,15 @@ const Checkbox = ({
   }
   const showIndeterminate = nextGlyph === 'indeterminate';
 
+  const { keyHandlers: spaceKeyHandlers, cancel: cancelSpaceKeyPress } =
+    useSpaceKeyPress({
+      onPress: isInteractive ? onPress : undefined,
+      onPressIn: startPressRipple,
+      onPressOut: () => {
+        pressedSV.value = 0;
+      },
+    });
+
   const handleFocus = React.useCallback(
     (e: NativeSyntheticEvent<TargetedEvent>) => {
       if (disabled) return;
@@ -390,7 +400,8 @@ const Checkbox = ({
 
   const handleBlur = React.useCallback(() => {
     setFocused(false);
-  }, []);
+    cancelSpaceKeyPress();
+  }, [cancelSpaceKeyPress]);
 
   const interactionHandlers = isInteractive
     ? {
@@ -474,8 +485,10 @@ const Checkbox = ({
 
   return (
     // The ring is a sibling of the pressable, not a child: a foreground ripple
-    // forces `overflow: hidden` on it regardless of `borderless`.
-    <View style={[styles.root, style]}>
+    // forces `overflow: hidden` on it regardless of `borderless`. Space is
+    // handled here as its key events bubble up from the pressable, which
+    // leaves a caller's own key handlers on the pressable in place.
+    <View style={[styles.root, style]} {...spaceKeyHandlers}>
       <TouchableRipple
         {...rest}
         centered
