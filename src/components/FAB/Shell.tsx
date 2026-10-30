@@ -315,13 +315,17 @@ const Shell = ({
           target === document.activeElement
         ) {
           const previous = previousFocusedElement.current;
+          // Only restore keyboard focus. A mouse click or tap also focuses the
+          // FAB, and moving focus back could jump into an earlier text field.
           if (
+            target.matches(':focus-visible') &&
             previous?.isConnected &&
             !previous.closest('[aria-hidden="true"], [inert]')
           ) {
             previous.focus({ preventScroll: true });
           }
-          // The previous element may have been removed or become unfocusable.
+          // Blur when focus didn't move back, e.g. after a mouse click or when
+          // the previous element is gone or can't take focus.
           if (target === document.activeElement) target.blur();
         }
       }
