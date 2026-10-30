@@ -357,7 +357,7 @@ it('uses the shared FAB hover elevation for the menu trigger', async () => {
 // React Native 0.85 sends no hover events on iOS or Android by default. These
 // only check that the elevation logic itself has no platform check.
 it.each(['ios', 'android'] as const)(
-  'follows hover events and keeps the hover elevation on focus when Platform.OS is %s',
+  'keeps the resting elevation on focus and follows hover and press events when Platform.OS is %s',
   async (platform) => {
     jest.replaceProperty(Platform, 'OS', platform);
     const ref = React.createRef<View>();
@@ -373,6 +373,8 @@ it.each(['ios', 'android'] as const)(
     const fab = screen.getByRole('button', { name: 'Create' });
     const resting = getStyle(ref);
 
+    await fireEvent(fab, 'focus', { nativeEvent: {} });
+    expect(getStyle(ref)).toEqual(resting);
     await fireEvent(fab, 'hoverIn');
     const hovered = getStyle(ref);
     expect(hovered).not.toEqual(resting);
@@ -519,7 +521,7 @@ describe('on web', () => {
   };
 
   it.each(['icon', 'extended'] as const)(
-    'raises the %s FAB while hovered, keeps it raised on focus and lowers it while pressed',
+    'keeps the %s FAB at rest on focus, raises it while hovered and lowers it while pressed',
     async (type) => {
       const ref = React.createRef<View>();
       await render(
@@ -545,6 +547,8 @@ describe('on web', () => {
       const fab = screen.getByRole('button', { name: 'Create' });
       const resting = getStyle(ref);
 
+      await fireEvent(fab, 'focus', { nativeEvent: {} });
+      expect(getStyle(ref)).toEqual(resting);
       await fireEvent(fab, 'hoverIn');
       const hovered = getStyle(ref);
       expect(hovered).not.toEqual(resting);
