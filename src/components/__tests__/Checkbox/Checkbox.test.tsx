@@ -411,6 +411,15 @@ describe('Checkbox accessible name', () => {
     );
   });
 
+  it('does not warn in production', async () => {
+    jest.replaceProperty(process.env, 'NODE_ENV', 'production');
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(<Checkbox status="checked" onPress={() => {}} />);
+
+    expect(console.warn).not.toHaveBeenCalled();
+  });
+
   it('is named by aria-label', async () => {
     jest.spyOn(console, 'warn').mockImplementation(() => {});
 

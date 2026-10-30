@@ -463,7 +463,13 @@ const Checkbox = ({
   );
 
   React.useEffect(() => {
-    if (isHidden || hasAccessibleName) return;
+    if (
+      process.env.NODE_ENV === 'production' ||
+      isHidden ||
+      hasAccessibleName
+    ) {
+      return;
+    }
 
     console.warn(
       'Checkbox: pass `aria-label` to name the checkbox for assistive tech, or use `Checkbox.Item` for a labelled row.'
