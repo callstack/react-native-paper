@@ -468,7 +468,6 @@ const Checkbox = ({
     focused && !disabled ? (
       <View
         pointerEvents="none"
-        testID={testID ? `${testID}-focus-ring` : undefined}
         style={[styles.focusRing, { borderColor: theme.colors.secondary }]}
       />
     ) : null;
@@ -499,13 +498,11 @@ const Checkbox = ({
         <View pointerEvents="none" style={styles.tapTargetInner}>
           <Animated.View
             pointerEvents="none"
-            testID={testID ? `${testID}-state-layer` : undefined}
             style={[styles.stateLayer, stateLayerStyle]}
           />
           {ownsPress ? (
             <Animated.View
               pointerEvents="none"
-              testID={testID ? `${testID}-ripple` : undefined}
               style={[
                 styles.stateLayer,
                 { backgroundColor: pressColor },

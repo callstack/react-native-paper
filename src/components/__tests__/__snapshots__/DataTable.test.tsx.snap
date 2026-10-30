@@ -130,6 +130,7 @@ exports[`DataTable.Cell renders data table cell children without wrapping text c
     }
   >
     <View
+      accessibilityLabel="Select row"
       accessibilityLiveRegion="polite"
       accessibilityState={
         {
@@ -209,7 +210,6 @@ exports[`DataTable.Cell renders data table cell children without wrapping text c
               },
             ]
           }
-          testID="table-cell-checkbox-state-layer"
         />
         <View
           style={

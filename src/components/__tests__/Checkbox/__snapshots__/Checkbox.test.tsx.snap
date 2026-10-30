@@ -13,6 +13,7 @@ exports[`renders Checkbox with custom testID 1`] = `
   }
 >
   <View
+    accessibilityLabel="Notify me"
     accessibilityLiveRegion="polite"
     accessibilityState={
       {
@@ -92,7 +93,6 @@ exports[`renders Checkbox with custom testID 1`] = `
             },
           ]
         }
-        testID="custom:testID-state-layer"
       />
       <View
         style={
@@ -228,6 +228,7 @@ exports[`renders checked Checkbox with color 1`] = `
   }
 >
   <View
+    accessibilityLabel="Notify me"
     accessibilityLiveRegion="polite"
     accessibilityState={
       {
@@ -441,6 +442,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
   }
 >
   <View
+    accessibilityLabel="Notify me"
     accessibilityLiveRegion="polite"
     accessibilityState={
       {
@@ -679,6 +681,7 @@ exports[`renders indeterminate Checkbox 1`] = `
   }
 >
   <View
+    accessibilityLabel="Notify me"
     accessibilityLiveRegion="polite"
     accessibilityState={
       {
@@ -904,6 +907,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   }
 >
   <View
+    accessibilityLabel="Notify me"
     accessibilityLiveRegion="polite"
     accessibilityState={
       {
@@ -1104,6 +1108,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
   }
 >
   <View
+    accessibilityLabel="Notify me"
     accessibilityLiveRegion="polite"
     accessibilityState={
       {
@@ -1317,6 +1322,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   }
 >
   <View
+    accessibilityLabel="Notify me"
     accessibilityLiveRegion="polite"
     accessibilityState={
       {
