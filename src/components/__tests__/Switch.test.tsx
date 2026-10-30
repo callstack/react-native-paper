@@ -163,8 +163,6 @@ describe('Switch operability', () => {
   it('warns when it is given no way to be operated', async () => {
     jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    // @ts-expect-error -- the props type requires a handler, `readOnly`, or
-    // `disabled`; this covers untyped callers that get past it.
     await render(<Switch value />);
 
     expect(console.warn).toHaveBeenCalledWith(
@@ -175,7 +173,6 @@ describe('Switch operability', () => {
   it('is not focusable when it has no way to be operated', async () => {
     jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    // @ts-expect-error -- see above.
     await render(<Switch value />);
 
     expect(screen.getByRole('switch')).toHaveProp('focusable', false);
@@ -215,7 +212,6 @@ describe('Switch operability', () => {
       jest.replaceProperty(Platform, 'OS', platform);
       jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-      // @ts-expect-error -- the fallback exists for untyped callers.
       await render(<Switch value disabled={false} />);
       const control = screen.getByRole('switch', {
         checked: true,
@@ -247,7 +243,6 @@ describe('Switch operability', () => {
     jest.replaceProperty(Platform, 'OS', 'web');
     jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    // @ts-expect-error -- the fallback exists for untyped callers.
     await render(<Switch value />);
 
     expect(screen.getByRole('switch')).toHaveProp('aria-readonly', true);
