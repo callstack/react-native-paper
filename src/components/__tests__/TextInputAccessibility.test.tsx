@@ -97,8 +97,9 @@ it('preserves accessory refs when switching between decoration and action', asyn
 });
 
 it.each(['filled', 'outlined'] as const)(
-  'associates helper and counter without changing the %s field name',
+  'associates helper and counter on web without changing the %s field name',
   async (variant) => {
+    jest.replaceProperty(Platform, 'OS', 'web');
     await render(
       <TextInput
         variant={variant}
@@ -124,6 +125,7 @@ it.each(['filled', 'outlined'] as const)(
 );
 
 it('keeps generated IDs stable as helper text becomes an error and removes absent descriptions', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
   const { rerender } = await render(
     <TextInput label="Email" supportingText="Optional" render={renderInput} />
   );
@@ -175,6 +177,7 @@ it('gives different fields distinct description IDs even with the same test ID',
 });
 
 it('merges external descriptions and preserves an explicit accessible name in a custom renderer', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
   await render(
     <TextInput
       label="Email"
@@ -197,7 +200,7 @@ it('merges external descriptions and preserves an explicit accessible name in a 
 });
 
 it.each(['ios', 'android'] as const)(
-  'provides field descriptions as a native hint on %s',
+  'reads field descriptions only from the native hint on %s',
   async (platform) => {
     jest.replaceProperty(Platform, 'OS', platform);
     await render(
@@ -214,13 +217,33 @@ it.each(['ios', 'android'] as const)(
       'accessibilityHint',
       'Double tap to edit, Keep it short, Characters entered 2 of 20'
     );
+    expect(screen.queryByText('Keep it short')).toBeNull();
+    expect(screen.queryByText('2/20')).toBeNull();
+    expect(
+      screen.getByText('Keep it short', { includeHiddenElements: true })
+    ).toBeOnTheScreen();
+    expect(
+      screen.getByText('2/20', { includeHiddenElements: true })
+    ).toBeOnTheScreen();
   }
 );
 
 it('uses web descriptions without duplicating them in a hint', async () => {
   jest.replaceProperty(Platform, 'OS', 'web');
-  await render(<TextInput label="Bio" supportingText="Keep it short" />);
+  await render(
+    <TextInput
+      label="Bio"
+      supportingText="Keep it short"
+      counter
+      maxLength={20}
+    />
+  );
   expect(screen.getByLabelText('Bio')).not.toHaveProp('accessibilityHint');
+  expect(screen.getByText('Keep it short')).toBeOnTheScreen();
+  expect(screen.getByLabelText('Characters entered 0 of 20')).toHaveProp(
+    'aria-live',
+    'polite'
+  );
 });
 
 it.each([true, false, 'true', 'false', 'grammar', 'spelling'] as const)(
@@ -250,50 +273,55 @@ it.each([true, false, 'true', 'false', 'grammar', 'spelling'] as const)(
   }
 );
 
-it('announces each changed error message once on iOS', async () => {
-  jest.replaceProperty(Platform, 'OS', 'ios');
+it.each(['ios', 'android'] as const)(
+  'announces each changed error message once on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    const announce = jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockClear();
+    const { rerender } = await render(
+      <TextInput label="Email" supportingText="Optional" />
+    );
+    expect(announce).not.toHaveBeenCalled();
+
+    await rerender(
+      <TextInput label="Email" supportingText="Invalid address" error />
+    );
+    expect(announce).toHaveBeenLastCalledWith('Invalid address');
+    await rerender(
+      <TextInput
+        label="Email"
+        supportingText="Invalid address"
+        error
+        value="a"
+      />
+    );
+    expect(announce).toHaveBeenCalledTimes(1);
+    await rerender(
+      <TextInput label="Email" supportingText="Address is required" error />
+    );
+    expect(announce).toHaveBeenLastCalledWith('Address is required');
+    await rerender(<TextInput label="Email" supportingText="Optional" />);
+    expect(announce).toHaveBeenCalledTimes(2);
+  }
+);
+
+it('announces errors on web through the alert role', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
   const announce = jest
     .spyOn(AccessibilityInfo, 'announceForAccessibility')
     .mockClear();
   const { rerender } = await render(
     <TextInput label="Email" supportingText="Optional" />
   );
+  expect(screen.queryByRole('alert')).toBeNull();
+
+  await rerender(
+    <TextInput label="Email" supportingText="Invalid address" error />
+  );
+  expect(screen.getByRole('alert')).toHaveTextContent('Invalid address');
   expect(announce).not.toHaveBeenCalled();
-
-  await rerender(
-    <TextInput label="Email" supportingText="Invalid address" error />
-  );
-  expect(announce).toHaveBeenLastCalledWith('Invalid address');
-  await rerender(
-    <TextInput label="Email" supportingText="Invalid address" error value="a" />
-  );
-  expect(announce).toHaveBeenCalledTimes(1);
-  await rerender(
-    <TextInput label="Email" supportingText="Address is required" error />
-  );
-  expect(announce).toHaveBeenLastCalledWith('Address is required');
-  await rerender(<TextInput label="Email" supportingText="Optional" />);
-  expect(announce).toHaveBeenCalledTimes(2);
-});
-
-it('uses an assertive Android live region for an error', async () => {
-  jest.replaceProperty(Platform, 'OS', 'android');
-  await render(
-    <TextInput label="Email" supportingText="Invalid address" error />
-  );
-  expect(screen.getByRole('alert')).toHaveProp(
-    'accessibilityLiveRegion',
-    'assertive'
-  );
-});
-
-it('uses a native Android live region for counter updates', async () => {
-  jest.replaceProperty(Platform, 'OS', 'android');
-  await render(<TextInput label="Email" counter maxLength={40} />);
-  expect(screen.getByText('0/40')).toHaveProp(
-    'accessibilityLiveRegion',
-    'polite'
-  );
 });
 
 it('keeps a disabled native input read-only when readOnly is explicitly false', async () => {
