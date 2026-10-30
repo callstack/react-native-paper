@@ -95,11 +95,11 @@ export const getLabelColor = ({
     colors: { error, primary, onSurface, onSurfaceVariant },
   } = theme;
 
-  if (hasError) {
-    return error;
-  }
   if (isDisabled) {
     return onSurface;
+  }
+  if (hasError) {
+    return error;
   }
   if (isFocused) {
     return primary;
@@ -120,11 +120,11 @@ export const getSupportingTextColor = ({
     colors: { error, onSurface, onSurfaceVariant },
   } = theme;
 
-  if (hasError) {
-    return error;
-  }
   if (isDisabled) {
     return onSurface;
+  }
+  if (hasError) {
+    return error;
   }
   return onSurfaceVariant;
 };
@@ -162,8 +162,8 @@ export const getIconColor = ({
   isDisabled: boolean;
 }): ColorValue => {
   if (iconColor) return iconColor;
-  if (hasError) return theme.colors.error;
   if (isDisabled) return theme.colors.onSurface;
+  if (hasError) return theme.colors.error;
   return theme.colors.onSurfaceVariant;
 };
 
