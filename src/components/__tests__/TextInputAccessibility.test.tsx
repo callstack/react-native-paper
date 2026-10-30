@@ -307,6 +307,26 @@ it.each(['ios', 'android'] as const)(
   }
 );
 
+it.each(['ios', 'android'] as const)(
+  'does not announce an error that is shown on mount on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    const announce = jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockClear();
+    const { rerender } = await render(
+      <TextInput label="Email" supportingText="Invalid address" error />
+    );
+    expect(announce).not.toHaveBeenCalled();
+
+    await rerender(
+      <TextInput label="Email" supportingText="Address is required" error />
+    );
+    expect(announce).toHaveBeenCalledTimes(1);
+    expect(announce).toHaveBeenLastCalledWith('Address is required');
+  }
+);
+
 it('announces errors on web through the alert role', async () => {
   jest.replaceProperty(Platform, 'OS', 'web');
   const announce = jest
