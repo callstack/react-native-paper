@@ -1,25 +1,37 @@
-import { Platform, StyleSheet, type ViewStyle } from 'react-native';
+import { Platform } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { getAnimatedStyle } from 'react-native-reanimated';
-import type { JsonNode } from 'test-renderer';
+import type { JsonElement, JsonNode } from 'test-renderer';
 
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import Switch from '../Switch/Switch';
 
-// Snapshot rendered output with current animation values instead of the
-// initial styles retained by the test renderer.
-const renderedStyles = (
-  tree: JsonNode | JsonNode[] | null = screen.toJSON()
-): ViewStyle[] => {
-  if (tree === null || typeof tree === 'string') return [];
-  if (Array.isArray(tree)) return tree.flatMap(renderedStyles);
+const { colors } = LightTheme;
 
-  const { props, children } = tree;
-  return [
-    { ...StyleSheet.flatten(props.style), ...getAnimatedStyle(tree) },
-    ...children.flatMap(renderedStyles),
-  ];
+const element = (node: JsonNode | null | undefined): JsonElement => {
+  if (typeof node !== 'object' || node === null) {
+    throw new Error('Expected a rendered view');
+  }
+
+  return node;
+};
+
+// The state layer, handle and focus ring are decorative views with no role or
+// test ID. They render after the control in this order, and the handle fill
+// is the last view inside the handle.
+const getLayers = () => {
+  const { children } = element(screen.toJSON());
+  const handle = element(children[2]);
+  const { children: handleChildren } = handle;
+
+  return {
+    stateLayer: getAnimatedStyle(element(children[1])),
+    handle: getAnimatedStyle(handle),
+    handleFill: getAnimatedStyle(element(handleChildren.at(-1))),
+    focusRing: getAnimatedStyle(element(children.at(-1))),
+  };
 };
 
 afterEach(() => {
@@ -96,42 +108,57 @@ describe('Switch accessibility', () => {
 });
 
 describe('Switch focus state', () => {
-  it.each([false, true])(
-    'renders keyboard focus feedback when value is %s and clears it on blur',
-    async (value) => {
+  it.each([
+    {
+      value: false,
+      focusedHandle: colors.onSurfaceVariant,
+      restingHandle: colors.outline,
+    },
+    {
+      value: true,
+      focusedHandle: colors.primaryContainer,
+      restingHandle: colors.onPrimary,
+    },
+  ])(
+    'renders keyboard focus feedback when value is $value and clears it on blur',
+    async ({ value, focusedHandle, restingHandle }) => {
       await render(<Switch value={value} onValueChange={jest.fn()} />);
-      const resting = renderedStyles();
 
       await fireEvent(screen.getByRole('switch'), 'focus');
       await jest.runAllTimersAsync();
 
-      expect(renderedStyles()).toMatchSnapshot('focused');
-      expect(renderedStyles()).not.toEqual(resting);
+      expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
+      expect(getLayers().stateLayer).toMatchObject({ opacity: 0.1 });
+      expect(getLayers().handleFill).toMatchObject({
+        backgroundColor: focusedHandle,
+      });
 
       await fireEvent(screen.getByRole('switch'), 'blur');
       await jest.runAllTimersAsync();
 
-      expect(renderedStyles()).toEqual(resting);
+      expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+      expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
+      expect(getLayers().handleFill).toMatchObject({
+        backgroundColor: restingHandle,
+      });
     }
   );
 
   it('only shows focus feedback for keyboard focus on web', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
     await render(<Switch value onValueChange={jest.fn()} />);
-    const resting = renderedStyles();
 
     await fireEvent(screen.getByRole('switch'), 'focus', {
       currentTarget: { matches: () => false },
     });
     await jest.runAllTimersAsync();
-    expect(renderedStyles()).toEqual(resting);
+    expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
 
     await fireEvent(screen.getByRole('switch'), 'focus', {
       currentTarget: { matches: () => true },
     });
     await jest.runAllTimersAsync();
-    expect(renderedStyles()).toMatchSnapshot('keyboard focus');
-    expect(renderedStyles()).not.toEqual(resting);
+    expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
   });
 
   it.each(['disabled', 'readOnly'] as const)(
@@ -139,13 +166,13 @@ describe('Switch focus state', () => {
     async (prop) => {
       const onValueChange = jest.fn();
       const view = await render(<Switch value onValueChange={onValueChange} />);
-      const resting = renderedStyles();
 
       await fireEvent(screen.getByRole('switch'), 'focus');
       await fireEvent(screen.getByRole('switch'), 'hoverIn');
       await fireEvent(screen.getByRole('switch'), 'pressIn');
       await jest.runAllTimersAsync();
-      expect(renderedStyles()).not.toEqual(resting);
+      expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
+      expect(getLayers().handle).toMatchObject({ width: 28, height: 28 });
 
       await view.rerender(
         <Switch value onValueChange={onValueChange} {...{ [prop]: true }} />
@@ -154,7 +181,12 @@ describe('Switch focus state', () => {
       await view.rerender(<Switch value onValueChange={onValueChange} />);
       await jest.runAllTimersAsync();
 
-      expect(renderedStyles()).toEqual(resting);
+      expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+      expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
+      expect(getLayers().handle).toMatchObject({ width: 24, height: 24 });
+      expect(getLayers().handleFill).toMatchObject({
+        backgroundColor: colors.onPrimary,
+      });
     }
   );
 });
@@ -179,14 +211,16 @@ describe('Switch operability', () => {
   });
 
   describe.each(['ios', 'android', 'web'] as const)('%s', (platform) => {
-    it.each([false, true])(
-      'exposes a read-only switch with value %s as non-operable',
-      async (value) => {
+    it.each([
+      { value: false, restingHandle: colors.outline },
+      { value: true, restingHandle: colors.onPrimary },
+    ])(
+      'exposes a read-only switch with value $value as non-operable',
+      async ({ value, restingHandle }) => {
         jest.replaceProperty(Platform, 'OS', platform);
         const view = await render(
           <Switch value={value} onValueChange={jest.fn()} />
         );
-        const enabledAppearance = renderedStyles();
         await view.rerender(
           <Switch
             value={value}
@@ -195,6 +229,7 @@ describe('Switch operability', () => {
             aria-label="Dark theme"
           />
         );
+        await jest.runAllTimersAsync();
 
         const control = screen.getByRole('switch', {
           name: 'Dark theme',
@@ -203,7 +238,10 @@ describe('Switch operability', () => {
         });
         expect(control).toHaveProp('focusable', false);
         expect(control).toHaveProp('tabIndex', -1);
-        expect(renderedStyles()).toEqual(enabledAppearance);
+        expect(getLayers().handleFill).toMatchObject({
+          backgroundColor: restingHandle,
+          opacity: 1,
+        });
         expect(control).toBeOnTheScreen();
       }
     );
@@ -276,23 +314,28 @@ describe('Switch operability', () => {
 });
 
 describe('Switch press feedback', () => {
-  it.each([false, true])(
-    'grows immediately when value is %s and returns to rest on release',
-    async (value) => {
+  it.each([
+    { value: false, restingSize: 16 },
+    { value: true, restingSize: 24 },
+  ])(
+    'grows immediately when value is $value and returns to rest on release',
+    async ({ value, restingSize }) => {
       await render(<Switch value={value} onValueChange={jest.fn()} />);
-      const resting = renderedStyles();
 
       await fireEvent(screen.getByRole('switch'), 'pressIn');
       // Two frames, before the previous 100ms growth delay would elapse.
       jest.advanceTimersByTime(32);
-      expect(renderedStyles()).toMatchSnapshot('early press');
+      expect(getLayers().handle.width).toBeGreaterThan(restingSize);
 
       await jest.runAllTimersAsync();
-      expect(renderedStyles()).toMatchSnapshot('held press');
+      expect(getLayers().handle).toMatchObject({ width: 28, height: 28 });
 
       await fireEvent(screen.getByRole('switch'), 'pressOut');
       await jest.runAllTimersAsync();
-      expect(renderedStyles()).toEqual(resting);
+      expect(getLayers().handle).toMatchObject({
+        width: restingSize,
+        height: restingSize,
+      });
     }
   );
 });
