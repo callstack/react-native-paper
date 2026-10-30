@@ -432,8 +432,13 @@ const Checkbox = ({
     rippleScale.value = RIPPLE_START_SCALE;
   }, [isInteractive, pressedSV, rippleHoldSV, rippleAlpha, rippleScale]);
 
-  // `Checkbox.Item` names the row and passes `accessible={false}` here.
-  const isInAccessibilityTree = rest.accessible !== false;
+  // A hidden checkbox needs no name. `Checkbox.Item` names the row and passes
+  // `accessible={false}` here.
+  const isInAccessibilityTree =
+    rest.accessible !== false &&
+    rest['aria-hidden'] !== true &&
+    rest.importantForAccessibility !== 'no' &&
+    rest.importantForAccessibility !== 'no-hide-descendants';
   const hasAccessibleName = Boolean(
     rest['aria-label'] ??
     rest.accessibilityLabel ??

@@ -680,6 +680,23 @@ describe('Checkbox accessible name', () => {
 
     expect(console.warn).not.toHaveBeenCalled();
   });
+
+  it.each([
+    { 'aria-hidden': true },
+    { importantForAccessibility: 'no' },
+    { importantForAccessibility: 'no-hide-descendants' },
+  ] as const)(
+    'does not warn for a checkbox hidden from assistive tech with %o',
+    async (hidden) => {
+      jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      await render(
+        <Checkbox status="checked" onPress={() => {}} {...hidden} />
+      );
+
+      expect(console.warn).not.toHaveBeenCalled();
+    }
+  );
 });
 
 it('renders the focus ring outside the pressable so clipping cannot crop it', async () => {
