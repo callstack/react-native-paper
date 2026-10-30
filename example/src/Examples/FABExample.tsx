@@ -37,7 +37,6 @@ const variants: FabColor[] = [
   'primaryContainer',
   'secondaryContainer',
   'tertiaryContainer',
-  'branded',
   'custom',
 ];
 
@@ -139,24 +138,12 @@ const FABExample = () => {
       <View style={styles.controls}>
         <ChipRow
           label="Color"
-          options={
-            type === 'menu' ? variants.filter((v) => v !== 'branded') : variants
-          }
+          options={variants}
           value={variant}
           onChange={setVariant}
         />
         <ChipRow label="Size" options={sizes} value={size} onChange={setSize} />
-        <ChipRow
-          label="Type"
-          options={types}
-          value={type}
-          onChange={(nextType) => {
-            if (nextType === 'menu' && variant === 'branded') {
-              setVariant('primaryContainer');
-            }
-            setType(nextType);
-          }}
-        />
+        <ChipRow label="Type" options={types} value={type} onChange={setType} />
         <ChipRow
           label="Position"
           options={positions}
@@ -228,7 +215,7 @@ const FABExample = () => {
           alignment={position}
           trigger={{
             icon: 'pencil',
-            variant: activeVariant === 'branded' ? undefined : activeVariant,
+            variant: activeVariant,
             containerColor: activeContainerColor,
             size,
             visible: showFab,

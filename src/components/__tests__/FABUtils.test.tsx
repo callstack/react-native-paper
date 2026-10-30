@@ -15,7 +15,6 @@ describe('resolveColors', () => {
         secondaryContainer: ['secondaryContainer', 'onSecondaryContainer'],
         tertiary: ['tertiary', 'onTertiary'],
         tertiaryContainer: ['tertiaryContainer', 'onTertiaryContainer'],
-        branded: ['surfaceContainerHigh', 'onSurface'],
       } as const;
 
       const variantNames = [
@@ -25,7 +24,6 @@ describe('resolveColors', () => {
         'secondaryContainer',
         'tertiary',
         'tertiaryContainer',
-        'branded',
       ] as const;
       for (const variant of variantNames) {
         const [container, content] = variants[variant];
