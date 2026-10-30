@@ -66,7 +66,8 @@ export type Props = Omit<ViewProps, 'style'> & {
   contentStyle?: StyleProp<ViewStyle>;
   /**
    * @supported Available in v5.x with theme version 3
-   * Changes Banner shadow and background on iOS and Android.
+   * Changes Banner shadow on iOS and Android. The banner background is
+   * `theme.colors.surfaceContainerLow` and is not affected by `elevation`.
    */
   elevation?: Elevation;
   /**
@@ -211,6 +212,7 @@ const Banner = ({
       {...rest}
       style={[surfaceStyle, style]}
       theme={theme}
+      container="surfaceContainerLow"
       elevation={elevation}
     >
       <View style={[styles.wrapper, contentStyle]}>
