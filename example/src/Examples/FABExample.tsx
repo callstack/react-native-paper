@@ -215,6 +215,7 @@ const FABExample = () => {
           alignment={position}
           trigger={{
             icon: 'pencil',
+            'aria-label': 'Compose',
             variant: activeVariant,
             containerColor: activeContainerColor,
             size,
