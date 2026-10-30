@@ -355,13 +355,28 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 />
 ```
 
-`TextInput.Icon` is decorative when no press handlers are provided. Decorative icons are
-hidden from assistive technology and do not create a keyboard focus stop.
-Icons with `onPress`, `onLongPress`, `onPressIn`, or `onPressOut` require an accessible name:
+`TextInput.Icon` without a press handler is decorative: it is hidden from
+assistive technology and is not a keyboard focus stop. An icon with `onPress`,
+`onLongPress`, `onPressIn` or `onPressOut` requires an `aria-label` or
+`accessibilityLabel` that names its action:
 
 ```tsx
+const [value, setValue] = React.useState('');
+
+// Before (v5)
 <TextInput
   label="Search"
+  value={value}
+  onChangeText={setValue}
+  left={<TextInput.Icon icon="magnify" />}
+  right={<TextInput.Icon icon="close" onPress={() => setValue('')} />}
+/>
+
+// After (v6)
+<TextInput
+  label="Search"
+  value={value}
+  onChangeText={setValue}
   startAccessory={(props) => <TextInput.Icon {...props} icon="magnify" />}
   endAccessory={(props) => (
     <TextInput.Icon
@@ -401,32 +416,31 @@ Icons with `onPress`, `onLongPress`, `onPressIn`, or `onPressOut` require an acc
 />
 ```
 
-Supporting text and the character counter describe the field without becoming
-part of its accessible name. On web, their generated `nativeID` values are
-referenced by the input's `aria-describedby`. Additional IDs passed through
-`aria-describedby` are preserved. On Android and iOS, these descriptions are
-included in `accessibilityHint`, alongside any hint you provide, because React
-Native does not support native described-by relationships. The text below the
-field is hidden from assistive technology there, so it is not read twice.
+Supporting text and the character counter describe the field instead of
+becoming part of its accessible name. On web, the input references them with
+`aria-describedby`, and IDs you pass in `aria-describedby` are kept. On Android
+and iOS, they are only exposed through `accessibilityHint`, alongside any hint
+you pass, and the visible text is hidden from assistive technology. Users who
+turn hints off, for example with the VoiceOver Speak Hints setting, do not hear
+them.
 
 When no label or explicit accessible name is supplied, the placeholder names the
 field, including after text is entered. A disabled field always exposes its
 disabled state, even when `aria-disabled={false}` is supplied.
 
 On web, error supporting text uses `role="alert"`. On Android and iOS, a new or
-changed error message is announced through `AccessibilityInfo`. An error that is
-already shown when the field mounts is not announced.
-Custom input renderers should forward the accessibility props they receive.
-Explicit `aria-invalid` values are preserved; when omitted, validity is derived
-from `error` and the character counter.
-Empty fields remain visible to native accessibility before focus and after
-clearing. The field content no longer fades with the floating label.
+changed error message is announced through `AccessibilityInfo`, and an error
+that is already shown when the field mounts is not announced there. Explicit
+`aria-invalid` values are kept; when omitted, validity is derived from `error`
+and the character counter. Custom input renderers should forward the
+accessibility props they receive.
 
-The filled resting indicator now uses `onSurfaceVariant`; outlined fields use
-`outline` at rest. Both change to `onSurface` on hover. Invalid fields use `error`
-at rest and `onErrorContainer` on hover. Focus takes precedence over hover and
-uses `primary` (or `error` for an invalid field). A disabled field uses the
-disabled colors even when `error` is set, and it is still reported as invalid.
+The filled indicator uses `onSurfaceVariant` and the outlined border uses
+`outline` at rest. On web, both change to `onSurface` on hover, and an invalid
+field changes from `error` to `onErrorContainer`. Focus takes precedence over
+hover and uses `primary`, or `error` for an invalid field. A disabled field uses
+the disabled colors even when `error` is set, and it is still reported as
+invalid.
 
 #### Removed props
 
