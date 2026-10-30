@@ -149,7 +149,7 @@ const CheckboxItem = ({
   const textAlign = isLeading ? 'right' : 'left';
 
   // The row is the focusable checkbox, so it takes the Space key itself.
-  const { keyHandlers: spaceKeyHandlers, cancel: cancelSpaceKeyPress } =
+  const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
     useSpaceKeyPress({ onPress: disabled ? undefined : onPress });
 
   const computedStyle: TextStyle = {
@@ -165,7 +165,7 @@ const CheckboxItem = ({
       aria-disabled={disabled}
       onPress={onPress}
       onLongPress={onLongPress}
-      onBlur={cancelSpaceKeyPress}
+      onBlur={handleSpaceKeyBlur}
       {...spaceKeyHandlers}
       testID={testID}
       disabled={disabled}

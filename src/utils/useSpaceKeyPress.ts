@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { type GestureResponderEvent, Platform } from 'react-native';
+import {
+  type GestureResponderEvent,
+  type NativeSyntheticEvent,
+  Platform,
+  type TargetedEvent,
+} from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
@@ -11,20 +16,28 @@ type Options = {
    * be pressed.
    */
   onPress: ((e: GestureResponderEvent) => void) | undefined;
-  onPressIn?: () => void;
-  onPressOut?: () => void;
+  onPressIn?: (e: GestureResponderEvent) => void;
+  onPressOut?: (e: GestureResponderEvent) => void;
 };
 
 const isSpaceKey = ({ nativeEvent: { key } }: KeyboardEvent) =>
   key === ' ' || key === 'Spacebar';
 
+// React Native Web hands Enter's key events to the press callbacks as they
+// are, so Space passes its own events the same way.
+const asPressEvent = (
+  event: KeyboardEvent | NativeSyntheticEvent<TargetedEvent>
+) =>
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  event as unknown as GestureResponderEvent;
+
 /**
  * React Native Web presses on Space only for `role="button"`, so on a focused
  * element with another role, such as `checkbox`, Space scrolls the page
- * instead. The returned key handlers keep the page in place and press once
- * Space is released, as a native checkbox does. Enter needs nothing here:
- * React Native Web presses on it for every role. Native platforms get no
- * handlers.
+ * instead. The returned key handlers keep the page in place and press the way
+ * Enter does: press in on key down, then press out and press on release.
+ * Enter needs nothing here, since React Native Web handles it for every role.
+ * Native platforms get no handlers.
  */
 export const useSpaceKeyPress = ({
   onPress,
@@ -34,19 +47,21 @@ export const useSpaceKeyPress = ({
   const pressedRef = React.useRef(false);
   const enabled = Platform.OS === 'web' && onPress !== undefined;
 
-  /** Drops a pending Space press, e.g. when focus leaves before the release. */
-  const cancel = useLatestCallback(() => {
-    if (!pressedRef.current) return;
-
-    pressedRef.current = false;
-    onPressOut?.();
-  });
-
   // Without `onPress` the release is never handled, so a press pending at
   // that moment would otherwise fire on a later, unrelated release.
   React.useEffect(() => {
-    if (!enabled) cancel();
-  }, [enabled, cancel]);
+    if (!enabled) pressedRef.current = false;
+  }, [enabled]);
+
+  /** Ends a pending press when focus leaves before Space is released. */
+  const onBlur = useLatestCallback(
+    (event: NativeSyntheticEvent<TargetedEvent>) => {
+      if (!pressedRef.current) return;
+
+      pressedRef.current = false;
+      onPressOut?.(asPressEvent(event));
+    }
+  );
 
   const keyHandlers = enabled
     ? {
@@ -57,7 +72,7 @@ export const useSpaceKeyPress = ({
           if (event.nativeEvent.repeat) return;
 
           pressedRef.current = true;
-          onPressIn?.();
+          onPressIn?.(asPressEvent(event));
         },
         onKeyUp: (event: KeyboardEvent) => {
           if (!isSpaceKey(event)) return;
@@ -66,13 +81,11 @@ export const useSpaceKeyPress = ({
           if (!pressedRef.current) return;
 
           pressedRef.current = false;
-          onPressOut?.();
-          // React Native Web hands the key event to `onPress` for Enter too.
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-          onPress(event as unknown as GestureResponderEvent);
+          onPressOut?.(asPressEvent(event));
+          onPress(asPressEvent(event));
         },
       }
     : undefined;
 
-  return { keyHandlers, cancel };
+  return { keyHandlers, onBlur };
 };

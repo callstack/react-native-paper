@@ -148,17 +148,9 @@ describe('Checkbox Space key', () => {
     preventDefault: jest.fn(),
   });
 
-  const renderCheckbox = (
-    onPress: (e: GestureResponderEvent) => void,
-    disabled = false
-  ) =>
+  const renderCheckbox = (onPress: (e: GestureResponderEvent) => void) =>
     render(
-      <Checkbox
-        status="unchecked"
-        onPress={onPress}
-        disabled={disabled}
-        aria-label="Notify me"
-      />
+      <Checkbox status="unchecked" onPress={onPress} aria-label="Notify me" />
     );
 
   it('toggles once on release on web, without scrolling the page', async () => {
@@ -181,6 +173,34 @@ describe('Checkbox Space key', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it('presses in on key down and presses out before toggling, like Enter', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const calls: string[] = [];
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPressIn={() => {
+          calls.push('pressIn');
+        }}
+        onPressOut={() => {
+          calls.push('pressOut');
+        }}
+        onPress={() => {
+          calls.push('press');
+        }}
+        aria-label="Notify me"
+      />
+    );
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+
+    expect(calls).toEqual(['pressIn']);
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(calls).toEqual(['pressIn', 'pressOut', 'press']);
+  });
+
   it('leaves Enter to React Native Web on web', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
     const onPress = jest.fn<(e: GestureResponderEvent) => void>();
@@ -194,15 +214,27 @@ describe('Checkbox Space key', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('does not toggle when focus leaves before the release', async () => {
+  it('presses out without toggling when focus leaves before the release', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
     const onPress = jest.fn<(e: GestureResponderEvent) => void>();
-    await renderCheckbox(onPress);
+    const onPressOut = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={onPress}
+        onPressOut={onPressOut}
+        aria-label="Notify me"
+      />
+    );
 
     await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
     await fireEvent(screen.getByRole('checkbox'), 'blur');
+
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+
     await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
 
+    expect(onPressOut).toHaveBeenCalledTimes(1);
     expect(onPress).not.toHaveBeenCalled();
   });
 

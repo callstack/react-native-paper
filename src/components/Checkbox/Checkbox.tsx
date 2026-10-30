@@ -380,13 +380,21 @@ const Checkbox = ({
   }
   const showIndeterminate = nextGlyph === 'indeterminate';
 
-  const { keyHandlers: spaceKeyHandlers, cancel: cancelSpaceKeyPress } =
+  const handlePressIn = (e: GestureResponderEvent) => {
+    startPressRipple();
+    rest.onPressIn?.(e);
+  };
+
+  const handlePressOut = (e: GestureResponderEvent) => {
+    pressedSV.value = 0;
+    rest.onPressOut?.(e);
+  };
+
+  const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
     useSpaceKeyPress({
       onPress: isInteractive ? onPress : undefined,
-      onPressIn: startPressRipple,
-      onPressOut: () => {
-        pressedSV.value = 0;
-      },
+      onPressIn: handlePressIn,
+      onPressOut: handlePressOut,
     });
 
   const handleFocus = React.useCallback(
@@ -398,10 +406,13 @@ const Checkbox = ({
     [disabled]
   );
 
-  const handleBlur = React.useCallback(() => {
-    setFocused(false);
-    cancelSpaceKeyPress();
-  }, [cancelSpaceKeyPress]);
+  const handleBlur = React.useCallback(
+    (e: NativeSyntheticEvent<TargetedEvent>) => {
+      setFocused(false);
+      handleSpaceKeyBlur(e);
+    },
+    [handleSpaceKeyBlur]
+  );
 
   const interactionHandlers = isInteractive
     ? {
@@ -413,14 +424,8 @@ const Checkbox = ({
           setHovered(false);
           rest.onHoverOut?.(e);
         },
-        onPressIn: (e: GestureResponderEvent) => {
-          startPressRipple();
-          rest.onPressIn?.(e);
-        },
-        onPressOut: (e: GestureResponderEvent) => {
-          pressedSV.value = 0;
-          rest.onPressOut?.(e);
-        },
+        onPressIn: handlePressIn,
+        onPressOut: handlePressOut,
       }
     : null;
 
