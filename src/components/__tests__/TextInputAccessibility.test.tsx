@@ -217,18 +217,19 @@ it.each(['ios', 'android'] as const)(
         maxLength={20}
       />
     );
-    expect(screen.getByLabelText('Bio')).toHaveProp(
+    const input = screen.getByLabelText('Bio');
+    expect(input).toHaveProp(
       'accessibilityHint',
       'Double tap to edit, Keep it short, Characters entered 2 of 20'
     );
+    expect(input).not.toHaveProp('aria-describedby');
     expect(screen.queryByText('Keep it short')).toBeNull();
     expect(screen.queryByText('2/20')).toBeNull();
-    expect(
-      screen.getByText('Keep it short', { includeHiddenElements: true })
-    ).toBeOnTheScreen();
-    expect(
-      screen.getByText('2/20', { includeHiddenElements: true })
-    ).toBeOnTheScreen();
+    for (const text of ['Keep it short', '2/20']) {
+      expect(
+        screen.getByText(text, { includeHiddenElements: true })
+      ).not.toHaveProp('nativeID');
+    }
   }
 );
 
