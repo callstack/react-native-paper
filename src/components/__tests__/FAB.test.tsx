@@ -332,7 +332,7 @@ it.each(['icon', 'extended'] as const)(
   }
 );
 
-it('does not enable a FAB without an action when adding interaction handlers', async () => {
+it('renders a FAB without onPress as a disabled button', async () => {
   await render(<FAB icon="plus" aria-label="Create" />);
   expect(screen.getByRole('button', { name: 'Create' })).toBeDisabled();
 });
