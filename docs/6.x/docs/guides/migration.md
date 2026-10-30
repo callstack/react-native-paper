@@ -576,21 +576,21 @@ mutually exclusive options, use `SegmentedButtons`.
 
 ### Switch
 
-#### Explicit operability
+#### Switches without `onValueChange`
 
-A `Switch` now has to declare how it can be operated. Previously a switch with no `onValueChange` still rendered as an enabled, focusable control that did nothing when activated, and screen readers announced it as operable.
-
-Pass `onValueChange` to make it interactive, or mark it `readOnly` or `disabled` to render it as a state indicator. A read-only switch keeps its enabled appearance and exposes its on/off state to screen readers, but it cannot be focused with a keyboard or pressed. On web it exposes `aria-readonly`. On iOS and Android it exposes a disabled accessibility state because React Native has no read-only state for switches. Use `disabled` when you also want the disabled appearance.
+A `Switch` with no `onValueChange` used to render as an enabled, focusable control that did nothing when activated, and screen readers announced it as operable. It now renders as read-only and logs a warning. Pass `onValueChange` to make it interactive, or set `readOnly` or `disabled` to render it as a state indicator:
 
 ```tsx
-// Before (v5) — an enabled switch that does nothing
+// Before (v5)
 <Switch value={isDarkTheme} />
 
-// After (v6) — say which it is
+// After (v6)
 <Switch value={isDarkTheme} onValueChange={setIsDarkTheme} />
 <Switch value={isDarkTheme} readOnly />
 <Switch value={isDarkTheme} disabled />
 ```
+
+A read-only switch keeps its enabled appearance and exposes its on/off state to screen readers, but it cannot be focused with a keyboard or pressed. On web it exposes `aria-readonly`. On iOS and Android it exposes a disabled accessibility state, because React Native has no read-only state for switches. Use `disabled` when you also want the disabled appearance.
 
 This most often shows up where the switch sits inside a row that owns the press:
 

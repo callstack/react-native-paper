@@ -34,11 +34,27 @@ import type { StateOpacityKey, ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon, { type IconSource } from '../Icon';
 
-type SwitchBaseProps = {
+export type Props = {
   /**
    * Whether the switch is on.
    */
   value?: boolean;
+  /**
+   * Called with the new value when the user toggles the switch. A switch
+   * without it that is neither `readOnly` nor `disabled` renders as read-only
+   * and logs a warning.
+   */
+  onValueChange?: (value: boolean) => void;
+  /**
+   * Reports state the user cannot change here. The switch keeps its enabled
+   * appearance but cannot be focused with a keyboard or pressed. Screen readers
+   * receive a read-only state on web and a disabled state on native platforms.
+   */
+  readOnly?: boolean;
+  /**
+   * Disables interaction and renders the disabled visual state.
+   */
+  disabled?: boolean;
   /**
    * Icon shown inside the handle when checked
    */
@@ -55,45 +71,6 @@ type SwitchBaseProps = {
    */
   'aria-label'?: string;
 };
-
-export type Props = SwitchBaseProps & {
-  /**
-   * Called with the new value when the user toggles the switch. Required
-   * unless the switch is `readOnly` or `disabled`.
-   */
-  onValueChange?: (value: boolean) => void;
-  /**
-   * Reports state the user cannot change here. The switch keeps its enabled
-   * appearance but cannot be focused with a keyboard or pressed. Screen readers
-   * receive a read-only state on web and a disabled state on native platforms.
-   */
-  readOnly?: boolean;
-  /**
-   * Disables interaction and renders the disabled visual state.
-   */
-  disabled?: boolean;
-};
-
-/**
- * `Props`, narrowed so a switch always declares how it can be operated and can
- * never render as an enabled control that does nothing when activated.
- *
- * This is applied to the component's declared type rather than folded into
- * `Props`, because the docs generator reads props off the parameter annotation
- * and silently drops a union (a top-level one drops the whole page). So the
- * parameter below stays annotated as the flat `Props`, and callers still get
- * the narrowed type through this one.
- */
-export type OperableProps = SwitchBaseProps &
-  (
-    | {
-        onValueChange: (value: boolean) => void;
-        readOnly?: boolean;
-        disabled?: boolean;
-      }
-    | { onValueChange?: never; readOnly: true; disabled?: boolean }
-    | { onValueChange?: never; readOnly?: boolean; disabled: true }
-  );
 
 const {
   trackWidth: TRACK_WIDTH,
@@ -159,7 +136,7 @@ const CHECKED_CENTER = TRACK_WIDTH - HANDLE_PADDING - SELECTED_HANDLE / 2;
  * - `surface`: disabled selected handle
  * - `secondary`: focus indicator
  */
-const Switch: (props: OperableProps) => React.JSX.Element = ({
+const Switch = ({
   value,
   disabled,
   readOnly,
@@ -180,8 +157,8 @@ const Switch: (props: OperableProps) => React.JSX.Element = ({
   const isDisabled = !!disabled;
   const isEnabled = !isDisabled;
   const isReadOnly = !!readOnly;
-  // `OperableProps` already requires one of these, but untyped callers can slip
-  // past it, so guard here too rather than rendering an enabled no-op.
+  // Without a handler, an enabled switch would be a control that does nothing
+  // when activated, so render it as read-only instead.
   const isMissingOperability = !onValueChange && !isReadOnly && !isDisabled;
 
   if (isMissingOperability) {
