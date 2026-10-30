@@ -437,26 +437,32 @@ const Checkbox = ({
   }, [isInteractive, pressedSV, rippleHoldSV, rippleAlpha, rippleScale]);
 
   // A hidden checkbox needs no name. `Checkbox.Item` names the row and passes
-  // `accessible={false}` here.
-  const isInAccessibilityTree =
-    rest.accessible !== false &&
-    rest['aria-hidden'] !== true &&
-    rest.importantForAccessibility !== 'no' &&
-    rest.importantForAccessibility !== 'no-hide-descendants';
+  // `accessible={false}` here. Only count props the platform acts on:
+  // `importantForAccessibility` hides on Android alone,
+  // `accessibilityElementsHidden` on iOS alone, and iOS does not name an
+  // element after the one `aria-labelledby` points to.
+  const isHidden =
+    rest.accessible === false ||
+    rest['aria-hidden'] === true ||
+    (Platform.OS === 'ios' && rest.accessibilityElementsHidden === true) ||
+    (Platform.OS === 'android' &&
+      (rest.importantForAccessibility === 'no' ||
+        rest.importantForAccessibility === 'no-hide-descendants'));
   const hasAccessibleName = Boolean(
     rest['aria-label'] ??
     rest.accessibilityLabel ??
-    rest['aria-labelledby'] ??
-    rest.accessibilityLabelledBy
+    (Platform.OS !== 'ios'
+      ? (rest['aria-labelledby'] ?? rest.accessibilityLabelledBy)
+      : undefined)
   );
 
   React.useEffect(() => {
-    if (!isInAccessibilityTree || hasAccessibleName) return;
+    if (isHidden || hasAccessibleName) return;
 
     console.warn(
       'Checkbox: pass `aria-label` to name the checkbox for assistive tech, or use `Checkbox.Item` for a labelled row.'
     );
-  }, [isInAccessibilityTree, hasAccessibleName]);
+  }, [isHidden, hasAccessibleName]);
 
   const checked: boolean | 'mixed' =
     status === 'indeterminate' ? 'mixed' : status === 'checked';

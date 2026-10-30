@@ -339,16 +339,67 @@ describe('Checkbox accessible name', () => {
   });
 
   it.each([
-    { 'aria-hidden': true },
-    { importantForAccessibility: 'no' },
-    { importantForAccessibility: 'no-hide-descendants' },
+    { os: 'ios', hidden: { 'aria-hidden': true } },
+    { os: 'android', hidden: { 'aria-hidden': true } },
+    { os: 'web', hidden: { 'aria-hidden': true } },
+    { os: 'ios', hidden: { accessibilityElementsHidden: true } },
+    { os: 'android', hidden: { importantForAccessibility: 'no' } },
+    {
+      os: 'android',
+      hidden: { importantForAccessibility: 'no-hide-descendants' },
+    },
   ] as const)(
-    'does not warn for a checkbox hidden from assistive tech with %o',
-    async (hidden) => {
+    'does not warn on $os for a checkbox hidden with $hidden',
+    async ({ os, hidden }) => {
+      jest.replaceProperty(Platform, 'OS', os);
       jest.spyOn(console, 'warn').mockImplementation(() => {});
 
       await render(
         <Checkbox status="checked" onPress={() => {}} {...hidden} />
+      );
+
+      expect(console.warn).not.toHaveBeenCalled();
+    }
+  );
+
+  it('still warns on iOS when only importantForAccessibility hides it', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    // iOS ignores `importantForAccessibility`, so the checkbox stays exposed.
+    await render(
+      <Checkbox
+        status="checked"
+        onPress={() => {}}
+        importantForAccessibility="no-hide-descendants"
+      />
+    );
+
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining('aria-label')
+    );
+  });
+
+  it('warns on iOS when only aria-labelledby names it', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    // iOS does not name an element after the one it is labelled by.
+    await render(
+      <Checkbox status="checked" onPress={() => {}} aria-labelledby="label" />
+    );
+
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining('aria-label')
+    );
+  });
+
+  it.each(['android', 'web'] as const)(
+    'is named by aria-labelledby on %s',
+    async (os) => {
+      jest.replaceProperty(Platform, 'OS', os);
+      jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      await render(
+        <Checkbox status="checked" onPress={() => {}} aria-labelledby="label" />
       );
 
       expect(console.warn).not.toHaveBeenCalled();
