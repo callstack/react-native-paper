@@ -12,9 +12,9 @@ export type Variant =
   | 'primary'
   | 'secondary'
   | 'tertiary'
-  | 'tonalPrimary'
-  | 'tonalSecondary'
-  | 'tonalTertiary';
+  | 'primaryContainer'
+  | 'secondaryContainer'
+  | 'tertiaryContainer';
 
 export type Size = 'default' | 'medium' | 'large';
 
@@ -71,15 +71,15 @@ const variants = {
   primary: { container: 'primary', content: 'onPrimary' },
   secondary: { container: 'secondary', content: 'onSecondary' },
   tertiary: { container: 'tertiary', content: 'onTertiary' },
-  tonalPrimary: {
+  primaryContainer: {
     container: 'primaryContainer',
     content: 'onPrimaryContainer',
   },
-  tonalSecondary: {
+  secondaryContainer: {
     container: 'secondaryContainer',
     content: 'onSecondaryContainer',
   },
-  tonalTertiary: {
+  tertiaryContainer: {
     container: 'tertiaryContainer',
     content: 'onTertiaryContainer',
   },
