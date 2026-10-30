@@ -573,3 +573,43 @@ mutually exclusive options, use `SegmentedButtons`.
   />
 </>
 ```
+
+### Checkbox
+
+#### Interaction states
+
+Hover, focus and press now paint a Material Design 3 state layer, a 40dp circle around the box, on every platform. Hover and focus use `primary` when the checkbox is selected and `onSurface` when it is not, a press ripples in the opposite color, and an error checkbox uses `error` throughout. `color` and `uncheckedColor` also set the matching state layer color. Keyboard focus draws a 50dp ring with a 2dp gap around the state layer.
+
+To use the platform ripple instead of the state layer press, pass `rippleColor` on any platform, `background` on Android or `underlayColor` on iOS. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` turns off the press ripple either way.
+
+#### Touch target size
+
+`Checkbox` now takes up 48dp instead of 36dp to meet the minimum touch target, so rows with a checkbox can grow up to 12dp taller.
+
+#### Style
+
+`Checkbox` now accepts `style` and applies it to its outer container, so layout styles such as `margin`, `position` and `transform` move the whole checkbox, focus ring included. `width` and `height` do not resize the 48dp touch target.
+
+To keep the 36dp footprint of 5.x, use a negative margin. The touch target stays 48dp and reaches 6dp into the space around the checkbox:
+
+```tsx
+// Before (v5)
+<Checkbox status="checked" onPress={onPress} aria-label="Notify me" />
+
+// After (v6)
+<Checkbox
+  status="checked"
+  onPress={onPress}
+  aria-label="Notify me"
+  style={{ margin: -6 }}
+/>
+```
+
+#### Accessible name
+
+A standalone `Checkbox` has no visible label, so it now warns in development when it has no accessible name. Pass `aria-label` or `accessibilityLabel`, or use `Checkbox.Item`, which names the whole row. On Android and web, `aria-labelledby` names it too. A checkbox hidden from assistive technology, for example with `aria-hidden`, does not warn.
+
+```diff
+-<Checkbox status="checked" onPress={onPress} />
++<Checkbox status="checked" onPress={onPress} aria-label="Notify me" />
+```

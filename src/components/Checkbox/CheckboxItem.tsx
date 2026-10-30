@@ -11,6 +11,7 @@ import Checkbox from './Checkbox';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, TypescaleKey } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
+import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -147,6 +148,10 @@ const CheckboxItem = ({
 
   const textAlign = isLeading ? 'right' : 'left';
 
+  // The row is the focusable checkbox, so it takes the Space key itself.
+  const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
+    useSpaceKeyPress({ onPress: disabled ? undefined : onPress });
+
   const computedStyle: TextStyle = {
     ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
@@ -160,6 +165,8 @@ const CheckboxItem = ({
       aria-disabled={disabled}
       onPress={onPress}
       onLongPress={onLongPress}
+      onBlur={handleSpaceKeyBlur}
+      {...spaceKeyHandlers}
       testID={testID}
       disabled={disabled}
       theme={theme}
