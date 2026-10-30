@@ -277,6 +277,17 @@ describe('Switch operability', () => {
     expect(screen.getByRole('switch')).toBeEnabled();
   });
 
+  it('drops the pointer cursor on web when the switch becomes read-only', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const view = await render(<Switch value onValueChange={jest.fn()} />);
+
+    expect(screen.getByRole('switch')).not.toHaveStyle({ cursor: 'auto' });
+
+    await view.rerender(<Switch value readOnly />);
+
+    expect(screen.getByRole('switch')).toHaveStyle({ cursor: 'auto' });
+  });
+
   it('exposes a missing-handler fallback as read-only on web', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
     jest.spyOn(console, 'warn').mockImplementation(() => {});

@@ -449,6 +449,11 @@ const Switch = ({
         style={[
           styles.touchable,
           Platform.OS === 'web' ? webNoOutline : undefined,
+          // React Native Web shows a pointer cursor on any Pressable that is
+          // not `disabled`, and a read-only switch stays enabled there.
+          Platform.OS === 'web' && !isInteractive
+            ? styles.nonInteractiveTouchable
+            : undefined,
         ]}
       >
         <View
@@ -550,6 +555,9 @@ const styles = StyleSheet.create({
     height: TOUCH_TARGET_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  nonInteractiveTouchable: {
+    cursor: 'auto',
   },
   track: {
     width: TRACK_WIDTH,

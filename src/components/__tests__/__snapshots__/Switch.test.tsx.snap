@@ -55,6 +55,7 @@ exports[`Switch render renders disabled off 1`] = `
           "width": 52,
         },
         undefined,
+        undefined,
       ]
     }
     tabIndex={-1}
@@ -271,6 +272,7 @@ exports[`Switch render renders disabled on 1`] = `
           "width": 52,
         },
         undefined,
+        undefined,
       ]
     }
     tabIndex={-1}
@@ -466,6 +468,7 @@ exports[`Switch render renders off 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
+        undefined,
         undefined,
       ]
     }
@@ -666,6 +669,7 @@ exports[`Switch render renders on 1`] = `
           "width": 52,
         },
         undefined,
+        undefined,
       ]
     }
     tabIndex={0}
@@ -845,6 +849,7 @@ exports[`Switch render renders with checked icon 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
+        undefined,
         undefined,
       ]
     }
@@ -1095,6 +1100,7 @@ exports[`Switch render renders with per-state icons 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
+        undefined,
         undefined,
       ]
     }
