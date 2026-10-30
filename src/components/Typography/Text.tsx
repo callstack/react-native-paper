@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ReactNode } from 'react';
 import {
   I18nManager,
   StyleProp,
@@ -178,7 +177,7 @@ const styles = StyleSheet.create({
 
 type TextComponent<T> = (
   props: Props<T> & { ref?: React.RefObject<TextRef> }
-) => ReactNode;
+) => React.ReactElement | null;
 
 const Component = forwardRef(Text) as TextComponent<never>;
 
