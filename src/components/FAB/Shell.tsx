@@ -308,7 +308,7 @@ const Shell = ({
 
   React.useEffect(() => {
     if (!visible) {
-      if (Platform.OS === 'web' && typeof document !== 'undefined') {
+      if (Platform.OS === 'web') {
         const target: unknown = touchableRef.current;
         if (
           target instanceof HTMLElement &&
