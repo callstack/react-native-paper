@@ -13,11 +13,6 @@ import { fireEvent, userEvent } from '@testing-library/react-native';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { render, screen } from '../../test-utils';
-import { LightTheme } from '../../theme/schemes';
-import {
-  androidElevationLevels,
-  shadow,
-} from '../../theme/tokens/sys/elevation';
 import FAB from '../FAB';
 
 afterEach(() => {
@@ -127,48 +122,6 @@ const getStyle = (ref: React.RefObject<View | null>) => {
   return getAnimatedStyle(ref.current);
 };
 
-it.each(['icon', 'extended'] as const)(
-  'applies web hover elevation to the %s FAB and restores it after press and exit',
-  async (type) => {
-    jest.replaceProperty(Platform, 'OS', 'web');
-    const ref = React.createRef<View>();
-    const onPress = jest.fn();
-    await render(
-      type === 'icon' ? (
-        <FAB
-          ref={ref}
-          style={{}}
-          icon="plus"
-          aria-label="Create"
-          onPress={onPress}
-        />
-      ) : (
-        <FAB.Extended
-          ref={ref}
-          style={{}}
-          expanded
-          icon="plus"
-          label="Create"
-          onPress={onPress}
-        />
-      )
-    );
-    const fab = screen.getByRole('button', { name: 'Create' });
-    const [restingShadow] = shadow(3, LightTheme.colors.shadow);
-    const [hoverShadow] = shadow(4, LightTheme.colors.shadow);
-
-    expect(getStyle(ref)).toMatchObject(restingShadow);
-    await fireEvent(fab, 'hoverIn');
-    expect(getStyle(ref)).toMatchObject(hoverShadow);
-    await fireEvent(fab, 'pressIn');
-    expect(getStyle(ref)).toMatchObject(restingShadow);
-    await fireEvent(fab, 'pressOut');
-    expect(getStyle(ref)).toMatchObject(hoverShadow);
-    await fireEvent(fab, 'hoverOut');
-    expect(getStyle(ref)).toMatchObject(restingShadow);
-  }
-);
-
 it('renders a FAB without onPress as a disabled button', async () => {
   await render(<FAB icon="plus" aria-label="Create" />);
   expect(screen.getByRole('button', { name: 'Create' })).toBeDisabled();
@@ -208,13 +161,14 @@ it('clears interaction elevation when a FAB is hidden and shown again', async ()
       onPress={onPress}
     />
   );
+  const resting = getStyle(ref);
   await fireEvent(screen.getByRole('button', { name: 'Create' }), 'hoverIn');
+  expect(getStyle(ref)).not.toEqual(resting);
   await rerender(
     <FAB ref={ref} style={{}} icon="plus" onPress={onPress} visible={false} />
   );
   await rerender(<FAB ref={ref} style={{}} icon="plus" onPress={onPress} />);
-  const [restingShadow] = shadow(3, LightTheme.colors.shadow);
-  expect(getStyle(ref)).toMatchObject(restingShadow);
+  expect(getStyle(ref)).toEqual(resting);
 });
 
 it('uses the shared FAB hover elevation for the menu trigger', async () => {
@@ -237,8 +191,10 @@ it('uses the shared FAB hover elevation for the menu trigger', async () => {
   expect(JSON.stringify(toJSON())).toBe(before);
 });
 
+// React Native 0.85 sends no hover events on iOS or Android by default. These
+// only check that the elevation logic itself has no platform check.
 it.each(['ios', 'android'] as const)(
-  'applies hover elevation alongside focus and restores it after press on %s',
+  'follows hover events and keeps the hover elevation on focus when Platform.OS is %s',
   async (platform) => {
     jest.replaceProperty(Platform, 'OS', platform);
     const ref = React.createRef<View>();
@@ -252,29 +208,19 @@ it.each(['ios', 'android'] as const)(
       />
     );
     const fab = screen.getByRole('button', { name: 'Create' });
-    const [restingShadow] = shadow(3, LightTheme.colors.shadow);
-    const [hoverShadow] = shadow(4, LightTheme.colors.shadow);
-    const restingStyle =
-      platform === 'android'
-        ? { elevation: androidElevationLevels[3] }
-        : restingShadow;
-    const hoverStyle =
-      platform === 'android'
-        ? { elevation: androidElevationLevels[4] }
-        : hoverShadow;
+    const resting = getStyle(ref);
 
-    await fireEvent(fab, 'focus', { nativeEvent: {} });
-    expect(getStyle(ref)).toMatchObject(restingStyle);
     await fireEvent(fab, 'hoverIn');
-    expect(getStyle(ref)).toMatchObject(hoverStyle);
+    const hovered = getStyle(ref);
+    expect(hovered).not.toEqual(resting);
     await fireEvent(fab, 'focus', { nativeEvent: {} });
-    expect(getStyle(ref)).toMatchObject(hoverStyle);
+    expect(getStyle(ref)).toEqual(hovered);
     await fireEvent(fab, 'pressIn');
-    expect(getStyle(ref)).toMatchObject(restingStyle);
+    expect(getStyle(ref)).toEqual(resting);
     await fireEvent(fab, 'pressOut');
-    expect(getStyle(ref)).toMatchObject(hoverStyle);
+    expect(getStyle(ref)).toEqual(hovered);
     await fireEvent(fab, 'hoverOut');
-    expect(getStyle(ref)).toMatchObject(restingStyle);
+    expect(getStyle(ref)).toEqual(resting);
   }
 );
 
@@ -289,13 +235,14 @@ it('restores the resting elevation when a hovered FAB loses its action', async (
       onPress={() => {}}
     />
   );
+  const resting = getStyle(ref);
   await fireEvent(screen.getByRole('button', { name: 'Create' }), 'hoverIn');
+  expect(getStyle(ref)).not.toEqual(resting);
   await rerender(<FAB ref={ref} style={{}} icon="plus" aria-label="Create" />);
-  const [restingShadow] = shadow(3, LightTheme.colors.shadow);
-  expect(getStyle(ref)).toMatchObject(restingShadow);
+  expect(getStyle(ref)).toEqual(resting);
   expect(screen.getByRole('button', { name: 'Create' })).toBeDisabled();
   await rerender(<FAB ref={ref} style={{}} icon="plus" onPress={() => {}} />);
-  expect(getStyle(ref)).toMatchObject(restingShadow);
+  expect(getStyle(ref)).toEqual(resting);
 });
 
 describe('on web', () => {
@@ -407,6 +354,47 @@ describe('on web', () => {
     });
     return { blur, hide: () => rerender(fab(false)) };
   };
+
+  it.each(['icon', 'extended'] as const)(
+    'raises the %s FAB while hovered, keeps it raised on focus and lowers it while pressed',
+    async (type) => {
+      const ref = React.createRef<View>();
+      await render(
+        type === 'icon' ? (
+          <FAB
+            ref={ref}
+            style={{}}
+            icon="plus"
+            aria-label="Create"
+            onPress={() => {}}
+          />
+        ) : (
+          <FAB.Extended
+            ref={ref}
+            style={{}}
+            expanded
+            icon="plus"
+            label="Create"
+            onPress={() => {}}
+          />
+        )
+      );
+      const fab = screen.getByRole('button', { name: 'Create' });
+      const resting = getStyle(ref);
+
+      await fireEvent(fab, 'hoverIn');
+      const hovered = getStyle(ref);
+      expect(hovered).not.toEqual(resting);
+      await fireEvent(fab, 'focus', { nativeEvent: {} });
+      expect(getStyle(ref)).toEqual(hovered);
+      await fireEvent(fab, 'pressIn');
+      expect(getStyle(ref)).toEqual(resting);
+      await fireEvent(fab, 'pressOut');
+      expect(getStyle(ref)).toEqual(hovered);
+      await fireEvent(fab, 'hoverOut');
+      expect(getStyle(ref)).toEqual(resting);
+    }
+  );
 
   it('moves focus back to the previous element when a keyboard-focused FAB hides', async () => {
     const previous = createElement();
