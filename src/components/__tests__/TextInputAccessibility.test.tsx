@@ -523,7 +523,10 @@ it.each(['aria-labelledby', 'accessibilityLabelledBy'] as const)(
         />
       </>
     );
-    expect(renderInput.mock.lastCall?.[0][attribute]).toBe('external-label');
+    expect(screen.getByLabelText('Work address')).toHaveProp(
+      attribute,
+      'external-label'
+    );
     expect(renderInput.mock.lastCall?.[0]['aria-describedby']).toEqual(
       expect.any(String)
     );
