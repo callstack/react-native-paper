@@ -616,19 +616,21 @@ export const getAccessibilityData = ({
       accessibilityHint: hint,
     },
     label: { nativeID: labelId },
+    // On native, the hint above already contains these texts. Hide their nodes
+    // so they are not read twice or merged into the field wrapper's label.
     supportingText: {
       nativeID: supportingTextId,
-      role: hasError && supportingText ? 'alert' : undefined,
-      accessibilityLiveRegion:
-        Platform.OS === 'android' && hasError && supportingText
-          ? 'assertive'
+      'aria-hidden': Platform.OS !== 'web',
+      role:
+        Platform.OS === 'web' && hasError && supportingText
+          ? 'alert'
           : undefined,
     },
     counter: {
       nativeID: counterId,
+      'aria-hidden': Platform.OS !== 'web',
       'aria-label': counterAccessibilityLabel,
       'aria-live': Platform.OS === 'web' ? 'polite' : undefined,
-      accessibilityLiveRegion: Platform.OS === 'android' ? 'polite' : undefined,
     },
   };
 };
