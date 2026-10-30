@@ -172,6 +172,9 @@ describe('Switch focus state', () => {
 
     expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
     expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
+    expect(getLayers().handleFill).toMatchObject({
+      backgroundColor: colors.onPrimary,
+    });
   });
 
   // On web the switch keeps DOM focus while it is not interactive, because
@@ -216,6 +219,22 @@ describe('Switch focus state', () => {
     await jest.runAllTimersAsync();
 
     expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+  });
+
+  it('shows focus feedback on web once a switch focused while read-only becomes operable', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onValueChange = jest.fn();
+    const view = await render(
+      <Switch value onValueChange={onValueChange} readOnly />
+    );
+
+    await fireEvent(screen.getByRole('switch'), 'focus', {
+      currentTarget: { matches: () => true },
+    });
+    await view.rerender(<Switch value onValueChange={onValueChange} />);
+    await jest.runAllTimersAsync();
+
+    expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
   });
 
   it.each(['disabled', 'readOnly'] as const)(
