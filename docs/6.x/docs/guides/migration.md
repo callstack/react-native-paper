@@ -425,7 +425,8 @@ clearing. The field content no longer fades with the floating label.
 The filled resting indicator now uses `onSurfaceVariant`; outlined fields use
 `outline` at rest. Both change to `onSurface` on hover. Invalid fields use `error`
 at rest and `onErrorContainer` on hover. Focus takes precedence over hover and
-uses `primary` (or `error` for an invalid field).
+uses `primary` (or `error` for an invalid field). A disabled field uses the
+disabled colors even when `error` is set, and it is still reported as invalid.
 
 #### Removed props
 

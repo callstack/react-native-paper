@@ -1,6 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 
+import { render, screen } from '../../test-utils';
 import { LightTheme as theme } from '../../theme/schemes';
+import TextInput from '../TextInput';
 import { getOutlineColor } from '../TextInput/utils';
 
 type State = {
@@ -52,4 +54,29 @@ describe.each([
       })
     ).toBe(theme.colors[role]);
   });
+});
+
+it('uses the disabled colors for a disabled invalid field and keeps it invalid', async () => {
+  await render(
+    <TextInput
+      label="Email"
+      supportingText="Enter a valid email"
+      error
+      disabled
+      startAccessory={(props) => <TextInput.Icon {...props} icon="email" />}
+    />
+  );
+
+  // Label, supporting text, accessory icon and the default error icon.
+  for (const text of [
+    'Email',
+    'Enter a valid email',
+    'email',
+    'alert-circle',
+  ]) {
+    expect(screen.getByText(text, { includeHiddenElements: true })).toHaveStyle(
+      { color: theme.colors.onSurface }
+    );
+  }
+  expect(screen.getByLabelText('Email')).toHaveProp('aria-invalid', true);
 });

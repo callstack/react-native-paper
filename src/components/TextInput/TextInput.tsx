@@ -475,7 +475,11 @@ function TextInput({
             multiline: !!rest.multiline,
           })
         ) : hasError ? (
-          <TextInputErrorIcon style={trailingAccessoryStyles} theme={theme} />
+          <TextInputErrorIcon
+            style={trailingAccessoryStyles}
+            disabled={isDisabled}
+            theme={theme}
+          />
         ) : null}
       </View>
 
