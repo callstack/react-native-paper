@@ -437,7 +437,6 @@ const Switch = ({
     <View style={[styles.wrapper, style]}>
       <Pressable
         disabled={Platform.OS === 'web' ? isDisabled : !isInteractive}
-        focusable={isInteractive}
         tabIndex={isInteractive ? 0 : -1}
         aria-readonly={Platform.OS === 'web' ? isAnnouncedReadOnly : undefined}
         {...interactionProps}
