@@ -44,22 +44,33 @@ export const useSpaceKeyPress = ({
   onPressIn,
   onPressOut,
 }: Options) => {
-  const pressedRef = React.useRef(false);
+  // The key down event of the pending press, or `null` when there is none.
+  const pressInEventRef = React.useRef<KeyboardEvent | null>(null);
   const enabled = Platform.OS === 'web' && onPress !== undefined;
 
-  // Without `onPress` the release is never handled, so a press pending at
-  // that moment would otherwise fire on a later, unrelated release.
+  /** Presses out the pending press, if any, and returns whether there was one. */
+  const endPress = useLatestCallback(
+    (event: KeyboardEvent | NativeSyntheticEvent<TargetedEvent>) => {
+      if (pressInEventRef.current === null) return false;
+
+      pressInEventRef.current = null;
+      onPressOut?.(asPressEvent(event));
+      return true;
+    }
+  );
+
+  // Without `onPress` the release is never handled, so a pending press ends
+  // here instead, without pressing. Otherwise it would press on a later,
+  // unrelated release.
   React.useEffect(() => {
-    if (!enabled) pressedRef.current = false;
-  }, [enabled]);
+    const pressInEvent = pressInEventRef.current;
+    if (!enabled && pressInEvent !== null) endPress(pressInEvent);
+  }, [enabled, endPress]);
 
   /** Ends a pending press when focus leaves before Space is released. */
   const onBlur = useLatestCallback(
     (event: NativeSyntheticEvent<TargetedEvent>) => {
-      if (!pressedRef.current) return;
-
-      pressedRef.current = false;
-      onPressOut?.(asPressEvent(event));
+      endPress(event);
     }
   );
 
@@ -71,18 +82,14 @@ export const useSpaceKeyPress = ({
           event.preventDefault();
           if (event.nativeEvent.repeat) return;
 
-          pressedRef.current = true;
+          pressInEventRef.current = event;
           onPressIn?.(asPressEvent(event));
         },
         onKeyUp: (event: KeyboardEvent) => {
           if (!isSpaceKey(event)) return;
 
           event.preventDefault();
-          if (!pressedRef.current) return;
-
-          pressedRef.current = false;
-          onPressOut?.(asPressEvent(event));
-          onPress(asPressEvent(event));
+          if (endPress(event)) onPress(asPressEvent(event));
         },
       }
     : undefined;

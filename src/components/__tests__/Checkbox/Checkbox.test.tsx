@@ -238,6 +238,66 @@ describe('Checkbox Space key', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
+  it('presses out without toggling when disabled mid press', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    const onPressOut = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={onPress}
+        onPressOut={onPressOut}
+        aria-label="Notify me"
+      />
+    );
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+    await screen.rerender(
+      <Checkbox
+        status="unchecked"
+        onPress={onPress}
+        onPressOut={onPressOut}
+        disabled
+        aria-label="Notify me"
+      />
+    );
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('presses out when onPress goes away mid press', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    const onLongPress = jest.fn<(e: GestureResponderEvent) => void>();
+    const onPressOut = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={onPress}
+        onLongPress={onLongPress}
+        onPressOut={onPressOut}
+        aria-label="Notify me"
+      />
+    );
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+    // Still interactive through `onLongPress`, but Space has nothing to press.
+    await screen.rerender(
+      <Checkbox
+        status="unchecked"
+        onLongPress={onLongPress}
+        onPressOut={onPressOut}
+        aria-label="Notify me"
+      />
+    );
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
   it('does not toggle once the checkbox becomes disabled', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
     const onPress = jest.fn<(e: GestureResponderEvent) => void>();
