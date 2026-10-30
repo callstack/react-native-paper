@@ -225,8 +225,9 @@ export type TextInputProps = NativeTextInputProps & {
   /**
    * Supporting text to display below the input (Material Design 3).
    * Associated with the field through `aria-describedby` on web and included
-   * in the native accessibility hint. When `error` is true, it is announced
-   * as an alert. It does not become part of the field's accessible name.
+   * in the native accessibility hint. When `error` is true, a new or changed
+   * message is announced. It does not become part of the field's accessible
+   * name.
    */
   supportingText?: string;
   /**

@@ -364,7 +364,12 @@ Icons with `onPress`, `onLongPress`, `onPressIn`, or `onPressOut` require an acc
   label="Search"
   startAccessory={(props) => <TextInput.Icon {...props} icon="magnify" />}
   endAccessory={(props) => (
-    <TextInput.Icon {...props} icon="close" aria-label="Clear search" onPress={() => setValue('')} />
+    <TextInput.Icon
+      {...props}
+      icon="close"
+      aria-label="Clear search"
+      onPress={() => setValue('')}
+    />
   )}
 />
 ```
@@ -401,14 +406,16 @@ part of its accessible name. On web, their generated `nativeID` values are
 referenced by the input's `aria-describedby`. Additional IDs passed through
 `aria-describedby` are preserved. On Android and iOS, these descriptions are
 included in `accessibilityHint`, alongside any hint you provide, because React
-Native does not support native described-by relationships.
+Native does not support native described-by relationships. The text below the
+field is hidden from assistive technology there, so it is not read twice.
 
 When no label or explicit accessible name is supplied, the placeholder names the
 field, including after text is entered. A disabled field always exposes its
 disabled state, even when `aria-disabled={false}` is supplied.
 
-Error supporting text uses `role="alert"`. Android uses an assertive live region;
-iOS announces changed error messages through `AccessibilityInfo`.
+On web, error supporting text uses `role="alert"`. On Android and iOS, a new or
+changed error message is announced through `AccessibilityInfo`. An error that is
+already shown when the field mounts is not announced.
 Custom input renderers should forward the accessibility props they receive.
 Explicit `aria-invalid` values are preserved; when omitted, validity is derived
 from `error` and the character counter.
