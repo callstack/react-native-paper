@@ -113,10 +113,16 @@ it('toggles the row once on Space release on web', async () => {
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
-it('does not toggle a disabled row on Space', async () => {
+it('does not toggle on a release after the row was disabled mid press', async () => {
   jest.replaceProperty(Platform, 'OS', 'web');
   const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+  const space = { nativeEvent: { key: ' ' }, preventDefault: jest.fn() };
   await render(
+    <Checkbox.Item label="Notify me" status="unchecked" onPress={onPress} />
+  );
+
+  await fireEvent(screen.getByRole('checkbox'), 'keyDown', space);
+  await screen.rerender(
     <Checkbox.Item
       label="Notify me"
       status="unchecked"
@@ -124,11 +130,10 @@ it('does not toggle a disabled row on Space', async () => {
       disabled
     />
   );
-  const row = screen.getByRole('checkbox', { name: 'Notify me' });
-  const space = { nativeEvent: { key: ' ' }, preventDefault: jest.fn() };
-
-  await fireEvent(row, 'keyDown', space);
-  await fireEvent(row, 'keyUp', space);
+  await screen.rerender(
+    <Checkbox.Item label="Notify me" status="unchecked" onPress={onPress} />
+  );
+  await fireEvent(screen.getByRole('checkbox'), 'keyUp', space);
 
   expect(onPress).not.toHaveBeenCalled();
 });
