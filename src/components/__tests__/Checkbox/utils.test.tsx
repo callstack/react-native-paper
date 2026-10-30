@@ -2,7 +2,10 @@ import { describe, expect, it } from '@jest/globals';
 
 import { DarkTheme, LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';
-import { getSelectionVisualState, getStateLayer } from '../../Checkbox/utils';
+import {
+  getCheckboxStateLayer,
+  getSelectionVisualState,
+} from '../../Checkbox/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -154,13 +157,17 @@ describe('getSelectionVisualState', () => {
   });
 });
 
-describe('getStateLayer', () => {
+describe('getCheckboxStateLayer', () => {
   const { colors } = LightTheme;
   const { hovered, focused, pressed } = tokens.md.sys.state.opacity;
 
   it('is fully transparent when idle', () => {
     expect(
-      getStateLayer({ theme: LightTheme, selected: false, interaction: null })
+      getCheckboxStateLayer({
+        theme: LightTheme,
+        selected: false,
+        interaction: null,
+      })
     ).toEqual({ color: 'transparent', opacity: 0 });
   });
 
@@ -169,7 +176,7 @@ describe('getStateLayer', () => {
     ['focused' as const, focused],
   ])('tints %s with primary when selected', (interaction, opacity) => {
     expect(
-      getStateLayer({ theme: LightTheme, selected: true, interaction })
+      getCheckboxStateLayer({ theme: LightTheme, selected: true, interaction })
     ).toEqual({
       color: colors.primary,
       opacity,
@@ -181,7 +188,7 @@ describe('getStateLayer', () => {
     ['focused' as const, focused],
   ])('tints %s with onSurface when unselected', (interaction, opacity) => {
     expect(
-      getStateLayer({ theme: LightTheme, selected: false, interaction })
+      getCheckboxStateLayer({ theme: LightTheme, selected: false, interaction })
     ).toEqual({
       color: colors.onSurface,
       opacity,
@@ -190,7 +197,7 @@ describe('getStateLayer', () => {
 
   it('inverts to onSurface when a selected checkbox is pressed', () => {
     expect(
-      getStateLayer({
+      getCheckboxStateLayer({
         theme: LightTheme,
         selected: true,
         interaction: 'pressed',
@@ -200,7 +207,7 @@ describe('getStateLayer', () => {
 
   it('inverts to primary when an unselected checkbox is pressed', () => {
     expect(
-      getStateLayer({
+      getCheckboxStateLayer({
         theme: LightTheme,
         selected: false,
         interaction: 'pressed',
@@ -212,7 +219,7 @@ describe('getStateLayer', () => {
     'stays on error for %s regardless of selection',
     (interaction) => {
       expect(
-        getStateLayer({
+        getCheckboxStateLayer({
           theme: LightTheme,
           selected: true,
           error: true,
@@ -220,7 +227,7 @@ describe('getStateLayer', () => {
         })
       ).toEqual({ color: colors.error, opacity: expect.any(Number) });
       expect(
-        getStateLayer({
+        getCheckboxStateLayer({
           theme: LightTheme,
           selected: false,
           error: true,
@@ -241,7 +248,7 @@ describe('getStateLayer', () => {
       ['focused' as const, focused],
     ])('uses customColor for %s when selected', (interaction, opacity) => {
       expect(
-        getStateLayer({
+        getCheckboxStateLayer({
           theme: LightTheme,
           selected: true,
           interaction,
@@ -257,7 +264,7 @@ describe('getStateLayer', () => {
       'uses customUncheckedColor for %s when unselected',
       (interaction, opacity) => {
         expect(
-          getStateLayer({
+          getCheckboxStateLayer({
             theme: LightTheme,
             selected: false,
             interaction,
@@ -269,7 +276,7 @@ describe('getStateLayer', () => {
 
     it('takes the unchecked color when a selected checkbox is pressed', () => {
       expect(
-        getStateLayer({
+        getCheckboxStateLayer({
           theme: LightTheme,
           selected: true,
           interaction: 'pressed',
@@ -280,7 +287,7 @@ describe('getStateLayer', () => {
 
     it('takes the checked color when an unselected checkbox is pressed', () => {
       expect(
-        getStateLayer({
+        getCheckboxStateLayer({
           theme: LightTheme,
           selected: false,
           interaction: 'pressed',
@@ -291,7 +298,7 @@ describe('getStateLayer', () => {
 
     it('overrides error, matching the box', () => {
       expect(
-        getStateLayer({
+        getCheckboxStateLayer({
           theme: LightTheme,
           selected: true,
           error: true,
@@ -303,7 +310,7 @@ describe('getStateLayer', () => {
 
     it('leaves the other side on its token role', () => {
       expect(
-        getStateLayer({
+        getCheckboxStateLayer({
           theme: LightTheme,
           selected: true,
           interaction: 'hovered',

@@ -2,7 +2,12 @@ import type { ColorValue } from 'react-native';
 
 import { CheckboxTokens } from './tokens';
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme, StateOpacityKey } from '../../theme/types';
+import type {
+  InternalTheme,
+  StateLayer,
+  StateOpacityKey,
+} from '../../theme/types';
+import { getStateLayer } from '../../theme/utils/state';
 
 // MD3 Checkbox spec: https://m3.material.io/components/checkbox/specs
 
@@ -76,7 +81,8 @@ const getIconColor = ({
 
 /**
  * Resolve the static (non-interactive) colors + opacity for the Checkbox
- * renderer. The interaction states are resolved by `getStateLayer` instead.
+ * renderer. The interaction states are resolved by `getCheckboxStateLayer`
+ * instead.
  */
 export const getSelectionVisualState = ({
   theme,
@@ -121,11 +127,6 @@ export type CheckboxInteraction = Extract<
   'hovered' | 'focused' | 'pressed'
 >;
 
-export type CheckboxStateLayer = {
-  color: ColorValue;
-  opacity: number;
-};
-
 type StateLayerState = {
   theme: InternalTheme;
   selected: boolean;
@@ -140,7 +141,7 @@ type StateLayerState = {
  * error checkbox stays on `error` throughout, and `color`/`uncheckedColor`
  * override the role they already override on the box itself.
  */
-export const getStateLayer = ({
+export const getCheckboxStateLayer = ({
   theme,
   selected,
   error,
@@ -149,12 +150,10 @@ export const getStateLayer = ({
   customUncheckedColor,
 }: StateLayerState & {
   interaction: CheckboxInteraction | null;
-}): CheckboxStateLayer => {
+}): StateLayer => {
   if (interaction === null) {
     return { color: 'transparent', opacity: 0 };
   }
-
-  const opacity = stateOpacity[interaction];
 
   // A press previews the state being moved to, so the layer takes the opposite
   // selection's color -- the same inversion the tokens below encode.
@@ -162,14 +161,15 @@ export const getStateLayer = ({
   const custom = followsSelected ? customColor : customUncheckedColor;
 
   if (custom) {
-    return { color: custom, opacity };
+    return { color: custom, opacity: stateOpacity[interaction] };
   }
 
   if (error) {
-    return {
-      color: theme.colors[CheckboxTokens.errorStateLayerColor],
-      opacity,
-    };
+    return getStateLayer(
+      theme,
+      CheckboxTokens.errorStateLayerColor,
+      interaction
+    );
   }
 
   const role =
@@ -185,5 +185,5 @@ export const getStateLayer = ({
           ? CheckboxTokens.selectedHoverStateLayerColor
           : CheckboxTokens.unselectedHoverStateLayerColor;
 
-  return { color: theme.colors[role], opacity };
+  return getStateLayer(theme, role, interaction);
 };

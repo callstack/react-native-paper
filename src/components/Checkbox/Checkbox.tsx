@@ -23,7 +23,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { CheckboxTokens } from './tokens';
-import { getSelectionVisualState, getStateLayer } from './utils';
+import { getCheckboxStateLayer, getSelectionVisualState } from './utils';
 import type { CheckboxInteraction } from './utils';
 import { useLocale } from '../../core/locale';
 import { SettingsContext } from '../../core/settings';
@@ -204,12 +204,12 @@ const Checkbox = ({
   // Fade by opacity alone: under a dynamic theme the role is a `PlatformColor`,
   // which Reanimated cannot interpolate, so the color stays put while idle
   // instead of dropping to transparent.
-  const stateLayer = getStateLayer({ ...selectionColors, interaction });
-  const stateLayerColor = getStateLayer({
+  const stateLayer = getCheckboxStateLayer({ ...selectionColors, interaction });
+  const stateLayerColor = getCheckboxStateLayer({
     ...selectionColors,
     interaction: interaction ?? 'hovered',
   }).color;
-  const pressRipple = getStateLayer({
+  const pressRipple = getCheckboxStateLayer({
     ...selectionColors,
     interaction: 'pressed',
   });
