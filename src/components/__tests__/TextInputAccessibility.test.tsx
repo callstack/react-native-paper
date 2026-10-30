@@ -153,6 +153,7 @@ it('keeps generated IDs stable as helper text becomes an error and removes absen
 });
 
 it('gives different fields distinct description IDs even with the same test ID', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
   await render(
     <>
       <TextInput
@@ -510,6 +511,7 @@ it('blocks every accessory activation handler when the field is disabled', async
 it.each(['aria-labelledby', 'accessibilityLabelledBy'] as const)(
   'preserves caller %s relationships',
   async (attribute) => {
+    jest.replaceProperty(Platform, 'OS', 'web');
     await render(
       <>
         <Text nativeID="external-label">Work address</Text>

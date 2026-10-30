@@ -576,24 +576,22 @@ export const getAccessibilityData = ({
       : `Characters entered ${inputLength} of ${maxLength}`
     : undefined;
 
-  const labelId = `${id}-label`;
-  const supportingTextId = `${id}-supporting-text`;
-  const counterId = `${id}-counter`;
+  // Generated IDs only link the label and descriptions on web.
+  const labelId = Platform.OS === 'web' ? `${id}-label` : undefined;
+  const supportingTextId =
+    Platform.OS === 'web' && supportingText
+      ? `${id}-supporting-text`
+      : undefined;
+  const counterId =
+    Platform.OS === 'web' && hasCounter ? `${id}-counter` : undefined;
   const describedBy =
-    [
-      props['aria-describedby'],
-      supportingText ? supportingTextId : undefined,
-      hasCounter ? counterId : undefined,
-    ]
+    [props['aria-describedby'], supportingTextId, counterId]
       .filter(Boolean)
       .join(' ') || undefined;
   const explicitLabel = props['aria-label'] ?? props.accessibilityLabel;
   const labelledBy =
     props['aria-labelledby'] ??
-    (Platform.OS === 'web' &&
-    label &&
-    explicitLabel == null &&
-    !props.accessibilityLabelledBy
+    (label && explicitLabel == null && !props.accessibilityLabelledBy
       ? labelId
       : undefined);
 
