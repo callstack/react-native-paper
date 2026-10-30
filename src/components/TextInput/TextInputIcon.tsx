@@ -121,12 +121,6 @@ const TextInputIcon = ({
     onPressIn,
     onPressOut,
   });
-  const iconRef = React.useRef<View>(null);
-  React.useImperativeHandle<View | null, View | null>(
-    rest.ref,
-    () => iconRef.current,
-    []
-  );
   const accessibleName = rest['aria-label'] ?? rest.accessibilityLabel;
   React.useEffect(() => {
     if (__DEV__ && actionable && !accessibleName?.trim()) {
@@ -146,7 +140,6 @@ const TextInputIcon = ({
     >
       <IconButton
         {...rest}
-        ref={rest.ref ? iconRef : undefined}
         {...(!actionable && {
           role: 'none',
           accessibilityRole: 'none',
