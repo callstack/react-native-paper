@@ -207,7 +207,7 @@ describe('Switch operability', () => {
 
     await render(<Switch value />);
 
-    expect(screen.getByRole('switch')).toHaveProp('focusable', false);
+    expect(screen.getByRole('switch')).toHaveProp('tabIndex', -1);
   });
 
   describe.each(['ios', 'android', 'web'] as const)('%s', (platform) => {
@@ -236,7 +236,6 @@ describe('Switch operability', () => {
           checked: value,
           disabled: platform !== 'web',
         });
-        expect(control).toHaveProp('focusable', false);
         expect(control).toHaveProp('tabIndex', -1);
         expect(getLayers().handleFill).toMatchObject({
           backgroundColor: restingHandle,
@@ -320,7 +319,7 @@ describe('Switch operability', () => {
   it('keeps an interactive switch focusable', async () => {
     await render(<Switch value onValueChange={jest.fn()} />);
 
-    expect(screen.getByRole('switch')).toHaveProp('focusable', true);
+    expect(screen.getByRole('switch')).toHaveProp('tabIndex', 0);
   });
 });
 

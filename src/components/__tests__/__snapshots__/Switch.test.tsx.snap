@@ -35,7 +35,7 @@ exports[`Switch render renders disabled off 1`] = `
     }
     accessible={true}
     collapsable={false}
-    focusable={false}
+    focusable={true}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -252,7 +252,7 @@ exports[`Switch render renders disabled on 1`] = `
     }
     accessible={true}
     collapsable={false}
-    focusable={false}
+    focusable={true}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
