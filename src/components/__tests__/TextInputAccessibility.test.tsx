@@ -278,7 +278,7 @@ it.each(['ios', 'android'] as const)(
   async (platform) => {
     jest.replaceProperty(Platform, 'OS', platform);
     const announce = jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
       .mockClear();
     const { rerender } = await render(
       <TextInput label="Email" supportingText="Optional" />
@@ -288,7 +288,9 @@ it.each(['ios', 'android'] as const)(
     await rerender(
       <TextInput label="Email" supportingText="Invalid address" error />
     );
-    expect(announce).toHaveBeenLastCalledWith('Invalid address');
+    expect(announce).toHaveBeenLastCalledWith('Invalid address', {
+      queue: true,
+    });
     await rerender(
       <TextInput
         label="Email"
@@ -301,7 +303,9 @@ it.each(['ios', 'android'] as const)(
     await rerender(
       <TextInput label="Email" supportingText="Address is required" error />
     );
-    expect(announce).toHaveBeenLastCalledWith('Address is required');
+    expect(announce).toHaveBeenLastCalledWith('Address is required', {
+      queue: true,
+    });
     await rerender(<TextInput label="Email" supportingText="Optional" />);
     expect(announce).toHaveBeenCalledTimes(2);
   }
@@ -312,7 +316,7 @@ it.each(['ios', 'android'] as const)(
   async (platform) => {
     jest.replaceProperty(Platform, 'OS', platform);
     const announce = jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
       .mockClear();
     const { rerender } = await render(
       <TextInput label="Email" supportingText="Invalid address" error />
@@ -323,14 +327,47 @@ it.each(['ios', 'android'] as const)(
       <TextInput label="Email" supportingText="Address is required" error />
     );
     expect(announce).toHaveBeenCalledTimes(1);
-    expect(announce).toHaveBeenLastCalledWith('Address is required');
+    expect(announce).toHaveBeenLastCalledWith('Address is required', {
+      queue: true,
+    });
+  }
+);
+
+it.each(['ios', 'android'] as const)(
+  'queues the errors of fields that become invalid together on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    const announce = jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
+      .mockClear();
+    const { rerender } = await render(
+      <>
+        <TextInput label="Email" supportingText="Optional" />
+        <TextInput label="Password" supportingText="Optional" />
+      </>
+    );
+
+    await rerender(
+      <>
+        <TextInput label="Email" supportingText="Invalid address" error />
+        <TextInput
+          label="Password"
+          supportingText="Password is required"
+          error
+        />
+      </>
+    );
+    expect(announce.mock.calls).toEqual([
+      ['Invalid address', { queue: true }],
+      ['Password is required', { queue: true }],
+    ]);
   }
 );
 
 it('announces errors on web through the alert role', async () => {
   jest.replaceProperty(Platform, 'OS', 'web');
   const announce = jest
-    .spyOn(AccessibilityInfo, 'announceForAccessibility')
+    .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
     .mockClear();
   const { rerender } = await render(
     <TextInput label="Email" supportingText="Optional" />

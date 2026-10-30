@@ -439,6 +439,8 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   // hidden, so a live region would not announce it. Announce changed errors
   // instead, but not errors present on mount, so a screen that opens with
   // several invalid fields does not queue an announcement for each of them.
+  // Queue them so that fields becoming invalid together do not cut each other
+  // off on iOS.
   const errorMessage = flags.hasError ? props.supportingText : undefined;
   const previousErrorMessage = useRef(errorMessage);
   useEffect(() => {
@@ -447,7 +449,9 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
       errorMessage &&
       errorMessage !== previousErrorMessage.current
     ) {
-      AccessibilityInfo.announceForAccessibility(errorMessage);
+      AccessibilityInfo.announceForAccessibilityWithOptions(errorMessage, {
+        queue: true,
+      });
     }
 
     previousErrorMessage.current = errorMessage;
