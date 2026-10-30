@@ -1,22 +1,26 @@
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 
-import { render } from '../../test-utils';
+import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import IconButton from '../IconButton/IconButton';
-import { getIconButtonColor } from '../IconButton/utils';
+import {
+  getDimensions,
+  getHitSlop,
+  getIconButtonColor,
+  resolveShapeToken,
+} from '../IconButton/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
+const theme = LightTheme;
 
 const styles = StyleSheet.create({
-  square: {
-    borderRadius: 0,
-  },
-  slightlyRounded: {
-    borderRadius: 4,
+  scaled: {
+    transform: [{ scale: 1 }],
   },
 });
 
@@ -26,16 +30,42 @@ it('renders icon button by default', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders icon button with color', async () => {
+it('renders filled icon button', async () => {
   const tree = (
-    await render(<IconButton icon="camera" iconColor={pink500} />)
+    await render(<IconButton icon="camera" mode="filled" />)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders icon button with size', async () => {
-  const tree = (await render(<IconButton icon="camera" size={30} />)).toJSON();
+it('renders tonal icon button', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" mode="tonal" />)
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders outlined icon button', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" mode="outlined" />)
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders extraLarge icon button', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" size="extraLarge" />)
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders icon button with color', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" iconColor={pink500} />)
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -52,39 +82,133 @@ it('renders icon change animated', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders icon button with custom border radius', async () => {
-  const { toJSON } = await render(
-    <IconButton
-      icon="camera"
-      testID="icon-button"
-      size={36}
-      onPress={() => {}}
-      style={styles.square}
-    />
-  );
+it('renders a square icon button', async () => {
+  const tree = (
+    await render(
+      <IconButton
+        icon="camera"
+        testID="icon-button"
+        shape="square"
+        onPress={() => {}}
+      />
+    )
+  ).toJSON();
 
-  expect(toJSON()).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });
 
-it('renders icon button with small border radius', async () => {
-  const { toJSON } = await render(
+it('applies a static transform from style', async () => {
+  const tree = (
+    await render(
+      <IconButton icon="camera" testID="icon-button" style={styles.scaled} />
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('calls onPress', async () => {
+  const onPress = jest.fn();
+  const user = userEvent.setup();
+
+  await render(
+    <IconButton icon="camera" testID="icon-button" onPress={onPress} />
+  );
+  await user.press(screen.getByTestId('icon-button'));
+
+  expect(onPress).toHaveBeenCalledTimes(1);
+});
+
+it('exposes a selected toggle to assistive technology', async () => {
+  await render(<IconButton icon="camera" selected onPress={() => {}} />);
+
+  expect(screen.getByRole('button', { selected: true })).toBeOnTheScreen();
+});
+
+it('exposes an unselected toggle to assistive technology', async () => {
+  await render(
+    <IconButton icon="camera" selected={false} onPress={() => {}} />
+  );
+
+  expect(screen.getByRole('button', { selected: false })).toBeOnTheScreen();
+});
+
+it('does not expose a selected state when it is not a toggle', async () => {
+  await render(<IconButton icon="camera" onPress={() => {}} />);
+
+  expect(screen.getByRole('button')).toHaveProp(
+    'accessibilityState',
+    expect.objectContaining({ selected: undefined })
+  );
+});
+
+it('uses a square resting shape when a round button is selected', async () => {
+  await render(
     <IconButton
       icon="camera"
       testID="icon-button"
-      size={36}
+      selected
       onPress={() => {}}
-      style={styles.slightlyRounded}
     />
   );
 
-  expect(toJSON()).toMatchSnapshot();
+  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+    borderRadius: theme.shapes.corner.medium,
+  });
+});
+
+it('keeps the inverted resting shape after a tap that selects the button', async () => {
+  const ToggleIconButton = () => {
+    const [selected, setSelected] = useState(false);
+
+    return (
+      <IconButton
+        icon="camera"
+        testID="icon-button"
+        selected={selected}
+        onPress={() => setSelected((value) => !value)}
+      />
+    );
+  };
+  const user = userEvent.setup();
+
+  await render(<ToggleIconButton />);
+  await user.press(screen.getByTestId('icon-button'));
+
+  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+    borderRadius: theme.shapes.corner.medium,
+  });
+
+  await user.press(screen.getByTestId('icon-button'));
+
+  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+    borderRadius: getDimensions({ theme }).restingRadius,
+  });
+});
+
+it('morphs to the pressed shape with only onLongPress', async () => {
+  await render(
+    <IconButton icon="camera" testID="icon-button" onLongPress={() => {}} />
+  );
+
+  await fireEvent(screen.getByTestId('icon-button'), 'pressIn');
+
+  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+    borderRadius: getDimensions({ theme }).pressedRadius,
+  });
+});
+
+it('stays non-interactive without touch handlers', async () => {
+  await render(<IconButton icon="camera" testID="icon-button" />);
+
+  expect(screen.getByTestId('icon-button')).toBeDisabled();
 });
 
 describe('getIconButtonColor - icon color', () => {
   it('should return custom icon color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
+        theme,
         customIconColor: 'purple',
       })
     ).toMatchObject({
@@ -92,105 +216,106 @@ describe('getIconButtonColor - icon color', () => {
     });
   });
 
-  it('should return correct disabled color, for theme version 3', () => {
+  it('should return disabled icon color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
+        theme,
         disabled: true,
       })
     ).toMatchObject({
-      iconColor: LightTheme.colors.onSurface,
+      iconColor: theme.colors.onSurface,
       iconOpacity: stateOpacity.disabled,
     });
   });
 
-  it('should return theme icon color, for theme version 3, mode contained', () => {
+  it('should return filled default icon color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
-        mode: 'contained',
+        theme,
+        mode: 'filled',
       })
     ).toMatchObject({
-      iconColor: LightTheme.colors.primary,
+      iconColor: theme.colors.onPrimary,
     });
   });
 
-  it('should return theme icon color, for theme version 3, mode contained, selected', () => {
+  it('should return filled selected icon color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
-        mode: 'contained',
+        theme,
+        mode: 'filled',
         selected: true,
       })
     ).toMatchObject({
-      iconColor: LightTheme.colors.onPrimary,
+      iconColor: theme.colors.onPrimary,
     });
   });
 
-  it('should return theme icon color, for theme version 3, mode contained-tonal', () => {
+  it('should return filled unselected icon color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
-        mode: 'contained-tonal',
+        theme,
+        mode: 'filled',
+        selected: false,
       })
     ).toMatchObject({
-      iconColor: LightTheme.colors.onSurfaceVariant,
+      iconColor: theme.colors.onSurfaceVariant,
     });
   });
 
-  it('should return theme icon color, for theme version 3, mode contained-tonal, selected', () => {
+  it('should return tonal default icon color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
-        mode: 'contained-tonal',
+        theme,
+        mode: 'tonal',
+      })
+    ).toMatchObject({
+      iconColor: theme.colors.onSecondaryContainer,
+    });
+  });
+
+  it('should return tonal selected icon color', () => {
+    expect(
+      getIconButtonColor({
+        theme,
+        mode: 'tonal',
         selected: true,
       })
     ).toMatchObject({
-      iconColor: LightTheme.colors.onSecondaryContainer,
+      iconColor: theme.colors.onSecondary,
     });
   });
 
-  it('should return theme icon color, for theme version 3, mode outlined', () => {
+  it('should return outlined selected icon color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
+        theme,
         mode: 'outlined',
-      })
-    ).toMatchObject({
-      iconColor: LightTheme.colors.onSurfaceVariant,
-    });
-  });
-
-  it('should return theme icon color, for theme version 3, mode outlined, selected', () => {
-    expect(
-      getIconButtonColor({
-        theme: LightTheme,
-        mode: 'outlined',
         selected: true,
       })
     ).toMatchObject({
-      iconColor: LightTheme.colors.inverseOnSurface,
+      iconColor: theme.colors.inverseOnSurface,
     });
   });
 
-  it('should return theme icon color, for theme version 3', () => {
+  it('should return standard selected icon color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
-      })
-    ).toMatchObject({
-      iconColor: LightTheme.colors.onSurfaceVariant,
-    });
-  });
-
-  it('should return theme icon color, for theme version 3, selected', () => {
-    expect(
-      getIconButtonColor({
-        theme: LightTheme,
+        theme,
         selected: true,
       })
     ).toMatchObject({
-      iconColor: LightTheme.colors.primary,
+      iconColor: theme.colors.primary,
+    });
+  });
+
+  it('should return standard default icon color', () => {
+    expect(
+      getIconButtonColor({
+        theme,
+      })
+    ).toMatchObject({
+      iconColor: theme.colors.onSurfaceVariant,
     });
   });
 });
@@ -199,7 +324,7 @@ describe('getIconButtonColor - background color', () => {
   it('should return custom background color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
+        theme,
         customContainerColor: 'purple',
       })
     ).toMatchObject({
@@ -207,83 +332,84 @@ describe('getIconButtonColor - background color', () => {
     });
   });
 
-  (['contained', 'contained-tonal'] as const).forEach((mode) =>
-    it(`should return correct disabled color, for theme version 3, ${mode} mode`, () => {
+  (['filled', 'tonal'] as const).forEach((mode) =>
+    it(`should use 0.10 container opacity when disabled in ${mode} mode`, () => {
       expect(
         getIconButtonColor({
-          theme: LightTheme,
+          theme,
           mode,
           disabled: true,
         })
       ).toMatchObject({
-        backgroundColor: LightTheme.colors.onSurface,
-        backgroundOpacity: stateOpacity.disabled,
+        backgroundColor: theme.colors.onSurface,
+        backgroundOpacity: 0.1,
       });
     })
   );
 
-  it('should return theme icon color, for theme version 3, mode contained', () => {
+  it('should return filled default container color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
-        mode: 'contained',
+        theme,
+        mode: 'filled',
       })
     ).toMatchObject({
-      backgroundColor: LightTheme.colors.surfaceVariant,
+      backgroundColor: theme.colors.primary,
     });
   });
 
-  it('should return theme icon color, for theme version 3, mode contained, selected', () => {
+  it('should return filled unselected container color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
-        mode: 'contained',
+        theme,
+        mode: 'filled',
+        selected: false,
+      })
+    ).toMatchObject({
+      backgroundColor: theme.colors.surfaceContainer,
+    });
+  });
+
+  it('should return tonal default container color', () => {
+    expect(
+      getIconButtonColor({
+        theme,
+        mode: 'tonal',
+      })
+    ).toMatchObject({
+      backgroundColor: theme.colors.secondaryContainer,
+    });
+  });
+
+  it('should return tonal selected container color', () => {
+    expect(
+      getIconButtonColor({
+        theme,
+        mode: 'tonal',
         selected: true,
       })
     ).toMatchObject({
-      backgroundColor: LightTheme.colors.primary,
+      backgroundColor: theme.colors.secondary,
     });
   });
 
-  it('should return theme icon color, for theme version 3, mode contained-tonal', () => {
+  it('should return outlined selected container color', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
-        mode: 'contained-tonal',
-      })
-    ).toMatchObject({
-      backgroundColor: LightTheme.colors.surfaceVariant,
-    });
-  });
-
-  it('should return theme icon color, for theme version 3, mode contained-tonal, selected', () => {
-    expect(
-      getIconButtonColor({
-        theme: LightTheme,
-        mode: 'contained-tonal',
-        selected: true,
-      })
-    ).toMatchObject({
-      backgroundColor: LightTheme.colors.secondaryContainer,
-    });
-  });
-
-  it('should return theme icon color, for theme version 3, mode outlined, selected', () => {
-    expect(
-      getIconButtonColor({
-        theme: LightTheme,
+        theme,
         mode: 'outlined',
         selected: true,
       })
     ).toMatchObject({
-      backgroundColor: LightTheme.colors.inverseSurface,
+      backgroundColor: theme.colors.inverseSurface,
+      borderWidth: 0,
     });
   });
 
-  it('should return undefined, for theme version 3, if mode not specified', () => {
+  it('should return undefined container for standard mode', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
+        theme,
       })
     ).toMatchObject({
       backgroundColor: undefined,
@@ -292,24 +418,102 @@ describe('getIconButtonColor - background color', () => {
 });
 
 describe('getIconButtonColor - border color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
+  it('should return outline variant when disabled', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
+        theme,
         disabled: true,
       })
     ).toMatchObject({
-      borderColor: LightTheme.colors.outlineVariant,
+      borderColor: theme.colors.outlineVariant,
     });
   });
 
-  it('should return theme color, for theme version 3', () => {
+  it('should return outline variant for outlined mode', () => {
     expect(
       getIconButtonColor({
-        theme: LightTheme,
+        theme,
+        mode: 'outlined',
+        outlineWidth: 1,
       })
     ).toMatchObject({
-      borderColor: LightTheme.colors.outlineVariant,
+      borderColor: theme.colors.outlineVariant,
+      borderWidth: 1,
     });
+  });
+});
+
+describe('resolveShapeToken', () => {
+  it('keeps a round button full until it is selected', () => {
+    expect(resolveShapeToken({ shape: 'round' })).toBe('full');
+    expect(resolveShapeToken({ shape: 'round', selected: false })).toBe('full');
+    expect(resolveShapeToken({ shape: 'round', selected: true })).toBe(
+      'medium'
+    );
+  });
+
+  it('inverts a square button to full when selected', () => {
+    expect(resolveShapeToken({ shape: 'square' })).toBe('medium');
+    expect(resolveShapeToken({ shape: 'square', selected: true })).toBe('full');
+  });
+
+  it('uses the shared pressed shape for round and square', () => {
+    expect(resolveShapeToken({ shape: 'round', pressed: true })).toBe('small');
+    expect(resolveShapeToken({ shape: 'square', pressed: true })).toBe('small');
+    expect(
+      resolveShapeToken({ shape: 'round', selected: true, pressed: true })
+    ).toBe('small');
+  });
+});
+
+describe('getDimensions', () => {
+  it('returns small default size', () => {
+    expect(getDimensions({ theme })).toMatchObject({
+      width: 40,
+      height: 40,
+      iconSize: 24,
+      restingRadius: 20,
+    });
+  });
+
+  it('returns the square resting radius when a round button is selected', () => {
+    expect(getDimensions({ theme, selected: true })).toMatchObject({
+      restingRadius: theme.shapes.corner.medium,
+    });
+  });
+
+  it('returns extraSmall narrow size', () => {
+    expect(
+      getDimensions({ theme, size: 'extraSmall', width: 'narrow' })
+    ).toMatchObject({
+      width: 28,
+      height: 32,
+      iconSize: 20,
+    });
+  });
+
+  it('returns extraLarge wide size', () => {
+    expect(
+      getDimensions({ theme, size: 'extraLarge', width: 'wide' })
+    ).toMatchObject({
+      width: 184,
+      height: 136,
+      iconSize: 40,
+    });
+  });
+});
+
+describe('getHitSlop', () => {
+  it('expands extraSmall containers to a 48dp target', () => {
+    expect(getHitSlop(32, 32)).toEqual({
+      top: 8,
+      bottom: 8,
+      left: 8,
+      right: 8,
+    });
+  });
+
+  it('is omitted when the container already meets 48dp', () => {
+    expect(getHitSlop(56, 56)).toBeUndefined();
   });
 });

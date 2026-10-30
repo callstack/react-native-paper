@@ -26,7 +26,11 @@ const ScreenshotTabs = ({ screenshotData }: ScreenshotTabsProps) => {
 
   const screenshots = Object.entries(screenshotData).map(([key, value]) => (
     <TabItem key={key} value={key} label={key} default>
-      {typeof value === 'string' ? renderScreenshot(value) : null}
+      {typeof value === 'string' ? (
+        renderScreenshot(value)
+      ) : (
+        <ScreenshotTabs screenshotData={value} />
+      )}
     </TabItem>
   ));
 

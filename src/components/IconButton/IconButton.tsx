@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -7,11 +7,24 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Animated, { type AnimatedStyle } from 'react-native-reanimated';
+import Animated, {
+  type AnimatedStyle,
+  cubicBezier,
+  type CSSStyle,
+} from 'react-native-reanimated';
 
-import { getIconButtonColor } from './utils';
+import type { Mode, Shape, Size, Width } from './tokens';
+import { getDimensions, getHitSlop, getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
+import {
+  FOCUS_RING_INSET,
+  FOCUS_RING_THICKNESS,
+  webNoOutline,
+} from '../../utils/focusRing';
+import hasTouchHandler from '../../utils/hasTouchHandler';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -19,23 +32,23 @@ import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
-const PADDING = 8;
-
-type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
-
 export type Props = Omit<
   React.PropsWithoutRef<TouchableRippleProps>,
-  'children' | 'style'
+  'children' | 'style' | 'onPress'
 > & {
   /**
    * Icon to display.
    */
   icon: IconSource;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Mode of the icon button. By default there is no specified mode - only pressable icon will be rendered.
+   * Color style of the icon button.
+   *
+   * - `standard` — no container fill (default)
+   * - `filled` — primary container
+   * - `tonal` — secondary-container fill
+   * - `outlined` — outline, no fill (selected uses inverse surface)
    */
-  mode?: IconButtonMode;
+  mode?: Mode;
   /**
    * @renamed Renamed from 'color' to 'iconColor' in v5.x
    * Color of the icon.
@@ -46,13 +59,29 @@ export type Props = Omit<
    */
   containerColor?: ColorValue;
   /**
-   * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.
+   * Toggle state. Omit for the default (non-toggle) color set;
+   * `true` / `false` use the toggle-ON / toggle-OFF color sets and invert
+   * the resting shape.
    */
   selected?: boolean;
   /**
-   * Size of the icon.
+   * Named size on the MD3 Expressive scale. Defaults to `small`.
    */
-  size?: number;
+  size?: Size;
+  /**
+   * Horizontal padding around the icon: `narrow`, `default`, or `wide`.
+   * Uniform (`default`) sizes are square.
+   */
+  width?: Width;
+  /**
+   * Resting container shape. Toggle-ON inverts round ↔ square. Pressed
+   * uses a shared corner for both shapes.
+   */
+  shape?: Shape;
+  /**
+   * Icon size override in dp. Defaults to the size token.
+   */
+  iconSize?: number;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -67,7 +96,7 @@ export type Props = Omit<
   'aria-label'?: string;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width or to set a custom padding`.
+   * Use this prop to apply custom height and width or to set a custom padding.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
@@ -102,7 +131,7 @@ export type Props = Omit<
  *   <IconButton
  *     icon="camera"
  *     iconColor={Palette.error50}
- *     size={20}
+ *     size="small"
  *     onPress={() => console.log('Pressed')}
  *   />
  * );
@@ -116,24 +145,43 @@ const IconButton = ({
   icon,
   iconColor: customIconColor,
   containerColor: customContainerColor,
-  size = 24,
+  size = 'small',
+  width = 'default',
+  shape = 'round',
+  iconSize,
   'aria-label': ariaLabel,
   disabled,
   onPress,
-  selected = false,
+  selected,
   animated = false,
-  mode,
+  mode = 'standard',
   style,
   theme: themeOverrides,
   testID,
   loading = false,
   contentStyle,
   ref,
+  onPressIn: onPressInProp,
+  onPressOut: onPressOutProp,
+  onFocus: onFocusProp,
+  onBlur: onBlurProp,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
+  const [pressed, setPressed] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
+
+  const dimensions = getDimensions({
+    theme,
+    size,
+    width,
+    shape,
+    selected,
+    iconSize,
+  });
 
   const {
     iconColor,
@@ -141,6 +189,7 @@ const IconButton = ({
     backgroundColor,
     borderColor,
     backgroundOpacity,
+    borderWidth,
   } = getIconButtonColor({
     theme,
     disabled,
@@ -148,64 +197,133 @@ const IconButton = ({
     mode,
     customIconColor,
     customContainerColor,
+    outlineWidth: dimensions.outlineWidth,
   });
 
-  const buttonSize = size + 2 * PADDING;
-
-  const borderStyles = {
-    borderWidth: mode === 'outlined' && !selected ? 1 : 0,
-    borderRadius: buttonSize / 2,
-    borderColor,
+  const borderRadius = pressed
+    ? dimensions.pressedRadius
+    : dimensions.restingRadius;
+  const radiusStyle: CSSStyle<ViewStyle> = {
+    borderRadius,
+    transitionProperty: ['borderRadius'],
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.short4,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
   };
+  const focusRingRadiusStyle: CSSStyle<ViewStyle> = {
+    ...radiusStyle,
+    borderRadius: borderRadius + FOCUS_RING_INSET,
+  };
+
+  const handlePressIn = (e: GestureResponderEvent) => {
+    setPressed(true);
+    onPressInProp?.(e);
+  };
+
+  const handlePressOut = (e: GestureResponderEvent) => {
+    setPressed(false);
+    onPressOutProp?.(e);
+  };
+
+  const handleFocus = (e: Parameters<NonNullable<typeof onFocusProp>>[0]) => {
+    if (isKeyboardFocusEvent(e)) {
+      setFocused(true);
+    }
+    onFocusProp?.(e);
+  };
+
+  const handleBlur = (e: Parameters<NonNullable<typeof onBlurProp>>[0]) => {
+    setFocused(false);
+    onBlurProp?.(e);
+  };
+
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress: rest.onLongPress,
+    onPressIn: onPressInProp,
+    onPressOut: onPressOutProp,
+  });
+
+  const hitSlop = getHitSlop(dimensions.width, dimensions.height);
 
   return (
     <Animated.View
       ref={ref}
+      testID={testID ? `${testID}-container` : undefined}
       style={[
         styles.container,
         {
-          backgroundColor: backgroundOpacity < 1 ? undefined : backgroundColor,
-          width: buttonSize,
-          height: buttonSize,
+          width: dimensions.width,
+          height: dimensions.height,
         },
-        borderStyles,
         style,
+        radiusStyle,
       ]}
     >
-      {backgroundOpacity < 1 && (
-        <View
-          pointerEvents="none"
-          style={[
-            StyleSheet.absoluteFill,
-            { backgroundColor, opacity: backgroundOpacity },
-          ]}
-        />
-      )}
-      <TouchableRipple
-        borderless
-        centered
-        onPress={onPress}
-        aria-label={ariaLabel}
-        style={[styles.touchable, contentStyle]}
-        role="button"
-        aria-disabled={disabled}
-        disabled={disabled}
-        hitSlop={
-          TouchableRipple.supported
-            ? { top: 10, left: 10, bottom: 10, right: 10 }
-            : { top: 6, left: 6, bottom: 6, right: 6 }
-        }
-        testID={testID}
-        {...rest}
+      <Animated.View
+        style={[
+          styles.clip,
+          {
+            backgroundColor:
+              backgroundOpacity < 1 ? undefined : backgroundColor,
+            borderWidth,
+            borderColor,
+          },
+          radiusStyle,
+        ]}
       >
-        <View style={{ opacity: iconOpacity }}>
-          {loading ? (
-            <ActivityIndicator size={size} color={iconColor} />
-          ) : (
-            <IconComponent color={iconColor} source={icon} size={size} />
-          )}
-        </View>
-      </TouchableRipple>
+        {backgroundOpacity < 1 && (
+          <View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor, opacity: backgroundOpacity },
+            ]}
+          />
+        )}
+        <TouchableRipple
+          borderless
+          centered
+          onPress={onPress}
+          onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
+          onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          aria-label={ariaLabel}
+          style={[
+            styles.touchable,
+            Platform.OS === 'web' ? webNoOutline : null,
+            contentStyle,
+          ]}
+          role="button"
+          aria-disabled={disabled}
+          aria-selected={selected}
+          disabled={disabled}
+          hitSlop={hitSlop}
+          testID={testID}
+          {...rest}
+        >
+          <View style={{ opacity: iconOpacity }}>
+            {loading ? (
+              <ActivityIndicator size={dimensions.iconSize} color={iconColor} />
+            ) : (
+              <IconComponent
+                color={iconColor}
+                source={icon}
+                size={dimensions.iconSize}
+                testID={testID ? `${testID}-icon` : undefined}
+              />
+            )}
+          </View>
+        </TouchableRipple>
+      </Animated.View>
+      <Animated.View
+        style={[
+          styles.focusRing,
+          focused ? styles.focusRingVisible : styles.focusRingHidden,
+          { borderColor: theme.colors.secondary },
+          focusRingRadiusStyle,
+        ]}
+      />
     </Animated.View>
   );
 };
@@ -213,12 +331,32 @@ const IconButton = ({
 const styles = StyleSheet.create({
   container: {
     margin: 6,
+    overflow: 'visible',
+  },
+  clip: {
+    width: '100%',
+    height: '100%',
     overflow: 'hidden',
   },
   touchable: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  focusRing: {
+    position: 'absolute',
+    top: -FOCUS_RING_INSET,
+    left: -FOCUS_RING_INSET,
+    right: -FOCUS_RING_INSET,
+    bottom: -FOCUS_RING_INSET,
+    borderWidth: FOCUS_RING_THICKNESS,
+    pointerEvents: 'none',
+  },
+  focusRingVisible: {
+    opacity: 1,
+  },
+  focusRingHidden: {
+    opacity: 0,
   },
 });
 

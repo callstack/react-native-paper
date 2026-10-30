@@ -29,13 +29,17 @@ const BadgeExample = () => {
       <List.Section title="Text">
         <View style={styles.row}>
           <View style={styles.item}>
-            <IconButton icon="palette-swatch" size={36} style={styles.button} />
+            <IconButton
+              icon="palette-swatch"
+              size="medium"
+              style={styles.button}
+            />
             <Badge visible={visible} style={styles.textBadge}>
               12
             </Badge>
           </View>
           <View style={styles.item}>
-            <IconButton icon="inbox" size={36} style={styles.button} />
+            <IconButton icon="inbox" size="medium" style={styles.button} />
             <Badge
               visible={visible}
               style={[
@@ -53,11 +57,11 @@ const BadgeExample = () => {
       <List.Section title="Dot">
         <View style={styles.row}>
           <View style={styles.item}>
-            <IconButton icon="book-open" size={36} style={styles.button} />
+            <IconButton icon="book-open" size="medium" style={styles.button} />
             <Badge visible={visible} style={styles.dotBadge} />
           </View>
           <View style={styles.item}>
-            <IconButton icon="receipt" size={36} style={styles.button} />
+            <IconButton icon="receipt" size="medium" style={styles.button} />
             <Badge visible={visible} style={styles.dotBadge} />
           </View>
         </View>
