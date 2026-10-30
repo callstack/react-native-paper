@@ -435,11 +435,12 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     inputLength,
   });
 
-  // Native iOS does not implement live regions. Announce changed errors once,
-  // while Android and web use the rendered alert/live region.
+  // On native, the error is read from the input's hint and its text node is
+  // hidden, so a live region would not announce it. Announce changed errors
+  // instead, while web uses the rendered alert.
   const errorMessage = flags.hasError ? props.supportingText : undefined;
   useEffect(() => {
-    if (Platform.OS === 'ios' && errorMessage) {
+    if (Platform.OS !== 'web' && errorMessage) {
       AccessibilityInfo.announceForAccessibility(errorMessage);
     }
   }, [errorMessage]);

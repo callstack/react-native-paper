@@ -306,7 +306,7 @@ it('renders supporting text below the field', async () => {
   ).toBeOnTheScreen();
 });
 
-it('uses an alert for error supporting text', async () => {
+it('marks the input invalid and describes the error supporting text', async () => {
   await render(
     <TextInput
       label="Email"
@@ -318,8 +318,9 @@ it('uses an alert for error supporting text', async () => {
     />
   );
 
-  expect(screen.getByText('Invalid')).toHaveProp('role', 'alert');
-  expect(screen.getByLabelText('Email')).toHaveProp('aria-invalid', true);
+  const input = screen.getByLabelText('Email');
+  expect(input).toHaveProp('aria-invalid', true);
+  expect(input).toHaveProp('accessibilityHint', 'Invalid');
 });
 
 it('marks the input invalid when error is true without supporting text', async () => {
@@ -338,7 +339,7 @@ it('marks the input invalid when error is true without supporting text', async (
   expect(input).not.toHaveProp('accessibilityHint');
 });
 
-it('exposes helper supporting text without including it in the field name', async () => {
+it('describes helper supporting text without including it in the field name', async () => {
   await render(
     <TextInput
       label="Email"
@@ -349,10 +350,13 @@ it('exposes helper supporting text without including it in the field name', asyn
     />
   );
 
-  const supportingText = screen.getByText('Optional', includeHiddenElements);
-  expect(supportingText).not.toHaveProp('aria-hidden', true);
-  expect(supportingText).not.toHaveProp('aria-live');
-  expect(screen.getByLabelText('Email')).toBeOnTheScreen();
+  expect(screen.getByLabelText('Email')).toHaveProp(
+    'accessibilityHint',
+    'Optional'
+  );
+  expect(screen.getByText('Optional', includeHiddenElements)).not.toHaveProp(
+    'aria-live'
+  );
 });
 
 it('keeps supporting text separate when label is omitted', async () => {
@@ -366,7 +370,9 @@ it('keeps supporting text separate when label is omitted', async () => {
   );
 
   expect(screen.getByTestId('tf-input')).not.toHaveProp('aria-label');
-  expect(screen.getByText('Helper only')).toBeOnTheScreen();
+  expect(
+    screen.getByText('Helper only', includeHiddenElements)
+  ).toBeOnTheScreen();
 });
 
 it('does not mark the input as aria-disabled when editable is false (read-only)', async () => {
@@ -551,8 +557,10 @@ it('shows a character counter when counter is true and maxLength is set (filled)
     />
   );
 
-  expect(screen.getByText('5/100')).toBeOnTheScreen();
-  expect(screen.queryByText('0/100')).not.toBeOnTheScreen();
+  expect(screen.getByText('5/100', includeHiddenElements)).toBeOnTheScreen();
+  expect(
+    screen.queryByText('0/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 });
 
 it('shows a character counter when counter is true and maxLength is set (outlined)', async () => {
@@ -567,7 +575,7 @@ it('shows a character counter when counter is true and maxLength is set (outline
     />
   );
 
-  expect(screen.getByText('0/50')).toBeOnTheScreen();
+  expect(screen.getByText('0/50', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('updates the character counter when the value changes', async () => {
@@ -581,7 +589,7 @@ it('updates the character counter when the value changes', async () => {
     />
   );
 
-  expect(screen.getByText('1/10')).toBeOnTheScreen();
+  expect(screen.getByText('1/10', includeHiddenElements)).toBeOnTheScreen();
 
   await rerender(
     <TextInput
@@ -593,7 +601,7 @@ it('updates the character counter when the value changes', async () => {
     />
   );
 
-  expect(screen.getByText('4/10')).toBeOnTheScreen();
+  expect(screen.getByText('4/10', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('does not show a character counter when counter is false', async () => {
@@ -606,7 +614,9 @@ it('does not show a character counter when counter is false', async () => {
     />
   );
 
-  expect(screen.queryByText('5/100')).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('5/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 });
 
 it('does not show a character counter when maxLength is missing', async () => {
@@ -614,8 +624,10 @@ it('does not show a character counter when maxLength is missing', async () => {
     <TextInput label="Bio" value="hello" onChangeText={() => {}} counter />
   );
 
-  expect(screen.queryByText('5/100')).not.toBeOnTheScreen();
-  expect(screen.queryByText(/\//)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('5/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
+  expect(screen.queryByText(/\//, includeHiddenElements)).not.toBeOnTheScreen();
 });
 
 it('invokes onFocus and onBlur on the TextInput', async () => {
@@ -805,7 +817,7 @@ it('renders the counter as a Text child', async () => {
     />
   );
 
-  expect(screen.getByText('2/80')).toBeOnTheScreen();
+  expect(screen.getByText('2/80', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('renders supporting text and counter separately when both are shown', async () => {
@@ -823,7 +835,7 @@ it('renders supporting text and counter separately when both are shown', async (
   expect(
     screen.getByText('Help text', includeHiddenElements)
   ).toBeOnTheScreen();
-  expect(screen.getByText('1/10')).toBeOnTheScreen();
+  expect(screen.getByText('1/10', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('applies RTL text alignment and writing direction to the TextInput (filled)', async () => {
@@ -1249,12 +1261,12 @@ it('updates the character counter for an uncontrolled field with counter enabled
     />
   );
 
-  expect(screen.getByText('1/10')).toBeOnTheScreen();
+  expect(screen.getByText('1/10', includeHiddenElements)).toBeOnTheScreen();
 
   await user.type(screen.getByTestId('tf-uncontrolled-counter'), 'bcd');
 
   expect(onChangeText).toHaveBeenCalledWith('abcd');
-  expect(screen.getByText('4/10')).toBeOnTheScreen();
+  expect(screen.getByText('4/10', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('resets counter and hides prefix/suffix when clear() is called on uncontrolled field while blurred', async () => {
@@ -1271,7 +1283,7 @@ it('resets counter and hides prefix/suffix when clear() is called on uncontrolle
     />
   );
 
-  expect(screen.getByText('3/200')).toBeOnTheScreen();
+  expect(screen.getByText('3/200', includeHiddenElements)).toBeOnTheScreen();
   expect(screen.getByText('$')).toBeOnTheScreen();
   expect(screen.getByText('/100')).toBeOnTheScreen();
 
