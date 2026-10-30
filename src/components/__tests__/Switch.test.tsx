@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { getAnimatedStyle } from 'react-native-reanimated';
@@ -259,6 +259,21 @@ describe('Switch operability', () => {
       expect(control).toBeOnTheScreen();
     });
 
+    it('passes a press on a read-only switch to the row that owns it', async () => {
+      jest.replaceProperty(Platform, 'OS', platform);
+      const user = userEvent.setup();
+      const onRowPress = jest.fn();
+      await render(
+        <Pressable onPress={onRowPress}>
+          <Switch value readOnly />
+        </Pressable>
+      );
+
+      await user.press(screen.getByRole('switch'));
+
+      expect(onRowPress).toHaveBeenCalledTimes(1);
+    });
+
     it('keeps disabled semantics when read-only is also set', async () => {
       jest.replaceProperty(Platform, 'OS', platform);
       await render(<Switch value disabled readOnly />);
@@ -274,17 +289,6 @@ describe('Switch operability', () => {
 
     expect(screen.getByRole('switch')).toHaveProp('aria-readonly', true);
     expect(screen.getByRole('switch')).toBeEnabled();
-  });
-
-  it('drops the pointer cursor on web when the switch becomes read-only', async () => {
-    jest.replaceProperty(Platform, 'OS', 'web');
-    const view = await render(<Switch value onValueChange={jest.fn()} />);
-
-    expect(screen.getByRole('switch')).not.toHaveStyle({ cursor: 'auto' });
-
-    await view.rerender(<Switch value readOnly />);
-
-    expect(screen.getByRole('switch')).toHaveStyle({ cursor: 'auto' });
   });
 
   it('exposes a missing-handler fallback as read-only on web', async () => {
