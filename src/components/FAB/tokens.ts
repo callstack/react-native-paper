@@ -14,8 +14,7 @@ export type Variant =
   | 'tertiary'
   | 'primaryContainer'
   | 'secondaryContainer'
-  | 'tertiaryContainer'
-  | 'branded';
+  | 'tertiaryContainer';
 
 export type Size = 'default' | 'medium' | 'large';
 
@@ -69,8 +68,6 @@ const stateElevation = {
 } as const satisfies Record<string, Elevation>;
 
 const variants = {
-  // Branded artwork has no prescribed icon color; onSurface is a fallback.
-  branded: { container: 'surfaceContainerHigh', content: 'onSurface' },
   primary: { container: 'primary', content: 'onPrimary' },
   secondary: { container: 'secondary', content: 'onSecondary' },
   tertiary: { container: 'tertiary', content: 'onTertiary' },

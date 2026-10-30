@@ -55,15 +55,13 @@ export type MenuItemProps = {
   testID?: string;
 };
 
-type MenuVariant = Exclude<Variant, 'branded'>;
-
 export type MenuTriggerProps = {
   /**
    * Icon displayed in the trigger FAB (and cross-faded to `closeIcon` when
    * the menu is open).
    */
   icon: IconSource;
-  variant?: MenuVariant;
+  variant?: Variant;
   size?: Size;
   containerColor?: ColorValue;
   contentColor?: ColorValue;
@@ -123,7 +121,7 @@ export type MenuProps = {
  * The close button is always the saturated role color; items are always the
  * tonal (container) role color.
  */
-const getCloseVariant = (triggerVariant: MenuVariant): Variant => {
+const getCloseVariant = (triggerVariant: Variant): Variant => {
   if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
     return 'primary';
   }
@@ -136,7 +134,7 @@ const getCloseVariant = (triggerVariant: MenuVariant): Variant => {
   return 'tertiary';
 };
 
-const getItemsVariant = (triggerVariant: MenuVariant): Variant => {
+const getItemsVariant = (triggerVariant: Variant): Variant => {
   if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
     return 'primaryContainer';
   }
@@ -310,7 +308,7 @@ const MenuItem = ({
 };
 
 type MorphingTriggerProps = {
-  triggerVariant: MenuVariant;
+  triggerVariant: Variant;
   closeVariant: Variant;
   triggerContainerColor?: ColorValue;
   triggerContentColor?: ColorValue;
@@ -552,7 +550,7 @@ const Menu = ({
   const isRTL = direction === 'rtl';
   const insets = useSafeAreaInsets();
 
-  const triggerVariant: MenuVariant = trigger.variant ?? 'primaryContainer';
+  const triggerVariant: Variant = trigger.variant ?? 'primaryContainer';
   const size: Size = trigger.size ?? 'default';
   const openIcon: IconSource = trigger.icon;
   const openOnPress = trigger.onPress;
