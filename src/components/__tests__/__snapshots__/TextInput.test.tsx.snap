@@ -115,7 +115,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
     >
       <Text
         collapsable={false}
-        nativeID="_r_2_-label"
         style={
           [
             {
@@ -591,7 +590,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
     >
       <Text
         collapsable={false}
-        nativeID="_r_4_-label"
         style={
           [
             {
@@ -1065,7 +1063,6 @@ exports[`renders filled TextInput with label and value 1`] = `
     >
       <Text
         collapsable={false}
-        nativeID="_r_0_-label"
         style={
           [
             {
@@ -1237,7 +1234,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
     >
       <Text
         collapsable={false}
-        nativeID="_r_3_-label"
         style={
           [
             {
@@ -1693,7 +1689,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
     >
       <Text
         collapsable={false}
-        nativeID="_r_5_-label"
         style={
           [
             {
@@ -2147,7 +2142,6 @@ exports[`renders outlined TextInput with label and value 1`] = `
     >
       <Text
         collapsable={false}
-        nativeID="_r_1_-label"
         style={
           [
             {

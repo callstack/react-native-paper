@@ -61,9 +61,9 @@ export type GetAccessibilityDataReturn = {
     'aria-invalid'?: TextInputProps['aria-invalid'];
     'aria-describedby'?: string;
   };
-  label: { nativeID: string };
-  supportingText: AccessibilityProps & { nativeID: string };
-  counter: AccessibilityProps & { nativeID: string };
+  label: { nativeID?: string };
+  supportingText: AccessibilityProps & { nativeID?: string };
+  counter: AccessibilityProps & { nativeID?: string };
 };
 
 export type GetAccessibilityDataProps = {
