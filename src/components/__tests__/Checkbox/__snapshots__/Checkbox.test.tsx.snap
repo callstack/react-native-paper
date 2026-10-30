@@ -6,7 +6,9 @@ exports[`renders Checkbox with custom testID 1`] = `
     [
       {
         "alignItems": "center",
+        "height": 48,
         "justifyContent": "center",
+        "width": 48,
       },
       undefined,
     ]
@@ -221,7 +223,9 @@ exports[`renders checked Checkbox with color 1`] = `
     [
       {
         "alignItems": "center",
+        "height": 48,
         "justifyContent": "center",
+        "width": 48,
       },
       undefined,
     ]
@@ -435,7 +439,9 @@ exports[`renders checked Checkbox with onPress 1`] = `
     [
       {
         "alignItems": "center",
+        "height": 48,
         "justifyContent": "center",
+        "width": 48,
       },
       undefined,
     ]
@@ -674,7 +680,9 @@ exports[`renders indeterminate Checkbox 1`] = `
     [
       {
         "alignItems": "center",
+        "height": 48,
         "justifyContent": "center",
+        "width": 48,
       },
       undefined,
     ]
@@ -900,7 +908,9 @@ exports[`renders indeterminate Checkbox with color 1`] = `
     [
       {
         "alignItems": "center",
+        "height": 48,
         "justifyContent": "center",
+        "width": 48,
       },
       undefined,
     ]
@@ -1101,7 +1111,9 @@ exports[`renders unchecked Checkbox with color 1`] = `
     [
       {
         "alignItems": "center",
+        "height": 48,
         "justifyContent": "center",
+        "width": 48,
       },
       undefined,
     ]
@@ -1315,7 +1327,9 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
     [
       {
         "alignItems": "center",
+        "height": 48,
         "justifyContent": "center",
+        "width": 48,
       },
       undefined,
     ]

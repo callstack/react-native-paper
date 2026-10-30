@@ -280,6 +280,16 @@ describe('Checkbox touch target', () => {
     expect(screen.getByRole('checkbox')).not.toHaveStyle({ marginTop: 12 });
   });
 
+  it('sizes its outer container to the touch target', async () => {
+    await render(
+      <Checkbox status="unchecked" onPress={() => {}} aria-label="Notify me" />
+    );
+
+    // Without a definite size, a column's default `alignItems: 'stretch'`
+    // widens the container and centers the checkbox in the column.
+    expect(screen.root).toHaveStyle({ width: 48, height: 48 });
+  });
+
   it('keeps the 48dp touch target under a negative margin', async () => {
     await render(
       <Checkbox

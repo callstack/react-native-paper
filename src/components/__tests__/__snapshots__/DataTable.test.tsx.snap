@@ -123,7 +123,9 @@ exports[`DataTable.Cell renders data table cell children without wrapping text c
       [
         {
           "alignItems": "center",
+          "height": 48,
           "justifyContent": "center",
+          "width": 48,
         },
         undefined,
       ]

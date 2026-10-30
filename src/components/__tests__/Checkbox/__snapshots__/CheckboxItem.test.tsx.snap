@@ -61,7 +61,9 @@ exports[`can render leading checkbox control 1`] = `
         [
           {
             "alignItems": "center",
+            "height": 48,
             "justifyContent": "center",
+            "width": 48,
           },
           undefined,
         ]
@@ -403,7 +405,9 @@ exports[`renders unchecked 1`] = `
         [
           {
             "alignItems": "center",
+            "height": 48,
             "justifyContent": "center",
+            "width": 48,
           },
           undefined,
         ]
@@ -707,7 +711,9 @@ exports[`should have maxFontSizeMultiplier set to 1.5 by default 1`] = `
         [
           {
             "alignItems": "center",
+            "height": 48,
             "justifyContent": "center",
+            "width": 48,
           },
           undefined,
         ]

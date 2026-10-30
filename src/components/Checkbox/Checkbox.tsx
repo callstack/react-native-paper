@@ -577,7 +577,11 @@ const Checkbox = ({
 const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({
+  // A definite size keeps a stretching parent from widening the container and
+  // moving the checkbox away from where it is laid out.
   root: {
+    width: TOUCH_TARGET_SIZE,
+    height: TOUCH_TARGET_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
   },
