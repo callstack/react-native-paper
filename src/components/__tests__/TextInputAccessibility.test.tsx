@@ -338,36 +338,47 @@ it.each(['ios', 'android'] as const)(
   }
 );
 
+const makeTwoFieldsInvalid = async () => {
+  const announce = jest
+    .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
+    .mockClear();
+  const { rerender } = await render(
+    <>
+      <TextInput label="Email" supportingText="Optional" />
+      <TextInput label="Password" supportingText="Optional" />
+    </>
+  );
+
+  await rerender(
+    <>
+      <TextInput label="Email" supportingText="Invalid address" error />
+      <TextInput label="Password" supportingText="Password is required" error />
+    </>
+  );
+
+  return announce;
+};
+
 it.each(['ios', 'android'] as const)(
-  'queues the errors of fields that become invalid together on %s',
+  'announces the error of each field that becomes invalid in the same update on %s',
   async (platform) => {
     jest.replaceProperty(Platform, 'OS', platform);
-    const announce = jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
-      .mockClear();
-    const { rerender } = await render(
-      <>
-        <TextInput label="Email" supportingText="Optional" />
-        <TextInput label="Password" supportingText="Optional" />
-      </>
-    );
-
-    await rerender(
-      <>
-        <TextInput label="Email" supportingText="Invalid address" error />
-        <TextInput
-          label="Password"
-          supportingText="Password is required"
-          error
-        />
-      </>
-    );
-    expect(announce.mock.calls).toEqual([
-      ['Invalid address', { queue: true }],
-      ['Password is required', { queue: true }],
+    const announce = await makeTwoFieldsInvalid();
+    expect(announce.mock.calls.map(([message]) => message)).toEqual([
+      'Invalid address',
+      'Password is required',
     ]);
   }
 );
+
+it('queues the error announcements on iOS so they do not cut each other off', async () => {
+  jest.replaceProperty(Platform, 'OS', 'ios');
+  const announce = await makeTwoFieldsInvalid();
+  expect(announce.mock.calls).toEqual([
+    ['Invalid address', { queue: true }],
+    ['Password is required', { queue: true }],
+  ]);
+});
 
 it('announces errors on web through the alert role', async () => {
   jest.replaceProperty(Platform, 'OS', 'web');
