@@ -317,8 +317,17 @@ To preserve the v5 FAB color treatment, update the `variant` prop:
 | `secondary` | `secondaryContainer` |
 | `tertiary` | `tertiaryContainer` |
 
-If you omit `variant`, no change is needed. Replace `variant="surface"` with
-one of the supported color variants, such as `primaryContainer`.
+If you omit `variant`, no change is needed. The `surface` variant was removed. To keep its look, pass the colors directly:
+
+```jsx
+const { colors } = useTheme();
+
+<FAB
+  icon="plus"
+  containerColor={colors.surfaceContainerHigh}
+  contentColor={colors.primary}
+/>
+```
 
 For custom colors, replace `color` with `contentColor` and move
 `style.backgroundColor` to `containerColor`:
