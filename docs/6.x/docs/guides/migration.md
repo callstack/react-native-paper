@@ -573,3 +573,76 @@ mutually exclusive options, use `SegmentedButtons`.
   />
 </>
 ```
+
+### Switch
+
+#### Switches without `onValueChange`
+
+A `Switch` with no `onValueChange` used to render as an enabled, focusable control that did nothing when activated, and screen readers announced it as operable. It now renders as read-only and logs a warning. Pass `onValueChange` to make it interactive, or set `readOnly` or `disabled` to render it as a state indicator:
+
+```tsx
+// Before (v5)
+<Switch value={isDarkTheme} />
+
+// After (v6)
+<Switch value={isDarkTheme} onValueChange={setIsDarkTheme} />
+<Switch value={isDarkTheme} readOnly />
+<Switch value={isDarkTheme} disabled />
+```
+
+A read-only switch keeps its enabled appearance and exposes its on/off state to screen readers, but it cannot be focused with a keyboard or pressed. On web it exposes `aria-readonly`. On iOS and Android it exposes a disabled accessibility state, because React Native has no read-only state for switches. Use `disabled` when you also want the disabled appearance.
+
+This most often shows up where the switch sits inside a row that owns the press. Give the row the switch role and state, and hide the inner switch from assistive technology, so screen readers announce the row as one switch with its on/off state:
+
+```diff
+-<TouchableRipple onPress={toggleTheme}>
++<TouchableRipple
++  onPress={toggleTheme}
++  role="switch"
++  aria-checked={isDarkTheme}
++>
+   <View style={styles.row}>
+     <Text>Dark Theme</Text>
+-    <View pointerEvents="none">
+-      <Switch value={isDarkTheme} />
++    <View pointerEvents="none" aria-hidden>
++      <Switch value={isDarkTheme} readOnly />
+     </View>
+   </View>
+ </TouchableRipple>
+```
+
+On web, such a row toggles with Enter but not with Space, because React Native Web only handles Space for elements with the `button` role.
+
+#### Icon color
+
+When selected, an icon set with `checkedIcon` uses `onPrimaryContainer`. If you set `checkedIcon` and pass a `theme` with a partial `theme.colors` override, include `onPrimaryContainer`, because omitted roles fall back to the app theme:
+
+```tsx
+import { Switch, useTheme } from 'react-native-paper';
+
+const TertiarySwitch = ({ value, onValueChange }) => {
+  const theme = useTheme();
+  const switchTheme = {
+    colors: {
+      primary: theme.colors.tertiary,
+      onPrimary: theme.colors.onTertiary,
+      primaryContainer: theme.colors.tertiaryContainer,
+      onPrimaryContainer: theme.colors.onTertiaryContainer,
+    },
+  };
+
+  return (
+    <Switch
+      value={value}
+      onValueChange={onValueChange}
+      checkedIcon="check"
+      theme={switchTheme}
+    />
+  );
+};
+```
+
+#### Size
+
+`Switch` is drawn by Paper instead of the platform switch: a 52×32 track inside a 48dp tall touch target, so rows containing a switch may change height.

@@ -33,6 +33,7 @@ const SwitchExample = () => {
         primary: theme.colors.tertiary,
         onPrimary: theme.colors.onTertiary,
         primaryContainer: theme.colors.tertiaryContainer,
+        onPrimaryContainer: theme.colors.onTertiaryContainer,
         secondary: theme.colors.tertiary,
       },
     }),
@@ -86,6 +87,10 @@ const SwitchExample = () => {
           theme={tertiaryTheme}
           disabled={disableAll}
         />
+      </Row>
+
+      <Row label="Read-only">
+        <Switch value={defaultOn} readOnly />
       </Row>
 
       <View

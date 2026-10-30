@@ -15,7 +15,6 @@ import Animated, {
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-  withDelay,
   withSequence,
   withSpring,
   withTiming,
@@ -39,9 +38,17 @@ export type Props = {
    */
   value?: boolean;
   /**
-   * Called with the new value when the user toggles the switch.
+   * Called with the new value when the user toggles the switch. A switch
+   * without it that is neither `readOnly` nor `disabled` renders as read-only
+   * and logs a warning.
    */
   onValueChange?: (value: boolean) => void;
+  /**
+   * Reports state the user cannot change here. The switch keeps its enabled
+   * appearance but cannot be focused with a keyboard or pressed. Screen readers
+   * receive a read-only state on web and a disabled state on native platforms.
+   */
+  readOnly?: boolean;
   /**
    * Disables interaction and renders the disabled visual state.
    */
@@ -68,6 +75,7 @@ const {
   trackHeight: TRACK_HEIGHT,
   trackOutlineWidth: TRACK_OUTLINE_WIDTH,
   stateLayerSize: STATE_LAYER_SIZE,
+  touchTargetSize: TOUCH_TARGET_SIZE,
   selectedHandleSize: SELECTED_HANDLE,
   unselectedHandleSize: UNSELECTED_HANDLE,
   iconHandleSize: ICON_HANDLE,
@@ -86,11 +94,10 @@ const stateOpacity = stateTokens.opacity;
 const { thickness: FOCUS_THICKNESS, outerOffset: FOCUS_OUTER_OFFSET } =
   stateTokens.focusIndicator;
 const FOCUS_RING_INSET = -(FOCUS_OUTER_OFFSET + FOCUS_THICKNESS);
-const OVERLAY_TOP = (STATE_LAYER_SIZE - TRACK_HEIGHT) / 2;
-
-// Hold-then-grow: a brief delay before snapping to PRESSED_HANDLE so a quick
-// tap doesn't flash the press-grow visual.
-const PRESS_GROW_DELAY = 100;
+// Every painted layer is smaller than the touch target and absolutely
+// positioned, so each one is centered against it.
+const centerY = (size: number) => (TOUCH_TARGET_SIZE - size) / 2;
+const TRACK_TOP = centerY(TRACK_HEIGHT);
 
 function restingHandleSize(checked: boolean, hasIcon: boolean): number {
   if (hasIcon) return ICON_HANDLE;
@@ -117,11 +124,12 @@ const CHECKED_CENTER = TRACK_WIDTH - HANDLE_PADDING - SELECTED_HANDLE / 2;
  *
  * ## Theming
  * Customize by overriding these `theme.colors` roles:
- * - `primary` / `onPrimary`: selected track + icon / selected handle
- * - `primaryContainer`: selected handle on hover, press
+ * - `primary` / `onPrimary`: selected track / selected handle
+ * - `onPrimaryContainer`: selected icon
+ * - `primaryContainer`: selected handle on hover, focus, press
  * - `surfaceContainerHighest`: unselected track + icon
  * - `outline`: unselected resting handle, unselected track outline
- * - `onSurfaceVariant`: unselected handle on hover, press
+ * - `onSurfaceVariant`: unselected handle on hover, focus, press
  * - `onSurface`: disabled track, handle, and icon fills
  * - `surface`: disabled selected handle
  * - `secondary`: focus indicator
@@ -129,6 +137,7 @@ const CHECKED_CENTER = TRACK_WIDTH - HANDLE_PADDING - SELECTED_HANDLE / 2;
 const Switch = ({
   value,
   disabled,
+  readOnly,
   onValueChange,
   checkedIcon,
   uncheckedIcon,
@@ -145,6 +154,21 @@ const Switch = ({
   const checked = !!value;
   const isDisabled = !!disabled;
   const isEnabled = !isDisabled;
+  const isReadOnly = !!readOnly;
+  // Without a handler, an enabled switch would be a control that does nothing
+  // when activated, so render it as read-only instead.
+  const isMissingOperability = !onValueChange && !isReadOnly && !isDisabled;
+
+  if (isMissingOperability) {
+    console.warn(
+      'Switch: pass `onValueChange` to make the switch operable, or set `readOnly` or `disabled` to render it as a state indicator.'
+    );
+  }
+
+  const isInteractive = !isDisabled && !isReadOnly && !isMissingOperability;
+  // Native accessibility has no read-only switch state. Disable the Pressable
+  // there to expose non-operability, while keeping colors tied to `disabled`.
+  const isAnnouncedReadOnly = !isDisabled && !isInteractive;
   const iconSource = checked ? checkedIcon : uncheckedIcon;
   const hasIcon = iconSource !== undefined;
 
@@ -152,17 +176,47 @@ const Switch = ({
     Platform.OS === 'web' && direction === 'rtl' ? { right: 0 } : { left: 0 };
 
   const pressedSV = useSharedValue(0);
+  const spacePressedRef = React.useRef(false);
   const hoveredSV = useSharedValue(0);
   const focusedSV = useSharedValue(0);
   const checkedSV = useSharedValue(checked ? 1 : 0);
   const hasIconSV = useSharedValue(hasIcon ? 1 : 0);
   const isDisabledSV = useSharedValue(isDisabled ? 1 : 0);
+  const isInteractiveSV = useSharedValue(isInteractive ? 1 : 0);
 
   React.useEffect(() => {
     checkedSV.value = checked ? 1 : 0;
     hasIconSV.value = hasIcon ? 1 : 0;
     isDisabledSV.value = isDisabled ? 1 : 0;
-  }, [checked, hasIcon, isDisabled, checkedSV, hasIconSV, isDisabledSV]);
+    isInteractiveSV.value = isInteractive ? 1 : 0;
+  }, [
+    checked,
+    hasIcon,
+    isDisabled,
+    isInteractive,
+    checkedSV,
+    hasIconSV,
+    isDisabledSV,
+    isInteractiveSV,
+  ]);
+
+  // A switch that stops being interactive loses its press and hover handlers,
+  // so one that was pressed or hovered at that moment would never get the
+  // matching press-out or hover-out and would keep painting that state.
+  React.useEffect(() => {
+    if (isInteractive) return;
+
+    pressedSV.value = 0;
+    spacePressedRef.current = false;
+    hoveredSV.value = 0;
+  }, [isInteractive, pressedSV, hoveredSV]);
+
+  // Focus is tracked even while the switch is not interactive, because it can
+  // keep focus meanwhile (web only changes `tabIndex`). It is shown only while
+  // the switch can be operated, so it returns once the switch is operable again.
+  const isFocusShownSV = useDerivedValue(() =>
+    focusedSV.value === 1 && isInteractiveSV.value === 1 ? 1 : 0
+  );
 
   const colors = React.useMemo(() => getDefaultSwitchColors(theme), [theme]);
 
@@ -229,14 +283,10 @@ const Switch = ({
     ({ p, c, hi }) => {
       const restingSize =
         hi === 1 ? ICON_HANDLE : c === 1 ? SELECTED_HANDLE : UNSELECTED_HANDLE;
-      if (p === 1) {
-        handleSize.value = withDelay(
-          PRESS_GROW_DELAY,
-          withTiming(PRESSED_HANDLE, { duration: 0 })
-        );
-      } else {
-        handleSize.value = withSpring(restingSize, springConfig);
-      }
+      handleSize.value = withSpring(
+        p === 1 ? PRESSED_HANDLE : restingSize,
+        springConfig
+      );
     },
     [springConfig]
   );
@@ -244,19 +294,14 @@ const Switch = ({
   useAnimatedReaction(
     (): StateOpacityKey | null => {
       if (pressedSV.value === 1) return 'pressed';
-      if (focusedSV.value === 1) return 'focused';
+      if (isFocusShownSV.value === 1) return 'focused';
       if (hoveredSV.value === 1) return 'hovered';
       return null;
     },
     (current, prev) => {
       if (current === prev) return;
       const wasPressed = prev === 'pressed';
-      const target =
-        current === 'pressed'
-          ? stateOpacity.pressed
-          : current === 'hovered'
-            ? stateOpacity.hovered
-            : 0;
+      const target = current ? stateOpacity[current] : 0;
       if (wasPressed && current !== 'pressed') {
         // On release: rise to peak, then fall to the next state.
         stateLayerAlpha.value = withSequence(
@@ -284,6 +329,11 @@ const Switch = ({
         ? colors.checkedPressedHandleColor
         : colors.uncheckedPressedHandleColor;
     }
+    if (isFocusShownSV.value === 1) {
+      return isCheckedNow
+        ? colors.checkedFocusHandleColor
+        : colors.uncheckedFocusHandleColor;
+    }
     if (hoveredSV.value === 1) {
       return isCheckedNow
         ? colors.checkedHoverHandleColor
@@ -297,7 +347,7 @@ const Switch = ({
   const handleAnimatedStyle = useAnimatedStyle(() => ({
     width: handleSize.value,
     height: handleSize.value,
-    top: (STATE_LAYER_SIZE - handleSize.value) / 2,
+    top: (TOUCH_TARGET_SIZE - handleSize.value) / 2,
     transform: [
       { translateX: xSign * (handleCenter.value - handleSize.value / 2) },
     ],
@@ -324,7 +374,7 @@ const Switch = ({
   }));
 
   const focusRingAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: focusedSV.value,
+    opacity: isFocusShownSV.value,
   }));
 
   const paint = resolveSwitchPaint(colors, isEnabled, checked);
@@ -345,39 +395,80 @@ const Switch = ({
   const trackOpacityValue = isDisabled ? DISABLED_TRACK_OPACITY : 1;
   const iconSize = checked ? SELECTED_ICON : UNSELECTED_ICON;
 
+  // A non-interactive switch gets no press or hover handlers. It stays in the
+  // accessibility tree, so its state is still announced.
+  const interactionProps = isInteractive
+    ? {
+        onPress: () => onValueChange?.(!checked),
+        onPressIn: () => {
+          pressedSV.value = 1;
+        },
+        onPressOut: () => {
+          pressedSV.value = 0;
+        },
+        onHoverIn: () => {
+          hoveredSV.value = 1;
+        },
+        onHoverOut: () => {
+          hoveredSV.value = 0;
+        },
+        // React Native Web only handles Space for button roles.
+        ...(Platform.OS === 'web'
+          ? {
+              onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
+                const { key, repeat } = event.nativeEvent;
+                if (key !== ' ' && key !== 'Spacebar') return;
+                event.preventDefault();
+                if (!repeat) {
+                  spacePressedRef.current = true;
+                  pressedSV.value = 1;
+                }
+              },
+              onKeyUp: (event: React.KeyboardEvent<HTMLElement>) => {
+                const { key } = event.nativeEvent;
+                if (key !== ' ' && key !== 'Spacebar') return;
+                event.preventDefault();
+                if (spacePressedRef.current) {
+                  spacePressedRef.current = false;
+                  pressedSV.value = 0;
+                  onValueChange?.(!checked);
+                }
+              },
+            }
+          : undefined),
+      }
+    : null;
+
   return (
     <View style={[styles.wrapper, style]}>
       <Pressable
-        disabled={disabled}
-        onPress={() => onValueChange?.(!checked)}
-        onPressIn={() => {
-          pressedSV.value = 1;
-        }}
-        onPressOut={() => {
-          pressedSV.value = 0;
-        }}
-        onHoverIn={() => {
-          hoveredSV.value = 1;
-        }}
-        onHoverOut={() => {
-          hoveredSV.value = 0;
-        }}
+        disabled={Platform.OS === 'web' ? isDisabled : !isInteractive}
+        tabIndex={isInteractive ? 0 : -1}
+        aria-readonly={Platform.OS === 'web' ? isAnnouncedReadOnly : undefined}
         onFocus={(e) => {
           if (!isKeyboardFocusEvent(e)) return;
           focusedSV.value = 1;
         }}
         onBlur={() => {
           focusedSV.value = 0;
+          pressedSV.value = 0;
+          spacePressedRef.current = false;
         }}
+        {...interactionProps}
         android_ripple={{ color: 'transparent' }}
         role="switch"
-        aria-disabled={isDisabled}
         aria-checked={checked}
         aria-label={ariaLabel}
         testID={testID}
         style={[
           styles.touchable,
           Platform.OS === 'web' ? webNoOutline : undefined,
+          // A read-only switch stays enabled on web, where React Native Web's
+          // Pressable would take the press and stop the click from reaching a
+          // row that owns it. Native platforms disable the Pressable instead.
+          Platform.OS === 'web' && !isInteractive
+            ? styles.nonInteractiveTouchable
+            : undefined,
         ]}
       >
         <View
@@ -453,10 +544,10 @@ const Switch = ({
           {
             borderColor: colors.focusIndicatorColor,
             borderWidth: FOCUS_THICKNESS,
-            top: OVERLAY_TOP + FOCUS_RING_INSET,
+            top: TRACK_TOP + FOCUS_RING_INSET,
             left: FOCUS_RING_INSET,
             right: FOCUS_RING_INSET,
-            bottom: OVERLAY_TOP + FOCUS_RING_INSET,
+            bottom: TRACK_TOP + FOCUS_RING_INSET,
             borderRadius: cornerFull,
           },
           focusRingAnimatedStyle,
@@ -469,16 +560,19 @@ const Switch = ({
 const styles = StyleSheet.create({
   wrapper: {
     width: TRACK_WIDTH,
-    height: STATE_LAYER_SIZE,
+    height: TOUCH_TARGET_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'visible',
   },
   touchable: {
     width: TRACK_WIDTH,
-    height: STATE_LAYER_SIZE,
+    height: TOUCH_TARGET_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  nonInteractiveTouchable: {
+    pointerEvents: 'none',
   },
   track: {
     width: TRACK_WIDTH,
@@ -498,7 +592,7 @@ const styles = StyleSheet.create({
   },
   stateLayer: {
     position: 'absolute',
-    top: 0,
+    top: centerY(STATE_LAYER_SIZE),
     width: STATE_LAYER_SIZE,
     height: STATE_LAYER_SIZE,
     borderRadius: cornerFull,
@@ -520,7 +614,7 @@ const styles = StyleSheet.create({
   },
   iconWrap: {
     position: 'absolute',
-    top: (STATE_LAYER_SIZE - SELECTED_ICON) / 2,
+    top: centerY(SELECTED_ICON),
     width: SELECTED_ICON,
     height: SELECTED_ICON,
     pointerEvents: 'none',
