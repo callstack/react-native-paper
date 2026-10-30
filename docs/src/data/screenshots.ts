@@ -51,10 +51,7 @@ export const screenshots = {
     enabled: 'screenshots/checkbox-enabled.ios.png',
     disabled: 'screenshots/checkbox-disabled.ios.png',
   },
-  Chip: {
-    flat: 'screenshots/chip-1.png',
-    outlined: 'screenshots/chip-2.png',
-  },
+  Chip: 'screenshots/chip.png',
   DataTable: 'screenshots/data-table-full-width.png',
   'DataTable.Cell': 'screenshots/data-table-row-cell.png',
   'DataTable.Header': 'screenshots/data-table-header.png',
