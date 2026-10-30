@@ -10,7 +10,10 @@ import { afterEach, expect, it, jest } from '@jest/globals';
 
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import TextInput from '../TextInput';
-import type { TextInputRenderProps } from '../TextInput/TextInput';
+import type {
+  TextInputProps,
+  TextInputRenderProps,
+} from '../TextInput/TextInput';
 
 const renderInput = jest.fn((props: TextInputRenderProps) => (
   <NativeTextInput {...props} />
@@ -413,6 +416,52 @@ it.each(['onLongPress', 'onPressIn', 'onPressOut'] as const)(
     expect(onAction).toHaveBeenCalledTimes(1);
   }
 );
+
+const accessoryNameWarning =
+  'TextInput.Icon: an actionable icon requires an aria-label or accessibilityLabel.';
+
+it('warns when an actionable accessory has a blank accessible name', async () => {
+  const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  await render(
+    <TextInput
+      label="Search"
+      endAccessory={(props) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          aria-label="  "
+          onPress={() => {}}
+        />
+      )}
+    />
+  );
+  expect(warn).toHaveBeenCalledWith(accessoryNameWarning);
+});
+
+it.each<{
+  accessory: string;
+  endAccessory: NonNullable<TextInputProps['endAccessory']>;
+}>([
+  {
+    accessory: 'a decorative accessory',
+    endAccessory: (props) => <TextInput.Icon {...props} icon="magnify" />,
+  },
+  {
+    accessory: 'a named actionable accessory',
+    endAccessory: (props) => (
+      <TextInput.Icon
+        {...props}
+        icon="close"
+        aria-label="Clear search"
+        onPress={() => {}}
+      />
+    ),
+  },
+])('does not warn for $accessory', async ({ endAccessory }) => {
+  const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  await render(<TextInput label="Search" endAccessory={endAccessory} />);
+  expect(warn).not.toHaveBeenCalled();
+});
 
 it('renders decorative accessories outside the accessibility tree without buttons', async () => {
   await render(
