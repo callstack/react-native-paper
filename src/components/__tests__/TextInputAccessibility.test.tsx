@@ -4,6 +4,7 @@ import {
   Platform,
   TextInput as NativeTextInput,
 } from 'react-native';
+import type { View } from 'react-native';
 
 import { afterEach, expect, it, jest } from '@jest/globals';
 
@@ -70,8 +71,7 @@ it.each(['filled', 'outlined'] as const)(
 );
 
 it('preserves accessory refs when switching between decoration and action', async () => {
-  const cleanup = jest.fn<() => void>();
-  const ref = jest.fn(() => cleanup);
+  const ref = jest.fn<(instance: View | null) => void>();
   const props = {
     icon: 'magnify',
     style: {},
@@ -81,21 +81,19 @@ it('preserves accessory refs when switching between decoration and action', asyn
     ref,
   };
   const { rerender, unmount } = await render(<TextInput.Icon {...props} />);
-  const decoration = ref.mock.lastCall;
-  expect(ref).toHaveBeenCalledWith(
+  expect(ref).toHaveBeenCalledTimes(1);
+  expect(ref).toHaveBeenLastCalledWith(
     expect.objectContaining({ measure: expect.any(Function) })
   );
 
   await rerender(
     <TextInput.Icon {...props} onPress={() => {}} aria-label="Search" />
   );
-  expect(cleanup).not.toHaveBeenCalled();
-  expect(ref.mock.lastCall).toEqual(decoration);
-
   await rerender(<TextInput.Icon {...props} />);
-  expect(cleanup).not.toHaveBeenCalled();
+  expect(ref).toHaveBeenCalledTimes(1);
+
   await unmount();
-  expect(cleanup).toHaveBeenCalledTimes(1);
+  expect(ref).toHaveBeenLastCalledWith(null);
 });
 
 it.each(['filled', 'outlined'] as const)(
