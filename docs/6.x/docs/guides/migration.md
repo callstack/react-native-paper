@@ -576,24 +576,40 @@ mutually exclusive options, use `SegmentedButtons`.
 
 ### Checkbox
 
-#### Interaction state colors
+#### Interaction states
 
-Interaction states are now painted as a Material Design 3 state layer on every platform, so the tint follows the spec: hover and focus fill a flat 40dp layer with `primary` when selected and `onSurface` when not, a press ripples inside that same 40dp layer in the inverted color, and an error checkbox stays on `error` throughout. `color` and `uncheckedColor` replace the role they already override on the box, so a custom checkbox no longer picks up a `primary` halo. The platform ripple is turned off to make room for it; passing `rippleColor` on any platform, `background` on Android or `underlayColor` on iOS turns it back on and disables the built-in press instead. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` still suppresses both.
+Hover, focus and press now paint a Material Design 3 state layer, a 40dp circle around the box, on every platform. Hover and focus use `primary` when the checkbox is selected and `onSurface` when it is not, a press ripples in the opposite color, and an error checkbox uses `error` throughout. `color` and `uncheckedColor` also set the matching state layer color. Keyboard focus draws a 50dp ring with a 2dp gap around the state layer.
 
-#### Touch target height
+To use the platform ripple instead of the state layer press, pass `rippleColor` on any platform, `background` on Android or `underlayColor` on iOS. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` turns off the press ripple either way.
 
-`Checkbox` now reserves the 48dp minimum touch target, so it occupies 48dp instead of 40dp. Nothing painted changed size, but rows containing a checkbox may become slightly taller.
+#### Touch target size
 
-#### Custom style target
+`Checkbox` now takes up 48dp instead of 36dp to meet the minimum touch target, so rows with a checkbox can grow up to 12dp taller.
 
-The `style` prop now applies to the checkbox's outer container rather than the pressable inside it, so layout styles such as `margin`, `position` and `transform` move the whole component, focus ring included. `width` and `height` no longer resize the 48dp touch target, and paint styles land on a different shape: a `backgroundColor` used to fill the circular pressable and now fills the square container around it.
+#### Style
 
-To keep a layout as dense as before, give the extra space back with a negative margin instead of shrinking the checkbox. It then takes up 40dp in the layout again, while its touch target stays 48dp:
+`Checkbox` now accepts `style` and applies it to its outer container, so layout styles such as `margin`, `position` and `transform` move the whole checkbox, focus ring included. `width` and `height` do not resize the 48dp touch target.
+
+To keep the 36dp footprint of 5.x, use a negative margin. The touch target stays 48dp and reaches 6dp into the space around the checkbox:
 
 ```tsx
 // Before (v5)
-<Checkbox status="checked" onPress={onPress} />
+<Checkbox status="checked" onPress={onPress} aria-label="Notify me" />
 
 // After (v6)
-<Checkbox status="checked" onPress={onPress} style={{ margin: -4 }} />
+<Checkbox
+  status="checked"
+  onPress={onPress}
+  aria-label="Notify me"
+  style={{ margin: -6 }}
+/>
+```
+
+#### Accessible name
+
+A standalone `Checkbox` has no visible label, so it now warns in development when it has no accessible name. Pass `aria-label` or `accessibilityLabel`, or use `Checkbox.Item`, which names the whole row. On Android and web, `aria-labelledby` names it too. A checkbox hidden from assistive technology, for example with `aria-hidden`, does not warn.
+
+```diff
+-<Checkbox status="checked" onPress={onPress} />
++<Checkbox status="checked" onPress={onPress} aria-label="Notify me" />
 ```
