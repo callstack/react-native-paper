@@ -454,22 +454,28 @@ describe('Checkbox accessible name', () => {
     }
   );
 
-  it('still warns on iOS when only importantForAccessibility hides it', async () => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  // Each of these props hides a view on one platform only, so elsewhere the
+  // checkbox stays exposed and still needs a name.
+  it.each([
+    { os: 'ios', hidden: { importantForAccessibility: 'no-hide-descendants' } },
+    { os: 'web', hidden: { importantForAccessibility: 'no-hide-descendants' } },
+    { os: 'android', hidden: { accessibilityElementsHidden: true } },
+    { os: 'web', hidden: { accessibilityElementsHidden: true } },
+  ] as const)(
+    'still warns on $os when only $hidden hides it',
+    async ({ os, hidden }) => {
+      jest.replaceProperty(Platform, 'OS', os);
+      jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    // iOS ignores `importantForAccessibility`, so the checkbox stays exposed.
-    await render(
-      <Checkbox
-        status="checked"
-        onPress={() => {}}
-        importantForAccessibility="no-hide-descendants"
-      />
-    );
+      await render(
+        <Checkbox status="checked" onPress={() => {}} {...hidden} />
+      );
 
-    expect(console.warn).toHaveBeenCalledWith(
-      expect.stringContaining('aria-label')
-    );
-  });
+      expect(console.warn).toHaveBeenCalledWith(
+        expect.stringContaining('aria-label')
+      );
+    }
+  );
 
   it('warns on iOS when only aria-labelledby names it', async () => {
     jest.spyOn(console, 'warn').mockImplementation(() => {});
