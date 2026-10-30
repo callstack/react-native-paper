@@ -350,9 +350,11 @@ describe('on web', () => {
 
   const createElement = ({
     isConnected = true,
+    focusable = true,
     hiddenBy,
   }: {
     isConnected?: boolean;
+    focusable?: boolean;
     hiddenBy?: string;
   } = {}) => {
     const element = new View({});
@@ -360,8 +362,11 @@ describe('on web', () => {
       isConnected,
       closest: (selectors: string) =>
         hiddenBy && selectors.includes(hiddenBy) ? {} : null,
+      // Like browsers, focus() does nothing on an element that can't take it.
       focus: jest.fn(() => {
-        activeElement = element;
+        if (isConnected && focusable) {
+          activeElement = element;
+        }
       }),
     });
   };
@@ -457,6 +462,16 @@ describe('on web', () => {
       expect(blur).toHaveBeenCalledTimes(1);
     }
   );
+
+  it("blurs a keyboard-focused FAB that hides when the previous element can't take focus", async () => {
+    const previous = createElement({ focusable: false });
+    const { blur, hide } = await renderFocusedFAB(previous);
+
+    await hide();
+
+    expect(previous.focus).toHaveBeenCalledWith({ preventScroll: true });
+    expect(blur).toHaveBeenCalledTimes(1);
+  });
 
   it('blurs a FAB focused by a mouse click instead of moving focus back', async () => {
     focusVisible = false;
