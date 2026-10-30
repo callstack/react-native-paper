@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders disabled icon button 1`] = `
+exports[`computes hitSlop from explicit width/height rather than the button size 1`] = `
 <View
   collapsable={false}
   style={
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -15,8 +14,16 @@ exports[`renders disabled icon button 1`] = `
         "width": 40,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       undefined,
@@ -47,10 +54,10 @@ exports[`renders disabled icon button 1`] = `
     focusable={true}
     hitSlop={
       {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
+        "bottom": 14,
+        "left": 14,
+        "right": 14,
+        "top": 14,
       }
     }
     onBlur={[Function]}
@@ -73,6 +80,436 @@ exports[`renders disabled icon button 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": 20,
+            "width": 20,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        camera
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`drops hitSlop when explicit width/height already meet the 48dp minimum 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+      },
+      {
+        "backgroundColor": undefined,
+        "height": 40,
+        "width": 40,
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderColor": "rgba(202, 196, 208, 1)",
+        "borderRadius": 20,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "borderWidth": 0,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    centered={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      [
+        {
+          "overflow": "hidden",
+        },
+        [
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": 48,
+            "width": 48,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        camera
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`lets a caller-supplied hitSlop win even while disabled 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+      },
+      {
+        "backgroundColor": undefined,
+        "height": 40,
+        "width": 40,
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderColor": "rgba(202, 196, 208, 1)",
+        "borderRadius": 20,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "borderWidth": 0,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    centered={true}
+    collapsable={false}
+    focusable={true}
+    hitSlop={2}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      [
+        {
+          "overflow": "hidden",
+        },
+        [
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        {
+          "opacity": 0.38,
+        }
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        camera
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders disabled icon button 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+      },
+      {
+        "backgroundColor": undefined,
+        "height": 40,
+        "width": 40,
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderColor": "rgba(202, 196, 208, 1)",
+        "borderRadius": 20,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "borderWidth": 0,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    centered={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      [
+        {
+          "overflow": "hidden",
+        },
+        [
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],
@@ -127,7 +564,6 @@ exports[`renders icon button by default 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -135,8 +571,16 @@ exports[`renders icon button by default 1`] = `
         "width": 40,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       undefined,
@@ -167,10 +611,10 @@ exports[`renders icon button by default 1`] = `
     focusable={true}
     hitSlop={
       {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
+        "bottom": 4,
+        "left": 4,
+        "right": 4,
+        "top": 4,
       }
     }
     onBlur={[Function]}
@@ -193,6 +637,24 @@ exports[`renders icon button by default 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],
@@ -247,7 +709,6 @@ exports[`renders icon button with color 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -255,8 +716,16 @@ exports[`renders icon button with color 1`] = `
         "width": 40,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       undefined,
@@ -287,10 +756,10 @@ exports[`renders icon button with color 1`] = `
     focusable={true}
     hitSlop={
       {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
+        "bottom": 4,
+        "left": 4,
+        "right": 4,
+        "top": 4,
       }
     }
     onBlur={[Function]}
@@ -313,6 +782,24 @@ exports[`renders icon button with color 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],
@@ -367,7 +854,6 @@ exports[`renders icon button with custom border radius 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -375,8 +861,16 @@ exports[`renders icon button with custom border radius 1`] = `
         "width": 52,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 26,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       {
@@ -407,14 +901,6 @@ exports[`renders icon button with custom border radius 1`] = `
     centered={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -435,6 +921,24 @@ exports[`renders icon button with custom border radius 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 26,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],
@@ -490,7 +994,6 @@ exports[`renders icon button with size 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -498,8 +1001,16 @@ exports[`renders icon button with size 1`] = `
         "width": 46,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 23,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       undefined,
@@ -530,10 +1041,10 @@ exports[`renders icon button with size 1`] = `
     focusable={true}
     hitSlop={
       {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
+        "bottom": 1,
+        "left": 1,
+        "right": 1,
+        "top": 1,
       }
     }
     onBlur={[Function]}
@@ -556,6 +1067,24 @@ exports[`renders icon button with size 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 23,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],
@@ -610,7 +1139,6 @@ exports[`renders icon button with small border radius 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -618,8 +1146,16 @@ exports[`renders icon button with small border radius 1`] = `
         "width": 52,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 26,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       {
@@ -650,14 +1186,6 @@ exports[`renders icon button with small border radius 1`] = `
     centered={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -678,6 +1206,24 @@ exports[`renders icon button with small border radius 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 26,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],
@@ -733,7 +1279,6 @@ exports[`renders icon change animated 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -741,8 +1286,16 @@ exports[`renders icon change animated 1`] = `
         "width": 40,
       },
       {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
         "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
         "borderWidth": 0,
       },
       undefined,
@@ -773,10 +1326,10 @@ exports[`renders icon change animated 1`] = `
     focusable={true}
     hitSlop={
       {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
+        "bottom": 4,
+        "left": 4,
+        "right": 4,
+        "top": 4,
       }
     }
     onBlur={[Function]}
@@ -799,6 +1352,24 @@ exports[`renders icon change animated 1`] = `
             "alignItems": "center",
             "flexGrow": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "height": undefined,
+            "width": undefined,
           },
           undefined,
         ],

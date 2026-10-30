@@ -20,9 +20,11 @@ import {
   getSegmentedButtonColors,
   getSegmentedButtonDensityPadding,
 } from './utils';
+import type { SegmentBorderRadiusStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -172,6 +174,7 @@ const SegmentedButtonItem = ({
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
     theme,
     segment,
+    borderRadius,
   });
 
   const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
@@ -187,16 +190,19 @@ const SegmentedButtonItem = ({
     backgroundColor,
     borderColor,
     borderWidth,
-    borderRadius,
     ...segmentBorderRadius,
   };
 
   const paddingVertical = getSegmentedButtonDensityPadding({ density });
+  const contentHeight = 2 * paddingVertical + iconSize;
+  const defaultHitSlop = disabled
+    ? undefined
+    : getMinInteractiveSizeHitSlop({ height: contentHeight });
 
-  const rippleStyle: ViewStyle = {
-    borderRadius,
+  const rippleStyle: SegmentBorderRadiusStyle = {
     ...segmentBorderRadius,
   };
+  const { borderEndWidth: _borderEndWidth, ...touchableShape } = rippleStyle;
 
   const labelTextStyle: TextStyle = {
     ...theme.fonts.labelLarge,
@@ -215,9 +221,10 @@ const SegmentedButtonItem = ({
         disabled={disabled}
         testID={testID}
         style={rippleStyle}
+        {...touchableShape}
         background={background}
         theme={theme}
-        hitSlop={hitSlop}
+        hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
       >
         <View
           style={[styles.content, { paddingVertical, opacity: textOpacity }]}
