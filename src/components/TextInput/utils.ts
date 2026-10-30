@@ -95,11 +95,11 @@ export const getLabelColor = ({
     colors: { error, primary, onSurface, onSurfaceVariant },
   } = theme;
 
-  if (hasError) {
-    return error;
-  }
   if (isDisabled) {
     return onSurface;
+  }
+  if (hasError) {
+    return error;
   }
   if (isFocused) {
     return primary;
@@ -120,11 +120,11 @@ export const getSupportingTextColor = ({
     colors: { error, onSurface, onSurfaceVariant },
   } = theme;
 
-  if (hasError) {
-    return error;
-  }
   if (isDisabled) {
     return onSurface;
+  }
+  if (hasError) {
+    return error;
   }
   return onSurfaceVariant;
 };
@@ -162,43 +162,39 @@ export const getIconColor = ({
   isDisabled: boolean;
 }): ColorValue => {
   if (iconColor) return iconColor;
-  if (hasError) return theme.colors.error;
   if (isDisabled) return theme.colors.onSurface;
+  if (hasError) return theme.colors.error;
   return theme.colors.onSurfaceVariant;
 };
 
 /**
- * Returns the raw outline color for a filled field. The disabled state's
- * alpha is intentionally NOT baked in here — it is applied via the `opacity`
- * style on the (childless) outline View so the value can be a `PlatformColor`
- * on Android, which the `color` library cannot parse at runtime.
+ * Resolve the filled indicator or outlined border color. Disabled opacity is
+ * applied by the outline View so native PlatformColor values stay intact.
  */
 export const getOutlineColor = ({
   theme,
   hasError,
   isFocused,
   isDisabled,
+  isHovered = false,
+  variant = 'outlined',
 }: {
   theme: InternalTheme;
   isFocused: boolean;
   hasError: boolean;
   isDisabled: boolean;
+  isHovered?: boolean;
+  variant?: TextInputVariant;
 }) => {
-  const {
-    colors: { error, onSurface, primary, outline },
-  } = theme;
+  const { colors } = theme;
 
+  if (isDisabled) return colors.onSurface;
   if (hasError) {
-    return error;
+    return isHovered && !isFocused ? colors.onErrorContainer : colors.error;
   }
-  if (isDisabled) {
-    return onSurface;
-  }
-  if (isFocused) {
-    return primary;
-  }
-
-  return outline;
+  if (isFocused) return colors.primary;
+  if (isHovered) return colors.onSurface;
+  return variant === 'filled' ? colors.onSurfaceVariant : colors.outline;
 };
 
 /**
@@ -330,6 +326,8 @@ export const getFilledTextInputData = (
     hasError,
     isFocused: false,
     isDisabled,
+    variant: 'filled',
+    isHovered: api.isHovered,
   });
 
   const activeOutlineColor = getOutlineColor({
@@ -363,10 +361,7 @@ export const getFilledTextInputData = (
     animatedLabelWrapperStyle,
   ];
 
-  const containerStyles: StyleProp<ViewStyle> = [
-    filledStyles.container,
-    isDisabled && styles.disabled,
-  ];
+  const containerStyles = filledStyles.container;
 
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
@@ -479,6 +474,7 @@ export const getOutlinedTextInputData = (
     isDisabled,
     isFocused,
     hasError,
+    isHovered: api.isHovered,
   });
 
   /**
@@ -491,10 +487,7 @@ export const getOutlinedTextInputData = (
    * Variant-specific styles
    */
 
-  const containerStyles: StyleProp<ViewStyle> = [
-    outlinedStyles.container,
-    isDisabled && styles.disabled,
-  ];
+  const containerStyles = outlinedStyles.container;
 
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
@@ -568,65 +561,74 @@ export const getOutlinedTextInputData = (
 
 export const getAccessibilityData = ({
   data,
+  id,
   hasError,
   hasCounter,
   isDisabled,
   inputLength,
 }: GetAccessibilityDataProps): GetAccessibilityDataReturn => {
-  const { label, supportingText, ...props } = data;
-
-  const maxLength = props.maxLength;
-  const shouldEvaluateCounter = !!maxLength && hasCounter;
-  const isEmptyString = inputLength === 0;
-  const isCounterExceeded = shouldEvaluateCounter && inputLength > maxLength;
-  const isCounterReached = shouldEvaluateCounter && inputLength === maxLength;
-  const isInvalid = hasError || isCounterExceeded;
-  const isSupportingTextHidden = !!(supportingText && !hasError);
-
-  const chunks: string[] = [];
-
-  if (label) {
-    chunks.push(label);
-  }
-
-  if (isSupportingTextHidden) {
-    chunks.push(supportingText);
-  }
-
-  if (isEmptyString && props.placeholder && !hasError) {
-    chunks.push(props.placeholder);
-  }
-
-  const ariaLabel = chunks.length > 0 ? chunks.join(', ') : label;
-
-  let hint: string | undefined;
-
-  if (isCounterExceeded && !(hasError && supportingText)) {
-    hint = `Character limit exceeded ${inputLength} of ${maxLength}`;
-  }
-
-  const counterAccessibilityLabel = shouldEvaluateCounter
+  const { label, supportingText, maxLength, ...props } = data;
+  const isCounterExceeded =
+    hasCounter && maxLength != null && inputLength > maxLength;
+  const counterAccessibilityLabel = hasCounter
     ? isCounterExceeded
       ? `Character limit exceeded ${inputLength} of ${maxLength}`
       : `Characters entered ${inputLength} of ${maxLength}`
     : undefined;
 
+  // Generated IDs only link the label and descriptions on web.
+  const labelId = Platform.OS === 'web' ? `${id}-label` : undefined;
+  const supportingTextId =
+    Platform.OS === 'web' && supportingText
+      ? `${id}-supporting-text`
+      : undefined;
+  const counterId =
+    Platform.OS === 'web' && hasCounter ? `${id}-counter` : undefined;
+  const describedBy =
+    [props['aria-describedby'], supportingTextId, counterId]
+      .filter(Boolean)
+      .join(' ') || undefined;
+  const explicitLabel = props['aria-label'] ?? props.accessibilityLabel;
+  const labelledBy =
+    props['aria-labelledby'] ??
+    (label && explicitLabel == null && !props.accessibilityLabelledBy
+      ? labelId
+      : undefined);
+
+  // React Native 0.85 does not implement described-by relationships on native.
+  // Expose the same description as a hint without changing the field's name.
+  const hint =
+    Platform.OS === 'web'
+      ? props.accessibilityHint
+      : [props.accessibilityHint, supportingText, counterAccessibilityLabel]
+          .filter(Boolean)
+          .join(', ') || undefined;
+
   return {
     input: {
-      'aria-label': ariaLabel,
-      'aria-valuemax': isCounterReached ? maxLength : undefined,
-      'aria-valuenow': isCounterReached ? inputLength : undefined,
-      'aria-disabled': isDisabled,
-      'aria-invalid': isInvalid,
+      'aria-label': explicitLabel ?? label ?? props.placeholder,
+      'aria-labelledby': labelledBy,
+      'aria-describedby': describedBy,
+      'aria-disabled': isDisabled || (props['aria-disabled'] ?? false),
+      'aria-invalid': props['aria-invalid'] ?? (hasError || isCounterExceeded),
       accessibilityHint: hint,
     },
+    label: { nativeID: labelId },
+    // On native, the hint above already contains these texts. Hide their nodes
+    // so they are not read twice or merged into the field wrapper's label.
     supportingText: {
-      'aria-hidden': isSupportingTextHidden,
-      'aria-live': hasError && supportingText ? 'polite' : undefined,
+      nativeID: supportingTextId,
+      'aria-hidden': Platform.OS !== 'web',
+      role:
+        Platform.OS === 'web' && hasError && supportingText
+          ? 'alert'
+          : undefined,
     },
     counter: {
+      nativeID: counterId,
+      'aria-hidden': Platform.OS !== 'web',
       'aria-label': counterAccessibilityLabel,
-      'aria-live': 'polite',
+      'aria-live': Platform.OS === 'web' ? 'polite' : undefined,
     },
   };
 };

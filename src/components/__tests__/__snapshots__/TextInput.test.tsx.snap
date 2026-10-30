@@ -62,7 +62,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             "right": 0,
           },
           {
-            "backgroundColor": "rgba(121, 116, 126, 1)",
+            "backgroundColor": "rgba(73, 69, 79, 1)",
             "height": 1,
           },
           false,
@@ -137,6 +137,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       </Text>
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -178,6 +180,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         }
       >
         <View
+          accessibilityRole="none"
           accessibilityState={
             {
               "busy": undefined,
@@ -195,10 +198,11 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "text": undefined,
             }
           }
-          accessible={true}
+          accessible={false}
+          aria-hidden={true}
           centered={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           hitSlop={
             {
               "bottom": 6,
@@ -207,7 +211,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "top": 6,
             }
           }
-          multiline={false}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
@@ -217,7 +220,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          role="button"
+          role="none"
           style={
             [
               {
@@ -233,6 +236,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
+          tabIndex={-1}
         >
           <View
             style={
@@ -275,20 +279,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "flex-end",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -326,6 +323,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       />
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -367,6 +366,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         }
       >
         <View
+          accessibilityRole="none"
           accessibilityState={
             {
               "busy": undefined,
@@ -384,10 +384,11 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "text": undefined,
             }
           }
-          accessible={true}
+          accessible={false}
+          aria-hidden={true}
           centered={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           hitSlop={
             {
               "bottom": 6,
@@ -396,7 +397,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "top": 6,
             }
           }
-          multiline={false}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
@@ -406,7 +406,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          role="button"
+          role="none"
           style={
             [
               {
@@ -422,6 +422,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
+          tabIndex={-1}
         >
           <View
             style={
@@ -611,6 +612,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       </Text>
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -652,6 +655,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         }
       >
         <View
+          accessibilityRole="none"
           accessibilityState={
             {
               "busy": undefined,
@@ -669,10 +673,11 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "text": undefined,
             }
           }
-          accessible={true}
+          accessible={false}
+          aria-hidden={true}
           centered={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           hitSlop={
             {
               "bottom": 6,
@@ -681,7 +686,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "top": 6,
             }
           }
-          multiline={false}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
@@ -691,7 +695,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          role="button"
+          role="none"
           style={
             [
               {
@@ -707,6 +711,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               ],
             ]
           }
+          tabIndex={-1}
         >
           <View
             style={
@@ -749,20 +754,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "flex-end",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -800,6 +798,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       />
     </View>
     <View
+      aria-hidden={false}
+      pointerEvents="auto"
       style={
         {
           "alignItems": "center",
@@ -841,6 +841,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         }
       >
         <View
+          accessibilityLabel="Clear"
           accessibilityState={
             {
               "busy": undefined,
@@ -870,7 +871,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "top": 6,
             }
           }
-          multiline={false}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
@@ -1010,7 +1010,7 @@ exports[`renders filled TextInput with label and value 1`] = `
             "right": 0,
           },
           {
-            "backgroundColor": "rgba(121, 116, 126, 1)",
+            "backgroundColor": "rgba(73, 69, 79, 1)",
             "height": 1,
           },
           false,
@@ -1085,20 +1085,13 @@ exports[`renders filled TextInput with label and value 1`] = `
       </Text>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "flex-end",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -1263,6 +1256,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       </Text>
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -1304,6 +1299,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         }
       >
         <View
+          accessibilityRole="none"
           accessibilityState={
             {
               "busy": undefined,
@@ -1321,10 +1317,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "text": undefined,
             }
           }
-          accessible={true}
+          accessible={false}
+          aria-hidden={true}
           centered={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           hitSlop={
             {
               "bottom": 6,
@@ -1333,7 +1330,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "top": 6,
             }
           }
-          multiline={false}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
@@ -1343,7 +1339,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          role="button"
+          role="none"
           style={
             [
               {
@@ -1359,6 +1355,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
+          tabIndex={-1}
         >
           <View
             style={
@@ -1401,20 +1398,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -1452,6 +1442,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       />
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -1493,6 +1485,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         }
       >
         <View
+          accessibilityRole="none"
           accessibilityState={
             {
               "busy": undefined,
@@ -1510,10 +1503,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "text": undefined,
             }
           }
-          accessible={true}
+          accessible={false}
+          aria-hidden={true}
           centered={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           hitSlop={
             {
               "bottom": 6,
@@ -1522,7 +1516,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "top": 6,
             }
           }
-          multiline={false}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
@@ -1532,7 +1525,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          role="button"
+          role="none"
           style={
             [
               {
@@ -1548,6 +1541,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
+          tabIndex={-1}
         >
           <View
             style={
@@ -1717,6 +1711,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       </Text>
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -1758,6 +1754,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         }
       >
         <View
+          accessibilityRole="none"
           accessibilityState={
             {
               "busy": undefined,
@@ -1775,10 +1772,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "text": undefined,
             }
           }
-          accessible={true}
+          accessible={false}
+          aria-hidden={true}
           centered={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           hitSlop={
             {
               "bottom": 6,
@@ -1787,7 +1785,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "top": 6,
             }
           }
-          multiline={false}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
@@ -1797,7 +1794,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          role="button"
+          role="none"
           style={
             [
               {
@@ -1813,6 +1810,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               ],
             ]
           }
+          tabIndex={-1}
         >
           <View
             style={
@@ -1855,20 +1853,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -1906,6 +1897,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       />
     </View>
     <View
+      aria-hidden={false}
+      pointerEvents="auto"
       style={
         {
           "alignItems": "center",
@@ -1947,6 +1940,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         }
       >
         <View
+          accessibilityLabel="Clear"
           accessibilityState={
             {
               "busy": undefined,
@@ -1976,7 +1970,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "top": 6,
             }
           }
-          multiline={false}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
@@ -2171,20 +2164,13 @@ exports[`renders outlined TextInput with label and value 1`] = `
       </Text>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
