@@ -131,6 +131,7 @@ const RIPPLE_START_SCALE = 0.6;
  *       onPress={() => {
  *         setChecked(!checked);
  *       }}
+ *       aria-label="Remember me"
  *     />
  *   );
  * };
