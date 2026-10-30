@@ -311,22 +311,26 @@ The misspelled `traileringIcon` props have been renamed:
 
 To preserve the v5 FAB color treatment, update the `variant` prop:
 
-| v5 | v6 |
-| --- | --- |
-| `primary` | `primaryContainer` |
+| v5          | v6                   |
+| ----------- | -------------------- |
+| `primary`   | `primaryContainer`   |
 | `secondary` | `secondaryContainer` |
-| `tertiary` | `tertiaryContainer` |
+| `tertiary`  | `tertiaryContainer`  |
 
 If you omit `variant`, no change is needed. The `surface` variant was removed. To keep its look, pass the colors directly:
 
 ```jsx
-const { colors } = useTheme();
+const MyFAB = () => {
+  const { colors } = useTheme();
 
-<FAB
-  icon="plus"
-  containerColor={colors.surfaceContainerHigh}
-  contentColor={colors.primary}
-/>
+  return (
+    <FAB
+      icon="plus"
+      containerColor={colors.surfaceContainerHigh}
+      contentColor={colors.primary}
+    />
+  );
+};
 ```
 
 For custom colors, replace `color` with `contentColor` and move
