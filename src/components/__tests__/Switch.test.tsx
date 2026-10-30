@@ -348,6 +348,23 @@ describe('Switch operability', () => {
     });
   });
 
+  it('toggles an operable switch inside a pressable row on web without pressing the row', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const user = userEvent.setup();
+    const onValueChange = jest.fn();
+    const onRowPress = jest.fn();
+    await render(
+      <Pressable onPress={onRowPress}>
+        <Switch value onValueChange={onValueChange} />
+      </Pressable>
+    );
+
+    await user.press(screen.getByRole('switch'));
+
+    expect(onValueChange).toHaveBeenCalledWith(false);
+    expect(onRowPress).not.toHaveBeenCalled();
+  });
+
   it('exposes the read-only state on web', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
     await render(<Switch value readOnly />);
