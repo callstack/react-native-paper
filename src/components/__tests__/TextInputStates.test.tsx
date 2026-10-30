@@ -1,9 +1,15 @@
-import { describe, expect, it } from '@jest/globals';
+import { Platform } from 'react-native';
+
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { render, screen } from '../../test-utils';
 import { LightTheme as theme } from '../../theme/schemes';
 import TextInput from '../TextInput';
 import { getOutlineColor } from '../TextInput/utils';
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 type State = {
   isFocused?: boolean;
@@ -56,7 +62,8 @@ describe.each([
   });
 });
 
-it('uses the disabled colors for a disabled invalid field and keeps it invalid', async () => {
+it('uses the disabled colors for a disabled invalid field and keeps it invalid on web', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
   await render(
     <TextInput
       label="Email"
