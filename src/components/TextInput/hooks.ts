@@ -437,12 +437,20 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
 
   // On native, the error is read from the input's hint and its text node is
   // hidden, so a live region would not announce it. Announce changed errors
-  // instead, while web uses the rendered alert.
+  // instead, but not errors present on mount, so a screen that opens with
+  // several invalid fields does not queue an announcement for each of them.
   const errorMessage = flags.hasError ? props.supportingText : undefined;
+  const previousErrorMessage = useRef(errorMessage);
   useEffect(() => {
-    if (Platform.OS !== 'web' && errorMessage) {
+    if (
+      Platform.OS !== 'web' &&
+      errorMessage &&
+      errorMessage !== previousErrorMessage.current
+    ) {
       AccessibilityInfo.announceForAccessibility(errorMessage);
     }
+
+    previousErrorMessage.current = errorMessage;
   }, [errorMessage]);
 
   const counterText = `${inputLength}/${props.maxLength}`;
