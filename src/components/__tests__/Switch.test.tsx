@@ -256,6 +256,17 @@ describe('Switch operability', () => {
     );
   });
 
+  it.each(['readOnly', 'disabled'] as const)(
+    'does not warn when %s is set without onValueChange',
+    async (prop) => {
+      jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      await render(<Switch value {...{ [prop]: true }} />);
+
+      expect(console.warn).not.toHaveBeenCalled();
+    }
+  );
+
   it('is not focusable when it has no way to be operated', async () => {
     jest.spyOn(console, 'warn').mockImplementation(() => {});
 
