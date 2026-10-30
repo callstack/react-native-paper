@@ -97,9 +97,9 @@ const { thickness: FOCUS_THICKNESS, outerOffset: FOCUS_OUTER_OFFSET } =
   stateTokens.focusIndicator;
 const FOCUS_RING_INSET = -(FOCUS_OUTER_OFFSET + FOCUS_THICKNESS);
 // Every painted layer is smaller than the touch target and absolutely
-// positioned, so each one is centred against it.
-const centreY = (size: number) => (TOUCH_TARGET_SIZE - size) / 2;
-const TRACK_TOP = centreY(TRACK_HEIGHT);
+// positioned, so each one is centered against it.
+const centerY = (size: number) => (TOUCH_TARGET_SIZE - size) / 2;
+const TRACK_TOP = centerY(TRACK_HEIGHT);
 
 function restingHandleSize(checked: boolean, hasIcon: boolean): number {
   if (hasIcon) return ICON_HANDLE;
@@ -576,7 +576,7 @@ const styles = StyleSheet.create({
   },
   stateLayer: {
     position: 'absolute',
-    top: centreY(STATE_LAYER_SIZE),
+    top: centerY(STATE_LAYER_SIZE),
     width: STATE_LAYER_SIZE,
     height: STATE_LAYER_SIZE,
     borderRadius: cornerFull,
@@ -598,7 +598,7 @@ const styles = StyleSheet.create({
   },
   iconWrap: {
     position: 'absolute',
-    top: centreY(SELECTED_ICON),
+    top: centerY(SELECTED_ICON),
     width: SELECTED_ICON,
     height: SELECTED_ICON,
     pointerEvents: 'none',
