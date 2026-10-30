@@ -185,6 +185,7 @@ it('hides an invisible FAB from accessibility and keyboard navigation without ma
   expect(fab).toHaveProp('focusable', false);
   expect(fab).toHaveProp('tabIndex', -1);
   await userEvent.press(fab);
+  await fireEvent(fab, 'click', { nativeEvent: {} });
   expect(onPress).not.toHaveBeenCalled();
 });
 
