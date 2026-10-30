@@ -430,17 +430,17 @@ disabled state, even when `aria-disabled={false}` is supplied.
 
 On web, error supporting text uses `role="alert"`. On Android and iOS, a new or
 changed error message is announced through `AccessibilityInfo`, and an error
-that is already shown when the field mounts is not announced there. Explicit
-`aria-invalid` values are kept; when omitted, validity is derived from `error`
-and the character counter. Custom input renderers should forward the
+that is already shown when the field mounts is not announced there. On web,
+explicit `aria-invalid` values are kept; when omitted, validity is derived from
+`error` and the character counter. Custom input renderers should forward the
 accessibility props they receive.
 
 The filled indicator uses `onSurfaceVariant` and the outlined border uses
 `outline` at rest. On web, both change to `onSurface` on hover, and an invalid
 field changes from `error` to `onErrorContainer`. Focus takes precedence over
 hover and uses `primary`, or `error` for an invalid field. A disabled field uses
-the disabled colors even when `error` is set, and it is still reported as
-invalid.
+the disabled colors even when `error` is set. On web it keeps `aria-invalid`; on
+Android and iOS the error text stays in its hint.
 
 #### Removed props
 
