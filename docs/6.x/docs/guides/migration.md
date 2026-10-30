@@ -320,6 +320,8 @@ To preserve the v5 FAB color treatment, update the `variant` prop:
 If you omit `variant`, no change is needed. The `surface` variant was removed. To keep its look, pass the colors directly:
 
 ```jsx
+import { FAB, useTheme } from 'react-native-paper';
+
 const MyFAB = () => {
   const { colors } = useTheme();
 
