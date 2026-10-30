@@ -122,6 +122,16 @@ const getStyle = (ref: React.RefObject<View | null>) => {
   return getAnimatedStyle(ref.current);
 };
 
+// Android exposes elevation as a plain number, so the direction is checkable
+// without the shadow tokens.
+const getElevation = (ref: React.RefObject<View | null>) => {
+  const style = getStyle(ref);
+  if (!('elevation' in style) || typeof style.elevation !== 'number') {
+    throw new Error('Expected a numeric elevation');
+  }
+  return style.elevation;
+};
+
 it('renders a FAB without onPress as a disabled button', async () => {
   await render(<FAB icon="plus" aria-label="Create" />);
   expect(screen.getByRole('button', { name: 'Create' })).toBeDisabled();
@@ -225,6 +235,27 @@ it.each(['ios', 'android'] as const)(
     expect(getStyle(ref)).toEqual(resting);
   }
 );
+
+it('raises the elevation while hovered and lowers it while pressed when Platform.OS is android', async () => {
+  jest.replaceProperty(Platform, 'OS', 'android');
+  const ref = React.createRef<View>();
+  await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={() => {}}
+    />
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+  const resting = getElevation(ref);
+
+  await fireEvent(fab, 'hoverIn');
+  expect(getElevation(ref)).toBeGreaterThan(resting);
+  await fireEvent(fab, 'pressIn');
+  expect(getElevation(ref)).toBe(resting);
+});
 
 it('restores the resting elevation when a hovered FAB loses its action', async () => {
   const ref = React.createRef<View>();
@@ -358,7 +389,7 @@ describe('on web', () => {
   };
 
   it.each(['icon', 'extended'] as const)(
-    'keeps the %s FAB at rest on focus, raises it while hovered and lowers it while pressed',
+    'keeps the %s FAB at rest on focus, changes its elevation while hovered and restores it while pressed',
     async (type) => {
       const ref = React.createRef<View>();
       await render(
