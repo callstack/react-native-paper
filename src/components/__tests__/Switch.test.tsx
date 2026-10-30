@@ -161,17 +161,72 @@ describe('Switch focus state', () => {
     expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
   });
 
+  it('paints no focus feedback when a read-only switch receives focus on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(<Switch value readOnly />);
+
+    await fireEvent(screen.getByRole('switch'), 'focus', {
+      currentTarget: { matches: () => true },
+    });
+    await jest.runAllTimersAsync();
+
+    expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+    expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
+  });
+
+  // On web the switch keeps DOM focus while it is not interactive, because
+  // React Native Web only changes its `tabIndex` and ARIA state.
   it.each(['disabled', 'readOnly'] as const)(
-    'clears interaction feedback when the switch becomes %s',
+    'shows focus feedback again on web when a focused switch stops being %s',
     async (prop) => {
+      jest.replaceProperty(Platform, 'OS', 'web');
       const onValueChange = jest.fn();
       const view = await render(<Switch value onValueChange={onValueChange} />);
 
       await fireEvent(screen.getByRole('switch'), 'focus');
+      await view.rerender(
+        <Switch value onValueChange={onValueChange} {...{ [prop]: true }} />
+      );
+      await jest.runAllTimersAsync();
+      expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+      expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
+
+      await view.rerender(<Switch value onValueChange={onValueChange} />);
+      await jest.runAllTimersAsync();
+
+      expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
+      expect(getLayers().stateLayer).toMatchObject({ opacity: 0.1 });
+      expect(getLayers().handleFill).toMatchObject({
+        backgroundColor: colors.primaryContainer,
+      });
+    }
+  );
+
+  it('keeps focus feedback hidden on web when the switch lost focus while read-only', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onValueChange = jest.fn();
+    const view = await render(<Switch value onValueChange={onValueChange} />);
+
+    await fireEvent(screen.getByRole('switch'), 'focus');
+    await view.rerender(
+      <Switch value onValueChange={onValueChange} readOnly />
+    );
+    await fireEvent(screen.getByRole('switch'), 'blur');
+    await view.rerender(<Switch value onValueChange={onValueChange} />);
+    await jest.runAllTimersAsync();
+
+    expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+  });
+
+  it.each(['disabled', 'readOnly'] as const)(
+    'clears hover and press feedback when the switch becomes %s',
+    async (prop) => {
+      const onValueChange = jest.fn();
+      const view = await render(<Switch value onValueChange={onValueChange} />);
+
       await fireEvent(screen.getByRole('switch'), 'hoverIn');
       await fireEvent(screen.getByRole('switch'), 'pressIn');
       await jest.runAllTimersAsync();
-      expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
       expect(getLayers().handle).toMatchObject({ width: 28, height: 28 });
 
       await view.rerender(
@@ -181,7 +236,6 @@ describe('Switch focus state', () => {
       await view.rerender(<Switch value onValueChange={onValueChange} />);
       await jest.runAllTimersAsync();
 
-      expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
       expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
       expect(getLayers().handle).toMatchObject({ width: 24, height: 24 });
       expect(getLayers().handleFill).toMatchObject({

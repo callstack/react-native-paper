@@ -3,9 +3,7 @@ import {
   Platform,
   Pressable,
   StyleSheet,
-  type NativeSyntheticEvent,
   type StyleProp,
-  type TargetedEvent,
   View,
   type ViewStyle,
 } from 'react-native';
@@ -184,24 +182,41 @@ const Switch = ({
   const checkedSV = useSharedValue(checked ? 1 : 0);
   const hasIconSV = useSharedValue(hasIcon ? 1 : 0);
   const isDisabledSV = useSharedValue(isDisabled ? 1 : 0);
+  const isInteractiveSV = useSharedValue(isInteractive ? 1 : 0);
 
   React.useEffect(() => {
     checkedSV.value = checked ? 1 : 0;
     hasIconSV.value = hasIcon ? 1 : 0;
     isDisabledSV.value = isDisabled ? 1 : 0;
-  }, [checked, hasIcon, isDisabled, checkedSV, hasIconSV, isDisabledSV]);
+    isInteractiveSV.value = isInteractive ? 1 : 0;
+  }, [
+    checked,
+    hasIcon,
+    isDisabled,
+    isInteractive,
+    checkedSV,
+    hasIconSV,
+    isDisabledSV,
+    isInteractiveSV,
+  ]);
 
-  // A switch that stops being interactive loses its handlers, so one that was
-  // hovered, pressed, or focused at that moment would never get the matching
-  // hover-out, press-out, or blur and would keep painting that state.
+  // A switch that stops being interactive loses its press and hover handlers,
+  // so one that was pressed or hovered at that moment would never get the
+  // matching press-out or hover-out and would keep painting that state.
   React.useEffect(() => {
     if (isInteractive) return;
 
     pressedSV.value = 0;
     spacePressedRef.current = false;
     hoveredSV.value = 0;
-    focusedSV.value = 0;
-  }, [isInteractive, pressedSV, hoveredSV, focusedSV]);
+  }, [isInteractive, pressedSV, hoveredSV]);
+
+  // Focus is tracked even while the switch is not interactive, because it can
+  // keep focus meanwhile (web only changes `tabIndex`). It is shown only while
+  // the switch can be operated, so it returns once the switch is operable again.
+  const isFocusShownSV = useDerivedValue(() =>
+    focusedSV.value === 1 && isInteractiveSV.value === 1 ? 1 : 0
+  );
 
   const colors = React.useMemo(() => getDefaultSwitchColors(theme), [theme]);
 
@@ -279,7 +294,7 @@ const Switch = ({
   useAnimatedReaction(
     (): StateOpacityKey | null => {
       if (pressedSV.value === 1) return 'pressed';
-      if (focusedSV.value === 1) return 'focused';
+      if (isFocusShownSV.value === 1) return 'focused';
       if (hoveredSV.value === 1) return 'hovered';
       return null;
     },
@@ -314,7 +329,7 @@ const Switch = ({
         ? colors.checkedPressedHandleColor
         : colors.uncheckedPressedHandleColor;
     }
-    if (focusedSV.value === 1) {
+    if (isFocusShownSV.value === 1) {
       return isCheckedNow
         ? colors.checkedFocusHandleColor
         : colors.uncheckedFocusHandleColor;
@@ -359,7 +374,7 @@ const Switch = ({
   }));
 
   const focusRingAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: focusedSV.value,
+    opacity: isFocusShownSV.value,
   }));
 
   const paint = resolveSwitchPaint(colors, isEnabled, checked);
@@ -380,8 +395,8 @@ const Switch = ({
   const trackOpacityValue = isDisabled ? DISABLED_TRACK_OPACITY : 1;
   const iconSize = checked ? SELECTED_ICON : UNSELECTED_ICON;
 
-  // A non-interactive switch gets no press, hover, or focus affordances at all.
-  // It stays in the accessibility tree, so its state is still announced.
+  // A non-interactive switch gets no press or hover handlers. It stays in the
+  // accessibility tree, so its state is still announced.
   const interactionProps = isInteractive
     ? {
         onPress: () => onValueChange?.(!checked),
@@ -396,15 +411,6 @@ const Switch = ({
         },
         onHoverOut: () => {
           hoveredSV.value = 0;
-        },
-        onFocus: (e: NativeSyntheticEvent<TargetedEvent>) => {
-          if (!isKeyboardFocusEvent(e)) return;
-          focusedSV.value = 1;
-        },
-        onBlur: () => {
-          focusedSV.value = 0;
-          pressedSV.value = 0;
-          spacePressedRef.current = false;
         },
         // React Native Web only handles Space for button roles.
         ...(Platform.OS === 'web'
@@ -439,6 +445,15 @@ const Switch = ({
         disabled={Platform.OS === 'web' ? isDisabled : !isInteractive}
         tabIndex={isInteractive ? 0 : -1}
         aria-readonly={Platform.OS === 'web' ? isAnnouncedReadOnly : undefined}
+        onFocus={(e) => {
+          if (!isKeyboardFocusEvent(e)) return;
+          focusedSV.value = 1;
+        }}
+        onBlur={() => {
+          focusedSV.value = 0;
+          pressedSV.value = 0;
+          spacePressedRef.current = false;
+        }}
         {...interactionProps}
         android_ripple={{ color: 'transparent' }}
         role="switch"
