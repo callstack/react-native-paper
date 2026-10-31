@@ -75,14 +75,14 @@ export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationLight: T;
   materialLight?: Theme;
 }): {
-  LightTheme: NavigationTheme;
+  LightTheme: T;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationDark: T;
   materialDark?: Theme;
 }): {
-  DarkTheme: NavigationTheme;
+  DarkTheme: T;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<

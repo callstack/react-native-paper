@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import ListAccordion from '../List/ListAccordion';
@@ -94,6 +94,34 @@ it('renders list accordion with custom title and description styles', async () =
   expect(tree).toMatchSnapshot();
 });
 
+it('indents expanded accordion children without their own left/right when the accordion has a left icon', async () => {
+  await render(
+    <ListAccordion
+      left={(props) => <ListIcon {...props} icon="folder" />}
+      title="Accordion with indented children"
+      expanded
+    >
+      <ListItem title="Child item" testID="accordion-child" />
+    </ListAccordion>
+  );
+
+  expect(screen.getByTestId('accordion-child')).toHaveStyle({
+    paddingLeft: 40,
+  });
+});
+
+it('does not indent expanded accordion children when the accordion has no left icon', async () => {
+  await render(
+    <ListAccordion title="Accordion without left icon" expanded>
+      <ListItem title="Child item" testID="accordion-child" />
+    </ListAccordion>
+  );
+
+  expect(screen.getByTestId('accordion-child')).not.toHaveStyle({
+    paddingLeft: 40,
+  });
+});
+
 describe('ListAccordion', () => {
   it('should not throw an error when id={0}', async () => {
     const ListAccordionTest = () => (
@@ -105,6 +133,22 @@ describe('ListAccordion', () => {
     );
 
     await expect(render(<ListAccordionTest />)).resolves.toBeDefined();
+  });
+
+  it('expands the accordion with id={0} when it is the controlled expandedId', async () => {
+    await render(
+      <ListAccordionGroup expandedId={0} onAccordionPress={() => {}}>
+        <ListAccordion title="First accordion" id={0}>
+          <ListItem title="First accordion item" />
+        </ListAccordion>
+        <ListAccordion title="Second accordion" id={1}>
+          <ListItem title="Second accordion item" />
+        </ListAccordion>
+      </ListAccordionGroup>
+    );
+
+    expect(screen.getByText('First accordion item')).toBeOnTheScreen();
+    expect(screen.queryByText('Second accordion item')).not.toBeOnTheScreen();
   });
 
   it('should throw an error when id={""}', async () => {

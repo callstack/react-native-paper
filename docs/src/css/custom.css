@@ -231,7 +231,7 @@ a .badge .badge-text {
   overflow: visible;
 }
 
-.color-picker {
+table.color-picker {
   display: table;
   width: 100%;
   overflow: visible;

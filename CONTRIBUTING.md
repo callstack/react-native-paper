@@ -101,13 +101,34 @@ To preview the documentation, run `yarn docs dev` in the project root.
 
 ### Publishing a release
 
-We use [release-it](https://github.com/webpro/release-it) to automate our release. If you have publish access to the NPM package, run the following from the main branch to publish a new release:
+We use [release-it](https://github.com/webpro/release-it) to automate our release. If you have publish access to the NPM package, run the following from the main branch, always with the exact version you want to publish:
 
 ```sh
-yarn release
+yarn release 6.0.0-beta.0 --dry-run
+yarn release 6.0.0-beta.0
+```
+
+- Always pass the version. A bare `yarn release` applies the bump the commit history recommends, which can be a stable or major version you did not intend. npm never accepts the same version twice, so a wrong version cannot be taken back.
+- Start with the dry run. Before running it for real, check the compare range in the changelog heading it prints (for example `v6.0.0-alpha.0...v6.0.0-alpha.1`) and the `--tag` on the `npm publish` line.
+- The npm tag and the GitHub prerelease flag follow the version: `6.0.0-beta.0` is published under the `beta` tag as a GitHub prerelease, `6.0.0` under `latest` as a regular release.
+- The GitHub release is created as a draft. Once `npm publish` has succeeded, add the release notes and publish the draft:
+
+```sh
+gh release edit v6.0.0-beta.0 --notes-file notes.md --draft=false
 ```
 
 NOTE: You must have a `GITHUB_TOKEN` environment variable available. You can create a GitHub access token with the "repo" access [here](https://github.com/settings/tokens).
+
+You also need to be logged in to npm with an account that can publish the package: check with `npm whoami`, and run `npm login` if it fails.
+
+Publishing the GitHub release also deploys the example app via EAS, so keep the release a draft until npm has the package. If there were no native code changes, it'll ship an OTA update.
+
+Otherwise, for stable releases:
+
+- The Android build is automatically submitted to Google Play for review
+- The iOS build is automatically uploaded to App Store Connect and needs to be manually submitted for review
+
+Pre-release builds are shipped to the internal track on Google Play for Android and TestFlight for iOS. They shouldn't be submitted to the App Store for review, or the stable build with the same version would be rejected.
 
 ## Reporting issues
 
