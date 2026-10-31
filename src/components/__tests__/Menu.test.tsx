@@ -301,3 +301,53 @@ it('accounts for a keyboard that is already open when the menu mounts', async ()
   keyboardMetricsSpy.mockRestore();
   dimensionsSpy.mockRestore();
 });
+it('does not crash when Keyboard.metrics is unavailable (react-native-web)', async () => {
+  const testID = 'no-metrics-menu';
+  const original = Keyboard.metrics;
+  // @ts-expect-error simulate react-native-web, where metrics doesn't exist
+  Keyboard.metrics = undefined;
+
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={<Button mode="outlined">Open menu</Button>}
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  try {
+    const { rerender, toJSON } = await render(makeMenu(false));
+
+    await act(async () => {
+      await rerender(makeMenu(true));
+      await Promise.resolve();
+    });
+
+    await waitFor(() => {
+      const json = JSON.stringify(toJSON());
+      expect(json).toContain('"left":100');
+      expect(json).toContain('"top":100');
+    });
+  } finally {
+    Keyboard.metrics = original;
+    measureSpy.mockRestore();
+    dimensionsSpy.mockRestore();
+  }
+});
