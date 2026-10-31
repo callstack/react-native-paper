@@ -118,7 +118,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const WINDOW_LAYOUT = Dimensions.get('window');
 
 const getKeyboardHeight = (fallback: number) =>
-  Keyboard.metrics()?.height ?? fallback;
+  Keyboard.metrics?.()?.height ?? fallback;
 
 const DEFAULT_ELEVATION: Elevation = 2;
 const DEFAULT_MODE = 'elevated';
