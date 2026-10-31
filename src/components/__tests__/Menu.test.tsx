@@ -1,3 +1,6 @@
+import { Dimensions, Keyboard, StyleSheet, View } from 'react-native';
+
+import { expect, it, jest } from '@jest/globals';
 import { Dimensions, Platform, StyleSheet, View } from 'react-native';
 
 import {
@@ -340,4 +343,121 @@ it('renders menu with mode "flat"', async () => {
 
   expect(styles).not.toHaveProperty('shadowColor');
   expect(styles).not.toHaveProperty('shadowOpacity');
+});
+
+it('accounts for a keyboard that is already open when the menu mounts', async () => {
+  const testID = 'keyboard-aware-menu';
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const keyboardMetricsSpy = jest.spyOn(Keyboard, 'metrics').mockReturnValue({
+    screenX: 0,
+    screenY: 500,
+    width: 400,
+    height: 300,
+  });
+
+  let measureCalls = 0;
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => {
+      measureCalls += 1;
+      if (measureCalls % 2 === 1) {
+        // Menu content is tall enough to overflow the remaining window.
+        fn(100, 100, 200, 400);
+      } else {
+        fn(100, 100, 80, 32);
+      }
+    });
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={
+            <Button mode="outlined" testID="anchor">
+              Open menu
+            </Button>
+          }
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+          <Menu.Item onPress={jest.fn()} title="Redo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  const { rerender } = await render(makeMenu(false));
+
+  await act(async () => {
+    await rerender(makeMenu(true));
+    await Promise.resolve();
+  });
+
+  await waitFor(() => {
+    // eslint-disable-next-line no-restricted-syntax -- layout height is not otherwise exposed.
+    const styles = StyleSheet.flatten(screen.getByTestId(testID).props.style);
+    // Available height is window (800) minus keyboard (300) minus top (100) minus SCREEN_INDENT (8).
+    expect(styles).toEqual(expect.objectContaining({ height: 392 }));
+  });
+
+  measureSpy.mockRestore();
+  keyboardMetricsSpy.mockRestore();
+  dimensionsSpy.mockRestore();
+});
+it('does not crash when Keyboard.metrics is unavailable (react-native-web)', async () => {
+  const testID = 'no-metrics-menu';
+  const original = Keyboard.metrics;
+  // @ts-expect-error simulate react-native-web, where metrics doesn't exist
+  Keyboard.metrics = undefined;
+
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={<Button mode="outlined">Open menu</Button>}
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  try {
+    const { rerender, toJSON } = await render(makeMenu(false));
+
+    await act(async () => {
+      await rerender(makeMenu(true));
+      await Promise.resolve();
+    });
+
+    await waitFor(() => {
+      const json = JSON.stringify(toJSON());
+      expect(json).toContain('"left":100');
+      expect(json).toContain('"top":100');
+    });
+  } finally {
+    Keyboard.metrics = original;
+    measureSpy.mockRestore();
+    dimensionsSpy.mockRestore();
+  }
 });
