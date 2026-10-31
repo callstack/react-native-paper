@@ -4,8 +4,7 @@ import type { GestureResponderEvent } from 'react-native';
 import { describe, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
-import { SettingsContext } from '../../core/settings';
-import { render, screen } from '../../test-utils';
+import { act, fireEvent, render, screen } from '../../test-utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
 describe('TouchableRipple', () => {
@@ -45,33 +44,73 @@ describe('TouchableRipple', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('triggers onPress when unstable_pressDelay is provided', async () => {
+  const createResponderEvent = () => ({
+    persist: () => {},
+    nativeEvent: { timestamp: Date.now() },
+    currentTarget: {
+      measure: (callback: any) => {
+        callback(0, 0, 100, 100, 0, 0);
+      },
+    },
+  });
+
+  it('suppresses onPressIn when touch is terminated before unstable_pressDelay', async () => {
+    const onPressIn = jest.fn();
     const onPress = jest.fn<(event: GestureResponderEvent) => void>();
+
     await render(
-      <TouchableRipple unstable_pressDelay={100} onPress={onPress}>
+      <TouchableRipple
+        testID="delay-ripple"
+        unstable_pressDelay={100}
+        onPressIn={onPressIn}
+        onPress={onPress}
+      >
         <Text>Button</Text>
       </TouchableRipple>
     );
 
-    await userEvent.press(screen.getByText('Button'));
+    const button = screen.getByTestId('delay-ripple');
 
-    expect(onPress).toHaveBeenCalledTimes(1);
+    await fireEvent(button, 'responderGrant', createResponderEvent());
+    await act(() => {
+      jest.advanceTimersByTime(50);
+    });
+    await fireEvent(button, 'responderTerminate', createResponderEvent());
+    await act(() => {
+      jest.advanceTimersByTime(100);
+    });
+
+    expect(onPressIn).not.toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('triggers onPress when ripplePressDelay is provided in SettingsContext', async () => {
+  it('triggers onPressIn after unstable_pressDelay when touch is not terminated', async () => {
+    const onPressIn = jest.fn();
     const onPress = jest.fn<(event: GestureResponderEvent) => void>();
+
     await render(
-      <SettingsContext.Provider
-        value={{ rippleEffectEnabled: true, ripplePressDelay: 80 }}
+      <TouchableRipple
+        testID="delay-ripple"
+        unstable_pressDelay={100}
+        onPressIn={onPressIn}
+        onPress={onPress}
       >
-        <TouchableRipple onPress={onPress}>
-          <Text>Button</Text>
-        </TouchableRipple>
-      </SettingsContext.Provider>
+        <Text>Button</Text>
+      </TouchableRipple>
     );
 
-    await userEvent.press(screen.getByText('Button'));
+    const button = screen.getByTestId('delay-ripple');
 
+    await fireEvent(button, 'responderGrant', createResponderEvent());
+    expect(onPressIn).not.toHaveBeenCalled();
+
+    await act(() => {
+      jest.advanceTimersByTime(100);
+    });
+
+    expect(onPressIn).toHaveBeenCalledTimes(1);
+
+    await fireEvent(button, 'responderRelease', createResponderEvent());
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 

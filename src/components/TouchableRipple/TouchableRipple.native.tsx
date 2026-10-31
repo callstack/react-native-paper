@@ -50,8 +50,7 @@ const TouchableRipple = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { rippleEffectEnabled, ripplePressDelay } =
-    React.useContext<Settings>(SettingsContext);
+  const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
 
@@ -91,7 +90,6 @@ const TouchableRipple = ({
     return (
       <Pressable
         {...rest}
-        unstable_pressDelay={rest.unstable_pressDelay ?? ripplePressDelay}
         ref={ref}
         disabled={disabled}
         style={[useForeground && styles.overflowHidden, style]}
@@ -105,7 +103,6 @@ const TouchableRipple = ({
   return (
     <Pressable
       {...rest}
-      unstable_pressDelay={rest.unstable_pressDelay ?? ripplePressDelay}
       ref={ref}
       disabled={disabled}
       style={[borderless && styles.overflowHidden, style]}

@@ -111,7 +111,9 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   delayLongPress?: number;
   /**
-   * Delay in ms, from the start of the touch, before the press is engaged and ripple is triggered.
+   * Delay in ms, from the start of the touch, before the press feedback (ripple) is shown.
+   * Quick taps shorter than this delay will still fire `onPress` but might not show the ripple effect.
+   * Recommended values for buttons in scrollable lists are between 50ms and 100ms.
    */
   unstable_pressDelay?: number;
   /**

@@ -125,8 +125,7 @@ const TouchableRipple = ({
     typeof calculatedRippleColor === 'string'
       ? color(calculatedRippleColor).fade(0.5).rgb().string()
       : calculatedRippleColor;
-  const { rippleEffectEnabled, ripplePressDelay } =
-    React.useContext<Settings>(SettingsContext);
+  const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
 
@@ -277,7 +276,6 @@ const TouchableRipple = ({
   return (
     <Pressable
       {...rest}
-      unstable_pressDelay={rest.unstable_pressDelay ?? ripplePressDelay}
       ref={ref}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}

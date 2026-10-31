@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { describe, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { act, fireEvent, render, screen } from '../../test-utils';
 import { pink500, white } from '../../theme/colors';
 import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -98,16 +98,73 @@ it('renders active button if only onLongPress handler is passed', async () => {
   expect(screen.getByTestId('active-button')).toBeEnabled();
 });
 
-it('renders button with unstable_pressDelay and triggers onPress', async () => {
+const createResponderEvent = () => ({
+  persist: () => {},
+  nativeEvent: { timestamp: Date.now() },
+  currentTarget: {
+    measure: (callback: any) => {
+      callback(0, 0, 100, 100, 0, 0);
+    },
+  },
+});
+
+it('suppresses onPressIn when touch is terminated before unstable_pressDelay', async () => {
+  const onPressIn = jest.fn();
   const onPress = jest.fn();
 
   await render(
-    <Button testID="delay-button" unstable_pressDelay={100} onPress={onPress}>
+    <Button
+      testID="delay-button"
+      unstable_pressDelay={100}
+      onPressIn={onPressIn}
+      onPress={onPress}
+    >
       Delay Button
     </Button>
   );
 
-  await userEvent.press(screen.getByTestId('delay-button'));
+  const button = screen.getByTestId('delay-button');
+
+  await fireEvent(button, 'responderGrant', createResponderEvent());
+  await act(() => {
+    jest.advanceTimersByTime(50);
+  });
+  await fireEvent(button, 'responderTerminate', createResponderEvent());
+  await act(() => {
+    jest.advanceTimersByTime(100);
+  });
+
+  expect(onPressIn).not.toHaveBeenCalled();
+  expect(onPress).not.toHaveBeenCalled();
+});
+
+it('triggers onPressIn after unstable_pressDelay when touch is not terminated', async () => {
+  const onPressIn = jest.fn();
+  const onPress = jest.fn();
+
+  await render(
+    <Button
+      testID="delay-button"
+      unstable_pressDelay={100}
+      onPressIn={onPressIn}
+      onPress={onPress}
+    >
+      Delay Button
+    </Button>
+  );
+
+  const button = screen.getByTestId('delay-button');
+
+  await fireEvent(button, 'responderGrant', createResponderEvent());
+  expect(onPressIn).not.toHaveBeenCalled();
+
+  await act(() => {
+    jest.advanceTimersByTime(100);
+  });
+
+  expect(onPressIn).toHaveBeenCalledTimes(1);
+
+  await fireEvent(button, 'responderRelease', createResponderEvent());
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
