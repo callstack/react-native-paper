@@ -9,11 +9,15 @@ import Tabs from '@docs/components/Tabs';
 
 ## Installation
 
+React Native Paper 6.x requires React 19 and React Native's New Architecture.
+
 Open a Terminal in your project's folder and install the library:
 
 ```bash npm2yarn
-npm install react-native-paper
+npm install react-native-paper@alpha
 ```
+
+React Native Paper 6.x is a prerelease published under the npm `alpha` tag, and `npm install react-native-paper` without the tag still installs 5.x.
 
 React Native Paper uses [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area, [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/) and [react-native-worklets](https://docs.swmansion.com/react-native-worklets/) for animations.
 
@@ -32,7 +36,13 @@ Minimum requirements:
 
 Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
 
-If you use Expo, you don't need to install vector icons - those are the part of the expo package. However, if you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
+You also need to install [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons), because some components use these icons internally:
+
+```bash
+npx expo install @react-native-vector-icons/material-design-icons
+```
+
+If you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
 
   </TabItem>
   <TabItem value="community-cli" label="Community CLI">
@@ -168,16 +178,13 @@ Example:
 
 ```js
 import * as React from 'react';
-import {
-  MD3LightTheme as DefaultTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...DefaultTheme,
+  ...LightTheme,
   colors: {
-    ...DefaultTheme.colors,
+    ...LightTheme.colors,
     primary: 'tomato',
     secondary: 'yellow',
   },
