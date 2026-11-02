@@ -198,7 +198,7 @@ it('exposes the expanded state on the trigger', async () => {
     <FAB.Menu
       expanded={expanded}
       onDismiss={jest.fn()}
-      trigger={{ icon: 'plus', 'aria-label': 'Actions' }}
+      trigger={{ icon: 'plus', onPress: jest.fn(), 'aria-label': 'Actions' }}
       items={makeItems()}
     />
   );
