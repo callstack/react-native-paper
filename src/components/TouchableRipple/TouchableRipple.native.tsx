@@ -10,7 +10,7 @@ import {
   ColorValue,
 } from 'react-native';
 
-import type { PressableProps } from './Pressable';
+import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { Pressable } from './Pressable';
 import { getTouchableRippleColors } from './utils';
 import { Settings, SettingsContext } from '../../core/settings';
@@ -33,7 +33,9 @@ export type Props = PressableProps & {
   onPressOut?: (e: GestureResponderEvent) => void;
   rippleColor?: ColorValue;
   underlayColor?: string;
-  children: React.ReactNode;
+  children:
+    | ((state: PressableStateCallbackType) => React.ReactNode)
+    | React.ReactNode;
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
 };
@@ -73,6 +75,18 @@ const TouchableRipple = (
       underlayColor,
     });
 
+  const getStyle = (state: unknown) => [
+    borderless && styles.overflowHidden,
+    typeof style === 'function'
+      ? (style as (state: unknown) => StyleProp<ViewStyle>)(state)
+      : style,
+  ];
+
+  const getChildren = (state: unknown) =>
+    typeof children === 'function'
+      ? (children as (state: unknown) => React.ReactNode)(state)
+      : children;
+
   // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
   // https://github.com/facebook/react-native/issues/6480
   const useForeground =
@@ -94,24 +108,19 @@ const TouchableRipple = (
         {...rest}
         ref={ref}
         disabled={disabled}
-        style={[borderless && styles.overflowHidden, style]}
+        style={getStyle}
         android_ripple={androidRipple}
       >
-        {React.Children.only(children)}
+        {getChildren}
       </Pressable>
     );
   }
 
   return (
-    <Pressable
-      {...rest}
-      ref={ref}
-      disabled={disabled}
-      style={[borderless && styles.overflowHidden, style]}
-    >
-      {({ pressed }) => (
+    <Pressable {...rest} ref={ref} disabled={disabled} style={getStyle}>
+      {(state) => (
         <>
-          {pressed && rippleEffectEnabled && (
+          {state.pressed && rippleEffectEnabled && (
             <View
               testID="touchable-ripple-underlay"
               style={[
@@ -120,7 +129,7 @@ const TouchableRipple = (
               ]}
             />
           )}
-          {React.Children.only(children)}
+          {getChildren(state)}
         </>
       )}
     </Pressable>
