@@ -164,7 +164,7 @@ html.dark .icons-list-searchbar {
 
 html.dark .icons-list-searchbar:focus,
 html.dark .icons-list-searchbar:hover {
-  background-color: var(--rp-c-bg-mute, #35353a);
+  background-color: #38373d;
 }
 
 .icons-list-searchbar:focus-visible {
