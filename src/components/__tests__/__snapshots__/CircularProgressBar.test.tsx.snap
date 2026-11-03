@@ -1,0 +1,1971 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders animated circular progress bar and 70% progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": true,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 24,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 12,
+          "borderWidth": 2.4,
+          "height": 24,
+          "width": 24,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders animated circular progress bar with 0% progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": true,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 24,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 12,
+          "borderWidth": 2.4,
+          "height": 24,
+          "width": 24,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders animated circular progress bar with 40% progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": true,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 24,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 12,
+          "borderWidth": 2.4,
+          "height": 24,
+          "width": 24,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders animated circular progress bar with 100% progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": true,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 24,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 12,
+          "borderWidth": 2.4,
+          "height": 24,
+          "width": 24,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders circular progress bar with 0% progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": false,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 24,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 12,
+          "borderWidth": 2.4,
+          "height": 24,
+          "width": 24,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "-180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "-180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders circular progress bar with 40% progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": false,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 24,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 12,
+          "borderWidth": 2.4,
+          "height": 24,
+          "width": 24,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "-180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "-36deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders circular progress bar with 70% progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": false,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 24,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 12,
+          "borderWidth": 2.4,
+          "height": 24,
+          "width": 24,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "-108deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders circular progress bar with 100% progress 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": false,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 24,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 12,
+          "borderWidth": 2.4,
+          "height": 24,
+          "width": 24,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders colored animated circular progress bar 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": true,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 24,
+        "width": 24,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 12,
+          "borderWidth": 2.4,
+          "height": 24,
+          "width": 24,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "#FF0000",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 24,
+            "width": 24,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 24,
+              "overflow": "hidden",
+              "width": 12,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 24,
+                  "overflow": "hidden",
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "#FF0000",
+                    "borderRadius": 12,
+                    "borderWidth": 2.4,
+                    "height": 24,
+                    "width": 24,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders large animated circular progress bar 1`] = `
+<View
+  accessibilityRole="progressbar"
+  accessibilityState={
+    {
+      "busy": true,
+    }
+  }
+  accessible={true}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "height": 48,
+        "width": 48,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "borderColor": "rgba(231, 224, 236, 1)",
+          "borderRadius": 24,
+          "borderWidth": 4.8,
+          "height": 48,
+          "width": 48,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 48,
+            "width": 48,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 48,
+              "overflow": "hidden",
+              "width": 24,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 48,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 48,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 48,
+                  "overflow": "hidden",
+                  "width": 24,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 24,
+                    "borderWidth": 4.8,
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      style={
+        {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "rotate": "180deg",
+            },
+          ],
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "height": 48,
+            "width": 48,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 48,
+              "overflow": "hidden",
+              "width": 24,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 48,
+                "transform": [
+                  {
+                    "rotate": "180deg",
+                  },
+                ],
+                "width": 48,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 48,
+                  "overflow": "hidden",
+                  "width": 24,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "borderColor": "rgba(103, 80, 164, 1)",
+                    "borderRadius": 24,
+                    "borderWidth": 4.8,
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
