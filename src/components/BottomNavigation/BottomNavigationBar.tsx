@@ -671,12 +671,10 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               : 1;
 
             // Scale horizontally the outline pill
-            const outlineScale = focused
-              ? active.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.5, 1],
-                })
-              : 0;
+            const outlineScale = active.interpolate({
+              inputRange: [0, 1],
+              outputRange: focused ? [0.5, 1] : [0, 0],
+            });
 
             const badge = getBadge({ route });
 
@@ -740,7 +738,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       },
                     ]}
                   >
-                    {isV3 && focused && (
+                    {isV3 && (
                       <Animated.View
                         style={[
                           styles.outline,
