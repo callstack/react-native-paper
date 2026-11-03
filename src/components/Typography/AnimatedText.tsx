@@ -76,8 +76,6 @@ function AnimatedText({
       />
     );
   } else if (isNested) {
-    // Declare only what this component was asked for. Everything else, including
-    // the font and the color, inherits from the enclosing text.
     element = <Animated.Text ref={ref} {...rest} style={style} />;
   } else {
     const font = theme.fonts.bodyMedium;

@@ -115,7 +115,6 @@ const Text = ({
       // Context:   Some components have the built-in `Text` component with a predefined variant,
       //            that also accepts `children` as a `React.Node`. This can result in a situation,
       //            where another `Text` component is rendered within the built-in `Text` component.
-      //            By doing that, we assume that user doesn't want to consume pre-defined font properties.
       // Case one:  Nested `Text` has different `variant` that specified in parent. For example:
       //              <Chip>
       //                <Text variant="displayMedium">Nested</Text>
@@ -136,12 +135,8 @@ const Text = ({
       //              <Chip>
       //                <Text style={{fontSize: 30}}>Nested</Text>
       //              </Chip>
-      // Solution:  To address the following scenario, the code below lets the
-      //            children's style win over the parent's, while keeping the
-      //            parent's `variant` as the base. Dropping the base instead
-      //            would leave a parent wrapping an unstyled `Text` with no
-      //            typography at all, since there is no child style to take over
-      //            from it.
+      // Solution:  To address the following scenario, the code below overrides the
+      //            parent's style with children's style, on top of the parent's variant:
       if (!props.variant) {
         textStyle = [font, style, props.style];
       }
@@ -167,8 +162,6 @@ const Text = ({
       />
     );
   } else if (isNested) {
-    // Declare only what this `Text` was asked for. Everything else, including
-    // the font and the color, inherits from the enclosing `Text`.
     element = <NativeText {...rest} ref={root} style={style} />;
   } else {
     const font = theme.fonts.default;
