@@ -1,6 +1,4 @@
-import { Dimensions, Keyboard, StyleSheet, View } from 'react-native';
-
-import { expect, it, jest } from '@jest/globals';
+import { Dimensions, Keyboard, Platform, StyleSheet, View } from 'react-native';
 
 import {
   afterEach,
@@ -94,7 +92,6 @@ describe('web focus', () => {
   it('does not move focus when mounted hidden', async () => {
     await render(makeMenu(false));
     await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
-
     expect(focus).not.toHaveBeenCalled();
   });
 
@@ -102,19 +99,15 @@ describe('web focus', () => {
     const { rerender } = await render(makeMenu(false));
     await rerender(makeMenu(true));
     await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
-
     expect(focus).toHaveBeenCalledTimes(1);
-
     await rerender(makeMenu(false));
     await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
-
     expect(focus).toHaveBeenCalledTimes(2);
   });
 
   it('moves focus when mounted visible', async () => {
     await render(makeMenu(true));
     await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
-
     expect(focus).toHaveBeenCalledTimes(1);
   });
 });
