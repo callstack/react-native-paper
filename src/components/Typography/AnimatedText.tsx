@@ -68,12 +68,16 @@ function AnimatedText({
       <Animated.Text
         ref={ref}
         {...rest}
-        style={[
-          font,
-          styles.text,
-          { writingDirection, color: theme.colors.onSurface },
-          style,
-        ]}
+        style={
+          inheritsStyle
+            ? [font, style]
+            : [
+                font,
+                styles.text,
+                { writingDirection, color: theme.colors.onSurface },
+                style,
+              ]
+        }
       />
     );
   } else if (inheritsStyle) {

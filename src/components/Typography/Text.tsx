@@ -154,11 +154,15 @@ const Text = ({
     element = (
       <NativeText
         ref={root}
-        style={[
-          styles.text,
-          { writingDirection, color: theme.colors.onSurface },
-          textStyle,
-        ]}
+        style={
+          inheritsStyle
+            ? textStyle
+            : [
+                styles.text,
+                { writingDirection, color: theme.colors.onSurface },
+                textStyle,
+              ]
+        }
         {...rest}
       />
     );
