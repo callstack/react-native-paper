@@ -153,17 +153,15 @@ const RadioButtonAndroid = ({
               ]}
             >
               {checked ? (
-                <View style={[StyleSheet.absoluteFill, styles.radioContainer]}>
-                  <Animated.View
-                    style={[
-                      styles.dot,
-                      {
-                        backgroundColor: selectionControlColor,
-                        transform: [{ scale: radioAnim }],
-                      },
-                    ]}
-                  />
-                </View>
+                <Animated.View
+                  style={[
+                    styles.dot,
+                    {
+                      backgroundColor: selectionControlColor,
+                      transform: [{ scale: radioAnim }],
+                    },
+                  ]}
+                />
               ) : null}
             </Animated.View>
           </TouchableRipple>
@@ -179,11 +177,9 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
   },
-  radioContainer: {
+  radio: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  radio: {
     height: 20,
     width: 20,
     borderRadius: 10,
