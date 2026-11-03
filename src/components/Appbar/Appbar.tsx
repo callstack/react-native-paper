@@ -364,6 +364,10 @@ const styles = StyleSheet.create({
   columnContainer: {
     flexDirection: 'column',
     flex: 1,
+    // Stretch to the Appbar's fixed `modeAppbarHeight` instead of being sized
+    // to content. Without this the column can exceed the header height and the
+    // title gets clipped on iOS, where `Surface` renders a fixed-size layer.
+    alignSelf: 'stretch',
     paddingTop: 8,
   },
   centerAlignedContainer: {
