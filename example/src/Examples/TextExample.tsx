@@ -85,6 +85,12 @@ const TextExample = () => {
           Body Small
         </Text>
 
+        <PaperProvider theme={theme}>
+          <Text style={styles.text} variant="customVariant">
+            Custom Variant
+          </Text>
+        </PaperProvider>
+
         <Text style={styles.heading} variant="titleMedium">
           Nested text
         </Text>
@@ -105,12 +111,6 @@ const TextExample = () => {
         <Text style={[styles.text, styles.boldParent]} variant="headlineSmall">
           Bold parent, <Text>and the nested child inherits the weight</Text>
         </Text>
-
-        <PaperProvider theme={theme}>
-          <Text style={styles.text} variant="customVariant">
-            Custom Variant
-          </Text>
-        </PaperProvider>
       </View>
     </ScreenWrapper>
   );
