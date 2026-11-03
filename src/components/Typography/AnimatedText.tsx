@@ -49,7 +49,8 @@ function AnimatedText({
   const theme = useInternalTheme(themeOverrides);
 
   const { direction: writingDirection } = useLocale();
-  const isNested = React.useContext(NestedTextContext);
+  // Nested text inherits the parent's style unless it has its own theme
+  const inheritsStyle = React.useContext(NestedTextContext) && !themeOverrides;
 
   let element: React.ReactElement;
 
@@ -75,7 +76,7 @@ function AnimatedText({
         ]}
       />
     );
-  } else if (isNested) {
+  } else if (inheritsStyle) {
     element = <Animated.Text ref={ref} {...rest} style={style} />;
   } else {
     const font = theme.fonts.bodyMedium;

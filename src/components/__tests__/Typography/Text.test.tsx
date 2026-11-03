@@ -197,10 +197,37 @@ it('text nested inside another component inherits from the enclosing text', asyn
   });
 });
 
+it('nested text with its own theme uses the theme color', async () => {
+  const theme = { colors: { onSurface: 'green' } };
+
+  await render(
+    <Text variant="headlineSmall">
+      Parent{' '}
+      <Text testID="child-text" theme={theme}>
+        child
+      </Text>{' '}
+      <Text testID="variant-child-text" variant="bodyLarge" theme={theme}>
+        variant child
+      </Text>
+    </Text>
+  );
+
+  expect(screen.getByTestId('child-text')).toHaveStyle({ color: 'green' });
+  expect(screen.getByTestId('variant-child-text')).toHaveStyle({
+    ...LightTheme.fonts.bodyLarge,
+    color: 'green',
+  });
+});
+
 it('animated text uses its fallback font at the top level and nests like text', async () => {
+  const theme = { colors: { onSurface: 'green' } };
+
   await render(
     <AnimatedText testID="parent-text" style={{ color: parentColor }}>
-      Parent <AnimatedText testID="child-text">child</AnimatedText>
+      Parent <AnimatedText testID="child-text">child</AnimatedText>{' '}
+      <AnimatedText testID="theme-child-text" theme={theme}>
+        theme child
+      </AnimatedText>
     </AnimatedText>
   );
 
@@ -215,6 +242,9 @@ it('animated text uses its fallback font at the top level and nests like text', 
     fontFamily: undefined,
     fontSize: undefined,
     color: undefined,
+  });
+  expect(screen.getByTestId('theme-child-text')).toHaveStyle({
+    color: 'green',
   });
 });
 

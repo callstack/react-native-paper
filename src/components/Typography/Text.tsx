@@ -91,7 +91,8 @@ const Text = ({
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();
-  const isNested = React.useContext(NestedTextContext);
+  // Nested text inherits the parent's style unless it has its own theme
+  const inheritsStyle = React.useContext(NestedTextContext) && !initialTheme;
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
@@ -161,7 +162,7 @@ const Text = ({
         {...rest}
       />
     );
-  } else if (isNested) {
+  } else if (inheritsStyle) {
     element = <NativeText {...rest} ref={root} style={style} />;
   } else {
     const font = theme.fonts.default;
