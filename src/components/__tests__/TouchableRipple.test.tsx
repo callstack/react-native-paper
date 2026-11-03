@@ -114,6 +114,34 @@ describe('TouchableRipple', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it('triggers onPress for fast taps shorter than unstable_pressDelay', async () => {
+    const onPressIn = jest.fn();
+    const onPress = jest.fn<(event: GestureResponderEvent) => void>();
+
+    await render(
+      <TouchableRipple
+        testID="delay-ripple"
+        unstable_pressDelay={100}
+        onPressIn={onPressIn}
+        onPress={onPress}
+      >
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    const button = screen.getByTestId('delay-ripple');
+
+    await fireEvent(button, 'responderGrant', createResponderEvent());
+    await act(() => {
+      jest.advanceTimersByTime(60);
+    });
+    expect(onPressIn).not.toHaveBeenCalled();
+
+    await fireEvent(button, 'responderRelease', createResponderEvent());
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(onPressIn).toHaveBeenCalledTimes(1);
+  });
+
   describe('on iOS', () => {
     Platform.OS = 'ios';
 

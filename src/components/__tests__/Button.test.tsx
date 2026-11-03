@@ -168,6 +168,34 @@ it('triggers onPressIn after unstable_pressDelay when touch is not terminated', 
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
+it('triggers onPress for fast taps shorter than unstable_pressDelay', async () => {
+  const onPressIn = jest.fn();
+  const onPress = jest.fn();
+
+  await render(
+    <Button
+      testID="delay-button"
+      unstable_pressDelay={100}
+      onPressIn={onPressIn}
+      onPress={onPress}
+    >
+      Delay Button
+    </Button>
+  );
+
+  const button = screen.getByTestId('delay-button');
+
+  await fireEvent(button, 'responderGrant', createResponderEvent());
+  await act(() => {
+    jest.advanceTimersByTime(60);
+  });
+  expect(onPressIn).not.toHaveBeenCalled();
+
+  await fireEvent(button, 'responderRelease', createResponderEvent());
+  expect(onPress).toHaveBeenCalledTimes(1);
+  expect(onPressIn).toHaveBeenCalledTimes(1);
+});
+
 it('renders button with color', async () => {
   const tree = (
     await render(<Button textColor={pink500}>Custom Button</Button>)
