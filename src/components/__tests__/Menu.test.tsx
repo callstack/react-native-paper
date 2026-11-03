@@ -1,7 +1,6 @@
 import { Dimensions, Keyboard, StyleSheet, View } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
-import { Dimensions, Platform, StyleSheet, View } from 'react-native';
 
 import {
   afterEach,
