@@ -9,6 +9,7 @@ import {
 import { getAndroidSelectionControlColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import Icon, { IconSource } from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -41,6 +42,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * custom icon.
+   */
+  icon?: IconSource;
 };
 
 // From https://material.io/design/motion/speed.html#duration
@@ -59,6 +64,7 @@ const CheckboxAndroid = ({
   disabled,
   onPress,
   testID,
+  icon: customIcon,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -134,13 +140,17 @@ const CheckboxAndroid = ({
       theme={theme}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-        <MaterialCommunityIcon
-          allowFontScaling={false}
-          name={icon}
-          size={24}
-          color={selectionControlColor}
-          direction="ltr"
-        />
+        {customIcon ? (
+          <Icon source={customIcon} size={24} color={selectionControlColor} />
+        ) : (
+          <MaterialCommunityIcon
+            allowFontScaling={false}
+            name={icon}
+            size={24}
+            color={selectionControlColor}
+            direction="ltr"
+          />
+        )}
         <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
           <Animated.View
             style={[
