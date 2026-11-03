@@ -2,7 +2,7 @@ import type { ColorValue } from 'react-native';
 
 import { CheckboxTokens } from './tokens';
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 // MD3 Checkbox spec: https://m3.material.io/components/checkbox/specs
 
@@ -62,13 +62,9 @@ const getOutlineColor = ({
 
 const getIconColor = ({
   theme,
-  selected,
   disabled,
   error,
 }: SelectionState): ColorValue => {
-  if (!selected) {
-    return 'transparent';
-  }
   if (disabled) {
     return theme.colors[CheckboxTokens.disabledIconColor];
   }

@@ -9,6 +9,7 @@ import {
 import { Appbar } from 'react-native-paper';
 
 import ExampleList, { examples } from './ExampleList';
+import { colorThemes } from '../utils';
 
 const { TeamDetails, ...examplesWithoutParams } = examples;
 
@@ -16,7 +17,9 @@ type ExampleRouteName = keyof typeof examplesWithoutParams;
 
 const fromEntries = <Key extends PropertyKey, Value>(
   entries: Array<[Key, Value]>
-) => Object.fromEntries(entries) as Record<Key, Value>;
+) =>
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  Object.fromEntries(entries) as Record<Key, Value>;
 
 function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
   const drawerNavigation = useNavigation('Home');
@@ -50,6 +53,7 @@ const Root = createNativeStackNavigator({
       },
       linking: '',
     }),
+    /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
     ...fromEntries(
       (
         Object.entries(examplesWithoutParams) as [
@@ -67,6 +71,7 @@ const Root = createNativeStackNavigator({
         }),
       ])
     ),
+    /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
     TeamDetails: createNativeStackScreen({
       screen: TeamDetails,
       options: {
@@ -75,6 +80,11 @@ const Root = createNativeStackNavigator({
       linking: {
         path: 'team-details/:sourceColor?/:headerTitle?/:darkMode?',
         parse: {
+          sourceColor: (value) =>
+            value in colorThemes
+              ? // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+                (value as keyof typeof colorThemes)
+              : 'paper',
           darkMode: (value) => value === 'true',
         },
       },

@@ -9,13 +9,13 @@ import type {
 import SegmentedButtonItem from './SegmentedButtonItem';
 import { getDisabledSegmentedButtonStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 
 type ConditionalValue<T extends string = string> =
   | {
       /**
-       * Array of the currently selected segmented button values.
+       * Currently selected segmented button value or values.
        */
       value: T[];
       /**
@@ -29,7 +29,7 @@ type ConditionalValue<T extends string = string> =
     }
   | {
       /**
-       * Value of the currently selected segmented button.
+       * Currently selected segmented button value or values.
        */
       value: T;
       /**

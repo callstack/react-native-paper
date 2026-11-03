@@ -9,13 +9,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Animated, {
-  Easing,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { cubicBezier, type CSSStyle } from 'react-native-reanimated';
 
 import { CheckboxTokens } from './tokens';
 import { getSelectionVisualState } from './utils';
@@ -23,11 +17,15 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
-export type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Status of checkbox.
    */
@@ -123,7 +121,9 @@ const Checkbox = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+
   const reduceMotion = useReduceMotion();
+
   const { direction } = useLocale();
   // Web (react-native-web) doesn't auto-mirror layout, so flip the mask
   // anchor manually for RTL. Native handles it via `I18nManager`.
@@ -131,56 +131,6 @@ const Checkbox = ({
   const [focused, setFocused] = React.useState(false);
 
   const selected = status === 'checked' || status === 'indeterminate';
-
-  const reanimatedReduceMotion = reduceMotion
-    ? ReduceMotion.Always
-    : ReduceMotion.Never;
-
-  const fillTimingConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration.short2,
-      easing: Easing.bezier(...theme.motion.easing.standard),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [
-      theme.motion.duration.short2,
-      theme.motion.easing.standard,
-      reanimatedReduceMotion,
-    ]
-  );
-  const checkTimingConfig = React.useMemo(
-    () => ({
-      duration: theme.motion.duration.short3,
-      easing: Easing.bezier(...theme.motion.easing.standard),
-      reduceMotion: reanimatedReduceMotion,
-    }),
-    [
-      theme.motion.duration.short3,
-      theme.motion.easing.standard,
-      reanimatedReduceMotion,
-    ]
-  );
-
-  // 0 = unselected (outline only), 1 = selected (filled + drawn icon).
-  const fillProgress = useSharedValue(selected ? 1 : 0);
-  const checkProgress = useSharedValue(selected ? 1 : 0);
-  const firstRender = React.useRef(true);
-
-  React.useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-    const target = selected ? 1 : 0;
-    fillProgress.value = withTiming(target, fillTimingConfig);
-    checkProgress.value = withTiming(target, checkTimingConfig);
-  }, [
-    selected,
-    fillProgress,
-    checkProgress,
-    fillTimingConfig,
-    checkTimingConfig,
-  ]);
 
   // Visual state (colors + opacity) for the static layers. `hovered` /
   // `pressed` aren't tracked here — `TouchableRipple` owns the press ripple
@@ -194,19 +144,45 @@ const Checkbox = ({
     customUncheckedColor: uncheckedColor,
   });
 
-  // Outline fades out as fill fades in (and vice versa).
-  const outlineAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: 1 - fillProgress.value,
-  }));
+  const fillTransitionTimingFunction = cubicBezier(
+    ...theme.motion.easing.standard
+  );
 
-  const fillAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: fillProgress.value,
-  }));
+  const fillTransitionDuration = reduceMotion
+    ? 0
+    : theme.motion.duration.short2;
 
-  const maskAnimatedStyle = useAnimatedStyle(() => ({
-    width: checkProgress.value * CONTAINER_SIZE,
-    opacity: checkProgress.value,
-  }));
+  const checkTransitionDuration = reduceMotion
+    ? 0
+    : theme.motion.duration.short3;
+
+  const checkTransitionTimingFunction = cubicBezier(
+    ...theme.motion.easing.standard
+  );
+
+  const outlineStyle: CSSStyle<ViewStyle> = {
+    borderColor: visual.outlineColor,
+    opacity: selected ? 0 : 1,
+    transitionDuration: fillTransitionDuration,
+    transitionProperty: ['opacity'],
+    transitionTimingFunction: fillTransitionTimingFunction,
+  };
+
+  const fillStyle: CSSStyle<ViewStyle> = {
+    backgroundColor: visual.containerColor,
+    opacity: selected ? 1 : 0,
+    transitionDuration: fillTransitionDuration,
+    transitionProperty: ['opacity'],
+    transitionTimingFunction: fillTransitionTimingFunction,
+  };
+
+  const maskStyle: CSSStyle<ViewStyle> = {
+    width: selected ? CONTAINER_SIZE : 0,
+    opacity: selected ? 1 : 0,
+    transitionDuration: checkTransitionDuration,
+    transitionProperty: ['width', 'opacity'],
+    transitionTimingFunction: checkTransitionTimingFunction,
+  };
 
   // Remember the last drawn glyph so the reveal-mask can finish collapsing
   // when `selected` flips back to false. Computed via the "derive state
@@ -239,6 +215,9 @@ const Checkbox = ({
     setFocused(false);
   }, []);
 
+  const checked: boolean | 'mixed' =
+    status === 'indeterminate' ? 'mixed' : status === 'checked';
+
   // When `accessible={false}` is passed (typically by `CheckboxItem`, which
   // owns the a11y tree for the wrapped row), suppress our own a11y role
   // and state so the same logical control doesn't expose two `checked`
@@ -249,9 +228,7 @@ const Checkbox = ({
       : {
           role: 'checkbox' as const,
           'aria-disabled': !!disabled,
-          'aria-checked': (status === 'indeterminate'
-            ? 'mixed'
-            : status === 'checked') as boolean | 'mixed',
+          'aria-checked': checked,
           'aria-live': 'polite' as const,
         };
 
@@ -282,93 +259,50 @@ const Checkbox = ({
         <View style={[styles.container, { opacity: visual.containerOpacity }]}>
           <Animated.View
             pointerEvents="none"
-            style={[
-              styles.outline,
-              { borderColor: visual.outlineColor },
-              outlineAnimatedStyle,
-            ]}
+            style={[styles.outline, outlineStyle]}
           />
           <Animated.View
             pointerEvents="none"
-            style={[
-              styles.fill,
-              { backgroundColor: visual.containerColor },
-              fillAnimatedStyle,
-            ]}
+            style={[styles.fill, fillStyle]}
           />
-          {showIndeterminate ? (
-            <Animated.View
-              style={[
-                flipMaskForWebRTL
-                  ? styles.checkmarkMaskWebRTL
-                  : styles.checkmarkMask,
-                maskAnimatedStyle,
-              ]}
-            >
+          <Animated.View
+            style={[
+              flipMaskForWebRTL
+                ? styles.checkmarkMaskWebRTL
+                : styles.checkmarkMask,
+              maskStyle,
+            ]}
+          >
+            {showIndeterminate ? (
               <View style={styles.checkmarkContent}>
                 <View
                   style={[styles.dash, { backgroundColor: visual.iconColor }]}
                 />
               </View>
-            </Animated.View>
-          ) : (
-            <Checkmark
-              color={visual.iconColor}
-              maskAnimatedStyle={maskAnimatedStyle}
-              flipMaskForWebRTL={flipMaskForWebRTL}
-              isRTL={direction === 'rtl'}
-              autoSwapsBorders={Platform.OS !== 'web'}
-            />
-          )}
+            ) : (
+              <View style={styles.checkmarkContent}>
+                <View
+                  style={[
+                    styles.checkmarkGlyph,
+                    { borderColor: visual.iconColor },
+                    // Native platforms auto-swap border sides in RTL, so
+                    // pre-swap them to preserve the checkmark orientation.
+                    direction === 'rtl' && Platform.OS !== 'web'
+                      ? styles.checkmarkGlyphRTL
+                      : null,
+                  ]}
+                />
+              </View>
+            )}
+          </Animated.View>
         </View>
       </View>
     </TouchableRipple>
   );
 };
 
-/**
- * Reveal-mask checkmark: an L-shape (borderLeftWidth + borderBottomWidth
- * rotated -45deg) inside a directional-anchored View whose width animates
- * 0 → CONTAINER_SIZE so the stroke "draws in" along the writing direction.
- */
-const Checkmark = ({
-  color,
-  maskAnimatedStyle,
-  flipMaskForWebRTL,
-  isRTL,
-  autoSwapsBorders,
-}: {
-  color: ColorValue;
-  maskAnimatedStyle: ReturnType<typeof useAnimatedStyle>;
-  flipMaskForWebRTL: boolean;
-  isRTL: boolean;
-  // True on platforms whose layout engine auto-swaps `borderLeftWidth`
-  // ↔ `borderRightWidth` in RTL (Android, iOS); false on web (RNW).
-  autoSwapsBorders: boolean;
-}) => {
-  return (
-    <Animated.View
-      style={[
-        flipMaskForWebRTL ? styles.checkmarkMaskWebRTL : styles.checkmarkMask,
-        maskAnimatedStyle,
-      ]}
-    >
-      <View style={styles.checkmarkContent}>
-        <View
-          style={[
-            styles.checkmarkGlyph,
-            { borderColor: color },
-            // On platforms that auto-swap borders in RTL, pre-swap them
-            // here so the swap brings them back to the LTR orientation.
-            isRTL && autoSwapsBorders ? styles.checkmarkGlyphRTL : null,
-          ]}
-        />
-      </View>
-    </Animated.View>
-  );
-};
-
 // Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({

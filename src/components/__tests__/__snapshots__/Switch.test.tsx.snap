@@ -96,6 +96,7 @@ exports[`Switch render renders disabled off 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -124,6 +125,7 @@ exports[`Switch render renders disabled off 1`] = `
     }
   />
   <View
+    collapsable={false}
     style={
       [
         {
@@ -166,6 +168,7 @@ exports[`Switch render renders disabled off 1`] = `
       }
     />
     <View
+      collapsable={false}
       style={
         [
           {
@@ -187,6 +190,7 @@ exports[`Switch render renders disabled off 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -287,6 +291,7 @@ exports[`Switch render renders disabled on 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -315,6 +320,7 @@ exports[`Switch render renders disabled on 1`] = `
     }
   />
   <View
+    collapsable={false}
     style={
       [
         {
@@ -357,6 +363,7 @@ exports[`Switch render renders disabled on 1`] = `
       }
     />
     <View
+      collapsable={false}
       style={
         [
           {
@@ -378,6 +385,7 @@ exports[`Switch render renders disabled on 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -498,6 +506,7 @@ exports[`Switch render renders off 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -526,6 +535,7 @@ exports[`Switch render renders off 1`] = `
     }
   />
   <View
+    collapsable={false}
     style={
       [
         {
@@ -551,6 +561,7 @@ exports[`Switch render renders off 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         [
           {
@@ -572,6 +583,7 @@ exports[`Switch render renders off 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -672,6 +684,7 @@ exports[`Switch render renders on 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -700,6 +713,7 @@ exports[`Switch render renders on 1`] = `
     }
   />
   <View
+    collapsable={false}
     style={
       [
         {
@@ -725,6 +739,7 @@ exports[`Switch render renders on 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         [
           {
@@ -746,6 +761,7 @@ exports[`Switch render renders on 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -846,6 +862,7 @@ exports[`Switch render renders with checked icon 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -874,6 +891,7 @@ exports[`Switch render renders with checked icon 1`] = `
     }
   />
   <View
+    collapsable={false}
     style={
       [
         {
@@ -899,6 +917,7 @@ exports[`Switch render renders with checked icon 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         [
           {
@@ -920,6 +939,7 @@ exports[`Switch render renders with checked icon 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -990,6 +1010,7 @@ exports[`Switch render renders with checked icon 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1090,6 +1111,7 @@ exports[`Switch render renders with per-state icons 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1118,6 +1140,7 @@ exports[`Switch render renders with per-state icons 1`] = `
     }
   />
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1143,6 +1166,7 @@ exports[`Switch render renders with per-state icons 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         [
           {
@@ -1164,6 +1188,7 @@ exports[`Switch render renders with per-state icons 1`] = `
     />
   </View>
   <View
+    collapsable={false}
     style={
       [
         {
@@ -1234,6 +1259,7 @@ exports[`Switch render renders with per-state icons 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       [
         {

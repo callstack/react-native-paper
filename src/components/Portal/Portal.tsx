@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import PortalConsumer from './PortalConsumer';
 import PortalHost, { PortalContext } from './PortalHost';
-import type { PortalMethods } from './PortalHost';
-import { LocaleContext, LocaleProvider } from '../../core/locale';
+import { LocaleProvider, useLocale } from '../../core/locale';
 import {
-  Consumer as SettingsConsumer,
+  SettingsContext,
   Provider as SettingsProvider,
 } from '../../core/settings';
-import { ThemeProvider, withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { ThemeProvider, useInternalTheme } from '../../core/theming';
+import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props = {
   /**
@@ -17,9 +17,15 @@ export type Props = {
    */
   children: React.ReactNode;
   /**
+   * Whether the portal hides items below it from screen readers and focus order.
+   *
+   * Ensure it's set to true only when the modal is open.
+   */
+  modal?: boolean;
+  /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -42,35 +48,27 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-class Portal extends React.Component<Props> {
-  // @component ./PortalHost.tsx
-  static Host = PortalHost;
+const Portal = ({ children, modal, theme: themeOverrides }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
+  const settings = React.useContext(SettingsContext);
+  const manager = React.useContext(PortalContext);
+  const reduceMotion = React.useContext(ReduceMotionContext);
 
-  render() {
-    const { children, theme } = this.props;
+  return (
+    <PortalConsumer manager={manager} modal={modal}>
+      <SettingsProvider value={settings}>
+        <ReduceMotionContext.Provider value={reduceMotion}>
+          <LocaleProvider direction={direction}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </LocaleProvider>
+        </ReduceMotionContext.Provider>
+      </SettingsProvider>
+    </PortalConsumer>
+  );
+};
 
-    return (
-      <LocaleContext.Consumer>
-        {(locale) => (
-          <SettingsConsumer>
-            {(settings) => (
-              <PortalContext.Consumer>
-                {(manager) => (
-                  <PortalConsumer manager={manager as PortalMethods}>
-                    <SettingsProvider value={settings}>
-                      <LocaleProvider direction={locale!.direction}>
-                        <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                      </LocaleProvider>
-                    </SettingsProvider>
-                  </PortalConsumer>
-                )}
-              </PortalContext.Consumer>
-            )}
-          </SettingsConsumer>
-        )}
-      </LocaleContext.Consumer>
-    );
-  }
-}
+// @component ./PortalHost.tsx
+Portal.Host = PortalHost;
 
-export default withInternalTheme(Portal);
+export default Portal;

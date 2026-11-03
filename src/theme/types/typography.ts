@@ -37,7 +37,22 @@ export type TypescaleKey =
   | 'labelSmall'
   | 'bodyLarge'
   | 'bodyMedium'
-  | 'bodySmall';
+  | 'bodySmall'
+  | 'displayLargeEmphasized'
+  | 'displayMediumEmphasized'
+  | 'displaySmallEmphasized'
+  | 'headlineLargeEmphasized'
+  | 'headlineMediumEmphasized'
+  | 'headlineSmallEmphasized'
+  | 'titleLargeEmphasized'
+  | 'titleMediumEmphasized'
+  | 'titleSmallEmphasized'
+  | 'labelLargeEmphasized'
+  | 'labelMediumEmphasized'
+  | 'labelSmallEmphasized'
+  | 'bodyLargeEmphasized'
+  | 'bodyMediumEmphasized'
+  | 'bodySmallEmphasized';
 
 export type TypescaleStyle = {
   fontFamily: string;

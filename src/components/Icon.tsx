@@ -7,7 +7,7 @@ import { accessibilityProps } from './MaterialCommunityIcon';
 import { useLocale } from '../core/locale';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import type { ThemeProp } from '../theme/types';
 
 type IconSourceBase = string | ImageSourcePropType;
 

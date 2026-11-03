@@ -1,18 +1,18 @@
 import type { StyleProp, TextProps, TextStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-import Animated from 'react-native-reanimated';
+import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
 import { cornerFull } from '../theme/tokens/sys/shape';
-import type { ThemeProp } from '../types';
+import type { ThemeProp } from '../theme/types';
 
 const SMALL_SIZE = 6;
 const LARGE_SIZE = 16;
 const MAX_LARGE_WIDTH = 36;
 const LARGE_PADDING = 4;
 
-export type Props = TextProps & {
+export type Props = Omit<TextProps, 'style'> & {
   /**
    * Whether the badge is visible
    */
@@ -21,7 +21,7 @@ export type Props = TextProps & {
    * Content of the `Badge`.
    */
   children?: string | number;
-  style?: StyleProp<TextStyle>;
+  style?: StyleProp<AnimatedStyle<TextStyle>>;
   /**
    * @optional
    */

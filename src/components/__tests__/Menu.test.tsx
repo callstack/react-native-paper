@@ -1,20 +1,115 @@
-import { Animated, Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, Keyboard, Platform, StyleSheet, View } from 'react-native';
 
-import { expect, it, jest } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
 
-import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
-import type { Elevation } from '../../types';
+import { LightTheme } from '../../theme/schemes';
+import type { Elevation } from '../../theme/types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
 
-const styles = StyleSheet.create({
-  contentStyle: {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-  },
+describe('web focus', () => {
+  const PAST_ANIMATION_MS = 300;
+  const focus = jest.fn();
+  const originalPlatform = Platform.OS;
+  const originalHTMLElement = Object.getOwnPropertyDescriptor(
+    globalThis,
+    'HTMLElement'
+  );
+  const originalDocument = Object.getOwnPropertyDescriptor(
+    globalThis,
+    'document'
+  );
+  const originalQuerySelector = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'querySelector'
+  );
+  const originalMeasureInWindow = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'measureInWindow'
+  );
+
+  beforeEach(() => {
+    Platform.OS = 'web';
+    focus.mockClear();
+    // Native View refs stand in for DOM elements in the native test renderer.
+    Object.defineProperty(globalThis, 'HTMLElement', {
+      configurable: true,
+      value: View,
+    });
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: {
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+      },
+    });
+    Object.defineProperty(View.prototype, 'querySelector', {
+      configurable: true,
+      value: () => ({ focus }),
+    });
+    const measureInWindow: View['measureInWindow'] = (fn) =>
+      fn(100, 100, 80, 32);
+    Object.defineProperty(View.prototype, 'measureInWindow', {
+      configurable: true,
+      value: measureInWindow,
+    });
+  });
+
+  afterEach(() => {
+    Platform.OS = originalPlatform;
+    for (const [target, key, descriptor] of [
+      [globalThis, 'HTMLElement', originalHTMLElement],
+      [globalThis, 'document', originalDocument],
+      [View.prototype, 'querySelector', originalQuerySelector],
+      [View.prototype, 'measureInWindow', originalMeasureInWindow],
+    ] as const) {
+      if (descriptor) {
+        Object.defineProperty(target, key, descriptor);
+      } else {
+        Reflect.deleteProperty(target, key);
+      }
+    }
+  });
+
+  const makeMenu = (visible: boolean) => (
+    <Portal.Host>
+      <Menu visible={visible} anchor={<Button>Open menu</Button>}>
+        <Menu.Item title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  it('does not move focus when mounted hidden', async () => {
+    await render(makeMenu(false));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    expect(focus).not.toHaveBeenCalled();
+  });
+
+  it('moves focus when opened and restores it when closed', async () => {
+    const { rerender } = await render(makeMenu(false));
+    await rerender(makeMenu(true));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    expect(focus).toHaveBeenCalledTimes(1);
+    await rerender(makeMenu(false));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    expect(focus).toHaveBeenCalledTimes(2);
+  });
+
+  it('moves focus when mounted visible', async () => {
+    await render(makeMenu(true));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    expect(focus).toHaveBeenCalledTimes(1);
+  });
 });
 
 it('renders visible menu', async () => {
@@ -55,29 +150,11 @@ it('renders not visible menu', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders menu with content styles', async () => {
-  const tree = (
-    await render(
-      <Portal.Host>
-        <Menu
-          visible
-          onDismiss={jest.fn()}
-          anchor={<Button mode="outlined">Open menu</Button>}
-          contentStyle={styles.contentStyle}
-        >
-          <Menu.Item onPress={jest.fn()} title="Undo" />
-          <Menu.Item onPress={jest.fn()} title="Redo" />
-        </Menu>
-      </Portal.Host>
-    )
-  ).toJSON();
+const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
-  expect(tree).toMatchSnapshot();
-});
-
-([0, 1, 2, 3, 4, 5] as Elevation[]).forEach((elevation) =>
+elevations.forEach((elevation) =>
   it(`renders menu with background color based on elevation value = ${elevation}`, async () => {
-    const theme = getTheme();
+    const testID = 'menu-with-elevation';
 
     await render(
       <Portal.Host>
@@ -86,6 +163,8 @@ it('renders menu with content styles', async () => {
           onDismiss={jest.fn()}
           anchor={<Button mode="outlined">Open menu</Button>}
           elevation={elevation}
+          mode="flat"
+          testID={testID}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -93,13 +172,14 @@ it('renders menu with content styles', async () => {
       </Portal.Host>
     );
 
-    expect(screen.getByTestId('menu-surface')).toHaveStyle({
-      backgroundColor: theme.colors.elevation[`level${elevation}`],
+    expect(screen.getByTestId(testID)).toHaveStyle({
+      backgroundColor: LightTheme.colors.elevation[`level${elevation}`],
     });
   })
 );
 
 it('uses the default anchorPosition of top', async () => {
+  const testID = 'top-positioned-menu';
   const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
     width: 400,
     height: 800,
@@ -121,7 +201,7 @@ it('uses the default anchorPosition of top', async () => {
               Open menu
             </Button>
           }
-          contentStyle={styles.contentStyle}
+          testID={testID}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -130,7 +210,7 @@ it('uses the default anchorPosition of top', async () => {
     );
   }
 
-  const { rerender } = await render(makeMenu(false));
+  const { rerender, toJSON } = await render(makeMenu(false));
 
   // You must update instead of creating directly and using it because
   // componentDidUpdate isn't called by default in jest. Forcing the update
@@ -143,19 +223,19 @@ it('uses the default anchorPosition of top', async () => {
   });
 
   await waitFor(() => {
-    const menu = screen.getByTestId('menu-view');
-    expect(menu).toHaveStyle({
-      position: 'absolute',
-      left: 100,
-      top: 100,
-    });
+    const json = JSON.stringify(toJSON());
+    expect(json).toContain('"left":100');
+    expect(json).toContain('"top":100');
   });
+
+  expect(toJSON()).toMatchSnapshot();
 
   measureSpy.mockRestore();
   dimensionsSpy.mockRestore();
 });
 
 it('respects anchorPosition bottom', async () => {
+  const testID = 'bottom-positioned-menu';
   const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
     width: 400,
     height: 800,
@@ -178,7 +258,125 @@ it('respects anchorPosition bottom', async () => {
             </Button>
           }
           anchorPosition="bottom"
-          contentStyle={styles.contentStyle}
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+          <Menu.Item onPress={jest.fn()} title="Redo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  const { rerender, toJSON } = await render(makeMenu(false));
+
+  await act(async () => {
+    await rerender(makeMenu(true));
+    // Menu waits a tick for Portal refs to be up-to-date.
+    await Promise.resolve();
+  });
+
+  await waitFor(() => {
+    const json = JSON.stringify(toJSON());
+    expect(json).toContain('"left":100');
+    expect(json).toContain('"top":132');
+  });
+
+  expect(toJSON()).toMatchSnapshot();
+
+  measureSpy.mockRestore();
+  dimensionsSpy.mockRestore();
+});
+
+it('renders menu with mode "elevated"', async () => {
+  const testID = 'elevated-menu';
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+        mode="elevated"
+        testID={testID}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+        <Menu.Item onPress={jest.fn()} title="Redo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  const styles = StyleSheet.flatten(screen.getByTestId(testID).props.style);
+
+  expect(styles).toHaveProperty('shadowColor');
+  expect(styles).toHaveProperty('shadowOpacity');
+});
+
+it('renders menu with mode "flat"', async () => {
+  const testID = 'flat-menu';
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+        mode="flat"
+        testID={testID}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+        <Menu.Item onPress={jest.fn()} title="Redo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  const styles = StyleSheet.flatten(screen.getByTestId(testID).props.style);
+
+  expect(styles).not.toHaveProperty('shadowColor');
+  expect(styles).not.toHaveProperty('shadowOpacity');
+});
+
+it('accounts for a keyboard that is already open when the menu mounts', async () => {
+  const testID = 'keyboard-aware-menu';
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const keyboardMetricsSpy = jest.spyOn(Keyboard, 'metrics').mockReturnValue({
+    screenX: 0,
+    screenY: 500,
+    width: 400,
+    height: 300,
+  });
+
+  let measureCalls = 0;
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => {
+      measureCalls += 1;
+      if (measureCalls % 2 === 1) {
+        // Menu content is tall enough to overflow the remaining window.
+        fn(100, 100, 200, 400);
+      } else {
+        fn(100, 100, 80, 32);
+      }
+    });
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={
+            <Button mode="outlined" testID="anchor">
+              Open menu
+            </Button>
+          }
+          testID={testID}
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -191,102 +389,67 @@ it('respects anchorPosition bottom', async () => {
 
   await act(async () => {
     await rerender(makeMenu(true));
-    // Menu waits a tick for Portal refs to be up-to-date.
     await Promise.resolve();
   });
 
   await waitFor(() => {
-    const menu = screen.getByTestId('menu-view');
-    expect(menu).toHaveStyle({
-      position: 'absolute',
-      left: 100,
-      top: 132,
-    });
+    // eslint-disable-next-line no-restricted-syntax -- layout height is not otherwise exposed.
+    const styles = StyleSheet.flatten(screen.getByTestId(testID).props.style);
+    // Available height is window (800) minus keyboard (300) minus top (100) minus SCREEN_INDENT (8).
+    expect(styles).toEqual(expect.objectContaining({ height: 392 }));
   });
 
   measureSpy.mockRestore();
+  keyboardMetricsSpy.mockRestore();
   dimensionsSpy.mockRestore();
 });
+it('does not crash when Keyboard.metrics is unavailable (react-native-web)', async () => {
+  const testID = 'no-metrics-menu';
+  const original = Keyboard.metrics;
+  // @ts-expect-error simulate react-native-web, where metrics doesn't exist
+  Keyboard.metrics = undefined;
 
-it('animated value changes correctly', async () => {
-  const value = new Animated.Value(1);
-  await render(
-    <Portal.Host>
-      <Menu
-        visible
-        onDismiss={jest.fn()}
-        anchor={<Button mode="outlined">Open menu</Button>}
-        testID="menu"
-        contentStyle={[{ transform: [{ scale: value }] }]}
-      >
-        <Menu.Item onPress={jest.fn()} title="Test" />
-      </Menu>
-    </Portal.Host>
-  );
-  expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1 }],
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
   });
+  const measureSpy = jest
+    .spyOn(View.prototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
 
-  Animated.timing(value, {
-    toValue: 1.5,
-    useNativeDriver: false,
-    duration: 200,
-  }).start();
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={<Button mode="outlined">Open menu</Button>}
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
 
-  await act(() => {
-    jest.advanceTimersByTime(200);
-  });
-  expect(screen.getByTestId('menu-surface-outer-layer')).toHaveStyle({
-    transform: [{ scale: 1.5 }],
-  });
-});
+  try {
+    const { rerender, toJSON } = await render(makeMenu(false));
 
-it('renders menu with mode "elevated"', async () => {
-  await render(
-    <Portal.Host>
-      <Menu
-        visible
-        onDismiss={jest.fn()}
-        anchor={<Button mode="outlined">Open menu</Button>}
-        mode="elevated"
-      >
-        <Menu.Item onPress={jest.fn()} title="Undo" />
-        <Menu.Item onPress={jest.fn()} title="Redo" />
-      </Menu>
-    </Portal.Host>
-  );
+    await act(async () => {
+      await rerender(makeMenu(true));
+      await Promise.resolve();
+    });
 
-  const menuSurface = screen.getByTestId('menu-surface');
-
-  // Get flattened styles
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  const styles = StyleSheet.flatten(menuSurface.props.style);
-
-  expect(styles).toHaveProperty('shadowColor');
-  expect(styles).toHaveProperty('shadowOpacity');
-});
-
-it('renders menu with mode "flat"', async () => {
-  await render(
-    <Portal.Host>
-      <Menu
-        visible
-        onDismiss={jest.fn()}
-        anchor={<Button mode="outlined">Open menu</Button>}
-        mode="flat"
-      >
-        <Menu.Item onPress={jest.fn()} title="Undo" />
-        <Menu.Item onPress={jest.fn()} title="Redo" />
-      </Menu>
-    </Portal.Host>
-  );
-
-  const menuSurface = screen.getByTestId('menu-surface');
-
-  // Get flattened styles
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  const styles = StyleSheet.flatten(menuSurface.props.style);
-
-  expect(styles).not.toHaveProperty('shadowColor');
-  expect(styles).not.toHaveProperty('shadowOpacity');
+    await waitFor(() => {
+      const json = JSON.stringify(toJSON());
+      expect(json).toContain('"left":100');
+      expect(json).toContain('"top":100');
+    });
+  } finally {
+    Keyboard.metrics = original;
+    measureSpy.mockRestore();
+    dimensionsSpy.mockRestore();
+  }
 });
