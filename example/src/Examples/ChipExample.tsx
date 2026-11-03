@@ -249,10 +249,10 @@ const ChipExample = () => {
             </Chip>
           </View>
         </List.Section>
-        <List.Section title="Custom chip">
-          <View style={styles.row}>
-            {isV3 && (
-              <>
+        <List.Section title="Custom chips">
+          {isV3 && (
+            <List.Section title="Custom border radius">
+              <View style={styles.row}>
                 <Chip
                   mode="outlined"
                   onPress={() => {}}
@@ -265,7 +265,7 @@ const ChipExample = () => {
                   }
                   style={[styles.chip, styles.customBorderRadius]}
                 >
-                  Compact with custom border radius
+                  Compact with custom border radius (outlined)
                 </Chip>
                 <Chip
                   mode="flat"
@@ -279,110 +279,219 @@ const ChipExample = () => {
                   }
                   style={[styles.chip, styles.customBorderRadius]}
                 >
-                  Compact with custom border radius
+                  Compact with custom border radius (flat)
                 </Chip>
-              </>
-            )}
+              </View>
+            </List.Section>
+          )}
+          <List.Section title="Custom background color">
+            <View style={styles.row}>
+              <Chip
+                selected
+                onPress={() => {}}
+                style={[
+                  styles.chip,
+                  {
+                    backgroundColor: color(customColor)
+                      .alpha(0.2)
+                      .rgb()
+                      .string(),
+                  },
+                ]}
+              >
+                Flat selected chip with custom background color
+              </Chip>
+              <Chip
+                selected={false}
+                onPress={() => {}}
+                style={[
+                  styles.chip,
+                  {
+                    backgroundColor: color(customColor)
+                      .alpha(0.2)
+                      .rgb()
+                      .string(),
+                  },
+                ]}
+              >
+                Flat unselected chip with custom background color
+              </Chip>
+              <Chip
+                disabled
+                onPress={() => {}}
+                style={[
+                  styles.chip,
+                  {
+                    backgroundColor: color(customColor)
+                      .alpha(0.2)
+                      .rgb()
+                      .string(),
+                  },
+                ]}
+              >
+                Flat disabled chip with custom background color
+              </Chip>
+            </View>
+          </List.Section>
+          <List.Section title="Custom selected color">
+            <View style={styles.row}>
+              <Chip
+                selected
+                onPress={() => {}}
+                style={[styles.chip]}
+                selectedColor={customColor}
+              >
+                Flat selected chip with custom selected color
+              </Chip>
+              <Chip
+                selected={false}
+                onPress={() => {}}
+                style={styles.chip}
+                selectedColor={customColor}
+              >
+                Flat unselected chip with custom selected color
+              </Chip>
+              <Chip
+                selected
+                showSelectedCheck={false}
+                onPress={() => {}}
+                style={[styles.chip]}
+                selectedColor={customColor}
+              >
+                Flat selected chip with custom selected color (no check)
+              </Chip>
+              <Chip
+                selected={false}
+                showSelectedCheck={false}
+                onPress={() => {}}
+                style={styles.chip}
+                selectedColor={customColor}
+              >
+                Flat unselected chip with custom selected color (no check)
+              </Chip>
+              <Chip
+                disabled
+                onPress={() => {}}
+                style={styles.chip}
+                selectedColor={customColor}
+              >
+                Flat disabled unselected chip with custom selected color
+              </Chip>
+              <Chip
+                selected
+                mode="outlined"
+                onPress={() => {}}
+                style={[
+                  styles.chip,
+                  {
+                    backgroundColor: color(customColor)
+                      .alpha(0.2)
+                      .rgb()
+                      .string(),
+                  },
+                ]}
+                selectedColor={customColor}
+              >
+                Outlined selected chip with custom color
+              </Chip>
+              <Chip
+                mode="outlined"
+                onPress={() => {}}
+                style={styles.chip}
+                selectedColor={customColor}
+              >
+                Outlined unselected chip with custom color
+              </Chip>
+            </View>
+          </List.Section>
+          <List.Section title="Custom styling">
+            <View style={styles.row}>
+              <Chip
+                selected
+                showSelectedCheck={false}
+                onPress={() => {}}
+                style={[styles.chip]}
+                selectedColor="rgba(255, 255, 255, 1)"
+                selectedBackgroundColor="rgba(0, 0, 0, 1)"
+              >
+                Flat selected chip with custom selected color & background color
+              </Chip>
+              <Chip
+                disabled
+                onPress={() => {}}
+                style={[styles.chip]}
+                selectedColor="rgba(255, 255, 255, 1)"
+                selectedBackgroundColor="rgba(0, 0, 0, 1)"
+              >
+                Flat disabled chip with custom selected & background color
+              </Chip>
+              <Chip
+                onPress={() => {}}
+                style={styles.chip}
+                textStyle={styles.tiny}
+              >
+                With custom size
+              </Chip>
+              <Chip
+                onPress={() => {}}
+                style={styles.chip}
+                textStyle={styles.tiny}
+              >
+                <Text variant="titleLarge">With custom text</Text>
+              </Chip>
+              <Chip
+                onPress={() => {}}
+                onClose={() =>
+                  setSnackbarProperties({
+                    visible: true,
+                    text: 'Custom icon close button pressed',
+                  })
+                }
+                closeIcon="arrow-down"
+                style={styles.chip}
+                closeIconAccessibilityLabel="Custom Close icon accessibility label"
+              >
+                With custom close icon
+              </Chip>
+              <Chip
+                mode="outlined"
+                onPress={() => {}}
+                onLongPress={() =>
+                  setSnackbarProperties({ visible: true, text: '' })
+                }
+                style={styles.chip}
+              >
+                With onLongPress
+              </Chip>
+            </View>
+          </List.Section>
+          <List.Section title="Full width & long text">
+            <View style={styles.row}>
+              <Chip
+                onPress={() => {}}
+                onClose={() =>
+                  setSnackbarProperties({
+                    visible: true,
+                    text: 'Close button pressed',
+                  })
+                }
+                style={styles.bigTextFlex}
+                textStyle={styles.bigTextStyle}
+                ellipsizeMode="middle"
+              >
+                With a very big text: React Native Paper is a high-quality,
+                standard-compliant Material Design library that has you covered
+                in all major use-cases.
+              </Chip>
+            </View>
             <Chip
               mode="outlined"
               onPress={() => {}}
-              onLongPress={() =>
-                setSnackbarProperties({ visible: true, text: '' })
-              }
-              style={styles.chip}
+              style={styles.fullWidthChip}
             >
-              With onLongPress
+              Full width chip
             </Chip>
-            <Chip
-              selected
-              onPress={() => {}}
-              style={[
-                styles.chip,
-                {
-                  backgroundColor: color(customColor).alpha(0.2).rgb().string(),
-                },
-              ]}
-              selectedColor={customColor}
-            >
-              Flat selected chip with custom color
-            </Chip>
-            <Chip
-              onPress={() => {}}
-              style={styles.chip}
-              selectedColor={customColor}
-            >
-              Flat unselected chip with custom color
-            </Chip>
-            <Chip
-              selected
-              mode="outlined"
-              onPress={() => {}}
-              style={[
-                styles.chip,
-                {
-                  backgroundColor: color(customColor).alpha(0.2).rgb().string(),
-                },
-              ]}
-              selectedColor={customColor}
-            >
-              Outlined selected chip with custom color
-            </Chip>
-            <Chip
-              mode="outlined"
-              onPress={() => {}}
-              style={styles.chip}
-              selectedColor={customColor}
-            >
-              Outlined unselected chip with custom color
-            </Chip>
-            <Chip
-              onPress={() => {}}
-              style={styles.chip}
-              textStyle={styles.tiny}
-            >
-              With custom size
-            </Chip>
-            <Chip
-              onPress={() => {}}
-              onClose={() =>
-                setSnackbarProperties({
-                  visible: true,
-                  text: 'Close button pressed',
-                })
-              }
-              style={styles.bigTextFlex}
-              textStyle={styles.bigTextStyle}
-              ellipsizeMode="middle"
-            >
-              With a very big text: React Native Paper is a high-quality,
-              standard-compliant Material Design library that has you covered in
-              all major use-cases.
-            </Chip>
-            <Chip
-              onPress={() => {}}
-              onClose={() =>
-                setSnackbarProperties({
-                  visible: true,
-                  text: 'Custom icon close button pressed',
-                })
-              }
-              closeIcon="arrow-down"
-              style={styles.chip}
-              closeIconAccessibilityLabel="Custom Close icon accessibility label"
-            >
-              With custom close icon
-            </Chip>
-            <Chip
-              onPress={() => {}}
-              style={styles.chip}
-              textStyle={styles.tiny}
-            >
-              <Text variant="titleLarge">With custom text</Text>
-            </Chip>
-          </View>
-          <Chip mode="outlined" onPress={() => {}} style={styles.fullWidthChip}>
-            Full width chip
-          </Chip>
+          </List.Section>
         </List.Section>
       </ScreenWrapper>
       <Snackbar
