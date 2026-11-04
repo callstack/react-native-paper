@@ -211,6 +211,18 @@ describe('Checkbox Space key', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it('leaves a Space release without a pending press alone', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await renderCheckbox(onPress);
+    const up = key(' ');
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', up);
+
+    expect(up.preventDefault).not.toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
   it('presses in on key down and presses out before toggling, like Enter', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
     const calls: string[] = [];

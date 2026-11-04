@@ -86,10 +86,12 @@ export const useSpaceKeyPress = ({
           onPressIn?.(asPressEvent(event));
         },
         onKeyUp: (event: KeyboardEvent) => {
-          if (!isSpaceKey(event)) return;
+          // A release without a pending press is someone else's, for example
+          // a button around a checkbox that is hidden from the keyboard.
+          if (!isSpaceKey(event) || !endPress(event)) return;
 
           event.preventDefault();
-          if (endPress(event)) onPress(asPressEvent(event));
+          onPress(asPressEvent(event));
         },
       }
     : undefined;
