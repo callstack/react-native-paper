@@ -324,7 +324,7 @@ The misspelled `traileringIcon` props have been renamed:
 
 ### FAB
 
-To preserve the v5 FAB color treatment, update the `variant` prop:
+`variant="primary"`, `"secondary"` and `"tertiary"` still type-check in 6.x, but they now draw the filled role color instead of the 5.x container color, so an app that sets them explicitly changes look without any error. To preserve the v5 FAB color treatment, update the `variant` prop:
 
 | v5          | v6                   |
 | ----------- | -------------------- |
