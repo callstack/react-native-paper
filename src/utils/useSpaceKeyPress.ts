@@ -86,8 +86,10 @@ export const useSpaceKeyPress = ({
           onPressIn?.(asPressEvent(event));
         },
         onKeyUp: (event: KeyboardEvent) => {
-          // A release without a pending press is someone else's, for example
-          // a button around a checkbox that is hidden from the keyboard.
+          // React Native Web handles Space itself on a pressable with
+          // `role="button"`, such as a checkbox given `accessible={false}` and
+          // `role="button"`, so only its release reaches here. Preventing that
+          // release would cancel the button's own click.
           if (!isSpaceKey(event) || !endPress(event)) return;
 
           event.preventDefault();
