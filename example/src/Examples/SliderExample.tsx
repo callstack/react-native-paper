@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import {
   Card,
   Divider,
+  LocaleProvider,
   RangeSlider,
   Slider,
   Surface,
@@ -18,6 +19,11 @@ const SliderExample = () => {
   const theme = useTheme();
 
   // State values for various slider configurations
+  const [isRTLMode, setIsRTLMode] = React.useState(false);
+  const [rtlSliderVal, setRtlSliderVal] = React.useState(30);
+  const [rtlRangeVals, setRtlRangeVals] = React.useState<[number, number]>([
+    20, 80,
+  ]);
   const [continuousVal, setContinuousVal] = React.useState(45);
   const [discreteVal, setDiscreteVal] = React.useState(30);
   const [centeredVal, setCenteredVal] = React.useState(15);
@@ -62,6 +68,51 @@ const SliderExample = () => {
         <Text variant="labelLarge">Disable all sliders</Text>
         <Switch value={disableAll} onValueChange={setDisableAll} />
       </View>
+
+      <Divider style={styles.divider} />
+
+      {/* RTL Slider & RangeSlider Demo */}
+      <Card style={styles.card} mode="outlined">
+        <Card.Title
+          title="RTL Layout & Gestures"
+          subtitle={`RTL: ${isRTLMode ? 'Enabled' : 'Disabled'} | Slider: ${Math.round(rtlSliderVal)} | Range: [${Math.round(rtlRangeVals[0])}, ${Math.round(rtlRangeVals[1])}]`}
+        />
+        <Card.Content>
+          <View style={[styles.toggleRow, styles.rtlToggleRow]}>
+            <Text variant="labelLarge">Toggle RTL</Text>
+            <Switch
+              value={isRTLMode}
+              onValueChange={setIsRTLMode}
+              testID="rtl-toggle-switch"
+            />
+          </View>
+          <LocaleProvider direction={isRTLMode ? 'rtl' : 'ltr'}>
+            <View style={isRTLMode ? styles.rtlContainer : styles.ltrContainer}>
+              <Slider
+                value={rtlSliderVal}
+                onValueChange={setRtlSliderVal}
+                min={0}
+                max={100}
+                step={10}
+                showTickMarks
+                disabled={disableAll}
+                testID="rtl-slider"
+              />
+              <View style={styles.sliderSpacing} />
+              <RangeSlider
+                values={rtlRangeVals}
+                onValueChange={setRtlRangeVals}
+                min={0}
+                max={100}
+                step={5}
+                showTickMarks
+                disabled={disableAll}
+                testID="rtl-range-slider"
+              />
+            </View>
+          </LocaleProvider>
+        </Card.Content>
+      </Card>
 
       <Divider style={styles.divider} />
 
@@ -328,6 +379,18 @@ const styles = StyleSheet.create({
   },
   spacing: {
     height: 16,
+  },
+  sliderSpacing: {
+    height: 24,
+  },
+  rtlToggleRow: {
+    marginBottom: 16,
+  },
+  rtlContainer: {
+    direction: 'rtl',
+  },
+  ltrContainer: {
+    direction: 'ltr',
   },
   visibleSlider: {
     marginTop: 48,

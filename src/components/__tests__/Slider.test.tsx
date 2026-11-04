@@ -9,6 +9,7 @@ import {
   jest,
 } from '@jest/globals';
 
+import { LocaleProvider } from '../../core/locale';
 import { fireEvent, render, screen } from '../../test-utils';
 import RangeSlider from '../Slider/RangeSlider';
 import Slider from '../Slider/Slider';
@@ -243,6 +244,54 @@ describe('Slider interaction (web keyboard navigation)', () => {
       preventDefault: jest.fn(),
     });
     expect(onValueChange).not.toHaveBeenCalled();
+  });
+
+  it('navigates with reversed direction in RTL mode', async () => {
+    const onValueChange = jest.fn();
+    const onSlidingComplete = jest.fn();
+
+    await render(
+      <LocaleProvider direction="rtl">
+        <Slider
+          defaultValue={50}
+          min={0}
+          max={100}
+          step={5}
+          onValueChange={onValueChange}
+          onSlidingComplete={onSlidingComplete}
+        />
+      </LocaleProvider>
+    );
+
+    const slider = screen.getByRole('slider');
+    await fireEvent(slider, 'keyDown', {
+      key: 'ArrowRight',
+      preventDefault: jest.fn(),
+    });
+    // In RTL, ArrowRight points towards 0 (start at right), so value decreases
+    expect(onValueChange).toHaveBeenCalledWith(45);
+    expect(onSlidingComplete).toHaveBeenCalledWith(45);
+
+    await fireEvent(slider, 'keyDown', {
+      key: 'ArrowLeft',
+      preventDefault: jest.fn(),
+    });
+    // In RTL, ArrowLeft points towards 100 (end at left), so value increases
+    expect(onValueChange).toHaveBeenCalledWith(50);
+
+    await fireEvent(slider, 'keyDown', {
+      key: 'ArrowUp',
+      preventDefault: jest.fn(),
+    });
+    // ArrowUp always increments regardless of RTL
+    expect(onValueChange).toHaveBeenCalledWith(55);
+
+    await fireEvent(slider, 'keyDown', {
+      key: 'ArrowDown',
+      preventDefault: jest.fn(),
+    });
+    // ArrowDown always decrements regardless of RTL
+    expect(onValueChange).toHaveBeenCalledWith(50);
   });
 });
 

@@ -18,23 +18,16 @@ exports[`RangeSlider render & accessibility renders disabled range slider 1`] = 
   <View
     collapsable={false}
     onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
-      {
-        "flex": 1,
-        "height": 48,
-        "justifyContent": "center",
-        "overflow": "visible",
-        "position": "relative",
-      }
+      [
+        {
+          "flex": 1,
+          "height": 48,
+          "justifyContent": "center",
+          "overflow": "visible",
+          "position": "relative",
+        },
+      ]
     }
   >
     <View
@@ -54,6 +47,7 @@ exports[`RangeSlider render & accessibility renders disabled range slider 1`] = 
             "top": 4,
           },
           {
+            "left": -12,
             "opacity": 0,
             "transform": [
               {
@@ -104,6 +98,7 @@ exports[`RangeSlider render & accessibility renders disabled range slider 1`] = 
             "top": 2,
           },
           {
+            "left": 6,
             "transform": [
               {
                 "scaleX": 1,
@@ -118,6 +113,7 @@ exports[`RangeSlider render & accessibility renders disabled range slider 1`] = 
       }
     />
     <View
+      collapsable={false}
       onLayout={[Function]}
       pointerEvents="none"
       style={
@@ -128,6 +124,9 @@ exports[`RangeSlider render & accessibility renders disabled range slider 1`] = 
             "justifyContent": "center",
             "position": "absolute",
             "top": -54,
+          },
+          {
+            "left": -16,
           },
           {
             "left": -16,
@@ -215,6 +214,7 @@ exports[`RangeSlider render & accessibility renders disabled range slider 1`] = 
             "top": 4,
           },
           {
+            "left": -12,
             "opacity": 0,
             "transform": [
               {
@@ -265,6 +265,7 @@ exports[`RangeSlider render & accessibility renders disabled range slider 1`] = 
             "top": 2,
           },
           {
+            "left": 6,
             "transform": [
               {
                 "scaleX": 1,
@@ -279,6 +280,7 @@ exports[`RangeSlider render & accessibility renders disabled range slider 1`] = 
       }
     />
     <View
+      collapsable={false}
       onLayout={[Function]}
       pointerEvents="none"
       style={
@@ -289,6 +291,9 @@ exports[`RangeSlider render & accessibility renders disabled range slider 1`] = 
             "justifyContent": "center",
             "position": "absolute",
             "top": -54,
+          },
+          {
+            "left": -16,
           },
           {
             "left": -16,
@@ -381,23 +386,16 @@ exports[`RangeSlider render & accessibility renders range slider 1`] = `
   <View
     collapsable={false}
     onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
-      {
-        "flex": 1,
-        "height": 48,
-        "justifyContent": "center",
-        "overflow": "visible",
-        "position": "relative",
-      }
+      [
+        {
+          "flex": 1,
+          "height": 48,
+          "justifyContent": "center",
+          "overflow": "visible",
+          "position": "relative",
+        },
+      ]
     }
   >
     <View
@@ -417,6 +415,7 @@ exports[`RangeSlider render & accessibility renders range slider 1`] = `
             "top": 4,
           },
           {
+            "left": -12,
             "opacity": 0,
             "transform": [
               {
@@ -467,6 +466,7 @@ exports[`RangeSlider render & accessibility renders range slider 1`] = `
             "top": 2,
           },
           {
+            "left": 6,
             "transform": [
               {
                 "scaleX": 1,
@@ -479,6 +479,7 @@ exports[`RangeSlider render & accessibility renders range slider 1`] = `
       }
     />
     <View
+      collapsable={false}
       onLayout={[Function]}
       pointerEvents="none"
       style={
@@ -489,6 +490,9 @@ exports[`RangeSlider render & accessibility renders range slider 1`] = `
             "justifyContent": "center",
             "position": "absolute",
             "top": -54,
+          },
+          {
+            "left": -16,
           },
           {
             "left": -16,
@@ -576,6 +580,7 @@ exports[`RangeSlider render & accessibility renders range slider 1`] = `
             "top": 4,
           },
           {
+            "left": -12,
             "opacity": 0,
             "transform": [
               {
@@ -626,6 +631,7 @@ exports[`RangeSlider render & accessibility renders range slider 1`] = `
             "top": 2,
           },
           {
+            "left": 6,
             "transform": [
               {
                 "scaleX": 1,
@@ -638,6 +644,7 @@ exports[`RangeSlider render & accessibility renders range slider 1`] = `
       }
     />
     <View
+      collapsable={false}
       onLayout={[Function]}
       pointerEvents="none"
       style={
@@ -648,6 +655,9 @@ exports[`RangeSlider render & accessibility renders range slider 1`] = `
             "justifyContent": "center",
             "position": "absolute",
             "top": -54,
+          },
+          {
+            "left": -16,
           },
           {
             "left": -16,
@@ -762,23 +772,16 @@ exports[`Slider render renders centered slider 1`] = `
   <View
     collapsable={false}
     onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
-      {
-        "flex": 1,
-        "height": 48,
-        "justifyContent": "center",
-        "overflow": "visible",
-        "position": "relative",
-      }
+      [
+        {
+          "flex": 1,
+          "height": 48,
+          "justifyContent": "center",
+          "overflow": "visible",
+          "position": "relative",
+        },
+      ]
     }
   />
 </View>
@@ -824,23 +827,16 @@ exports[`Slider render renders disabled slider 1`] = `
   <View
     collapsable={false}
     onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
-      {
-        "flex": 1,
-        "height": 48,
-        "justifyContent": "center",
-        "overflow": "visible",
-        "position": "relative",
-      }
+      [
+        {
+          "flex": 1,
+          "height": 48,
+          "justifyContent": "center",
+          "overflow": "visible",
+          "position": "relative",
+        },
+      ]
     }
   />
 </View>
@@ -886,23 +882,16 @@ exports[`Slider render renders discrete slider with tick marks 1`] = `
   <View
     collapsable={false}
     onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
-      {
-        "flex": 1,
-        "height": 48,
-        "justifyContent": "center",
-        "overflow": "visible",
-        "position": "relative",
-      }
+      [
+        {
+          "flex": 1,
+          "height": 48,
+          "justifyContent": "center",
+          "overflow": "visible",
+          "position": "relative",
+        },
+      ]
     }
   />
 </View>
@@ -948,23 +937,16 @@ exports[`Slider render renders standard continuous slider 1`] = `
   <View
     collapsable={false}
     onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
-      {
-        "flex": 1,
-        "height": 48,
-        "justifyContent": "center",
-        "overflow": "visible",
-        "position": "relative",
-      }
+      [
+        {
+          "flex": 1,
+          "height": 48,
+          "justifyContent": "center",
+          "overflow": "visible",
+          "position": "relative",
+        },
+      ]
     }
   />
 </View>
@@ -1054,23 +1036,16 @@ exports[`Slider render renders with start and end icons 1`] = `
   <View
     collapsable={false}
     onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
-      {
-        "flex": 1,
-        "height": 48,
-        "justifyContent": "center",
-        "overflow": "visible",
-        "position": "relative",
-      }
+      [
+        {
+          "flex": 1,
+          "height": 48,
+          "justifyContent": "center",
+          "overflow": "visible",
+          "position": "relative",
+        },
+      ]
     }
   />
   <View
@@ -1160,23 +1135,16 @@ exports[`Slider render renders with value indicator visible 1`] = `
   <View
     collapsable={false}
     onLayout={[Function]}
-    onMoveShouldSetResponder={[Function]}
-    onMoveShouldSetResponderCapture={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    onStartShouldSetResponderCapture={[Function]}
     style={
-      {
-        "flex": 1,
-        "height": 48,
-        "justifyContent": "center",
-        "overflow": "visible",
-        "position": "relative",
-      }
+      [
+        {
+          "flex": 1,
+          "height": 48,
+          "justifyContent": "center",
+          "overflow": "visible",
+          "position": "relative",
+        },
+      ]
     }
   />
 </View>

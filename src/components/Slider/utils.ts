@@ -48,6 +48,7 @@ export function getDefaultSliderColors(theme: InternalTheme): SliderColors {
  * Clamps a number between min and max inclusive.
  */
 export function clamp(value: number, min: number, max: number): number {
+  'worklet';
   if (value < min) return min;
   if (value > max) return max;
   return value;
@@ -62,6 +63,7 @@ export function snapToStep(
   max: number,
   step?: number
 ): number {
+  'worklet';
   if (typeof step !== 'number' || step <= 0) {
     return clamp(value, min, max);
   }
@@ -84,6 +86,7 @@ export function getRatioFromValue(
   min: number,
   max: number
 ): number {
+  'worklet';
   if (max <= min) return 0;
   return clamp((value - min) / (max - min), 0, 1);
 }
@@ -97,6 +100,7 @@ export function getValueFromRatio(
   max: number,
   step?: number
 ): number {
+  'worklet';
   const raw = min + ratio * (max - min);
   return snapToStep(raw, min, max, step);
 }

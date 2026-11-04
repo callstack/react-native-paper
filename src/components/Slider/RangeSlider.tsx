@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  type GestureResponderEvent,
   type LayoutChangeEvent,
   Platform,
   StyleSheet,
@@ -9,11 +8,14 @@ import {
   type ViewStyle,
 } from 'react-native';
 
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import { SliderTokens } from './tokens';
 import {
@@ -227,10 +229,28 @@ const RangeSlider = ({
   );
 
   const [trackWidth, setTrackWidth] = React.useState<number>(0);
-  const trackRef = React.useRef<View>(null);
-  const trackPageX = React.useRef<number>(0);
+  const distance = max - min;
+  const animDuration = reduceMotion ? 0 : 150;
+  const trackCornerRadius = trackHeight / 2 || DEFAULT_TRACK_CORNER_RADIUS;
+  const travelWidth = Math.max(0, trackWidth - 2 * trackCornerRadius);
+  const trackWidthSV = useSharedValue(0);
+  const startValueSV = useSharedValue(currentValues[0]);
+  const endValueSV = useSharedValue(currentValues[1]);
+  const offsetSV = useSharedValue({ start: 0, end: 0 });
+  const activeThumbSV = useSharedValue<{ start: boolean; end: boolean }>({
+    start: false,
+    end: false,
+  });
+  const lastEmittedValuesSV = useSharedValue<[number, number]>([
+    currentValues[0],
+    currentValues[1],
+  ]);
 
-  const activeThumbRef = React.useRef<'start' | 'end' | null>(null);
+  const px = useDerivedValue(() => {
+    const travel = Math.max(0, trackWidthSV.value - 2 * trackCornerRadius);
+    return distance > 0 ? travel / distance : 0;
+  });
+
   const isInteractingStartSV = useSharedValue(0);
   const isInteractingEndSV = useSharedValue(0);
   const [isStartFocused, setIsStartFocused] = React.useState(false);
@@ -266,13 +286,6 @@ const RangeSlider = ({
     onValueChange,
     onSlidingStart,
     onSlidingComplete,
-    currentValues,
-    min,
-    max,
-    step,
-    minSeparation,
-    disabled,
-    isRTL,
     isControlled,
   });
 
@@ -281,162 +294,240 @@ const RangeSlider = ({
       onValueChange,
       onSlidingStart,
       onSlidingComplete,
-      currentValues,
-      min,
-      max,
-      step,
-      minSeparation,
-      disabled,
-      isRTL,
       isControlled,
     };
   });
 
-  const updateRangeFromX = React.useCallback(
-    (x: number) => {
-      const {
-        min: curMin,
-        max: curMax,
-        step: curStep,
-        minSeparation: curSeparation,
-        isRTL: curRTL,
-        onValueChange: cbValueChange,
-        currentValues: curVals,
-        isControlled: curControlled,
-      } = latestCallbacks.current;
+  React.useEffect(() => {
+    if (!activeThumbSV.value.start && !activeThumbSV.value.end) {
+      startValueSV.value = currentValues[0];
+      endValueSV.value = currentValues[1];
+    }
+  }, [currentValues, startValueSV, endValueSV, activeThumbSV]);
 
-      const radius = trackHeight / 2 || DEFAULT_TRACK_CORNER_RADIUS;
-      const travelWidth = Math.max(0, trackWidth - 2 * radius);
-      if (travelWidth <= 0 || !activeThumbRef.current) return;
+  const notifySlidingStart = React.useCallback((vals: [number, number]) => {
+    latestCallbacks.current.onSlidingStart?.(vals);
+  }, []);
 
-      let ratio = clamp((x - radius) / travelWidth, 0, 1);
-      if (curRTL) {
-        ratio = 1 - ratio;
-      }
+  const notifyValueChange = React.useCallback((vals: [number, number]) => {
+    if (!latestCallbacks.current.isControlled) {
+      setInternalValues(vals);
+    }
+    latestCallbacks.current.onValueChange?.(vals);
+  }, []);
 
-      const rawVal = getValueFromRatio(ratio, curMin, curMax, curStep);
+  const notifySlidingComplete = React.useCallback((vals: [number, number]) => {
+    latestCallbacks.current.onSlidingComplete?.(vals);
+  }, []);
 
-      let nextVals: [number, number];
-      if (activeThumbRef.current === 'start') {
-        const clampedStart = clamp(rawVal, curMin, curVals[1] - curSeparation);
-        nextVals = [clampedStart, curVals[1]];
-      } else {
-        const clampedEnd = clamp(rawVal, curVals[0] + curSeparation, curMax);
-        nextVals = [curVals[0], clampedEnd];
-      }
+  const onTrackLayout = React.useCallback(
+    (e: LayoutChangeEvent) => {
+      const { width } = e.nativeEvent.layout;
+      setTrackWidth(width);
+      trackWidthSV.value = width;
+    },
+    [trackWidthSV]
+  );
 
-      if (nextVals[0] !== curVals[0] || nextVals[1] !== curVals[1]) {
-        if (!curControlled) {
-          setInternalValues(nextVals);
+  const panGesture = React.useMemo(() => {
+    return Gesture.Pan()
+      .enabled(!disabled)
+      .activeOffsetX([-10, 10])
+      .failOffsetY([-10, 10])
+      .onBegin((e) => {
+        'worklet';
+        const travel = Math.max(0, trackWidthSV.value - 2 * trackCornerRadius);
+        if (travel <= 0 || distance <= 0) return;
+
+        const curStart = startValueSV.value;
+        const curEnd = endValueSV.value;
+
+        // Record initial positions
+        const startPx = clamp(curStart - min, 0, distance) * px.value;
+        const endPx = clamp(curEnd - min, 0, distance) * px.value;
+        offsetSV.value = { start: startPx, end: endPx };
+
+        const startX = trackCornerRadius + (isRTL ? travel - startPx : startPx);
+        const endX = trackCornerRadius + (isRTL ? travel - endPx : endPx);
+
+        const distToStart = Math.abs(e.x - startX);
+        const distToEnd = Math.abs(e.x - endX);
+        const isStart =
+          distToStart === distToEnd
+            ? isRTL
+              ? e.x > startX
+              : e.x < startX
+            : distToStart < distToEnd;
+
+        activeThumbSV.value = {
+          start: isStart,
+          end: !isStart,
+        };
+      })
+      .onStart(() => {
+        'worklet';
+        if (activeThumbSV.value.start) {
+          isInteractingStartSV.value = withTiming(1, {
+            duration: animDuration,
+          });
+        } else if (activeThumbSV.value.end) {
+          isInteractingEndSV.value = withTiming(1, { duration: animDuration });
         }
-        cbValueChange?.(nextVals);
-      }
-    },
-    [trackHeight, trackWidth]
-  );
 
-  const handleStartShouldSetResponder = React.useCallback(
-    () => !disabled,
-    [disabled]
-  );
+        scheduleOnRN(notifySlidingStart, [
+          startValueSV.value,
+          endValueSV.value,
+        ]);
+      })
+      .onUpdate((e) => {
+        'worklet';
+        if (px.value <= 0 || distance <= 0) return;
 
-  const handleMoveShouldSetResponder = React.useCallback(
-    () => !disabled,
-    [disabled]
-  );
+        let start: number | undefined;
+        let end: number | undefined;
+        const delta = isRTL ? -e.translationX : e.translationX;
 
-  const handleTerminationRequest = React.useCallback(() => false, []);
+        if (activeThumbSV.value.start) {
+          const rawVal = min + (offsetSV.value.start + delta) / px.value;
+          start = clamp(
+            snapToStep(rawVal, min, max, step),
+            min,
+            endValueSV.value - minSeparation
+          );
+        }
 
-  const handleResponderGrant = React.useCallback(
-    (evt: GestureResponderEvent) => {
-      if (disabled) return false;
-      const {
-        currentValues: curVals,
-        min: curMin,
-        max: curMax,
-        isRTL: curRTL,
-      } = latestCallbacks.current;
+        if (activeThumbSV.value.end) {
+          const rawVal = min + (offsetSV.value.end + delta) / px.value;
+          end = clamp(
+            snapToStep(rawVal, min, max, step),
+            startValueSV.value + minSeparation,
+            max
+          );
+        }
 
-      const pageX = evt.nativeEvent.pageX;
-      const locationX = evt.nativeEvent.locationX;
-      trackPageX.current = pageX - locationX;
+        const nextStart = start ?? startValueSV.value;
+        const nextEnd = end ?? endValueSV.value;
 
-      const radius = trackHeight / 2 || DEFAULT_TRACK_CORNER_RADIUS;
-      const travelWidth = Math.max(0, trackWidth - 2 * radius);
+        if (nextStart !== startValueSV.value || nextEnd !== endValueSV.value) {
+          startValueSV.value = nextStart;
+          endValueSV.value = nextEnd;
 
-      const startR = getRatioFromValue(curVals[0], curMin, curMax);
-      const endR = getRatioFromValue(curVals[1], curMin, curMax);
-
-      const startVisualR = curRTL ? 1 - startR : startR;
-      const endVisualR = curRTL ? 1 - endR : endR;
-
-      const startX = radius + startVisualR * travelWidth;
-      const endX = radius + endVisualR * travelWidth;
-
-      const distToStart = Math.abs(locationX - startX);
-      const distToEnd = Math.abs(locationX - endX);
-
-      const thumb = distToStart <= distToEnd ? 'start' : 'end';
-      activeThumbRef.current = thumb;
-
-      if (thumb === 'start') {
-        isInteractingStartSV.value = 1;
-      } else {
-        isInteractingEndSV.value = 1;
-      }
-
-      latestCallbacks.current.onSlidingStart?.(curVals);
-      updateRangeFromX(locationX);
-
-      if (trackRef.current) {
-        trackRef.current.measure((_x, _y, _width, _height, measuredPageX) => {
-          if (!isNaN(measuredPageX)) {
-            trackPageX.current = measuredPageX;
+          const threshold = step !== undefined ? 0 : distance / 200;
+          if (
+            Math.abs(nextStart - lastEmittedValuesSV.value[0]) >= threshold ||
+            Math.abs(nextEnd - lastEmittedValuesSV.value[1]) >= threshold
+          ) {
+            lastEmittedValuesSV.value = [nextStart, nextEnd];
+            scheduleOnRN(notifyValueChange, [nextStart, nextEnd]);
           }
-        });
-      }
+        }
+      })
+      .onFinalize((_, success) => {
+        'worklet';
+        activeThumbSV.value = { start: false, end: false };
+        isInteractingStartSV.value = withTiming(0, { duration: animDuration });
+        isInteractingEndSV.value = withTiming(0, { duration: animDuration });
 
-      return true;
-    },
-    [
-      disabled,
-      trackHeight,
-      trackWidth,
-      isInteractingStartSV,
-      isInteractingEndSV,
-      updateRangeFromX,
-    ]
-  );
-
-  const handleResponderMove = React.useCallback(
-    (evt: GestureResponderEvent) => {
-      if (disabled) return;
-      const localX = evt.nativeEvent.pageX - trackPageX.current;
-      updateRangeFromX(localX);
-    },
-    [disabled, updateRangeFromX]
-  );
-
-  const handleResponderEnd = React.useCallback(() => {
-    isInteractingStartSV.value = 0;
-    isInteractingEndSV.value = 0;
-    activeThumbRef.current = null;
-    latestCallbacks.current.onSlidingComplete?.(
-      latestCallbacks.current.currentValues
-    );
-  }, [isInteractingStartSV, isInteractingEndSV]);
-
-  const onTrackLayout = React.useCallback((e: LayoutChangeEvent) => {
-    const { width } = e.nativeEvent.layout;
-    setTrackWidth(width);
-    if (trackRef.current) {
-      trackRef.current.measure((_x, _y, _width, _height, pageX) => {
-        if (!isNaN(pageX)) {
-          trackPageX.current = pageX;
+        if (success) {
+          const finalValues: [number, number] = [
+            startValueSV.value,
+            endValueSV.value,
+          ];
+          if (
+            finalValues[0] !== lastEmittedValuesSV.value[0] ||
+            finalValues[1] !== lastEmittedValuesSV.value[1]
+          ) {
+            lastEmittedValuesSV.value = finalValues;
+            scheduleOnRN(notifyValueChange, finalValues);
+          }
+          scheduleOnRN(notifySlidingComplete, finalValues);
         }
       });
-    }
-  }, []);
+  }, [
+    disabled,
+    trackCornerRadius,
+    trackWidthSV,
+    distance,
+    animDuration,
+    min,
+    max,
+    step,
+    minSeparation,
+    px,
+    isRTL,
+    startValueSV,
+    endValueSV,
+    activeThumbSV,
+    offsetSV,
+    lastEmittedValuesSV,
+    isInteractingStartSV,
+    isInteractingEndSV,
+    notifySlidingStart,
+    notifyValueChange,
+    notifySlidingComplete,
+  ]);
+
+  const tapGesture = React.useMemo(() => {
+    return Gesture.Tap()
+      .enabled(!disabled)
+      .maxDistance(5)
+      .onEnd((e) => {
+        'worklet';
+        const travel = Math.max(0, trackWidthSV.value - 2 * trackCornerRadius);
+        if (travel <= 0 || distance <= 0) return;
+
+        let ratio = clamp((e.x - trackCornerRadius) / travel, 0, 1);
+        if (isRTL) ratio = 1 - ratio;
+        const tapVal = getValueFromRatio(ratio, min, max, step);
+
+        const curStart = startValueSV.value;
+        const curEnd = endValueSV.value;
+
+        const distToStart = Math.abs(tapVal - curStart);
+        const distToEnd = Math.abs(tapVal - curEnd);
+
+        let nextStart = curStart;
+        let nextEnd = curEnd;
+
+        if (distToStart <= distToEnd) {
+          nextStart = clamp(tapVal, min, curEnd - minSeparation);
+        } else {
+          nextEnd = clamp(tapVal, curStart + minSeparation, max);
+        }
+
+        const prevValues: [number, number] = [
+          startValueSV.value,
+          endValueSV.value,
+        ];
+        startValueSV.value = nextStart;
+        endValueSV.value = nextEnd;
+        lastEmittedValuesSV.value = [nextStart, nextEnd];
+        scheduleOnRN(notifySlidingStart, prevValues);
+        scheduleOnRN(notifyValueChange, [nextStart, nextEnd]);
+        scheduleOnRN(notifySlidingComplete, [nextStart, nextEnd]);
+      });
+  }, [
+    disabled,
+    trackCornerRadius,
+    trackWidthSV,
+    distance,
+    isRTL,
+    min,
+    max,
+    step,
+    minSeparation,
+    startValueSV,
+    endValueSV,
+    lastEmittedValuesSV,
+    notifySlidingStart,
+    notifyValueChange,
+    notifySlidingComplete,
+  ]);
+
+  const gesture = React.useMemo(
+    () => Gesture.Race(panGesture, tapGesture),
+    [panGesture, tapGesture]
+  );
 
   const handleStartAccessibilityAction = React.useCallback(
     (event: { nativeEvent: { actionName: string } }) => {
@@ -517,11 +608,17 @@ const RangeSlider = ({
       if (disabled) return;
       const stepVal = step ?? (max - min) / 100;
       let next = currentValues[0];
-      if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+      if (e.key === 'ArrowRight') {
         next = isRTL ? next - stepVal : next + stepVal;
         e.preventDefault();
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+      } else if (e.key === 'ArrowLeft') {
         next = isRTL ? next + stepVal : next - stepVal;
+        e.preventDefault();
+      } else if (e.key === 'ArrowUp') {
+        next = next + stepVal;
+        e.preventDefault();
+      } else if (e.key === 'ArrowDown') {
+        next = next - stepVal;
         e.preventDefault();
       } else if (e.key === 'Home') {
         next = min;
@@ -543,7 +640,9 @@ const RangeSlider = ({
       );
       if (clamped !== currentValues[0]) {
         const nextVals: [number, number] = [clamped, currentValues[1]];
-        setInternalValues(nextVals);
+        if (!isControlled) {
+          setInternalValues(nextVals);
+        }
         onValueChange?.(nextVals);
         onSlidingComplete?.(nextVals);
       }
@@ -556,6 +655,7 @@ const RangeSlider = ({
       currentValues,
       isRTL,
       minSeparation,
+      isControlled,
       onValueChange,
       onSlidingComplete,
     ]
@@ -566,11 +666,17 @@ const RangeSlider = ({
       if (disabled) return;
       const stepVal = step ?? (max - min) / 100;
       let next = currentValues[1];
-      if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+      if (e.key === 'ArrowRight') {
         next = isRTL ? next - stepVal : next + stepVal;
         e.preventDefault();
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+      } else if (e.key === 'ArrowLeft') {
         next = isRTL ? next + stepVal : next - stepVal;
+        e.preventDefault();
+      } else if (e.key === 'ArrowUp') {
+        next = next + stepVal;
+        e.preventDefault();
+      } else if (e.key === 'ArrowDown') {
+        next = next - stepVal;
         e.preventDefault();
       } else if (e.key === 'Home') {
         next = currentValues[0] + minSeparation;
@@ -592,7 +698,9 @@ const RangeSlider = ({
       );
       if (clamped !== currentValues[1]) {
         const nextVals: [number, number] = [currentValues[0], clamped];
-        setInternalValues(nextVals);
+        if (!isControlled) {
+          setInternalValues(nextVals);
+        }
         onValueChange?.(nextVals);
         onSlidingComplete?.(nextVals);
       }
@@ -605,37 +713,20 @@ const RangeSlider = ({
       currentValues,
       isRTL,
       minSeparation,
+      isControlled,
       onValueChange,
       onSlidingComplete,
     ]
   );
 
-  const trackCornerRadius = trackHeight / 2 || DEFAULT_TRACK_CORNER_RADIUS;
-  const travelWidth = Math.max(0, trackWidth - 2 * trackCornerRadius);
-
   const startRatio = getRatioFromValue(currentValues[0], min, max);
   const endRatio = getRatioFromValue(currentValues[1], min, max);
 
-  const visualStartRatio = isRTL ? 1 - startRatio : startRatio;
-  const visualEndRatio = isRTL ? 1 - endRatio : endRatio;
-
-  const startThumbCenter = trackCornerRadius + visualStartRatio * travelWidth;
-  const endThumbCenter = trackCornerRadius + visualEndRatio * travelWidth;
+  const startThumbCenter = trackCornerRadius + startRatio * travelWidth;
+  const endThumbCenter = trackCornerRadius + endRatio * travelWidth;
 
   const gap = thumbTrackGapSize;
   const halfThumb = DEFAULT_THUMB_WIDTH / 2;
-
-  // Active track is between the two thumbs (with gap on each side)
-  const leftEdge = Math.min(startThumbCenter, endThumbCenter);
-  const rightEdge = Math.max(startThumbCenter, endThumbCenter);
-
-  const activeLeft = leftEdge + halfThumb + gap;
-  const activeWidth = Math.max(0, rightEdge - halfThumb - gap - activeLeft);
-
-  // Inactive segments on the left and right
-  const inactiveLeftWidth = Math.max(0, leftEdge - halfThumb - gap);
-  const inactiveRightLeft = rightEdge + halfThumb + gap;
-  const inactiveRightWidth = Math.max(0, trackWidth - inactiveRightLeft);
 
   const effectiveActiveTrackColor = disabled
     ? defaultSliderColors.disabledActiveTrackColor
@@ -653,62 +744,150 @@ const RangeSlider = ({
     ? defaultSliderColors.disabledIconColor
     : defaultSliderColors.iconColor;
 
-  const animDuration = reduceMotion ? 0 : 150;
+  const startThumbAnimatedStyle = useAnimatedStyle(() => {
+    const val = startValueSV.value;
+    const radius = trackCornerRadius;
+    const travel = travelWidth;
+    const r =
+      travel > 0 && max > min ? clamp((val - min) / (max - min), 0, 1) : 0;
+    const center = radius + r * travel;
+    return {
+      left: center - DEFAULT_THUMB_WIDTH / 2,
+      transform: [
+        {
+          scaleX: 1 + 0.5 * isInteractingStartSV.value,
+        },
+      ],
+    };
+  }, [travelWidth, trackCornerRadius, min, max]);
 
-  const startThumbAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [
-      {
-        scaleX: withTiming(isInteractingStartSV.value ? 1.5 : 1, {
-          duration: animDuration,
-        }),
-      },
-    ],
-  }));
+  const endThumbAnimatedStyle = useAnimatedStyle(() => {
+    const val = endValueSV.value;
+    const radius = trackCornerRadius;
+    const travel = travelWidth;
+    const r =
+      travel > 0 && max > min ? clamp((val - min) / (max - min), 0, 1) : 0;
+    const center = radius + r * travel;
+    return {
+      left: center - DEFAULT_THUMB_WIDTH / 2,
+      transform: [
+        {
+          scaleX: 1 + 0.5 * isInteractingEndSV.value,
+        },
+      ],
+    };
+  }, [travelWidth, trackCornerRadius, min, max]);
 
-  const endThumbAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [
-      {
-        scaleX: withTiming(isInteractingEndSV.value ? 1.5 : 1, {
-          duration: animDuration,
-        }),
-      },
-    ],
-  }));
+  const stateLayerStartAnimatedStyle = useAnimatedStyle(() => {
+    const val = startValueSV.value;
+    const radius = trackCornerRadius;
+    const travel = travelWidth;
+    const r =
+      travel > 0 && max > min ? clamp((val - min) / (max - min), 0, 1) : 0;
+    const center = radius + r * travel;
+    return {
+      left: center - STATE_LAYER_SIZE / 2,
+      opacity:
+        isInteractingStartSV.value * 0.12 +
+        (1 - isInteractingStartSV.value) * (isStartFocused ? 0.1 : 0),
+      transform: [
+        {
+          scale:
+            0.6 +
+            0.4 * (isInteractingStartSV.value || (isStartFocused ? 1 : 0)),
+        },
+      ],
+    };
+  }, [travelWidth, trackCornerRadius, min, max, isStartFocused]);
 
-  const stateLayerStartAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(
-      isInteractingStartSV.value ? 0.12 : isStartFocused ? 0.1 : 0,
-      {
-        duration: animDuration,
-      }
-    ),
-    transform: [
-      {
-        scale: withTiming(
-          isInteractingStartSV.value || isStartFocused ? 1 : 0.6,
-          {
-            duration: animDuration,
-          }
-        ),
-      },
-    ],
-  }));
+  const stateLayerEndAnimatedStyle = useAnimatedStyle(() => {
+    const val = endValueSV.value;
+    const radius = trackCornerRadius;
+    const travel = travelWidth;
+    const r =
+      travel > 0 && max > min ? clamp((val - min) / (max - min), 0, 1) : 0;
+    const center = radius + r * travel;
+    return {
+      left: center - STATE_LAYER_SIZE / 2,
+      opacity:
+        isInteractingEndSV.value * 0.12 +
+        (1 - isInteractingEndSV.value) * (isEndFocused ? 0.1 : 0),
+      transform: [
+        {
+          scale:
+            0.6 + 0.4 * (isInteractingEndSV.value || (isEndFocused ? 1 : 0)),
+        },
+      ],
+    };
+  }, [travelWidth, trackCornerRadius, min, max, isEndFocused]);
 
-  const stateLayerEndAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(
-      isInteractingEndSV.value ? 0.12 : isEndFocused ? 0.1 : 0,
-      {
-        duration: animDuration,
-      }
-    ),
-    transform: [
-      {
-        scale: withTiming(isInteractingEndSV.value || isEndFocused ? 1 : 0.6, {
-          duration: animDuration,
-        }),
-      },
-    ],
-  }));
+  const inactiveLeftTrackAnimatedStyle = useAnimatedStyle(() => {
+    const sVal = startValueSV.value;
+    const radius = trackCornerRadius;
+    const travel = travelWidth;
+    const sR =
+      travel > 0 && max > min ? clamp((sVal - min) / (max - min), 0, 1) : 0;
+    const sCenter = radius + sR * travel;
+    return {
+      width: Math.max(0, sCenter - halfThumb - gap),
+    };
+  }, [travelWidth, trackCornerRadius, min, max, halfThumb, gap]);
+
+  const activeMiddleTrackAnimatedStyle = useAnimatedStyle(() => {
+    const sVal = startValueSV.value;
+    const eVal = endValueSV.value;
+    const radius = trackCornerRadius;
+    const travel = travelWidth;
+    const sR =
+      travel > 0 && max > min ? clamp((sVal - min) / (max - min), 0, 1) : 0;
+    const eR =
+      travel > 0 && max > min ? clamp((eVal - min) / (max - min), 0, 1) : 0;
+    const sCenter = radius + sR * travel;
+    const eCenter = radius + eR * travel;
+    const left = sCenter + halfThumb + gap;
+    return {
+      left,
+      width: Math.max(0, eCenter - halfThumb - gap - left),
+    };
+  }, [travelWidth, trackCornerRadius, min, max, halfThumb, gap]);
+
+  const inactiveRightTrackAnimatedStyle = useAnimatedStyle(() => {
+    const eVal = endValueSV.value;
+    const radius = trackCornerRadius;
+    const travel = travelWidth;
+    const eR =
+      travel > 0 && max > min ? clamp((eVal - min) / (max - min), 0, 1) : 0;
+    const eCenter = radius + eR * travel;
+    const left = eCenter + halfThumb + gap;
+    return {
+      left,
+      width: Math.max(0, trackWidth - left),
+    };
+  }, [trackWidth, travelWidth, trackCornerRadius, min, max, halfThumb, gap]);
+
+  const startValueIndicatorAnchorAnimatedStyle = useAnimatedStyle(() => {
+    const val = startValueSV.value;
+    const radius = trackCornerRadius;
+    const travel = travelWidth;
+    const r =
+      travel > 0 && max > min ? clamp((val - min) / (max - min), 0, 1) : 0;
+    const center = radius + r * travel;
+    return {
+      left: center - startIndicatorWidth / 2,
+    };
+  }, [travelWidth, trackCornerRadius, min, max, startIndicatorWidth]);
+
+  const endValueIndicatorAnchorAnimatedStyle = useAnimatedStyle(() => {
+    const val = endValueSV.value;
+    const radius = trackCornerRadius;
+    const travel = travelWidth;
+    const r =
+      travel > 0 && max > min ? clamp((val - min) / (max - min), 0, 1) : 0;
+    const center = radius + r * travel;
+    return {
+      left: center - endIndicatorWidth / 2,
+    };
+  }, [travelWidth, trackCornerRadius, min, max, endIndicatorWidth]);
 
   const valueIndicatorStartAnimatedStyle = useAnimatedStyle(() => {
     if (labelBehavior === 'visible') {
@@ -717,7 +896,7 @@ const RangeSlider = ({
     if (labelBehavior === 'gone') {
       return { opacity: 0, transform: [{ scale: 0 }] };
     }
-    const show = isInteractingStartSV.value === 1 || isStartFocused;
+    const show = isInteractingStartSV.value > 0 || isStartFocused;
     return {
       opacity: withTiming(show ? 1 : 0, { duration: animDuration }),
       transform: [
@@ -735,7 +914,7 @@ const RangeSlider = ({
     if (labelBehavior === 'gone') {
       return { opacity: 0, transform: [{ scale: 0 }] };
     }
-    const show = isInteractingEndSV.value === 1 || isEndFocused;
+    const show = isInteractingEndSV.value > 0 || isEndFocused;
     return {
       opacity: withTiming(show ? 1 : 0, { duration: animDuration }),
       transform: [
@@ -787,279 +966,273 @@ const RangeSlider = ({
       ) : null}
 
       {/* Main Track & Dual Thumbs Area */}
-      <View
-        ref={trackRef}
-        collapsable={false}
-        style={styles.touchArea}
-        onLayout={onTrackLayout}
-        onStartShouldSetResponder={handleStartShouldSetResponder}
-        onMoveShouldSetResponder={handleMoveShouldSetResponder}
-        onStartShouldSetResponderCapture={handleStartShouldSetResponder}
-        onMoveShouldSetResponderCapture={handleMoveShouldSetResponder}
-        onResponderTerminationRequest={handleTerminationRequest}
-        onResponderGrant={handleResponderGrant}
-        onResponderMove={handleResponderMove}
-        onResponderRelease={handleResponderEnd}
-        onResponderTerminate={handleResponderEnd}
-      >
-        {/* Inactive Left Track */}
-        {trackWidth > 0 && inactiveLeftWidth > 0 ? (
-          <View
+      <GestureDetector gesture={gesture}>
+        <Animated.View
+          collapsable={false}
+          style={styles.touchArea}
+          onLayout={onTrackLayout}
+        >
+          {/* Inactive Left Track */}
+          {trackWidth > 0 ? (
+            <Animated.View
+              style={[
+                styles.segment,
+                styles.inactiveLeftSegment,
+                {
+                  top: (MIN_TOUCH_TARGET_SIZE - trackHeight) / 2,
+                  height: trackHeight,
+                  backgroundColor: effectiveInactiveTrackColor,
+                  borderTopStartRadius: trackCornerRadius,
+                  borderBottomStartRadius: trackCornerRadius,
+                  borderTopEndRadius: TRACK_INSIDE_CORNER_RADIUS,
+                  borderBottomEndRadius: TRACK_INSIDE_CORNER_RADIUS,
+                },
+                inactiveLeftTrackAnimatedStyle,
+                disabled && styles.disabledInactiveTrack,
+              ]}
+            />
+          ) : null}
+
+          {/* Active Middle Track */}
+          {trackWidth > 0 ? (
+            <Animated.View
+              style={[
+                styles.segment,
+                {
+                  top: (MIN_TOUCH_TARGET_SIZE - trackHeight) / 2,
+                  height: trackHeight,
+                  backgroundColor: effectiveActiveTrackColor,
+                  borderRadius: TRACK_INSIDE_CORNER_RADIUS,
+                },
+                activeMiddleTrackAnimatedStyle,
+                disabled && styles.disabledActiveTrack,
+              ]}
+            />
+          ) : null}
+
+          {/* Inactive Right Track */}
+          {trackWidth > 0 ? (
+            <Animated.View
+              style={[
+                styles.segment,
+                {
+                  top: (MIN_TOUCH_TARGET_SIZE - trackHeight) / 2,
+                  height: trackHeight,
+                  backgroundColor: effectiveInactiveTrackColor,
+                  borderTopStartRadius: TRACK_INSIDE_CORNER_RADIUS,
+                  borderBottomStartRadius: TRACK_INSIDE_CORNER_RADIUS,
+                  borderTopEndRadius: trackCornerRadius,
+                  borderBottomEndRadius: trackCornerRadius,
+                },
+                inactiveRightTrackAnimatedStyle,
+                disabled && styles.disabledInactiveTrack,
+              ]}
+            />
+          ) : null}
+
+          {/* Stop Indicators (Tick Marks) */}
+          {trackWidth > 0 && tickMarks.length > 0
+            ? tickMarks.map((tickRatio, idx) => {
+                const tickPos = trackCornerRadius + tickRatio * travelWidth;
+                const isActiveTick =
+                  tickRatio >= startRatio && tickRatio <= endRatio;
+
+                // Don't render ticks inside thumb gaps
+                const distToStartThumb = Math.abs(tickPos - startThumbCenter);
+                const distToEndThumb = Math.abs(tickPos - endThumbCenter);
+                if (
+                  distToStartThumb < halfThumb + gap ||
+                  distToEndThumb < halfThumb + gap
+                ) {
+                  return null;
+                }
+
+                const tickColor = isActiveTick
+                  ? defaultSliderColors.stopIndicatorActiveColor
+                  : defaultSliderColors.stopIndicatorInactiveColor;
+
+                return (
+                  <View
+                    key={idx}
+                    style={[
+                      styles.tickMark,
+                      {
+                        left: tickPos - STOP_INDICATOR_SIZE / 2,
+                        top: (MIN_TOUCH_TARGET_SIZE - STOP_INDICATOR_SIZE) / 2,
+                        backgroundColor: disabled
+                          ? defaultSliderColors.disabledStopIndicatorColor
+                          : tickColor,
+                      },
+                      disabled && styles.disabledStopIndicator,
+                    ]}
+                  />
+                );
+              })
+            : null}
+
+          {/* Start State Layer & Thumb */}
+          <Animated.View
             style={[
-              styles.segment,
-              styles.inactiveLeftSegment,
+              styles.stateLayer,
               {
-                width: inactiveLeftWidth,
-                height: trackHeight,
-                backgroundColor: effectiveInactiveTrackColor,
-                borderTopLeftRadius: trackCornerRadius,
-                borderBottomLeftRadius: trackCornerRadius,
-                borderTopRightRadius: TRACK_INSIDE_CORNER_RADIUS,
-                borderBottomRightRadius: TRACK_INSIDE_CORNER_RADIUS,
+                left: startThumbCenter - STATE_LAYER_SIZE / 2,
+                top: (MIN_TOUCH_TARGET_SIZE - STATE_LAYER_SIZE) / 2,
+                backgroundColor: defaultSliderColors.stateLayerColor,
               },
-              disabled && styles.disabledInactiveTrack,
+              stateLayerStartAnimatedStyle,
             ]}
           />
-        ) : null}
-
-        {/* Active Middle Track */}
-        {trackWidth > 0 && activeWidth > 0 ? (
-          <View
+          <Animated.View
             style={[
-              styles.segment,
+              styles.thumb,
               {
-                left: activeLeft,
-                width: activeWidth,
-                height: trackHeight,
-                backgroundColor: effectiveActiveTrackColor,
-                borderRadius: TRACK_INSIDE_CORNER_RADIUS,
+                left: startThumbCenter - DEFAULT_THUMB_WIDTH / 2,
+                top: (MIN_TOUCH_TARGET_SIZE - DEFAULT_THUMB_HEIGHT) / 2,
+                backgroundColor: effectiveThumbColor,
               },
-              disabled && styles.disabledActiveTrack,
+              startThumbAnimatedStyle,
+              Platform.OS === 'web' ? webNoOutline : undefined,
+              disabled && styles.disabledHandle,
             ]}
-          />
-        ) : null}
-
-        {/* Inactive Right Track */}
-        {trackWidth > 0 && inactiveRightWidth > 0 ? (
-          <View
-            style={[
-              styles.segment,
-              {
-                left: inactiveRightLeft,
-                width: inactiveRightWidth,
-                height: trackHeight,
-                backgroundColor: effectiveInactiveTrackColor,
-                borderTopLeftRadius: TRACK_INSIDE_CORNER_RADIUS,
-                borderBottomLeftRadius: TRACK_INSIDE_CORNER_RADIUS,
-                borderTopRightRadius: trackCornerRadius,
-                borderBottomRightRadius: trackCornerRadius,
-              },
-              disabled && styles.disabledInactiveTrack,
+            accessible
+            accessibilityRole="adjustable"
+            role="slider"
+            aria-label={startAccessibilityLabel}
+            aria-valuemin={min}
+            aria-valuemax={currentValues[1] - minSeparation}
+            aria-valuenow={currentValues[0]}
+            aria-valuetext={startFormatted}
+            aria-disabled={disabled}
+            accessibilityActions={[
+              { name: 'increment', label: 'increment' },
+              { name: 'decrement', label: 'decrement' },
             ]}
+            onAccessibilityAction={handleStartAccessibilityAction}
+            {...(Platform.OS === 'web'
+              ? {
+                  focusable: !disabled,
+                  onFocus: () => setIsStartFocused(true),
+                  onBlur: () => setIsStartFocused(false),
+                  onKeyDown: handleStartKeyDown,
+                  tabIndex: disabled ? -1 : 0,
+                }
+              : {})}
           />
-        ) : null}
-
-        {/* Stop Indicators (Tick Marks) */}
-        {trackWidth > 0 && tickMarks.length > 0
-          ? tickMarks.map((tickRatio, idx) => {
-              const tickVisualRatio = isRTL ? 1 - tickRatio : tickRatio;
-              const tickPos = trackCornerRadius + tickVisualRatio * travelWidth;
-              const isActiveTick =
-                tickRatio >= startRatio && tickRatio <= endRatio;
-
-              // Don't render ticks inside thumb gaps
-              const distToStartThumb = Math.abs(tickPos - startThumbCenter);
-              const distToEndThumb = Math.abs(tickPos - endThumbCenter);
-              if (
-                distToStartThumb < halfThumb + gap ||
-                distToEndThumb < halfThumb + gap
-              ) {
-                return null;
-              }
-
-              const tickColor = isActiveTick
-                ? defaultSliderColors.stopIndicatorActiveColor
-                : defaultSliderColors.stopIndicatorInactiveColor;
-
-              return (
-                <View
-                  key={idx}
+          {labelBehavior !== 'gone' ? (
+            <Animated.View
+              style={[
+                styles.valueIndicatorAnchor,
+                { left: startThumbCenter - startIndicatorWidth / 2 },
+                startValueIndicatorAnchorAnimatedStyle,
+              ]}
+              onLayout={handleStartIndicatorLayout}
+              pointerEvents="none"
+            >
+              <Animated.View
+                style={[
+                  styles.valueIndicator,
+                  {
+                    backgroundColor:
+                      defaultSliderColors.valueIndicatorContainerColor,
+                  },
+                  valueIndicatorStartAnimatedStyle,
+                ]}
+              >
+                <Text
+                  variant="labelLarge"
                   style={[
-                    styles.tickMark,
-                    {
-                      left: tickPos - STOP_INDICATOR_SIZE / 2,
-                      top: (MIN_TOUCH_TARGET_SIZE - STOP_INDICATOR_SIZE) / 2,
-                      backgroundColor: disabled
-                        ? defaultSliderColors.disabledStopIndicatorColor
-                        : tickColor,
-                    },
-                    disabled && styles.disabledStopIndicator,
+                    styles.valueIndicatorText,
+                    { color: defaultSliderColors.valueIndicatorTextColor },
                   ]}
-                />
-              );
-            })
-          : null}
+                >
+                  {startFormatted}
+                </Text>
+              </Animated.View>
+            </Animated.View>
+          ) : null}
 
-        {/* Start State Layer & Thumb */}
-        <Animated.View
-          style={[
-            styles.stateLayer,
-            {
-              left: startThumbCenter - STATE_LAYER_SIZE / 2,
-              top: (MIN_TOUCH_TARGET_SIZE - STATE_LAYER_SIZE) / 2,
-              backgroundColor: defaultSliderColors.stateLayerColor,
-            },
-            stateLayerStartAnimatedStyle,
-          ]}
-        />
-        <Animated.View
-          style={[
-            styles.thumb,
-            {
-              left: startThumbCenter - DEFAULT_THUMB_WIDTH / 2,
-              top: (MIN_TOUCH_TARGET_SIZE - DEFAULT_THUMB_HEIGHT) / 2,
-              backgroundColor: effectiveThumbColor,
-            },
-            startThumbAnimatedStyle,
-            Platform.OS === 'web' ? webNoOutline : undefined,
-            disabled && styles.disabledHandle,
-          ]}
-          accessible
-          accessibilityRole="adjustable"
-          role="slider"
-          aria-label={startAccessibilityLabel}
-          aria-valuemin={min}
-          aria-valuemax={currentValues[1] - minSeparation}
-          aria-valuenow={currentValues[0]}
-          aria-valuetext={startFormatted}
-          aria-disabled={disabled}
-          accessibilityActions={[
-            { name: 'increment', label: 'increment' },
-            { name: 'decrement', label: 'decrement' },
-          ]}
-          onAccessibilityAction={handleStartAccessibilityAction}
-          {...(Platform.OS === 'web'
-            ? {
-                focusable: !disabled,
-                onFocus: () => setIsStartFocused(true),
-                onBlur: () => setIsStartFocused(false),
-                onKeyDown: handleStartKeyDown,
-                tabIndex: disabled ? -1 : 0,
-              }
-            : {})}
-        />
-        {labelBehavior !== 'gone' ? (
-          <View
+          {/* End State Layer & Thumb */}
+          <Animated.View
             style={[
-              styles.valueIndicatorAnchor,
-              { left: startThumbCenter - startIndicatorWidth / 2 },
+              styles.stateLayer,
+              {
+                left: endThumbCenter - STATE_LAYER_SIZE / 2,
+                top: (MIN_TOUCH_TARGET_SIZE - STATE_LAYER_SIZE) / 2,
+                backgroundColor: defaultSliderColors.stateLayerColor,
+              },
+              stateLayerEndAnimatedStyle,
             ]}
-            onLayout={handleStartIndicatorLayout}
-            pointerEvents="none"
-          >
+          />
+          <Animated.View
+            style={[
+              styles.thumb,
+              {
+                left: endThumbCenter - DEFAULT_THUMB_WIDTH / 2,
+                top: (MIN_TOUCH_TARGET_SIZE - DEFAULT_THUMB_HEIGHT) / 2,
+                backgroundColor: effectiveThumbColor,
+              },
+              endThumbAnimatedStyle,
+              Platform.OS === 'web' ? webNoOutline : undefined,
+              disabled && styles.disabledHandle,
+            ]}
+            accessible
+            accessibilityRole="adjustable"
+            role="slider"
+            aria-label={endAccessibilityLabel}
+            aria-valuemin={currentValues[0] + minSeparation}
+            aria-valuemax={max}
+            aria-valuenow={currentValues[1]}
+            aria-valuetext={endFormatted}
+            aria-disabled={disabled}
+            accessibilityActions={[
+              { name: 'increment', label: 'increment' },
+              { name: 'decrement', label: 'decrement' },
+            ]}
+            onAccessibilityAction={handleEndAccessibilityAction}
+            {...(Platform.OS === 'web'
+              ? {
+                  focusable: !disabled,
+                  onFocus: () => setIsEndFocused(true),
+                  onBlur: () => setIsEndFocused(false),
+                  onKeyDown: handleEndKeyDown,
+                  tabIndex: disabled ? -1 : 0,
+                }
+              : {})}
+          />
+          {labelBehavior !== 'gone' ? (
             <Animated.View
               style={[
-                styles.valueIndicator,
-                {
-                  backgroundColor:
-                    defaultSliderColors.valueIndicatorContainerColor,
-                },
-                valueIndicatorStartAnimatedStyle,
+                styles.valueIndicatorAnchor,
+                { left: endThumbCenter - endIndicatorWidth / 2 },
+                endValueIndicatorAnchorAnimatedStyle,
               ]}
+              onLayout={handleEndIndicatorLayout}
+              pointerEvents="none"
             >
-              <Text
-                variant="labelLarge"
+              <Animated.View
                 style={[
-                  styles.valueIndicatorText,
-                  { color: defaultSliderColors.valueIndicatorTextColor },
+                  styles.valueIndicator,
+                  {
+                    backgroundColor:
+                      defaultSliderColors.valueIndicatorContainerColor,
+                  },
+                  valueIndicatorEndAnimatedStyle,
                 ]}
               >
-                {startFormatted}
-              </Text>
+                <Text
+                  variant="labelLarge"
+                  style={[
+                    styles.valueIndicatorText,
+                    { color: defaultSliderColors.valueIndicatorTextColor },
+                  ]}
+                >
+                  {endFormatted}
+                </Text>
+              </Animated.View>
             </Animated.View>
-          </View>
-        ) : null}
-
-        {/* End State Layer & Thumb */}
-        <Animated.View
-          style={[
-            styles.stateLayer,
-            {
-              left: endThumbCenter - STATE_LAYER_SIZE / 2,
-              top: (MIN_TOUCH_TARGET_SIZE - STATE_LAYER_SIZE) / 2,
-              backgroundColor: defaultSliderColors.stateLayerColor,
-            },
-            stateLayerEndAnimatedStyle,
-          ]}
-        />
-        <Animated.View
-          style={[
-            styles.thumb,
-            {
-              left: endThumbCenter - DEFAULT_THUMB_WIDTH / 2,
-              top: (MIN_TOUCH_TARGET_SIZE - DEFAULT_THUMB_HEIGHT) / 2,
-              backgroundColor: effectiveThumbColor,
-            },
-            endThumbAnimatedStyle,
-            Platform.OS === 'web' ? webNoOutline : undefined,
-            disabled && styles.disabledHandle,
-          ]}
-          accessible
-          accessibilityRole="adjustable"
-          role="slider"
-          aria-label={endAccessibilityLabel}
-          aria-valuemin={currentValues[0] + minSeparation}
-          aria-valuemax={max}
-          aria-valuenow={currentValues[1]}
-          aria-valuetext={endFormatted}
-          aria-disabled={disabled}
-          accessibilityActions={[
-            { name: 'increment', label: 'increment' },
-            { name: 'decrement', label: 'decrement' },
-          ]}
-          onAccessibilityAction={handleEndAccessibilityAction}
-          {...(Platform.OS === 'web'
-            ? {
-                focusable: !disabled,
-                onFocus: () => setIsEndFocused(true),
-                onBlur: () => setIsEndFocused(false),
-                onKeyDown: handleEndKeyDown,
-                tabIndex: disabled ? -1 : 0,
-              }
-            : {})}
-        />
-        {labelBehavior !== 'gone' ? (
-          <View
-            style={[
-              styles.valueIndicatorAnchor,
-              { left: endThumbCenter - endIndicatorWidth / 2 },
-            ]}
-            onLayout={handleEndIndicatorLayout}
-            pointerEvents="none"
-          >
-            <Animated.View
-              style={[
-                styles.valueIndicator,
-                {
-                  backgroundColor:
-                    defaultSliderColors.valueIndicatorContainerColor,
-                },
-                valueIndicatorEndAnimatedStyle,
-              ]}
-            >
-              <Text
-                variant="labelLarge"
-                style={[
-                  styles.valueIndicatorText,
-                  { color: defaultSliderColors.valueIndicatorTextColor },
-                ]}
-              >
-                {endFormatted}
-              </Text>
-            </Animated.View>
-          </View>
-        ) : null}
-      </View>
+          ) : null}
+        </Animated.View>
+      </GestureDetector>
 
       {/* Trailing Icon */}
       {endIcon ? (
@@ -1102,6 +1275,7 @@ const styles = StyleSheet.create({
   },
   segment: {
     position: 'absolute',
+    top: (MIN_TOUCH_TARGET_SIZE - DEFAULT_TRACK_HEIGHT) / 2,
     pointerEvents: 'none',
   },
   inactiveLeftSegment: {
