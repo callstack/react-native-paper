@@ -225,28 +225,8 @@ const Checkbox = ({
     pressRipple.color
   );
 
-  // The platform press paints the wrong thing: it covers the whole 48dp target
-  // instead of the 40dp state layer, tints with a neutral role, and on web its
-  // hover overlay doubles up with the layer. Android also refuses a
-  // `PlatformColor`, which is what the dynamic theme resolves the roles to.
-  // A caller can still ask for that platform press back, but only through a
-  // prop this platform honours: `rippleColor` everywhere, `background` for the
-  // Android ripple, `underlayColor` for the iOS highlight. Counting one the
-  // platform drops would cost the MD3 ripple and hand back the neutral default
-  // instead.
-  const platformOwnsPress =
-    rest.rippleColor != null ||
-    (Platform.OS === 'android' && rest.background != null) ||
-    (Platform.OS === 'ios' && rest.underlayColor != null);
-
-  const platformPressOverride = platformOwnsPress
-    ? null
-    : ({ rippleColor: 'transparent' } as const);
-
-  // A disabled ripple effect asks for no press at all, on top of the platform
-  // press being spoken for above -- either way, nothing left for us to paint.
-  const ownsPress =
-    isInteractive && !platformOwnsPress && Boolean(rippleEffectEnabled);
+  // A disabled ripple effect asks for no press at all.
+  const ownsPress = isInteractive && Boolean(rippleEffectEnabled);
 
   const fillTransitionTimingFunction = cubicBezier(
     ...theme.motion.easing.standard
@@ -514,10 +494,16 @@ const Checkbox = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...interactionHandlers}
-        // Keeps the platform press circular for a caller that hands it back
-        // with `rippleColor` or `underlayColor`.
         borderless
-        {...platformPressOverride}
+        // The platform press paints the wrong thing: it covers the whole 48dp
+        // target instead of the 40dp state layer, tints with a neutral role,
+        // and on web its hover overlay doubles up with the layer. Android also
+        // refuses a `PlatformColor`, which the dynamic theme resolves the roles
+        // to. So the checkbox always paints its own press, and the platform
+        // ripple and highlight stay transparent whatever the caller passes.
+        rippleColor="transparent"
+        underlayColor="transparent"
+        background={undefined}
         disabled={disabled}
         {...accessibilityProps}
         testID={testID}

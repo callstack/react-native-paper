@@ -580,7 +580,7 @@ mutually exclusive options, use `SegmentedButtons`.
 
 Hover, focus and press now paint a Material Design 3 state layer, a 40dp circle around the box, on every platform. Hover and focus use `primary` when the checkbox is selected and `onSurface` when it is not, a press ripples in the opposite color, and an error checkbox uses `error` throughout. `color` and `uncheckedColor` also set the matching state layer color. Keyboard focus draws a 50dp ring with a 2dp gap around the state layer.
 
-To use the platform ripple instead of the state layer press, pass `rippleColor` on any platform, `background` on Android or `underlayColor` on iOS. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` turns off the press ripple either way.
+`Checkbox` always paints its own press and ignores `rippleColor`, `background` and `underlayColor`. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` turns off the press ripple.
 
 #### Touch target size
 

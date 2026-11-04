@@ -140,6 +140,44 @@ describe('Checkbox press', () => {
 
     expect(screen.getByRole('checkbox')).toBeDisabled();
   });
+
+  it.each(['ios', 'android', 'web'] as const)(
+    'renders the same with rippleColor, background and underlayColor on %s',
+    async (os) => {
+      jest.replaceProperty(Platform, 'OS', os);
+
+      // Held down, so the press the platform would paint is on screen.
+      const plain = JSON.stringify(
+        (
+          await render(
+            <Checkbox
+              status="checked"
+              onPress={() => {}}
+              aria-label="Notify me"
+              testOnly_pressed
+            />
+          )
+        ).toJSON()
+      );
+      const withPlatformPress = JSON.stringify(
+        (
+          await render(
+            <Checkbox
+              status="checked"
+              onPress={() => {}}
+              aria-label="Notify me"
+              testOnly_pressed
+              rippleColor="teal"
+              background={{ color: 'teal' }}
+              underlayColor="teal"
+            />
+          )
+        ).toJSON()
+      );
+
+      expect(withPlatformPress).toBe(plain);
+    }
+  );
 });
 
 describe('Checkbox Space key', () => {
