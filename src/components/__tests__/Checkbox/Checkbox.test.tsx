@@ -420,6 +420,24 @@ describe('Checkbox touch target', () => {
     expect(screen.root).toHaveStyle({ width: 48, height: 48 });
   });
 
+  it('reports the layout of the whole checkbox, not its pressable', async () => {
+    const onLayout = jest.fn();
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={() => {}}
+        aria-label="Notify me"
+        style={{ marginLeft: 24 }}
+        onLayout={onLayout}
+      />
+    );
+
+    // `style` positions the outer container, so its frame is the checkbox's.
+    // The pressable inside it always sits at x 0.
+    expect(screen.root).toHaveProp('onLayout', onLayout);
+    expect(screen.getByRole('checkbox')).not.toHaveProp('onLayout');
+  });
+
   it('keeps the 48dp touch target under a negative margin', async () => {
     await render(
       <Checkbox

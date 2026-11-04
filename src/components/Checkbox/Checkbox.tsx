@@ -155,6 +155,7 @@ const Checkbox = ({
   color,
   uncheckedColor,
   style,
+  onLayout,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -486,7 +487,12 @@ const Checkbox = ({
     // forces `overflow: hidden` on it regardless of `borderless`. Space is
     // handled here as its key events bubble up from the pressable, which
     // leaves a caller's own key handlers on the pressable in place.
-    <View style={[styles.root, style]} {...spaceKeyHandlers}>
+    <View
+      style={[styles.root, style]}
+      // Reports the frame of the whole checkbox, which `style` positions.
+      onLayout={onLayout}
+      {...spaceKeyHandlers}
+    >
       <TouchableRipple
         {...rest}
         centered
