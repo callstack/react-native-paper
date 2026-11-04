@@ -1,4 +1,4 @@
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import type { InternalTheme } from '../../theme/types';
 
@@ -61,7 +61,10 @@ export const getCardColors = ({
 }: {
   theme: InternalTheme;
   mode: CardMode;
-}) => {
+}): {
+  backgroundColor: ColorValue | undefined;
+  borderColor: ColorValue;
+} => {
   const isMode = (modeToCompare: CardMode) => {
     return mode === modeToCompare;
   };
