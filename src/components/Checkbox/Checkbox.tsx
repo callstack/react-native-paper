@@ -18,6 +18,7 @@ import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
+import { webNoOutline } from '../../utils/focusRing';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -300,10 +301,6 @@ const Checkbox = ({
     </TouchableRipple>
   );
 };
-
-// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({
   tapTarget: {

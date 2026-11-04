@@ -30,6 +30,7 @@ import { tokens } from '../../theme/tokens';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { StateOpacityKey, ThemeProp } from '../../theme/types';
+import { webNoOutline } from '../../utils/focusRing';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon, { type IconSource } from '../Icon';
 
@@ -537,9 +538,5 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
-
-// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export default Switch;

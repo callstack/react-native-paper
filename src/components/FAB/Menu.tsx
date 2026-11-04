@@ -14,13 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Content from './Content';
 import Shell from './Shell';
-import {
-  MenuTokens,
-  Tokens,
-  FOCUS_RING_INSET,
-  FOCUS_RING_THICKNESS,
-  webNoOutline,
-} from './tokens';
+import { MenuTokens, Tokens } from './tokens';
 import type { Size, Variant } from './tokens';
 import { useFocusRing } from './useFocusRing';
 import { resolveColors } from './utils';
@@ -30,6 +24,11 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
+import {
+  FOCUS_RING_INSET,
+  FOCUS_RING_THICKNESS,
+  webNoOutline,
+} from '../../utils/focusRing';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
