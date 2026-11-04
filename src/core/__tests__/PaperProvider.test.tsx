@@ -17,11 +17,6 @@ import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
 
 declare module 'react-native' {
-  interface AccessibilityInfoStatic {
-    removeEventListener(): void;
-    __internalListeners: Array<(enabled: boolean) => void>;
-  }
-
   namespace Appearance {
     //@ts-ignore
     // eslint-disable-next-line jest/no-export
@@ -43,11 +38,18 @@ declare module 'react-native' {
   }
 }
 
+const getMockedAccessibilityInfo = () =>
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  AccessibilityInfo as typeof AccessibilityInfo & {
+    removeEventListener(): void;
+    __internalListeners: Array<(enabled: boolean) => void>;
+  };
+
 const mockAppearance = () => {
   mockJest.mock('react-native/Libraries/Utilities/Appearance', () => {
-    const realApp = mockJest.requireActual<
-      typeof import('react-native/Libraries/Utilities/Appearance')
-    >('react-native/Libraries/Utilities/Appearance');
+    const realApp = mockJest.requireActual<typeof Appearance>(
+      'react-native/Libraries/Utilities/Appearance'
+    );
 
     const listeners: Array<
       (options: { colorScheme: ColorSchemeName }) => void
@@ -153,7 +155,7 @@ describe('PaperProvider', () => {
     );
 
     expect(AccessibilityInfo.addEventListener).toHaveBeenCalled();
-    await act(() => AccessibilityInfo.__internalListeners[0](true));
+    await act(() => getMockedAccessibilityInfo().__internalListeners[0](true));
 
     expect(
       // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
@@ -202,7 +204,9 @@ describe('PaperProvider', () => {
     );
 
     expect(AccessibilityInfo.addEventListener).toHaveBeenCalledTimes(1);
-    expect(AccessibilityInfo.removeEventListener).not.toHaveBeenCalled();
+    expect(
+      getMockedAccessibilityInfo().removeEventListener
+    ).not.toHaveBeenCalled();
 
     await rerender(
       <PaperProvider reduceMotion="off">
@@ -210,7 +214,9 @@ describe('PaperProvider', () => {
       </PaperProvider>
     );
 
-    expect(AccessibilityInfo.removeEventListener).toHaveBeenCalledTimes(1);
+    expect(
+      getMockedAccessibilityInfo().removeEventListener
+    ).toHaveBeenCalledTimes(1);
   });
 
   it('does not subscribe to AccessibilityInfo when reduceMotion is "off"', async () => {

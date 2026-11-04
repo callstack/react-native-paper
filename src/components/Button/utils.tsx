@@ -191,8 +191,8 @@ export const getButtonColors = ({
   };
 };
 
-type ViewStyleBorderRadiusStyles = Partial<
-  Pick<
+type ViewStyleBorderRadiusStyles = {
+  -readonly [K in keyof Pick<
     ViewStyle,
     | 'borderBottomEndRadius'
     | 'borderBottomLeftRadius'
@@ -203,8 +203,8 @@ type ViewStyleBorderRadiusStyles = Partial<
     | 'borderTopRightRadius'
     | 'borderTopStartRadius'
     | 'borderRadius'
-  >
->;
+  >]?: ViewStyle[K];
+};
 export const getButtonTouchableRippleStyle = (
   style?: ViewStyle,
   borderWidth: number = 0

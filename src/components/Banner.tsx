@@ -74,7 +74,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   maxFontSizeMultiplier?: number;
   style?: StyleProp<SurfaceStyle>;
-  ref?: React.RefObject<View>;
+  ref?: React.RefObject<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */

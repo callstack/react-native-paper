@@ -2,9 +2,8 @@ import * as React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
-  NativeSyntheticEvent,
   StyleProp,
-  TextLayoutEventData,
+  TextLayoutEvent,
   ViewProps,
   ViewStyle,
 } from 'react-native';
@@ -150,9 +149,7 @@ const DrawerCollapsedItem = ({
     ? theme.colors.onSecondaryContainer
     : theme.colors.onSurfaceVariant;
 
-  const onTextLayout = ({
-    nativeEvent,
-  }: NativeSyntheticEvent<TextLayoutEventData>) => {
+  const onTextLayout = ({ nativeEvent }: TextLayoutEvent) => {
     setNumOfLines(nativeEvent.lines.length);
   };
 

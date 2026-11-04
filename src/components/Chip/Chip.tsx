@@ -153,7 +153,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Reference to the chip container.
    */
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**

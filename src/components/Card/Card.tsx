@@ -105,7 +105,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Reference to the card container.
    */
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 const DEFAULT_CARD_GAP = 16;
@@ -198,7 +198,6 @@ const Card = ({
     mode: cardMode,
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   const { borderColor = themedBorderColor } = flattenedStyles;

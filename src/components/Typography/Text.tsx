@@ -9,7 +9,7 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 
-export type Props<T> = React.ComponentProps<typeof NativeText> & {
+export type Props<T> = Omit<React.ComponentProps<typeof NativeText>, 'ref'> & {
   /**
    * @supported Available in v5.x with theme version 3
    *
@@ -86,7 +86,7 @@ const Text = ({
   ref,
   ...rest
 }: Props<string>) => {
-  const root = React.useRef<NativeText | null>(null);
+  const root = React.useRef<React.ComponentRef<typeof NativeText> | null>(null);
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();

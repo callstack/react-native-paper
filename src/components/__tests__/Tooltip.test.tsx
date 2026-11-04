@@ -17,6 +17,8 @@ import PaperProvider from '../../core/PaperProvider';
 import { render } from '../../test-utils';
 import Tooltip from '../Tooltip/Tooltip';
 
+const ViewPrototype: React.ComponentRef<typeof View> = View.prototype;
+
 const mockedRemoveEventListener = jest.fn();
 
 jest.mock('../../utils/addEventListener', () => ({
@@ -29,7 +31,7 @@ const DummyComponent = ({
   ref,
   ...props
 }: ViewProps & {
-  ref?: React.RefObject<View | null>;
+  ref?: React.RefObject<React.ComponentRef<typeof View> | null>;
 }) => (
   <View {...props} ref={ref}>
     <Text>dummy component</Text>
@@ -82,7 +84,7 @@ describe('Tooltip', () => {
     };
 
     jest
-      .spyOn(View.prototype, 'measure')
+      .spyOn(ViewPrototype, 'measure')
       .mockImplementation((cb) => cb(x, y, width, height, pageX, pageY));
 
     const wrapper = await render(
