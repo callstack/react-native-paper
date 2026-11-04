@@ -75,7 +75,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   disabled?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -87,6 +87,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    * Accessibility label for the close icon. This is read by the screen reader when the user taps the close icon.
    */
   closeIconAccessibilityLabel?: string;
+  /**
+   * testID for the close icon button.
+   */
+  closeIconTestID?: string;
   /**
    * Function to execute on press.
    */
@@ -186,6 +190,7 @@ const Chip = ({
   'aria-label': ariaLabel,
   role = 'button',
   closeIconAccessibilityLabel = 'Close',
+  closeIconTestID,
   onPress,
   onLongPress,
   onPressOut,
@@ -196,7 +201,7 @@ const Chip = ({
   textStyle,
   style,
   theme: themeOverrides,
-  testID = 'chip',
+  testID,
   selectedColor,
   showSelectedCheck = true,
   ellipsizeMode,
@@ -281,7 +286,6 @@ const Chip = ({
       elevation={elevation}
       transitionDuration={elevationTransitionDuration}
       {...rest}
-      testID={`${testID}-container`}
       theme={theme}
     >
       <TouchableRipple
@@ -386,6 +390,7 @@ const Chip = ({
             disabled={disabled}
             role="button"
             aria-label={closeIconAccessibilityLabel}
+            testID={closeIconTestID}
           >
             <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
               {closeIcon ? (

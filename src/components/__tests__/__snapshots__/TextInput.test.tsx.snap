@@ -176,7 +176,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             false,
           ]
         }
-        testID="icon-button-container"
       >
         <View
           accessibilityState={
@@ -234,7 +233,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -367,7 +365,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             false,
           ]
         }
-        testID="icon-button-container"
       >
         <View
           accessibilityState={
@@ -425,7 +422,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -654,7 +650,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             false,
           ]
         }
-        testID="icon-button-container"
       >
         <View
           accessibilityState={
@@ -712,7 +707,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -845,7 +839,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             false,
           ]
         }
-        testID="icon-button-container"
       >
         <View
           accessibilityState={
@@ -903,7 +896,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -1310,7 +1302,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             false,
           ]
         }
-        testID="icon-button-container"
       >
         <View
           accessibilityState={
@@ -1368,7 +1359,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -1501,7 +1491,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             false,
           ]
         }
-        testID="icon-button-container"
       >
         <View
           accessibilityState={
@@ -1559,7 +1548,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -1768,7 +1756,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             false,
           ]
         }
-        testID="icon-button-container"
       >
         <View
           accessibilityState={
@@ -1826,7 +1813,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={
@@ -1959,7 +1945,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             false,
           ]
         }
-        testID="icon-button-container"
       >
         <View
           accessibilityState={
@@ -2017,7 +2002,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               ],
             ]
           }
-          testID="icon-button"
         >
           <View
             style={

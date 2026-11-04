@@ -64,6 +64,10 @@ export type Props = Omit<TextInputProps, 'style'> & {
    */
   searchAccessibilityLabel?: string;
   /**
+   * testID for the left icon button (see `onIconPress`).
+   */
+  searchTestID?: string;
+  /**
    * Custom icon for clear button, default will be icon close. It's visible when `loading` is set to `false`.
    * In v5.x with theme version 3, `clearIcon` is visible only if `right` prop is not defined.
    */
@@ -73,24 +77,32 @@ export type Props = Omit<TextInputProps, 'style'> & {
    */
   clearAccessibilityLabel?: string;
   /**
+   * testID for the clear button.
+   */
+  clearTestID?: string;
+  /**
    * @supported Available in v5.x with theme version 3
-   * Icon name for the right trailering icon button.
+   * Icon name for the right trailing icon button.
    * Works only when `mode` is set to "bar". It won't be displayed if `loading` is set to `true`.
    */
-  traileringIcon?: IconSource;
+  trailingIcon?: IconSource;
   /**
    * @supported Available in v5.x with theme version 3
-   * Custom color for the right trailering icon, default will be derived from theme
+   * Custom color for the right trailing icon, default will be derived from theme
    */
-  traileringIconColor?: ColorValue;
+  trailingIconColor?: ColorValue;
   /**
-   * Callback to execute on the right trailering icon button press.
+   * Callback to execute on the right trailing icon button press.
    */
-  onTraileringIconPress?: (e: GestureResponderEvent) => void;
+  onTrailingIconPress?: (e: GestureResponderEvent) => void;
   /**
-   * Accessibility label for the right trailering icon button. This is read by the screen reader when the user taps the button.
+   * Accessibility label for the right trailing icon button. This is read by the screen reader when the user taps the button.
    */
-  traileringIconAccessibilityLabel?: string;
+  trailingIconAccessibilityLabel?: string;
+  /**
+   * testID for the right trailing icon button.
+   */
+  trailingTestID?: string;
   /**
    * @supported Available in v5.x with theme version 3
    * Callback which returns a React element to display on the right side.
@@ -99,7 +111,7 @@ export type Props = Omit<TextInputProps, 'style'> & {
   right?: (props: {
     color: ColorValue;
     style: Style;
-    testID: string;
+    testID?: string;
   }) => React.ReactNode;
   /**
    * @supported Available in v5.x with theme version 3
@@ -166,13 +178,16 @@ const Searchbar = ({
   iconColor: customIconColor,
   onIconPress,
   searchAccessibilityLabel = 'search',
+  searchTestID,
   clearIcon,
   clearAccessibilityLabel = 'clear',
+  clearTestID,
   onClearIconPress,
-  traileringIcon,
-  traileringIconColor,
-  traileringIconAccessibilityLabel,
-  onTraileringIconPress,
+  trailingIcon,
+  trailingIconColor,
+  trailingIconAccessibilityLabel,
+  trailingTestID,
+  onTrailingIconPress,
   right,
   mode = 'bar',
   showDivider = true,
@@ -183,7 +198,7 @@ const Searchbar = ({
   theme: themeOverrides,
   value,
   loading = false,
-  testID = 'search-bar',
+  testID,
   ref,
   ...rest
 }: Props) => {
@@ -227,15 +242,14 @@ const Searchbar = ({
 
   const isBarMode = mode === 'bar';
   const inputTextAlign = direction === 'rtl' ? 'right' : 'left';
-  const shouldRenderTraileringIcon =
-    isBarMode && traileringIcon && !loading && (!value || right !== undefined);
+  const shouldRenderTrailingIcon =
+    isBarMode && trailingIcon && !loading && (!value || right !== undefined);
 
   return (
     <Surface
       backgroundColor={theme.colors.surfaceContainerHigh}
       borderRadius={isBarMode ? theme.shapes.corner.extraLarge : cornerNone}
       style={[styles.container, style]}
-      testID={`${testID}-container`}
       elevation={elevation}
       theme={theme}
     >
@@ -257,7 +271,7 @@ const Searchbar = ({
         }
         theme={theme}
         aria-label={searchAccessibilityLabel}
-        testID={`${testID}-icon`}
+        testID={searchTestID}
       />
       <TextInput
         style={[
@@ -284,10 +298,7 @@ const Searchbar = ({
         {...rest}
       />
       {loading ? (
-        <ActivityIndicator
-          testID="activity-indicator"
-          style={styles.v3Loader}
-        />
+        <ActivityIndicator style={styles.v3Loader} />
       ) : (
         // Clear icon should be always rendered within Searchbar – it's transparent,
         // without touch events, when there is no value. It's done to avoid issues
@@ -295,7 +306,6 @@ const Searchbar = ({
         // when clearing the value.
         <View
           pointerEvents={value ? 'auto' : 'none'}
-          testID={`${testID}-icon-wrapper`}
           style={[
             !value && styles.v3ClearIcon,
             right !== undefined && styles.v3ClearIconHidden,
@@ -317,21 +327,21 @@ const Searchbar = ({
                 />
               ))
             }
-            testID={`${testID}-clear-icon`}
             role="button"
             theme={theme}
+            testID={clearTestID}
           />
         </View>
       )}
-      {shouldRenderTraileringIcon ? (
+      {shouldRenderTrailingIcon ? (
         <IconButton
           role="button"
           borderless
-          onPress={onTraileringIconPress}
-          iconColor={traileringIconColor || colors.onSurfaceVariant}
-          icon={traileringIcon}
-          aria-label={traileringIconAccessibilityLabel}
-          testID={`${testID}-trailering-icon`}
+          onPress={onTrailingIconPress}
+          iconColor={trailingIconColor || colors.onSurfaceVariant}
+          icon={trailingIcon}
+          aria-label={trailingIconAccessibilityLabel}
+          testID={trailingTestID}
         />
       ) : null}
       {isBarMode &&
@@ -345,7 +355,6 @@ const Searchbar = ({
               backgroundColor: colors.outline,
             },
           ]}
-          testID={`${testID}-divider`}
         />
       )}
     </Surface>

@@ -125,7 +125,7 @@ const IconButton = ({
   mode,
   style,
   theme: themeOverrides,
-  testID = 'icon-button',
+  testID,
   loading = false,
   contentStyle,
   ref,
@@ -161,7 +161,6 @@ const IconButton = ({
   return (
     <Animated.View
       ref={ref}
-      testID={`${testID}-container`}
       style={[
         styles.container,
         {

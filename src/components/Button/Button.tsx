@@ -74,7 +74,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   uppercase?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -184,7 +184,7 @@ const Button = ({
   uppercase: uppercaseProp,
   contentStyle,
   labelStyle,
-  testID = 'button',
+  testID,
   accessible,
   background,
   maxFontSizeMultiplier,
@@ -292,7 +292,6 @@ const Button = ({
     <Surface
       {...rest}
       ref={ref}
-      testID={`${testID}-container`}
       backgroundColor={backgroundOpacity < 1 ? 'transparent' : backgroundColor}
       {...touchableStyle}
       style={[
@@ -342,7 +341,7 @@ const Button = ({
       >
         <View style={[styles.content, { opacity: textOpacity }, contentStyle]}>
           {icon && loading !== true ? (
-            <View style={iconStyle} testID={`${testID}-icon-container`}>
+            <View style={iconStyle}>
               <Icon
                 source={icon}
                 size={customLabelSize ?? iconSize}
@@ -369,7 +368,6 @@ const Button = ({
             variant="labelLarge"
             selectable={false}
             numberOfLines={1}
-            testID={`${testID}-text`}
             style={[
               styles.label,
               isMode('text')

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import type { CardActionChildProps } from './utils';
+import { CardContext } from './CardContext';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 
@@ -26,8 +26,8 @@ export type Props = ViewProps & {
  * const MyComponent = () => (
  *   <Card>
  *     <Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button mode="outlined">Cancel</Button>
+ *       <Button mode="contained">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );
@@ -37,32 +37,32 @@ export type Props = ViewProps & {
  */
 const CardActions = ({ theme, style, children, ...rest }: Props) => {
   useInternalTheme(theme);
+  const cardContext = React.useContext(CardContext);
+
+  const cardMarginStyle = cardContext
+    ? cardContext.direction === 'horizontal'
+      ? {
+          marginTop: -cardContext.padding,
+          marginRight: -cardContext.padding,
+          marginBottom: -cardContext.padding,
+        }
+      : {
+          marginLeft: -cardContext.padding,
+          marginRight: -cardContext.padding,
+          marginBottom: -cardContext.padding,
+        }
+    : null;
 
   const containerStyle = [
     styles.container,
+    cardMarginStyle,
     { justifyContent: 'flex-end' } satisfies ViewStyle,
     style,
   ];
 
   return (
     <View {...rest} style={containerStyle}>
-      {React.Children.map(children, (child, index) => {
-        if (!React.isValidElement<CardActionChildProps>(child)) {
-          return child;
-        }
-
-        const compact = child.props.compact;
-        const mode =
-          child.props.mode ?? (index === 0 ? 'outlined' : 'contained');
-        const childStyle = [styles.button, child.props.style];
-
-        return React.cloneElement(child, {
-          ...child.props,
-          compact,
-          mode,
-          style: childStyle,
-        });
-      })}
+      {children}
     </View>
   );
 };
@@ -73,10 +73,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
-  },
-  button: {
-    marginLeft: 8,
+    columnGap: 8,
+    paddingHorizontal: 8,
+    paddingBottom: 8,
   },
 });
 

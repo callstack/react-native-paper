@@ -49,7 +49,6 @@ exports[`renders chip with close button 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -144,7 +143,6 @@ exports[`renders chip with close button 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -404,7 +402,6 @@ exports[`renders chip with custom close button 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -499,7 +496,6 @@ exports[`renders chip with custom close button 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -759,7 +755,6 @@ exports[`renders chip with icon 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -854,7 +849,6 @@ exports[`renders chip with icon 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -1021,7 +1015,6 @@ exports[`renders chip with onPress 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -1116,7 +1109,6 @@ exports[`renders chip with onPress 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -1238,7 +1230,6 @@ exports[`renders outlined disabled chip 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -1333,7 +1324,6 @@ exports[`renders outlined disabled chip 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -1455,7 +1445,6 @@ exports[`renders selected chip 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -1550,7 +1539,6 @@ exports[`renders selected chip 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={

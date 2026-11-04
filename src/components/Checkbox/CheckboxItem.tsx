@@ -37,7 +37,7 @@ export type Props = {
    */
   onLongPress?: (e: GestureResponderEvent) => void;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -174,7 +174,6 @@ const CheckboxItem = ({
         {isLeading && checkbox}
         <Text
           variant={labelVariant}
-          testID={`${testID}-text`}
           maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
           style={[styles.label, computedStyle, labelStyle]}
         >

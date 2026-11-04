@@ -528,7 +528,6 @@ exports[`renders snackbar with action button 1`] = `
             },
           ]
         }
-        testID="button-container"
       >
         <View
           collapsable={false}
@@ -618,7 +617,6 @@ exports[`renders snackbar with action button 1`] = `
               },
             ]
           }
-          testID="button"
         >
           <View
             style={
@@ -679,7 +677,6 @@ exports[`renders snackbar with action button 1`] = `
                   ],
                 ]
               }
-              testID="button-text"
             >
               Undo
             </Text>

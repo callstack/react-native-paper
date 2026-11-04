@@ -67,7 +67,11 @@ export type Props = {
   /**
    * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the menu.
    */
-  overlayAccessibilityLabel?: string;
+  dismissAccessibilityLabel?: string;
+  /**
+   * testID for the overlay that is displayed behind the menu.
+   */
+  overlayTestID?: string;
   /**
    * Content of the `Menu`.
    */
@@ -113,6 +117,8 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 const WINDOW_LAYOUT = Dimensions.get('window');
 
+const getKeyboardHeight = (fallback: number) =>
+  Keyboard.metrics?.()?.height ?? fallback;
 const DEFAULT_ELEVATION: Elevation = 2;
 const DEFAULT_MODE = 'elevated';
 
@@ -185,8 +191,9 @@ const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
 const Menu = ({
   visible,
   statusBarHeight,
-  overlayAccessibilityLabel = 'Close menu',
-  testID = 'menu',
+  dismissAccessibilityLabel = 'Close menu',
+  overlayTestID,
+  testID,
   anchor,
   onDismiss,
   anchorPosition,
@@ -221,7 +228,7 @@ const Menu = ({
   const scaleY = useSharedValue(0);
 
   const keyboardHeightRef = React.useRef(0);
-  const prevVisible = React.useRef<boolean | null>(null);
+  const prevVisible = React.useRef(visible);
   const anchorRef = React.useRef<View | null>(null);
   const menuRef = React.useRef<View | null>(null);
   const isShownRef = React.useRef(false);
@@ -375,7 +382,9 @@ const Menu = ({
     });
 
     setWindowLayout({
-      height: windowLayoutResult.height - keyboardHeightRef.current,
+      height:
+        windowLayoutResult.height -
+        getKeyboardHeight(keyboardHeightRef.current),
       width: windowLayoutResult.width,
     });
 
@@ -456,6 +465,8 @@ const Menu = ({
       'keyboardDidHide',
       keyboardDidHide
     );
+    // iOS does not replay keyboardDidShow for a keyboard that is already open.
+    keyboardHeightRef.current = getKeyboardHeight(keyboardHeightRef.current);
 
     return () => {
       removeListeners();
@@ -676,11 +687,12 @@ const Menu = ({
       {rendered ? (
         <Portal>
           <Pressable
-            aria-label={overlayAccessibilityLabel}
+            aria-label={dismissAccessibilityLabel}
             role="button"
             onPress={onDismiss}
             pointerEvents={visible ? 'auto' : 'none'}
             style={styles.pressableOverlay}
+            testID={overlayTestID}
           />
           <View
             ref={(ref) => {
@@ -691,7 +703,6 @@ const Menu = ({
             style={[styles.wrapper, positionStyle, style]}
             pointerEvents={pointerEvents}
             onAccessibilityEscape={onDismiss}
-            testID={`${testID}-view`}
           >
             <Animated.View
               pointerEvents={pointerEvents}
@@ -707,7 +718,7 @@ const Menu = ({
                   shadowMenuAnimationStyle,
                 ]}
                 elevation={elevation}
-                testID={`${testID}-surface`}
+                testID={testID}
                 theme={theme}
               >
                 <Animated.View

@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native';
 import { describe, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
-import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
 import { pink500, white } from '../../theme/colors';
+import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Button from '../Button/Button';
 import { getButtonColors } from '../Button/utils';
@@ -180,7 +180,7 @@ describe('button text styles', () => {
       </Button>
     );
 
-    expect(screen.getByTestId('button-text')).toHaveStyle({
+    expect(screen.getByText('Test')).toHaveStyle({
       textTransform: 'uppercase',
     });
   });
@@ -192,7 +192,7 @@ describe('button text styles', () => {
       </Button>
     );
 
-    expect(screen.getByTestId('button-text')).not.toHaveStyle({
+    expect(screen.getByText('Test')).not.toHaveStyle({
       textTransform: 'uppercase',
     });
   });
@@ -200,60 +200,44 @@ describe('button text styles', () => {
 
 describe('button icon styles', () => {
   it('should return correct icon styles for compact text button', async () => {
-    await render(
+    const { toJSON } = await render(
       <Button mode={'text'} compact icon="camera" testID="compact-button">
         Compact text button
       </Button>
     );
-    expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
-      marginLeft: 6,
-      marginRight: 0,
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 
   (['outlined', 'contained', 'contained-tonal', 'elevated'] as const).forEach(
     (mode) =>
       it(`should return correct icon styles for compact ${mode} button`, async () => {
-        await render(
+        const { toJSON } = await render(
           <Button mode={mode} compact icon="camera" testID="compact-button">
             Compact {mode} button
           </Button>
         );
-        expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle(
-          {
-            marginLeft: 8,
-            marginRight: 0,
-          }
-        );
+        expect(toJSON()).toMatchSnapshot();
       })
   );
 
   it('should return correct icon styles for text button', async () => {
-    await render(
+    const { toJSON } = await render(
       <Button mode={'text'} icon="camera" testID="compact-button">
         text button
       </Button>
     );
-    expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle({
-      marginLeft: 12,
-      marginRight: -8,
-    });
+    expect(toJSON()).toMatchSnapshot();
   });
 
   (['outlined', 'contained', 'contained-tonal', 'elevated'] as const).forEach(
     (mode) =>
       it(`should return correct icon styles for compact ${mode} button`, async () => {
-        await render(
+        const { toJSON } = await render(
           <Button mode={mode} icon="camera" testID="compact-button">
             {mode} button
           </Button>
         );
-        expect(screen.getByTestId('compact-button-icon-container')).toHaveStyle(
-          {
-            marginLeft: 16,
-            marginRight: -16,
-          }
-        );
+        expect(toJSON()).toMatchSnapshot();
       })
   );
 });
@@ -265,7 +249,7 @@ describe('getButtonColors - background color', () => {
     expect(
       getButtonColors({
         customButtonColor,
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: false,
         mode: 'text',
       })
@@ -277,7 +261,7 @@ describe('getButtonColors - background color', () => {
       expect(
         getButtonColors({
           customButtonColor,
-          theme: getTheme(),
+          theme: LightTheme,
           mode,
           disabled: true,
         })
@@ -290,7 +274,7 @@ describe('getButtonColors - background color', () => {
       expect(
         getButtonColors({
           customButtonColor,
-          theme: getTheme(),
+          theme: LightTheme,
           mode,
           disabled: true,
         })
@@ -303,12 +287,12 @@ describe('getButtonColors - background color', () => {
       return expect(
         getButtonColors({
           customButtonColor,
-          theme: getTheme(),
+          theme: LightTheme,
           mode,
           disabled: true,
         })
       ).toMatchObject({
-        backgroundColor: getTheme().colors.onSurface,
+        backgroundColor: LightTheme.colors.onSurface,
         backgroundOpacity: stateOpacity.pressed,
       });
     })
@@ -319,12 +303,12 @@ describe('getButtonColors - background color', () => {
       return expect(
         getButtonColors({
           customButtonColor,
-          theme: getTheme(true),
+          theme: DarkTheme,
           mode,
           disabled: true,
         })
       ).toMatchObject({
-        backgroundColor: getTheme(true).colors.onSurface,
+        backgroundColor: DarkTheme.colors.onSurface,
         backgroundOpacity: stateOpacity.pressed,
       });
     })
@@ -333,66 +317,66 @@ describe('getButtonColors - background color', () => {
   it('should return correct theme color, for theme version 3, elevated mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         mode: 'elevated',
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.surfaceContainerLow,
+      backgroundColor: LightTheme.colors.surfaceContainerLow,
     });
   });
 
   it('should return correct theme color, for theme version 3, dark theme, elevated mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(true),
+        theme: DarkTheme,
         mode: 'elevated',
       })
     ).toMatchObject({
-      backgroundColor: getTheme(true).colors.surfaceContainerLow,
+      backgroundColor: DarkTheme.colors.surfaceContainerLow,
     });
   });
 
   it('should return correct theme color, for theme version 3, contained mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         mode: 'contained',
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.primary,
+      backgroundColor: LightTheme.colors.primary,
     });
   });
 
   it('should return correct theme color, for theme version 3, dark theme, contained mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(true),
+        theme: DarkTheme,
         mode: 'contained',
       })
     ).toMatchObject({
-      backgroundColor: getTheme(true).colors.primary,
+      backgroundColor: DarkTheme.colors.primary,
     });
   });
 
   it('should return correct theme color, for theme version 3, contained-tonal mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         mode: 'contained-tonal',
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.secondaryContainer,
+      backgroundColor: LightTheme.colors.secondaryContainer,
     });
   });
 
   it('should return correct theme color, for theme version 3, dark theme, contained-tonal mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(true),
+        theme: DarkTheme,
         mode: 'contained-tonal',
       })
     ).toMatchObject({
-      backgroundColor: getTheme(true).colors.secondaryContainer,
+      backgroundColor: DarkTheme.colors.secondaryContainer,
     });
   });
 
@@ -400,7 +384,7 @@ describe('getButtonColors - background color', () => {
     it(`should return transparent color, for theme version 3, ${mode} mode`, () => {
       return expect(
         getButtonColors({
-          theme: getTheme(),
+          theme: LightTheme,
           mode,
         })
       ).toMatchObject({
@@ -413,7 +397,7 @@ describe('getButtonColors - background color', () => {
     it(`should return transparent color, for theme version 3, dark theme, ${mode} mode`, () => {
       return expect(
         getButtonColors({
-          theme: getTheme(true),
+          theme: DarkTheme,
           mode,
         })
       ).toMatchObject({
@@ -430,7 +414,7 @@ describe('getButtonColors - text color', () => {
     expect(
       getButtonColors({
         customTextColor,
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: false,
         mode: 'text',
       })
@@ -441,12 +425,12 @@ describe('getButtonColors - text color', () => {
     expect(
       getButtonColors({
         customTextColor,
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
         mode: 'text',
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurface,
+      textColor: LightTheme.colors.onSurface,
       textOpacity: stateOpacity.disabled,
     });
   });
@@ -455,12 +439,12 @@ describe('getButtonColors - text color', () => {
     expect(
       getButtonColors({
         customTextColor,
-        theme: getTheme(true),
+        theme: DarkTheme,
         disabled: true,
         mode: 'text',
       })
     ).toMatchObject({
-      textColor: getTheme(true).colors.onSurface,
+      textColor: DarkTheme.colors.onSurface,
       textOpacity: stateOpacity.disabled,
     });
   });
@@ -469,7 +453,7 @@ describe('getButtonColors - text color', () => {
     it(`should return correct text color for dark prop, for theme version 3, ${mode} mode`, () => {
       expect(
         getButtonColors({
-          theme: getTheme(),
+          theme: LightTheme,
           mode,
           dark: true,
         })
@@ -483,11 +467,11 @@ describe('getButtonColors - text color', () => {
     it(`should return correct theme text color, for theme version 3, ${mode} mode`, () => {
       expect(
         getButtonColors({
-          theme: getTheme(),
+          theme: LightTheme,
           mode,
         })
       ).toMatchObject({
-        textColor: getTheme().colors.primary,
+        textColor: LightTheme.colors.primary,
       });
     })
   );
@@ -496,11 +480,11 @@ describe('getButtonColors - text color', () => {
     it(`should return correct theme text color, for theme version 3, dark theme, ${mode} mode`, () => {
       expect(
         getButtonColors({
-          theme: getTheme(true),
+          theme: DarkTheme,
           mode,
         })
       ).toMatchObject({
-        textColor: getTheme(true).colors.primary,
+        textColor: DarkTheme.colors.primary,
       });
     })
   );
@@ -508,44 +492,44 @@ describe('getButtonColors - text color', () => {
   it('should return correct theme text color, for theme version 3, contained mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         mode: 'contained',
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onPrimary,
+      textColor: LightTheme.colors.onPrimary,
     });
   });
 
   it('should return correct theme text color, for theme version 3, dark theme, contained mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(true),
+        theme: DarkTheme,
         mode: 'contained',
       })
     ).toMatchObject({
-      textColor: getTheme(true).colors.onPrimary,
+      textColor: DarkTheme.colors.onPrimary,
     });
   });
 
   it('should return correct theme text color, for theme version 3, contained-tonal mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         mode: 'contained-tonal',
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSecondaryContainer,
+      textColor: LightTheme.colors.onSecondaryContainer,
     });
   });
 
   it('should return correct theme text color, for theme version 3, dark theme contained-tonal mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(true),
+        theme: DarkTheme,
         mode: 'contained-tonal',
       })
     ).toMatchObject({
-      textColor: getTheme(true).colors.onSecondaryContainer,
+      textColor: DarkTheme.colors.onSecondaryContainer,
     });
   });
 });
@@ -554,46 +538,46 @@ describe('getButtonColors - border color', () => {
   it('should return correct border color, for theme version 3, when disabled, outlined mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outlineVariant,
+      borderColor: LightTheme.colors.outlineVariant,
     });
   });
 
   it('should return correct border color, for theme version 3, when disabled, dark theme, outlined mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(true),
+        theme: DarkTheme,
         disabled: true,
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outlineVariant,
+      borderColor: DarkTheme.colors.outlineVariant,
     });
   });
 
   it('should return correct border color, for theme version 3, outlined mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outlineVariant,
+      borderColor: LightTheme.colors.outlineVariant,
     });
   });
 
   it('should return correct border color, for theme version 3, dark theme, outlined mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(true),
+        theme: DarkTheme,
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outlineVariant,
+      borderColor: DarkTheme.colors.outlineVariant,
     });
   });
 
@@ -602,7 +586,7 @@ describe('getButtonColors - border color', () => {
       it(`should return transparent border, for theme version 3, ${mode} mode`, () => {
         expect(
           getButtonColors({
-            theme: getTheme(),
+            theme: LightTheme,
             mode,
           })
         ).toMatchObject({
@@ -616,7 +600,7 @@ describe('getButtonColors - border color', () => {
       it(`should return transparent border, for theme version 3, dark theme, ${mode} mode`, () => {
         expect(
           getButtonColors({
-            theme: getTheme(true),
+            theme: DarkTheme,
             mode,
           })
         ).toMatchObject({
@@ -630,7 +614,7 @@ describe('getButtonColors - border width', () => {
   it('should return correct border width, for theme version 3, outlined mode', () => {
     expect(
       getButtonColors({
-        theme: getTheme(),
+        theme: LightTheme,
         mode: 'outlined',
       })
     ).toMatchObject({
@@ -643,7 +627,7 @@ describe('getButtonColors - border width', () => {
       it(`should return correct border width, for ${mode} mode`, () => {
         expect(
           getButtonColors({
-            theme: getTheme(),
+            theme: LightTheme,
             mode,
           })
         ).toMatchObject({

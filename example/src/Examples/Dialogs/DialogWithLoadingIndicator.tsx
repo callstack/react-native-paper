@@ -1,6 +1,6 @@
 import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 
-import { Dialog, Palette, Portal } from 'react-native-paper';
+import { Dialog, Palette } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
 
@@ -12,21 +12,19 @@ const DialogWithLoadingIndicator = ({
   close: () => void;
 }) => {
   return (
-    <Portal>
-      <Dialog onDismiss={close} visible={visible}>
-        <Dialog.Title>Progress Dialog</Dialog.Title>
-        <Dialog.Content>
-          <View style={styles.flexing}>
-            <ActivityIndicator
-              color={Palette.tertiary30}
-              size={Platform.OS === 'ios' ? 'large' : 48}
-              style={styles.marginRight}
-            />
-            <TextComponent>Loading.....</TextComponent>
-          </View>
-        </Dialog.Content>
-      </Dialog>
-    </Portal>
+    <Dialog onDismiss={close} visible={visible}>
+      <Dialog.Title>Progress Dialog</Dialog.Title>
+      <Dialog.Content>
+        <View style={styles.flexing}>
+          <ActivityIndicator
+            color={Palette.tertiary30}
+            size={Platform.OS === 'ios' ? 'large' : 48}
+            style={styles.marginRight}
+          />
+          <TextComponent>Loading.....</TextComponent>
+        </View>
+      </Dialog.Content>
+    </Dialog>
   );
 };
 

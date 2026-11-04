@@ -111,7 +111,6 @@ const TouchableRipple = ({
         <>
           {pressed && rippleEffectEnabled && (
             <View
-              testID="touchable-ripple-underlay"
               style={[
                 styles.underlay,
                 { backgroundColor: calculatedUnderlayColor },

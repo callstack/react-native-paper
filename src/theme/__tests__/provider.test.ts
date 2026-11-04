@@ -1,6 +1,17 @@
-import { describe, expect, it } from '@jest/globals';
+import * as React from 'react';
+import { PlatformColor } from 'react-native';
 
-import { isPlatformColorSentinel, safeMerge } from '../provider';
+import { describe, expect, it } from '@jest/globals';
+import { renderHook } from '@testing-library/react-native';
+
+import {
+  isPlatformColorSentinel,
+  safeMerge,
+  ThemeProvider,
+  useInternalTheme,
+} from '../provider';
+import { DarkTheme, LightTheme } from '../schemes';
+import type { ThemeProp } from '../types';
 
 describe('isPlatformColorSentinel', () => {
   it('detects iOS PlatformColor (semantic)', () => {
@@ -112,5 +123,86 @@ describe('safeMerge', () => {
     expect(result.colors.primary).toBe(sentinel);
     expect(result.colors.secondary).toBe('#999');
     expect(result.colors.tertiary).toBe('#222');
+  });
+});
+
+describe('useInternalTheme', () => {
+  it('returns the default theme without overrides', async () => {
+    const { result } = await renderHook(() => useInternalTheme(undefined));
+
+    expect(result.current).toBe(LightTheme);
+  });
+
+  it('keeps the theme reference when nested overrides have equal values', async () => {
+    const { result, rerender } = await renderHook(
+      (overrides: ThemeProp) => useInternalTheme(overrides),
+      { initialProps: { colors: { primary: '#123456' } } }
+    );
+    const theme = result.current;
+
+    await rerender({ colors: { primary: '#123456' } });
+
+    expect(result.current).toBe(theme);
+    expect(result.current.colors.primary).toBe('#123456');
+    expect(result.current.colors.secondary).toBe(LightTheme.colors.secondary);
+  });
+
+  it('updates changed overrides and restores defaults when overrides are removed', async () => {
+    const { result, rerender } = await renderHook(
+      (overrides: ThemeProp | undefined) => useInternalTheme(overrides),
+      { initialProps: { colors: { primary: '#123456', secondary: '#abcdef' } } }
+    );
+    const theme = result.current;
+
+    await rerender({ colors: { primary: '#654321' } });
+
+    expect(result.current).not.toBe(theme);
+    expect(result.current.colors.primary).toBe('#654321');
+    expect(result.current.colors.secondary).toBe(LightTheme.colors.secondary);
+
+    await rerender(undefined);
+
+    expect(result.current).toBe(LightTheme);
+  });
+
+  it('updates the provider theme while keeping local overrides', async () => {
+    let theme = LightTheme;
+    const wrapper = (props: { children: React.ReactNode }) =>
+      React.createElement(ThemeProvider, { ...props, theme });
+    const { result, rerender } = await renderHook(
+      (overrides: ThemeProp) => useInternalTheme(overrides),
+      { wrapper, initialProps: { colors: { primary: '#123456' } } }
+    );
+    const previous = result.current;
+
+    theme = DarkTheme;
+    await rerender({ colors: { primary: '#123456' } });
+
+    expect(result.current).not.toBe(previous);
+    expect(result.current.dark).toBe(true);
+    expect(result.current.colors.primary).toBe('#123456');
+    expect(result.current.colors.secondary).toBe(DarkTheme.colors.secondary);
+  });
+
+  it('preserves platform colors and keeps equal platform color overrides stable', async () => {
+    const primary = PlatformColor('label');
+    const { result, rerender } = await renderHook(
+      (overrides: ThemeProp) => useInternalTheme(overrides),
+      { initialProps: { colors: { primary } } }
+    );
+    const theme = result.current;
+
+    expect(result.current.colors.primary).toBe(primary);
+
+    await rerender({ colors: { primary: PlatformColor('label') } });
+
+    expect(result.current).toBe(theme);
+
+    await rerender({ colors: { primary: PlatformColor('secondaryLabel') } });
+
+    expect(result.current).not.toBe(theme);
+    expect(result.current.colors.primary).toEqual(
+      PlatformColor('secondaryLabel')
+    );
   });
 });
