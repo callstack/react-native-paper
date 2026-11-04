@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Text, View, Platform } from 'react-native';
+import { Dimensions, Text, View, Platform, Pressable } from 'react-native';
 import type { ViewProps } from 'react-native';
 
 import {
@@ -205,6 +205,30 @@ describe('Tooltip', () => {
         await user.longPress(getTrigger(getByText));
 
         expect(await findByText('some tooltip text')).toBeTruthy();
+      });
+    });
+
+    describe('consumer handlers', () => {
+      it('forwards the gesture event to the onPress written by the consumer', async () => {
+        const onPress = jest.fn();
+        const {
+          wrapper: { getByText },
+        } = await setup({
+          children: (props: TooltipTriggerProps) => (
+            <Pressable {...props} onPress={onPress}>
+              <Text>dummy component</Text>
+            </Pressable>
+          ),
+        });
+
+        // The trigger props are spread onto the consumer's element, so its own
+        // handler runs with the real event instead of being called without one
+        await user.press(getTrigger(getByText));
+
+        expect(onPress).toHaveBeenCalledTimes(1);
+        expect(onPress).toHaveBeenCalledWith(
+          expect.objectContaining({ nativeEvent: expect.anything() })
+        );
       });
     });
 
@@ -916,6 +940,62 @@ describe('Tooltip.Rich', () => {
       await runTimers(); // exit fade → unmount
 
       expect(queryByText('Body text')).toBeNull();
+    });
+
+    describe('onDismiss', () => {
+      it('does not fire when the tooltip opens', async () => {
+        const onDismiss = jest.fn();
+        const {
+          wrapper: { getByText },
+        } = await setup({ onDismiss });
+
+        await user.press(getTrigger(getByText));
+
+        expect(getByText('Body text')).toBeTruthy();
+        expect(onDismiss).not.toHaveBeenCalled();
+      });
+
+      it('fires when an action calls dismiss', async () => {
+        const onDismiss = jest.fn();
+        const {
+          wrapper: { getByText },
+        } = await setup({
+          onDismiss,
+          actions: ({ dismiss }) => <Text onPress={dismiss}>Learn more</Text>,
+        });
+
+        await user.press(getTrigger(getByText));
+        await user.press(getByText('Learn more'));
+        await runTimers(); // exit fade → unmount
+
+        expect(onDismiss).toHaveBeenCalledTimes(1);
+      });
+
+      it('fires when the backdrop is pressed', async () => {
+        const onDismiss = jest.fn();
+        const {
+          wrapper: { getByText, getByRole },
+        } = await setup({ onDismiss });
+
+        await user.press(getTrigger(getByText));
+        await user.press(getByRole('button', { name: 'Close' }));
+        await runTimers(); // exit fade → unmount
+
+        expect(onDismiss).toHaveBeenCalledTimes(1);
+      });
+
+      it('fires once when the trigger is pressed again', async () => {
+        const onDismiss = jest.fn();
+        const {
+          wrapper: { getByText },
+        } = await setup({ onDismiss });
+
+        await user.press(getTrigger(getByText));
+        await user.press(getTrigger(getByText));
+        await runTimers(); // exit fade → unmount
+
+        expect(onDismiss).toHaveBeenCalledTimes(1);
+      });
     });
   });
 

@@ -82,6 +82,13 @@ export type Props = {
    */
   actions?: (props: { dismiss: () => void }) => React.ReactNode;
   /**
+   * Called whenever the tooltip closes, whichever way it was dismissed: an
+   * outside tap, re-pressing the trigger, an action calling `dismiss`, the
+   * pointer leaving (web), or another tooltip taking its place. It is not
+   * called when the component unmounts with the tooltip still open.
+   */
+  onDismiss?: () => void;
+  /**
    * The number of milliseconds a user must hover the element before showing
    * the tooltip (web only).
    */
@@ -138,6 +145,7 @@ const RichTooltip = ({
   title,
   content,
   actions,
+  onDismiss,
   enterTouchDelay = 100,
   leaveTouchDelay = 500,
   titleMaxFontSizeMultiplier,
@@ -157,6 +165,7 @@ const RichTooltip = ({
   const tooltipRef = React.useRef<TooltipHostElement>(null);
   // Web only: set while dismiss is returning focus to the trigger
   const refocusAfterDismissRef = React.useRef(false);
+  const wasVisibleRef = React.useRef(visible);
 
   const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -208,6 +217,15 @@ const RichTooltip = ({
     }
     hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [clearShowTimer, leaveTouchDelay]);
+
+  // Report every dismissal from one place rather than calling the prop from
+  // each path that hides the tooltip, so a future close path can't miss it
+  React.useEffect(() => {
+    if (wasVisibleRef.current && !visible) {
+      onDismiss?.();
+    }
+    wasVisibleRef.current = visible;
+  }, [visible, onDismiss]);
 
   // Web only: tooltip opens on trigger focus, so it has to ignore the focus
   // that Escape itself causes; later focus (or any blur) re-arms it
