@@ -13,7 +13,7 @@ import IconsList from '@docs/components/IconsList.tsx';
 Many of the components render icon names using [`@react-native-vector-icons/material-design-icons`](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons). In Expo projects this usually works without extra setup. In vanilla React Native projects, install the package and complete any required platform setup as described in the [getting started guide](./getting-started).
 
 :::note
-If you opted out of vector icons support using [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require), you won't be able to use icon names for the icon prop. Some components may not look correct without vector icons and might need extra configuration.
+If you don't install `@react-native-vector-icons/material-design-icons`, you won't be able to use icon names for the icon prop: components show a placeholder and log a warning instead. Some components may not look correct without vector icons and might need extra configuration.
 :::
 
 ## Using the `icon` prop
