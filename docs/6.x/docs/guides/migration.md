@@ -127,6 +127,7 @@ The `style.elevation` property is no longer supported. Use the `elevated` prop t
 | `barStyle`                                                            | `style`                                                                  |
 | `animationEasing`                                                     | removed (the indicator uses M3 motion from the theme)                |
 | `barStyle` with `Animated.Value`                                      | `style` with static styles only                                          |
+| `barTestID`, `${testID}-bar`                                          | `testID` on `NavigationBar`                                              |
 | n/a                                                                   | new `variant` (`'stacked' \| 'horizontal'`) for the item layout          |
 
 ```diff
@@ -145,6 +146,8 @@ The `style.elevation` property is no longer supported. Use the `elevated` prop t
 +   />
 + </>
 ```
+
+This renders only the active route, so a screen unmounts when you leave its tab, unlike v5 which kept the visited screens mounted. If your app depends on that state, render `NavigationBar` as the [`tabBar` of React Navigation's bottom tabs](./navigation-bar#quick-example), which keeps screens mounted.
 
 `onTabPress` & `onTabLongPress` callbacks receive only pressed `route`. The v5 event object also carried `preventDefault()` & `defaultPrevented`, so code that reads them now throws `preventDefault is not a function`. The bar never navigates on its own, so navigator's own `tabPress` event decides whether press is handled:
 
