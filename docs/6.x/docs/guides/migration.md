@@ -584,7 +584,7 @@ To use the platform ripple instead of the state layer press, pass `rippleColor` 
 
 #### Touch target size
 
-`Checkbox` now takes up 48dp instead of 36dp to meet the minimum touch target, so rows with a checkbox can grow up to 12dp taller.
+`Checkbox` now takes up 48dp instead of 36dp to meet the minimum touch target, so rows with a standalone checkbox can grow up to 12dp taller. In `Checkbox.Item` the whole row is the touch target, so its checkbox takes up 40dp and a one-line row is 56dp tall, 4dp taller than in 5.x.
 
 #### Style
 

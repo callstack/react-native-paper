@@ -143,8 +143,11 @@ const CheckboxItem = ({
   const isLeading = position === 'leading';
   // The outer TouchableRipple below is the interactable element + a11y
   // checkbox; the inner Checkbox is purely visual, so we exclude it from
-  // the accessibility tree to avoid duplicate `checked` states.
-  const checkbox = <Checkbox {...checkboxProps} accessible={false} />;
+  // the accessibility tree to avoid duplicate `checked` states. The row is the
+  // touch target, so the checkbox's own 48dp target only needs 40dp of room.
+  const checkbox = (
+    <Checkbox {...checkboxProps} accessible={false} style={styles.checkbox} />
+  );
 
   const textAlign = isLeading ? 'right' : 'left';
 
@@ -210,5 +213,8 @@ const styles = StyleSheet.create({
   label: {
     flexShrink: 1,
     flexGrow: 1,
+  },
+  checkbox: {
+    margin: -4,
   },
 });
