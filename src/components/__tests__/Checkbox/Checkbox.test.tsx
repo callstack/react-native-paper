@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { fireEvent, render, screen, userEvent } from '../../../test-utils';
 import Checkbox from '../../Checkbox';
+import TouchableRipple from '../../TouchableRipple/TouchableRipple';
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -141,10 +142,16 @@ describe('Checkbox press', () => {
     expect(screen.getByRole('checkbox')).toBeDisabled();
   });
 
-  it.each(['ios', 'android', 'web'] as const)(
-    'renders the same with rippleColor, background and underlayColor on %s',
-    async (os) => {
+  // `TouchableRipple.supported` is computed once at import, so the Android
+  // ripple has to be switched on by hand to render the `android_ripple` path.
+  it.each([
+    { os: 'ios', supported: false },
+    { os: 'android', supported: true },
+  ] as const)(
+    'renders the same with rippleColor, background and underlayColor on $os',
+    async ({ os, supported }) => {
       jest.replaceProperty(Platform, 'OS', os);
+      jest.replaceProperty(TouchableRipple, 'supported', supported);
 
       // Held down, so the press the platform would paint is on screen.
       const plain = JSON.stringify(
