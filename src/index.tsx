@@ -44,6 +44,7 @@ export { default as Searchbar } from './components/Searchbar';
 export { default as Snackbar } from './components/Snackbar';
 export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch/Switch';
+export { default as Slider, RangeSlider } from './components/Slider';
 export { default as Appbar } from './components/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
@@ -127,6 +128,7 @@ export type { Props as SearchbarProps } from './components/Searchbar';
 export type { Props as SnackbarProps } from './components/Snackbar';
 export type { Props as SurfaceProps } from './components/Surface';
 export type { Props as SwitchProps } from './components/Switch/Switch';
+export type { SliderProps, RangeSliderProps } from './components/Slider';
 export type {
   TextInputProps,
   TextInputRenderProps,

@@ -18088,6 +18088,7 @@ __metadata:
     react: "npm:19.2.3"
     react-native: "npm:0.85.3"
     react-native-builder-bob: "npm:^0.42.1"
+    react-native-gesture-handler: "npm:~2.31.1"
     react-native-reanimated: "npm:4.3.1"
     react-native-safe-area-context: "npm:5.7.0"
     react-native-worklets: "npm:0.8.3"

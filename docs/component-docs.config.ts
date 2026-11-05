@@ -139,6 +139,10 @@ const pages = {
   Switch: {
     Switch: 'Switch/Switch',
   },
+  Slider: {
+    Slider: 'Slider/Slider',
+    RangeSlider: 'Slider/RangeSlider',
+  },
   TextInput: {
     TextInput: {
       source: 'TextInput/TextInput',

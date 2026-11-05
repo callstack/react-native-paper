@@ -85,6 +85,7 @@
     "react": "19.2.3",
     "react-native": "0.85.3",
     "react-native-builder-bob": "^0.42.1",
+    "react-native-gesture-handler": "~2.31.1",
     "react-native-reanimated": "4.3.1",
     "react-native-safe-area-context": "5.7.0",
     "react-native-worklets": "0.8.3",
@@ -96,6 +97,7 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
+    "react-native-gesture-handler": ">=2.0.0",
     "react-native-reanimated": ">=4.3.0",
     "react-native-safe-area-context": "*",
     "react-native-worklets": ">=0.8.1"
@@ -127,7 +129,7 @@
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|@react-navigation|react-native-reanimated|react-native-worklets|react-native-safe-area-context|nanoid|query-string|decode-uri-component|filter-obj|split-on-first|escape-string-regexp)/)"
+      "node_modules/(?!(@react-native|react-native|react-native-gesture-handler|@react-navigation|react-native-reanimated|react-native-worklets|react-native-safe-area-context|nanoid|query-string|decode-uri-component|filter-obj|split-on-first|escape-string-regexp)/)"
     ]
   },
   "greenkeeper": {
