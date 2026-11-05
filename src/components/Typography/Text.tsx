@@ -4,10 +4,11 @@ import { StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import AnimatedText from './AnimatedText';
+import { canContainNestedText, NestedTextContext } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props<T> = React.ComponentProps<typeof NativeText> & {
   /**
@@ -25,6 +26,9 @@ export type Props<T> = React.ComponentProps<typeof NativeText> & {
    *  Label:  `labelLarge`, `labelMedium`, `labelSmall`
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
+   *
+   *  Each variant also has an `Emphasized` counterpart with a heavier font weight.
+   *  e.g. `displayLargeEmphasized`, `bodyMediumEmphasized` etc.
    */
   variant?: VariantProp<T>;
   children: React.ReactNode;
@@ -87,10 +91,14 @@ const Text = ({
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();
+  // Nested text inherits the parent's style unless it has its own theme
+  const inheritsStyle = React.useContext(NestedTextContext) && !initialTheme;
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
   }));
+
+  let element: React.ReactElement;
 
   if (variant) {
     let font = theme.fonts[variant];
@@ -108,7 +116,6 @@ const Text = ({
       // Context:   Some components have the built-in `Text` component with a predefined variant,
       //            that also accepts `children` as a `React.Node`. This can result in a situation,
       //            where another `Text` component is rendered within the built-in `Text` component.
-      //            By doing that, we assume that user doesn't want to consume pre-defined font properties.
       // Case one:  Nested `Text` has different `variant` that specified in parent. For example:
       //              <Chip>
       //                <Text variant="displayMedium">Nested</Text>
@@ -124,15 +131,15 @@ const Text = ({
         textStyle = [style, font];
       }
 
-      // Case two:  Nested `Text` has specified `styles` which intefere
+      // Case two:  Nested `Text` has specified `styles` which interfere
       //            with font properties, from the parent's `variant`. For example:
       //              <Chip>
       //                <Text style={{fontSize: 30}}>Nested</Text>
       //              </Chip>
       // Solution:  To address the following scenario, the code below overrides the
-      //            parent's style with children's style:
+      //            parent's style with children's style, on top of the parent's variant:
       if (!props.variant) {
-        textStyle = [style, props.style];
+        textStyle = [font, style, props.style];
       }
     }
 
@@ -144,24 +151,30 @@ const Text = ({
       );
     }
 
-    return (
+    element = (
       <NativeText
         ref={root}
-        style={[
-          styles.text,
-          { writingDirection, color: theme.colors.onSurface },
-          textStyle,
-        ]}
+        style={
+          inheritsStyle
+            ? textStyle
+            : [
+                styles.text,
+                { writingDirection, color: theme.colors.onSurface },
+                textStyle,
+              ]
+        }
         {...rest}
       />
     );
+  } else if (inheritsStyle) {
+    element = <NativeText {...rest} ref={root} style={style} />;
   } else {
     const font = theme.fonts.default;
     const textStyle = {
       ...font,
       color: theme.colors?.onSurface,
     };
-    return (
+    element = (
       <NativeText
         {...rest}
         ref={root}
@@ -169,6 +182,16 @@ const Text = ({
       />
     );
   }
+
+  if (!canContainNestedText(rest.children)) {
+    return element;
+  }
+
+  return (
+    <NestedTextContext.Provider value={true}>
+      {element}
+    </NestedTextContext.Provider>
+  );
 };
 
 const styles = StyleSheet.create({

@@ -74,7 +74,7 @@ const ListAccordionGroup = ({
   return (
     <ListAccordionGroupContext.Provider
       value={{
-        expandedId: expandedIdProp || expandedId, // component can be controlled or uncontrolled
+        expandedId: expandedIdProp ?? expandedId, // component can be controlled or uncontrolled
         onAccordionPress: onAccordionPress || onAccordionPressDefault,
       }}
     >

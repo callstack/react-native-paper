@@ -3,7 +3,7 @@ import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import getContrastingColor from '../../utils/getContrastingColor';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';

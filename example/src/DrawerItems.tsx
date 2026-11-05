@@ -10,14 +10,13 @@ import {
   Dialog,
   Drawer,
   Palette,
-  Portal,
   Switch,
   Text,
   TouchableRipple,
   useTheme,
 } from 'react-native-paper';
 
-import { dynamicThemeSupported, isWeb } from '../utils';
+import { dynamicThemeSupported } from '../utils';
 import { PreferencesContext } from './PreferencesContext';
 
 const DrawerItemsData = [
@@ -92,7 +91,6 @@ function DrawerItems() {
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
   const { colors } = useTheme();
-  const isIOS = Platform.OS === 'ios';
   const expoGoExecution =
     Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
 
@@ -114,7 +112,7 @@ function DrawerItems() {
   } = preferences;
 
   const _handleToggleRTL = () => {
-    if (!isWeb && expoGoExecution) {
+    if (Platform.OS !== 'web' && expoGoExecution) {
       setShowRTLDialog(true);
       return;
     }
@@ -222,7 +220,7 @@ function DrawerItems() {
             <TouchableRipple onPress={toggleRippleEffect}>
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">
-                  {isIOS ? 'Highlight' : 'Ripple'} effect *
+                  {Platform.OS === 'ios' ? 'Highlight' : 'Ripple'} effect *
                 </Text>
                 <View pointerEvents="none">
                   <Switch value={rippleEffectEnabled} />
@@ -241,24 +239,22 @@ function DrawerItems() {
           </Text>
         </>
       )}
-      <Portal>
-        <Dialog visible={showRTLDialog} onDismiss={_handleDismissRTLDialog}>
-          <Dialog.Title>Changing to RTL</Dialog.Title>
-          <Dialog.Content>
-            <Text variant="bodyMedium">
-              Due to Expo Go limitations it is impossible to change RTL
-              dynamically. To do so, you need to create a development build of
-              Example app or change it statically by setting{' '}
-              <Text variant="labelMedium">forcesRTL</Text> property to true in{' '}
-              <Text variant="labelMedium">app.json</Text> within{' '}
-              <Text variant="labelMedium">example</Text> directory.
-            </Text>
-            <Dialog.Actions>
-              <Button onPress={_handleDismissRTLDialog}>Ok</Button>
-            </Dialog.Actions>
-          </Dialog.Content>
-        </Dialog>
-      </Portal>
+      <Dialog visible={showRTLDialog} onDismiss={_handleDismissRTLDialog}>
+        <Dialog.Title>Changing to RTL</Dialog.Title>
+        <Dialog.Content>
+          <Text variant="bodyMedium">
+            Due to Expo Go limitations it is impossible to change RTL
+            dynamically. To do so, you need to create a development build of
+            Example app or change it statically by setting{' '}
+            <Text variant="labelMedium">forcesRTL</Text> property to true in{' '}
+            <Text variant="labelMedium">app.json</Text> within{' '}
+            <Text variant="labelMedium">example</Text> directory.
+          </Text>
+          <Dialog.Actions>
+            <Button onPress={_handleDismissRTLDialog}>Ok</Button>
+          </Dialog.Actions>
+        </Dialog.Content>
+      </Dialog>
     </DrawerContentScrollView>
   );
 }

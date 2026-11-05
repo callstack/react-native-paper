@@ -2,7 +2,7 @@ import type { ColorValue, ViewStyle } from 'react-native';
 
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 import { splitStyles } from '../../utils/splitStyles';
 
 const stateOpacity = tokens.md.sys.state.opacity;

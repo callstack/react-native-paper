@@ -5,7 +5,7 @@ import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
 import { cornerFull } from '../theme/tokens/sys/shape';
-import type { ThemeProp } from '../types';
+import type { ThemeProp } from '../theme/types';
 
 const SMALL_SIZE = 6;
 const LARGE_SIZE = 16;

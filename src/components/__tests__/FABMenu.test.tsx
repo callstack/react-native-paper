@@ -171,11 +171,10 @@ it('calls trigger onPress when menu is closed', async () => {
     <FAB.Menu
       expanded={false}
       onDismiss={jest.fn()}
-      trigger={{ icon: 'plus', onPress: onTriggerPress }}
+      trigger={{ icon: 'plus', onPress: onTriggerPress, testID: 'fab-shell' }}
       items={makeItems()}
     />
   );
-  // Shell's TouchableRipple uses the default testID 'fab-shell'
   await userEvent.press(screen.getByTestId('fab-shell'));
   expect(onTriggerPress).toHaveBeenCalledTimes(1);
 });
@@ -186,7 +185,7 @@ it('calls onDismiss when trigger is pressed while menu is open', async () => {
     <FAB.Menu
       expanded
       onDismiss={onDismiss}
-      trigger={{ icon: 'plus' }}
+      trigger={{ icon: 'plus', testID: 'fab-shell' }}
       items={makeItems()}
     />
   );

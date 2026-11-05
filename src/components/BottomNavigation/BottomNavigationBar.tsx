@@ -16,7 +16,7 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -324,7 +324,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
-  testID = 'bottom-navigation-bar',
+  testID,
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
@@ -494,10 +494,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       ]}
       onLayout={onLayout}
     >
-      <Animated.View
-        style={[styles.barContent, { backgroundColor }]}
-        testID={`${testID}-content`}
-      >
+      <Animated.View style={[styles.barContent, { backgroundColor }]}>
         <View
           style={[
             styles.items,
@@ -510,7 +507,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             },
           ]}
           role={'tablist'}
-          testID={`${testID}-content-wrapper`}
         >
           {routes.map((route, index) => {
             const focused = navigationState.index === index;

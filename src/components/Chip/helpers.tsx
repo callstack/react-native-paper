@@ -3,7 +3,7 @@ import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import color from 'color';
 
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 const md3 = (theme: InternalTheme) => theme;
 

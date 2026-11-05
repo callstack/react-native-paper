@@ -3,7 +3,7 @@ import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import getContrastingColor from '../../utils/getContrastingColor';
 import Text from '../Typography/Text';
 
