@@ -102,7 +102,7 @@ Some components now accept explicit `testID` props for their interactable elemen
 - `BottomNavigation`: `barTestID` for the internal `BottomNavigation.Bar`, replacing the previous `${testID}-bar` derivation.
 - `Chip`: `closeIconTestID` for the close icon button.
 - `Dialog` and `Modal`: `overlayTestID` for the overlay displayed behind the content.
-- `FAB.Menu` and `Menu`: `overlayTestID` for the overlay displayed behind the menu.
+- `Menu`: `overlayTestID` for the overlay displayed behind the menu.
 - `Searchbar`: `searchTestID`, `clearTestID`, and `trailingTestID` for the search, clear, and trailing icon buttons.
 - `Snackbar`: `iconTestID` for the icon button.
 
@@ -284,14 +284,6 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
   <Menu.Item title="Item" />
 </Menu>
 ```
-
-### FAB.Menu
-
-`onDismiss` is now also called when the user presses outside the menu, presses Escape (web), presses the hardware back button (Android) or performs the screen reader escape gesture (iOS). Before, it was only called by the close button and the items.
-
-An invisible layer behind the open menu receives the outside press, so the press no longer reaches the content under it. If your screen relied on pressing through the open menu, close the menu in `onDismiss` and press again.
-
-Focus moves to the first item when the menu opens and returns to the trigger when it closes.
 
 ### Searchbar
 

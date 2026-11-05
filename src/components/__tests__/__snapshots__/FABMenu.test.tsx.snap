@@ -2102,7 +2102,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
 
 exports[`renders FAB.Menu open 1`] = `
 <View
-  onAccessibilityEscape={[MockFunction]}
   onLayout={[Function]}
   style={
     [
@@ -2124,47 +2123,6 @@ exports[`renders FAB.Menu open 1`] = `
     ]
   }
 >
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={false}
-    aria-hidden={true}
-    collapsable={false}
-    focusable={false}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  />
   <View
     style={
       [
@@ -3194,7 +3152,6 @@ exports[`renders FAB.Menu open 1`] = `
 
 exports[`renders FAB.Menu with 6 items 1`] = `
 <View
-  onAccessibilityEscape={[MockFunction]}
   onLayout={[Function]}
   style={
     [
@@ -3216,47 +3173,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
     ]
   }
 >
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={false}
-    aria-hidden={true}
-    collapsable={false}
-    focusable={false}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  />
   <View
     style={
       [
@@ -5418,7 +5334,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
 
 exports[`renders FAB.Menu with center alignment 1`] = `
 <View
-  onAccessibilityEscape={[MockFunction]}
   onLayout={[Function]}
   style={
     [
@@ -5440,47 +5355,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
     ]
   }
 >
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={false}
-    aria-hidden={true}
-    collapsable={false}
-    focusable={false}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  />
   <View
     style={
       [
@@ -6511,7 +6385,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
 
 exports[`renders FAB.Menu with items having icons 1`] = `
 <View
-  onAccessibilityEscape={[MockFunction]}
   onLayout={[Function]}
   style={
     [
@@ -6533,47 +6406,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
     ]
   }
 >
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={false}
-    aria-hidden={true}
-    collapsable={false}
-    focusable={false}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  />
   <View
     style={
       [
@@ -7663,7 +7495,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
 
 exports[`renders FAB.Menu with start alignment 1`] = `
 <View
-  onAccessibilityEscape={[MockFunction]}
   onLayout={[Function]}
   style={
     [
@@ -7685,47 +7516,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
     ]
   }
 >
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={false}
-    aria-hidden={true}
-    collapsable={false}
-    focusable={false}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  />
   <View
     style={
       [

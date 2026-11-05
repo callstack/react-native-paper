@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Platform, ScrollView, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -22,10 +16,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useLatestCallback from 'use-latest-callback';
 
 import Content from './Content';
-import { focusNode } from './focus';
+import { getFocusableElement } from './focus';
 import Shell from './Shell';
 import {
   MenuTokens,
@@ -44,9 +37,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
-import { getFocusableElement } from '../../utils/focusFirstDOMNode';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
-import { useHardwareBackPress } from '../../utils/useHardwareBackPress';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -130,11 +121,6 @@ export type MenuProps = {
   items: TwoToSix<MenuItemProps>;
   testID?: string;
   /**
-   * testID for the invisible layer behind the menu that dismisses it when
-   * pressed.
-   */
-  overlayTestID?: string;
-  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -172,8 +158,8 @@ const getItemsVariant = (triggerVariant: Variant): Variant => {
 const STAGGER_MS = 30;
 
 // Room the items scroll view keeps around the items, so it doesn't clip the
-// focus ring and the hover shadow. Taps in this margin don't reach the
-// dismiss layer on Android, so keep it small.
+// focus ring and the hover shadow. Taps in this margin don't reach the content
+// below on Android, so keep it small.
 const ITEMS_SCROLL_INSET = FOCUS_RING_INSET + 4;
 
 type AnimatedItemProps = {
@@ -637,7 +623,6 @@ const Menu = ({
   closeIcon = 'close',
   items,
   testID,
-  overlayTestID,
   theme: themeOverrides,
 }: MenuProps) => {
   const theme = useInternalTheme(themeOverrides);
@@ -655,16 +640,11 @@ const Menu = ({
 
   const effectiveExpanded = triggerVisible && expanded;
 
-  const containerRef = React.useRef<View>(null);
   const triggerRef = React.useRef<View>(null);
   const scrollRef = React.useRef<ScrollView>(null);
   const itemRefs = React.useRef<(View | null)[]>([]);
-  const wasExpandedRef = React.useRef(effectiveExpanded);
-  const closedByItemRef = React.useRef(false);
 
   const [containerHeight, setContainerHeight] = React.useState<number>();
-
-  const onDismissCallback = useLatestCallback(onDismiss);
 
   const registerItemRef = React.useCallback(
     (index: number, node: View | null) => {
@@ -676,61 +656,19 @@ const Menu = ({
   const handleItemPress =
     (item: MenuItemProps) => (e: GestureResponderEvent) => {
       item.onPress(e);
-      closedByItemRef.current = true;
       onDismiss();
     };
 
-  // Focus moves into the menu when it opens and back to the trigger when it
-  // closes, unless the user already moved focus somewhere else.
+  // A long list scrolls, so start from the first item every time it opens.
   React.useEffect(() => {
-    if (wasExpandedRef.current === effectiveExpanded) {
-      return;
-    }
-    wasExpandedRef.current = effectiveExpanded;
-
-    const closedByItem = closedByItemRef.current;
-    closedByItemRef.current = false;
-
     if (effectiveExpanded) {
-      // The first item is at the top of the list. Reset the scroll position
-      // from the last time instead of scrolling the page to reach the item.
       scrollRef.current?.scrollTo({ y: 0, animated: false });
-      focusNode(itemRefs.current[0], { preventScroll: true });
-      return;
     }
+  }, [effectiveExpanded]);
 
-    if (!triggerVisible) {
-      return;
-    }
-
-    if (Platform.OS !== 'web') {
-      // An item usually takes the user elsewhere, so leave the screen reader
-      // focus where the item's action puts it. On the web this is the
-      // `activeElement` check below.
-      if (closedByItem) {
-        return;
-      }
-    } else {
-      const { activeElement, body } = document;
-      const container = containerRef.current;
-
-      if (
-        activeElement &&
-        activeElement !== body &&
-        !(container instanceof HTMLElement && container.contains(activeElement))
-      ) {
-        return;
-      }
-    }
-
-    focusNode(triggerRef.current);
-  }, [effectiveExpanded, triggerVisible]);
-
-  useHardwareBackPress(effectiveExpanded, () => {
-    onDismiss();
-    return true;
-  });
-
+  // Arrow keys, Home and End move focus between the items and the close
+  // button. Opening, closing and dismissing the menu are left to the overlay
+  // handling.
   React.useEffect(() => {
     if (Platform.OS !== 'web' || !effectiveExpanded) {
       return undefined;
@@ -739,11 +677,6 @@ const Menu = ({
     const onKeyDown = (e: KeyboardEvent) => {
       // Something else, such as a dialog on top, already handled the key.
       if (e.defaultPrevented) {
-        return;
-      }
-
-      if (e.key === 'Escape') {
-        onDismissCallback();
         return;
       }
 
@@ -786,7 +719,7 @@ const Menu = ({
     document.addEventListener('keydown', onKeyDown);
 
     return () => document.removeEventListener('keydown', onKeyDown);
-  }, [effectiveExpanded, onDismissCallback]);
+  }, [effectiveExpanded]);
 
   const flexAlign: 'flex-start' | 'center' | 'flex-end' =
     alignment === 'start'
@@ -824,7 +757,7 @@ const Menu = ({
         ITEMS_SCROLL_INSET * 2;
 
   // Only the items take touches, so taps next to them in the scroll view's
-  // margin reach the dismiss layer. When collapsed, nothing does. Android
+  // margin reach the content below. When collapsed, nothing does. Android
   // doesn't scroll with `box-none`.
   const itemsPointerEvents = !effectiveExpanded
     ? styles.pointerEventsNone
@@ -834,7 +767,6 @@ const Menu = ({
 
   return (
     <View
-      ref={containerRef}
       style={[
         styles.container,
         {
@@ -845,19 +777,8 @@ const Menu = ({
         },
       ]}
       onLayout={(e) => setContainerHeight(e.nativeEvent.layout.height)}
-      onAccessibilityEscape={effectiveExpanded ? onDismiss : undefined}
       testID={testID}
     >
-      {effectiveExpanded ? (
-        <Pressable
-          aria-hidden
-          accessible={false}
-          focusable={false}
-          onPress={onDismiss}
-          style={StyleSheet.absoluteFill}
-          testID={overlayTestID}
-        />
-      ) : null}
       <View style={[styles.stack, { alignItems: flexAlign }]}>
         <View
           style={[

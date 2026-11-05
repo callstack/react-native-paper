@@ -1,27 +1,24 @@
-import { AccessibilityInfo, findNodeHandle, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import type { View } from 'react-native';
 
-import { focusFirstDOMNode } from '../../utils/focusFirstDOMNode';
+// This is a rough list of selectors that can be focused.
+const FOCUSABLE_SELECTOR =
+  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 /**
- * Moves keyboard focus (web) or screen reader focus (native) to the node.
+ * Resolves the DOM element that can receive keyboard focus for a ref: its first
+ * focusable descendant, or the node itself when it is the focusable element.
+ * Web only; returns `null` on native.
  */
-export const focusNode = (
-  node: View | null | undefined,
-  options?: FocusOptions
-) => {
-  if (!node) {
-    return;
+export const getFocusableElement = (
+  el: View | null | undefined
+): HTMLElement | null => {
+  if (Platform.OS !== 'web' || !(el instanceof HTMLElement)) {
+    return null;
   }
 
-  if (Platform.OS === 'web') {
-    focusFirstDOMNode(node, options);
-    return;
-  }
-
-  const handle = findNodeHandle(node);
-
-  if (handle != null) {
-    AccessibilityInfo.setAccessibilityFocus(handle);
-  }
+  return (
+    el.querySelector<HTMLElement>(FOCUSABLE_SELECTOR) ??
+    (el.matches(FOCUSABLE_SELECTOR) ? el : null)
+  );
 };
