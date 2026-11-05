@@ -3,16 +3,17 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   StyleProp,
-  TextLayoutEventData,
   TextProps,
   TextStyle,
   ViewStyle,
 } from 'react-native';
 
 import { ListAccordionContext } from './ListAccordionContext';
-import { getLeftStyles, getRightStyles } from './utils';
+import { ListItemContext } from './ListItemContext';
+import { ListTokens } from './tokens';
+import { useMultilineDescription } from './useMultilineDescription';
+import { ListRowContext, getLeftStyles, getRightStyles } from './utils';
 import type { Style } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -51,6 +52,14 @@ export type Props = Omit<
    */
   description?: Description;
   /**
+   * Element to display in the leading slot. Takes precedence over `left`.
+   */
+  leading?: React.ReactNode;
+  /**
+   * Element to display in the trailing slot. Takes precedence over `right`.
+   */
+  trailing?: React.ReactNode;
+  /**
    * Callback which returns a React element to display on the left side.
    */
   left?: (props: { color: ColorValue; style: Style }) => React.ReactNode;
@@ -58,6 +67,10 @@ export type Props = Omit<
    * Callback which returns a React element to display on the right side.
    */
   right?: (props: { color: ColorValue; style?: Style }) => React.ReactNode;
+  /**
+   * Whether to highlight the list item as selected.
+   */
+  selected?: boolean;
   /**
    * Function to execute on press.
    */
@@ -147,8 +160,11 @@ export type Props = Omit<
 const ListItem = ({
   left,
   right,
+  leading,
+  trailing,
   title,
   description,
+  selected,
   onPress,
   theme: themeOverrides,
   style,
@@ -169,14 +185,18 @@ const ListItem = ({
   const theme = useInternalTheme(themeOverrides);
   const { hasLeft } = React.useContext(ListAccordionContext);
   const shouldIndent = hasLeft && !left && !right;
-  const [alignToTop, setAlignToTop] = React.useState(false);
+  const {
+    isMultiline: isDescriptionMultiline,
+    contentRef,
+    descriptionProps,
+  } = useMultilineDescription(Boolean(description));
 
-  const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
-  ) => {
-    const { nativeEvent } = event;
-    setAlignToTop(nativeEvent.lines.length >= 2);
-  };
+  const backgroundColor = selected
+    ? theme.colors[ListTokens.selectedContainerColor]
+    : undefined;
+  const titleColor = selected
+    ? theme.colors[ListTokens.selectedContentColor]
+    : theme.colors[ListTokens.headlineColor];
 
   const renderDescription = (
     descriptionColor: ColorValue,
@@ -187,19 +207,17 @@ const ListItem = ({
         selectable: false,
         ellipsizeMode: descriptionEllipsizeMode,
         color: descriptionColor,
-        fontSize: styles.description.fontSize,
+        fontSize: theme.fonts.bodyMedium.fontSize,
       })
     ) : (
       <Text
+        variant="bodyMedium"
+        theme={theme}
         selectable={false}
         numberOfLines={descriptionNumberOfLines}
         ellipsizeMode={descriptionEllipsizeMode}
-        style={[
-          styles.description,
-          { color: descriptionColor },
-          descriptionStyle,
-        ]}
-        onTextLayout={onDescriptionTextLayout}
+        style={[{ color: descriptionColor }, descriptionStyle]}
+        {...descriptionProps}
         maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
       >
         {description}
@@ -208,21 +226,21 @@ const ListItem = ({
   };
 
   const renderTitle = () => {
-    const titleColor = theme.colors.onSurface;
-
     return typeof title === 'function' ? (
       title({
         selectable: false,
         ellipsizeMode: titleEllipsizeMode,
         color: titleColor,
-        fontSize: styles.title.fontSize,
+        fontSize: theme.fonts.bodyLarge.fontSize,
       })
     ) : (
       <Text
+        variant="bodyLarge"
+        theme={theme}
         selectable={false}
         ellipsizeMode={titleEllipsizeMode}
         numberOfLines={titleNumberOfLines}
-        style={[styles.title, { color: titleColor }, titleStyle]}
+        style={[{ color: titleColor }, titleStyle]}
         maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
       >
         {title}
@@ -230,43 +248,99 @@ const ListItem = ({
     );
   };
 
-  const descriptionColor = theme.colors.onSurfaceVariant;
+  const descriptionColor = selected
+    ? theme.colors[ListTokens.selectedContentColor]
+    : theme.colors[ListTokens.supportingTextColor];
+
+  const rowContext = React.useMemo(
+    () => ({
+      verticalPadding: isDescriptionMultiline
+        ? ListTokens.threeLineVerticalPadding
+        : ListTokens.verticalPadding,
+    }),
+    [isDescriptionMultiline]
+  );
+
+  const leadingColor = selected
+    ? theme.colors[ListTokens.selectedContentColor]
+    : theme.colors[ListTokens.leadingIconColor];
+  const trailingColor = selected
+    ? theme.colors[ListTokens.selectedContentColor]
+    : theme.colors[ListTokens.trailingIconColor];
+
+  const leadingContext = React.useMemo(
+    () => ({ color: leadingColor }),
+    [leadingColor]
+  );
+  const trailingContext = React.useMemo(
+    () => ({ color: trailingColor }),
+    [trailingColor]
+  );
+
+  const renderLeading = () => {
+    const accessoryStyle = getLeftStyles(isDescriptionMultiline, description);
+
+    if (leading) {
+      return (
+        <ListItemContext.Provider value={leadingContext}>
+          <View style={accessoryStyle}>{leading}</View>
+        </ListItemContext.Provider>
+      );
+    }
+
+    return left ? left({ color: leadingColor, style: accessoryStyle }) : null;
+  };
+
+  const renderTrailing = () => {
+    const accessoryStyle = getRightStyles(isDescriptionMultiline, description);
+
+    if (trailing) {
+      return (
+        <ListItemContext.Provider value={trailingContext}>
+          <View style={accessoryStyle}>{trailing}</View>
+        </ListItemContext.Provider>
+      );
+    }
+
+    return right
+      ? right({ color: trailingColor, style: accessoryStyle })
+      : null;
+  };
 
   return (
-    <TouchableRipple
-      {...rest}
-      ref={ref}
-      style={
-        shouldIndent
-          ? [styles.container, styles.indent, style]
-          : [styles.container, style]
-      }
-      onPress={onPress}
-      theme={theme}
-      testID={testID}
-    >
-      <View style={[styles.row, containerStyle]}>
-        {left
-          ? left({
-              color: descriptionColor,
-              style: getLeftStyles(alignToTop, description),
-            })
-          : null}
-        <View style={[styles.item, styles.content, contentStyle]}>
-          {renderTitle()}
+    <ListRowContext.Provider value={rowContext}>
+      <TouchableRipple
+        {...rest}
+        ref={ref}
+        style={[
+          styles.container,
+          description ? styles.containerTwoLine : styles.containerOneLine,
+          isDescriptionMultiline && styles.containerThreeLine,
+          shouldIndent && styles.indent,
+          { backgroundColor },
+          style,
+        ]}
+        onPress={onPress}
+        aria-selected={selected}
+        theme={theme}
+        testID={testID}
+      >
+        <View style={[styles.row, containerStyle]}>
+          {renderLeading()}
+          <View
+            ref={contentRef}
+            style={[styles.item, styles.content, contentStyle]}
+          >
+            {renderTitle()}
 
-          {description
-            ? renderDescription(descriptionColor, description)
-            : null}
+            {description
+              ? renderDescription(descriptionColor, description)
+              : null}
+          </View>
+          {renderTrailing()}
         </View>
-        {right
-          ? right({
-              color: descriptionColor,
-              style: getRightStyles(alignToTop, description),
-            })
-          : null}
-      </View>
-    </TouchableRipple>
+      </TouchableRipple>
+    </ListRowContext.Provider>
   );
 };
 
@@ -274,8 +348,18 @@ ListItem.displayName = 'List.Item';
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 8,
-    paddingRight: 24,
+    paddingVertical: ListTokens.verticalPadding,
+    paddingRight: ListTokens.trailingSpace,
+    justifyContent: 'center',
+  },
+  containerOneLine: {
+    minHeight: ListTokens.oneLineContainerHeight,
+  },
+  containerTwoLine: {
+    minHeight: ListTokens.twoLineContainerHeight,
+  },
+  containerThreeLine: {
+    paddingVertical: ListTokens.threeLineVerticalPadding,
   },
   indent: {
     paddingLeft: 40,
@@ -283,16 +367,9 @@ const styles = StyleSheet.create({
   row: {
     width: '100%',
     flexDirection: 'row',
-    marginVertical: 6,
-  },
-  title: {
-    fontSize: 16,
-  },
-  description: {
-    fontSize: 14,
   },
   item: {
-    paddingLeft: 16,
+    paddingLeft: ListTokens.leadingSpace,
   },
   content: {
     flexShrink: 1,
