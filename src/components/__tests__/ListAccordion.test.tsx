@@ -135,6 +135,22 @@ describe('ListAccordion', () => {
     await expect(render(<ListAccordionTest />)).resolves.toBeDefined();
   });
 
+  it('expands the accordion with id={0} when it is the controlled expandedId', async () => {
+    await render(
+      <ListAccordionGroup expandedId={0} onAccordionPress={() => {}}>
+        <ListAccordion title="First accordion" id={0}>
+          <ListItem title="First accordion item" />
+        </ListAccordion>
+        <ListAccordion title="Second accordion" id={1}>
+          <ListItem title="Second accordion item" />
+        </ListAccordion>
+      </ListAccordionGroup>
+    );
+
+    expect(screen.getByText('First accordion item')).toBeOnTheScreen();
+    expect(screen.queryByText('Second accordion item')).not.toBeOnTheScreen();
+  });
+
   it('should throw an error when id={""}', async () => {
     const ListAccordionTest = () => (
       <ListAccordionGroup>

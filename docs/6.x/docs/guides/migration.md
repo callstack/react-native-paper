@@ -546,6 +546,12 @@ An accordion with a `left` element now indents only its `List.Item` children. An
 
 `theme` set on `List.Accordion` no longer reaches its children either. Pass it to the child that needs the override.
 
+### Text
+
+A `Text` nested in another `Text` now inherits the parent's font and color, as React Native's own `Text` does. In 5.x it reset them to the theme's default font and `onSurface`, so a `Text` with a variant inside a contained `Button` lost the button's label color, and a plain `Text` inside a `Chip` lost the chip's font. A nested `Text` with a `variant` still takes that variant's font, and its own `style` still wins over the parent's. To give a nested `Text` its own color, set `color` in its `style`, or pass it a `theme`, which makes it render like a top-level `Text`.
+
+On iOS and Android, a `Text` inside a `View` inside a `Text` renders in the platform's default color, so set its `color` or pass it a `theme`.
+
 ### ToggleButton
 
 `ToggleButton`, `ToggleButton.Group` and `ToggleButton.Row` were removed. For an
