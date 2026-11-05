@@ -213,10 +213,9 @@ const SearchExample = () => {
       <Snackbar
         visible={isVisible}
         onDismiss={() => setIsVisible(false)}
+        message="Microphone button pressed"
         duration={Snackbar.DURATION_SHORT}
-      >
-        Microphone button pressed
-      </Snackbar>
+      />
     </>
   );
 };

@@ -19,6 +19,7 @@ const SnackbarExample = () => {
     showCloseIcon: false,
     showLongerMessage: false,
     showLongerAction: false,
+    showInPortal: true,
   });
 
   const {
@@ -27,14 +28,11 @@ const SnackbarExample = () => {
     showCloseIcon,
     showLongerMessage,
     showLongerAction,
+    showInPortal,
   } = options;
 
-  const action = {
-    label: showLongerAction ? 'Toggle Theme' : 'Action',
-    onPress: () => {
-      preferences?.toggleTheme();
-    },
-  };
+  const toggleOption = (option: keyof typeof options) =>
+    setOptions({ ...options, [option]: !options[option] });
 
   return (
     <>
@@ -44,71 +42,65 @@ const SnackbarExample = () => {
             <Text>Action button</Text>
             <Switch
               value={showAction}
-              onValueChange={() =>
-                setOptions({ ...options, showAction: !showAction })
-              }
+              onValueChange={() => toggleOption('showAction')}
             />
           </View>
           <View style={styles.row}>
             <Text>Close icon button</Text>
             <Switch
               value={showCloseIcon}
-              onValueChange={() =>
-                setOptions({ ...options, showCloseIcon: !showCloseIcon })
-              }
+              onValueChange={() => toggleOption('showCloseIcon')}
             />
           </View>
           <View style={styles.row}>
             <Text>Longer message</Text>
             <Switch
               value={showLongerMessage}
-              onValueChange={() =>
-                setOptions({
-                  ...options,
-                  showLongerMessage: !showLongerMessage,
-                })
-              }
+              onValueChange={() => toggleOption('showLongerMessage')}
             />
           </View>
           <View style={styles.row}>
             <Text>Longer action</Text>
             <Switch
               value={showLongerAction}
-              onValueChange={() =>
-                setOptions({
-                  ...options,
-                  showLongerAction: !showLongerAction,
-                })
-              }
+              onValueChange={() => toggleOption('showLongerAction')}
+            />
+          </View>
+          <View style={styles.row}>
+            <Text>Render in portal</Text>
+            <Switch
+              value={showInPortal}
+              onValueChange={() => toggleOption('showInPortal')}
             />
           </View>
         </List.Section>
 
         <View style={styles.wrapper}>
-          <Button
-            mode="outlined"
-            onPress={() =>
-              setOptions({ ...options, showSnackbar: !showSnackbar })
-            }
-          >
+          <Button mode="outlined" onPress={() => toggleOption('showSnackbar')}>
             {showSnackbar ? 'Hide' : 'Show'}
           </Button>
         </View>
       </ScreenWrapper>
       <Snackbar
         visible={showSnackbar}
-        onDismiss={() => setOptions({ ...options, showSnackbar: false })}
-        action={showAction ? action : undefined}
-        onIconPress={
-          showCloseIcon
-            ? () => setOptions({ ...options, showSnackbar: false })
+        onDismiss={() => toggleOption('showSnackbar')}
+        message={showLongerMessage ? LONG_MESSAGE : SHORT_MESSAGE}
+        action={
+          showAction
+            ? {
+                label: showLongerAction ? 'Toggle theme' : 'Action',
+                onPress: () => {
+                  preferences?.toggleTheme();
+                },
+              }
             : undefined
         }
+        onIconPress={
+          showCloseIcon ? () => toggleOption('showSnackbar') : undefined
+        }
+        portal={showInPortal}
         duration={Snackbar.DURATION_MEDIUM}
-        style={showLongerAction && styles.longerAction}
-      >
-        {showLongerMessage ? LONG_MESSAGE : SHORT_MESSAGE}
-      </Snackbar>
+      />
     </>
   );
 };
@@ -129,9 +121,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 8,
     paddingHorizontal: 16,
-  },
-  longerAction: {
-    flexDirection: 'column',
   },
 });
 

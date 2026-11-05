@@ -184,10 +184,9 @@ const AppbarExample = () => {
       <Snackbar
         visible={showSnackbar}
         onDismiss={() => setShowSnackbar(false)}
+        message="Heading pressed"
         duration={Snackbar.DURATION_SHORT}
-      >
-        Heading pressed
-      </Snackbar>
+      />
     </>
   );
 };
