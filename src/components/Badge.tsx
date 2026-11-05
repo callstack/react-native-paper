@@ -1,9 +1,13 @@
 import type { StyleProp, TextProps, TextStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-import Animated, { type AnimatedStyle } from 'react-native-reanimated';
+import Animated, {
+  type AnimatedStyle,
+  type CSSStyle,
+} from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
+import { getTransition } from '../theme/tokens/sys/motion';
 import { cornerFull } from '../theme/tokens/sys/shape';
 import type { ThemeProp } from '../theme/types';
 
@@ -57,20 +61,17 @@ const Badge = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const {
-    animation: { scale },
-  } = theme;
-
   const textColor = theme.colors.onError;
 
   const isLarge = children != null;
   const badgeSize = isLarge ? LARGE_SIZE : SMALL_SIZE;
   const labelFont = theme.fonts.labelSmall;
 
-  const transitionStyle = {
+  const transitionStyle: CSSStyle<TextStyle> = {
     opacity: visible ? 1 : 0,
-    transitionDuration: 150 * scale,
-    transitionProperty: 'opacity',
+    // Opacity is exempt from reduced motion (see `useReduceMotion`'s
+    // contract), so this always animates — pass `false`, not `reduceMotion`.
+    ...getTransition<TextStyle>(theme, 'opacity', 'short3', 'standard', false),
   };
 
   return (

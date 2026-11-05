@@ -1,3 +1,10 @@
+import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
+
+import {
+  cubicBezier,
+  type CSSTransitionProperties,
+} from 'react-native-reanimated';
+
 import type {
   MotionConfig,
   MotionDuration,
@@ -109,5 +116,49 @@ export function toRawSpring({
     stiffness,
     damping: ratio * 2 * Math.sqrt(stiffness),
     mass: 1, // as per MD specs
+  };
+}
+
+/**
+ * Builds the three Reanimated CSS-transition style props (duration, easing,
+ * property) from theme motion tokens, so components don't re-derive them by
+ * hand. `theme.animation.scale` is applied the same way `Surface`, `Chip` and
+ * `Button` apply it (a general speed multiplier used in tests/screenshots,
+ * e.g. `scale: 0` to freeze animations) — it's unrelated to accessibility
+ * reduced motion.
+ *
+ * `reduceMotion` sets the duration to 0, because Reanimated's `ReduceMotion`
+ * option (the imperative tier's mechanism) has no effect on CSS transitions.
+ * Per `useReduceMotion`'s contract (see `ReduceMotionContext.tsx`), only pass
+ * `true` here for a motion property (translation, scale, transform) — for an
+ * opacity/color-only transition, pass `false` so it keeps animating under
+ * reduced motion, as that contract requires.
+ *
+ * @example
+ * <Animated.View
+ *   style={[
+ *     { opacity: visible ? 1 : 0 },
+ *     // Opacity: exempt from reduced motion, so pass `false` here, not
+ *     // `reduceMotion`.
+ *     getTransition(theme, 'opacity', 'short3', 'standard', false),
+ *   ]}
+ * />
+ */
+export function getTransition<
+  S extends object = ViewStyle & TextStyle & ImageStyle,
+>(
+  theme: { motion: MotionConfig; animation: { scale: number } },
+  property: NonNullable<CSSTransitionProperties<S>['transitionProperty']>,
+  durationToken: keyof MotionDuration,
+  easingToken: keyof MotionEasing,
+  reduceMotion: boolean
+): Required<Pick<CSSTransitionProperties<S>, 'transitionProperty'>> &
+  CSSTransitionProperties<S> {
+  return {
+    transitionProperty: property,
+    transitionDuration: reduceMotion
+      ? 0
+      : theme.motion.duration[durationToken] * theme.animation.scale,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing[easingToken]),
   };
 }
