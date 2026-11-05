@@ -447,6 +447,7 @@ const styles = StyleSheet.create({
   md3LabelText: {
     textAlignVertical: 'center',
     marginVertical: 6,
+    flexShrink: 1,
   },
   avatar: {
     width: 24,
