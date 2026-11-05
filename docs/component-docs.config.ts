@@ -5,6 +5,14 @@ import { extendedExamples } from './src/data/extendedExamples.ts';
 import { screenshots } from './src/data/screenshots.ts';
 import { themeColors } from './src/data/themeColors.ts';
 
+// 6.x-only overrides: the v5 iOS radio assets show a control this release
+// removes, but `generate-5x-docs.ts` still renders them from the shared map.
+const screenshotsV6: Record<string, unknown> = {
+  ...screenshots,
+  'RadioButton.Group': 'screenshots/radio-button-group-android.gif',
+};
+delete screenshotsV6['RadioButton.Item'];
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export type Page =
@@ -125,9 +133,7 @@ const pages = {
   ProgressBar: 'ProgressBar',
   RadioButton: {
     RadioButton: 'RadioButton/RadioButton',
-    RadioButtonAndroid: 'RadioButton/RadioButtonAndroid',
     RadioButtonGroup: 'RadioButton/RadioButtonGroup',
-    RadioButtonIOS: 'RadioButton/RadioButtonIOS',
     RadioButtonItem: 'RadioButton/RadioButtonItem',
   },
   Searchbar: 'Searchbar',
@@ -179,7 +185,7 @@ const componentDocsConfig: ComponentDocsConfig = {
     },
     knownIssues: {},
     themeColors,
-    screenshots,
+    screenshots: screenshotsV6,
     extendedExamples,
   },
 };

@@ -24,11 +24,11 @@ const RadioButtonGroupExample = () => {
           </View>
           <View style={styles.row}>
             <Text>Second</Text>
-            <RadioButton.Android value="second" />
+            <RadioButton value="second" />
           </View>
           <View style={styles.row}>
             <Text>Third</Text>
-            <RadioButton.IOS value="third" />
+            <RadioButton value="third" />
           </View>
         </RadioButton.Group>
       </List.Section>

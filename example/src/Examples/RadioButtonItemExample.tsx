@@ -7,55 +7,47 @@ import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonItemExample = () => {
   const [checkedDefault, setCheckedDefault] = React.useState(true);
-  const [checkedAndroid, setCheckedAndroid] = React.useState(true);
-  const [checkedIOS, setCheckedIOS] = React.useState(true);
   const [checkedLeadingControl, setCheckedLeadingControl] =
     React.useState(true);
   const [checkedDisabled, setCheckedDisabled] = React.useState<boolean>(true);
+  const [checkedError, setCheckedError] = React.useState(true);
   const [checkedLabelVariant, setCheckedLabelVariant] = React.useState(true);
 
   return (
     <ScreenWrapper style={styles.container}>
       <RadioButton.Item
-        label="Default (will look like whatever system this is running on)"
+        label="Default (trailing control)"
         status={checkedDefault ? 'checked' : 'unchecked'}
         onPress={() => setCheckedDefault(!checkedDefault)}
         value="default"
       />
       <RadioButton.Item
-        label="Material Design"
-        mode="android"
-        status={checkedAndroid ? 'checked' : 'unchecked'}
-        onPress={() => setCheckedAndroid(!checkedAndroid)}
-        value="android"
-      />
-      <RadioButton.Item
-        label="iOS"
-        mode="ios"
-        status={checkedIOS ? 'checked' : 'unchecked'}
-        onPress={() => setCheckedIOS(!checkedIOS)}
-        value="iOS"
-      />
-      <RadioButton.Item
-        label="Default with leading control"
+        label="Leading control"
         status={checkedLeadingControl ? 'checked' : 'unchecked'}
         onPress={() => setCheckedLeadingControl(!checkedLeadingControl)}
-        value="iOS"
+        value="leading"
         position="leading"
       />
       <RadioButton.Item
-        label="Disabled checkbox"
+        label="Error"
+        status={checkedError ? 'checked' : 'unchecked'}
+        onPress={() => setCheckedError(!checkedError)}
+        value="error"
+        error
+      />
+      <RadioButton.Item
+        label="Disabled"
         status={checkedDisabled ? 'checked' : 'unchecked'}
         onPress={() => setCheckedDisabled(!checkedDisabled)}
-        value="iOS"
+        value="disabled"
         disabled
       />
       <RadioButton.Item
-        label="Default with titleLarge title variant"
+        label="titleLarge label variant"
         labelVariant="titleLarge"
         status={checkedLabelVariant ? 'checked' : 'unchecked'}
         onPress={() => setCheckedLabelVariant(!checkedLabelVariant)}
-        value="default"
+        value="variant"
       />
     </ScreenWrapper>
   );

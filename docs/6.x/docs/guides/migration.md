@@ -285,6 +285,28 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 </Menu>
 ```
 
+### RadioButton
+
+`RadioButton` renders one Material 3 circular radio control on every platform. The platform-specific components and their prop types are gone. On iOS checked controls no longer render a checkmark; they use the same ring-and-dot indicator as other platforms. `RadioButton` now also forwards `TouchableRipple` props (`accessible`, `onFocus`, `onBlur`, `borderless`, `rippleColor`, ...).
+
+The control now occupies a 48×48dp layout box instead of 36×36dp, so rows containing it may become 12dp taller. The 20dp radio indicator is unchanged. `RadioButton.Item` rows grow from 52dp to 64dp.
+
+#### Interaction state colors
+
+Interaction states are now painted as a Material Design 3 state layer on every platform, so the tint follows the spec: hover & focus fill a flat 40dp layer behind the indicator with `primary` when checked and `onSurface` when not, and press inverts the two. An `error` radio stays on `error` throughout and `color`/`uncheckedColor` replace the role they already override on the ring, so custom radio no longer picks up `primary` halo. The platform ripple is turned off to make room for it; passing `rippleColor` on any platform, `background` on Android or `underlayColor` on iOS turns it back on and disables the built-in press. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` still suppresses both.
+
+| v5                                               | v6                                                                       |
+| ------------------------------------------------ | ------------------------------------------------------------------------ |
+| `RadioButton.Android`, `RadioButton.IOS`         | `RadioButton`                                                            |
+| `RadioButtonAndroidProps`, `RadioButtonIOSProps` | `RadioButtonProps`                                                       |
+| `RadioButton.Item` `mode="android" \| "ios"`     | `mode` removed; `RadioButton.Item` always renders `RadioButton`          |
+| n/a                                              | new `error` (uses `theme.colors.error`) and `style` (touch-target style) |
+
+```diff
+- <RadioButton.IOS value="first" status="checked" onPress={select} />
++ <RadioButton value="first" status="checked" onPress={select} />
+```
+
 ### Searchbar
 
 The misspelled `traileringIcon` props have been renamed:

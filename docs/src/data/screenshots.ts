@@ -107,22 +107,12 @@ export const screenshots = {
   Modal: 'screenshots/modal.gif',
   ProgressBar: 'screenshots/progress-bar.png',
   RadioButton: {
-    'Android (enabled)': 'screenshots/radio-enabled.android.png',
-    'Android (disabled)': 'screenshots/radio-disabled.android.png',
-    'iOS (enabled)': 'screenshots/radio-enabled.ios.png',
-    'iOS (disabled)': 'screenshots/radio-disabled.ios.png',
-  },
-  'RadioButton.Android': {
     enabled: 'screenshots/radio-enabled.android.png',
     disabled: 'screenshots/radio-disabled.android.png',
   },
   'RadioButton.Group': {
     Android: 'screenshots/radio-button-group-android.gif',
     iOS: 'screenshots/radio-button-group-ios.gif',
-  },
-  'RadioButton.IOS': {
-    enabled: 'screenshots/radio-enabled.ios.png',
-    disabled: 'screenshots/radio-disabled.ios.png',
   },
   'RadioButton.Item': 'screenshots/radio-item.ios.png',
   Searchbar: {

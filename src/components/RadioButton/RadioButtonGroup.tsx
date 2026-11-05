@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
+import useLatestCallback from 'use-latest-callback';
+
 export type Props = {
   /**
    * Function to execute on selection change.
@@ -53,11 +55,21 @@ export const RadioButtonContext =
  * export default MyComponent;
  *```
  */
-const RadioButtonGroup = ({ value, onValueChange, children }: Props) => (
-  <RadioButtonContext.Provider value={{ value, onValueChange }}>
-    <View role="radiogroup">{children}</View>
-  </RadioButtonContext.Provider>
-);
+const RadioButtonGroup = ({ value, onValueChange, children }: Props) => {
+  // Stabilize the callback so the memoized context value only changes when
+  // `value` changes — not on every parent render.
+  const stableOnValueChange = useLatestCallback(onValueChange);
+  const context = React.useMemo(
+    () => ({ value, onValueChange: stableOnValueChange }),
+    [value, stableOnValueChange]
+  );
+
+  return (
+    <RadioButtonContext.Provider value={context}>
+      <View role="radiogroup">{children}</View>
+    </RadioButtonContext.Provider>
+  );
+};
 
 RadioButtonGroup.displayName = 'RadioButton.Group';
 export default RadioButtonGroup;
