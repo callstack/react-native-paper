@@ -17,7 +17,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
+type AppbarModes =
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'center-aligned'
+  | 'medium-flexible'
+  | 'large-flexible';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const MEDIUM_FAB_HEIGHT = 56;
@@ -27,10 +33,15 @@ const AppbarExample = () => {
 
   const [showLeftIcon, setShowLeftIcon] = React.useState(true);
   const [showSubtitle, setShowSubtitle] = React.useState(true);
+  const [showLogo, setShowLogo] = React.useState(false);
   const [showSearchIcon, setShowSearchIcon] = React.useState(true);
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
+  const [showFilledAction, setShowFilledAction] = React.useState(false);
+  const [showTonalAction, setShowTonalAction] = React.useState(false);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
   const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
+  const [centerTitle, setCenterTitle] = React.useState(false);
+  const [collapsed, setCollapsed] = React.useState(false);
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
@@ -39,7 +50,7 @@ const AppbarExample = () => {
   const { bottom, left, right } = useSafeAreaInsets();
   const height = 80;
 
-  const isCenterAlignedMode = appbarMode === 'center-aligned';
+  const isCenterAlignedMode = appbarMode === 'center-aligned' || centerTitle;
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -47,12 +58,24 @@ const AppbarExample = () => {
         <Appbar.Header
           style={showCustomColor ? styles.customColor : null}
           mode={appbarMode}
+          titleAlignment={centerTitle ? 'center' : 'start'}
           elevated={showElevated}
+          collapsed={collapsed}
         >
           {showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
           )}
-          <Appbar.Content title="Title" onPress={() => setShowSnackbar(true)} />
+          {showLogo && (
+            <Appbar.Image
+              source={require('../../assets/images/paper-icon.png')}
+              size={36}
+            />
+          )}
+          <Appbar.Content
+            title="Title"
+            subtitle={showSubtitle ? 'Supporting subtitle' : undefined}
+            onPress={() => setShowSnackbar(true)}
+          />
           {isCenterAlignedMode
             ? false
             : showCalendarIcon && (
@@ -60,6 +83,16 @@ const AppbarExample = () => {
               )}
           {showSearchIcon && (
             <Appbar.Action icon="magnify" onPress={() => {}} />
+          )}
+          {showFilledAction && (
+            <Appbar.Action icon="plus" mode="contained" onPress={() => {}} />
+          )}
+          {showTonalAction && (
+            <Appbar.Action
+              icon="bookmark"
+              mode="contained-tonal"
+              onPress={() => {}}
+            />
           )}
           {showMoreIcon && (
             <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
@@ -71,10 +104,15 @@ const AppbarExample = () => {
     navigation,
     showLeftIcon,
     showSubtitle,
+    showLogo,
     showSearchIcon,
     showMoreIcon,
+    showFilledAction,
+    showTonalAction,
     showCustomColor,
     appbarMode,
+    centerTitle,
+    collapsed,
     showCalendarIcon,
     isCenterAlignedMode,
     showElevated,
@@ -93,23 +131,43 @@ const AppbarExample = () => {
   const renderDefaultOptions = () => (
     <>
       <View style={styles.row}>
-        <Text>Left icon</Text>
+        <Text>Left back action</Text>
         <Switch value={showLeftIcon} onValueChange={setShowLeftIcon} />
+      </View>
+      <View style={styles.row}>
+        <Text>Appbar logo (Appbar.Image)</Text>
+        <Switch value={showLogo} onValueChange={setShowLogo} />
       </View>
       <View style={styles.row}>
         <Text>Subtitle</Text>
         <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
       </View>
       <View style={styles.row}>
-        <Text>Search icon</Text>
+        <Text>Center title alignment</Text>
+        <Switch value={centerTitle} onValueChange={setCenterTitle} />
+      </View>
+      <View style={styles.row}>
+        <Text>Collapsed state</Text>
+        <Switch value={collapsed} onValueChange={setCollapsed} />
+      </View>
+      <View style={styles.row}>
+        <Text>Search action</Text>
         <Switch value={showSearchIcon} onValueChange={setShowSearchIcon} />
       </View>
       <View style={styles.row}>
-        <Text>More icon</Text>
+        <Text>Filled trailing action (Primary)</Text>
+        <Switch value={showFilledAction} onValueChange={setShowFilledAction} />
+      </View>
+      <View style={styles.row}>
+        <Text>Tonal trailing action</Text>
+        <Switch value={showTonalAction} onValueChange={setShowTonalAction} />
+      </View>
+      <View style={styles.row}>
+        <Text>More action</Text>
         <Switch value={showMoreIcon} onValueChange={setShowMoreIcon} />
       </View>
       <View style={styles.row}>
-        <Text>Calendar icon</Text>
+        <Text>Calendar action</Text>
         <Switch
           value={isCenterAlignedMode ? false : showCalendarIcon}
           disabled={isCenterAlignedMode}
@@ -149,16 +207,24 @@ const AppbarExample = () => {
               <RadioButton value="small" />
             </View>
             <View style={styles.row}>
-              <Text>Medium</Text>
-              <RadioButton value="medium" />
+              <Text>Medium Flexible (MD3 Expressive)</Text>
+              <RadioButton value="medium-flexible" />
             </View>
             <View style={styles.row}>
-              <Text>Large</Text>
-              <RadioButton value="large" />
+              <Text>Large Flexible (MD3 Expressive)</Text>
+              <RadioButton value="large-flexible" />
             </View>
             <View style={styles.row}>
               <Text>Center-aligned</Text>
               <RadioButton value="center-aligned" />
+            </View>
+            <View style={styles.row}>
+              <Text>Medium (Baseline, deprecated)</Text>
+              <RadioButton value="medium" />
+            </View>
+            <View style={styles.row}>
+              <Text>Large (Baseline, deprecated)</Text>
+              <RadioButton value="large" />
             </View>
           </RadioButton.Group>
         </List.Section>

@@ -9,6 +9,7 @@ import type {
 } from 'react-native';
 
 import { modeTextVariant } from './utils';
+import type { AppbarModes } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
@@ -37,6 +38,22 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
    */
   titleRef?: React.RefObject<TextRef>;
   /**
+   * Optional subtitle or supporting text. Restored as part of the MD3 Expressive specification for flexible variants.
+   */
+  subtitle?: React.ReactNode;
+  /**
+   * Style for the subtitle, if `subtitle` is a string.
+   */
+  subtitleStyle?: StyleProp<TextStyle>;
+  /**
+   * Reference for the subtitle.
+   */
+  subtitleRef?: React.RefObject<TextRef>;
+  /**
+   * Optional logo or image component to render alongside title.
+   */
+  image?: React.ReactNode;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -53,9 +70,29 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
    */
   titleMaxFontSizeMultiplier?: number;
   /**
-   * @internal
+   * Specifies the largest possible scale a subtitle font can reach.
    */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  subtitleMaxFontSizeMultiplier?: number;
+  /**
+   * Number of lines to show for title before truncating.
+   */
+  titleNumberOfLines?: number;
+  /**
+   * Number of lines to show for subtitle before truncating.
+   */
+  subtitleNumberOfLines?: number;
+  /**
+   * Alignment of title and subtitle.
+   */
+  titleAlignment?: 'start' | 'center';
+  /**
+   * Whether the appbar is in collapsed state.
+   */
+  collapsed?: boolean;
+  /**
+   * Mode of the Appbar.
+   */
+  mode?: AppbarModes;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -68,7 +105,7 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
 } & (TitleString | TitleElement);
 
 /**
- * A component used to display a title in an appbar.
+ * A component used to display a title and optional subtitle in an appbar.
  *
  * ## Usage
  * ```js
@@ -76,8 +113,8 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
  * import { Appbar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Appbar.Header>
- *      <Appbar.Content title="Title" />
+ *   <Appbar.Header mode="medium-flexible">
+ *      <Appbar.Content title="Inbox" subtitle="3 unread messages" />
  *   </Appbar.Header>
  * );
  *
@@ -92,7 +129,16 @@ const AppbarContent = ({
   titleRef,
   titleStyle,
   title,
+  subtitle,
+  subtitleRef,
+  subtitleStyle,
+  image,
   titleMaxFontSizeMultiplier,
+  subtitleMaxFontSizeMultiplier,
+  titleNumberOfLines = 1,
+  subtitleNumberOfLines = 1,
+  titleAlignment,
+  collapsed = false,
   mode = 'small',
   theme: themeOverrides,
   testID,
@@ -102,45 +148,107 @@ const AppbarContent = ({
   const { colors, fonts } = theme;
 
   const titleTextColor = titleColor ? titleColor : colors.onSurface;
+  const isCenterAligned =
+    titleAlignment === 'center' || mode === 'center-aligned';
 
-  const modeContainerStyles = {
+  const modeContainerStyles: Record<AppbarModes, StyleProp<ViewStyle>> = {
     small: styles.v3DefaultContainer,
     medium: styles.v3MediumContainer,
     large: styles.v3LargeContainer,
     'center-aligned': styles.v3DefaultContainer,
+    'medium-flexible': styles.v3MediumFlexibleContainer,
+    'large-flexible': styles.v3LargeFlexibleContainer,
   };
 
-  const variant = modeTextVariant[mode];
+  const currentVariant = collapsed ? 'titleLarge' : modeTextVariant[mode];
 
   const contentWrapperProps = {
     pointerEvents: 'box-none',
-    style: [styles.container, modeContainerStyles[mode], style],
+    style: [
+      styles.container,
+      collapsed ? styles.v3DefaultContainer : modeContainerStyles[mode],
+      ...(isCenterAligned ? [styles.centerAlignedContent] : []),
+      style,
+    ],
     testID,
     ...rest,
   } satisfies ViewProps;
 
-  const content = (
-    <>
-      {typeof title === 'string' ? (
+  const titleElement =
+    typeof title === 'string' ? (
+      <Text
+        variant={currentVariant}
+        ref={titleRef}
+        style={[
+          {
+            color: titleTextColor,
+            ...fonts[currentVariant],
+          },
+          ...(isCenterAligned ? [styles.centerText] : []),
+          titleStyle,
+        ]}
+        numberOfLines={titleNumberOfLines}
+        accessible
+        role={onPress ? 'none' : 'heading'}
+        maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+      >
+        {title}
+      </Text>
+    ) : (
+      title
+    );
+
+  const subtitleElement =
+    !collapsed && subtitle != null ? (
+      typeof subtitle === 'string' ? (
         <Text
-          variant={variant}
-          ref={titleRef}
+          variant="bodyMedium"
+          ref={subtitleRef}
           style={[
             {
-              color: titleTextColor,
-              ...fonts[variant],
+              color: colors.onSurfaceVariant,
+              ...fonts.bodyMedium,
             },
-            titleStyle,
+            isCenterAligned && styles.centerText,
+            styles.subtitleSpacing,
+            subtitleStyle,
           ]}
-          numberOfLines={1}
+          numberOfLines={subtitleNumberOfLines}
           accessible
-          role={onPress ? 'none' : 'heading'}
-          maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+          maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
         >
-          {title}
+          {subtitle}
         </Text>
       ) : (
-        title
+        subtitle
+      )
+    ) : null;
+
+  const content = (
+    <>
+      {image ? (
+        <View
+          style={[
+            styles.imageWrapper,
+            isCenterAligned && styles.centerAlignedImageWrapper,
+          ]}
+        >
+          {image}
+          <View
+            style={[
+              styles.textContainer,
+              isCenterAligned && styles.centerAlignedContent,
+            ]}
+          >
+            {titleElement}
+            {subtitleElement}
+          </View>
+        </View>
+      ) : (
+        <>
+          {titleElement}
+          {subtitleElement}
+        </>
       )}
     </>
   );
@@ -182,6 +290,35 @@ const styles = StyleSheet.create({
     paddingTop: 36,
     justifyContent: 'flex-end',
     paddingBottom: 28,
+  },
+  v3MediumFlexibleContainer: {
+    paddingHorizontal: 0,
+    justifyContent: 'flex-end',
+    paddingBottom: 16,
+  },
+  v3LargeFlexibleContainer: {
+    paddingHorizontal: 0,
+    justifyContent: 'flex-end',
+    paddingBottom: 20,
+  },
+  centerAlignedContent: {
+    alignItems: 'center',
+  },
+  centerText: {
+    textAlign: 'center',
+  },
+  subtitleSpacing: {
+    marginTop: 2,
+  },
+  imageWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  centerAlignedImageWrapper: {
+    justifyContent: 'center',
+  },
+  textContainer: {
+    flex: 1,
   },
 });
 
