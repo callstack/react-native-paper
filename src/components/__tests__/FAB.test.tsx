@@ -1,8 +1,10 @@
 import { expect, it, jest } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import FAB from '../FAB';
+import Tooltip from '../Tooltip/Tooltip';
 
 it('renders FAB with default props', async () => {
   const tree = (await render(<FAB icon="plus" />)).toJSON();
@@ -100,4 +102,37 @@ it('forwards event object to onPress', async () => {
     key: 'value',
   });
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
+});
+
+it('calls onLongPress and onPressOut when FAB is long pressed', async () => {
+  const user = userEvent.setup();
+  const onLongPress = jest.fn();
+  const onPressOut = jest.fn();
+  await render(
+    <FAB
+      icon="plus"
+      aria-label="Add item"
+      onLongPress={onLongPress}
+      onPressOut={onPressOut}
+      delayLongPress={300}
+    />
+  );
+  await user.longPress(screen.getByRole('button', { name: 'Add item' }), {
+    duration: 400,
+  });
+  expect(onLongPress).toHaveBeenCalledTimes(1);
+  expect(onPressOut).toHaveBeenCalledTimes(1);
+});
+
+it('shows Tooltip when FAB is long pressed', async () => {
+  const user = userEvent.setup();
+  await render(
+    <PaperProvider>
+      <Tooltip title="Press Me">
+        <FAB icon="plus" aria-label="Add item" onPress={() => {}} />
+      </Tooltip>
+    </PaperProvider>
+  );
+  await user.longPress(screen.getByRole('button', { name: 'Add item' }));
+  expect(screen.getByText('Press Me')).toBeOnTheScreen();
 });
