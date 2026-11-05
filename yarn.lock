@@ -18179,7 +18179,6 @@ __metadata:
     react-native-builder-bob: "npm:^0.42.1"
     react-native-reanimated: "npm:4.7.1"
     react-native-safe-area-context: "npm:5.11.1"
-    react-native-web: "npm:~0.21.4"
     react-native-worklets: "npm:0.13.0"
     release-it: "npm:^13.4.0"
     test-renderer: "npm:1.2.0"

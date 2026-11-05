@@ -519,6 +519,15 @@ We have also added a `direction` prop to the `Card` component, which lets you ar
 </Card>
 ```
 
+#### `Card.Cover`
+
+The `style` prop of `Card.Cover` is now typed as a `View` style. Image style properties such as `resizeMode` or `tintColor` were never applied, so pass them as `Image` props instead:
+
+```diff
+- <Card.Cover source={cover} style={{ resizeMode: 'contain' }} />
++ <Card.Cover source={cover} resizeMode="contain" />
+```
+
 #### `Card.Actions`
 
 `Card.Actions` no longer injects `mode` on the buttons. To keep the previous behavior, you need to set `mode="outlined"` on the first button and `mode="contained"` on the rest:

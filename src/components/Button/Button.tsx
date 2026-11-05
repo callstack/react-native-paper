@@ -135,7 +135,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Reference for the touchable
    */
-  touchableRef?: React.RefObject<React.ComponentRef<typeof View>>;
+  touchableRef?: React.Ref<React.ComponentRef<typeof View>>;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * testID to be used on tests.

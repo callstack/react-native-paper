@@ -84,7 +84,11 @@ type SurfaceVisualProps = {
   borderCurve?: ViewStyle['borderCurve'];
 };
 
-export type SurfaceStyle = Omit<
+type DistributiveOmit<T, K extends PropertyKey> = T extends unknown
+  ? Omit<T, K>
+  : never;
+
+export type SurfaceStyle = DistributiveOmit<
   AnimatedStyle<ViewStyle>,
   keyof SurfaceVisualProps | 'elevation'
 >;
