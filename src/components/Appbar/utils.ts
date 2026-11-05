@@ -5,12 +5,31 @@ import { StyleSheet } from 'react-native';
 import { white } from '../../theme/colors';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 
-export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
+export type AppbarModes =
+  | 'small'
+  /**
+   * @deprecated Baseline medium app bar is not recommended in MD3 Expressive. Use 'medium-flexible' instead.
+   */
+  | 'medium'
+  /**
+   * @deprecated Baseline large app bar is not recommended in MD3 Expressive. Use 'large-flexible' instead.
+   */
+  | 'large'
+  /**
+   * Center-aligned app bar. In MD3 Expressive, consider using mode="small" with titleAlignment="center".
+   */
+  | 'center-aligned'
+  | 'medium-flexible'
+  | 'large-flexible';
 
 export type AppbarChildProps = {
   isLeading?: boolean;
-  color: string;
+  color?: string;
   style?: StyleProp<ViewStyle>;
+  subtitle?: React.ReactNode;
+  mode?: AppbarModes;
+  titleAlignment?: 'start' | 'center';
+  collapsed?: boolean;
 };
 
 const borderStyleProperties = [
@@ -50,7 +69,7 @@ export const getAppbarBackgroundColor = (
 export const getAppbarColor = ({
   color,
   isDark,
-}: BaseProps & { color: string }) => {
+}: BaseProps & { color?: string }) => {
   if (typeof color !== 'undefined') {
     return color;
   }
@@ -86,17 +105,47 @@ type RenderAppbarContentProps = BaseProps & {
   renderOnly?: (string | boolean)[];
   renderExcept?: string[];
   mode?: AppbarModes;
+  titleAlignment?: 'start' | 'center';
+  collapsed?: boolean;
   theme?: ThemeProp;
 };
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
-const MD3_DEFAULT_APPBAR_HEIGHT = 64;
+export const MD3_DEFAULT_APPBAR_HEIGHT = 64;
 
-export const modeAppbarHeight = {
+export const modeAppbarHeight: Record<AppbarModes, number> = {
   small: MD3_DEFAULT_APPBAR_HEIGHT,
   medium: 112,
   large: 152,
   'center-aligned': MD3_DEFAULT_APPBAR_HEIGHT,
+  'medium-flexible': 112,
+  'large-flexible': 120,
+};
+
+export const modeAppbarHeightWithSubtitle: Partial<
+  Record<AppbarModes, number>
+> = {
+  'medium-flexible': 136,
+  'large-flexible': 152,
+};
+
+export const getAppbarHeight = ({
+  mode = 'small',
+  hasSubtitle = false,
+  collapsed = false,
+}: {
+  mode?: AppbarModes;
+  hasSubtitle?: boolean;
+  collapsed?: boolean;
+} = {}) => {
+  if (collapsed) {
+    return MD3_DEFAULT_APPBAR_HEIGHT;
+  }
+  const heightWithSubtitle = modeAppbarHeightWithSubtitle[mode];
+  if (hasSubtitle && heightWithSubtitle) {
+    return heightWithSubtitle;
+  }
+  return modeAppbarHeight[mode] ?? MD3_DEFAULT_APPBAR_HEIGHT;
 };
 
 export const modeTextVariant = {
@@ -104,15 +153,35 @@ export const modeTextVariant = {
   medium: 'headlineSmall',
   large: 'headlineMedium',
   'center-aligned': 'titleLarge',
+  'medium-flexible': 'headlineSmall',
+  'large-flexible': 'headlineMedium',
 } as const;
 
 export const filterAppbarActions = (
   children: React.ReactNode,
   isLeading = false
 ) => {
-  return React.Children.toArray(children).filter((child) => {
+  const childrenArray = React.Children.toArray(children);
+  const contentIndex = childrenArray.findIndex(
+    (child) =>
+      React.isValidElement(child) &&
+      // @ts-expect-error: displayName check
+      (child.type?.displayName === 'Appbar.Content' ||
+        // @ts-expect-error: name check
+        child.type?.name === 'AppbarContent')
+  );
+
+  return childrenArray.filter((child, index) => {
     if (!React.isValidElement<AppbarChildProps>(child)) return false;
-    return isLeading ? child.props.isLeading : !child.props.isLeading;
+    if (typeof child.props.isLeading === 'boolean') {
+      return isLeading ? child.props.isLeading : !child.props.isLeading;
+    }
+    // @ts-expect-error: displayName check
+    if (child.type?.displayName === 'Appbar.Image') {
+      const isBeforeContent = contentIndex !== -1 ? index < contentIndex : true;
+      return isLeading ? isBeforeContent : !isBeforeContent;
+    }
+    return isLeading ? Boolean(child.props.isLeading) : !child.props.isLeading;
   });
 };
 
@@ -123,6 +192,8 @@ export const renderAppbarContent = ({
   renderOnly,
   renderExcept,
   mode = 'small',
+  titleAlignment,
+  collapsed,
   theme,
 }: RenderAppbarContentProps) => {
   return React.Children.toArray(children)
@@ -142,6 +213,7 @@ export const renderAppbarContent = ({
           'Appbar.Content',
           'Appbar.Action',
           'Appbar.BackAction',
+          'Appbar.Image',
           'Tooltip',
         ].includes(
           // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
@@ -155,6 +227,8 @@ export const renderAppbarContent = ({
         color?: string;
         style?: StyleProp<ViewStyle>;
         mode?: AppbarModes;
+        titleAlignment?: 'start' | 'center';
+        collapsed?: boolean;
         theme?: ThemeProp;
       } = {
         theme,
@@ -164,6 +238,10 @@ export const renderAppbarContent = ({
       // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
       if (child.type.displayName === 'Appbar.Content') {
         props.mode = mode;
+        props.collapsed = collapsed;
+        if (titleAlignment) {
+          props.titleAlignment = titleAlignment;
+        }
         props.style = [
           i === 0 && !shouldCenterContent && styles.v3Spacing,
           shouldCenterContent && styles.centerAlignedContent,

@@ -44,7 +44,11 @@ export { default as Searchbar } from './components/Searchbar';
 export { default as Snackbar } from './components/Snackbar';
 export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch/Switch';
-export { default as Appbar } from './components/Appbar';
+export { default as Appbar, TopAppBar } from './components/Appbar';
+export {
+  useAppbarScrollBehavior,
+  useTopAppBarScrollBehavior,
+} from './components/Appbar/useAppbarScrollBehavior';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
@@ -59,6 +63,17 @@ export type { Props as AppbarActionProps } from './components/Appbar/AppbarActio
 export type { Props as AppbarBackActionProps } from './components/Appbar/AppbarBackAction';
 export type { Props as AppbarContentProps } from './components/Appbar/AppbarContent';
 export type { Props as AppbarHeaderProps } from './components/Appbar/AppbarHeader';
+export type { Props as AppbarImageProps } from './components/Appbar/AppbarImage';
+export type { Props as TopAppBarProps } from './components/Appbar/Appbar';
+export type { Props as TopAppBarActionProps } from './components/Appbar/AppbarAction';
+export type { Props as TopAppBarBackActionProps } from './components/Appbar/AppbarBackAction';
+export type { Props as TopAppBarContentProps } from './components/Appbar/AppbarContent';
+export type { Props as TopAppBarHeaderProps } from './components/Appbar/AppbarHeader';
+export type { Props as TopAppBarImageProps } from './components/Appbar/AppbarImage';
+export type {
+  AppbarScrollBehavior,
+  TopAppBarScrollBehavior,
+} from './components/Appbar/useAppbarScrollBehavior';
 export type { Props as AvatarIconProps } from './components/Avatar/AvatarIcon';
 export type { Props as AvatarImageProps } from './components/Avatar/AvatarImage';
 export type { Props as AvatarTextProps } from './components/Avatar/AvatarText';

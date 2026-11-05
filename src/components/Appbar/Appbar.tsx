@@ -3,10 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import AppbarContent from './AppbarContent';
+import type { AppbarScrollBehavior } from './useAppbarScrollBehavior';
 import {
   getAppbarBackgroundColor,
   getAppbarBorders,
-  modeAppbarHeight,
+  getAppbarHeight,
   renderAppbarContent,
   filterAppbarActions,
 } from './utils';
@@ -29,20 +30,43 @@ export type Props = Omit<Partial<ViewProps>, 'style'> & {
    */
   children: React.ReactNode;
   /**
-   * @supported Available in v5.x with theme version 3
-   *
    * Mode of the Appbar.
    * - `small` - Appbar with default height (64).
-   * - `medium` - Appbar with medium height (112).
-   * - `large` - Appbar with large height (152).
+   * - `medium` - Baseline medium height (112). @deprecated Use 'medium-flexible' instead.
+   * - `large` - Baseline large height (152). @deprecated Use 'large-flexible' instead.
    * - `center-aligned` - Appbar with default height and center-aligned title.
+   * - `medium-flexible` - MD3 Expressive medium flexible appbar with subtitle support (112/136).
+   * - `large-flexible` - MD3 Expressive large flexible appbar with subtitle support (120/152).
    */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  mode?: AppbarModes;
   /**
-   * @supported Available in v5.x with theme version 3
+   * Text alignment for the title and subtitle.
+   * - `start` - Left-aligned text (default).
+   * - `center` - Centered text.
+   */
+  titleAlignment?: 'start' | 'center';
+  /**
    * Whether Appbar background should have the elevation along with primary color pigment.
+   * In MD3, elevated appbars transition background color to `surfaceContainer`.
    */
   elevated?: boolean;
+  /**
+   * Whether the appbar is collapsed into the small (64dp) height.
+   */
+  collapsed?: boolean;
+  /**
+   * Scroll behavior configuration, e.g. from `useAppbarScrollBehavior()`.
+   */
+  scrollBehavior?: AppbarScrollBehavior;
+  /**
+   * Current scroll offset (in pixels) for reactive elevation and collapsing.
+   */
+  scrollOffset?: number;
+  /**
+   * Threshold in pixels after which the Appbar transitions to elevated.
+   * Defaults to 0.
+   */
+  elevationThreshold?: number;
   /**
    * Safe area insets for the Appbar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
    */
@@ -71,11 +95,11 @@ export type Props = Omit<Partial<ViewProps>, 'style'> & {
  * import { Appbar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Appbar.Header>
+ *   <Appbar.Header mode="medium-flexible">
  *     <Appbar.BackAction onPress={() => {}} />
- *     <Appbar.Content title="Title" />
- *     <Appbar.Action icon="calendar" onPress={() => {}} />
+ *     <Appbar.Content title="Inbox" subtitle="3 unread messages" />
  *     <Appbar.Action icon="magnify" onPress={() => {}} />
+ *     <Appbar.Action icon="plus" mode="contained" onPress={() => {}} />
  *   </Appbar.Header>
  * );
  *
@@ -145,7 +169,12 @@ const Appbar = ({
   dark,
   style,
   mode = 'small',
+  titleAlignment,
   elevated = false,
+  collapsed = false,
+  scrollBehavior,
+  scrollOffset,
+  elevationThreshold,
   safeAreaInsets,
   theme: themeOverrides,
   ...rest
@@ -155,11 +184,44 @@ const Appbar = ({
   const { backgroundColor: customBackground, ...restStyle } = (flattenedStyle ||
     {}) as Exclude<typeof flattenedStyle, number> & {
     backgroundColor?: ColorValue;
+    height?: AppbarStyle['height'];
   };
+
+  const isElevated =
+    scrollBehavior?.isElevated ??
+    (typeof scrollOffset === 'number'
+      ? scrollOffset > (elevationThreshold ?? 0)
+      : elevated);
+
+  const isCollapsed = scrollBehavior?.isCollapsed ?? collapsed;
+
+  const isCenterAligned =
+    mode === 'center-aligned' || titleAlignment === 'center';
+
+  let hasSubtitle = false;
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement<AppbarChildProps>(child)) {
+      if (
+        child.type === AppbarContent ||
+        // @ts-expect-error: displayName check
+        child.type?.displayName === 'Appbar.Content'
+      ) {
+        if (child.props.subtitle != null) {
+          hasSubtitle = true;
+        }
+      }
+    }
+  });
+
+  const defaultHeight = getAppbarHeight({
+    mode,
+    hasSubtitle,
+    collapsed: isCollapsed,
+  });
 
   const backgroundColor = getAppbarBackgroundColor(
     theme,
-    elevated,
+    isElevated,
     customBackground
   );
 
@@ -171,12 +233,11 @@ const Appbar = ({
 
   const isDark = typeof dark === 'boolean' ? dark : false;
 
-  const isCenterAlignedMode = isMode('center-aligned');
-
   let shouldCenterContent = false;
   let shouldAddLeftSpacing = false;
   let shouldAddRightSpacing = false;
-  if (isCenterAlignedMode) {
+
+  if (isCenterAligned) {
     let hasAppbarContent = false;
     let leftItemsCount = 0;
     let rightItemsCount = 0;
@@ -185,7 +246,11 @@ const Appbar = ({
       if (React.isValidElement<AppbarChildProps>(child)) {
         const isLeading = child.props.isLeading === true;
 
-        if (child.type === AppbarContent) {
+        if (
+          child.type === AppbarContent ||
+          // @ts-expect-error: displayName check
+          child.type?.displayName === 'Appbar.Content'
+        ) {
           hasAppbarContent = true;
         } else if (isLeading || !hasAppbarContent) {
           leftItemsCount++;
@@ -210,24 +275,27 @@ const Appbar = ({
     paddingRight: (safeAreaInsets?.right ?? 0) + APPBAR_HORIZONTAL_PADDING,
   };
 
+  const isSingleRow =
+    isMode('small') || isMode('center-aligned') || isCollapsed;
+
   return (
     <Surface
       {...borderStyles}
       backgroundColor={backgroundColor}
       style={[
         {
-          height: modeAppbarHeight[mode],
+          height: flattenedStyle?.height ?? defaultHeight,
         },
         styles.appbar,
         insets,
         restStyle,
       ]}
-      elevation={elevated ? 2 : 0}
+      elevation={isElevated ? 2 : 0}
       {...rest}
       theme={theme}
     >
       {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
-      {(isMode('small') || isMode('center-aligned')) && (
+      {isSingleRow && (
         <>
           {/* Render only the back action at first place  */}
           {renderAppbarContent({
@@ -235,7 +303,9 @@ const Appbar = ({
             isDark,
             theme,
             renderOnly: ['Appbar.BackAction'],
-            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
+            shouldCenterContent: isCenterAligned || shouldCenterContent,
+            collapsed: isCollapsed,
+            titleAlignment: isCenterAligned ? 'center' : 'start',
           })}
           {/* Render the rest of the content except the back action */}
           {renderAppbarContent({
@@ -247,15 +317,17 @@ const Appbar = ({
             isDark,
             theme,
             renderExcept: ['Appbar.BackAction'],
-            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
+            shouldCenterContent: isCenterAligned || shouldCenterContent,
+            collapsed: isCollapsed,
+            titleAlignment: isCenterAligned ? 'center' : 'start',
           })}
         </>
       )}
-      {(isMode('medium') || isMode('large')) && (
+      {!isSingleRow && (
         <View
           style={[
             styles.columnContainer,
-            isMode('center-aligned') && styles.centerAlignedContainer,
+            isCenterAligned && styles.centerAlignedContainer,
           ]}
         >
           {/* Appbar top row with controls */}
@@ -270,7 +342,7 @@ const Appbar = ({
             {renderAppbarContent({
               children: filterAppbarActions(children, true),
               isDark,
-              renderOnly: ['Appbar.Action'],
+              renderOnly: ['Appbar.Action', 'Appbar.Image'],
               mode,
             })}
             {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
@@ -293,6 +365,8 @@ const Appbar = ({
             isDark,
             renderOnly: ['Appbar.Content'],
             mode,
+            titleAlignment: isCenterAligned ? 'center' : 'start',
+            shouldCenterContent: isCenterAligned,
           })}
         </View>
       )}
