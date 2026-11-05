@@ -15,8 +15,7 @@ import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
 import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
-import { addEventListener } from '../utils/addEventListener';
-import { BackHandler } from '../utils/BackHandler/BackHandler';
+import { useHardwareBackPress } from '../utils/useHardwareBackPress';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
@@ -186,27 +185,13 @@ function Modal({
     return () => clearTimeout(timeout);
   }, [scale, visible, visibleInternal]);
 
-  React.useEffect(() => {
-    if (!visible) {
-      return undefined;
+  useHardwareBackPress(visible, () => {
+    if (dismissableBackButton) {
+      onDismissCallback();
     }
 
-    const onHardwareBackPress = () => {
-      if (dismissableBackButton) {
-        onDismissCallback();
-      }
-
-      return true;
-    };
-
-    const subscription = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      onHardwareBackPress
-    );
-
-    return () => subscription.remove();
-  }, [dismissableBackButton, onDismissCallback, visible]);
+    return true;
+  });
 
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 

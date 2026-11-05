@@ -35,6 +35,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
+import { focusFirstDOMNode } from '../../utils/focusFirstDOMNode';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
@@ -121,20 +122,6 @@ const getKeyboardHeight = (fallback: number) =>
   Keyboard.metrics?.()?.height ?? fallback;
 const DEFAULT_ELEVATION: Elevation = 2;
 const DEFAULT_MODE = 'elevated';
-
-const focusFirstDOMNode = (el: View | null | undefined) => {
-  if (el && Platform.OS === 'web') {
-    // When in the browser, we want to focus the first focusable item on toggle
-    // For example, when menu is shown, focus the first item in the menu
-    // And when menu is dismissed, send focus back to the button to resume tabbing
-    if (el instanceof HTMLElement) {
-      el.querySelector<HTMLElement>(
-        // This is a rough list of selectors that can be focused
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      )?.focus();
-    }
-  }
-};
 
 const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
   !React.isValidElement(anchor) &&
