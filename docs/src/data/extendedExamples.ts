@@ -1,10 +1,7 @@
-import {
-  dynamicCode,
-  staticCode,
-} from './extendedExamples/BottomNavigationBar.ts';
+import { dynamicCode, staticCode } from './extendedExamples/NavigationBar.ts';
 
 export const extendedExamples = {
-  'BottomNavigation.Bar': {
+  NavigationBar: {
     'with React Navigation': {
       static: staticCode,
       dynamic: dynamicCode,
