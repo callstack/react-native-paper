@@ -101,12 +101,16 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   />
   <View
     collapsable={false}
+    forwardedRef={[Function]}
     style={
       [
         {},
         {
           "alignItems": "center",
           "flexDirection": "row",
+        },
+        {
+          "marginHorizontal": 24,
         },
         undefined,
         {},
@@ -282,7 +286,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             style={
               [
                 {
-                  "color": "rgba(73, 69, 79, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -308,8 +312,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
     </View>
     <TextInput
       keyboardAppearance="light"
+      onBlur={[Function]}
+      onFocus={[Function]}
       placeholder="Search"
-      placeholderTextColor="rgba(29, 27, 32, 1)"
+      placeholderTextColor="rgba(73, 69, 79, 1)"
       returnKeyType="search"
       role="searchbox"
       selectionColor="rgba(103, 80, 164, 1)"
@@ -318,12 +324,11 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           {
             "alignSelf": "stretch",
             "flex": 1,
-            "fontSize": 18,
             "minWidth": 0,
             "paddingLeft": 8,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",

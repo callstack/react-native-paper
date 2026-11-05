@@ -272,11 +272,11 @@ export const themeColors = {
   },
   Searchbar: {
     '-': {
-      backgroundColor: 'theme.colors.elevation.level3',
-      placeholderTextColor: 'theme.colors.onSurface',
-      textColor: 'theme.colors.onSurfaceVariant',
+      backgroundColor: 'theme.colors.surfaceContainerHigh',
+      placeholderTextColor: 'theme.colors.onSurfaceVariant',
+      textColor: 'theme.colors.onSurface',
       selectionColor: 'theme.colors.primary',
-      iconColor: 'theme.colors.onSurfaceVariant',
+      iconColor: 'theme.colors.onSurface',
       trailingIconColor: 'theme.colors.onSurfaceVariant',
       dividerColor: 'theme.colors.outline',
     },

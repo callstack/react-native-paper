@@ -126,8 +126,8 @@ export const screenshots = {
   },
   'RadioButton.Item': 'screenshots/radio-item.ios.png',
   Searchbar: {
-    bar: 'screenshots/searchbar.png',
-    view: 'screenshots/searchbar-view.png',
+    contained: 'screenshots/searchbar.png',
+    divided: 'screenshots/searchbar-view.png',
   },
   SegmentedButtons: {
     'single select': 'screenshots/segmented-button-single-select.png',
