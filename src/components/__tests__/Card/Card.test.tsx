@@ -46,6 +46,16 @@ describe('Card', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
+  it('renders the outline with the color passed to borderColor prop', async () => {
+    const { toJSON } = await render(
+      <Card mode="outlined" borderColor="red">
+        {null}
+      </Card>
+    );
+
+    expect(toJSON()).toMatchSnapshot();
+  });
+
   it('renders with a custom theme background color', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
 

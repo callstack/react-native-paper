@@ -148,6 +148,7 @@ exports[`button icon styles should return correct icon styles for compact contai
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -403,6 +404,7 @@ exports[`button icon styles should return correct icon styles for compact contai
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -657,6 +659,7 @@ exports[`button icon styles should return correct icon styles for compact contai
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -912,6 +915,7 @@ exports[`button icon styles should return correct icon styles for compact contai
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -1166,6 +1170,7 @@ exports[`button icon styles should return correct icon styles for compact elevat
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -1421,6 +1426,7 @@ exports[`button icon styles should return correct icon styles for compact elevat
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -1675,6 +1681,7 @@ exports[`button icon styles should return correct icon styles for compact outlin
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -1930,6 +1937,7 @@ exports[`button icon styles should return correct icon styles for compact outlin
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -2184,6 +2192,7 @@ exports[`button icon styles should return correct icon styles for compact text b
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -2439,6 +2448,7 @@ exports[`button icon styles should return correct icon styles for text button 1`
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -2692,6 +2702,7 @@ exports[`renders button with an accessibility hint 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -2897,6 +2908,7 @@ exports[`renders button with an accessibility label 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -3101,6 +3113,7 @@ exports[`renders button with button color 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -3305,6 +3318,7 @@ exports[`renders button with color 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -3510,6 +3524,7 @@ exports[`renders button with custom testID 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -3714,6 +3729,7 @@ exports[`renders button with icon 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -3963,8 +3979,11 @@ exports[`renders button with icon in reverse order 1`] = `
         [
           {
             "alignItems": "center",
-            "flexDirection": "row-reverse",
+            "flexDirection": "row",
             "justifyContent": "center",
+          },
+          {
+            "flexDirection": "row-reverse",
           },
           {
             "opacity": 1,
@@ -4218,6 +4237,7 @@ exports[`renders contained contained with mode 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -4423,6 +4443,7 @@ exports[`renders disabled button 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 0.38,
           },
@@ -4627,6 +4648,7 @@ exports[`renders loading button 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -5035,6 +5057,7 @@ exports[`renders outlined button with mode 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -5240,6 +5263,7 @@ exports[`renders text button by default 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -5444,6 +5468,7 @@ exports[`renders text button with mode 1`] = `
             "flexDirection": "row",
             "justifyContent": "center",
           },
+          false,
           {
             "opacity": 1,
           },

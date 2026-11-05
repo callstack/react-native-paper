@@ -270,6 +270,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             icon="heart"
+            iconSize={24}
             mode="outlined"
             onPress={() => {}}
             style={styles.button}

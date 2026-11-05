@@ -55,6 +55,20 @@ it('renders avatar with image', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders avatar with image and custom background color', async () => {
+  await render(
+    <Avatar.Image
+      testID="avatar-image"
+      backgroundColor={red500}
+      source={{ uri: 'avatar.png' }}
+    />
+  );
+
+  expect(screen.getByTestId('avatar-image').parent).toHaveStyle({
+    backgroundColor: red500,
+  });
+});
+
 describe('AvatarImage listener', () => {
   const onListenerMock = jest.fn();
 

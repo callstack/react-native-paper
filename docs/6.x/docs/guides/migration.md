@@ -73,8 +73,11 @@ You can use the component's color prop where available, or override the correspo
 
 Components no longer read values from the `style` prop to derive other styles, since this is not possible with animated styles. The affected props have been replaced with dedicated props:
 
+- `Appbar` and `Appbar.Header`: `backgroundColor` and the border radius props (`borderRadius`, `borderTopLeftRadius` etc.) replace `style.backgroundColor` and the border radius in `style`
+- `Avatar.Icon`, `Avatar.Image` and `Avatar.Text`: `backgroundColor` replaces `style.backgroundColor`
 - `Button`: `iconPosition` replaces `contentStyle={{ flexDirection: 'row-reverse' }}`
-- `Card`: the outline color is controlled by `theme.colors.outline` instead of `style.borderColor`
+- `Button`: `iconSize` replaces `labelStyle.fontSize` for the size of the icon and the loading indicator
+- `Card`: `borderColor` replaces `style.borderColor` for the outline color
 
 ### Test IDs
 
@@ -152,7 +155,7 @@ e.g.:
 ### Button
 
 - The `iconPosition` prop controls the placement of the icon. Use `iconPosition="trailing"` to display the icon after the label instead of `contentStyle={{ flexDirection: 'row-reverse' }}`.
-- The `color` and `fontSize` in `labelStyle` no longer apply to the icon and loading indicator. Use the `textColor` prop to customize the icon color along with the label color.
+- The `color` and `fontSize` in `labelStyle` no longer apply to the icon and loading indicator. Use the `textColor` prop to customize the icon color along with the label color, and the `iconSize` prop to customize the size of the icon and the loading indicator.
 
 e.g.:
 
@@ -170,7 +173,7 @@ e.g.:
 
 ### Card
 
-- The `borderColor` in `style` no longer changes the outline color in `outlined` mode. Override `theme.colors.outline` using the `theme` prop instead.
+- The `borderColor` in `style` no longer changes the outline color in `outlined` mode. Use the `borderColor` prop instead.
 - `Card.Cover` no longer applies the border radius from `style` to the image directly. The image is clipped by the container, so any border radius passed in `style` still applies.
 
 e.g.:
@@ -179,7 +182,7 @@ e.g.:
 <Card
   mode="outlined"
 - style={{ borderColor: 'red' }}
-+ theme={{ colors: { outline: 'red' } }}
++ borderColor="red"
 >
   <Card.Content>...</Card.Content>
 </Card>
@@ -187,7 +190,20 @@ e.g.:
 
 ### Tooltip
 
-`Tooltip` now passes a `ref` to the wrapped element to measure its position on the screen. When wrapping a custom component, make sure it forwards the `ref` to its root view. Otherwise the tooltip falls back to measuring its own wrapper.
+`Tooltip` no longer reads positioning styles such as `position: 'absolute'` from the `style` of the wrapped element. Apply them to a parent `View` wrapping the `Tooltip` instead.
+
+e.g.:
+
+```diff
+- <Tooltip title="Add">
+-   <FAB icon="plus" style={{ position: 'absolute', right: 16, bottom: 16 }} />
+- </Tooltip>
++ <View style={{ position: 'absolute', right: 16, bottom: 16 }}>
++   <Tooltip title="Add">
++     <FAB icon="plus" />
++   </Tooltip>
++ </View>
+```
 
 ### Surface
 

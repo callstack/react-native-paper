@@ -18,7 +18,9 @@ import Text from '../Typography/Text';
 
 export type Props = {
   /**
-   * Tooltip reference element. Needs to be able to hold a ref.
+   * Tooltip reference element.
+   *
+   * Positioning styles such as `position: 'absolute'` should be applied to a parent `View` wrapping the `Tooltip` instead of the element.
    */
   children: React.ReactElement;
   /**
@@ -83,32 +85,11 @@ const Tooltip = ({
   const hideTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const childrenWrapperRef = React.useRef<View>(null);
-  const childRef = React.useRef<View | null>(null);
   const touched = React.useRef(false);
 
   const isValidChild = React.useMemo(
     () => React.isValidElement<TooltipChildProps>(children),
     [children]
-  );
-
-  const childOwnRef = isValidChild
-    ? // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-      (children.props as TooltipChildProps).ref
-    : undefined;
-
-  // Keep a ref to the wrapped element so it can be measured directly,
-  // while still forwarding the ref passed by the user (if any)
-  const setChildRef = React.useCallback(
-    (node: View | null) => {
-      childRef.current = node;
-
-      if (typeof childOwnRef === 'function') {
-        childOwnRef(node);
-      } else if (childOwnRef) {
-        childOwnRef.current = node;
-      }
-    },
-    [childOwnRef]
   );
 
   React.useEffect(() => {
@@ -194,21 +175,15 @@ const Tooltip = ({
   }, [children.props, handleTouchEnd, isValidChild]);
 
   const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-    // Measure the wrapped element itself when possible, since the wrapper
-    // doesn't reflect its layout if the element is absolutely positioned.
-    // Custom components may expose an instance without `measure`, fall back to the wrapper in that case
-    const target =
-      typeof childRef.current?.measure === 'function'
-        ? childRef.current
-        : childrenWrapperRef.current;
-
-    target?.measure((_x, _y, width, height, pageX, pageY) => {
-      setMeasurement({
-        children: { pageX, pageY, height, width },
-        tooltip: { ...layout },
-        measured: true,
-      });
-    });
+    childrenWrapperRef.current?.measure(
+      (_x, _y, width, height, pageX, pageY) => {
+        setMeasurement({
+          children: { pageX, pageY, height, width },
+          tooltip: { ...layout },
+          measured: true,
+        });
+      }
+    );
   };
 
   const mobilePressProps = {
@@ -260,15 +235,10 @@ const Tooltip = ({
         style={styles.pressContainer}
         {...(Platform.OS === 'web' ? webPressProps : mobilePressProps)}
       >
-        {React.cloneElement(
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-          children as React.ReactElement<TooltipChildProps>,
-          {
-            ...rest,
-            ...(Platform.OS === 'web' ? webPressProps : mobilePressProps),
-            ref: setChildRef,
-          }
-        )}
+        {React.cloneElement(children, {
+          ...rest,
+          ...(Platform.OS === 'web' ? webPressProps : mobilePressProps),
+        })}
       </Pressable>
     </>
   );

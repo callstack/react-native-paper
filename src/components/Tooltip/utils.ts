@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-import type { LayoutRectangle, View } from 'react-native';
+import type { LayoutRectangle } from 'react-native';
 
 type ChildrenMeasurement = {
   width: number;
@@ -17,7 +17,6 @@ export type Measurement = {
 };
 
 export type TooltipChildProps = {
-  ref?: React.Ref<View>;
   disabled?: boolean;
   onPress?: () => void;
   onHoverIn?: () => void;

@@ -11,7 +11,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import { getButtonColors, getButtonTouchableRippleStyle } from './utils';
+import { getButtonColors } from './utils';
 import type { ButtonMode } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -67,6 +67,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    * - `trailing` - icon is displayed after the label.
    */
   iconPosition?: 'leading' | 'trailing';
+  /**
+   * Size of the icon and the loading indicator.
+   */
+  iconSize?: number;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -174,6 +178,7 @@ const Button = ({
   loading,
   icon,
   iconPosition = 'leading',
+  iconSize = 18,
   buttonColor: customButtonColor,
   textColor: customTextColor,
   children,
@@ -250,7 +255,6 @@ const Button = ({
     theme.animation.scale;
 
   const borderRadius = theme.shapes.corner.largeIncreased;
-  const iconSize = 18;
 
   const {
     backgroundColor,
@@ -269,6 +273,9 @@ const Button = ({
   });
 
   const touchableStyle = { borderRadius };
+  const touchableRippleStyle = {
+    borderRadius: borderRadius > 0 ? borderRadius - borderWidth : 0,
+  };
 
   const font = theme.fonts.labelLarge;
 
@@ -338,14 +345,15 @@ const Button = ({
         accessible={accessible}
         hitSlop={hitSlop}
         disabled={disabled}
-        style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
+        style={touchableRippleStyle}
         testID={testID}
         theme={theme}
         ref={touchableRef}
       >
         <View
           style={[
-            isIconTrailing ? styles.contentReverse : styles.content,
+            styles.content,
+            isIconTrailing && styles.contentReverse,
             { opacity: textOpacity },
             contentStyle,
           ]}
@@ -403,8 +411,6 @@ const styles = StyleSheet.create({
   },
   contentReverse: {
     flexDirection: 'row-reverse',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   icon: {
     marginLeft: 12,

@@ -1,4 +1,4 @@
-import type { ColorValue, ViewStyle } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
@@ -188,38 +188,4 @@ export const getButtonColors = ({
     borderWidth,
     backgroundOpacity,
   };
-};
-
-const borderRadiusKeys = [
-  'borderBottomEndRadius',
-  'borderBottomLeftRadius',
-  'borderBottomRightRadius',
-  'borderBottomStartRadius',
-  'borderTopEndRadius',
-  'borderTopLeftRadius',
-  'borderTopRightRadius',
-  'borderTopStartRadius',
-  'borderRadius',
-] as const;
-
-type ViewStyleBorderRadiusStyles = Partial<
-  Pick<ViewStyle, (typeof borderRadiusKeys)[number]>
->;
-
-export const getButtonTouchableRippleStyle = (
-  style?: ViewStyle,
-  borderWidth: number = 0
-): ViewStyleBorderRadiusStyles => {
-  if (!style) return {};
-  const touchableRippleStyle: ViewStyleBorderRadiusStyles = {};
-
-  borderRadiusKeys.forEach((key) => {
-    const value = style[key];
-    if (typeof value === 'number') {
-      // Only subtract borderWidth if value is greater than 0
-      const radius = value > 0 ? value - borderWidth : 0;
-      touchableRippleStyle[key] = radius;
-    }
-  });
-  return touchableRippleStyle;
 };

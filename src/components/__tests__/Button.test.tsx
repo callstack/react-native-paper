@@ -60,6 +60,20 @@ it('renders button with icon in reverse order', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('passes the iconSize prop to the icon', async () => {
+  const renderIcon = jest.fn(() => null);
+
+  await render(
+    <Button icon={renderIcon} iconSize={24}>
+      Icon Button
+    </Button>
+  );
+
+  expect(renderIcon).toHaveBeenCalledWith(
+    expect.objectContaining({ size: 24 })
+  );
+});
+
 it('renders loading button', async () => {
   const tree = (await render(<Button loading>Loading Button</Button>)).toJSON();
 
