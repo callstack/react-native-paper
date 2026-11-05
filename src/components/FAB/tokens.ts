@@ -109,13 +109,15 @@ const listItem = {
   leading: 24,
   trailing: 24,
   iconLabelGap: 8,
-  labelTypescale: 'titleMedium',
+  labelTypescale: 'titleMedium' satisfies TypescaleKey,
   // Items are tonal, so they sit flat and lift on hover like tonal buttons.
-  elevation: { enabled: 0, hover: 1, focus: 0, pressed: 0 },
-} as const satisfies {
-  labelTypescale: TypescaleKey;
-  elevation: Record<Interaction, Elevation>;
-};
+  elevation: {
+    enabled: 0,
+    hover: 1,
+    focus: 0,
+    pressed: 0,
+  } as const satisfies Record<Interaction, Elevation>,
+} as const;
 
 const spacing = {
   betweenItems: 4,
