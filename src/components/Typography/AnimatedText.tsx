@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
+import { canContainNestedText, NestedTextContext } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -48,6 +49,10 @@ function AnimatedText({
   const theme = useInternalTheme(themeOverrides);
 
   const { direction: writingDirection } = useLocale();
+  // Nested text inherits the parent's style unless it has its own theme
+  const inheritsStyle = React.useContext(NestedTextContext) && !themeOverrides;
+
+  let element: React.ReactElement;
 
   if (variant) {
     const font = theme.fonts[variant];
@@ -59,25 +64,31 @@ function AnimatedText({
       );
     }
 
-    return (
+    element = (
       <Animated.Text
         ref={ref}
         {...rest}
-        style={[
-          font,
-          styles.text,
-          { writingDirection, color: theme.colors.onSurface },
-          style,
-        ]}
+        style={
+          inheritsStyle
+            ? [font, style]
+            : [
+                font,
+                styles.text,
+                { writingDirection, color: theme.colors.onSurface },
+                style,
+              ]
+        }
       />
     );
+  } else if (inheritsStyle) {
+    element = <Animated.Text ref={ref} {...rest} style={style} />;
   } else {
     const font = theme.fonts.bodyMedium;
     const textStyle = {
       ...font,
       color: theme.colors.onSurface,
     };
-    return (
+    element = (
       <Animated.Text
         ref={ref}
         {...rest}
@@ -92,6 +103,16 @@ function AnimatedText({
       />
     );
   }
+
+  if (!canContainNestedText(rest.children)) {
+    return element;
+  }
+
+  return (
+    <NestedTextContext.Provider value={true}>
+      {element}
+    </NestedTextContext.Provider>
+  );
 }
 
 const styles = StyleSheet.create({

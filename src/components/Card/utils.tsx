@@ -10,15 +10,7 @@ export type CardActionChildProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-export const getCardCoverStyle = ({
-  theme,
-  index: _index,
-  total: _total,
-}: {
-  theme: InternalTheme;
-  index?: number;
-  total?: number;
-}) => {
+export const getCardCoverStyle = ({ theme }: { theme: InternalTheme }) => {
   return {
     borderRadius: theme.shapes.corner.medium,
   };

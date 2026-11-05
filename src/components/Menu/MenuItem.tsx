@@ -46,11 +46,11 @@ export type Props = {
   /**
    * @supported Available in v5.x with theme version 3
    *
-   * Sets min height with densed layout.
+   * Sets min height with dense layout.
    */
   dense?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;

@@ -14,7 +14,7 @@ Below you can find the most important information about the components whose API
 
 ### Installation
 
-- The `v5` has been oficially released as a stable version, which means it will be installed by default from the `npm`. In order to do that, open a Terminal in your project's folder and run:
+- The `v5` has been officially released as a stable version, which means it will be installed by default from the `npm`. In order to do that, open a Terminal in your project's folder and run:
 
 ```bash npm2yarn
 npm install react-native-paper
@@ -26,7 +26,7 @@ npm install react-native-paper
 npm install react-native-safe-area-context
 ```
 
-Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
+Additionally for `iOS` platform there is a requirement to link the native parts of the library:
 
 ```bash
 npx pod-install
@@ -165,7 +165,7 @@ Take a look at the suggested replacement diff:
 
 ### Configure fonts
 
-The existing utility called `configureFonts` was adjusted to help users configure their theme fonts in both version, that's why that function, as of today, is going to accept the object with the follwing properties as an argument:
+The existing utility called `configureFonts` was adjusted to help users configure their theme fonts in both version, that's why that function, as of today, is going to accept the object with the following properties as an argument:
 
 ```ts
 configureFonts(params);
@@ -476,7 +476,7 @@ With the latest version, there is a possibility to specify whether `Drawer.Secti
 
 #### FAB
 
-Additionaly `FAB` may be applied in one of three available sizes, thanks to new prop `size`:
+Additionally `FAB` may be applied in one of three available sizes, thanks to new prop `size`:
 
 - `small` - FAB with small height (40),
 - `medium` - Appbar with default medium height (56),

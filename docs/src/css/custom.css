@@ -147,6 +147,7 @@ html[data-theme='light'] .gallery-dark {
   padding: 12px;
   font-size: 1em;
   background-color: #f0f0f0;
+  color: var(--rp-c-text-1, #000);
   border-radius: 3px;
   transition: background-color 0.3s;
   outline: 0;
@@ -155,6 +156,15 @@ html[data-theme='light'] .gallery-dark {
 .icons-list-searchbar:focus,
 .icons-list-searchbar:hover {
   background-color: #e7e7e7;
+}
+
+html.dark .icons-list-searchbar {
+  background-color: var(--rp-c-bg-soft, #2a2a2e);
+}
+
+html.dark .icons-list-searchbar:focus,
+html.dark .icons-list-searchbar:hover {
+  background-color: #38373d;
 }
 
 .icons-list-searchbar:focus-visible {
@@ -231,7 +241,7 @@ a .badge .badge-text {
   overflow: visible;
 }
 
-.color-picker {
+table.color-picker {
   display: table;
   width: 100%;
   overflow: visible;

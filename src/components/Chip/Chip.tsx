@@ -75,7 +75,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   disabled?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -447,6 +447,7 @@ const styles = StyleSheet.create({
   md3LabelText: {
     textAlignVertical: 'center',
     marginVertical: 6,
+    flexShrink: 1,
   },
   avatar: {
     width: 24,
