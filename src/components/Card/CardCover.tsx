@@ -9,7 +9,7 @@ import { grey200 } from '../../theme/colors';
 import type { ThemeProp } from '../../theme/types';
 import { splitStyles } from '../../utils/splitStyles';
 
-export type Props = ImageProps & {
+export type Props = Omit<ImageProps, 'style'> & {
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -40,7 +40,7 @@ const CardCover = ({ style, theme: themeOverrides, ...rest }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const cardContext = React.useContext(CardContext);
 
-  const flattenedStyles = StyleSheet.flatten<ViewStyle>(style) || {};
+  const flattenedStyles = StyleSheet.flatten(style) || {};
   const [, borderRadiusStyles] = splitStyles(
     flattenedStyles,
     (style) => style.startsWith('border') && style.endsWith('Radius')

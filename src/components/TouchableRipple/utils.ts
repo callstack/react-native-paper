@@ -38,7 +38,10 @@ export const getTouchableRippleColors = ({
   theme: InternalTheme;
   rippleColor?: ColorValue;
   underlayColor?: string;
-}) => {
+}): {
+  calculatedRippleColor: ColorValue;
+  calculatedUnderlayColor: ColorValue;
+} => {
   const calculatedRippleColor = getRippleColor({ theme, rippleColor });
   return {
     calculatedRippleColor,

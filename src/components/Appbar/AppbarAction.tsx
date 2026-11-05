@@ -41,7 +41,7 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    */
   isLeading?: boolean;
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */

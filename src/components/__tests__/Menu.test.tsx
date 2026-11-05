@@ -1,3 +1,4 @@
+import type { ComponentRef } from 'react';
 import { Dimensions, Keyboard, Platform, StyleSheet, View } from 'react-native';
 
 import {
@@ -57,8 +58,9 @@ describe('web focus', () => {
       configurable: true,
       value: () => ({ focus }),
     });
-    const measureInWindow: View['measureInWindow'] = (fn) =>
-      fn(100, 100, 80, 32);
+    const measureInWindow: ComponentRef<typeof View>['measureInWindow'] = (
+      fn
+    ) => fn(100, 100, 80, 32);
     Object.defineProperty(View.prototype, 'measureInWindow', {
       configurable: true,
       value: measureInWindow,
@@ -150,6 +152,8 @@ it('renders not visible menu', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+const ViewPrototype: ComponentRef<typeof View> = View.prototype;
+
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
 elevations.forEach((elevation) =>
@@ -187,7 +191,7 @@ it('uses the default anchorPosition of top', async () => {
     fontScale: 2,
   });
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
@@ -243,7 +247,7 @@ it('respects anchorPosition bottom', async () => {
     fontScale: 2,
   });
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
@@ -354,7 +358,7 @@ it('accounts for a keyboard that is already open when the menu mounts', async ()
 
   let measureCalls = 0;
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => {
       measureCalls += 1;
       if (measureCalls % 2 === 1) {
@@ -416,7 +420,7 @@ it('does not crash when Keyboard.metrics is unavailable (react-native-web)', asy
     fontScale: 2,
   });
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
