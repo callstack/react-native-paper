@@ -179,7 +179,7 @@ export type ShellProps = {
   /**
    * Ref to the pressable inside the shell, the element that receives focus.
    */
-  buttonRef?: React.Ref<View>;
+  buttonRef?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**

@@ -34,7 +34,7 @@ export const getAppbarBackgroundColor = (
   theme: InternalTheme,
   elevated: boolean,
   customBackground?: ColorValue
-) => {
+): ColorValue => {
   const { colors } = theme;
   if (customBackground) {
     return customBackground;

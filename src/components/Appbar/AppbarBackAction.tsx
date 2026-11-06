@@ -35,7 +35,7 @@ export type Props = Omit<React.PropsWithoutRef<AppbarActionProps>, 'icon'> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**

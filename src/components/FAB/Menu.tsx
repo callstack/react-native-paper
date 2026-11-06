@@ -238,7 +238,10 @@ type ItemProps = {
   /**
    * Called with the item's index and its node when it mounts and unmounts.
    */
-  registerRef: (index: number, node: View | null) => void;
+  registerRef: (
+    index: number,
+    node: React.ComponentRef<typeof View> | null
+  ) => void;
   onPress: (e: GestureResponderEvent) => void;
   /**
    * Accessibility label. Falls back to `label`.
@@ -301,7 +304,7 @@ const MenuItem = ({
   };
 
   const itemRef = React.useCallback(
-    (node: View | null) => registerRef(index, node),
+    (node: React.ComponentRef<typeof View> | null) => registerRef(index, node),
     [registerRef, index]
   );
 
@@ -386,7 +389,7 @@ type MorphingTriggerProps = {
   'aria-label'?: string;
   theme: InternalTheme;
   testID?: string;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 const MorphingTrigger = ({
@@ -640,14 +643,14 @@ const Menu = ({
 
   const effectiveExpanded = triggerVisible && expanded;
 
-  const triggerRef = React.useRef<View>(null);
-  const scrollRef = React.useRef<ScrollView>(null);
-  const itemRefs = React.useRef<(View | null)[]>([]);
+  const triggerRef = React.useRef<React.ComponentRef<typeof View>>(null);
+  const scrollRef = React.useRef<React.ComponentRef<typeof ScrollView>>(null);
+  const itemRefs = React.useRef<(React.ComponentRef<typeof View> | null)[]>([]);
 
   const [containerHeight, setContainerHeight] = React.useState<number>();
 
   const registerItemRef = React.useCallback(
-    (index: number, node: View | null) => {
+    (index: number, node: React.ComponentRef<typeof View> | null) => {
       itemRefs.current[index] = node;
     },
     []

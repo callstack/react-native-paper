@@ -1,3 +1,4 @@
+import type { ComponentRef } from 'react';
 import { Platform } from 'react-native';
 import type { View } from 'react-native';
 
@@ -11,7 +12,7 @@ const FOCUSABLE_SELECTOR =
  * Web only; returns `null` on native.
  */
 export const getFocusableElement = (
-  el: View | null | undefined
+  el: ComponentRef<typeof View> | null | undefined
 ): HTMLElement | null => {
   if (Platform.OS !== 'web' || !(el instanceof HTMLElement)) {
     return null;

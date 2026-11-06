@@ -71,7 +71,7 @@ export const getAccentColors = ({
 }: {
   theme: InternalTheme;
   hasError: boolean;
-}) => {
+}): { selectionColor: ColorValue; cursorColor: ColorValue } => {
   const color = hasError ? theme.colors.error : theme.colors.primary;
 
   return {
@@ -90,7 +90,7 @@ export const getLabelColor = ({
   isFocused: boolean;
   hasError: boolean;
   isDisabled: boolean;
-}) => {
+}): ColorValue => {
   const {
     colors: { error, primary, onSurface, onSurfaceVariant },
   } = theme;
@@ -115,7 +115,7 @@ export const getSupportingTextColor = ({
   theme: InternalTheme;
   hasError: boolean;
   isDisabled: boolean;
-}) => {
+}): ColorValue => {
   const {
     colors: { error, onSurface, onSurfaceVariant },
   } = theme;
@@ -183,7 +183,7 @@ export const getOutlineColor = ({
   isFocused: boolean;
   hasError: boolean;
   isDisabled: boolean;
-}) => {
+}): ColorValue => {
   const {
     colors: { error, onSurface, primary, outline },
   } = theme;

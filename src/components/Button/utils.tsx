@@ -149,7 +149,14 @@ export const getButtonColors = ({
   customTextColor?: ColorValue;
   disabled?: boolean;
   dark?: boolean;
-}) => {
+}): {
+  backgroundColor: ColorValue;
+  borderColor: ColorValue;
+  textColor: ColorValue;
+  textOpacity: number;
+  borderWidth: number;
+  backgroundOpacity: number;
+} => {
   const isMode = (modeToCompare: ButtonMode) => {
     return mode === modeToCompare;
   };
@@ -191,8 +198,8 @@ export const getButtonColors = ({
   };
 };
 
-type ViewStyleBorderRadiusStyles = Partial<
-  Pick<
+type ViewStyleBorderRadiusStyles = {
+  -readonly [K in keyof Pick<
     ViewStyle,
     | 'borderBottomEndRadius'
     | 'borderBottomLeftRadius'
@@ -203,8 +210,8 @@ type ViewStyleBorderRadiusStyles = Partial<
     | 'borderTopRightRadius'
     | 'borderTopStartRadius'
     | 'borderRadius'
-  >
->;
+  >]?: ViewStyle[K];
+};
 export const getButtonTouchableRippleStyle = (
   style?: ViewStyle,
   borderWidth: number = 0
