@@ -25,7 +25,7 @@ import {
   getButtonTransitionDuration,
   getEffectiveButtonShape,
 } from './utils';
-import type { ButtonMode, ButtonShape, ButtonSize } from './utils';
+import type { ButtonMode } from './utils';
 import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
@@ -70,13 +70,13 @@ export type Props = Omit<ViewProps, 'style'> & {
    * The size controls the minimum height, horizontal padding, icon size, the
    * gap between icon and label, and the label typescale.
    */
-  size?: ButtonSize;
+  size?: 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large';
   /**
    * Shape variant of the button (Material Design 3 expressive). Defaults to
    * `round`. `'round'` uses the full-pill corner radius; `'square'` uses a
    * smaller per-size corner radius.
    */
-  shape?: ButtonShape;
+  shape?: 'round' | 'square';
   /**
    * Whether the container animates its corner radius. Defaults to `true`.
    *

@@ -97,11 +97,13 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
      */
     transitionDuration?: number;
     /**
+     * @internal
      * Duration of the `borderRadius` transition in milliseconds. Undefined
      * means no transition.
      */
     shapeTransitionDuration?: number;
     /**
+     * @internal
      * Timing function of the `borderRadius` transition.
      */
     shapeTransitionTimingFunction?: CSSTransitionTimingFunction;
