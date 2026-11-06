@@ -110,7 +110,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Reference to the card container.
    */
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 const DEFAULT_CARD_GAP = 16;

@@ -33,7 +33,7 @@ export type Props = PressableProps & {
   underlayColor?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   theme?: ThemeProp;
 };
 

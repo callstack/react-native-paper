@@ -117,6 +117,21 @@ Some components now accept explicit `testID` props for their interactable elemen
 - `Searchbar`: `searchTestID`, `clearTestID`, and `trailingTestID` for the search, clear, and trailing icon buttons.
 - `Snackbar`: `iconTestID` for the icon button.
 
+### Refs
+
+From React Native 0.87, `View`, `Text`, and `TextInput` are function components in React Native's types, so `React.Ref<View>` no longer refers to an instance. Component refs, such as the ones on `Button`, `Card`, `Chip`, and `Surface`, are now typed with `React.ComponentRef`. This works on older React Native versions too.
+
+Type your refs the same way:
+
+```diff
+- const ref = React.useRef<View>(null);
++ const ref = React.useRef<React.ComponentRef<typeof View>>(null);
+
+  <Button ref={ref}>Press me</Button>;
+```
+
+For `TextInput` and `Searchbar`, keep using `TextInputHandles`. It now keeps its methods, such as `focus` and `clear`, on React Native 0.87 and later.
+
 ## Components
 
 ### Appbar
@@ -593,6 +608,15 @@ We have also added a `direction` prop to the `Card` component, which lets you ar
     <Button mode="outlined">Another Action</Button>
   </Card.Actions>
 </Card>
+```
+
+#### `Card.Cover`
+
+The `style` prop of `Card.Cover` is now typed as a `View` style. Image style properties such as `resizeMode` or `tintColor` were never applied, so pass them as `Image` props instead:
+
+```diff
+- <Card.Cover source={cover} style={{ resizeMode: 'contain' }} />
++ <Card.Cover source={cover} resizeMode="contain" />
 ```
 
 #### `Card.Actions`

@@ -8,7 +8,7 @@ import { useInternalTheme } from '../../core/theming';
 import { grey200 } from '../../theme/colors';
 import type { ThemeProp } from '../../theme/types';
 
-export type Props = ImageProps & {
+export type Props = Omit<ImageProps, 'style'> & {
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
