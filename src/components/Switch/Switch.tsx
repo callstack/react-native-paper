@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  type KeyDownEvent,
+  type KeyUpEvent,
   Platform,
   Pressable,
   StyleSheet,
@@ -415,7 +417,7 @@ const Switch = ({
         // React Native Web only handles Space for button roles.
         ...(Platform.OS === 'web'
           ? {
-              onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
+              onKeyDown: (event: KeyDownEvent) => {
                 const { key, repeat } = event.nativeEvent;
                 if (key !== ' ' && key !== 'Spacebar') return;
                 event.preventDefault();
@@ -424,7 +426,7 @@ const Switch = ({
                   pressedSV.value = 1;
                 }
               },
-              onKeyUp: (event: React.KeyboardEvent<HTMLElement>) => {
+              onKeyUp: (event: KeyUpEvent) => {
                 const { key } = event.nativeEvent;
                 if (key !== ' ' && key !== 'Spacebar') return;
                 event.preventDefault();
