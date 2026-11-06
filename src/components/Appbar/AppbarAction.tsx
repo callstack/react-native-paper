@@ -11,7 +11,7 @@ import type { Props as IconButtonProps } from '../IconButton/IconButton';
 
 export type Props = React.PropsWithoutRef<IconButtonProps> & {
   /**
-   *  Custom color for action icon.
+   * Custom color for action icon.
    */
   color?: ColorValue;
   /**
@@ -40,6 +40,15 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    * Whether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons.
    */
   isLeading?: boolean;
+  /**
+   * Mode of the action icon button.
+   * In MD3 Expressive, allows a single filled (`contained`) or tonal (`contained-tonal`) button in the trailing area.
+   */
+  mode?: 'outlined' | 'contained' | 'contained-tonal';
+  /**
+   * Custom background color for the icon button container (useful with `contained` or `contained-tonal` modes).
+   */
+  containerColor?: ColorValue;
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
@@ -78,6 +87,8 @@ const AppbarAction = ({
   onPress,
   'aria-label': ariaLabel,
   isLeading,
+  mode,
+  containerColor: customContainerColor,
   theme: themeOverrides,
   ref,
   ...rest
@@ -85,17 +96,32 @@ const AppbarAction = ({
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme;
 
-  const actionIconColor = iconColor
-    ? iconColor
-    : isLeading
-      ? colors.onSurface
-      : colors.onSurfaceVariant;
+  const defaultContainerColor =
+    mode === 'contained'
+      ? colors.primary
+      : mode === 'contained-tonal'
+        ? colors.secondaryContainer
+        : undefined;
+
+  const defaultIconColor =
+    mode === 'contained'
+      ? colors.onPrimary
+      : mode === 'contained-tonal'
+        ? colors.onSecondaryContainer
+        : isLeading
+          ? colors.onSurface
+          : colors.onSurfaceVariant;
+
+  const actionIconColor = iconColor ?? defaultIconColor;
+  const actionContainerColor = customContainerColor ?? defaultContainerColor;
 
   return (
     <IconButton
       size={size}
       onPress={onPress}
       iconColor={actionIconColor}
+      containerColor={actionContainerColor}
+      mode={mode}
       icon={icon}
       disabled={disabled}
       aria-label={ariaLabel}
