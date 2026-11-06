@@ -181,6 +181,11 @@ export const getButtonPressedRadius = ({
 }): number =>
   resolveCornerRadius(theme, Tokens.sizes[size].pressedContainerShape);
 
+export const createIsMode =
+  (mode: ButtonMode) =>
+  (modeToCompare: ButtonMode): boolean =>
+    mode === modeToCompare;
+
 type BaseProps = {
   isMode: (mode: ButtonMode) => boolean;
   theme: InternalTheme;
@@ -388,9 +393,7 @@ export const getButtonColors = ({
   borderWidth: number;
   backgroundOpacity: number;
 } => {
-  const isMode = (modeToCompare: ButtonMode) => {
-    return mode === modeToCompare;
-  };
+  const isMode = createIsMode(mode);
 
   const toggleColors = disabled
     ? undefined

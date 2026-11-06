@@ -14,6 +14,7 @@ import type {
 import Reanimated, { linear } from 'react-native-reanimated';
 
 import {
+  createIsMode,
   getButtonColors,
   getButtonContentBoxStyle,
   getButtonHitSlop,
@@ -25,7 +26,6 @@ import {
   getButtonTransitionDuration,
   getEffectiveButtonShape,
 } from './utils';
-import type { ButtonMode } from './utils';
 import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
@@ -276,7 +276,7 @@ const Button = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
-  const isMode = (modeToCompare: ButtonMode) => mode === modeToCompare;
+  const isMode = createIsMode(mode);
 
   const requestedTrailingIcon = iconPosition === 'trailing';
   // On web, the browser already mirrors the row under `dir="rtl"`.
