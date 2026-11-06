@@ -317,7 +317,9 @@ exports[`renders chip with close button 1`] = `
             "justifyContent": "center",
             "width": "100%",
           },
-          undefined,
+          {
+            "borderRadius": 8,
+          },
         ]
       }
     >
@@ -690,7 +692,9 @@ exports[`renders chip with custom close button 1`] = `
             "justifyContent": "center",
             "width": "100%",
           },
-          undefined,
+          {
+            "borderRadius": 8,
+          },
         ]
       }
     >

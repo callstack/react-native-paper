@@ -2,7 +2,7 @@ import { Platform, Text } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
-import { userEvent } from '@testing-library/react-native';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
