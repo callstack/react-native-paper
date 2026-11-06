@@ -1,0 +1,33 @@
+{
+  "about": "agent-device 0.21.0, --platform web (managed agent-browser 0.27.1, Node 24.18), against `expo export --platform web` of the example app served on 127.0.0.1:4322, 2026-09-14.",
+  "open": {
+    "success": true,
+    "device": "Agent Browser Chrome",
+    "startupMs": 1576
+  },
+  "screenshot_crop_on": {
+    "command": "screenshot web-crop.png --crop-on 'id=\"surface-example-elevated\"' --platform web --session web --json",
+    "success": false,
+    "error": {
+      "code": "UNSUPPORTED_OPERATION",
+      "message": "screenshot --crop-on is not accepted on web targets",
+      "hint": "This command is not available for the selected platform/device.",
+      "diagnosticId": "mu0zgqxl-62c0defe",
+      "logPath": "/Users/juliankobrynski/.agent-device/sessions/web/requests/4f9d41985f52c500.ndjson",
+      "diagnosticsRecord": {
+        "session": "web",
+        "requestId": "4f9d41985f52c500"
+      },
+      "details": {
+        "reason": "CROP_TARGET_NOT_ACCEPTED",
+        "rejectionReason": "PENDING_PIXEL_IDENTITY_EVIDENCE"
+      }
+    }
+  },
+  "screenshot_plain": {
+    "command": "screenshot web-full.png --platform web --session web --json",
+    "success": true,
+    "width": 1280,
+    "height": 577
+  }
+}
