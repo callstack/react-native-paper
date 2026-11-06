@@ -99,7 +99,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    * - When `true` the `shape` is flipped: `'round'` renders square and vice
    *   versa, and an `outlined` button drops its outline.
    * - Screen readers announce the toggle state: `aria-pressed` on web,
-   *   `aria-selected` on native.
+   *   `aria-checked` on native.
    *
    * Ignored on `mode="text"`, which MD3 gives no toggle.
    */
@@ -290,12 +290,11 @@ const Button = ({
   // toggle colors, no shape flip, and no toggle state. Every other use of
   // the toggle state goes through this value.
   const toggleSelected = isMode('text') ? undefined : selected;
-  // ARIA has no `aria-selected` on the button role, and React Native's types
-  // have no `aria-pressed`.
+  // React Native's types have no `aria-pressed`.
   const toggleStateProps =
     Platform.OS === 'web'
       ? { 'aria-pressed': toggleSelected }
-      : { 'aria-selected': toggleSelected };
+      : { 'aria-checked': toggleSelected };
 
   // When the button is `selected`, flip the requested shape so the
   // unselected/selected pair contrasts visually (round ↔ square).

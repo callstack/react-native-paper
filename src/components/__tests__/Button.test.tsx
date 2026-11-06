@@ -747,15 +747,22 @@ describe('shape prop', () => {
 });
 
 describe('selected prop', () => {
-  it('marks the button as selected for screen readers', async () => {
-    await render(
-      <Button testID="button" selected onPress={() => {}}>
-        X
-      </Button>
-    );
+  it.each([true, false])(
+    'announces the toggle state %s with aria-checked on native',
+    async (selected) => {
+      await render(
+        <Button selected={selected} onPress={() => {}}>
+          X
+        </Button>
+      );
 
-    expect(screen.getByTestId('button')).toBeSelected();
-  });
+      expect(screen.getByRole('button')).toHaveProp(
+        'accessibilityState',
+        expect.objectContaining({ checked: selected })
+      );
+      expect(screen.getByRole('button')).not.toBeSelected();
+    }
+  );
 
   it('announces the toggle state with aria-pressed on web', async () => {
     jest.replaceProperty(Platform, 'OS', 'web');
@@ -807,6 +814,22 @@ describe('selected prop', () => {
     });
   });
 
+  it('fills a disabled selected outlined toggle instead of the outline', () => {
+    expect(
+      getButtonColors({
+        theme: LightTheme,
+        mode: 'outlined',
+        selected: true,
+        disabled: true,
+      })
+    ).toMatchObject({
+      backgroundColor: LightTheme.colors.onSurface,
+      backgroundOpacity: stateOpacity.pressed,
+      borderColor: 'transparent',
+      borderWidth: 0,
+    });
+  });
+
   // MD3 gives the text style no toggle, so `selected` is inert there.
   it('ignores `selected` entirely on a text button', async () => {
     const plain = getButtonColors({ theme: LightTheme, mode: 'text' });
@@ -828,7 +851,10 @@ describe('selected prop', () => {
       borderRadius: 20,
     });
     // And no toggle state is announced.
-    expect(screen.getByTestId('button')).not.toBeSelected();
+    expect(screen.getByTestId('button')).not.toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: expect.any(Boolean) })
+    );
   });
 
   it('leaves a plain button untouched when `selected` is omitted', () => {

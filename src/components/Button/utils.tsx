@@ -214,9 +214,10 @@ const getButtonBackgroundColor = ({
   isMode,
   theme,
   disabled,
+  selected,
   customButtonColor,
   toggleColors,
-}: Omit<BaseProps, 'selected'> & {
+}: BaseProps & {
   customButtonColor?: ColorValue;
   toggleColors?: ToggleColors;
 }) => {
@@ -226,7 +227,7 @@ const getButtonBackgroundColor = ({
   }
 
   if (disabled) {
-    if (isMode('outlined') || isMode('text')) {
+    if (isMode('text') || (isMode('outlined') && !selected)) {
       return 'transparent';
     }
     return colors.onSurface;
@@ -313,12 +314,10 @@ const getButtonLabelColor = ({
 const getButtonBorderColor = ({
   isMode,
   theme,
-  disabled,
   selected,
-}: BaseProps) => {
-  // A selected outlined toggle drops its outline (the filled inverse-surface
-  // background takes over as the visual affordance).
-  if (selected && !disabled && isMode('outlined')) {
+}: Omit<BaseProps, 'disabled'>) => {
+  // A selected outlined toggle drops its outline, disabled or not.
+  if (selected && isMode('outlined')) {
     return 'transparent';
   }
   if (isMode('outlined')) {
@@ -330,11 +329,10 @@ const getButtonBorderColor = ({
 
 const getButtonBorderWidth = ({
   isMode,
-  disabled,
   selected,
   size,
-}: Omit<BaseProps, 'theme'> & { size: ButtonSize }) => {
-  if (selected && !disabled && isMode('outlined')) {
+}: Omit<BaseProps, 'theme' | 'disabled'> & { size: ButtonSize }) => {
+  if (selected && isMode('outlined')) {
     return 0;
   }
   if (isMode('outlined')) {
@@ -375,6 +373,7 @@ export const getButtonColors = ({
     isMode,
     theme,
     disabled,
+    selected,
     customButtonColor,
     toggleColors,
   });
@@ -393,13 +392,11 @@ export const getButtonColors = ({
   const borderColor = getButtonBorderColor({
     isMode,
     theme,
-    disabled,
     selected,
   });
 
   const borderWidth = getButtonBorderWidth({
     isMode,
-    disabled,
     selected,
     size,
   });
@@ -407,7 +404,7 @@ export const getButtonColors = ({
   const labelOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
 
   const backgroundOpacity =
-    disabled && !isMode('outlined') && !isMode('text')
+    disabled && backgroundColor !== 'transparent'
       ? stateOpacity.pressed
       : stateOpacity.enabled;
 
