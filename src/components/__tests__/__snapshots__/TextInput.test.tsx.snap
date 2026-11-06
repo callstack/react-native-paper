@@ -32,6 +32,11 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   role="none"
+  style={
+    {
+      "flexShrink": 1,
+    }
+  }
 >
   <View
     style={
@@ -506,6 +511,11 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   role="none"
+  style={
+    {
+      "flexShrink": 1,
+    }
+  }
 >
   <View
     style={
@@ -980,6 +990,11 @@ exports[`renders filled TextInput with label and value 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   role="none"
+  style={
+    {
+      "flexShrink": 1,
+    }
+  }
 >
   <View
     style={
@@ -1178,6 +1193,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   role="none"
+  style={
+    {
+      "flexShrink": 1,
+    }
+  }
 >
   <View
     style={
@@ -1632,6 +1652,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   role="none"
+  style={
+    {
+      "flexShrink": 1,
+    }
+  }
 >
   <View
     style={
@@ -2086,6 +2111,11 @@ exports[`renders outlined TextInput with label and value 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   role="none"
+  style={
+    {
+      "flexShrink": 1,
+    }
+  }
 >
   <View
     style={

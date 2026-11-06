@@ -125,8 +125,7 @@ export type OutlinedTextInputHookData = SharedTextInputStyleData & {
 };
 
 export type TextInputLayoutData =
-  | FilledTextInputHookData
-  | OutlinedTextInputHookData;
+  FilledTextInputHookData | OutlinedTextInputHookData;
 
 export type TextInputLayoutState = Omit<
   TextInputLayoutData,
@@ -145,8 +144,7 @@ export type TextInputHookReturn = SharedTextInputStyleData & {
   selectionColor: ColorValue;
   cursorColor: ColorValue;
   animatedActiveOutlineStyles:
-    | StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>
-    | undefined;
+    StyleProp<AnimatedStyle<StyleProp<ViewStyle>>> | undefined;
   animatedContainerStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   animatedLabelWrapperStyles: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   containerStyles: StyleProp<ViewStyle>;
@@ -158,11 +156,9 @@ export type TextInputHookReturn = SharedTextInputStyleData & {
   counterText: string;
   accessibilityProps: GetAccessibilityDataReturn;
   renderLeadingAccessory:
-    | ((props: TextInputAccessoryProps) => React.ReactNode)
-    | undefined;
+    ((props: TextInputAccessoryProps) => React.ReactNode) | undefined;
   renderTrailingAccessory:
-    | ((props: TextInputAccessoryProps) => React.ReactNode)
-    | undefined;
+    ((props: TextInputAccessoryProps) => React.ReactNode) | undefined;
   onChangeText: (text: string) => void;
   onFocus: (e: FocusEvent) => void;
   onBlur: (e: BlurEvent) => void;
@@ -360,7 +356,12 @@ function TextInput({
   });
 
   return (
-    <Pressable onPress={focusInput} accessible={false} role="none">
+    <Pressable
+      onPress={focusInput}
+      accessible={false}
+      role="none"
+      style={styles.root}
+    >
       <View style={fieldStyles}>
         {/* Disabled tint overlay — filled variant only. A childless
           absolutely-positioned View whose translucent fill is applied via the

@@ -1340,3 +1340,18 @@ it('hides prefix/suffix when blurring after clear() was called while focused', a
   expect(screen.queryByText('$')).not.toBeOnTheScreen();
   expect(screen.queryByText('/100')).not.toBeOnTheScreen();
 });
+
+it('applies flexShrink: 1 to the outer container to prevent overflowing constrained flex parents', async () => {
+  const { root } = await render(
+    <View style={{ width: 100, flexDirection: 'row' }}>
+      <TextInput
+        label="Constrained Input"
+        value="This is an extremely long string that would typically force an unconstrained flex parent to expand beyond limits"
+        onChangeText={() => {}}
+      />
+    </View>
+  );
+
+  const pressable = getOuterTextInputPressable(root);
+  expect(pressable).toHaveStyle({ flexShrink: 1 });
+});
