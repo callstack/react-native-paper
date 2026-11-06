@@ -1,13 +1,12 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
+import { DEFAULT_SIZE, getAvatarRole, resolveAvatarColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
-import getContrastingColor from '../../utils/getContrastingColor';
+import { takeGraphemes } from '../../utils/takeGraphemes';
 import Text from '../Typography/Text';
-
-const defaultSize = 64;
 
 export type Props = ViewProps & {
   /**
@@ -19,11 +18,18 @@ export type Props = ViewProps & {
    */
   size?: number;
   /**
-   * Custom color for the text.
+   * Custom color for the text. Takes precedence over the automatic contrast
+   * color below.
    */
   color?: string;
   /**
-   * Style for text container
+   * Style for text container. A custom `backgroundColor` is automatically
+   * paired with a contrasting text color when `color` is not set: string
+   * values use a luminance heuristic, while opaque/dynamic values
+   * (`PlatformColor` / `DynamicColorIOS`) are paired with a theme role's
+   * `on-` color, falling back to white. Pass `color` for a dynamic
+   * background that is not in the theme, because its contrast cannot be
+   * checked.
    */
   style?: StyleProp<ViewStyle>;
   /**
@@ -55,7 +61,7 @@ export type Props = ViewProps & {
  */
 const AvatarText = ({
   label,
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   style,
   labelStyle,
   color: customColor,
@@ -64,12 +70,16 @@ const AvatarText = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
-    StyleSheet.flatten(style) || {};
-  const textColor =
-    customColor ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
+  const { backgroundColor, ...restStyle } = StyleSheet.flatten(style) || {};
+  const { background, textColor } = resolveAvatarColors({
+    theme,
+    backgroundColor,
+    color: customColor,
+  });
   const { fontScale } = useWindowDimensions();
+  const avatarInitials = takeGraphemes(label, 2);
+  const hasCustomLabel =
+    rest.accessibilityLabel !== undefined || rest['aria-label'] !== undefined;
 
   return (
     <View
@@ -77,17 +87,22 @@ const AvatarText = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
-          backgroundColor,
+          borderRadius: cornerFull,
+          backgroundColor: background,
         },
         styles.container,
         restStyle,
       ]}
+      {...(hasCustomLabel && {
+        accessible: true,
+        ...getAvatarRole(rest.accessibilityRole),
+      })}
       {...rest}
     >
       <Text
         style={[
           styles.text,
+          theme.fonts.titleMedium,
           {
             color: textColor,
             fontSize: size / 2,
@@ -97,8 +112,11 @@ const AvatarText = ({
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
+        {...(hasCustomLabel
+          ? { 'aria-hidden': true }
+          : { 'aria-label': label, role: 'img' as const })}
       >
-        {label}
+        {avatarInitials}
       </Text>
     </View>
   );

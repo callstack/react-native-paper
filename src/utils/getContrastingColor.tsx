@@ -1,15 +1,9 @@
-import type { ColorValue } from 'react-native';
-
 import color from 'color';
 
 export default function getContrastingColor(
-  input: ColorValue,
+  input: string,
   light: string,
   dark: string
 ): string {
-  if (typeof input === 'string') {
-    return color(input).isLight() ? dark : light;
-  }
-
-  return light;
+  return color(input).isLight() ? dark : light;
 }
