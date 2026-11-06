@@ -113,6 +113,24 @@ it('swaps the icon to the trailing edge under RTL', async () => {
   });
 });
 
+it('leaves the RTL mirroring to the browser on web', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+
+  await render(
+    <LocaleProvider direction="rtl">
+      <Button icon="camera" iconPosition="leading">
+        Leading
+      </Button>
+      <Button icon="camera" iconPosition="trailing">
+        Trailing
+      </Button>
+    </LocaleProvider>
+  );
+
+  expect(contentOf('Leading')).toHaveStyle({ flexDirection: 'row' });
+  expect(contentOf('Trailing')).toHaveStyle({ flexDirection: 'row-reverse' });
+});
+
 it('renders loading button', async () => {
   const tree = (await render(<Button loading>Loading Button</Button>)).toJSON();
 

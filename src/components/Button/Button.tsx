@@ -258,7 +258,9 @@ const Button = ({
   const isMode = (modeToCompare: ButtonMode) => mode === modeToCompare;
 
   const requestedTrailingIcon = iconPosition === 'trailing';
-  const shouldFlipForRTL = direction !== getDefaultDirection();
+  // On web, the browser already mirrors the row under `dir="rtl"`.
+  const shouldFlipForRTL =
+    Platform.OS !== 'web' && direction !== getDefaultDirection();
   const isTrailingIcon = shouldFlipForRTL
     ? !requestedTrailingIcon
     : requestedTrailingIcon;
