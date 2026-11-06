@@ -1,3 +1,4 @@
+import type { ComponentRef } from 'react';
 import {
   AccessibilityInfo,
   Text,
@@ -74,7 +75,7 @@ it.each(['filled', 'outlined'] as const)(
 );
 
 it('preserves accessory refs when switching between decoration and action', async () => {
-  const ref = jest.fn<(instance: View | null) => void>();
+  const ref = jest.fn<(instance: ComponentRef<typeof View> | null) => void>();
   const props = {
     icon: 'magnify',
     style: {},
