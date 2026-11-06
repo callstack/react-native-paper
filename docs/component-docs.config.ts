@@ -67,6 +67,9 @@ const pages = {
   Chip: {
     Chip: 'Chip/Chip',
   },
+  ConnectedButtonGroup: {
+    ConnectedButtonGroup: 'ConnectedButtonGroup/ConnectedButtonGroup',
+  },
   DataTable: {
     DataTable: 'DataTable/DataTable',
     DataTableCell: 'DataTable/DataTableCell',

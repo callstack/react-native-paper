@@ -16,6 +16,7 @@ import CardExample from './Examples/CardExample';
 import CheckboxExample from './Examples/CheckboxExample';
 import CheckboxItemExample from './Examples/CheckboxItemExample';
 import ChipExample from './Examples/ChipExample';
+import ConnectedButtonGroupExample from './Examples/ConnectedButtonGroupExample';
 import DataTableExample from './Examples/DataTableExample';
 import DialogExample from './Examples/DialogExample';
 import DividerExample from './Examples/DividerExample';
@@ -60,6 +61,7 @@ export const mainExamples = {
   Checkbox: CheckboxExample,
   CheckboxItem: CheckboxItemExample,
   Chip: ChipExample,
+  ConnectedButtonGroup: ConnectedButtonGroupExample,
   DataTable: DataTableExample,
   Dialog: DialogExample,
   Divider: DividerExample,

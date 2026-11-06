@@ -112,6 +112,8 @@ const TouchableRipple = ({
   children,
   theme: themeOverrides,
   ref,
+  onKeyDown,
+  onKeyUp,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -273,12 +275,41 @@ const TouchableRipple = ({
 
   const disabled = disabledProp || !hasPassedTouchHandler;
 
+  // react-native-web presses on Space only for `role="button"`, so these
+  // roles turn a Space key-up into a click, which runs `onPress` the way a
+  // mouse click does.
+  const pressesOnSpace =
+    !disabled && rest.role !== undefined && spacePressRoles.has(rest.role);
+
+  const handleKeyDown = React.useCallback(
+    (event: React.KeyboardEvent<HTMLElement>) => {
+      onKeyDown?.(event);
+      if (pressesOnSpace && isSpaceKey(event.key)) {
+        // Stops the page from scrolling.
+        event.preventDefault();
+      }
+    },
+    [onKeyDown, pressesOnSpace]
+  );
+
+  const handleKeyUp = React.useCallback(
+    (event: React.KeyboardEvent<HTMLElement>) => {
+      onKeyUp?.(event);
+      if (pressesOnSpace && isSpaceKey(event.key)) {
+        event.currentTarget.click();
+      }
+    },
+    [onKeyUp, pressesOnSpace]
+  );
+
   return (
     <Pressable
       {...rest}
       ref={ref}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
+      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyUp}
       disabled={disabled}
       style={(state) => [
         styles.touchable,
@@ -298,6 +329,15 @@ const TouchableRipple = ({
     </Pressable>
   );
 };
+
+const spacePressRoles = new Set<string>([
+  'checkbox',
+  'menuitem',
+  'radio',
+  'switch',
+]);
+
+const isSpaceKey = (key: string) => key === ' ' || key === 'Spacebar';
 
 /**
  * Whether ripple effect is supported.
