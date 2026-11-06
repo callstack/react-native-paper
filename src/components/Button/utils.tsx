@@ -36,7 +36,6 @@ export type ButtonSizeStyle = {
   iconGap: number;
   outlineWidth: number;
   labelVariant: ButtonLabelVariant;
-  outerBoundHeight: number;
 };
 
 /**
@@ -53,7 +52,6 @@ export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle => {
     iconGap: t.iconLabelSpace,
     outlineWidth: t.outlinedOutlineWidth,
     labelVariant: t.labelVariant,
-    outerBoundHeight: t.outerBoundHeight,
   };
 };
 
@@ -69,14 +67,14 @@ export const getButtonContentBoxStyle = (
 });
 
 /**
- * Slop that brings the touch target up to the size's `outerBoundHeight`,
+ * Slop that brings the touch target up to `max(48, containerHeight)`,
  * expanding outside the container.
  *
  * Returns `undefined` when the container is already tall enough.
  */
 export const getButtonHitSlop = (size: ButtonSize): Insets | undefined => {
-  const { containerHeight, outerBoundHeight } = Tokens.sizes[size];
-  const vertical = (outerBoundHeight - containerHeight) / 2;
+  const { containerHeight } = Tokens.sizes[size];
+  const vertical = (Tokens.minTouchTargetHeight - containerHeight) / 2;
 
   if (vertical <= 0) {
     return undefined;

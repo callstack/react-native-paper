@@ -535,13 +535,12 @@ const sizeMetrics: [
   iconGap: number,
   outlineWidth: number,
   labelVariant: ButtonLabelVariant,
-  outerBoundHeight: number,
 ][] = [
-  ['extra-small', 32, 12, 12, 20, 4, 1, 'labelLarge', 48],
-  ['small', 40, 16, 16, 20, 8, 1, 'labelLarge', 48],
-  ['medium', 56, 24, 24, 24, 8, 1, 'titleMedium', 64],
-  ['large', 96, 48, 48, 32, 12, 2, 'headlineSmall', 104],
-  ['extra-large', 136, 64, 64, 40, 16, 3, 'headlineLarge', 144],
+  ['extra-small', 32, 12, 12, 20, 4, 1, 'labelLarge'],
+  ['small', 40, 16, 16, 20, 8, 1, 'labelLarge'],
+  ['medium', 56, 24, 24, 24, 8, 1, 'titleMedium'],
+  ['large', 96, 48, 48, 32, 12, 2, 'headlineSmall'],
+  ['extra-large', 136, 64, 64, 40, 16, 3, 'headlineLarge'],
 ];
 
 describe('getButtonSizeStyle', () => {
@@ -555,8 +554,7 @@ describe('getButtonSizeStyle', () => {
       iconSize,
       iconGap,
       outlineWidth,
-      labelVariant,
-      outerBoundHeight
+      labelVariant
     ) => {
       expect(getButtonSizeStyle(size)).toEqual({
         minHeight,
@@ -566,29 +564,30 @@ describe('getButtonSizeStyle', () => {
         iconGap,
         outlineWidth,
         labelVariant,
-        outerBoundHeight,
       });
     }
   );
 });
 
 describe('getButtonHitSlop', () => {
-  // The slop closes the gap between the drawn container and the outer bound,
-  // halved because it applies to both edges.
-  it.each(sizeMetrics)('reaches the %s outer bound', (size) => {
-    const { containerHeight, outerBoundHeight } = Tokens.sizes[size];
-    const slop = getButtonHitSlop(size);
+  it.each(sizeMetrics)(
+    'brings the %s touch target to at least 48dp tall',
+    (size, minHeight) => {
+      const slop = getButtonHitSlop(size);
 
-    expect(containerHeight + (slop?.top ?? 0) + (slop?.bottom ?? 0)).toBe(
-      outerBoundHeight
-    );
-  });
+      expect(minHeight + (slop?.top ?? 0) + (slop?.bottom ?? 0)).toBe(
+        Math.max(48, minHeight)
+      );
+    }
+  );
 
-  // The outer bound is a height; width comes off the 64dp minimum, which
-  // already clears the target.
-  it.each(sizeMetrics)('leaves the %s width alone', (size) => {
-    expect(getButtonHitSlop(size)).toMatchObject({ left: 0, right: 0 });
-  });
+  // Width comes off the 64dp minimum, which already clears the target.
+  it.each(['extra-small', 'small'] as const)(
+    'leaves the %s width alone',
+    (size) => {
+      expect(getButtonHitSlop(size)).toMatchObject({ left: 0, right: 0 });
+    }
+  );
 });
 
 describe('size prop', () => {
@@ -1125,17 +1124,29 @@ describe('touch target', () => {
     });
   });
 
-  it('expands the target to the outer bound', async () => {
+  it('expands a 32dp target to 48dp', async () => {
+    await render(
+      <Button onPress={() => {}} size="extra-small" testID="button">
+        X
+      </Button>
+    );
+
+    expect(screen.getByTestId('button')).toHaveProp('hitSlop', {
+      top: 8,
+      bottom: 8,
+      left: 0,
+      right: 0,
+    });
+  });
+
+  it('adds no slop to a target taller than 48dp', async () => {
     await render(
       <Button onPress={() => {}} size="medium" testID="button">
         X
       </Button>
     );
 
-    expect(screen.getByTestId('button')).toHaveProp(
-      'hitSlop',
-      getButtonHitSlop('medium')
-    );
+    expect(screen.getByTestId('button')).not.toHaveProp('hitSlop');
   });
 
   it('lets a caller hitSlop win', async () => {
