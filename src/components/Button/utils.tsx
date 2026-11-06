@@ -257,11 +257,13 @@ const getButtonLabelColor = ({
   theme,
   disabled,
   customLabelColor,
+  customButtonColor,
   backgroundColor,
   dark,
   toggleColors,
 }: Omit<BaseProps, 'selected'> & {
   customLabelColor?: ColorValue;
+  customButtonColor?: ColorValue;
   backgroundColor: ColorValue;
   dark?: boolean;
   toggleColors?: ToggleColors;
@@ -275,14 +277,16 @@ const getButtonLabelColor = ({
     return theme.colors.onSurface;
   }
 
-  if (toggleColors) {
+  const appliesDark =
+    typeof dark === 'boolean' &&
+    (isMode('filled') || isMode('tonal') || isMode('elevated'));
+
+  if (toggleColors && !(customButtonColor && appliesDark)) {
     return colors[toggleColors.label];
   }
 
-  if (typeof dark === 'boolean') {
-    if (isMode('filled') || isMode('tonal') || isMode('elevated')) {
-      return isDark({ dark, backgroundColor }) ? white : black;
-    }
+  if (appliesDark) {
+    return isDark({ dark, backgroundColor }) ? white : black;
   }
 
   // Outlined uses the neutral on-surface-variant label per MD3 spec; text and
@@ -380,6 +384,7 @@ export const getButtonColors = ({
     theme,
     disabled,
     customLabelColor,
+    customButtonColor,
     backgroundColor,
     dark,
     toggleColors,
@@ -421,8 +426,9 @@ export const getButtonColors = ({
  * color at the pressed-state opacity (per Material Design 3).
  *
  * When the label color is not a plain string (e.g. an Android Material You
- * `PlatformColor`), `undefined` is returned so `TouchableRipple` falls back to
- * its own default state-layer color.
+ * `PlatformColor`), or is a string `color` can't parse (e.g. `var(--x)` or
+ * `currentColor` on web), `undefined` is returned so `TouchableRipple` falls
+ * back to its own default state-layer color.
  */
 export const getButtonRippleColor = ({
   labelColor,
@@ -433,5 +439,9 @@ export const getButtonRippleColor = ({
     return undefined;
   }
 
-  return color(labelColor).alpha(stateOpacity.pressed).rgb().string();
+  try {
+    return color(labelColor).alpha(stateOpacity.pressed).rgb().string();
+  } catch {
+    return undefined;
+  }
 };

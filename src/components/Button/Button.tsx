@@ -60,6 +60,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   mode?: 'text' | 'outlined' | 'filled' | 'elevated' | 'tonal';
   /**
    * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for the `filled`, `tonal` and `elevated` modes.
+   * On a toggle (`selected` defined), it applies only with a custom `buttonColor`.
    */
   dark?: boolean;
   /**

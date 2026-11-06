@@ -514,6 +514,18 @@ describe('getButtonRippleColor', () => {
   });
 });
 
+it('renders with a label color the ripple cannot parse', async () => {
+  await render(
+    <Button textColor="var(--label)" onPress={() => {}}>
+      Custom property
+    </Button>
+  );
+
+  expect(screen.getByText('Custom property')).toHaveStyle({
+    color: 'var(--label)',
+  });
+});
+
 const sizeMetrics: [
   size: ButtonSize,
   minHeight: number,
@@ -888,6 +900,28 @@ describe('toggle colors', () => {
 
     expect(unselected.backgroundColor).not.toBe(plain.backgroundColor);
     expect(unselected.labelColor).not.toBe(plain.labelColor);
+  });
+
+  it('lets `dark` pick the label on a custom container color', async () => {
+    await render(
+      <Button buttonColor="#1B1B1F" dark selected={false}>
+        Custom
+      </Button>
+    );
+
+    expect(screen.getByText('Custom')).toHaveStyle({ color: white });
+  });
+
+  it('keeps the toggle label on the toggle container color', async () => {
+    await render(
+      <Button dark selected={false}>
+        Theme
+      </Button>
+    );
+
+    expect(screen.getByText('Theme')).toHaveStyle({
+      color: LightTheme.colors.onSurfaceVariant,
+    });
   });
 
   it('ignores the toggle table when disabled', () => {
