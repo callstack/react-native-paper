@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   touchable: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

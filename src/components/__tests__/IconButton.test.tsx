@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
   },
   slightlyRounded: {
     borderRadius: 4,
+  },
+  customBackground: {
+    backgroundColor: pink500,
   },
 });
 
@@ -78,6 +81,15 @@ it('renders icon button with small border radius', async () => {
   );
 
   expect(toJSON()).toMatchSnapshot();
+});
+
+it('keeps touchable content centered with custom container style', async () => {
+  await render(<IconButton icon="delete" style={styles.customBackground} />);
+  expect(screen.getByRole('button')).toHaveStyle({
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  });
 });
 
 describe('getIconButtonColor - icon color', () => {
