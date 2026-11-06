@@ -7,7 +7,7 @@ import { render, screen } from '../../../test-utils';
 import { LightTheme } from '../../../theme/schemes';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
-import { getCardColors, getCardCoverStyle } from '../../Card/utils';
+import { getCardColors } from '../../Card/utils';
 
 const styles = StyleSheet.create({
   customCoverRadius: {
@@ -114,6 +114,21 @@ describe('Card', () => {
 });
 
 describe('CardCover', () => {
+  it('renders with the theme border radius by default', async () => {
+    await render(
+      <Card>
+        <Card.Cover
+          source={{ uri: 'https://picsum.photos/700' }}
+          testID="card-cover"
+        />
+      </Card>
+    );
+
+    expect(screen.getByTestId('card-cover').parent).toHaveStyle({
+      borderRadius: LightTheme.shapes.corner.medium,
+    });
+  });
+
   it('renders with custom border radius', async () => {
     await render(
       <Card>
@@ -238,16 +253,6 @@ describe('getCardColors - border color', () => {
         mode: undefined,
       })
     ).toMatchObject({ borderColor: LightTheme.colors.outline });
-  });
-});
-
-describe('getCardCoverStyle - border radius', () => {
-  it('should return correct border radius based on roundness, for theme version 3', () => {
-    expect(
-      getCardCoverStyle({
-        theme: LightTheme,
-      })
-    ).toMatchObject({ borderRadius: LightTheme.shapes.corner.medium });
   });
 });
 
