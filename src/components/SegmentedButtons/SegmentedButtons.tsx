@@ -135,7 +135,10 @@ const SegmentedButtons = <T extends string = string>({
   const theme = useInternalTheme(themeOverrides);
 
   return (
-    <View style={[styles.row, style]}>
+    <View
+      role={multiSelect ? undefined : 'radiogroup'}
+      style={[styles.row, style]}
+    >
       {buttons.map((item, i) => {
         const disabledChildStyle = getDisabledSegmentedButtonStyle({
           theme,
@@ -169,6 +172,7 @@ const SegmentedButtons = <T extends string = string>({
             {...item}
             key={i}
             checked={checked}
+            multiSelect={multiSelect}
             segment={segment}
             density={density}
             onPress={onPress}
