@@ -28,6 +28,7 @@ exports[`Modal closes a non-dismissible modal when visible changes from true to 
     <View
       aria-live="polite"
       collapsable={false}
+      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -237,6 +238,7 @@ exports[`Modal closes a non-dismissible modal when visible changes from true to 
     <View
       aria-live="polite"
       collapsable={false}
+      onAccessibilityEscape={[Function]}
       pointerEvents="none"
       style={
         [
@@ -1701,6 +1703,7 @@ exports[`Modal keeps a non-dismissible modal visible when the Android back butto
     <View
       aria-live="polite"
       collapsable={false}
+      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -1910,6 +1913,7 @@ exports[`Modal keeps a non-dismissible modal visible when the Android back butto
     <View
       aria-live="polite"
       collapsable={false}
+      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -2119,6 +2123,7 @@ exports[`Modal keeps a non-dismissible modal visible when the Android back butto
     <View
       aria-live="polite"
       collapsable={false}
+      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -2328,6 +2333,7 @@ exports[`Modal keeps a non-dismissible modal visible when the backdrop is presse
     <View
       aria-live="polite"
       collapsable={false}
+      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -2537,6 +2543,7 @@ exports[`Modal keeps a non-dismissible modal visible when the backdrop is presse
     <View
       aria-live="polite"
       collapsable={false}
+      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [
@@ -2746,6 +2753,7 @@ exports[`Modal keeps a non-dismissible modal visible when the backdrop is presse
     <View
       aria-live="polite"
       collapsable={false}
+      onAccessibilityEscape={[Function]}
       pointerEvents="auto"
       style={
         [

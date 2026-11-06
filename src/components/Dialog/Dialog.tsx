@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import type { StyleProp } from 'react-native';
+import type { StyleProp, View } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -40,6 +40,14 @@ export type Props = {
    * Determines Whether the dialog is visible.
    */
   visible: boolean;
+  /**
+   * An accessibility element to focus when the dialog opens.
+   */
+  initialFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
+  /**
+   * An accessibility element to focus when the dialog closes.
+   */
+  restoreFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
   /**
    * Content of the `Dialog`.
    */
@@ -106,6 +114,8 @@ const Dialog = ({
   dismissAccessibilityLabel,
   'aria-label': ariaLabel,
   visible = false,
+  initialFocusRef,
+  restoreFocusRef,
   style,
   theme: themeOverrides,
   testID,
@@ -129,6 +139,8 @@ const Dialog = ({
       onDismiss={onDismiss}
       dismissAccessibilityLabel={dismissAccessibilityLabel}
       visible={visible}
+      initialFocusRef={initialFocusRef}
+      restoreFocusRef={restoreFocusRef}
       contentBackgroundColor={backgroundColor}
       contentBorderRadius={borderRadius}
       contentElevation={DIALOG_ELEVATION}

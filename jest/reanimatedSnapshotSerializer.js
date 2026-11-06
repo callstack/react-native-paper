@@ -2,6 +2,9 @@ const reanimatedTestProps = new Set([
   'jestAnimatedProps',
   'jestAnimatedStyle',
   'jestInlineStyle',
+  // Reanimated passes the ref it was given down as a prop of its own. Printing
+  // it walks the whole host instance, which never ends.
+  'forwardedRef',
 ]);
 
 module.exports = {

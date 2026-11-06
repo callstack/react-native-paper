@@ -15,22 +15,28 @@ import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
 import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
-import { addEventListener } from '../utils/addEventListener';
-import { BackHandler } from '../utils/BackHandler/BackHandler';
+import { useOverlayDismiss } from '../utils/useOverlayDismiss';
+import { useOverlayFocus } from '../utils/useOverlayFocus';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 export type Props = {
   /**
-   * Determines whether clicking outside the modal dismisses it.
+   * Determines whether clicking outside the modal dismisses it. It also decides
+   * whether the screen reader escape gesture and the visually hidden dismiss
+   * button dismiss it, and is the default for `dismissableBackButton`.
    */
   dismissable?: boolean;
   /**
-   * Determines whether clicking Android hardware back button dismisses the dialog.
+   * Determines whether the Android hardware back button and the Escape key on the web dismiss the modal.
+   * While a modal is visible, only the topmost one handles these. When this is `false`,
+   * they are absorbed and nothing is dismissed, rather than passed on to what is behind the modal.
    */
   dismissableBackButton?: boolean;
   /**
    * Callback that is called when the user dismisses the modal.
+   * A visible modal always takes the back button and Escape key, so without
+   * this callback they do nothing, and on Android the user cannot go back.
    */
   onDismiss?: () => void;
   /**
@@ -54,6 +60,14 @@ export type Props = {
    * Determines Whether the modal is visible.
    */
   visible: boolean;
+  /**
+   * Element to focus when the modal opens.
+   */
+  initialFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
+  /**
+   * Element to focus when the modal closes.
+   */
+  restoreFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
   /**
    * Content of the `Modal`.
    */
@@ -94,6 +108,10 @@ export type Props = {
 };
 
 const DEFAULT_DURATION = 220;
+
+// Having the handler at all keeps the screen reader escape gesture on this
+// modal, instead of passing it on to the modal behind it.
+const absorbAccessibilityEscape = () => {};
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
@@ -138,6 +156,8 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
+  initialFocusRef,
+  restoreFocusRef,
   dismissAccessibilityLabel = 'Close modal',
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
@@ -167,6 +187,15 @@ function Modal({
 
   const { scale } = theme.animation;
 
+  const contentRef = React.useRef<React.ComponentRef<typeof View>>(null);
+
+  const { focusInitialTarget, restoreFocus } = useOverlayFocus({
+    visible,
+    containerRef: contentRef,
+    initialFocusRef,
+    restoreFocusRef,
+  });
+
   React.useEffect(() => {
     const timeout = setTimeout(() => setAnimatedVisible(visible), 0);
 
@@ -187,26 +216,28 @@ function Modal({
   }, [scale, visible, visibleInternal]);
 
   React.useEffect(() => {
-    if (!visible) {
+    if (!visibleInternal) {
+      restoreFocus();
+    }
+  }, [restoreFocus, visibleInternal]);
+
+  useOverlayDismiss({
+    enabled: visible,
+    dismissable: dismissableBackButton,
+    onDismiss: onDismissCallback,
+  });
+
+  React.useEffect(() => {
+    if (!animatedVisible) {
       return undefined;
     }
 
-    const onHardwareBackPress = () => {
-      if (dismissableBackButton) {
-        onDismissCallback();
-      }
+    // Transparent views are not in the accessibility tree, so focus has to
+    // wait for the fade to finish.
+    const timeout = setTimeout(focusInitialTarget, scale * DEFAULT_DURATION);
 
-      return true;
-    };
-
-    const subscription = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      onHardwareBackPress
-    );
-
-    return () => subscription.remove();
-  }, [dismissableBackButton, onDismissCallback, visible]);
+    return () => clearTimeout(timeout);
+  }, [animatedVisible, focusInitialTarget, scale]);
 
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
@@ -240,7 +271,9 @@ function Modal({
         pointerEvents={visible ? 'auto' : 'none'}
         aria-live="polite"
         style={StyleSheet.absoluteFill}
-        onAccessibilityEscape={dismissable ? onDismissCallback : undefined}
+        onAccessibilityEscape={
+          dismissable ? onDismissCallback : absorbAccessibilityEscape
+        }
         testID={testID}
       >
         <AnimatedPressable
@@ -261,6 +294,7 @@ function Modal({
           pointerEvents="box-none"
         >
           <Surface
+            ref={contentRef}
             role="dialog"
             aria-modal
             aria-label={ariaLabel}

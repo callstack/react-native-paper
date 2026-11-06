@@ -236,6 +236,22 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`,
 
 Previously, the Android back button dismissed the modal when `dismissable` was `true`, even if `dismissableBackButton` was `false`. The `dismissableBackButton` prop can now prevent the modal from being dismissed via the back button independently of the `dismissable` prop.
 
+The Escape key on web now dismisses the modal too, and `dismissableBackButton` controls it together with the back button. When several modals are open, back and Escape dismiss only the topmost one. When `dismissableBackButton` is `false`, they are absorbed and nothing is dismissed, rather than passed on to the content behind the modal.
+
+Opening a modal now moves focus into it, and closing it returns focus to the element that had it before. You can choose the elements with the new `initialFocusRef` and `restoreFocusRef` props:
+
+```jsx
+<Modal
+  visible={visible}
+  onDismiss={hideModal}
+  aria-label="Rename file"
+  initialFocusRef={inputRef}
+  restoreFocusRef={buttonRef}
+>
+  <TextInput ref={inputRef} label="Name" />
+</Modal>
+```
+
 ### Dialog
 
 `Dialog` now uses a `Portal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Dialog`:
@@ -260,6 +276,8 @@ The dialog now has the `dialog` role. On web, the dialog's accessible name is se
   </Dialog.Content>
 </Dialog>
 ```
+
+`Dialog` follows the same back button, Escape key and focus behavior as `Modal`, including the `initialFocusRef` and `restoreFocusRef` props.
 
 When the dialog is `dismissable`, screen reader users can dismiss it with a visually hidden button inside the dialog. You can change the button's accessibility label with the new `dismissAccessibilityLabel` prop.
 
@@ -299,6 +317,8 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
   <Menu.Item title="Item" />
 </Menu>
 ```
+
+On web, a menu now closes on the Escape key when it is pressed down, instead of when it is released. Back and Escape dismiss only the topmost overlay, so a menu opened from a `Modal` or `Dialog` closes first and leaves the modal open.
 
 ### Searchbar
 
