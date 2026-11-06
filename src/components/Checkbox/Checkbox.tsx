@@ -335,8 +335,7 @@ const Checkbox = ({
         duration: rippleFadeOutDuration,
         reduceMotion: reanimatedReduceMotion,
       });
-    },
-    [rippleFadeOutDuration, reanimatedReduceMotion]
+    }
   );
 
   const rippleStyle = useAnimatedStyle(() => ({
