@@ -26,7 +26,7 @@ export type Props = ViewProps & {
  * Data tables allow displaying sets of data.
  *
  * ## Usage
- * ```js
+ * ```tsx
  * import * as React from 'react';
  * import { DataTable } from 'react-native-paper';
  *

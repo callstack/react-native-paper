@@ -80,6 +80,7 @@ Once we have finished implementing the components, we can run the app and check 
 To navigate from `HomeScreen` to `DetailsScreen` we can use the navigation object provided by `Stack.Screen` component. Every component rendered by `Stack.Screen` has an access to the navigation object via props. Let's modify our `HomeScreen` component:
 
 ```js
+import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 
 function HomeScreen({ navigation }) {

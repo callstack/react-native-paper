@@ -90,7 +90,7 @@ export type Props = Omit<Partial<ViewProps>, 'style'> & {
  * import { useSafeAreaInsets } from 'react-native-safe-area-context';
  *
  * const BOTTOM_APPBAR_HEIGHT = 80;
- * const MEDIUM_FAB_HEIGHT = 56;
+ * const FAB_HEIGHT = 56;
  *
  * const MyComponent = () => {
  *   const { bottom } = useSafeAreaInsets();
@@ -112,13 +112,11 @@ export type Props = Omit<Partial<ViewProps>, 'style'> & {
  *       <Appbar.Action icon="label" onPress={() => {}} />
  *       <Appbar.Action icon="delete" onPress={() => {}} />
  *       <FAB
- *         mode="flat"
- *         size="medium"
  *         icon="plus"
  *         onPress={() => {}}
  *         style={[
  *           styles.fab,
- *           { top: (BOTTOM_APPBAR_HEIGHT - MEDIUM_FAB_HEIGHT) / 2 },
+ *           { top: (BOTTOM_APPBAR_HEIGHT - FAB_HEIGHT) / 2 },
  *         ]}
  *       />
  *     </Appbar>

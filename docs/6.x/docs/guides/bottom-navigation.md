@@ -17,7 +17,7 @@ Install [`@react-navigation/native`](https://reactnavigation.org/docs/getting-st
 
 Pass a `BottomNavigation.Bar` to the navigator's `tabBar` prop. The bar reads navigation state and dispatches `tabPress` events back:
 
-```jsx
+```tsx
 import MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions } from '@react-navigation/native';
@@ -54,7 +54,8 @@ function MyTabs() {
           renderIcon={({ route, focused, color }) =>
             descriptors[route.key].options.tabBarIcon?.({
               focused,
-              color,
+              // React Navigation types this as a string; Paper's color can be a PlatformColor.
+              color: color as string,
               size: 24,
             }) ?? null
           }

@@ -68,6 +68,29 @@ The following component style props no longer support overriding their backgroun
 
 You can use the component's color prop where available, or override the corresponding theme colors.
 
+### Ripple color
+
+These components no longer take a `rippleColor` prop. They derive the ripple color from their content color, as Material Design 3 specifies:
+
+- `Button`
+- `Checkbox.Item`
+- `Chip`
+- `Drawer.Item`
+- `List.Accordion`
+- `Menu.Item`
+- `RadioButton.Item`
+- `Searchbar`
+- `SegmentedButtons`: the `rippleColor` of an item in `buttons`
+- `Snackbar`
+
+TypeScript reports an error, and in JavaScript the prop is ignored. `FAB`, `FAB.Group` and `AnimatedFAB` changed too, see [FAB](#fab). To use your own ripple color, build the pressable element with `TouchableRipple`, which keeps its `rippleColor` prop:
+
+```tsx
+<TouchableRipple rippleColor="#FF000020" onPress={onPress}>
+  <Text>Press me</Text>
+</TouchableRipple>
+```
+
 ### Test IDs
 
 Hardcoded default test IDs have been removed for the components listed below:
@@ -250,6 +273,13 @@ Libraries built on Paper may not support 6.x yet. For example, `react-native-pap
 ## Components
 
 ### Appbar
+
+`Appbar.Content` no longer takes `subtitle` or `subtitleStyle`, which were deprecated in 5.x. In 5.x they only rendered with a Material Design 2 theme, so removing them doesn't change how a Material Design 3 app looks.
+
+```diff
+-<Appbar.Content title="Inbox" subtitle="3 unread messages" />
++<Appbar.Content title="Inbox" />
+```
 
 The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
 
@@ -752,6 +782,99 @@ mutually exclusive options, use `SegmentedButtons`.
 </>
 ```
 
+### FAB
+
+`FAB` was rewritten for Material Design 3. `FAB.Group` and `AnimatedFAB` were removed: use `FAB.Menu` and `FAB.Extended` instead.
+
+#### `variant`
+
+The variants changed meaning. In 5.x, `primary`, `secondary` and `tertiary` painted the container role, e.g. `primaryContainer`. In 6.x they paint the role itself, e.g. `primary`, and the new tonal variants paint the container role. So a FAB with an explicit `variant` looks different. To keep the 5.x colors:
+
+- **`primary`** (the 5.x default) → **`tonalPrimary`** (the 6.x default)
+- **`secondary`** → **`tonalSecondary`**
+- **`tertiary`** → **`tonalTertiary`**
+- **`surface`** has no variant. Set `containerColor` and `contentColor` instead, e.g. to `theme.colors.surfaceContainerHigh` and `theme.colors.primary`.
+
+A FAB without a `variant` keeps its 5.x colors.
+
+```diff
+-<FAB icon="plus" variant="secondary" onPress={onPress} />
++<FAB icon="plus" variant="tonalSecondary" onPress={onPress} />
+```
+
+#### `size`
+
+- **`size="small"`** and **`small`** (40dp) were removed. The smallest FAB is now `size="default"` (56dp).
+- **`size="medium"`** (56dp, the 5.x default) → **`size="default"`** (the 6.x default)
+- **`size="large"`** (96dp) is unchanged.
+
+`size="medium"` still type-checks, but in 6.x it is 80dp, so a FAB with an explicit `size="medium"` grows by 24dp. `customSize` was removed.
+
+#### Removed props
+
+- **`label`** and **`uppercase`**: use `FAB.Extended` for a FAB with a label.
+- **`color`** → **`contentColor`**. Set the background with `containerColor`, as `style` is only for positioning.
+- **`mode`**: no replacement. A FAB always has its resting elevation.
+- **`disabled`**: no replacement. To take the action away, hide the FAB with `visible={false}`.
+- **`loading`**, **`animated`**, **`onLongPress`** and **`delayLongPress`**: no replacement.
+- **`rippleColor`**: see [Ripple color](#ripple-color).
+
+TypeScript reports an error for each of them, and in JavaScript they're ignored.
+
+```diff
+-<FAB icon="pencil" label="Compose" color="white" onPress={onPress} />
++<FAB.Extended
++  icon="pencil"
++  label="Compose"
++  expanded
++  contentColor="white"
++  onPress={onPress}
++/>
+```
+
+#### `FAB.Extended`
+
+`FAB.Extended` replaces `AnimatedFAB`. `extended` is now `expanded`, and changing it animates the width and the label. `iconMode` and `animateFrom` were removed, and so were the props listed above for `FAB`. In JavaScript, `AnimatedFAB` imports as `undefined`, so the app builds but fails to render with "Element type is invalid".
+
+```diff
+-<AnimatedFAB
++<FAB.Extended
+   icon="plus"
+   label="Compose"
+-  extended={isExtended}
++  expanded={isExtended}
+   onPress={onPress}
+ />
+```
+
+#### `FAB.Menu`
+
+`FAB.Menu` replaces `FAB.Group`. It takes `expanded` and `onDismiss` instead of `open` and `onStateChange`, the main button's props move into `trigger`, and `actions` are now `items`, 2 to 6 of them. Items take `icon`, `label`, `onPress`, `aria-label` and `testID`: the color, style and size props of an action were removed, and so were `backdropColor`, `fabStyle` and the long-press props.
+
+`FAB.Menu` has no backdrop and doesn't close on a tap outside it. It closes when the user presses its close button or an item, which calls `onDismiss`.
+
+```diff
+-<FAB.Group
+-  open={open}
+-  visible
+-  icon={open ? 'close' : 'plus'}
+-  actions={[
+-    { icon: 'email', label: 'Send', onPress: send },
+-    { icon: 'bell', label: 'Remind', onPress: remind },
+-  ]}
+-  onStateChange={({ open }) => setOpen(open)}
+-/>
++<FAB.Menu
++  expanded={open}
++  onDismiss={() => setOpen(false)}
++  trigger={{ icon: 'plus', onPress: () => setOpen(true) }}
++  items={[
++    { icon: 'email', label: 'Send', onPress: send },
++    { icon: 'bell', label: 'Remind', onPress: remind },
++  ]}
++/>
+```
+
 ### Checkbox
 
 #### Interaction states
@@ -792,4 +915,21 @@ A standalone `Checkbox` has no visible label, so it now warns in development whe
 ```diff
 -<Checkbox status="checked" onPress={onPress} />
 +<Checkbox status="checked" onPress={onPress} aria-label="Notify me" />
+```
+
+### Switch
+
+`Switch` is now drawn by Paper instead of wrapping React Native's `Switch`, so iOS shows the Material Design 3 switch instead of the iOS one.
+
+#### Removed props
+
+`Switch` no longer takes React Native's `Switch` props, such as `trackColor`, `thumbColor`, `ios_backgroundColor` and `onChange`, or a `ref`. The `color` prop was removed too: set colors with the `theme` prop instead. The selected track uses `primary` and the selected handle uses `onPrimary`.
+
+```diff
+-<Switch value={value} onValueChange={setValue} color="tomato" />
++<Switch
++  value={value}
++  onValueChange={setValue}
++  theme={{ colors: { primary: 'tomato' } }}
++/>
 ```
