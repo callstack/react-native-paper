@@ -468,6 +468,8 @@ const Button = ({
     () => StyleSheet.flatten(labelStyle) || {},
     [labelStyle]
   );
+  const iconColor =
+    typeof labelStyleColor === 'string' ? labelStyleColor : labelColor;
 
   const contentBoxStyle = React.useMemo(
     () => getButtonContentBoxStyle(sizeStyle, borderWidth),
@@ -542,23 +544,12 @@ const Button = ({
                 <Icon
                   source={icon}
                   size={sizeStyle.iconSize}
-                  color={
-                    typeof labelStyleColor === 'string'
-                      ? labelStyleColor
-                      : labelColor
-                  }
+                  color={iconColor}
                 />
               </View>
             ) : null}
             {loading ? (
-              <ActivityIndicator
-                size={sizeStyle.iconSize}
-                color={
-                  typeof labelStyleColor === 'string'
-                    ? labelStyleColor
-                    : labelColor
-                }
-              />
+              <ActivityIndicator size={sizeStyle.iconSize} color={iconColor} />
             ) : null}
             <Text
               variant={sizeStyle.labelVariant}
