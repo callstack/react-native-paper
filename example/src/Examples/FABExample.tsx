@@ -152,9 +152,11 @@ const FABExample = () => {
         />
         <List.Item
           title="Show FAB"
+          role="switch"
+          aria-checked={showFab}
           right={() => (
-            <View pointerEvents="none">
-              <Switch value={showFab} />
+            <View pointerEvents="none" aria-hidden>
+              <Switch value={showFab} readOnly />
             </View>
           )}
           onPress={() => setShowFab((v) => !v)}

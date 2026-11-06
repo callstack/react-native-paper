@@ -16,8 +16,10 @@ export type SwitchColors = {
 
   // Enabled, interacted handle (track stays constant per spec)
   checkedHoverHandleColor: ColorValue;
+  checkedFocusHandleColor: ColorValue;
   checkedPressedHandleColor: ColorValue;
   uncheckedHoverHandleColor: ColorValue;
+  uncheckedFocusHandleColor: ColorValue;
   uncheckedPressedHandleColor: ColorValue;
 
   // State layer tints
@@ -53,8 +55,10 @@ export function getDefaultSwitchColors(theme: InternalTheme): SwitchColors {
     uncheckedIconColor: c[t.unselectedIconColor],
 
     checkedHoverHandleColor: c[t.selectedHoverHandleColor],
+    checkedFocusHandleColor: c[t.selectedFocusHandleColor],
     checkedPressedHandleColor: c[t.selectedPressedHandleColor],
     uncheckedHoverHandleColor: c[t.unselectedHoverHandleColor],
+    uncheckedFocusHandleColor: c[t.unselectedFocusHandleColor],
     uncheckedPressedHandleColor: c[t.unselectedPressedHandleColor],
 
     checkedStateLayerColor: c[t.selectedStateLayerColor],
