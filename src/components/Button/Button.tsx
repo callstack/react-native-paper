@@ -19,6 +19,7 @@ import {
   getButtonHitSlop,
   getButtonPressedRadius,
   getButtonRippleColor,
+  getButtonShapeCurvePoints,
   getButtonShapeRadius,
   getButtonSizeStyle,
   getButtonTransitionDuration,
@@ -318,12 +319,10 @@ const Button = ({
     animatesShape && pressed
       ? getButtonPressedRadius({ size, theme })
       : restingRadius;
-  const shapeSpring = React.useMemo(() => {
-    const { points, duration } = toSpringCurve(
-      theme.motion.spring.fast.spatial
-    );
-    return { timingFunction: linear(...points), duration };
-  }, [theme.motion.spring.fast.spatial]);
+  const shapeSpring = React.useMemo(
+    () => toSpringCurve(theme.motion.spring.fast.spatial),
+    [theme.motion.spring.fast.spatial]
+  );
   const shapeTransitionDuration = animatesShape
     ? shapeSpring.duration * theme.animation.scale
     : 0;
@@ -402,6 +401,24 @@ const Button = ({
     previousContainerColor: committedContainerColor,
   });
 
+  const innerRadius = Math.max(0, radius - borderWidth);
+  const largestRadius = Math.max(
+    sizeStyle.minHeight / 2,
+    getButtonShapeRadius({ size, shape: 'square', theme }),
+    getButtonPressedRadius({ size, theme })
+  );
+  const shapeTimingFunction = React.useMemo(
+    () =>
+      linear(
+        ...getButtonShapeCurvePoints({
+          points: shapeSpring.points,
+          radius: innerRadius,
+          largestRadius: Math.max(0, largestRadius - borderWidth),
+        })
+      ),
+    [shapeSpring.points, innerRadius, largestRadius, borderWidth]
+  );
+
   // The clip carries the same radius transition as the `Surface`, so the
   // ripple and the disabled overlay follow the morph.
   //
@@ -416,15 +433,12 @@ const Button = ({
   const shapeTransitionStyle = {
     transitionProperty: 'borderRadius',
     transitionDuration: shapeTransitionDuration,
-    transitionTimingFunction: shapeSpring.timingFunction,
+    transitionTimingFunction: shapeTimingFunction,
   } as const;
 
   const clipStyle = { ...shapeTransitionStyle, borderRadius: radius };
 
-  const innerClipStyle = {
-    ...shapeTransitionStyle,
-    borderRadius: Math.max(0, radius - borderWidth),
-  };
+  const innerClipStyle = { ...shapeTransitionStyle, borderRadius: innerRadius };
 
   const outlineStyle = React.useMemo(
     () => ({ borderColor, borderWidth }),
@@ -458,7 +472,7 @@ const Button = ({
       elevation={elevation}
       transitionDuration={surfaceTransitionDuration}
       shapeTransitionDuration={shapeTransitionDuration}
-      shapeTransitionTimingFunction={shapeSpring.timingFunction}
+      shapeTransitionTimingFunction={shapeTimingFunction}
       style={[styles.button, style]}
     >
       <Reanimated.View style={[styles.clip, outlineStyle, clipStyle]}>

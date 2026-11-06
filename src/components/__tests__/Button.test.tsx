@@ -11,6 +11,7 @@ import { pink500, white } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import { shadow } from '../../theme/tokens/sys/elevation';
+import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import Button from '../Button/Button';
 import { Tokens } from '../Button/tokens';
 import {
@@ -19,6 +20,7 @@ import {
   getButtonHitSlop,
   getButtonPressedRadius,
   getButtonRippleColor,
+  getButtonShapeCurvePoints,
   getButtonShapeRadius,
   getButtonSizeStyle,
   getButtonTransitionDuration,
@@ -650,6 +652,33 @@ describe('getButtonPressedRadius', () => {
       expect(getButtonPressedRadius({ size, theme: LightTheme })).toBe(pressed);
     }
   );
+});
+
+describe('getButtonShapeCurvePoints', () => {
+  const { points } = toSpringCurve(LightTheme.motion.spring.fast.spatial);
+  const cornersOnTheWay = (curve: number[], from: number, to: number) =>
+    curve.map((progress) => from + (to - from) * progress);
+
+  it('keeps the corner at 0 or above on its way to a 0 corner', () => {
+    const curve = getButtonShapeCurvePoints({
+      points,
+      radius: 0,
+      largestRadius: 20,
+    });
+
+    expect(Math.min(...cornersOnTheWay(curve, 20, 0))).toBe(0);
+  });
+
+  it('keeps the overshoot when the corner has room for it', () => {
+    const curve = getButtonShapeCurvePoints({
+      points,
+      radius: 8,
+      largestRadius: 20,
+    });
+
+    expect(curve).toEqual(points);
+    expect(Math.min(...cornersOnTheWay(curve, 20, 8))).toBeLessThan(8);
+  });
 });
 
 describe('getButtonTransitionDuration', () => {

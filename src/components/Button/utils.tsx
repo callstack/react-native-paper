@@ -149,6 +149,28 @@ export const getButtonTransitionDuration = ({
   );
 };
 
+/**
+ * Caps the spring curve so the corner can't overshoot below 0 on its way to
+ * `radius`, from any start up to `largestRadius`.
+ */
+export const getButtonShapeCurvePoints = ({
+  points,
+  radius,
+  largestRadius,
+}: {
+  points: number[];
+  radius: number;
+  largestRadius: number;
+}): number[] => {
+  if (largestRadius <= radius) {
+    return points;
+  }
+
+  const maxProgress = largestRadius / (largestRadius - radius);
+
+  return points.map((point) => Math.min(point, maxProgress));
+};
+
 /** Corner the container morphs to while pressed. */
 export const getButtonPressedRadius = ({
   size,
