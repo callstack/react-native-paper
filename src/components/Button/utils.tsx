@@ -415,9 +415,8 @@ export const getButtonColors = ({
 };
 
 /**
- * Returns the color used for the button's ripple / state layer. Defaults to
- * the label color at the pressed-state opacity (per Material Design 3), unless
- * a custom ripple color is provided.
+ * Returns the color used for the button's ripple / state layer: the label
+ * color at the pressed-state opacity (per Material Design 3).
  *
  * When the label color is not a plain string (e.g. an Android Material You
  * `PlatformColor`), `undefined` is returned so `TouchableRipple` falls back to
@@ -425,15 +424,9 @@ export const getButtonColors = ({
  */
 export const getButtonRippleColor = ({
   labelColor,
-  customRippleColor,
 }: {
   labelColor: ColorValue;
-  customRippleColor?: ColorValue;
 }): ColorValue | undefined => {
-  if (customRippleColor) {
-    return customRippleColor;
-  }
-
   if (typeof labelColor !== 'string') {
     return undefined;
   }

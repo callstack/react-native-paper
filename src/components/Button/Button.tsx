@@ -137,11 +137,6 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   background?: PressableAndroidRippleConfig;
   /**
-   * Color of the ripple effect / state layer. Defaults to the label color at
-   * the pressed-state opacity.
-   */
-  rippleColor?: ColorValue;
-  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   'aria-label'?: string;
@@ -253,7 +248,6 @@ const Button = ({
   testID,
   accessible,
   background,
-  rippleColor: customRippleColor,
   maxFontSizeMultiplier,
   touchableRef,
   ref,
@@ -385,8 +379,8 @@ const Button = ({
   );
 
   const rippleColor = React.useMemo(
-    () => getButtonRippleColor({ labelColor, customRippleColor }),
-    [labelColor, customRippleColor]
+    () => getButtonRippleColor({ labelColor }),
+    [labelColor]
   );
 
   const containerColor =

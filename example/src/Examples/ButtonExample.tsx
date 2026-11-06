@@ -290,14 +290,6 @@ const ButtonExample = () => {
             Custom label color
           </Button>
           <Button
-            mode="tonal"
-            rippleColor="rgba(179, 38, 30, 0.32)"
-            onPress={() => {}}
-            style={styles.button}
-          >
-            Custom ripple
-          </Button>
-          <Button
             mode="outlined"
             icon={{
               uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',

@@ -493,6 +493,8 @@ a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
   `extra-small` is **32dp** tall, while `compact` only reduced the horizontal
   margins and the min width and kept the **40dp** height.
 - **`contentStyle={{ flexDirection: 'row-reverse' }}`** → `iconPosition="trailing"`.
+- **`rippleColor`** is removed, with no replacement. The ripple uses the label
+  color at the pressed-state opacity.
 
 ```tsx
 // Before (v5)

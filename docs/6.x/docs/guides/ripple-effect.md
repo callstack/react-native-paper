@@ -12,16 +12,14 @@ The ripple effect on the iOS platform is replaced by a highlight effect.
 
 ## Customize ripple effect color in component
 
-The `rippleColor` prop is available for every pressable component which allows you to set the color of the ripple effect. For the instance, to make the `Button` component's ripple effect transparent, simply pass the desired color value to the prop:
+The `rippleColor` prop of `TouchableRipple` sets the color of the ripple effect. For example, to make the ripple effect a translucent red, pass the color value to the prop:
 
 ```typescript
-<Button
+<TouchableRipple
   rippleColor="#FF000020"
-  icon="camera"
-  mode="filled"
   onPress={() => console.log('Pressed')}>
-  Press me
-</Button>
+  <Text>Press me</Text>
+</TouchableRipple>
 ```
 
 ## Disable ripple effect in all components
