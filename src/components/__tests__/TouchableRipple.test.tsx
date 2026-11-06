@@ -1,10 +1,11 @@
-import { Platform, Text } from 'react-native';
+import { Platform, PlatformColor, Text } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
+import { Palette } from '../../theme/tokens';
 import type { PressableProps } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
@@ -181,6 +182,48 @@ describe('TouchableRipple', () => {
       );
 
       expect(ripple).toEqual({ color: 'red', alpha: 0.5 });
+    });
+
+    it('falls back to reference neutral color when theme onSurface is a PlatformColor', async () => {
+      const ripple = await getAndroidRipple(
+        <TouchableRipple
+          testID="ripple-touchable"
+          onPress={() => {}}
+          theme={{
+            colors: {
+              onSurface: PlatformColor(
+                '@android:color/system_on_surface_light'
+              ),
+            },
+          }}
+        >
+          <Text>Press me!</Text>
+        </TouchableRipple>
+      );
+
+      expect(ripple).toMatchObject({
+        color: Palette.neutral10,
+        alpha: 0.1,
+      });
+    });
+
+    it('falls back to reference neutral color when custom background has a PlatformColor', async () => {
+      const ripple = await getAndroidRipple(
+        <TouchableRipple
+          testID="ripple-touchable"
+          onPress={() => {}}
+          background={{
+            color: PlatformColor('@android:color/system_on_surface_light'),
+          }}
+        >
+          <Text>Press me!</Text>
+        </TouchableRipple>
+      );
+
+      expect(ripple).toEqual({
+        color: Palette.neutral10,
+        alpha: 0.1,
+      });
     });
   });
 });

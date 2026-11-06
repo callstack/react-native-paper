@@ -6,11 +6,10 @@ import type {
 
 import type { ThemeProp } from '../../theme/types';
 
-declare module 'react-native' {
-  interface PressableAndroidRippleConfig {
+export type TouchableRippleAndroidRippleConfig =
+  PressableAndroidRippleConfig & {
     alpha?: number | null;
-  }
-}
+  };
 
 /**
  * Props shared by the web and native `TouchableRipple` implementations.
@@ -28,7 +27,7 @@ export type TouchableRippleCommonProps = {
    * its `alpha` only if the config doesn't set one.
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
-  background?: PressableAndroidRippleConfig;
+  background?: TouchableRippleAndroidRippleConfig;
   /**
    * Whether to start the ripple at the center (Web).
    */

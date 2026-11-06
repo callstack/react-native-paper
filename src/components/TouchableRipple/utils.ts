@@ -1,5 +1,7 @@
 import type { ColorValue } from 'react-native';
 
+import { isPlatformColorSentinel } from '../../theme/provider';
+import { Palette } from '../../theme/tokens';
 import type { InternalTheme } from '../../theme/types';
 
 const getUnderlayColor = ({
@@ -23,11 +25,13 @@ const getRippleColor = ({
   theme: InternalTheme;
   rippleColor?: ColorValue;
 }) => {
-  if (rippleColor) {
-    return rippleColor;
+  const color = rippleColor || theme.colors.onSurface;
+
+  if (isPlatformColorSentinel(color)) {
+    return theme.dark ? Palette.neutral90 : Palette.neutral10;
   }
 
-  return theme.colors.onSurface;
+  return color;
 };
 
 export const getTouchableRippleColors = ({

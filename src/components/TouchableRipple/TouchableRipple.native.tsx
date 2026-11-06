@@ -9,6 +9,8 @@ import { getTouchableRippleColors } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
+import { isPlatformColorSentinel } from '../../theme/provider';
+import { Palette } from '../../theme/tokens';
 import { state } from '../../theme/tokens/sys/state';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 
@@ -66,7 +68,14 @@ const TouchableRipple = ({
   if (TouchableRipple.supported) {
     const androidRipple = rippleEffectEnabled
       ? background
-        ? { alpha: state.opacity.pressed, ...background }
+        ? {
+            alpha: state.opacity.pressed,
+            ...background,
+            ...(background.color &&
+              isPlatformColorSentinel(background.color) && {
+                color: theme.dark ? Palette.neutral90 : Palette.neutral10,
+              }),
+          }
         : {
             color: calculatedRippleColor,
             borderless,
