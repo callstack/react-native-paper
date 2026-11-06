@@ -1,5 +1,4 @@
 import { BackHandler as RNBackHandler, Text } from 'react-native';
-import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
@@ -16,9 +15,9 @@ jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
 }));
 
-interface BackHandlerStatic extends RNBackHandlerStatic {
+type BackHandlerStatic = typeof RNBackHandler & {
   mockPressBack(): void;
-}
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;

@@ -82,7 +82,8 @@ const Tooltip = ({
   const showTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
   const hideTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const childrenWrapperRef = React.useRef<View>(null);
+  const childrenWrapperRef =
+    React.useRef<React.ComponentRef<typeof View>>(null);
   const touched = React.useRef(false);
 
   const isValidChild = React.useMemo(

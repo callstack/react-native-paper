@@ -5,7 +5,6 @@ import {
   Platform,
   BackHandler as RNBackHandler,
 } from 'react-native';
-import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { act, userEvent } from '@testing-library/react-native';
@@ -15,9 +14,9 @@ import { render, screen } from '../../test-utils';
 import Button from '../Button/Button';
 import Portal from '../Portal/Portal';
 
-interface BackHandlerStatic extends RNBackHandlerStatic {
+type BackHandlerStatic = typeof RNBackHandler & {
   mockPressBack(): void;
-}
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;

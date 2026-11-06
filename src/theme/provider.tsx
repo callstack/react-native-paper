@@ -29,6 +29,8 @@ export const isPlatformColorSentinel = (v: unknown): boolean =>
   typeof v === 'object' &&
   ('resource_paths' in v || 'semantic' in v || 'dynamic' in v);
 
+const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   if (
@@ -46,6 +48,9 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   }
   const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
   for (const key of Object.keys(overrides)) {
+    if (UNSAFE_KEYS.has(key)) {
+      continue;
+    }
     out[key] = safeMerge(
       (base as Record<string, unknown>)[key],
       (overrides as Record<string, unknown>)[key]
@@ -75,14 +80,14 @@ export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationLight: T;
   materialLight?: Theme;
 }): {
-  LightTheme: NavigationTheme;
+  LightTheme: T;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationDark: T;
   materialDark?: Theme;
 }): {
-  DarkTheme: NavigationTheme;
+  DarkTheme: T;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<
