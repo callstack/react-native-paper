@@ -213,7 +213,7 @@ const Shell = ({
   const theme = useInternalTheme(themeOverrides);
   const [hovered, setHovered] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
-  const touchableRef = React.useRef<View>(null);
+  const touchableRef = React.useRef<React.ComponentRef<typeof View>>(null);
   const previousFocusedElement = React.useRef<HTMLElement | null>(null);
 
   const resolvedElevation =
