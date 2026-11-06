@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
-  type KeyDownEvent,
-  type KeyUpEvent,
+  type NativeSyntheticEvent,
   Platform,
   Pressable,
   StyleSheet,
@@ -33,6 +32,10 @@ import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { StateOpacityKey, ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon, { type IconSource } from '../Icon';
+
+// React Native 0.87+ exports `KeyDownEvent` and `KeyUpEvent`, but its legacy
+// types, the default before 0.87, have neither, so type only what is read.
+type KeyEvent = NativeSyntheticEvent<{ key: string; repeat?: boolean }>;
 
 export type Props = {
   /**
@@ -417,7 +420,7 @@ const Switch = ({
         // React Native Web only handles Space for button roles.
         ...(Platform.OS === 'web'
           ? {
-              onKeyDown: (event: KeyDownEvent) => {
+              onKeyDown: (event: KeyEvent) => {
                 const { key, repeat } = event.nativeEvent;
                 if (key !== ' ' && key !== 'Spacebar') return;
                 event.preventDefault();
@@ -426,7 +429,7 @@ const Switch = ({
                   pressedSV.value = 1;
                 }
               },
-              onKeyUp: (event: KeyUpEvent) => {
+              onKeyUp: (event: KeyEvent) => {
                 const { key } = event.nativeEvent;
                 if (key !== ' ' && key !== 'Spacebar') return;
                 event.preventDefault();
