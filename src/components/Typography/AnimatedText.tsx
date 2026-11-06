@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
-import { useIsNestedText, withNestedText } from './NestedTextContext';
+import { useIsNestedText, markChildrenAsNested } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -104,7 +104,7 @@ function AnimatedText({
     );
   }
 
-  return withNestedText(element, rest.children);
+  return markChildrenAsNested(element, rest.children);
 }
 
 const styles = StyleSheet.create({

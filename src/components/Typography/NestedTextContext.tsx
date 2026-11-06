@@ -14,8 +14,7 @@ const canContainNestedText = (children: unknown) =>
 
 export const useIsNestedText = () => React.useContext(NestedTextContext);
 
-// Marks the children of a text as nested
-export const withNestedText = (
+export const markChildrenAsNested = (
   element: React.ReactElement,
   children: unknown
 ) =>
