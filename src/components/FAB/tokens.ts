@@ -100,6 +100,8 @@ const closeButton = {
   shape: 'full',
 } as const;
 
+export type Interaction = keyof typeof stateElevation;
+
 const listItem = {
   height: 56,
   shape: 'full',
@@ -107,6 +109,14 @@ const listItem = {
   leading: 24,
   trailing: 24,
   iconLabelGap: 8,
+  labelTypescale: 'titleMedium' satisfies TypescaleKey,
+  // Items are tonal, so they sit flat and lift on hover like tonal buttons.
+  elevation: {
+    enabled: 0,
+    hover: 1,
+    focus: 0,
+    pressed: 0,
+  } as const satisfies Record<Interaction, Elevation>,
 } as const;
 
 const spacing = {
@@ -120,6 +130,14 @@ export const MenuTokens = {
   spacing,
 };
 
+const stateOpacity = tokens.md.sys.state.opacity;
+export const STATE_LAYER_OPACITY = {
+  enabled: 0,
+  hover: stateOpacity.hovered,
+  focus: stateOpacity.focused,
+  pressed: stateOpacity.pressed,
+} as const satisfies Record<Interaction, number>;
+
 const focusIndicator = tokens.md.sys.state.focusIndicator;
 export const FOCUS_RING_THICKNESS = focusIndicator.thickness;
 export const FOCUS_RING_OUTER_OFFSET = focusIndicator.outerOffset;
@@ -127,3 +145,5 @@ export const FOCUS_RING_INSET = FOCUS_RING_OUTER_OFFSET + FOCUS_RING_THICKNESS;
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 export const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
+
+export const webNoHoverTint: ViewStyle = { backgroundColor: 'transparent' };
