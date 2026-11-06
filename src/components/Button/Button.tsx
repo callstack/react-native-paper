@@ -173,6 +173,11 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width or to set a custom padding.
+   *
+   * The content takes `minHeight`, `paddingStart` and `paddingEnd` from `size`.
+   * To change them, set these same properties. On Android and iOS, `padding`
+   * and `paddingHorizontal` do not override them, and a `height` below
+   * `minHeight` has no effect.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**

@@ -522,6 +522,10 @@ a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
   reads `corner.medium` at `extra-small` and `small`; `corner.large` at
   `medium`; and `corner.extraLarge` at `large` and `extra-large`.
 - **Background color** is no longer set through `style`. Use `buttonColor`.
+- **Border color and width** are no longer set through `style`. An inner view
+  draws the outline, so `borderColor` in `style` does not recolor it, and
+  `borderWidth` adds a second border around it. To recolor the outline,
+  override `theme.colors.outlineVariant`.
 - **Animated styles** must come from Reanimated. A React Native
   `Animated.Value` in `style` is not applied.
 
@@ -537,6 +541,23 @@ a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
   theme={{ shapes: { corner: { medium: 8 } } }}
   buttonColor="red"
 >
+  Press me
+</Button>
+```
+
+#### Content style
+
+The content takes `minHeight`, `paddingStart` and `paddingEnd` from `size`.
+To change them in `contentStyle`, set these same properties. On Android and
+iOS, `padding` and `paddingHorizontal` do not override them, and a `height`
+below `minHeight` has no effect.
+
+```tsx
+// Before (v5)
+<Button contentStyle={{ height: 36, paddingHorizontal: 8 }}>Press me</Button>
+
+// After (v6)
+<Button contentStyle={{ minHeight: 36, paddingStart: 8, paddingEnd: 8 }}>
   Press me
 </Button>
 ```
