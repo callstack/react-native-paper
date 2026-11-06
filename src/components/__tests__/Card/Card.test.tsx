@@ -148,13 +148,13 @@ describe('CardActions', () => {
     await render(
       <Card>
         <Card.Actions>
-          <ProbeButton mode="contained">Agree</ProbeButton>
+          <ProbeButton mode="filled">Agree</ProbeButton>
         </Card.Actions>
       </Card>
     );
 
     expect(buttonProps).toHaveBeenCalledWith(
-      expect.objectContaining({ mode: 'contained' })
+      expect.objectContaining({ mode: 'filled' })
     );
   });
 
