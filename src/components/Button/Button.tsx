@@ -427,8 +427,8 @@ const Button = ({
   };
 
   const outlineStyle = React.useMemo(
-    () => ({ backgroundColor: containerColor, borderColor, borderWidth }),
-    [containerColor, borderColor, borderWidth]
+    () => ({ borderColor, borderWidth }),
+    [borderColor, borderWidth]
   );
 
   const { color: labelStyleColor } = React.useMemo(

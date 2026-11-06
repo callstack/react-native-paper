@@ -1910,7 +1910,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 "borderStyle": "solid",
               },
               {
-                "backgroundColor": "transparent",
                 "borderColor": "rgba(202, 196, 208, 1)",
                 "borderWidth": 1,
               },

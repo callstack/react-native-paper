@@ -103,7 +103,6 @@ exports[`renders button with icon 1`] = `
           "borderStyle": "solid",
         },
         {
-          "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
           "borderWidth": 0,
         },
@@ -367,7 +366,6 @@ exports[`renders disabled button 1`] = `
           "borderStyle": "solid",
         },
         {
-          "backgroundColor": "transparent",
           "borderColor": "transparent",
           "borderWidth": 0,
         },
@@ -622,7 +620,6 @@ exports[`renders filled button by default 1`] = `
           "borderStyle": "solid",
         },
         {
-          "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
           "borderWidth": 0,
         },
@@ -855,7 +852,6 @@ exports[`renders loading button 1`] = `
           "borderStyle": "solid",
         },
         {
-          "backgroundColor": "rgba(103, 80, 164, 1)",
           "borderColor": "transparent",
           "borderWidth": 0,
         },
@@ -1279,7 +1275,6 @@ exports[`renders outlined button with mode 1`] = `
           "borderStyle": "solid",
         },
         {
-          "backgroundColor": "transparent",
           "borderColor": "rgba(202, 196, 208, 1)",
           "borderWidth": 1,
         },
@@ -1512,7 +1507,6 @@ exports[`renders text button with mode 1`] = `
           "borderStyle": "solid",
         },
         {
-          "backgroundColor": "transparent",
           "borderColor": "transparent",
           "borderWidth": 0,
         },

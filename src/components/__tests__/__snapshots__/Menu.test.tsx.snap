@@ -115,7 +115,6 @@ exports[`renders not visible menu 1`] = `
               "borderStyle": "solid",
             },
             {
-              "backgroundColor": "transparent",
               "borderColor": "rgba(202, 196, 208, 1)",
               "borderWidth": 1,
             },
@@ -363,7 +362,6 @@ exports[`renders visible menu 1`] = `
                 "borderStyle": "solid",
               },
               {
-                "backgroundColor": "transparent",
                 "borderColor": "rgba(202, 196, 208, 1)",
                 "borderWidth": 1,
               },
@@ -1068,7 +1066,6 @@ exports[`respects anchorPosition bottom 1`] = `
                 "borderStyle": "solid",
               },
               {
-                "backgroundColor": "transparent",
                 "borderColor": "rgba(202, 196, 208, 1)",
                 "borderWidth": 1,
               },
@@ -1775,7 +1772,6 @@ exports[`uses the default anchorPosition of top 1`] = `
                 "borderStyle": "solid",
               },
               {
-                "backgroundColor": "transparent",
                 "borderColor": "rgba(202, 196, 208, 1)",
                 "borderWidth": 1,
               },

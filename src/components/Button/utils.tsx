@@ -124,7 +124,7 @@ export const getButtonShapeRadius = ({
 /**
  * Duration of `Surface`'s background and elevation transition.
  *
- * Snaps when the container is or was transparent.
+ * Snaps when either color is transparent or not a plain string.
  */
 export const getButtonTransitionDuration = ({
   theme,
@@ -138,6 +138,8 @@ export const getButtonTransitionDuration = ({
   previousContainerColor: ColorValue;
 }): number => {
   if (
+    typeof containerColor !== 'string' ||
+    typeof previousContainerColor !== 'string' ||
     containerColor === 'transparent' ||
     previousContainerColor === 'transparent'
   ) {

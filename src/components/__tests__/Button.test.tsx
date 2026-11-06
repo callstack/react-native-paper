@@ -173,6 +173,21 @@ it('applies a custom container color', async () => {
   expect(screen.root).toHaveStyle({ backgroundColor: pink500 });
 });
 
+it('paints the container color only on the container', async () => {
+  const translucent = 'rgba(0, 0, 0, 0.5)';
+
+  await render(
+    <Button buttonColor={translucent} onPress={() => {}} testID="button">
+      Translucent
+    </Button>
+  );
+
+  expect(screen.root).toHaveStyle({ backgroundColor: translucent });
+  expect(parentOf(screen.getByTestId('button'), 'the touchable')).toHaveStyle({
+    backgroundColor: undefined,
+  });
+});
+
 it('exposes the accessibility label', async () => {
   await render(<Button aria-label="label">Button</Button>);
 
@@ -675,6 +690,23 @@ describe('getButtonTransitionDuration', () => {
       })
     ).toBe(0);
   });
+
+  it.each([
+    ['to', PlatformColor('?attr/colorPrimary'), opaque],
+    ['from', opaque, PlatformColor('?attr/colorPrimary')],
+  ])(
+    'snaps when the container changes %s a PlatformColor',
+    (_, containerColor, previousContainerColor) => {
+      expect(
+        getButtonTransitionDuration({
+          theme,
+          pressed: false,
+          containerColor,
+          previousContainerColor,
+        })
+      ).toBe(0);
+    }
+  );
 });
 
 describe('shape prop', () => {
