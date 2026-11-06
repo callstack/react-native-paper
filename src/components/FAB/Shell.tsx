@@ -175,7 +175,7 @@ export type ShellProps = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * Ref to the pressable inside the shell, the element that receives focus.
    */
