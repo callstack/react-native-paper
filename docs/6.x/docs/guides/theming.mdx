@@ -28,7 +28,7 @@ export default function Main() {
 }
 ```
 
-By default React Native Paper will apply the [Material You theme (MD3)](https://github.com/callstack/react-native-paper/blob/main/src/theme/schemes/LightTheme.tsx) if no `theme` or `version` prop is passed to the `PaperProvider`.
+By default React Native Paper will apply the [Material You theme (MD3)](https://github.com/callstack/react-native-paper/blob/main/src/theme/schemes/LightTheme.tsx) if no `theme` prop is passed to the `PaperProvider`.
 
 ## Accessing theme properties
 
@@ -36,6 +36,7 @@ Use the built-in `useTheme()` hook to get access to the theme's variables:
 
 ```js
 import * as React from 'react';
+import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 export default function PaymentScreen() {
@@ -49,6 +50,7 @@ You can also use the `withTheme()` HOC exported from the library. If you wrap yo
 
 ```js
 import * as React from 'react';
+import { View } from 'react-native';
 import { withTheme } from 'react-native-paper';
 
 function PaymentScreen({ theme }) {
@@ -65,8 +67,7 @@ You can change the theme prop dynamically and all the components will automatica
 A theme usually contains the following properties:
 
 - `dark` (`boolean`): whether this is a dark theme or light theme.
-- `version`: Material You (MD3); kept for compatibility and normalized to `3` by `PaperProvider`
-- `roundness` (`number`): roundness of common elements, such as buttons.
+- `shapes` (`object`): corner radii of components, under `corner`, from `extraSmall` (4) to `extraExtraLarge` (48). Each component uses one of them, e.g. `Button` uses `largeIncreased`.
 - `colors` (`object`): various colors used throughout different elements.
 
   > The primary key color is used to derive roles for key components across the UI, such as the FAB, prominent buttons, active states, as well as the tint of elevated surfaces.
@@ -148,19 +149,16 @@ Keeping your own properties in the theme is fully supported by our library:
 
 ```js
 import * as React from 'react';
-import {
-  MD3LightTheme as DefaultTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...DefaultTheme,
+  ...LightTheme,
   // Specify custom property
   myOwnProperty: true,
   // Specify custom property in nested object
   colors: {
-    ...DefaultTheme.colors,
+    ...LightTheme.colors,
     myOwnColor: '#BADA55',
   },
 };
@@ -195,14 +193,11 @@ Once we have copied the color schemes from the generated JSON above, we can use 
 
 ```jsx
 import * as React from 'react';
-import {
-  MD3LightTheme as DefaultTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...DefaultTheme,
+  ...LightTheme,
   colors: yourGeneratedLightOrDarkScheme.colors, // Copy it from the color codes scheme and then use it here
 };
 
@@ -300,7 +295,7 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   PaperProvider,
-  MD3LightTheme,
+  LightTheme as PaperLightTheme,
   adaptNavigationTheme,
 } from 'react-native-paper';
 
@@ -312,7 +307,7 @@ const { LightTheme } = adaptNavigationTheme({
 
 export default function App() {
   return (
-    <PaperProvider theme={MD3LightTheme}>
+    <PaperProvider theme={PaperLightTheme}>
       <NavigationContainer theme={LightTheme}>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} />
@@ -350,14 +345,20 @@ You can provide a `theme` prop with a theme object with the same properties as t
 
 ```js
 import * as React from 'react';
-import { MD3LightTheme, PaperProvider } from 'react-native-paper';
+import { LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...MD3LightTheme, // or MD3DarkTheme
-  roundness: 2,
+  ...LightTheme, // or DarkTheme
+  shapes: {
+    ...LightTheme.shapes,
+    corner: {
+      ...LightTheme.shapes.corner,
+      largeIncreased: 10,
+    },
+  },
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: '#3498db',
     secondary: '#f1c40f',
     tertiary: '#a1b2c3',
@@ -381,18 +382,18 @@ If you need to modify the built-in theme schema by adding a new property or chan
 
 ```ts
 import * as React from 'react';
-import { MD3LightTheme, PaperProvider } from 'react-native-paper';
+import { LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
 
   // Specify a custom property
   custom: 'property',
 
   // Specify a custom property in nested object
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     brandPrimary: '#fefefe',
     brandSecondary: 'red',
   },
@@ -411,18 +412,18 @@ export default function Main() {
 
 ```ts
 import * as React from 'react';
-import { MD3LightTheme, PaperProvider, useTheme } from 'react-native-paper';
+import { LightTheme, PaperProvider, useTheme } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
 
   // Specify a custom property
   custom: 'property',
 
   // Specify a custom property in nested object
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     brandPrimary: '#fefefe',
     brandSecondary: 'red',
   },
@@ -445,6 +446,7 @@ export default function Main() {
 
 ```ts
 import * as React from 'react';
+import { View } from 'react-native';
 import { useAppTheme } from './App';
 
 export default function HomeScreen() {
@@ -458,7 +460,7 @@ export default function HomeScreen() {
 
 ## Material Design 3
 
-React Native Paper ships with Material Design 3 (Material You) only. Customize the default experience by extending `MD3LightTheme` or `MD3DarkTheme` (see [Extending the theme](#extending-the-theme) and [Advanced theme overrides](#advanced-theme-overrides)).
+React Native Paper ships with Material Design 3 (Material You) only. Customize the default experience by extending `LightTheme` or `DarkTheme` (see [Extending the theme](#extending-the-theme) and [Advanced theme overrides](#advanced-theme-overrides)).
 
 ## Applying a theme to a paper component
 
@@ -470,7 +472,10 @@ import { Button } from 'react-native-paper';
 
 export default function ButtonExample() {
   return (
-    <Button raised theme={{ roundness: 3 }}>
+    <Button
+      mode="contained"
+      theme={{ shapes: { corner: { largeIncreased: 15 } } }}
+    >
       Press me
     </Button>
   );
@@ -490,7 +495,7 @@ import { Button } from 'react-native-paper';
 export default function FancyButton(props) {
   return (
     <Button
-      theme={{ typescale: { labelLarge: { letterSpacing: 1 } } }}
+      theme={{ fonts: { labelLarge: { letterSpacing: 1 } } }}
       {...props}
     />
   );
