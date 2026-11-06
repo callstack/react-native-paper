@@ -95,6 +95,11 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   role?: Role;
   /**
+   * Whether the control the button opens is currently expanded. Set this when
+   * the button anchors a menu or another disclosure.
+   */
+  'aria-expanded'?: boolean;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -336,6 +341,7 @@ const Button = ({
         aria-expanded={ariaExpanded}
         accessibilityHint={accessibilityHint}
         role={role}
+        aria-expanded={ariaExpanded}
         aria-disabled={disabled}
         accessible={accessible}
         hitSlop={hitSlop}

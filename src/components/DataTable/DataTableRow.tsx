@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   StyleProp,
@@ -7,8 +7,18 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { DataTableContext, DataTableRowContext } from './DataTableContext';
+import type { RegisteredCell } from './DataTableContext';
+import {
+  HORIZONTAL_PADDING,
+  ROW_MIN_HEIGHT,
+  ROW_VERTICAL_PADDING,
+} from './tokens';
+import { composeRowLabel } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
+import webAriaProps from '../../utils/webAriaProps';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
@@ -17,13 +27,26 @@ export type Props = Omit<
   'children'
 > & {
   /**
-   * Content of the `DataTableRow`.
+   * Content of the `DataTableRow`. Put all content in `DataTable.Cell`s: on
+   * iOS and Android a row of plain-text cells is announced as one item, and
+   * content outside a cell would be hidden with the cells.
    */
   children: React.ReactNode;
   /**
    * Function to execute on press.
+   *
+   * On the web, a pressable row is clickable but is no Tab stop, because a
+   * table row cannot also be a button. Put a control in a cell, such as a
+   * `Checkbox` or a `Button`, so keyboard and screen reader users can reach
+   * the action.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Index of this row within the data set, counting from 0. Announced to
+   * screen readers as the row's position. On a paginated page, pass the index
+   * within the whole set, not within the page.
+   */
+  index?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -59,25 +82,181 @@ export type Props = Omit<
  */
 const DataTableRow = ({
   onPress,
+  onLongPress,
+  onPressIn,
+  onPressOut,
+  disabled,
   style,
   children,
   pointerEvents,
+  index,
+  accessible,
+  'aria-label': ariaLabel,
   theme: themeOverrides,
+  // Must not reach the plain view a static row renders as.
+  rippleColor,
+  underlayColor,
+  background,
+  borderless,
+  centered,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const borderBottomColor = theme.colors.surfaceVariant;
+  const table = React.useContext(DataTableContext);
+  const borderBottomColor = theme.colors.outlineVariant;
+
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    table?.rowCount != null &&
+    index == null
+  ) {
+    console.warn(
+      'DataTable.Row needs `index` when the DataTable has `rowCount`, otherwise its position is not announced'
+    );
+  }
+
+  const interactive = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
+
+  // Table roles convey nothing on iOS or Android, so the label has to.
+  const collectsCells =
+    Platform.OS !== 'web' &&
+    table?.nativeFocusMode !== 'cell' &&
+    accessible !== false;
+
+  const [cells, setCells] = React.useState<ReadonlyMap<string, RegisteredCell>>(
+    () => new Map()
+  );
+
+  const registerCell = React.useCallback((id: string, cell: RegisteredCell) => {
+    setCells((previous) => new Map(previous).set(id, cell));
+
+    return () =>
+      setCells((previous) => {
+        const next = new Map(previous);
+        next.delete(id);
+        return next;
+      });
+  }, []);
+
+  // Collapsing a row is only safe when every cell is plain text and none is
+  // separately interactive, or its content would be out of reach.
+  const { cellLabels, describable } = React.useMemo(() => {
+    const indexed: Array<string | undefined> = [];
+    const unindexed: Array<string | undefined> = [];
+    let describable = cells.size > 0;
+
+    cells.forEach((cell) => {
+      if (!cell.describable) {
+        describable = false;
+      }
+
+      if (cell.index == null) {
+        unindexed.push(cell.label);
+      } else {
+        indexed[cell.index] = cell.label;
+      }
+    });
+
+    return { cellLabels: [...indexed, ...unindexed], describable };
+  }, [cells]);
+
+  const rowIsFocusUnit = collectsCells && describable;
+
+  const label =
+    ariaLabel ??
+    (rowIsFocusUnit
+      ? composeRowLabel({
+          cellLabels,
+          rowIndex: index,
+          rowCount: table?.rowCount,
+          formatRowPosition: table?.formatRowPosition,
+        })
+      : undefined);
+
+  const rowContext = React.useMemo(
+    () => ({
+      header: false,
+      rowIsFocusUnit,
+      registerCell: collectsCells ? registerCell : undefined,
+    }),
+    [rowIsFocusUnit, collectsCells, registerCell]
+  );
+
+  const structuralProps = {
+    // Native maps `button` to a real trait; `row` maps to nothing there.
+    role:
+      Platform.OS === 'web' || !interactive
+        ? ('row' as const)
+        : ('button' as const),
+    ...webAriaProps({
+      'aria-rowindex':
+        index == null ? undefined : index + 1 + (table?.hasHeader ? 1 : 0),
+    }),
+    // Left unset, `Pressable` defaults it to `true`, which would swallow
+    // whatever an interactive row holds.
+    accessible: accessible ?? rowIsFocusUnit,
+    'aria-label': label,
+    ...(Platform.OS === 'web' && interactive
+      ? { tabIndex: -1 as const }
+      : null),
+  };
+
+  const content = (
+    <View
+      style={styles.content}
+      pointerEvents={pointerEvents}
+      // The row already announces every cell.
+      {...(rowIsFocusUnit
+        ? {
+            accessibilityElementsHidden: true,
+            importantForAccessibility: 'no-hide-descendants' as const,
+          }
+        : null)}
+    >
+      {children}
+    </View>
+  );
 
   return (
-    <TouchableRipple
-      {...rest}
-      onPress={onPress}
-      style={[styles.container, { borderBottomColor }, style]}
-    >
-      <View style={styles.content} pointerEvents={pointerEvents}>
-        {children}
-      </View>
-    </TouchableRipple>
+    <DataTableRowContext.Provider value={rowContext}>
+      {interactive ? (
+        <TouchableRipple
+          {...structuralProps}
+          {...rest}
+          onPress={onPress}
+          onLongPress={onLongPress}
+          onPressIn={onPressIn}
+          onPressOut={onPressOut}
+          disabled={disabled}
+          rippleColor={rippleColor}
+          underlayColor={underlayColor}
+          background={background}
+          borderless={borderless}
+          centered={centered}
+          style={[styles.container, { borderBottomColor }, style]}
+        >
+          {content}
+        </TouchableRipple>
+      ) : (
+        <View
+          {...structuralProps}
+          {...rest}
+          style={[
+            styles.container,
+            styles.static,
+            { borderBottomColor },
+            style,
+          ]}
+        >
+          {content}
+        </View>
+      )}
+    </DataTableRowContext.Provider>
   );
 };
 
@@ -87,8 +266,12 @@ const styles = StyleSheet.create({
   container: {
     borderStyle: 'solid',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    minHeight: 48,
-    paddingHorizontal: 16,
+    minHeight: ROW_MIN_HEIGHT,
+    paddingHorizontal: HORIZONTAL_PADDING,
+    paddingVertical: ROW_VERTICAL_PADDING,
+  },
+  static: {
+    position: 'relative',
   },
   content: {
     flex: 1,
