@@ -121,6 +121,132 @@ Type your refs the same way:
 
 For `TextInput` and `Searchbar`, keep using `TextInputHandles`. It now keeps its methods, such as `focus` and `clear`, on React Native 0.87 and later.
 
+### Theme
+
+#### Exports and types
+
+Paper 6 exports four themes: `LightTheme`, `DarkTheme`, `DynamicLightTheme` and `DynamicDarkTheme`. The 5.x theme exports were removed:
+
+- **`MD3LightTheme`** and **`DefaultTheme`** → **`LightTheme`**
+- **`MD3DarkTheme`** → **`DarkTheme`**
+- **`MD2LightTheme`**, **`MD2DarkTheme`** and **`MD2Colors`** have no replacement, as Material Design 2 is no longer supported.
+
+In JavaScript, the old names import as `undefined` without an error: spreading `...MD3LightTheme` adds nothing, and reading `MD3LightTheme.colors` throws.
+
+```diff
+-import { MD3LightTheme } from 'react-native-paper';
++import { LightTheme } from 'react-native-paper';
+
+ const theme = {
+-  ...MD3LightTheme,
++  ...LightTheme,
+   colors: {
+-    ...MD3LightTheme.colors,
++    ...LightTheme.colors,
+     primary: 'tomato',
+   },
+ };
+```
+
+Watch for `DarkTheme` in particular. 5.x had no `DarkTheme` export, so in a JavaScript app an import of it was `undefined` and Paper used its default theme instead. In 6.x the same import is the Material Design 3 dark theme, so the app can look different after the upgrade. React Navigation and `adaptNavigationTheme` also use the names `LightTheme`, `DarkTheme` and `DefaultTheme`, so when a file uses both, import Paper's themes under other names, e.g. `LightTheme as PaperLightTheme`.
+
+The theme types were renamed too:
+
+- **`MD3Theme`** → **`Theme`**
+- **`MD3Elevation`** → **`Elevation`**
+- **`MD3TypescaleKey`** → **`TypescaleKey`**
+- **`ThemeBase`** and **`MD2Theme`** were removed. Use `Theme` instead.
+
+#### `MD3Colors`
+
+`MD3Colors` was renamed to `Palette`. It has every key `MD3Colors` had, such as `Palette.tertiary70`, plus new tones such as `primary98` and `neutral94`. The `neutral` tones from `neutral10` to `neutral99` are slightly different colors.
+
+```diff
+-import { MD3Colors } from 'react-native-paper';
++import { Palette } from 'react-native-paper';
+
+-const color = MD3Colors.tertiary70;
++const color = Palette.tertiary70;
+```
+
+#### `roundness`
+
+The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme, and TypeScript only reports it in a theme object written inline in a `theme` prop.
+
+In 5.x, each of these components multiplied `roundness` by a fixed number, and the 6.x defaults match the 5.x corners with the default `roundness` of 4. To port a custom `roundness`, set each role to your `roundness` times its multiplier:
+
+| Role             | Default | 5.x multiplier | Components                                          |
+| ---------------- | ------- | -------------- | --------------------------------------------------- |
+| `extraSmall`     | 4       | 1              | `Menu`, `Snackbar`, `Tooltip`                       |
+| `small`          | 8       | 2              | `Chip`                                              |
+| `medium`         | 12      | 3              | `Card`                                              |
+| `largeIncreased` | 20      | 5              | `Button`, `SegmentedButtons`                        |
+| `extraLarge`     | 28      | 7              | `Dialog`, `Drawer.Item`, `Searchbar` (`mode="bar"`) |
+
+`FAB` and `FAB.Extended` use the role of their `size`: `large` (16) by default, `largeIncreased` for `size="medium"` and `extraLarge` for `size="large"`. `TextInput` no longer follows the theme: its corners are always 4.
+
+A component's `theme` prop is merged deeply, so you can set only the role you need:
+
+```diff
+-<Button theme={{ roundness: 2 }}>Press me</Button>
++<Button theme={{ shapes: { corner: { largeIncreased: 10 } } }}>Press me</Button>
+```
+
+`PaperProvider` doesn't merge `shapes` deeply: a `shapes` key in its `theme` replaces the default one. So spread the base `shapes` and `corner`, or the roles you leave out are `undefined` and those components lose their rounded corners:
+
+```diff
+-import { MD3LightTheme, PaperProvider } from 'react-native-paper';
++import { LightTheme, PaperProvider } from 'react-native-paper';
+
+ const theme = {
+-  ...MD3LightTheme,
+-  roundness: 2,
++  ...LightTheme,
++  shapes: {
++    ...LightTheme.shapes,
++    corner: {
++      ...LightTheme.shapes.corner,
++      extraSmall: 2,
++      small: 4,
++      medium: 6,
++      large: 8,
++      largeIncreased: 10,
++      extraLarge: 14,
++    },
++  },
+ };
+
+ <PaperProvider theme={theme}>{children}</PaperProvider>;
+```
+
+### Accessibility props
+
+Components now use React Native's `aria-*` props and `role` instead of the `accessibility*` props. `accessibilityLabel` is now `aria-label`, the `accessibilityRole` of `Button` is now `role`, and the `accessibilityState` of `FAB` and `Menu.Item` is now `aria-checked` and `aria-selected`.
+
+`Checkbox.Item`, `RadioButton.Item`, `FAB`, `Menu.Item`, `List.Accordion` and `Switch` no longer accept `accessibilityLabel`, so TypeScript reports an error. Components whose props extend React Native's view props, such as `Button`, `Chip` and `DataTable.Pagination`, still compile with the old props, but pass them to their outer container instead of the element they used to label.
+
+Props that label a part of a component keep their names, e.g. `closeIconAccessibilityLabel` on `Chip` and `dismissAccessibilityLabel` on `Modal`.
+
+Keys inside data objects changed the same way: the `routes` of `BottomNavigation` and the `buttons` of `SegmentedButtons` now take `'aria-label'`. The old `accessibilityLabel` key is ignored, and TypeScript doesn't report it in `routes`.
+
+```diff
+ <Checkbox.Item
+   label="Notify me"
+   status="checked"
+-  accessibilityLabel="Notifications"
++  aria-label="Notifications"
+ />
+
+ const routes = [
+-  { key: 'music', title: 'Music', focusedIcon: 'music', accessibilityLabel: 'Music tab' },
++  { key: 'music', title: 'Music', focusedIcon: 'music', 'aria-label': 'Music tab' },
+ ];
+```
+
+### Libraries built on Paper
+
+Libraries built on Paper may not support 6.x yet. For example, `react-native-paper-dates` 0.24.1 still uses `HelperText`, the 5.x theme exports and `theme.roundness`, so its `DatePickerInput` crashes when it shows a validation error.
+
 ## Components
 
 ### Appbar
@@ -407,12 +533,12 @@ No direct `TextInput` equivalents for:
 Use **`style`** on the inner input and the **`theme`** for colors.
 
 ```tsx
-import { MD3LightTheme, TextInput } from 'react-native-paper';
+import { LightTheme, TextInput } from 'react-native-paper';
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     outline: '#79747E',
     primary: '#6750A4',
   },
@@ -569,6 +695,28 @@ An accordion with a `left` element now indents only its `List.Item` children. An
 ```
 
 `theme` set on `List.Accordion` no longer reaches its children either. Pass it to the child that needs the override.
+
+### Typography components
+
+The Material Design 2 typography components were removed. Use `Text` with the matching `variant` instead:
+
+- **`Title`** → **`<Text variant="titleLarge">`**
+- **`Headline`** → **`<Text variant="headlineSmall">`**
+- **`Subheading`** → **`<Text variant="titleMedium">`**
+- **`Paragraph`** → **`<Text variant="bodyMedium">`**
+- **`Caption`** → **`<Text variant="bodySmall">`**
+
+In JavaScript, the old components import as `undefined`, so the app builds but fails to render with "Element type is invalid".
+
+```diff
+-import { Caption, Title } from 'react-native-paper';
++import { Text } from 'react-native-paper';
+
+-<Title>Inbox</Title>
+-<Caption>3 new messages</Caption>
++<Text variant="titleLarge">Inbox</Text>
++<Text variant="bodySmall">3 new messages</Text>
+```
 
 ### Text
 
