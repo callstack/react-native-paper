@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 import {
   afterEach,
@@ -117,14 +118,22 @@ it('forwards event object to onPress', async () => {
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
 });
 
-const getStyle = (ref: React.RefObject<View | null>) => {
+const getStyle = (
+  ref: React.RefObject<React.ComponentRef<typeof View> | null>
+) => {
   if (!ref.current) throw new Error('Expected FAB ref to be attached');
-  return getAnimatedStyle(ref.current);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const animatedComponent = ref.current as unknown as {
+    props: Record<string, unknown>;
+  };
+  return getAnimatedStyle(animatedComponent);
 };
 
 // Android exposes elevation as a plain number, so the direction is checkable
 // without the shadow tokens.
-const getElevation = (ref: React.RefObject<View | null>) => {
+const getElevation = (
+  ref: React.RefObject<React.ComponentRef<typeof View> | null>
+) => {
   const style = getStyle(ref);
   if (!('elevation' in style) || typeof style.elevation !== 'number') {
     throw new Error('Expected a numeric elevation');
@@ -160,7 +169,7 @@ it('hides an invisible FAB from accessibility and keyboard navigation without ma
 });
 
 it('clears interaction elevation when a FAB is hidden and shown again', async () => {
-  const ref = React.createRef<View>();
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
   const onPress = jest.fn();
   const { rerender } = await render(
     <FAB
@@ -207,7 +216,7 @@ it.each(['ios', 'android'] as const)(
   'keeps the resting elevation on focus and follows hover and press events when Platform.OS is %s',
   async (platform) => {
     jest.replaceProperty(Platform, 'OS', platform);
-    const ref = React.createRef<View>();
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
     await render(
       <FAB
         ref={ref}
@@ -238,7 +247,7 @@ it.each(['ios', 'android'] as const)(
 
 it('raises the elevation while hovered and lowers it while pressed when Platform.OS is android', async () => {
   jest.replaceProperty(Platform, 'OS', 'android');
-  const ref = React.createRef<View>();
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
   await render(
     <FAB
       ref={ref}
@@ -258,7 +267,7 @@ it('raises the elevation while hovered and lowers it while pressed when Platform
 });
 
 it('restores the resting elevation when a hovered FAB loses its action', async () => {
-  const ref = React.createRef<View>();
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
   const { rerender } = await render(
     <FAB
       ref={ref}
@@ -297,7 +306,9 @@ describe('on web', () => {
   );
   let activeElement: unknown;
   let focusVisible: boolean;
-  let fabElement: View | undefined;
+  // The jest View mock is a class component, so its instances have props.
+  type ViewMockInstance = { props: ViewProps; blur: () => void };
+  let fabElement: ViewMockInstance | undefined;
 
   beforeEach(() => {
     jest.replaceProperty(Platform, 'OS', 'web');
@@ -325,7 +336,7 @@ describe('on web', () => {
     // The pressable view with the FAB's testID is the element that takes focus.
     Object.defineProperty(View.prototype, 'componentDidMount', {
       configurable: true,
-      value(this: View) {
+      value(this: ViewMockInstance) {
         if (this.props.testID === 'create') {
           fabElement = this;
         }
@@ -357,7 +368,8 @@ describe('on web', () => {
     focusable?: boolean;
     hiddenBy?: string;
   } = {}) => {
-    const element = new View({});
+    // Inherits from the View mock to pass the HTMLElement instanceof check.
+    const element: object = Object.create(View.prototype);
     return Object.assign(element, {
       isConnected,
       closest: (selectors: string) =>
@@ -396,7 +408,7 @@ describe('on web', () => {
   it.each(['icon', 'extended'] as const)(
     'keeps the %s FAB at rest on focus, changes its elevation while hovered and restores it while pressed',
     async (type) => {
-      const ref = React.createRef<View>();
+      const ref = React.createRef<React.ComponentRef<typeof View>>();
       await render(
         type === 'icon' ? (
           <FAB
