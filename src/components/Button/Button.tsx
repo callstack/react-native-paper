@@ -83,6 +83,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   'aria-label'?: string;
   /**
+   * Indicates whether the element's controlled content is expanded.
+   */
+  'aria-expanded'?: boolean;
+  /**
    * Accessibility hint for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityHint?: string;

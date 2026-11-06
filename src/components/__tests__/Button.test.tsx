@@ -24,18 +24,19 @@ it('renders text button by default', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it.each([true, false])(
+it.each<[boolean, 'toBeExpanded' | 'toBeCollapsed']>([
+  [true, 'toBeExpanded'],
+  [false, 'toBeCollapsed'],
+])(
   'exposes aria-expanded=%s on the interactive button',
-  async (expanded) => {
+  async (expanded, matcher) => {
     await render(
       <Button aria-expanded={expanded} onPress={() => {}}>
         Show details
       </Button>
     );
 
-    expect(
-      screen.getByRole('button', { name: 'Show details', expanded })
-    ).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Show details' }))[matcher]();
   }
 );
 
