@@ -10,12 +10,6 @@ export type CardActionChildProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-export const getCardCoverStyle = ({ theme }: { theme: InternalTheme }) => {
-  return {
-    borderRadius: theme.shapes.corner.medium,
-  };
-};
-
 const getBorderColor = ({ theme }: { theme: InternalTheme }) => {
   return theme.colors.outline;
 };

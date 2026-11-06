@@ -3,7 +3,6 @@ import { Image, StyleSheet, View } from 'react-native';
 import type { ImageProps, StyleProp, ViewStyle } from 'react-native';
 
 import { CardContext } from './CardContext';
-import { getCardCoverStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { grey200 } from '../../theme/colors';
 import type { ThemeProp } from '../../theme/types';
@@ -39,9 +38,7 @@ const CardCover = ({ style, theme: themeOverrides, ...rest }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const cardContext = React.useContext(CardContext);
 
-  const coverStyle = getCardCoverStyle({
-    theme,
-  });
+  const coverStyle = { borderRadius: theme.shapes.corner.medium };
 
   const cardMarginStyle = cardContext
     ? cardContext.direction === 'horizontal'
