@@ -89,7 +89,8 @@ const getChildrenMeasures = (
   style: StyleProp<ViewStyle>,
   measures: ChildrenMeasurement
 ): ChildrenMeasurement => {
-  const { position, top, bottom, left, right } = StyleSheet.flatten(style);
+  const { position, top, bottom, left, right } =
+    StyleSheet.flatten(style) ?? {};
 
   if (position === 'absolute') {
     let pageX = 0;

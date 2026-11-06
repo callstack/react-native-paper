@@ -117,10 +117,14 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 const WINDOW_LAYOUT = Dimensions.get('window');
 
+const getKeyboardHeight = (fallback: number) =>
+  Keyboard.metrics?.()?.height ?? fallback;
 const DEFAULT_ELEVATION: Elevation = 2;
 const DEFAULT_MODE = 'elevated';
 
-const focusFirstDOMNode = (el: View | null | undefined) => {
+const focusFirstDOMNode = (
+  el: React.ComponentRef<typeof View> | null | undefined
+) => {
   if (el && Platform.OS === 'web') {
     // When in the browser, we want to focus the first focusable item on toggle
     // For example, when menu is shown, focus the first item in the menu
@@ -227,8 +231,8 @@ const Menu = ({
 
   const keyboardHeightRef = React.useRef(0);
   const prevVisible = React.useRef(visible);
-  const anchorRef = React.useRef<View | null>(null);
-  const menuRef = React.useRef<View | null>(null);
+  const anchorRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
+  const menuRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
   const isShownRef = React.useRef(false);
 
   const keyboardDidShow = React.useCallback((e: RNKeyboardEvent) => {
@@ -380,7 +384,9 @@ const Menu = ({
     });
 
     setWindowLayout({
-      height: windowLayoutResult.height - keyboardHeightRef.current,
+      height:
+        windowLayoutResult.height -
+        getKeyboardHeight(keyboardHeightRef.current),
       width: windowLayoutResult.width,
     });
 
@@ -461,6 +467,8 @@ const Menu = ({
       'keyboardDidHide',
       keyboardDidHide
     );
+    // iOS does not replay keyboardDidShow for a keyboard that is already open.
+    keyboardHeightRef.current = getKeyboardHeight(keyboardHeightRef.current);
 
     return () => {
       removeListeners();

@@ -130,7 +130,14 @@ export const getChipColors = ({
 }: BaseProps & {
   disabled?: boolean;
   selectedColor?: ColorValue;
-}) => {
+}): {
+  borderColor: ColorValue;
+  textColor: ColorValue;
+  iconColor: ColorValue;
+  contentOpacity: number;
+  backgroundColor: ColorValue;
+  selectedBackgroundColor: ColorValue;
+} => {
   const baseChipColorProps = { theme, isOutlined, disabled };
 
   const backgroundColor = getBackgroundColor({

@@ -124,6 +124,49 @@ describe('safeMerge', () => {
     expect(result.colors.secondary).toBe('#999');
     expect(result.colors.tertiary).toBe('#222');
   });
+
+  it('ignores a top-level __proto__ key', () => {
+    const overrides = JSON.parse('{"__proto__": {"polluted": "yes"}, "a": 2}');
+
+    const result = safeMerge<Record<string, unknown>>({ a: 1 }, overrides);
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+    expect(result).toEqual({ a: 2 });
+    expect(result.polluted).toBeUndefined();
+    const fresh: Record<string, unknown> = {};
+    expect(fresh.polluted).toBeUndefined();
+  });
+
+  it('ignores a nested __proto__ key', () => {
+    const base = { colors: { primary: 'blue', secondary: 'green' } };
+    const overrides = JSON.parse(
+      '{"colors": {"__proto__": {"polluted": "yes"}, "primary": "red"}}'
+    );
+
+    const result = safeMerge<{ colors: Record<string, unknown> }>(
+      base,
+      overrides
+    );
+    expect(Object.getPrototypeOf(result.colors)).toBe(Object.prototype);
+    expect(result.colors.primary).toBe('red');
+    expect(result.colors.secondary).toBe('green');
+    expect(result.colors.polluted).toBeUndefined();
+  });
+
+  it('skips constructor and prototype keys', () => {
+    const overrides = JSON.parse(
+      '{"constructor": {"x": 1}, "prototype": {"y": 2}, "a": 2}'
+    );
+
+    const result = safeMerge<Record<string, unknown>>({ a: 1 }, overrides);
+    expect(Object.prototype.hasOwnProperty.call(result, 'constructor')).toBe(
+      false
+    );
+    expect(Object.prototype.hasOwnProperty.call(result, 'prototype')).toBe(
+      false
+    );
+    expect(result.constructor).toBe(Object);
+    expect(result).toEqual({ a: 2 });
+  });
 });
 
 describe('useInternalTheme', () => {
