@@ -80,26 +80,6 @@ export type Props = PressableProps & {
    * @optional
    */
   theme?: ThemeProp;
-  /**
-   * Radius of every corner of the touchable. Native-only: it shapes the
-   * highlight underlay there. On web the ripple container clips itself
-   * regardless, so this has no effect.
-   */
-  borderRadius?: number;
-  borderTopLeftRadius?: number;
-  borderTopRightRadius?: number;
-  borderBottomLeftRadius?: number;
-  borderBottomRightRadius?: number;
-  borderTopStartRadius?: number;
-  borderTopEndRadius?: number;
-  borderBottomStartRadius?: number;
-  borderBottomEndRadius?: number;
-  /**
-   * Width of the touchable's own border, if it draws one. Web-only: the touch
-   * target's absolute offsets start inside the border, not the visible outer
-   * edge, so this widens the target back out to it.
-   */
-  borderWidth?: number;
 };
 
 /**
@@ -138,18 +118,6 @@ const TouchableRipple = ({
   children,
   theme: themeOverrides,
   hitSlop,
-  // consumed so they do not reach the DOM; native-only, the ripple container
-  // clips itself regardless of shape on web
-  borderRadius: _borderRadius,
-  borderTopLeftRadius: _borderTopLeftRadius,
-  borderTopRightRadius: _borderTopRightRadius,
-  borderBottomLeftRadius: _borderBottomLeftRadius,
-  borderBottomRightRadius: _borderBottomRightRadius,
-  borderTopStartRadius: _borderTopStartRadius,
-  borderTopEndRadius: _borderTopEndRadius,
-  borderBottomStartRadius: _borderBottomStartRadius,
-  borderBottomEndRadius: _borderBottomEndRadius,
-  borderWidth,
   ref,
   ...rest
 }: Props) => {
@@ -329,26 +297,23 @@ const TouchableRipple = ({
       ]}
     >
       {(state) => {
-        const border = borderWidth ?? 0;
-        const inset = (value: number | undefined) => -((value ?? 0) + border);
-
         const touchTargetStyle: ViewStyle | undefined =
           hitSlop == null
             ? undefined
             : typeof hitSlop === 'number'
               ? {
                   position: 'absolute',
-                  top: inset(hitSlop),
-                  bottom: inset(hitSlop),
-                  left: inset(hitSlop),
-                  right: inset(hitSlop),
+                  top: -hitSlop,
+                  bottom: -hitSlop,
+                  left: -hitSlop,
+                  right: -hitSlop,
                 }
               : {
                   position: 'absolute',
-                  top: inset(hitSlop.top),
-                  bottom: inset(hitSlop.bottom),
-                  left: inset(hitSlop.left),
-                  right: inset(hitSlop.right),
+                  top: -(hitSlop.top ?? 0),
+                  bottom: -(hitSlop.bottom ?? 0),
+                  left: -(hitSlop.left ?? 0),
+                  right: -(hitSlop.right ?? 0),
                 };
 
         return (

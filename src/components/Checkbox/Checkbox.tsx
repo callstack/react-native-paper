@@ -244,7 +244,6 @@ const Checkbox = ({
       disabled={disabled}
       {...accessibilityProps}
       testID={testID}
-      borderRadius={FOCUS_RING_RADIUS}
       style={[
         styles.tapTarget,
         Platform.OS === 'web' ? webNoOutline : undefined,

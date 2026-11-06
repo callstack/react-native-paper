@@ -273,7 +273,6 @@ const MenuItem = ({
             { borderRadius },
             Platform.OS === 'web' ? webNoOutline : null,
           ]}
-          borderRadius={borderRadius}
           testID={testID}
         >
           <Content

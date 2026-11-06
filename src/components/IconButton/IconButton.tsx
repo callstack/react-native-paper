@@ -68,35 +68,13 @@ export type Props = Omit<
   'aria-label'?: string;
   /**
    * Style of button's inner content.
-   * Use this prop to set a custom padding. For a custom height and width,
-   * use the `width` and `height` props instead.
+   * Use this prop to apply custom height and width or to set a custom padding`.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  /**
-   * Width of the button's inner content. Defaults to the button's size.
-   */
-  width?: number;
-  /**
-   * Height of the button's inner content. Defaults to the button's size.
-   */
-  height?: number;
-  /**
-   * Radius of every corner of the button. Defaults to a circle (half of the
-   * button's size).
-   */
-  borderRadius?: number;
-  borderTopLeftRadius?: number;
-  borderTopRightRadius?: number;
-  borderBottomLeftRadius?: number;
-  borderBottomRightRadius?: number;
-  borderTopStartRadius?: number;
-  borderTopEndRadius?: number;
-  borderBottomStartRadius?: number;
-  borderBottomEndRadius?: number;
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<View>;
   /**
@@ -151,17 +129,6 @@ const IconButton = ({
   testID,
   loading = false,
   contentStyle,
-  width,
-  height,
-  borderRadius,
-  borderTopLeftRadius,
-  borderTopRightRadius,
-  borderBottomLeftRadius,
-  borderBottomRightRadius,
-  borderTopStartRadius,
-  borderTopEndRadius,
-  borderBottomStartRadius,
-  borderBottomEndRadius,
   ref,
   ...rest
 }: Props) => {
@@ -187,32 +154,21 @@ const IconButton = ({
   const buttonSize = size + 2 * PADDING;
   const borderWidth = mode === 'outlined' && !selected ? 1 : 0;
 
-  const shapeStyles = {
-    borderRadius: borderRadius ?? buttonSize / 2,
-    borderTopLeftRadius,
-    borderTopRightRadius,
-    borderBottomLeftRadius,
-    borderBottomRightRadius,
-    borderTopStartRadius,
-    borderTopEndRadius,
-    borderBottomStartRadius,
-    borderBottomEndRadius,
-  };
+  const shapeStyle = { borderRadius: buttonSize / 2 };
 
   const borderStyles = {
     borderWidth,
     borderColor,
-    ...shapeStyles,
+    ...shapeStyle,
   };
 
-  const touchableWidth = width ?? buttonSize - 2 * borderWidth;
-  const touchableHeight = height ?? buttonSize - 2 * borderWidth;
+  const touchableSize = buttonSize - 2 * borderWidth;
 
   const hitSlop = disabled
     ? undefined
     : getMinInteractiveSizeHitSlop({
-        width: touchableWidth,
-        height: touchableHeight,
+        width: touchableSize,
+        height: touchableSize,
       });
 
   return (
@@ -235,7 +191,7 @@ const IconButton = ({
           style={[
             StyleSheet.absoluteFill,
             { backgroundColor, opacity: backgroundOpacity },
-            shapeStyles,
+            shapeStyle,
           ]}
         />
       )}
@@ -246,15 +202,12 @@ const IconButton = ({
         aria-label={ariaLabel}
         style={[
           styles.touchable,
-          shapeStyles,
-          // The Surface used to clip the ripple, so the touchable does it now.
-          // Native only: its own overflow does not clip its hitSlop, but on web
-          // it would clip the touch target, where the container already clips.
+          shapeStyle,
+          // Clip the ripple to the button shape. Not on web, where
+          // `overflow: 'hidden'` would also clip the hit slop target.
           Platform.OS !== 'web' && styles.clipToShape,
-          { width, height },
           contentStyle,
         ]}
-        {...shapeStyles}
         role="button"
         aria-disabled={disabled}
         disabled={disabled}

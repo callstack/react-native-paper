@@ -3,11 +3,14 @@ import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TargetedEvent,
   TextProps,
   TextStyle,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
@@ -17,9 +20,11 @@ import type { ChipAvatarProps } from './helpers';
 import { ChipTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
+import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -159,20 +164,14 @@ export type Props = Omit<ViewProps, 'style'> & {
 };
 
 /**
- * Room the chip reserves on its right for the close button, which fills all of
- * it, so the body stops here and the two divide the chip.
- *
- * Matches material-web's own remove button, which expands to a 48px touch
- * target the same way; the 24x24 dimensions in its `_trailing-icon.scss` are
- * for the ripple and focus ring, not the touch target.
- * @see https://github.com/material-components/material-web/blob/main/chips/internal/_shared.scss
+ * Width reserved on the right for the close button.
  */
 const CLOSE_AFFORDANCE_WIDTH = 34;
 
 /**
- * Floor for the clamp below. The glyph is 18dp and sits 8dp from the right, so
- * under this it hangs over the chip body, and part of the visible icon would
- * activate the chip instead of removing it.
+ * Floor for the clamp below. The 18dp glyph is centered in the column, so at
+ * this width it sits 4dp from each side. Any narrower and part of the visible
+ * icon would activate the chip instead of removing it.
  */
 const CLOSE_AFFORDANCE_MIN_WIDTH = 26;
 
@@ -188,6 +187,13 @@ const CHIP_BODY_HIT_SLOP = getMinInteractiveSizeHitSlop({
 // The close button's own box is the same fixed height as the body, so it
 // needs the same vertical slop to reach 48dp.
 const CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET = CHIP_BODY_HIT_SLOP?.top ?? 0;
+
+const CLOSE_ICON_SIZE = 18;
+const CLOSE_FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
+
+// Web-only style; `outline` is outside ViewStyle.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 /**
  * Chips are compact elements that can represent inputs, attributes, or actions.
@@ -247,6 +253,7 @@ const Chip = ({
   const theme = useInternalTheme(themeOverrides);
 
   const [pressed, setPressed] = React.useState(false);
+  const [closeFocused, setCloseFocused] = React.useState(false);
   const elevation = elevated ? (pressed ? 2 : 1) : 0;
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -266,6 +273,18 @@ const Chip = ({
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
     onPressOut?.(e);
     setPressed(false);
+  });
+
+  const handleCloseFocus = useLatestCallback(
+    (e: NativeSyntheticEvent<TargetedEvent>) => {
+      if (Platform.OS === 'web' && isKeyboardFocusEvent(e)) {
+        setCloseFocused(true);
+      }
+    }
+  );
+
+  const handleCloseBlur = useLatestCallback(() => {
+    setCloseFocused(false);
   });
 
   const elevationTransitionDuration =
@@ -325,7 +344,6 @@ const Chip = ({
         borderless
         background={background}
         style={[{ borderRadius }, styles.touchable]}
-        borderRadius={borderRadius}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
@@ -431,19 +449,32 @@ const Chip = ({
             role="button"
             aria-label={closeIconAccessibilityLabel}
             testID={closeIconTestID}
-            style={styles.closeButton}
+            onFocus={handleCloseFocus}
+            onBlur={handleCloseBlur}
+            // The browser outline would wrap the whole column and cover the
+            // label, so a ring is drawn around the glyph instead.
+            style={[
+              styles.closeButton,
+              Platform.OS === 'web' ? webNoOutline : undefined,
+            ]}
             hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
           >
-            {/* react-native-web removed `hitSlop` in 0.13.0, 
+            {/* react-native-web removed `hitSlop` in 0.13.0,
                 so web needs a real element the browser can
                 hit-test instead of a native responder inset. */}
             {Platform.OS === 'web' && !disabled && (
               <View aria-hidden style={styles.closeButtonWebTouchTarget} />
             )}
-            <View
-              testID={testID ? `${testID}-close-icon` : undefined}
-              style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}
-            >
+            <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
+              {closeFocused && !disabled ? (
+                <View
+                  pointerEvents="none"
+                  style={[
+                    styles.closeFocusRing,
+                    { borderColor: theme.colors.secondary },
+                  ]}
+                />
+              ) : null}
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
@@ -493,12 +524,8 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   md3CloseIcon: {
-    marginRight: 8,
+    marginRight: 0,
     padding: 0,
-    // `styles.icon` sets `alignSelf: 'center'`, which beats `alignItems` on the
-    // parent. Without this the glyph centres in the wider column and moves 4dp
-    // left.
-    alignSelf: 'flex-end',
   },
   md3LabelText: {
     textAlignVertical: 'center',
@@ -540,9 +567,16 @@ const styles = StyleSheet.create({
   closeButton: {
     width: '100%',
     height: '100%',
-    // Vertical only. The glyph pins itself horizontally with `alignSelf`.
     justifyContent: 'center',
-    ...(Platform.OS === 'web' && { position: 'relative' }),
+  },
+  closeFocusRing: {
+    position: 'absolute',
+    top: -CLOSE_FOCUS_THICKNESS,
+    left: -CLOSE_FOCUS_THICKNESS,
+    width: CLOSE_ICON_SIZE + 2 * CLOSE_FOCUS_THICKNESS,
+    height: CLOSE_ICON_SIZE + 2 * CLOSE_FOCUS_THICKNESS,
+    borderRadius: CLOSE_ICON_SIZE / 2 + CLOSE_FOCUS_THICKNESS,
+    borderWidth: CLOSE_FOCUS_THICKNESS,
   },
   closeButtonWebTouchTarget: {
     position: 'absolute',

@@ -2,7 +2,7 @@ import { Platform, Text } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { act, fireEvent, userEvent } from '@testing-library/react-native';
+import { userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
@@ -66,30 +66,6 @@ describe('TouchableRipple', () => {
 
       expect(toJSON()).toMatchSnapshot();
     });
-
-    it('takes the shape of the touchable so it does not square off the corners', async () => {
-      const { toJSON } = await render(
-        <TouchableRipple testOnly_pressed borderRadius={4}>
-          <Text>Press me!</Text>
-        </TouchableRipple>
-      );
-
-      expect(toJSON()).toMatchSnapshot();
-    });
-
-    it('takes per-corner radii too', async () => {
-      const { toJSON } = await render(
-        <TouchableRipple
-          testOnly_pressed
-          borderTopLeftRadius={8}
-          borderBottomRightRadius={2}
-        >
-          <Text>Press me!</Text>
-        </TouchableRipple>
-      );
-
-      expect(toJSON()).toMatchSnapshot();
-    });
   });
 
   describe('hitSlop', () => {
@@ -118,27 +94,6 @@ describe('TouchableRipple', () => {
       ).toJSON();
 
       expect(tree).toMatchSnapshot();
-    });
-
-    it('still calls a caller-supplied onLayout', async () => {
-      const onLayout = jest.fn();
-      await render(
-        <TouchableRipple
-          testID="touchable"
-          onPress={() => {}}
-          onLayout={onLayout}
-        >
-          <Text>Button</Text>
-        </TouchableRipple>
-      );
-
-      await act(async () => {
-        await fireEvent(screen.getByTestId('touchable'), 'layout', {
-          nativeEvent: { layout: { width: 32, height: 32, x: 0, y: 0 } },
-        });
-      });
-
-      expect(onLayout).toHaveBeenCalledTimes(1);
     });
   });
 });

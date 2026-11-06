@@ -319,11 +319,14 @@ exports[`renders chip with close button 1`] = `
       onStartShouldSetResponder={[Function]}
       role="button"
       style={
-        {
-          "height": "100%",
-          "justifyContent": "center",
-          "width": "100%",
-        }
+        [
+          {
+            "height": "100%",
+            "justifyContent": "center",
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -337,8 +340,7 @@ exports[`renders chip with close button 1`] = `
               "marginRight": 4,
             },
             {
-              "alignSelf": "flex-end",
-              "marginRight": 8,
+              "marginRight": 0,
               "padding": 0,
             },
           ]
@@ -698,11 +700,14 @@ exports[`renders chip with custom close button 1`] = `
       onStartShouldSetResponder={[Function]}
       role="button"
       style={
-        {
-          "height": "100%",
-          "justifyContent": "center",
-          "width": "100%",
-        }
+        [
+          {
+            "height": "100%",
+            "justifyContent": "center",
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -716,8 +721,7 @@ exports[`renders chip with custom close button 1`] = `
               "marginRight": 4,
             },
             {
-              "alignSelf": "flex-end",
-              "marginRight": 8,
+              "marginRight": 0,
               "padding": 0,
             },
           ]

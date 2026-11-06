@@ -262,10 +262,6 @@ const Button = ({
   });
 
   const touchableStyle = { borderRadius };
-  const touchableRippleStyle = getButtonTouchableRippleStyle(
-    touchableStyle,
-    borderWidth
-  );
 
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
@@ -338,8 +334,7 @@ const Button = ({
         accessible={accessible}
         hitSlop={hitSlop}
         disabled={disabled}
-        style={touchableRippleStyle}
-        {...touchableRippleStyle}
+        style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
         testID={testID}
         theme={theme}
         ref={touchableRef}
