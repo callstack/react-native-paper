@@ -16,6 +16,10 @@ import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
+import {
+  resolveIconColors as resolveToolbarIconColors,
+  ToolbarColorContext,
+} from '../Toolbar/ToolbarColorContext';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
@@ -135,6 +139,31 @@ const IconButton = ({
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
 
+  // A mode-less `IconButton` inside a `Toolbar` picks up its ambient
+  // coloring, unless it already has its own spec-defined coloring (a
+  // `mode` or an explicit color prop).
+  const toolbarColors = React.useContext(ToolbarColorContext);
+  const hasOwnColoring =
+    mode != null || customIconColor != null || customContainerColor != null;
+
+  let resolvedMode = mode;
+  let resolvedIconColor = customIconColor;
+  let resolvedContainerColor = customContainerColor;
+
+  if (toolbarColors && !hasOwnColoring) {
+    const {
+      iconColor: toolbarIconColor,
+      containerColor: toolbarContainerColor,
+    } = resolveToolbarIconColors({
+      theme: toolbarColors.theme,
+      colorScheme: toolbarColors.colorScheme,
+      selected,
+    });
+    resolvedIconColor = toolbarIconColor;
+    resolvedContainerColor = toolbarContainerColor;
+    resolvedMode = selected ? 'contained-tonal' : mode;
+  }
+
   const {
     iconColor,
     iconOpacity,
@@ -145,9 +174,9 @@ const IconButton = ({
     theme,
     disabled,
     selected,
-    mode,
-    customIconColor,
-    customContainerColor,
+    mode: resolvedMode,
+    customIconColor: resolvedIconColor,
+    customContainerColor: resolvedContainerColor,
   });
 
   const buttonSize = size + 2 * PADDING;
