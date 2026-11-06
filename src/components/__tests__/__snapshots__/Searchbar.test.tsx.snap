@@ -815,17 +815,17 @@ exports[`renders searchbar in "view" mode 1`] = `
     </View>
   </View>
   <View
+    aria-hidden={true}
     style={
       [
         {
-          "backgroundColor": "rgba(202, 196, 208, 1)",
-          "height": 0.5,
-        },
-        undefined,
-        false,
-        {
           "height": 1,
         },
+        {
+          "backgroundColor": "rgba(202, 196, 208, 1)",
+        },
+        false,
+        false,
         [
           {
             "bottom": 0,
