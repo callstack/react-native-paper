@@ -1953,11 +1953,12 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "justifyContent": "center",
                 },
                 {
-                  "opacity": 1,
-                },
-                {
                   "flexDirection": "row-reverse",
                 },
+                {
+                  "opacity": 1,
+                },
+                undefined,
               ]
             }
           >
