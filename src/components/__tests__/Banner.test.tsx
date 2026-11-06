@@ -11,7 +11,8 @@ import {
 } from '@jest/globals';
 import { act } from '@testing-library/react-native';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import Banner from '../Banner';
 
 it('renders hidden banner, without action buttons and without image', async () => {
@@ -102,6 +103,18 @@ it('renders visible banner, with action buttons and with image', async () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders banner with surfaceContainerLow background', async () => {
+  await render(
+    <Banner visible testID="banner">
+      Text
+    </Banner>
+  );
+
+  expect(screen.getByTestId('banner')).toHaveStyle({
+    backgroundColor: LightTheme.colors.surfaceContainerLow,
+  });
 });
 
 it('render visible banner, with custom theme', async () => {

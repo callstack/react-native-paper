@@ -173,6 +173,142 @@ describe('Surface', () => {
         transitionProperty: expect.not.arrayContaining(['backgroundColor']),
       });
     });
+
+    it('resolves the container role from the theme', async () => {
+      await render(
+        <Surface
+          mode="flat"
+          container="surfaceContainerHigh"
+          testID="surface-test"
+        >
+          {null}
+        </Surface>
+      );
+
+      expect(screen.getByTestId('surface-test')).toHaveStyle({
+        backgroundColor: LightTheme.colors.surfaceContainerHigh,
+      });
+    });
+
+    it('prefers backgroundColor over container', async () => {
+      const backgroundColor = 'rgba(1, 2, 3, 0.5)';
+      await render(
+        <Surface
+          mode="flat"
+          container="surfaceContainerHigh"
+          backgroundColor={backgroundColor}
+          testID="surface-test"
+        >
+          {null}
+        </Surface>
+      );
+
+      expect(screen.getByTestId('surface-test')).toHaveStyle({
+        backgroundColor,
+      });
+    });
+
+    it('prefers container over the elevation-derived color', async () => {
+      await render(
+        <Surface
+          elevation={5}
+          container="surfaceContainerLowest"
+          testID="surface-test"
+        >
+          {null}
+        </Surface>
+      );
+
+      expect(screen.getByTestId('surface-test')).toHaveStyle({
+        backgroundColor: LightTheme.colors.surfaceContainerLowest,
+      });
+    });
+
+    it('keeps the elevation-driven shadow when container is set', async () => {
+      await render(
+        <Surface
+          elevation={5}
+          container="surfaceContainerLow"
+          testID="surface-test"
+        >
+          {null}
+        </Surface>
+      );
+
+      expect(screen.getByTestId('surface-test')).toHaveStyle({
+        shadowOpacity: SPOT_SHADOW_OPACITY,
+      });
+    });
+
+    it('does not render a shadow in flat mode when container is set', async () => {
+      await render(
+        <Surface
+          mode="flat"
+          elevation={5}
+          container="surfaceContainerLow"
+          testID="surface-test"
+        >
+          {null}
+        </Surface>
+      );
+
+      // @ts-expect-error
+      expect(screen.getByTestId('surface-test')).not.toHaveStyle({
+        shadowOpacity: expect.any(Number),
+      });
+    });
+
+    it('keeps the container background when elevation changes', async () => {
+      await render(
+        <Surface
+          elevation={1}
+          container="surfaceContainer"
+          testID="surface-test"
+        >
+          {null}
+        </Surface>
+      );
+
+      await screen.rerender(
+        <Surface
+          elevation={5}
+          container="surfaceContainer"
+          testID="surface-test"
+        >
+          {null}
+        </Surface>
+      );
+      await jest.runAllTimersAsync();
+
+      expect(screen.getByTestId('surface-test')).toHaveStyle({
+        backgroundColor: LightTheme.colors.surfaceContainer,
+      });
+    });
+
+    it('does not transition a DynamicColorIOS container role', async () => {
+      await render(
+        <Surface
+          testID="surface-test"
+          container="surfaceContainer"
+          theme={{
+            colors: {
+              surfaceContainer: DynamicColorIOS({
+                light: 'white',
+                dark: 'black',
+              }),
+            },
+          }}
+        >
+          {null}
+        </Surface>
+      );
+
+      expect(
+        getAnimatedStyle(screen.getByTestId('surface-test'))
+      ).toMatchObject({
+        transitionProperty: expect.not.arrayContaining(['backgroundColor']),
+      });
+    });
   });
 
   describe('on Android', () => {
@@ -199,6 +335,38 @@ describe('Surface', () => {
     it('should render the dp value for the elevation level, if mode is elevated', async () => {
       await render(
         <Surface elevation={5} testID="surface-container">
+          {null}
+        </Surface>
+      );
+
+      expect(screen.getByTestId('surface-container')).toHaveStyle({
+        elevation: 12,
+      });
+    });
+
+    it('resolves the container role from the theme', async () => {
+      await render(
+        <Surface
+          mode="flat"
+          container="surfaceContainerHigh"
+          testID="surface-container"
+        >
+          {null}
+        </Surface>
+      );
+
+      expect(screen.getByTestId('surface-container')).toHaveStyle({
+        backgroundColor: LightTheme.colors.surfaceContainerHigh,
+      });
+    });
+
+    it('keeps the elevation-driven dp value when container is set', async () => {
+      await render(
+        <Surface
+          elevation={5}
+          container="surfaceContainerLow"
+          testID="surface-container"
+        >
           {null}
         </Surface>
       );

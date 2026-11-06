@@ -157,7 +157,7 @@ const ViewPrototype: ComponentRef<typeof View> = View.prototype;
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
 elevations.forEach((elevation) =>
-  it(`renders menu with background color based on elevation value = ${elevation}`, async () => {
+  it(`renders menu with surfaceContainer background regardless of elevation value = ${elevation}`, async () => {
     const testID = 'menu-with-elevation';
 
     await render(
@@ -177,7 +177,7 @@ elevations.forEach((elevation) =>
     );
 
     expect(screen.getByTestId(testID)).toHaveStyle({
-      backgroundColor: LightTheme.colors.elevation[`level${elevation}`],
+      backgroundColor: LightTheme.colors.surfaceContainer,
     });
   })
 );
