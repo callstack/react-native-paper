@@ -67,4 +67,33 @@ describe('TouchableRipple', () => {
       expect(toJSON()).toMatchSnapshot();
     });
   });
+
+  describe('hitSlop', () => {
+    it('does not add its own hitSlop when none is supplied', async () => {
+      const tree = (
+        await render(
+          <TouchableRipple onPress={() => {}}>
+            <Text>Button</Text>
+          </TouchableRipple>
+        )
+      ).toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('passes a caller-supplied hitSlop straight through', async () => {
+      const tree = (
+        await render(
+          <TouchableRipple
+            onPress={() => {}}
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          >
+            <Text>Button</Text>
+          </TouchableRipple>
+        )
+      ).toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+  });
 });

@@ -322,6 +322,18 @@ The misspelled `traileringIcon` props have been renamed:
 />
 ```
 
+### Chip
+
+The close button (`onClose`) now fills the trailing 34dp column reserved for it, instead of only the 26x18 area around its icon, and its touch target extends to 48dp in height. Taps in that column that used to activate the chip's `onPress` now activate `onClose`.
+
+### IconButton
+
+Corner radii set through `style` no longer shape the press, hover and disabled feedback.
+
+### TouchableRipple
+
+`borderless` has no effect on web. The web ripple is always clipped to the touchable's shape, including when `centered` is set, and the touchable no longer clips its own content. A child that needs a clipped or rounded shape should carry that shape itself.
+
 ### TextInput
 
 The Paper 6.x `TextInput` is a complete rewrite with a new API. Import the component the same way, but note that the props and behavior have changed significantly.

@@ -3,21 +3,28 @@ import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TargetedEvent,
   TextProps,
   TextStyle,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
 import { getChipColors } from './helpers';
 import type { ChipAvatarProps } from './helpers';
+import { ChipTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
+import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -157,6 +164,38 @@ export type Props = Omit<ViewProps, 'style'> & {
 };
 
 /**
+ * Width reserved on the right for the close button.
+ */
+const CLOSE_AFFORDANCE_WIDTH = 34;
+
+/**
+ * Floor for the clamp below. The 18dp glyph is centered in the column, so at
+ * this width it sits 4dp from each side. Any narrower and part of the visible
+ * icon would activate the chip instead of removing it.
+ */
+const CLOSE_AFFORDANCE_MIN_WIDTH = 26;
+
+/**
+ * The container height is fixed by spec, so the slop to reach the 48dp minimum
+ * is a constant rather than something to measure. Width grows with the label
+ * and the whole pill is already the target, so only the vertical axis needs it.
+ */
+const { containerHeight: CHIP_BODY_HEIGHT } = ChipTokens;
+const CHIP_BODY_HIT_SLOP = getMinInteractiveSizeHitSlop({
+  height: CHIP_BODY_HEIGHT,
+});
+// The close button's own box is the same fixed height as the body, so it
+// needs the same vertical slop to reach 48dp.
+const CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET = CHIP_BODY_HIT_SLOP?.top ?? 0;
+
+const CLOSE_ICON_SIZE = 18;
+const CLOSE_FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
+
+// Web-only style; `outline` is outside ViewStyle.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
+
+/**
  * Chips are compact elements that can represent inputs, attributes, or actions.
  * They can have an icon or avatar on the left, and a close button icon on the right.
  * They are typically used to:
@@ -214,6 +253,7 @@ const Chip = ({
   const theme = useInternalTheme(themeOverrides);
 
   const [pressed, setPressed] = React.useState(false);
+  const [closeFocused, setCloseFocused] = React.useState(false);
   const elevation = elevated ? (pressed ? 2 : 1) : 0;
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -233,6 +273,18 @@ const Chip = ({
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
     onPressOut?.(e);
     setPressed(false);
+  });
+
+  const handleCloseFocus = useLatestCallback(
+    (e: NativeSyntheticEvent<TargetedEvent>) => {
+      if (Platform.OS === 'web' && isKeyboardFocusEvent(e)) {
+        setCloseFocused(true);
+      }
+    }
+  );
+
+  const handleCloseBlur = useLatestCallback(() => {
+    setCloseFocused(false);
   });
 
   const elevationTransitionDuration =
@@ -270,7 +322,7 @@ const Chip = ({
   };
 
   const contentSpacings = {
-    paddingRight: onClose ? 34 : 0,
+    paddingRight: onClose ? CLOSE_AFFORDANCE_WIDTH : 0,
   };
 
   const labelTextStyle = {
@@ -304,7 +356,13 @@ const Chip = ({
         aria-disabled={disabled}
         testID={testID}
         theme={theme}
-        hitSlop={hitSlop}
+        hitSlop={
+          hitSlop !== undefined
+            ? hitSlop
+            : disabled
+              ? undefined
+              : CHIP_BODY_HIT_SLOP
+        }
       >
         <View
           style={[
@@ -391,8 +449,32 @@ const Chip = ({
             role="button"
             aria-label={closeIconAccessibilityLabel}
             testID={closeIconTestID}
+            onFocus={handleCloseFocus}
+            onBlur={handleCloseBlur}
+            // The browser outline would wrap the whole column and cover the
+            // label, so a ring is drawn around the glyph instead.
+            style={[
+              styles.closeButton,
+              Platform.OS === 'web' ? webNoOutline : undefined,
+            ]}
+            hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
           >
+            {/* react-native-web removed `hitSlop` in 0.13.0,
+                so web needs a real element the browser can
+                hit-test instead of a native responder inset. */}
+            {Platform.OS === 'web' && !disabled && (
+              <View aria-hidden style={styles.closeButtonWebTouchTarget} />
+            )}
             <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
+              {closeFocused && !disabled ? (
+                <View
+                  pointerEvents="none"
+                  style={[
+                    styles.closeFocusRing,
+                    { borderColor: theme.colors.secondary },
+                  ]}
+                />
+              ) : null}
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
@@ -428,6 +510,7 @@ const styles = StyleSheet.create({
   },
   md3Content: {
     paddingLeft: 0,
+    minHeight: CHIP_BODY_HEIGHT,
   },
   icon: {
     padding: 4,
@@ -441,7 +524,7 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   md3CloseIcon: {
-    marginRight: 8,
+    marginRight: 0,
     padding: 0,
   },
   md3LabelText: {
@@ -474,9 +557,34 @@ const styles = StyleSheet.create({
   closeButtonStyle: {
     position: 'absolute',
     right: 0,
+    width: CLOSE_AFFORDANCE_WIDTH,
+    // A chip narrower than this column would hand the whole thing to the close
+    // button. Never more than half, never less than the glyph needs; minWidth
+    // wins over maxWidth.
+    minWidth: CLOSE_AFFORDANCE_MIN_WIDTH,
+    maxWidth: '50%',
+    height: '100%',
+  },
+  closeButton: {
+    width: '100%',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+  },
+  closeFocusRing: {
+    position: 'absolute',
+    top: -CLOSE_FOCUS_THICKNESS,
+    left: -CLOSE_FOCUS_THICKNESS,
+    width: CLOSE_ICON_SIZE + 2 * CLOSE_FOCUS_THICKNESS,
+    height: CLOSE_ICON_SIZE + 2 * CLOSE_FOCUS_THICKNESS,
+    borderRadius: CLOSE_ICON_SIZE / 2 + CLOSE_FOCUS_THICKNESS,
+    borderWidth: CLOSE_FOCUS_THICKNESS,
+  },
+  closeButtonWebTouchTarget: {
+    position: 'absolute',
+    top: -CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET,
+    bottom: -CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET,
+    left: 0,
+    right: 0,
   },
   touchable: {
     width: '100%',

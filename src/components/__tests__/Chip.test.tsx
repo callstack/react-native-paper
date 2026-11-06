@@ -309,3 +309,11 @@ describe('getChipColor - border color', () => {
     });
   });
 });
+
+describe('close affordance', () => {
+  it('is not rendered without onClose', async () => {
+    await render(<Chip onPress={() => {}}>Example</Chip>);
+
+    expect(screen.queryByLabelText('Close')).not.toBeOnTheScreen();
+  });
+});

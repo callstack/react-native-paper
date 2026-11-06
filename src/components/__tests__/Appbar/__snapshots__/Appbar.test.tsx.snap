@@ -194,7 +194,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -235,10 +234,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -261,6 +260,12 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 "alignItems": "center",
                 "flexGrow": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -360,7 +365,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -401,10 +405,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
             }
           }
           onBlur={[Function]}
@@ -427,6 +431,12 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],
@@ -582,7 +592,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -623,10 +632,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -649,6 +658,12 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -805,7 +820,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -845,10 +859,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -871,6 +885,12 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1062,7 +1082,6 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -1102,10 +1121,10 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -1128,6 +1147,12 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1320,7 +1345,6 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -1360,10 +1384,10 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -1386,6 +1410,12 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1578,7 +1608,6 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -1618,10 +1647,10 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -1644,6 +1673,12 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1836,7 +1871,6 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -1877,10 +1911,10 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -1903,6 +1937,12 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],

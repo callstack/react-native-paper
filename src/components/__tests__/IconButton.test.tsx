@@ -46,6 +46,14 @@ it('renders disabled icon button', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('lets a caller-supplied hitSlop win even while disabled', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" disabled hitSlop={2} />)
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders icon change animated', async () => {
   const tree = (await render(<IconButton icon="camera" animated />)).toJSON();
 
