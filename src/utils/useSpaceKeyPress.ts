@@ -1,14 +1,16 @@
 import * as React from 'react';
 import {
   type GestureResponderEvent,
-  type KeyDownEvent,
-  type KeyUpEvent,
   type NativeSyntheticEvent,
   Platform,
   type TargetedEvent,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
+
+// React Native 0.87+ exports `KeyDownEvent` and `KeyUpEvent`, but its legacy
+// types, the default before 0.87, have neither, so type only what is read.
+type KeyEvent = NativeSyntheticEvent<{ key: string; repeat?: boolean }>;
 
 type Options = {
   /**
@@ -20,14 +22,12 @@ type Options = {
   onPressOut?: (e: GestureResponderEvent) => void;
 };
 
-const isSpaceKey = ({ nativeEvent: { key } }: KeyDownEvent | KeyUpEvent) =>
+const isSpaceKey = ({ nativeEvent: { key } }: KeyEvent) =>
   key === ' ' || key === 'Spacebar';
 
 // React Native Web hands Enter's key events to the press callbacks as they
 // are, so Space passes its own events the same way.
-const asPressEvent = (
-  event: KeyDownEvent | KeyUpEvent | NativeSyntheticEvent<TargetedEvent>
-) =>
+const asPressEvent = (event: KeyEvent | NativeSyntheticEvent<TargetedEvent>) =>
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   event as unknown as GestureResponderEvent;
 
@@ -45,14 +45,12 @@ export const useSpaceKeyPress = ({
   onPressOut,
 }: Options) => {
   // The key down event of the pending press, or `null` when there is none.
-  const pressInEventRef = React.useRef<KeyDownEvent | null>(null);
+  const pressInEventRef = React.useRef<KeyEvent | null>(null);
   const enabled = Platform.OS === 'web' && onPress !== undefined;
 
   /** Presses out the pending press, if any, and returns whether there was one. */
   const endPress = useLatestCallback(
-    (
-      event: KeyDownEvent | KeyUpEvent | NativeSyntheticEvent<TargetedEvent>
-    ) => {
+    (event: KeyEvent | NativeSyntheticEvent<TargetedEvent>) => {
       if (pressInEventRef.current === null) return false;
 
       pressInEventRef.current = null;
@@ -78,7 +76,7 @@ export const useSpaceKeyPress = ({
 
   const keyHandlers = enabled
     ? {
-        onKeyDown: (event: KeyDownEvent) => {
+        onKeyDown: (event: KeyEvent) => {
           if (!isSpaceKey(event)) return;
 
           event.preventDefault();
@@ -87,7 +85,7 @@ export const useSpaceKeyPress = ({
           pressInEventRef.current = event;
           onPressIn?.(asPressEvent(event));
         },
-        onKeyUp: (event: KeyUpEvent) => {
+        onKeyUp: (event: KeyEvent) => {
           // React Native Web handles Space itself on a pressable with
           // `role="button"`, such as a checkbox given `accessible={false}` and
           // `role="button"`, so only its release reaches here. Preventing that
