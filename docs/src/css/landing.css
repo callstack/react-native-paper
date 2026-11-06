@@ -265,9 +265,18 @@ div#__rspress_root:has(> main.landing)::after {
   touch-action: pan-y;
 }
 
+.landing .landing-slider__swipe:focus-visible {
+  outline: 3px solid #21005d;
+  outline-offset: 4px;
+}
+
 .landing a.b1qn7xxj {
   display: inline-flex;
   align-items: center;
+}
+
+.landing .awvlien {
+  pointer-events: none;
 }
 
 .landing .awvlien button {
@@ -276,6 +285,7 @@ div#__rspress_root:has(> main.landing)::after {
   background: none;
   cursor: pointer;
   line-height: 0;
+  pointer-events: auto;
 }
 
 .landing .awvlien button img {

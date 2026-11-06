@@ -59,7 +59,11 @@ export default function LandingTestimonials() {
       </LandingSection>
 
       <LandingSection variant="o18vdt8l" innerClassName="i1olqn3s">
-        <LandingSlider initialSlide={2} slidesAmount={testimonials.length}>
+        <LandingSlider
+          initialSlide={2}
+          label="Testimonials"
+          slidesAmount={testimonials.length}
+        >
           {testimonials.map((testimonial) => (
             <div className="c1pd6wp7" key={testimonial.name}>
               <div className="cjmn5uj">

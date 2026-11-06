@@ -7,6 +7,7 @@ type Props = {
   children: ReactNode;
   slidesAmount: number;
   initialSlide: number;
+  label: string;
 };
 
 const SWIPE_THRESHOLD = 40;
@@ -15,6 +16,7 @@ export default function LandingSlider({
   children,
   slidesAmount,
   initialSlide,
+  label,
 }: Props) {
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
 
@@ -47,6 +49,16 @@ export default function LandingSlider({
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      prevSlide();
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      nextSlide();
+    }
+  };
+
   const offset = (slideWidth: number) =>
     currentSlide * -slideWidth + slideWidth / 2;
 
@@ -62,10 +74,15 @@ export default function LandingSlider({
   return (
     <div className="wibeo8m">
       <div
+        aria-label={label}
+        aria-roledescription="carousel"
         className="landing-slider__swipe"
+        onKeyDown={handleKeyDown}
         onPointerCancel={handlePointerEnd}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerEnd}
+        role="group"
+        tabIndex={0}
       >
         <div className="i15993hv" style={track}>
           {children}

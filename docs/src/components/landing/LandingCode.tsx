@@ -288,6 +288,7 @@ const Demo = ({
           }
         />
         <Appbar.Action
+          aria-label="Open the Appbar documentation"
           color={isMaterialYou ? undefined : md2AppbarContent(isDarkTheme)}
           icon="open-in-new"
           onPress={() => void Linking.openURL(appbarHref)}
