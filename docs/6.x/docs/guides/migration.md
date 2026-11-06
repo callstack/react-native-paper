@@ -253,7 +253,7 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 #### `Dialog.Actions`
 
-`Dialog.Actions` no longer injects `compact` on its buttons. To get close to the previous look, add `size="extra-small"` (which replaces `compact`) and `mode="text"` (since the default [`Button`](#button) mode is now `filled`) to each button. The buttons get shorter: `extra-small` is **32dp** tall, while `compact` buttons kept the **40dp** height:
+`Dialog.Actions` no longer injects `compact` on its buttons, and the default [`Button`](#button) mode is now `filled`. Add `mode="text"` to each button. At the default `small` size, the buttons are **40dp** tall, the Material Design 3 size for dialog actions. The `compact` text buttons in 5.x were **38dp** tall. For a more compact look, also add `size="extra-small"`, which is **32dp** tall:
 
 ```tsx
 // Before (v5)
@@ -263,7 +263,7 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 // After (v6)
 <Dialog.Actions>
-  <Button mode="text" size="extra-small" onPress={hide}>
+  <Button mode="text" onPress={hide}>
     Done
   </Button>
 </Dialog.Actions>
@@ -491,7 +491,8 @@ a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
 - **`uppercase`** → `labelStyle={{ textTransform: 'uppercase' }}`.
 - **`compact`** → `size="extra-small"`. This also changes the height:
   `extra-small` is **32dp** tall, while `compact` only reduced the horizontal
-  margins and the min width and kept the **40dp** height.
+  margins and the min width, and kept the height: **40dp**, or **38dp** for
+  `text` buttons.
 - **`contentStyle={{ flexDirection: 'row-reverse' }}`** → `iconPosition="trailing"`.
 - **`rippleColor`** is removed, with no replacement. The ripple uses the label
   color at the pressed-state opacity.
