@@ -68,24 +68,39 @@ const stateElevation = {
 } as const satisfies Record<string, Elevation>;
 
 const variants = {
-  primary: { container: 'primary', content: 'onPrimary' },
-  secondary: { container: 'secondary', content: 'onSecondary' },
-  tertiary: { container: 'tertiary', content: 'onTertiary' },
+  primary: {
+    container: 'primary',
+    content: 'onPrimary',
+    stateLayer: 'onPrimary',
+  },
+  secondary: {
+    container: 'secondary',
+    content: 'onSecondary',
+    stateLayer: 'onSecondary',
+  },
+  tertiary: {
+    container: 'tertiary',
+    content: 'onTertiary',
+    stateLayer: 'onTertiary',
+  },
   tonalPrimary: {
     container: 'primaryContainer',
     content: 'onPrimaryContainer',
+    stateLayer: 'onPrimaryContainer',
   },
   tonalSecondary: {
     container: 'secondaryContainer',
     content: 'onSecondaryContainer',
+    stateLayer: 'onSecondaryContainer',
   },
   tonalTertiary: {
     container: 'tertiaryContainer',
     content: 'onTertiaryContainer',
+    stateLayer: 'onTertiaryContainer',
   },
 } as const satisfies Record<
   Variant,
-  { container: ColorRole; content: ColorRole }
+  { container: ColorRole; content: ColorRole; stateLayer: ColorRole }
 >;
 
 export const Tokens = {

@@ -192,6 +192,12 @@ The theme types were renamed too:
 +const color = Palette.tertiary70;
 ```
 
+#### `stateLayerPressed`
+
+The `stateLayerPressed` color token has been removed from `theme.colors`. The Material 3 pressed state layer opacity (`0.10`) is now applied automatically by `TouchableRipple` (via `android_ripple.alpha` on Android, `color.alpha()` on Web, and underlay opacity on iOS) rather than being baked into a color token.
+
+If your code referenced `theme.colors.stateLayerPressed`, use `theme.colors.onSurface` (or the appropriate on-color for the container) with the desired opacity or alpha.
+
 #### `roundness`
 
 The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme, and TypeScript only reports it in a theme object written inline in a `theme` prop.
@@ -933,3 +939,10 @@ A standalone `Checkbox` has no visible label, so it now warns in development whe
 +  theme={{ colors: { primary: 'tomato' } }}
 +/>
 ```
+
+### TouchableRipple
+
+- `TouchableRipple` now automatically bakes the Material 3 pressed state layer opacity (`0.10`) into the ripple and default iOS underlay.
+- The default `rippleColor` is now `theme.colors.onSurface` (instead of the removed `theme.colors.stateLayerPressed`), with the pressed opacity applied automatically.
+- On Android, `TouchableRipple` provides `alpha: 0.1` in `android_ripple` to `Pressable`. When passing a custom `background` prop, the pressed opacity is filled into `alpha` if not already specified.
+- On iOS, `TouchableRipple` applies `opacity: 0.1` to the default underlay. Passing an explicit `underlayColor` preserves that color without forcing underlay opacity.
