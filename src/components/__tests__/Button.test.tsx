@@ -191,6 +191,20 @@ it('applies a custom container color', async () => {
   expect(screen.root).toHaveStyle({ backgroundColor: pink500 });
 });
 
+it.each([false, true])(
+  'applies custom colors to a toggle with selected=%s',
+  async (selected) => {
+    await render(
+      <Button buttonColor={pink500} textColor={white} selected={selected}>
+        Custom toggle
+      </Button>
+    );
+
+    expect(screen.root).toHaveStyle({ backgroundColor: pink500 });
+    expect(screen.getByText('Custom toggle')).toHaveStyle({ color: white });
+  }
+);
+
 it('paints the container color only on the container', async () => {
   const translucent = 'rgba(0, 0, 0, 0.5)';
 

@@ -96,7 +96,8 @@ export type Props = Omit<ViewProps, 'style'> & {
    * When defined:
    *
    * - The button takes its container and label colours from the toggle set for
-   *   its `mode`, which differ between `false` and `true`.
+   *   its `mode`, which differ between `false` and `true`. A custom
+   *   `buttonColor` or `textColor` replaces them in both states.
    * - When `true` the `shape` is flipped: `'round'` renders square and vice
    *   versa, and an `outlined` button drops its outline.
    * - Screen readers announce the toggle state: `aria-pressed` on web,
@@ -107,10 +108,18 @@ export type Props = Omit<ViewProps, 'style'> & {
   selected?: boolean;
   /**
    * Custom button's background color.
+   *
+   * On a toggle (`selected` defined), the color applies in both states, as
+   * `containerColor` does on `IconButton`. To show the state by color as well
+   * as by shape, pass a color for each state, for example
+   * `buttonColor={selected ? colors.tertiary : colors.tertiaryContainer}`.
    */
   buttonColor?: ColorValue;
   /**
    * Custom button's text color.
+   *
+   * On a toggle (`selected` defined), the color applies in both states, as
+   * `buttonColor` does. Pass a color for each state to match `buttonColor`.
    */
   textColor?: ColorValue;
   /**

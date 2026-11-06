@@ -105,6 +105,7 @@ const ButtonExample = () => {
   >({});
   const toggle = (key: string) =>
     setSelectedToggles((prev) => ({ ...prev, [key]: !prev[key] }));
+  const customSelected = !!selectedToggles.custom;
 
   return (
     <ScreenWrapper>
@@ -288,6 +289,24 @@ const ButtonExample = () => {
             style={styles.button}
           >
             Custom label color
+          </Button>
+          <Button
+            mode="filled"
+            selected={customSelected}
+            buttonColor={
+              customSelected
+                ? theme.colors.tertiary
+                : theme.colors.tertiaryContainer
+            }
+            textColor={
+              customSelected
+                ? theme.colors.onTertiary
+                : theme.colors.onTertiaryContainer
+            }
+            onPress={() => toggle('custom')}
+            style={styles.button}
+          >
+            Custom toggle
           </Button>
           <Button
             mode="outlined"
