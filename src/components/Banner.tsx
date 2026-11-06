@@ -165,8 +165,10 @@ const Banner = ({
   const showCallback = useLatestCallback(onShowAnimationFinished);
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
+  const { duration, easing } = theme.motion;
   const { scale } = theme.animation;
-  const animationDuration = (visible ? 250 : 200) * scale;
+  const animationDuration =
+    (visible ? duration.medium1 : duration.short4) * scale;
 
   React.useEffect(() => {
     const callback = visible ? showCallback : hideCallback;
@@ -175,12 +177,19 @@ const Banner = ({
       visible ? 1 : 0,
       {
         duration: animationDuration,
-        easing: Easing.inOut(Easing.ease),
+        easing: Easing.bezier(...easing.standard),
         reduceMotion: ReduceMotion.Never,
       },
       (finished) => scheduleOnRN(callback, { finished: finished ?? false })
     );
-  }, [animationDuration, hideCallback, position, showCallback, visible]);
+  }, [
+    animationDuration,
+    easing,
+    hideCallback,
+    position,
+    showCallback,
+    visible,
+  ]);
 
   const surfaceStyle = useAnimatedStyle(() => ({
     opacity: interpolate(position.value, [0, 0.1, 1], [0, 1, 1]),
