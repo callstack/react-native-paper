@@ -10,12 +10,14 @@ import type { ShapeToken } from '../../theme/utils/shape';
 export type ResolvedColors = {
   container: ColorValue;
   content: ColorValue;
+  stateLayer: ColorValue;
 };
 
 /**
- * Resolve container + content colors. Explicit overrides win; when only
- * `containerColor` is set, the content color is derived via
- * `contentColorFor`.
+ * Resolve container + content + state-layer colors. Explicit overrides win;
+ * when only `containerColor` is set, the content color is derived via
+ * `contentColorFor`. The state layer always follows the container (it ignores
+ * a `contentColor` override) so the ripple keeps contrasting the surface.
  */
 export const resolveColors = ({
   theme,
@@ -35,7 +37,11 @@ export const resolveColors = ({
     (containerColor != null
       ? contentColorFor(theme, container)
       : theme.colors[roles.content]);
-  return { container, content };
+  const stateLayer =
+    containerColor != null
+      ? contentColorFor(theme, container)
+      : theme.colors[roles.stateLayer];
+  return { container, content, stateLayer };
 };
 
 export type Dimensions = {

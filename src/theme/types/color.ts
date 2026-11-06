@@ -55,11 +55,5 @@ export type ThemeColors = {
   onTertiaryFixedVariant: ColorValue;
   shadow: ColorValue;
   scrim: ColorValue;
-  /** Pre-computed state layer color at press opacity (0.10).
-   *  Used for ripple effects. Avoids runtime alpha manipulation
-   *  which is incompatible with PlatformColor on Android.
-   *  TODO: revisit after https://github.com/facebook/react-native/pull/56395
-   *  @see https://m3.material.io/foundations/interaction/states/state-layers */
-  stateLayerPressed: ColorValue;
   elevation: ElevationColors;
 };

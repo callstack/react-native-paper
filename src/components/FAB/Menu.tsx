@@ -264,6 +264,7 @@ const MenuItem = ({
       >
         <TouchableRipple
           borderless
+          rippleColor={colors.stateLayer}
           onPress={onPress}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -448,9 +449,9 @@ const MorphingTrigger = ({
     >
       <Shell
         size={size}
-        variant={triggerVariant}
-        containerColor={triggerContainerColor}
-        contentColor={triggerContentColor}
+        variant={expanded ? closeVariant : triggerVariant}
+        containerColor={expanded ? undefined : triggerContainerColor}
+        contentColor={expanded ? undefined : triggerContentColor}
         visible={visible}
         onPress={onPress}
         aria-label={ariaLabel}

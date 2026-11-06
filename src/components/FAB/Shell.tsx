@@ -326,6 +326,7 @@ const Shell = ({
         <TouchableRipple
           borderless
           background={background}
+          rippleColor={colors.stateLayer}
           onPress={onPress}
           onFocus={onFocus}
           onBlur={onBlur}

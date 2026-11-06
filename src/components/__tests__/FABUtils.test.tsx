@@ -9,6 +9,7 @@ describe('resolveColors', () => {
     expect(colors).toEqual({
       container: LightTheme.colors.primaryContainer,
       content: LightTheme.colors.onPrimaryContainer,
+      stateLayer: LightTheme.colors.onPrimaryContainer,
     });
   });
 
@@ -17,6 +18,7 @@ describe('resolveColors', () => {
     expect(colors).toEqual({
       container: LightTheme.colors.primary,
       content: LightTheme.colors.onPrimary,
+      stateLayer: LightTheme.colors.onPrimary,
     });
   });
 
@@ -25,6 +27,7 @@ describe('resolveColors', () => {
     expect(colors).toEqual({
       container: LightTheme.colors.secondary,
       content: LightTheme.colors.onSecondary,
+      stateLayer: LightTheme.colors.onSecondary,
     });
   });
 
@@ -33,6 +36,7 @@ describe('resolveColors', () => {
     expect(colors).toEqual({
       container: LightTheme.colors.tertiary,
       content: LightTheme.colors.onTertiary,
+      stateLayer: LightTheme.colors.onTertiary,
     });
   });
 
@@ -44,6 +48,7 @@ describe('resolveColors', () => {
     expect(colors).toEqual({
       container: LightTheme.colors.secondaryContainer,
       content: LightTheme.colors.onSecondaryContainer,
+      stateLayer: LightTheme.colors.onSecondaryContainer,
     });
   });
 
@@ -55,6 +60,7 @@ describe('resolveColors', () => {
     expect(colors).toEqual({
       container: LightTheme.colors.tertiaryContainer,
       content: LightTheme.colors.onTertiaryContainer,
+      stateLayer: LightTheme.colors.onTertiaryContainer,
     });
   });
 
@@ -75,6 +81,8 @@ describe('resolveColors', () => {
     });
     expect(colors.container).toBe(LightTheme.colors.primary);
     expect(colors.content).toBe(LightTheme.colors.onPrimary);
+    // State layer follows the container's on-color too.
+    expect(colors.stateLayer).toBe(LightTheme.colors.onPrimary);
   });
 
   it('both containerColor and contentColor overrides win', () => {
@@ -83,7 +91,13 @@ describe('resolveColors', () => {
       containerColor: '#bg',
       contentColor: '#fg',
     });
-    expect(colors).toEqual({ container: '#bg', content: '#fg' });
+    // stateLayer ignores the contentColor override and derives from the
+    // (unknown) container, so it falls back to onSurface.
+    expect(colors).toEqual({
+      container: '#bg',
+      content: '#fg',
+      stateLayer: LightTheme.colors.onSurface,
+    });
   });
 
   it('contentColor-only override uses variant container', () => {
@@ -94,6 +108,8 @@ describe('resolveColors', () => {
     });
     expect(colors.container).toBe(LightTheme.colors.primary);
     expect(colors.content).toBe('#custom');
+    // State layer stays on the variant's on-color, unaffected by contentColor.
+    expect(colors.stateLayer).toBe(LightTheme.colors.onPrimary);
   });
 });
 
