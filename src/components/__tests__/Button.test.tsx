@@ -1188,14 +1188,14 @@ describe('touch target', () => {
     expect(screen.getByTestId('button')).toHaveProp('hitSlop', 12);
   });
 
-  it('takes `null` as an opt out', async () => {
+  it('takes `0` as an opt out', async () => {
     await render(
-      <Button onPress={() => {}} hitSlop={null} testID="button">
+      <Button onPress={() => {}} hitSlop={0} testID="button">
         X
       </Button>
     );
 
-    expect(screen.getByTestId('button')).toHaveProp('hitSlop', null);
+    expect(screen.getByTestId('button')).toHaveProp('hitSlop', 0);
   });
 });
 

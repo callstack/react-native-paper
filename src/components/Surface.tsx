@@ -85,8 +85,13 @@ type SurfaceVisualProps = {
   borderCurve?: ViewStyle['borderCurve'];
 };
 
-export type SurfaceStyle = AnimatedStyle<
-  Omit<ViewStyle, keyof SurfaceVisualProps | 'elevation'>
+type DistributiveOmit<T, K extends PropertyKey> = T extends unknown
+  ? Omit<T, K>
+  : never;
+
+export type SurfaceStyle = DistributiveOmit<
+  AnimatedStyle<ViewStyle>,
+  keyof SurfaceVisualProps | 'elevation'
 >;
 
 export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
@@ -146,7 +151,7 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
      * TestID used for testing purposes
      */
     testID?: string;
-    ref?: React.Ref<View>;
+    ref?: React.Ref<React.ComponentRef<typeof View>>;
   };
 
 /**

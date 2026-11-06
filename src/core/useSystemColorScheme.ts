@@ -18,7 +18,7 @@ export function useSystemColorScheme(enabled: boolean): ColorSchemeName {
   React.useEffect(() => {
     if (!enabled) return;
     const sub = Appearance?.addChangeListener((preferences) => {
-      setColorScheme(preferences.colorScheme);
+      setColorScheme(preferences.colorScheme ?? 'light');
     });
     return () => {
       sub?.remove();

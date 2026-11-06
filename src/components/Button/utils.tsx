@@ -380,7 +380,14 @@ export const getButtonColors = ({
   disabled?: boolean;
   dark?: boolean;
   selected?: boolean;
-}) => {
+}): {
+  backgroundColor: ColorValue;
+  borderColor: ColorValue;
+  labelColor: ColorValue;
+  labelOpacity: number;
+  borderWidth: number;
+  backgroundOpacity: number;
+} => {
   const isMode = (modeToCompare: ButtonMode) => {
     return mode === modeToCompare;
   };
