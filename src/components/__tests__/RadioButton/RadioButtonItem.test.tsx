@@ -84,3 +84,16 @@ it('should execute onLongPress', async () => {
 
   expect(onLongPress).toHaveBeenCalledTimes(1);
 });
+
+it('exposes only one radio control to screen readers', async () => {
+  await render(
+    <RadioButton.Item
+      label="Radio button"
+      value="radio"
+      status="unchecked"
+    />
+  );
+
+  expect(screen.getAllByRole('radio')).toHaveLength(1);
+});
+
