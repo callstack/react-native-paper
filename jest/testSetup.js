@@ -90,9 +90,6 @@ jest.mock('react-native', () => {
   return RN;
 });
 
-// React Native's `Text` tells its children they're inside a text, and its
-// `View` resets that. The preset's mocks of both skip it, so a nested Paper
-// `Text` would never inherit, unlike on a device.
 jest.mock('react-native/Libraries/Text/Text', () => {
   const TextAncestorContext = jest.requireActual(
     'react-native/Libraries/Text/TextAncestorContext'
