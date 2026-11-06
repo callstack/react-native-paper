@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
+  AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -83,6 +84,15 @@ export type Props = Omit<ViewProps, 'style'> & {
    * Accessibility label for the chip. This is read by the screen reader when the user taps the chip.
    */
   'aria-label'?: string;
+  /**
+   * Accessibility state for the chip. This is read by the screen reader when the user taps the chip.
+   */
+  accessibilityState?: AccessibilityState;
+  /**
+   * Indicates whether the chip is checked. Accepts `true`, `false`,
+   * or `'mixed'` for an indeterminate state.
+   */
+  'aria-checked'?: boolean | 'mixed';
   /**
    * Accessibility label for the close icon. This is read by the screen reader when the user taps the close icon.
    */
@@ -186,6 +196,8 @@ const Chip = ({
   avatar,
   selected = false,
   disabled = false,
+  accessibilityState,
+  'aria-checked': ariaChecked,
   background,
   'aria-label': ariaLabel,
   role = 'button',
@@ -298,10 +310,12 @@ const Chip = ({
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
         disabled={disabled}
+        accessibilityState={accessibilityState}
         aria-label={ariaLabel}
         role={role}
-        aria-selected={selected}
+        aria-selected={selected || Boolean(accessibilityState?.selected)}
         aria-disabled={disabled}
+        aria-checked={ariaChecked ?? accessibilityState?.checked}
         testID={testID}
         theme={theme}
         hitSlop={hitSlop}
