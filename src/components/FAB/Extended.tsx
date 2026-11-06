@@ -38,7 +38,7 @@ export type Props = {
    */
   label: string;
   /**
-   * Role-color preset. Defaults to `tonalPrimary`.
+   * Role-color preset. Defaults to `primaryContainer`.
    */
   variant?: Variant;
   /**
@@ -154,7 +154,7 @@ export type Props = {
 const Extended = ({
   icon,
   label,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   containerColor,
   contentColor,
   size = 'default',

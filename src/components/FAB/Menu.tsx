@@ -122,23 +122,29 @@ export type MenuProps = {
  * tonal (container) role color.
  */
 const getCloseVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
     return 'primary';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
     return 'secondary';
   }
   return 'tertiary';
 };
 
 const getItemsVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
-    return 'tonalPrimary';
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
+    return 'primaryContainer';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
-    return 'tonalSecondary';
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
+    return 'secondaryContainer';
   }
-  return 'tonalTertiary';
+  return 'tertiaryContainer';
 };
 
 // Per-item delay used by the stagger. Compose uses a single SlowEffects-driven
@@ -544,7 +550,7 @@ const Menu = ({
   const isRTL = direction === 'rtl';
   const insets = useSafeAreaInsets();
 
-  const triggerVariant: Variant = trigger.variant ?? 'tonalPrimary';
+  const triggerVariant: Variant = trigger.variant ?? 'primaryContainer';
   const size: Size = trigger.size ?? 'default';
   const openIcon: IconSource = trigger.icon;
   const openOnPress = trigger.onPress;
