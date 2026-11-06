@@ -603,3 +603,45 @@ mutually exclusive options, use `SegmentedButtons`.
   />
 </>
 ```
+
+### Checkbox
+
+#### Interaction states
+
+Hover, focus and press now paint a Material Design 3 state layer, a 40dp circle around the box, on every platform. Hover and focus use `primary` when the checkbox is selected and `onSurface` when it is not, a press ripples in the opposite color, and an error checkbox uses `error` throughout. `color` and `uncheckedColor` also set the matching state layer color. Keyboard focus draws a 50dp ring with a 2dp gap around the state layer.
+
+`Checkbox` always paints its own press and ignores `rippleColor`, `background` and `underlayColor`. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` turns off the press ripple.
+
+On web, Space now toggles a focused checkbox or `Checkbox.Item` row, as Enter already did. If your app toggles a checkbox on Space itself, remove that handling, or the checkbox toggles twice.
+
+#### Touch target size
+
+`Checkbox` now takes up 48dp instead of 36dp to meet the minimum touch target, so rows with a standalone checkbox can grow up to 12dp taller. In `Checkbox.Item` the whole row is the touch target, so its checkbox takes up 40dp and a one-line row is 56dp tall, 4dp taller than in 5.x.
+
+#### Style
+
+`Checkbox` now accepts `style` and applies it to its outer container, so layout styles such as `margin`, `position` and `transform` move the whole checkbox, focus ring included. `width` and `height` do not resize the 48dp touch target.
+
+To keep the 36dp footprint of 5.x, use a negative margin. The touch target stays 48dp and reaches 6dp into the space around the checkbox:
+
+```tsx
+// Before (v5)
+<Checkbox status="checked" onPress={onPress} aria-label="Notify me" />
+
+// After (v6)
+<Checkbox
+  status="checked"
+  onPress={onPress}
+  aria-label="Notify me"
+  style={{ margin: -6 }}
+/>
+```
+
+#### Accessible name
+
+A standalone `Checkbox` has no visible label, so it now warns in development when it has no accessible name. Pass `aria-label` or `accessibilityLabel`, or use `Checkbox.Item`, which names the whole row. On Android and web, `aria-labelledby` names it too. A checkbox hidden from assistive technology, for example with `aria-hidden`, does not warn. Hide only a checkbox without `onPress` and let another element name and toggle it: with `onPress`, a hidden checkbox can still take focus.
+
+```diff
+-<Checkbox status="checked" onPress={onPress} />
++<Checkbox status="checked" onPress={onPress} aria-label="Notify me" />
+```

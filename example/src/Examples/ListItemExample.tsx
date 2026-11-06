@@ -6,7 +6,7 @@ import ScreenWrapper from '../ScreenWrapper';
 
 const CenteredCheckbox = () => (
   <View style={styles.centered}>
-    <Checkbox status="checked" />
+    <Checkbox status="checked" aria-label="Headline" />
   </View>
 );
 
@@ -30,7 +30,7 @@ const ListItemExample = () => {
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          right={() => <Checkbox status="checked" />}
+          right={() => <Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>
@@ -66,7 +66,7 @@ const ListItemExample = () => {
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
           left={(props) => <List.Icon {...props} icon="account-outline" />}
-          right={() => <Checkbox status="checked" />}
+          right={() => <Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>
@@ -114,7 +114,7 @@ const ListItemExample = () => {
           left={(props) => (
             <Avatar.Text style={props.style} label="A" size={40} />
           )}
-          right={() => <Checkbox status="checked" />}
+          right={() => <Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>
@@ -180,7 +180,7 @@ const ListItemExample = () => {
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
           )}
-          right={() => <Checkbox status="checked" />}
+          right={() => <Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>
@@ -252,7 +252,7 @@ const ListItemExample = () => {
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
           )}
-          right={() => <Checkbox status="checked" />}
+          right={() => <Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>

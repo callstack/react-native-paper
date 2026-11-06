@@ -164,6 +164,7 @@ export default withCallstackPreset(
           config.plugins.push(
             new rspack.DefinePlugin({
               __DEV__: JSON.stringify(isDev),
+              global: 'globalThis',
               'process.env.JEST_WORKER_ID': 'undefined',
               'process.env.NODE_ENV': JSON.stringify(
                 isDev ? 'development' : 'production'
