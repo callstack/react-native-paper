@@ -143,6 +143,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   'aria-label'?: string;
   /**
+   * Indicates whether the element's controlled content is expanded.
+   */
+  'aria-expanded'?: boolean;
+  /**
    * Accessibility hint for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityHint?: string;
@@ -240,6 +244,7 @@ const Button = ({
   textColor: customLabelColor,
   children,
   'aria-label': ariaLabel,
+  'aria-expanded': ariaExpanded,
   accessibilityHint,
   role = 'button',
   hitSlop,
@@ -502,6 +507,7 @@ const Button = ({
           onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
           delayLongPress={delayLongPress}
           aria-label={ariaLabel}
+          aria-expanded={ariaExpanded}
           accessibilityHint={accessibilityHint}
           role={role}
           aria-disabled={disabled}
