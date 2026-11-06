@@ -4,7 +4,7 @@ import { StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import AnimatedText from './AnimatedText';
-import { canContainNestedText, NestedTextContext } from './NestedTextContext';
+import { useIsNestedText, withNestedText } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -92,7 +92,7 @@ const Text = ({
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();
   // Nested text inherits the parent's style unless it has its own theme
-  const inheritsStyle = React.useContext(NestedTextContext) && !initialTheme;
+  const inheritsStyle = useIsNestedText() && !initialTheme;
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
@@ -183,15 +183,7 @@ const Text = ({
     );
   }
 
-  if (!canContainNestedText(rest.children)) {
-    return element;
-  }
-
-  return (
-    <NestedTextContext.Provider value={true}>
-      {element}
-    </NestedTextContext.Provider>
-  );
+  return withNestedText(element, rest.children);
 };
 
 const styles = StyleSheet.create({

@@ -111,6 +111,12 @@ const TextExample = () => {
         <Text style={[styles.text, styles.boldParent]} variant="headlineSmall">
           Bold parent, <Text>and the nested child inherits the weight</Text>
         </Text>
+        <Text style={styles.text} variant="headlineSmall">
+          Parent{' '}
+          <View>
+            <Text>Child in a View, still in the theme color</Text>
+          </View>
+        </Text>
       </View>
     </ScreenWrapper>
   );
