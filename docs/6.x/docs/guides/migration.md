@@ -752,7 +752,7 @@ In JavaScript, the old components import as `undefined`, so the app builds but f
 
 A `Text` nested in another `Text` now inherits the parent's font and color, as React Native's own `Text` does. In 5.x it reset them to the theme's default font and `onSurface`, so a `Text` with a variant inside a contained `Button` lost the button's label color, and a plain `Text` inside a `Chip` lost the chip's font. A nested `Text` with a `variant` still takes that variant's font, and its own `style` still wins over the parent's. To give a nested `Text` its own color, set `color` in its `style`, or pass it a `theme`, which makes it render like a top-level `Text`.
 
-On iOS and Android, a `Text` inside a `View` inside a `Text` renders in the platform's default color, so set its `color` or pass it a `theme`.
+On iOS and Android, nesting follows React Native: a `Text` inside React Native's own `Text` inherits from it as well, and a `Text` inside a `View` isn't nested, so it renders like a top-level `Text`.
 
 ### ToggleButton
 
