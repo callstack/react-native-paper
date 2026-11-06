@@ -22,15 +22,21 @@ const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 export type Props = {
   /**
-   * Determines whether clicking outside the modal dismisses it.
+   * Determines whether clicking outside the modal dismisses it. It also decides
+   * whether the screen reader escape gesture and the visually hidden dismiss
+   * button dismiss it, and is the default for `dismissableBackButton`.
    */
   dismissable?: boolean;
   /**
-   * Determines whether clicking Android hardware back button dismisses the dialog.
+   * Determines whether the Android hardware back button and the Escape key on the web dismiss the modal.
+   * While a modal is visible, only the topmost one handles these. When this is `false`,
+   * they are absorbed and nothing is dismissed, rather than passed on to what is behind the modal.
    */
   dismissableBackButton?: boolean;
   /**
    * Callback that is called when the user dismisses the modal.
+   * A visible modal always takes the back button and Escape key, so without
+   * this callback they do nothing, and on Android the user cannot go back.
    */
   onDismiss?: () => void;
   /**
@@ -102,6 +108,10 @@ export type Props = {
 };
 
 const DEFAULT_DURATION = 220;
+
+// Having the handler at all keeps the screen reader escape gesture on this
+// modal, instead of passing it on to the modal behind it.
+const absorbAccessibilityEscape = () => {};
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
@@ -261,7 +271,9 @@ function Modal({
         pointerEvents={visible ? 'auto' : 'none'}
         aria-live="polite"
         style={StyleSheet.absoluteFill}
-        onAccessibilityEscape={dismissable ? onDismissCallback : undefined}
+        onAccessibilityEscape={
+          dismissable ? onDismissCallback : absorbAccessibilityEscape
+        }
         testID={testID}
       >
         <AnimatedPressable

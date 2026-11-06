@@ -40,6 +40,27 @@ const Probe = ({
   return visible ? <Text>{label}</Text> : null;
 };
 
+// A `Portal.Host` inside a modal puts the inner modal's content in a host of
+// its own, so the two modals do not share a parent host.
+const NestedModals = ({
+  onDismissOuter,
+  onDismissInner,
+}: {
+  onDismissOuter: () => void;
+  onDismissInner: () => void;
+}) => (
+  <Portal.Host>
+    <Modal visible onDismiss={onDismissOuter} aria-label="outer">
+      <Text>outer</Text>
+      <Portal.Host>
+        <Modal visible onDismiss={onDismissInner} aria-label="inner">
+          <Text>inner</Text>
+        </Modal>
+      </Portal.Host>
+    </Modal>
+  </Portal.Host>
+);
+
 const pressBack = async () => {
   await act(() => {
     BackHandler.mockPressBack();
@@ -74,6 +95,24 @@ describe('useOverlayDismiss', () => {
 
       expect(onDismissSecond).toHaveBeenCalledTimes(1);
       expect(onDismissFirst).not.toHaveBeenCalled();
+    });
+
+    it('closes the inner modal of two nested portal hosts', async () => {
+      const onDismissOuter = jest.fn();
+      const onDismissInner = jest.fn();
+
+      await render(
+        <NestedModals
+          onDismissOuter={onDismissOuter}
+          onDismissInner={onDismissInner}
+        />
+      );
+      await screen.findByText('inner');
+
+      await pressBack();
+
+      expect(onDismissInner).toHaveBeenCalledTimes(1);
+      expect(onDismissOuter).not.toHaveBeenCalled();
     });
 
     it('closes one overlay per press instead of all of them at once', async () => {
@@ -211,9 +250,16 @@ describe('useOverlayDismiss', () => {
 
       // There is no DOM under the React Native preset, and the hook only
       // reaches for one on the web, so the test supplies what it touches.
+      // A real `Modal` also reads `HTMLElement` and `document.activeElement` to
+      // manage focus. Nothing here is focusable, so an empty class will do.
+      Object.defineProperty(global, 'HTMLElement', {
+        configurable: true,
+        value: class {},
+      });
       Object.defineProperty(global, 'document', {
         configurable: true,
         value: {
+          activeElement: null,
           addEventListener: (
             type: string,
             listener: (event: unknown) => void,
@@ -236,6 +282,7 @@ describe('useOverlayDismiss', () => {
     afterAll(() => {
       platform.restore();
       delete (global as { document?: unknown }).document;
+      delete (global as { HTMLElement?: unknown }).HTMLElement;
     });
 
     beforeEach(() => {
@@ -274,6 +321,24 @@ describe('useOverlayDismiss', () => {
       expect(onDismissFirst).not.toHaveBeenCalled();
       expect(event.preventDefault).toHaveBeenCalledTimes(1);
       expect(event.stopImmediatePropagation).toHaveBeenCalledTimes(1);
+    });
+
+    it('closes the inner modal of two nested portal hosts', async () => {
+      const onDismissOuter = jest.fn();
+      const onDismissInner = jest.fn();
+
+      await render(
+        <NestedModals
+          onDismissOuter={onDismissOuter}
+          onDismissInner={onDismissInner}
+        />
+      );
+      await screen.findByText('inner');
+
+      await pressEscape();
+
+      expect(onDismissInner).toHaveBeenCalledTimes(1);
+      expect(onDismissOuter).not.toHaveBeenCalled();
     });
 
     it('absorbs the key without closing anything when the overlay may not be dismissed', async () => {

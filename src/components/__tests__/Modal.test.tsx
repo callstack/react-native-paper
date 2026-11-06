@@ -459,6 +459,39 @@ describe('Modal', () => {
     expect(onDismiss).not.toHaveBeenCalled();
   });
 
+  it('does not pass the accessibility escape gesture of a non-dismissible modal on to the modal behind it', async () => {
+    const onDismissOuter = jest.fn();
+    const onDismissInner = jest.fn();
+
+    await render(
+      <Portal.Host>
+        <Modal
+          testID="outer"
+          visible
+          onDismiss={onDismissOuter}
+          aria-label="Outer"
+        >
+          <Portal.Host>
+            <Modal
+              testID="inner"
+              visible
+              dismissable={false}
+              onDismiss={onDismissInner}
+              aria-label="Inner"
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
+        </Modal>
+      </Portal.Host>
+    );
+
+    await fireEvent(screen.getByTestId('inner'), 'accessibilityEscape');
+
+    expect(onDismissInner).not.toHaveBeenCalled();
+    expect(onDismissOuter).not.toHaveBeenCalled();
+  });
+
   it('keeps a non-dismissible modal on screen on the accessibility escape gesture', async () => {
     const onDismiss = jest.fn();
 
