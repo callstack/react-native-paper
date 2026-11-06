@@ -111,6 +111,12 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   delayLongPress?: number;
   /**
+   * Delay in ms, from the start of the touch, before the press feedback (ripple) is shown (Native-only).
+   * Quick taps shorter than this delay will still fire `onPress` but might not show the ripple effect.
+   * Recommended values for buttons in scrollable lists are between 50ms and 100ms.
+   */
+  unstable_pressDelay?: number;
+  /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width, to set a custom padding or to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
@@ -179,6 +185,7 @@ const Button = ({
   onPressOut,
   onLongPress,
   delayLongPress,
+  unstable_pressDelay,
   style,
   theme: themeOverrides,
   uppercase: uppercaseProp,
@@ -327,6 +334,7 @@ const Button = ({
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
+        unstable_pressDelay={unstable_pressDelay}
         aria-label={ariaLabel}
         accessibilityHint={accessibilityHint}
         role={role}
