@@ -117,7 +117,7 @@ export type ShellProps = {
   /**
    * Custom actions screen reader users can trigger on the FAB.
    */
-  accessibilityActions?: AccessibilityActionInfo[];
+  accessibilityActions?: readonly AccessibilityActionInfo[];
   /**
    * Called with the name of the custom action the user triggered.
    */
