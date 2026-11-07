@@ -1,4 +1,6 @@
-import { describe, expect, it } from '@jest/globals';
+import { Platform } from 'react-native';
+
+import { describe, expect, it, jest } from '@jest/globals';
 import color from 'color';
 
 import { render, screen } from '../../test-utils';
@@ -307,5 +309,77 @@ describe('getChipColor - border color', () => {
     ).toMatchObject({
       borderColor: 'transparent',
     });
+  });
+});
+
+describe('Chip accessibility (Issue #5180)', () => {
+  it('does not set aria-selected or aria-pressed by default when selected is not provided', async () => {
+    await render(<Chip testID="chip">Action chip</Chip>);
+    const chip = screen.getByTestId('chip');
+    expect(chip).not.toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ selected: expect.anything() })
+    );
+    expect(chip).not.toHaveProp('aria-pressed');
+  });
+
+  it('sets aria-selected on native when selected is provided', async () => {
+    jest.replaceProperty(Platform, 'OS', 'ios');
+    await render(
+      <Chip selected testID="chip">
+        Selected chip
+      </Chip>
+    );
+    const chip = screen.getByTestId('chip');
+    expect(chip).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ selected: true })
+    );
+    expect(chip).not.toHaveProp('aria-pressed');
+  });
+
+  it('sets aria-pressed instead of aria-selected on web when role is button', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(
+      <Chip selected testID="chip">
+        Selected web chip
+      </Chip>
+    );
+    const chip = screen.getByTestId('chip');
+    expect(chip).toHaveProp('aria-pressed', true);
+    expect(chip).not.toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ selected: expect.anything() })
+    );
+  });
+
+  it('sets aria-pressed to false on web when selected is false', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(
+      <Chip selected={false} testID="chip">
+        Unselected web chip
+      </Chip>
+    );
+    const chip = screen.getByTestId('chip');
+    expect(chip).toHaveProp('aria-pressed', false);
+    expect(chip).not.toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ selected: expect.anything() })
+    );
+  });
+
+  it('keeps aria-selected on web when role is not button', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(
+      <Chip selected role="option" testID="chip">
+        Option chip
+      </Chip>
+    );
+    const chip = screen.getByTestId('chip');
+    expect(chip).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ selected: true })
+    );
+    expect(chip).not.toHaveProp('aria-pressed');
   });
 });

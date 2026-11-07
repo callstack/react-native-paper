@@ -184,7 +184,7 @@ const Chip = ({
   children,
   icon,
   avatar,
-  selected = false,
+  selected,
   disabled = false,
   background,
   'aria-label': ariaLabel,
@@ -278,6 +278,20 @@ const Chip = ({
     ...theme.fonts.labelLarge,
   };
 
+  const isWeb = Platform.OS === 'web';
+  const isButtonRole = role === 'button';
+  const isSelectedDefined = typeof selected === 'boolean';
+
+  const accessibilitySelectedProps = React.useMemo(() => {
+    if (!isSelectedDefined) {
+      return {};
+    }
+    if (isWeb && isButtonRole) {
+      return { 'aria-pressed': selected };
+    }
+    return { 'aria-selected': selected };
+  }, [selected, isWeb, isButtonRole, isSelectedDefined]);
+
   return (
     <Surface
       backgroundColor={selected ? selectedBackgroundColor : backgroundColor}
@@ -300,7 +314,7 @@ const Chip = ({
         disabled={disabled}
         aria-label={ariaLabel}
         role={role}
-        aria-selected={selected}
+        {...accessibilitySelectedProps}
         aria-disabled={disabled}
         testID={testID}
         theme={theme}

@@ -104,7 +104,7 @@ exports[`renders chip with close button 1`] = `
         "checked": undefined,
         "disabled": true,
         "expanded": undefined,
-        "selected": false,
+        "selected": undefined,
       }
     }
     accessibilityValue={
@@ -458,7 +458,7 @@ exports[`renders chip with custom close button 1`] = `
         "checked": undefined,
         "disabled": true,
         "expanded": undefined,
-        "selected": false,
+        "selected": undefined,
       }
     }
     accessibilityValue={
@@ -812,7 +812,7 @@ exports[`renders chip with icon 1`] = `
         "checked": undefined,
         "disabled": true,
         "expanded": undefined,
-        "selected": false,
+        "selected": undefined,
       }
     }
     accessibilityValue={
@@ -1073,7 +1073,7 @@ exports[`renders chip with onPress 1`] = `
         "checked": undefined,
         "disabled": false,
         "expanded": undefined,
-        "selected": false,
+        "selected": undefined,
       }
     }
     accessibilityValue={
@@ -1289,7 +1289,7 @@ exports[`renders outlined disabled chip 1`] = `
         "checked": undefined,
         "disabled": true,
         "expanded": undefined,
-        "selected": false,
+        "selected": undefined,
       }
     }
     accessibilityValue={
