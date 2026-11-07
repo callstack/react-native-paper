@@ -203,8 +203,10 @@ In 5.x, each of these components multiplied `roundness` by a fixed number, and t
 | `extraSmall`     | 4       | 1              | `Menu`, `Snackbar`, `Tooltip`                       |
 | `small`          | 8       | 2              | `Chip`                                              |
 | `medium`         | 12      | 3              | `Card`                                              |
-| `largeIncreased` | 20      | 5              | `Button`, `SegmentedButtons`                        |
+| `largeIncreased` | 20      | 5              | `SegmentedButtons`                                  |
 | `extraLarge`     | 28      | 7              | `Dialog`, `Drawer.Item`, `Searchbar` (`mode="bar"`) |
+
+`Button` (5.x multiplier 5) is a full pill by default and doesn't read a corner role. With `shape="square"` it reads the corner of its `size`, as listed in the Button section's [Style](#style) notes: `medium` at the default `small` size.
 
 `FAB` and `FAB.Extended` use the role of their `size`: `large` (16) by default, `largeIncreased` for `size="medium"` and `extraLarge` for `size="large"`. `TextInput` no longer follows the theme: its corners are always 4.
 
@@ -212,7 +214,9 @@ A component's `theme` prop is merged deeply, so you can set only the role you ne
 
 ```diff
 -<Button theme={{ roundness: 2 }}>Press me</Button>
-+<Button theme={{ shapes: { corner: { largeIncreased: 10 } } }}>Press me</Button>
++<Button shape="square" theme={{ shapes: { corner: { medium: 10 } } }}>
++  Press me
++</Button>
 ```
 
 `PaperProvider` doesn't merge `shapes` deeply: a `shapes` key in its `theme` replaces the default one. So spread the base `shapes` and `corner`, or the roles you leave out are `undefined` and those components lose their rounded corners:
