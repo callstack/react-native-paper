@@ -67,7 +67,7 @@ You can change the theme prop dynamically and all the components will automatica
 A theme usually contains the following properties:
 
 - `dark` (`boolean`): whether this is a dark theme or light theme.
-- `shapes` (`object`): corner radii of components, under `corner`, from `extraSmall` (4) to `extraExtraLarge` (48). Each component uses one of them, e.g. `Button` uses `largeIncreased`.
+- `shapes` (`object`): corner radii of components, under `corner`, from `extraSmall` (4) to `extraExtraLarge` (48). Each component uses one of them, e.g. `Card` uses `medium`. `Button` is a full pill by default; with `shape="square"` it uses the role of its `size`, `medium` at the default `small` size.
 - `colors` (`object`): various colors used throughout different elements.
 
   > The primary key color is used to derive roles for key components across the UI, such as the FAB, prominent buttons, active states, as well as the tint of elevated surfaces.
@@ -473,8 +473,8 @@ import { Button } from 'react-native-paper';
 export default function ButtonExample() {
   return (
     <Button
-      mode="contained"
-      theme={{ shapes: { corner: { largeIncreased: 15 } } }}
+      shape="square"
+      theme={{ shapes: { corner: { medium: 15 } } }}
     >
       Press me
     </Button>
