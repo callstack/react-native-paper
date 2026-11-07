@@ -101,3 +101,19 @@ it('forwards event object to onPress', async () => {
   });
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
 });
+
+it('forwards accessibilityActions and onAccessibilityAction to the button', async () => {
+  const actions = [{ name: 'newNote', label: 'New note' }];
+  const onAccessibilityAction = jest.fn();
+  await render(
+    <FAB
+      icon="plus"
+      aria-label="Add item"
+      accessibilityActions={actions}
+      onAccessibilityAction={onAccessibilityAction}
+    />
+  );
+  const button = screen.getByRole('button', { name: 'Add item' });
+  expect(button).toHaveProp('accessibilityActions', actions);
+  expect(button).toHaveProp('onAccessibilityAction', onAccessibilityAction);
+});
