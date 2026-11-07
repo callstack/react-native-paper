@@ -453,7 +453,11 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     selectionColor,
     cursorColor,
     animatedActiveOutlineStyles: undefined,
-    animatedContainerStyle: animation.animatedContainerStyle,
+    // The input only fades out while a label rests in its place; without a
+    // label the input and its placeholder stay visible.
+    animatedContainerStyle: props.label
+      ? animation.animatedContainerStyle
+      : undefined,
     placeholder,
     counterText,
     accessibilityProps,

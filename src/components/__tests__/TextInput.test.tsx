@@ -979,6 +979,35 @@ it('shows placeholder on multiline TextInput when focused', async () => {
   );
 });
 
+it.each(['filled', 'outlined'] as const)(
+  'keeps an empty, unfocused %s TextInput without a label visible',
+  async (variant) => {
+    await render(
+      <TextInput
+        variant={variant}
+        value=""
+        onChangeText={() => {}}
+        placeholder="Search for plugins..."
+      />
+    );
+
+    expect(screen.getByPlaceholderText('Search for plugins...')).toBeVisible();
+  }
+);
+
+it('hides the input of an empty, unfocused TextInput while its label rests in place', async () => {
+  await render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  expect(screen.getByTestId('tf-input')).not.toBeVisible();
+});
+
 it('does not expose the placeholder string again after the TextInput loses focus', async () => {
   await render(
     <TextInput
