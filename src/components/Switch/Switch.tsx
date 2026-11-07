@@ -61,6 +61,10 @@ export type Props = {
    * Accessibility label for the switch. This is read by the screen reader when the user focuses the switch.
    */
   'aria-label'?: string;
+  /**
+   * ID of the element that names the switch, e.g. a `Text` with a `nativeID`.
+   */
+  'aria-labelledby'?: string;
 };
 
 const {
@@ -136,6 +140,7 @@ const Switch = ({
   testID,
   theme: themeOverrides,
   'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
@@ -374,6 +379,7 @@ const Switch = ({
         aria-disabled={isDisabled}
         aria-checked={checked}
         aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
         testID={testID}
         style={[
           styles.touchable,

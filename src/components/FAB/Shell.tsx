@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import type {
+  AccessibilityActionEvent,
+  AccessibilityActionInfo,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -113,6 +115,14 @@ export type ShellProps = {
    */
   'aria-expanded'?: boolean;
   /**
+   * Custom actions screen reader users can trigger on the FAB.
+   */
+  accessibilityActions?: AccessibilityActionInfo[];
+  /**
+   * Called with the name of the custom action the user triggered.
+   */
+  onAccessibilityAction?: (event: AccessibilityActionEvent) => void;
+  /**
    * Largest scale the label font can reach (auto-built content only).
    */
   labelMaxFontSizeMultiplier?: number;
@@ -202,6 +212,8 @@ const Shell = ({
   'aria-selected': ariaSelected,
   'aria-busy': ariaBusy,
   'aria-expanded': ariaExpanded,
+  accessibilityActions,
+  onAccessibilityAction,
   labelMaxFontSizeMultiplier,
   labelAnimatedStyle,
   background,
@@ -335,6 +347,8 @@ const Shell = ({
           aria-selected={ariaSelected}
           aria-busy={ariaBusy}
           aria-expanded={ariaExpanded}
+          accessibilityActions={accessibilityActions}
+          onAccessibilityAction={onAccessibilityAction}
           testID={testID}
           style={[
             children ? styles.fill : null,
