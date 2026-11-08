@@ -64,7 +64,7 @@ export type Props = PressableProps & {
   /**
    * Color of the underlay for the highlight effect (Android < 5.0 and iOS).
    */
-  underlayColor?: string;
+  underlayColor?: ColorValue;
   /**
    * Content of the `TouchableRipple`. Can be a function that receives the pressable state.
    * `hovered` and `focused` are only available on the web.
