@@ -1,4 +1,6 @@
-import { describe, expect, it } from '@jest/globals';
+import { Platform } from 'react-native';
+
+import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
 import color from 'color';
 
 import { render, screen } from '../../test-utils';
@@ -311,97 +313,111 @@ describe('getChipColor - border color', () => {
 });
 
 describe('accessibility', () => {
-  it('forwards accessibilityState to the underlying touchable element', async () => {
-    await render(
-      <Chip
-        onPress={() => {}}
-        accessibilityState={{ checked: true, busy: true, expanded: false }}
-      >
-        Accessibility Chip
-      </Chip>
-    );
+  const originalPlatform = Platform.OS;
 
-    expect(screen.getByRole('button')).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: true, busy: true, expanded: false })
-    );
+  afterEach(() => {
+    Platform.OS = originalPlatform;
   });
 
-  it('forwards aria-checked to the underlying touchable element', async () => {
-    await render(
-      <Chip onPress={() => {}} aria-checked={true}>
-        Checkable Chip
-      </Chip>
-    );
+  describe('web', () => {
+    beforeEach(() => {
+      Platform.OS = 'web';
+    });
 
-    expect(screen.getByRole('button')).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: true })
-    );
+    it('does not expose aria-pressed for an action Chip when selected is omitted', async () => {
+      await render(<Chip onPress={() => {}}>Action Chip</Chip>);
+
+      const button = screen.getByRole('button');
+      expect(button).not.toHaveProp('aria-pressed');
+    });
+
+    it('exposes aria-pressed as true when selected is true', async () => {
+      await render(
+        <Chip onPress={() => {}} selected={true}>
+          Selected Chip
+        </Chip>
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveProp('aria-pressed', true);
+    });
+
+    it('exposes aria-pressed as false when selected is explicitly false', async () => {
+      await render(
+        <Chip onPress={() => {}} selected={false}>
+          Unselected Chip
+        </Chip>
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveProp('aria-pressed', false);
+    });
+
+    it('removes aria-selected from the interactive button', async () => {
+      await render(
+        <Chip onPress={() => {}} selected={true}>
+          Toggle Chip
+        </Chip>
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).not.toHaveProp('aria-selected');
+    });
+
+    it('removes aria-selected when selected is omitted', async () => {
+      await render(<Chip onPress={() => {}}>Action Chip</Chip>);
+
+      const button = screen.getByRole('button');
+      expect(button).not.toHaveProp('aria-selected');
+    });
   });
 
-  it('prioritizes aria-checked over accessibilityState.checked', async () => {
-    await render(
-      <Chip
-        onPress={() => {}}
-        accessibilityState={{ checked: false }}
-        aria-checked={true}
-      >
-        Chip
-      </Chip>
-    );
+  describe('native', () => {
+    it('preserves selected state when selected is true', async () => {
+      await render(
+        <Chip onPress={() => {}} selected={true}>
+          Selected Chip
+        </Chip>
+      );
 
-    expect(screen.getByRole('button')).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: true })
-    );
+      const button = screen.getByRole('button');
+      expect(button).toHaveProp(
+        'accessibilityState',
+        expect.objectContaining({ selected: true })
+      );
+    });
+
+    it('produces native selected state false when selected is explicitly false', async () => {
+      await render(
+        <Chip onPress={() => {}} selected={false}>
+          Unselected Chip
+        </Chip>
+      );
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveProp(
+        'accessibilityState',
+        expect.objectContaining({ selected: false })
+      );
+    });
+
+    it('produces native selected state false when selected is omitted', async () => {
+      await render(<Chip onPress={() => {}}>Default Chip</Chip>);
+
+      const button = screen.getByRole('button');
+      expect(button).toHaveProp(
+        'accessibilityState',
+        expect.objectContaining({ selected: false })
+      );
+    });
   });
 
-  it('handles both selected and checked state simultaneously', async () => {
-    await render(
-      <Chip onPress={() => {}} selected aria-checked={true}>
-        Selected Checked Chip
-      </Chip>
-    );
-
-    expect(screen.getByRole('button')).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: true, selected: true })
-    );
-  });
-
-  it('handles accessibilityState.selected when selected prop is omitted', async () => {
-    await render(
-      <Chip onPress={() => {}} accessibilityState={{ selected: true }}>
-        Selected Chip
-      </Chip>
-    );
-
-    expect(screen.getByRole('button')).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ selected: true })
-    );
-  });
-
-  it('forwards aria-checked when role is checkbox', async () => {
-    await render(
-      <Chip onPress={() => {}} role="checkbox" aria-checked={true}>
-        Checkbox Chip
-      </Chip>
-    );
-
-    expect(screen.getByRole('checkbox')).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ checked: true })
-    );
-  });
-
-  it('does not pass accessibilityState or aria-checked to the outer surface', async () => {
+  it('does not forward accessibilityState or aria-checked to the outer Surface or interactive TouchableRipple', async () => {
     await render(
       <Chip
         onPress={() => {}}
         testID="chip-touchable"
-        accessibilityState={{ checked: true }}
+        accessibilityState={{ checked: true, busy: true }}
         aria-checked={true}
       >
         Chip
@@ -410,22 +426,28 @@ describe('accessibility', () => {
 
     const touchable = screen.getByTestId('chip-touchable');
     const surface = touchable.parent;
+
     expect(surface).not.toHaveProp('accessibilityState');
     expect(surface).not.toHaveProp('aria-checked');
+
+    expect(touchable).not.toHaveProp('aria-checked');
+    expect(touchable).toHaveProp(
+      'accessibilityState',
+      expect.not.objectContaining({
+        checked: expect.anything(),
+        busy: expect.anything(),
+      })
+    );
   });
 
-  it('has default accessibilityState when accessibilityState and aria-checked are omitted', async () => {
+  it('does not forward accessibilityState or aria-checked to the interactive button by default', async () => {
     await render(<Chip onPress={() => {}}>Default Chip</Chip>);
 
     const button = screen.getByRole('button');
+    expect(button).not.toHaveProp('aria-checked');
     expect(button).toHaveProp(
       'accessibilityState',
       expect.not.objectContaining({ checked: expect.anything() })
     );
-    expect(button).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ selected: false, disabled: false })
-    );
-    expect(button).not.toHaveProp('aria-checked');
   });
 });
