@@ -22,7 +22,7 @@ export type IconSource =
       }
     ) => React.ReactNode);
 
-type IconProps = {
+export type IconProps = {
   /**
    * Size of icon.
    */
