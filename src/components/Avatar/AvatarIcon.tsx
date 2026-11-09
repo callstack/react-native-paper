@@ -2,13 +2,11 @@ import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
-import getContrastingColor from '../../utils/getContrastingColor';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-
-const defaultSize = 64;
+import { DEFAULT_SIZE } from './utils';
 
 export type Props = ViewProps & {
   /**
@@ -45,17 +43,13 @@ export type Props = ViewProps & {
  */
 const Avatar = ({
   icon,
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   style,
   theme: themeOverrides,
+  color: customColor,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
-    StyleSheet.flatten(style) || {};
-  const textColor =
-    rest.color ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
 
   return (
     <View
@@ -63,15 +57,19 @@ const Avatar = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
-          backgroundColor,
+          borderRadius: cornerFull,
+          backgroundColor: theme.colors.primaryContainer,
         },
         styles.container,
-        restStyle,
+        style,
       ]}
       {...rest}
     >
-      <Icon source={icon} color={textColor} size={size * 0.6} />
+      <Icon
+        source={icon}
+        color={customColor ?? theme.colors.onPrimaryContainer}
+        size={size * 0.6}
+      />
     </View>
   );
 };

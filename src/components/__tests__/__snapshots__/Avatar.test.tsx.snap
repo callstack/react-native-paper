@@ -5,8 +5,8 @@ exports[`renders avatar with icon 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -14,7 +14,7 @@ exports[`renders avatar with icon 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      undefined,
     ]
   }
 >
@@ -26,7 +26,7 @@ exports[`renders avatar with icon 1`] = `
     style={
       [
         {
-          "color": "#ffffff",
+          "color": "rgba(33, 0, 93, 1)",
           "fontSize": 38.4,
         },
         [
@@ -55,8 +55,8 @@ exports[`renders avatar with icon and custom background color 1`] = `
   style={
     [
       {
-        "backgroundColor": "#f44336",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -64,7 +64,9 @@ exports[`renders avatar with icon and custom background color 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      {
+        "backgroundColor": "#f44336",
+      },
     ]
   }
 >
@@ -76,7 +78,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
     style={
       [
         {
-          "color": "#ffffff",
+          "color": "rgba(33, 0, 93, 1)",
           "fontSize": 38.4,
         },
         [
@@ -105,8 +107,8 @@ exports[`renders avatar with image 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -123,7 +125,7 @@ exports[`renders avatar with image 1`] = `
     }
     style={
       {
-        "borderRadius": 32,
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       }
@@ -137,8 +139,8 @@ exports[`renders avatar with text 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -146,7 +148,7 @@ exports[`renders avatar with text 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      undefined,
     ]
   }
 >
@@ -159,24 +161,28 @@ exports[`renders avatar with text 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
-            "textAlign": "center",
-            "textAlignVertical": "center",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
-          {
-            "color": "#ffffff",
-            "fontSize": 32,
-            "lineHeight": 64,
-          },
-          undefined,
+          [
+            {
+              "textAlign": "center",
+              "textAlignVertical": "center",
+            },
+            {
+              "color": "rgba(33, 0, 93, 1)",
+              "fontSize": 32,
+              "lineHeight": 64,
+            },
+            undefined,
+          ],
         ],
       ]
     }
@@ -191,8 +197,8 @@ exports[`renders avatar with text and custom background color 1`] = `
   style={
     [
       {
-        "backgroundColor": "#f44336",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -200,7 +206,9 @@ exports[`renders avatar with text and custom background color 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      {
+        "backgroundColor": "#f44336",
+      },
     ]
   }
 >
@@ -213,24 +221,28 @@ exports[`renders avatar with text and custom background color 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
-            "textAlign": "center",
-            "textAlignVertical": "center",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
-          {
-            "color": "#ffffff",
-            "fontSize": 32,
-            "lineHeight": 64,
-          },
-          undefined,
+          [
+            {
+              "textAlign": "center",
+              "textAlignVertical": "center",
+            },
+            {
+              "color": "rgba(33, 0, 93, 1)",
+              "fontSize": 32,
+              "lineHeight": 64,
+            },
+            undefined,
+          ],
         ],
       ]
     }
@@ -245,8 +257,8 @@ exports[`renders avatar with text and custom colors 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 32,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 64,
         "width": 64,
       },
@@ -254,7 +266,7 @@ exports[`renders avatar with text and custom colors 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      undefined,
     ]
   }
 >
@@ -267,24 +279,28 @@ exports[`renders avatar with text and custom colors 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
-            "textAlign": "center",
-            "textAlignVertical": "center",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
-          {
-            "color": "#FFFFFF",
-            "fontSize": 32,
-            "lineHeight": 64,
-          },
-          undefined,
+          [
+            {
+              "textAlign": "center",
+              "textAlignVertical": "center",
+            },
+            {
+              "color": "#FFFFFF",
+              "fontSize": 32,
+              "lineHeight": 64,
+            },
+            undefined,
+          ],
         ],
       ]
     }
@@ -299,8 +315,8 @@ exports[`renders avatar with text and custom size 1`] = `
   style={
     [
       {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderRadius": 48,
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 9999,
         "height": 96,
         "width": 96,
       },
@@ -308,7 +324,7 @@ exports[`renders avatar with text and custom size 1`] = `
         "alignItems": "center",
         "justifyContent": "center",
       },
-      {},
+      undefined,
     ]
   }
 >
@@ -321,24 +337,28 @@ exports[`renders avatar with text and custom size 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
-            "textAlign": "center",
-            "textAlignVertical": "center",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
-          {
-            "color": "#ffffff",
-            "fontSize": 48,
-            "lineHeight": 96,
-          },
-          undefined,
+          [
+            {
+              "textAlign": "center",
+              "textAlignVertical": "center",
+            },
+            {
+              "color": "rgba(33, 0, 93, 1)",
+              "fontSize": 48,
+              "lineHeight": 96,
+            },
+            undefined,
+          ],
         ],
       ]
     }
