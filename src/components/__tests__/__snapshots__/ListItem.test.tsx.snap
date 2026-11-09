@@ -363,7 +363,7 @@ exports[`renders list item with custom description 1`] = `
                   "checked": undefined,
                   "disabled": false,
                   "expanded": undefined,
-                  "selected": false,
+                  "selected": undefined,
                 }
               }
               accessibilityValue={
