@@ -146,7 +146,7 @@ it('leaves the RTL mirroring to the browser on web', async () => {
   expect(contentOf('Trailing')).toHaveStyle({ flexDirection: 'row-reverse' });
 });
 
-it('passes the iconSize prop to the icon', async () => {
+it('renders the icon at the size set by iconSize', async () => {
   const renderIcon = jest.fn(() => null);
 
   await render(
@@ -158,6 +158,18 @@ it('passes the iconSize prop to the icon', async () => {
   expect(renderIcon).toHaveBeenCalledWith(
     expect.objectContaining({ size: 24 })
   );
+});
+
+it('renders the loading indicator at the size set by iconSize', async () => {
+  const tree = (
+    await render(
+      <Button loading iconSize={24}>
+        Loading Button
+      </Button>
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
 
 it('renders loading button', async () => {

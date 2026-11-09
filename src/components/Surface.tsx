@@ -28,59 +28,59 @@ export type SurfaceVisualProps = {
    */
   backgroundColor?: ColorValue;
   /**
-   * Radius of every corner of the Surface.
+   * Radius of every corner.
    */
   borderRadius?: BorderRadius;
   /**
-   * Radius of the bottom-end corner of the Surface.
+   * Radius of the bottom-end corner.
    */
   borderBottomEndRadius?: BorderRadius;
   /**
-   * Radius of the bottom-left corner of the Surface.
+   * Radius of the bottom-left corner.
    */
   borderBottomLeftRadius?: BorderRadius;
   /**
-   * Radius of the bottom-right corner of the Surface.
+   * Radius of the bottom-right corner.
    */
   borderBottomRightRadius?: BorderRadius;
   /**
-   * Radius of the bottom-start corner of the Surface.
+   * Radius of the bottom-start corner.
    */
   borderBottomStartRadius?: BorderRadius;
   /**
-   * Radius of the end-end corner of the Surface.
+   * Radius of the end-end corner.
    */
   borderEndEndRadius?: BorderRadius;
   /**
-   * Radius of the end-start corner of the Surface.
+   * Radius of the end-start corner.
    */
   borderEndStartRadius?: BorderRadius;
   /**
-   * Radius of the start-end corner of the Surface.
+   * Radius of the start-end corner.
    */
   borderStartEndRadius?: BorderRadius;
   /**
-   * Radius of the start-start corner of the Surface.
+   * Radius of the start-start corner.
    */
   borderStartStartRadius?: BorderRadius;
   /**
-   * Radius of the top-end corner of the Surface.
+   * Radius of the top-end corner.
    */
   borderTopEndRadius?: BorderRadius;
   /**
-   * Radius of the top-left corner of the Surface.
+   * Radius of the top-left corner.
    */
   borderTopLeftRadius?: BorderRadius;
   /**
-   * Radius of the top-right corner of the Surface.
+   * Radius of the top-right corner.
    */
   borderTopRightRadius?: BorderRadius;
   /**
-   * Radius of the top-start corner of the Surface.
+   * Radius of the top-start corner.
    */
   borderTopStartRadius?: BorderRadius;
   /**
-   * Corner curve of the Surface on iOS.
+   * Corner curve on iOS.
    */
   borderCurve?: ViewStyle['borderCurve'];
 };

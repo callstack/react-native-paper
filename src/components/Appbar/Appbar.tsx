@@ -17,8 +17,6 @@ import type { SurfaceStyle, SurfaceVisualProps } from '../Surface';
 
 const APPBAR_HORIZONTAL_PADDING = 4;
 
-export type AppbarStyle = SurfaceStyle;
-
 export type Props = Omit<Partial<ViewProps>, 'style'> &
   Omit<SurfaceVisualProps, 'backgroundColor'> & {
     /**
@@ -66,7 +64,7 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
      *
      * Background color and border radius should be specified via props instead.
      */
-    style?: StyleProp<AppbarStyle>;
+    style?: StyleProp<SurfaceStyle>;
   };
 
 /**

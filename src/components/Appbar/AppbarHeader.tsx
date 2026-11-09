@@ -5,9 +5,10 @@ import type { StyleProp } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Appbar } from './Appbar';
-import type { AppbarStyle, Props as AppbarProps } from './Appbar';
+import type { Props as AppbarProps } from './Appbar';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import type { SurfaceStyle } from '../Surface';
 
 export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
   /**
@@ -49,7 +50,7 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    *
    * Background color and border radius should be specified via props instead.
    */
-  style?: StyleProp<AppbarStyle>;
+  style?: StyleProp<SurfaceStyle>;
 };
 
 /**
