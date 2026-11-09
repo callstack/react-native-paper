@@ -744,6 +744,13 @@ These need no code change, but the rendering differs:
 
 - The `outlined` label and icon use **`onSurfaceVariant`** instead of
   `primary`.
+- The `outlined` outline uses **`outlineVariant`** instead of `outline`, and
+  keeps it when disabled instead of switching to `surfaceDisabled`. A theme
+  that set `colors.outline` to restyle outlined buttons sets `outlineVariant`
+  now.
+- `Banner` actions are `text` buttons instead of `compact` ones, so they are
+  wider: **16dp** of horizontal padding at the default `small` size instead of
+  **8dp**, and a **64dp** minimum width.
 - The default icon size is **20dp**, up from **18dp**.
 - `labelStyle={{ fontSize }}` no longer changes the icon size. The icon follows
   `size`; set both if you need them to match.
