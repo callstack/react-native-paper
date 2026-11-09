@@ -265,7 +265,7 @@ describe('useOverlayDismiss', () => {
             listener: (event: unknown) => void,
             capture?: boolean
           ) => {
-            if (type === 'keydown' && capture === true) {
+            if (type === 'keydown' && capture !== true) {
               keyDownListeners.add(listener);
             }
           },
@@ -289,11 +289,12 @@ describe('useOverlayDismiss', () => {
       keyDownListeners = new Set();
     });
 
-    const pressEscape = async ({ defaultPrevented = false } = {}) => {
+    const pressEscape = async ({ isComposing = false } = {}) => {
       const event = {
         key: 'Escape',
-        defaultPrevented,
+        isComposing,
         preventDefault: jest.fn(),
+        stopPropagation: jest.fn(),
         stopImmediatePropagation: jest.fn(),
       };
 
@@ -320,7 +321,15 @@ describe('useOverlayDismiss', () => {
       expect(onDismissSecond).toHaveBeenCalledTimes(1);
       expect(onDismissFirst).not.toHaveBeenCalled();
       expect(event.preventDefault).toHaveBeenCalledTimes(1);
-      expect(event.stopImmediatePropagation).toHaveBeenCalledTimes(1);
+    });
+
+    it('lets the key travel on to handlers in the app', async () => {
+      await render(<Probe label="only" visible onDismiss={jest.fn()} />);
+
+      const event = await pressEscape();
+
+      expect(event.stopPropagation).not.toHaveBeenCalled();
+      expect(event.stopImmediatePropagation).not.toHaveBeenCalled();
     });
 
     it('closes the inner modal of two nested portal hosts', async () => {
@@ -341,7 +350,7 @@ describe('useOverlayDismiss', () => {
       expect(onDismissOuter).not.toHaveBeenCalled();
     });
 
-    it('absorbs the key without closing anything when the overlay may not be dismissed', async () => {
+    it('closes nothing when the overlay may not be dismissed, and lets the key travel on', async () => {
       const onDismiss = jest.fn();
 
       await render(
@@ -356,15 +365,16 @@ describe('useOverlayDismiss', () => {
       const event = await pressEscape();
 
       expect(onDismiss).not.toHaveBeenCalled();
-      expect(event.stopImmediatePropagation).toHaveBeenCalledTimes(1);
+      expect(event.preventDefault).toHaveBeenCalledTimes(1);
+      expect(event.stopImmediatePropagation).not.toHaveBeenCalled();
     });
 
-    it('stays out of the way once something nearer the key press handled it', async () => {
+    it('ignores the key while an IME composition is active', async () => {
       const onDismiss = jest.fn();
 
       await render(<Probe label="only" visible onDismiss={onDismiss} />);
 
-      const event = await pressEscape({ defaultPrevented: true });
+      const event = await pressEscape({ isComposing: true });
 
       expect(onDismiss).not.toHaveBeenCalled();
       expect(event.preventDefault).not.toHaveBeenCalled();

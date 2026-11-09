@@ -128,7 +128,7 @@ describe('a menu inside a dialog', () => {
             listener: (event: unknown) => void,
             capture?: boolean
           ) => {
-            if (type === 'keydown' && capture === true) {
+            if (type === 'keydown' && capture !== true) {
               keyDownListeners.add(listener);
             }
           },
@@ -155,9 +155,8 @@ describe('a menu inside a dialog', () => {
     const pressEscape = async () => {
       const event = {
         key: 'Escape',
-        defaultPrevented: false,
+        isComposing: false,
         preventDefault: jest.fn(),
-        stopImmediatePropagation: jest.fn(),
       };
 
       await act(() => {

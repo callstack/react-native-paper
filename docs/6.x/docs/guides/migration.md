@@ -236,7 +236,7 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`,
 
 Previously, the Android back button dismissed the modal when `dismissable` was `true`, even if `dismissableBackButton` was `false`. The `dismissableBackButton` prop can now prevent the modal from being dismissed via the back button independently of the `dismissable` prop.
 
-The Escape key on web now dismisses the modal too, and `dismissableBackButton` controls it together with the back button. When several modals are open, back and Escape dismiss only the topmost one. When `dismissableBackButton` is `false`, they are absorbed and nothing is dismissed, rather than passed on to the content behind the modal.
+The Escape key on web now dismisses the modal too, and `dismissableBackButton` controls it together with the back button. When several modals are open, back and Escape dismiss only the topmost one. When `dismissableBackButton` is `false`, back is absorbed and nothing is dismissed, rather than passed on to the content behind the modal. Escape dismisses nothing either, but it still reaches your own key handlers. Escape is ignored while an input method editor (IME) composition is active.
 
 Opening a modal now moves focus into it, and closing it returns focus to the element that had it before. You can choose the elements with the new `initialFocusRef` and `restoreFocusRef` props:
 

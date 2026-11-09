@@ -33,7 +33,10 @@ const isTopmost = (key: number | undefined) =>
 
 export type OverlayDismissOptions = {
   enabled: boolean;
-  /** When false the press is absorbed, not passed on; same for Escape. */
+  /**
+   * When false, back is absorbed and not passed on, and Escape closes nothing.
+   * Escape still reaches the rest of the page.
+   */
   dismissable: boolean;
   /** Called when the overlay should close. */
   onDismiss?: () => void;
@@ -97,8 +100,8 @@ export function useOverlayDismiss({
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Something nearer the key press already dealt with it.
-      if (event.key !== 'Escape' || event.defaultPrevented) {
+      // Escape cancels an IME composition, it does not close the overlay.
+      if (event.key !== 'Escape' || event.isComposing) {
         return;
       }
 
@@ -107,11 +110,12 @@ export function useOverlayDismiss({
       }
 
       event.preventDefault();
-      event.stopImmediatePropagation();
     };
 
-    document.addEventListener('keydown', handleKeyDown, true);
+    // The bubble phase, and the event keeps travelling: handlers in the app
+    // still see the key.
+    document.addEventListener('keydown', handleKeyDown);
 
-    return () => document.removeEventListener('keydown', handleKeyDown, true);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [enabled, handleDismiss]);
 }

@@ -30,7 +30,8 @@ export type Props = {
   /**
    * Determines whether the Android hardware back button and the Escape key on the web dismiss the modal.
    * While a modal is visible, only the topmost one handles these. When this is `false`,
-   * they are absorbed and nothing is dismissed, rather than passed on to what is behind the modal.
+   * back is absorbed and nothing is dismissed, rather than passed on to what is behind the modal.
+   * Escape dismisses nothing either, but it still reaches the rest of the page.
    */
   dismissableBackButton?: boolean;
   /**
