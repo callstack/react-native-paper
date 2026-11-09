@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 import { Avatar, List, Palette } from 'react-native-paper';
 
@@ -44,11 +44,36 @@ const AvatarExample = () => {
           <Avatar.Image
             style={styles.avatar}
             source={require('../../assets/images/avatar.png')}
+            alt="Jane Doe"
           />
           <Avatar.Image
             style={styles.avatar}
             source={require('../../assets/images/avatar.png')}
             size={80}
+          />
+        </View>
+      </List.Section>
+      <List.Section title="Image fallback">
+        <View style={styles.row}>
+          <Avatar.Image
+            style={styles.avatar}
+            source={{ uri: 'file:///missing-avatar.png' }}
+            alt="Jane Doe"
+            fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+          />
+          <Avatar.Image
+            style={styles.avatar}
+            source={({ style, onError, ...a11y }) => (
+              <Image
+                source={require('../../assets/images/avatar.png')}
+                style={style}
+                onError={onError}
+                accessibilityIgnoresInvertColors
+                {...a11y}
+              />
+            )}
+            alt="Jane Doe"
+            fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
           />
         </View>
       </List.Section>
