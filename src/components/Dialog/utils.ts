@@ -8,8 +8,3 @@ export const DialogTitleIdContext = React.createContext<string | undefined>(
 export type DialogChildProps = {
   style?: StyleProp<ViewStyle>;
 };
-
-export type DialogActionChildProps = DialogChildProps & {
-  compact?: boolean;
-  uppercase?: boolean;
-};

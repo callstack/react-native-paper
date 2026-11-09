@@ -11,29 +11,43 @@ const STATUSES: Status[] = ['unchecked', 'checked', 'indeterminate'];
 
 type Row = {
   label: string;
-  render: (status: Status) => React.ReactNode;
+  render: (status: Status, label: string) => React.ReactNode;
 };
 
 const ROWS: Row[] = [
   {
     label: 'Default',
-    render: (status) => <Checkbox status={status} onPress={() => {}} />,
+    render: (status, label) => (
+      <Checkbox status={status} onPress={() => {}} aria-label={label} />
+    ),
   },
   {
     label: 'Disabled',
-    render: (status) => <Checkbox status={status} disabled />,
+    render: (status, label) => (
+      <Checkbox status={status} disabled aria-label={label} />
+    ),
   },
   {
     label: 'Custom color (tertiary)',
-    render: (status) => <CustomColorCheckbox status={status} />,
+    render: (status, label) => (
+      <CustomColorCheckbox status={status} label={label} />
+    ),
   },
   {
     label: 'Error',
-    render: (status) => <Checkbox status={status} error onPress={() => {}} />,
+    render: (status, label) => (
+      <Checkbox status={status} error onPress={() => {}} aria-label={label} />
+    ),
   },
 ];
 
-const CustomColorCheckbox = ({ status }: { status: Status }) => {
+const CustomColorCheckbox = ({
+  status,
+  label,
+}: {
+  status: Status;
+  label: string;
+}) => {
   const theme = useTheme();
   return (
     <Checkbox
@@ -41,6 +55,7 @@ const CustomColorCheckbox = ({ status }: { status: Status }) => {
       color={theme.colors.tertiary}
       uncheckedColor={theme.colors.tertiary}
       onPress={() => {}}
+      aria-label={label}
     />
   );
 };
@@ -59,6 +74,7 @@ const Interactive = () => {
           <Checkbox
             status={aChecked ? 'checked' : 'unchecked'}
             onPress={() => setAChecked((v) => !v)}
+            aria-label="Unchecked or checked"
           />
         </View>
         <Text
@@ -75,6 +91,7 @@ const Interactive = () => {
           <Checkbox
             status={bIndeterminate ? 'indeterminate' : 'unchecked'}
             onPress={() => setBIndeterminate((v) => !v)}
+            aria-label="Unchecked or indeterminate"
           />
         </View>
         <Text
@@ -114,7 +131,11 @@ const IndeterminateParent = () => {
         Parent / children (indeterminate)
       </Text>
       <View style={styles.parentRow}>
-        <Checkbox status={parentStatus} onPress={toggleAll} />
+        <Checkbox
+          status={parentStatus}
+          onPress={toggleAll}
+          aria-label="Select all"
+        />
         <Text
           style={[styles.interactiveLabel, { color: theme.colors.onSurface }]}
         >
@@ -125,6 +146,7 @@ const IndeterminateParent = () => {
         <Checkbox
           status={child1 ? 'checked' : 'unchecked'}
           onPress={() => setChild1((v) => !v)}
+          aria-label="Apples"
         />
         <Text
           style={[styles.interactiveLabel, { color: theme.colors.onSurface }]}
@@ -136,6 +158,7 @@ const IndeterminateParent = () => {
         <Checkbox
           status={child2 ? 'checked' : 'unchecked'}
           onPress={() => setChild2((v) => !v)}
+          aria-label="Bananas"
         />
         <Text
           style={[styles.interactiveLabel, { color: theme.colors.onSurface }]}
@@ -147,6 +170,7 @@ const IndeterminateParent = () => {
         <Checkbox
           status={child3 ? 'checked' : 'unchecked'}
           onPress={() => setChild3((v) => !v)}
+          aria-label="Cherries"
         />
         <Text
           style={[styles.interactiveLabel, { color: theme.colors.onSurface }]}
@@ -173,7 +197,7 @@ const CheckboxExample = () => {
           <View style={styles.cells}>
             {STATUSES.map((status) => (
               <View key={status} style={styles.cell}>
-                {row.render(status)}
+                {row.render(status, row.label)}
               </View>
             ))}
           </View>
