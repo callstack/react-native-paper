@@ -57,10 +57,11 @@ Use `LocaleProvider` to override the direction for a specific part of the tree w
 import * as React from 'react';
 import { LocaleProvider } from 'react-native-paper';
 
-export default function ArabicSection() {
+export default function ArabicSection({ children }) {
   return (
     <LocaleProvider direction="rtl">
       {/* Components here will use RTL layout */}
+      {children}
     </LocaleProvider>
   );
 }

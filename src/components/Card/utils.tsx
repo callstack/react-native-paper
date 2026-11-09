@@ -5,7 +5,6 @@ import type { InternalTheme } from '../../theme/types';
 type CardMode = 'elevated' | 'outlined' | 'contained';
 
 export type CardActionChildProps = {
-  compact?: boolean;
   mode?: string;
   style?: StyleProp<ViewStyle>;
 };

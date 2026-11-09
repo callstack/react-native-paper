@@ -87,7 +87,7 @@ const DIALOG_ELEVATION: Elevation = 3;
  *             <Text variant="bodyMedium">This is simple dialog</Text>
  *           </Dialog.Content>
  *           <Dialog.Actions>
- *             <Button onPress={hideDialog}>Done</Button>
+ *             <Button mode="text" onPress={hideDialog}>Done</Button>
  *           </Dialog.Actions>
  *         </Dialog>
  *       </View>
