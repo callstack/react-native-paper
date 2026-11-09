@@ -10,7 +10,7 @@ import type { IconSource } from '../Icon';
 
 const defaultSize = 64;
 
-export type Props = ViewProps & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Icon to display for the `Avatar`.
    */

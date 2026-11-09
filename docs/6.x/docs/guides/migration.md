@@ -75,9 +75,11 @@ Components no longer read values from the `style` prop to derive other styles, s
 
 - `Appbar` and `Appbar.Header`: `backgroundColor` and the border radius props (`borderRadius`, `borderTopLeftRadius` etc.) replace `style.backgroundColor` and the border radius in `style`
 - `Avatar.Icon`, `Avatar.Image` and `Avatar.Text`: `backgroundColor` replaces `style.backgroundColor`
-- `Button`: `iconPosition` replaces `contentStyle={{ flexDirection: 'row-reverse' }}`
 - `Button`: `iconSize` replaces `labelStyle.fontSize` for the size of the icon and the loading indicator
+- `Button`: `textColor` replaces `labelStyle.color` for the color of the icon and the loading indicator
 - `Card`: `borderColor` replaces `style.borderColor` for the outline color
+
+`Tooltip` no longer reads positioning styles from the wrapped element. Apply them to a parent `View` wrapping the `Tooltip`, see [Tooltip](#tooltip).
 
 ### Ripple color
 
@@ -308,6 +310,19 @@ e.g.:
 - style={{ backgroundColor: 'red', borderBottomLeftRadius: 16 }}
 + backgroundColor="red"
 + borderBottomLeftRadius={16}
+>
+  <Appbar.Content title="Title" />
+</Appbar.Header>
+```
+
+To keep the height of the content row when setting `height` in `style`, add the top inset from `useSafeAreaInsets()` of `react-native-safe-area-context`:
+
+```diff
++const { top } = useSafeAreaInsets();
++
+<Appbar.Header
+- style={{ height: 80 }}
++ style={{ height: 80 + top }}
 >
   <Appbar.Content title="Title" />
 </Appbar.Header>
@@ -793,6 +808,14 @@ below `minHeight` has no effect.
 </Button>
 ```
 
+#### Label style
+
+- `labelStyle={{ fontSize }}` no longer changes the icon size. The icon follows
+  `size`; use the `iconSize` prop to change the size of the icon and the
+  loading indicator.
+- `labelStyle={{ color }}` no longer changes the color of the icon and the
+  loading indicator. Use the `textColor` prop instead.
+
 #### Appearance changes
 
 These need no code change, but the rendering differs:
@@ -807,11 +830,6 @@ These need no code change, but the rendering differs:
   wider: **16dp** of horizontal padding at the default `small` size instead of
   **8dp**, and a **64dp** minimum width.
 - The default icon size is **20dp**, up from **18dp**.
-- `labelStyle={{ fontSize }}` no longer changes the icon size. The icon follows
-  `size`; use the `iconSize` prop to change the size of the icon and the
-  loading indicator.
-- `labelStyle={{ color }}` no longer changes the color of the icon and the
-  loading indicator. Use the `textColor` prop instead.
 - The resting corner is the full pill radius instead of a fixed **20dp**.
 - At the default `small` size, the horizontal padding is **16dp** for every
   mode. In 5.x, the label margins were **24dp** for `filled`, `tonal`,

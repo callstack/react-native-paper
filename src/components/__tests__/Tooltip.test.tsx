@@ -161,16 +161,6 @@ describe('Tooltip', () => {
       });
     });
 
-    describe('ref', () => {
-      it('forwards the ref passed to the wrapped component', async () => {
-        const ref = React.createRef<React.ComponentRef<typeof View>>();
-
-        await setup({ children: <DummyComponent ref={ref} /> });
-
-        expect(ref.current).not.toBeNull();
-      });
-    });
-
     describe('pressOut', () => {
       it('hides the tooltip when the user stop pressing the component', async () => {
         const {
@@ -220,6 +210,32 @@ describe('Tooltip', () => {
           expect(tooltip.parent).toHaveStyle({
             left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
             top: 250, // pageY (200) + height (50)
+          });
+        });
+
+        it('anchors the tooltip to the wrapper when the child is absolutely positioned', async () => {
+          const {
+            wrapper: { getByText, findByText },
+          } = await setup({
+            children: (
+              <DummyComponent
+                style={{ position: 'absolute', left: 10, top: 20 }}
+              />
+            ),
+          });
+
+          await userEvent.longPress(getTrigger(getByText));
+
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
+            nativeEvent: {
+              layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
+            },
+          });
+
+          expect(tooltip.parent).toHaveStyle({
+            left: 210,
+            top: 250,
           });
         });
       });

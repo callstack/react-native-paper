@@ -18,7 +18,7 @@ export type AvatarImageSource =
   | ImageSourcePropType
   | ((props: { size: number }) => React.ReactNode);
 
-export type Props = ViewProps & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop

@@ -49,6 +49,7 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    * Style of the header.
    *
    * Background color and border radius should be specified via props instead.
+   * A `height` set here is the total height of the header, including the status bar.
    */
   style?: StyleProp<SurfaceStyle>;
 };

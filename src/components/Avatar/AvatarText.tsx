@@ -15,7 +15,7 @@ import Text from '../Typography/Text';
 
 const defaultSize = 64;
 
-export type Props = ViewProps & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Initials to show as the text in the `Avatar`.
    */
