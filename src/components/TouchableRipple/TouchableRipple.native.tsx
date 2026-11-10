@@ -75,17 +75,17 @@ const TouchableRipple = (
       underlayColor,
     });
 
-  const getStyle = (state: unknown) => [
-    borderless && styles.overflowHidden,
+  // Keep the static form when possible: `Pressable` only tracks the pressed
+  // state when `children` or `style` is a function.
+  const resolvedStyle: PressableProps['style'] =
     typeof style === 'function'
-      ? (style as (state: unknown) => StyleProp<ViewStyle>)(state)
-      : style,
-  ];
+      ? (state) => [borderless && styles.overflowHidden, style(state)]
+      : [borderless && styles.overflowHidden, style];
 
-  const getChildren = (state: unknown) =>
-    typeof children === 'function'
-      ? (children as (state: unknown) => React.ReactNode)(state)
-      : children;
+  const resolveChildren = (state: PressableStateCallbackType) =>
+    React.Children.only(
+      typeof children === 'function' ? children(state) : children
+    );
 
   // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
   // https://github.com/facebook/react-native/issues/6480
@@ -108,16 +108,18 @@ const TouchableRipple = (
         {...rest}
         ref={ref}
         disabled={disabled}
-        style={getStyle}
+        style={resolvedStyle}
         android_ripple={androidRipple}
       >
-        {getChildren}
+        {typeof children === 'function'
+          ? resolveChildren
+          : React.Children.only(children)}
       </Pressable>
     );
   }
 
   return (
-    <Pressable {...rest} ref={ref} disabled={disabled} style={getStyle}>
+    <Pressable {...rest} ref={ref} disabled={disabled} style={resolvedStyle}>
       {(state) => (
         <>
           {state.pressed && rippleEffectEnabled && (
@@ -129,7 +131,7 @@ const TouchableRipple = (
               ]}
             />
           )}
-          {getChildren(state)}
+          {resolveChildren(state)}
         </>
       )}
     </Pressable>

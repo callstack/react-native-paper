@@ -286,7 +286,11 @@ const TouchableRipple = (
         typeof style === 'function' ? style(state) : style,
       ]}
     >
-      {(state) => (typeof children === 'function' ? children(state) : children)}
+      {(state) =>
+        React.Children.only(
+          typeof children === 'function' ? children(state) : children
+        )
+      }
     </Pressable>
   );
 };
