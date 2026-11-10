@@ -9,9 +9,10 @@ import {
   safeMerge,
   ThemeProvider,
   useInternalTheme,
+  useTheme,
 } from '../provider';
 import { DarkTheme, LightTheme } from '../schemes';
-import type { ThemeProp } from '../types';
+import type { Theme, ThemeProp } from '../types';
 
 describe('isPlatformColorSentinel', () => {
   it('detects iOS PlatformColor (semantic)', () => {
@@ -167,6 +168,23 @@ describe('safeMerge', () => {
     expect(result.constructor).toBe(Object);
     expect(result).toEqual({ a: 2 });
   });
+
+  it('ignores a __proto__ key inside a new override subtree', () => {
+    const overrides = JSON.parse(
+      '{"extra": {"__proto__": {"polluted": "yes"}, "b": 2}}'
+    );
+
+    const result = safeMerge<{ a: number; extra?: Record<string, unknown> }>(
+      { a: 1 },
+      overrides
+    );
+    expect(Object.getPrototypeOf(result.extra)).toBe(Object.prototype);
+    expect(
+      Object.prototype.hasOwnProperty.call(result.extra, '__proto__')
+    ).toBe(false);
+    expect(result.extra?.polluted).toBeUndefined();
+    expect(result.extra).toEqual({ b: 2 });
+  });
 });
 
 describe('useInternalTheme', () => {
@@ -247,5 +265,40 @@ describe('useInternalTheme', () => {
     expect(result.current.colors.primary).toEqual(
       PlatformColor('secondaryLabel')
     );
+  });
+});
+
+describe('useTheme', () => {
+  it('drops prototype keys from overrides parsed from JSON', async () => {
+    const overrides = JSON.parse(
+      '{"__proto__": {"polluted": "yes"}, "colors": {"__proto__": {"polluted": "yes"}, "secondary": "blue"}}'
+    );
+
+    const { result } = await renderHook(() => useTheme<Theme>(overrides));
+
+    for (const value of [result.current, result.current.colors]) {
+      expect(Object.getPrototypeOf(value)).toBe(Object.prototype);
+      expect(Object.prototype.hasOwnProperty.call(value, '__proto__')).toBe(
+        false
+      );
+      expect(value).not.toHaveProperty('polluted');
+    }
+    expect(result.current.colors.primary).toBe(LightTheme.colors.primary);
+    expect(result.current.colors.secondary).toBe('blue');
+    expect(result.current.fonts).toEqual(LightTheme.fonts);
+    expect({}).not.toHaveProperty('polluted');
+  });
+
+  it('keeps the theme reference while the overrides object stays the same', async () => {
+    const overrides = { colors: { primary: '#123456' } };
+    const { result, rerender } = await renderHook(() =>
+      useTheme<Theme>(overrides)
+    );
+    const theme = result.current;
+
+    await rerender({});
+
+    expect(result.current).toBe(theme);
+    expect(result.current.colors.primary).toBe('#123456');
   });
 });

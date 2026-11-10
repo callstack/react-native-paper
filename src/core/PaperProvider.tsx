@@ -4,7 +4,7 @@ import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider } from './settings';
 import type { Settings } from './settings';
-import { ThemeProvider } from './theming';
+import { ThemeProvider, withoutUnsafeKeys } from './theming';
 import {
   useResolvedReduceMotion,
   type ReduceMotionPreference,
@@ -36,12 +36,13 @@ const PaperProvider = (props: Props) => {
     const scale = resolvedReduceMotion
       ? 0
       : (props.theme?.animation?.scale ?? 1);
+    const themeProp = withoutUnsafeKeys(props.theme);
 
     return {
       ...base,
-      ...props.theme,
-      colors: { ...base.colors, ...props.theme?.colors },
-      animation: { ...props.theme?.animation, scale },
+      ...themeProp,
+      colors: { ...base.colors, ...themeProp?.colors },
+      animation: { ...themeProp?.animation, scale },
     };
   }, [colorScheme, props.theme, resolvedReduceMotion]);
 
