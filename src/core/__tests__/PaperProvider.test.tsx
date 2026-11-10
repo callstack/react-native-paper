@@ -12,9 +12,9 @@ import { act, render, screen } from '@testing-library/react-native';
 
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { DarkTheme, DynamicLightTheme, LightTheme } from '../../theme/schemes';
-import type { ThemeProp } from '../../theme/types';
+import type { Theme, ThemeProp } from '../../theme/types';
 import PaperProvider from '../PaperProvider';
-import { useTheme } from '../theming';
+import { useTheme, withTheme } from '../theming';
 
 declare module 'react-native' {
   namespace Appearance {
@@ -110,6 +110,27 @@ const FakeChild = () => {
   const theme = useTheme();
   return <View testID="provider-child-view" theme={theme} />;
 };
+
+type ThemeReaderProps = {
+  onTheme: (theme: Theme) => void;
+};
+
+const UseThemeReader = ({ onTheme }: ThemeReaderProps) => {
+  onTheme(useTheme());
+  return null;
+};
+
+const UseThemeOverridesReader = ({ onTheme }: ThemeReaderProps) => {
+  onTheme(useTheme<Theme>({ colors: { secondary: 'blue' } }));
+  return null;
+};
+
+const WithThemeReader = withTheme(
+  ({ onTheme, theme }: ThemeReaderProps & { theme: Theme }) => {
+    onTheme(theme);
+    return null;
+  }
+);
 
 const createProvider = (theme?: ThemeProp) => {
   return (
@@ -335,4 +356,105 @@ describe('PaperProvider', () => {
       customTheme
     );
   });
+
+  it.each([
+    {
+      label: 'useTheme()',
+      Reader: UseThemeReader,
+      secondary: LightTheme.colors.secondary,
+    },
+    {
+      label: 'useTheme(overrides)',
+      Reader: UseThemeOverridesReader,
+      secondary: 'blue',
+    },
+    {
+      label: 'withTheme',
+      Reader: WithThemeReader,
+      secondary: LightTheme.colors.secondary,
+    },
+  ])(
+    'drops prototype keys from a theme parsed from JSON, read with $label',
+    async ({ Reader, secondary }) => {
+      const theme: ThemeProp = JSON.parse(
+        '{"__proto__": {"polluted": "yes"}, "colors": {"__proto__": {"polluted": "yes"}, "primary": "red"}, "animation": {"__proto__": {"polluted": "yes"}}}'
+      );
+      const onTheme = mockJest.fn<(theme: Theme) => void>();
+
+      await render(
+        <PaperProvider theme={theme} reduceMotion="off">
+          <Reader onTheme={onTheme} />
+        </PaperProvider>
+      );
+
+      expect(onTheme).toHaveBeenCalled();
+      const [received] = onTheme.mock.calls[0];
+      for (const value of [received, received.colors, received.animation]) {
+        expect(Object.getPrototypeOf(value)).toBe(Object.prototype);
+        expect(Object.prototype.hasOwnProperty.call(value, '__proto__')).toBe(
+          false
+        );
+        expect(value).not.toHaveProperty('polluted');
+      }
+      expect(received.colors.primary).toBe('red');
+      expect(received.colors.secondary).toBe(secondary);
+      expect(received.colors.tertiary).toBe(LightTheme.colors.tertiary);
+      expect(received.animation.scale).toBe(1);
+      expect(received.fonts).toEqual(LightTheme.fonts);
+      expect({}).not.toHaveProperty('polluted');
+    }
+  );
+
+  it('drops nested prototype keys from a theme parsed from JSON', async () => {
+    const theme: ThemeProp = JSON.parse(
+      '{"fonts": {"bodyMedium": {"__proto__": {"polluted": "yes"}, "fontSize": 20}}}'
+    );
+    const onTheme = mockJest.fn<(theme: Theme) => void>();
+
+    await render(
+      <PaperProvider theme={theme} reduceMotion="off">
+        <UseThemeOverridesReader onTheme={onTheme} />
+      </PaperProvider>
+    );
+
+    expect(onTheme).toHaveBeenCalled();
+    const [received] = onTheme.mock.calls[0];
+    const { bodyMedium } = received.fonts;
+    expect(Object.getPrototypeOf(bodyMedium)).toBe(Object.prototype);
+    expect(Object.prototype.hasOwnProperty.call(bodyMedium, '__proto__')).toBe(
+      false
+    );
+    expect(bodyMedium).not.toHaveProperty('polluted');
+    expect(bodyMedium.fontSize).toBe(20);
+    expect(received.colors.secondary).toBe('blue');
+  });
+
+  it.each([
+    { label: 'useTheme()', Reader: UseThemeReader },
+    { label: 'useTheme(overrides)', Reader: UseThemeOverridesReader },
+  ])(
+    'drops prototype keys from a theme color shaped like a PlatformColor, read with $label',
+    async ({ Reader }) => {
+      const theme: ThemeProp = JSON.parse(
+        '{"colors": {"primary": {"semantic": ["label"], "__proto__": {"polluted": "yes"}}}}'
+      );
+      const onTheme = mockJest.fn<(theme: Theme) => void>();
+
+      await render(
+        <PaperProvider theme={theme} reduceMotion="off">
+          <Reader onTheme={onTheme} />
+        </PaperProvider>
+      );
+
+      expect(onTheme).toHaveBeenCalled();
+      const [received] = onTheme.mock.calls[0];
+      const { primary } = received.colors;
+      expect(Object.getPrototypeOf(primary)).toBe(Object.prototype);
+      expect(Object.prototype.hasOwnProperty.call(primary, '__proto__')).toBe(
+        false
+      );
+      expect(primary).not.toHaveProperty('polluted');
+      expect(primary).toEqual({ semantic: ['label'] });
+    }
+  );
 });
