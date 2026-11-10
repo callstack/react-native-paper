@@ -63,8 +63,17 @@ export type Props = {
    */
   visible: boolean;
   /**
-   * Element to focus when the modal opens. Accepts a host element or the ref
-   * of a component with a `focus()` method, such as a `TextInput`.
+   * Element to focus when the modal opens.
+   *
+   * By default, focus moves to the first focusable element inside the modal on
+   * web, or to the modal itself when there is none. Focus that is already
+   * inside, such as on an `autoFocus` field, stays where it is. On iOS and
+   * Android, screen reader focus moves to the modal.
+   *
+   * Accepts a host element, such as a `View`, `Pressable` or `Button`. On iOS
+   * and Android it receives screen reader focus, not keyboard focus. A
+   * component handle with a `focus()` method, such as the one of a
+   * `TextInput`, has `focus()` called.
    */
   initialFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
@@ -74,9 +83,10 @@ export type Props = {
    * and this prop picks another one. On iOS and Android, nothing is restored
    * unless this prop is given.
    *
-   * Accepts a host element, such as a `View`, `Pressable` or `Button`, which
-   * receives screen reader focus on iOS and Android. A component handle with a
-   * `focus()` method, such as the one of a `TextInput`, has `focus()` called.
+   * Accepts a host element, such as a `View`, `Pressable` or `Button`. On iOS
+   * and Android it receives screen reader focus, not keyboard focus. A
+   * component handle with a `focus()` method, such as the one of a
+   * `TextInput`, has `focus()` called.
    */
   restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**

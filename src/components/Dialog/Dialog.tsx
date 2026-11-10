@@ -42,12 +42,30 @@ export type Props = {
    */
   visible: boolean;
   /**
-   * Element to focus when the dialog opens. Accepts a host element or the ref
-   * of a component with a `focus()` method, such as a `TextInput`.
+   * Element to focus when the dialog opens.
+   *
+   * By default, focus moves to the first focusable element inside the dialog on
+   * web, or to the dialog itself when there is none. Focus that is already
+   * inside, such as on an `autoFocus` field, stays where it is. On iOS and
+   * Android, screen reader focus moves to the dialog.
+   *
+   * Accepts a host element, such as a `View`, `Pressable` or `Button`. On iOS
+   * and Android it receives screen reader focus, not keyboard focus. A
+   * component handle with a `focus()` method, such as the one of a
+   * `TextInput`, has `focus()` called.
    */
   initialFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
-   * An accessibility element to focus when the dialog closes.
+   * Element to focus when the dialog closes.
+   *
+   * On web, focus returns to the element that had it before the dialog opened,
+   * and this prop picks another one. On iOS and Android, nothing is restored
+   * unless this prop is given.
+   *
+   * Accepts a host element, such as a `View`, `Pressable` or `Button`. On iOS
+   * and Android it receives screen reader focus, not keyboard focus. A
+   * component handle with a `focus()` method, such as the one of a
+   * `TextInput`, has `focus()` called.
    */
   restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
