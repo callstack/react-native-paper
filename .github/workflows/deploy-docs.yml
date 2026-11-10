@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  # To redeploy, start a new run instead of rerunning a failed one: a rerun
-  # uploads a second `github-pages` artifact to the run, and `deploy-pages`
-  # fails when it finds two.
   workflow_dispatch:
 
 permissions:
