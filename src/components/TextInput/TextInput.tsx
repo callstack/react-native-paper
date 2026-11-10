@@ -28,7 +28,6 @@ import type { InternalTheme, ThemeProp } from '../../theme/types';
 export type TextInputAnimationState = {
   animatedLabelWrapperStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   animatedLabelTextStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
-  animatedContainerStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   animatedActiveOutlineStyle?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
 };
 
