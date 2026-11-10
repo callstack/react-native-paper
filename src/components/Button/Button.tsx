@@ -135,6 +135,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   iconPosition?: 'leading' | 'trailing';
   /**
+   * Size of the icon and the loading indicator. Defaults to the icon size of the button's `size`.
+   */
+  iconSize?: number;
+  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -249,6 +253,7 @@ const Button = ({
   loading,
   icon,
   iconPosition,
+  iconSize: customIconSize,
   buttonColor: customButtonColor,
   textColor: customLabelColor,
   children,
@@ -464,12 +469,7 @@ const Button = ({
     [borderColor, borderWidth]
   );
 
-  const { color: labelStyleColor } = React.useMemo(
-    () => StyleSheet.flatten(labelStyle) || {},
-    [labelStyle]
-  );
-  const iconColor =
-    typeof labelStyleColor === 'string' ? labelStyleColor : labelColor;
+  const iconSize = customIconSize ?? sizeStyle.iconSize;
 
   const contentBoxStyle = React.useMemo(
     () => getButtonContentBoxStyle(sizeStyle, borderWidth),
@@ -541,15 +541,11 @@ const Button = ({
           >
             {icon && loading !== true ? (
               <View>
-                <Icon
-                  source={icon}
-                  size={sizeStyle.iconSize}
-                  color={iconColor}
-                />
+                <Icon source={icon} size={iconSize} color={labelColor} />
               </View>
             ) : null}
             {loading ? (
-              <ActivityIndicator size={sizeStyle.iconSize} color={iconColor} />
+              <ActivityIndicator size={iconSize} color={labelColor} />
             ) : null}
             <Text
               variant={sizeStyle.labelVariant}
