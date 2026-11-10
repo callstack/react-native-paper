@@ -10,11 +10,13 @@ import { act, fireEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
+import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import Card from '../Card/Card';
 import Chip from '../Chip/Chip';
 import FAB from '../FAB/FAB';
 import ListItem from '../List/ListItem';
 import Switch from '../Switch/Switch';
+import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
 const { thickness, outerOffset } = tokens.md.sys.state.focusIndicator;
 const OUTWARD = outerOffset;
@@ -65,6 +67,31 @@ describe('focus ring wiring', () => {
 
   it('Chip rings inward, so a scrolling chip row cannot trim it', async () => {
     await render(<Chip onPress={() => {}}>chip</Chip>);
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(INWARD);
+  });
+
+  // The bar clips (`overflow: 'hidden'`) and tabs fill it edge to edge, so an
+  // outward ring loses its top and bottom. Rendered through a custom
+  // `renderTouchable` so the test runs the ring path on every platform.
+  it('BottomNavigation.Bar rings its tabs inward', async () => {
+    await render(
+      <BottomNavigation.Bar
+        navigationState={{
+          index: 0,
+          routes: [
+            { key: 'a', title: 'A', focusedIcon: 'home' },
+            { key: 'b', title: 'B', focusedIcon: 'cog' },
+          ],
+        }}
+        onTabPress={() => {}}
+        renderTouchable={({ key, route: _route, ...props }) => (
+          <TouchableRipple key={key} {...props} />
+        )}
+      />
+    );
 
     await focusFirstFocusable();
 
