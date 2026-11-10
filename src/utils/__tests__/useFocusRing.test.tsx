@@ -64,6 +64,17 @@ describe('buildFocusRingStylesheet', () => {
     );
   });
 
+  // `:has()` only looks down from the ringed element, so a ring on a child of
+  // the focused element needs its own rule, keyed off the focused ancestor.
+  it('rings `descendant` from its focused ancestor, for both placements', () => {
+    expect(css).toContain(
+      '[data-focus-ring-target]:focus-visible [data-focus-ring-descendant="outward"]'
+    );
+    expect(css).toContain(
+      '[data-focus-ring-target]:focus-visible [data-focus-ring-descendant="inward"]'
+    );
+  });
+
   // Values must come from the design tokens, not be hardcoded here, or the
   // token is decorative. Derive the expectation from the token itself.
   it('takes its thickness and offsets from the focusIndicator tokens', () => {
@@ -198,6 +209,36 @@ describe('useFocusRing (web)', () => {
     // eslint-disable-next-line no-restricted-syntax
     expect(screen.getByTestId('probe').props.dataSet).toEqual({
       focusRingWithin: 'inward',
+    });
+    expect(screen.getByTestId('target')).toHaveStyle(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      { outline: 'none' } as unknown as ViewStyle
+    );
+  });
+
+  it('marks the focused element and its ringed child for scope "descendant", and suppresses the target element\'s own outline', async () => {
+    const DescendantProbe = () => {
+      const { target, ring } = useFocusRing(
+        false,
+        'rebeccapurple',
+        'outward',
+        'descendant'
+      );
+      return (
+        <View testID="target" style={target.style} {...target.dataSetProps}>
+          <View testID="probe" style={ring.style} {...ring.dataSetProps} />
+        </View>
+      );
+    };
+    await render(<DescendantProbe />);
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('target').props.dataSet).toEqual({
+      focusRingTarget: 'true',
+    });
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('probe').props.dataSet).toEqual({
+      focusRingDescendant: 'outward',
     });
     expect(screen.getByTestId('target')).toHaveStyle(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion

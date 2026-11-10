@@ -169,14 +169,14 @@ const Switch = ({
 
   const colors = React.useMemo(() => getDefaultSwitchColors(theme), [theme]);
 
-  // `scope: 'within'`: the ring is drawn on the track below, not this
-  // Pressable - it also suppresses the browser's own outline here on web, so
-  // only the track's ring shows.
+  // `scope: 'descendant'`: the ring is drawn on the track, a child of this
+  // Pressable, not on the Pressable itself - it also suppresses the browser's
+  // own outline here on web, so only the track's ring shows.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     isDisabled,
     colors.focusIndicatorColor,
     'outward',
-    'within'
+    'descendant'
   );
 
   const reanimatedReduceMotion = reduceMotion
@@ -389,6 +389,7 @@ const Switch = ({
         aria-label={ariaLabel}
         testID={testID}
         style={[styles.touchable, ...focusTarget.style]}
+        {...focusTarget.dataSetProps}
       >
         <View
           style={[

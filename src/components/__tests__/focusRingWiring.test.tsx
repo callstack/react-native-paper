@@ -2,10 +2,10 @@
    The node carrying the ring is an unnamed internal view (Card's Pressable,
    Switch's track, FAB's clip view). There is no testID to query it by, and
    which node it is IS the thing under test, so the tree has to be walked. */
-import { StyleSheet, Text } from 'react-native';
+import { Platform, StyleSheet, Text } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { describe, expect, it } from '@jest/globals';
+import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
@@ -99,5 +99,35 @@ describe('focus ring wiring', () => {
     await focusFirstFocusable();
 
     expect(ringOffset()).toBe(OUTWARD);
+  });
+});
+
+describe('focus ring wiring (web)', () => {
+  const original = Platform.OS;
+  beforeEach(() => {
+    Platform.OS = 'web';
+  });
+  afterEach(() => {
+    Platform.OS = original;
+  });
+
+  // The track is a child of the focused Pressable, so it can't be ringed with
+  // `:has(:focus-visible)` (that only matches ancestors of the focused node).
+  it('Switch marks its Pressable as the focus target and rings the track inside it', async () => {
+    await render(<Switch value onValueChange={() => {}} />);
+
+    const pressable = screen.getByRole('switch');
+    expect(pressable.props.dataSet).toEqual({ focusRingTarget: 'true' });
+
+    const ringed = walk(
+      pressable,
+      (n) =>
+        (n.props?.dataSet as Record<string, string> | undefined)
+          ?.focusRingDescendant !== undefined
+    );
+    expect(ringed).toHaveLength(1);
+    expect(
+      (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
+    ).toBe('outward');
   });
 });

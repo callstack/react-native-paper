@@ -18,8 +18,10 @@ export type FocusRingPlacement = 'outward' | 'inward' | 'none';
  * `'self'` - the ring is drawn on the element that receives focus.
  * `'within'` - the ring is drawn on an ancestor (a track/clip view), because
  * the focusable element's own box is the wrong shape or size for it.
+ * `'descendant'` - the ring is drawn on a child of the element that receives
+ * focus (Switch's track inside its 48dp-tall Pressable), for the same reason.
  */
-export type FocusRingScope = 'self' | 'within';
+export type FocusRingScope = 'self' | 'within' | 'descendant';
 
 export type FocusRingResult = {
   /** Spread onto the element that receives focus. */
@@ -27,6 +29,12 @@ export type FocusRingResult = {
     onFocus?: (e: NativeSyntheticEvent<TargetedEvent>) => void;
     onBlur?: () => void;
     style: ViewStyle[];
+    /**
+     * Spread onto the focused element, like `ring.dataSetProps`. Only set
+     * for `scope: 'descendant'` on web, where the stylesheet needs to find
+     * the focused ancestor of the ring; empty otherwise.
+     */
+    dataSetProps: object;
   };
   /** Spread onto the element that draws the ring. */
   ring: {
@@ -47,11 +55,14 @@ const toDataSetProps = (dataSet: Record<string, string> | undefined): object =>
   dataSet ? { dataSet } : {};
 
 const EMPTY: FocusRingResult = {
-  target: { style: [] },
+  target: { style: [], dataSetProps: {} },
   ring: { style: [], dataSetProps: {} },
 };
 
-/** Suppresses the browser's own focus ring, for `scope: 'within'` on web. */
+/**
+ * Suppresses the browser's own focus ring, for `scope: 'within'` and
+ * `scope: 'descendant'` on web.
+ */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const webNoOutlineStyle = { outline: 'none' } as unknown as ViewStyle;
 
@@ -67,9 +78,10 @@ const webNoOutlineStyle = { outline: 'none' } as unknown as ViewStyle;
  * JS on web - the browser drives it.
  *
  * `scope: 'within'` is for a control whose ring belongs on an ancestor of the
- * element that actually receives focus (Switch's track, FAB's clip view):
- * `target` also suppresses the browser's default outline on the focused
- * element itself on web, so only the ring shows.
+ * element that actually receives focus (FAB's clip view), and
+ * `scope: 'descendant'` for one whose ring belongs on a child of it (Switch's
+ * track): `target` also suppresses the browser's default outline on the
+ * focused element itself on web, so only the ring shows.
  *
  * iOS: `onFocus`/`onBlur` never reach here today. Fabric's view does call
  * `-becomeFirstResponder`/`-resignFirstResponder` for hardware-keyboard/Full
@@ -118,9 +130,19 @@ export function useFocusRing(
     }
 
     if (Platform.OS === 'web') {
-      const dataKey = scope === 'within' ? 'focusRingWithin' : 'focusRing';
+      const dataKey =
+        scope === 'within'
+          ? 'focusRingWithin'
+          : scope === 'descendant'
+            ? 'focusRingDescendant'
+            : 'focusRing';
       return {
-        target: { style: scope === 'within' ? [webNoOutlineStyle] : [] },
+        target: {
+          style: scope === 'self' ? [] : [webNoOutlineStyle],
+          dataSetProps: toDataSetProps(
+            scope === 'descendant' ? { focusRingTarget: 'true' } : undefined
+          ),
+        },
         ring: {
           style: [
             // A style key starting with `--` becomes a real CSS custom
@@ -136,7 +158,7 @@ export function useFocusRing(
     }
 
     return {
-      target: { onFocus, onBlur, style: [] },
+      target: { onFocus, onBlur, style: [], dataSetProps: {} },
       ring: {
         style: isNativeFocused
           ? [
@@ -177,6 +199,10 @@ export const buildFocusRingStylesheet = (): string =>
   [
     focusRingRule((p) => `[data-focus-ring="${p}"]:focus-visible`),
     focusRingRule((p) => `[data-focus-ring-within="${p}"]:has(:focus-visible)`),
+    focusRingRule(
+      (p) =>
+        `[data-focus-ring-target]:focus-visible [data-focus-ring-descendant="${p}"]`
+    ),
   ].join('\n');
 
 let injected = false;
