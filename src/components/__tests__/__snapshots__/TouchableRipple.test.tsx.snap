@@ -50,10 +50,12 @@ exports[`TouchableRipple on iOS displays the underlay when pressed 1`] = `
           "zIndex": 2,
         },
         {
-          "backgroundColor": "rgba(29, 27, 32, 0.1)",
+          "backgroundColor": "rgba(29, 27, 32, 1)",
+          "opacity": 0.1,
         },
       ]
     }
+    testID="touchable-ripple-underlay"
   />
   <Text>
     Press me!
@@ -115,6 +117,7 @@ exports[`TouchableRipple on iOS renders custom underlay color 1`] = `
         },
       ]
     }
+    testID="touchable-ripple-underlay"
   />
   <Text>
     Press me!

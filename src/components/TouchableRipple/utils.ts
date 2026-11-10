@@ -1,5 +1,7 @@
 import type { ColorValue } from 'react-native';
 
+import { isPlatformColorSentinel } from '../../theme/provider';
+import { Palette } from '../../theme/tokens';
 import type { InternalTheme } from '../../theme/types';
 
 const getUnderlayColor = ({
@@ -7,7 +9,7 @@ const getUnderlayColor = ({
   underlayColor,
 }: {
   calculatedRippleColor: ColorValue;
-  underlayColor?: string;
+  underlayColor?: ColorValue;
 }) => {
   if (underlayColor != null) {
     return underlayColor;
@@ -23,11 +25,13 @@ const getRippleColor = ({
   theme: InternalTheme;
   rippleColor?: ColorValue;
 }) => {
-  if (rippleColor) {
-    return rippleColor;
+  const color = rippleColor || theme.colors.onSurface;
+
+  if (isPlatformColorSentinel(color)) {
+    return theme.dark ? Palette.neutral90 : Palette.neutral10;
   }
 
-  return theme.colors.stateLayerPressed;
+  return color;
 };
 
 export const getTouchableRippleColors = ({
@@ -37,7 +41,7 @@ export const getTouchableRippleColors = ({
 }: {
   theme: InternalTheme;
   rippleColor?: ColorValue;
-  underlayColor?: string;
+  underlayColor?: ColorValue;
 }): {
   calculatedRippleColor: ColorValue;
   calculatedUnderlayColor: ColorValue;
