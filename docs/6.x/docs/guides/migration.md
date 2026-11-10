@@ -510,6 +510,30 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`,
 
 Previously, the Android back button dismissed the modal when `dismissable` was `true`, even if `dismissableBackButton` was `false`. The `dismissableBackButton` prop can now prevent the modal from being dismissed via the back button independently of the `dismissable` prop.
 
+The Escape key on web now dismisses the modal too, and `dismissableBackButton` controls it together with the back button. When several modals are open, back and Escape dismiss only the topmost one. When `dismissableBackButton` is `false`, back is absorbed and nothing is dismissed, rather than passed on to the content behind the modal. Escape dismisses nothing either, but it still reaches your own key handlers. A handler that calls `preventDefault()` on the key keeps the modal open. Escape also works while a text field has focus, and is ignored while an input method editor (IME) composition is active.
+
+Opening a modal now moves focus into it, and closing it hands focus back:
+
+- **Web:** focus returns to the element that had it before the modal opened. With `restoreFocusRef`, it goes there instead, unless that element is gone by then, such as a list row the modal deleted. Then focus returns to the element that had it before.
+- **iOS and Android:** focus comes back only with `restoreFocusRef`. Without it, nothing is restored.
+
+You can choose the elements with the new `initialFocusRef` and `restoreFocusRef` props. They accept the ref of any element or component with a `focus()` method, such as a `TextInput`. A component handle has `focus()` called. On iOS, a host element such as a `View` or `Pressable` gets screen reader focus, not keyboard focus. TalkBack on Android doesn't follow these props: when the modal opens, it moves its focus to the first element inside the modal by itself:
+
+```tsx
+const inputRef = React.useRef<TextInputHandles>(null);
+const buttonRef = React.useRef<React.ComponentRef<typeof View>>(null);
+
+<Modal
+  visible={visible}
+  onDismiss={hideModal}
+  aria-label="Rename file"
+  initialFocusRef={inputRef}
+  restoreFocusRef={buttonRef}
+>
+  <TextInput ref={inputRef} label="Name" />
+</Modal>;
+```
+
 ### Dialog
 
 `Dialog` now uses a `Portal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Dialog`:
@@ -534,6 +558,8 @@ The dialog now has the `dialog` role. On web, the dialog's accessible name is se
   </Dialog.Content>
 </Dialog>
 ```
+
+`Dialog` follows the same back button, Escape key and focus behavior as `Modal`, including the `initialFocusRef` and `restoreFocusRef` props. As with `Modal`, focus returns on iOS and Android only when you pass `restoreFocusRef`.
 
 When the dialog is `dismissable`, screen reader users can dismiss it with a visually hidden button inside the dialog. You can change the button's accessibility label with the new `dismissAccessibilityLabel` prop.
 
@@ -573,6 +599,10 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
   <Menu.Item title="Item" />
 </Menu>
 ```
+
+On web, a menu now closes on the Escape key when it is pressed down, instead of when it is released. Back and Escape dismiss only the topmost overlay, so a menu opened from a `Modal` or `Dialog` closes first and leaves the modal open.
+
+On Android, an open menu now also keeps the back press: it calls `onDismiss`, and the screen behind no longer goes back. Previously the press reached that screen as well. Without an `onDismiss`, the menu leaves the press to whatever is underneath, so pass one to close the menu on back.
 
 ### Searchbar
 

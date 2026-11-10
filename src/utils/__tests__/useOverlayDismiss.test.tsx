@@ -1,0 +1,461 @@
+import * as React from 'react';
+import { BackHandler as RNBackHandler, Platform, Text } from 'react-native';
+
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import { act } from '@testing-library/react-native';
+
+import Modal from '../../components/Modal';
+import Portal from '../../components/Portal/Portal';
+import { render, screen } from '../../test-utils';
+import { useOverlayDismiss } from '../useOverlayDismiss';
+
+type BackHandlerStatic = typeof RNBackHandler & {
+  mockPressBack(): void;
+  exitApp: jest.Mock<() => void>;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+const BackHandler = RNBackHandler as BackHandlerStatic;
+
+const Probe = ({
+  label,
+  visible,
+  dismissable = true,
+  onDismiss,
+}: {
+  label: string;
+  visible: boolean;
+  dismissable?: boolean;
+  onDismiss?: () => void;
+}) => {
+  useOverlayDismiss({ enabled: visible, dismissable, onDismiss });
+
+  return visible ? <Text>{label}</Text> : null;
+};
+
+// A `Portal.Host` inside a modal puts the inner modal's content in a host of
+// its own, so the two modals do not share a parent host.
+const NestedModals = ({
+  onDismissOuter,
+  onDismissInner,
+}: {
+  onDismissOuter: () => void;
+  onDismissInner: () => void;
+}) => (
+  <Portal.Host>
+    <Modal visible onDismiss={onDismissOuter} aria-label="outer">
+      <Text>outer</Text>
+      <Portal.Host>
+        <Modal visible onDismiss={onDismissInner} aria-label="inner">
+          <Text>inner</Text>
+        </Modal>
+      </Portal.Host>
+    </Modal>
+  </Portal.Host>
+);
+
+const pressBack = async () => {
+  await act(() => {
+    BackHandler.mockPressBack();
+  });
+};
+
+describe('useOverlayDismiss', () => {
+  beforeEach(() => {
+    BackHandler.exitApp.mockClear();
+  });
+
+  describe('when the back button is pressed', () => {
+    it('closes the overlay that opened last', async () => {
+      const onDismissFirst = jest.fn();
+      const onDismissSecond = jest.fn();
+
+      const { rerender } = await render(
+        <>
+          <Probe label="first" visible onDismiss={onDismissFirst} />
+          <Probe label="second" visible={false} onDismiss={onDismissSecond} />
+        </>
+      );
+
+      await rerender(
+        <>
+          <Probe label="first" visible onDismiss={onDismissFirst} />
+          <Probe label="second" visible onDismiss={onDismissSecond} />
+        </>
+      );
+
+      await pressBack();
+
+      expect(onDismissSecond).toHaveBeenCalledTimes(1);
+      expect(onDismissFirst).not.toHaveBeenCalled();
+    });
+
+    it('closes the inner modal of two nested portal hosts', async () => {
+      const onDismissOuter = jest.fn();
+      const onDismissInner = jest.fn();
+
+      await render(
+        <NestedModals
+          onDismissOuter={onDismissOuter}
+          onDismissInner={onDismissInner}
+        />
+      );
+      await screen.findByText('inner');
+
+      await pressBack();
+
+      expect(onDismissInner).toHaveBeenCalledTimes(1);
+      expect(onDismissOuter).not.toHaveBeenCalled();
+    });
+
+    it('closes one overlay per press instead of all of them at once', async () => {
+      const onDismissFirst = jest.fn();
+      const onDismissSecond = jest.fn();
+
+      const { rerender } = await render(
+        <>
+          <Probe label="first" visible onDismiss={onDismissFirst} />
+          <Probe label="second" visible onDismiss={onDismissSecond} />
+        </>
+      );
+
+      await pressBack();
+
+      expect(onDismissSecond).toHaveBeenCalledTimes(1);
+      expect(onDismissFirst).not.toHaveBeenCalled();
+
+      await rerender(
+        <>
+          <Probe label="first" visible onDismiss={onDismissFirst} />
+          <Probe label="second" visible={false} onDismiss={onDismissSecond} />
+        </>
+      );
+
+      await pressBack();
+
+      expect(onDismissFirst).toHaveBeenCalledTimes(1);
+      expect(onDismissSecond).toHaveBeenCalledTimes(1);
+    });
+
+    it('gives the press back to the overlay underneath when the one above unmounts', async () => {
+      const onDismissFirst = jest.fn();
+      const onDismissSecond = jest.fn();
+
+      const { rerender } = await render(
+        <>
+          <Probe label="first" visible onDismiss={onDismissFirst} />
+          <Probe label="second" visible onDismiss={onDismissSecond} />
+        </>
+      );
+
+      await rerender(
+        <Probe label="first" visible onDismiss={onDismissFirst} />
+      );
+
+      await pressBack();
+
+      expect(onDismissFirst).toHaveBeenCalledTimes(1);
+      expect(onDismissSecond).not.toHaveBeenCalled();
+    });
+
+    it('leaves the press alone for an overlay that is mounted but closed', async () => {
+      const onDismiss = jest.fn();
+
+      await render(
+        <Probe label="closed" visible={false} onDismiss={onDismiss} />
+      );
+
+      await pressBack();
+
+      expect(onDismiss).not.toHaveBeenCalled();
+      expect(BackHandler.exitApp).toHaveBeenCalledTimes(1);
+    });
+
+    it('absorbs the press without closing anything when the overlay may not be dismissed', async () => {
+      const onDismissFirst = jest.fn();
+      const onDismissBlocking = jest.fn();
+
+      await render(
+        <>
+          <Probe label="first" visible onDismiss={onDismissFirst} />
+          <Probe
+            label="blocking"
+            visible
+            dismissable={false}
+            onDismiss={onDismissBlocking}
+          />
+        </>
+      );
+
+      await pressBack();
+
+      expect(onDismissBlocking).not.toHaveBeenCalled();
+      // Neither the overlay underneath nor the screen behind it: an overlay
+      // the user may not dismiss still keeps the back button from leaving.
+      expect(onDismissFirst).not.toHaveBeenCalled();
+      expect(BackHandler.exitApp).not.toHaveBeenCalled();
+    });
+
+    it('takes the press from a modal once something else opens over it', async () => {
+      const onDismissModal = jest.fn();
+      const onDismissProbe = jest.fn();
+
+      const Overlays = ({ probeVisible }: { probeVisible: boolean }) => (
+        <Portal.Host>
+          <Modal visible onDismiss={onDismissModal}>
+            <Text>modal</Text>
+          </Modal>
+          <Probe
+            label="probe"
+            visible={probeVisible}
+            onDismiss={onDismissProbe}
+          />
+        </Portal.Host>
+      );
+
+      const { rerender } = await render(<Overlays probeVisible={false} />);
+
+      await act(() => {
+        jest.runAllTimers();
+      });
+
+      await rerender(<Overlays probeVisible />);
+
+      // An open modal hides its siblings from assistive technology, so the
+      // probe is on screen but not reachable by an accessibility query.
+      expect(
+        screen.getByText('probe', { includeHiddenElements: true })
+      ).toBeOnTheScreen();
+
+      await pressBack();
+
+      expect(onDismissProbe).toHaveBeenCalledTimes(1);
+      expect(onDismissModal).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('when the Escape key is pressed on the web', () => {
+    let platform: { restore(): void };
+    let keyDownListeners = new Set<(event: unknown) => void>();
+
+    beforeAll(() => {
+      platform = jest.replaceProperty(Platform, 'OS', 'web');
+
+      // There is no DOM under the React Native preset, and the hook only
+      // reaches for one on the web, so the test supplies what it touches.
+      // A real `Modal` also reads `HTMLElement` and `document.activeElement` to
+      // manage focus. Nothing here is focusable, so an empty class will do.
+      Object.defineProperty(global, 'HTMLElement', {
+        configurable: true,
+        value: class {},
+      });
+      Object.defineProperty(global, 'document', {
+        configurable: true,
+        value: {
+          activeElement: null,
+          addEventListener: (
+            type: string,
+            listener: (event: unknown) => void,
+            capture?: boolean
+          ) => {
+            if (type === 'keydown' && capture === true) {
+              keyDownListeners.add(listener);
+            }
+          },
+          removeEventListener: (
+            _type: string,
+            listener: (event: unknown) => void
+          ) => {
+            keyDownListeners.delete(listener);
+          },
+        },
+      });
+    });
+
+    afterAll(() => {
+      platform.restore();
+      delete (global as { document?: unknown }).document;
+      delete (global as { HTMLElement?: unknown }).HTMLElement;
+    });
+
+    beforeEach(() => {
+      keyDownListeners = new Set();
+    });
+
+    // The listener is in the capture phase, so it sees the key before the
+    // page does. `usedByApp` stands for something on the page that handles the
+    // key afterwards, such as a handler that calls `preventDefault()`.
+    const pressEscape = async ({
+      isComposing = false,
+      usedByApp = false,
+    } = {}) => {
+      const event = {
+        key: 'Escape',
+        isComposing,
+        defaultPrevented: false,
+        preventDefault: jest.fn(),
+        stopPropagation: jest.fn(),
+        stopImmediatePropagation: jest.fn(),
+      };
+
+      await act(() => {
+        keyDownListeners.forEach((listener) => listener(event));
+
+        if (usedByApp) {
+          event.defaultPrevented = true;
+        }
+      });
+      await act(() => {
+        jest.advanceTimersByTime(1);
+      });
+
+      return event;
+    };
+
+    it('closes the overlay that opened last', async () => {
+      const onDismissFirst = jest.fn();
+      const onDismissSecond = jest.fn();
+
+      await render(
+        <>
+          <Probe label="first" visible onDismiss={onDismissFirst} />
+          <Probe label="second" visible onDismiss={onDismissSecond} />
+        </>
+      );
+
+      await pressEscape();
+
+      expect(onDismissSecond).toHaveBeenCalledTimes(1);
+      expect(onDismissFirst).not.toHaveBeenCalled();
+    });
+
+    it('closes one overlay per key press even when the one on top closes itself', async () => {
+      const onDismissFirst = jest.fn();
+
+      const Overlays = () => {
+        const [secondVisible, setSecondVisible] = React.useState(true);
+
+        return (
+          <>
+            <Probe label="first" visible onDismiss={onDismissFirst} />
+            <Probe
+              label="second"
+              visible={secondVisible}
+              onDismiss={() => setSecondVisible(false)}
+            />
+          </>
+        );
+      };
+
+      await render(<Overlays />);
+
+      await pressEscape();
+
+      expect(screen.queryByText('second')).not.toBeOnTheScreen();
+      expect(onDismissFirst).not.toHaveBeenCalled();
+    });
+
+    it('lets the key travel on to handlers in the app', async () => {
+      await render(<Probe label="only" visible onDismiss={jest.fn()} />);
+
+      const event = await pressEscape();
+
+      expect(event.stopPropagation).not.toHaveBeenCalled();
+      expect(event.stopImmediatePropagation).not.toHaveBeenCalled();
+    });
+
+    it('leaves the key alone once something in the app has used it', async () => {
+      const onDismiss = jest.fn();
+
+      await render(<Probe label="only" visible onDismiss={onDismiss} />);
+
+      await pressEscape({ usedByApp: true });
+
+      expect(onDismiss).not.toHaveBeenCalled();
+    });
+
+    it('closes the inner modal of two nested portal hosts', async () => {
+      const onDismissOuter = jest.fn();
+      const onDismissInner = jest.fn();
+
+      await render(
+        <NestedModals
+          onDismissOuter={onDismissOuter}
+          onDismissInner={onDismissInner}
+        />
+      );
+      await screen.findByText('inner');
+
+      await pressEscape();
+
+      expect(onDismissInner).toHaveBeenCalledTimes(1);
+      expect(onDismissOuter).not.toHaveBeenCalled();
+    });
+
+    it('closes nothing when the overlay may not be dismissed', async () => {
+      const onDismiss = jest.fn();
+      const onDismissBelow = jest.fn();
+
+      await render(
+        <>
+          <Probe label="below" visible onDismiss={onDismissBelow} />
+          <Probe
+            label="blocking"
+            visible
+            dismissable={false}
+            onDismiss={onDismiss}
+          />
+        </>
+      );
+
+      await pressEscape();
+
+      expect(onDismiss).not.toHaveBeenCalled();
+      expect(onDismissBelow).not.toHaveBeenCalled();
+    });
+
+    it('does not close an overlay that went away before the key press was through', async () => {
+      const onDismiss = jest.fn();
+
+      const { rerender } = await render(
+        <Probe label="only" visible onDismiss={onDismiss} />
+      );
+
+      await act(() => {
+        keyDownListeners.forEach((listener) =>
+          listener({
+            key: 'Escape',
+            isComposing: false,
+            defaultPrevented: false,
+          })
+        );
+      });
+      await rerender(
+        <Probe label="only" visible={false} onDismiss={onDismiss} />
+      );
+      await act(() => {
+        jest.advanceTimersByTime(1);
+      });
+
+      expect(onDismiss).not.toHaveBeenCalled();
+    });
+
+    it('ignores the key while an IME composition is active', async () => {
+      const onDismiss = jest.fn();
+
+      await render(<Probe label="only" visible onDismiss={onDismiss} />);
+
+      await pressEscape({ isComposing: true });
+
+      expect(onDismiss).not.toHaveBeenCalled();
+    });
+  });
+});
