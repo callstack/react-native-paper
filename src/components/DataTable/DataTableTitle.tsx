@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { PixelRatio, Pressable, StyleSheet } from 'react-native';
+import { PixelRatio, Pressable, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableProps,
+  PressableStateCallbackType,
   StyleProp,
   TextStyle,
   ViewStyle,
@@ -20,8 +21,17 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
+import hasTouchHandler, {
+  ACTIVATABLE_ROLES,
+} from '../../utils/hasTouchHandler';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
+
+// The plain View branch has nothing to press, so the style function always sees
+// this idle state. Matches the state shape Pressable passes.
+const IDLE_STATE: PressableStateCallbackType = {
+  pressed: false,
+};
 
 export type Props = PressableProps & {
   /**
@@ -41,7 +51,8 @@ export type Props = PressableProps & {
    */
   numberOfLines?: number;
   /**
-   * Function to execute on press.
+   * Function to execute on press. If not set, the title renders as a plain
+   * container and is not exposed as a control.
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
@@ -89,6 +100,10 @@ const DataTableTitle = ({
   numeric,
   children,
   onPress,
+  onLongPress,
+  onPressIn,
+  onPressOut,
+  disabled: disabledProp,
   sortDirection,
   textStyle,
   style,
@@ -131,31 +146,82 @@ const DataTableTitle = ({
     </Animated.View>
   ) : null;
 
+  const cellStyle = [
+    styles.cell,
+    // height must scale with numberOfLines
+    { maxHeight: 24 * PixelRatio.getFontScale() * numberOfLines },
+    // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
+    numberOfLines > 1
+      ? numeric
+        ? direction === 'rtl'
+          ? styles.leftText
+          : styles.rightText
+        : styles.centerText
+      : {},
+    sortDirection ? styles.sorted : { color: alphaTextColor },
+    textStyle,
+  ];
+
+  const containerStyle = [styles.container, numeric && styles.right];
+
+  // `role` wins over `accessibilityRole` on every platform, so resolve it the
+  // same way instead of testing both.
+  const effectiveRole: string | undefined = rest.role ?? rest.accessibilityRole;
+  const claimsActivatable =
+    effectiveRole !== undefined && ACTIVATABLE_ROLES.includes(effectiveRole);
+
+  // Without a touch handler and without an explicit disabled this is a column
+  // heading, not a control, so it renders as a plain View. A Pressable is wrong
+  // here either way: it is a tab stop that does nothing on web, and on native it
+  // claims the touch and swallows presses meant for whatever wraps it.
+  const isControl =
+    hasTouchHandler({ onPress, onLongPress, onPressIn, onPressOut }) ||
+    Boolean(disabledProp);
+
+  if (!isControl) {
+    return (
+      <View
+        {...rest}
+        // Pressable defaults this to true, so keep it to preserve any role and
+        // state the caller set.
+        accessible={rest.accessible !== false}
+        // Drop the claim, keep the element so its label is still announced.
+        role={claimsActivatable ? 'none' : rest.role}
+        // A consumer role of button makes react-native-web render a real
+        // <button>, which is tabbable by default. Nothing to activate here.
+        focusable={rest.focusable ?? false}
+        style={[
+          ...containerStyle,
+          typeof style === 'function' ? style(IDLE_STATE) : style,
+        ]}
+      >
+        {icon}
+
+        <Text
+          style={cellStyle}
+          numberOfLines={numberOfLines}
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
+        >
+          {children}
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <Pressable
-      disabled={!onPress}
-      onPress={onPress}
       {...rest}
-      style={[styles.container, numeric && styles.right, style]}
+      onPress={onPress}
+      onLongPress={onLongPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      disabled={disabledProp}
+      style={[...containerStyle, style]}
     >
       {icon}
 
       <Text
-        style={[
-          styles.cell,
-          // height must scale with numberOfLines
-          { maxHeight: 24 * PixelRatio.getFontScale() * numberOfLines },
-          // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
-          numberOfLines > 1
-            ? numeric
-              ? direction === 'rtl'
-                ? styles.leftText
-                : styles.rightText
-              : styles.centerText
-            : {},
-          sortDirection ? styles.sorted : { color: alphaTextColor },
-          textStyle,
-        ]}
+        style={cellStyle}
         numberOfLines={numberOfLines}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
       >
