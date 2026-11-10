@@ -319,9 +319,6 @@ const TouchableRippleComponent = Component as typeof Component & {
   supported: boolean;
 };
 
-/**
- * Whether ripple effect is supported.
- */
 TouchableRippleComponent.supported = true;
 
 export default TouchableRippleComponent;
