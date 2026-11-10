@@ -279,7 +279,7 @@ it('describes an empty labelled field with its placeholder on web until the inpu
     renderInput.mock.lastCall?.[0]['aria-describedby']?.split(' ') ?? [];
   const ids = getDescriptionIds();
 
-  expect(input).toHaveProp('placeholder', ' ');
+  expect(input).toHaveProp('placeholder', '');
   expect(ids).toHaveLength(2);
   expect(screen.queryByText('name@example.com')).toBeNull();
   expect(
