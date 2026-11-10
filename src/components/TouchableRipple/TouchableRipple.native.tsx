@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   PressableAndroidRippleConfig,
   StyleProp,
@@ -8,7 +8,7 @@ import type {
   ColorValue,
 } from 'react-native';
 
-import type { PressableProps } from './Pressable';
+import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { Pressable } from './Pressable';
 import { getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
@@ -21,6 +21,14 @@ import hasTouchHandler, {
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
+
+// The plain View branch has nothing to press, so the render prop and the style
+// function always see this idle state. Matches the state shape Pressable passes.
+const IDLE_STATE: PressableStateCallbackType = {
+  pressed: false,
+  hovered: false,
+  focused: false,
+};
 
 export type Props = PressableProps & {
   borderless?: boolean;
@@ -99,13 +107,12 @@ const TouchableRipple = ({
       : [baseStyle, style];
 
   if (!isControl) {
-    const state = { pressed: false, hovered: false, focused: false };
     const baseStyle = TouchableRipple.supported
       ? useForeground && styles.overflowHidden
       : borderless && styles.overflowHidden;
 
     return (
-      <Animated.View
+      <View
         {...rest}
         ref={ref}
         // Pressable defaults this to true, so keep it to preserve any role and
@@ -118,11 +125,11 @@ const TouchableRipple = ({
         focusable={rest.focusable ?? false}
         style={[
           baseStyle,
-          typeof style === 'function' ? style(state) : style,
+          typeof style === 'function' ? style(IDLE_STATE) : style,
         ]}
       >
-        {resolveChildren(children, state)}
-      </Animated.View>
+        {typeof children === 'function' ? children(IDLE_STATE) : children}
+      </View>
     );
   }
 

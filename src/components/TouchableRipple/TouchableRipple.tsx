@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -19,6 +19,14 @@ import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler, {
   ACTIVATABLE_ROLES,
 } from '../../utils/hasTouchHandler';
+
+// The plain View branch has nothing to press, so the render prop and the style
+// function always see this idle state. Matches the state shape Pressable passes.
+const IDLE_STATE: PressableStateCallbackType = {
+  pressed: false,
+  hovered: false,
+  focused: false,
+};
 
 export type Props = PressableProps & {
   /**
@@ -296,10 +304,8 @@ const TouchableRipple = ({
   );
 
   if (!isControl) {
-    const state = { pressed: false, hovered: false, focused: false };
-
     return (
-      <Animated.View
+      <View
         {...rest}
         ref={ref}
         // Pressable defaults this to true, so keep it to preserve any role and
@@ -313,11 +319,11 @@ const TouchableRipple = ({
         style={[
           styles.touchable,
           styles.disabled,
-          typeof style === 'function' ? style(state) : style,
+          typeof style === 'function' ? style(IDLE_STATE) : style,
         ]}
       >
-        {resolveChildren(children, state)}
-      </Animated.View>
+        {typeof children === 'function' ? children(IDLE_STATE) : children}
+      </View>
     );
   }
 
