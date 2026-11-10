@@ -92,25 +92,61 @@ describe('TouchableRipple', () => {
     });
   });
 
+  describe('supported', () => {
+    it.each([
+      { os: 'android', version: 28, expected: true },
+      { os: 'android', version: 20, expected: false },
+      { os: 'ios', version: '17.0', expected: false },
+    ])('is $expected on $os $version', ({ os, version, expected }) => {
+      jest.isolateModules(() => {
+        const { Platform: IsolatedPlatform } = require('react-native');
+        IsolatedPlatform.OS = os;
+        jest.spyOn(IsolatedPlatform, 'Version', 'get').mockReturnValue(version);
+
+        const {
+          default: NativeTouchableRipple,
+        } = require('../TouchableRipple/TouchableRipple.native');
+
+        expect(NativeTouchableRipple.supported).toBe(expected);
+      });
+    });
+
+    it('is true on the web', () => {
+      const {
+        default: WebTouchableRipple,
+      } = require('../TouchableRipple/TouchableRipple.tsx');
+
+      expect(WebTouchableRipple.supported).toBe(true);
+    });
+  });
+
   // Both branches of the component need to behave the same, so the tests below
   // are run once with the native ripple effect enabled (Android >= Lollipop)
-  // and once with the highlight fallback used everywhere else. The component
-  // reads `supported` from the render function that `forwardRef` wraps.
+  // and once with the highlight fallback used everywhere else.
   describe.each([
     { supported: false, label: 'with the highlight fallback' },
     { supported: true, label: 'with the native ripple effect' },
   ])('$label', ({ supported }) => {
-    const renderFunction = (
-      TouchableRipple as unknown as { render: { supported: boolean } }
-    ).render;
-    const originalSupported = renderFunction.supported;
+    const originalSupported = TouchableRipple.supported;
 
     beforeAll(() => {
-      renderFunction.supported = supported;
+      TouchableRipple.supported = supported;
     });
 
     afterAll(() => {
-      renderFunction.supported = originalSupported;
+      TouchableRipple.supported = originalSupported;
+    });
+
+    it('draws the highlight underlay only without the native ripple', () => {
+      const { queryByTestId } = render(
+        <TouchableRipple testOnly_pressed>
+          <Text>Press me!</Text>
+        </TouchableRipple>
+      );
+
+      expect(Boolean(queryByTestId('touchable-ripple-underlay'))).toBe(
+        !supported
+      );
     });
 
     it('supports children as a render function', () => {

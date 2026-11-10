@@ -295,11 +295,6 @@ const TouchableRipple = (
   );
 };
 
-/**
- * Whether ripple effect is supported.
- */
-TouchableRipple.supported = true;
-
 const styles = StyleSheet.create({
   touchable: {
     position: 'relative',
@@ -320,4 +315,10 @@ const styles = StyleSheet.create({
 
 const Component = forwardRef(TouchableRipple);
 
-export default Component as typeof Component & { supported: boolean };
+const TouchableRippleComponent = Component as typeof Component & {
+  supported: boolean;
+};
+
+TouchableRippleComponent.supported = true;
+
+export default TouchableRippleComponent;
