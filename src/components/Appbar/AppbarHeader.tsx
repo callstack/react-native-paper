@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import type { ColorValue, StyleProp } from 'react-native';
+import type { StyleProp } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Appbar } from './Appbar';
-import type { AppbarStyle, Props as AppbarProps } from './Appbar';
-import { getAppbarBackgroundColor, modeAppbarHeight } from './utils';
+import type { Props as AppbarProps } from './Appbar';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import type { SurfaceStyle } from '../Surface';
 
 export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
   /**
@@ -45,7 +45,13 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    * @optional
    */
   theme?: ThemeProp;
-  style?: StyleProp<AppbarStyle>;
+  /**
+   * Style of the header.
+   *
+   * Background color and border radius should be specified via props instead.
+   * A `height` set here is the total height of the header, including the status bar.
+   */
+  style?: StyleProp<SurfaceStyle>;
 };
 
 /**
@@ -90,40 +96,14 @@ const AppbarHeader = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const flattenedStyle = StyleSheet.flatten(style);
-  const {
-    height = modeAppbarHeight[mode],
-    backgroundColor: customBackground,
-    zIndex = elevated ? 1 : 0,
-    ...restStyle
-  } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
-    height?: AppbarStyle['height'];
-    backgroundColor?: ColorValue;
-    zIndex?: number;
-  };
-
-  const backgroundColor = getAppbarBackgroundColor(
-    theme,
-    elevated,
-    customBackground
-  );
-
   const { top, left, right } = useSafeAreaInsets();
   const topInset = statusBarHeight ?? top;
   const horizontalInset = Math.max(left, right);
-  const headerHeight = typeof height === 'number' ? height + topInset : height;
 
   return (
     <Appbar
       testID={testID}
-      style={[
-        {
-          height: headerHeight,
-          backgroundColor,
-          zIndex,
-        },
-        restStyle,
-      ]}
+      style={[elevated ? styles.elevated : styles.flat, style]}
       safeAreaInsets={{
         top: topInset,
         left: horizontalInset,
@@ -139,6 +119,15 @@ const AppbarHeader = ({
 };
 
 AppbarHeader.displayName = 'Appbar.Header';
+
+const styles = StyleSheet.create({
+  elevated: {
+    zIndex: 1,
+  },
+  flat: {
+    zIndex: 0,
+  },
+});
 
 export default AppbarHeader;
 

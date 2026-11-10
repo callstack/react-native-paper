@@ -171,7 +171,7 @@ export type ShellProps = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**

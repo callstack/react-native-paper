@@ -38,7 +38,7 @@ export type Props = PressableProps & {
     | StyleProp<ViewStyle>
     | ((state: PressableStateCallbackType) => StyleProp<ViewStyle>)
     | undefined;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   theme?: ThemeProp;
 };
 

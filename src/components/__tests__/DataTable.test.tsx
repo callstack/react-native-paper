@@ -81,7 +81,11 @@ describe('DataTable.Cell', () => {
     const tree = (
       await render(
         <DataTable.Cell testID="table-cell">
-          <Checkbox status="checked" testID="table-cell-checkbox" />
+          <Checkbox
+            status="checked"
+            testID="table-cell-checkbox"
+            aria-label="Select row"
+          />
         </DataTable.Cell>
       )
     ).toJSON();

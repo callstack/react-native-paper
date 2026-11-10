@@ -110,7 +110,13 @@ export const getIconButtonColor = ({
   mode?: IconButtonMode;
   customIconColor?: ColorValue;
   customContainerColor?: ColorValue;
-}) => {
+}): {
+  iconColor: ColorValue;
+  iconOpacity: number;
+  backgroundColor: ColorValue | undefined;
+  borderColor: ColorValue;
+  backgroundOpacity: number;
+} => {
   const isMode = (modeToCompare: IconButtonMode) => {
     return mode === modeToCompare;
   };

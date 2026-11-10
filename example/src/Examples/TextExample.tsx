@@ -2,9 +2,9 @@ import { Platform, StyleSheet, View } from 'react-native';
 
 import {
   configureFonts,
-  LightTheme,
   PaperProvider,
   customText,
+  useTheme,
 } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
@@ -12,6 +12,7 @@ import ScreenWrapper from '../ScreenWrapper';
 const Text = customText<'customVariant'>();
 
 const TextExample = () => {
+  const baseTheme = useTheme();
   const fontConfig = {
     customVariant: {
       fontFamily: Platform.select({
@@ -29,7 +30,7 @@ const TextExample = () => {
   } as const;
 
   const theme = {
-    ...LightTheme,
+    ...baseTheme,
     fonts: configureFonts({ config: fontConfig }),
   };
   return (
@@ -110,6 +111,12 @@ const TextExample = () => {
         </Text>
         <Text style={[styles.text, styles.boldParent]} variant="headlineSmall">
           Bold parent, <Text>and the nested child inherits the weight</Text>
+        </Text>
+        <Text style={styles.text} variant="headlineSmall">
+          Parent{' '}
+          <View>
+            <Text>Child in a View, still in the theme color</Text>
+          </View>
         </Text>
       </View>
     </ScreenWrapper>
