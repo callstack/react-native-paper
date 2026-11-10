@@ -271,46 +271,29 @@ it('does not expose a handler-less TextInput.Icon as a control when the field is
   expect(clear).toBeDisabled();
 });
 
-it('dims a disabled TextInput.Icon exactly once', async () => {
-  await render(
-    <TextInput
-      label="Search"
-      value="x"
-      onChangeText={() => {}}
-      disabled
-      startAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="magnify" testID="decorative" />
-      )}
-      endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon
-          {...props}
-          icon="close"
-          onPress={() => {}}
-          testID="clear"
-        />
-      )}
-    />
-  );
+it('dims a disabled TextInput with TextInput.Icon accessories exactly once', async () => {
+  // The snapshot pins the opacity values: the accessory wrapper carries the
+  // disabled dim for the decorative icon, whose IconButton stays enabled, and
+  // IconButton carries it for the interactive one, whose wrapper is cancelled.
+  // Both firing multiplies the dim to 0.14.
+  const tree = (
+    await render(
+      <TextInput
+        label="Search"
+        value="x"
+        onChangeText={() => {}}
+        disabled
+        startAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="magnify" />
+        )}
+        endAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        )}
+      />
+    )
+  ).toJSON();
 
-  const disabledOpacity = tokens.md.sys.state.opacity.disabled;
-
-  // TextInput dims the accessory wrapper and IconButton dims a disabled icon.
-  // Both firing multiplies to 0.14, so exactly one has to apply per icon.
-  // decorative: IconButton is not disabled, so the wrapper carries the dim
-  expect(screen.getByTestId('decorative-container-outer-layer')).toHaveStyle({
-    opacity: disabledOpacity,
-  });
-  expect(screen.getByTestId('decorative-icon-opacity')).toHaveStyle({
-    opacity: 1,
-  });
-
-  // interactive: IconButton carries it, so the wrapper is cancelled
-  expect(screen.getByTestId('clear-container-outer-layer')).toHaveStyle({
-    opacity: 1,
-  });
-  expect(screen.getByTestId('clear-icon-opacity')).toHaveStyle({
-    opacity: disabledOpacity,
-  });
+  expect(tree).toMatchSnapshot();
 });
 
 it('disables a TextInput.Icon that only has onLongPress when the field is disabled', async () => {
