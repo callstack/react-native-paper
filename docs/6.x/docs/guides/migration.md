@@ -473,7 +473,7 @@ Opening a modal now moves focus into it, and closing it hands focus back:
 - **Web:** focus returns to the element that had it before the modal opened. With `restoreFocusRef`, it goes there instead, unless that element is gone by then, such as a list row the modal deleted. Then focus returns to the element that had it before.
 - **iOS and Android:** focus comes back only with `restoreFocusRef`. Without it, nothing is restored.
 
-You can choose the elements with the new `initialFocusRef` and `restoreFocusRef` props. They accept the ref of any element or component with a `focus()` method, such as a `TextInput`. On iOS and Android, a host element such as a `View`, `Pressable` or `Button` gets screen reader focus, not keyboard focus, while a component handle has `focus()` called:
+You can choose the elements with the new `initialFocusRef` and `restoreFocusRef` props. They accept the ref of any element or component with a `focus()` method, such as a `TextInput`. A component handle has `focus()` called. On iOS, a host element such as a `View` or `Pressable` gets screen reader focus, not keyboard focus. TalkBack on Android doesn't follow these props: when the modal opens, it moves its focus to the first element inside the modal by itself:
 
 ```tsx
 const inputRef = React.useRef<TextInputHandles>(null);
