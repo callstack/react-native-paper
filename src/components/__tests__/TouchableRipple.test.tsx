@@ -94,6 +94,9 @@ describe('TouchableRipple', () => {
       ).toJSON();
 
       expect(tree).toMatchSnapshot();
+    });
+  });
+
   // Both branches of the component need to behave the same, so the tests below
   // are run once with the native ripple effect enabled (Android >= Lollipop)
   // and once with the highlight fallback used everywhere else.
