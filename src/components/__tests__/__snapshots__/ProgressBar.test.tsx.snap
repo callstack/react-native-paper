@@ -39,10 +39,7 @@ exports[`renders colored progress bar 1`] = `
           "flex": 1,
           "transform": [
             {
-              "translateX": -50,
-            },
-            {
-              "scaleX": 0.0001,
+              "translateX": -100,
             },
           ],
           "width": 100,
@@ -93,10 +90,7 @@ exports[`renders hidden progress bar 1`] = `
           "flex": 1,
           "transform": [
             {
-              "translateX": -50,
-            },
-            {
-              "scaleX": 0.0001,
+              "translateX": -100,
             },
           ],
           "width": 100,
@@ -195,10 +189,7 @@ exports[`renders progress bar with specific progress 1`] = `
           "flex": 1,
           "transform": [
             {
-              "translateX": -50,
-            },
-            {
-              "scaleX": 0.0001,
+              "translateX": -100,
             },
           ],
           "width": 100,

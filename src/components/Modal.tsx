@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
   },
   // eslint-disable-next-line react-native/no-color-literals

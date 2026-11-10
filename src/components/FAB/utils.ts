@@ -70,7 +70,12 @@ export const getCombinedStyles = ({
     ];
     combinedStyles.iconWrapper.transform = [
       {
-        translateX: isIconStatic ? 0 : animFAB,
+        translateX: isIconStatic
+          ? animFAB.interpolate({
+              inputRange: [distance, 0],
+              outputRange: [0, 0],
+            })
+          : animFAB,
       },
     ];
     combinedStyles.absoluteFill.transform = [
@@ -85,7 +90,10 @@ export const getCombinedStyles = ({
     combinedStyles.iconWrapper.transform = [
       {
         translateX: isIconStatic
-          ? 0
+          ? animFAB.interpolate({
+              inputRange: [distance, 0],
+              outputRange: [0, 0],
+            })
           : animFAB.interpolate({
               inputRange: [distance, 0],
               outputRange: [-distance, 0],
@@ -112,7 +120,10 @@ export const getCombinedStyles = ({
     combinedStyles.iconWrapper.transform = [
       {
         translateX: isIconStatic
-          ? distance
+          ? animFAB.interpolate({
+              inputRange: [0, distance],
+              outputRange: [distance, distance],
+            })
           : animFAB.interpolate({
               inputRange: [0, distance],
               outputRange: [distance, distance * 2],
@@ -140,7 +151,10 @@ export const getCombinedStyles = ({
               inputRange: [0, distance],
               outputRange: [-distance, -distance * 2],
             })
-          : -distance,
+          : animFAB.interpolate({
+              inputRange: [0, distance],
+              outputRange: [-distance, -distance],
+            }),
       },
     ];
     combinedStyles.innerWrapper.transform = [

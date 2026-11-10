@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Animated, Platform, StyleSheet } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import { act, render } from '@testing-library/react-native';
 
@@ -96,4 +97,18 @@ it('renders progress bar with custom style of filled part', async () => {
   expect(tree.getByTestId('progress-bar-fill')).toHaveStyle({
     borderRadius: 4,
   });
+});
+
+it('does not scale the determinate fill width', async () => {
+  const tree = render(<ProgressBar progress={0.2} testID="progress-bar" />);
+  await triggerLayout(tree);
+
+  const fillStyle = StyleSheet.flatten(
+    tree.getByTestId('progress-bar-fill').props.style
+  ) as ViewStyle;
+  const transform = fillStyle.transform;
+
+  expect(
+    Array.isArray(transform) && transform.some((value) => 'scaleX' in value)
+  ).toBe(false);
 });

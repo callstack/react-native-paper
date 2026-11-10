@@ -194,6 +194,42 @@ const ProgressBar = ({
   const trackTintColor = theme.isV3
     ? theme.colors.surfaceVariant
     : setColor(tintColor).alpha(0.38).rgb().string();
+  const progressBarStyle = indeterminate
+    ? {
+        width,
+        backgroundColor: tintColor,
+        transform: [
+          {
+            translateX: timer.interpolate({
+              inputRange: [0, 0.5, 1],
+              outputRange: [
+                (isRTL ? 1 : -1) * 0.5 * width,
+                (isRTL ? 1 : -1) * 0.5 * INDETERMINATE_MAX_WIDTH * width,
+                (isRTL ? -1 : 1) * 0.7 * width,
+              ],
+            }),
+          },
+          {
+            // Workaround for workaround for https://github.com/facebook/react-native/issues/6278
+            scaleX: timer.interpolate({
+              inputRange: [0, 0.5, 1],
+              outputRange: [0.0001, INDETERMINATE_MAX_WIDTH, 0.0001],
+            }),
+          },
+        ],
+      }
+    : {
+        width,
+        backgroundColor: tintColor,
+        transform: [
+          {
+            translateX: timer.interpolate({
+              inputRange: [0, 1],
+              outputRange: [(isRTL ? 1 : -1) * width, 0],
+            }),
+          },
+        ],
+      };
 
   return (
     <View
@@ -220,54 +256,7 @@ const ProgressBar = ({
         {width ? (
           <Animated.View
             testID={`${testID}-fill`}
-            style={[
-              styles.progressBar,
-              {
-                width,
-                backgroundColor: tintColor,
-                transform: [
-                  {
-                    translateX: timer.interpolate(
-                      indeterminate
-                        ? {
-                            inputRange: [0, 0.5, 1],
-                            outputRange: [
-                              (isRTL ? 1 : -1) * 0.5 * width,
-                              (isRTL ? 1 : -1) *
-                                0.5 *
-                                INDETERMINATE_MAX_WIDTH *
-                                width,
-                              (isRTL ? -1 : 1) * 0.7 * width,
-                            ],
-                          }
-                        : {
-                            inputRange: [0, 1],
-                            outputRange: [(isRTL ? 1 : -1) * 0.5 * width, 0],
-                          }
-                    ),
-                  },
-                  {
-                    // Workaround for workaround for https://github.com/facebook/react-native/issues/6278
-                    scaleX: timer.interpolate(
-                      indeterminate
-                        ? {
-                            inputRange: [0, 0.5, 1],
-                            outputRange: [
-                              0.0001,
-                              INDETERMINATE_MAX_WIDTH,
-                              0.0001,
-                            ],
-                          }
-                        : {
-                            inputRange: [0, 1],
-                            outputRange: [0.0001, 1],
-                          }
-                    ),
-                  },
-                ],
-              },
-              fillStyle,
-            ]}
+            style={[styles.progressBar, progressBarStyle, fillStyle]}
           />
         ) : null}
       </Animated.View>
