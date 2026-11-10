@@ -100,6 +100,22 @@ describe('ListAccordion', () => {
     );
   });
 
+  it('expands the accordion with id={0} when it is the controlled expandedId', () => {
+    const { getByText, queryByText } = render(
+      <ListAccordionGroup expandedId={0} onAccordionPress={() => {}}>
+        <ListAccordion title="First accordion" id={0}>
+          <ListItem title="First accordion item" />
+        </ListAccordion>
+        <ListAccordion title="Second accordion" id={1}>
+          <ListItem title="Second accordion item" />
+        </ListAccordion>
+      </ListAccordionGroup>
+    );
+
+    expect(getByText('First accordion item')).toBeTruthy();
+    expect(queryByText('Second accordion item')).toBeNull();
+  });
+
   it('should throw an error when id={""}', () => {
     const ListAccordionTest = () => (
       <ListAccordionGroup>
