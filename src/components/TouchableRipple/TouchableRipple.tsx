@@ -11,7 +11,7 @@ import color from 'color';
 
 import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
+import { getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
@@ -291,11 +291,7 @@ const TouchableRipple = ({
         typeof style === 'function' ? style(state) : style,
       ]}
     >
-      {(state) =>
-        React.Children.only(
-          typeof children === 'function' ? children(state) : children
-        )
-      }
+      {(state) => resolveChildren(children, state)}
     </Pressable>
   );
 };

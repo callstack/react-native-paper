@@ -8,9 +8,9 @@ import type {
   ColorValue,
 } from 'react-native';
 
-import type { PressableProps, PressableStateCallbackType } from './Pressable';
+import type { PressableProps } from './Pressable';
 import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
+import { getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
@@ -31,13 +31,6 @@ export type Props = PressableProps & {
   onPressOut?: (e: GestureResponderEvent) => void;
   rippleColor?: ColorValue;
   underlayColor?: string;
-  children:
-    | ((state: PressableStateCallbackType) => React.ReactNode)
-    | React.ReactNode;
-  style?:
-    | StyleProp<ViewStyle>
-    | ((state: PressableStateCallbackType) => StyleProp<ViewStyle>)
-    | undefined;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
   theme?: ThemeProp;
 };
@@ -110,7 +103,7 @@ const TouchableRipple = ({
         android_ripple={androidRipple}
       >
         {typeof children === 'function'
-          ? (state) => React.Children.only(children(state))
+          ? (state) => resolveChildren(children, state)
           : React.Children.only(children)}
       </Pressable>
     );
@@ -133,9 +126,7 @@ const TouchableRipple = ({
               ]}
             />
           )}
-          {React.Children.only(
-            typeof children === 'function' ? children(state) : children
-          )}
+          {resolveChildren(children, state)}
         </>
       )}
     </Pressable>

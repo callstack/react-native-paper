@@ -1,5 +1,7 @@
+import * as React from 'react';
 import type { ColorValue } from 'react-native';
 
+import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import type { InternalTheme } from '../../theme/types';
 
 const getUnderlayColor = ({
@@ -51,3 +53,11 @@ export const getTouchableRippleColors = ({
     }),
   };
 };
+
+export const resolveChildren = (
+  children: PressableProps['children'],
+  state: PressableStateCallbackType
+) =>
+  React.Children.only(
+    typeof children === 'function' ? children(state) : children
+  );
