@@ -2,6 +2,7 @@ import { BackHandler as RNBackHandler, Platform } from 'react-native';
 
 import {
   afterAll,
+  afterEach,
   beforeAll,
   beforeEach,
   describe,
@@ -150,6 +151,15 @@ describe('a menu inside a dialog', () => {
 
     beforeEach(() => {
       keyDownListeners = new Set();
+    });
+
+    afterEach(async () => {
+      // Unmounting hands focus back from a timer, which needs the stubs above
+      // and the web platform. Let it run before they are removed.
+      await screen.unmount();
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
     });
 
     const pressEscape = async () => {
