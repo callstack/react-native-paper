@@ -104,6 +104,8 @@ TypeScript reports an error, and in JavaScript the prop is ignored. `FAB`, `FAB.
 </TouchableRipple>
 ```
 
+Components built on `TouchableRipple` that extend its props still take `rippleColor`, such as `IconButton` (and so `Appbar.Action` and `TextInput.Icon`), `List.Item` and `DataTable.Row`.
+
 ### Test IDs
 
 Hardcoded default test IDs have been removed for the components listed below:
@@ -193,6 +195,21 @@ The theme types were renamed too:
 - **`MD3TypescaleKey`** → **`TypescaleKey`**
 - **`ThemeBase`** and **`MD2Theme`** were removed. Use `Theme` instead.
 
+`IconSource`, the type of icon props such as `IconButton`'s `icon`, isn't exported from the package root. You can get it from the root through `IconButtonProps`:
+
+```tsx
+import type { IconButtonProps } from 'react-native-paper';
+
+type IconSource = IconButtonProps['icon'];
+```
+
+If you import it from Paper's type declarations instead, the path changed:
+
+```diff
+-import type { IconSource } from 'react-native-paper/lib/typescript/components/Icon';
++import type { IconSource } from 'react-native-paper/lib/typescript/src/components/Icon';
+```
+
 #### `MD3Colors`
 
 `MD3Colors` was renamed to `Palette`. It has every key `MD3Colors` had, such as `Palette.tertiary70`, plus new tones such as `primary98` and `neutral94`. The `neutral` tones from `neutral10` to `neutral99` are slightly different colors.
@@ -207,7 +224,7 @@ The theme types were renamed too:
 
 #### `roundness`
 
-The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme, and TypeScript only reports it in a theme object written inline in a `theme` prop.
+The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme, and TypeScript only reports it in a theme object written inline in a `theme` prop or typed as `Theme`.
 
 In 5.x, each of these components multiplied `roundness` by a fixed number, and the 6.x defaults match the 5.x corners with the default `roundness` of 4. To port a custom `roundness`, set each role to your `roundness` times its multiplier:
 
@@ -257,6 +274,33 @@ A component's `theme` prop is merged deeply, so you can set only the role you ne
  };
 
  <PaperProvider theme={theme}>{children}</PaperProvider>;
+```
+
+#### Removed keys
+
+The 6.x theme has no `version`, `isV3`, `mode` or `animation.defaultAnimationDuration` keys. Paper 6 only supports Material Design 3, so `version` and `isV3` have nothing to select, and `mode` and `defaultAnimationDuration` have no replacement. Remove `version: 3` and `isV3` from your custom theme objects:
+
+```diff
+ const theme = {
+   ...LightTheme,
+-  version: 3,
+-  isV3: true,
+   colors: {
+     ...LightTheme.colors,
+     primary: 'tomato',
+   },
+ };
+```
+
+As with `roundness`, Paper ignores these keys, and TypeScript only reports them in a theme object written inline in a `theme` prop or typed as `Theme`. Code that reads `theme.isV3` gets `undefined` once the key is gone, so a check like `theme.isV3 ? a : b` takes the Material Design 2 branch. Keep only the Material Design 3 branch.
+
+#### `configureFonts`
+
+`configureFonts` only takes `config` now. The `isV3` option is gone, and so are the Material Design 2 fonts that `configureFonts({ isV3: false })` returned. In JavaScript the option is ignored, so that call returns the Material Design 3 typescale.
+
+```diff
+-const fonts = configureFonts({ config: fontConfig, isV3: true });
++const fonts = configureFonts({ config: fontConfig });
 ```
 
 ### Accessibility props
@@ -627,27 +671,36 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 />
 ```
 
+A `HelperText` that isn't tied to one input, such as an error under a group of inputs, has no `supportingText` to move to. Render a `Text` in the theme's error color instead:
+
+```tsx
+import { Text, useTheme } from 'react-native-paper';
+
+const GroupError = ({ visible }: { visible: boolean }) => {
+  const { colors } = useTheme();
+
+  if (!visible) {
+    return null;
+  }
+
+  return (
+    <Text variant="bodySmall" style={{ color: colors.error }}>
+      Enter at least one phone number
+    </Text>
+  );
+};
+```
+
 #### Removed props
 
 No direct `TextInput` equivalents for:
 
-- **`dense`**, **`contentStyle`**, **`underlineStyle`**
+- **`dense`**, **`contentStyle`**, **`underlineStyle`**, **`outlineStyle`**
 - **`underlineColor`**, **`activeUnderlineColor`**, **`outlineColor`**, **`activeOutlineColor`**, **`textColor`**
 
 Use **`style`** on the inner input and the **`theme`** for colors.
 
 ```tsx
-import { LightTheme, TextInput } from 'react-native-paper';
-
-const theme = {
-  ...LightTheme,
-  colors: {
-    ...LightTheme.colors,
-    outline: '#79747E',
-    primary: '#6750A4',
-  },
-};
-
 // Before (v5)
 <TextInput
   dense
@@ -665,12 +718,22 @@ const theme = {
   textColor="#1C1B1F"
   style={{ fontSize: 16 }}
 />
+```
+
+```tsx
+import { LightTheme, TextInput } from 'react-native-paper';
+
+const theme = {
+  ...LightTheme,
+  colors: {
+    ...LightTheme.colors,
+    outline: '#79747E',
+    primary: '#6750A4',
+  },
+};
 
 // After (v6)
-<TextInput
-  theme={theme}
-  style={{ fontSize: 16, color: '#1C1B1F' }}
-/>
+<TextInput theme={theme} style={{ fontSize: 16, color: '#1C1B1F' }} />;
 ```
 
 ### Button
