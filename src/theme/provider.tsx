@@ -16,7 +16,11 @@ const {
 export { ThemeProvider, withTheme };
 
 export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
-  return useThemeBase<T>(withoutUnsafeKeys(overrides));
+  const safeOverrides = React.useMemo(
+    () => withoutUnsafeKeys(overrides),
+    [overrides]
+  );
+  return useThemeBase<T>(safeOverrides);
 }
 
 // Upstream `deepmerge` corrupts PlatformColor objects, so we recurse manually
@@ -34,13 +38,20 @@ const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   !!value &&
   typeof value === 'object' &&
-  !isPlatformColorSentinel(value) &&
   [Object.prototype, null].includes(Object.getPrototypeOf(value));
 
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
-// Drops unsafe keys at any depth of nested plain objects. An object with
-// nothing to drop is returned as is, so the app's objects keep their identity.
+// Drops unsafe keys at any depth of nested plain objects and arrays. A value
+// with nothing to drop is returned as is, so the app's objects keep their
+// identity. PlatformColor values are walked too, since any object can carry a
+// sentinel key; a real one has nothing to drop and comes back as is.
 export const withoutUnsafeKeys = <T,>(value: T): T => {
+  if (Array.isArray(value)) {
+    const items = value.map((item: unknown) => withoutUnsafeKeys(item));
+    return items.some((item, index) => item !== value[index])
+      ? (items as T)
+      : value;
+  }
   if (!isPlainObject(value)) {
     return value;
   }

@@ -10,6 +10,7 @@ import {
   ThemeProvider,
   useInternalTheme,
   useTheme,
+  withoutUnsafeKeys,
 } from '../provider';
 import { DarkTheme, LightTheme } from '../schemes';
 import type { Theme, ThemeProp } from '../types';
@@ -300,5 +301,70 @@ describe('useTheme', () => {
 
     expect(result.current).toBe(theme);
     expect(result.current.colors.primary).toBe('#123456');
+  });
+
+  it('keeps the theme reference while overrides with a prototype key stay the same', async () => {
+    const overrides = JSON.parse(
+      '{"__proto__": {"polluted": "yes"}, "colors": {"primary": "#123456"}}'
+    );
+    const { result, rerender } = await renderHook(() =>
+      useTheme<Theme>(overrides)
+    );
+    const theme = result.current;
+
+    await rerender({});
+
+    expect(result.current).toBe(theme);
+    expect(Object.getPrototypeOf(result.current)).toBe(Object.prototype);
+    expect(result.current.colors.primary).toBe('#123456');
+  });
+
+  it('drops prototype keys from overrides shaped like a PlatformColor', async () => {
+    const overrides = JSON.parse(
+      '{"semantic": ["label"], "__proto__": {"polluted": "yes"}, "colors": {"primary": {"semantic": ["label"], "__proto__": {"polluted": "yes"}}}}'
+    );
+
+    const { result } = await renderHook(() => useTheme<Theme>(overrides));
+
+    for (const value of [result.current, result.current.colors.primary]) {
+      expect(Object.getPrototypeOf(value)).toBe(Object.prototype);
+      expect(Object.prototype.hasOwnProperty.call(value, '__proto__')).toBe(
+        false
+      );
+      expect(value).not.toHaveProperty('polluted');
+    }
+    expect(result.current.colors.primary).toEqual({ semantic: ['label'] });
+  });
+
+  it('drops prototype keys from objects inside arrays', async () => {
+    const overrides = JSON.parse(
+      '{"list": [{"__proto__": {"polluted": "yes"}, "a": 1}, "b"]}'
+    );
+
+    const { result } = await renderHook(() =>
+      useTheme<Theme & { list: unknown[] }>(overrides)
+    );
+
+    const [item, other] = result.current.list;
+    expect(Object.getPrototypeOf(item)).toBe(Object.prototype);
+    expect(item).not.toHaveProperty('polluted');
+    expect(item).toEqual({ a: 1 });
+    expect(other).toBe('b');
+  });
+});
+
+describe('withoutUnsafeKeys', () => {
+  it('returns values with nothing to drop as they are', () => {
+    const values = [
+      PlatformColor('label'),
+      { dynamic: { light: '#fff', dark: '#000' } },
+      { resource_paths: ['@android:color/black'] },
+      { colors: { primary: PlatformColor('label') }, list: [{ a: 1 }, 'b'] },
+      [{ a: 1 }],
+    ];
+
+    for (const value of values) {
+      expect(withoutUnsafeKeys(value)).toBe(value);
+    }
   });
 });

@@ -428,4 +428,33 @@ describe('PaperProvider', () => {
     expect(bodyMedium.fontSize).toBe(20);
     expect(received.colors.secondary).toBe('blue');
   });
+
+  it.each([
+    { label: 'useTheme()', Reader: UseThemeReader },
+    { label: 'useTheme(overrides)', Reader: UseThemeOverridesReader },
+  ])(
+    'drops prototype keys from a theme color shaped like a PlatformColor, read with $label',
+    async ({ Reader }) => {
+      const theme: ThemeProp = JSON.parse(
+        '{"colors": {"primary": {"semantic": ["label"], "__proto__": {"polluted": "yes"}}}}'
+      );
+      const onTheme = mockJest.fn<(theme: Theme) => void>();
+
+      await render(
+        <PaperProvider theme={theme} reduceMotion="off">
+          <Reader onTheme={onTheme} />
+        </PaperProvider>
+      );
+
+      expect(onTheme).toHaveBeenCalled();
+      const [received] = onTheme.mock.calls[0];
+      const { primary } = received.colors;
+      expect(Object.getPrototypeOf(primary)).toBe(Object.prototype);
+      expect(Object.prototype.hasOwnProperty.call(primary, '__proto__')).toBe(
+        false
+      );
+      expect(primary).not.toHaveProperty('polluted');
+      expect(primary).toEqual({ semantic: ['label'] });
+    }
+  );
 });

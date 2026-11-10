@@ -36,13 +36,13 @@ const PaperProvider = (props: Props) => {
     const scale = resolvedReduceMotion
       ? 0
       : (props.theme?.animation?.scale ?? 1);
-    const themeProp = withoutUnsafeKeys(props.theme);
+    const safeTheme = withoutUnsafeKeys(props.theme);
 
     return {
       ...base,
-      ...themeProp,
-      colors: { ...base.colors, ...themeProp?.colors },
-      animation: { ...themeProp?.animation, scale },
+      ...safeTheme,
+      colors: { ...base.colors, ...safeTheme?.colors },
+      animation: { ...safeTheme?.animation, scale },
     };
   }, [colorScheme, props.theme, resolvedReduceMotion]);
 
