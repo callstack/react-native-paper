@@ -173,6 +173,7 @@ exports[`renders chip with close button 1`] = `
                 },
                 [
                   {
+                    "flexShrink": 1,
                     "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
@@ -468,6 +469,7 @@ exports[`renders chip with custom close button 1`] = `
                 },
                 [
                   {
+                    "flexShrink": 1,
                     "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
@@ -763,6 +765,7 @@ exports[`renders chip with icon 1`] = `
                 },
                 [
                   {
+                    "flexShrink": 1,
                     "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
@@ -920,6 +923,7 @@ exports[`renders chip with onPress 1`] = `
                 },
                 [
                   {
+                    "flexShrink": 1,
                     "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
@@ -1077,6 +1081,7 @@ exports[`renders outlined disabled chip 1`] = `
                 },
                 [
                   {
+                    "flexShrink": 1,
                     "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
@@ -1279,6 +1284,7 @@ exports[`renders selected chip 1`] = `
                 },
                 [
                   {
+                    "flexShrink": 1,
                     "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
