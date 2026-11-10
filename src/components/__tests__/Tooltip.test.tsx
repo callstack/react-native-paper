@@ -212,6 +212,32 @@ describe('Tooltip', () => {
             top: 250, // pageY (200) + height (50)
           });
         });
+
+        it('anchors the tooltip to the wrapper when the child is absolutely positioned', async () => {
+          const {
+            wrapper: { getByText, findByText },
+          } = await setup({
+            children: (
+              <DummyComponent
+                style={{ position: 'absolute', left: 10, top: 20 }}
+              />
+            ),
+          });
+
+          await userEvent.longPress(getTrigger(getByText));
+
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
+            nativeEvent: {
+              layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
+            },
+          });
+
+          expect(tooltip.parent).toHaveStyle({
+            left: 210,
+            top: 250,
+          });
+        });
       });
 
       describe('When it overflows to left', () => {

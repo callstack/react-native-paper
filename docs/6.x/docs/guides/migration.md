@@ -10,6 +10,7 @@ React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-r
 
 The following props now accept animated styles returned from `useAnimatedStyle`. They no longer accept `Animated.Value` or `Animated.AnimatedInterpolation` where these were previously supported:
 
+- `Appbar` and `Appbar.Header`: `style`
 - `Appbar.Action` and `Appbar.BackAction`: `style`
 - `Badge`: `style`
 - `Banner`: `style`
@@ -57,6 +58,8 @@ You can use an elevation level from `0` to `5` instead. Changes to the elevation
 
 The following component style props no longer support overriding their background color or border radius:
 
+- `Appbar` and `Appbar.Header`
+- `Avatar.Icon`, `Avatar.Image` and `Avatar.Text`: background color
 - `Banner`
 - `Button`
 - `Card`
@@ -66,7 +69,17 @@ The following component style props no longer support overriding their backgroun
 - `Searchbar`
 - `Snackbar`
 
-You can use the component's color prop where available, or override the corresponding theme colors.
+You can use the component's color prop where available, or override the corresponding theme colors. See the component sections below for details.
+
+Components no longer read values from the `style` prop to derive other styles, since this is not possible with animated styles. The affected props have been replaced with dedicated props:
+
+- `Appbar` and `Appbar.Header`: `backgroundColor` and the border radius props (`borderRadius`, `borderTopLeftRadius` etc.) replace `style.backgroundColor` and the border radius in `style`
+- `Avatar.Icon`, `Avatar.Image` and `Avatar.Text`: `backgroundColor` replaces `style.backgroundColor`
+- `Button`: `iconSize` replaces `labelStyle.fontSize` for the size of the icon and the loading indicator
+- `Button`: `textColor` replaces `labelStyle.color` for the color of the icon and the loading indicator
+- `Card`: `borderColor` replaces `style.borderColor` for the outline color
+
+`Tooltip` no longer reads positioning styles from the wrapped element. Apply them to a parent `View` wrapping the `Tooltip`, see [Tooltip](#tooltip).
 
 ### Ripple color
 
@@ -285,9 +298,66 @@ Libraries built on Paper may not support 6.x yet. For example, `react-native-pap
 +<Appbar.Content title="Inbox" />
 ```
 
-The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
+- The `style` props for `Appbar` and `Appbar.Header` no longer configure the background color or border radius. Use the `backgroundColor` prop and the border radius props (`borderRadius`, `borderTopLeftRadius`, `borderCurve` etc.) instead.
+- The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+- The default height of `Appbar` now includes the `safeAreaInsets`, so the content area keeps the height of the selected `mode`.
+- The `height` specified in `style` for `Appbar.Header` now includes the status bar height. Previously, the status bar height was added to it automatically.
 
-The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+e.g.:
+
+```diff
+<Appbar.Header
+- style={{ backgroundColor: 'red', borderBottomLeftRadius: 16 }}
++ backgroundColor="red"
++ borderBottomLeftRadius={16}
+>
+  <Appbar.Content title="Title" />
+</Appbar.Header>
+```
+
+To keep the height of the content row when setting `height` in `style`, add the top inset from `useSafeAreaInsets()` of `react-native-safe-area-context`:
+
+```diff
++const { top } = useSafeAreaInsets();
++
+<Appbar.Header
+- style={{ height: 80 }}
++ style={{ height: 80 + top }}
+>
+  <Appbar.Content title="Title" />
+</Appbar.Header>
+```
+
+### Avatar
+
+The `style` prop for `Avatar.Icon`, `Avatar.Image` and `Avatar.Text` no longer configures the background color. Use the `backgroundColor` prop instead. The text or icon color is still derived from the background color unless `color` is specified.
+
+e.g.:
+
+```diff
+<Avatar.Text
+  label="XD"
+- style={{ backgroundColor: 'red' }}
++ backgroundColor="red"
+/>
+```
+
+### Tooltip
+
+`Tooltip` no longer reads positioning styles such as `position: 'absolute'` from the `style` of the wrapped element. Apply them to a parent `View` wrapping the `Tooltip` instead.
+
+e.g.:
+
+```diff
+- <Tooltip title="Add">
+-   <FAB icon="plus" style={{ position: 'absolute', right: 16, bottom: 16 }} />
+- </Tooltip>
++ <View style={{ position: 'absolute', right: 16, bottom: 16 }}>
++   <Tooltip title="Add">
++     <FAB icon="plus" />
++   </Tooltip>
++ </View>
+```
 
 ### Surface
 
@@ -761,6 +831,14 @@ below `minHeight` has no effect.
 </Button>
 ```
 
+#### Label style
+
+- `labelStyle={{ fontSize }}` no longer changes the icon size. The icon follows
+  `size`; use the `iconSize` prop to change the size of the icon and the
+  loading indicator.
+- `labelStyle={{ color }}` no longer changes the color of the icon and the
+  loading indicator. Use the `textColor` prop instead.
+
 #### Appearance changes
 
 These need no code change, but the rendering differs:
@@ -775,8 +853,6 @@ These need no code change, but the rendering differs:
   wider: **16dp** of horizontal padding at the default `small` size instead of
   **8dp**, and a **64dp** minimum width.
 - The default icon size is **20dp**, up from **18dp**.
-- `labelStyle={{ fontSize }}` no longer changes the icon size. The icon follows
-  `size`; set both if you need them to match.
 - The resting corner is the full pill radius instead of a fixed **20dp**.
 - At the default `small` size, the horizontal padding is **16dp** for every
   mode. In 5.x, the label margins were **24dp** for `filled`, `tonal`,
@@ -859,6 +935,20 @@ We have also added a `direction` prop to the `Card` component, which lets you ar
 </Card>
 ```
 
+#### Outline color
+
+The `borderColor` in `style` no longer changes the outline color in `outlined` mode. Use the `borderColor` prop instead:
+
+```diff
+<Card
+  mode="outlined"
+- style={{ borderColor: 'red' }}
++ borderColor="red"
+>
+  <Card.Content>...</Card.Content>
+</Card>
+```
+
 #### `Card.Cover`
 
 The `style` prop of `Card.Cover` is now typed as a `View` style. Image style properties such as `resizeMode` or `tintColor` were never applied, so pass them as `Image` props instead:
@@ -867,6 +957,8 @@ The `style` prop of `Card.Cover` is now typed as a `View` style. Image style pro
 - <Card.Cover source={cover} style={{ resizeMode: 'contain' }} />
 + <Card.Cover source={cover} resizeMode="contain" />
 ```
+
+`Card.Cover` no longer applies the border radius from `style` to the image directly. The image is clipped by the container, so any border radius passed in `style` still applies.
 
 #### `Card.Actions`
 

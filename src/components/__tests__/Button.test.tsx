@@ -34,9 +34,6 @@ afterEach(() => {
 });
 
 const styles = StyleSheet.create({
-  flexing: {
-    flexDirection: 'row-reverse',
-  },
   scaled: {
     transform: [{ scale: 1.5 }],
   },
@@ -147,6 +144,32 @@ it('leaves the RTL mirroring to the browser on web', async () => {
 
   expect(contentOf('Leading')).toHaveStyle({ flexDirection: 'row' });
   expect(contentOf('Trailing')).toHaveStyle({ flexDirection: 'row-reverse' });
+});
+
+it('renders the icon at the size set by iconSize', async () => {
+  const renderIcon = jest.fn(() => null);
+
+  await render(
+    <Button icon={renderIcon} iconSize={24}>
+      Icon Button
+    </Button>
+  );
+
+  expect(renderIcon).toHaveBeenCalledWith(
+    expect.objectContaining({ size: 24 })
+  );
+});
+
+it('renders the loading indicator at the size set by iconSize', async () => {
+  const tree = (
+    await render(
+      <Button loading iconSize={24}>
+        Loading Button
+      </Button>
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
 
 it('renders loading button', async () => {
