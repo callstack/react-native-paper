@@ -94,7 +94,7 @@ const TouchableRipple = (
     Platform.Version >= ANDROID_VERSION_PIE &&
     borderless;
 
-  if (TouchableRipple.supported) {
+  if (TouchableRippleComponent.supported) {
     const androidRipple = rippleEffectEnabled
       ? background ?? {
           color: calculatedRippleColor,
@@ -138,9 +138,6 @@ const TouchableRipple = (
   );
 };
 
-TouchableRipple.supported =
-  Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
-
 const styles = StyleSheet.create({
   overflowHidden: {
     overflow: 'hidden',
@@ -153,4 +150,11 @@ const styles = StyleSheet.create({
 
 const Component = forwardRef(TouchableRipple);
 
-export default Component as typeof Component & { supported: boolean };
+const TouchableRippleComponent = Component as typeof Component & {
+  supported: boolean;
+};
+
+TouchableRippleComponent.supported =
+  Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+
+export default TouchableRippleComponent;

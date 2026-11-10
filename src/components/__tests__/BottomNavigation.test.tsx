@@ -15,6 +15,7 @@ import {
   getLabelColor,
 } from '../BottomNavigation/utils';
 import Icon from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 const styles = StyleSheet.create({
   backgroundColor: {
@@ -597,3 +598,36 @@ it("allows customizing Route's type via generics", () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+describe.each([
+  { supported: true, touchable: 'TouchableRipple' },
+  { supported: false, touchable: 'Pressable' },
+])(
+  'when TouchableRipple.supported is $supported',
+  ({ supported, touchable }) => {
+    const originalSupported = TouchableRipple.supported;
+
+    beforeAll(() => {
+      TouchableRipple.supported = supported;
+    });
+
+    afterAll(() => {
+      TouchableRipple.supported = originalSupported;
+    });
+
+    it(`renders each tab with ${touchable}`, () => {
+      const { getAllByRole, UNSAFE_queryAllByType } = render(
+        <BottomNavigation
+          navigationState={createState(0, 3)}
+          onIndexChange={jest.fn()}
+          renderScene={({ route }) => route.title}
+        />
+      );
+
+      expect(getAllByRole('button')).toHaveLength(3);
+      expect(UNSAFE_queryAllByType(TouchableRipple)).toHaveLength(
+        supported ? 3 : 0
+      );
+    });
+  }
+);

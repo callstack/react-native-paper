@@ -8,6 +8,7 @@ import { getTheme } from '../../core/theming';
 import { pink500 } from '../../styles/themes/v2/colors';
 import IconButton from '../IconButton/IconButton';
 import { getIconButtonColor } from '../IconButton/utils';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 const styles = StyleSheet.create({
   square: {
@@ -380,5 +381,33 @@ it('action animated value changes correctly', () => {
   });
   expect(getByTestId('icon-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
+  });
+});
+
+describe.each([
+  { supported: true, hitSlop: 10 },
+  { supported: false, hitSlop: 6 },
+])('when TouchableRipple.supported is $supported', ({ supported, hitSlop }) => {
+  const originalSupported = TouchableRipple.supported;
+
+  beforeAll(() => {
+    TouchableRipple.supported = supported;
+  });
+
+  afterAll(() => {
+    TouchableRipple.supported = originalSupported;
+  });
+
+  it(`uses a ${hitSlop}dp hit slop`, () => {
+    const { getByTestId } = render(
+      <IconButton icon="camera" onPress={jest.fn()} />
+    );
+
+    expect(getByTestId('icon-button').props.hitSlop).toEqual({
+      top: hitSlop,
+      left: hitSlop,
+      bottom: hitSlop,
+      right: hitSlop,
+    });
   });
 });
