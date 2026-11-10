@@ -1,6 +1,14 @@
-import { Dimensions, StyleSheet, View } from 'react-native';
+import type { ComponentRef } from 'react';
+import { Dimensions, Keyboard, Platform, StyleSheet, View } from 'react-native';
 
-import { expect, it, jest } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { render } from '../../test-utils';
@@ -9,6 +17,102 @@ import type { Elevation } from '../../theme/types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
+
+describe('web focus', () => {
+  const PAST_ANIMATION_MS = 300;
+  const focus = jest.fn();
+  const originalPlatform = Platform.OS;
+  const originalHTMLElement = Object.getOwnPropertyDescriptor(
+    globalThis,
+    'HTMLElement'
+  );
+  const originalDocument = Object.getOwnPropertyDescriptor(
+    globalThis,
+    'document'
+  );
+  const originalQuerySelector = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'querySelector'
+  );
+  const originalMeasureInWindow = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'measureInWindow'
+  );
+
+  beforeEach(() => {
+    Platform.OS = 'web';
+    focus.mockClear();
+    // Native View refs stand in for DOM elements in the native test renderer.
+    Object.defineProperty(globalThis, 'HTMLElement', {
+      configurable: true,
+      value: View,
+    });
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: {
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+      },
+    });
+    Object.defineProperty(View.prototype, 'querySelector', {
+      configurable: true,
+      value: () => ({ focus }),
+    });
+    const measureInWindow: ComponentRef<typeof View>['measureInWindow'] = (
+      fn
+    ) => fn(100, 100, 80, 32);
+    Object.defineProperty(View.prototype, 'measureInWindow', {
+      configurable: true,
+      value: measureInWindow,
+    });
+  });
+
+  afterEach(() => {
+    Platform.OS = originalPlatform;
+    for (const [target, key, descriptor] of [
+      [globalThis, 'HTMLElement', originalHTMLElement],
+      [globalThis, 'document', originalDocument],
+      [View.prototype, 'querySelector', originalQuerySelector],
+      [View.prototype, 'measureInWindow', originalMeasureInWindow],
+    ] as const) {
+      if (descriptor) {
+        Object.defineProperty(target, key, descriptor);
+      } else {
+        Reflect.deleteProperty(target, key);
+      }
+    }
+  });
+
+  const makeMenu = (visible: boolean) => (
+    <Portal.Host>
+      <Menu visible={visible} anchor={<Button>Open menu</Button>}>
+        <Menu.Item title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  it('does not move focus when mounted hidden', async () => {
+    await render(makeMenu(false));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    expect(focus).not.toHaveBeenCalled();
+  });
+
+  it('moves focus when opened and restores it when closed', async () => {
+    const { rerender } = await render(makeMenu(false));
+    await rerender(makeMenu(true));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    expect(focus).toHaveBeenCalledTimes(1);
+    await rerender(makeMenu(false));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    expect(focus).toHaveBeenCalledTimes(2);
+  });
+
+  it('moves focus when mounted visible', async () => {
+    await render(makeMenu(true));
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    expect(focus).toHaveBeenCalledTimes(1);
+  });
+});
 
 it('renders visible menu', async () => {
   const tree = (
@@ -48,6 +152,8 @@ it('renders not visible menu', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+const ViewPrototype: ComponentRef<typeof View> = View.prototype;
+
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
 elevations.forEach((elevation) =>
@@ -85,7 +191,7 @@ it('uses the default anchorPosition of top', async () => {
     fontScale: 2,
   });
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
@@ -141,7 +247,7 @@ it('respects anchorPosition bottom', async () => {
     fontScale: 2,
   });
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
@@ -233,4 +339,121 @@ it('renders menu with mode "flat"', async () => {
 
   expect(styles).not.toHaveProperty('shadowColor');
   expect(styles).not.toHaveProperty('shadowOpacity');
+});
+
+it('accounts for a keyboard that is already open when the menu mounts', async () => {
+  const testID = 'keyboard-aware-menu';
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const keyboardMetricsSpy = jest.spyOn(Keyboard, 'metrics').mockReturnValue({
+    screenX: 0,
+    screenY: 500,
+    width: 400,
+    height: 300,
+  });
+
+  let measureCalls = 0;
+  const measureSpy = jest
+    .spyOn(ViewPrototype, 'measureInWindow')
+    .mockImplementation((fn) => {
+      measureCalls += 1;
+      if (measureCalls % 2 === 1) {
+        // Menu content is tall enough to overflow the remaining window.
+        fn(100, 100, 200, 400);
+      } else {
+        fn(100, 100, 80, 32);
+      }
+    });
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={
+            <Button mode="outlined" testID="anchor">
+              Open menu
+            </Button>
+          }
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+          <Menu.Item onPress={jest.fn()} title="Redo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  const { rerender } = await render(makeMenu(false));
+
+  await act(async () => {
+    await rerender(makeMenu(true));
+    await Promise.resolve();
+  });
+
+  await waitFor(() => {
+    // eslint-disable-next-line no-restricted-syntax -- layout height is not otherwise exposed.
+    const styles = StyleSheet.flatten(screen.getByTestId(testID).props.style);
+    // Available height is window (800) minus keyboard (300) minus top (100) minus SCREEN_INDENT (8).
+    expect(styles).toEqual(expect.objectContaining({ height: 392 }));
+  });
+
+  measureSpy.mockRestore();
+  keyboardMetricsSpy.mockRestore();
+  dimensionsSpy.mockRestore();
+});
+it('does not crash when Keyboard.metrics is unavailable (react-native-web)', async () => {
+  const testID = 'no-metrics-menu';
+  const original = Keyboard.metrics;
+  // @ts-expect-error simulate react-native-web, where metrics doesn't exist
+  Keyboard.metrics = undefined;
+
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 2,
+    fontScale: 2,
+  });
+  const measureSpy = jest
+    .spyOn(ViewPrototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={<Button mode="outlined">Open menu</Button>}
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  try {
+    const { rerender, toJSON } = await render(makeMenu(false));
+
+    await act(async () => {
+      await rerender(makeMenu(true));
+      await Promise.resolve();
+    });
+
+    await waitFor(() => {
+      const json = JSON.stringify(toJSON());
+      expect(json).toContain('"left":100');
+      expect(json).toContain('"top":100');
+    });
+  } finally {
+    Keyboard.metrics = original;
+    measureSpy.mockRestore();
+    dimensionsSpy.mockRestore();
+  }
 });

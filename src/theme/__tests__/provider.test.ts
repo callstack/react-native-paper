@@ -9,9 +9,11 @@ import {
   safeMerge,
   ThemeProvider,
   useInternalTheme,
+  useTheme,
+  withoutUnsafeKeys,
 } from '../provider';
 import { DarkTheme, LightTheme } from '../schemes';
-import type { ThemeProp } from '../types';
+import type { Theme, ThemeProp } from '../types';
 
 describe('isPlatformColorSentinel', () => {
   it('detects iOS PlatformColor (semantic)', () => {
@@ -124,6 +126,66 @@ describe('safeMerge', () => {
     expect(result.colors.secondary).toBe('#999');
     expect(result.colors.tertiary).toBe('#222');
   });
+
+  it('ignores a top-level __proto__ key', () => {
+    const overrides = JSON.parse('{"__proto__": {"polluted": "yes"}, "a": 2}');
+
+    const result = safeMerge<Record<string, unknown>>({ a: 1 }, overrides);
+    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);
+    expect(result).toEqual({ a: 2 });
+    expect(result.polluted).toBeUndefined();
+    const fresh: Record<string, unknown> = {};
+    expect(fresh.polluted).toBeUndefined();
+  });
+
+  it('ignores a nested __proto__ key', () => {
+    const base = { colors: { primary: 'blue', secondary: 'green' } };
+    const overrides = JSON.parse(
+      '{"colors": {"__proto__": {"polluted": "yes"}, "primary": "red"}}'
+    );
+
+    const result = safeMerge<{ colors: Record<string, unknown> }>(
+      base,
+      overrides
+    );
+    expect(Object.getPrototypeOf(result.colors)).toBe(Object.prototype);
+    expect(result.colors.primary).toBe('red');
+    expect(result.colors.secondary).toBe('green');
+    expect(result.colors.polluted).toBeUndefined();
+  });
+
+  it('skips constructor and prototype keys', () => {
+    const overrides = JSON.parse(
+      '{"constructor": {"x": 1}, "prototype": {"y": 2}, "a": 2}'
+    );
+
+    const result = safeMerge<Record<string, unknown>>({ a: 1 }, overrides);
+    expect(Object.prototype.hasOwnProperty.call(result, 'constructor')).toBe(
+      false
+    );
+    expect(Object.prototype.hasOwnProperty.call(result, 'prototype')).toBe(
+      false
+    );
+    expect(result.constructor).toBe(Object);
+    expect(result).toEqual({ a: 2 });
+  });
+
+  it('ignores a __proto__ key inside a new override subtree', () => {
+    const overrides = JSON.parse(
+      '{"extra": {"__proto__": {"polluted": "yes"}, "b": 2}}'
+    );
+
+    const result = safeMerge<{ a: number; extra?: Record<string, unknown> }>(
+      { a: 1 },
+      overrides
+    );
+    expect(Object.getPrototypeOf(result.extra)).toBe(Object.prototype);
+    expect(
+      Object.prototype.hasOwnProperty.call(result.extra, '__proto__')
+    ).toBe(false);
+    expect(result.extra?.polluted).toBeUndefined();
+    expect(result.extra).toEqual({ b: 2 });
+  });
 });
 
 describe('useInternalTheme', () => {
@@ -204,5 +266,105 @@ describe('useInternalTheme', () => {
     expect(result.current.colors.primary).toEqual(
       PlatformColor('secondaryLabel')
     );
+  });
+});
+
+describe('useTheme', () => {
+  it('drops prototype keys from overrides parsed from JSON', async () => {
+    const overrides = JSON.parse(
+      '{"__proto__": {"polluted": "yes"}, "colors": {"__proto__": {"polluted": "yes"}, "secondary": "blue"}}'
+    );
+
+    const { result } = await renderHook(() => useTheme<Theme>(overrides));
+
+    for (const value of [result.current, result.current.colors]) {
+      expect(Object.getPrototypeOf(value)).toBe(Object.prototype);
+      expect(Object.prototype.hasOwnProperty.call(value, '__proto__')).toBe(
+        false
+      );
+      expect(value).not.toHaveProperty('polluted');
+    }
+    expect(result.current.colors.primary).toBe(LightTheme.colors.primary);
+    expect(result.current.colors.secondary).toBe('blue');
+    expect(result.current.fonts).toEqual(LightTheme.fonts);
+    expect({}).not.toHaveProperty('polluted');
+  });
+
+  it('keeps the theme reference while the overrides object stays the same', async () => {
+    const overrides = { colors: { primary: '#123456' } };
+    const { result, rerender } = await renderHook(() =>
+      useTheme<Theme>(overrides)
+    );
+    const theme = result.current;
+
+    await rerender({});
+
+    expect(result.current).toBe(theme);
+    expect(result.current.colors.primary).toBe('#123456');
+  });
+
+  it('keeps the theme reference while overrides with a prototype key stay the same', async () => {
+    const overrides = JSON.parse(
+      '{"__proto__": {"polluted": "yes"}, "colors": {"primary": "#123456"}}'
+    );
+    const { result, rerender } = await renderHook(() =>
+      useTheme<Theme>(overrides)
+    );
+    const theme = result.current;
+
+    await rerender({});
+
+    expect(result.current).toBe(theme);
+    expect(Object.getPrototypeOf(result.current)).toBe(Object.prototype);
+    expect(result.current.colors.primary).toBe('#123456');
+  });
+
+  it('drops prototype keys from overrides shaped like a PlatformColor', async () => {
+    const overrides = JSON.parse(
+      '{"semantic": ["label"], "__proto__": {"polluted": "yes"}, "colors": {"primary": {"semantic": ["label"], "__proto__": {"polluted": "yes"}}}}'
+    );
+
+    const { result } = await renderHook(() => useTheme<Theme>(overrides));
+
+    for (const value of [result.current, result.current.colors.primary]) {
+      expect(Object.getPrototypeOf(value)).toBe(Object.prototype);
+      expect(Object.prototype.hasOwnProperty.call(value, '__proto__')).toBe(
+        false
+      );
+      expect(value).not.toHaveProperty('polluted');
+    }
+    expect(result.current.colors.primary).toEqual({ semantic: ['label'] });
+  });
+
+  it('drops prototype keys from objects inside arrays', async () => {
+    const overrides = JSON.parse(
+      '{"list": [{"__proto__": {"polluted": "yes"}, "a": 1}, "b"]}'
+    );
+
+    const { result } = await renderHook(() =>
+      useTheme<Theme & { list: unknown[] }>(overrides)
+    );
+
+    const [item, other] = result.current.list;
+    expect(Object.getPrototypeOf(item)).toBe(Object.prototype);
+    expect(item).not.toHaveProperty('polluted');
+    expect(item).toEqual({ a: 1 });
+    expect(other).toBe('b');
+  });
+});
+
+describe('withoutUnsafeKeys', () => {
+  it('returns values with nothing to drop as they are', () => {
+    const values = [
+      PlatformColor('label'),
+      { dynamic: { light: '#fff', dark: '#000' } },
+      { resource_paths: ['@android:color/black'] },
+      { colors: { primary: PlatformColor('label') }, list: [{ a: 1 }, 'b'] },
+      [{ a: 1 }],
+    ];
+
+    for (const value of values) {
+      expect(withoutUnsafeKeys(value)).toBe(value);
+    }
   });
 });

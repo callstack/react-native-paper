@@ -17,6 +17,8 @@ import PaperProvider from '../../core/PaperProvider';
 import { render } from '../../test-utils';
 import Tooltip from '../Tooltip/Tooltip';
 
+const ViewPrototype: React.ComponentRef<typeof View> = View.prototype;
+
 const mockedRemoveEventListener = jest.fn();
 
 jest.mock('../../utils/addEventListener', () => ({
@@ -29,7 +31,7 @@ const DummyComponent = ({
   ref,
   ...props
 }: ViewProps & {
-  ref?: React.RefObject<View | null>;
+  ref?: React.RefObject<React.ComponentRef<typeof View> | null>;
 }) => (
   <View {...props} ref={ref}>
     <Text>dummy component</Text>
@@ -82,7 +84,7 @@ describe('Tooltip', () => {
     };
 
     jest
-      .spyOn(View.prototype, 'measure')
+      .spyOn(ViewPrototype, 'measure')
       .mockImplementation((cb) => cb(x, y, width, height, pageX, pageY));
 
     const wrapper = await render(
@@ -163,7 +165,7 @@ describe('Tooltip', () => {
       it('hides the tooltip when the user stop pressing the component', async () => {
         const {
           wrapper: { queryByText, getByText, findByText },
-        } = await setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
+        } = await setup({ enterTouchDelay: 50, leaveTouchDelay: 100 });
 
         await userEvent.longPress(getTrigger(getByText));
 
@@ -208,6 +210,32 @@ describe('Tooltip', () => {
           expect(tooltip.parent).toHaveStyle({
             left: 210, // pageX (220) + (width (80) - TOOLTIP_WIDTH (100)) / 2 = 210
             top: 250, // pageY (200) + height (50)
+          });
+        });
+
+        it('anchors the tooltip to the wrapper when the child is absolutely positioned', async () => {
+          const {
+            wrapper: { getByText, findByText },
+          } = await setup({
+            children: (
+              <DummyComponent
+                style={{ position: 'absolute', left: 10, top: 20 }}
+              />
+            ),
+          });
+
+          await userEvent.longPress(getTrigger(getByText));
+
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
+            nativeEvent: {
+              layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
+            },
+          });
+
+          expect(tooltip.parent).toHaveStyle({
+            left: 210,
+            top: 250,
           });
         });
       });

@@ -160,7 +160,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Reference to the chip container.
    */
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -530,6 +530,7 @@ const styles = StyleSheet.create({
   md3LabelText: {
     textAlignVertical: 'center',
     marginVertical: 6,
+    flexShrink: 1,
   },
   avatar: {
     width: 24,

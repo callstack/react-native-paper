@@ -3,14 +3,14 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   StyleProp,
-  TextLayoutEventData,
+  TextLayoutEvent,
   TextProps,
   TextStyle,
   ViewStyle,
 } from 'react-native';
 
+import { ListAccordionContext } from './ListAccordionContext';
 import { getLeftStyles, getRightStyles } from './utils';
 import type { Style } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -69,7 +69,7 @@ export type Props = Omit<
    * Style that is passed to the root TouchableRipple container.
    */
   style?: StyleProp<ViewStyle>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * Style that is passed to the outermost container that wraps the entire content, including left and right items and both title and description.
    */
@@ -166,11 +166,11 @@ const ListItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { hasLeft } = React.useContext(ListAccordionContext);
+  const shouldIndent = hasLeft && !left && !right;
   const [alignToTop, setAlignToTop] = React.useState(false);
 
-  const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
-  ) => {
+  const onDescriptionTextLayout = (event: TextLayoutEvent) => {
     const { nativeEvent } = event;
     setAlignToTop(nativeEvent.lines.length >= 2);
   };
@@ -233,7 +233,11 @@ const ListItem = ({
     <TouchableRipple
       {...rest}
       ref={ref}
-      style={[styles.container, style]}
+      style={
+        shouldIndent
+          ? [styles.container, styles.indent, style]
+          : [styles.container, style]
+      }
       onPress={onPress}
       theme={theme}
       testID={testID}
@@ -269,6 +273,9 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 8,
     paddingRight: 24,
+  },
+  indent: {
+    paddingLeft: 40,
   },
   row: {
     width: '100%',

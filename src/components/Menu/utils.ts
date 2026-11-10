@@ -1,3 +1,5 @@
+import type { ColorValue } from 'react-native';
+
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../theme/types';
 import type { IconSource } from '../Icon';
@@ -26,7 +28,14 @@ const getIconColor = ({ theme }: ColorProps) => {
   return theme.colors.onSurfaceVariant;
 };
 
-export const getMenuItemColor = ({ theme, disabled }: ColorProps) => {
+export const getMenuItemColor = ({
+  theme,
+  disabled,
+}: ColorProps): {
+  titleColor: ColorValue;
+  iconColor: ColorValue;
+  contentOpacity: number;
+} => {
   const contentOpacity = disabled
     ? stateOpacity.disabled
     : stateOpacity.enabled;

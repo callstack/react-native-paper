@@ -11,7 +11,7 @@ import color from 'color';
 
 import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
+import { getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
@@ -66,7 +66,8 @@ export type Props = PressableProps & {
    */
   underlayColor?: string;
   /**
-   * Content of the `TouchableRipple`.
+   * Content of the `TouchableRipple`. Can be a function that receives the pressable state.
+   * `hovered` and `focused` are only available on the web.
    */
   children:
     | ((state: PressableStateCallbackType) => React.ReactNode)
@@ -75,7 +76,7 @@ export type Props = PressableProps & {
     | StyleProp<ViewStyle>
     | ((state: PressableStateCallbackType) => StyleProp<ViewStyle>)
     | undefined;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */
@@ -321,9 +322,7 @@ const TouchableRipple = ({
             {!disabled && touchTargetStyle && (
               <View aria-hidden style={touchTargetStyle} />
             )}
-            {React.Children.only(
-              typeof children === 'function' ? children(state) : children
-            )}
+            {resolveChildren(children, state)}
           </>
         );
       }}

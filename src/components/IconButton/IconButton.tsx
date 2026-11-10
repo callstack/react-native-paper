@@ -76,7 +76,7 @@ export type Props = Omit<
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * TestID used for testing purposes
    */
