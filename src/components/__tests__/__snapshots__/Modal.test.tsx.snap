@@ -26,7 +26,6 @@ exports[`Modal closes a non-dismissible modal when visible changes from true to 
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -236,7 +235,6 @@ exports[`Modal closes a non-dismissible modal when visible changes from true to 
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="none"
@@ -446,7 +444,6 @@ exports[`Modal invokes onDismiss immediately when the backdrop is pressed 1`] = 
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -697,7 +694,6 @@ exports[`Modal invokes onDismiss immediately when the backdrop is pressed 2`] = 
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -948,7 +944,6 @@ exports[`Modal invokes onDismiss when the Android back button is pressed 1`] = `
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -1199,7 +1194,6 @@ exports[`Modal invokes onDismiss when the Android back button is pressed 2`] = `
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -1450,7 +1444,6 @@ exports[`Modal invokes onDismiss when the Android back button is pressed 3`] = `
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -1701,7 +1694,6 @@ exports[`Modal keeps a non-dismissible modal visible when the Android back butto
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -1911,7 +1903,6 @@ exports[`Modal keeps a non-dismissible modal visible when the Android back butto
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -2121,7 +2112,6 @@ exports[`Modal keeps a non-dismissible modal visible when the Android back butto
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -2331,7 +2321,6 @@ exports[`Modal keeps a non-dismissible modal visible when the backdrop is presse
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -2541,7 +2530,6 @@ exports[`Modal keeps a non-dismissible modal visible when the backdrop is presse
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -2751,7 +2739,6 @@ exports[`Modal keeps a non-dismissible modal visible when the backdrop is presse
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -2961,7 +2948,6 @@ exports[`Modal keeps the modal closed when visible changes back to false while o
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -3212,7 +3198,6 @@ exports[`Modal keeps the modal open when visible changes back to true while clos
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -3463,7 +3448,6 @@ exports[`Modal keeps the modal open when visible changes back to true while clos
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="none"
@@ -3714,7 +3698,6 @@ exports[`Modal keeps the modal open when visible changes back to true while clos
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -3965,7 +3948,6 @@ exports[`Modal receives appropriate top and bottom insets 1`] = `
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -4216,7 +4198,6 @@ exports[`Modal runs the closing animation when visible changes to false after di
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -4467,7 +4448,6 @@ exports[`Modal runs the closing animation when visible changes to false after di
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="none"
@@ -4718,7 +4698,6 @@ exports[`Modal runs the closing animation when visible changes to false after di
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="none"
@@ -4969,7 +4948,6 @@ exports[`Modal runs the fade-in animation when visible changes from false to tru
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -5220,7 +5198,6 @@ exports[`Modal runs the fade-in animation when visible changes from false to tru
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -5471,7 +5448,6 @@ exports[`Modal runs the fade-out animation when visible changes from true to fal
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="auto"
@@ -5722,7 +5698,6 @@ exports[`Modal runs the fade-out animation when visible changes from true to fal
     }
   >
     <View
-      aria-live="polite"
       collapsable={false}
       onAccessibilityEscape={[Function]}
       pointerEvents="none"

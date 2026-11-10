@@ -22,6 +22,8 @@ import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Modal from '../Modal';
 import Portal from '../Portal/Portal';
+import TextInput from '../TextInput';
+import type { TextInputHandles } from '../TextInput/TextInput';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
@@ -636,6 +638,33 @@ describe('Modal', () => {
       initialFocusRef.current,
       'focus'
     );
+  });
+
+  it('focuses a Paper TextInput given as initialFocusRef through its own handle', async () => {
+    const initialFocusRef = React.createRef<TextInputHandles>();
+
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible initialFocusRef={initialFocusRef}>
+          <TextInput ref={initialFocusRef} label="Name" />
+        </Modal>
+      </Portal.Host>
+    );
+
+    // The handle is not a native node, so the screen reader has nothing to
+    // land on. The input is focused instead.
+    const handle = initialFocusRef.current;
+
+    if (!handle) {
+      throw new Error('The TextInput did not set its ref');
+    }
+
+    const focus = jest.spyOn(handle, 'focus');
+
+    await settle();
+
+    expect(focus).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).not.toHaveBeenCalled();
   });
 
   it('sends the screen reader back to restoreFocusRef when it closes', async () => {

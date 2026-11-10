@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AccessibilityInfo, Platform } from 'react-native';
-import type { View } from 'react-native';
+import type { HostInstance } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
@@ -24,31 +24,73 @@ const findFirstTabbable = (container: HTMLElement) =>
     isVisible
   ) ?? null;
 
+/**
+ * Anything that can take focus: a host element, or the handle of a component
+ * such as a Paper `TextInput`.
+ */
+export type OverlayFocusTarget = { focus: () => void };
+
+const hasFocusMethod = (target: unknown): target is OverlayFocusTarget =>
+  typeof target === 'object' &&
+  target !== null &&
+  'focus' in target &&
+  typeof target.focus === 'function';
+
+// A component handle has no native node for the screen reader to land on.
+const isHostInstance = (target: OverlayFocusTarget): target is HostInstance =>
+  'measure' in target && typeof target.measure === 'function';
+
+const isFocusInside = (container: unknown) =>
+  container instanceof HTMLElement &&
+  document.activeElement instanceof HTMLElement &&
+  container.contains(document.activeElement);
+
 // Prefer `target`. Search inside it only if the browser refused focus.
-const moveWebFocusTo = (
-  target: React.ComponentRef<typeof View> | HTMLElement | null
-) => {
-  // Anything outside the document has nowhere for focus to go.
-  if (!(target instanceof HTMLElement)) {
-    return false;
+const moveWebFocusTo = (target: OverlayFocusTarget | null) => {
+  if (target instanceof HTMLElement) {
+    target.focus();
+
+    // The browser refused focus, so try the first element inside instead.
+    if (document.activeElement !== target) {
+      findFirstTabbable(target)?.focus();
+    }
+
+    return true;
   }
 
-  target.focus();
+  // A component handle decides for itself where its focus goes.
+  if (hasFocusMethod(target)) {
+    target.focus();
 
-  // The browser refused focus, so try the first element inside instead.
-  if (document.activeElement !== target) {
-    findFirstTabbable(target)?.focus();
+    return true;
   }
 
-  return true;
+  // Anything else has nowhere for focus to go.
+  return false;
 };
 
-const moveNativeFocusTo = (target: React.ComponentRef<typeof View> | null) => {
-  if (!target) {
+// The first element inside, or the container itself when nothing in it can
+// take focus.
+const moveWebFocusIntoContainer = (container: OverlayFocusTarget | null) => {
+  if (container instanceof HTMLElement) {
+    (findFirstTabbable(container) ?? container).focus();
+
+    return true;
+  }
+
+  return moveWebFocusTo(container);
+};
+
+const moveNativeFocusTo = (target: OverlayFocusTarget | null) => {
+  if (!hasFocusMethod(target)) {
     return false;
   }
 
-  AccessibilityInfo.sendAccessibilityEvent(target, 'focus');
+  if (isHostInstance(target)) {
+    AccessibilityInfo.sendAccessibilityEvent(target, 'focus');
+  } else {
+    target.focus();
+  }
 
   return true;
 };
@@ -57,11 +99,11 @@ export type OverlayFocusOptions = {
   /** Whether the overlay is open. Drives each capture and restore cycle. */
   visible: boolean;
   /** The overlay's own content. Focused when no `initialFocusRef` is provided. */
-  containerRef: React.RefObject<React.ComponentRef<typeof View> | null>;
+  containerRef: React.RefObject<OverlayFocusTarget | null>;
   /** Element to focus when the overlay opens, instead of the container. */
-  initialFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
+  initialFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /** Element to focus when the overlay closes. */
-  restoreFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
+  restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
 };
 
 /**
@@ -78,6 +120,7 @@ export function useOverlayFocus({
   initialFocusRef,
   restoreFocusRef,
 }: OverlayFocusOptions) {
+  const hasOpened = React.useRef(false);
   const hasMovedInitialFocus = React.useRef(false);
   const hasRestoredFocus = React.useRef(false);
   const focusedWebElementBeforeOpen = React.useRef<HTMLElement | null>(null);
@@ -88,17 +131,39 @@ export function useOverlayFocus({
       return;
     }
 
-    const target = initialFocusRef?.current ?? containerRef.current;
+    const requestedTarget = initialFocusRef?.current ?? null;
 
-    hasMovedInitialFocus.current =
-      Platform.OS === 'web'
-        ? moveWebFocusTo(target)
-        : moveNativeFocusTo(target);
+    if (Platform.OS !== 'web') {
+      hasMovedInitialFocus.current = moveNativeFocusTo(
+        requestedTarget ?? containerRef.current
+      );
+
+      return;
+    }
+
+    // Focus already inside, such as an `autoFocus` field, stays where it is.
+    // An element asked for with `initialFocusRef` still takes precedence.
+    if (!requestedTarget && isFocusInside(containerRef.current)) {
+      hasMovedInitialFocus.current = true;
+
+      return;
+    }
+
+    hasMovedInitialFocus.current = requestedTarget
+      ? moveWebFocusTo(requestedTarget)
+      : moveWebFocusIntoContainer(containerRef.current);
   });
 
   const restoreFocus = useLatestCallback(() => {
-    // An overlay that never took focus has none to give back.
-    if (!hasMovedInitialFocus.current || hasRestoredFocus.current) {
+    // On the web an open overlay makes what is behind it inert, which drops
+    // focus on the body right away, so there is focus to give back even when
+    // the overlay closes before it moved any in. Elsewhere, an overlay that
+    // never took focus has none to give back.
+    const hasFocusToGiveBack =
+      hasMovedInitialFocus.current ||
+      (Platform.OS === 'web' && hasOpened.current);
+
+    if (!hasFocusToGiveBack || hasRestoredFocus.current) {
       return;
     }
 
@@ -129,6 +194,7 @@ export function useOverlayFocus({
 
     clearTimeout(restoreTimeout.current);
     restoreTimeout.current = undefined;
+    hasOpened.current = true;
     hasMovedInitialFocus.current = false;
     hasRestoredFocus.current = false;
 

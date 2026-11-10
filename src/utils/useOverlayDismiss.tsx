@@ -99,23 +99,40 @@ export function useOverlayDismiss({
       return undefined;
     }
 
+    const pending = new Set<ReturnType<typeof setTimeout>>();
+
     const handleKeyDown = (event: KeyboardEvent) => {
       // Escape cancels an IME composition, it does not close the overlay.
       if (event.key !== 'Escape' || event.isComposing) {
         return;
       }
 
-      if (!handleDismiss()) {
+      // Decided now, so that one key press closes one overlay even when the
+      // overlay on top has gone by the time the others look.
+      if (!isTopmost(overlayKey.current)) {
         return;
       }
 
-      event.preventDefault();
+      // Listening in the capture phase puts this ahead of everything else,
+      // including react-native-web's `TextInput`, which stops every key press
+      // from travelling on. The overlay waits until the key has been through
+      // the page, and leaves it alone if something there already used it.
+      const timeout = setTimeout(() => {
+        pending.delete(timeout);
+
+        if (!event.defaultPrevented) {
+          handleDismiss();
+        }
+      }, 0);
+
+      pending.add(timeout);
     };
 
-    // The bubble phase, and the event keeps travelling: handlers in the app
-    // still see the key.
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown, true);
 
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true);
+      pending.forEach(clearTimeout);
+    };
   }, [enabled, handleDismiss]);
 }

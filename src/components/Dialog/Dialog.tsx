@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import type { StyleProp, View } from 'react-native';
+import type { StyleProp } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -9,11 +9,12 @@ import DialogContent from './DialogContent';
 import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
+import { DialogTitleIdContext } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
+import type { OverlayFocusTarget } from '../../utils/useOverlayFocus';
 import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
-import { DialogTitleIdContext } from './utils';
 
 export type Props = {
   /**
@@ -41,13 +42,14 @@ export type Props = {
    */
   visible: boolean;
   /**
-   * An accessibility element to focus when the dialog opens.
+   * Element to focus when the dialog opens. Accepts a host element or the ref
+   * of a component with a `focus()` method, such as a `TextInput`.
    */
-  initialFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
+  initialFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
    * An accessibility element to focus when the dialog closes.
    */
-  restoreFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
+  restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
    * Content of the `Dialog`.
    */

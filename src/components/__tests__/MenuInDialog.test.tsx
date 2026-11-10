@@ -128,7 +128,7 @@ describe('a menu inside a dialog', () => {
             listener: (event: unknown) => void,
             capture?: boolean
           ) => {
-            if (type === 'keydown' && capture !== true) {
+            if (type === 'keydown' && capture === true) {
               keyDownListeners.add(listener);
             }
           },
@@ -156,11 +156,15 @@ describe('a menu inside a dialog', () => {
       const event = {
         key: 'Escape',
         isComposing: false,
-        preventDefault: jest.fn(),
+        defaultPrevented: false,
       };
 
       await act(() => {
         keyDownListeners.forEach((listener) => listener(event));
+      });
+      // The overlay waits until the key has been through the page.
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
       });
     };
 

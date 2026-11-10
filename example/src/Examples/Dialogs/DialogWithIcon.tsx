@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { Button, Dialog, Palette } from 'react-native-paper';
+import { Button, Dialog, Palette, TextInput } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
 
@@ -16,6 +16,8 @@ const DialogWithIcon = ({
       <Dialog.Icon icon="alert" />
       <Dialog.Title style={styles.title}>Dialog with Icon</Dialog.Title>
       <Dialog.Content>
+        <TextInput label="First" />
+        <TextInput autoFocus label="Second" />
         <TextComponent>
           This is a dialog with new component called DialogIcon. When icon is
           displayed you should center the header.

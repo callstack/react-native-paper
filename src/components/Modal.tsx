@@ -17,6 +17,7 @@ import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
 import { useOverlayDismiss } from '../utils/useOverlayDismiss';
 import { useOverlayFocus } from '../utils/useOverlayFocus';
+import type { OverlayFocusTarget } from '../utils/useOverlayFocus';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
@@ -62,13 +63,22 @@ export type Props = {
    */
   visible: boolean;
   /**
-   * Element to focus when the modal opens.
+   * Element to focus when the modal opens. Accepts a host element or the ref
+   * of a component with a `focus()` method, such as a `TextInput`.
    */
-  initialFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
+  initialFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
    * Element to focus when the modal closes.
+   *
+   * On web, focus returns to the element that had it before the modal opened,
+   * and this prop picks another one. On iOS and Android, nothing is restored
+   * unless this prop is given.
+   *
+   * Accepts a host element, such as a `View`, `Pressable` or `Button`, which
+   * receives screen reader focus on iOS and Android. A component handle with a
+   * `focus()` method, such as the one of a `TextInput`, has `focus()` called.
    */
-  restoreFocusRef?: React.RefObject<React.ComponentRef<typeof View> | null>;
+  restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
    * Content of the `Modal`.
    */
@@ -270,7 +280,6 @@ function Modal({
     <Portal modal={visibleInternal} theme={themeOverrides}>
       <Animated.View
         pointerEvents={visible ? 'auto' : 'none'}
-        aria-live="polite"
         style={StyleSheet.absoluteFill}
         onAccessibilityEscape={
           dismissable ? onDismissCallback : absorbAccessibilityEscape
@@ -298,6 +307,8 @@ function Modal({
             ref={contentRef}
             role="dialog"
             aria-modal
+            // Focus has somewhere to go on the web when nothing inside can take it.
+            tabIndex={Platform.OS === 'web' ? -1 : undefined}
             aria-label={ariaLabel}
             aria-labelledby={
               // Only set `aria-labelledby` on web, it's ignored on iOS
