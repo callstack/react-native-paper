@@ -607,6 +607,47 @@ describe('useOverlayFocus', () => {
       expect(activeElement).toBe(invoker);
     });
 
+    it('gives focus to the requested element instead of the invoker', async () => {
+      const { dialog } = createDialog();
+      const invoker = new FakeElement();
+      const requested = new FakeElement();
+      const restoreFocusRef = { current: requested };
+
+      invoker.focus();
+
+      const overlay = await renderOverlay({
+        container: dialog,
+        restoreFocusRef,
+      });
+
+      await overlay.open();
+      await overlay.close();
+      await overlay.restoreFocus();
+
+      expect(activeElement).toBe(requested);
+    });
+
+    it('gives focus back to the invoker when the requested element is gone', async () => {
+      const { dialog } = createDialog();
+      const invoker = new FakeElement();
+      // Its element unmounted, such as a row the overlay just deleted.
+      const restoreFocusRef = { current: null };
+
+      invoker.focus();
+
+      const overlay = await renderOverlay({
+        container: dialog,
+        restoreFocusRef,
+      });
+
+      await overlay.open();
+      setActiveElement(null);
+      await overlay.close();
+      await overlay.restoreFocus();
+
+      expect(activeElement).toBe(invoker);
+    });
+
     it('leaves focus alone for an overlay that never opened', async () => {
       const { dialog } = createDialog();
       const invoker = new FakeElement();

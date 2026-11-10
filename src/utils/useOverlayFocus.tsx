@@ -176,9 +176,9 @@ export function useOverlayFocus({
       focusedWebElementBeforeOpen.current = null;
 
       if (Platform.OS === 'web') {
-        moveWebFocusTo(
-          restoreFocusRef ? restoreFocusRef.current : elementBeforeOpen
-        );
+        // An empty ref, such as a row the overlay just deleted, falls back to
+        // where focus was before the overlay opened.
+        moveWebFocusTo(restoreFocusRef?.current ?? elementBeforeOpen);
 
         return;
       }

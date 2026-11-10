@@ -59,8 +59,9 @@ export type Props = {
    * Element to focus when the dialog closes.
    *
    * On web, focus returns to the element that had it before the dialog opened,
-   * and this prop picks another one. On iOS and Android, nothing is restored
-   * unless this prop is given.
+   * and this prop picks another one. If that element is gone by then, such as a
+   * list row the dialog deleted, focus goes back to the one that had it before.
+   * On iOS and Android, nothing is restored unless this prop is given.
    *
    * Accepts a host element, such as a `View`, `Pressable` or `Button`. On iOS
    * and Android it receives screen reader focus, not keyboard focus. A

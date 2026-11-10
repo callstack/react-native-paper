@@ -470,7 +470,7 @@ The Escape key on web now dismisses the modal too, and `dismissableBackButton` c
 
 Opening a modal now moves focus into it, and closing it hands focus back:
 
-- **Web:** focus returns to the element that had it before the modal opened.
+- **Web:** focus returns to the element that had it before the modal opened. With `restoreFocusRef`, it goes there instead, unless that element is gone by then, such as a list row the modal deleted. Then focus returns to the element that had it before.
 - **iOS and Android:** focus comes back only with `restoreFocusRef`. Without it, nothing is restored.
 
 You can choose the elements with the new `initialFocusRef` and `restoreFocusRef` props. They accept the ref of any element or component with a `focus()` method, such as a `TextInput`. On iOS and Android, a host element such as a `View`, `Pressable` or `Button` gets screen reader focus, not keyboard focus, while a component handle has `focus()` called:
