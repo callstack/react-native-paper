@@ -105,7 +105,7 @@ describe('TouchableRipple', () => {
       expect(screen.getByText('pressed')).toBeOnTheScreen();
     });
 
-    it('resolves style as a function', async () => {
+    it('applies the style returned by a style function', async () => {
       await render(
         <TouchableRipple
           testID="touchable-ripple"

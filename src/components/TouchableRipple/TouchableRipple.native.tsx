@@ -83,9 +83,8 @@ const TouchableRipple = ({
   const useForeground =
     Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
 
-  // Both `children` and `style` may be render functions, like on `Pressable`.
-  // They are kept in their static form whenever possible, because `Pressable`
-  // only tracks the pressed state when one of them is a function.
+  // Keep the static form when possible: `Pressable` only tracks the pressed
+  // state when `children` or `style` is a function.
   const resolveStyle = (
     baseStyle: StyleProp<ViewStyle>
   ): PressableProps['style'] =>

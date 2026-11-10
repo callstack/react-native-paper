@@ -61,7 +61,8 @@ export type Props = PressableProps & {
    */
   underlayColor?: string;
   /**
-   * Content of the `TouchableRipple`.
+   * Content of the `TouchableRipple`. Can be a function that receives the pressable state.
+   * `hovered` and `focused` are only available on the web.
    */
   children:
     | ((state: PressableStateCallbackType) => React.ReactNode)
