@@ -422,7 +422,7 @@ describe('should have `accessibilityState={ checked: true }` when selected', () 
       />
     );
 
-    const buttons = screen.getAllByRole('button');
+    const buttons = screen.getAllByRole('checkbox');
 
     expect(buttons[0]).toHaveProp(
       'accessibilityState',
@@ -461,6 +461,50 @@ describe('should have `accessibilityState={ checked: true }` when selected', () 
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
+  });
+});
+
+describe('roles allow aria-checked', () => {
+  it('single select renders radios inside a radiogroup', async () => {
+    await render(
+      <SegmentedButtons
+        value="walk"
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'drive', label: 'Driving' },
+        ]}
+        onValueChange={jest.fn()}
+      />
+    );
+
+    expect(screen.getByRole('radiogroup')).toBeTruthy();
+    expect(screen.queryAllByRole('button')).toHaveLength(0);
+    expect(screen.getByRole('radio', { name: 'Walking' })).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: true })
+    );
+    expect(screen.getByRole('radio', { name: 'Driving' })).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: false })
+    );
+  });
+
+  it('multi select renders checkboxes without a radiogroup', async () => {
+    await render(
+      <SegmentedButtons
+        multiSelect
+        value={['walk']}
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'drive', label: 'Driving' },
+        ]}
+        onValueChange={jest.fn()}
+      />
+    );
+
+    expect(screen.queryByRole('radiogroup')).toBeNull();
+    expect(screen.queryAllByRole('radio')).toHaveLength(0);
+    expect(screen.getAllByRole('checkbox')).toHaveLength(2);
   });
 });
 

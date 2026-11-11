@@ -41,6 +41,12 @@ export type Props = {
    */
   checked: boolean;
   /**
+   * Whether the segment belongs to a multi-select group. Multi-select segments
+   * are exposed as checkboxes and single-select segments as radios, so
+   * `aria-checked` is allowed on the role and announced by screen readers.
+   */
+  multiSelect?: boolean;
+  /**
    * Icon to display for the `SegmentedButtonItem`.
    */
   icon?: IconSource;
@@ -116,6 +122,7 @@ export type Props = {
 
 const SegmentedButtonItem = ({
   checked,
+  multiSelect,
   'aria-label': ariaLabel,
   disabled,
   style,
@@ -211,7 +218,7 @@ const SegmentedButtonItem = ({
         aria-label={ariaLabel}
         aria-disabled={disabled}
         aria-checked={checked}
-        role="button"
+        role={multiSelect ? 'checkbox' : 'radio'}
         disabled={disabled}
         testID={testID}
         style={rippleStyle}
