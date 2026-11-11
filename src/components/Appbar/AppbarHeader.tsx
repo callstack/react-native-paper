@@ -16,10 +16,9 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    */
   dark?: boolean;
   /**
-   * Extra padding to add at the top of header to account for translucent status bar.
-   * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
-   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
-   * Pass `0` or a custom value to disable the default behaviour, and customize the height.
+   * Padding at the top of the header, to keep its content clear of the status bar.
+   * By default, the header uses the top safe area inset, on every platform.
+   * Pass a number, such as `0`, to use that padding instead.
    */
   statusBarHeight?: number;
   /**
@@ -84,7 +83,7 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
  * ```
  */
 const AppbarHeader = ({
-  // Don't use default props since we check it to know whether we should use SafeAreaView
+  // No default, because `undefined` falls back to the top safe area inset
   statusBarHeight,
   style,
   dark,
