@@ -37,6 +37,7 @@ export { default as Chip } from './components/Chip/Chip';
 export { default as DataTable } from './components/DataTable/DataTable';
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Divider } from './components/Divider';
+export { default as Dropdown } from './components/Dropdown';
 export { default as FAB } from './components/FAB';
 export { default as AnimatedFAB } from './components/FAB/AnimatedFAB';
 export { default as HelperText } from './components/HelperText/HelperText';
