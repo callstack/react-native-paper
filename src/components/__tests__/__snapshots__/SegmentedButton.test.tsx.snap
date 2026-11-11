@@ -2,6 +2,7 @@
 
 exports[`renders segmented button 1`] = `
 <View
+  role="radiogroup"
   style={
     [
       {
@@ -65,7 +66,7 @@ exports[`renders segmented button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -191,7 +192,7 @@ exports[`renders segmented button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -331,7 +332,7 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="checkbox"
       style={
         [
           {
@@ -505,7 +506,7 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="checkbox"
       style={
         [
           {
@@ -631,7 +632,7 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="checkbox"
       style={
         [
           {
@@ -710,6 +711,7 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
 
 exports[`should not render icon when icon prop is not passed 1`] = `
 <View
+  role="radiogroup"
   style={
     [
       {
@@ -773,7 +775,7 @@ exports[`should not render icon when icon prop is not passed 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -900,7 +902,7 @@ exports[`should not render icon when icon prop is not passed 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -978,6 +980,7 @@ exports[`should not render icon when icon prop is not passed 1`] = `
 
 exports[`should not render icon when icon prop is passed along with label, button is checked, showSelectedCheck is true 1`] = `
 <View
+  role="radiogroup"
   style={
     [
       {
@@ -1041,7 +1044,7 @@ exports[`should not render icon when icon prop is passed along with label, butto
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -1217,7 +1220,7 @@ exports[`should not render icon when icon prop is passed along with label, butto
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -1344,6 +1347,7 @@ exports[`should not render icon when icon prop is passed along with label, butto
 
 exports[`should render icon when icon prop is passed 1`] = `
 <View
+  role="radiogroup"
   style={
     [
       {
@@ -1407,7 +1411,7 @@ exports[`should render icon when icon prop is passed 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -1581,7 +1585,7 @@ exports[`should render icon when icon prop is passed 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -1706,6 +1710,7 @@ exports[`should render icon when icon prop is passed 1`] = `
 
 exports[`should render icon when icon prop is passed along with label, button is checked, showSelectedCheck is false 1`] = `
 <View
+  role="radiogroup"
   style={
     [
       {
@@ -1769,7 +1774,7 @@ exports[`should render icon when icon prop is passed along with label, button is
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -1945,7 +1950,7 @@ exports[`should render icon when icon prop is passed along with label, button is
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -2072,6 +2077,7 @@ exports[`should render icon when icon prop is passed along with label, button is
 
 exports[`should render icon when icon prop is passed along with label, no matter if button is checked 1`] = `
 <View
+  role="radiogroup"
   style={
     [
       {
@@ -2135,7 +2141,7 @@ exports[`should render icon when icon prop is passed along with label, no matter
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
@@ -2311,7 +2317,7 @@ exports[`should render icon when icon prop is passed along with label, no matter
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      role="button"
+      role="radio"
       style={
         [
           {
