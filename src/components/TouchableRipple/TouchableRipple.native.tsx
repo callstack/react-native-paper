@@ -10,7 +10,7 @@ import type {
 
 import type { PressableProps } from './Pressable';
 import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
+import { getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
@@ -31,9 +31,7 @@ export type Props = PressableProps & {
   onPressOut?: (e: GestureResponderEvent) => void;
   rippleColor?: ColorValue;
   underlayColor?: string;
-  children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   theme?: ThemeProp;
 };
 
@@ -78,6 +76,15 @@ const TouchableRipple = ({
   const useForeground =
     Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
 
+  // Keep the static form when possible: `Pressable` only tracks the pressed
+  // state when `children` or `style` is a function.
+  const resolveStyle = (
+    baseStyle: StyleProp<ViewStyle>
+  ): PressableProps['style'] =>
+    typeof style === 'function'
+      ? (state) => [baseStyle, style(state)]
+      : [baseStyle, style];
+
   if (TouchableRipple.supported) {
     const androidRipple = rippleEffectEnabled
       ? (background ?? {
@@ -92,10 +99,12 @@ const TouchableRipple = ({
         {...rest}
         ref={ref}
         disabled={disabled}
-        style={[useForeground && styles.overflowHidden, style]}
+        style={resolveStyle(useForeground && styles.overflowHidden)}
         android_ripple={androidRipple}
       >
-        {React.Children.only(children)}
+        {typeof children === 'function'
+          ? (state) => resolveChildren(children, state)
+          : React.Children.only(children)}
       </Pressable>
     );
   }
@@ -105,11 +114,11 @@ const TouchableRipple = ({
       {...rest}
       ref={ref}
       disabled={disabled}
-      style={[borderless && styles.overflowHidden, style]}
+      style={resolveStyle(borderless && styles.overflowHidden)}
     >
-      {({ pressed }) => (
+      {(state) => (
         <>
-          {pressed && rippleEffectEnabled && (
+          {state.pressed && rippleEffectEnabled && (
             <View
               style={[
                 styles.underlay,
@@ -117,7 +126,7 @@ const TouchableRipple = ({
               ]}
             />
           )}
-          {React.Children.only(children)}
+          {resolveChildren(children, state)}
         </>
       )}
     </Pressable>

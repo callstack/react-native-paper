@@ -37,10 +37,17 @@ const BottomNavigationBarExample = createBottomTabNavigator({
     <BottomNavigation.Bar
       navigationState={state}
       onTabPress={({ route, preventDefault }) => {
+        const isRepeatedPress = state.routes[state.index].key === route.key;
         const event = navigation.emit({
           type: 'tabPress',
           target: route.key,
           canPreventDefault: true,
+          data: {
+            behavior: {
+              scrollToTop: isRepeatedPress,
+              popToTop: isRepeatedPress,
+            },
+          },
         });
 
         if (event.defaultPrevented) {

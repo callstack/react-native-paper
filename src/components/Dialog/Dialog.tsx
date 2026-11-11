@@ -9,11 +9,12 @@ import DialogContent from './DialogContent';
 import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
+import { DialogTitleIdContext } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
+import type { OverlayFocusTarget } from '../../utils/useOverlayFocus';
 import Modal from '../Modal';
 import type { SurfaceStyle } from '../Surface';
-import { DialogTitleIdContext } from './utils';
 
 export type Props = {
   /**
@@ -40,6 +41,35 @@ export type Props = {
    * Determines Whether the dialog is visible.
    */
   visible: boolean;
+  /**
+   * Element to focus when the dialog opens.
+   *
+   * By default, focus moves to the first focusable element inside the dialog on
+   * web, or to the dialog itself when there is none. Focus that is already
+   * inside, such as on an `autoFocus` field, stays where it is. On iOS, screen
+   * reader focus moves to the dialog. On Android, TalkBack moves its focus to
+   * the first element inside the dialog by itself.
+   *
+   * Accepts a host element, such as a `View` or `Pressable`. On iOS it receives
+   * screen reader focus, not keyboard focus. A component handle with a
+   * `focus()` method, such as the one of a `TextInput`, has `focus()` called.
+   * TalkBack on Android follows neither.
+   */
+  initialFocusRef?: React.RefObject<OverlayFocusTarget | null>;
+  /**
+   * Element to focus when the dialog closes.
+   *
+   * On web, focus returns to the element that had it before the dialog opened,
+   * and this prop picks another one. If that element is gone by then, such as a
+   * list row the dialog deleted, focus goes back to the one that had it before.
+   * On iOS and Android, nothing is restored unless this prop is given.
+   *
+   * Accepts a host element, such as a `View` or `Pressable`. On iOS it receives
+   * screen reader focus, not keyboard focus. A component handle with a
+   * `focus()` method, such as the one of a `TextInput`, has `focus()` called.
+   * TalkBack on Android doesn't move to a host element.
+   */
+  restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
    * Content of the `Dialog`.
    */
@@ -87,7 +117,7 @@ const DIALOG_ELEVATION: Elevation = 3;
  *             <Text variant="bodyMedium">This is simple dialog</Text>
  *           </Dialog.Content>
  *           <Dialog.Actions>
- *             <Button onPress={hideDialog}>Done</Button>
+ *             <Button mode="text" onPress={hideDialog}>Done</Button>
  *           </Dialog.Actions>
  *         </Dialog>
  *       </View>
@@ -106,6 +136,8 @@ const Dialog = ({
   dismissAccessibilityLabel,
   'aria-label': ariaLabel,
   visible = false,
+  initialFocusRef,
+  restoreFocusRef,
   style,
   theme: themeOverrides,
   testID,
@@ -129,6 +161,8 @@ const Dialog = ({
       onDismiss={onDismiss}
       dismissAccessibilityLabel={dismissAccessibilityLabel}
       visible={visible}
+      initialFocusRef={initialFocusRef}
+      restoreFocusRef={restoreFocusRef}
       contentBackgroundColor={backgroundColor}
       contentBorderRadius={borderRadius}
       contentElevation={DIALOG_ELEVATION}

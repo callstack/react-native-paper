@@ -15,10 +15,12 @@ const UndismissableDialog = ({
       <TextComponent>This is an undismissable dialog!!</TextComponent>
     </Dialog.Content>
     <Dialog.Actions>
-      <Button textColor={Palette.tertiary50} disabled>
+      <Button mode="text" textColor={Palette.tertiary50} disabled>
         Disagree
       </Button>
-      <Button onPress={close}>Agree</Button>
+      <Button mode="text" onPress={close}>
+        Agree
+      </Button>
     </Dialog.Actions>
   </Dialog>
 );

@@ -4,13 +4,13 @@ import { StyleSheet, Text as NativeText } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import AnimatedText from './AnimatedText';
-import { canContainNestedText, NestedTextContext } from './NestedTextContext';
+import { useIsNestedText, markChildrenAsNested } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 
-export type Props<T> = React.ComponentProps<typeof NativeText> & {
+export type Props<T> = Omit<React.ComponentProps<typeof NativeText>, 'ref'> & {
   /**
    * @supported Available in v5.x with theme version 3
    *
@@ -87,12 +87,12 @@ const Text = ({
   ref,
   ...rest
 }: Props<string>) => {
-  const root = React.useRef<NativeText | null>(null);
+  const root = React.useRef<React.ComponentRef<typeof NativeText> | null>(null);
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();
   // Nested text inherits the parent's style unless it has its own theme
-  const inheritsStyle = React.useContext(NestedTextContext) && !initialTheme;
+  const inheritsStyle = useIsNestedText() && !initialTheme;
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
@@ -183,15 +183,7 @@ const Text = ({
     );
   }
 
-  if (!canContainNestedText(rest.children)) {
-    return element;
-  }
-
-  return (
-    <NestedTextContext.Provider value={true}>
-      {element}
-    </NestedTextContext.Provider>
-  );
+  return markChildrenAsNested(element, rest.children);
 };
 
 const styles = StyleSheet.create({

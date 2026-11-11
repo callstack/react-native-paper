@@ -87,7 +87,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<SurfaceStyle>;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */
@@ -314,7 +314,6 @@ const Snackbar = ({
                 }}
                 style={[styles.button, actionStyle]}
                 textColor={buttonTextColor}
-                compact={false}
                 mode="text"
                 theme={theme}
                 {...actionProps}
