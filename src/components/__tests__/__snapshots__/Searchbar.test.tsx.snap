@@ -723,7 +723,7 @@ exports[`renders searchbar in "view" mode 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": false,
+            "disabled": true,
             "expanded": undefined,
             "selected": undefined,
           }
@@ -737,9 +737,10 @@ exports[`renders searchbar in "view" mode 1`] = `
           }
         }
         accessible={true}
+        aria-hidden={true}
         centered={true}
         collapsable={false}
-        focusable={true}
+        focusable={false}
         hitSlop={
           {
             "bottom": 6,
@@ -1126,7 +1127,7 @@ exports[`renders with placeholder 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": false,
+            "disabled": true,
             "expanded": undefined,
             "selected": undefined,
           }
@@ -1140,9 +1141,10 @@ exports[`renders with placeholder 1`] = `
           }
         }
         accessible={true}
+        aria-hidden={true}
         centered={true}
         collapsable={false}
-        focusable={true}
+        focusable={false}
         hitSlop={
           {
             "bottom": 6,
