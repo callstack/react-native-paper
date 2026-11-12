@@ -329,6 +329,12 @@ Keys inside data objects changed the same way: the `routes` of `BottomNavigation
  ];
 ```
 
+### TouchableRipple without a press handler
+
+A `TouchableRipple`, and anything built on it, is no longer a disabled control when it has no touch handler. Without `onPress`, `onLongPress`, `onPressIn` or `onPressOut`, and without `disabled`, it renders a plain view: assistive tech does not announce it as disabled, an activatable `role` such as `button`, `link`, `menuitem`, `tab`, `imagebutton` or `togglebutton` becomes `none`, and it does not take the press, so a `Pressable` around it gets it. `DataTable.Title` works the same way, and its `onLongPress`, `onPressIn` and `onPressOut` no longer accept `null` in the types.
+
+To have something look and announce disabled, pass `disabled`, which keeps the control and its role. Pass it to switch interactivity off at runtime too, instead of removing `onPress`: going between having a handler and not having one renders another element, so children are remounted and lose focus and state.
+
 ### Libraries built on Paper
 
 Libraries built on Paper may not support 6.x yet. For example, `react-native-paper-dates` 0.24.1 still uses `HelperText`, the 5.x theme exports and `theme.roundness`, so its `DatePickerInput` crashes when it shows a validation error.
