@@ -185,7 +185,7 @@ const ListItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { hasLeft } = React.useContext(ListAccordionContext);
-  const shouldIndent = hasLeft && !left && !right;
+  const shouldIndent = hasLeft && !left && !right && !leading && !trailing;
   const [isDescriptionMultiline, setIsDescriptionMultiline] =
     React.useState(false);
 

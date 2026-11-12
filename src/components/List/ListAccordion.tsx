@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  LayoutChangeEvent,
   NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -15,14 +16,13 @@ import type {
 import Animated, {
   Easing,
   ReduceMotion,
+  cubicBezier,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
+  type CSSStyle,
 } from 'react-native-reanimated';
-import type {
-  EntryAnimationsValues,
-  ExitAnimationsValues,
-} from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import { ListAccordionContext } from './ListAccordionContext';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
@@ -37,6 +37,8 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+
+type ContentPhase = 'collapsed' | 'expanding' | 'expanded' | 'collapsing';
 
 export type Props = {
   /**
@@ -271,43 +273,77 @@ const ListAccordion = ({
     ]
   );
 
-  const chevronProgress = useSharedValue(isExpanded ? 1 : 0);
+  const chevronStyle: CSSStyle<ViewStyle> = {
+    transform: [{ rotate: isExpanded ? '180deg' : '0deg' }],
+    transitionProperty: ['transform'],
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.medium2,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.emphasized),
+  };
+
+  const [contentPhase, setContentPhase] = React.useState<ContentPhase>(
+    isExpanded ? 'expanded' : 'collapsed'
+  );
+  const [contentHeight, setContentHeight] = React.useState(0);
+
+  // Start the transition in the render where `isExpanded` changes, so the
+  // content is mounted and measured before the first animation frame.
+  if (
+    isExpanded &&
+    (contentPhase === 'collapsed' || contentPhase === 'collapsing')
+  ) {
+    setContentPhase('expanding');
+  } else if (
+    !isExpanded &&
+    (contentPhase === 'expanded' || contentPhase === 'expanding')
+  ) {
+    setContentPhase('collapsing');
+  }
+
+  const contentProgress = useSharedValue(isExpanded ? 1 : 0);
 
   React.useEffect(() => {
-    chevronProgress.value = withTiming(isExpanded ? 1 : 0, timingConfig);
-  }, [isExpanded, chevronProgress, timingConfig]);
+    // An interrupted animation reports `finished: false`, and a stale one
+    // cannot move the phase because the phase no longer matches.
+    const finishTransition = (finished: boolean) => {
+      if (!finished) {
+        return;
+      }
 
-  const chevronStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${chevronProgress.value * 180}deg` }],
+      setContentPhase((phase) => {
+        if (isExpanded && phase === 'expanding') {
+          return 'expanded';
+        }
+
+        if (!isExpanded && phase === 'collapsing') {
+          return 'collapsed';
+        }
+
+        return phase;
+      });
+    };
+
+    contentProgress.value = withTiming(
+      isExpanded ? 1 : 0,
+      timingConfig,
+      (finished) => scheduleOnRN(finishTransition, finished ?? false)
+    );
+  }, [isExpanded, contentProgress, timingConfig]);
+
+  // The wrapper height changes in layout, so the rows below the accordion
+  // move with it. When the transition ends, the height goes back to `auto`
+  // so that content which changes size (for example, a nested accordion)
+  // is not clipped.
+  const contentTransitionStyle = useAnimatedStyle(() => ({
+    height:
+      contentPhase === 'expanded'
+        ? 'auto'
+        : contentProgress.value * contentHeight,
+    opacity: contentProgress.value,
   }));
 
-  const expandAnimation = React.useCallback(
-    (values: EntryAnimationsValues) => {
-      'worklet';
-      return {
-        initialValues: { height: 0, opacity: 0 },
-        animations: {
-          height: withTiming(values.targetHeight, timingConfig),
-          opacity: withTiming(1, timingConfig),
-        },
-      };
-    },
-    [timingConfig]
-  );
-
-  const collapseAnimation = React.useCallback(
-    (values: ExitAnimationsValues) => {
-      'worklet';
-      return {
-        initialValues: { height: values.currentHeight, opacity: 1 },
-        animations: {
-          height: withTiming(0, timingConfig),
-          opacity: withTiming(0, timingConfig),
-        },
-      };
-    },
-    [timingConfig]
-  );
+  const onContentLayout = (event: LayoutChangeEvent) => {
+    setContentHeight(event.nativeEvent.layout.height);
+  };
 
   const {
     descriptionColor,
@@ -429,15 +465,18 @@ const ListAccordion = ({
         </ListRowContext.Provider>
       </View>
 
-      {isExpanded ? (
-        <Animated.View
-          entering={expandAnimation}
-          exiting={collapseAnimation}
-          style={styles.expandedContent}
-        >
-          <ListAccordionContext.Provider value={accordionContext}>
-            {children}
-          </ListAccordionContext.Provider>
+      {contentPhase !== 'collapsed' ? (
+        <Animated.View style={[styles.expandedContent, contentTransitionStyle]}>
+          <View
+            onLayout={onContentLayout}
+            style={
+              contentPhase === 'expanded' ? null : styles.transitioningContent
+            }
+          >
+            <ListAccordionContext.Provider value={accordionContext}>
+              {children}
+            </ListAccordionContext.Provider>
+          </View>
         </Animated.View>
       ) : null}
     </View>
@@ -473,6 +512,12 @@ const styles = StyleSheet.create({
   },
   expandedContent: {
     overflow: 'hidden',
+  },
+  transitioningContent: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
   },
   content: {
     flex: 1,

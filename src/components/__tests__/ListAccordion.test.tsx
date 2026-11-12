@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 
-import { fireEvent, render, screen } from '../../test-utils';
+import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import ListAccordion from '../List/ListAccordion';
@@ -119,6 +119,52 @@ it('does not indent expanded accordion children when the accordion has no left i
   expect(screen.getByTestId('accordion-child')).not.toHaveStyle({
     paddingLeft: 40,
   });
+});
+
+it.each([
+  ['the leading slot', { leading: <ListIcon icon="star" /> }],
+  ['the trailing slot', { trailing: <ListIcon icon="star" /> }],
+])(
+  'does not indent expanded accordion children that use %s',
+  async (_label, slots) => {
+    await render(
+      <ListAccordion
+        left={(props) => <ListIcon {...props} icon="folder" />}
+        title="Accordion with indented children"
+        expanded
+      >
+        <ListItem title="Child item" testID="accordion-child" {...slots} />
+      </ListAccordion>
+    );
+
+    expect(screen.getByTestId('accordion-child')).not.toHaveStyle({
+      paddingLeft: 40,
+    });
+  }
+);
+
+it('keeps the content on screen until the collapse animation ends', async () => {
+  await render(
+    <ListAccordion title="Accordion item 1">
+      <ListItem title="List item 1" />
+    </ListAccordion>
+  );
+
+  expect(screen.queryByText('List item 1')).not.toBeOnTheScreen();
+
+  await userEvent.press(screen.getByText('Accordion item 1'));
+
+  expect(screen.getByText('List item 1')).toBeOnTheScreen();
+
+  await userEvent.press(screen.getByText('Accordion item 1'));
+
+  expect(screen.getByText('List item 1')).toBeOnTheScreen();
+
+  await act(() => {
+    jest.runAllTimers();
+  });
+
+  expect(screen.queryByText('List item 1')).not.toBeOnTheScreen();
 });
 
 describe('ListAccordion', () => {

@@ -176,76 +176,71 @@ exports[`renders expanded accordion 1`] = `
   </View>
   <View
     collapsable={false}
-    entering={[Function]}
-    exiting={[Function]}
     style={
       [
         {
           "overflow": "hidden",
         },
+        {
+          "height": "auto",
+          "opacity": 1,
+        },
       ]
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        [
-          false,
-          [
-            {
-              "justifyContent": "center",
-              "paddingRight": 16,
-              "paddingVertical": 8,
-            },
-            {
-              "minHeight": 56,
-            },
-            false,
-            false,
-            {
-              "backgroundColor": undefined,
-            },
-            undefined,
-          ],
-        ]
-      }
+      onLayout={[Function]}
+      style={null}
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           [
-            {
-              "flexDirection": "row",
-              "width": "100%",
-            },
-            undefined,
+            false,
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 56,
+              },
+              false,
+              false,
+              {
+                "backgroundColor": undefined,
+              },
+              undefined,
+            ],
           ]
         }
       >
@@ -253,49 +248,61 @@ exports[`renders expanded accordion 1`] = `
           style={
             [
               {
-                "paddingLeft": 16,
-              },
-              {
-                "flexGrow": 1,
-                "flexShrink": 1,
-                "justifyContent": "center",
+                "flexDirection": "row",
+                "width": "100%",
               },
               undefined,
             ]
           }
         >
-          <Text
-            numberOfLines={1}
-            selectable={false}
+          <View
             style={
               [
                 {
-                  "textAlign": "left",
+                  "paddingLeft": 16,
                 },
                 {
-                  "color": "rgba(29, 27, 32, 1)",
-                  "writingDirection": "ltr",
+                  "flexGrow": 1,
+                  "flexShrink": 1,
+                  "justifyContent": "center",
                 },
-                [
-                  {
-                    "fontFamily": "System",
-                    "fontSize": 16,
-                    "fontWeight": "400",
-                    "letterSpacing": 0.5,
-                    "lineHeight": 24,
-                  },
-                  [
-                    {
-                      "color": "rgba(29, 27, 32, 1)",
-                    },
-                    undefined,
-                  ],
-                ],
+                undefined,
               ]
             }
           >
-            List item 1
-          </Text>
+            <Text
+              numberOfLines={1}
+              selectable={false}
+              style={
+                [
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  [
+                    {
+                      "fontFamily": "System",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "letterSpacing": 0.5,
+                      "lineHeight": 24,
+                    },
+                    [
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                      },
+                      undefined,
+                    ],
+                  ],
+                ]
+              }
+            >
+              List item 1
+            </Text>
+          </View>
         </View>
       </View>
     </View>
