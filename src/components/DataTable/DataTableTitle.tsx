@@ -3,7 +3,6 @@ import { PixelRatio, Pressable, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableProps,
-  PressableStateCallbackType,
   StyleProp,
   TextStyle,
   ViewStyle,
@@ -27,12 +26,6 @@ import hasTouchHandler, {
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
-// The plain View branch has nothing to press, so the style function always sees
-// this idle state. Matches the state shape Pressable passes.
-const IDLE_STATE: PressableStateCallbackType = {
-  pressed: false,
-};
-
 export type Props = PressableProps & {
   /**
    * Text content of the `DataTableTitle`.
@@ -51,10 +44,25 @@ export type Props = PressableProps & {
    */
   numberOfLines?: number;
   /**
-   * Function to execute on press. If not set, the title renders as a plain
-   * container and is not exposed as a control.
+   * Function to execute on press. Without it, and without `onLongPress`,
+   * `onPressIn` or `onPressOut`, the title renders as a plain container and is
+   * not exposed as a control. To make it unreachable at runtime, pass `disabled`
+   * rather than removing this handler: switching between having a handler and
+   * not having one renders another element and remounts children.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute immediately when a touch is engaged, before `onPressOut` and `onPress`.
+   */
+  onPressIn?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute when a touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
    * Text content style of the `DataTableTitle`.
@@ -190,10 +198,7 @@ const DataTableTitle = ({
         // A consumer role of button makes react-native-web render a real
         // <button>, which is tabbable by default. Nothing to activate here.
         focusable={rest.focusable ?? false}
-        style={[
-          ...containerStyle,
-          typeof style === 'function' ? style(IDLE_STATE) : style,
-        ]}
+        style={[...containerStyle, style]}
       >
         {icon}
 
