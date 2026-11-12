@@ -282,8 +282,6 @@ const ListAccordion = ({
   );
   const [contentHeight, setContentHeight] = React.useState(0);
 
-  // Start the transition in the render where `isExpanded` changes, so the
-  // content is mounted and measured before the first animation frame.
   if (
     isExpanded &&
     (contentPhase === 'collapsed' || contentPhase === 'collapsing')
@@ -299,8 +297,6 @@ const ListAccordion = ({
   const contentProgress = useSharedValue(isExpanded ? 1 : 0);
 
   React.useEffect(() => {
-    // An interrupted animation reports `finished: false`, and a stale one
-    // cannot move the phase because the phase no longer matches.
     const finishTransition = (finished: boolean) => {
       if (!finished) {
         return;
@@ -326,10 +322,6 @@ const ListAccordion = ({
     );
   }, [isExpanded, contentProgress, timingConfig]);
 
-  // The wrapper height changes in layout, so the rows below the accordion
-  // move with it. When the transition ends, the height goes back to `auto`
-  // so that content which changes size (for example, a nested accordion)
-  // is not clipped.
   const contentTransitionStyle = useAnimatedStyle(() => ({
     height:
       contentPhase === 'expanded'
