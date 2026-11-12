@@ -227,7 +227,7 @@ const SegmentedButtonItem = ({
               <Icon source={'check'} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
-          {showIcon ? (
+          {showIcon && icon ? (
             <Animated.View style={[iconStyle, iconAnimatedStyle]}>
               <Icon source={icon} size={iconSize} color={textColor} />
             </Animated.View>
