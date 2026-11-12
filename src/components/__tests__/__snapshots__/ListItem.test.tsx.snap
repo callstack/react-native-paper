@@ -421,7 +421,6 @@ exports[`renders list item with custom description 1`] = `
                       "position": "relative",
                     },
                     {
-                      "minHeight": 32,
                       "paddingLeft": 0,
                     },
                     {

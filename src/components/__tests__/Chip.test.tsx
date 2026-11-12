@@ -317,3 +317,34 @@ describe('close affordance', () => {
     expect(screen.queryByLabelText('Close')).not.toBeOnTheScreen();
   });
 });
+
+describe('hitSlop', () => {
+  it('expands a pressable chip to a 48dp tall target', async () => {
+    await render(
+      <Chip onPress={() => {}} testID="chip">
+        Example
+      </Chip>
+    );
+
+    expect(screen.getByTestId('chip')).toHaveProp('hitSlop', {
+      top: 8,
+      bottom: 8,
+      left: 0,
+      right: 0,
+    });
+  });
+
+  it.each([
+    { when: 'it has no touch handler', props: {} },
+    { when: 'it only has onClose', props: { onClose: () => {} } },
+    { when: 'it is disabled', props: { onPress: () => {}, disabled: true } },
+  ])('adds no slop to the chip body when $when', async ({ props }) => {
+    await render(
+      <Chip {...props} testID="chip">
+        Example
+      </Chip>
+    );
+
+    expect(screen.getByTestId('chip')).not.toHaveProp('hitSlop');
+  });
+});

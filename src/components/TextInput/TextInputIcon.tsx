@@ -72,6 +72,7 @@ const TextInputIcon = ({
   disabled,
   theme: themeOverride,
   onPress,
+  hitSlop,
   ...rest
 }: TextInputIconProps) => {
   const theme = useInternalTheme(themeOverride);
@@ -90,8 +91,8 @@ const TextInputIcon = ({
   return (
     <View style={styles.iconWrapper}>
       <IconButton
-        hitSlop={ACCESSORY_HIT_SLOP}
         {...rest}
+        hitSlop={hitSlop !== undefined ? hitSlop : ACCESSORY_HIT_SLOP}
         icon={icon}
         iconColor={color}
         size={iconSize}

@@ -176,16 +176,16 @@ const CLOSE_AFFORDANCE_WIDTH = 34;
 const CLOSE_AFFORDANCE_MIN_WIDTH = 26;
 
 /**
- * The container height is fixed by spec, so the slop to reach the 48dp minimum
- * is a constant rather than something to measure. Width grows with the label
- * and the whole pill is already the target, so only the vertical axis needs it.
+ * The label makes a default chip 32dp tall, so the slop to reach the 48dp
+ * minimum is a constant rather than something to measure. Width grows with the
+ * label and the whole pill is already the target, so only the vertical axis
+ * needs it.
  */
 const { containerHeight: CHIP_BODY_HEIGHT } = ChipTokens;
 const CHIP_BODY_HIT_SLOP = getMinInteractiveSizeHitSlop({
   height: CHIP_BODY_HEIGHT,
 });
-// The close button's own box is the same fixed height as the body, so it
-// needs the same vertical slop to reach 48dp.
+// The close column spans the chip's height, so it gets the same vertical slop.
 const CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET = CHIP_BODY_HIT_SLOP?.top ?? 0;
 
 const CLOSE_ICON_SIZE = 18;
@@ -359,7 +359,7 @@ const Chip = ({
         hitSlop={
           hitSlop !== undefined
             ? hitSlop
-            : disabled
+            : disabled || !hasPassedTouchHandler
               ? undefined
               : CHIP_BODY_HIT_SLOP
         }
@@ -510,7 +510,6 @@ const styles = StyleSheet.create({
   },
   md3Content: {
     paddingLeft: 0,
-    minHeight: CHIP_BODY_HEIGHT,
   },
   icon: {
     padding: 4,

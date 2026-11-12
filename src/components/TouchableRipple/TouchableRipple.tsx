@@ -22,10 +22,10 @@ export type Props = PressableProps & {
   /**
    * Whether to render the ripple outside the view bounds.
    *
-   * On web the ripple is bounded by its own container regardless of this prop.
-   * The touchable never clips its content, since clipping would also clip the
-   * touch target, so children needing a rounded shape must carry the radius
-   * themselves.
+   * On web this prop has no effect: the ripple is always clipped to the
+   * touchable's shape, and the touchable doesn't clip its content, since that
+   * would also clip the touch target. Children that need a rounded shape there
+   * carry the radius themselves.
    */
   borderless?: boolean;
   /**

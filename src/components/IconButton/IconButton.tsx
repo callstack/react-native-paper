@@ -129,6 +129,7 @@ const IconButton = ({
   testID,
   loading = false,
   contentStyle,
+  hitSlop,
   ref,
   ...rest
 }: Props) => {
@@ -164,7 +165,7 @@ const IconButton = ({
 
   const touchableSize = buttonSize - 2 * borderWidth;
 
-  const hitSlop = disabled
+  const defaultHitSlop = disabled
     ? undefined
     : getMinInteractiveSizeHitSlop({
         width: touchableSize,
@@ -212,7 +213,7 @@ const IconButton = ({
         aria-disabled={disabled}
         disabled={disabled}
         testID={testID}
-        hitSlop={hitSlop}
+        hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
         {...rest}
       >
         <View style={{ opacity: iconOpacity }}>
