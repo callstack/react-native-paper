@@ -864,7 +864,7 @@ exports[`renders loading button 1`] = `
     <View
       accessibilityState={
         {
-          "busy": undefined,
+          "busy": true,
           "checked": undefined,
           "disabled": true,
           "expanded": undefined,
@@ -938,6 +938,7 @@ exports[`renders loading button 1`] = `
         <View
           accessible={true}
           aria-busy={true}
+          aria-hidden={true}
           role="progressbar"
           style={
             [
@@ -1751,7 +1752,7 @@ exports[`renders the loading indicator at the size set by iconSize 1`] = `
     <View
       accessibilityState={
         {
-          "busy": undefined,
+          "busy": true,
           "checked": undefined,
           "disabled": true,
           "expanded": undefined,
@@ -1825,6 +1826,7 @@ exports[`renders the loading indicator at the size set by iconSize 1`] = `
         <View
           accessible={true}
           aria-busy={true}
+          aria-hidden={true}
           role="progressbar"
           style={
             [
