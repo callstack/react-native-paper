@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 
 import type { AnimatedStyle } from 'react-native-reanimated';
 
+import { useAppbarContext, useAppbarItem } from './AppbarContext';
+import { getAppbarColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
@@ -40,6 +43,23 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    * Whether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons.
    */
   isLeading?: boolean;
+  /**
+   * @supported Available in v6.x
+   *
+   * Visual variant of the action.
+   * - `standard` - Icon without a container.
+   * - `filled` - Icon in a container with the primary color.
+   * - `tonal` - Icon in a container with the secondary container color.
+   */
+  variant?: 'standard' | 'filled' | 'tonal';
+  /**
+   * @supported Available in v6.x
+   *
+   * Width of the container of a `filled` or `tonal` action. It has no effect on a `standard` action.
+   * - `default` - Square container.
+   * - `wide` - Wide container.
+   */
+  width?: 'default' | 'wide';
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
@@ -78,18 +98,28 @@ const AppbarAction = ({
   onPress,
   'aria-label': ariaLabel,
   isLeading,
+  variant = 'standard',
+  width = 'default',
+  mode,
+  selected,
+  style,
   theme: themeOverrides,
   ref,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const appbar = useAppbarContext();
+  const theme = useInternalTheme(themeOverrides ?? appbar?.theme);
   const { colors } = theme;
 
-  const actionIconColor = iconColor
-    ? iconColor
-    : isLeading
-      ? colors.onSurface
-      : colors.onSurfaceVariant;
+  useAppbarItem(appbar, isLeading ? 'leading' : 'trailing');
+
+  const isStandard = variant === 'standard';
+
+  // The icon of a filled or tonal action takes the color of its container
+  const actionIconColor = isStandard
+    ? (getAppbarColor({ color: iconColor, isDark: appbar?.dark ?? false }) ??
+      (isLeading ? colors.onSurface : colors.onSurfaceVariant))
+    : iconColor;
 
   return (
     <IconButton
@@ -99,12 +129,27 @@ const AppbarAction = ({
       icon={icon}
       disabled={disabled}
       aria-label={ariaLabel}
+      mode={
+        variant === 'filled'
+          ? 'contained'
+          : variant === 'tonal'
+            ? 'contained-tonal'
+            : mode
+      }
+      selected={isStandard ? selected : true}
+      style={[!isStandard && width === 'wide' && styles.wide, style]}
       animated
       ref={ref}
       {...rest}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  wide: {
+    width: 56,
+  },
+});
 
 AppbarAction.displayName = 'Appbar.Action';
 

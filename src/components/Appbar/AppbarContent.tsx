@@ -2,13 +2,20 @@ import * as React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import type {
   GestureResponderEvent,
+  LayoutChangeEvent,
   StyleProp,
   TextStyle,
   ViewStyle,
   ViewProps,
 } from 'react-native';
 
-import { modeTextVariant } from './utils';
+import { useAppbarContext, useAppbarItem } from './AppbarContext';
+import {
+  APPBAR_HORIZONTAL_PADDING,
+  getAppbarColor,
+  isFlexibleMode,
+  modeTextVariant,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
@@ -52,10 +59,6 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
    * Specifies the largest possible scale a title font can reach.
    */
   titleMaxFontSizeMultiplier?: number;
-  /**
-   * @internal
-   */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -93,29 +96,61 @@ const AppbarContent = ({
   titleStyle,
   title,
   titleMaxFontSizeMultiplier,
-  mode = 'small',
   theme: themeOverrides,
   testID,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const appbar = useAppbarContext();
+  const theme = useInternalTheme(themeOverrides ?? appbar?.theme);
   const { colors, fonts } = theme;
 
-  const titleTextColor = titleColor ? titleColor : colors.onSurface;
+  useAppbarItem(appbar, 'content');
 
-  const modeContainerStyles = {
-    small: styles.v3DefaultContainer,
-    medium: styles.v3MediumContainer,
-    large: styles.v3LargeContainer,
-    'center-aligned': styles.v3DefaultContainer,
-  };
+  const mode = appbar?.mode ?? 'small';
+  const insets = appbar?.insets;
+  const onContentLayout = appbar?.onContentLayout;
+  const isFlexible = isFlexibleMode(mode);
+
+  React.useEffect(() => () => onContentLayout?.(0), [onContentLayout]);
+
+  const titleTextColor =
+    getAppbarColor({ color: titleColor, isDark: appbar?.dark ?? false }) ??
+    colors.onSurface;
+
+  // The `medium` and `large` modes show the title below the actions, and the flexible modes
+  // grow with the title, so the title is positioned at the bottom of the Appbar
+  // and the content only takes up the space between the actions.
+  const isBottomAligned = mode === 'medium' || mode === 'large' || isFlexible;
+
+  const bottomStyle = [
+    styles.bottom,
+    {
+      left: (insets?.left ?? 0) + APPBAR_HORIZONTAL_PADDING + 12,
+      right: (insets?.right ?? 0) + APPBAR_HORIZONTAL_PADDING + 12,
+      bottom: insets?.bottom ?? 0,
+    },
+    mode === 'medium' && styles.mediumBottom,
+    mode === 'large' && styles.largeBottom,
+    isFlexible && styles.flexibleBottom,
+  ];
 
   const variant = modeTextVariant[mode];
 
   const contentWrapperProps = {
     pointerEvents: 'box-none',
-    style: [styles.container, modeContainerStyles[mode], style],
+    style: [
+      isBottomAligned
+        ? bottomStyle
+        : mode === 'center-aligned'
+          ? styles.centerAligned
+          : styles.container,
+      style,
+    ],
     testID,
+    onLayout: isFlexible
+      ? (event: LayoutChangeEvent) =>
+          onContentLayout?.(event.nativeEvent.layout.height)
+      : undefined,
     ...rest,
   } satisfies ViewProps;
 
@@ -132,7 +167,7 @@ const AppbarContent = ({
             },
             titleStyle,
           ]}
-          numberOfLines={1}
+          numberOfLines={isFlexible ? 2 : 1}
           accessible
           role={onPress ? 'none' : 'heading'}
           maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
@@ -145,21 +180,31 @@ const AppbarContent = ({
     </>
   );
 
-  if (onPress) {
+  const wrapper = onPress ? (
+    <Pressable
+      role="button"
+      aria-disabled={disabled}
+      onPress={onPress}
+      disabled={disabled}
+      {...contentWrapperProps}
+    >
+      {content}
+    </Pressable>
+  ) : (
+    <View {...contentWrapperProps}>{content}</View>
+  );
+
+  if (isBottomAligned) {
     return (
-      <Pressable
-        role="button"
-        aria-disabled={disabled}
-        onPress={onPress}
-        disabled={disabled}
-        {...contentWrapperProps}
-      >
-        {content}
-      </Pressable>
+      <>
+        {/* Takes up the space between the actions, so the trailing actions stay at the end */}
+        <View style={styles.spacer} />
+        {wrapper}
+      </>
     );
   }
 
-  return <View {...contentWrapperProps}>{content}</View>;
+  return wrapper;
 };
 
 AppbarContent.displayName = 'Appbar.Content';
@@ -167,21 +212,27 @@ AppbarContent.displayName = 'Appbar.Content';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 12,
+    marginLeft: 12,
   },
-  v3DefaultContainer: {
-    paddingHorizontal: 0,
+  centerAligned: {
+    flex: 1,
+    alignItems: 'center',
   },
-  v3MediumContainer: {
-    paddingHorizontal: 0,
-    justifyContent: 'flex-end',
+  spacer: {
+    flex: 1,
+  },
+  bottom: {
+    position: 'absolute',
+  },
+  mediumBottom: {
     paddingBottom: 24,
   },
-  v3LargeContainer: {
-    paddingHorizontal: 0,
-    paddingTop: 36,
-    justifyContent: 'flex-end',
+  largeBottom: {
     paddingBottom: 28,
+  },
+  flexibleBottom: {
+    paddingTop: 8,
+    paddingBottom: 12,
   },
 });
 
