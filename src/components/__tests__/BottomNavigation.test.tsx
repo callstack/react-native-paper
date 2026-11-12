@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
   backgroundColor: {
     backgroundColor: red300,
   },
+  activeIndicator: {
+    opacity: 0.5,
+    transform: [{ translateY: 2 }],
+  },
 });
 
 const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
@@ -597,6 +601,41 @@ it("allows customizing Route's type via generics", () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('keeps inactive indicators hidden when activeIndicatorStyle sets opacity and transform', () => {
+  const { container } = render(
+    <BottomNavigation
+      navigationState={createState(0, 3)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      activeIndicatorStyle={styles.activeIndicator}
+    />
+  );
+
+  const pills = container.findAll(
+    (node) =>
+      typeof node.type === 'string' &&
+      StyleSheet.flatten(node.props.style)?.opacity ===
+        styles.activeIndicator.opacity
+  );
+  expect(pills).toHaveLength(3);
+
+  const [focused, ...unfocused] = pills.map((pill) => {
+    let parent = pill.parent;
+    while (parent && typeof parent.type !== 'string') {
+      parent = parent.parent;
+    }
+    return parent;
+  });
+
+  pills.forEach((pill) => {
+    expect(pill).toHaveStyle(styles.activeIndicator);
+  });
+  expect(focused).toHaveStyle({ opacity: 1, transform: [{ scaleX: 1 }] });
+  unfocused.forEach((indicator) => {
+    expect(indicator).toHaveStyle({ opacity: 0 });
+  });
 });
 
 describe.each([

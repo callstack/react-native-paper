@@ -746,19 +746,23 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     {isV3 && (
                       <Animated.View
                         style={[
-                          styles.outline,
+                          styles.outlineContainer,
                           {
                             opacity: outlineOpacity,
-                            transform: [
-                              {
-                                scaleX: outlineScale,
-                              },
-                            ],
-                            backgroundColor: theme.colors.secondaryContainer,
+                            transform: [{ scaleX: outlineScale }],
                           },
-                          activeIndicatorStyle,
                         ]}
-                      />
+                      >
+                        <View
+                          style={[
+                            styles.outline,
+                            {
+                              backgroundColor: theme.colors.secondaryContainer,
+                            },
+                            activeIndicatorStyle,
+                          ]}
+                        />
+                      </Animated.View>
                     )}
                     <Animated.View
                       style={[
@@ -999,6 +1003,9 @@ const styles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  outlineContainer: {
+    alignSelf: 'center',
   },
   outline: {
     width: OUTLINE_WIDTH,
