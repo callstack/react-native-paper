@@ -94,7 +94,7 @@ To get smaller bundle size by excluding modules you don't use, you can use our o
 
 ```js
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: ['module:@react-native/babel-preset'],
   env: {
     production: {
       plugins: ['react-native-paper/babel'],
@@ -103,7 +103,7 @@ module.exports = {
 };
 ```
 
-If you created your project using Expo, it'll look something like this. New Expo projects don't include a `babel.config.js`, so create it in the project root if it's missing:
+If you created your project using Expo, it'll look something like this. New Expo projects don't have a `babel.config.js`, so create one with `npx expo customize babel.config.js`, which also installs `babel-preset-expo`. Then add the `env` block:
 
 ```js
 module.exports = function (api) {
