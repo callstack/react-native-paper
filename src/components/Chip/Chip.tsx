@@ -184,8 +184,10 @@ const Chip = ({
   children,
   icon,
   avatar,
-  selected = false,
+  selected,
   disabled = false,
+  accessibilityState: _accessibilityState,
+  'aria-checked': _ariaChecked,
   background,
   'aria-label': ariaLabel,
   role = 'button',
@@ -300,7 +302,11 @@ const Chip = ({
         disabled={disabled}
         aria-label={ariaLabel}
         role={role}
-        aria-selected={selected}
+        {...(Platform.OS === 'web'
+          ? selected !== undefined
+            ? { 'aria-pressed': selected }
+            : undefined
+          : { 'aria-selected': selected ?? false })}
         aria-disabled={disabled}
         testID={testID}
         theme={theme}
