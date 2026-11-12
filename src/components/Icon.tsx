@@ -117,6 +117,7 @@ const Icon = ({
   const { direction: layoutDirection } = useLocale();
   const directional =
     typeof source === 'object' &&
+    source !== null &&
     'direction' in source &&
     source.direction &&
     source.source

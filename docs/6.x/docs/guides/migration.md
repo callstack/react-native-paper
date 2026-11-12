@@ -1300,3 +1300,10 @@ If you pass a field that can be `undefined`, such as an optional `focusedIcon` o
 ```
 
 A render function's props are now typed as what `Icon` passes: `size`, `color`, `direction` and `testID`. For an icon that isn't directional, `direction` is now `'ltr'`, where 5.x passed `null`, and the `icon` function in `PaperProvider`'s `settings` gets `'ltr'` too. Paper's own icons look the same, since they only flip for `'rtl'`.
+
+`testID` is optional (`testID?: string`) in those props, so if you typed your render function's props with a required `testID: string`, you now get a type error. Make it optional:
+
+```diff
+-const renderIcon = ({ size, testID }: { size: number; testID: string }) => (
++const renderIcon = ({ size, testID }: { size: number; testID?: string }) => (
+```
