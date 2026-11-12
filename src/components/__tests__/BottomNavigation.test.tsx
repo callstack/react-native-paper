@@ -284,7 +284,7 @@ it('renders custom icon and label in shifting bottom navigation', async () => {
         onIndexChange={jest.fn()}
         renderScene={renderScene}
         renderIcon={({ route, color }) => (
-          <Icon color={color} source={route.unfocusedIcon} size={24} />
+          <Icon color={color} source={route.focusedIcon} size={24} />
         )}
         renderLabel={({ route, color }) => (
           <Text
@@ -309,7 +309,7 @@ it('renders custom icon and label in non-shifting bottom navigation', async () =
         onIndexChange={jest.fn()}
         renderScene={renderScene}
         renderIcon={({ route, color }) => (
-          <Icon color={color} source={route.unfocusedIcon} size={24} />
+          <Icon color={color} source={route.focusedIcon} size={24} />
         )}
         renderLabel={({ route, color }) => (
           <Text

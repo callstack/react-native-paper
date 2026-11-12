@@ -14,7 +14,13 @@ type IconSourceBase = string | ImageSourcePropType;
 export type IconSource =
   | IconSourceBase
   | Readonly<{ source: IconSourceBase; direction: 'rtl' | 'ltr' | 'auto' }>
-  | ((props: IconProps & { color: ColorValue }) => React.ReactNode);
+  | ((
+      props: IconProps & {
+        color: ColorValue;
+        direction: 'rtl' | 'ltr';
+        testID?: string;
+      }
+    ) => React.ReactNode);
 
 type IconProps = {
   /**
@@ -24,7 +30,8 @@ type IconProps = {
   allowFontScaling?: boolean;
 };
 
-const isImageSource = (source: any) =>
+// On web this also passes image URL strings, which react-native-web's Image accepts
+const isImageSource = (source: any): source is ImageSourcePropType =>
   // source is an object with uri
   (typeof source === 'object' &&
     source !== null &&
@@ -63,7 +70,7 @@ export type Props = IconProps & {
   /**
    * Icon to display.
    */
-  source: any;
+  source: IconSource;
   /**
    * Color of the icon.
    */
@@ -108,17 +115,20 @@ const Icon = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction: layoutDirection } = useLocale();
-  const direction =
-    typeof source === 'object' && source.direction && source.source
-      ? source.direction === 'auto'
-        ? layoutDirection
-        : source.direction
+  const directional =
+    typeof source === 'object' &&
+    'direction' in source &&
+    source.direction &&
+    source.source
+      ? source
       : null;
+  // An icon that isn't directional gets 'ltr', so it never flips
+  const direction =
+    directional?.direction === 'auto'
+      ? layoutDirection
+      : (directional?.direction ?? 'ltr');
 
-  const s =
-    typeof source === 'object' && source.direction && source.source
-      ? source.source
-      : source;
+  const s = directional ? directional.source : source;
   const iconColor = color || theme.colors.onSurface;
 
   if (isImageSource(s)) {

@@ -1,6 +1,6 @@
 import { Image } from 'react-native';
 
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 
 import { render, screen } from '../../test-utils';
 import Icon from '../Icon';
@@ -33,7 +33,7 @@ describe('Icon Component', () => {
   });
 
   it('renders correctly with function source', async () => {
-    const source = ({ size, testID }: { size: number; testID: string }) => (
+    const source = ({ size, testID }: { size: number; testID?: string }) => (
       <Image
         accessibilityIgnoresInvertColors
         source={{ uri: 'https://picsum.photos/700' }}
@@ -51,5 +51,32 @@ describe('Icon Component', () => {
 
     expect(functionIcon).toHaveStyle({ width: ICON_SIZE, height: ICON_SIZE });
     expect(functionIcon).toBeOnTheScreen();
+  });
+
+  it('gives a render function the ltr direction when the icon is not directional', async () => {
+    const source = jest.fn(() => null);
+    await render(<Icon source={source} size={ICON_SIZE} />);
+
+    expect(source).toHaveBeenCalledWith(
+      expect.objectContaining({ direction: 'ltr' })
+    );
+  });
+
+  it('renders nothing for a source that is not an icon', async () => {
+    await render(
+      <>
+        {/* @ts-expect-error: a boolean isn't an icon source */}
+        <Icon source={true} size={ICON_SIZE} testID="boolean-icon" />
+        {/* @ts-expect-error: source is required, so undefined isn't allowed */}
+        <Icon source={undefined} size={ICON_SIZE} testID="undefined-icon" />
+      </>
+    );
+
+    expect(
+      screen.queryByTestId('boolean-icon', { includeHiddenElements: true })
+    ).not.toBeOnTheScreen();
+    expect(
+      screen.queryByTestId('undefined-icon', { includeHiddenElements: true })
+    ).not.toBeOnTheScreen();
   });
 });

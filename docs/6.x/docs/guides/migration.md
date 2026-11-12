@@ -210,6 +210,8 @@ If you import it from Paper's type declarations instead, the path changed:
 +import type { IconSource } from 'react-native-paper/lib/typescript/src/components/Icon';
 ```
 
+`Icon`'s `source` prop now uses this type too, see [Icon](#icon).
+
 #### `MD3Colors`
 
 `MD3Colors` was renamed to `Palette`. It has every key `MD3Colors` had, such as `Palette.tertiary70`, plus new tones such as `primary98` and `neutral94`. The `neutral` tones from `neutral10` to `neutral99` are slightly different colors.
@@ -1279,3 +1281,22 @@ A standalone `Checkbox` has no visible label, so it now warns in development whe
 +  theme={{ colors: { primary: 'tomato' } }}
 +/>
 ```
+
+### Icon
+
+`Icon`'s `source` prop is typed as `IconSource` instead of `any`, so a value that isn't an icon name, an image source or a render function, such as a boolean or `undefined`, is now a type error. `Icon` still renders nothing for those values.
+
+If you pass a field that can be `undefined`, such as an optional `focusedIcon` on a route in `BottomNavigation`'s `renderIcon`, check it first:
+
+```diff
+-renderIcon={({ route, color }) => (
+-  <Icon source={route.focusedIcon} color={color} size={24} />
+-)}
++renderIcon={({ route, color }) =>
++  route.focusedIcon ? (
++    <Icon source={route.focusedIcon} color={color} size={24} />
++  ) : null
++}
+```
+
+A render function's props are now typed as what `Icon` passes: `size`, `color`, `direction` and `testID`. For an icon that isn't directional, `direction` is now `'ltr'`, where 5.x passed `null`, and the `icon` function in `PaperProvider`'s `settings` gets `'ltr'` too. Paper's own icons look the same, since they only flip for `'rtl'`.
