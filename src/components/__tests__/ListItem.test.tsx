@@ -11,6 +11,7 @@ import { LightTheme } from '../../theme/schemes';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';
+import ListImage from '../List/ListImage';
 import ListItem from '../List/ListItem';
 
 const styles = StyleSheet.create({
@@ -22,18 +23,6 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingLeft: 0,
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-  },
-  image: {
-    width: 56,
-    height: 56,
-  },
-  video: {
-    width: 114,
-    height: 64,
   },
 });
 
@@ -224,30 +213,64 @@ it('hits the two and three line container heights without measuring', async () =
   });
 });
 
+// The row is 88dp tall: 2 * padding + 2 * margin + the 64dp thumbnail.
 it.each([
-  ['a 40dp accessory', styles.avatar, undefined, 56],
-  ['a 56dp accessory', styles.image, 'Item description', 72],
-  ['a 64dp accessory', styles.video, undefined, 56],
+  ['one line', undefined, false, 8, 4],
+  ['two line', 'Item description', false, 8, 4],
+  ['three line', 'Item description', true, 12, 0],
 ])(
-  'keeps the container height with %s in the leading slot',
-  async (_label, accessoryStyle, description, minHeight) => {
+  'makes a %s row with a video thumbnail 88dp tall',
+  async (_label, description, wrapsDescription, padding, margin) => {
     await render(
       <ListItem
         title="First Item"
         description={description}
-        left={(props) => (
-          <View testID="left-accessory" style={[props.style, accessoryStyle]} />
-        )}
+        leading={
+          <ListImage
+            variant="video"
+            source={{ uri: 'https://picsum.photos/228/128' }}
+            testID="video-thumbnail"
+          />
+        }
         testID={testID}
       />
     );
 
+    if (wrapsDescription) {
+      await fireEvent(screen.getByText('Item description'), 'textLayout', {
+        nativeEvent: { lines: [{}, {}] },
+      });
+    }
+
     expect(screen.getByTestId(testID)).toHaveStyle({
-      minHeight,
-      paddingVertical: 8,
+      paddingVertical: padding,
+    });
+    expect(screen.getByTestId('video-thumbnail')).toHaveStyle({
+      height: 64,
+      marginVertical: margin,
     });
   }
 );
+
+it('does not add vertical margin to an image thumbnail', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      leading={
+        <ListImage
+          source={{ uri: 'https://picsum.photos/112' }}
+          testID="image-thumbnail"
+        />
+      }
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId('image-thumbnail')).toHaveStyle({
+    height: 56,
+    marginVertical: undefined,
+  });
+});
 
 it('colors the typed slots from the list item context', async () => {
   await render(
