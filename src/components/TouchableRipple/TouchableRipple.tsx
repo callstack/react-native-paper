@@ -52,8 +52,11 @@ export type Props = PressableProps & {
    */
   disabled?: boolean;
   /**
-   * Function to execute on press. If not set, the touchable renders as a plain
-   * container and is not exposed as a control.
+   * Function to execute on press. Without it, and without `onLongPress`,
+   * `onPressIn` or `onPressOut`, the touchable renders as a plain container and
+   * is not exposed as a control. To make it unreachable at runtime, pass
+   * `disabled` rather than removing this handler: switching between having a
+   * handler and not having one renders another element and remounts children.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**

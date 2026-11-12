@@ -85,6 +85,38 @@ describe('TouchableRipple (web file)', () => {
     expect(screen.getByRole('checkbox', { checked: true })).toBeOnTheScreen();
   });
 
+  it('renders more than one child, with and without a touch handler', async () => {
+    const { rerender } = await render(
+      <TouchableRipple>
+        <Text>First</Text>
+        <Text>Second</Text>
+      </TouchableRipple>
+    );
+
+    expect(screen.getByText('First')).toBeOnTheScreen();
+    expect(screen.getByText('Second')).toBeOnTheScreen();
+
+    await rerender(
+      <TouchableRipple onPress={() => {}}>
+        <Text>First</Text>
+        <Text>Second</Text>
+      </TouchableRipple>
+    );
+
+    expect(screen.getByText('First')).toBeOnTheScreen();
+    expect(screen.getByText('Second')).toBeOnTheScreen();
+  });
+
+  it('drops a togglebutton role when no touch handler is passed', async () => {
+    await render(
+      <TouchableRipple accessibilityRole="togglebutton">
+        <Text>Not a control</Text>
+      </TouchableRipple>
+    );
+
+    expect(screen.queryByRole('togglebutton')).not.toBeOnTheScreen();
+  });
+
   it('keeps the button role on a disabled control', async () => {
     await render(
       <TouchableRipple role="button" disabled>

@@ -153,7 +153,7 @@ const TouchableRipple = ({
       >
         {typeof children === 'function'
           ? (state) => resolveChildren(children, state)
-          : React.Children.only(children)}
+          : children}
       </Pressable>
     );
   }

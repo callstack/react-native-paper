@@ -32,4 +32,5 @@ export const ACTIVATABLE_ROLES: readonly string[] = [
   'link',
   'menuitem',
   'tab',
+  'togglebutton',
 ];

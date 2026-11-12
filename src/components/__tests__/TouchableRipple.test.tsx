@@ -100,15 +100,18 @@ describe('TouchableRipple', () => {
     }
   );
 
-  it('drops a native imagebutton accessibilityRole when no touch handler is passed', async () => {
-    await render(
-      <TouchableRipple accessibilityRole="imagebutton">
-        <Text>Not a control</Text>
-      </TouchableRipple>
-    );
+  it.each(['imagebutton', 'togglebutton'] as const)(
+    'drops a native %s accessibilityRole when no touch handler is passed',
+    async (accessibilityRole) => {
+      await render(
+        <TouchableRipple accessibilityRole={accessibilityRole}>
+          <Text>Not a control</Text>
+        </TouchableRipple>
+      );
 
-    expect(screen.queryByRole('imagebutton')).not.toBeOnTheScreen();
-  });
+      expect(screen.queryByRole(accessibilityRole)).not.toBeOnTheScreen();
+    }
+  );
 
   it('resolves role ahead of accessibilityRole, as every platform does', async () => {
     await render(
@@ -157,6 +160,40 @@ describe('TouchableRipple', () => {
     await userEvent.press(off);
 
     expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('keeps the element when toggling with disabled, and swaps it without a handler', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    const { rerender } = await render(
+      <TouchableRipple role="button" onPress={onPress}>
+        <Text>Press me</Text>
+      </TouchableRipple>
+    );
+
+    const enabled = screen.getByRole('button');
+
+    // switching off with `disabled` keeps the same element, so a child that
+    // holds focus or state is not remounted
+    await rerender(
+      <TouchableRipple role="button" disabled onPress={onPress}>
+        <Text>Press me</Text>
+      </TouchableRipple>
+    );
+
+    const off = screen.getByRole('button');
+
+    expect(off).toBeDisabled();
+    expect(off).toBe(enabled);
+
+    // dropping the handler instead renders a plain view
+    await rerender(
+      <TouchableRipple role="button">
+        <Text>Press me</Text>
+      </TouchableRipple>
+    );
+
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+    expect(screen.getByText('Press me')).not.toBeDisabled();
   });
 
   it('never reports a press when no touch handler is passed', async () => {
@@ -255,6 +292,34 @@ describe('TouchableRipple', () => {
 
     afterAll(() => {
       TouchableRipple.supported = originalSupported;
+    });
+
+    it('renders more than one child, with and without a touch handler', async () => {
+      const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+      const { rerender } = await render(
+        <TouchableRipple>
+          <Text>First</Text>
+          <Text>Second</Text>
+        </TouchableRipple>
+      );
+
+      expect(screen.getByText('First')).toBeOnTheScreen();
+      expect(screen.getByText('Second')).toBeOnTheScreen();
+
+      // the element a handler switches to has to keep the same children
+      await rerender(
+        <TouchableRipple onPress={onPress}>
+          <Text>First</Text>
+          <Text>Second</Text>
+        </TouchableRipple>
+      );
+
+      expect(screen.getByText('First')).toBeOnTheScreen();
+      expect(screen.getByText('Second')).toBeOnTheScreen();
+
+      await userEvent.press(screen.getByText('Second'));
+
+      expect(onPress).toHaveBeenCalledTimes(1);
     });
 
     it('supports children as a render function', async () => {
