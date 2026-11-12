@@ -4,10 +4,9 @@ import type {
   ColorValue,
   GestureResponderEvent,
   LayoutChangeEvent,
-  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  TextLayoutEventData,
+  TextLayoutEvent,
   TextStyle,
   ViewProps,
   ViewStyle,
@@ -226,9 +225,7 @@ const ListAccordion = ({
   const [isDescriptionMultiline, setIsDescriptionMultiline] =
     React.useState(false);
 
-  const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
-  ) => {
+  const onDescriptionTextLayout = (event: TextLayoutEvent) => {
     const { nativeEvent } = event;
     setIsDescriptionMultiline(nativeEvent.lines.length >= 2);
   };

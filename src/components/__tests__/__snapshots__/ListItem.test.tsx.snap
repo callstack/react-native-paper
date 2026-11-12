@@ -510,6 +510,7 @@ exports[`renders list item with custom description 1`] = `
                         },
                         [
                           {
+                            "flexShrink": 1,
                             "marginVertical": 6,
                             "textAlignVertical": "center",
                           },

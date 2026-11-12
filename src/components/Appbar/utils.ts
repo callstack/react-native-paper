@@ -13,28 +13,11 @@ export type AppbarChildProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-const borderStyleProperties = [
-  'borderRadius',
-  'borderBottomEndRadius',
-  'borderBottomStartRadius',
-  'borderEndEndRadius',
-  'borderEndStartRadius',
-  'borderStartEndRadius',
-  'borderStartStartRadius',
-  'borderTopEndRadius',
-  'borderTopStartRadius',
-  'borderTopLeftRadius',
-  'borderTopRightRadius',
-  'borderBottomRightRadius',
-  'borderBottomLeftRadius',
-  'borderCurve',
-] satisfies readonly (keyof ViewStyle)[];
-
 export const getAppbarBackgroundColor = (
   theme: InternalTheme,
   elevated: boolean,
   customBackground?: ColorValue
-) => {
+): ColorValue => {
   const { colors } = theme;
   if (customBackground) {
     return customBackground;
@@ -60,20 +43,6 @@ export const getAppbarColor = ({
   }
 
   return undefined;
-};
-
-export const getAppbarBorders = (style: ViewStyle) => {
-  let borders: ViewStyle = {};
-
-  for (const property of borderStyleProperties) {
-    const value = style[property];
-
-    if (typeof value === 'number' || typeof value === 'string') {
-      borders = { ...borders, [property]: value };
-    }
-  }
-
-  return borders;
 };
 
 type BaseProps = {

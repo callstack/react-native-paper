@@ -1,6 +1,6 @@
 import * as React from 'react';
 // eslint-disable-next-line no-restricted-imports -- TODO: migrate BottomNavigation to Reanimated.
-import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   EasingFunction,
@@ -24,6 +24,7 @@ import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
+import { Pressable } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -433,15 +434,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  const {
-    backgroundColor: customBackground,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  } = (StyleSheet.flatten(style) || {}) as {
-    backgroundColor?: ColorValue;
-  };
-
-  const backgroundColor = customBackground || colors.surfaceContainer;
-
   const activeTintColor = getActiveTintColor({
     activeColor,
     theme,
@@ -472,6 +464,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       testID={testID}
       style={[
         styles.bar,
+        { backgroundColor: colors.surfaceContainer },
         keyboardHidesNavigationBar // eslint-disable-next-line react-native/no-inline-styles
           ? {
               // When the keyboard is shown, slide down the navigation bar
@@ -493,7 +486,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       ]}
       onLayout={onLayout}
     >
-      <Animated.View style={[styles.barContent, { backgroundColor }]}>
+      <View style={styles.barContent}>
         <View
           style={[
             styles.items,
@@ -763,7 +756,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             });
           })}
         </View>
-      </Animated.View>
+      </View>
     </Animated.View>
   );
 };

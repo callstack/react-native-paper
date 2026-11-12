@@ -119,6 +119,16 @@ export default defineConfig(
         },
       ],
 
+      'no-restricted-properties': [
+        'error',
+        {
+          object: 'StyleSheet',
+          property: 'flatten',
+          message:
+            'Do not flatten styles. Animated styles from `useAnimatedStyle` cannot be flattened. Accept the values you need as props instead.',
+        },
+      ],
+
       '@react-native/platform-colors': 'error',
 
       'promise/no-callback-in-promise': 'error',
@@ -155,6 +165,8 @@ export default defineConfig(
   {
     files: ['**/*.{ts,tsx}'],
     rules: {
+      // TypeScript reports real redeclarations, and the base rule flags overloads
+      'no-redeclare': 'off',
       '@typescript-eslint/no-non-null-assertion': 'error',
       '@typescript-eslint/no-unsafe-type-assertion': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
@@ -173,6 +185,8 @@ export default defineConfig(
     },
     rules: {
       ...testingLibraryReact.rules,
+
+      'no-restricted-properties': 'off',
 
       'no-restricted-syntax': [
         'error',

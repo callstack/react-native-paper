@@ -2,9 +2,9 @@ import { Platform, StyleSheet, View } from 'react-native';
 
 import {
   configureFonts,
-  LightTheme,
   PaperProvider,
   customText,
+  useTheme,
 } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
@@ -12,6 +12,7 @@ import ScreenWrapper from '../ScreenWrapper';
 const Text = customText<'customVariant'>();
 
 const TextExample = () => {
+  const baseTheme = useTheme();
   const fontConfig = {
     customVariant: {
       fontFamily: Platform.select({
@@ -29,7 +30,7 @@ const TextExample = () => {
   } as const;
 
   const theme = {
-    ...LightTheme,
+    ...baseTheme,
     fonts: configureFonts({ config: fontConfig }),
   };
   return (
@@ -90,6 +91,33 @@ const TextExample = () => {
             Custom Variant
           </Text>
         </PaperProvider>
+
+        <Text style={styles.heading} variant="titleMedium">
+          Nested text
+        </Text>
+
+        <Text style={styles.text} variant="headlineSmall">
+          <Text>Unstyled child, stays Headline Small</Text>
+        </Text>
+        <Text style={styles.text} variant="headlineSmall">
+          <Text style={styles.nestedChild}>
+            Styled child, italic but still Headline Small
+          </Text>
+        </Text>
+        <Text style={styles.text} variant="headlineSmall">
+          <Text variant="bodySmall">
+            Child variant wins, renders Body Small
+          </Text>
+        </Text>
+        <Text style={[styles.text, styles.boldParent]} variant="headlineSmall">
+          Bold parent, <Text>and the nested child inherits the weight</Text>
+        </Text>
+        <Text style={styles.text} variant="headlineSmall">
+          Parent{' '}
+          <View>
+            <Text>Child in a View, still in the theme color</Text>
+          </View>
+        </Text>
       </View>
     </ScreenWrapper>
   );
@@ -103,6 +131,16 @@ const styles = StyleSheet.create({
   },
   text: {
     marginVertical: 4,
+  },
+  heading: {
+    marginTop: 24,
+    marginBottom: 4,
+  },
+  nestedChild: {
+    fontStyle: 'italic',
+  },
+  boldParent: {
+    fontWeight: 'bold',
   },
 });
 

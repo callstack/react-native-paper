@@ -87,7 +87,51 @@ jest.mock('react-native', () => {
   RN.Animated.loop = loop;
   RN.Animated.parallel = parallel;
 
+  RN.AccessibilityInfo.sendAccessibilityEvent = jest.fn();
+
   return RN;
+});
+
+jest.mock('react-native/Libraries/Text/Text', () => {
+  const TextAncestorContext = jest.requireActual(
+    'react-native/Libraries/Text/TextAncestorContext'
+  ).default;
+  const MockText = jest.requireActual(
+    '@react-native/jest-preset/jest/mocks/Text'
+  ).default;
+
+  class Text extends MockText {
+    render() {
+      return (
+        <TextAncestorContext.Provider value={true}>
+          {super.render()}
+        </TextAncestorContext.Provider>
+      );
+    }
+  }
+
+  return { __esModule: true, default: Text };
+});
+
+jest.mock('react-native/Libraries/Components/View/View', () => {
+  const TextAncestorContext = jest.requireActual(
+    'react-native/Libraries/Text/TextAncestorContext'
+  ).default;
+  const MockView = jest.requireActual(
+    '@react-native/jest-preset/jest/mocks/View'
+  ).default;
+
+  class View extends MockView {
+    render() {
+      return (
+        <TextAncestorContext.Provider value={false}>
+          {super.render()}
+        </TextAncestorContext.Provider>
+      );
+    }
+  }
+
+  return { __esModule: true, default: View };
 });
 
 jest.mock('react-native/Libraries/Utilities/useWindowDimensions', () => ({
