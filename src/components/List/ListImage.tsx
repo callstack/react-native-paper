@@ -11,6 +11,10 @@ export type Props = {
   variant?: 'image' | 'video';
   style?: StyleProp<ImageStyle>;
   /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -38,6 +42,7 @@ const ListImage = ({
   style,
   source,
   variant = 'image',
+  testID,
   theme: _theme,
 }: Props) => {
   const { verticalPadding } = React.useContext(ListRowContext);
@@ -60,6 +65,7 @@ const ListImage = ({
     <Image
       style={getStyles()}
       source={source}
+      testID={testID}
       accessibilityIgnoresInvertColors
     />
   );
