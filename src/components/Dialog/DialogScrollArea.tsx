@@ -24,8 +24,7 @@ export type Props = ViewProps & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ScrollView } from 'react-native';
- * import { Dialog, Text } from 'react-native-paper';
+ * import { Dialog } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -33,9 +32,12 @@ export type Props = ViewProps & {
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog} scrollable content="This is a scrollable area" />
- *     </Portal>
+ *     <Dialog
+ *       visible={visible}
+ *       onDismiss={hideDialog}
+ *       scrollable
+ *       content="This is a scrollable area"
+ *     />
  *   );
  * };
  *

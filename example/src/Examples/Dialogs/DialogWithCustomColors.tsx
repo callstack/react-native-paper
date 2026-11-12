@@ -13,6 +13,7 @@ const DialogWithCustomColors = ({
     <Dialog
       onDismiss={close}
       visible={visible}
+      aria-label="Alert"
       theme={{
         colors: {
           surfaceContainerHigh: Palette.primary10,

@@ -30,14 +30,12 @@ export type Props = {
 };
 
 /**
- * @supported Available in v5.x with theme version 3
  * A component to show an icon in a Dialog.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { StyleSheet } from 'react-native';
- * import { Dialog, Text } from 'react-native-paper';
+ * import { Dialog } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -45,17 +43,14 @@ export type Props = {
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog} icon="alert" content="This is simple dialog" />
- *     </Portal>
+ *     <Dialog
+ *       visible={visible}
+ *       onDismiss={hideDialog}
+ *       icon="alert"
+ *       content="This is simple dialog"
+ *     />
  *   );
  * };
- *
- * const styles = StyleSheet.create({
- *   title: {
- *     textAlign: 'center',
- *   },
- * })
  *
  * export default MyComponent;
  * ```
@@ -87,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
-    paddingTop: 0,
+    paddingTop: 24,
   },
 });
 
