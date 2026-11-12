@@ -33,7 +33,7 @@ Minimum requirements:
 - `react-native` **≥ 0.81**
 - `react-native-reanimated` **≥ 4.3.0**
 - `react-native-worklets` **≥ 0.8.1**
-- `react-native-safe-area-context` — version compatible with your React Native toolchain.
+- `react-native-safe-area-context`: a version compatible with your React Native toolchain.
 
 You also need to install [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons), because some components use these icons internally:
 
@@ -59,7 +59,7 @@ Minimum requirements:
 - `react-native` **≥ 0.81**
 - `react-native-reanimated` **≥ 4.3.0**
 - `react-native-worklets` **≥ 0.8.1**
-- `react-native-safe-area-context` — version compatible with your React Native toolchain.
+- `react-native-safe-area-context`: a version compatible with your React Native toolchain.
 
 Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
 
@@ -123,22 +123,9 @@ The plugin only works if you are importing the library using ES2015 import state
 
 If your `babel.config.js` also lists `react-native-worklets/plugin`, as Reanimated requires for Community CLI projects, keep it in the top-level `plugins`. Babel adds the `env.production` plugins after it, which is fine because `react-native-paper/babel` only rewrites `import` statements.
 
-:::note
-The above examples are for the latest `react-native` using Babel 7. If you have `react-native <= 0.55`, you'll have a `.babelrc` file instead of a `babel.config.js` file and the content of the file will be different.
-:::
-
-If you're using Flow for typechecking your code, you need to add the following under the `[options]` section in your `.flowconfig`:
-
-```ini
-module.file_ext=.js
-module.file_ext=.native.js
-module.file_ext=.android.js
-module.file_ext=.ios.js
-```
-
 ## Usage
 
-Wrap your root component in `PaperProvider` from `react-native-paper`(if you are using versions prior to 5.8.0 you need to use `Provider`). If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to `AppRegistry.registerComponent`. This will usually be in the `index.js` file. If you have an Expo project that uses Expo Router (the default for new Expo projects), wrap the content of your root layout, `app/_layout.tsx` (or `src/app/_layout.tsx`). In an Expo project without Expo Router, you can do this inside the exported component in the `App.js` file.
+Wrap your root component in `PaperProvider` from `react-native-paper`. If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to `AppRegistry.registerComponent`. This will usually be in the `index.js` file. If you have an Expo project that uses Expo Router (the default for new Expo projects), wrap the content of your root layout, `app/_layout.tsx` (or `src/app/_layout.tsx`). In an Expo project without Expo Router, you can do this inside the exported component in the `App.js` file.
 
 Example:
 
@@ -199,7 +186,7 @@ export default function Main() {
 
 ## Customization
 
-You can provide a custom theme to customize the colors, typescales etc. with the `Provider` component. Check the [Material Design 3 default theme](https://github.com/callstack/react-native-paper/blob/main/src/theme/schemes/LightTheme.tsx) to see what customization options are supported.
+You can provide a custom theme to customize the colors, typescales etc. with the `PaperProvider` component. Check the [Material Design 3 default theme](https://github.com/callstack/react-native-paper/blob/main/src/theme/schemes/LightTheme.tsx) to see what customization options are supported.
 
 Example:
 
