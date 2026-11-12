@@ -38,9 +38,16 @@ export type Props = {
    */
   dismissAccessibilityLabel?: string;
   /**
-   * Accessible name for the dialog. On web, defaults to the text of `Dialog.Title`.
+   * Accessible name for the dialog. Defaults to the text of `Dialog.Title`
+   * when the title is a string.
    */
   'aria-label'?: string;
+  /**
+   * `nativeID` of the element that provides the accessible name for the dialog.
+   * Only applied on web. Defaults to the dialog's title when no `aria-label`
+   * is set.
+   */
+  'aria-labelledby'?: string;
   /**
    * Determines Whether the dialog is visible.
    */
@@ -83,7 +90,7 @@ export type Props = {
    */
   title?: React.ReactNode;
   /**
-   * Content of the dialog. Non-empty strings are rendered as Material 3
+   * Content of the dialog. Strings and numbers are rendered as Material 3
    * supporting text.
    */
   content?: React.ReactNode;
@@ -132,7 +139,6 @@ const DIALOG_ELEVATION: Elevation = 3;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { View } from 'react-native';
  * import { Button, Dialog, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
@@ -144,20 +150,18 @@ const DIALOG_ELEVATION: Elevation = 3;
  *
  *   return (
  *     <PaperProvider>
- *       <View>
- *         <Button onPress={showDialog}>Show Dialog</Button>
- *         <Dialog
- *           visible={visible}
- *           onDismiss={hideDialog}
- *           title="Alert"
- *           content="This is simple dialog"
- *           actions={[
- *             <Button key="done-btn" onPress={hideDialog}>
- *               Done
- *             </Button>,
- *           ]}
- *         />
- *       </View>
+ *       <Button onPress={showDialog}>Show Dialog</Button>
+ *       <Dialog
+ *         visible={visible}
+ *         onDismiss={hideDialog}
+ *         title="Alert"
+ *         content="This is simple dialog"
+ *         actions={[
+ *           <Button key="done-btn" onPress={hideDialog}>
+ *             Done
+ *           </Button>,
+ *         ]}
+ *       />
  *     </PaperProvider>
  *   );
  * };
@@ -171,6 +175,7 @@ const Dialog = ({
   onDismiss,
   dismissAccessibilityLabel,
   'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   visible = false,
   initialFocusRef,
   restoreFocusRef,
@@ -197,7 +202,7 @@ const Dialog = ({
   const titleId = React.useId();
 
   const contentNode =
-    typeof content === 'string' ? (
+    typeof content === 'string' || typeof content === 'number' ? (
       <Text
         variant="bodyMedium"
         style={{ color: theme.colors.onSurfaceVariant }}
@@ -210,8 +215,12 @@ const Dialog = ({
 
   return (
     <Modal
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabel == null ? titleId : undefined}
+      aria-label={
+        ariaLabel ?? (title && typeof title === 'string' ? title : undefined)
+      }
+      aria-labelledby={
+        ariaLabelledBy ?? (ariaLabel == null ? titleId : undefined)
+      }
       dismissable={dismissable}
       dismissableBackButton={dismissableBackButton}
       onDismiss={onDismiss}
@@ -222,13 +231,8 @@ const Dialog = ({
       contentBackgroundColor={backgroundColor}
       contentBorderRadius={borderRadius}
       contentElevation={DIALOG_ELEVATION}
-      contentContainerStyle={[
-        {
-          marginHorizontal: Math.max(left, right, 26),
-        },
-        styles.container,
-        style,
-      ]}
+      style={[styles.wrapper, { paddingHorizontal: Math.max(left, right, 26) }]}
+      contentContainerStyle={[styles.container, style]}
       theme={theme}
       testID={testID}
       overlayTestID={overlayTestID}
@@ -280,6 +284,9 @@ Dialog.ScrollArea = DialogScrollArea;
 Dialog.Icon = DialogIcon;
 
 const styles = StyleSheet.create({
+  wrapper: {
+    alignItems: 'center',
+  },
   container: {
     /**
      * This prevents the shadow from being clipped on Android since Android
@@ -290,6 +297,7 @@ const styles = StyleSheet.create({
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     justifyContent: 'flex-start',
+    width: '100%',
     minWidth: 280,
     maxWidth: 560,
   },

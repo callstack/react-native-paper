@@ -100,9 +100,7 @@ it('keeps dialog content accessible above a modal when both are visible', async 
       <Modal visible onDismiss={() => {}}>
         <Text>modal content</Text>
       </Modal>
-      <Dialog visible onDismiss={() => {}}>
-        <Text>dialog content</Text>
-      </Dialog>
+      <Dialog visible onDismiss={() => {}} content="dialog content" />
     </Portal.Host>
   );
 

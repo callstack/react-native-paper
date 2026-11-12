@@ -542,23 +542,20 @@ const buttonRef = React.useRef<React.ComponentRef<typeof View>>(null);
 
 ```diff
 -<Portal>
--  <Dialog visible={visible} onDismiss={hideDialog}>
--    <Dialog.Title>Alert</Dialog.Title>
--  </Dialog>
+-  <Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 -</Portal>
-+<Dialog visible={visible} onDismiss={hideDialog}>
-+  <Dialog.Title>Alert</Dialog.Title>
-+</Dialog>
++<Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 ```
 
-The dialog now has the `dialog` role. On web, the dialog's accessible name is set automatically by `Dialog.Title`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
+The dialog now has the `dialog` role. Its accessible name is set automatically from the `title` prop. A string title is used as the `aria-label` on all platforms. Any other title is linked through `aria-labelledby`, which applies on web only. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
 
 ```jsx
-<Dialog visible={visible} onDismiss={hideDialog} aria-label="Delete file">
-  <Dialog.Content>
-    <Text>Are you sure?</Text>
-  </Dialog.Content>
-</Dialog>
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  content="Are you sure?"
+  aria-label="Delete file"
+/>
 ```
 
 `Dialog` follows the same back button, Escape key and focus behavior as `Modal`, including the `initialFocusRef` and `restoreFocusRef` props. As with `Modal`, focus returns on iOS and Android only when you pass `restoreFocusRef`.
@@ -592,6 +589,7 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
 - **`scrollAreaProps`** passes props to the internal `Dialog.ScrollArea` when `scrollable` is enabled.
 - **`scrollViewProps`** passes props to the internal `ScrollView` when `scrollable` is enabled.
 - **`aria-label`** overrides the title as the dialog's accessible name.
+- **`aria-labelledby`** is the `nativeID` of an element that provides the dialog's accessible name. It takes precedence over the title and is applied on web only.
 
 ```tsx
 // Before (v5)
@@ -611,7 +609,6 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
 <Dialog
   visible={visible}
   onDismiss={hideDialog}
-  icon="alert"
   title="Alert"
   content="This is a simple dialog"
   actions={[
@@ -633,11 +630,13 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
 </Dialog.Actions>
 
 // After (v6)
-<Dialog.Actions>
-  <Button mode="text" onPress={hide}>
-    Done
-  </Button>
-</Dialog.Actions>
+<Dialog
+  actions={[
+    <Button key="done" mode="text" onPress={hide}>
+      Done
+    </Button>,
+  ]}
+/>
 ```
 
 ### Menu
