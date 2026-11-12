@@ -53,20 +53,16 @@ function configureFontsConfig(
 export default function configureFonts(params?: {
   config?: Partial<TypescaleStyle>;
 }): Typescale;
-// eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
   config?: Partial<Record<TypescaleKey, Partial<TypescaleStyle>>>;
 }): Typescale;
-// eslint-disable-next-line no-redeclare
 export default function configureFonts(params: {
   config: Partial<TypescaleStyle> &
     Partial<Record<TypescaleKey, Partial<TypescaleStyle>>>;
 }): Typescale;
-// eslint-disable-next-line no-redeclare
 export default function configureFonts(params: {
   config: Record<string, TypescaleStyle>;
 }): Typescale & { [key: string]: TypescaleStyle };
-// eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: any) {
   const { config } = params || {};
   return configureFontsConfig(config);
