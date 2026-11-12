@@ -127,18 +127,17 @@ const RadioButtonAndroid = ({
           <TouchableRipple
             {...rest}
             borderless
-            onPress={
-              disabled
-                ? undefined
-                : (event) => {
-                    handlePress({
-                      onPress,
-                      onValueChange: context?.onValueChange,
-                      value,
-                      event,
-                    });
-                  }
-            }
+            // `disabled` is what keeps the press away: dropping the handler
+            // would render another element and remount the radio.
+            onPress={(event) => {
+              handlePress({
+                onPress,
+                onValueChange: context?.onValueChange,
+                value,
+                event,
+              });
+            }}
+            disabled={disabled}
             role="radio"
             aria-disabled={disabled}
             aria-checked={checked}
