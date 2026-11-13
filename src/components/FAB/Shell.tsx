@@ -92,6 +92,18 @@ export type ShellProps = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * Accessibility label. Falls back to `label` if unset.
    */
   'aria-label'?: string;
@@ -197,6 +209,9 @@ const Shell = ({
   elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
@@ -327,6 +342,9 @@ const Shell = ({
           borderless
           background={background}
           onPress={onPress}
+          onLongPress={onLongPress}
+          onPressOut={onPressOut}
+          delayLongPress={delayLongPress}
           onFocus={onFocus}
           onBlur={onBlur}
           aria-label={ariaLabel}
