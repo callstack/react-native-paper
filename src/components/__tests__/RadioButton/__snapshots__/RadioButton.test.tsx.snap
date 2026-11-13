@@ -2,36 +2,10 @@
 
 exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
 <View
-  accessibilityLiveRegion="polite"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-live="polite"
+  focusable={false}
   role="radio"
   style={
     [
@@ -89,36 +63,10 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
 
 exports[`RadioButton on default platform renders properly 1`] = `
 <View
-  accessibilityLiveRegion="polite"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-live="polite"
+  focusable={false}
   role="radio"
   style={
     [
@@ -175,36 +123,10 @@ exports[`RadioButton on default platform renders properly 1`] = `
 
 exports[`RadioButton on ios platform renders properly 1`] = `
 <View
-  accessibilityLiveRegion="polite"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-live="polite"
+  focusable={false}
   role="radio"
   style={
     [

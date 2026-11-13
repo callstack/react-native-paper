@@ -85,16 +85,22 @@ const RadioButtonIOS = ({
           <TouchableRipple
             {...rest}
             borderless
-            // `disabled` is what keeps the press away: dropping the handler
-            // would render another element and remount the radio.
-            onPress={(event) => {
-              handlePress({
-                onPress,
-                value,
-                onValueChange: context?.onValueChange,
-                event,
-              });
-            }}
+            // A radio with nothing to call (no `onPress` and no
+            // `RadioButton.Group`) is read only and gets no handler, so it never
+            // takes a press meant for its parent. A live radio is turned off with
+            // `disabled`, which keeps the same element instead of remounting it.
+            onPress={
+              onPress || context?.onValueChange
+                ? (event) => {
+                    handlePress({
+                      onPress,
+                      value,
+                      onValueChange: context?.onValueChange,
+                      event,
+                    });
+                  }
+                : undefined
+            }
             disabled={disabled}
             role="radio"
             aria-disabled={disabled}
