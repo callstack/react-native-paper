@@ -185,8 +185,24 @@ const Banner = ({
   // read, focused or pressed. the spacer stays behind to keep the layout
   const [exited, setExited] = React.useState(false);
 
-  const showCallback = useLatestCallback(onShowAnimationFinished);
-  const hideCallback = useLatestCallback(onHideAnimationFinished);
+  // only a finished animation is a transition the consumer asked to be told
+  // about, so an interrupted one leaves the callbacks alone
+  const showCallback = useLatestCallback((result: { finished: boolean }) => {
+    if (result.finished) {
+      onShowAnimationFinished(result);
+    }
+  });
+
+  const hideCallback = useLatestCallback((result: { finished: boolean }) => {
+    if (!result.finished) {
+      return;
+    }
+
+    // the content can only leave the tree once the hide animation is over, and
+    // that has to happen on the react thread
+    setExited(true);
+    onHideAnimationFinished(result);
+  });
 
   const getDuration = useMotionDuration();
 
@@ -212,8 +228,6 @@ const Banner = ({
       setExited(false);
     }
 
-    const callback = visible ? showCallback : hideCallback;
-
     position.value = withTiming(
       visible ? 1 : 0,
       {
@@ -223,11 +237,11 @@ const Banner = ({
       },
       (finished) => {
         const result = { finished: finished ?? false };
-        // the content only leaves the tree once the hide animation is over
-        if (!visible && result.finished) {
-          setExited(true);
+        if (visible) {
+          scheduleOnRN(showCallback, result);
+        } else {
+          scheduleOnRN(hideCallback, result);
         }
-        scheduleOnRN(callback, result);
       }
     );
   }, [getDuration, hideCallback, position, showCallback, visible]);
