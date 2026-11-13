@@ -225,7 +225,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
                 },
                 {
@@ -430,7 +430,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
                 },
                 {

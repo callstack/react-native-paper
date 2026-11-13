@@ -92,8 +92,29 @@ it('renders icon button with small border radius', async () => {
 });
 
 it('keeps touchable content centered with custom container style', async () => {
-  await render(<IconButton icon="delete" style={styles.customBackground} />);
+  await render(
+    <IconButton
+      icon="delete"
+      onPress={() => {}}
+      style={styles.customBackground}
+    />
+  );
   expect(screen.getByRole('button')).toHaveStyle({
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  });
+});
+
+it('keeps handler-less content centered with custom container style', async () => {
+  await render(
+    <IconButton
+      icon="delete"
+      testID="icon-button"
+      style={styles.customBackground}
+    />
+  );
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
