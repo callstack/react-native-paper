@@ -386,7 +386,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             {
               "busy": undefined,
               "checked": undefined,
-              "disabled": false,
+              "disabled": true,
               "expanded": undefined,
               "selected": undefined,
             }
@@ -400,9 +400,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             }
           }
           accessible={true}
+          aria-hidden={true}
           centered={true}
           collapsable={false}
-          focusable={true}
+          focusable={false}
           hitSlop={
             {
               "bottom": 4,

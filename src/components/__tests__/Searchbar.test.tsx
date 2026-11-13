@@ -65,6 +65,23 @@ it('does not respond to touch on the clear icon when search has no value', async
   expect(onClearIconPressMock).not.toHaveBeenCalled();
 });
 
+it('exposes the clear button only while there is a search value', async () => {
+  const { rerender } = await render(<Searchbar value="" />);
+
+  expect(screen.queryByRole('button', { name: 'clear' })).toBeNull();
+  expect(
+    screen.getByRole('button', { name: 'clear', includeHiddenElements: true })
+  ).toHaveProp('focusable', false);
+
+  await rerender(<Searchbar value="query" />);
+
+  expect(screen.getByRole('button', { name: 'clear' })).toBeEnabled();
+
+  await rerender(<Searchbar value="" />);
+
+  expect(screen.queryByRole('button', { name: 'clear' })).toBeNull();
+});
+
 it('defines onClearIconPress action and checks if it is called when close button is pressed', async () => {
   const onClearIconPressMock = jest.fn();
   await render(
