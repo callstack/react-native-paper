@@ -71,6 +71,25 @@ const ListAccordionGroupExample = () => {
           </List.Accordion>
         </List.Section>
       </List.AccordionGroup>
+      <List.AccordionGroup expandDirection="upwards">
+        <List.Section title="Accordion Group example (upwards)">
+          <List.Accordion
+            left={(props) => <List.Icon {...props} icon="folder" />}
+            title="Expandable list item"
+            id="1"
+          >
+            <List.Item title="List item 1" />
+            <List.Item title="List item 2" />
+          </List.Accordion>
+          <List.Accordion
+            left={(props) => <List.Icon {...props} icon="folder" />}
+            title="Expandable list item 2"
+            id="2"
+          >
+            <List.Item title="List item 1" />
+          </List.Accordion>
+        </List.Section>
+      </List.AccordionGroup>
     </ScreenWrapper>
   );
 };
