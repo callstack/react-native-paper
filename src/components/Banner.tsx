@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {
+  AccessibilityInfo,
+  findNodeHandle,
+  Platform,
+  StyleSheet,
+  View,
+} from 'react-native';
 import type {
   LayoutChangeEvent,
   StyleProp,
@@ -30,6 +36,8 @@ import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../theme/types';
 
 const DEFAULT_MAX_WIDTH = 960;
+// banners carry at most two actions per the material spec
+const MAX_ACTIONS = 2;
 
 type AnimationFinishedCallback = (result: { finished: boolean }) => void;
 
@@ -54,6 +62,9 @@ export type Props = Omit<ViewProps, 'style'> & {
    * - `onPress`: callback that is called when button is pressed (required)
    *
    * To customize button you can pass other props that button component takes.
+   *
+   * A maximum of 2 actions is supported, per the Material spec. Any further
+   * actions are ignored, with a warning in development.
    */
   actions?: Array<
     {
@@ -70,6 +81,12 @@ export type Props = Omit<ViewProps, 'style'> & {
    * Changes Banner shadow and background on iOS and Android.
    */
   elevation?: Elevation;
+  /**
+   * Whether the message should interrupt whatever the screen reader is saying
+   * instead of waiting for it to finish. Use it for messages that need
+   * immediate attention, such as errors.
+   */
+  urgent?: boolean;
   /**
    * Specifies the largest possible scale a text font can reach.
    */
@@ -148,6 +165,8 @@ const Banner = ({
   onShowAnimationFinished = () => {},
   onHideAnimationFinished = () => {},
   maxFontSizeMultiplier,
+  urgent = false,
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -162,13 +181,37 @@ const Banner = ({
     height: 0,
     measured: false,
   });
+  // content is dropped from the tree once it's fully hidden, so it can't be
+  // read, focused or pressed. the spacer stays behind to keep the layout
+  const [exited, setExited] = React.useState(false);
 
   const showCallback = useLatestCallback(onShowAnimationFinished);
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
   const getDuration = useMotionDuration();
 
+  const prevVisible = React.useRef<boolean | null>(null);
+
   React.useEffect(() => {
+    // only animate for transitions that actually happened, so the callbacks
+    // don't fire on mount or when unrelated deps (e.g. scale) change
+    if (prevVisible.current === visible) {
+      return;
+    }
+
+    const isFirstRender = prevVisible.current === null;
+    prevVisible.current = visible;
+
+    // position is already initialised to the matching end state
+    if (isFirstRender) {
+      return;
+    }
+
+    if (visible) {
+      // the content has to be back in the tree before it can slide in
+      setExited(false);
+    }
+
     const callback = visible ? showCallback : hideCallback;
 
     position.value = withTiming(
@@ -178,7 +221,14 @@ const Banner = ({
         easing: Easing.inOut(Easing.ease),
         reduceMotion: ReduceMotion.Never,
       },
-      (finished) => scheduleOnRN(callback, { finished: finished ?? false })
+      (finished) => {
+        const result = { finished: finished ?? false };
+        // the content only leaves the tree once the hide animation is over
+        if (!visible && result.finished) {
+          setExited(true);
+        }
+        scheduleOnRN(callback, result);
+      }
     );
   }, [getDuration, hideCallback, position, showCallback, visible]);
 
@@ -194,9 +244,86 @@ const Banner = ({
     transform: [{ translateY: (position.value - 1) * layout.height }],
   }));
 
+  const visibleActions = actions.slice(0, MAX_ACTIONS);
+  const actionCount = visibleActions.length;
+  React.useEffect(() => {
+    if (process.env.NODE_ENV !== 'production' && actions.length > MAX_ACTIONS) {
+      console.warn(
+        `Banner supports a maximum of ${MAX_ACTIONS} actions, received ${actions.length}. The extra actions are ignored.`
+      );
+    }
+  }, [actions.length]);
+
+  const liveRegion = urgent ? 'assertive' : 'polite';
+  const message = React.Children.toArray(children)
+    .filter((child) => typeof child === 'string' || typeof child === 'number')
+    .join('');
+
+  // aria-live only reaches a real live region on android and web. ios has no
+  // equivalent, so announce there by hand whenever the message becomes
+  // available. doing it everywhere would double up with the live region
+  React.useEffect(() => {
+    if (Platform.OS !== 'ios' || !visible || !message) {
+      return;
+    }
+
+    AccessibilityInfo.announceForAccessibilityWithOptions(message, {
+      queue: !urgent,
+    });
+  }, [visible, message, urgent]);
+
+  // one stable ref per action slot; the cap is what bounds the array
+  const actionRefs = React.useRef<Array<React.RefObject<View>>>([]);
+  for (let i = 0; i < MAX_ACTIONS; i++) {
+    // Button types touchableRef as non-nullable, but a ref always starts null
+    actionRefs.current[i] ??= React.createRef<View>() as React.RefObject<View>;
+  }
+  const messageRef = React.useRef<View>(null);
+  const focusedAction = React.useRef<number | null>(null);
+
+  const focusNode = (node: View | null) => {
+    if (!node) {
+      return;
+    }
+
+    const handle = findNodeHandle(node);
+    if (handle !== null) {
+      AccessibilityInfo.setAccessibilityFocus(handle);
+    }
+
+    // rnw resolves the ref to the dom node, which takes focus directly
+    (node as unknown as { focus?: () => void }).focus?.();
+  };
+
+  // a removed action would otherwise strand focus at the top of the document
+  React.useEffect(() => {
+    const focused = focusedAction.current;
+
+    if (focused === null || focused < actionCount) {
+      return;
+    }
+
+    if (!visible) {
+      focusedAction.current = null;
+      return;
+    }
+
+    const next = actionCount - 1;
+    focusedAction.current = next < 0 ? null : next;
+    focusNode(next < 0 ? messageRef.current : actionRefs.current[next].current);
+  }, [actionCount, visible]);
+
   const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
     const { height } = nativeEvent.layout;
+    const isFirstMeasure = !layout.measured;
+
     setLayout({ height, measured: true });
+
+    // mounted hidden: we only render to measure the spacer height, so drop the
+    // content again right after. later measurements happen mid-transition
+    if (isFirstMeasure && !visible) {
+      setExited(true);
+    }
   };
 
   // The banner animation has 2 parts:
@@ -206,67 +333,101 @@ const Banner = ({
   // Once we have the height, we apply the height to the spacer and switch the banner to position: absolute
   // We need this because we need to move the content below as if banner's height was being animated
   // However we can't animated banner's height directly as it'll also resize the content inside
+  // rnw forwards `inert` to the dom, which drops the subtree from the a11y
+  // tree and the tab order. native ignores the unknown prop
+  const inertProps = visible ? null : ({ inert: true } as object);
+
   return (
     <Surface
       {...rest}
+      testID={testID}
       style={[surfaceStyle, style]}
       theme={theme}
       elevation={elevation}
     >
       <View style={[styles.wrapper, contentStyle]}>
         <Animated.View style={spacerStyle} />
-        <Animated.View
-          onLayout={handleLayout}
-          style={[
-            layout.measured || !visible
-              ? // If we have measured banner's height or it's invisible,
-                // Position it absolutely, the layout will be taken care of the spacer
-                [styles.absolute, contentAnimationStyle]
-              : // Otherwise position it normally
-                null,
-            !layout.measured && !visible
-              ? // If we haven't measured banner's height yet and it's invisible,
-                // hide it with opacity: 0 so user doesn't see it
-                styles.transparent
-              : null,
-          ]}
-        >
-          <View style={styles.content}>
-            {icon ? (
-              <View style={styles.icon}>
-                <Icon source={icon} size={40} />
+        {exited ? null : (
+          <Animated.View
+            testID={`${testID ?? 'banner'}-content`}
+            onLayout={handleLayout}
+            aria-hidden={!visible}
+            pointerEvents={visible ? 'auto' : 'none'}
+            {...inertProps}
+            style={[
+              layout.measured || !visible
+                ? // If we have measured banner's height or it's invisible,
+                  // Position it absolutely, the layout will be taken care of the spacer
+                  [styles.absolute, contentAnimationStyle]
+                : // Otherwise position it normally
+                  null,
+              !layout.measured && !visible
+                ? // If we haven't measured banner's height yet and it's invisible,
+                  // hide it with opacity: 0 so user doesn't see it
+                  styles.transparent
+                : null,
+            ]}
+          >
+            <View style={styles.content}>
+              {/* icon and message travel together as one flex item, so only
+                  the actions can be wrapped onto the next line */}
+              <View style={styles.body}>
+                {icon ? (
+                  <View style={styles.icon}>
+                    <Icon source={icon} size={40} />
+                  </View>
+                ) : null}
+                {/* the region is scoped to the message: status/alert imply
+                    aria-atomic, so keeping the actions out of it stops their
+                    labels from re-announcing the whole banner */}
+                <View
+                  ref={messageRef}
+                  testID={`${testID ?? 'banner'}-message`}
+                  style={styles.message}
+                  role={urgent ? 'alert' : 'status'}
+                  aria-live={visible ? liveRegion : 'off'}
+                >
+                  <Text
+                    variant="bodyMedium"
+                    style={{ color: colors.onSurface }}
+                    maxFontSizeMultiplier={maxFontSizeMultiplier}
+                  >
+                    {children}
+                  </Text>
+                </View>
               </View>
-            ) : null}
-            <Text
-              variant="bodyMedium"
-              style={[
-                styles.message,
-                {
-                  color: colors.onSurface,
-                },
-              ]}
-              aria-live={visible ? 'polite' : 'off'}
-              role="alert"
-              maxFontSizeMultiplier={maxFontSizeMultiplier}
-            >
-              {children}
-            </Text>
-          </View>
-          <View style={styles.actions}>
-            {actions.map(({ label, ...others }, i) => (
-              <Button
-                key={i}
-                mode="text"
-                style={styles.button}
-                textColor={colors.primary}
-                theme={theme}
-                {...others}
-              >
-                {label}
-              </Button>
-            ))}
-          </View>
-        </Animated.View>
+              {/* same wrapping row as the message, so the actions sit inline
+                  when they fit and drop to their own line when they don't */}
+              {visibleActions.length ? (
+                <View style={styles.actions}>
+                  {visibleActions.map(({ label, ...others }, i) => (
+                    <Button
+                      key={i}
+                      mode="text"
+                      style={styles.button}
+                      textColor={colors.primary}
+                      theme={theme}
+                      {...others}
+                      touchableRef={actionRefs.current[i]}
+                      onFocus={(e) => {
+                        focusedAction.current = i;
+                        others.onFocus?.(e);
+                      }}
+                      onBlur={(e) => {
+                        if (focusedAction.current === i) {
+                          focusedAction.current = null;
+                        }
+                        others.onBlur?.(e);
+                      }}
+                    >
+                      {label}
+                    </Button>
+                  ))}
+                </View>
+              ) : null}
+            </View>
+          </Animated.View>
+        )}
       </View>
     </Surface>
   );
@@ -286,20 +447,32 @@ const styles = StyleSheet.create({
   },
   content: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
     marginHorizontal: 8,
     marginTop: 16,
     marginBottom: 0,
+  },
+  body: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 'auto',
   },
   icon: {
     margin: 8,
   },
   message: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 'auto',
     margin: 8,
   },
   actions: {
     flexDirection: 'row',
+    flexShrink: 0,
     justifyContent: 'flex-end',
     margin: 4,
   },
