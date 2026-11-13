@@ -17,6 +17,7 @@ import { act, fireEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
+import AppbarContent from '../Appbar/AppbarContent';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import Button from '../Button/Button';
 import Card from '../Card/Card';
@@ -233,6 +234,18 @@ describe('focus ring wiring', () => {
 
     expect(style(pressable).outlineStyle).toBeUndefined();
     expect(ringOffset()).toBe(INWARD);
+  });
+
+  it('Appbar.Content with onPress rings outward, and keeps its own onFocus', async () => {
+    const onFocus = jest.fn();
+    await render(
+      <AppbarContent title="Title" onPress={() => {}} onFocus={onFocus} />
+    );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(OUTWARD);
+    expect(onFocus).toHaveBeenCalledTimes(1);
   });
 
   it('Card rings outward', async () => {

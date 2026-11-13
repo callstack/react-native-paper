@@ -11,6 +11,7 @@ import type {
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
 
@@ -101,6 +102,14 @@ const AppbarContent = ({
   const theme = useInternalTheme(themeOverrides);
   const { colors, fonts } = theme;
 
+  // With `onPress` the title is a button, so it gets the keyboard focus ring
+  // (MD3: interactive elements in an app bar have focus rings). It is a plain
+  // `Pressable`, so it calls the hook directly. Outward, the default.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !onPress,
+    colors.secondary
+  );
+
   const titleTextColor = titleColor ? titleColor : colors.onSurface;
 
   const modeContainerStyles = {
@@ -153,6 +162,16 @@ const AppbarContent = ({
         onPress={onPress}
         disabled={disabled}
         {...contentWrapperProps}
+        onFocus={(e) => {
+          focusTarget.onFocus?.(e);
+          rest.onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          focusTarget.onBlur?.();
+          rest.onBlur?.(e);
+        }}
+        {...focusRing.dataSetProps}
+        style={[...contentWrapperProps.style, ...focusRing.style]}
       >
         {content}
       </Pressable>
