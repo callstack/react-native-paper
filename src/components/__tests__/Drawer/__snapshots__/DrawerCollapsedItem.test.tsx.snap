@@ -37,17 +37,12 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "marginBottom": 12,
-            "minHeight": 56,
-            "width": 80,
-          },
-          {
-            "borderRadius": 8,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
       }
     >
       <View
@@ -120,6 +115,23 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
           star
         </Text>
       </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>
@@ -162,17 +174,12 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "marginBottom": 12,
-            "minHeight": 56,
-            "width": 80,
-          },
-          {
-            "borderRadius": 8,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
       }
     >
       <View
@@ -245,6 +252,23 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
           star
         </Text>
       </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>
@@ -287,17 +311,12 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "marginBottom": 12,
-            "minHeight": 56,
-            "width": 80,
-          },
-          {
-            "borderRadius": 8,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
       }
     >
       <View
@@ -370,6 +389,23 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
           star-outline
         </Text>
       </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>
@@ -412,17 +448,12 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "marginBottom": 12,
-            "minHeight": 56,
-            "width": 80,
-          },
-          {
-            "borderRadius": 8,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
       }
     >
       <View
@@ -536,6 +567,23 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
       >
         starred
       </Text>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>
@@ -578,17 +626,12 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "marginBottom": 12,
-            "minHeight": 56,
-            "width": 80,
-          },
-          {
-            "borderRadius": 8,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "marginBottom": 12,
+          "minHeight": 56,
+          "width": 80,
+        }
       }
     >
       <View
@@ -661,6 +704,23 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
           star-outline
         </Text>
       </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>

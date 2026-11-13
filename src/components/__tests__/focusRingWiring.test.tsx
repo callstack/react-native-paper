@@ -236,6 +236,13 @@ describe('focus ring wiring', () => {
 
     expect(style(pressable).outlineStyle).toBeUndefined();
     expect(ringOffset()).toBe(INWARD);
+
+    // An inward ring is painted under its own element's children, where the
+    // active indicator would cover it, so it is on an overlay drawn last.
+    const root = (screen as unknown as { root: Node }).root;
+    const [ringed] = walk(root, (n) => style(n).outlineStyle === 'solid');
+    expect(style(ringed).position).toBe('absolute');
+    expect(ringed.children ?? []).toHaveLength(0);
   });
 
   it('Appbar.Content with onPress rings outward, and keeps its own onFocus', async () => {

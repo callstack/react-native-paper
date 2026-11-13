@@ -17,6 +17,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import { useFocusRing } from '../../utils/useFocusRing';
 import Badge from '../Badge';
@@ -121,7 +122,12 @@ const DrawerCollapsedItem = ({
   // MD3 rings a navigation rail item as a whole (icon and label) with a
   // rounded rectangle inside the rail, like Material Web's navigation tab
   // (inward, small corner). The `Pressable` also spans the gap below the
-  // item, so the ring goes on the item inside it (`'descendant'`).
+  // item, so the ring goes on an overlay inside it (`'descendant'`). An
+  // overlay, not the item itself: an inward ring is painted under the item's
+  // children, and the active indicator would cover its top edge. The overlay
+  // starts above the item, so the ring clears the indicator by the usual 2dp
+  // gap instead of cutting into it; the 12dp gap below the item above it
+  // leaves room.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     disabled,
     theme.colors.secondary,
@@ -199,14 +205,7 @@ const DrawerCollapsedItem = ({
         {...focusTarget.dataSetProps}
         style={focusTarget.style}
       >
-        <View
-          style={[
-            styles.wrapper,
-            { borderRadius: theme.shapes.corner.small },
-            ...focusRing.style,
-          ]}
-          {...focusRing.dataSetProps}
-        >
+        <View style={styles.wrapper}>
           <Animated.View
             style={[
               styles.outline,
@@ -244,6 +243,16 @@ const DrawerCollapsedItem = ({
               {label}
             </Text>
           ) : null}
+
+          <View
+            pointerEvents="none"
+            style={[
+              styles.focusRing,
+              { borderRadius: theme.shapes.corner.small },
+              ...focusRing.style,
+            ]}
+            {...focusRing.dataSetProps}
+          />
         </View>
       </Pressable>
     </View>
@@ -252,7 +261,17 @@ const DrawerCollapsedItem = ({
 
 DrawerCollapsedItem.displayName = 'Drawer.CollapsedItem';
 
+const { thickness: focusThickness, outerOffset: focusOuterOffset } =
+  tokens.md.sys.state.focusIndicator;
+
 const styles = StyleSheet.create({
+  focusRing: {
+    position: 'absolute',
+    top: -(focusOuterOffset + focusThickness),
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
   wrapper: {
     width: 80,
     marginBottom: 12,
