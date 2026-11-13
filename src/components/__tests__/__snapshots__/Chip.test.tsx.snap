@@ -337,6 +337,13 @@ exports[`renders chip with close button 1`] = `
               "marginRight": 0,
               "padding": 0,
             },
+            {
+              "alignItems": "center",
+              "borderRadius": 12,
+              "height": 24,
+              "justifyContent": "center",
+              "width": 24,
+            },
           ]
         }
       >
@@ -711,6 +718,13 @@ exports[`renders chip with custom close button 1`] = `
             {
               "marginRight": 0,
               "padding": 0,
+            },
+            {
+              "alignItems": "center",
+              "borderRadius": 12,
+              "height": 24,
+              "justifyContent": "center",
+              "width": 24,
             },
           ]
         }

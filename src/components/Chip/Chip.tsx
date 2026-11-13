@@ -172,6 +172,13 @@ const CLOSE_AFFORDANCE_WIDTH = 34;
 const CLOSE_AFFORDANCE_MIN_WIDTH = 26;
 
 /**
+ * The close button's focus ring is a circle around the glyph, not around the
+ * whole column, sized like Material Web's trailing action (4/3 of the 18dp
+ * icon). It fits inside the column's 26dp floor.
+ */
+const CLOSE_FOCUS_RING_SIZE = 24;
+
+/**
  * The label makes a default chip 32dp tall, so the slop to reach the 48dp
  * minimum is a constant rather than something to measure. Width grows with the
  * label and the whole pill is already the target, so only the vertical axis
@@ -242,11 +249,14 @@ const Chip = ({
   const theme = useInternalTheme(themeOverrides);
   // The close affordance is a plain `Pressable`, not a `TouchableRipple`
   // (see below), so it calls `useFocusRing` directly instead of going
-  // through `TouchableRipple`'s `focusRing` prop like the body does.
+  // through `TouchableRipple`'s `focusRing` prop like the body does. The
+  // `Pressable` is the whole close column, but the ring follows the glyph's
+  // round shape, so it goes on a circle inside it (`'descendant'`).
   const { target: closeFocusTarget, ring: closeFocusRing } = useFocusRing(
     disabled,
     theme.colors.secondary,
-    'inward'
+    'outward',
+    'descendant'
   );
 
   const [pressed, setPressed] = React.useState(false);
@@ -436,11 +446,11 @@ const Chip = ({
             hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
             onFocus={closeFocusTarget.onFocus}
             onBlur={closeFocusTarget.onBlur}
-            {...closeFocusRing.dataSetProps}
+            {...closeFocusTarget.dataSetProps}
             style={[
               styles.closeButton,
               { borderRadius },
-              ...closeFocusRing.style,
+              ...closeFocusTarget.style,
             ]}
           >
             {/* react-native-web removed `hitSlop` in 0.13.0,
@@ -449,7 +459,16 @@ const Chip = ({
             {Platform.OS === 'web' && !disabled && (
               <View aria-hidden style={styles.closeButtonWebTouchTarget} />
             )}
-            <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
+            <View
+              style={[
+                styles.icon,
+                styles.closeIcon,
+                styles.md3CloseIcon,
+                styles.closeFocusRing,
+                ...closeFocusRing.style,
+              ]}
+              {...closeFocusRing.dataSetProps}
+            >
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
@@ -542,6 +561,13 @@ const styles = StyleSheet.create({
   closeButton: {
     width: '100%',
     height: '100%',
+    justifyContent: 'center',
+  },
+  closeFocusRing: {
+    width: CLOSE_FOCUS_RING_SIZE,
+    height: CLOSE_FOCUS_RING_SIZE,
+    borderRadius: CLOSE_FOCUS_RING_SIZE / 2,
+    alignItems: 'center',
     justifyContent: 'center',
   },
   closeButtonWebTouchTarget: {

@@ -100,6 +100,30 @@ describe('focus ring wiring', () => {
     expect(ringOffset()).toBe(INWARD);
   });
 
+  // Material Web rings the remove button with a circle around the glyph, not
+  // the whole close column.
+  it('Chip rings its close button with a circle around the glyph', async () => {
+    await render(
+      <Chip onPress={() => {}} onClose={() => {}}>
+        chip
+      </Chip>
+    );
+
+    await act(async () => {
+      await fireEvent(screen.getByLabelText('Close'), 'focus');
+    });
+
+    const root = (screen as unknown as { root: Node }).root;
+    const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
+    expect(ringed).toHaveLength(1);
+    expect(style(ringed[0])).toMatchObject({
+      outlineOffset: OUTWARD,
+      width: 24,
+      height: 24,
+      borderRadius: 12,
+    });
+  });
+
   it('Card rings outward', async () => {
     await render(
       <Card onPress={() => {}}>
@@ -158,5 +182,28 @@ describe('focus ring wiring (web)', () => {
     expect(
       (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
     ).toBe('outward');
+  });
+
+  it('Chip marks its close button as the focus target and rings the glyph circle inside it', async () => {
+    await render(
+      <Chip onPress={() => {}} onClose={() => {}}>
+        chip
+      </Chip>
+    );
+
+    const close = screen.getByLabelText('Close');
+    expect(close.props.dataSet).toEqual({ focusRingTarget: 'true' });
+
+    const ringed = walk(
+      close,
+      (n) =>
+        (n.props?.dataSet as Record<string, string> | undefined)
+          ?.focusRingDescendant !== undefined
+    );
+    expect(ringed).toHaveLength(1);
+    expect(
+      (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
+    ).toBe('outward');
+    expect(style(ringed[0])).toMatchObject({ width: 24, borderRadius: 12 });
   });
 });

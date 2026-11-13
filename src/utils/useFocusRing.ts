@@ -19,7 +19,8 @@ export type FocusRingPlacement = 'outward' | 'inward' | 'none';
  * `'within'` - the ring is drawn on an ancestor (a track/clip view), because
  * the focusable element's own box is the wrong shape or size for it.
  * `'descendant'` - the ring is drawn on a child of the element that receives
- * focus (Switch's track inside its 48dp-tall Pressable), for the same reason.
+ * focus (Switch's track inside its 48dp-tall Pressable, the circle around
+ * Chip's close glyph inside its close column), for the same reason.
  */
 export type FocusRingScope = 'self' | 'within' | 'descendant';
 
