@@ -15,6 +15,7 @@ import Card from '../Card/Card';
 import CheckboxItem from '../Checkbox/CheckboxItem';
 import Chip from '../Chip/Chip';
 import FAB from '../FAB/FAB';
+import ListAccordion from '../List/ListAccordion';
 import ListItem from '../List/ListItem';
 import Switch from '../Switch/Switch';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
@@ -128,6 +129,18 @@ describe('focus ring wiring', () => {
   it('Checkbox.Item rings inward, clear of the rows above and below', async () => {
     await render(
       <CheckboxItem label="row" status="checked" onPress={() => {}} />
+    );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(INWARD);
+  });
+
+  it('List.Accordion rings inward, like List.Item', async () => {
+    await render(
+      <ListAccordion title="section">
+        <ListItem title="row" />
+      </ListAccordion>
     );
 
     await focusFirstFocusable();
