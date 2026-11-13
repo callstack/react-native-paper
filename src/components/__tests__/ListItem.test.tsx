@@ -5,11 +5,13 @@ import { Text, View } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { fireEvent, render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
+import { LightTheme } from '../../theme/schemes';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';
+import ListImage from '../List/ListImage';
 import ListItem from '../List/ListItem';
 
 const styles = StyleSheet.create({
@@ -177,3 +179,217 @@ it('renders list item with custom content style', async () => {
 
   expect(toJSON()).toMatchSnapshot();
 });
+
+it('hits the one line container height without measuring the description', async () => {
+  await render(<ListItem title="First Item" testID={testID} />);
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 56,
+    paddingVertical: 8,
+  });
+});
+
+it('hits the two and three line container heights without measuring', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 72,
+    paddingVertical: 8,
+  });
+
+  await fireEvent(screen.getByText('Item description'), 'textLayout', {
+    nativeEvent: { lines: [{}, {}] },
+  });
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 72,
+    paddingVertical: 12,
+  });
+});
+
+// The row is 88dp tall: 2 * padding + 2 * margin + the 64dp thumbnail.
+it.each([
+  ['one line', undefined, false, 8, 4],
+  ['two line', 'Item description', false, 8, 4],
+  ['three line', 'Item description', true, 12, 0],
+])(
+  'makes a %s row with a video thumbnail 88dp tall',
+  async (_label, description, wrapsDescription, padding, margin) => {
+    await render(
+      <ListItem
+        title="First Item"
+        description={description}
+        leading={
+          <ListImage
+            variant="video"
+            source={{ uri: 'https://picsum.photos/228/128' }}
+            testID="video-thumbnail"
+          />
+        }
+        testID={testID}
+      />
+    );
+
+    if (wrapsDescription) {
+      await fireEvent(screen.getByText('Item description'), 'textLayout', {
+        nativeEvent: { lines: [{}, {}] },
+      });
+    }
+
+    expect(screen.getByTestId(testID)).toHaveStyle({
+      paddingVertical: padding,
+    });
+    expect(screen.getByTestId('video-thumbnail')).toHaveStyle({
+      height: 64,
+      marginVertical: margin,
+    });
+  }
+);
+
+it('does not add vertical margin to an image thumbnail', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      leading={
+        <ListImage
+          source={{ uri: 'https://picsum.photos/112' }}
+          testID="image-thumbnail"
+        />
+      }
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId('image-thumbnail')).toHaveStyle({
+    height: 56,
+    marginVertical: undefined,
+  });
+});
+
+it('colors the typed slots from the list item context', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      leading={<ListIcon icon="folder" />}
+      trailing={<ListIcon icon="chevron-right" />}
+      testID={testID}
+    />
+  );
+
+  expect(
+    screen.getByText('folder', { includeHiddenElements: true })
+  ).toHaveStyle({ color: LightTheme.colors.onSurfaceVariant });
+  expect(
+    screen.getByText('chevron-right', { includeHiddenElements: true })
+  ).toHaveStyle({ color: LightTheme.colors.onSurfaceVariant });
+});
+
+it('renders the trailing slot', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      trailing={<Text>Trailing</Text>}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByText('Trailing')).toBeOnTheScreen();
+});
+
+it('prefers the typed slots over the left and right render props', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      leading={<Text>Leading slot</Text>}
+      trailing={<Text>Trailing slot</Text>}
+      left={() => <Text>Left render prop</Text>}
+      right={() => <Text>Right render prop</Text>}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByText('Leading slot')).toBeOnTheScreen();
+  expect(screen.getByText('Trailing slot')).toBeOnTheScreen();
+  expect(screen.queryByText('Left render prop')).not.toBeOnTheScreen();
+  expect(screen.queryByText('Right render prop')).not.toBeOnTheScreen();
+});
+
+it('top aligns the accessories once the description wraps', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      left={(props) => <View testID="left-accessory" style={props.style} />}
+      testID={testID}
+    />
+  );
+
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({
+    alignSelf: 'center',
+  });
+
+  await fireEvent(screen.getByText('Item description'), 'textLayout', {
+    nativeEvent: { lines: [{}, {}] },
+  });
+
+  expect(screen.getByTestId('left-accessory')).toHaveStyle({
+    alignSelf: 'flex-start',
+  });
+});
+
+it('applies the theme override to title and description typography', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+      theme={{
+        fonts: { bodyLarge: { fontSize: 99 }, bodyMedium: { fontSize: 77 } },
+      }}
+    />
+  );
+
+  expect(screen.getByText('First Item')).toHaveStyle({ fontSize: 99 });
+  expect(screen.getByText('Item description')).toHaveStyle({ fontSize: 77 });
+});
+
+it.each([
+  [
+    'an unselected item on surface colors',
+    false,
+    undefined,
+    LightTheme.colors.onSurface,
+    LightTheme.colors.onSurfaceVariant,
+  ],
+  [
+    'a selected item on the primary container',
+    true,
+    LightTheme.colors.primaryContainer,
+    LightTheme.colors.onPrimaryContainer,
+    LightTheme.colors.onPrimaryContainer,
+  ],
+])(
+  'renders %s',
+  async (_label, selected, backgroundColor, titleColor, descriptionColor) => {
+    await render(
+      <ListItem
+        title="First Item"
+        description="Item description"
+        selected={selected}
+        testID={testID}
+      />
+    );
+
+    expect(screen.getByTestId(testID)).toHaveStyle({ backgroundColor });
+    expect(screen.getByText('First Item')).toHaveStyle({ color: titleColor });
+    expect(screen.getByText('Item description')).toHaveStyle({
+      color: descriptionColor,
+    });
+  }
+);
