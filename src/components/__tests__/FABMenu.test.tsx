@@ -192,3 +192,20 @@ it('calls onDismiss when trigger is pressed while menu is open', async () => {
   await userEvent.press(screen.getByTestId('fab-shell'));
   expect(onDismiss).toHaveBeenCalledTimes(1);
 });
+
+it('exposes the expanded state on the trigger', async () => {
+  const menu = (expanded: boolean) => (
+    <FAB.Menu
+      expanded={expanded}
+      onDismiss={jest.fn()}
+      trigger={{ icon: 'plus', onPress: jest.fn(), 'aria-label': 'Actions' }}
+      items={makeItems()}
+    />
+  );
+
+  await render(menu(false));
+  expect(screen.getByRole('button', { name: 'Actions' })).toBeCollapsed();
+
+  await screen.rerender(menu(true));
+  expect(screen.getByRole('button', { name: 'Actions' })).toBeExpanded();
+});
