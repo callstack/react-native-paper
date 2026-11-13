@@ -638,6 +638,51 @@ it('keeps inactive indicators hidden when activeIndicatorStyle sets opacity and 
   });
 });
 
+it('hides the previous indicator and shows the new one after switching tabs', () => {
+  const props = {
+    onIndexChange: jest.fn(),
+    renderScene: ({ route }: { route: { title?: string } }) => route.title,
+    activeIndicatorStyle: styles.activeIndicator,
+  };
+  const { getAllByRole, rerender } = render(
+    <BottomNavigation navigationState={createState(0, 3)} {...props} />
+  );
+
+  rerender(<BottomNavigation navigationState={createState(1, 3)} {...props} />);
+  act(() => {
+    jest.runAllTimers();
+  });
+
+  // Multiply opacity and collect transforms from the pill up through its
+  // ancestors, so the check doesn't depend on which view holds the animated
+  // styles.
+  const indicators = getAllByRole('button').map((tab) => {
+    const pill = tab.find(
+      (node) =>
+        typeof node.type === 'string' &&
+        StyleSheet.flatten(node.props.style)?.opacity ===
+          styles.activeIndicator.opacity
+    );
+    let opacity = 1;
+    const transforms: unknown[] = [];
+    let node: typeof pill | null = pill;
+    while (node) {
+      if (typeof node.type === 'string') {
+        const style = StyleSheet.flatten(node.props.style) ?? {};
+        if (typeof style.opacity === 'number') opacity *= style.opacity;
+        if (Array.isArray(style.transform)) transforms.push(...style.transform);
+      }
+      node = node.parent;
+    }
+    return { opacity, transforms };
+  });
+
+  expect(indicators.map(({ opacity }) => opacity)).toEqual([0, 0.5, 0]);
+  expect(indicators[1].transforms).toEqual(
+    expect.arrayContaining([{ scaleX: 1 }, { translateY: 2 }])
+  );
+});
+
 describe.each([
   { supported: true, touchable: 'TouchableRipple' },
   { supported: false, touchable: 'Pressable' },

@@ -205,8 +205,13 @@ exports[`allows customizing Route's type via generics 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -490,8 +495,13 @@ exports[`allows customizing Route's type via generics 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -918,8 +928,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -1143,8 +1158,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -1368,8 +1388,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -1735,8 +1760,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -1960,8 +1990,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -2185,8 +2220,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -2683,8 +2723,13 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -3028,8 +3073,13 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -3373,8 +3423,13 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -3718,8 +3773,13 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -4063,8 +4123,13 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -4555,8 +4620,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -4849,8 +4919,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -5143,8 +5218,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -5437,8 +5517,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -5731,8 +5816,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -6162,8 +6252,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -6374,8 +6469,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -6586,8 +6686,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -6945,8 +7050,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -7143,8 +7253,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -7341,8 +7456,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -7539,8 +7659,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -7737,8 +7862,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -8072,8 +8202,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -8417,8 +8552,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -8762,8 +8902,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -9254,8 +9399,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -9548,8 +9698,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -9842,8 +9997,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -10273,8 +10433,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -10618,8 +10783,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -10963,8 +11133,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -11455,8 +11630,13 @@ exports[`renders shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 1,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 1,
@@ -11749,8 +11929,13 @@ exports[`renders shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -12043,8 +12228,13 @@ exports[`renders shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -12337,8 +12527,13 @@ exports[`renders shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,
@@ -12631,8 +12826,13 @@ exports[`renders shifting bottom navigation 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "alignSelf": "center",
+                      "bottom": 0,
+                      "justifyContent": "center",
+                      "left": 0,
                       "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
                       "transform": [
                         {
                           "scaleX": 0.4,

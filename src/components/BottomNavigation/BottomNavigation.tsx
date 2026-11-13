@@ -254,6 +254,11 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Style for the active indicator pill.
+   * The show and hide animation (opacity and horizontal scale) is applied on top of it.
+   */
   activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional

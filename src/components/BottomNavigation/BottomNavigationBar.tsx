@@ -201,6 +201,11 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Style for the active indicator pill.
+   * The show and hide animation (opacity and horizontal scale) is applied on top of it.
+   */
   activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -676,10 +681,22 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               outputRange: [0.4, 1],
             });
 
-            const outlineOpacity = active.interpolate({
-              inputRange: [0, 0.2, 1],
-              outputRange: [0, 1, 1],
-            });
+            // Fade the pill in over the first fifth of showing it and out
+            // over the first fifth of hiding it, as Material Components for
+            // Android does.
+            const outlineOpacity = active.interpolate(
+              focused
+                ? {
+                    inputRange: [0, 0.2, 1],
+                    outputRange: [0, 1, 1],
+                    extrapolate: 'clamp',
+                  }
+                : {
+                    inputRange: [0, 0.8, 1],
+                    outputRange: [0, 0, 1],
+                    extrapolate: 'clamp',
+                  }
+            );
 
             const badge = getBadge({ route });
 
@@ -1004,8 +1021,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  // Fills the 32x32 icon container, so sizes, alignSelf and absolute positions
+  // in `activeIndicatorStyle` resolve against the icon slot.
   outlineContainer: {
-    alignSelf: 'center',
+    ...StyleSheet.absoluteFill,
+    justifyContent: 'center',
   },
   outline: {
     width: OUTLINE_WIDTH,
