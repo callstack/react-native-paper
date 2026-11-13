@@ -255,6 +255,94 @@ it('exposes the accessibility hint', async () => {
   expect(screen.getByRole('button')).toHaveProp('accessibilityHint', 'hint');
 });
 
+it('applies accessibilityLabel to the interactive button', async () => {
+  await render(<Button accessibilityLabel="Save draft">Save</Button>);
+
+  expect(screen.getByRole('button', { name: 'Save draft' })).toBeOnTheScreen();
+});
+
+it('applies accessibilityState to the interactive button', async () => {
+  await render(
+    <Button accessibilityState={{ expanded: false }} onPress={() => {}}>
+      Show details
+    </Button>
+  );
+
+  expect(screen.getByRole('button', { name: 'Show details' })).toBeCollapsed();
+});
+
+it('exposes the loading state on the interactive button', async () => {
+  await render(
+    <Button loading onPress={() => {}}>
+      Save
+    </Button>
+  );
+
+  expect(screen.getByRole('button', { name: 'Save' })).toBeBusy();
+});
+
+it('applies the accessibility props from the issue to the interactive button', async () => {
+  await render(
+    <Button
+      accessibilityLabel="Save draft"
+      accessibilityState={{ expanded: false }}
+      loading
+      onPress={() => {}}
+    >
+      Save
+    </Button>
+  );
+
+  const button = screen.getByRole('button', { name: 'Save draft' });
+
+  expect(button).toBeCollapsed();
+  expect(button).toBeBusy();
+  expect(screen.queryByRole('progressbar')).not.toBeOnTheScreen();
+});
+
+it('keeps accessibilityState.busy when loading is false', async () => {
+  await render(
+    <Button
+      loading={false}
+      accessibilityState={{ busy: true }}
+      onPress={() => {}}
+    >
+      Save
+    </Button>
+  );
+
+  expect(screen.getByRole('button', { name: 'Save' })).toBeBusy();
+});
+
+it('does not mark the button as busy when it is not loading', async () => {
+  await render(<Button onPress={() => {}}>Save</Button>);
+
+  expect(screen.getByRole('button', { name: 'Save' })).not.toBeBusy();
+});
+
+it('prefers aria-label over accessibilityLabel', async () => {
+  await render(
+    <Button aria-label="Aria label" accessibilityLabel="Legacy label">
+      Save
+    </Button>
+  );
+
+  expect(screen.getByRole('button', { name: 'Aria label' })).toBeOnTheScreen();
+  expect(
+    screen.queryByRole('button', { name: 'Legacy label' })
+  ).not.toBeOnTheScreen();
+});
+
+it('does not expose the loading indicator as a separate element', async () => {
+  await render(
+    <Button loading onPress={() => {}}>
+      Save
+    </Button>
+  );
+
+  expect(screen.queryByRole('progressbar')).not.toBeOnTheScreen();
+});
+
 it('should execute onPressIn', async () => {
   const onPressInMock = jest.fn();
   const onPress = jest.fn();

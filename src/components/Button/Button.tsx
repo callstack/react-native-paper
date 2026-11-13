@@ -259,7 +259,9 @@ const Button = ({
   children,
   'aria-label': ariaLabel,
   'aria-expanded': ariaExpanded,
+  accessibilityLabel,
   accessibilityHint,
+  accessibilityState,
   role = 'button',
   hitSlop,
   onPress,
@@ -518,8 +520,11 @@ const Button = ({
           onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
           delayLongPress={delayLongPress}
           aria-label={ariaLabel}
-          aria-expanded={ariaExpanded}
+          aria-expanded={ariaExpanded ?? accessibilityState?.expanded}
+          aria-busy={loading || accessibilityState?.busy || undefined}
+          accessibilityLabel={accessibilityLabel}
           accessibilityHint={accessibilityHint}
+          accessibilityState={accessibilityState}
           role={role}
           aria-disabled={disabled}
           {...toggleStateProps}
@@ -545,7 +550,11 @@ const Button = ({
               </View>
             ) : null}
             {loading ? (
-              <ActivityIndicator size={iconSize} color={labelColor} />
+              <ActivityIndicator
+                size={iconSize}
+                color={labelColor}
+                aria-hidden
+              />
             ) : null}
             <Text
               variant={sizeStyle.labelVariant}
