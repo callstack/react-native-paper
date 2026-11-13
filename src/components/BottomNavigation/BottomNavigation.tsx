@@ -195,11 +195,11 @@ export type Props<Route extends BaseRoute> = {
   /**
    * Custom color for icon and label in the active tab.
    */
-  activeColor?: string;
+  activeColor?: ColorValue;
   /**
    * Custom color for icon and label in the inactive tab.
    */
-  inactiveColor?: string;
+  inactiveColor?: ColorValue;
   /**
    * Whether animation is enabled for scenes transitions in `shifting` mode.
    * By default, the scenes cross-fade during tab change when `shifting` is enabled.

@@ -161,11 +161,11 @@ export type Props<Route extends BaseRoute> = {
   /**
    * Custom color for icon and label in the active tab.
    */
-  activeColor?: string;
+  activeColor?: ColorValue;
   /**
    * Custom color for icon and label in the inactive tab.
    */
-  inactiveColor?: string;
+  inactiveColor?: ColorValue;
   /**
    * The scene animation Easing.
    */

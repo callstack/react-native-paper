@@ -2,6 +2,7 @@ import * as React from 'react';
 // eslint-disable-next-line no-restricted-imports -- TODO: migrate ProgressBar to Reanimated.
 import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
+  ColorValue,
   LayoutChangeEvent,
   StyleProp,
   ViewProps,
@@ -26,7 +27,7 @@ export type Props = ViewProps & {
   /**
    * Color of the progress bar. The background color will be calculated based on this but you can change it by passing `backgroundColor` to `style` prop.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * If the progress bar will show indeterminate progress.
    */

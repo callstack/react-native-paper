@@ -1,6 +1,7 @@
 import * as React from 'react';
 // eslint-disable-next-line no-restricted-imports -- TODO: migrate RadioButtonAndroid to Reanimated.
 import { Animated, StyleSheet, View } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 import { RadioButtonContext } from './RadioButtonGroup';
 import type { RadioButtonContextType } from './RadioButtonGroup';
@@ -33,11 +34,11 @@ export type Props = Omit<
   /**
    * Custom color for unchecked radio.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * Custom color for radio.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * @optional
    */

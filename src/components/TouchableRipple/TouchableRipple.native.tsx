@@ -30,7 +30,7 @@ export type Props = PressableProps & {
   onPressIn?: (e: GestureResponderEvent) => void;
   onPressOut?: (e: GestureResponderEvent) => void;
   rippleColor?: ColorValue;
-  underlayColor?: string;
+  underlayColor?: ColorValue;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
   theme?: ThemeProp;
 };

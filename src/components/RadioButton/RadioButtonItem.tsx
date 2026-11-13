@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import type {
+  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -53,11 +54,11 @@ export type Props = {
   /**
    * Custom color for unchecked radio.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * Custom color for radio.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Status of radio button.
    */

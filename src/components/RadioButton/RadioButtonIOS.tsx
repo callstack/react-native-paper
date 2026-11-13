@@ -1,6 +1,6 @@
 import type * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { GestureResponderEvent } from 'react-native';
+import type { ColorValue, GestureResponderEvent } from 'react-native';
 
 import { RadioButtonContext } from './RadioButtonGroup';
 import type { RadioButtonContextType } from './RadioButtonGroup';
@@ -35,7 +35,7 @@ export type Props = Omit<
   /**
    * Custom color for radio.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * @optional
    */
