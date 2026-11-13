@@ -33,6 +33,7 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -114,6 +115,23 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
           star
         </Text>
       </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>
@@ -152,6 +170,7 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -233,6 +252,23 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
           star
         </Text>
       </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>
@@ -271,6 +307,7 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -352,6 +389,23 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
           star-outline
         </Text>
       </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>
@@ -390,6 +444,7 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -512,6 +567,23 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
       >
         starred
       </Text>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>
@@ -550,6 +622,7 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -631,6 +704,23 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
           star-outline
         </Text>
       </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>

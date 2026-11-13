@@ -70,6 +70,9 @@ const DataTableRow = ({
 
   return (
     <TouchableRipple
+      // Rows stack edge to edge, so an outward ring would run into the rows
+      // above and below. MD3 has no data table; this follows its lists.
+      focusRing="inward"
       {...rest}
       onPress={onPress}
       style={[styles.container, { borderBottomColor }, style]}

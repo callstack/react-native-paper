@@ -17,6 +17,8 @@ import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { FocusRingPlacement } from '../../utils/useFocusRing';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 
 export type Props = PressableProps & {
   /**
@@ -41,6 +43,18 @@ export type Props = PressableProps & {
    * Whether to prevent interaction with the touchable.
    */
   disabled?: boolean;
+  /**
+   * Where to draw the MD3 keyboard focus indicator.
+   *
+   * - `outward` - just outside the bounds. The MD3 default.
+   * - `inward` - just inside, for controls a clipping ancestor would trim or
+   *   that sit flush against a neighbour.
+   * - `none` - no indicator. Only for a control that draws its own.
+   *
+   * Has no effect on iOS today - see `useFocusRing`'s doc comment for why
+   * (`enableImperativeFocus`, off by default).
+   */
+  focusRing?: FocusRingPlacement;
   /**
    * Function to execute on press. If not set, will cause the touchable to be disabled.
    */
@@ -119,6 +133,7 @@ const TouchableRipple = ({
   children,
   theme: themeOverrides,
   hitSlop,
+  focusRing = 'outward',
   ref,
   ...rest
 }: Props) => {
@@ -281,6 +296,20 @@ const TouchableRipple = ({
 
   const disabled = disabledProp || !hasPassedTouchHandler;
 
+  // No JS focus tracking here: the ring is real CSS, driven by the browser's
+  // own `:focus-visible`, keyed off the `data-focus-ring` attribute spread
+  // below. `onFocus`/`onBlur` reach the caller unmodified via `rest`, nothing
+  // to intercept.
+  //
+  // Keyed off `disabledProp`, not `disabled`: the latter also folds in
+  // "no press handler passed", which is a non-interactivity signal, not a
+  // disabled one - the ring should only react to real disablement.
+  const { ring } = useFocusRing(
+    disabledProp,
+    theme.colors.secondary,
+    focusRing
+  );
+
   return (
     <Pressable
       {...rest}
@@ -288,13 +317,16 @@ const TouchableRipple = ({
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
+      {...mergeDataSetProps(rest, ring.dataSetProps)}
       style={(state) => [
         styles.touchable,
-        // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
-        // state.focused && { backgroundColor: ___ },
+        // RNW's own `state.focused` fires for mouse clicks too, which is
+        // exactly the distinction `:focus-visible` exists to make.
+        // https://github.com/necolas/react-native-web/issues/1849
         state.hovered && { backgroundColor: hoverColor },
         disabled && styles.disabled,
         typeof style === 'function' ? style(state) : style,
+        ...ring.style,
       ]}
     >
       {(state) => {

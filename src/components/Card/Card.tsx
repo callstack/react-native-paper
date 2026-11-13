@@ -19,6 +19,7 @@ import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
 
@@ -165,7 +166,10 @@ const Card = ({
   ...rest
 }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
   const theme = useInternalTheme(themeOverrides);
-
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled,
+    theme.colors.secondary
+  );
   const isMode = React.useCallback(
     (modeToCompare: Mode) => {
       return cardMode === modeToCompare;
@@ -267,6 +271,13 @@ const Card = ({
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
           testID={testID}
+          // Like Switch: a ripple drawable owns the focused state, so Android does
+          // not add its grey default focus highlight on top of the ring.
+          android_ripple={{ color: 'transparent' }}
+          onFocus={focusTarget.onFocus}
+          onBlur={focusTarget.onBlur}
+          {...focusRing.dataSetProps}
+          style={[{ borderRadius }, ...focusRing.style]}
         >
           {content}
         </Pressable>

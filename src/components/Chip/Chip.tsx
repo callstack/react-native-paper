@@ -3,14 +3,11 @@ import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  TargetedEvent,
   TextProps,
   TextStyle,
   ViewProps,
-  ViewStyle,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
@@ -24,7 +21,7 @@ import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -176,6 +173,16 @@ const CLOSE_AFFORDANCE_WIDTH = 34;
 const CLOSE_AFFORDANCE_MIN_WIDTH = 26;
 
 /**
+ * The close button's focus ring is a circle around the glyph, not around the
+ * whole column, matching Material Web's trailing action: a 24dp circle (4/3
+ * of the 18dp icon) with the 3dp ring right outside it and no outer offset
+ * (`inset: unset`). The shared ring adds the 2dp offset, so the view is that
+ * much smaller. The ring ends 30dp across, 2dp clear of the label.
+ */
+const CLOSE_FOCUS_RING_SIZE =
+  24 - 2 * tokens.md.sys.state.focusIndicator.outerOffset;
+
+/**
  * The label makes a default chip 32dp tall, so the slop to reach the 48dp
  * minimum is a constant rather than something to measure. Width grows with the
  * label and the whole pill is already the target, so only the vertical axis
@@ -187,13 +194,6 @@ const CHIP_BODY_HIT_SLOP = getMinInteractiveSizeHitSlop({
 });
 // The close column spans the chip's height, so it gets the same vertical slop.
 const CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET = CHIP_BODY_HIT_SLOP?.top ?? 0;
-
-const CLOSE_ICON_SIZE = 18;
-const CLOSE_FOCUS_THICKNESS = tokens.md.sys.state.focusIndicator.thickness;
-
-// Web-only style; `outline` is outside ViewStyle.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 /**
  * Chips are compact elements that can represent inputs, attributes, or actions.
@@ -251,9 +251,21 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  // The close affordance is a plain `Pressable`, not a `TouchableRipple`
+  // (see below), so it calls `useFocusRing` directly instead of going
+  // through `TouchableRipple`'s `focusRing` prop like the body does. The
+  // `Pressable` is the whole close column, but the ring follows the glyph's
+  // round shape, so it goes on a circle inside it (`'descendant'`). The
+  // circle is a childless overlay on the glyph: Android drew the ring square
+  // when it sat on the view holding the icon, ignoring its border radius.
+  const { target: closeFocusTarget, ring: closeFocusRing } = useFocusRing(
+    disabled,
+    theme.colors.secondary,
+    'outward',
+    'descendant'
+  );
 
   const [pressed, setPressed] = React.useState(false);
-  const [closeFocused, setCloseFocused] = React.useState(false);
   const elevation = elevated ? (pressed ? 2 : 1) : 0;
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -273,18 +285,6 @@ const Chip = ({
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
     onPressOut?.(e);
     setPressed(false);
-  });
-
-  const handleCloseFocus = useLatestCallback(
-    (e: NativeSyntheticEvent<TargetedEvent>) => {
-      if (Platform.OS === 'web' && isKeyboardFocusEvent(e)) {
-        setCloseFocused(true);
-      }
-    }
-  );
-
-  const handleCloseBlur = useLatestCallback(() => {
-    setCloseFocused(false);
   });
 
   const elevationTransitionDuration =
@@ -449,15 +449,18 @@ const Chip = ({
             role="button"
             aria-label={closeIconAccessibilityLabel}
             testID={closeIconTestID}
-            onFocus={handleCloseFocus}
-            onBlur={handleCloseBlur}
-            // The browser outline would wrap the whole column and cover the
-            // label, so a ring is drawn around the glyph instead.
+            hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
+            // Like Switch: a ripple drawable owns the focused state, so Android does
+            // not add its grey default focus highlight on top of the ring.
+            android_ripple={{ color: 'transparent' }}
+            onFocus={closeFocusTarget.onFocus}
+            onBlur={closeFocusTarget.onBlur}
+            {...closeFocusTarget.dataSetProps}
             style={[
               styles.closeButton,
-              Platform.OS === 'web' ? webNoOutline : undefined,
+              { borderRadius },
+              ...closeFocusTarget.style,
             ]}
-            hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
           >
             {/* react-native-web removed `hitSlop` in 0.13.0,
                 so web needs a real element the browser can
@@ -465,16 +468,14 @@ const Chip = ({
             {Platform.OS === 'web' && !disabled && (
               <View aria-hidden style={styles.closeButtonWebTouchTarget} />
             )}
-            <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
-              {closeFocused && !disabled ? (
-                <View
-                  pointerEvents="none"
-                  style={[
-                    styles.closeFocusRing,
-                    { borderColor: theme.colors.secondary },
-                  ]}
-                />
-              ) : null}
+            <View
+              style={[
+                styles.icon,
+                styles.closeIcon,
+                styles.md3CloseIcon,
+                styles.closeFocusRing,
+              ]}
+            >
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
@@ -485,6 +486,15 @@ const Chip = ({
                   direction="ltr"
                 />
               )}
+              <View
+                pointerEvents="none"
+                style={[
+                  StyleSheet.absoluteFill,
+                  styles.closeFocusRingShape,
+                  ...closeFocusRing.style,
+                ]}
+                {...closeFocusRing.dataSetProps}
+              />
             </View>
           </Pressable>
         </View>
@@ -562,21 +572,21 @@ const styles = StyleSheet.create({
     // wins over maxWidth.
     minWidth: CLOSE_AFFORDANCE_MIN_WIDTH,
     maxWidth: '50%',
-    height: '100%',
+    top: 0,
+    bottom: 0,
   },
   closeButton: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
     justifyContent: 'center',
   },
   closeFocusRing: {
-    position: 'absolute',
-    top: -CLOSE_FOCUS_THICKNESS,
-    left: -CLOSE_FOCUS_THICKNESS,
-    width: CLOSE_ICON_SIZE + 2 * CLOSE_FOCUS_THICKNESS,
-    height: CLOSE_ICON_SIZE + 2 * CLOSE_FOCUS_THICKNESS,
-    borderRadius: CLOSE_ICON_SIZE / 2 + CLOSE_FOCUS_THICKNESS,
-    borderWidth: CLOSE_FOCUS_THICKNESS,
+    width: CLOSE_FOCUS_RING_SIZE,
+    height: CLOSE_FOCUS_RING_SIZE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  closeFocusRingShape: {
+    borderRadius: CLOSE_FOCUS_RING_SIZE / 2,
   },
   closeButtonWebTouchTarget: {
     position: 'absolute',

@@ -182,6 +182,9 @@ const MenuItem = ({
 
   return (
     <TouchableRipple
+      // Items fill the menu's scroll view edge to edge with no gap, which
+      // clips an outward ring and runs it into the neighbouring items.
+      focusRing="inward"
       style={[
         styles.container,
         { paddingHorizontal: containerPadding },
