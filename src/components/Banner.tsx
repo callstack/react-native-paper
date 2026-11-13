@@ -365,9 +365,9 @@ const Banner = ({
       return;
     }
 
-    // rnw's findNodeHandle throws, and the ref is already the dom node there
+    // rnw's findNodeHandle throws; on web the host instance takes focus itself
     if (Platform.OS === 'web') {
-      (node as unknown as { focus?: () => void }).focus?.();
+      node.focus();
       return;
     }
 
