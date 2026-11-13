@@ -255,7 +255,9 @@ const Chip = ({
   // (see below), so it calls `useFocusRing` directly instead of going
   // through `TouchableRipple`'s `focusRing` prop like the body does. The
   // `Pressable` is the whole close column, but the ring follows the glyph's
-  // round shape, so it goes on a circle inside it (`'descendant'`).
+  // round shape, so it goes on a circle inside it (`'descendant'`). The
+  // circle is a childless overlay on the glyph: Android drew the ring square
+  // when it sat on the view holding the icon, ignoring its border radius.
   const { target: closeFocusTarget, ring: closeFocusRing } = useFocusRing(
     disabled,
     theme.colors.secondary,
@@ -469,9 +471,7 @@ const Chip = ({
                 styles.closeIcon,
                 styles.md3CloseIcon,
                 styles.closeFocusRing,
-                ...closeFocusRing.style,
               ]}
-              {...closeFocusRing.dataSetProps}
             >
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
@@ -483,6 +483,15 @@ const Chip = ({
                   direction="ltr"
                 />
               )}
+              <View
+                pointerEvents="none"
+                style={[
+                  StyleSheet.absoluteFill,
+                  styles.closeFocusRingShape,
+                  ...closeFocusRing.style,
+                ]}
+                {...closeFocusRing.dataSetProps}
+              />
             </View>
           </Pressable>
         </View>
@@ -570,9 +579,11 @@ const styles = StyleSheet.create({
   closeFocusRing: {
     width: CLOSE_FOCUS_RING_SIZE,
     height: CLOSE_FOCUS_RING_SIZE,
-    borderRadius: CLOSE_FOCUS_RING_SIZE / 2,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  closeFocusRingShape: {
+    borderRadius: CLOSE_FOCUS_RING_SIZE / 2,
   },
   closeButtonWebTouchTarget: {
     position: 'absolute',

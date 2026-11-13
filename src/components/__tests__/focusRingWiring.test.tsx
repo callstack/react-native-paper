@@ -135,14 +135,18 @@ describe('focus ring wiring', () => {
     const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
     expect(ringed).toHaveLength(1);
     // Material Web: a 24dp circle with the ring right outside it. The shared
-    // ring adds the outer offset, so the view is that much smaller.
+    // ring adds the outer offset, so the circle is that much smaller. It is
+    // an overlay filling the glyph's box, which sets the size.
     const size = 24 - 2 * outerOffset;
     expect(style(ringed[0])).toMatchObject({
       outlineOffset: OUTWARD,
-      width: size,
-      height: size,
+      position: 'absolute',
       borderRadius: size / 2,
     });
+    const box = walk(root, (n) =>
+      (n.children ?? []).some((c) => c === ringed[0])
+    )[0];
+    expect(style(box)).toMatchObject({ width: size, height: size });
   });
 
   it('Checkbox.Item rings inward, clear of the rows above and below', async () => {
@@ -439,7 +443,7 @@ describe('focus ring wiring (web)', () => {
       (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
     ).toBe('outward');
     expect(style(ringed[0])).toMatchObject({
-      width: 24 - 2 * outerOffset,
+      position: 'absolute',
       borderRadius: 12 - outerOffset,
     });
   });

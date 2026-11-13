@@ -339,7 +339,6 @@ exports[`renders chip with close button 1`] = `
             },
             {
               "alignItems": "center",
-              "borderRadius": 10,
               "height": 20,
               "justifyContent": "center",
               "width": 20,
@@ -376,6 +375,23 @@ exports[`renders chip with close button 1`] = `
         >
           close
         </Text>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "borderRadius": 10,
+              },
+            ]
+          }
+        />
       </View>
     </View>
   </View>
@@ -721,7 +737,6 @@ exports[`renders chip with custom close button 1`] = `
             },
             {
               "alignItems": "center",
-              "borderRadius": 10,
               "height": 20,
               "justifyContent": "center",
               "width": 20,
@@ -758,6 +773,23 @@ exports[`renders chip with custom close button 1`] = `
         >
           arrow-down
         </Text>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "borderRadius": 10,
+              },
+            ]
+          }
+        />
       </View>
     </View>
   </View>
