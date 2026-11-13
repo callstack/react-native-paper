@@ -31,6 +31,7 @@ import FABMenu from '../FAB/Menu';
 import ListAccordion from '../List/ListAccordion';
 import ListItem from '../List/ListItem';
 import MenuItem from '../Menu/MenuItem';
+import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import Switch from '../Switch/Switch';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
@@ -246,6 +247,25 @@ describe('focus ring wiring', () => {
 
     expect(ringOffset()).toBe(OUTWARD);
     expect(onFocus).toHaveBeenCalledTimes(1);
+  });
+
+  // MD3's segmented button figure puts the ring on the segment's edge;
+  // segments share borders, so outward would cover the neighbour.
+  it('SegmentedButtons rings each segment inward', async () => {
+    await render(
+      <SegmentedButtons
+        value="a"
+        onValueChange={() => {}}
+        buttons={[
+          { value: 'a', label: 'A' },
+          { value: 'b', label: 'B' },
+        ]}
+      />
+    );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(INWARD);
   });
 
   it('Card rings outward', async () => {
