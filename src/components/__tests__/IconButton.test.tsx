@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -42,6 +42,14 @@ it('renders icon button with size', async () => {
 
 it('renders disabled icon button', async () => {
   const tree = (await render(<IconButton icon="camera" disabled />)).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('lets a caller-supplied hitSlop win even while disabled', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" disabled hitSlop={2} />)
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -311,5 +319,38 @@ describe('getIconButtonColor - border color', () => {
     ).toMatchObject({
       borderColor: LightTheme.colors.outlineVariant,
     });
+  });
+});
+
+describe('hitSlop', () => {
+  it('keeps the 48dp default when a forwarded hitSlop is undefined', async () => {
+    await render(
+      <IconButton
+        icon="camera"
+        onPress={() => {}}
+        hitSlop={undefined}
+        testID="icon-button"
+      />
+    );
+
+    expect(screen.getByTestId('icon-button')).toHaveProp('hitSlop', {
+      top: 4,
+      bottom: 4,
+      left: 4,
+      right: 4,
+    });
+  });
+
+  it('takes `0` as an opt out', async () => {
+    await render(
+      <IconButton
+        icon="camera"
+        onPress={() => {}}
+        hitSlop={0}
+        testID="icon-button"
+      />
+    );
+
+    expect(screen.getByTestId('icon-button')).toHaveProp('hitSlop', 0);
   });
 });

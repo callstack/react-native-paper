@@ -5,8 +5,16 @@ import { ACCESSORY_SIZE } from './constants';
 import { styles } from './styles';
 import { getIconColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import IconButton from '../IconButton/IconButton';
 import type { Props as IconButtonProps } from '../IconButton/IconButton';
+
+// TextInput shrinks the button to ACCESSORY_SIZE through `style`, which
+// IconButton can't see when computing its own slop.
+const ACCESSORY_HIT_SLOP = getMinInteractiveSizeHitSlop({
+  width: ACCESSORY_SIZE,
+  height: ACCESSORY_SIZE,
+});
 
 export type TextInputAccessoryProps = {
   style: StyleProp<ViewStyle>;
@@ -64,6 +72,7 @@ const TextInputIcon = ({
   disabled,
   theme: themeOverride,
   onPress,
+  hitSlop,
   ...rest
 }: TextInputIconProps) => {
   const theme = useInternalTheme(themeOverride);
@@ -83,6 +92,7 @@ const TextInputIcon = ({
     <View style={styles.iconWrapper}>
       <IconButton
         {...rest}
+        hitSlop={hitSlop !== undefined ? hitSlop : ACCESSORY_HIT_SLOP}
         icon={icon}
         iconColor={color}
         size={iconSize}

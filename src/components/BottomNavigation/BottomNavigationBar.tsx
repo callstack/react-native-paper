@@ -788,6 +788,9 @@ const styles = StyleSheet.create({
     // Top padding is 6 and bottom padding is 10
     // The extra 4dp bottom padding is offset by label's height
     paddingVertical: 6,
+    // `borderless` doesn't clip on web, so a label wider than its tab would
+    // spill into the neighbouring tabs.
+    ...(Platform.OS === 'web' ? { overflow: 'hidden' } : null),
   },
   v3Item: {
     paddingVertical: 0,

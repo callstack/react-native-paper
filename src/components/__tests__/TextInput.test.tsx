@@ -1369,3 +1369,29 @@ it('hides prefix/suffix when blurring after clear() was called while focused', a
   expect(screen.queryByText('$')).not.toBeOnTheScreen();
   expect(screen.queryByText('/100')).not.toBeOnTheScreen();
 });
+
+it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          onPress={() => {}}
+          hitSlop={undefined}
+          testID="clear-icon"
+        />
+      )}
+    />
+  );
+
+  expect(screen.getByTestId('clear-icon')).toHaveProp('hitSlop', {
+    top: 12,
+    bottom: 12,
+    left: 12,
+    right: 12,
+  });
+});
