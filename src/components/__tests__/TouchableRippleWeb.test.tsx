@@ -5,8 +5,8 @@ import { describe, expect, it } from '@jest/globals';
 import { render, screen } from '../../test-utils';
 // The bare specifier resolves to .native under the jest preset, so the web file
 // needs the extension or it never runs. There is still no DOM here, so this only
-// pins the props and tree it computes. Hit testing and clipping have to be
-// checked in a browser.
+// pins the tree and accessibility output it computes. Hit testing and clipping
+// have to be checked in a browser.
 import TouchableRipple from '../TouchableRipple/TouchableRipple.tsx';
 
 describe('TouchableRipple (web)', () => {
@@ -63,35 +63,35 @@ describe('TouchableRipple (web)', () => {
 describe('TouchableRipple (web file)', () => {
   it('drops a button role but keeps the name when no touch handler is passed', async () => {
     await render(
-      <TouchableRipple testID="plain" role="button" aria-label="Add item">
+      <TouchableRipple role="button" aria-label="Add item">
         <Text>Not a button</Text>
       </TouchableRipple>
     );
 
-    const plain = screen.getByTestId('plain');
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
 
-    expect(plain).toHaveProp('role', 'none');
-    expect(plain).toHaveProp('accessible', true);
-    expect(plain).toHaveProp('aria-label', 'Add item');
+    // hiding the element instead would silence the name, which for an icon
+    // only control is all it has to announce
+    expect(screen.getByLabelText('Add item')).toHaveAccessibleName('Add item');
   });
 
   it('keeps a state bearing role when no touch handler is passed', async () => {
     await render(
-      <TouchableRipple testID="readonly" role="checkbox" aria-checked>
+      <TouchableRipple role="checkbox" aria-checked>
         <Text>Read only</Text>
       </TouchableRipple>
     );
 
-    expect(screen.getByTestId('readonly')).toHaveProp('role', 'checkbox');
+    expect(screen.getByRole('checkbox', { checked: true })).toBeOnTheScreen();
   });
 
   it('keeps the button role on a disabled control', async () => {
     await render(
-      <TouchableRipple testID="off" role="button" disabled onPress={() => {}}>
+      <TouchableRipple role="button" disabled>
         <Text>Disabled</Text>
       </TouchableRipple>
     );
 
-    expect(screen.getByTestId('off')).toHaveProp('role', 'button');
+    expect(screen.getByRole('button')).toBeDisabled();
   });
 });

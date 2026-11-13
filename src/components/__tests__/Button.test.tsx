@@ -254,13 +254,21 @@ it('paints the container color only on the container', async () => {
 });
 
 it('exposes the accessibility label', async () => {
-  await render(<Button aria-label="label">Button</Button>);
+  await render(
+    <Button aria-label="label" onPress={() => {}}>
+      Button
+    </Button>
+  );
 
   expect(screen.getByRole('button', { name: 'label' })).toBeOnTheScreen();
 });
 
 it('exposes the accessibility hint', async () => {
-  await render(<Button accessibilityHint="hint">Button</Button>);
+  await render(
+    <Button accessibilityHint="hint" onPress={() => {}}>
+      Button
+    </Button>
+  );
 
   expect(screen.getByRole('button')).toHaveProp('accessibilityHint', 'hint');
 });

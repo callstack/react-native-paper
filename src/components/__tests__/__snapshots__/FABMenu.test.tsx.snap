@@ -104,7 +104,7 @@ exports[`renders FAB.Menu closed 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -280,7 +280,7 @@ exports[`renders FAB.Menu closed 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -583,36 +583,11 @@ exports[`renders FAB.Menu closed 1`] = `
             }
           />
           <View
-            accessibilityState={
-              {
-                "busy": undefined,
-                "checked": undefined,
-                "disabled": true,
-                "expanded": undefined,
-                "selected": undefined,
-              }
-            }
-            accessibilityValue={
-              {
-                "max": undefined,
-                "min": undefined,
-                "now": undefined,
-                "text": undefined,
-              }
-            }
             accessible={true}
-            collapsable={false}
-            focusable={true}
+            focusable={false}
             onBlur={[Function]}
-            onClick={[Function]}
             onFocus={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            role="button"
+            role="none"
             style={
               [
                 {
@@ -881,7 +856,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -1057,7 +1032,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -1360,36 +1335,11 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
             }
           />
           <View
-            accessibilityState={
-              {
-                "busy": undefined,
-                "checked": undefined,
-                "disabled": true,
-                "expanded": undefined,
-                "selected": undefined,
-              }
-            }
-            accessibilityValue={
-              {
-                "max": undefined,
-                "min": undefined,
-                "now": undefined,
-                "text": undefined,
-              }
-            }
             accessible={true}
-            collapsable={false}
-            focusable={true}
+            focusable={false}
             onBlur={[Function]}
-            onClick={[Function]}
             onFocus={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            role="button"
+            role="none"
             style={
               [
                 {
@@ -1658,7 +1608,7 @@ exports[`renders FAB.Menu open 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -1834,7 +1784,7 @@ exports[`renders FAB.Menu open 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -2141,7 +2091,7 @@ exports[`renders FAB.Menu open 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": false,
+                "disabled": undefined,
                 "expanded": undefined,
                 "selected": undefined,
               }
@@ -2435,7 +2385,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -2611,7 +2561,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -2787,7 +2737,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -2963,7 +2913,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -3139,7 +3089,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -3315,7 +3265,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -3622,7 +3572,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": false,
+                "disabled": undefined,
                 "expanded": undefined,
                 "selected": undefined,
               }
@@ -3917,7 +3867,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -4093,7 +4043,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -4400,7 +4350,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": false,
+                "disabled": undefined,
                 "expanded": undefined,
                 "selected": undefined,
               }
@@ -4694,7 +4644,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -4900,7 +4850,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -5237,7 +5187,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": false,
+                "disabled": undefined,
                 "expanded": undefined,
                 "selected": undefined,
               }
@@ -5531,7 +5481,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -5707,7 +5657,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": false,
+                  "disabled": undefined,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -6014,7 +5964,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": false,
+                "disabled": undefined,
                 "expanded": undefined,
                 "selected": undefined,
               }

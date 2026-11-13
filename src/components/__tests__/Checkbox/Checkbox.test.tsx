@@ -136,10 +136,11 @@ describe('Checkbox press', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('is reported as disabled rather than an enabled no-op without a press handler', async () => {
+  it('is an enabled read only checkbox without a press handler', async () => {
     await render(<Checkbox status="checked" aria-label="Notify me" />);
 
-    expect(screen.getByRole('checkbox')).toBeDisabled();
+    // it keeps saying `checkbox`, and `checked`, to assistive tech
+    expect(screen.getByRole('checkbox', { checked: true })).not.toBeDisabled();
   });
 
   // `TouchableRipple.supported` is computed once at import, so the Android

@@ -165,6 +165,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -174,7 +175,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -210,10 +210,10 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
           focusable={false}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -228,6 +228,12 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],
@@ -335,6 +341,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -344,7 +351,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -400,10 +406,10 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -427,6 +433,12 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],

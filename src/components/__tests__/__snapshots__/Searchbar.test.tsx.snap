@@ -112,28 +112,10 @@ exports[`activity indicator snapshot test 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
+      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -142,16 +124,7 @@ exports[`activity indicator snapshot test 1`] = `
           "top": 4,
         }
       }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -556,28 +529,10 @@ exports[`renders searchbar in "view" mode 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
+      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -586,16 +541,7 @@ exports[`renders searchbar in "view" mode 1`] = `
           "top": 4,
         }
       }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -732,7 +678,7 @@ exports[`renders searchbar in "view" mode 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": false,
+            "disabled": undefined,
             "expanded": undefined,
             "selected": undefined,
           }
@@ -969,28 +915,10 @@ exports[`renders with placeholder 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
+      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -999,16 +927,7 @@ exports[`renders with placeholder 1`] = `
           "top": 4,
         }
       }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1145,7 +1064,7 @@ exports[`renders with placeholder 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": false,
+            "disabled": undefined,
             "expanded": undefined,
             "selected": undefined,
           }
@@ -1357,28 +1276,10 @@ exports[`renders with text 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
+      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -1387,16 +1288,7 @@ exports[`renders with text 1`] = `
           "top": 4,
         }
       }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1529,7 +1421,7 @@ exports[`renders with text 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": false,
+            "disabled": undefined,
             "expanded": undefined,
             "selected": undefined,
           }

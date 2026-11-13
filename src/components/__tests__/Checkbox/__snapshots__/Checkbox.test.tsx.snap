@@ -15,38 +15,15 @@ exports[`renders Checkbox with custom testID 1`] = `
   }
 >
   <View
-    accessibilityLabel="Notify me"
-    accessibilityLiveRegion="polite"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": true,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
+    aria-checked={true}
+    aria-disabled={false}
+    aria-label="Notify me"
+    aria-live="polite"
     centered={true}
-    collapsable={false}
-    focusable={true}
+    focusable={false}
     onBlur={[Function]}
-    onClick={[Function]}
     onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     role="checkbox"
     style={
       [
@@ -232,38 +209,15 @@ exports[`renders checked Checkbox with color 1`] = `
   }
 >
   <View
-    accessibilityLabel="Notify me"
-    accessibilityLiveRegion="polite"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": true,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
+    aria-checked={true}
+    aria-disabled={false}
+    aria-label="Notify me"
+    aria-live="polite"
     centered={true}
-    collapsable={false}
-    focusable={true}
+    focusable={false}
     onBlur={[Function]}
-    onClick={[Function]}
     onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     role="checkbox"
     style={
       [
@@ -917,38 +871,15 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   }
 >
   <View
-    accessibilityLabel="Notify me"
-    accessibilityLiveRegion="polite"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": "mixed",
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
+    aria-checked="mixed"
+    aria-disabled={false}
+    aria-label="Notify me"
+    aria-live="polite"
     centered={true}
-    collapsable={false}
-    focusable={true}
+    focusable={false}
     onBlur={[Function]}
-    onClick={[Function]}
     onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     role="checkbox"
     style={
       [
@@ -1120,38 +1051,15 @@ exports[`renders unchecked Checkbox with color 1`] = `
   }
 >
   <View
-    accessibilityLabel="Notify me"
-    accessibilityLiveRegion="polite"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": true,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
+    aria-checked={true}
+    aria-disabled={false}
+    aria-label="Notify me"
+    aria-live="polite"
     centered={true}
-    collapsable={false}
-    focusable={true}
+    focusable={false}
     onBlur={[Function]}
-    onClick={[Function]}
     onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     role="checkbox"
     style={
       [

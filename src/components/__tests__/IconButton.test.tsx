@@ -117,12 +117,12 @@ describe('getIconButtonColor - icon color', () => {
     // `onSurfaceDisabled`
     expect(
       getIconButtonColor({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
         customIconColor: 'purple',
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSurface,
+      iconColor: LightTheme.colors.onSurface,
       iconOpacity: stateOpacity.disabled,
     });
   });

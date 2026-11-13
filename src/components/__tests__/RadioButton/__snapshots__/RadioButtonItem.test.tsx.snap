@@ -7,7 +7,7 @@ exports[`can render leading radio button control 1`] = `
     {
       "busy": undefined,
       "checked": false,
-      "disabled": false,
+      "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -61,7 +61,7 @@ exports[`can render leading radio button control 1`] = `
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -185,7 +185,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
     {
       "busy": undefined,
       "checked": false,
-      "disabled": false,
+      "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -275,7 +275,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -337,7 +337,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
     {
       "busy": undefined,
       "checked": false,
-      "disabled": false,
+      "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -427,7 +427,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -515,7 +515,7 @@ exports[`renders unchecked 1`] = `
     {
       "busy": undefined,
       "checked": false,
-      "disabled": false,
+      "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -605,7 +605,7 @@ exports[`renders unchecked 1`] = `
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }

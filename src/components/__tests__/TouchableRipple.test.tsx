@@ -1,4 +1,4 @@
-import { Platform, Text } from 'react-native';
+import { Platform, Pressable, Text } from 'react-native';
 import type { GestureResponderEvent, Role } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
@@ -44,39 +44,43 @@ describe('TouchableRipple', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('is not exposed as a control when no touch handler is passed', async () => {
+  it('lets a press reach the parent when no touch handler is passed', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Pressable onPress={onPress}>
+        <TouchableRipple>
+          <Text>Icon</Text>
+        </TouchableRipple>
+      </Pressable>
+    );
+
+    await userEvent.press(screen.getByText('Icon'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('is not reported as disabled when no touch handler is passed', async () => {
     await render(
       <TouchableRipple testID="plain">
         <Text>Not a button</Text>
       </TouchableRipple>
     );
 
-    const plain = screen.getByTestId('plain');
-
-    expect(plain).not.toBeDisabled();
-    // no Pressable underneath, so nothing claims the touch. A responder here
-    // would swallow taps meant for whatever wraps this, e.g. TextInput's
-    // press to focus.
-    expect(plain).not.toHaveProp('onStartShouldSetResponder');
-    expect(plain).toHaveProp('focusable', false);
+    expect(screen.getByTestId('plain')).not.toBeDisabled();
   });
 
   it('drops a button role when no touch handler is passed', async () => {
     await render(
-      <TouchableRipple testID="plain" role="button" aria-label="Add item">
+      <TouchableRipple role="button" aria-label="Add item">
         <Text>Not a button</Text>
       </TouchableRipple>
     );
 
-    const plain = screen.getByTestId('plain');
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
 
-    // react-native-web turns role button into a real <button>
-    expect(plain).toHaveProp('role', 'none');
-
-    // but hiding the element would silence the label, which for an icon only
-    // control is all it has to announce
-    expect(plain).toHaveProp('accessible', true);
-    expect(plain).toHaveProp('aria-label', 'Add item');
+    // hiding the element instead would silence the label, which for an icon
+    // only control is all it has to announce
+    expect(screen.getByLabelText('Add item')).toBeOnTheScreen();
   });
 
   // `imagebutton` is missing here because it is native only, absent from the
@@ -87,66 +91,61 @@ describe('TouchableRipple', () => {
     'drops the %s role too when no touch handler is passed',
     async (role) => {
       await render(
-        <TouchableRipple testID="plain" role={role}>
+        <TouchableRipple role={role}>
           <Text>Not a control</Text>
         </TouchableRipple>
       );
 
-      expect(screen.getByTestId('plain')).toHaveProp('role', 'none');
+      expect(screen.queryByRole(role)).not.toBeOnTheScreen();
     }
   );
 
   it('drops a native imagebutton accessibilityRole when no touch handler is passed', async () => {
     await render(
-      <TouchableRipple testID="plain" accessibilityRole="imagebutton">
+      <TouchableRipple accessibilityRole="imagebutton">
         <Text>Not a control</Text>
       </TouchableRipple>
     );
 
-    expect(screen.getByTestId('plain')).toHaveProp('role', 'none');
+    expect(screen.queryByRole('imagebutton')).not.toBeOnTheScreen();
   });
 
   it('resolves role ahead of accessibilityRole, as every platform does', async () => {
     await render(
-      <TouchableRipple
-        testID="plain"
-        accessibilityRole="button"
-        role="checkbox"
-      >
+      <TouchableRipple accessibilityRole="button" role="checkbox">
         <Text>Read only</Text>
       </TouchableRipple>
     );
 
-    expect(screen.getByTestId('plain')).toHaveProp('role', 'checkbox');
+    expect(screen.getByRole('checkbox')).toBeOnTheScreen();
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
   });
 
   it('keeps a non button role when no touch handler is passed', async () => {
     await render(
-      <TouchableRipple testID="readonly" role="checkbox" aria-checked>
+      <TouchableRipple role="checkbox" aria-checked>
         <Text>Read only</Text>
       </TouchableRipple>
     );
 
-    const readonly = screen.getByTestId('readonly');
-
-    expect(readonly).toHaveProp('role', 'checkbox');
-    expect(readonly).toHaveProp('accessible', true);
-    expect(readonly).toHaveProp('aria-checked', true);
+    // reachable by role, so the element was kept, not hidden
+    expect(screen.getByRole('checkbox', { checked: true })).toBeOnTheScreen();
   });
 
   it('keeps the button role on a disabled control', async () => {
     await render(
-      <TouchableRipple testID="off" role="button" disabled onPress={() => {}}>
+      <TouchableRipple role="button" disabled>
         <Text>Disabled</Text>
       </TouchableRipple>
     );
 
-    expect(screen.getByTestId('off')).toHaveProp('role', 'button');
+    expect(screen.getByRole('button')).toBeDisabled();
   });
 
   it('stays a disabled control when the disabled prop is passed', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
     await render(
-      <TouchableRipple testID="off" disabled onPress={() => {}}>
+      <TouchableRipple testID="off" disabled onPress={onPress}>
         <Text>Disabled</Text>
       </TouchableRipple>
     );
@@ -154,34 +153,34 @@ describe('TouchableRipple', () => {
     const off = screen.getByTestId('off');
 
     expect(off).toBeDisabled();
-    expect(off).toHaveProp('focusable', true);
-    expect(off).toHaveProp('onStartShouldSetResponder');
+
+    await userEvent.press(off);
+
+    expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('does not show press feedback when no touch handler is passed', async () => {
+  it('never reports a press when no touch handler is passed', async () => {
+    // `testOnly_pressed` is what the platform reports for a press held down.
+    // A handler-less ripple has nothing to press, so it keeps seeing idle.
     await render(
       <TouchableRipple testOnly_pressed>
-        <Text>Not a button</Text>
+        {({ pressed }) => <Text>{pressed ? 'pressed' : 'idle'}</Text>}
       </TouchableRipple>
     );
 
-    expect(
-      screen.queryByTestId('touchable-ripple-underlay')
-    ).not.toBeOnTheScreen();
+    expect(screen.getByText('idle')).toBeOnTheScreen();
   });
 
   it('does not show press feedback on a disabled control', async () => {
     // this one reaches the underlay branch, unlike the handler-less case above
     // which returns a plain View before that subtree is ever built
-    await render(
+    const { toJSON } = await render(
       <TouchableRipple testOnly_pressed disabled onPress={() => {}}>
         <Text>Disabled</Text>
       </TouchableRipple>
     );
 
-    expect(
-      screen.queryByTestId('touchable-ripple-underlay')
-    ).not.toBeOnTheScreen();
+    expect(toJSON()).toMatchSnapshot();
   });
 
   describe('on iOS', () => {
@@ -270,7 +269,7 @@ describe('TouchableRipple', () => {
 
     it('passes the pressed state to the children render function', async () => {
       await render(
-        <TouchableRipple testOnly_pressed>
+        <TouchableRipple testOnly_pressed onPress={() => {}}>
           {({ pressed }) => <Text>{pressed ? 'pressed' : 'idle'}</Text>}
         </TouchableRipple>
       );
@@ -283,6 +282,7 @@ describe('TouchableRipple', () => {
         <TouchableRipple
           testID="touchable-ripple"
           testOnly_pressed
+          onPress={() => {}}
           style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
         >
           <Text>Press me!</Text>

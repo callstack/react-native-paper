@@ -10,7 +10,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
       {
         "busy": undefined,
         "checked": true,
-        "disabled": false,
+        "disabled": undefined,
         "expanded": undefined,
         "selected": undefined,
       }
