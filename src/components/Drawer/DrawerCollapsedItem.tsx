@@ -18,6 +18,7 @@ import Animated, {
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
@@ -117,6 +118,17 @@ const DrawerCollapsedItem = ({
   const theme = useInternalTheme(themeOverrides);
   const { scale } = theme.animation;
 
+  // MD3 rings a navigation rail item as a whole (icon and label) with a
+  // rounded rectangle inside the rail, like Material Web's navigation tab
+  // (inward, small corner). The `Pressable` also spans the gap below the
+  // item, so the ring goes on the item inside it (`'descendant'`).
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled,
+    theme.colors.secondary,
+    'inward',
+    'descendant'
+  );
+
   const [numOfLines, setNumOfLines] = React.useState(1);
 
   const outlineScale = useSharedValue(active ? 1 : 0.5);
@@ -182,8 +194,19 @@ const DrawerCollapsedItem = ({
         aria-selected={active}
         aria-label={ariaLabel}
         testID={testID}
+        onFocus={focusTarget.onFocus}
+        onBlur={focusTarget.onBlur}
+        {...focusTarget.dataSetProps}
+        style={focusTarget.style}
       >
-        <View style={styles.wrapper}>
+        <View
+          style={[
+            styles.wrapper,
+            { borderRadius: theme.shapes.corner.small },
+            ...focusRing.style,
+          ]}
+          {...focusRing.dataSetProps}
+        >
           <Animated.View
             style={[
               styles.outline,

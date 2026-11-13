@@ -24,6 +24,7 @@ import CheckboxItem from '../Checkbox/CheckboxItem';
 import Chip from '../Chip/Chip';
 import DataTableRow from '../DataTable/DataTableRow';
 import DataTableTitle from '../DataTable/DataTableTitle';
+import DrawerCollapsedItem from '../Drawer/DrawerCollapsedItem';
 import FAB from '../FAB/FAB';
 import FABMenu from '../FAB/Menu';
 import ListAccordion from '../List/ListAccordion';
@@ -214,6 +215,26 @@ describe('focus ring wiring', () => {
     expect(ringOffset()).toBeUndefined();
   });
 
+  // MD3 rings a navigation rail item as a whole, inside the rail. The
+  // Pressable also spans the gap below the item, so the ring is on the item.
+  it('Drawer.CollapsedItem rings the item inward, not the Pressable', async () => {
+    await render(
+      <DrawerCollapsedItem
+        label="Inbox"
+        focusedIcon="inbox"
+        onPress={() => {}}
+      />
+    );
+
+    const pressable = screen.getByRole('button');
+    await act(async () => {
+      await fireEvent(pressable, 'focus');
+    });
+
+    expect(style(pressable).outlineStyle).toBeUndefined();
+    expect(ringOffset()).toBe(INWARD);
+  });
+
   it('Card rings outward', async () => {
     await render(
       <Card onPress={() => {}}>
@@ -294,6 +315,30 @@ describe('focus ring wiring (web)', () => {
     expect(
       (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
     ).toBe('outward');
+  });
+
+  it('Drawer.CollapsedItem marks its Pressable as the focus target and rings the item inside it', async () => {
+    await render(
+      <DrawerCollapsedItem
+        label="Inbox"
+        focusedIcon="inbox"
+        onPress={() => {}}
+      />
+    );
+
+    const pressable = screen.getByRole('button');
+    expect(pressable.props.dataSet).toEqual({ focusRingTarget: 'true' });
+
+    const ringed = walk(
+      pressable,
+      (n) =>
+        (n.props?.dataSet as Record<string, string> | undefined)
+          ?.focusRingDescendant !== undefined
+    );
+    expect(ringed).toHaveLength(1);
+    expect(
+      (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
+    ).toBe('inward');
   });
 
   it('Chip marks its close button as the focus target and rings the glyph circle inside it', async () => {

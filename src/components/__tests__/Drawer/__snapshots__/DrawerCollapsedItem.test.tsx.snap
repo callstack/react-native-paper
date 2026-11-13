@@ -33,15 +33,21 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
-        {
-          "alignItems": "center",
-          "marginBottom": 12,
-          "minHeight": 56,
-          "width": 80,
-        }
+        [
+          {
+            "alignItems": "center",
+            "marginBottom": 12,
+            "minHeight": 56,
+            "width": 80,
+          },
+          {
+            "borderRadius": 8,
+          },
+        ]
       }
     >
       <View
@@ -152,15 +158,21 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
-        {
-          "alignItems": "center",
-          "marginBottom": 12,
-          "minHeight": 56,
-          "width": 80,
-        }
+        [
+          {
+            "alignItems": "center",
+            "marginBottom": 12,
+            "minHeight": 56,
+            "width": 80,
+          },
+          {
+            "borderRadius": 8,
+          },
+        ]
       }
     >
       <View
@@ -271,15 +283,21 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
-        {
-          "alignItems": "center",
-          "marginBottom": 12,
-          "minHeight": 56,
-          "width": 80,
-        }
+        [
+          {
+            "alignItems": "center",
+            "marginBottom": 12,
+            "minHeight": 56,
+            "width": 80,
+          },
+          {
+            "borderRadius": 8,
+          },
+        ]
       }
     >
       <View
@@ -390,15 +408,21 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
-        {
-          "alignItems": "center",
-          "marginBottom": 12,
-          "minHeight": 56,
-          "width": 80,
-        }
+        [
+          {
+            "alignItems": "center",
+            "marginBottom": 12,
+            "minHeight": 56,
+            "width": 80,
+          },
+          {
+            "borderRadius": 8,
+          },
+        ]
       }
     >
       <View
@@ -550,15 +574,21 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
-        {
-          "alignItems": "center",
-          "marginBottom": 12,
-          "minHeight": 56,
-          "width": 80,
-        }
+        [
+          {
+            "alignItems": "center",
+            "marginBottom": 12,
+            "minHeight": 56,
+            "width": 80,
+          },
+          {
+            "borderRadius": 8,
+          },
+        ]
       }
     >
       <View
