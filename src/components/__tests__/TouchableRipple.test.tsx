@@ -68,6 +68,35 @@ describe('TouchableRipple', () => {
     });
   });
 
+  describe('hitSlop', () => {
+    it('does not add its own hitSlop when none is supplied', async () => {
+      const tree = (
+        await render(
+          <TouchableRipple onPress={() => {}}>
+            <Text>Button</Text>
+          </TouchableRipple>
+        )
+      ).toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('passes a caller-supplied hitSlop straight through', async () => {
+      const tree = (
+        await render(
+          <TouchableRipple
+            onPress={() => {}}
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          >
+            <Text>Button</Text>
+          </TouchableRipple>
+        )
+      ).toJSON();
+
+      expect(tree).toMatchSnapshot();
+    });
+  });
+
   // Both branches of the component need to behave the same, so the tests below
   // are run once with the native ripple effect enabled (Android >= Lollipop)
   // and once with the highlight fallback used everywhere else.

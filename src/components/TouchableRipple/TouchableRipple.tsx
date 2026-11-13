@@ -21,6 +21,11 @@ import hasTouchHandler from '../../utils/hasTouchHandler';
 export type Props = PressableProps & {
   /**
    * Whether to render the ripple outside the view bounds.
+   *
+   * On web this prop has no effect: the ripple is always clipped to the
+   * touchable's shape, and the touchable doesn't clip its content, since that
+   * would also clip the touch target. Children that need a rounded shape there
+   * carry the radius themselves.
    */
   borderless?: boolean;
   /**
@@ -106,12 +111,14 @@ export type Props = PressableProps & {
 const TouchableRipple = ({
   style,
   background: _background,
-  borderless = false,
+  // consumed so it does not reach the DOM; the ripple container clips regardless
+  borderless: _borderless = false,
   disabled: disabledProp,
   rippleColor,
   underlayColor: _underlayColor,
   children,
   theme: themeOverrides,
+  hitSlop,
   ref,
   ...rest
 }: Props) => {
@@ -179,7 +186,7 @@ const TouchableRipple = ({
           borderTopRightRadius: style.borderTopRightRadius,
           borderBottomRightRadius: style.borderBottomRightRadius,
           borderBottomLeftRadius: style.borderBottomLeftRadius,
-          overflow: centered ? 'visible' : 'hidden',
+          overflow: 'hidden',
         });
 
         // Create span to show the ripple effect
@@ -283,7 +290,6 @@ const TouchableRipple = ({
       disabled={disabled}
       style={(state) => [
         styles.touchable,
-        borderless && styles.borderless,
         // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
         // state.focused && { backgroundColor: ___ },
         state.hovered && { backgroundColor: hoverColor },
@@ -291,7 +297,35 @@ const TouchableRipple = ({
         typeof style === 'function' ? style(state) : style,
       ]}
     >
-      {(state) => resolveChildren(children, state)}
+      {(state) => {
+        const touchTargetStyle: ViewStyle | undefined =
+          hitSlop == null
+            ? undefined
+            : typeof hitSlop === 'number'
+              ? {
+                  position: 'absolute',
+                  top: -hitSlop,
+                  bottom: -hitSlop,
+                  left: -hitSlop,
+                  right: -hitSlop,
+                }
+              : {
+                  position: 'absolute',
+                  top: -(hitSlop.top ?? 0),
+                  bottom: -(hitSlop.bottom ?? 0),
+                  left: -(hitSlop.left ?? 0),
+                  right: -(hitSlop.right ?? 0),
+                };
+
+        return (
+          <>
+            {!disabled && touchTargetStyle && (
+              <View aria-hidden style={touchTargetStyle} />
+            )}
+            {resolveChildren(children, state)}
+          </>
+        );
+      }}
     </Pressable>
   );
 };
@@ -313,9 +347,6 @@ const styles = StyleSheet.create({
     ...(Platform.OS === 'web' && {
       cursor: 'auto',
     }),
-  },
-  borderless: {
-    overflow: 'hidden',
   },
 });
 
