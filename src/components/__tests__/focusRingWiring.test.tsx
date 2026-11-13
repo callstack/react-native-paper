@@ -11,6 +11,7 @@ import { act, fireEvent } from '@testing-library/react-native';
 import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
+import Button from '../Button/Button';
 import Card from '../Card/Card';
 import CheckboxItem from '../Checkbox/CheckboxItem';
 import Chip from '../Chip/Chip';
@@ -156,6 +157,14 @@ describe('focus ring wiring', () => {
     await focusFirstFocusable();
 
     expect(ringOffset()).toBe(INWARD);
+  });
+
+  it('Button rings outward', async () => {
+    await render(<Button onPress={() => {}}>button</Button>);
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(OUTWARD);
   });
 
   it('Card rings outward', async () => {

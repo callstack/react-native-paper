@@ -446,14 +446,9 @@ const Button = ({
   // The clip carries the same radius transition as the `Surface`, so the
   // ripple and the disabled overlay follow the morph.
   //
-  // TODO: revisit the focus ring's placement once #5084 lands.
-  // https://github.com/callstack/react-native-paper/pull/5084 adds MD3 keyboard
-  // focus indicators to every `TouchableRipple` consumer, so Button gets one
-  // with no code here. Deliberately not implemented locally: a second ring here
-  // would double up with it. The catch is placement — that PR defaults to
-  // `focusRing="outward"` and warns an outward ring is trimmed by "any clipping
-  // ancestor sized to its content", which is exactly this view. Button will
-  // likely need `focusRing="inward"`, or the ring on the outer view.
+  // The keyboard focus ring is `TouchableRipple`'s default outward one, drawn
+  // on the ripple itself. Neither this view nor the `Surface` sets `overflow`,
+  // so nothing here trims it.
   const shapeTransitionStyle = {
     transitionProperty: 'borderRadius',
     transitionDuration: shapeTransitionDuration,
