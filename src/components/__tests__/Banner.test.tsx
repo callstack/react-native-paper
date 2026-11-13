@@ -5,8 +5,8 @@ import {
   Image,
   Platform,
   Text,
-  View,
 } from 'react-native';
+import type { HostInstance } from 'react-native';
 
 import {
   afterAll,
@@ -375,7 +375,7 @@ describe('actions', () => {
       .spyOn(AccessibilityInfo, 'setAccessibilityFocus')
       .mockImplementation(() => {});
     setFocus.mockClear();
-    const touchableRef = React.createRef<View>();
+    const touchableRef = React.createRef<HostInstance>();
 
     const view = await render(
       <Banner
@@ -590,8 +590,8 @@ describe('actions', () => {
 
   it('holds on to a consumer touchableRef across re-renders', async () => {
     // a callback rebuilt every render hands the consumer null between commits
-    const nodes: Array<View | null> = [];
-    const touchableRef = (node: View | null) => {
+    const nodes: Array<HostInstance | null> = [];
+    const touchableRef = (node: HostInstance | null) => {
       nodes.push(node);
     };
 

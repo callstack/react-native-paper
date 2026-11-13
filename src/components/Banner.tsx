@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import type {
+  HostInstance,
   LayoutChangeEvent,
   StyleProp,
   ViewProps,
@@ -333,9 +334,11 @@ const Banner = ({
   }, [visible, message, urgent]);
 
   // one stable ref per action slot
-  const actionRefs = React.useRef<Array<React.RefObject<View | null>>>([]);
+  const actionRefs = React.useRef<Array<React.RefObject<HostInstance | null>>>(
+    []
+  );
   for (let i = 0; i < MAX_ACTIONS; i++) {
-    actionRefs.current[i] ??= React.createRef<View>();
+    actionRefs.current[i] ??= React.createRef<HostInstance>();
   }
   // fixed length, so the dep list below keeps a constant size
   const touchableRefs = Array.from(
@@ -354,22 +357,22 @@ const Banner = ({
   );
 
   const [row, onRowLayout] = useLayout();
-  const messageRef = React.useRef<View>(null);
+  const messageRef = React.useRef<HostInstance>(null);
   const focusedAction = React.useRef<number | null>(null);
 
-  const focusNode = (node: View | null) => {
+  const focusNode = (node: HostInstance | null) => {
     if (!node) {
       return;
     }
 
     // rnw's findNodeHandle throws, and the ref is already the dom node there
     if (Platform.OS === 'web') {
-      node.focus();
+      (node as unknown as { focus?: () => void }).focus?.();
       return;
     }
 
     const handle = findNodeHandle(node);
-    if (handle !== null) {
+    if (handle != null) {
       AccessibilityInfo.setAccessibilityFocus(handle);
     }
   };
