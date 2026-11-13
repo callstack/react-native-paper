@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     margin: 6,
   },
   touchable: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

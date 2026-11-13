@@ -783,7 +783,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -906,7 +906,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -1087,7 +1087,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -1210,7 +1210,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -1333,7 +1333,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -1456,7 +1456,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -1637,7 +1637,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -1760,7 +1760,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -2252,7 +2252,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -2375,7 +2375,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -2498,7 +2498,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -2621,7 +2621,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {

@@ -258,7 +258,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
               {
@@ -429,7 +429,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
                 },
                 {
@@ -656,7 +656,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -883,7 +883,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -1145,7 +1145,7 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -1408,7 +1408,7 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -1671,7 +1671,7 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             {
@@ -1935,7 +1935,7 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
             {
