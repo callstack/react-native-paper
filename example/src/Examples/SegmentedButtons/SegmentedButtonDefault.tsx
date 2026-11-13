@@ -13,6 +13,7 @@ const SegmentedButtonDefault = () => {
       <SegmentedButtons
         value={value}
         onValueChange={setValue}
+        aria-label="Transport mode"
         buttons={[
           {
             value: 'walk',
