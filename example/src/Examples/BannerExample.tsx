@@ -19,10 +19,7 @@ const BannerExample = () => {
     colors: {
       ...defaultTheme.colors,
       onSurface: Palette.tertiary100,
-      elevation: {
-        ...defaultTheme.colors.elevation,
-        level1: Palette.tertiary50,
-      },
+      surfaceContainerLow: Palette.tertiary50,
       primary: Palette.tertiary10,
     },
   };
