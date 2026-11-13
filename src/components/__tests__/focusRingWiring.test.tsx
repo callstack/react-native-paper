@@ -17,6 +17,7 @@ import Chip from '../Chip/Chip';
 import FAB from '../FAB/FAB';
 import ListAccordion from '../List/ListAccordion';
 import ListItem from '../List/ListItem';
+import MenuItem from '../Menu/MenuItem';
 import Switch from '../Switch/Switch';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
@@ -142,6 +143,14 @@ describe('focus ring wiring', () => {
         <ListItem title="row" />
       </ListAccordion>
     );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(INWARD);
+  });
+
+  it("Menu.Item rings inward, inside the menu's scroll view", async () => {
+    await render(<MenuItem title="item" onPress={() => {}} />);
 
     await focusFirstFocusable();
 
