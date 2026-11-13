@@ -5,7 +5,14 @@
 import { Platform, StyleSheet, Text } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
@@ -16,6 +23,7 @@ import Card from '../Card/Card';
 import CheckboxItem from '../Checkbox/CheckboxItem';
 import Chip from '../Chip/Chip';
 import DataTableRow from '../DataTable/DataTableRow';
+import DataTableTitle from '../DataTable/DataTableTitle';
 import FAB from '../FAB/FAB';
 import FABMenu from '../FAB/Menu';
 import ListAccordion from '../List/ListAccordion';
@@ -181,6 +189,29 @@ describe('focus ring wiring', () => {
     await focusFirstFocusable();
 
     expect(ringOffset()).toBe(INWARD);
+  });
+
+  it('DataTable.Title rings inward when sortable, and keeps its own onFocus', async () => {
+    const onFocus = jest.fn();
+    await render(
+      <DataTableTitle onPress={() => {}} onFocus={onFocus}>
+        title
+      </DataTableTitle>
+    );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(INWARD);
+    expect(onFocus).toHaveBeenCalledTimes(1);
+  });
+
+  // Without `onPress` the title is plain text and takes no focus.
+  it('DataTable.Title draws no ring when it is not pressable', async () => {
+    await render(<DataTableTitle>title</DataTableTitle>);
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBeUndefined();
   });
 
   it('Card rings outward', async () => {

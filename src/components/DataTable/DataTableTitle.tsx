@@ -20,6 +20,7 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
+import { useFocusRing } from '../../utils/useFocusRing';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
@@ -95,9 +96,19 @@ const DataTableTitle = ({
   theme: themeOverrides,
   numberOfLines = 1,
   maxFontSizeMultiplier,
+  onFocus,
+  onBlur,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  // A sortable title is a button, so it gets the keyboard focus ring. It is a
+  // plain `Pressable`, not a `TouchableRipple`, so it calls the hook directly.
+  // Inward: titles sit side by side in the header row, like the rows below.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    !onPress,
+    theme.colors.secondary,
+    'inward'
+  );
   const reduceMotion = useReduceMotion();
 
   const { direction } = useLocale();
@@ -136,7 +147,21 @@ const DataTableTitle = ({
       disabled={!onPress}
       onPress={onPress}
       {...rest}
-      style={[styles.container, numeric && styles.right, style]}
+      onFocus={(e) => {
+        focusTarget.onFocus?.(e);
+        onFocus?.(e);
+      }}
+      onBlur={(e) => {
+        focusTarget.onBlur?.();
+        onBlur?.(e);
+      }}
+      {...focusRing.dataSetProps}
+      style={[
+        styles.container,
+        numeric && styles.right,
+        style,
+        ...focusRing.style,
+      ]}
     >
       {icon}
 
