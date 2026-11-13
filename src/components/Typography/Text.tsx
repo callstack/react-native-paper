@@ -88,7 +88,6 @@ const Text = ({
   ...rest
 }: Props<string>) => {
   const root = React.useRef<React.ComponentRef<typeof NativeText> | null>(null);
-  // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();
   // Nested text inherits the parent's style unless it has its own theme
