@@ -450,6 +450,9 @@ const Chip = ({
             aria-label={closeIconAccessibilityLabel}
             testID={closeIconTestID}
             hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
+            // Like Switch: a ripple drawable owns the focused state, so Android does
+            // not add its grey default focus highlight on top of the ring.
+            android_ripple={{ color: 'transparent' }}
             onFocus={closeFocusTarget.onFocus}
             onBlur={closeFocusTarget.onBlur}
             {...closeFocusTarget.dataSetProps}

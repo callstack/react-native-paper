@@ -162,6 +162,9 @@ const AppbarContent = ({
         onPress={onPress}
         disabled={disabled}
         {...contentWrapperProps}
+        // Like Switch: a ripple drawable owns the focused state, so Android does
+        // not add its grey default focus highlight on top of the ring.
+        android_ripple={{ color: 'transparent' }}
         onFocus={(e) => {
           focusTarget.onFocus?.(e);
           rest.onFocus?.(e);

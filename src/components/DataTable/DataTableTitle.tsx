@@ -147,6 +147,9 @@ const DataTableTitle = ({
       disabled={!onPress}
       onPress={onPress}
       {...rest}
+      // Like Switch: a ripple drawable owns the focused state, so Android does
+      // not add its grey default focus highlight on top of the ring.
+      android_ripple={{ color: 'transparent' }}
       onFocus={(e) => {
         focusTarget.onFocus?.(e);
         onFocus?.(e);

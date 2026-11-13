@@ -271,6 +271,9 @@ const Card = ({
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
           testID={testID}
+          // Like Switch: a ripple drawable owns the focused state, so Android does
+          // not add its grey default focus highlight on top of the ring.
+          android_ripple={{ color: 'transparent' }}
           onFocus={focusTarget.onFocus}
           onBlur={focusTarget.onBlur}
           {...focusRing.dataSetProps}
