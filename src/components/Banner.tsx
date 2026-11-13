@@ -35,10 +35,14 @@ import { useInternalTheme } from '../core/theming';
 import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../theme/types';
 import { mergeRefs } from '../utils/mergeRefs';
+import useLayout from '../utils/useLayout';
 
 const DEFAULT_MAX_WIDTH = 960;
 // banners carry at most two actions per the material spec
 const MAX_ACTIONS = 2;
+// md3's compact window size class. md3 has no banner spec, so where the
+// actions go is a choice, not a spec value
+const COMPACT_BREAKPOINT = 600;
 // a tradeoff, not a safe number: too short and the set and clear can batch into
 // one a11y update, too long and a talkback swipe hears the message twice
 const ANNOUNCE_CLEAR_DELAY = 3000;
@@ -336,6 +340,7 @@ const Banner = ({
   for (let i = 0; i < MAX_ACTIONS; i++) {
     actionRefs.current[i] ??= React.createRef<View>();
   }
+  const [row, onRowLayout] = useLayout();
   const messageRef = React.useRef<View>(null);
   const focusedAction = React.useRef<number | null>(null);
 
@@ -398,6 +403,8 @@ const Banner = ({
   // tree and the tab order. native ignores the unknown prop
   const inertProps: { inert?: boolean } = visible ? {} : { inert: true };
 
+  const stacked = !row.measured || row.width < COMPACT_BREAKPOINT;
+
   // annotated, not cast: the literal -1 widens to number on its own
   const messageFocusProps: Pick<ViewProps, 'tabIndex' | 'accessible'> =
     Platform.OS === 'web' ? { tabIndex: -1 } : { accessible: true };
@@ -433,10 +440,12 @@ const Banner = ({
                 : null,
             ]}
           >
-            <View style={styles.content}>
-              {/* icon and message travel together as one flex item, so only
-                  the actions can be wrapped onto the next line */}
-              <View style={styles.body}>
+            <View
+              testID={`${testID ?? 'banner'}-row`}
+              onLayout={onRowLayout}
+              style={[styles.content, stacked ? styles.contentStacked : null]}
+            >
+              <View style={[styles.body, stacked ? null : styles.bodyInline]}>
                 {/* rnw gives the icon role="img" with no name */}
                 {icon ? (
                   <View
@@ -464,8 +473,6 @@ const Banner = ({
                   </Text>
                 </View>
               </View>
-              {/* same wrapping row as the message, so the actions sit inline
-                  when they fit and drop to their own line when they don't */}
               {visibleActions.length ? (
                 <View style={styles.actions}>
                   {visibleActions.map(({ label, ...others }, i) => (
@@ -528,27 +535,29 @@ const styles = StyleSheet.create({
   },
   content: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'flex-end',
     marginHorizontal: 8,
     marginTop: 16,
     marginBottom: 0,
   },
+  contentStacked: {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+  },
   body: {
     flexDirection: 'row',
     alignItems: 'center',
-    flexGrow: 1,
     flexShrink: 1,
-    flexBasis: 'auto',
+  },
+  bodyInline: {
+    flexGrow: 1,
+    flexBasis: 0,
   },
   icon: {
     margin: 8,
   },
   message: {
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 'auto',
+    flex: 1,
     margin: 8,
   },
   actions: {
