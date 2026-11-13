@@ -13,11 +13,12 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         "alignItems": "center",
         "flexDirection": "row",
       },
+      false,
       {
-        "paddingBottom": undefined,
+        "paddingBottom": 0,
         "paddingLeft": 4,
         "paddingRight": 4,
-        "paddingTop": undefined,
+        "paddingTop": 0,
       },
       undefined,
       {},
@@ -40,65 +41,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
+      false,
     ]
   }
 >
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": undefined,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-        },
-      ]
-    }
-  />
   <View
     collapsable={false}
     style={
@@ -500,11 +446,12 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "alignItems": "center",
         "flexDirection": "row",
       },
+      false,
       {
-        "paddingBottom": undefined,
+        "paddingBottom": 0,
         "paddingLeft": 4,
         "paddingRight": 4,
-        "paddingTop": undefined,
+        "paddingTop": 0,
       },
       undefined,
       {},
@@ -527,65 +474,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
+      false,
     ]
   }
 >
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": undefined,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-        },
-      ]
-    }
-  />
   <View
     collapsable={false}
     style={
@@ -603,6 +495,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "borderRadius": 20,
           "borderWidth": 0,
         },
+        false,
         undefined,
       ]
     }
@@ -760,18 +653,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       [
         {
           "flex": 1,
-          "paddingHorizontal": 12,
+          "marginLeft": 12,
         },
-        {
-          "paddingHorizontal": 0,
-        },
-        [
-          {
-            "marginLeft": 12,
-          },
-          false,
-          undefined,
-        ],
+        undefined,
       ]
     }
   >
@@ -831,6 +715,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "borderRadius": 20,
           "borderWidth": 0,
         },
+        false,
         undefined,
       ]
     }
@@ -990,11 +875,12 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
         "alignItems": "center",
         "flexDirection": "row",
       },
+      false,
       {
-        "paddingBottom": undefined,
+        "paddingBottom": 0,
         "paddingLeft": 4,
         "paddingRight": 4,
-        "paddingTop": undefined,
+        "paddingTop": 0,
       },
       undefined,
       {},
@@ -1017,65 +903,10 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
+      false,
     ]
   }
 >
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": undefined,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-        },
-      ]
-    }
-  />
   <View
     collapsable={false}
     style={
@@ -1093,6 +924,7 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
           "borderRadius": 20,
           "borderWidth": 0,
         },
+        false,
         undefined,
       ]
     }
@@ -1253,11 +1085,12 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
         "alignItems": "center",
         "flexDirection": "row",
       },
+      false,
       {
-        "paddingBottom": undefined,
+        "paddingBottom": 0,
         "paddingLeft": 4,
         "paddingRight": 4,
-        "paddingTop": undefined,
+        "paddingTop": 0,
       },
       undefined,
       {},
@@ -1280,65 +1113,10 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
+      false,
     ]
   }
 >
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": undefined,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-        },
-      ]
-    }
-  />
   <View
     collapsable={false}
     style={
@@ -1356,6 +1134,7 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
           "borderRadius": 20,
           "borderWidth": 0,
         },
+        false,
         undefined,
       ]
     }
@@ -1516,11 +1295,12 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
         "alignItems": "center",
         "flexDirection": "row",
       },
+      false,
       {
-        "paddingBottom": undefined,
+        "paddingBottom": 0,
         "paddingLeft": 4,
         "paddingRight": 4,
-        "paddingTop": undefined,
+        "paddingTop": 0,
       },
       undefined,
       {},
@@ -1543,65 +1323,10 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
+      false,
     ]
   }
 >
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": undefined,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-        },
-      ]
-    }
-  />
   <View
     collapsable={false}
     style={
@@ -1619,6 +1344,7 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
           "borderRadius": 20,
           "borderWidth": 0,
         },
+        false,
         undefined,
       ]
     }
@@ -1779,11 +1505,12 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
         "alignItems": "center",
         "flexDirection": "row",
       },
+      false,
       {
-        "paddingBottom": undefined,
+        "paddingBottom": 0,
         "paddingLeft": 4,
         "paddingRight": 4,
-        "paddingTop": undefined,
+        "paddingTop": 0,
       },
       undefined,
       {},
@@ -1806,65 +1533,10 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
+      false,
     ]
   }
 >
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": undefined,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-        },
-      ]
-    }
-  />
   <View
     collapsable={false}
     style={
@@ -1882,6 +1554,7 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
           "borderRadius": 20,
           "borderWidth": 0,
         },
+        false,
         undefined,
       ]
     }

@@ -374,6 +374,48 @@ To keep the height of the content row when setting `height` in `style`, add the 
 </Appbar.Header>
 ```
 
+#### Parts read from the `Appbar`
+
+`Appbar` no longer inspects its children and clones them to pass `color`, `theme`, `mode` and `style`. `Appbar.BackAction`, `Appbar.Content` and `Appbar.Action` now read the `dark` and `theme` props and the `mode` of the `Appbar` they are rendered in from context. This means they can be wrapped in other components, for example in a `Tooltip` or a `View`, and still get the colors and the theme of the `Appbar`. A `theme` set on a part takes precedence over the `theme` of the `Appbar`.
+
+The parts are rendered in the order they are given, so render the leading actions first, then `Appbar.Content`, then the trailing actions. Previously, `Appbar.BackAction` and the actions with `isLeading` were moved before the rest.
+
+- `Appbar.Content` always has a `12dp` margin before its title. Previously, the margin was only added when the title was the first item after `Appbar.BackAction`.
+- The `mode` prop of `Appbar.Content`, which was for internal use, is removed.
+- In the `center-aligned` mode, the title is centered between the actions when there is room for it. The actions before the title count as leading actions only when they are `Appbar.BackAction` or have `isLeading`.
+
+```diff
+ <Appbar.Header mode="center-aligned">
+-  <Appbar.Action icon="menu" onPress={() => {}} />
++  <Appbar.Action icon="menu" isLeading onPress={() => {}} />
+   <Appbar.Content title="Title" />
+   <Appbar.Action icon="magnify" onPress={() => {}} />
+ </Appbar.Header>
+```
+
+#### Material 3 Expressive
+
+- The `mode` prop of `Appbar` and `Appbar.Header` accepts two new values: `medium-flexible` and `large-flexible`. Their height is the minimum height (`112` and `120`), and they grow when the title wraps onto a second line.
+- `Appbar.Action` has new `variant` and `width` props. `variant="filled"` and `variant="tonal"` render the action in a container, and `width="wide"` makes the container wider.
+- `Appbar` and `Appbar.Header` have a new `isScrolled` prop. Set it when the content below has scrolled, to switch the container to the `surfaceContainer` color. Unlike `elevated`, it doesn't add elevation.
+
+```tsx
+<Appbar.Header mode="large-flexible" isScrolled={isScrolled}>
+  <Appbar.BackAction onPress={() => {}} />
+  <Appbar.Content title="Photos" />
+  <Appbar.Action
+    icon="share"
+    variant="filled"
+    width="wide"
+    onPress={() => {}}
+  />
+</Appbar.Header>
+```
+
+#### Bottom bar
+
+Using `Appbar` as a bottom bar is deprecated. Material Design 3 moves the bottom bar to toolbars. It continues to work in 6.x, and will be replaced by the `Toolbar` component once it is available.
+
 ### Avatar
 
 The `style` prop for `Avatar.Icon`, `Avatar.Image` and `Avatar.Text` no longer configures the background color. Use the `backgroundColor` prop instead. The text or icon color is still derived from the background color unless `color` is specified.

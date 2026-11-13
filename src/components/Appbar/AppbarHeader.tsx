@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Appbar } from './Appbar';
 import type { Props as AppbarProps } from './Appbar';
+import type { AppbarModes } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import type { SurfaceStyle } from '../Surface';
@@ -33,13 +34,20 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    * - `medium` - Appbar with medium height (112).
    * - `large` - Appbar with large height (152).
    * - `center-aligned` - Appbar with default height and center-aligned title.
+   * - `medium-flexible` - Material 3 Expressive Appbar with a larger title and a minimum height of 112. It grows when the title wraps onto a second line.
+   * - `large-flexible` - Material 3 Expressive Appbar with a prominent title and a minimum height of 120. It grows when the title wraps onto a second line.
    */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  mode?: AppbarModes;
   /**
    * @supported Available in v5.x with theme version 3
    * Whether Appbar background should have the elevation along with primary color pigment.
    */
   elevated?: boolean;
+  /**
+   * Whether the content below the header has scrolled. A scrolled header uses the `surfaceContainer` color for its background,
+   * without elevation. Overridden by `backgroundColor`.
+   */
+  isScrolled?: boolean;
   /**
    * @optional
    */
