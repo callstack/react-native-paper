@@ -396,7 +396,7 @@ describe('actions', () => {
     // the consumer gets the node, and the internal ref still restores focus
     expect(touchableRef.current).not.toBeNull();
 
-    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+    await fireEvent(screen.getByTestId('action-first'), 'focus');
     await view.rerender(
       <Banner visible actions={[]}>
         Message
@@ -425,7 +425,7 @@ describe('actions', () => {
       </Banner>
     );
 
-    await fireEvent(screen.getByTestId('action-second-container'), 'focus');
+    await fireEvent(screen.getByTestId('action-second'), 'focus');
     expect(setFocus).not.toHaveBeenCalled();
 
     await view.rerender(
@@ -463,7 +463,7 @@ describe('actions', () => {
 
     // focus the first action, then drop the second: the count changes, so the
     // effect runs, but the focused index is still valid and must be left alone
-    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+    await fireEvent(screen.getByTestId('action-first'), 'focus');
     await view.rerender(
       <Banner
         visible
@@ -500,7 +500,7 @@ describe('actions', () => {
       </Banner>
     );
 
-    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+    await fireEvent(screen.getByTestId('action-first'), 'focus');
 
     await view.rerender(
       <Banner
@@ -534,7 +534,7 @@ describe('actions', () => {
       </Banner>
     );
 
-    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+    await fireEvent(screen.getByTestId('action-first'), 'focus');
 
     await view.rerender(
       <Banner visible actions={[]} testID="banner">
@@ -565,7 +565,7 @@ describe('actions', () => {
       </Banner>
     );
 
-    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+    await fireEvent(screen.getByTestId('action-first'), 'focus');
 
     await view.rerender(
       <Banner
@@ -638,7 +638,7 @@ describe('actions', () => {
       </Banner>
     );
 
-    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+    await fireEvent(screen.getByTestId('action-first'), 'focus');
 
     expect(onFocus).toHaveBeenCalledTimes(1);
   });
@@ -1105,7 +1105,7 @@ describe('message focus', () => {
       </Banner>
     );
 
-    await fireEvent(screen.getByTestId('action-first-container'), 'focus');
+    await fireEvent(screen.getByTestId('action-first'), 'focus');
 
     await view.rerender(
       <Banner visible actions={[]} testID="banner">
