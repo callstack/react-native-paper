@@ -69,6 +69,7 @@ export const styles = StyleSheet.create({
   iconWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 1,
   },
   icon: {
     margin: 0,

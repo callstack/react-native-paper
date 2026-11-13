@@ -141,6 +141,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -335,6 +336,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -625,6 +627,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -819,6 +822,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -1287,6 +1291,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -1481,6 +1486,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -1751,6 +1757,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -1945,6 +1952,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
