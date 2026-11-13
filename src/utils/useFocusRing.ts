@@ -55,6 +55,28 @@ export type FocusRingResult = {
 const toDataSetProps = (dataSet: Record<string, string> | undefined): object =>
   dataSet ? { dataSet } : {};
 
+const readDataSet = (props: object): object | undefined =>
+  'dataSet' in props && props.dataSet && typeof props.dataSet === 'object'
+    ? props.dataSet
+    : undefined;
+
+/**
+ * `dataSetProps` merged with a caller's own `dataSet`, for a component that
+ * spreads the caller's props onto the same element as the ring. Spreading
+ * `dataSetProps` after them would replace the caller's `dataSet` (e.g. their
+ * test hooks); this keeps both. Empty when there is no ring attribute, so the
+ * caller's `dataSet` passes through their own spread untouched.
+ */
+export const mergeDataSetProps = (
+  callerProps: object,
+  dataSetProps: object
+): object => {
+  const ringDataSet = readDataSet(dataSetProps);
+  return ringDataSet
+    ? { dataSet: { ...readDataSet(callerProps), ...ringDataSet } }
+    : {};
+};
+
 const EMPTY: FocusRingResult = {
   target: { style: [], dataSetProps: {} },
   ring: { style: [], dataSetProps: {} },

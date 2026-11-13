@@ -20,7 +20,7 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
-import { useFocusRing } from '../../utils/useFocusRing';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
@@ -155,7 +155,7 @@ const DataTableTitle = ({
         focusTarget.onBlur?.();
         onBlur?.(e);
       }}
-      {...focusRing.dataSetProps}
+      {...mergeDataSetProps(rest, focusRing.dataSetProps)}
       style={[
         styles.container,
         numeric && styles.right,

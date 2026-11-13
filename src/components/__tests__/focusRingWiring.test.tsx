@@ -350,6 +350,34 @@ describe('focus ring wiring (web)', () => {
     ).toBe('outward');
   });
 
+  // These spread the caller's props onto the ringed element, so the ring's
+  // `data-*` attribute must join the caller's `dataSet`, not replace it.
+  it("DataTable.Title and Appbar.Content keep a caller's own dataSet", async () => {
+    const dataSet = { qa: 'title' };
+    await render(
+      <>
+        <DataTableTitle onPress={() => {}} testID="table" {...{ dataSet }}>
+          title
+        </DataTableTitle>
+        <AppbarContent
+          title="Title"
+          onPress={() => {}}
+          testID="appbar"
+          {...{ dataSet }}
+        />
+      </>
+    );
+
+    expect(screen.getByTestId('table').props.dataSet).toEqual({
+      qa: 'title',
+      focusRing: 'inward',
+    });
+    expect(screen.getByTestId('appbar').props.dataSet).toEqual({
+      qa: 'title',
+      focusRing: 'outward',
+    });
+  });
+
   it('Drawer.CollapsedItem marks its Pressable as the focus target and rings the item inside it', async () => {
     await render(
       <DrawerCollapsedItem

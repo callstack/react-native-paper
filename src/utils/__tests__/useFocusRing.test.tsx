@@ -14,7 +14,11 @@ import { act, fireEvent } from '@testing-library/react-native';
 import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import type { FocusRingPlacement, FocusRingScope } from '../useFocusRing';
-import { buildFocusRingStylesheet, useFocusRing } from '../useFocusRing';
+import {
+  buildFocusRingStylesheet,
+  mergeDataSetProps,
+  useFocusRing,
+} from '../useFocusRing';
 
 const focus = async (data?: unknown) => {
   await act(async () => {
@@ -83,6 +87,28 @@ describe('buildFocusRingStylesheet', () => {
     expect(css).toContain(`outline: ${thickness}px solid`);
     expect(css).toContain(`outline-offset: ${outerOffset}px;`);
     expect(css).toContain(`outline-offset: ${-thickness}px;`);
+  });
+});
+
+describe('mergeDataSetProps', () => {
+  it("keeps the caller's dataSet alongside the ring attribute", () => {
+    expect(
+      mergeDataSetProps(
+        { dataSet: { qa: 'save' } },
+        { dataSet: { focusRing: 'outward' } }
+      )
+    ).toEqual({ dataSet: { qa: 'save', focusRing: 'outward' } });
+  });
+
+  // With no ring attribute the caller's own spread already carries theirs.
+  it('adds nothing when there is no ring attribute', () => {
+    expect(mergeDataSetProps({ dataSet: { qa: 'save' } }, {})).toEqual({});
+  });
+
+  it('passes the ring attribute through when the caller has no dataSet', () => {
+    expect(mergeDataSetProps({}, { dataSet: { focusRing: 'inward' } })).toEqual(
+      { dataSet: { focusRing: 'inward' } }
+    );
   });
 });
 

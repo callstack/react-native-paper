@@ -94,4 +94,26 @@ describe('TouchableRipple focus ring (web implementation)', () => {
     expect(onFocus).toHaveBeenCalled();
     expect(onBlur).toHaveBeenCalled();
   });
+
+  // react-native-web renders `dataSet` as `data-*` attributes, which callers
+  // use too (e.g. for test hooks). The ring's attribute must join theirs, not
+  // replace it.
+  it("keeps a caller's own dataSet alongside the ring attribute", async () => {
+    await renderRipple({ dataSet: { qa: 'save' } });
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('ripple').props.dataSet).toEqual({
+      qa: 'save',
+      focusRing: 'outward',
+    });
+  });
+
+  it("keeps a caller's own dataSet when the ring is turned off", async () => {
+    await renderRipple({ dataSet: { qa: 'save' }, focusRing: 'none' });
+
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('ripple').props.dataSet).toEqual({
+      qa: 'save',
+    });
+  });
 });

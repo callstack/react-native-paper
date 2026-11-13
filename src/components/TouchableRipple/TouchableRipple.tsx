@@ -18,7 +18,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { FocusRingPlacement } from '../../utils/useFocusRing';
-import { useFocusRing } from '../../utils/useFocusRing';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 
 export type Props = PressableProps & {
   /**
@@ -317,7 +317,7 @@ const TouchableRipple = ({
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
-      {...ring.dataSetProps}
+      {...mergeDataSetProps(rest, ring.dataSetProps)}
       style={(state) => [
         styles.touchable,
         // RNW's own `state.focused` fires for mouse clicks too, which is

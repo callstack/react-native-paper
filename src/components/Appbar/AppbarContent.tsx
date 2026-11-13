@@ -11,7 +11,7 @@ import type {
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import { useFocusRing } from '../../utils/useFocusRing';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
 
@@ -170,7 +170,7 @@ const AppbarContent = ({
           focusTarget.onBlur?.();
           rest.onBlur?.(e);
         }}
-        {...focusRing.dataSetProps}
+        {...mergeDataSetProps(rest, focusRing.dataSetProps)}
         style={[...contentWrapperProps.style, ...focusRing.style]}
       >
         {content}
