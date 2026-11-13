@@ -542,23 +542,20 @@ const buttonRef = React.useRef<React.ComponentRef<typeof View>>(null);
 
 ```diff
 -<Portal>
--  <Dialog visible={visible} onDismiss={hideDialog}>
--    <Dialog.Title>Alert</Dialog.Title>
--  </Dialog>
+-  <Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 -</Portal>
-+<Dialog visible={visible} onDismiss={hideDialog}>
-+  <Dialog.Title>Alert</Dialog.Title>
-+</Dialog>
++<Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 ```
 
-The dialog now has the `dialog` role. On web, the dialog's accessible name is set automatically by `Dialog.Title`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
+The dialog now has the `dialog` role. Its accessible name is set automatically from the `title` prop. A string title is used as the `aria-label` on all platforms. Any other title is linked through `aria-labelledby`, which applies on web only. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
 
 ```jsx
-<Dialog visible={visible} onDismiss={hideDialog} aria-label="Delete file">
-  <Dialog.Content>
-    <Text>Are you sure?</Text>
-  </Dialog.Content>
-</Dialog>
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  content="Are you sure?"
+  aria-label="Delete file"
+/>
 ```
 
 `Dialog` follows the same back button, Escape key and focus behavior as `Modal`, including the `initialFocusRef` and `restoreFocusRef` props. As with `Modal`, focus returns on iOS and Android only when you pass `restoreFocusRef`.
@@ -567,6 +564,60 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
+
+#### Prop-based API
+
+The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialog layouts. If your dialog previously composed `Dialog.Title`, `Dialog.Content`, and `Dialog.Actions` via `children`, migrate to the dedicated `icon`, `title`, `content`, and `actions` props.
+
+**Removed props**
+
+- **`children`** was removed from `Dialog`
+
+Use the dedicated props instead:
+
+- **`Dialog.Icon`** → **`icon`**
+- **`Dialog.Title`** → **`title`**
+- **`Dialog.Content`** → **`content`**
+- **`Dialog.Actions`** → **`actions`**
+
+The new **`actions`** prop is more customizable because it accepts **`React.ReactNode[]`**. Unlike the previous `Dialog.Actions` children behavior, the dialog no longer injects **`compact`** and **`uppercase`** into action components automatically. When **`actions`** is provided, the passed components are rendered through **`Dialog.Actions`** internally.
+
+**New props**
+
+- **`scrollable`** renders the dialog content inside a scrollable area.
+- **`contentProps`** passes props to the internal `Dialog.Content` when `scrollable` is not enabled.
+- **`scrollAreaProps`** passes props to the internal `Dialog.ScrollArea` when `scrollable` is enabled.
+- **`scrollViewProps`** passes props to the internal `ScrollView` when `scrollable` is enabled.
+- **`aria-label`** overrides the title as the dialog's accessible name.
+- **`aria-labelledby`** is the `nativeID` of an element that provides the dialog's accessible name. It takes precedence over the title and is applied on web only.
+
+```tsx
+// Before (v5)
+<Portal>
+  <Dialog visible={visible} onDismiss={hideDialog}>
+    <Dialog.Title>Alert</Dialog.Title>
+    <Dialog.Content>
+      <Text variant="bodyMedium">This is a simple dialog</Text>
+    </Dialog.Content>
+    <Dialog.Actions>
+      <Button onPress={hideDialog}>Done</Button>
+    </Dialog.Actions>
+  </Dialog>
+</Portal>
+
+// After (v6)
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  title="Alert"
+  content="This is a simple dialog"
+  actions={[
+    <Button key="done" onPress={hideDialog}>
+      Done
+    </Button>,
+  ]}
+/>
+```
 
 #### `Dialog.Actions`
 
@@ -579,11 +630,13 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 </Dialog.Actions>
 
 // After (v6)
-<Dialog.Actions>
-  <Button mode="text" onPress={hide}>
-    Done
-  </Button>
-</Dialog.Actions>
+<Dialog
+  actions={[
+    <Button key="done" mode="text" onPress={hide}>
+      Done
+    </Button>,
+  ]}
+/>
 ```
 
 ### Menu

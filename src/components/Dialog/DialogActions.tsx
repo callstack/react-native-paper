@@ -31,12 +31,14 @@ export type Props = ViewProps & {
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Dialog visible={visible} onDismiss={hideDialog}>
- *       <Dialog.Actions>
- *         <Button mode="text" onPress={() => console.log('Cancel')}>Cancel</Button>
- *         <Button mode="text" onPress={() => console.log('Ok')}>Ok</Button>
- *       </Dialog.Actions>
- *     </Dialog>
+ *     <Dialog
+ *       visible={visible}
+ *       onDismiss={hideDialog}
+ *       actions={[
+ *         <Button key="disagree-btn" onPress={hideDialog}>Disagree</Button>,
+ *         <Button key="agree-btn" onPress={hideDialog}>Agree</Button>,
+ *       ]}
+ *     />
  *   );
  * };
  *

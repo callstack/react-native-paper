@@ -38,8 +38,11 @@ const MenuInDialog = ({
   onDismissMenu: () => void;
 }) => (
   <Portal.Host>
-    <Dialog visible onDismiss={onDismissDialog} aria-label="Dialog">
-      <Dialog.Content>
+    <Dialog
+      visible
+      onDismiss={onDismissDialog}
+      aria-label="Dialog"
+      content={
         <Menu
           visible={menuVisible}
           onDismiss={onDismissMenu}
@@ -47,8 +50,8 @@ const MenuInDialog = ({
         >
           <Menu.Item title="Item" />
         </Menu>
-      </Dialog.Content>
-    </Dialog>
+      }
+    />
   </Portal.Host>
 );
 

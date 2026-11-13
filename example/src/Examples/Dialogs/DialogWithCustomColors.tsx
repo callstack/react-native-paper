@@ -1,6 +1,6 @@
-import { Button, Dialog, Palette } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 
-import { TextComponent } from './DialogTextComponent';
+import { Button, Dialog, Palette, Text } from 'react-native-paper';
 
 const DialogWithCustomColors = ({
   visible,
@@ -12,26 +12,36 @@ const DialogWithCustomColors = ({
   return (
     <Dialog
       onDismiss={close}
+      visible={visible}
+      aria-label="Alert"
       theme={{
         colors: {
           surfaceContainerHigh: Palette.primary10,
         },
       }}
-      visible={visible}
-    >
-      <Dialog.Title style={{ color: Palette.primary95 }}>Alert</Dialog.Title>
-      <Dialog.Content>
-        <TextComponent style={{ color: Palette.primary95 }}>
+      title={
+        <Text variant="headlineSmall" style={styles.text}>
+          Alert
+        </Text>
+      }
+      content={
+        <Text variant="bodyMedium" style={styles.text}>
           This is a dialog with custom colors
-        </TextComponent>
-      </Dialog.Content>
-      <Dialog.Actions>
-        <Button mode="text" textColor={Palette.primary95} onPress={close}>
+        </Text>
+      }
+      actions={[
+        <Button key="ok-btn" onPress={close} textColor={Palette.primary95}>
           Ok
-        </Button>
-      </Dialog.Actions>
-    </Dialog>
+        </Button>,
+      ]}
+    />
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    color: Palette.primary95,
+  },
+});
 
 export default DialogWithCustomColors;

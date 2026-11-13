@@ -16,7 +16,7 @@ export type Props = ViewProps & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Dialog, Text } from 'react-native-paper';
+ * import { Dialog } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -24,11 +24,11 @@ export type Props = ViewProps & {
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Dialog visible={visible} onDismiss={hideDialog}>
- *       <Dialog.Content>
- *         <Text variant="bodyMedium">This is simple dialog</Text>
- *       </Dialog.Content>
- *     </Dialog>
+ *     <Dialog
+ *       visible={visible}
+ *       onDismiss={hideDialog}
+ *       content="This is simple dialog"
+ *     />
  *   );
  * };
  *
