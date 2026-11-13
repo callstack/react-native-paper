@@ -21,3 +21,15 @@ export default function hasTouchHandler(
     return Boolean(touchableEventObject[event]);
   });
 }
+
+/**
+ * Roles claiming the view can be activated. State bearing roles (`checkbox`,
+ * `radio`, `switch`) are excluded: those still describe a read only view.
+ */
+export const ACTIVATABLE_ROLES: readonly string[] = [
+  'button',
+  'imagebutton',
+  'link',
+  'menuitem',
+  'tab',
+];
