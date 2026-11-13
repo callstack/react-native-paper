@@ -23,6 +23,7 @@ import Button from '../Button/Button';
 import Card from '../Card/Card';
 import CheckboxItem from '../Checkbox/CheckboxItem';
 import Chip from '../Chip/Chip';
+import DataTableCell from '../DataTable/DataTableCell';
 import DataTableRow from '../DataTable/DataTableRow';
 import DataTableTitle from '../DataTable/DataTableTitle';
 import DrawerCollapsedItem from '../Drawer/DrawerCollapsedItem';
@@ -262,6 +263,14 @@ describe('focus ring wiring', () => {
         ]}
       />
     );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(INWARD);
+  });
+
+  it('DataTable.Cell with onPress rings inward, like its row', async () => {
+    await render(<DataTableCell onPress={() => {}}>cell</DataTableCell>);
 
     await focusFirstFocusable();
 
