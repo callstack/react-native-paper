@@ -34,6 +34,7 @@ import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';
 import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../theme/types';
+import { mergeRefs } from '../utils/mergeRefs';
 
 const DEFAULT_MAX_WIDTH = 960;
 // banners carry at most two actions per the material spec
@@ -477,7 +478,10 @@ const Banner = ({
                       textColor={colors.primary}
                       theme={theme}
                       {...others}
-                      touchableRef={actionRefs.current[i]}
+                      touchableRef={mergeRefs(
+                        actionRefs.current[i],
+                        others.touchableRef
+                      )}
                       onFocus={(e) => {
                         focusedAction.current = i;
                         others.onFocus?.(e);
