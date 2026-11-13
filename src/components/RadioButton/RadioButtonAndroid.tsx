@@ -127,10 +127,13 @@ const RadioButtonAndroid = ({
           <TouchableRipple
             {...rest}
             borderless
+            // A radio with nothing to call (no `onPress` and no
+            // `RadioButton.Group`) is read only and gets no handler, so it never
+            // takes a press meant for its parent. A live radio is turned off with
+            // `disabled`, which keeps the same element instead of remounting it.
             onPress={
-              disabled
-                ? undefined
-                : (event) => {
+              onPress || context?.onValueChange
+                ? (event) => {
                     handlePress({
                       onPress,
                       onValueChange: context?.onValueChange,
@@ -138,7 +141,9 @@ const RadioButtonAndroid = ({
                       event,
                     });
                   }
+                : undefined
             }
+            disabled={disabled}
             role="radio"
             aria-disabled={disabled}
             aria-checked={checked}

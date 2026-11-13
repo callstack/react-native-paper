@@ -195,13 +195,20 @@ const RadioButtonItem = ({
           }) === 'checked';
         return (
           <TouchableRipple
-            onPress={(event) =>
-              handlePress({
-                onPress: onPress,
-                onValueChange: context?.onValueChange,
-                value,
-                event,
-              })
+            // A row with nothing to call (no `onPress` and no
+            // `RadioButton.Group`) is read only and gets no handler, so it never
+            // takes a press meant for its parent. A live row is turned off with
+            // `disabled`, which keeps the same element instead of remounting it.
+            onPress={
+              onPress || context?.onValueChange
+                ? (event) =>
+                    handlePress({
+                      onPress: onPress,
+                      onValueChange: context?.onValueChange,
+                      value,
+                      event,
+                    })
+                : undefined
             }
             onLongPress={onLongPress}
             aria-label={ariaLabel}

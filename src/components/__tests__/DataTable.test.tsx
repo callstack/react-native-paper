@@ -1,4 +1,8 @@
-import { describe, expect, it } from '@jest/globals';
+import { Pressable } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
+
+import { describe, expect, it, jest } from '@jest/globals';
+import { userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import Checkbox from '../Checkbox';
@@ -48,6 +52,76 @@ describe('DataTable.Title', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
+  });
+
+  it('is not disabled when no press handler is passed', async () => {
+    await render(<DataTable.Title>Dessert</DataTable.Title>);
+
+    expect(screen.getByText('Dessert')).not.toBeDisabled();
+  });
+
+  it('lets a press reach the parent when no press handler is passed', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Pressable onPress={onPress}>
+        <DataTable.Title>Dessert</DataTable.Title>
+      </Pressable>
+    );
+
+    await userEvent.press(screen.getByText('Dessert'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onPress when the title is pressed', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(<DataTable.Title onPress={onPress}>Dessert</DataTable.Title>);
+
+    await userEvent.press(screen.getByText('Dessert'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('is disabled when the disabled prop is passed', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <DataTable.Title disabled onPress={onPress}>
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(screen.getByText('Dessert')).toBeDisabled();
+
+    await userEvent.press(screen.getByText('Dessert'));
+
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('stays a disabled control when only the disabled prop is passed', async () => {
+    await render(<DataTable.Title disabled>Dessert</DataTable.Title>);
+
+    expect(screen.getByText('Dessert')).toBeDisabled();
+  });
+
+  it('drops a button role when no press handler is passed', async () => {
+    await render(<DataTable.Title role="button">Dessert</DataTable.Title>);
+
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+
+    // hiding the element instead would silence the title text
+    expect(screen.getByText('Dessert')).toBeOnTheScreen();
+  });
+
+  it('keeps a button role carrying a state when no press handler is passed', async () => {
+    // a toggle reports a state of its own, so the role reporting it stays: a
+    // state a presentational element carries goes unannounced
+    await render(
+      <DataTable.Title role="button" aria-checked>
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(screen.getByRole('button')).toHaveProp('aria-checked', true);
   });
 });
 

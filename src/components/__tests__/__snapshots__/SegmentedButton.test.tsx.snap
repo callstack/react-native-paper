@@ -40,7 +40,7 @@ exports[`renders segmented button 1`] = `
         {
           "busy": undefined,
           "checked": true,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -174,7 +174,7 @@ exports[`renders segmented button 1`] = `
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -322,7 +322,7 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
         {
           "busy": undefined,
           "checked": true,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -504,7 +504,7 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
         {
           "busy": undefined,
           "checked": true,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -638,7 +638,7 @@ exports[`should have \`accessibilityState={ checked: true }\` when selected show
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -788,7 +788,7 @@ exports[`should not render icon when icon prop is not passed 1`] = `
         {
           "busy": undefined,
           "checked": true,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -923,7 +923,7 @@ exports[`should not render icon when icon prop is not passed 1`] = `
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -1072,7 +1072,7 @@ exports[`should not render icon when icon prop is passed along with label, butto
         {
           "busy": undefined,
           "checked": true,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -1256,7 +1256,7 @@ exports[`should not render icon when icon prop is passed along with label, butto
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -1454,7 +1454,7 @@ exports[`should render icon when icon prop is passed 1`] = `
         {
           "busy": undefined,
           "checked": true,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -1636,7 +1636,7 @@ exports[`should render icon when icon prop is passed 1`] = `
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -1832,7 +1832,7 @@ exports[`should render icon when icon prop is passed along with label, button is
         {
           "busy": undefined,
           "checked": true,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -2016,7 +2016,7 @@ exports[`should render icon when icon prop is passed along with label, button is
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -2214,7 +2214,7 @@ exports[`should render icon when icon prop is passed along with label, no matter
         {
           "busy": undefined,
           "checked": true,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -2398,7 +2398,7 @@ exports[`should render icon when icon prop is passed along with label, no matter
         {
           "busy": undefined,
           "checked": false,
-          "disabled": false,
+          "disabled": undefined,
           "expanded": undefined,
           "selected": undefined,
         }

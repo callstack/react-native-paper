@@ -258,27 +258,8 @@ exports[`renders icon button by default 1`] = `
   }
 >
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
     centered={true}
-    collapsable={false}
-    focusable={true}
     hitSlop={
       {
         "bottom": 4,
@@ -287,16 +268,7 @@ exports[`renders icon button by default 1`] = `
         "top": 4,
       }
     }
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    role="none"
     style={
       [
         {
@@ -383,27 +355,8 @@ exports[`renders icon button with color 1`] = `
   }
 >
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
     centered={true}
-    collapsable={false}
-    focusable={true}
     hitSlop={
       {
         "bottom": 4,
@@ -412,16 +365,7 @@ exports[`renders icon button with color 1`] = `
         "top": 4,
       }
     }
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    role="none"
     style={
       [
         {
@@ -514,7 +458,7 @@ exports[`renders icon button with custom border radius 1`] = `
       {
         "busy": undefined,
         "checked": undefined,
-        "disabled": false,
+        "disabled": undefined,
         "expanded": undefined,
         "selected": undefined,
       }
@@ -628,27 +572,8 @@ exports[`renders icon button with size 1`] = `
   }
 >
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
     centered={true}
-    collapsable={false}
-    focusable={true}
     hitSlop={
       {
         "bottom": 1,
@@ -657,16 +582,7 @@ exports[`renders icon button with size 1`] = `
         "top": 1,
       }
     }
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    role="none"
     style={
       [
         {
@@ -759,7 +675,7 @@ exports[`renders icon button with small border radius 1`] = `
       {
         "busy": undefined,
         "checked": undefined,
-        "disabled": false,
+        "disabled": undefined,
         "expanded": undefined,
         "selected": undefined,
       }
@@ -873,27 +789,8 @@ exports[`renders icon change animated 1`] = `
   }
 >
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
     centered={true}
-    collapsable={false}
-    focusable={true}
     hitSlop={
       {
         "bottom": 4,
@@ -902,16 +799,7 @@ exports[`renders icon change animated 1`] = `
         "top": 4,
       }
     }
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    role="none"
     style={
       [
         {

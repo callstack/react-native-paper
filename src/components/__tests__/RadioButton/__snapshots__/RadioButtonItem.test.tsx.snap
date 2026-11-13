@@ -2,36 +2,10 @@
 
 exports[`can render leading radio button control 1`] = `
 <View
-  accessibilityLabel="Default with leading control"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-label="Default with leading control"
+  focusable={false}
   role="radio"
   style={
     [
@@ -56,36 +30,10 @@ exports[`can render leading radio button control 1`] = `
     }
   >
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      aria-checked={false}
+      aria-live="polite"
+      focusable={false}
       role="radio"
       style={
         [
@@ -180,36 +128,10 @@ exports[`can render leading radio button control 1`] = `
 
 exports[`can render the Android radio button on different platforms 1`] = `
 <View
-  accessibilityLabel="iOS Checkbox"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-label="iOS Checkbox"
+  focusable={false}
   role="radio"
   style={
     [
@@ -270,36 +192,10 @@ exports[`can render the Android radio button on different platforms 1`] = `
       iOS Checkbox
     </Text>
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      aria-checked={false}
+      aria-live="polite"
+      focusable={false}
       role="radio"
       style={
         [
@@ -332,36 +228,10 @@ exports[`can render the Android radio button on different platforms 1`] = `
 
 exports[`can render the iOS radio button on different platforms 1`] = `
 <View
-  accessibilityLabel="iOS Radio button"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-label="iOS Radio button"
+  focusable={false}
   role="radio"
   style={
     [
@@ -422,36 +292,10 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       iOS Radio button
     </Text>
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      aria-checked={false}
+      aria-live="polite"
+      focusable={false}
       role="radio"
       style={
         [
@@ -510,36 +354,10 @@ exports[`can render the iOS radio button on different platforms 1`] = `
 
 exports[`renders unchecked 1`] = `
 <View
-  accessibilityLabel="Unchecked Button"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-label="Unchecked Button"
+  focusable={false}
   role="radio"
   style={
     [
@@ -600,36 +418,10 @@ exports[`renders unchecked 1`] = `
       Unchecked Button
     </Text>
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      aria-checked={false}
+      aria-live="polite"
+      focusable={false}
       role="radio"
       style={
         [

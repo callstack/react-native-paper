@@ -186,8 +186,74 @@ it('renders disabled button', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled button if there is no touch handler passed', async () => {
-  await render(<Button testID="disabled-button">Disabled button</Button>);
+it('does not mark a button without a touch handler as disabled', async () => {
+  await render(<Button testID="plain-button">Plain button</Button>);
+
+  expect(screen.getByTestId('plain-button')).not.toBeDisabled();
+});
+
+it('drops the button role when neither a touch handler nor a state is passed', async () => {
+  await render(<Button>Plain button</Button>);
+
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+});
+
+// A toggle reports its state, so it stays the control that state belongs to
+// even when the handler is missing: the role would otherwise go and leave
+// `aria-checked` on a presentational element, which no platform announces.
+it('keeps the button role and the checked state on a handler-less toggle', async () => {
+  await render(
+    <Button mode="outlined" selected>
+      Toggle
+    </Button>
+  );
+
+  const toggle = screen.getByRole('button');
+
+  expect(toggle).toHaveProp('aria-checked', true);
+  expect(toggle).not.toBeDisabled();
+});
+
+it('keeps the button role and the pressed state of a handler-less web toggle', async () => {
+  // the web build reports `selected` with `aria-pressed`, which used to end up on
+  // a `role="none"` element: no platform announces a state a presentational
+  // element carries
+  jest.replaceProperty(Platform, 'OS', 'web');
+
+  await render(
+    <Button mode="outlined" selected>
+      Toggle
+    </Button>
+  );
+
+  const toggle = screen.getByRole('button');
+
+  expect(toggle).toHaveProp('aria-pressed', true);
+  expect(toggle).not.toBeDisabled();
+});
+
+it('still reports the checked state of a selected toggle with a touch handler', async () => {
+  await render(
+    <Button mode="outlined" selected onPress={() => {}}>
+      Toggle
+    </Button>
+  );
+
+  const toggle = screen.getByRole('button');
+
+  expect(toggle).toHaveProp(
+    'accessibilityState',
+    expect.objectContaining({ checked: true })
+  );
+  expect(toggle).toBeEnabled();
+});
+
+it('renders disabled button when the disabled prop is passed', async () => {
+  await render(
+    <Button disabled onPress={() => {}} testID="disabled-button">
+      Disabled button
+    </Button>
+  );
 
   expect(screen.getByTestId('disabled-button')).toBeDisabled();
 });
@@ -244,13 +310,21 @@ it('paints the container color only on the container', async () => {
 });
 
 it('exposes the accessibility label', async () => {
-  await render(<Button aria-label="label">Button</Button>);
+  await render(
+    <Button aria-label="label" onPress={() => {}}>
+      Button
+    </Button>
+  );
 
   expect(screen.getByRole('button', { name: 'label' })).toBeOnTheScreen();
 });
 
 it('exposes the accessibility hint', async () => {
-  await render(<Button accessibilityHint="hint">Button</Button>);
+  await render(
+    <Button accessibilityHint="hint" onPress={() => {}}>
+      Button
+    </Button>
+  );
 
   expect(screen.getByRole('button')).toHaveProp('accessibilityHint', 'hint');
 });

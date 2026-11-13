@@ -16,7 +16,17 @@ import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import hasTouchHandler from '../../utils/hasTouchHandler';
+import hasTouchHandler, {
+  getNonControlA11yProps,
+} from '../../utils/hasTouchHandler';
+
+// The plain View branch has nothing to press, so the render prop and the style
+// function always see this idle state. Matches the state shape Pressable passes.
+const IDLE_STATE: PressableStateCallbackType = {
+  pressed: false,
+  hovered: false,
+  focused: false,
+};
 
 export type Props = PressableProps & {
   /**
@@ -42,7 +52,11 @@ export type Props = PressableProps & {
    */
   disabled?: boolean;
   /**
-   * Function to execute on press. If not set, will cause the touchable to be disabled.
+   * Function to execute on press. Without it, and without `onLongPress`,
+   * `onPressIn` or `onPressOut`, the touchable renders as a plain container and
+   * is not exposed as a control. To make it unreachable at runtime, pass
+   * `disabled` rather than removing this handler: switching between having a
+   * handler and not having one renders another element and remounts children.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
@@ -136,6 +150,20 @@ const TouchableRipple = ({
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
+
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
+
+  // With no touch handler and no explicit disabled this is not a control, so it
+  // renders as a plain View. A Pressable is wrong here either way: keep the old
+  // disabled flag and it gets announced as a disabled control, drop the flag and
+  // it starts claiming the touch, swallowing taps meant for whatever wraps it.
+  const isControl = hasPassedTouchHandler || Boolean(disabledProp);
+  const isInteractive = hasPassedTouchHandler && !disabledProp;
 
   const handlePressIn = React.useCallback(
     (e: any) => {
@@ -272,14 +300,22 @@ const TouchableRipple = ({
     [onPressOut, rippleEffectEnabled]
   );
 
-  const hasPassedTouchHandler = hasTouchHandler({
-    onPress,
-    onLongPress,
-    onPressIn,
-    onPressOut,
-  });
-
-  const disabled = disabledProp || !hasPassedTouchHandler;
+  if (!isControl) {
+    return (
+      <View
+        {...rest}
+        ref={ref}
+        {...getNonControlA11yProps(rest)}
+        style={[
+          styles.touchable,
+          styles.disabled,
+          typeof style === 'function' ? style(IDLE_STATE) : style,
+        ]}
+      >
+        {typeof children === 'function' ? children(IDLE_STATE) : children}
+      </View>
+    );
+  }
 
   return (
     <Pressable
@@ -287,13 +323,13 @@ const TouchableRipple = ({
       ref={ref}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      disabled={disabled}
+      disabled={disabledProp}
       style={(state) => [
         styles.touchable,
         // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
         // state.focused && { backgroundColor: ___ },
-        state.hovered && { backgroundColor: hoverColor },
-        disabled && styles.disabled,
+        state.hovered && isInteractive && { backgroundColor: hoverColor },
+        !isInteractive && styles.disabled,
         typeof style === 'function' ? style(state) : style,
       ]}
     >
@@ -319,7 +355,7 @@ const TouchableRipple = ({
 
         return (
           <>
-            {!disabled && touchTargetStyle && (
+            {isInteractive && touchTargetStyle && (
               <View aria-hidden style={touchTargetStyle} />
             )}
             {resolveChildren(children, state)}
