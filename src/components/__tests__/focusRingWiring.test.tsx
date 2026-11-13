@@ -65,12 +65,14 @@ describe('focus ring wiring', () => {
     expect(ringOffset()).toBe(INWARD);
   });
 
-  it('Chip rings inward, so a scrolling chip row cannot trim it', async () => {
+  // Outward like MD3 and Material Web. A scrolling chip row that trims it is
+  // the app's container, not the chip's own view.
+  it('Chip rings outward', async () => {
     await render(<Chip onPress={() => {}}>chip</Chip>);
 
     await focusFirstFocusable();
 
-    expect(ringOffset()).toBe(INWARD);
+    expect(ringOffset()).toBe(OUTWARD);
   });
 
   // The bar clips (`overflow: 'hidden'`) and tabs fill it edge to edge, so an

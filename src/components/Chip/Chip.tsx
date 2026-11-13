@@ -326,7 +326,6 @@ const Chip = ({
     >
       <TouchableRipple
         borderless
-        focusRing="inward"
         background={background}
         style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
