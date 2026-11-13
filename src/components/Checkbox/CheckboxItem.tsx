@@ -163,6 +163,8 @@ const CheckboxItem = ({
   return (
     <TouchableRipple
       aria-label={ariaLabel}
+      // A full-width row: an outward ring would run into the rows around it.
+      focusRing="inward"
       role="checkbox"
       aria-checked={status === 'indeterminate' ? 'mixed' : status === 'checked'}
       aria-disabled={disabled}

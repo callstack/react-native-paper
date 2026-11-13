@@ -12,6 +12,7 @@ import { render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import Card from '../Card/Card';
+import CheckboxItem from '../Checkbox/CheckboxItem';
 import Chip from '../Chip/Chip';
 import FAB from '../FAB/FAB';
 import ListItem from '../List/ListItem';
@@ -122,6 +123,16 @@ describe('focus ring wiring', () => {
       height: 24,
       borderRadius: 12,
     });
+  });
+
+  it('Checkbox.Item rings inward, clear of the rows above and below', async () => {
+    await render(
+      <CheckboxItem label="row" status="checked" onPress={() => {}} />
+    );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(INWARD);
   });
 
   it('Card rings outward', async () => {
