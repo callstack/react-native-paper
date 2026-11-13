@@ -15,6 +15,7 @@ import Button from '../Button/Button';
 import Card from '../Card/Card';
 import CheckboxItem from '../Checkbox/CheckboxItem';
 import Chip from '../Chip/Chip';
+import DataTableRow from '../DataTable/DataTableRow';
 import FAB from '../FAB/FAB';
 import FABMenu from '../FAB/Menu';
 import ListAccordion from '../List/ListAccordion';
@@ -168,6 +169,18 @@ describe('focus ring wiring', () => {
     await focusFirstFocusable();
 
     expect(ringOffset()).toBe(OUTWARD);
+  });
+
+  it('DataTable.Row rings inward, clear of the rows above and below', async () => {
+    await render(
+      <DataTableRow onPress={() => {}}>
+        <Text>cell</Text>
+      </DataTableRow>
+    );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(INWARD);
   });
 
   it('Card rings outward', async () => {
