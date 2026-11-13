@@ -6,6 +6,8 @@ import type { MotionConfig } from './motion';
 import type { ThemeShapes } from './shape';
 import type { Typescale } from './typography';
 
+export type ContrastLevel = 'standard' | 'medium' | 'high';
+
 export type Theme = {
   dark: boolean;
   animation: {
