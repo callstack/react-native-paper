@@ -192,3 +192,59 @@ it('calls onDismiss when trigger is pressed while menu is open', async () => {
   await userEvent.press(screen.getByTestId('fab-shell'));
   expect(onDismiss).toHaveBeenCalledTimes(1);
 });
+
+it('exposes the expanded state on the trigger', async () => {
+  const { rerender } = await render(
+    <FAB.Menu
+      expanded={false}
+      onDismiss={jest.fn()}
+      trigger={{ icon: 'plus', testID: 'fab-shell' }}
+      items={makeItems()}
+    />
+  );
+  expect(screen.getByTestId('fab-shell')).toBeCollapsed();
+
+  await rerender(
+    <FAB.Menu
+      expanded
+      onDismiss={jest.fn()}
+      trigger={{ icon: 'plus', testID: 'fab-shell' }}
+      items={makeItems()}
+    />
+  );
+  expect(screen.getByTestId('fab-shell')).toBeExpanded();
+});
+
+it('renders item labels with the title medium typescale', async () => {
+  await render(
+    <FAB.Menu
+      expanded
+      onDismiss={jest.fn()}
+      trigger={{ icon: 'plus' }}
+      items={makeItems()}
+    />
+  );
+  expect(screen.getByText('Send email')).toHaveStyle({ fontSize: 16 });
+});
+
+it('hides collapsed items from assistive technology and exposes expanded ones', async () => {
+  const { rerender } = await render(
+    <FAB.Menu
+      expanded={false}
+      onDismiss={jest.fn()}
+      trigger={{ icon: 'plus' }}
+      items={makeItems()}
+    />
+  );
+  expect(screen.queryByRole('button', { name: 'Send email' })).toBeNull();
+
+  await rerender(
+    <FAB.Menu
+      expanded
+      onDismiss={jest.fn()}
+      trigger={{ icon: 'plus' }}
+      items={makeItems()}
+    />
+  );
+  expect(screen.getByRole('button', { name: 'Send email' })).toBeOnTheScreen();
+});

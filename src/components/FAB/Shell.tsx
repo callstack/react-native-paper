@@ -113,6 +113,10 @@ export type ShellProps = {
    */
   'aria-expanded'?: boolean;
   /**
+   * Indicates that the element opens a popup, such as a menu.
+   */
+  'aria-haspopup'?: boolean | 'menu';
+  /**
    * Largest scale the label font can reach (auto-built content only).
    */
   labelMaxFontSizeMultiplier?: number;
@@ -172,6 +176,10 @@ export type ShellProps = {
    */
   theme?: ThemeProp;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
+  /**
+   * Ref to the pressable inside the shell, the element that receives focus.
+   */
+  buttonRef?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -202,6 +210,7 @@ const Shell = ({
   'aria-selected': ariaSelected,
   'aria-busy': ariaBusy,
   'aria-expanded': ariaExpanded,
+  'aria-haspopup': ariaHasPopup,
   labelMaxFontSizeMultiplier,
   labelAnimatedStyle,
   background,
@@ -215,6 +224,7 @@ const Shell = ({
   testID,
   theme: themeOverrides,
   ref,
+  buttonRef,
 }: ShellProps) => {
   const theme = useInternalTheme(themeOverrides);
 
@@ -324,6 +334,7 @@ const Shell = ({
       <Animated.View style={[styles.clip, clipStyle]}>
         {overlay}
         <TouchableRipple
+          ref={buttonRef}
           borderless
           background={background}
           onPress={onPress}
@@ -335,6 +346,7 @@ const Shell = ({
           aria-selected={ariaSelected}
           aria-busy={ariaBusy}
           aria-expanded={ariaExpanded}
+          aria-haspopup={ariaHasPopup}
           testID={testID}
           style={[
             children ? styles.fill : null,
