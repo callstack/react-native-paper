@@ -121,11 +121,14 @@ describe('focus ring wiring', () => {
     const root = (screen as unknown as { root: Node }).root;
     const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
     expect(ringed).toHaveLength(1);
+    // Material Web: a 24dp circle with the ring right outside it. The shared
+    // ring adds the outer offset, so the view is that much smaller.
+    const size = 24 - 2 * outerOffset;
     expect(style(ringed[0])).toMatchObject({
       outlineOffset: OUTWARD,
-      width: 24,
-      height: 24,
-      borderRadius: 12,
+      width: size,
+      height: size,
+      borderRadius: size / 2,
     });
   });
 
@@ -269,6 +272,9 @@ describe('focus ring wiring (web)', () => {
     expect(
       (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
     ).toBe('outward');
-    expect(style(ringed[0])).toMatchObject({ width: 24, borderRadius: 12 });
+    expect(style(ringed[0])).toMatchObject({
+      width: 24 - 2 * outerOffset,
+      borderRadius: 12 - outerOffset,
+    });
   });
 });

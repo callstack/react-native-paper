@@ -17,6 +17,7 @@ import type { ChipAvatarProps } from './helpers';
 import { ChipTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../theme/colors';
+import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -173,10 +174,13 @@ const CLOSE_AFFORDANCE_MIN_WIDTH = 26;
 
 /**
  * The close button's focus ring is a circle around the glyph, not around the
- * whole column, sized like Material Web's trailing action (4/3 of the 18dp
- * icon). It fits inside the column's 26dp floor.
+ * whole column, matching Material Web's trailing action: a 24dp circle (4/3
+ * of the 18dp icon) with the 3dp ring right outside it and no outer offset
+ * (`inset: unset`). The shared ring adds the 2dp offset, so the view is that
+ * much smaller. The ring ends 30dp across, 2dp clear of the label.
  */
-const CLOSE_FOCUS_RING_SIZE = 24;
+const CLOSE_FOCUS_RING_SIZE =
+  24 - 2 * tokens.md.sys.state.focusIndicator.outerOffset;
 
 /**
  * The label makes a default chip 32dp tall, so the slop to reach the 48dp
