@@ -572,11 +572,11 @@ const styles = StyleSheet.create({
     // wins over maxWidth.
     minWidth: CLOSE_AFFORDANCE_MIN_WIDTH,
     maxWidth: '50%',
-    height: '100%',
+    top: 0,
+    bottom: 0,
   },
   closeButton: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
     justifyContent: 'center',
   },
   closeFocusRing: {

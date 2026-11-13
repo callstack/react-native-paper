@@ -261,11 +261,12 @@ exports[`renders chip with close button 1`] = `
   <View
     style={
       {
-        "height": "100%",
+        "bottom": 0,
         "maxWidth": "50%",
         "minWidth": 26,
         "position": "absolute",
         "right": 0,
+        "top": 0,
         "width": 34,
       }
     }
@@ -313,9 +314,8 @@ exports[`renders chip with close button 1`] = `
       style={
         [
           {
-            "height": "100%",
+            "flex": 1,
             "justifyContent": "center",
-            "width": "100%",
           },
           {
             "borderRadius": 8,
@@ -659,11 +659,12 @@ exports[`renders chip with custom close button 1`] = `
   <View
     style={
       {
-        "height": "100%",
+        "bottom": 0,
         "maxWidth": "50%",
         "minWidth": 26,
         "position": "absolute",
         "right": 0,
+        "top": 0,
         "width": 34,
       }
     }
@@ -711,9 +712,8 @@ exports[`renders chip with custom close button 1`] = `
       style={
         [
           {
-            "height": "100%",
+            "flex": 1,
             "justifyContent": "center",
-            "width": "100%",
           },
           {
             "borderRadius": 8,
