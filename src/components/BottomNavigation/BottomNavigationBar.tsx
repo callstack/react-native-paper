@@ -201,6 +201,11 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Style for the active indicator pill.
+   * The show and hide animation (opacity and horizontal scale) is applied on top of it.
+   */
   activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -671,12 +676,27 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               : 1;
 
             // Scale horizontally the outline pill
-            const outlineScale = focused
-              ? active.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.5, 1],
-                })
-              : 0;
+            const outlineScale = active.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0.4, 1],
+            });
+
+            // Fade the pill in over the first fifth of showing it and out
+            // over the first fifth of hiding it, as Material Components for
+            // Android does.
+            const outlineOpacity = active.interpolate(
+              focused
+                ? {
+                    inputRange: [0, 0.2, 1],
+                    outputRange: [0, 1, 1],
+                    extrapolate: 'clamp',
+                  }
+                : {
+                    inputRange: [0, 0.8, 1],
+                    outputRange: [0, 0, 1],
+                    extrapolate: 'clamp',
+                  }
+            );
 
             const badge = getBadge({ route });
 
@@ -740,21 +760,26 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       },
                     ]}
                   >
-                    {isV3 && focused && (
+                    {isV3 && (
                       <Animated.View
                         style={[
-                          styles.outline,
+                          styles.outlineContainer,
                           {
-                            transform: [
-                              {
-                                scaleX: outlineScale,
-                              },
-                            ],
-                            backgroundColor: theme.colors.secondaryContainer,
+                            opacity: outlineOpacity,
+                            transform: [{ scaleX: outlineScale }],
                           },
-                          activeIndicatorStyle,
                         ]}
-                      />
+                      >
+                        <View
+                          style={[
+                            styles.outline,
+                            {
+                              backgroundColor: theme.colors.secondaryContainer,
+                            },
+                            activeIndicatorStyle,
+                          ]}
+                        />
+                      </Animated.View>
                     )}
                     <Animated.View
                       style={[
@@ -995,6 +1020,12 @@ const styles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  // Fills the 32x32 icon container, so sizes, alignSelf and absolute positions
+  // in `activeIndicatorStyle` resolve against the icon slot.
+  outlineContainer: {
+    ...StyleSheet.absoluteFill,
+    justifyContent: 'center',
   },
   outline: {
     width: OUTLINE_WIDTH,
