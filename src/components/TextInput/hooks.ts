@@ -6,7 +6,7 @@ import {
   type ComponentRef,
   type RefObject,
 } from 'react';
-import { TextInput as NativeTextInput } from 'react-native';
+import { Platform, TextInput as NativeTextInput } from 'react-native';
 import type { BlurEvent, FocusEvent } from 'react-native';
 
 import {
@@ -14,6 +14,7 @@ import {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
+  type SharedValue,
 } from 'react-native-reanimated';
 
 import {
@@ -53,7 +54,8 @@ const useTextInputAnimation = ({
   hasAccessory: boolean;
   value: string | undefined;
   defaultValue: string | undefined;
-}): TextInputAnimationState & TextInputAnimationHandlers => {
+}): TextInputAnimationState &
+  TextInputAnimationHandlers & { floatSV: SharedValue<number> } => {
   const initialText = value ?? defaultValue ?? '';
 
   const focusSV = useSharedValue(0);
@@ -108,18 +110,14 @@ const useTextInputAnimation = ({
     ),
   }));
 
-  const animatedContainerStyle = useAnimatedStyle(() => ({
-    opacity: floatSV.value,
-  }));
-
   const animatedActiveOutlineStyle = useAnimatedStyle(() => ({
     transform: [{ scaleX: focusSV.value }],
   }));
 
   return {
+    floatSV,
     animatedLabelWrapperStyle,
     animatedLabelTextStyle,
-    animatedContainerStyle,
     animatedActiveOutlineStyle:
       variant === 'filled' ? animatedActiveOutlineStyle : undefined,
     runFocusAnimation,
@@ -362,6 +360,22 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   );
 
   /**
+   * The input fades in with the label as the label floats, so its placeholder,
+   * prefix and suffix don't overlap the label on its way up. While the label
+   * rests, the input keeps full opacity: it is empty and its placeholder is
+   * blank, so nothing shows, and iOS and Android leave views with opacity 0 out
+   * of the accessibility tree, which would hide the field from screen readers.
+   * The style always applies, so the input never keeps a stale opacity once
+   * its label is removed.
+   */
+  const fadesWithLabel = !!props.label && flags.isFloating;
+  const { floatSV } = animation;
+
+  const animatedContainerStyle = useAnimatedStyle(() => ({
+    opacity: fadesWithLabel ? floatSV.value : 1,
+  }));
+
+  /**
    * Edge case: a controlled `value` can change programmatically.
    * Reconcile the float animation with the new text here.
    * While focused the label is always floated, so we skip to avoid fighting the
@@ -437,9 +451,22 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     ? props.startAccessory
     : props.endAccessory;
 
-  // https://github.com/facebook/react-native/issues/31573
+  /**
+   * While the label rests in its place the placeholder stays empty. An empty
+   * field then reports no text, so Android screen readers announce the field's
+   * `aria-label` (label and supporting text): any text, even `' '`, is read
+   * aloud instead ("Space, edit box"). iOS multiline fields keep a blank `' '`:
+   * a multiline TextInput whose placeholder starts empty never shows the
+   * placeholder set later (https://github.com/facebook/react-native/issues/31573).
+   * VoiceOver reads the `aria-label` either way.
+   */
+  const restingPlaceholder =
+    Platform.OS === 'ios' && props.multiline ? ' ' : '';
+
   const placeholder =
-    isFocused || !props.label || hasValue ? props.placeholder : ' ';
+    isFocused || !props.label || hasValue
+      ? props.placeholder
+      : restingPlaceholder;
 
   return {
     input,
@@ -453,11 +480,7 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     selectionColor,
     cursorColor,
     animatedActiveOutlineStyles: undefined,
-    // The input only fades out while a label rests in its place; without a
-    // label the input and its placeholder stay visible.
-    animatedContainerStyle: props.label
-      ? animation.animatedContainerStyle
-      : undefined,
+    animatedContainerStyle,
     placeholder,
     counterText,
     accessibilityProps,

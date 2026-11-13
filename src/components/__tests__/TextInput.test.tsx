@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   I18nManager,
+  Platform,
   StyleSheet,
   TextInput as NativeTextInput,
   View,
@@ -916,9 +917,9 @@ it('does not expose the placeholder string when the TextInput is not focused', a
     />
   );
 
-  /* Sentinel space avoids iOS multiline UITextView not updating placeholder from nil (react-native#31573). */
+  /* Empty, not a blank: Android screen readers read any text, even ' ', instead of the label. */
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe('');
 });
 
 it('shows placeholder when unfocused and no label is given', async () => {
@@ -956,28 +957,45 @@ it('shows placeholder when the TextInput is focused', async () => {
   );
 });
 
-it('shows placeholder on multiline TextInput when focused', async () => {
-  await render(
-    <TextInput
-      label="Notes"
-      value=""
-      onChangeText={() => {}}
-      placeholder="Add a note…"
-      multiline
-      testID="tf-multiline"
-    />
-  );
+it.each([
+  // A blank, not empty: an iOS multiline TextInput never shows a placeholder
+  // set after an empty one (react-native#31573).
+  { os: 'ios' as const, restingPlaceholder: ' ' },
+  { os: 'android' as const, restingPlaceholder: '' },
+])(
+  'shows placeholder on multiline TextInput when focused ($os)',
+  async ({ os, restingPlaceholder }) => {
+    const originalOS = Platform.OS;
+    Platform.OS = os;
 
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(' ');
+    try {
+      await render(
+        <TextInput
+          label="Notes"
+          value=""
+          onChangeText={() => {}}
+          placeholder="Add a note…"
+          multiline
+          testID="tf-multiline"
+        />
+      );
 
-  await fireEvent(screen.getByTestId('tf-multiline'), 'focus');
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(
+        restingPlaceholder
+      );
 
-  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(
-    'Add a note…'
-  );
-});
+      await fireEvent(screen.getByTestId('tf-multiline'), 'focus');
+
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(
+        'Add a note…'
+      );
+    } finally {
+      Platform.OS = originalOS;
+    }
+  }
+);
 
 it.each(['filled', 'outlined'] as const)(
   'keeps an empty, unfocused %s TextInput without a label visible',
@@ -995,17 +1013,39 @@ it.each(['filled', 'outlined'] as const)(
   }
 );
 
-it('hides the input of an empty, unfocused TextInput while its label rests in place', async () => {
-  await render(
-    <TextInput
-      label="Email"
-      value=""
-      onChangeText={() => {}}
-      testID="tf-input"
-    />
-  );
+it.each(['filled', 'outlined'] as const)(
+  'keeps an empty, unfocused %s TextInput reachable by its label and supporting text while its label rests in place',
+  async (variant) => {
+    await render(
+      <TextInput
+        variant={variant}
+        label="Email"
+        supportingText="We never share it"
+        value=""
+        onChangeText={() => {}}
+      />
+    );
 
-  expect(screen.getByTestId('tf-input')).not.toBeVisible();
+    expect(screen.getByLabelText('Email, We never share it')).toBeVisible();
+  }
+);
+
+it('shows the placeholder of a TextInput that was focused before its label was removed', async () => {
+  const props = {
+    value: '',
+    onChangeText: () => {},
+    placeholder: 'Placeholder',
+    testID: 'tf-input',
+  };
+
+  const { rerender } = await render(<TextInput label="Label" {...props} />);
+
+  await fireEvent(screen.getByTestId('tf-input'), 'focus');
+  await fireEvent(screen.getByTestId('tf-input'), 'blur');
+
+  await rerender(<TextInput {...props} />);
+
+  expect(screen.getByPlaceholderText('Placeholder')).toBeVisible();
 });
 
 it('does not expose the placeholder string again after the TextInput loses focus', async () => {
@@ -1023,7 +1063,7 @@ it('does not expose the placeholder string again after the TextInput loses focus
   await fireEvent(screen.getByTestId('tf-input'), 'blur');
 
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe('');
 });
 
 it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order)', async () => {
