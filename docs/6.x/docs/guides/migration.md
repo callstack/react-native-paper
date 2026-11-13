@@ -210,6 +210,8 @@ If you import it from Paper's type declarations instead, the path changed:
 +import type { IconSource } from 'react-native-paper/lib/typescript/src/components/Icon';
 ```
 
+`Icon`'s `source` prop now uses this type too, see [Icon](#icon).
+
 #### `MD3Colors`
 
 `MD3Colors` was renamed to `Palette`. It has every key `MD3Colors` had, such as `Palette.tertiary70`, plus new tones such as `primary98` and `neutral94`. The `neutral` tones from `neutral10` to `neutral99` are slightly different colors.
@@ -667,6 +669,20 @@ The misspelled `traileringIcon` props have been renamed:
 + onTrailingIconPress={onMicrophonePress}
 />
 ```
+
+### Chip
+
+The close button (`onClose`) now fills the trailing 34dp column reserved for it, instead of only the 26x18 area around its icon, and its touch target extends to 48dp in height. Taps in that column that used to activate the chip's `onPress` now activate `onClose`.
+
+### IconButton
+
+Corner radii set through `style` no longer shape the press, hover and disabled feedback.
+
+### TouchableRipple
+
+`borderless` has no effect on web. The web ripple is always clipped to the touchable's shape, including when `centered` is set, and the touchable no longer clips its own content. A child that needs a clipped or rounded shape should carry that shape itself.
+
+`hitSlop` now works on web: the touchable renders an invisible target that extends past its bounds. An ancestor with `overflow: 'hidden'` or a scroll view clips it, as on Android.
 
 ### TextInput
 
@@ -1320,4 +1336,30 @@ A standalone `Checkbox` has no visible label, so it now warns in development whe
 +  onValueChange={setValue}
 +  theme={{ colors: { primary: 'tomato' } }}
 +/>
+```
+
+### Icon
+
+`Icon`'s `source` prop is typed as `IconSource` instead of `any`, so a value that isn't an icon name, an image source or a render function, such as a boolean or `undefined`, is now a type error. `Icon` still renders nothing for those values.
+
+If you pass a field that can be `undefined`, such as an optional `focusedIcon` on a route in `BottomNavigation`'s `renderIcon`, check it first:
+
+```diff
+-renderIcon={({ route, color }) => (
+-  <Icon source={route.focusedIcon} color={color} size={24} />
+-)}
++renderIcon={({ route, color }) =>
++  route.focusedIcon ? (
++    <Icon source={route.focusedIcon} color={color} size={24} />
++  ) : null
++}
+```
+
+A render function's props are now typed as what `Icon` passes: `size`, `color`, `direction` and `testID`. For an icon that isn't directional, `direction` is now `'ltr'`, where 5.x passed `null`, and the `icon` function in `PaperProvider`'s `settings` gets `'ltr'` too. Paper's own icons look the same, since they only flip for `'rtl'`.
+
+`testID` is optional (`testID?: string`) in those props, so if you typed your render function's props with a required `testID: string`, you now get a type error. Make it optional:
+
+```diff
+-const renderIcon = ({ size, testID }: { size: number; testID: string }) => (
++const renderIcon = ({ size, testID }: { size: number; testID?: string }) => (
 ```

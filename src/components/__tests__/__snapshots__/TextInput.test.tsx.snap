@@ -141,6 +141,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -150,7 +151,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -201,10 +201,10 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -226,8 +226,14 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],
@@ -330,6 +336,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -339,7 +346,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -390,10 +396,10 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -415,8 +421,14 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],
@@ -615,6 +627,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -624,7 +637,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -675,10 +687,10 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -700,8 +712,14 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],
@@ -804,6 +822,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -813,7 +832,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -864,10 +882,10 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -889,8 +907,14 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],
@@ -1267,6 +1291,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -1276,7 +1301,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -1327,10 +1351,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -1352,8 +1376,14 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],
@@ -1456,6 +1486,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -1465,7 +1496,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -1516,10 +1546,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -1541,8 +1571,14 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],
@@ -1721,6 +1757,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -1730,7 +1767,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -1781,10 +1817,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -1806,8 +1842,14 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],
@@ -1910,6 +1952,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         {
           "alignItems": "center",
           "justifyContent": "center",
+          "zIndex": 1,
         }
       }
     >
@@ -1919,7 +1962,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           [
             {
               "margin": 6,
-              "overflow": "hidden",
             },
             {
               "backgroundColor": undefined,
@@ -1970,10 +2012,10 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           focusable={true}
           hitSlop={
             {
-              "bottom": 6,
-              "left": 6,
-              "right": 6,
-              "top": 6,
+              "bottom": 12,
+              "left": 12,
+              "right": 12,
+              "top": 12,
             }
           }
           multiline={false}
@@ -1995,8 +2037,14 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
+                },
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
                 },
                 undefined,
               ],

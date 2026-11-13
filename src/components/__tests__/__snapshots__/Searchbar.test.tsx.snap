@@ -96,7 +96,6 @@ exports[`activity indicator snapshot test 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -137,10 +136,10 @@ exports[`activity indicator snapshot test 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -161,8 +160,14 @@ exports[`activity indicator snapshot test 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -535,7 +540,6 @@ exports[`renders searchbar in "view" mode 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -576,10 +580,10 @@ exports[`renders searchbar in "view" mode 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -600,8 +604,14 @@ exports[`renders searchbar in "view" mode 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -701,7 +711,6 @@ exports[`renders searchbar in "view" mode 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -742,10 +751,10 @@ exports[`renders searchbar in "view" mode 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -766,8 +775,14 @@ exports[`renders searchbar in "view" mode 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -938,7 +953,6 @@ exports[`renders with placeholder 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -979,10 +993,10 @@ exports[`renders with placeholder 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -1003,8 +1017,14 @@ exports[`renders with placeholder 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1104,7 +1124,6 @@ exports[`renders with placeholder 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1145,10 +1164,10 @@ exports[`renders with placeholder 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1169,8 +1188,14 @@ exports[`renders with placeholder 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1316,7 +1341,6 @@ exports[`renders with text 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -1357,10 +1381,10 @@ exports[`renders with text 1`] = `
       focusable={true}
       hitSlop={
         {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
         }
       }
       onBlur={[Function]}
@@ -1381,8 +1405,14 @@ exports[`renders with text 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1478,7 +1508,6 @@ exports[`renders with text 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1519,10 +1548,10 @@ exports[`renders with text 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1543,8 +1572,14 @@ exports[`renders with text 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],

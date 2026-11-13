@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
   },
   slightlyRounded: {
     borderRadius: 4,
+  },
+  customBackground: {
+    backgroundColor: pink500,
   },
 });
 
@@ -42,6 +45,14 @@ it('renders icon button with size', async () => {
 
 it('renders disabled icon button', async () => {
   const tree = (await render(<IconButton icon="camera" disabled />)).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('lets a caller-supplied hitSlop win even while disabled', async () => {
+  const tree = (
+    await render(<IconButton icon="camera" disabled hitSlop={2} />)
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -78,6 +89,15 @@ it('renders icon button with small border radius', async () => {
   );
 
   expect(toJSON()).toMatchSnapshot();
+});
+
+it('keeps touchable content centered with custom container style', async () => {
+  await render(<IconButton icon="delete" style={styles.customBackground} />);
+  expect(screen.getByRole('button')).toHaveStyle({
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  });
 });
 
 describe('getIconButtonColor - icon color', () => {
@@ -311,5 +331,38 @@ describe('getIconButtonColor - border color', () => {
     ).toMatchObject({
       borderColor: LightTheme.colors.outlineVariant,
     });
+  });
+});
+
+describe('hitSlop', () => {
+  it('keeps the 48dp default when a forwarded hitSlop is undefined', async () => {
+    await render(
+      <IconButton
+        icon="camera"
+        onPress={() => {}}
+        hitSlop={undefined}
+        testID="icon-button"
+      />
+    );
+
+    expect(screen.getByTestId('icon-button')).toHaveProp('hitSlop', {
+      top: 4,
+      bottom: 4,
+      left: 4,
+      right: 4,
+    });
+  });
+
+  it('takes `0` as an opt out', async () => {
+    await render(
+      <IconButton
+        icon="camera"
+        onPress={() => {}}
+        hitSlop={0}
+        testID="icon-button"
+      />
+    );
+
+    expect(screen.getByTestId('icon-button')).toHaveProp('hitSlop', 0);
   });
 });
