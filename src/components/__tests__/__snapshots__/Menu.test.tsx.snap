@@ -127,7 +127,6 @@ exports[`renders not visible menu 1`] = `
         <View
           accessible={true}
           collapsable={false}
-          focusable={false}
           hitSlop={
             {
               "bottom": 4,
@@ -348,7 +347,6 @@ exports[`renders visible menu 1`] = `
           <View
             accessible={true}
             collapsable={false}
-            focusable={false}
             hitSlop={
               {
                 "bottom": 4,
@@ -1026,7 +1024,6 @@ exports[`respects anchorPosition bottom 1`] = `
           <View
             accessible={true}
             collapsable={false}
-            focusable={false}
             hitSlop={
               {
                 "bottom": 4,
@@ -1706,7 +1703,6 @@ exports[`uses the default anchorPosition of top 1`] = `
           <View
             accessible={true}
             collapsable={false}
-            focusable={false}
             hitSlop={
               {
                 "bottom": 4,

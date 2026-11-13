@@ -219,7 +219,6 @@ exports[`TouchableRipple (web) renders no touch target when it is disabled 1`] =
 exports[`TouchableRipple (web) renders no touch target when there are no touch handlers 1`] = `
 <View
   accessible={true}
-  focusable={false}
   style={
     [
       {

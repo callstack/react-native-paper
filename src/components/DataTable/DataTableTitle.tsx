@@ -21,7 +21,7 @@ import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler, {
-  ACTIVATABLE_ROLES,
+  getNonControlA11yProps,
 } from '../../utils/hasTouchHandler';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
@@ -172,12 +172,6 @@ const DataTableTitle = ({
 
   const containerStyle = [styles.container, numeric && styles.right];
 
-  // `role` wins over `accessibilityRole` on every platform, so resolve it the
-  // same way instead of testing both.
-  const effectiveRole: string | undefined = rest.role ?? rest.accessibilityRole;
-  const claimsActivatable =
-    effectiveRole !== undefined && ACTIVATABLE_ROLES.includes(effectiveRole);
-
   // Without a touch handler and without an explicit disabled this is a column
   // heading, not a control, so it renders as a plain View. A Pressable is wrong
   // here either way: it is a tab stop that does nothing on web, and on native it
@@ -190,14 +184,7 @@ const DataTableTitle = ({
     return (
       <View
         {...rest}
-        // Pressable defaults this to true, so keep it to preserve any role and
-        // state the caller set.
-        accessible={rest.accessible !== false}
-        // Drop the claim, keep the element so its label is still announced.
-        role={claimsActivatable ? 'none' : rest.role}
-        // A consumer role of button makes react-native-web render a real
-        // <button>, which is tabbable by default. Nothing to activate here.
-        focusable={rest.focusable ?? false}
+        {...getNonControlA11yProps(rest)}
         style={[...containerStyle, style]}
       >
         {icon}

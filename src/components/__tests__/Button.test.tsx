@@ -192,6 +192,62 @@ it('does not mark a button without a touch handler as disabled', async () => {
   expect(screen.getByTestId('plain-button')).not.toBeDisabled();
 });
 
+it('drops the button role when neither a touch handler nor a state is passed', async () => {
+  await render(<Button>Plain button</Button>);
+
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+});
+
+// A toggle reports its state, so it stays the control that state belongs to
+// even when the handler is missing: the role would otherwise go and leave
+// `aria-checked` on a presentational element, which no platform announces.
+it('keeps the button role and the checked state on a handler-less toggle', async () => {
+  await render(
+    <Button mode="outlined" selected>
+      Toggle
+    </Button>
+  );
+
+  const toggle = screen.getByRole('button');
+
+  expect(toggle).toHaveProp('aria-checked', true);
+  expect(toggle).not.toBeDisabled();
+});
+
+it('keeps the button role and the pressed state of a handler-less web toggle', async () => {
+  // the web build reports `selected` with `aria-pressed`, which used to end up on
+  // a `role="none"` element: no platform announces a state a presentational
+  // element carries
+  jest.replaceProperty(Platform, 'OS', 'web');
+
+  await render(
+    <Button mode="outlined" selected>
+      Toggle
+    </Button>
+  );
+
+  const toggle = screen.getByRole('button');
+
+  expect(toggle).toHaveProp('aria-pressed', true);
+  expect(toggle).not.toBeDisabled();
+});
+
+it('still reports the checked state of a selected toggle with a touch handler', async () => {
+  await render(
+    <Button mode="outlined" selected onPress={() => {}}>
+      Toggle
+    </Button>
+  );
+
+  const toggle = screen.getByRole('button');
+
+  expect(toggle).toHaveProp(
+    'accessibilityState',
+    expect.objectContaining({ checked: true })
+  );
+  expect(toggle).toBeEnabled();
+});
+
 it('renders disabled button when the disabled prop is passed', async () => {
   await render(
     <Button disabled onPress={() => {}} testID="disabled-button">

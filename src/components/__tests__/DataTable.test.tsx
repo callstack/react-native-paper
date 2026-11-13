@@ -111,6 +111,18 @@ describe('DataTable.Title', () => {
     // hiding the element instead would silence the title text
     expect(screen.getByText('Dessert')).toBeOnTheScreen();
   });
+
+  it('keeps a button role carrying a state when no press handler is passed', async () => {
+    // a toggle reports a state of its own, so the role reporting it stays: a
+    // state a presentational element carries goes unannounced
+    await render(
+      <DataTable.Title role="button" aria-checked>
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(screen.getByRole('button')).toHaveProp('aria-checked', true);
+  });
 });
 
 describe('DataTable.Cell', () => {

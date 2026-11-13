@@ -260,7 +260,6 @@ exports[`renders icon button by default 1`] = `
   <View
     accessible={true}
     centered={true}
-    focusable={false}
     hitSlop={
       {
         "bottom": 4,
@@ -358,7 +357,6 @@ exports[`renders icon button with color 1`] = `
   <View
     accessible={true}
     centered={true}
-    focusable={false}
     hitSlop={
       {
         "bottom": 4,
@@ -576,7 +574,6 @@ exports[`renders icon button with size 1`] = `
   <View
     accessible={true}
     centered={true}
-    focusable={false}
     hitSlop={
       {
         "bottom": 1,
@@ -794,7 +791,6 @@ exports[`renders icon change animated 1`] = `
   <View
     accessible={true}
     centered={true}
-    focusable={false}
     hitSlop={
       {
         "bottom": 4,

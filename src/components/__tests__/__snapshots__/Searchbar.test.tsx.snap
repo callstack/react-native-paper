@@ -115,7 +115,6 @@ exports[`activity indicator snapshot test 1`] = `
       accessible={true}
       aria-label="search"
       centered={true}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -532,7 +531,6 @@ exports[`renders searchbar in "view" mode 1`] = `
       accessible={true}
       aria-label="search"
       centered={true}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -918,7 +916,6 @@ exports[`renders with placeholder 1`] = `
       accessible={true}
       aria-label="search"
       centered={true}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -1279,7 +1276,6 @@ exports[`renders with text 1`] = `
       accessible={true}
       aria-label="search"
       centered={true}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,

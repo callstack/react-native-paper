@@ -207,7 +207,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
         <View
           accessible={true}
           centered={true}
-          focusable={false}
           hitSlop={
             {
               "bottom": 12,
@@ -677,7 +676,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         <View
           accessible={true}
           centered={true}
-          focusable={false}
           hitSlop={
             {
               "bottom": 12,
@@ -846,7 +844,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         <View
           accessible={true}
           centered={true}
-          focusable={false}
           hitSlop={
             {
               "bottom": 12,
@@ -1111,7 +1108,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         <View
           accessible={true}
           centered={true}
-          focusable={false}
           hitSlop={
             {
               "bottom": 12,
@@ -1750,7 +1746,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         <View
           accessible={true}
           centered={true}
-          focusable={false}
           hitSlop={
             {
               "bottom": 12,
@@ -1919,7 +1914,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         <View
           accessible={true}
           centered={true}
-          focusable={false}
           hitSlop={
             {
               "bottom": 12,
@@ -2164,7 +2158,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         <View
           accessible={true}
           centered={true}
-          focusable={false}
           hitSlop={
             {
               "bottom": 12,

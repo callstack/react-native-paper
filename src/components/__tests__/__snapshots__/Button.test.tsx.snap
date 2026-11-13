@@ -115,7 +115,6 @@ exports[`renders button with icon 1`] = `
     <View
       accessible={true}
       collapsable={false}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -606,7 +605,6 @@ exports[`renders filled button by default 1`] = `
     <View
       accessible={true}
       collapsable={false}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -812,7 +810,6 @@ exports[`renders loading button 1`] = `
     <View
       accessible={true}
       collapsable={false}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -1209,7 +1206,6 @@ exports[`renders outlined button with mode 1`] = `
     <View
       accessible={true}
       collapsable={false}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -1415,7 +1411,6 @@ exports[`renders text button with mode 1`] = `
     <View
       accessible={true}
       collapsable={false}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -1621,7 +1616,6 @@ exports[`renders the loading indicator at the size set by iconSize 1`] = `
     <View
       accessible={true}
       collapsable={false}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,

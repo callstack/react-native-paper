@@ -455,7 +455,6 @@ exports[`renders list section with custom title style 1`] = `
   </Text>
   <View
     accessible={true}
-    focusable={false}
     style={
       [
         false,
@@ -580,7 +579,6 @@ exports[`renders list section with custom title style 1`] = `
   </View>
   <View
     accessible={true}
-    focusable={false}
     style={
       [
         false,
@@ -1159,7 +1157,6 @@ exports[`renders list section with subheader 1`] = `
   </Text>
   <View
     accessible={true}
-    focusable={false}
     style={
       [
         false,
@@ -1284,7 +1281,6 @@ exports[`renders list section with subheader 1`] = `
   </View>
   <View
     accessible={true}
-    focusable={false}
     style={
       [
         false,
@@ -1823,7 +1819,6 @@ exports[`renders list section without subheader 1`] = `
 >
   <View
     accessible={true}
-    focusable={false}
     style={
       [
         false,
@@ -1948,7 +1943,6 @@ exports[`renders list section without subheader 1`] = `
   </View>
   <View
     accessible={true}
-    focusable={false}
     style={
       [
         false,

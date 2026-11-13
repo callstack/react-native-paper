@@ -122,7 +122,6 @@ exports[`renders extended FAB collapsed 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        focusable={false}
         onBlur={[Function]}
         onFocus={[Function]}
         role="none"
@@ -422,7 +421,6 @@ exports[`renders extended FAB expanded 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        focusable={false}
         onBlur={[Function]}
         onFocus={[Function]}
         role="none"
@@ -722,7 +720,6 @@ exports[`renders extended FAB large size 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        focusable={false}
         onBlur={[Function]}
         onFocus={[Function]}
         role="none"
@@ -1022,7 +1019,6 @@ exports[`renders extended FAB medium size 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        focusable={false}
         onBlur={[Function]}
         onFocus={[Function]}
         role="none"
@@ -1322,7 +1318,6 @@ exports[`renders extended FAB not visible 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        focusable={false}
         onBlur={[Function]}
         onFocus={[Function]}
         role="none"
@@ -1622,7 +1617,6 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        focusable={false}
         onBlur={[Function]}
         onFocus={[Function]}
         role="none"

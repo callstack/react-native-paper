@@ -159,7 +159,6 @@ exports[`renders expanded accordion 1`] = `
   </View>
   <View
     accessible={true}
-    focusable={false}
     style={
       [
         false,

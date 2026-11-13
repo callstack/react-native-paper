@@ -4,7 +4,6 @@ exports[`renders DrawerItem with icon 1`] = `
 <View>
   <View
     accessible={true}
-    focusable={false}
     role="none"
     style={
       [
@@ -136,8 +135,6 @@ exports[`renders active DrawerItem 1`] = `
 <View>
   <View
     accessible={true}
-    aria-selected={true}
-    focusable={false}
     role="none"
     style={
       [

@@ -135,6 +135,82 @@ describe('TouchableRipple', () => {
     expect(screen.getByRole('checkbox', { checked: true })).toBeOnTheScreen();
   });
 
+  // A toggle reports a state of its own, so the role reporting it stays even with
+  // no handler: `Button` passes `aria-checked` for its `selected` prop. Reporting
+  // it unchecked says "off", which is still saying "toggle".
+  it.each([
+    { state: 'aria-checked', prop: 'aria-checked', value: true },
+    { state: 'aria-checked', prop: 'aria-checked', value: false },
+    { state: 'aria-pressed', prop: 'aria-pressed', value: true },
+    { state: 'aria-pressed', prop: 'aria-pressed', value: false },
+    {
+      state: 'a checked accessibilityState',
+      prop: 'accessibilityState',
+      value: { checked: true },
+    },
+  ])(
+    'keeps a button role carrying $state when no touch handler is passed',
+    async ({ prop, value }) => {
+      await render(
+        <TouchableRipple role="button" {...{ [prop]: value }}>
+          <Text>Toggle</Text>
+        </TouchableRipple>
+      );
+
+      expect(screen.getByRole('button')).toHaveProp(prop, value);
+    }
+  );
+
+  // A selection is not a toggle state: a component passes the flag for every item
+  // it renders, and a selection a presentational element carries is invalid ARIA.
+  // So the role and the flag go together.
+  it.each([true, false])(
+    'drops a button role carrying aria-selected of %s, together with the flag, when no touch handler is passed',
+    async (value) => {
+      await render(
+        <TouchableRipple testID="plain" role="button" aria-selected={value}>
+          <Text>Not a button</Text>
+        </TouchableRipple>
+      );
+
+      expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+
+      const plain = screen.getByTestId('plain');
+
+      expect(plain).not.toHaveProp('aria-selected');
+      expect(plain).not.toBeSelected();
+    }
+  );
+
+  it('strips the selection out of an accessibilityState when it drops the role', async () => {
+    await render(
+      <TouchableRipple
+        testID="plain"
+        role="button"
+        accessibilityState={{ selected: true, disabled: false }}
+      >
+        <Text>Not a button</Text>
+      </TouchableRipple>
+    );
+
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+
+    const plain = screen.getByTestId('plain');
+
+    expect(plain).toHaveProp('accessibilityState', { disabled: false });
+    expect(plain).not.toBeSelected();
+  });
+
+  it('respects a focusable prop of its own', async () => {
+    await render(
+      <TouchableRipple testID="plain" role="button" focusable>
+        <Text>Not a button</Text>
+      </TouchableRipple>
+    );
+
+    expect(screen.getByTestId('plain')).toHaveProp('focusable', true);
+  });
+
   it('keeps the button role on a disabled control', async () => {
     await render(
       <TouchableRipple role="button" disabled>

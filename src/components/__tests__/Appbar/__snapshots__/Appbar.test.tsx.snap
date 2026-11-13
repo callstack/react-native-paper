@@ -213,7 +213,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         accessible={true}
         aria-label="search"
         centered={true}
-        focusable={false}
         hitSlop={
           {
             "bottom": 4,
@@ -1073,7 +1072,6 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
     <View
       accessible={true}
       centered={true}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -1309,7 +1307,6 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
     <View
       accessible={true}
       centered={true}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -1545,7 +1542,6 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
     <View
       accessible={true}
       centered={true}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,
@@ -1782,7 +1778,6 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
       accessible={true}
       aria-label="Back"
       centered={true}
-      focusable={false}
       hitSlop={
         {
           "bottom": 4,

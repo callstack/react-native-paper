@@ -3,7 +3,6 @@
 exports[`DataTable.Cell renders data table cell 1`] = `
 <View
   accessible={true}
-  focusable={false}
   style={
     [
       false,
@@ -47,7 +46,6 @@ exports[`DataTable.Cell renders data table cell 1`] = `
 exports[`DataTable.Cell renders data table cell children without wrapping text component 1`] = `
 <View
   accessible={true}
-  focusable={false}
   style={
     [
       false,
@@ -261,7 +259,6 @@ exports[`DataTable.Cell renders data table cell children without wrapping text c
 exports[`DataTable.Cell renders data table cell with text content 1`] = `
 <View
   accessible={true}
-  focusable={false}
   style={
     [
       false,
@@ -306,7 +303,6 @@ exports[`DataTable.Cell renders data table cell with text content 1`] = `
 exports[`DataTable.Cell renders right aligned data table cell 1`] = `
 <View
   accessible={true}
-  focusable={false}
   style={
     [
       false,
@@ -367,7 +363,6 @@ exports[`DataTable.Header renders data table header 1`] = `
 >
   <View
     accessible={true}
-    focusable={false}
     style={
       [
         {
@@ -421,7 +416,6 @@ exports[`DataTable.Header renders data table header 1`] = `
   </View>
   <View
     accessible={true}
-    focusable={false}
     style={
       [
         {
@@ -2628,7 +2622,6 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
 exports[`DataTable.Title renders data table title with sort icon 1`] = `
 <View
   accessible={true}
-  focusable={false}
   style={
     [
       {
@@ -2733,7 +2726,6 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
 exports[`DataTable.Title renders right aligned data table title 1`] = `
 <View
   accessible={true}
-  focusable={false}
   style={
     [
       {

@@ -16,7 +16,7 @@ import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler, {
-  ACTIVATABLE_ROLES,
+  getNonControlA11yProps,
 } from '../../utils/hasTouchHandler';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
@@ -76,12 +76,6 @@ const TouchableRipple = ({
   const isControl = hasPassedTouchHandler || Boolean(disabledProp);
   const isInteractive = hasPassedTouchHandler && !disabledProp;
 
-  // `role` wins over `accessibilityRole` on every platform, so resolve it the
-  // same way instead of testing both.
-  const effectiveRole: string | undefined = rest.role ?? rest.accessibilityRole;
-  const claimsActivatable =
-    effectiveRole !== undefined && ACTIVATABLE_ROLES.includes(effectiveRole);
-
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
       theme,
@@ -115,14 +109,7 @@ const TouchableRipple = ({
       <View
         {...rest}
         ref={ref}
-        // Pressable defaults this to true, so keep it to preserve any role and
-        // state the caller set, e.g. a read only checked CheckboxItem.
-        accessible={rest.accessible !== false}
-        // Drop the claim, keep the element so its label is still announced.
-        role={claimsActivatable ? 'none' : rest.role}
-        // A consumer role of button makes react-native-web render a real
-        // <button>, which is tabbable by default. Nothing to activate here.
-        focusable={rest.focusable ?? false}
+        {...getNonControlA11yProps(rest)}
         style={[
           baseStyle,
           typeof style === 'function' ? style(IDLE_STATE) : style,
