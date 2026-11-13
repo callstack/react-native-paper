@@ -45,6 +45,15 @@ describe('Switch accessibility', () => {
 
     expect(screen.getByRole('switch')).toBeOnTheScreen();
   });
+
+  it('forwards aria-labelledby to the switch', async () => {
+    await render(<Switch value aria-labelledby="enabledLabel" />);
+
+    expect(screen.getByRole('switch')).toHaveProp(
+      'aria-labelledby',
+      'enabledLabel'
+    );
+  });
 });
 
 describe('Switch interaction', () => {

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import type {
+  AccessibilityActionEvent,
+  AccessibilityActionInfo,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -67,6 +69,14 @@ export type Props = {
    */
   'aria-expanded'?: boolean;
   /**
+   * Custom actions screen reader users can trigger on the FAB.
+   */
+  accessibilityActions?: readonly AccessibilityActionInfo[];
+  /**
+   * Called with the name of the custom action the user triggered.
+   */
+  onAccessibilityAction?: (event: AccessibilityActionEvent) => void;
+  /**
    * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
@@ -129,6 +139,8 @@ const FAB = ({
   'aria-selected': ariaSelected,
   'aria-busy': ariaBusy,
   'aria-expanded': ariaExpanded,
+  accessibilityActions,
+  onAccessibilityAction,
   background,
   style,
   testID,
@@ -149,6 +161,8 @@ const FAB = ({
     aria-selected={ariaSelected}
     aria-busy={ariaBusy}
     aria-expanded={ariaExpanded}
+    accessibilityActions={accessibilityActions}
+    onAccessibilityAction={onAccessibilityAction}
     background={background}
     style={style}
     testID={testID}
