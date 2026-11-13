@@ -15,6 +15,7 @@ import Card from '../Card/Card';
 import CheckboxItem from '../Checkbox/CheckboxItem';
 import Chip from '../Chip/Chip';
 import FAB from '../FAB/FAB';
+import FABMenu from '../FAB/Menu';
 import ListAccordion from '../List/ListAccordion';
 import ListItem from '../List/ListItem';
 import MenuItem from '../Menu/MenuItem';
@@ -179,6 +180,28 @@ describe('focus ring wiring', () => {
 
   // Inward here lands on the filled track, where `secondary` is ~1:1 against
   // `primary` and effectively invisible.
+  // Items are 4dp apart, less than an outward ring's 2dp gap plus 3dp
+  // thickness, so it would run into the next item.
+  it('FAB.Menu rings its items inward, clear of the neighbouring items', async () => {
+    await render(
+      <FABMenu
+        expanded
+        onDismiss={() => {}}
+        trigger={{ icon: 'plus' }}
+        items={[
+          { label: 'first', onPress: () => {}, testID: 'item-0' },
+          { label: 'second', onPress: () => {}, testID: 'item-1' },
+        ]}
+      />
+    );
+
+    await act(async () => {
+      await fireEvent(screen.getByTestId('item-0'), 'focus');
+    });
+
+    expect(ringOffset()).toBe(INWARD);
+  });
+
   it('Switch rings outward on its track, not inside it', async () => {
     await render(<Switch value onValueChange={() => {}} />);
 

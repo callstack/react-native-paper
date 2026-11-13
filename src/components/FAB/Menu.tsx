@@ -246,12 +246,16 @@ const MenuItem = ({
   // `scope: 'within'`: the ring belongs on the pill below, not the inner
   // `TouchableRipple` that actually receives focus.
   //
+  // Inward, as in the MD3 FAB menu spec: items are only
+  // `MenuTokens.spacing.betweenItems` (4dp) apart, so an outward ring (2dp gap
+  // plus 3dp thickness) would run into the neighbouring item.
+  //
   // `undefined` disabled: menu items have no `disabled` prop today. Wire the
   // real value through here if that ever changes.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     undefined,
     theme.colors.secondary,
-    'outward',
+    'inward',
     'within'
   );
 
