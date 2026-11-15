@@ -106,13 +106,17 @@ const webNoOutlineStyle = { outline: 'none' } as unknown as ViewStyle;
  * track): `target` also suppresses the browser's default outline on the
  * focused element itself on web, so only the ring shows.
  *
- * iOS: `onFocus`/`onBlur` never reach here today. Fabric's view does call
- * `-becomeFirstResponder`/`-resignFirstResponder` for hardware-keyboard/Full
- * Keyboard Access navigation, but only emits the JS event when the
- * `enableImperativeFocus` feature flag is on, and it defaults off (old
- * architecture has no equivalent path at all). Pre-existing, not something
- * this hook introduces - the library's older FAB, Checkbox, and Switch rings
- * were equally inert on iOS.
+ * iOS: a ringed element never gets its own `onFocus`/`onBlur` today. Fabric's
+ * view does call `-becomeFirstResponder`/`-resignFirstResponder` for
+ * hardware-keyboard/Full Keyboard Access navigation, but only emits the JS
+ * event when the `enableImperativeFocus` feature flag is on, and it defaults
+ * off. Pre-existing, not something this hook introduces: the library's older
+ * FAB, Checkbox, and Switch rings were equally inert on iOS.
+ *
+ * Native focus events bubble, on iOS too (a TextInput's focus after a tap
+ * reaches every ancestor's `onFocus`). The native `onFocus` ignores any event
+ * whose target isn't the element it is attached to, so a focused descendant
+ * never lights an ancestor's ring.
  */
 export function useFocusRing(
   disabled: boolean | undefined,
@@ -128,9 +132,13 @@ export function useFocusRing(
 
   const onFocus = React.useCallback(
     (e: NativeSyntheticEvent<TargetedEvent>) => {
-      if (!suppressed) {
-        setFocused(isKeyboardFocusEvent(e));
+      // Native focus events bubble: a focused descendant (a Switch in a
+      // List.Item, a TextInput tapped inside a pressable Card) reaches this
+      // handler too. Only the element's own focus draws its ring.
+      if (suppressed || e.target !== e.currentTarget) {
+        return;
       }
+      setFocused(isKeyboardFocusEvent(e));
     },
     [suppressed]
   );

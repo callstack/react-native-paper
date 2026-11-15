@@ -15,7 +15,7 @@ import {
 } from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { ownFocusEvent, render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import AppbarContent from '../Appbar/AppbarContent';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
@@ -65,7 +65,7 @@ const focusFirstFocusable = async () => {
   const target = walk(root, (n) => typeof n.props?.onFocus === 'function')[0];
   expect(target).toBeDefined();
   await act(async () => {
-    await fireEvent(target as never, 'focus');
+    await fireEvent(target as never, 'focus', ownFocusEvent());
   });
 };
 
@@ -128,7 +128,7 @@ describe('focus ring wiring', () => {
     );
 
     await act(async () => {
-      await fireEvent(screen.getByLabelText('Close'), 'focus');
+      await fireEvent(screen.getByLabelText('Close'), 'focus', ownFocusEvent());
     });
 
     const root = (screen as unknown as { root: Node }).root;
@@ -239,7 +239,7 @@ describe('focus ring wiring', () => {
 
     const pressable = screen.getByRole('button');
     await act(async () => {
-      await fireEvent(pressable, 'focus');
+      await fireEvent(pressable, 'focus', ownFocusEvent());
     });
 
     expect(style(pressable).outlineStyle).toBeUndefined();
@@ -330,7 +330,7 @@ describe('focus ring wiring', () => {
     );
 
     await act(async () => {
-      await fireEvent(screen.getByTestId('item-0'), 'focus');
+      await fireEvent(screen.getByTestId('item-0'), 'focus', ownFocusEvent());
     });
 
     expect(ringOffset()).toBe(INWARD);

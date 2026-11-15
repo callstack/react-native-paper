@@ -14,7 +14,7 @@ import {
 } from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { ownFocusEvent, render, screen } from '../../test-utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
 describe('TouchableRipple', () => {
@@ -544,7 +544,7 @@ describe('TouchableRipple', () => {
 describe('TouchableRipple focus ring', () => {
   const focus = async () => {
     await act(async () => {
-      await fireEvent(screen.getByTestId('ripple'), 'focus');
+      await fireEvent(screen.getByTestId('ripple'), 'focus', ownFocusEvent());
     });
   };
 

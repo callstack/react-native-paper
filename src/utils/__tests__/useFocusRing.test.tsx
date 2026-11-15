@@ -11,7 +11,7 @@ import {
 } from '@jest/globals';
 import { act, fireEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { ownFocusEvent, render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import type { FocusRingPlacement, FocusRingScope } from '../useFocusRing';
 import {
@@ -20,7 +20,7 @@ import {
   useFocusRing,
 } from '../useFocusRing';
 
-const focus = async (data?: unknown) => {
+const focus = async (data: unknown = ownFocusEvent()) => {
   await act(async () => {
     await fireEvent(screen.getByTestId('probe'), 'focus', data);
   });
@@ -131,6 +131,23 @@ describe('useFocusRing (native)', () => {
     });
 
     await blur();
+    expect(screen.getByTestId('probe')).not.toHaveStyle({
+      outlineWidth: thickness,
+    });
+  });
+
+  // Native focus events bubble, so a focused Switch inside a List.Item, or a
+  // TextInput tapped inside a pressable Card, reaches the container's onFocus
+  // with the descendant as `target`.
+  it('does not ring when focus bubbles up from a descendant', async () => {
+    await render(<Probe />);
+
+    await focus({
+      nativeEvent: { target: 0 },
+      target: {},
+      currentTarget: {},
+    });
+
     expect(screen.getByTestId('probe')).not.toHaveStyle({
       outlineWidth: thickness,
     });
