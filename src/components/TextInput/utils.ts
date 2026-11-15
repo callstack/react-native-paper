@@ -356,7 +356,7 @@ export const getFilledTextInputData = (
   > = [
     filledStyles.labelWrapper,
     {
-      left: hasAccessory
+      start: hasAccessory
         ? FILLED_LABEL_START_OFFSET_WITH_ACCESSORY
         : LABEL_START_OFFSET_WITHOUT_ACCESSORY,
     },
@@ -521,7 +521,7 @@ export const getOutlinedTextInputData = (
   > = [
     outlinedStyles.labelWrapper,
     {
-      left: hasAccessory
+      start: hasAccessory
         ? OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY
         : LABEL_START_OFFSET_WITHOUT_ACCESSORY,
       backgroundColor: labelBackgroundColor,

@@ -849,7 +849,7 @@ it('applies RTL writing direction to supporting text', async () => {
   });
 });
 
-it('places EndAccessory before StartAccessory in the tree when RTL', async () => {
+it('keeps StartAccessory before EndAccessory in tree order when RTL so flex row mirrors once', async () => {
   I18nManager.isRTL = true;
 
   function StartAccessory() {
@@ -872,9 +872,9 @@ it('places EndAccessory before StartAccessory in the tree when RTL', async () =>
   );
 
   const tree = toJSON();
-  expect(firstIndexOfTestIdInTree(tree, 'rtl-acc-from-end-prop')).toBeLessThan(
+  expect(
     firstIndexOfTestIdInTree(tree, 'rtl-acc-from-start-prop')
-  );
+  ).toBeLessThan(firstIndexOfTestIdInTree(tree, 'rtl-acc-from-end-prop'));
 });
 
 it('places StartAccessory before EndAccessory in the tree when LTR', async () => {
@@ -1026,7 +1026,7 @@ it('does not expose the placeholder string again after the TextInput loses focus
   expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
 });
 
-it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order)', async () => {
+it('keeps a lone StartAccessory before the input in both LTR and RTL (tree order)', async () => {
   function LoneStartAccessory() {
     return <View testID="lone-start-acc" />;
   }
@@ -1061,9 +1061,44 @@ it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order
   );
 
   const rtlTree = toJsonRtl();
-  expect(firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')).toBeLessThan(
-    firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')
+  expect(firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')).toBeLessThan(
+    firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')
   );
+});
+
+it('uses logical start offset on label wrapper for filled and outlined TextInput in RTL', async () => {
+  I18nManager.isRTL = true;
+
+  function StartAccessory() {
+    return <View testID="rtl-start-acc" />;
+  }
+
+  const { toJSON: toJsonFilled } = await render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      startAccessory={StartAccessory}
+    />
+  );
+
+  const { toJSON: toJsonOutlined } = await render(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      startAccessory={StartAccessory}
+    />
+  );
+
+  const serializedFilled = JSON.stringify(toJsonFilled());
+  const serializedOutlined = JSON.stringify(toJsonOutlined());
+
+  expect(serializedFilled).toContain('"start":52');
+  expect(serializedFilled).not.toContain('"left":52');
+  expect(serializedOutlined).toContain('"start":48');
+  expect(serializedOutlined).not.toContain('"left":48');
 });
 
 it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', async () => {
