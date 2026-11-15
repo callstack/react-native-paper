@@ -609,6 +609,7 @@ describe('focus ring color follows the theme prop', () => {
       await render(
         <Appbar mode={mode} theme={theme}>
           <AppbarBackAction onPress={() => {}} />
+          <AppbarAction icon="menu" isLeading onPress={() => {}} />
           <AppbarContent title="Inbox" onPress={() => {}} />
           <AppbarAction icon="magnify" onPress={() => {}} />
         </Appbar>
@@ -619,7 +620,7 @@ describe('focus ring color follows the theme prop', () => {
         root,
         (n) => typeof n.props?.onFocus === 'function'
       );
-      expect(focusables).toHaveLength(3);
+      expect(focusables).toHaveLength(4);
       for (const node of focusables) {
         await act(async () => {
           await fireEvent(node as never, 'focus', ownFocusEvent());
@@ -627,12 +628,10 @@ describe('focus ring color follows the theme prop', () => {
       }
 
       const rings = walk(root, (n) => style(n).outlineStyle === 'solid');
-      expect(rings).toHaveLength(3);
-      expect(rings.map((n) => style(n).outlineColor)).toEqual([
-        'rgb(255, 0, 0)',
-        'rgb(255, 0, 0)',
-        'rgb(255, 0, 0)',
-      ]);
+      expect(rings).toHaveLength(4);
+      expect(rings.map((n) => style(n).outlineColor)).toEqual(
+        Array(4).fill('rgb(255, 0, 0)')
+      );
     }
   );
 });
