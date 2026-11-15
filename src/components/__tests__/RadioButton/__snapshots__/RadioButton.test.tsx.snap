@@ -188,7 +188,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
     {
       "busy": undefined,
       "checked": true,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }

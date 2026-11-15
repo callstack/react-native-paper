@@ -1805,7 +1805,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": undefined,
+                "disabled": false,
                 "expanded": undefined,
                 "selected": undefined,
               }

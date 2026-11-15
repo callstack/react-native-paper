@@ -50,7 +50,7 @@ exports[`TouchableRipple hitSlop does not add its own hitSlop when none is suppl
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -94,7 +94,7 @@ exports[`TouchableRipple hitSlop passes a caller-supplied hitSlop straight throu
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -146,7 +146,7 @@ exports[`TouchableRipple on iOS displays the underlay when pressed 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -207,7 +207,7 @@ exports[`TouchableRipple on iOS renders custom underlay color 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }

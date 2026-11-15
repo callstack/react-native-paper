@@ -11,7 +11,7 @@ import color from 'color';
 
 import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { Pressable } from './Pressable';
-import { getTouchableRippleColors, resolveChildren } from './utils';
+import { IDLE_STATE, getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
@@ -19,14 +19,6 @@ import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler, {
   getNonControlA11yProps,
 } from '../../utils/hasTouchHandler';
-
-// The plain View branch has nothing to press, so the render prop and the style
-// function always see this idle state. Matches the state shape Pressable passes.
-const IDLE_STATE: PressableStateCallbackType = {
-  pressed: false,
-  hovered: false,
-  focused: false,
-};
 
 export type Props = PressableProps & {
   /**
@@ -52,11 +44,12 @@ export type Props = PressableProps & {
    */
   disabled?: boolean;
   /**
-   * Function to execute on press. Without it, and without `onLongPress`,
-   * `onPressIn` or `onPressOut`, the touchable renders as a plain container and
-   * is not exposed as a control. To make it unreachable at runtime, pass
-   * `disabled` rather than removing this handler: switching between having a
-   * handler and not having one renders another element and remounts children.
+   * Function to execute on press. Without it, `onLongPress`, `onPressIn`,
+   * `onPressOut` and `disabled`, the touchable renders as a plain view that
+   * isn't a control, and a press goes to its parent. To turn the touchable off
+   * at runtime, pass `disabled` instead of removing the handler: going between
+   * having a handler or `disabled` and having neither renders another element
+   * and remounts the children.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
@@ -80,8 +73,10 @@ export type Props = PressableProps & {
    */
   underlayColor?: string;
   /**
-   * Content of the `TouchableRipple`. Can be a function that receives the pressable state.
-   * `hovered` and `focused` are only available on the web.
+   * Content of the `TouchableRipple`: any React node, including several
+   * children, fragments and `null`. Can be a function that receives the
+   * pressable state. `hovered` and `focused` are only available on the web.
+   * Without a touch handler and without `disabled`, the state is always idle.
    */
   children:
     | ((state: PressableStateCallbackType) => React.ReactNode)
@@ -301,18 +296,18 @@ const TouchableRipple = ({
   );
 
   if (!isControl) {
+    // No cursor of its own: inside a clickable parent, the parent's applies
     return (
       <View
         {...rest}
         ref={ref}
         {...getNonControlA11yProps(rest)}
         style={[
-          styles.touchable,
-          styles.disabled,
+          styles.nonControl,
           typeof style === 'function' ? style(IDLE_STATE) : style,
         ]}
       >
-        {typeof children === 'function' ? children(IDLE_STATE) : children}
+        {resolveChildren(children, IDLE_STATE)}
       </View>
     );
   }
@@ -323,7 +318,7 @@ const TouchableRipple = ({
       ref={ref}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      disabled={disabledProp}
+      disabled={Boolean(disabledProp)}
       style={(state) => [
         styles.touchable,
         // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
@@ -378,6 +373,9 @@ const styles = StyleSheet.create({
       cursor: 'pointer',
       transition: '150ms background-color',
     }),
+  },
+  nonControl: {
+    position: 'relative',
   },
   disabled: {
     ...(Platform.OS === 'web' && {

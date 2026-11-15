@@ -213,14 +213,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         accessible={true}
         aria-label="search"
         centered={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
         role="none"
         style={
           [
@@ -358,7 +350,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             {
               "busy": undefined,
               "checked": undefined,
-              "disabled": undefined,
+              "disabled": false,
               "expanded": undefined,
               "selected": undefined,
             }
@@ -585,7 +577,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": undefined,
+          "disabled": false,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -812,7 +804,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": undefined,
+          "disabled": false,
           "expanded": undefined,
           "selected": undefined,
         }
@@ -1072,14 +1064,6 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
     <View
       accessible={true}
       centered={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       role="none"
       style={
         [
@@ -1307,14 +1291,6 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
     <View
       accessible={true}
       centered={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       role="none"
       style={
         [
@@ -1542,14 +1518,6 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
     <View
       accessible={true}
       centered={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       role="none"
       style={
         [
@@ -1778,14 +1746,6 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
       accessible={true}
       aria-label="Back"
       centered={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       role="none"
       style={
         [

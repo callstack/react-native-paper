@@ -92,9 +92,9 @@ it('does not announce a chip without a touch handler as a button', async () => {
   expect(onWrapPress).toHaveBeenCalledTimes(1);
 });
 
-// `selected` only styles and reports a control. With no handler the chip renders
-// a plain view, and the selection that role would have carried goes with it.
-it('reports no selection for a selected chip without a touch handler', async () => {
+// With no handler the chip renders a plain view and is no longer a button. iOS
+// and Android still report a selection whatever the role, so it stays.
+it('still reports the selection of a selected chip without a touch handler', async () => {
   await render(
     <Chip selected testID="plain-selected-chip">
       Info
@@ -102,11 +102,7 @@ it('reports no selection for a selected chip without a touch handler', async () 
   );
 
   expect(screen.queryByRole('button')).not.toBeOnTheScreen();
-
-  const chip = screen.getByTestId('plain-selected-chip');
-
-  expect(chip).not.toHaveProp('aria-selected');
-  expect(chip).not.toBeSelected();
+  expect(screen.getByTestId('plain-selected-chip')).toBeSelected();
 });
 
 it('reports the selected state of a chip with a touch handler', async () => {

@@ -104,7 +104,7 @@ exports[`renders FAB.Menu closed 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -280,7 +280,7 @@ exports[`renders FAB.Menu closed 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -855,7 +855,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -1031,7 +1031,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -1606,7 +1606,7 @@ exports[`renders FAB.Menu open 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -1782,7 +1782,7 @@ exports[`renders FAB.Menu open 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -2089,7 +2089,7 @@ exports[`renders FAB.Menu open 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": undefined,
+                "disabled": false,
                 "expanded": undefined,
                 "selected": undefined,
               }
@@ -2383,7 +2383,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -2559,7 +2559,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -2735,7 +2735,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -2911,7 +2911,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -3087,7 +3087,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -3263,7 +3263,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -3570,7 +3570,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": undefined,
+                "disabled": false,
                 "expanded": undefined,
                 "selected": undefined,
               }
@@ -3865,7 +3865,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -4041,7 +4041,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -4348,7 +4348,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": undefined,
+                "disabled": false,
                 "expanded": undefined,
                 "selected": undefined,
               }
@@ -4642,7 +4642,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -4848,7 +4848,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -5185,7 +5185,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": undefined,
+                "disabled": false,
                 "expanded": undefined,
                 "selected": undefined,
               }
@@ -5479,7 +5479,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -5655,7 +5655,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -5962,7 +5962,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               {
                 "busy": undefined,
                 "checked": undefined,
-                "disabled": undefined,
+                "disabled": false,
                 "expanded": undefined,
                 "selected": undefined,
               }

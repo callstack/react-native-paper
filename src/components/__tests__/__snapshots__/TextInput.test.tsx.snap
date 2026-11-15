@@ -207,14 +207,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
         <View
           accessible={true}
           centered={true}
-          hitSlop={
-            {
-              "bottom": 12,
-              "left": 12,
-              "right": 12,
-              "top": 12,
-            }
-          }
           multiline={false}
           role="none"
           style={
@@ -403,14 +395,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
           centered={true}
           collapsable={false}
           focusable={true}
-          hitSlop={
-            {
-              "bottom": 12,
-              "left": 12,
-              "right": 12,
-              "top": 12,
-            }
-          }
           multiline={false}
           onBlur={[Function]}
           onClick={[Function]}
@@ -676,14 +660,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         <View
           accessible={true}
           centered={true}
-          hitSlop={
-            {
-              "bottom": 12,
-              "left": 12,
-              "right": 12,
-              "top": 12,
-            }
-          }
           multiline={false}
           role="none"
           style={
@@ -844,14 +820,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         <View
           accessible={true}
           centered={true}
-          hitSlop={
-            {
-              "bottom": 12,
-              "left": 12,
-              "right": 12,
-              "top": 12,
-            }
-          }
           multiline={false}
           role="none"
           style={
@@ -1108,14 +1076,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         <View
           accessible={true}
           centered={true}
-          hitSlop={
-            {
-              "bottom": 12,
-              "left": 12,
-              "right": 12,
-              "top": 12,
-            }
-          }
           multiline={false}
           role="none"
           style={
@@ -1746,14 +1706,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         <View
           accessible={true}
           centered={true}
-          hitSlop={
-            {
-              "bottom": 12,
-              "left": 12,
-              "right": 12,
-              "top": 12,
-            }
-          }
           multiline={false}
           role="none"
           style={
@@ -1914,14 +1866,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         <View
           accessible={true}
           centered={true}
-          hitSlop={
-            {
-              "bottom": 12,
-              "left": 12,
-              "right": 12,
-              "top": 12,
-            }
-          }
           multiline={false}
           role="none"
           style={
@@ -2158,14 +2102,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         <View
           accessible={true}
           centered={true}
-          hitSlop={
-            {
-              "bottom": 12,
-              "left": 12,
-              "right": 12,
-              "top": 12,
-            }
-          }
           multiline={false}
           role="none"
           style={

@@ -115,14 +115,6 @@ exports[`activity indicator snapshot test 1`] = `
       accessible={true}
       aria-label="search"
       centered={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       role="none"
       style={
         [
@@ -531,14 +523,6 @@ exports[`renders searchbar in "view" mode 1`] = `
       accessible={true}
       aria-label="search"
       centered={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       role="none"
       style={
         [
@@ -676,7 +660,7 @@ exports[`renders searchbar in "view" mode 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": undefined,
+            "disabled": false,
             "expanded": undefined,
             "selected": undefined,
           }
@@ -916,14 +900,6 @@ exports[`renders with placeholder 1`] = `
       accessible={true}
       aria-label="search"
       centered={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       role="none"
       style={
         [
@@ -1061,7 +1037,7 @@ exports[`renders with placeholder 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": undefined,
+            "disabled": false,
             "expanded": undefined,
             "selected": undefined,
           }
@@ -1276,14 +1252,6 @@ exports[`renders with text 1`] = `
       accessible={true}
       aria-label="search"
       centered={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       role="none"
       style={
         [
@@ -1417,7 +1385,7 @@ exports[`renders with text 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": undefined,
+            "disabled": false,
             "expanded": undefined,
             "selected": undefined,
           }

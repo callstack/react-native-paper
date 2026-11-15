@@ -44,25 +44,14 @@ export type Props = PressableProps & {
    */
   numberOfLines?: number;
   /**
-   * Function to execute on press. Without it, and without `onLongPress`,
-   * `onPressIn` or `onPressOut`, the title renders as a plain container and is
-   * not exposed as a control. To make it unreachable at runtime, pass `disabled`
-   * rather than removing this handler: switching between having a handler and
-   * not having one renders another element and remounts children.
+   * Function to execute on press. Without it, `onLongPress`, `onPressIn`,
+   * `onPressOut` and `disabled`, the title renders as a plain view that isn't a
+   * control, and a press goes to its parent. To turn the title off at runtime,
+   * pass `disabled` instead of removing the handler: going between having a
+   * handler or `disabled` and having neither renders another element and
+   * remounts the children.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  /**
-   * Function to execute on long press.
-   */
-  onLongPress?: (e: GestureResponderEvent) => void;
-  /**
-   * Function to execute immediately when a touch is engaged, before `onPressOut` and `onPress`.
-   */
-  onPressIn?: (e: GestureResponderEvent) => void;
-  /**
-   * Function to execute when a touch is released.
-   */
-  onPressOut?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
    * Text content style of the `DataTableTitle`.
@@ -102,6 +91,8 @@ export type Props = PressableProps & {
  *
  * export default MyComponent;
  * ```
+ *
+ * @extends Pressable props https://reactnative.dev/docs/Pressable#props
  */
 
 const DataTableTitle = ({
@@ -118,6 +109,7 @@ const DataTableTitle = ({
   theme: themeOverrides,
   numberOfLines = 1,
   maxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -172,13 +164,31 @@ const DataTableTitle = ({
 
   const containerStyle = [styles.container, numeric && styles.right];
 
-  // Without a touch handler and without an explicit disabled this is a column
-  // heading, not a control, so it renders as a plain View. A Pressable is wrong
-  // here either way: it is a tab stop that does nothing on web, and on native it
-  // claims the touch and swallows presses meant for whatever wraps it.
-  const isControl =
-    hasTouchHandler({ onPress, onLongPress, onPressIn, onPressOut }) ||
-    Boolean(disabledProp);
+  // Without a touch handler and without `disabled` this is a column heading,
+  // not a control, so it renders as a plain View instead of a Pressable that
+  // would be announced as a disabled control.
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
+  const isControl = hasPassedTouchHandler || Boolean(disabledProp);
+  const isInteractive = hasPassedTouchHandler && !disabledProp;
+
+  const content = (
+    <>
+      {icon}
+
+      <Text
+        style={cellStyle}
+        numberOfLines={numberOfLines}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      >
+        {children}
+      </Text>
+    </>
+  );
 
   if (!isControl) {
     return (
@@ -187,15 +197,7 @@ const DataTableTitle = ({
         {...getNonControlA11yProps(rest)}
         style={[...containerStyle, style]}
       >
-        {icon}
-
-        <Text
-          style={cellStyle}
-          numberOfLines={numberOfLines}
-          maxFontSizeMultiplier={maxFontSizeMultiplier}
-        >
-          {children}
-        </Text>
+        {content}
       </View>
     );
   }
@@ -208,17 +210,11 @@ const DataTableTitle = ({
       onPressIn={onPressIn}
       onPressOut={onPressOut}
       disabled={disabledProp}
+      // a touch target only for something that can be pressed
+      hitSlop={isInteractive ? hitSlop : undefined}
       style={[...containerStyle, style]}
     >
-      {icon}
-
-      <Text
-        style={cellStyle}
-        numberOfLines={numberOfLines}
-        maxFontSizeMultiplier={maxFontSizeMultiplier}
-      >
-        {children}
-      </Text>
+      {content}
     </Pressable>
   );
 };

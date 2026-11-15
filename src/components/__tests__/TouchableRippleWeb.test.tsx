@@ -1,6 +1,14 @@
-import { Text } from 'react-native';
+import * as React from 'react';
+import { Platform, Text, View } from 'react-native';
 
-import { describe, expect, it } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 
 import { render, screen } from '../../test-utils';
 // The bare specifier resolves to .native under the jest preset, so the web file
@@ -113,14 +121,43 @@ describe('TouchableRipple (web file)', () => {
     }
   );
 
-  // A selection is not a toggle state: a component passes the flag for every item
-  // it renders, and a selection a presentational element carries is invalid ARIA.
-  // So the role and the flag go together.
-  it.each([true, false])(
-    'drops a button role carrying aria-selected of %s, together with the flag, when no touch handler is passed',
-    async (value) => {
+  // A selection is not a toggle state, and on web a selection on a
+  // presentational element is invalid ARIA, so the role and the flag go
+  // together. jest runs this file as iOS, which keeps the flag.
+  describe('on web', () => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', 'web');
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it.each([true, false])(
+      'drops a button role carrying aria-selected of %s, together with the flag, when no touch handler is passed',
+      async (value) => {
+        await render(
+          <TouchableRipple testID="plain" role="button" aria-selected={value}>
+            <Text>Not a button</Text>
+          </TouchableRipple>
+        );
+
+        expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+
+        const plain = screen.getByTestId('plain');
+
+        expect(plain).not.toHaveProp('aria-selected');
+        expect(plain).not.toBeSelected();
+      }
+    );
+
+    it('strips the selection out of an accessibilityState when it drops the role', async () => {
       await render(
-        <TouchableRipple testID="plain" role="button" aria-selected={value}>
+        <TouchableRipple
+          testID="plain"
+          role="button"
+          accessibilityState={{ selected: true, disabled: false }}
+        >
           <Text>Not a button</Text>
         </TouchableRipple>
       );
@@ -129,28 +166,9 @@ describe('TouchableRipple (web file)', () => {
 
       const plain = screen.getByTestId('plain');
 
-      expect(plain).not.toHaveProp('aria-selected');
+      expect(plain).toHaveProp('accessibilityState', { disabled: false });
       expect(plain).not.toBeSelected();
-    }
-  );
-
-  it('strips the selection out of an accessibilityState when it drops the role', async () => {
-    await render(
-      <TouchableRipple
-        testID="plain"
-        role="button"
-        accessibilityState={{ selected: true, disabled: false }}
-      >
-        <Text>Not a button</Text>
-      </TouchableRipple>
-    );
-
-    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
-
-    const plain = screen.getByTestId('plain');
-
-    expect(plain).toHaveProp('accessibilityState', { disabled: false });
-    expect(plain).not.toBeSelected();
+    });
   });
 
   // react-native-web puts these roles in the tab order by itself, so the element
@@ -235,5 +253,16 @@ describe('TouchableRipple (web file)', () => {
     );
 
     expect(screen.getByRole('button')).toBeDisabled();
+  });
+
+  it('hands its ref to the view it renders when no touch handler is passed', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    await render(
+      <TouchableRipple ref={ref}>
+        <Text>Plain</Text>
+      </TouchableRipple>
+    );
+
+    expect(ref.current).not.toBeNull();
   });
 });

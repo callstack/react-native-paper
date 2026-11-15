@@ -100,6 +100,7 @@ exports[`renders chip with close button 1`] = `
   <View
     accessible={true}
     aria-disabled={false}
+    aria-selected={false}
     role="none"
     style={
       [
@@ -446,6 +447,7 @@ exports[`renders chip with custom close button 1`] = `
   <View
     accessible={true}
     aria-disabled={false}
+    aria-selected={false}
     role="none"
     style={
       [
@@ -792,6 +794,7 @@ exports[`renders chip with icon 1`] = `
   <View
     accessible={true}
     aria-disabled={false}
+    aria-selected={false}
     role="none"
     style={
       [
@@ -1466,6 +1469,7 @@ exports[`renders selected chip 1`] = `
   <View
     accessible={true}
     aria-disabled={false}
+    aria-selected={true}
     role="none"
     style={
       [

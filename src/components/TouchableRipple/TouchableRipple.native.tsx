@@ -8,9 +8,9 @@ import type {
   ColorValue,
 } from 'react-native';
 
-import type { PressableProps, PressableStateCallbackType } from './Pressable';
+import type { PressableProps } from './Pressable';
 import { Pressable } from './Pressable';
-import { getTouchableRippleColors, resolveChildren } from './utils';
+import { IDLE_STATE, getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
@@ -21,14 +21,6 @@ import hasTouchHandler, {
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
-
-// The plain View branch has nothing to press, so the render prop and the style
-// function always see this idle state. Matches the state shape Pressable passes.
-const IDLE_STATE: PressableStateCallbackType = {
-  pressed: false,
-  hovered: false,
-  focused: false,
-};
 
 export type Props = PressableProps & {
   borderless?: boolean;
@@ -54,6 +46,7 @@ const TouchableRipple = ({
   underlayColor,
   children,
   theme: themeOverrides,
+  hitSlop,
   ref,
   ...rest
 }: Props) => {
@@ -75,6 +68,11 @@ const TouchableRipple = ({
   // it starts claiming the touch, swallowing taps meant for whatever wraps it.
   const isControl = hasPassedTouchHandler || Boolean(disabledProp);
   const isInteractive = hasPassedTouchHandler && !disabledProp;
+
+  // A touch target only for something that can be pressed, as on web. Android
+  // never makes a disabled view a touch target, but iOS does, and the plain
+  // View would take touches in its slop on both.
+  const effectiveHitSlop = isInteractive ? hitSlop : undefined;
 
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
@@ -115,7 +113,7 @@ const TouchableRipple = ({
           typeof style === 'function' ? style(IDLE_STATE) : style,
         ]}
       >
-        {typeof children === 'function' ? children(IDLE_STATE) : children}
+        {resolveChildren(children, IDLE_STATE)}
       </View>
     );
   }
@@ -134,7 +132,8 @@ const TouchableRipple = ({
       <Pressable
         {...rest}
         ref={ref}
-        disabled={disabledProp}
+        disabled={Boolean(disabledProp)}
+        hitSlop={effectiveHitSlop}
         style={resolveStyle(useForeground && styles.overflowHidden)}
         android_ripple={androidRipple}
       >
@@ -149,7 +148,8 @@ const TouchableRipple = ({
     <Pressable
       {...rest}
       ref={ref}
-      disabled={disabledProp}
+      disabled={Boolean(disabledProp)}
+      hitSlop={effectiveHitSlop}
       style={resolveStyle(borderless && styles.overflowHidden)}
     >
       {(state) => (

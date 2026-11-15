@@ -49,12 +49,20 @@ it('renders disabled icon button', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('lets a caller-supplied hitSlop win even while disabled', async () => {
-  const tree = (
-    await render(<IconButton icon="camera" disabled hitSlop={2} />)
-  ).toJSON();
+// A touch in the slop goes to the view that owns it, so a disabled button with
+// a slop would take touches meant for its neighbors
+it('ignores a caller-supplied hitSlop while disabled', async () => {
+  await render(
+    <IconButton
+      icon="camera"
+      disabled
+      onPress={() => {}}
+      hitSlop={2}
+      testID="icon-button"
+    />
+  );
 
-  expect(tree).toMatchSnapshot();
+  expect(screen.getByTestId('icon-button')).not.toHaveProp('hitSlop');
 });
 
 it('renders icon change animated', async () => {

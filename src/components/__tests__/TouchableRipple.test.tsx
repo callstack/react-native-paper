@@ -1,4 +1,5 @@
-import { Platform, Pressable, Text } from 'react-native';
+import * as React from 'react';
+import { Platform, Pressable, Text, View } from 'react-native';
 import type { GestureResponderEvent, Role } from 'react-native';
 
 import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
@@ -83,8 +84,8 @@ describe('TouchableRipple', () => {
     expect(screen.getByLabelText('Add item')).toBeOnTheScreen();
   });
 
-  // `imagebutton` is missing here because it is native only, absent from the
-  // web `Role` union, so it arrives via `accessibilityRole` instead
+  // `imagebutton` and `togglebutton` are legacy `accessibilityRole` values, not
+  // `Role` values, so they are covered by the next test
   const activatableRoles: Role[] = ['link', 'menuitem', 'tab'];
 
   it.each(activatableRoles)(
@@ -100,16 +101,19 @@ describe('TouchableRipple', () => {
     }
   );
 
-  it.each(['imagebutton', 'togglebutton'] as const)(
-    'drops a native %s accessibilityRole when no touch handler is passed',
+  it.each(['button', 'imagebutton', 'togglebutton'] as const)(
+    'drops a legacy %s accessibilityRole when no touch handler is passed',
     async (accessibilityRole) => {
       await render(
-        <TouchableRipple accessibilityRole={accessibilityRole}>
+        <TouchableRipple testID="ripple" accessibilityRole={accessibilityRole}>
           <Text>Not a control</Text>
         </TouchableRipple>
       );
 
       expect(screen.queryByRole(accessibilityRole)).not.toBeOnTheScreen();
+      // iOS reads role 'none' as no role and falls back to accessibilityRole,
+      // so the legacy prop itself has to go
+      expect(screen.getByTestId('ripple')).not.toHaveProp('accessibilityRole');
     }
   );
 
@@ -161,11 +165,10 @@ describe('TouchableRipple', () => {
     }
   );
 
-  // A selection is not a toggle state: a component passes the flag for every item
-  // it renders, and a selection a presentational element carries is invalid ARIA.
-  // So the role and the flag go together.
+  // A selection is not a toggle state, so it doesn't keep the role. iOS and
+  // Android still report a selection whatever the role, so it stays there.
   it.each([true, false])(
-    'drops a button role carrying aria-selected of %s, together with the flag, when no touch handler is passed',
+    'drops a button role carrying aria-selected of %s but keeps the flag when no touch handler is passed',
     async (value) => {
       await render(
         <TouchableRipple testID="plain" role="button" aria-selected={value}>
@@ -174,15 +177,11 @@ describe('TouchableRipple', () => {
       );
 
       expect(screen.queryByRole('button')).not.toBeOnTheScreen();
-
-      const plain = screen.getByTestId('plain');
-
-      expect(plain).not.toHaveProp('aria-selected');
-      expect(plain).not.toBeSelected();
+      expect(screen.getByTestId('plain')).toHaveProp('aria-selected', value);
     }
   );
 
-  it('strips the selection out of an accessibilityState when it drops the role', async () => {
+  it('keeps the selection in an accessibilityState when it drops the role', async () => {
     await render(
       <TouchableRipple
         testID="plain"
@@ -194,11 +193,7 @@ describe('TouchableRipple', () => {
     );
 
     expect(screen.queryByRole('button')).not.toBeOnTheScreen();
-
-    const plain = screen.getByTestId('plain');
-
-    expect(plain).toHaveProp('accessibilityState', { disabled: false });
-    expect(plain).not.toBeSelected();
+    expect(screen.getByTestId('plain')).toBeSelected();
   });
 
   it('respects a focusable prop of its own', async () => {
@@ -351,6 +346,32 @@ describe('TouchableRipple', () => {
 
       expect(tree).toMatchSnapshot();
     });
+
+    // A touch in the slop goes to the view that owns it, so a slop on
+    // something that can't be pressed takes touches from its neighbors
+    it.each([
+      { when: 'no touch handler is passed', props: {} },
+      { when: 'it is disabled', props: { onPress: () => {}, disabled: true } },
+    ])('takes no touches outside its bounds when $when', async ({ props }) => {
+      await render(
+        <TouchableRipple testID="ripple" hitSlop={16} {...props}>
+          <Text>Not pressable</Text>
+        </TouchableRipple>
+      );
+
+      expect(screen.getByTestId('ripple')).not.toHaveProp('hitSlop');
+    });
+  });
+
+  it('hands its ref to the view it renders when no touch handler is passed', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    await render(
+      <TouchableRipple ref={ref}>
+        <Text>Plain</Text>
+      </TouchableRipple>
+    );
+
+    expect(ref.current).not.toBeNull();
   });
 
   // Both branches of the component need to behave the same, so the tests below

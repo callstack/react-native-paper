@@ -127,14 +127,6 @@ exports[`renders not visible menu 1`] = `
         <View
           accessible={true}
           collapsable={false}
-          hitSlop={
-            {
-              "bottom": 4,
-              "left": 0,
-              "right": 0,
-              "top": 4,
-            }
-          }
           role="none"
           style={
             [
@@ -347,14 +339,6 @@ exports[`renders visible menu 1`] = `
           <View
             accessible={true}
             collapsable={false}
-            hitSlop={
-              {
-                "bottom": 4,
-                "left": 0,
-                "right": 0,
-                "top": 4,
-              }
-            }
             role="none"
             style={
               [
@@ -649,7 +633,7 @@ exports[`renders visible menu 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -771,7 +755,7 @@ exports[`renders visible menu 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -1024,14 +1008,6 @@ exports[`respects anchorPosition bottom 1`] = `
           <View
             accessible={true}
             collapsable={false}
-            hitSlop={
-              {
-                "bottom": 4,
-                "left": 0,
-                "right": 0,
-                "top": 4,
-              }
-            }
             role="none"
             style={
               [
@@ -1328,7 +1304,7 @@ exports[`respects anchorPosition bottom 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -1450,7 +1426,7 @@ exports[`respects anchorPosition bottom 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -1703,14 +1679,6 @@ exports[`uses the default anchorPosition of top 1`] = `
           <View
             accessible={true}
             collapsable={false}
-            hitSlop={
-              {
-                "bottom": 4,
-                "left": 0,
-                "right": 0,
-                "top": 4,
-              }
-            }
             role="none"
             style={
               [
@@ -2007,7 +1975,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }
@@ -2129,7 +2097,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                 {
                   "busy": undefined,
                   "checked": undefined,
-                  "disabled": undefined,
+                  "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
                 }

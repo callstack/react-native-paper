@@ -135,6 +135,7 @@ exports[`renders active DrawerItem 1`] = `
 <View>
   <View
     accessible={true}
+    aria-selected={true}
     role="none"
     style={
       [
@@ -269,7 +270,7 @@ exports[`renders basic DrawerItem 1`] = `
       {
         "busy": undefined,
         "checked": undefined,
-        "disabled": undefined,
+        "disabled": false,
         "expanded": undefined,
         "selected": undefined,
       }

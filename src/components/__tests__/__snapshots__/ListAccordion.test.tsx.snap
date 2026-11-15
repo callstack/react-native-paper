@@ -14,7 +14,7 @@ exports[`renders expanded accordion 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": undefined,
+          "disabled": false,
           "expanded": true,
           "selected": undefined,
         }
@@ -250,7 +250,7 @@ exports[`renders list accordion with children 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": undefined,
+          "disabled": false,
           "expanded": false,
           "selected": undefined,
         }
@@ -457,7 +457,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": undefined,
+          "disabled": false,
           "expanded": false,
           "selected": undefined,
         }
@@ -657,7 +657,7 @@ exports[`renders list accordion with left items 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": undefined,
+          "disabled": false,
           "expanded": false,
           "selected": undefined,
         }
@@ -864,7 +864,7 @@ exports[`renders multiline list accordion 1`] = `
         {
           "busy": undefined,
           "checked": undefined,
-          "disabled": undefined,
+          "disabled": false,
           "expanded": false,
           "selected": undefined,
         }

@@ -6,7 +6,7 @@ exports[`TouchableRipple (web) does not clip its content when borderless 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -54,7 +54,7 @@ exports[`TouchableRipple (web) renders a touch target behind the children sized 
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -114,7 +114,7 @@ exports[`TouchableRipple (web) renders a touch target behind the children sized 
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
@@ -224,7 +224,6 @@ exports[`TouchableRipple (web) renders no touch target when there are no touch h
       {
         "position": "relative",
       },
-      {},
       undefined,
     ]
   }
@@ -241,7 +240,7 @@ exports[`TouchableRipple (web) renders no touch target when there is no hitSlop 
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }

@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import type {
   AccessibilityRole,
   AccessibilityState,
@@ -15,7 +16,7 @@ const touchableEvents = [
 type TouchableEventObject = Partial<
   Record<
     (typeof touchableEvents)[number],
-    (event: GestureResponderEvent) => void
+    ((event: GestureResponderEvent) => void) | null
   >
 >;
 
@@ -28,9 +29,11 @@ export default function hasTouchHandler(
 }
 
 /**
- * Roles that claim the view can be activated. With no touch handler and no
- * toggle state (see `carriesToggleState`) such a role becomes `none`, since
- * nothing would answer to it. `checkbox`, `radio` and `switch` always keep it.
+ * Roles, and the legacy `accessibilityRole` values `imagebutton` and
+ * `togglebutton`, that claim the view can be activated. With no touch handler
+ * and no toggle state (see `carriesToggleState`) the role becomes `none`, since
+ * nothing would answer to it. Every other role, such as `checkbox`, `radio` or
+ * `switch`, always stays.
  */
 const ACTIVATABLE_ROLES: readonly string[] = [
   'button',
@@ -62,9 +65,7 @@ type ToggleState = {
 
 /**
  * Whether the element is a toggle, so it keeps its role without a handler.
- * A selection is not a toggle state: `aria-selected` and
- * `accessibilityState.selected` go with a dropped role, as a selection on a
- * presentational element is invalid ARIA and is not announced.
+ * A selection is not a toggle state, so it doesn't keep the role.
  */
 function carriesToggleState(props: ToggleState) {
   return (
@@ -87,6 +88,7 @@ type NonControlA11ySourceProps = ToggleState & {
 type NonControlA11yProps = {
   accessible: boolean;
   role: Role | undefined;
+  accessibilityRole?: undefined;
   focusable: boolean | undefined;
   'aria-selected'?: undefined;
   accessibilityState?: Omit<AccessibilityState, 'selected'>;
@@ -95,7 +97,9 @@ type NonControlA11yProps = {
 /**
  * Accessibility props for the plain `View` a touchable renders when it has
  * nothing to press; spread them after the rest props. The element and its
- * label stay, only the claims that stop being true go.
+ * label stay, only the claims that stop being true go: an activatable role
+ * (see `ACTIVATABLE_ROLES`), and on web the selection that goes with it. Other
+ * states, such as `aria-expanded`, pass through unchanged.
  */
 export function getNonControlA11yProps(
   props: NonControlA11ySourceProps
@@ -112,7 +116,7 @@ export function getNonControlA11yProps(
     // Pressable defaults this to true; keep it so the role and state stay
     accessible: props.accessible !== false,
     role: dropsRole ? 'none' : props.role,
-    // nothing to activate, so only a consumer makes this a tab stop
+    // nothing to activate, so on web only a consumer makes this a tab stop
     focusable:
       props.focusable ??
       (keptRole !== undefined && WEB_TABBABLE_ROLES.includes(keptRole)
@@ -121,6 +125,15 @@ export function getNonControlA11yProps(
   };
 
   if (dropsRole) {
+    // iOS (React Native 0.88+) reads role 'none' as no role and falls back to
+    // accessibilityRole, so the legacy prop has to go too.
+    a11yProps.accessibilityRole = undefined;
+  }
+
+  // On web a selection on role="presentation" is invalid ARIA and is ignored,
+  // so it goes with the role. iOS (the Selected trait) and Android
+  // (AccessibilityNodeInfo.isSelected) report it whatever the role, so it stays.
+  if (dropsRole && Platform.OS === 'web') {
     a11yProps['aria-selected'] = undefined;
 
     if (props.accessibilityState !== undefined) {
