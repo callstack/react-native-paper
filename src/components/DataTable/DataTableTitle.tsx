@@ -221,6 +221,11 @@ const DataTableTitle = ({
 
   return (
     <Pressable
+      // Like Switch: a ripple drawable owns the focused state, so Android does
+      // not add its grey default focus highlight on top of the ring. Before
+      // `rest`, so a caller's own `android_ripple` wins, and it owns the state
+      // just as well.
+      android_ripple={{ color: 'transparent' }}
       {...rest}
       onPress={onPress}
       onLongPress={onLongPress}
@@ -231,9 +236,6 @@ const DataTableTitle = ({
       disabled={Boolean(disabledProp)}
       // a touch target only for something that can be pressed
       hitSlop={isInteractive ? hitSlop : undefined}
-      // Like Switch: a ripple drawable owns the focused state, so Android does
-      // not add its grey default focus highlight on top of the ring.
-      android_ripple={{ color: 'transparent' }}
       onFocus={(e) => {
         focusTarget.onFocus?.(e);
         onFocus?.(e);

@@ -3,7 +3,7 @@
    Switch's track, FAB's clip view). There is no testID to query it by, and
    which node it is IS the thing under test, so the tree has to be walked. */
 import type { ReactElement } from 'react';
-import { Platform, StyleSheet, Text } from 'react-native';
+import { Platform, processColor, StyleSheet, Text } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import {
@@ -214,6 +214,16 @@ describe('focus ring wiring', () => {
 
     expect(ringOffset()).toBe(INWARD);
     expect(onFocus).toHaveBeenCalledTimes(1);
+  });
+
+  it("List.Item takes a caller's focusRing over its inward default", async () => {
+    await render(
+      <ListItem title="row" onPress={() => {}} focusRing="outward" />
+    );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(OUTWARD);
   });
 
   // Without a touch handler or `disabled` the title is a plain View, a column
@@ -481,6 +491,34 @@ describe('focus ring after the handler goes away and comes back', () => {
     );
 
     expect(ringOffset()).toBeUndefined();
+  });
+});
+
+describe('focus ring wiring (Android)', () => {
+  const original = Platform.OS;
+  beforeEach(() => {
+    Platform.OS = 'android';
+  });
+  afterEach(() => {
+    Platform.OS = original;
+  });
+
+  // The transparent ripple only keeps Android's grey focus highlight away, and
+  // any ripple does that, so a caller's own ripple stays.
+  it("DataTable.Title keeps a caller's android_ripple", async () => {
+    await render(
+      <DataTableTitle
+        testID="title"
+        onPress={() => {}}
+        android_ripple={{ color: 'red' }}
+      >
+        title
+      </DataTableTitle>
+    );
+
+    expect(
+      screen.getByTestId('title').props.nativeBackgroundAndroid
+    ).toMatchObject({ type: 'RippleAndroid', color: processColor('red') });
   });
 });
 
