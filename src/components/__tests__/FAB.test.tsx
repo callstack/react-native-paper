@@ -146,6 +146,14 @@ describe('without a touch handler', () => {
       expect(screen.getByRole('img', { name: 'Favorite' })).toBeOnTheScreen();
     });
 
+    it('drops aria-selected from the image, which cannot carry it', async () => {
+      await render(<FAB icon="star" aria-label="Favorite" aria-selected />);
+
+      expect(screen.getByRole('img', { name: 'Favorite' })).not.toHaveProp(
+        'aria-selected'
+      );
+    });
+
     it('stays a button with a touch handler', async () => {
       await render(
         <FAB icon="star" aria-label="Favorite" onPress={() => {}} />

@@ -56,6 +56,15 @@ const WEB_TABBABLE_ROLES: readonly string[] = [
   'switch',
 ];
 
+// Roles that can't carry a selection on web. `none` is what a dropped role
+// becomes, and a display-only IconButton or icon-only FAB is an image there.
+const WEB_ROLES_WITHOUT_SELECTION: readonly string[] = [
+  'none',
+  'presentation',
+  'img',
+  'image',
+];
+
 /** The flags only a toggle passes. `false` counts: it says "off", not "none". */
 type ToggleState = {
   'aria-checked'?: boolean | 'mixed';
@@ -101,8 +110,8 @@ type NonControlA11yProps = {
  * Accessibility props for the plain `View` a touchable renders when it has
  * nothing to press; spread them after the rest props. The element and its
  * label stay, only the claims that stop being true go: an activatable role
- * (see `ACTIVATABLE_ROLES`), and on web the selection that goes with it. Other
- * states, such as `aria-expanded`, pass through unchanged.
+ * (see `ACTIVATABLE_ROLES`), and on web a selection the remaining role can't
+ * carry. Other states, such as `aria-expanded`, pass through unchanged.
  */
 export function getNonControlA11yProps(
   props: NonControlA11ySourceProps
@@ -151,10 +160,14 @@ export function getNonControlA11yProps(
     a11yProps.accessibilityRole = undefined;
   }
 
-  // On web a selection on role="presentation" is invalid ARIA and is ignored,
-  // so it goes with the role. iOS (the Selected trait) and Android
+  // On web a selection on role="presentation" or role="img" is invalid ARIA and
+  // is ignored, so it goes. iOS (the Selected trait) and Android
   // (AccessibilityNodeInfo.isSelected) report it whatever the role, so it stays.
-  if (dropsRole && Platform.OS === 'web') {
+  if (
+    Platform.OS === 'web' &&
+    keptRole !== undefined &&
+    WEB_ROLES_WITHOUT_SELECTION.includes(keptRole)
+  ) {
     a11yProps['aria-selected'] = undefined;
 
     if (props.accessibilityState !== undefined) {

@@ -169,6 +169,21 @@ describe('TouchableRipple (web file)', () => {
       expect(plain).toHaveProp('accessibilityState', { disabled: false });
       expect(plain).not.toBeSelected();
     });
+
+    // A display-only IconButton or icon-only FAB is an image on web, and an
+    // image can't carry a selection either
+    it('drops aria-selected from an image role when no touch handler is passed', async () => {
+      await render(
+        <TouchableRipple role="img" aria-label="Star" aria-selected>
+          <Text>*</Text>
+        </TouchableRipple>
+      );
+
+      const image = screen.getByRole('img', { name: 'Star' });
+
+      expect(image).not.toHaveProp('aria-selected');
+      expect(image).not.toBeSelected();
+    });
   });
 
   // react-native-web puts these roles in the tab order by itself, so the element
