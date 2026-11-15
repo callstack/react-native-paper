@@ -429,7 +429,7 @@ To keep the height of the content row when setting `height` in `style`, add the 
 </Appbar.Header>
 ```
 
-In `medium` and `large` mode, `Appbar` now passes its `theme` to `Appbar.BackAction`, `Appbar.Action` and `Appbar.Content`, as the `small` and `center-aligned` modes already did. A medium or large bar with its own `theme` now takes the color of its icons, its title and their focus rings from that theme, not from the app's. In 5.x, a dark-themed bar in a light app drew dark icons and a dark title on its dark background.
+In `medium` and `large` mode, `Appbar` now passes its `theme` to `Appbar.BackAction`, `Appbar.Action` and `Appbar.Content`, as the `small` and `center-aligned` modes already did. These children of a medium or large bar with its own `theme` now take their colors, the title's font and their focus rings from that theme, not from the app's. In 5.x, a dark-themed bar in a light app drew dark icons and a dark title on its dark background.
 
 ### Avatar
 
