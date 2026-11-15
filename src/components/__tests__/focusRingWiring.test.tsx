@@ -240,6 +240,27 @@ describe('focus ring wiring', () => {
     expect(ringOffset()).toBe(OUTWARD);
   });
 
+  // The ring goes on the view that draws the outline, so the 2dp gap is
+  // measured from the outline's outer edge, not from inside it.
+  it.each(['small', 'extra-large'] as const)(
+    'outlined Button (%s) keeps the 2dp gap outside its outline',
+    async (size) => {
+      await render(
+        <Button mode="outlined" size={size} onPress={() => {}}>
+          button
+        </Button>
+      );
+
+      await focusFirstFocusable();
+
+      const root = (screen as unknown as { root: Node }).root;
+      const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
+      expect(ringed).toHaveLength(1);
+      expect(style(ringed[0]).outlineOffset).toBe(OUTWARD);
+      expect(style(ringed[0]).borderWidth).toBeGreaterThan(0);
+    }
+  );
+
   it('DataTable.Row rings inward, clear of the rows above and below', async () => {
     await render(
       <DataTableRow onPress={() => {}}>
@@ -659,6 +680,31 @@ describe('focus ring wiring (web)', () => {
     expect(
       (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
     ).toBe('inward');
+  });
+
+  it('Button rings the view that draws its outline, not the button inside it', async () => {
+    await render(
+      <Button mode="outlined" onPress={() => {}}>
+        button
+      </Button>
+    );
+
+    const button = screen.getByRole('button');
+    expect(style(button)).toMatchObject({ outline: 'none' });
+
+    const root = (screen as unknown as { root: Node }).root;
+    const ringed = walk(
+      root,
+      (n) =>
+        (n.props?.dataSet as Record<string, string> | undefined)
+          ?.focusRingWithin !== undefined
+    );
+    expect(ringed).toHaveLength(1);
+    expect(
+      (ringed[0].props?.dataSet as Record<string, string>).focusRingWithin
+    ).toBe('outward');
+    expect(style(ringed[0]).borderWidth).toBeGreaterThan(0);
+    expect(walk(ringed[0], (n) => n === button)).toHaveLength(1);
   });
 
   it('Chip marks its close button as the focus target and rings the glyph circle inside it', async () => {
