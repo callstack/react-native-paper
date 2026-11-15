@@ -228,11 +228,12 @@ exports[`can render the Android radio button on different platforms 1`] = `
 
 exports[`can render the iOS radio button on different platforms 1`] = `
 <View
-  accessible={true}
+  accessible={false}
   aria-checked={false}
   aria-label="iOS Radio button"
   focusable={false}
   role="radio"
+  screenReaderFocusable={true}
   style={
     [
       false,
@@ -292,11 +293,12 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       iOS Radio button
     </Text>
     <View
-      accessible={true}
+      accessible={false}
       aria-checked={false}
       aria-live="polite"
       focusable={false}
       role="radio"
+      screenReaderFocusable={true}
       style={
         [
           {

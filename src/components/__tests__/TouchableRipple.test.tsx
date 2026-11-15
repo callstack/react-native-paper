@@ -2,7 +2,16 @@ import * as React from 'react';
 import { Platform, Pressable, Text, View } from 'react-native';
 import type { GestureResponderEvent, Role } from 'react-native';
 
-import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
@@ -194,6 +203,54 @@ describe('TouchableRipple', () => {
 
     expect(screen.queryByRole('button')).not.toBeOnTheScreen();
     expect(screen.getByTestId('plain')).toBeSelected();
+  });
+
+  describe('on Android', () => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', 'android');
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    // `accessible` makes an Android view keyboard focusable, so a hardware
+    // keyboard or D-pad would stop on something with nothing to activate
+    it('is no keyboard stop but one screen reader element when no touch handler is passed', async () => {
+      await render(
+        <TouchableRipple testID="plain" aria-label="Info">
+          <Text>Not a control</Text>
+        </TouchableRipple>
+      );
+
+      const plain = screen.getByTestId('plain');
+
+      expect(plain).toHaveProp('accessible', false);
+      expect(plain).toHaveProp('screenReaderFocusable', true);
+    });
+
+    it('is a keyboard stop when the consumer passes accessible', async () => {
+      await render(
+        <TouchableRipple testID="plain" accessible>
+          <Text>Not a control</Text>
+        </TouchableRipple>
+      );
+
+      expect(screen.getByTestId('plain')).toHaveProp('accessible', true);
+    });
+
+    it('leaves the children to the screen reader when the consumer turns accessible off', async () => {
+      await render(
+        <TouchableRipple testID="plain" accessible={false}>
+          <Text>Not a control</Text>
+        </TouchableRipple>
+      );
+
+      expect(screen.getByTestId('plain')).toHaveProp(
+        'screenReaderFocusable',
+        false
+      );
+    });
   });
 
   it('respects a focusable prop of its own', async () => {

@@ -77,6 +77,7 @@ function carriesToggleState(props: ToggleState) {
 
 type NonControlA11ySourceProps = ToggleState & {
   accessible?: boolean;
+  screenReaderFocusable?: boolean;
   focusable?: boolean;
   role?: Role;
   accessibilityRole?: AccessibilityRole;
@@ -87,6 +88,7 @@ type NonControlA11ySourceProps = ToggleState & {
 /** What `getNonControlA11yProps` hands back, to be spread after the rest props. */
 type NonControlA11yProps = {
   accessible: boolean;
+  screenReaderFocusable?: boolean;
   role: Role | undefined;
   accessibilityRole?: undefined;
   focusable: boolean | undefined;
@@ -112,9 +114,23 @@ export function getNonControlA11yProps(
     !carriesToggleState(props);
   const keptRole = dropsRole ? 'none' : effectiveRole;
 
+  // Pressable defaults `accessible` to true, which keeps the element one unit
+  // for screen readers, with its role and state.
+  const isScreenReaderUnit = props.accessible !== false;
+
   const a11yProps: NonControlA11yProps = {
-    // Pressable defaults this to true; keep it so the role and state stay
-    accessible: props.accessible !== false,
+    // On Android `accessible` also makes the view keyboard focusable, so a
+    // hardware keyboard or D-pad would stop on something with nothing to
+    // activate. `screenReaderFocusable` keeps it one unit for TalkBack
+    // (Android 9+) while keys skip it; only a consumer's `accessible` makes it
+    // a stop.
+    accessible:
+      Platform.OS === 'android'
+        ? props.accessible === true
+        : isScreenReaderUnit,
+    ...(Platform.OS === 'android' && {
+      screenReaderFocusable: props.screenReaderFocusable ?? isScreenReaderUnit,
+    }),
     role: dropsRole ? 'none' : props.role,
     // nothing to activate, so on web only a consumer makes this a tab stop
     focusable:
