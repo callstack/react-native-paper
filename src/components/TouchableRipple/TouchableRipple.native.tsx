@@ -37,10 +37,12 @@ export type Props = PressableProps & {
    * - `outward` - just outside the bounds. The MD3 default.
    * - `inward` - just inside, for controls a clipping ancestor would trim or
    *   that sit flush against a neighbour.
-   * - `none` - no indicator. Only for a control that draws its own.
+   * - `none` - no indicator. On web the browser's own focus outline still
+   *   shows, so a control that draws its own indicator also needs
+   *   `outline: 'none'` there.
    *
-   * Has no effect on iOS today - see `useFocusRing`'s doc comment for why
-   * (`enableImperativeFocus`, off by default).
+   * The ring shows only while the touchable can be pressed: not when it is
+   * disabled or has no touch handler. There is no ring on iOS.
    */
   focusRing?: FocusRingPlacement;
   onPress?: (e: GestureResponderEvent) => void | null;
