@@ -18,6 +18,7 @@ import {
 import type { TestInstance } from 'test-renderer';
 
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import TextInput from '../TextInput';
 import type {
@@ -294,6 +295,58 @@ it('dims a disabled TextInput with TextInput.Icon accessories exactly once', asy
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('uses the disabled color for every TextInput.Icon of a disabled field with an error', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      error
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+      )}
+    />
+  );
+
+  for (const icon of ['magnify', 'close']) {
+    expect(screen.getByText(icon, includeHiddenElements)).toHaveStyle({
+      color: LightTheme.colors.onSurface,
+    });
+  }
+});
+
+it('uses the disabled color over iconColor for every TextInput.Icon of a disabled field', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" iconColor="#6750A4" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          iconColor="#6750A4"
+          onPress={() => {}}
+        />
+      )}
+    />
+  );
+
+  for (const icon of ['magnify', 'close']) {
+    expect(screen.getByText(icon, includeHiddenElements)).toHaveStyle({
+      color: LightTheme.colors.onSurface,
+    });
+  }
 });
 
 it('disables a TextInput.Icon that only has onLongPress when the field is disabled', async () => {
