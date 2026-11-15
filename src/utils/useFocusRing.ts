@@ -131,14 +131,16 @@ export function useFocusRing(
   const [focused, setFocused] = React.useState(false);
 
   const onFocus = React.useCallback(
-    (e: NativeSyntheticEvent<TargetedEvent>) => {
+    // Optional: an app test can call the handler with no event at all
+    // (`fireEvent(element, 'focus')`), and that has to keep working.
+    (e?: NativeSyntheticEvent<TargetedEvent>) => {
       // Native focus events bubble: a focused descendant (a Switch in a
       // List.Item, a TextInput tapped inside a pressable Card) reaches this
       // handler too. Only the element's own focus draws its ring.
-      if (suppressed || e.target !== e.currentTarget) {
+      if (suppressed || (e && e.target !== e.currentTarget)) {
         return;
       }
-      setFocused(isKeyboardFocusEvent(e));
+      setFocused(!e || isKeyboardFocusEvent(e));
     },
     [suppressed]
   );

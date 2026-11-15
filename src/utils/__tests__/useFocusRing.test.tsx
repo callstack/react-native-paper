@@ -153,6 +153,20 @@ describe('useFocusRing (native)', () => {
     });
   });
 
+  // `fireEvent(element, 'focus')` without an event calls the handler with
+  // nothing, as an app's own tests may do.
+  it('rings when the focus handler gets no event', async () => {
+    await render(<Probe />);
+
+    await act(async () => {
+      await fireEvent(screen.getByTestId('probe'), 'focus');
+    });
+
+    expect(screen.getByTestId('probe')).toHaveStyle({
+      outlineWidth: thickness,
+    });
+  });
+
   // `disabled` goes to the hook only, never to the Pressable: RNTL will not
   // dispatch to a disabled element, so that would pass for free.
   it('never rings a disabled control, even if a focus event arrives', async () => {
