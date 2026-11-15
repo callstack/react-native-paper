@@ -245,6 +245,16 @@ describe('TouchableRipple (web file)', () => {
     expect(screen.queryByRole('togglebutton')).not.toBeOnTheScreen();
   });
 
+  it('is reported as enabled with a touch handler, even with aria-disabled', async () => {
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}} aria-disabled>
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    expect(screen.getByTestId('ripple')).not.toBeDisabled();
+  });
+
   it('keeps the button role on a disabled control', async () => {
     await render(
       <TouchableRipple role="button" disabled>

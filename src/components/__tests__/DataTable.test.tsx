@@ -48,14 +48,27 @@ describe('DataTable.Title', () => {
     }
   );
 
-  it('takes no touches outside its bounds without a touch handler', async () => {
+  it.each([
+    { when: 'without a touch handler', props: {} },
+    { when: 'when disabled', props: { onPress: () => {}, disabled: true } },
+  ])('takes no touches outside its bounds $when', async ({ props }) => {
     await render(
-      <DataTable.Title testID="title" hitSlop={16}>
+      <DataTable.Title testID="title" hitSlop={16} {...props}>
         Dessert
       </DataTable.Title>
     );
 
     expect(screen.getByTestId('title')).not.toHaveProp('hitSlop');
+  });
+
+  it('is reported as enabled with a touch handler, even with aria-disabled', async () => {
+    await render(
+      <DataTable.Title testID="title" onPress={() => {}} aria-disabled>
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(screen.getByTestId('title')).not.toBeDisabled();
   });
 
   it('renders data table title with sort icon', async () => {
