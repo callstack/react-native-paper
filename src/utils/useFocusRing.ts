@@ -16,8 +16,11 @@ export type FocusRingPlacement = 'outward' | 'inward' | 'none';
 
 /**
  * `'self'` - the ring is drawn on the element that receives focus.
- * `'within'` - the ring is drawn on an ancestor (a track/clip view), because
- * the focusable element's own box is the wrong shape or size for it.
+ * `'within'` - the ring is drawn on the parent of the element that receives
+ * focus (a clip view, a card's box), because the focusable element's own box
+ * is the wrong shape or size for it. The focusable element must be a direct
+ * child: on web, a focused element deeper inside (a Button in a Card) doesn't
+ * light the parent's ring.
  * `'descendant'` - the ring is drawn on a child of the element that receives
  * focus (Switch's track inside its 48dp-tall Pressable, the circle around
  * Chip's close glyph inside its close column), for the same reason.
@@ -96,7 +99,7 @@ const webNoOutlineStyle = { outline: 'none' } as unknown as ViewStyle;
  * On native there is no CSS, so this tracks focus in state and computes the
  * ring as an `outline*` style, live. On web the ring is real CSS: a shared
  * stylesheet keyed off a `data-focus-ring[-within]` attribute and
- * `:focus-visible`/`:has(:focus-visible)`, with only the (theme-dependent)
+ * `:focus-visible`/`:has(> :focus-visible)`, with only the (theme-dependent)
  * color passed through as a CSS custom property. Nothing here tracks focus in
  * JS on web - the browser drives it.
  *
@@ -233,7 +236,11 @@ ${selector('inward')} {
 export const buildFocusRingStylesheet = (): string =>
   [
     focusRingRule((p) => `[data-focus-ring="${p}"]:focus-visible`),
-    focusRingRule((p) => `[data-focus-ring-within="${p}"]:has(:focus-visible)`),
+    // A direct child only: a focused element nested deeper, such as a Button
+    // or a TextInput inside a Card, must not light the Card's ring too.
+    focusRingRule(
+      (p) => `[data-focus-ring-within="${p}"]:has(> :focus-visible)`
+    ),
     focusRingRule(
       (p) =>
         `[data-focus-ring-target]:focus-visible [data-focus-ring-descendant="${p}"]`

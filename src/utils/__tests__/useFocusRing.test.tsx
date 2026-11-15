@@ -57,15 +57,18 @@ const Probe = ({
 describe('buildFocusRingStylesheet', () => {
   const css = buildFocusRingStylesheet();
 
-  it('rings `self` via :focus-visible and `within` via :has(:focus-visible), for both placements', () => {
+  // `within` matches only a focused direct child, so a focused Button or
+  // TextInput inside a pressable Card doesn't light the Card's ring as well.
+  it('rings `self` via :focus-visible and `within` via a focused direct child, for both placements', () => {
     expect(css).toContain('[data-focus-ring="outward"]:focus-visible');
     expect(css).toContain('[data-focus-ring="inward"]:focus-visible');
     expect(css).toContain(
-      '[data-focus-ring-within="outward"]:has(:focus-visible)'
+      '[data-focus-ring-within="outward"]:has(> :focus-visible)'
     );
     expect(css).toContain(
-      '[data-focus-ring-within="inward"]:has(:focus-visible)'
+      '[data-focus-ring-within="inward"]:has(> :focus-visible)'
     );
+    expect(css).not.toContain(':has(:focus-visible)');
   });
 
   // `:has()` only looks down from the ringed element, so a ring on a child of
