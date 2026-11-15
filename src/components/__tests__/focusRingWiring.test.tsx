@@ -24,6 +24,7 @@ import { act, fireEvent } from '@testing-library/react-native';
 
 import { ownFocusEvent, render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
+import Appbar from '../Appbar/Appbar';
 import AppbarAction from '../Appbar/AppbarAction';
 import AppbarBackAction from '../Appbar/AppbarBackAction';
 import AppbarContent from '../Appbar/AppbarContent';
@@ -605,6 +606,41 @@ describe('focus ring color follows the theme prop', () => {
 
     expect(ringColor()).toBe('rgb(255, 0, 0)');
   });
+
+  // An Appbar hands its theme to its back action, actions and title, in every
+  // mode, so their rings match the bar.
+  it.each(['small', 'center-aligned', 'medium', 'large'] as const)(
+    'Appbar in %s mode rings its controls in its theme color',
+    async (mode) => {
+      await render(
+        <Appbar mode={mode} theme={theme}>
+          <AppbarBackAction onPress={() => {}} />
+          <AppbarContent title="Inbox" onPress={() => {}} />
+          <AppbarAction icon="magnify" onPress={() => {}} />
+        </Appbar>
+      );
+
+      const root = (screen as unknown as { root: Node }).root;
+      const focusables = walk(
+        root,
+        (n) => typeof n.props?.onFocus === 'function'
+      );
+      expect(focusables).toHaveLength(3);
+      for (const node of focusables) {
+        await act(async () => {
+          await fireEvent(node as never, 'focus', ownFocusEvent());
+        });
+      }
+
+      const rings = walk(root, (n) => style(n).outlineStyle === 'solid');
+      expect(rings).toHaveLength(3);
+      expect(rings.map((n) => style(n).outlineColor)).toEqual([
+        'rgb(255, 0, 0)',
+        'rgb(255, 0, 0)',
+        'rgb(255, 0, 0)',
+      ]);
+    }
+  );
 });
 
 // A focused Pressable that unmounts sends no blur, so each of these resets its
