@@ -280,7 +280,9 @@ const Card = ({
           onFocus={focusTarget.onFocus}
           onBlur={focusTarget.onBlur}
           {...focusRing.dataSetProps}
-          style={[{ borderRadius }, ...focusRing.style]}
+          // Grows to fill a card that is taller than its content, so the ring
+          // follows the card's edge and the whole card takes the press.
+          style={[styles.pressable, { borderRadius }, ...focusRing.style]}
         >
           {content}
         </Pressable>
@@ -303,6 +305,9 @@ Card.Cover = CardCover;
 Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
+  pressable: {
+    flexGrow: 1,
+  },
   content: {
     flexShrink: 1,
     overflow: 'hidden',

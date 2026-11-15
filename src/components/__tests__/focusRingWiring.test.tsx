@@ -451,6 +451,22 @@ describe('focus ring wiring', () => {
     expect(ringOffset()).toBe(OUTWARD);
   });
 
+  // The caller's `style` sizes the card, around the ringed Pressable, so the
+  // Pressable has to grow with it or the ring stops at the content's height.
+  it('Card rings its whole box when it is taller than its content', async () => {
+    await render(
+      <Card onPress={() => {}} style={{ height: 200 }}>
+        <Text>card</Text>
+      </Card>
+    );
+
+    await focusFirstFocusable();
+
+    const root = (screen as unknown as { root: Node }).root;
+    const [ringed] = walk(root, (n) => style(n).outlineStyle === 'solid');
+    expect(style(ringed).flexGrow).toBe(1);
+  });
+
   it('FAB rings outward on its clip view', async () => {
     await render(<FAB icon="plus" onPress={() => {}} />);
 
