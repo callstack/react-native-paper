@@ -453,11 +453,12 @@ describe('focus ring wiring', () => {
     expect(ringOffset()).toBe(OUTWARD);
   });
 
-  // The caller's `style` sizes the card, around the ringed Pressable, so the
-  // Pressable has to grow with it or the ring stops at the content's height.
-  it('Card rings its whole box when it is taller than its content', async () => {
+  // The caller's `style` sizes and pads the card around the Pressable that
+  // takes focus, so the ring goes on the card's own box: a ring on the
+  // Pressable would stop at the content's height and sit inside the padding.
+  it('Card rings its own box, whatever its size and padding', async () => {
     await render(
-      <Card onPress={() => {}} style={{ height: 200 }}>
+      <Card onPress={() => {}} style={{ height: 200, padding: 12 }}>
         <Text>card</Text>
       </Card>
     );
@@ -465,8 +466,13 @@ describe('focus ring wiring', () => {
     await focusFirstFocusable();
 
     const root = (screen as unknown as { root: Node }).root;
-    const [ringed] = walk(root, (n) => style(n).outlineStyle === 'solid');
-    expect(style(ringed).flexGrow).toBe(1);
+    const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
+    expect(ringed).toHaveLength(1);
+    expect(style(ringed[0])).toMatchObject({
+      height: 200,
+      padding: 12,
+      outlineOffset: OUTWARD,
+    });
   });
 
   it('FAB rings outward on its clip view', async () => {
@@ -767,6 +773,31 @@ describe('focus ring wiring (web)', () => {
     expect(
       (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
     ).toBe('inward');
+  });
+
+  it('Card marks its own box as the ring and keeps the browser outline off the Pressable', async () => {
+    await render(
+      <Card testID="card" onPress={() => {}} style={{ height: 200 }}>
+        <Text>card</Text>
+      </Card>
+    );
+
+    const pressable = screen.getByTestId('card');
+    expect(style(pressable)).toMatchObject({ outline: 'none' });
+
+    const root = (screen as unknown as { root: Node }).root;
+    const ringed = walk(
+      root,
+      (n) =>
+        (n.props?.dataSet as Record<string, string> | undefined)
+          ?.focusRingWithin !== undefined
+    );
+    expect(ringed).toHaveLength(1);
+    expect(
+      (ringed[0].props?.dataSet as Record<string, string>).focusRingWithin
+    ).toBe('outward');
+    expect(style(ringed[0]).height).toBe(200);
+    expect(walk(ringed[0], (n) => n === pressable)).toHaveLength(1);
   });
 
   it('Button rings the view that draws its outline, not the button inside it', async () => {

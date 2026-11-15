@@ -1092,10 +1092,6 @@ The `borderColor` in `style` no longer changes the outline color in `outlined` m
 </Card>
 ```
 
-#### Press area
-
-A pressable `Card` that is taller than its content, such as one with a fixed `height` or one stretched by its row, now takes the press over its whole area, not only over its content. Its keyboard focus ring follows the card's edge the same way.
-
 #### `Card.Cover`
 
 The `style` prop of `Card.Cover` is now typed as a `View` style. Image style properties such as `resizeMode` or `tintColor` were never applied, so pass them as `Image` props instead:

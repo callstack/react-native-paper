@@ -19,7 +19,7 @@ import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import { useFocusRing } from '../../utils/useFocusRing';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
 
@@ -180,11 +180,18 @@ const Card = ({
     onPressOut,
   });
 
+  // The ring goes on the Surface, the card's visible box (`scope: 'within'`),
+  // not on the `Pressable` that takes focus: the caller's `style` sizes and
+  // pads the Surface, so a ring on the content-sized `Pressable` would stop
+  // short of a taller card's edge or sit inside its padding.
+  //
   // Off without a touch handler too: the `Pressable` unmounts then, and a
   // focused one sends no blur, so the ring would come back with the handler.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     disabled || !hasPassedTouchHandler,
-    theme.colors.secondary
+    theme.colors.secondary,
+    'outward',
+    'within'
   );
 
   const [pressed, setPressed] = React.useState(false);
@@ -244,11 +251,12 @@ const Card = ({
       ref={ref}
       borderRadius={borderRadius}
       backgroundColor={!isMode('elevated') ? backgroundColor : undefined}
-      style={style}
+      style={[style, ...focusRing.style]}
       theme={theme}
       elevation={elevation}
       testID={hasPassedTouchHandler ? undefined : testID}
       {...rest}
+      {...mergeDataSetProps(rest, focusRing.dataSetProps)}
     >
       {isMode('outlined') && (
         <View
@@ -279,10 +287,7 @@ const Card = ({
           android_ripple={{ color: 'transparent' }}
           onFocus={focusTarget.onFocus}
           onBlur={focusTarget.onBlur}
-          {...focusRing.dataSetProps}
-          // Grows to fill a card that is taller than its content, so the ring
-          // follows the card's edge and the whole card takes the press.
-          style={[styles.pressable, { borderRadius }, ...focusRing.style]}
+          style={[{ borderRadius }, ...focusTarget.style]}
         >
           {content}
         </Pressable>
@@ -305,9 +310,6 @@ Card.Cover = CardCover;
 Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
-  pressable: {
-    flexGrow: 1,
-  },
   content: {
     flexShrink: 1,
     overflow: 'hidden',
