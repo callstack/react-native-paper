@@ -1,4 +1,8 @@
-import { describe, expect, it } from '@jest/globals';
+import { Pressable } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
+
+import { describe, expect, it, jest } from '@jest/globals';
+import { userEvent } from '@testing-library/react-native';
 import color from 'color';
 
 import { render, screen } from '../../test-utils';
@@ -67,8 +71,56 @@ it('renders selected chip', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled chip if there is no touch handler passed', async () => {
-  await render(<Chip testID="disabled-chip">Disabled chip</Chip>);
+it('does not mark a chip without a touch handler as disabled', async () => {
+  await render(<Chip testID="plain-chip">Plain chip</Chip>);
+
+  expect(screen.getByTestId('plain-chip')).not.toBeDisabled();
+});
+
+it('does not announce a chip without a touch handler as a button', async () => {
+  const onWrapPress = jest.fn<(e: GestureResponderEvent) => void>();
+  await render(
+    <Pressable onPress={onWrapPress}>
+      <Chip>Info</Chip>
+    </Pressable>
+  );
+
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+
+  await userEvent.press(screen.getByText('Info'));
+
+  expect(onWrapPress).toHaveBeenCalledTimes(1);
+});
+
+// With no handler the chip renders a plain view and is no longer a button. iOS
+// and Android still report a selection whatever the role, so it stays.
+it('still reports the selection of a selected chip without a touch handler', async () => {
+  await render(
+    <Chip selected testID="plain-selected-chip">
+      Info
+    </Chip>
+  );
+
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+  expect(screen.getByTestId('plain-selected-chip')).toBeSelected();
+});
+
+it('reports the selected state of a chip with a touch handler', async () => {
+  await render(
+    <Chip selected onPress={() => {}}>
+      Selected chip
+    </Chip>
+  );
+
+  expect(screen.getByRole('button', { selected: true })).toBeOnTheScreen();
+});
+
+it('renders disabled chip when the disabled prop is passed', async () => {
+  await render(
+    <Chip disabled onPress={() => {}} testID="disabled-chip">
+      Disabled chip
+    </Chip>
+  );
 
   expect(screen.getByTestId('disabled-chip')).toBeDisabled();
 });

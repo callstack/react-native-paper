@@ -13,6 +13,9 @@ import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
+import hasTouchHandler, {
+  carriesToggleState,
+} from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -130,6 +133,7 @@ const IconButton = ({
   loading = false,
   contentStyle,
   hitSlop,
+  role = 'button',
   ref,
   ...rest
 }: Props) => {
@@ -172,6 +176,23 @@ const IconButton = ({
         height: touchableSize,
       });
 
+  // Without a handler the touchable drops the button role, and on web that
+  // renders role="presentation", which can't carry a name. A labelled icon
+  // that does nothing is an image there, named by its label. An explicit
+  // role="button", as Searchbar passes, counts as the default.
+  const isWebImage =
+    Platform.OS === 'web' &&
+    role === 'button' &&
+    !disabled &&
+    ariaLabel !== undefined &&
+    !hasTouchHandler({
+      onPress,
+      onLongPress: rest.onLongPress,
+      onPressIn: rest.onPressIn,
+      onPressOut: rest.onPressOut,
+    }) &&
+    !carriesToggleState(rest);
+
   return (
     <Animated.View
       ref={ref}
@@ -209,7 +230,7 @@ const IconButton = ({
           Platform.OS !== 'web' && styles.clipToShape,
           contentStyle,
         ]}
-        role="button"
+        role={isWebImage ? 'img' : role}
         aria-disabled={disabled}
         disabled={disabled}
         testID={testID}

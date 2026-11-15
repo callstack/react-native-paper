@@ -92,6 +92,11 @@ export type ShellProps = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Whether the shell can't be pressed. Turns a control off without removing
+   * `onPress`, which would render another element and remount the content.
+   */
+  disabled?: boolean;
+  /**
    * Accessibility label. Falls back to `label` if unset.
    */
   'aria-label'?: string;
@@ -197,6 +202,7 @@ const Shell = ({
   elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
+  disabled,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
@@ -299,6 +305,18 @@ const Shell = ({
 
   const { focusedSV, onFocus, onBlur } = useFocusRing();
 
+  // Without a handler the touchable drops the button role, and on web that
+  // renders role="presentation", which can't carry a name. A labelled
+  // icon-only FAB that does nothing is an image there, named by its label.
+  const isWebImage =
+    Platform.OS === 'web' &&
+    !onPress &&
+    !disabled &&
+    label === undefined &&
+    children === undefined &&
+    ariaLabel !== undefined &&
+    ariaChecked === undefined;
+
   const focusRingStyle = useAnimatedStyle(
     () => ({
       opacity: focusedSV.value ? 1 : 0,
@@ -327,10 +345,11 @@ const Shell = ({
           borderless
           background={background}
           onPress={onPress}
+          disabled={disabled}
           onFocus={onFocus}
           onBlur={onBlur}
           aria-label={ariaLabel}
-          role="button"
+          role={isWebImage ? 'img' : 'button'}
           aria-checked={ariaChecked}
           aria-selected={ariaSelected}
           aria-busy={ariaBusy}
