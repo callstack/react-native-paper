@@ -199,8 +199,8 @@ it('drops the button role when neither a touch handler nor a state is passed', a
 });
 
 // A toggle reports its state, so it stays the control that state belongs to
-// even when the handler is missing: the role would otherwise go and leave
-// `aria-checked` on a presentational element, which no platform announces.
+// even when the handler is missing: the role would otherwise go and leave the
+// checked state on an element that isn't a control.
 it('keeps the button role and the checked state on a handler-less toggle', async () => {
   await render(
     <Button mode="outlined" selected>

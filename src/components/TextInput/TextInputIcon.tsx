@@ -32,6 +32,10 @@ export type TextInputIconProps = TextInputAccessoryProps &
  * (return it from `startAccessory` or `endAccessory`). Accepts icon-specific props as well as
  * `TextInputAccessoryProps`, which TextInput passes into those render props.
  *
+ * Without `onPress`, `onLongPress`, `onPressIn` or `onPressOut`, the icon is
+ * decorative: a plain element that keeps its label but isn't a control, and a
+ * tap on it goes to the field.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';

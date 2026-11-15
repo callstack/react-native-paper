@@ -149,8 +149,7 @@ describe('getIconButtonColor - icon color', () => {
   });
 
   it('should let the disabled color outrank an explicit icon color', () => {
-    // matches Button's `customTextColor && !disabled` and the documented
-    // `onSurfaceDisabled`
+    // a disabled icon reads as disabled whatever color it was given
     expect(
       getIconButtonColor({
         theme: LightTheme,

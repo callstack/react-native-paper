@@ -92,6 +92,11 @@ export type ShellProps = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Whether the shell can't be pressed. Turns a control off without removing
+   * `onPress`, which would render another element and remount the content.
+   */
+  disabled?: boolean;
+  /**
    * Accessibility label. Falls back to `label` if unset.
    */
   'aria-label'?: string;
@@ -197,6 +202,7 @@ const Shell = ({
   elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
+  disabled,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
@@ -305,6 +311,7 @@ const Shell = ({
   const isWebImage =
     Platform.OS === 'web' &&
     !onPress &&
+    !disabled &&
     label === undefined &&
     children === undefined &&
     ariaLabel !== undefined &&
@@ -338,6 +345,7 @@ const Shell = ({
           borderless
           background={background}
           onPress={onPress}
+          disabled={disabled}
           onFocus={onFocus}
           onBlur={onBlur}
           aria-label={ariaLabel}

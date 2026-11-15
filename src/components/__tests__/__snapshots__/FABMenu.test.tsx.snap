@@ -583,10 +583,36 @@ exports[`renders FAB.Menu closed 1`] = `
             }
           />
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": true,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
+            collapsable={false}
+            focusable={true}
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
-            role="none"
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1334,10 +1360,36 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
             }
           />
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": true,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
+            collapsable={false}
+            focusable={true}
             onBlur={[Function]}
+            onClick={[Function]}
             onFocus={[Function]}
-            role="none"
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
