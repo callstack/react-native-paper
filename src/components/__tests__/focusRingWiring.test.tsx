@@ -30,11 +30,13 @@ import DataTableTitle from '../DataTable/DataTableTitle';
 import DrawerCollapsedItem from '../Drawer/DrawerCollapsedItem';
 import FAB from '../FAB/FAB';
 import FABMenu from '../FAB/Menu';
+import IconButton from '../IconButton/IconButton';
 import ListAccordion from '../List/ListAccordion';
 import ListItem from '../List/ListItem';
 import MenuItem from '../Menu/MenuItem';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import Switch from '../Switch/Switch';
+import TextInputIcon from '../TextInput/TextInputIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
 const { thickness, outerOffset } = tokens.md.sys.state.focusIndicator;
@@ -343,6 +345,75 @@ describe('focus ring wiring', () => {
     await focusFirstFocusable();
 
     expect(ringOffset()).toBe(OUTWARD);
+  });
+});
+
+// A component's `theme` prop sets its ring color, not only the provider's.
+describe('focus ring color follows the theme prop', () => {
+  const theme = { colors: { secondary: 'rgb(255, 0, 0)' } };
+
+  const ringColor = () => {
+    const root = (screen as unknown as { root: Node }).root;
+    const [ringed] = walk(root, (n) => style(n).outlineStyle === 'solid');
+    return ringed ? style(ringed).outlineColor : undefined;
+  };
+
+  it.each([
+    [
+      'IconButton',
+      <IconButton
+        key="icon"
+        icon="plus"
+        aria-label="Add"
+        onPress={() => {}}
+        theme={theme}
+      />,
+    ],
+    [
+      'TextInput.Icon',
+      <TextInputIcon
+        key="input-icon"
+        icon="eye"
+        aria-label="Show password"
+        onPress={() => {}}
+        style={undefined}
+        multiline={false}
+        disabled={false}
+        error={false}
+        theme={theme}
+      />,
+    ],
+    [
+      'Menu.Item',
+      <MenuItem key="menu" title="item" onPress={() => {}} theme={theme} />,
+    ],
+    [
+      'DataTable.Row',
+      <DataTableRow key="row" onPress={() => {}} theme={theme}>
+        <DataTableCell>cell</DataTableCell>
+      </DataTableRow>,
+    ],
+    [
+      'BottomNavigation.Bar',
+      <BottomNavigation.Bar
+        key="bar"
+        navigationState={{
+          index: 0,
+          routes: [{ key: 'a', title: 'A', focusedIcon: 'home' }],
+        }}
+        onTabPress={() => {}}
+        renderTouchable={({ key, route: _route, ...props }) => (
+          <TouchableRipple key={key} {...props} />
+        )}
+        theme={theme}
+      />,
+    ],
+  ])('%s', async (_name, element) => {
+    await render(element);
+
+    await focusFirstFocusable();
+
+    expect(ringColor()).toBe('rgb(255, 0, 0)');
   });
 });
 

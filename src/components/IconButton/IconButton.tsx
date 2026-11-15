@@ -221,6 +221,7 @@ const IconButton = ({
         borderless
         centered
         onPress={onPress}
+        theme={theme}
         aria-label={ariaLabel}
         style={[
           styles.touchable,

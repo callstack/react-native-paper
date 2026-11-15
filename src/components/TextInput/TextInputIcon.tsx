@@ -110,6 +110,7 @@ const TextInputIcon = ({
         icon={icon}
         iconColor={color}
         size={iconSize}
+        theme={themeOverride}
         style={[
           styles.icon,
           style,

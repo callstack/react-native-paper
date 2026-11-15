@@ -75,6 +75,7 @@ const DataTableRow = ({
       focusRing="inward"
       {...rest}
       onPress={onPress}
+      theme={theme}
       style={[styles.container, { borderBottomColor }, style]}
     >
       <View style={styles.content} pointerEvents={pointerEvents}>
