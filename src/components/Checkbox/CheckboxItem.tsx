@@ -163,9 +163,9 @@ const CheckboxItem = ({
   };
 
   // A full-width row: an outward ring would run into the rows around it. Inward,
-  // the ring goes on a childless overlay painted last (`'descendant'`), like
-  // Drawer.CollapsedItem's: drawn on the row itself, it would sit under the
-  // content view, and a background set through `style` would hide it. Off
+  // the ring goes on a childless overlay painted last (`'descendant'`): drawn
+  // on the row itself, it would sit under the content view, and a background
+  // set through `style` would hide it. Off
   // whenever the row can't be pressed, as on TouchableRipple.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     disabled || !hasTouchHandler({ onPress, onLongPress }),

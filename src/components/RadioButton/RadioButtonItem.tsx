@@ -189,10 +189,10 @@ const RadioButtonItem = ({
   };
 
   // Rows stack edge to edge, so the ring is inward. It goes on a childless
-  // overlay painted last (`'descendant'`), like Drawer.CollapsedItem's: drawn
-  // on the row itself, it would sit under the content view, and a background
-  // set through `style` would hide it. Off whenever the row can't be pressed,
-  // as on TouchableRipple. The hook needs the group above the consumer below.
+  // overlay painted last (`'descendant'`): drawn on the row itself, it would
+  // sit under the content view, and a background set through `style` would
+  // hide it. Off whenever the row can't be pressed, as on TouchableRipple.
+  // The hook needs the group above the consumer below.
   const group = React.useContext(RadioButtonContext);
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     disabled || !(onPress || group?.onValueChange || onLongPress),

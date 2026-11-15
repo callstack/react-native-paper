@@ -348,14 +348,16 @@ describe('focus ring wiring', () => {
     expect(ringed.children ?? []).toHaveLength(0);
   });
 
-  // The ring stays 2dp clear of the active indicator. Without a label the
-  // indicator is a circle as tall as the item, so the ring reaches below it.
+  // The ring stays 2dp clear of the item above and below. Without a label the
+  // indicator is a circle as tall as the item, and a two-line label sets the
+  // item's height, so the ring reaches below the item in both cases.
   it.each([
-    ['with a label', 'Inbox', 0],
-    ['without a label', undefined, -(outerOffset + thickness)],
+    ['with a label', 'Inbox'],
+    ['with a two-line label', 'Inbox and other mail'],
+    ['without a label', undefined],
   ])(
-    'Drawer.CollapsedItem %s clears the active indicator',
-    async (_name, label, bottom) => {
+    'Drawer.CollapsedItem %s clears the active indicator and the label',
+    async (_name, label) => {
       await render(
         <DrawerCollapsedItem
           label={label}
@@ -371,7 +373,7 @@ describe('focus ring wiring', () => {
       const [ringed] = walk(root, (n) => style(n).outlineStyle === 'solid');
       expect(style(ringed)).toMatchObject({
         top: -(outerOffset + thickness),
-        bottom,
+        bottom: -(outerOffset + thickness),
       });
     }
   );

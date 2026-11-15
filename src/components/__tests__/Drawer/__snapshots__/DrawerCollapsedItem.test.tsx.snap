@@ -78,14 +78,11 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
         style={
           [
             {
-              "bottom": 0,
+              "bottom": -5,
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": -5,
-            },
-            {
-              "bottom": -5,
             },
             {
               "borderRadius": 8,
@@ -218,14 +215,11 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
         style={
           [
             {
-              "bottom": 0,
+              "bottom": -5,
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": -5,
-            },
-            {
-              "bottom": -5,
             },
             {
               "borderRadius": 8,
@@ -358,14 +352,11 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
         style={
           [
             {
-              "bottom": 0,
+              "bottom": -5,
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": -5,
-            },
-            {
-              "bottom": -5,
             },
             {
               "borderRadius": 8,
@@ -496,13 +487,12 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
         style={
           [
             {
-              "bottom": 0,
+              "bottom": -5,
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": -5,
             },
-            false,
             {
               "borderRadius": 8,
             },
@@ -677,14 +667,11 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
         style={
           [
             {
-              "bottom": 0,
+              "bottom": -5,
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": -5,
-            },
-            {
-              "bottom": -5,
             },
             {
               "borderRadius": 8,
