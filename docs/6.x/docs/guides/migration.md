@@ -360,6 +360,30 @@ App tests change with it: a display-only element is no longer found by a role it
 
 In a disabled `TextInput`, every `TextInput.Icon` takes the disabled color, also over `iconColor` and the error color. One with a handler is a disabled `IconButton`, and an `opacity` in its `style` doesn't apply.
 
+### Focus indicator
+
+Interactive components now draw the Material Design 3 keyboard focus indicator: a 3dp ring in `theme.colors.secondary`, 2dp outside the component. On web it shows when an element gets focus from the keyboard (`:focus-visible`), and on Android when it gets focus from a hardware keyboard or D-pad. Clicking or touching an element shows no ring. iOS shows no ring.
+
+Components that fill a clipping container or touch their neighbours draw the ring 3dp inside their edge instead: `List.Item`, `List.Accordion`, `Checkbox.Item`, `RadioButton.Item`, `Menu.Item`, the `FAB.Menu` items, `Drawer.CollapsedItem`, the `BottomNavigation` tabs, `DataTable.Row`, `DataTable.Cell`, `DataTable.Title` and `SegmentedButtons`. `FAB` and `Switch` draw this ring instead of their own, and `Checkbox` keeps its circular ring around the state layer.
+
+A `TouchableRipple`, and every component built on it, rings only while it can be pressed. A disabled one shows no ring. One with no touch handler and no `disabled` is the plain view described in [TouchableRipple without a press handler](#touchableripple-without-a-press-handler): it isn't a keyboard stop, so it never rings. This applies to `TouchableRipple` only: a `Switch` or `Drawer.CollapsedItem` without a handler is still a keyboard stop and rings.
+
+An outward ring sits outside the component, so a scroll view or a container with `overflow: 'hidden'` clips it, and a neighbour that touches the component can cover it. Chips in a horizontal `ScrollView`, or a `TouchableRipple` that fills the width of a scroll view, show only part of the ring. Give the container 5dp of padding, or pass `focusRing="inward"` where the component takes it:
+
+```tsx
+<ScrollView horizontal contentContainerStyle={{ padding: 5 }}>
+  <Chip onPress={showMusic}>Music</Chip>
+</ScrollView>
+
+<TouchableRipple focusRing="inward" onPress={openSettings}>
+  <Text>Settings</Text>
+</TouchableRipple>
+```
+
+`TouchableRipple` takes a new `focusRing` prop, and so do the components whose props include it, such as `IconButton`, `List.Item`, `DataTable.Row` and `DataTable.Cell`. It is `'outward'`, `'inward'` or `'none'`. `'none'` draws no ring, but on web it leaves the browser's own focus outline, so a component that draws its own indicator also needs `outline: 'none'` on web.
+
+On web the ring comes from a stylesheet that Paper adds to the page, and on these elements it takes precedence over your own `:focus-visible` outline styles. There is no app-wide switch to turn the ring off. Its color follows `theme.colors.secondary`, from the theme or a component's `theme` prop.
+
 ### Libraries built on Paper
 
 Libraries built on Paper may not support 6.x yet. For example, `react-native-paper-dates` 0.24.1 still uses `HelperText`, the 5.x theme exports and `theme.roundness`, so its `DatePickerInput` crashes when it shows a validation error.
@@ -672,6 +696,8 @@ Corner radii set through `style` no longer shape the press, hover and disabled f
 `borderless` has no effect on web. The web ripple is always clipped to the touchable's shape, including when `centered` is set, and the touchable no longer clips its own content. A child that needs a clipped or rounded shape should carry that shape itself.
 
 `hitSlop` now works on web: the touchable renders an invisible target that extends past its bounds. An ancestor with `overflow: 'hidden'` or a scroll view clips it, as on Android.
+
+`TouchableRipple` draws the keyboard focus ring and takes a new `focusRing` prop. See [Focus indicator](#focus-indicator).
 
 ### TextInput
 
