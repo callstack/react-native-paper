@@ -201,8 +201,8 @@ const RadioButtonItem = ({
             // `RadioButton.Group`) is read only and gets no handler, so it never
             // takes a press meant for its parent. A live row is turned off with
             // `disabled`, which keeps the same element instead of remounting it.
-            // The radio inside has no handler of its own, so it still swaps
-            // elements when `disabled` toggles.
+            // Outside a `RadioButton.Group` the radio inside has no handler of
+            // its own, so it still swaps elements when `disabled` toggles.
             onPress={
               onPress || context?.onValueChange
                 ? (event) =>

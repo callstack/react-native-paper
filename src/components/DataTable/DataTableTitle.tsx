@@ -209,8 +209,8 @@ const DataTableTitle = ({
       onLongPress={onLongPress}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
-      // `false`, not undefined, when enabled: Pressable lets a caller's
-      // aria-disabled stand when `disabled` is undefined
+      // `false`, not undefined, when enabled: on iOS and Android, Pressable
+      // lets a caller's aria-disabled stand when `disabled` is undefined
       disabled={Boolean(disabledProp)}
       // a touch target only for something that can be pressed
       hitSlop={isInteractive ? hitSlop : undefined}
