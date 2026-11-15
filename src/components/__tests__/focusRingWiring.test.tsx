@@ -18,6 +18,8 @@ import { act, fireEvent } from '@testing-library/react-native';
 
 import { ownFocusEvent, render, screen } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
+import AppbarAction from '../Appbar/AppbarAction';
+import AppbarBackAction from '../Appbar/AppbarBackAction';
 import AppbarContent from '../Appbar/AppbarContent';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import Button from '../Button/Button';
@@ -519,6 +521,20 @@ describe('focus ring color follows the theme prop', () => {
   };
 
   it.each([
+    [
+      'Appbar.Action',
+      <AppbarAction
+        key="action"
+        icon="magnify"
+        aria-label="Search"
+        onPress={() => {}}
+        theme={theme}
+      />,
+    ],
+    [
+      'Appbar.BackAction',
+      <AppbarBackAction key="back" onPress={() => {}} theme={theme} />,
+    ],
     [
       'IconButton',
       <IconButton
