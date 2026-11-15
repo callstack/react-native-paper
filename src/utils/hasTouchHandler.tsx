@@ -89,6 +89,7 @@ type NonControlA11ySourceProps = ToggleState & {
 type NonControlA11yProps = {
   accessible: boolean;
   screenReaderFocusable?: boolean;
+  collapsable?: boolean;
   role: Role | undefined;
   accessibilityRole?: undefined;
   focusable: boolean | undefined;
@@ -117,19 +118,23 @@ export function getNonControlA11yProps(
   // Pressable defaults `accessible` to true, which keeps the element one unit
   // for screen readers, with its role and state.
   const isScreenReaderUnit = props.accessible !== false;
+  const screenReaderFocusable =
+    props.screenReaderFocusable ?? isScreenReaderUnit;
 
   const a11yProps: NonControlA11yProps = {
     // On Android `accessible` also makes the view keyboard focusable, so a
     // hardware keyboard or D-pad would stop on something with nothing to
     // activate. `screenReaderFocusable` keeps it one unit for TalkBack
     // (Android 9+) while keys skip it; only a consumer's `accessible` makes it
-    // a stop.
+    // a stop. Unlike `accessible`, it doesn't stop Fabric from flattening the
+    // children into the parent, so `collapsable: false` keeps them inside.
     accessible:
       Platform.OS === 'android'
         ? props.accessible === true
         : isScreenReaderUnit,
     ...(Platform.OS === 'android' && {
-      screenReaderFocusable: props.screenReaderFocusable ?? isScreenReaderUnit,
+      screenReaderFocusable,
+      ...(screenReaderFocusable && { collapsable: false }),
     }),
     role: dropsRole ? 'none' : props.role,
     // nothing to activate, so on web only a consumer makes this a tab stop

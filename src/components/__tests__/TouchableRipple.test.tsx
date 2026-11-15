@@ -69,6 +69,16 @@ describe('TouchableRipple', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it('is reported as enabled with a touch handler, even with aria-disabled', async () => {
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}} aria-disabled>
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    expect(screen.getByTestId('ripple')).not.toBeDisabled();
+  });
+
   it('is not reported as disabled when no touch handler is passed', async () => {
     await render(
       <TouchableRipple testID="plain">
@@ -227,6 +237,9 @@ describe('TouchableRipple', () => {
 
       expect(plain).toHaveProp('accessible', false);
       expect(plain).toHaveProp('screenReaderFocusable', true);
+      // unlike `accessible`, screenReaderFocusable lets Fabric flatten the
+      // children into the parent, which would split the element in two
+      expect(plain).toHaveProp('collapsable', false);
     });
 
     it('is a keyboard stop when the consumer passes accessible', async () => {
@@ -246,10 +259,10 @@ describe('TouchableRipple', () => {
         </TouchableRipple>
       );
 
-      expect(screen.getByTestId('plain')).toHaveProp(
-        'screenReaderFocusable',
-        false
-      );
+      const plain = screen.getByTestId('plain');
+
+      expect(plain).toHaveProp('screenReaderFocusable', false);
+      expect(plain).not.toHaveProp('collapsable');
     });
   });
 
