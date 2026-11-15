@@ -1,4 +1,4 @@
-import { type GestureResponderEvent, Platform } from 'react-native';
+import { type GestureResponderEvent, Platform, Pressable } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
@@ -141,6 +141,19 @@ describe('Checkbox press', () => {
 
     // it keeps saying `checkbox`, and `checked`, to assistive tech
     expect(screen.getByRole('checkbox', { checked: true })).not.toBeDisabled();
+  });
+
+  it('lets a press reach the row it sits in without a press handler', async () => {
+    const onRowPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Pressable onPress={onRowPress}>
+        <Checkbox status="checked" aria-label="Notify me" />
+      </Pressable>
+    );
+
+    await userEvent.press(screen.getByRole('checkbox', { checked: true }));
+
+    expect(onRowPress).toHaveBeenCalledTimes(1);
   });
 
   // `TouchableRipple.supported` is computed once at import, so the Android

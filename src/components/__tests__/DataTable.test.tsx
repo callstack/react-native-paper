@@ -24,6 +24,40 @@ describe('DataTable.Header', () => {
 });
 
 describe('DataTable.Title', () => {
+  it.each(['onLongPress', 'onPressIn', 'onPressOut'] as const)(
+    'is an enabled control with only %s, takes the press and calls it',
+    async (name) => {
+      const handler = jest.fn<(e: GestureResponderEvent) => void>();
+      const parent = jest.fn<(e: GestureResponderEvent) => void>();
+      await render(
+        <Pressable onPress={parent}>
+          <DataTable.Title {...{ [name]: handler }}>Dessert</DataTable.Title>
+        </Pressable>
+      );
+
+      expect(screen.getByText('Dessert')).not.toBeDisabled();
+
+      if (name === 'onLongPress') {
+        await userEvent.longPress(screen.getByText('Dessert'));
+      } else {
+        await userEvent.press(screen.getByText('Dessert'));
+      }
+
+      expect(handler).toHaveBeenCalledTimes(1);
+      expect(parent).not.toHaveBeenCalled();
+    }
+  );
+
+  it('takes no touches outside its bounds without a touch handler', async () => {
+    await render(
+      <DataTable.Title testID="title" hitSlop={16}>
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(screen.getByTestId('title')).not.toHaveProp('hitSlop');
+  });
+
   it('renders data table title with sort icon', async () => {
     const tree = (
       await render(

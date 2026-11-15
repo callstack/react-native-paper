@@ -997,7 +997,13 @@ describe('selected prop', () => {
     ).toMatchObject(plain);
 
     await render(
-      <Button testID="button" mode="text" shape="round" selected>
+      <Button
+        testID="button"
+        mode="text"
+        shape="round"
+        selected
+        onPress={() => {}}
+      >
         X
       </Button>
     );
