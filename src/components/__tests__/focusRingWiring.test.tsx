@@ -101,6 +101,50 @@ describe('focus ring wiring', () => {
     expect(ringOffset()).toBe(OUTWARD);
   });
 
+  // The caller's `style` sizes the chip around the ripple that takes focus,
+  // and on Android and iOS the ripple keeps its own height at the top of a
+  // taller chip. So the ring goes on the chip's own box, and the 2dp gap is
+  // measured from its border, the visible edge.
+  it('Chip rings its own box, whatever its height', async () => {
+    await render(
+      <Chip onPress={() => {}} style={{ height: 40 }}>
+        chip
+      </Chip>
+    );
+
+    await focusFirstFocusable();
+
+    const root = (screen as unknown as { root: Node }).root;
+    const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
+    expect(ringed).toHaveLength(1);
+    expect(style(ringed[0])).toMatchObject({
+      height: 40,
+      borderWidth: 1,
+      outlineOffset: OUTWARD,
+    });
+  });
+
+  it('Chip drops its ring when it is disabled while focused', async () => {
+    const { rerender } = await render(<Chip onPress={() => {}}>chip</Chip>);
+    await focusFirstFocusable();
+    expect(ringOffset()).toBe(OUTWARD);
+
+    await act(async () => {
+      await rerender(
+        <Chip disabled onPress={() => {}}>
+          chip
+        </Chip>
+      );
+    });
+    expect(ringOffset()).toBeUndefined();
+
+    // No focus event in between, so nothing is ringed after re-enabling.
+    await act(async () => {
+      await rerender(<Chip onPress={() => {}}>chip</Chip>);
+    });
+    expect(ringOffset()).toBeUndefined();
+  });
+
   // The bar clips (`overflow: 'hidden'`) and tabs fill it edge to edge, so an
   // outward ring loses its top and bottom. Rendered through a custom
   // `renderTouchable` so the test runs the ring path on every platform.
@@ -573,6 +617,12 @@ describe('focus ring color follows the theme prop', () => {
       <MenuItem key="menu" title="item" onPress={() => {}} theme={theme} />,
     ],
     [
+      'Chip',
+      <Chip key="chip" onPress={() => {}} theme={theme}>
+        chip
+      </Chip>,
+    ],
+    [
       'DataTable.Row',
       <DataTableRow key="row" onPress={() => {}} theme={theme}>
         <DataTableCell>cell</DataTableCell>
@@ -666,6 +716,15 @@ describe('focus ring after the handler goes away and comes back', () => {
       <Card>
         <Text>card</Text>
       </Card>
+    );
+
+    expect(ringOffset()).toBeUndefined();
+  });
+
+  it('Chip shows no ring until it is focused again', async () => {
+    await dropAndRestore(
+      <Chip onPress={() => {}}>chip</Chip>,
+      <Chip>chip</Chip>
     );
 
     expect(ringOffset()).toBeUndefined();
@@ -860,6 +919,37 @@ describe('focus ring wiring (web)', () => {
     ).toBe('outward');
     expect(style(ringed[0]).borderWidth).toBeGreaterThan(0);
     expect(walk(ringed[0], (n) => n === button)).toHaveLength(1);
+  });
+
+  it("Chip marks its own box as the ring, keeps the caller's dataSet and keeps the browser outline off the ripple", async () => {
+    await render(
+      <Chip
+        testID="chip"
+        onPress={() => {}}
+        style={{ height: 40 }}
+        {...{ dataSet: { qa: 'chip' } }}
+      >
+        chip
+      </Chip>
+    );
+
+    const ripple = screen.getByTestId('chip');
+    expect(style(ripple)).toMatchObject({ outline: 'none' });
+
+    const root = (screen as unknown as { root: Node }).root;
+    const ringed = walk(
+      root,
+      (n) =>
+        (n.props?.dataSet as Record<string, string> | undefined)
+          ?.focusRingWithin !== undefined
+    );
+    expect(ringed).toHaveLength(1);
+    expect(ringed[0].props?.dataSet).toEqual({
+      qa: 'chip',
+      focusRingWithin: 'outward',
+    });
+    expect(style(ringed[0])).toMatchObject({ height: 40, borderWidth: 1 });
+    expect(walk(ringed[0], (n) => n === ripple)).toHaveLength(1);
   });
 
   it('Chip marks its close button as the focus target and rings the glyph circle inside it', async () => {

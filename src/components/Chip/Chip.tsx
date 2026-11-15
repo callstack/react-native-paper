@@ -21,7 +21,7 @@ import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import { useFocusRing } from '../../utils/useFocusRing';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -252,12 +252,11 @@ const Chip = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   // The close affordance is a plain `Pressable`, not a `TouchableRipple`
-  // (see below), so it calls `useFocusRing` directly instead of going
-  // through `TouchableRipple`'s `focusRing` prop like the body does. The
-  // `Pressable` is the whole close column, but the ring follows the glyph's
-  // round shape, so it goes on a circle inside it (`'descendant'`). The
-  // circle is a childless overlay on the glyph: Android drew the ring square
-  // when it sat on the view holding the icon, ignoring its border radius.
+  // (see below). The `Pressable` is the whole close column, but the ring
+  // follows the glyph's round shape, so it goes on a circle inside it
+  // (`'descendant'`). The circle is a childless overlay on the glyph: Android
+  // drew the ring square when it sat on the view holding the icon, ignoring
+  // its border radius.
   // Off without `onClose` too: the close `Pressable` unmounts then, and a
   // focused one sends no blur, so the ring would come back with `onClose`.
   const { target: closeFocusTarget, ring: closeFocusRing } = useFocusRing(
@@ -276,6 +275,20 @@ const Chip = ({
     onPressIn,
     onPressOut,
   });
+
+  // The body's ring goes on the Surface, the chip's visible box
+  // (`scope: 'within'`), not on the ripple that takes focus. The ripple sits
+  // inside the Surface's border, so a ring measured from it would lose the
+  // border width from its 2dp gap. And on Android and iOS the ripple keeps its
+  // own height at the top of a chip that `style` makes taller, so a ring on it
+  // would sit high. Off whenever the body can't be pressed, as on
+  // TouchableRipple.
+  const { target: bodyFocusTarget, ring: bodyFocusRing } = useFocusRing(
+    disabled || !hasPassedTouchHandler,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
 
   const isOutlined = mode === 'outlined';
 
@@ -336,16 +349,26 @@ const Chip = ({
     <Surface
       backgroundColor={selected ? selectedBackgroundColor : backgroundColor}
       borderRadius={borderRadius}
-      style={[styles.container, styles.md3Container, { borderColor }, style]}
+      style={[
+        styles.container,
+        styles.md3Container,
+        { borderColor },
+        style,
+        ...bodyFocusRing.style,
+      ]}
       elevation={elevation}
       transitionDuration={elevationTransitionDuration}
       {...rest}
+      {...mergeDataSetProps(rest, bodyFocusRing.dataSetProps)}
       theme={theme}
     >
       <TouchableRipple
         borderless
         background={background}
-        style={[{ borderRadius }, styles.touchable]}
+        style={[{ borderRadius }, styles.touchable, ...bodyFocusTarget.style]}
+        focusRing="none"
+        onFocus={bodyFocusTarget.onFocus}
+        onBlur={bodyFocusTarget.onBlur}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
