@@ -28,6 +28,7 @@ import DataTableCell from '../DataTable/DataTableCell';
 import DataTableRow from '../DataTable/DataTableRow';
 import DataTableTitle from '../DataTable/DataTableTitle';
 import DrawerCollapsedItem from '../Drawer/DrawerCollapsedItem';
+import DrawerItem from '../Drawer/DrawerItem';
 import FAB from '../FAB/FAB';
 import FABMenu from '../FAB/Menu';
 import IconButton from '../IconButton/IconButton';
@@ -241,6 +242,14 @@ describe('focus ring wiring', () => {
 
   // MD3 rings a navigation rail item as a whole, inside the rail. The
   // Pressable also spans the gap below the item, so the ring is on the item.
+  it('Drawer.Item rings inward, clear of the items above and below', async () => {
+    await render(<DrawerItem label="Inbox" onPress={() => {}} />);
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBe(INWARD);
+  });
+
   it('Drawer.CollapsedItem rings the item inward, not the Pressable', async () => {
     await render(
       <DrawerCollapsedItem
