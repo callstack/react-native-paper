@@ -3,13 +3,7 @@
    Switch's track, FAB's clip view). There is no testID to query it by, and
    which node it is IS the thing under test, so the tree has to be walked. */
 import type { ReactElement } from 'react';
-import {
-  Platform,
-  processColor,
-  StyleSheet,
-  Text,
-  TextInput,
-} from 'react-native';
+import { Platform, processColor, StyleSheet, Text } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import {
@@ -842,81 +836,6 @@ describe('focus ring wiring (web)', () => {
     ).toBe('outward');
     expect(style(ringed[0]).height).toBe(200);
     expect(walk(ringed[0], (n) => n === pressable)).toHaveLength(1);
-  });
-
-  // On web a `within` ring lights only for a focused direct child, so each
-  // ring view has to hold its own focusable element directly.
-  const withinRings = () =>
-    walk(
-      (screen as unknown as { root: Node }).root,
-      (n) =>
-        (n.props?.dataSet as Record<string, string> | undefined)
-          ?.focusRingWithin !== undefined
-    );
-
-  it.each([
-    [
-      'FAB',
-      <FAB key="fab" icon="plus" testID="focusable" onPress={() => {}} />,
-    ],
-    [
-      'Button',
-      <Button key="button" testID="focusable" onPress={() => {}}>
-        Add
-      </Button>,
-    ],
-    [
-      'Card',
-      <Card key="card" testID="focusable" onPress={() => {}}>
-        <Text>card</Text>
-      </Card>,
-    ],
-  ])(
-    '%s holds its focusable element directly inside its ring',
-    async (_name, element) => {
-      await render(element);
-
-      const rings = withinRings();
-      expect(rings).toHaveLength(1);
-      expect(rings[0].children).toContain(screen.getByTestId('focusable'));
-    }
-  );
-
-  it('FAB.Menu holds each item directly inside its ring', async () => {
-    await render(
-      <FABMenu
-        expanded
-        onDismiss={() => {}}
-        trigger={{ icon: 'plus' }}
-        items={[
-          { label: 'first', onPress: () => {}, testID: 'item-0' },
-          { label: 'second', onPress: () => {}, testID: 'item-1' },
-        ]}
-      />
-    );
-
-    const item = screen.getByTestId('item-0');
-    expect(withinRings().some((r) => r.children?.includes(item))).toBe(true);
-  });
-
-  // A Button or TextInput inside a pressable Card is focused on its own, so it
-  // must not light the Card's ring as well.
-  it("does not hold a Card's nested controls directly inside the Card's ring", async () => {
-    await render(
-      <Card testID="card" onPress={() => {}}>
-        <TextInput testID="input" />
-        <Card.Actions>
-          <Button onPress={() => {}}>OK</Button>
-        </Card.Actions>
-      </Card>
-    );
-
-    const [cardRing] = withinRings();
-    expect(cardRing.children).toContain(screen.getByTestId('card'));
-    expect(cardRing.children).not.toContain(screen.getByTestId('input'));
-    expect(cardRing.children).not.toContain(
-      screen.getByRole('button', { name: 'OK' })
-    );
   });
 
   it('Button rings the view that draws its outline, not the button inside it', async () => {

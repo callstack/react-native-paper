@@ -103,7 +103,7 @@ const webNoOutlineStyle = { outline: 'none' } as unknown as ViewStyle;
  * color passed through as a CSS custom property. Nothing here tracks focus in
  * JS on web - the browser drives it.
  *
- * `scope: 'within'` is for a control whose ring belongs on an ancestor of the
+ * `scope: 'within'` is for a control whose ring belongs on the parent of the
  * element that actually receives focus (FAB's clip view), and
  * `scope: 'descendant'` for one whose ring belongs on a child of it (Switch's
  * track): `target` also suppresses the browser's default outline on the
