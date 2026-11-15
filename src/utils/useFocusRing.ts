@@ -145,8 +145,10 @@ export function useFocusRing(
 
   const onBlur = React.useCallback(() => setFocused(false), []);
 
-  // The focusable node can unmount while this hook stays mounted, and neither
-  // the DOM nor React fires blur for that, so clear rather than only masking.
+  // A focused node that unmounts sends no blur, so `focused` would outlive it.
+  // This clears it whenever the ring is suppressed, rather than only masking
+  // it, so a caller whose focusable node can unmount keys `disabled` off that
+  // too (no handler, no `onClose`) and the state resets with it.
   React.useEffect(() => {
     if (suppressed) {
       setFocused(false);

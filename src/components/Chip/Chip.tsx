@@ -258,8 +258,10 @@ const Chip = ({
   // round shape, so it goes on a circle inside it (`'descendant'`). The
   // circle is a childless overlay on the glyph: Android drew the ring square
   // when it sat on the view holding the icon, ignoring its border radius.
+  // Off without `onClose` too: the close `Pressable` unmounts then, and a
+  // focused one sends no blur, so the ring would come back with `onClose`.
   const { target: closeFocusTarget, ring: closeFocusRing } = useFocusRing(
-    disabled,
+    disabled || !onClose,
     theme.colors.secondary,
     'outward',
     'descendant'

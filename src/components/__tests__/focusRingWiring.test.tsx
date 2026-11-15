@@ -2,6 +2,7 @@
    The node carrying the ring is an unnamed internal view (Card's Pressable,
    Switch's track, FAB's clip view). There is no testID to query it by, and
    which node it is IS the thing under test, so the tree has to be walked. */
+import type { ReactElement } from 'react';
 import { Platform, StyleSheet, Text } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
@@ -342,6 +343,73 @@ describe('focus ring wiring', () => {
     await focusFirstFocusable();
 
     expect(ringOffset()).toBe(OUTWARD);
+  });
+});
+
+// A focused Pressable that unmounts sends no blur, so each of these resets its
+// ring state when the handler goes away. Otherwise the new Pressable is drawn
+// ringed when the handler comes back, with nothing focused.
+describe('focus ring after the handler goes away and comes back', () => {
+  const dropAndRestore = async (
+    withHandler: ReactElement,
+    withoutHandler: ReactElement
+  ) => {
+    const { rerender } = await render(withHandler);
+    await focusFirstFocusable();
+    expect(ringOffset()).toBeDefined();
+
+    await act(async () => {
+      await rerender(withoutHandler);
+    });
+    expect(ringOffset()).toBeUndefined();
+
+    await act(async () => {
+      await rerender(withHandler);
+    });
+  };
+
+  it('Card shows no ring until it is focused again', async () => {
+    await dropAndRestore(
+      <Card onPress={() => {}}>
+        <Text>card</Text>
+      </Card>,
+      <Card>
+        <Text>card</Text>
+      </Card>
+    );
+
+    expect(ringOffset()).toBeUndefined();
+  });
+
+  it('Chip close button shows no ring until it is focused again', async () => {
+    await dropAndRestore(
+      <Chip onClose={() => {}}>chip</Chip>,
+      <Chip>chip</Chip>
+    );
+
+    expect(ringOffset()).toBeUndefined();
+  });
+
+  it('TouchableRipple shows no ring until it is focused again', async () => {
+    await dropAndRestore(
+      <TouchableRipple onPress={() => {}}>
+        <Text>ripple</Text>
+      </TouchableRipple>,
+      <TouchableRipple>
+        <Text>ripple</Text>
+      </TouchableRipple>
+    );
+
+    expect(ringOffset()).toBeUndefined();
+  });
+
+  it('FAB shows no ring until it is focused again', async () => {
+    await dropAndRestore(
+      <FAB icon="plus" aria-label="Add" onPress={() => {}} />,
+      <FAB icon="plus" aria-label="Add" />
+    );
+
+    expect(ringOffset()).toBeUndefined();
   });
 });
 

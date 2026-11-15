@@ -166,10 +166,6 @@ const Card = ({
   ...rest
 }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { target: focusTarget, ring: focusRing } = useFocusRing(
-    disabled,
-    theme.colors.secondary
-  );
   const isMode = React.useCallback(
     (modeToCompare: Mode) => {
       return cardMode === modeToCompare;
@@ -183,6 +179,13 @@ const Card = ({
     onPressIn,
     onPressOut,
   });
+
+  // Off without a touch handler too: the `Pressable` unmounts then, and a
+  // focused one sends no blur, so the ring would come back with the handler.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !hasPassedTouchHandler,
+    theme.colors.secondary
+  );
 
   const [pressed, setPressed] = React.useState(false);
   const elevation = isMode('elevated') ? (pressed ? 2 : cardElevation) : 0;
