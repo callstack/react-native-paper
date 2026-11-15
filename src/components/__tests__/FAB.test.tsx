@@ -1,4 +1,13 @@
-import { expect, it, jest } from '@jest/globals';
+import { Platform } from 'react-native';
+
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
@@ -100,4 +109,41 @@ it('forwards event object to onPress', async () => {
     key: 'value',
   });
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
+});
+
+describe('without a touch handler', () => {
+  it('keeps its label but is no image on iOS and Android', async () => {
+    await render(<FAB icon="star" aria-label="Favorite" />);
+
+    expect(screen.getByLabelText('Favorite')).toBeOnTheScreen();
+    expect(screen.queryByRole('img')).not.toBeOnTheScreen();
+  });
+
+  // On web the dropped role renders role="presentation", which can't carry a
+  // name, so the label would sit on an element that may not be announced
+  describe('on web', () => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', 'web');
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('is an image named by its label when it shows only an icon', async () => {
+      await render(<FAB icon="star" aria-label="Favorite" />);
+
+      expect(screen.getByRole('img', { name: 'Favorite' })).toBeOnTheScreen();
+    });
+
+    it('stays a button with a touch handler', async () => {
+      await render(
+        <FAB icon="star" aria-label="Favorite" onPress={() => {}} />
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'Favorite' })
+      ).toBeOnTheScreen();
+    });
+  });
 });

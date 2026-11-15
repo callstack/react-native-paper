@@ -67,7 +67,7 @@ type ToggleState = {
  * Whether the element is a toggle, so it keeps its role without a handler.
  * A selection is not a toggle state, so it doesn't keep the role.
  */
-function carriesToggleState(props: ToggleState) {
+export function carriesToggleState(props: ToggleState) {
   return (
     props['aria-checked'] !== undefined ||
     props['aria-pressed'] !== undefined ||

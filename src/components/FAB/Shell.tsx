@@ -299,6 +299,17 @@ const Shell = ({
 
   const { focusedSV, onFocus, onBlur } = useFocusRing();
 
+  // Without a handler the touchable drops the button role, and on web that
+  // renders role="presentation", which can't carry a name. A labelled
+  // icon-only FAB that does nothing is an image there, named by its label.
+  const isWebImage =
+    Platform.OS === 'web' &&
+    !onPress &&
+    label === undefined &&
+    children === undefined &&
+    ariaLabel !== undefined &&
+    ariaChecked === undefined;
+
   const focusRingStyle = useAnimatedStyle(
     () => ({
       opacity: focusedSV.value ? 1 : 0,
@@ -330,7 +341,7 @@ const Shell = ({
           onFocus={onFocus}
           onBlur={onBlur}
           aria-label={ariaLabel}
-          role="button"
+          role={isWebImage ? 'img' : 'button'}
           aria-checked={ariaChecked}
           aria-selected={ariaSelected}
           aria-busy={ariaBusy}
