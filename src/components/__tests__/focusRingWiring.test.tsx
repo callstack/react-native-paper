@@ -35,6 +35,7 @@ import IconButton from '../IconButton/IconButton';
 import ListAccordion from '../List/ListAccordion';
 import ListItem from '../List/ListItem';
 import MenuItem from '../Menu/MenuItem';
+import RadioButtonItem from '../RadioButton/RadioButtonItem';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import Switch from '../Switch/Switch';
 import TextInputIcon from '../TextInput/TextInputIcon';
@@ -162,6 +163,54 @@ describe('focus ring wiring', () => {
 
     expect(ringOffset()).toBe(INWARD);
   });
+
+  const ROW_BACKGROUND = 'lightgrey';
+
+  // An inward ring on the row would sit under its content view, so a
+  // background set through `style` would hide it. The ring goes on a childless
+  // overlay that paints last instead.
+  it.each([
+    [
+      'Checkbox.Item',
+      <CheckboxItem
+        key="checkbox"
+        label="row"
+        status="checked"
+        onPress={() => {}}
+        style={{ backgroundColor: ROW_BACKGROUND }}
+      />,
+    ],
+    [
+      'RadioButton.Item',
+      <RadioButtonItem
+        key="radio"
+        label="row"
+        value="a"
+        onPress={() => {}}
+        style={{ backgroundColor: ROW_BACKGROUND }}
+      />,
+    ],
+  ])(
+    '%s rings inward above a background set through style',
+    async (_name, element) => {
+      await render(element);
+
+      await focusFirstFocusable();
+
+      const root = (screen as unknown as { root: Node }).root;
+      const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
+      expect(ringed).toHaveLength(1);
+      expect(style(ringed[0])).toMatchObject({
+        outlineOffset: INWARD,
+        position: 'absolute',
+      });
+      expect(ringed[0].children ?? []).toHaveLength(0);
+      const row = walk(root, (n) =>
+        (n.children ?? []).some((c) => c === ringed[0])
+      )[0];
+      expect(row.children?.at(-1)).toBe(ringed[0]);
+    }
+  );
 
   it('List.Accordion rings inward, like List.Item', async () => {
     await render(
