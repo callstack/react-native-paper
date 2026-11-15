@@ -133,6 +133,7 @@ const IconButton = ({
   loading = false,
   contentStyle,
   hitSlop,
+  role = 'button',
   ref,
   ...rest
 }: Props) => {
@@ -177,9 +178,11 @@ const IconButton = ({
 
   // Without a handler the touchable drops the button role, and on web that
   // renders role="presentation", which can't carry a name. A labelled icon
-  // that does nothing is an image there, named by its label.
+  // that does nothing is an image there, named by its label. An explicit
+  // role="button", as Searchbar passes, counts as the default.
   const isWebImage =
     Platform.OS === 'web' &&
+    role === 'button' &&
     !disabled &&
     ariaLabel !== undefined &&
     !hasTouchHandler({
@@ -227,7 +230,7 @@ const IconButton = ({
           Platform.OS !== 'web' && styles.clipToShape,
           contentStyle,
         ]}
-        role={isWebImage ? 'img' : 'button'}
+        role={isWebImage ? 'img' : role}
         aria-disabled={disabled}
         disabled={disabled}
         testID={testID}

@@ -112,11 +112,21 @@ it('forwards event object to onPress', async () => {
 });
 
 describe('without a touch handler', () => {
-  it('keeps its label but is no image on iOS and Android', async () => {
-    await render(<FAB icon="star" aria-label="Favorite" />);
+  describe.each(['ios', 'android'] as const)('on %s', (os) => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', os);
+    });
 
-    expect(screen.getByLabelText('Favorite')).toBeOnTheScreen();
-    expect(screen.queryByRole('img')).not.toBeOnTheScreen();
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('keeps its label but is no image', async () => {
+      await render(<FAB icon="star" aria-label="Favorite" />);
+
+      expect(screen.getByLabelText('Favorite')).toBeOnTheScreen();
+      expect(screen.queryByRole('img')).not.toBeOnTheScreen();
+    });
   });
 
   // On web the dropped role renders role="presentation", which can't carry a
@@ -144,6 +154,40 @@ describe('without a touch handler', () => {
       expect(
         screen.getByRole('button', { name: 'Favorite' })
       ).toBeOnTheScreen();
+    });
+
+    it('stays a button while it reports a toggle state', async () => {
+      await render(<FAB icon="star" aria-label="Favorite" aria-checked />);
+
+      expect(
+        screen.getByRole('button', { name: 'Favorite' })
+      ).toBeOnTheScreen();
+    });
+
+    it('is no image when it shows a label', async () => {
+      await render(<FAB.Extended icon="plus" label="New message" expanded />);
+
+      expect(
+        screen.queryByRole('img', { name: 'New message' })
+      ).not.toBeOnTheScreen();
+    });
+
+    it('keeps a closed FAB.Menu trigger without onPress a disabled button', async () => {
+      await render(
+        <FAB.Menu
+          expanded={false}
+          onDismiss={() => {}}
+          trigger={{ icon: 'plus', 'aria-label': 'Open actions' }}
+          items={[
+            { label: 'Send email', onPress: () => {} },
+            { label: 'Set reminder', onPress: () => {} },
+          ]}
+        />
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'Open actions' })
+      ).toBeDisabled();
     });
   });
 });

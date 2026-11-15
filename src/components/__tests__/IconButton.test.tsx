@@ -418,11 +418,21 @@ describe('hitSlop', () => {
 });
 
 describe('without a touch handler', () => {
-  it('keeps its label but is no image on iOS and Android', async () => {
-    await render(<IconButton icon="heart" aria-label="Favorite" />);
+  describe.each(['ios', 'android'] as const)('on %s', (os) => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', os);
+    });
 
-    expect(screen.getByLabelText('Favorite')).toBeOnTheScreen();
-    expect(screen.queryByRole('img')).not.toBeOnTheScreen();
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('keeps its label but is no image', async () => {
+      await render(<IconButton icon="heart" aria-label="Favorite" />);
+
+      expect(screen.getByLabelText('Favorite')).toBeOnTheScreen();
+      expect(screen.queryByRole('img')).not.toBeOnTheScreen();
+    });
   });
 
   // On web the dropped role renders role="presentation", which can't carry a
@@ -456,6 +466,41 @@ describe('without a touch handler', () => {
       await render(<IconButton icon="heart" aria-label="Favorite" disabled />);
 
       expect(screen.getByRole('button', { name: 'Favorite' })).toBeDisabled();
+    });
+
+    it.each(['onLongPress', 'onPressIn', 'onPressOut'] as const)(
+      'stays a button with only %s',
+      async (name) => {
+        await render(
+          <IconButton
+            icon="heart"
+            aria-label="Favorite"
+            {...{ [name]: () => {} }}
+          />
+        );
+
+        expect(
+          screen.getByRole('button', { name: 'Favorite' })
+        ).toBeOnTheScreen();
+      }
+    );
+
+    it('stays a button while it reports a toggle state', async () => {
+      await render(
+        <IconButton icon="heart" aria-label="Favorite" aria-pressed={false} />
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'Favorite' })
+      ).toBeOnTheScreen();
+    });
+
+    it('treats an explicit button role like the default', async () => {
+      await render(
+        <IconButton icon="heart" aria-label="Favorite" role="button" />
+      );
+
+      expect(screen.getByRole('img', { name: 'Favorite' })).toBeOnTheScreen();
     });
   });
 });
