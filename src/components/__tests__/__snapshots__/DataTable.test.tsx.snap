@@ -2493,7 +2493,7 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
     {
       "busy": undefined,
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
       "expanded": undefined,
       "selected": undefined,
     }
