@@ -127,7 +127,8 @@ const DrawerCollapsedItem = ({
   // children, and the active indicator would cover its top edge. The overlay
   // starts above the item, so the ring clears the indicator by the usual 2dp
   // gap instead of cutting into it; the 12dp gap below the item above it
-  // leaves room.
+  // leaves room. Without a label it ends below the item the same way, in the
+  // item's own 12dp gap.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     disabled,
     theme.colors.secondary,
@@ -219,6 +220,20 @@ const DrawerCollapsedItem = ({
             ]}
           />
 
+          {/* After the indicator, so the indicator doesn't cover the ring, but
+              before the icon and label, so a text badge above the indicator
+              and a second label line stay readable over it. */}
+          <View
+            pointerEvents="none"
+            style={[
+              styles.focusRing,
+              !label && styles.focusRingIconOnly,
+              { borderRadius: theme.shapes.corner.small },
+              ...focusRing.style,
+            ]}
+            {...focusRing.dataSetProps}
+          />
+
           <View style={[styles.icon, { top: iconPadding }]}>
             {badge !== false && (
               <View style={styles.badgeContainer}>
@@ -246,16 +261,6 @@ const DrawerCollapsedItem = ({
               {label}
             </Text>
           ) : null}
-
-          <View
-            pointerEvents="none"
-            style={[
-              styles.focusRing,
-              { borderRadius: theme.shapes.corner.small },
-              ...focusRing.style,
-            ]}
-            {...focusRing.dataSetProps}
-          />
         </View>
       </Pressable>
     </View>
@@ -274,6 +279,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  // Without a label the indicator is a circle as tall as the item, so the ring
+  // reaches into the gap below the item too, with the same 2dp clearance.
+  focusRingIconOnly: {
+    bottom: -(focusOuterOffset + focusThickness),
   },
   wrapper: {
     width: 80,

@@ -338,11 +338,66 @@ describe('focus ring wiring', () => {
     expect(ringOffset()).toBe(INWARD);
 
     // An inward ring is painted under its own element's children, where the
-    // active indicator would cover it, so it is on an overlay drawn last.
+    // active indicator would cover it, so it is on an overlay drawn after the
+    // indicator.
     const root = (screen as unknown as { root: Node }).root;
     const [ringed] = walk(root, (n) => style(n).outlineStyle === 'solid');
     expect(style(ringed).position).toBe('absolute');
     expect(ringed.children ?? []).toHaveLength(0);
+  });
+
+  // The ring stays 2dp clear of the active indicator. Without a label the
+  // indicator is a circle as tall as the item, so the ring reaches below it.
+  it.each([
+    ['with a label', 'Inbox', 0],
+    ['without a label', undefined, -(outerOffset + thickness)],
+  ])(
+    'Drawer.CollapsedItem %s clears the active indicator',
+    async (_name, label, bottom) => {
+      await render(
+        <DrawerCollapsedItem
+          label={label}
+          focusedIcon="inbox"
+          active
+          onPress={() => {}}
+        />
+      );
+
+      await focusFirstFocusable();
+
+      const root = (screen as unknown as { root: Node }).root;
+      const [ringed] = walk(root, (n) => style(n).outlineStyle === 'solid');
+      expect(style(ringed)).toMatchObject({
+        top: -(outerOffset + thickness),
+        bottom,
+      });
+    }
+  );
+
+  // A text badge pokes above the indicator, across the ring's top edge, so it
+  // has to paint over the ring to stay readable.
+  it('Drawer.CollapsedItem paints its badge over the ring', async () => {
+    await render(
+      <DrawerCollapsedItem
+        label="Inbox"
+        focusedIcon="inbox"
+        badge={3}
+        onPress={() => {}}
+      />
+    );
+
+    await focusFirstFocusable();
+
+    const root = (screen as unknown as { root: Node }).root;
+    const [ringed] = walk(root, (n) => style(n).outlineStyle === 'solid');
+    const wrapper = walk(root, (n) =>
+      (n.children ?? []).some((c) => c === ringed)
+    )[0];
+    const siblings = wrapper.children ?? [];
+    const badgeBox = siblings.findIndex(
+      (c) => walk(c as Node, (n) => n === screen.getByText('3')).length > 0
+    );
+    expect(badgeBox).toBeGreaterThan(siblings.indexOf(ringed));
   });
 
   it('Appbar.Content with onPress rings outward, and keeps its own onFocus', async () => {
