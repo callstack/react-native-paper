@@ -329,6 +329,37 @@ Keys inside data objects changed the same way: the `routes` of `BottomNavigation
  ];
 ```
 
+### TouchableRipple without a press handler
+
+A `TouchableRipple`, and anything built on it, is no longer a disabled control when it has no touch handler. Without `onPress`, `onLongPress`, `onPressIn` or `onPressOut`, and without `disabled`, it renders a plain view: assistive tech doesn't announce it as disabled, it isn't a keyboard stop, and it never takes the press, so a `Pressable` around it gets it. On Android and iOS a wrapping `Pressable` already got the press, except around a read-only radio (see below). On web it's new for components with the `button` role, such as `Button`, `Chip`, `IconButton` and `FAB`, which used to stop the press. `DataTable.Title` works the same way.
+
+Without a handler or `disabled`, an activatable role becomes `none`: a `role` or `accessibilityRole` of `button`, `link`, `menuitem` or `tab`, and an `accessibilityRole` of `imagebutton` or `togglebutton`. The role stays when the touchable reports a toggle state with `aria-checked`, `aria-pressed` or `accessibilityState.checked`, also when the value is `false`. A selection doesn't keep the role: Android and iOS still report it, and on web `aria-selected` is dropped with the role. Every other role, such as `checkbox`, `radio` or `switch`, stays too, so a read-only `Checkbox` is still a checkbox and keeps its state.
+
+```tsx
+// Still a toggle (pressed on web, checked on Android and iOS),
+// but does nothing when activated
+<Button mode="outlined" selected>Bold</Button>
+// No longer a button; still reports selected on Android and iOS
+<Chip selected>Info</Chip>
+```
+
+On web, an `IconButton` or icon-only `FAB` labelled with `aria-label`, with no handler, no `disabled` and no toggle state, is an image named by its label, since the plain view there can't carry a name. An image can't carry a selection either, so its `aria-selected` is dropped too.
+
+`hitSlop` applies only to a touchable that can be pressed. Without a handler, or with `disabled`, a touchable takes no touches outside its bounds, so it doesn't take them from its neighbors.
+
+`RadioButton`, `RadioButton.Android`, `RadioButton.IOS` and `RadioButton.Item` with no press handler and no `RadioButton.Group` no longer take the press. They stay read-only radios, a row around them gets the press, and on web they're no longer a tab stop.
+
+To have something look and announce disabled, pass `disabled`, which keeps the control and its role. Pass it to switch interactivity off at runtime too, instead of removing `onPress`. A touchable renders another element whenever it goes between having a handler or `disabled` and having neither, so its children remount and lose their state and focus. That includes toggling `disabled` on a touchable with no handler. `FAB.Menu` does this for its trigger: a trigger without `onPress` is a disabled button while the menu is closed, so it keeps its element when the menu opens.
+
+```diff
+-<Button onPress={isSaving ? undefined : save}>Save</Button>
++<Button onPress={save} disabled={isSaving}>Save</Button>
+```
+
+App tests change with it: a display-only element is no longer found by a role it lost, such as `button`, and is no longer disabled. Find it by its text or label instead.
+
+In a disabled `TextInput`, every `TextInput.Icon` takes the disabled color, also over `iconColor` and the error color. One with a handler is a disabled `IconButton`, and an `opacity` in its `style` doesn't apply.
+
 ### Libraries built on Paper
 
 Libraries built on Paper may not support 6.x yet. For example, `react-native-paper-dates` 0.24.1 still uses `HelperText`, the 5.x theme exports and `theme.roundness`, so its `DatePickerInput` crashes when it shows a validation error.

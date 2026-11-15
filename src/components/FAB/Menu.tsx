@@ -309,6 +309,7 @@ type MorphingTriggerProps = {
   visible: boolean;
   alignment: 'start' | 'center' | 'end';
   onPress?: (e: GestureResponderEvent) => void;
+  disabled?: boolean;
   /**
    * Accessibility label for the trigger button.
    */
@@ -329,6 +330,7 @@ const MorphingTrigger = ({
   visible,
   alignment,
   onPress,
+  disabled,
   'aria-label': ariaLabel,
   theme,
   testID,
@@ -448,6 +450,7 @@ const MorphingTrigger = ({
         contentColor={triggerContentColor}
         visible={visible}
         onPress={onPress}
+        disabled={disabled}
         aria-label={ariaLabel}
         testID={testID}
         widthShared={widthShared}
@@ -639,6 +642,9 @@ const Menu = ({
           visible={triggerVisible}
           alignment={alignment}
           onPress={effectiveExpanded ? onDismiss : openOnPress}
+          // Off, not handler-less, while closed with nothing to open it:
+          // dropping the handler would swap elements on every open and close
+          disabled={!effectiveExpanded && openOnPress === undefined}
           aria-label={trigger['aria-label']}
           theme={theme}
           testID={trigger.testID}

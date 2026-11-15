@@ -213,12 +213,16 @@ describe('focus ring wiring', () => {
     expect(onFocus).toHaveBeenCalledTimes(1);
   });
 
-  // Without `onPress` the title is plain text and takes no focus.
+  // Without a touch handler or `disabled` the title is a plain View, a column
+  // heading and not a control. It keeps a caller's onFocus, but even a focus
+  // that reaches it draws no ring.
   it('DataTable.Title draws no ring when it is not pressable', async () => {
-    await render(<DataTableTitle>title</DataTableTitle>);
+    const onFocus = jest.fn();
+    await render(<DataTableTitle onFocus={onFocus}>title</DataTableTitle>);
 
     await focusFirstFocusable();
 
+    expect(onFocus).toHaveBeenCalledTimes(1);
     expect(ringOffset()).toBeUndefined();
   });
 

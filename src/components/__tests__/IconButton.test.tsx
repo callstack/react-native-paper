@@ -1,6 +1,13 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
-import { describe, expect, it } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 
 import { render, screen } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
@@ -49,12 +56,20 @@ it('renders disabled icon button', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('lets a caller-supplied hitSlop win even while disabled', async () => {
-  const tree = (
-    await render(<IconButton icon="camera" disabled hitSlop={2} />)
-  ).toJSON();
+// A touch in the slop goes to the view that owns it, so a disabled button with
+// a slop would take touches meant for its neighbors
+it('ignores a caller-supplied hitSlop while disabled', async () => {
+  await render(
+    <IconButton
+      icon="camera"
+      disabled
+      onPress={() => {}}
+      hitSlop={2}
+      testID="icon-button"
+    />
+  );
 
-  expect(tree).toMatchSnapshot();
+  expect(screen.getByTestId('icon-button')).not.toHaveProp('hitSlop');
 });
 
 it('renders icon change animated', async () => {
@@ -92,8 +107,29 @@ it('renders icon button with small border radius', async () => {
 });
 
 it('keeps touchable content centered with custom container style', async () => {
-  await render(<IconButton icon="delete" style={styles.customBackground} />);
+  await render(
+    <IconButton
+      icon="delete"
+      onPress={() => {}}
+      style={styles.customBackground}
+    />
+  );
   expect(screen.getByRole('button')).toHaveStyle({
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  });
+});
+
+it('keeps handler-less content centered with custom container style', async () => {
+  await render(
+    <IconButton
+      icon="delete"
+      testID="icon-button"
+      style={styles.customBackground}
+    />
+  );
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -109,6 +145,20 @@ describe('getIconButtonColor - icon color', () => {
       })
     ).toMatchObject({
       iconColor: 'purple',
+    });
+  });
+
+  it('should let the disabled color outrank an explicit icon color', () => {
+    // a disabled icon reads as disabled whatever color it was given
+    expect(
+      getIconButtonColor({
+        theme: LightTheme,
+        disabled: true,
+        customIconColor: 'purple',
+      })
+    ).toMatchObject({
+      iconColor: LightTheme.colors.onSurface,
+      iconOpacity: stateOpacity.disabled,
     });
   });
 
@@ -364,5 +414,93 @@ describe('hitSlop', () => {
     );
 
     expect(screen.getByTestId('icon-button')).toHaveProp('hitSlop', 0);
+  });
+});
+
+describe('without a touch handler', () => {
+  describe.each(['ios', 'android'] as const)('on %s', (os) => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', os);
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('keeps its label but is no image', async () => {
+      await render(<IconButton icon="heart" aria-label="Favorite" />);
+
+      expect(screen.getByLabelText('Favorite')).toBeOnTheScreen();
+      expect(screen.queryByRole('img')).not.toBeOnTheScreen();
+    });
+  });
+
+  // On web the dropped role renders role="presentation", which can't carry a
+  // name, so the label would sit on an element that may not be announced
+  describe('on web', () => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', 'web');
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('is an image named by its label', async () => {
+      await render(<IconButton icon="heart" aria-label="Favorite" />);
+
+      expect(screen.getByRole('img', { name: 'Favorite' })).toBeOnTheScreen();
+    });
+
+    it('stays a button with a touch handler', async () => {
+      await render(
+        <IconButton icon="heart" aria-label="Favorite" onPress={() => {}} />
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'Favorite' })
+      ).toBeOnTheScreen();
+    });
+
+    it('stays a disabled button when disabled', async () => {
+      await render(<IconButton icon="heart" aria-label="Favorite" disabled />);
+
+      expect(screen.getByRole('button', { name: 'Favorite' })).toBeDisabled();
+    });
+
+    it.each(['onLongPress', 'onPressIn', 'onPressOut'] as const)(
+      'stays a button with only %s',
+      async (name) => {
+        await render(
+          <IconButton
+            icon="heart"
+            aria-label="Favorite"
+            {...{ [name]: () => {} }}
+          />
+        );
+
+        expect(
+          screen.getByRole('button', { name: 'Favorite' })
+        ).toBeOnTheScreen();
+      }
+    );
+
+    it('stays a button while it reports a toggle state', async () => {
+      await render(
+        <IconButton icon="heart" aria-label="Favorite" aria-pressed={false} />
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'Favorite' })
+      ).toBeOnTheScreen();
+    });
+
+    it('treats an explicit button role like the default', async () => {
+      await render(
+        <IconButton icon="heart" aria-label="Favorite" role="button" />
+      );
+
+      expect(screen.getByRole('img', { name: 'Favorite' })).toBeOnTheScreen();
+    });
   });
 });

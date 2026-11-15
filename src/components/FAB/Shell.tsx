@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -86,6 +86,11 @@ export type ShellProps = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Whether the shell can't be pressed. Turns a control off without removing
+   * `onPress`, which would render another element and remount the content.
+   */
+  disabled?: boolean;
   /**
    * Accessibility label. Falls back to `label` if unset.
    */
@@ -192,6 +197,7 @@ const Shell = ({
   elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
+  disabled,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
@@ -251,7 +257,7 @@ const Shell = ({
   // Fallback shared values track the static size-driven dimensions. Consumers
   // that don't supply their own animated shared values get these. Keeping
   // everything as a shared value means there's exactly one animated style
-  // per view — no static-vs-animated merge surprises.
+  // per view: no static-vs-animated merge surprises.
   const fallbackWidth = useSharedValue(dimensions.width);
   const fallbackHeight = useSharedValue(dimensions.height);
   const fallbackBorderRadius = useSharedValue(dimensions.borderRadius);
@@ -297,14 +303,28 @@ const Shell = ({
   // suppresses the browser's own outline there on web, so only the clip
   // view's ring shows.
   //
-  // `undefined` disabled: FAB has no `disabled` prop today. Wire the real
-  // value through here if that ever changes.
+  // Off when `disabled` or without `onPress`: the inner TouchableRipple is
+  // then a plain View, and a focused one unmounts without a blur reaching the
+  // hook. The public FAB has no `disabled`, so dropping `onPress` is how an app
+  // turns it off.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
-    undefined,
+    disabled || !onPress,
     theme.colors.secondary,
     'outward',
     'within'
   );
+
+  // Without a handler the touchable drops the button role, and on web that
+  // renders role="presentation", which can't carry a name. A labelled
+  // icon-only FAB that does nothing is an image there, named by its label.
+  const isWebImage =
+    Platform.OS === 'web' &&
+    !onPress &&
+    !disabled &&
+    label === undefined &&
+    children === undefined &&
+    ariaLabel !== undefined &&
+    ariaChecked === undefined;
 
   return (
     <Surface
@@ -330,10 +350,11 @@ const Shell = ({
           background={background}
           focusRing="none"
           onPress={onPress}
+          disabled={disabled}
           onFocus={focusTarget.onFocus}
           onBlur={focusTarget.onBlur}
           aria-label={ariaLabel}
-          role="button"
+          role={isWebImage ? 'img' : 'button'}
           aria-checked={ariaChecked}
           aria-selected={ariaSelected}
           aria-busy={ariaBusy}

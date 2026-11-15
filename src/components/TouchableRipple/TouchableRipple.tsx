@@ -11,12 +11,14 @@ import color from 'color';
 
 import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { Pressable } from './Pressable';
-import { getTouchableRippleColors, resolveChildren } from './utils';
+import { IDLE_STATE, getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import hasTouchHandler from '../../utils/hasTouchHandler';
+import hasTouchHandler, {
+  getNonControlA11yProps,
+} from '../../utils/hasTouchHandler';
 import type { FocusRingPlacement } from '../../utils/useFocusRing';
 import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 
@@ -56,7 +58,12 @@ export type Props = PressableProps & {
    */
   focusRing?: FocusRingPlacement;
   /**
-   * Function to execute on press. If not set, will cause the touchable to be disabled.
+   * Function to execute on press. Without it, `onLongPress`, `onPressIn`,
+   * `onPressOut` and `disabled`, the touchable renders as a plain view that
+   * isn't a control, and a press goes to its parent. To turn the touchable off
+   * at runtime, pass `disabled` instead of removing the handler: going between
+   * having a handler or `disabled` and having neither renders another element
+   * and remounts the children.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
@@ -80,8 +87,10 @@ export type Props = PressableProps & {
    */
   underlayColor?: string;
   /**
-   * Content of the `TouchableRipple`. Can be a function that receives the pressable state.
-   * `hovered` and `focused` are only available on the web.
+   * Content of the `TouchableRipple`: any React node, including several
+   * children, fragments and `null`. Can be a function that receives the
+   * pressable state. `hovered` and `focused` are only available on the web.
+   * Without a touch handler and without `disabled`, the state is always idle.
    */
   children:
     | ((state: PressableStateCallbackType) => React.ReactNode)
@@ -151,6 +160,20 @@ const TouchableRipple = ({
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
+
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
+
+  // With no touch handler and no explicit disabled this is not a control, so it
+  // renders as a plain View. A Pressable is wrong here either way: keep the old
+  // disabled flag and it gets announced as a disabled control, drop the flag and
+  // it starts claiming the touch, swallowing taps meant for whatever wraps it.
+  const isControl = hasPassedTouchHandler || Boolean(disabledProp);
+  const isInteractive = hasPassedTouchHandler && !disabledProp;
 
   const handlePressIn = React.useCallback(
     (e: any) => {
@@ -287,28 +310,37 @@ const TouchableRipple = ({
     [onPressOut, rippleEffectEnabled]
   );
 
-  const hasPassedTouchHandler = hasTouchHandler({
-    onPress,
-    onLongPress,
-    onPressIn,
-    onPressOut,
-  });
-
-  const disabled = disabledProp || !hasPassedTouchHandler;
-
   // No JS focus tracking here: the ring is real CSS, driven by the browser's
   // own `:focus-visible`, keyed off the `data-focus-ring` attribute spread
-  // below. `onFocus`/`onBlur` reach the caller unmodified via `rest`, nothing
-  // to intercept.
+  // onto the Pressable below. `onFocus`/`onBlur` reach the caller unmodified
+  // via `rest`, nothing to intercept.
   //
-  // Keyed off `disabledProp`, not `disabled`: the latter also folds in
-  // "no press handler passed", which is a non-interactivity signal, not a
-  // disabled one - the ring should only react to real disablement.
+  // Called above the non-control early return, so the hook runs on every
+  // render. Keyed off `!isInteractive`, which on the Pressable is the same as
+  // `disabled`. Web keeps no focus state, so this only mirrors the native
+  // file. The plain View below takes none of the ring props.
   const { ring } = useFocusRing(
-    disabledProp,
+    !isInteractive,
     theme.colors.secondary,
     focusRing
   );
+
+  if (!isControl) {
+    // No cursor of its own: inside a clickable parent, the parent's applies
+    return (
+      <View
+        {...rest}
+        ref={ref}
+        {...getNonControlA11yProps(rest)}
+        style={[
+          styles.nonControl,
+          typeof style === 'function' ? style(IDLE_STATE) : style,
+        ]}
+      >
+        {resolveChildren(children, IDLE_STATE)}
+      </View>
+    );
+  }
 
   return (
     <Pressable
@@ -316,15 +348,15 @@ const TouchableRipple = ({
       ref={ref}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      disabled={disabled}
+      disabled={Boolean(disabledProp)}
       {...mergeDataSetProps(rest, ring.dataSetProps)}
       style={(state) => [
         styles.touchable,
         // RNW's own `state.focused` fires for mouse clicks too, which is
         // exactly the distinction `:focus-visible` exists to make.
         // https://github.com/necolas/react-native-web/issues/1849
-        state.hovered && { backgroundColor: hoverColor },
-        disabled && styles.disabled,
+        state.hovered && isInteractive && { backgroundColor: hoverColor },
+        !isInteractive && styles.disabled,
         typeof style === 'function' ? style(state) : style,
         ...ring.style,
       ]}
@@ -351,7 +383,7 @@ const TouchableRipple = ({
 
         return (
           <>
-            {!disabled && touchTargetStyle && (
+            {isInteractive && touchTargetStyle && (
               <View aria-hidden style={touchTargetStyle} />
             )}
             {resolveChildren(children, state)}
@@ -374,6 +406,9 @@ const styles = StyleSheet.create({
       cursor: 'pointer',
       transition: '150ms background-color',
     }),
+  },
+  nonControl: {
+    position: 'relative',
   },
   disabled: {
     ...(Platform.OS === 'web' && {

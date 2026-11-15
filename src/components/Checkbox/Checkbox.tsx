@@ -183,9 +183,8 @@ const Checkbox = ({
 
   const visual = getSelectionVisualState({ ...selectionColors, disabled });
 
-  // `TouchableRipple` disables itself when nothing can handle a press, so
-  // attaching press handlers unconditionally would make a handler-less
-  // checkbox enabled and focusable while doing nothing.
+  // A handler-less checkbox would claim the touch and do nothing with it, so
+  // the press handlers stay off unless there is something to call.
   const isInteractive =
     !disabled &&
     hasTouchHandler({
