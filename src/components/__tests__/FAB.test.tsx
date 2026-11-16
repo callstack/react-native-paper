@@ -189,18 +189,12 @@ describe('without a touch handler', () => {
       );
     });
 
-    it('stays a button with a touch handler', async () => {
-      await render(
-        <FAB icon="star" aria-label="Favorite" onPress={() => {}} />
-      );
-
-      expect(
-        screen.getByRole('button', { name: 'Favorite' })
-      ).toBeOnTheScreen();
-    });
-
-    it('stays a button while it reports a toggle state', async () => {
-      await render(<FAB icon="star" aria-label="Favorite" aria-checked />);
+    it.each([
+      ['with only onPress', { onPress: () => {} }],
+      ['with only onLongPress', { onLongPress: () => {} }],
+      ['while it reports a toggle state', { 'aria-checked': true }],
+    ])('stays a button %s', async (_, props) => {
+      await render(<FAB icon="star" aria-label="Favorite" {...props} />);
 
       expect(
         screen.getByRole('button', { name: 'Favorite' })

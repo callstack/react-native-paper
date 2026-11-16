@@ -25,6 +25,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import { useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -318,12 +319,14 @@ const Shell = ({
   // stylesheet hides the browser's own outline there, so only the clip view's
   // ring shows, or only the outline in a browser without `:has()`.
   //
-  // Off when `disabled` or without `onPress`: the inner TouchableRipple is
-  // then a plain View, and a focused one unmounts without a blur reaching the
-  // hook. The public FAB has no `disabled`, so dropping `onPress` is how an app
-  // turns it off.
+  const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
+
+  // Off when `disabled` or without a touch handler: the inner TouchableRipple
+  // is then a plain View, and a focused one unmounts without a blur reaching
+  // the hook. The public FAB has no `disabled`, so dropping the handlers is how
+  // an app turns it off.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
-    disabled || !onPress,
+    disabled || !hasHandler,
     theme.colors.secondary,
     'outward',
     'within'
@@ -334,7 +337,7 @@ const Shell = ({
   // icon-only FAB that does nothing is an image there, named by its label.
   const isWebImage =
     Platform.OS === 'web' &&
-    !onPress &&
+    !hasHandler &&
     !disabled &&
     label === undefined &&
     children === undefined &&
