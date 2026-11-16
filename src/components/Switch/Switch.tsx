@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  type NativeSyntheticEvent,
   Platform,
   Pressable,
   StyleSheet,
@@ -32,11 +31,8 @@ import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { StateOpacityKey, ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import { useFocusRing } from '../../utils/useFocusRing';
+import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import Icon, { type IconSource } from '../Icon';
-
-// React Native 0.87+ exports `KeyDownEvent` and `KeyUpEvent`, but its legacy
-// types, the default before 0.87, have neither, so type only what is read.
-type KeyEvent = NativeSyntheticEvent<{ key: string; repeat?: boolean }>;
 
 export type Props = {
   /**
@@ -161,11 +157,15 @@ const Switch = ({
   // when activated, so render it as read-only instead.
   const isMissingOperability = !onValueChange && !isReadOnly && !isDisabled;
 
-  if (isMissingOperability) {
+  React.useEffect(() => {
+    if (process.env.NODE_ENV === 'production' || !isMissingOperability) {
+      return;
+    }
+
     console.warn(
       'Switch: pass `onValueChange` to make the switch operable, or set `readOnly` or `disabled` to render it as a state indicator.'
     );
-  }
+  }, [isMissingOperability]);
 
   const isInteractive = !isDisabled && !isReadOnly && !isMissingOperability;
   // Native accessibility has no read-only switch state. Disable the Pressable
@@ -178,7 +178,6 @@ const Switch = ({
     Platform.OS === 'web' && direction === 'rtl' ? { right: 0 } : { left: 0 };
 
   const pressedSV = useSharedValue(0);
-  const spacePressedRef = React.useRef(false);
   const hoveredSV = useSharedValue(0);
   const focusedSV = useSharedValue(0);
   const checkedSV = useSharedValue(checked ? 1 : 0);
@@ -209,7 +208,6 @@ const Switch = ({
     if (isInteractive) return;
 
     pressedSV.value = 0;
-    spacePressedRef.current = false;
     hoveredSV.value = 0;
   }, [isInteractive, pressedSV, hoveredSV]);
 
@@ -404,47 +402,35 @@ const Switch = ({
   const trackOpacityValue = isDisabled ? DISABLED_TRACK_OPACITY : 1;
   const iconSize = checked ? SELECTED_ICON : UNSELECTED_ICON;
 
+  const handlePress = () => onValueChange?.(!checked);
+  const handlePressIn = () => {
+    pressedSV.value = 1;
+  };
+  const handlePressOut = () => {
+    pressedSV.value = 0;
+  };
+
+  const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
+    useSpaceKeyPress({
+      onPress: isInteractive ? handlePress : undefined,
+      onPressIn: handlePressIn,
+      onPressOut: handlePressOut,
+    });
+
   // A non-interactive switch gets no press or hover handlers. It stays in the
   // accessibility tree, so its state is still announced.
   const interactionProps = isInteractive
     ? {
-        onPress: () => onValueChange?.(!checked),
-        onPressIn: () => {
-          pressedSV.value = 1;
-        },
-        onPressOut: () => {
-          pressedSV.value = 0;
-        },
+        onPress: handlePress,
+        onPressIn: handlePressIn,
+        onPressOut: handlePressOut,
         onHoverIn: () => {
           hoveredSV.value = 1;
         },
         onHoverOut: () => {
           hoveredSV.value = 0;
         },
-        // React Native Web only handles Space for button roles.
-        ...(Platform.OS === 'web'
-          ? {
-              onKeyDown: (event: KeyEvent) => {
-                const { key, repeat } = event.nativeEvent;
-                if (key !== ' ' && key !== 'Spacebar') return;
-                event.preventDefault();
-                if (!repeat) {
-                  spacePressedRef.current = true;
-                  pressedSV.value = 1;
-                }
-              },
-              onKeyUp: (event: KeyEvent) => {
-                const { key } = event.nativeEvent;
-                if (key !== ' ' && key !== 'Spacebar') return;
-                event.preventDefault();
-                if (spacePressedRef.current) {
-                  spacePressedRef.current = false;
-                  pressedSV.value = 0;
-                  onValueChange?.(!checked);
-                }
-              },
-            }
-          : undefined),
+        ...spaceKeyHandlers,
       }
     : null;
 
@@ -463,11 +449,10 @@ const Switch = ({
           focusTarget.onFocus?.(e);
           if (isKeyboardFocusEvent(e)) focusedSV.value = 1;
         }}
-        onBlur={() => {
+        onBlur={(e) => {
           focusTarget.onBlur?.();
+          handleSpaceKeyBlur(e);
           focusedSV.value = 0;
-          pressedSV.value = 0;
-          spacePressedRef.current = false;
         }}
         {...interactionProps}
         android_ripple={{ color: 'transparent' }}
