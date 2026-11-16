@@ -18,7 +18,9 @@ import Text from '../Typography/Text';
 
 export type Props = {
   /**
-   * Tooltip reference element. Needs to be able to hold a ref.
+   * Tooltip reference element.
+   *
+   * Positioning styles such as `position: 'absolute'` should be applied to a parent `View` wrapping the `Tooltip` instead of the element.
    */
   children: React.ReactElement;
   /**
@@ -82,7 +84,8 @@ const Tooltip = ({
   const showTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
   const hideTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const childrenWrapperRef = React.useRef<View>(null);
+  const childrenWrapperRef =
+    React.useRef<React.ComponentRef<typeof View>>(null);
   const touched = React.useRef(false);
 
   const isValidChild = React.useMemo(
@@ -208,9 +211,7 @@ const Tooltip = ({
                 backgroundColor: theme.colors.onSurface,
                 ...getTooltipPosition(
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-                  measurement as Measurement,
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-                  children as React.ReactElement<TooltipChildProps>
+                  measurement as Measurement
                 ),
                 borderRadius: theme.shapes.corner.extraSmall,
                 ...(measurement.measured ? styles.visible : styles.hidden),

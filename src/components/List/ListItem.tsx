@@ -3,9 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   StyleProp,
-  TextLayoutEventData,
+  TextLayoutEvent,
   TextProps,
   TextStyle,
   ViewStyle,
@@ -70,7 +69,7 @@ export type Props = Omit<
    * Style that is passed to the root TouchableRipple container.
    */
   style?: StyleProp<ViewStyle>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * Style that is passed to the outermost container that wraps the entire content, including left and right items and both title and description.
    */
@@ -171,9 +170,7 @@ const ListItem = ({
   const shouldIndent = hasLeft && !left && !right;
   const [alignToTop, setAlignToTop] = React.useState(false);
 
-  const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
-  ) => {
+  const onDescriptionTextLayout = (event: TextLayoutEvent) => {
     const { nativeEvent } = event;
     setAlignToTop(nativeEvent.lines.length >= 2);
   };

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import type {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   ViewProps,
@@ -86,6 +87,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   elevation?: Elevation;
   /**
+   * Color of the outline in `outlined` mode.
+   */
+  borderColor?: ColorValue;
+  /**
    * Style of card's content.
    */
   contentStyle?: StyleProp<ViewStyle>;
@@ -105,7 +110,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Reference to the card container.
    */
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 const DEFAULT_CARD_GAP = 16;
@@ -131,7 +136,7 @@ const DEFAULT_CARD_PADDING = 16;
  *     </Card.Content>
  *     <Card.Actions>
  *       <Button mode="outlined">Cancel</Button>
- *       <Button mode="contained">Ok</Button>
+ *       <Button mode="filled">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );
@@ -151,6 +156,7 @@ const Card = ({
   children,
   style,
   contentStyle,
+  borderColor: customBorderColor,
   theme: themeOverrides,
   testID,
   accessible,
@@ -198,10 +204,7 @@ const Card = ({
     mode: cardMode,
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
-
-  const { borderColor = themedBorderColor } = flattenedStyles;
+  const borderColor = customBorderColor ?? themedBorderColor;
 
   const borderRadius = theme.shapes.corner.medium;
 
@@ -234,7 +237,7 @@ const Card = ({
       ref={ref}
       borderRadius={borderRadius}
       backgroundColor={!isMode('elevated') ? backgroundColor : undefined}
-      style={[{ borderColor }, style]}
+      style={style}
       theme={theme}
       elevation={elevation}
       testID={hasPassedTouchHandler ? undefined : testID}

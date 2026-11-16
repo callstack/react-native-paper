@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
-import { canContainNestedText, NestedTextContext } from './NestedTextContext';
+import { useIsNestedText, markChildrenAsNested } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -50,7 +50,7 @@ function AnimatedText({
 
   const { direction: writingDirection } = useLocale();
   // Nested text inherits the parent's style unless it has its own theme
-  const inheritsStyle = React.useContext(NestedTextContext) && !themeOverrides;
+  const inheritsStyle = useIsNestedText() && !themeOverrides;
 
   let element: React.ReactElement;
 
@@ -104,15 +104,7 @@ function AnimatedText({
     );
   }
 
-  if (!canContainNestedText(rest.children)) {
-    return element;
-  }
-
-  return (
-    <NestedTextContext.Provider value={true}>
-      {element}
-    </NestedTextContext.Provider>
-  );
+  return markChildrenAsNested(element, rest.children);
 }
 
 const styles = StyleSheet.create({

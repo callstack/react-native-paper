@@ -77,7 +77,7 @@ const CardExample = () => {
             <Button mode="outlined" onPress={() => {}}>
               Share
             </Button>
-            <Button mode="contained" onPress={() => {}}>
+            <Button mode="filled" onPress={() => {}}>
               Explore
             </Button>
           </Card.Actions>
@@ -109,14 +109,16 @@ const CardExample = () => {
           <Card.Actions>
             <Button
               mode="outlined"
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+              shape="square"
+              theme={{ shapes: { corner: { medium: 12 } } }}
               onPress={() => {}}
             >
               Share
             </Button>
             <Button
-              mode="contained"
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+              mode="filled"
+              shape="square"
+              theme={{ shapes: { corner: { medium: 12 } } }}
               onPress={() => {}}
             >
               Explore
