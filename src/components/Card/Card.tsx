@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import type {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   ViewProps,
@@ -18,6 +19,7 @@ import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
 
@@ -86,6 +88,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   elevation?: Elevation;
   /**
+   * Color of the outline in `outlined` mode.
+   */
+  borderColor?: ColorValue;
+  /**
    * Style of card's content.
    */
   contentStyle?: StyleProp<ViewStyle>;
@@ -131,7 +137,7 @@ const DEFAULT_CARD_PADDING = 16;
  *     </Card.Content>
  *     <Card.Actions>
  *       <Button mode="outlined">Cancel</Button>
- *       <Button mode="contained">Ok</Button>
+ *       <Button mode="filled">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );
@@ -151,6 +157,7 @@ const Card = ({
   children,
   style,
   contentStyle,
+  borderColor: customBorderColor,
   theme: themeOverrides,
   testID,
   accessible,
@@ -159,7 +166,6 @@ const Card = ({
   ...rest
 }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
   const theme = useInternalTheme(themeOverrides);
-
   const isMode = React.useCallback(
     (modeToCompare: Mode) => {
       return cardMode === modeToCompare;
@@ -173,6 +179,20 @@ const Card = ({
     onPressIn,
     onPressOut,
   });
+
+  // The ring goes on the Surface, the card's visible box (`scope: 'within'`),
+  // not on the `Pressable` that takes focus: the caller's `style` sizes and
+  // pads the Surface, so a ring on the content-sized `Pressable` would stop
+  // short of a taller card's edge or sit inside its padding.
+  //
+  // Off without a touch handler too: the `Pressable` unmounts then, and a
+  // focused one sends no blur, so the ring would come back with the handler.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !hasPassedTouchHandler,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
 
   const [pressed, setPressed] = React.useState(false);
   const elevation = isMode('elevated') ? (pressed ? 2 : cardElevation) : 0;
@@ -198,12 +218,7 @@ const Card = ({
     mode: cardMode,
   });
 
-  // TODO: Remove together with StyleSheet.flatten in #5114.
-  const flattenedStyles =
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    StyleSheet.flatten(style as StyleProp<ViewStyle>) || {};
-
-  const { borderColor = themedBorderColor } = flattenedStyles;
+  const borderColor = customBorderColor ?? themedBorderColor;
 
   const borderRadius = theme.shapes.corner.medium;
 
@@ -236,11 +251,12 @@ const Card = ({
       ref={ref}
       borderRadius={borderRadius}
       backgroundColor={!isMode('elevated') ? backgroundColor : undefined}
-      style={[{ borderColor }, style]}
+      style={[style, ...focusRing.style]}
       theme={theme}
       elevation={elevation}
       testID={hasPassedTouchHandler ? undefined : testID}
       {...rest}
+      {...mergeDataSetProps(rest, focusRing.dataSetProps)}
     >
       {isMode('outlined') && (
         <View
@@ -266,6 +282,12 @@ const Card = ({
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
           testID={testID}
+          // Like Switch: a ripple drawable owns the focused state, so Android does
+          // not add its grey default focus highlight on top of the ring.
+          android_ripple={{ color: 'transparent' }}
+          onFocus={focusTarget.onFocus}
+          onBlur={focusTarget.onBlur}
+          style={[{ borderRadius }, ...focusTarget.style]}
         >
           {content}
         </Pressable>

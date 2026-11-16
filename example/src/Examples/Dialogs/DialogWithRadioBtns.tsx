@@ -82,8 +82,12 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
         </ScrollView>
       </Dialog.ScrollArea>
       <Dialog.Actions>
-        <Button onPress={close}>Cancel</Button>
-        <Button onPress={close}>Ok</Button>
+        <Button mode="text" onPress={close}>
+          Cancel
+        </Button>
+        <Button mode="text" onPress={close}>
+          Ok
+        </Button>
       </Dialog.Actions>
     </Dialog>
   );

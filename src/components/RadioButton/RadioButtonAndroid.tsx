@@ -27,7 +27,9 @@ export type Props = Omit<
    */
   disabled?: boolean;
   /**
-   * Function to execute on press.
+   * Function to execute on press. Without it, and outside a
+   * `RadioButton.Group`, the radio is read only: it can't be pressed, and a
+   * press goes to its parent.
    */
   onPress?: (param?: any) => void;
   /**
@@ -127,10 +129,14 @@ const RadioButtonAndroid = ({
           <TouchableRipple
             {...rest}
             borderless
+            // A radio with nothing to call (no `onPress` and no
+            // `RadioButton.Group`) is read only and gets no handler, so it never
+            // takes a press meant for its parent. A live radio is turned off with
+            // `disabled`, which keeps the same element instead of remounting it;
+            // a read-only one still swaps elements when `disabled` toggles.
             onPress={
-              disabled
-                ? undefined
-                : (event) => {
+              onPress || context?.onValueChange
+                ? (event) => {
                     handlePress({
                       onPress,
                       onValueChange: context?.onValueChange,
@@ -138,7 +144,9 @@ const RadioButtonAndroid = ({
                       event,
                     });
                   }
+                : undefined
             }
+            disabled={disabled}
             role="radio"
             aria-disabled={disabled}
             aria-checked={checked}

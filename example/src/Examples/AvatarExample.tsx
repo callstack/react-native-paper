@@ -10,12 +10,8 @@ const AvatarExample = () => {
       <List.Section title="Text">
         <View style={styles.row}>
           <Avatar.Text
-            style={[
-              styles.avatar,
-              {
-                backgroundColor: Palette.error70,
-              },
-            ]}
+            style={styles.avatar}
+            backgroundColor={Palette.error70}
             label="XD"
             color={Palette.primary0}
           />
@@ -26,12 +22,8 @@ const AvatarExample = () => {
       <List.Section title="Icon">
         <View style={styles.row}>
           <Avatar.Icon
-            style={[
-              styles.avatar,
-              {
-                backgroundColor: Palette.error70,
-              },
-            ]}
+            style={styles.avatar}
+            backgroundColor={Palette.error70}
             icon="folder"
             color={Palette.primary0}
           />

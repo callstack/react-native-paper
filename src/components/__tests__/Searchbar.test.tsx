@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import { expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
@@ -153,4 +155,16 @@ it('renders searchbar in "view" mode', async () => {
   const tree = (await render(<Searchbar value={''} mode="view" />)).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('names its search icon as an image on web when it has no onIconPress', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+
+  try {
+    await render(<Searchbar value="" onChangeText={() => {}} />);
+
+    expect(screen.getByRole('img', { name: 'search' })).toBeOnTheScreen();
+  } finally {
+    jest.restoreAllMocks();
+  }
 });
