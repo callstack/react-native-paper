@@ -14,10 +14,15 @@ const DialogWithIcon = ({
     title="Dialog with Icon"
     content="This is a dialog with a component called DialogIcon. When the icon is displayed, the title is centered automatically."
     actions={[
-      <Button key="disagree-btn" onPress={close} textColor={Palette.error50}>
+      <Button
+        mode="text"
+        key="disagree-btn"
+        onPress={close}
+        textColor={Palette.error50}
+      >
         Disagree
       </Button>,
-      <Button key="agree-btn" onPress={close}>
+      <Button mode="text" key="agree-btn" onPress={close}>
         Agree
       </Button>,
     ]}

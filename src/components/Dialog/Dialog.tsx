@@ -11,6 +11,7 @@ import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import type { Props as DialogScrollAreaProps } from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
+import type { Props as DialogTitleProps } from './DialogTitle';
 import { DialogTitleIdContext } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, ThemeProp } from '../../theme/types';
@@ -90,6 +91,10 @@ export type Props = {
    */
   title?: React.ReactNode;
   /**
+   * Props passed to `Dialog.Title` when `title` is provided.
+   */
+  titleProps?: Omit<DialogTitleProps, 'children'>;
+  /**
    * Content of the dialog. Strings and numbers are rendered as Material 3
    * supporting text.
    */
@@ -157,7 +162,7 @@ const DIALOG_ELEVATION: Elevation = 3;
  *         title="Alert"
  *         content="This is simple dialog"
  *         actions={[
- *           <Button key="done-btn" onPress={hideDialog}>
+ *           <Button mode="text" key="done-btn" onPress={hideDialog}>
  *             Done
  *           </Button>,
  *         ]}
@@ -191,6 +196,7 @@ const Dialog = ({
   scrollAreaProps,
   scrollViewProps,
   title,
+  titleProps,
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
 
@@ -242,9 +248,11 @@ const Dialog = ({
 
         {title ? (
           <DialogTitle
-            style={{
-              ...(icon ? styles.titleWithIcon : styles.firstChild),
-            }}
+            {...titleProps}
+            style={[
+              icon ? styles.titleWithIcon : styles.firstChild,
+              titleProps?.style,
+            ]}
           >
             {title}
           </DialogTitle>
@@ -253,14 +261,17 @@ const Dialog = ({
         {scrollable ? (
           <DialogScrollArea
             {...scrollAreaProps}
-            style={[!title && styles.firstChild, scrollAreaProps?.style]}
+            style={[
+              !title && !icon && styles.firstChild,
+              scrollAreaProps?.style,
+            ]}
           >
             <ScrollView {...scrollViewProps}>{contentNode}</ScrollView>
           </DialogScrollArea>
         ) : (
           <DialogContent
             {...contentProps}
-            style={[!title && styles.firstChild, contentProps?.style]}
+            style={[!title && !icon && styles.firstChild, contentProps?.style]}
           >
             {contentNode}
           </DialogContent>

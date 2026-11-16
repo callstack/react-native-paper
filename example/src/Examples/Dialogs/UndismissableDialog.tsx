@@ -15,6 +15,7 @@ const UndismissableDialog = ({
     content="This is an undismissable dialog!!"
     actions={[
       <Button
+        mode="text"
         key="disagree-btn"
         onPress={close}
         disabled
@@ -22,7 +23,7 @@ const UndismissableDialog = ({
       >
         Disagree
       </Button>,
-      <Button key="agree-btn" onPress={close}>
+      <Button mode="text" key="agree-btn" onPress={close}>
         Agree
       </Button>,
     ]}

@@ -15,10 +15,15 @@ const DialogWithDismissableBackButton = ({
     title="Alert"
     content="This is an undismissable dialog, however you can use hardware back button to close it!"
     actions={[
-      <Button key="disagree-btn" onPress={close} textColor={Palette.tertiary50}>
+      <Button
+        mode="text"
+        key="disagree-btn"
+        onPress={close}
+        textColor={Palette.tertiary50}
+      >
         Disagree
       </Button>,
-      <Button key="agree-btn" onPress={close}>
+      <Button mode="text" key="agree-btn" onPress={close}>
         Agree
       </Button>,
     ]}

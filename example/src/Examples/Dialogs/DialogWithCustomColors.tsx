@@ -30,7 +30,12 @@ const DialogWithCustomColors = ({
         </Text>
       }
       actions={[
-        <Button key="ok-btn" onPress={close} textColor={Palette.primary95}>
+        <Button
+          mode="text"
+          key="ok-btn"
+          onPress={close}
+          textColor={Palette.primary95}
+        >
           Ok
         </Button>,
       ]}

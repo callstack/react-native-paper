@@ -86,10 +86,10 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
         </View>
       }
       actions={[
-        <Button key="cancel-btn" onPress={close}>
+        <Button mode="text" key="cancel-btn" onPress={close}>
           Cancel
         </Button>,
-        <Button key="ok-btn" onPress={close}>
+        <Button mode="text" key="ok-btn" onPress={close}>
           Ok
         </Button>,
       ]}

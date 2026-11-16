@@ -35,8 +35,8 @@ export type Props = ViewProps & {
  *       visible={visible}
  *       onDismiss={hideDialog}
  *       actions={[
- *         <Button key="disagree-btn" onPress={hideDialog}>Disagree</Button>,
- *         <Button key="agree-btn" onPress={hideDialog}>Agree</Button>,
+ *         <Button mode="text" key="disagree-btn" onPress={hideDialog}>Disagree</Button>,
+ *         <Button mode="text" key="agree-btn" onPress={hideDialog}>Agree</Button>,
  *       ]}
  *     />
  *   );

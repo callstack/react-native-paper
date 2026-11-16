@@ -15,6 +15,7 @@ const DialogWithUndismissableBackButton = ({
     content="This dialog can be dismissed by tapping outside, however the hardware back button will not close it!"
     actions={[
       <Button
+        mode="text"
         key="disagree-btn"
         onPress={close}
         disabled
@@ -22,7 +23,7 @@ const DialogWithUndismissableBackButton = ({
       >
         Disagree
       </Button>,
-      <Button key="agree-btn" onPress={close}>
+      <Button mode="text" key="agree-btn" onPress={close}>
         Agree
       </Button>,
     ]}
