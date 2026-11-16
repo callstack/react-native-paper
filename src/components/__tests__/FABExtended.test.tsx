@@ -44,7 +44,7 @@ it('expands to fit the measured label width', async () => {
     pageY: 0,
   });
 
-  const ref = React.createRef<View>();
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
   await render(
     <FAB.Extended
       icon="plus"
@@ -60,7 +60,11 @@ it('expands to fit the measured label width', async () => {
     throw new Error('Expected FAB ref to be attached');
   }
 
-  expect(Reanimated.getAnimatedStyle(ref.current)).toMatchObject({
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const animatedComponent = ref.current as unknown as {
+    props: Record<string, unknown>;
+  };
+  expect(Reanimated.getAnimatedStyle(animatedComponent)).toMatchObject({
     width: 144,
   });
 });

@@ -6,6 +6,7 @@ import Animated, {
   cubicBezier,
   isSharedValue,
   type AnimatedStyle,
+  type CSSTransitionTimingFunction,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
@@ -20,72 +21,77 @@ type AnimatedStyleProp<Key extends keyof ViewStyle> = Extract<
 
 type BorderRadius = AnimatedStyleProp<'borderRadius'>;
 
-type SurfaceVisualProps = {
+export type SurfaceVisualProps = {
   /**
    * Background color of the Surface. Overrides the color derived from
    * `elevation`.
    */
   backgroundColor?: ColorValue;
   /**
-   * Radius of every corner of the Surface.
+   * Radius of every corner.
    */
   borderRadius?: BorderRadius;
   /**
-   * Radius of the bottom-end corner of the Surface.
+   * Radius of the bottom-end corner.
    */
   borderBottomEndRadius?: BorderRadius;
   /**
-   * Radius of the bottom-left corner of the Surface.
+   * Radius of the bottom-left corner.
    */
   borderBottomLeftRadius?: BorderRadius;
   /**
-   * Radius of the bottom-right corner of the Surface.
+   * Radius of the bottom-right corner.
    */
   borderBottomRightRadius?: BorderRadius;
   /**
-   * Radius of the bottom-start corner of the Surface.
+   * Radius of the bottom-start corner.
    */
   borderBottomStartRadius?: BorderRadius;
   /**
-   * Radius of the end-end corner of the Surface.
+   * Radius of the end-end corner.
    */
   borderEndEndRadius?: BorderRadius;
   /**
-   * Radius of the end-start corner of the Surface.
+   * Radius of the end-start corner.
    */
   borderEndStartRadius?: BorderRadius;
   /**
-   * Radius of the start-end corner of the Surface.
+   * Radius of the start-end corner.
    */
   borderStartEndRadius?: BorderRadius;
   /**
-   * Radius of the start-start corner of the Surface.
+   * Radius of the start-start corner.
    */
   borderStartStartRadius?: BorderRadius;
   /**
-   * Radius of the top-end corner of the Surface.
+   * Radius of the top-end corner.
    */
   borderTopEndRadius?: BorderRadius;
   /**
-   * Radius of the top-left corner of the Surface.
+   * Radius of the top-left corner.
    */
   borderTopLeftRadius?: BorderRadius;
   /**
-   * Radius of the top-right corner of the Surface.
+   * Radius of the top-right corner.
    */
   borderTopRightRadius?: BorderRadius;
   /**
-   * Radius of the top-start corner of the Surface.
+   * Radius of the top-start corner.
    */
   borderTopStartRadius?: BorderRadius;
   /**
-   * Corner curve of the Surface on iOS.
+   * Corner curve on iOS.
    */
   borderCurve?: ViewStyle['borderCurve'];
 };
 
-export type SurfaceStyle = AnimatedStyle<
-  Omit<ViewStyle, keyof SurfaceVisualProps | 'elevation'>
+type DistributiveOmit<T, K extends PropertyKey> = T extends unknown
+  ? Omit<T, K>
+  : never;
+
+export type SurfaceStyle = DistributiveOmit<
+  AnimatedStyle<ViewStyle>,
+  keyof SurfaceVisualProps | 'elevation'
 >;
 
 export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
@@ -95,6 +101,17 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
      * milliseconds.
      */
     transitionDuration?: number;
+    /**
+     * @internal
+     * Duration of the `borderRadius` transition in milliseconds. Undefined
+     * means no transition.
+     */
+    shapeTransitionDuration?: number;
+    /**
+     * @internal
+     * Timing function of the `borderRadius` transition.
+     */
+    shapeTransitionTimingFunction?: CSSTransitionTimingFunction;
     /**
      * Style of the Surface.
      *
@@ -134,7 +151,7 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
      * TestID used for testing purposes
      */
     testID?: string;
-    ref?: React.Ref<View>;
+    ref?: React.Ref<React.ComponentRef<typeof View>>;
   };
 
 /**
@@ -191,6 +208,8 @@ const Surface = ({
   testID,
   mode = 'elevated',
   transitionDuration: customTransitionDuration,
+  shapeTransitionDuration,
+  shapeTransitionTimingFunction,
   ref,
   ...rest
 }: Props) => {
@@ -203,8 +222,13 @@ const Surface = ({
 
   const backgroundStyle = { backgroundColor };
 
+  // A CSS transition can't animate a value set by the animated style.
+  const transitionsRadius =
+    shapeTransitionDuration !== undefined && typeof borderRadius === 'number';
+  const radiusStyles = transitionsRadius ? [{ borderRadius }] : [];
+
   const shapeProps = {
-    borderRadius,
+    ...(transitionsRadius ? null : { borderRadius }),
     borderBottomEndRadius,
     borderBottomLeftRadius,
     borderBottomRightRadius,
@@ -230,21 +254,51 @@ const Surface = ({
   const transitionDuration =
     customTransitionDuration ??
     theme.motion.duration.short3 * theme.animation.scale;
-  const transitionDurationStyle: AnimatedStyle<ViewStyle> = {
-    transitionDuration,
-  };
   const transitionTimingFunction = cubicBezier(...theme.motion.easing.standard);
-  const transitionProperty =
+  const colorTransitionProperty =
     // FIXME: Reanimated can't animate PlatformColor and DynamicColorIOS
     typeof backgroundColor === 'string' ? ['backgroundColor' as const] : [];
+
+  const getTransitionStyles = (
+    shadowProperties: (
+      | 'boxShadow'
+      | 'elevation'
+      | 'shadowOpacity'
+      | 'shadowOffset'
+      | 'shadowRadius'
+    )[]
+  ) => {
+    const properties = [...colorTransitionProperty, ...shadowProperties];
+    const transitionStyle: AnimatedStyle<ViewStyle> = {
+      transitionTimingFunction:
+        transitionsRadius && shapeTransitionTimingFunction !== undefined
+          ? [
+              ...properties.map(() => transitionTimingFunction),
+              shapeTransitionTimingFunction,
+            ]
+          : transitionTimingFunction,
+      transitionProperty: transitionsRadius
+        ? [...properties, 'borderRadius']
+        : properties,
+    };
+    const transitionDurationStyle: AnimatedStyle<ViewStyle> = {
+      transitionDuration:
+        transitionsRadius && shapeTransitionDuration !== undefined
+          ? [
+              ...properties.map(() => transitionDuration),
+              shapeTransitionDuration,
+            ]
+          : transitionDuration,
+    };
+    return { transitionStyle, transitionDurationStyle };
+  };
 
   if (Platform.OS === 'web') {
     const [elevationShadow] = shadow(elevation, theme.colors.shadow);
 
-    const transitionStyle: AnimatedStyle<ViewStyle> = {
-      transitionTimingFunction,
-      transitionProperty: [...transitionProperty, 'boxShadow'],
-    };
+    const { transitionStyle, transitionDurationStyle } = getTransitionStyles([
+      'boxShadow',
+    ]);
 
     return (
       <Animated.View
@@ -258,6 +312,7 @@ const Surface = ({
           transitionDurationStyle,
           backgroundStyle,
           visualStyle,
+          ...radiusStyles,
           isElevated ? elevationShadow : null,
         ]}
       >
@@ -269,10 +324,9 @@ const Surface = ({
   if (Platform.OS === 'android') {
     const elevationAndroid = androidElevationLevels[elevation];
 
-    const transitionStyle: AnimatedStyle<ViewStyle> = {
-      transitionTimingFunction,
-      transitionProperty: [...transitionProperty, 'elevation'],
-    };
+    const { transitionStyle, transitionDurationStyle } = getTransitionStyles([
+      'elevation',
+    ]);
 
     return (
       <Animated.View
@@ -285,6 +339,7 @@ const Surface = ({
           transitionDurationStyle,
           backgroundStyle,
           visualStyle,
+          ...radiusStyles,
           isElevated && { elevation: elevationAndroid },
         ]}
       >
@@ -295,15 +350,11 @@ const Surface = ({
 
   const [spotShadow, ambientShadow] = shadow(elevation, theme.colors.shadow);
 
-  const transitionStyle: AnimatedStyle<ViewStyle> = {
-    transitionTimingFunction,
-    transitionProperty: [
-      ...transitionProperty,
-      'shadowOpacity',
-      'shadowOffset',
-      'shadowRadius',
-    ],
-  };
+  const { transitionStyle, transitionDurationStyle } = getTransitionStyles([
+    'shadowOpacity',
+    'shadowOffset',
+    'shadowRadius',
+  ]);
 
   return (
     <Animated.View
@@ -315,6 +366,7 @@ const Surface = ({
         transitionDurationStyle,
         backgroundStyle,
         visualStyle,
+        ...radiusStyles,
         isElevated && spotShadow,
       ]}
       testID={testID}
@@ -328,6 +380,7 @@ const Surface = ({
             transitionDurationStyle,
             backgroundStyle,
             shadowVisualStyle,
+            ...radiusStyles,
             ambientShadow,
           ]}
         />

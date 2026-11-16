@@ -1,3 +1,5 @@
+import './requestAnimationFramePolyfill';
+
 import { Fragment, type ComponentProps } from 'react';
 
 import { HomeBanner } from '@callstack/rspress-theme';

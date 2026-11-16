@@ -14,7 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import type { Mode, Shape, Size, Width } from './tokens';
-import { getDimensions, getHitSlop, getIconButtonColor } from './utils';
+import { getDimensions, getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
@@ -23,7 +23,10 @@ import {
   FOCUS_RING_THICKNESS,
   webNoOutline,
 } from '../../utils/focusRing';
-import hasTouchHandler from '../../utils/hasTouchHandler';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
+import hasTouchHandler, {
+  carriesToggleState,
+} from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
@@ -104,7 +107,7 @@ export type Props = Omit<
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * TestID used for testing purposes
    */
@@ -160,6 +163,8 @@ const IconButton = ({
   testID,
   loading = false,
   contentStyle,
+  hitSlop,
+  role = 'button',
   ref,
   onPressIn: onPressInProp,
   onPressOut: onPressOutProp,
@@ -243,7 +248,34 @@ const IconButton = ({
     onPressOut: onPressOutProp,
   });
 
-  const hitSlop = getHitSlop(dimensions.width, dimensions.height);
+  // The touchable sits inside the outline, so it is smaller than the container.
+  const touchableWidth = dimensions.width - 2 * borderWidth;
+  const touchableHeight = dimensions.height - 2 * borderWidth;
+
+  // Disabled and handler-less buttons get no extra target.
+  const defaultHitSlop =
+    disabled || !hasPassedTouchHandler
+      ? undefined
+      : getMinInteractiveSizeHitSlop({
+          width: touchableWidth,
+          height: touchableHeight,
+        });
+
+  // Without a handler the touchable drops the button role, and on web that
+  // renders role="presentation", which can't carry a name. A labelled icon
+  // that does nothing is an image there, named by its label. An explicit
+  // role="button", as Searchbar passes, counts as the default.
+  const isWebImage =
+    Platform.OS === 'web' &&
+    role === 'button' &&
+    !disabled &&
+    ariaLabel !== undefined &&
+    !hasPassedTouchHandler &&
+    !carriesToggleState(rest);
+
+  // The touchable clips its own ripple to the container shape. Not on web,
+  // where `overflow: 'hidden'` would also clip the hit slop target.
+  const touchableShapeStyle = { borderRadius };
 
   return (
     <Animated.View
@@ -273,10 +305,10 @@ const IconButton = ({
       >
         {backgroundOpacity < 1 && (
           <View
-            pointerEvents="none"
             style={[
               StyleSheet.absoluteFill,
-              { backgroundColor, opacity: backgroundOpacity },
+              styles.overlay,
+              { backgroundColor, opacity: backgroundOpacity, borderRadius },
             ]}
           />
         )}
@@ -291,14 +323,15 @@ const IconButton = ({
           aria-label={ariaLabel}
           style={[
             styles.touchable,
-            Platform.OS === 'web' ? webNoOutline : null,
+            touchableShapeStyle,
+            Platform.OS === 'web' ? webNoOutline : styles.clipToShape,
             contentStyle,
           ]}
-          role="button"
+          role={isWebImage ? 'img' : role}
           aria-disabled={disabled}
           aria-selected={selected}
           disabled={disabled}
-          hitSlop={hitSlop}
+          hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
           testID={testID}
           {...rest}
         >
@@ -333,15 +366,22 @@ const styles = StyleSheet.create({
     margin: 6,
     overflow: 'visible',
   },
+  // No `overflow: 'hidden'`: it would clip the touchable's hit slop. The
+  // background and outline follow the radius on their own.
   clip: {
     width: '100%',
     height: '100%',
-    overflow: 'hidden',
   },
   touchable: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  overlay: {
+    pointerEvents: 'none',
+  },
+  clipToShape: {
+    overflow: 'hidden',
   },
   focusRing: {
     position: 'absolute',

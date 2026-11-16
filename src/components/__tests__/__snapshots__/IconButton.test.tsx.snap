@@ -33,7 +33,6 @@ exports[`applies a static transform from style 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -48,45 +47,11 @@ exports[`applies a static transform from style 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -95,10 +60,15 @@ exports[`applies a static transform from style 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]
@@ -200,7 +170,6 @@ exports[`renders a square icon button 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -262,10 +231,15 @@ exports[`renders a square icon button 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 12,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]
@@ -366,7 +340,6 @@ exports[`renders disabled icon button 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -402,14 +375,6 @@ exports[`renders disabled icon button 1`] = `
       centered={true}
       collapsable={false}
       focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -428,10 +393,15 @@ exports[`renders disabled icon button 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]
@@ -530,7 +500,6 @@ exports[`renders extraLarge icon button 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -545,37 +514,11 @@ exports[`renders extraLarge icon button 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -584,10 +527,15 @@ exports[`renders extraLarge icon button 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 68,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]
@@ -686,7 +634,6 @@ exports[`renders filled icon button 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -701,45 +648,11 @@ exports[`renders filled icon button 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -748,10 +661,15 @@ exports[`renders filled icon button 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]
@@ -850,7 +768,6 @@ exports[`renders icon button by default 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -865,45 +782,11 @@ exports[`renders icon button by default 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -912,10 +795,15 @@ exports[`renders icon button by default 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]
@@ -1014,7 +902,6 @@ exports[`renders icon button with color 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -1029,45 +916,11 @@ exports[`renders icon button with color 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1076,10 +929,15 @@ exports[`renders icon button with color 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]
@@ -1178,7 +1036,6 @@ exports[`renders icon change animated 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -1193,45 +1050,11 @@ exports[`renders icon change animated 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1240,10 +1063,15 @@ exports[`renders icon change animated 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]
@@ -1380,7 +1208,6 @@ exports[`renders outlined icon button 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -1395,45 +1222,11 @@ exports[`renders outlined icon button 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1442,10 +1235,15 @@ exports[`renders outlined icon button 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]
@@ -1544,7 +1342,6 @@ exports[`renders tonal icon button 1`] = `
       [
         {
           "height": "100%",
-          "overflow": "hidden",
           "width": "100%",
         },
         {
@@ -1559,45 +1356,11 @@ exports[`renders tonal icon button 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1606,10 +1369,15 @@ exports[`renders tonal icon button 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
             },
-            null,
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
             undefined,
           ],
         ]

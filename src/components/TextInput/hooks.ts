@@ -3,6 +3,7 @@ import {
   useImperativeHandle,
   useRef,
   useState,
+  type ComponentRef,
   type RefObject,
 } from 'react';
 import { TextInput as NativeTextInput } from 'react-native';
@@ -187,7 +188,7 @@ const useTextInputInput = (
 
 const useTextInputFocus = (
   props: Pick<TextInputProps, 'onFocus' | 'onBlur'>,
-  input: RefObject<NativeTextInput | null>,
+  input: RefObject<ComponentRef<typeof NativeTextInput> | null>,
   isDisabled: boolean,
   { runFocusAnimation, runBlurAnimation }: TextInputAnimationHandlers,
   getHasText: () => boolean
@@ -257,7 +258,7 @@ const useTextInputLayout = ({
 }: {
   variant: TextInputVariant;
   props: TextInputProps;
-  input: RefObject<NativeTextInput | null>;
+  input: RefObject<ComponentRef<typeof NativeTextInput> | null>;
   theme: InternalTheme;
   flags: TextInputFlags;
   isFocused: boolean;
@@ -322,7 +323,7 @@ const useTextInputLayout = ({
 export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const { ref, variant = 'filled', theme: themeOverride } = props;
 
-  const input = useRef<NativeTextInput>(null);
+  const input = useRef<ComponentRef<typeof NativeTextInput>>(null);
   const init = useRef(false);
 
   const theme = useInternalTheme(themeOverride);
@@ -452,7 +453,11 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     selectionColor,
     cursorColor,
     animatedActiveOutlineStyles: undefined,
-    animatedContainerStyle: animation.animatedContainerStyle,
+    // The input only fades out while a label rests in its place; without a
+    // label the input and its placeholder stay visible.
+    animatedContainerStyle: props.label
+      ? animation.animatedContainerStyle
+      : undefined,
     placeholder,
     counterText,
     accessibilityProps,

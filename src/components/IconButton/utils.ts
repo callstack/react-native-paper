@@ -50,6 +50,9 @@ const hasDisabledContainer = (
 /**
  * Resolve container, icon, and outline colors for an icon button.
  *
+ * A disabled button always takes the disabled icon color, whatever
+ * `customIconColor` says.
+ *
  * `selected` is a tri-state: `undefined` is the default (non-toggle)
  * appearance; `true`/`false` are the toggle-ON / toggle-OFF color sets.
  */
@@ -76,8 +79,7 @@ export const getIconButtonColor = ({
 
   if (usesDisabledContainer) {
     return {
-      iconColor:
-        customIconColor ?? theme.colors[IconButtonTokens.disabled.icon],
+      iconColor: theme.colors[IconButtonTokens.disabled.icon],
       iconOpacity,
       backgroundColor: theme.colors[IconButtonTokens.disabled.container],
       backgroundOpacity: IconButtonTokens.disabled.containerOpacity,
@@ -89,8 +91,7 @@ export const getIconButtonColor = ({
   if (disabled) {
     const set = colorSetFor(mode, selected);
     return {
-      iconColor:
-        customIconColor ?? theme.colors[IconButtonTokens.disabled.icon],
+      iconColor: theme.colors[IconButtonTokens.disabled.icon],
       iconOpacity,
       backgroundColor: customContainerColor,
       backgroundOpacity: stateOpacity.enabled,
@@ -187,14 +188,4 @@ export const getDimensions = ({
     restingRadius: resolveRadius(restingToken),
     pressedRadius: resolveRadius(pressedToken),
   };
-};
-
-export const getHitSlop = (width: number, height: number) => {
-  const min = IconButtonTokens.minTouchTarget;
-  const extraX = Math.max(0, (min - width) / 2);
-  const extraY = Math.max(0, (min - height) / 2);
-  if (extraX === 0 && extraY === 0) {
-    return undefined;
-  }
-  return { top: extraY, bottom: extraY, left: extraX, right: extraX };
 };

@@ -19,7 +19,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -213,7 +213,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           [
             {
               "height": "100%",
-              "overflow": "hidden",
               "width": "100%",
             },
             {
@@ -228,46 +227,12 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         }
       >
         <View
-          accessibilityLabel="search"
-          accessibilityState={
-            {
-              "busy": undefined,
-              "checked": undefined,
-              "disabled": true,
-              "expanded": undefined,
-              "selected": undefined,
-            }
-          }
-          accessibilityValue={
-            {
-              "max": undefined,
-              "min": undefined,
-              "now": undefined,
-              "text": undefined,
-            }
-          }
           accessible={true}
+          aria-label="search"
           centered={true}
-          collapsable={false}
-          focusable={true}
-          hitSlop={
-            {
-              "bottom": 4,
-              "left": 4,
-              "right": 4,
-              "top": 4,
-            }
-          }
           onBlur={[Function]}
-          onClick={[Function]}
           onFocus={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          role="button"
+          role="none"
           style={
             [
               {
@@ -276,10 +241,15 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
                 },
-                null,
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
+                },
                 undefined,
               ],
             ]
@@ -423,7 +393,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             [
               {
                 "height": "100%",
-                "overflow": "hidden",
                 "width": "100%",
               },
               {
@@ -486,10 +455,15 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 [
                   {
                     "alignItems": "center",
-                    "flexGrow": 1,
+                    "flex": 1,
                     "justifyContent": "center",
                   },
-                  null,
+                  {
+                    "borderRadius": 20,
+                  },
+                  {
+                    "overflow": "hidden",
+                  },
                   undefined,
                 ],
               ]
@@ -584,7 +558,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -689,7 +663,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -752,10 +725,15 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]
@@ -956,7 +934,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -1018,10 +995,15 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]
@@ -1152,7 +1134,7 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -1258,7 +1240,6 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -1273,45 +1254,11 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
       }
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
         accessible={true}
         centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        role="none"
         style={
           [
             {
@@ -1320,10 +1267,15 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]
@@ -1456,7 +1408,7 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -1562,7 +1514,6 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -1577,45 +1528,11 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
       }
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
         accessible={true}
         centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        role="none"
         style={
           [
             {
@@ -1624,10 +1541,15 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]
@@ -1760,7 +1682,7 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -1866,7 +1788,6 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -1881,45 +1802,11 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
       }
     >
       <View
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
         accessible={true}
         centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        role="none"
         style={
           [
             {
@@ -1928,10 +1815,15 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]
@@ -2064,7 +1956,7 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
         "paddingRight": 4,
         "paddingTop": undefined,
       },
-      {},
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -2170,7 +2062,6 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -2185,46 +2076,12 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
       }
     >
       <View
-        accessibilityLabel="Back"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
         accessible={true}
+        aria-label="Back"
         centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        role="none"
         style={
           [
             {
@@ -2233,10 +2090,15 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]

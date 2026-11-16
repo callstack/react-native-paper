@@ -107,7 +107,7 @@ const CrossFadeIcon = ({
         },
       ]}
     >
-      {hasPreviousIcon ? (
+      {previousIcon ? (
         <Animated.View style={[styles.icon, previousIconStyle]}>
           <Icon source={previousIcon} size={size} color={color} theme={theme} />
         </Animated.View>

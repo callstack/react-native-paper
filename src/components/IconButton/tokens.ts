@@ -145,12 +145,8 @@ const disabled = {
   containerOpacity: number;
 };
 
-/** Extra-small and small icon buttons must meet a 48dp touch target. */
-const minTouchTarget = 48;
-
 export const IconButtonTokens = {
   sizes,
   modes,
   disabled,
-  minTouchTarget,
 };

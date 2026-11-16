@@ -115,7 +115,6 @@ exports[`activity indicator snapshot test 1`] = `
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -130,46 +129,12 @@ exports[`activity indicator snapshot test 1`] = `
       }
     >
       <View
-        accessibilityLabel="search"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
         accessible={true}
+        aria-label="search"
         centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        role="none"
         style={
           [
             {
@@ -178,10 +143,15 @@ exports[`activity indicator snapshot test 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]
@@ -598,7 +568,6 @@ exports[`renders searchbar in "view" mode 1`] = `
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -613,46 +582,12 @@ exports[`renders searchbar in "view" mode 1`] = `
       }
     >
       <View
-        accessibilityLabel="search"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
         accessible={true}
+        aria-label="search"
         centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        role="none"
         style={
           [
             {
@@ -661,10 +596,15 @@ exports[`renders searchbar in "view" mode 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]
@@ -808,7 +748,6 @@ exports[`renders searchbar in "view" mode 1`] = `
           [
             {
               "height": "100%",
-              "overflow": "hidden",
               "width": "100%",
             },
             {
@@ -871,10 +810,15 @@ exports[`renders searchbar in "view" mode 1`] = `
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
                 },
-                null,
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
+                },
                 undefined,
               ],
             ]
@@ -1089,7 +1033,6 @@ exports[`renders with placeholder 1`] = `
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -1104,46 +1047,12 @@ exports[`renders with placeholder 1`] = `
       }
     >
       <View
-        accessibilityLabel="search"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
         accessible={true}
+        aria-label="search"
         centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        role="none"
         style={
           [
             {
@@ -1152,10 +1061,15 @@ exports[`renders with placeholder 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]
@@ -1299,7 +1213,6 @@ exports[`renders with placeholder 1`] = `
           [
             {
               "height": "100%",
-              "overflow": "hidden",
               "width": "100%",
             },
             {
@@ -1362,10 +1275,15 @@ exports[`renders with placeholder 1`] = `
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
                 },
-                null,
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
+                },
                 undefined,
               ],
             ]
@@ -1555,7 +1473,6 @@ exports[`renders with text 1`] = `
         [
           {
             "height": "100%",
-            "overflow": "hidden",
             "width": "100%",
           },
           {
@@ -1570,46 +1487,12 @@ exports[`renders with text 1`] = `
       }
     >
       <View
-        accessibilityLabel="search"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
         accessible={true}
+        aria-label="search"
         centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        role="none"
         style={
           [
             {
@@ -1618,10 +1501,15 @@ exports[`renders with text 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
               },
-              null,
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
+              },
               undefined,
             ],
           ]
@@ -1761,7 +1649,6 @@ exports[`renders with text 1`] = `
           [
             {
               "height": "100%",
-              "overflow": "hidden",
               "width": "100%",
             },
             {
@@ -1824,10 +1711,15 @@ exports[`renders with text 1`] = `
               [
                 {
                   "alignItems": "center",
-                  "flexGrow": 1,
+                  "flex": 1,
                   "justifyContent": "center",
                 },
-                null,
+                {
+                  "borderRadius": 20,
+                },
+                {
+                  "overflow": "hidden",
+                },
                 undefined,
               ],
             ]
