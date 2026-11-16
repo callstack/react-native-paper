@@ -32,16 +32,24 @@ describe.each([
 ])('focus ring contrast (%s)', (_name, theme) => {
   const ring = String(theme.colors.secondary);
 
-  // Surfaces an outward ring actually lands on.
-  const landsOn: (keyof typeof theme.colors)[] = [
-    'background',
-    'surface',
-    'surfaceVariant',
-    'secondaryContainer',
+  type Role = keyof typeof theme.colors;
+
+  // Surfaces an outward ring actually lands on, with the role that colors the
+  // ring there. Snackbar's action and close button sit on `inverseSurface`,
+  // so Snackbar rings them in `inversePrimary`.
+  const landsOn: [ring: Role, surface: Role][] = [
+    ['secondary', 'background'],
+    ['secondary', 'surface'],
+    ['secondary', 'surfaceVariant'],
+    ['secondary', 'secondaryContainer'],
+    ['inversePrimary', 'inverseSurface'],
   ];
-  it.each(landsOn)('has 3:1 against %s', (role) => {
+  it.each(landsOn)('a %s ring has 3:1 against %s', (ringRole, surfaceRole) => {
     expect(
-      contrastRatio(ring, String(theme.colors[role]))
+      contrastRatio(
+        String(theme.colors[ringRole]),
+        String(theme.colors[surfaceRole])
+      )
     ).toBeGreaterThanOrEqual(MIN_RATIO);
   });
 

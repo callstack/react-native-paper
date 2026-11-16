@@ -80,6 +80,15 @@ export const mergeDataSetProps = (
     : {};
 };
 
+/**
+ * Replaces the ring color of every control inside it, for a component that
+ * puts controls on a surface where `secondary` doesn't stand out: Snackbar's
+ * action and close button sit on `inverseSurface`. Internal, not exported
+ * from the package.
+ */
+export const FocusRingColorContext: React.Context<ColorValue | undefined> =
+  React.createContext<ColorValue | undefined>(undefined);
+
 const EMPTY: FocusRingResult = {
   target: { style: [], dataSetProps: {} },
   ring: { style: [], dataSetProps: {} },
@@ -128,6 +137,7 @@ export function useFocusRing(
   scope: FocusRingScope = 'self'
 ): FocusRingResult {
   const suppressed = disabled || placement === 'none';
+  const ringColor = React.useContext(FocusRingColorContext) ?? color;
 
   // Rules of hooks: called unconditionally regardless of platform. Cheap -
   // native's is a no-op until focus/blur actually fires, web's is stateless.
@@ -188,7 +198,7 @@ export function useFocusRing(
             // by the shared stylesheet below. Not reactive to focus - the
             // browser's own `:focus-visible`/`:has()` shows the ring.
             // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-            { ['--rnp-focus-ring-color']: color } as unknown as ViewStyle,
+            { ['--rnp-focus-ring-color']: ringColor } as unknown as ViewStyle,
           ],
           dataSetProps: toDataSetProps({ [dataKey]: placement }),
         },
@@ -202,7 +212,7 @@ export function useFocusRing(
           ? [
               {
                 outlineWidth: thickness,
-                outlineColor: color,
+                outlineColor: ringColor,
                 outlineStyle: 'solid' as const,
                 outlineOffset:
                   placement === 'inward' ? -thickness : outerOffset,
@@ -212,7 +222,15 @@ export function useFocusRing(
         dataSetProps: {},
       },
     };
-  }, [suppressed, scope, color, placement, isNativeFocused, onFocus, onBlur]);
+  }, [
+    suppressed,
+    scope,
+    ringColor,
+    placement,
+    isNativeFocused,
+    onFocus,
+    onBlur,
+  ]);
 }
 
 const STYLE_ELEMENT_ATTR = 'data-rnp-focus-ring-styles';

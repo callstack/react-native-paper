@@ -16,6 +16,7 @@ import { tokens } from '../../theme/tokens';
 import type { FocusRingPlacement, FocusRingScope } from '../useFocusRing';
 import {
   buildFocusRingStylesheet,
+  FocusRingColorContext,
   mergeDataSetProps,
   useFocusRing,
 } from '../useFocusRing';
@@ -170,6 +171,20 @@ describe('useFocusRing (native)', () => {
     });
   });
 
+  it('takes its color from FocusRingColorContext when one is set', async () => {
+    await render(
+      <FocusRingColorContext.Provider value="seagreen">
+        <Probe />
+      </FocusRingColorContext.Provider>
+    );
+
+    await focus();
+
+    expect(screen.getByTestId('probe')).toHaveStyle({
+      outlineColor: 'seagreen',
+    });
+  });
+
   // `disabled` goes to the hook only, never to the Pressable: RNTL will not
   // dispatch to a disabled element, so that would pass for free.
   it('never rings a disabled control, even if a focus event arrives', async () => {
@@ -311,6 +326,19 @@ describe('useFocusRing (web)', () => {
 
     // eslint-disable-next-line no-restricted-syntax
     expect(screen.getByTestId('target').props.style).toEqual([]);
+  });
+
+  it('takes the color variable from FocusRingColorContext when one is set', async () => {
+    await render(
+      <FocusRingColorContext.Provider value="seagreen">
+        <WebProbe placement="outward" />
+      </FocusRingColorContext.Provider>
+    );
+
+    expect(screen.getByTestId('probe')).toHaveStyle(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      { '--rnp-focus-ring-color': 'seagreen' } as unknown as ViewStyle
+    );
   });
 
   it('emits nothing when disabled or when the ring is turned off', async () => {

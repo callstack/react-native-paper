@@ -17,6 +17,7 @@ import {
 import { act, fireEvent } from '@testing-library/react-native';
 
 import { ownFocusEvent, render, screen } from '../../test-utils';
+import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Appbar from '../Appbar/Appbar';
 import AppbarAction from '../Appbar/AppbarAction';
@@ -40,6 +41,7 @@ import ListItem from '../List/ListItem';
 import MenuItem from '../Menu/MenuItem';
 import RadioButtonItem from '../RadioButton/RadioButtonItem';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
+import Snackbar from '../Snackbar';
 import Switch from '../Switch/Switch';
 import TextInputIcon from '../TextInput/TextInputIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
@@ -684,6 +686,66 @@ describe('focus ring color follows the theme prop', () => {
       );
     }
   );
+});
+
+// `secondary` barely shows on the snackbar's `inverseSurface` (2.04:1 in the
+// light theme, 1.32:1 in the dark), so its action and close button ring in
+// `inversePrimary`, the action label's color. Only those two: a control the
+// app puts in the message keeps `secondary`.
+describe.each([
+  ['light', LightTheme],
+  ['dark', DarkTheme],
+])('Snackbar focus ring (%s)', (_name, theme) => {
+  const renderSnackbar = () =>
+    render(
+      <Snackbar
+        visible
+        onDismiss={() => {}}
+        action={{ label: 'Undo', onPress: () => {} }}
+        onIconPress={() => {}}
+        iconAccessibilityLabel="Close"
+        theme={theme}
+      >
+        <Button onPress={() => {}} theme={theme}>
+          Details
+        </Button>
+      </Snackbar>
+    );
+
+  const ringColors = () => {
+    const root = (screen as unknown as { root: Node }).root;
+    return walk(root, (n) => style(n).outlineStyle === 'solid').map(
+      (n) => style(n).outlineColor
+    );
+  };
+
+  it.each(['Undo', 'Close'])('rings %s in inversePrimary', async (name) => {
+    await renderSnackbar();
+
+    await act(async () => {
+      await fireEvent(
+        screen.getByRole('button', { name }),
+        'focus',
+        ownFocusEvent()
+      );
+    });
+
+    expect(ringColors()).toEqual([theme.colors.inversePrimary]);
+  });
+
+  it('rings a control in the message in secondary', async () => {
+    await renderSnackbar();
+
+    await act(async () => {
+      await fireEvent(
+        screen.getByRole('button', { name: 'Details' }),
+        'focus',
+        ownFocusEvent()
+      );
+    });
+
+    expect(ringColors()).toEqual([theme.colors.secondary]);
+  });
 });
 
 // A focused Pressable that unmounts sends no blur, so each of these resets its
