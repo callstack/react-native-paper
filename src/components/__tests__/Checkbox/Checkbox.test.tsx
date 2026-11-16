@@ -1,9 +1,16 @@
-import { type GestureResponderEvent, Platform, Pressable } from 'react-native';
+import {
+  type GestureResponderEvent,
+  Platform,
+  Pressable,
+  StyleSheet,
+} from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { fireEvent, render, screen, userEvent } from '../../../test-utils';
+import { tokens } from '../../../theme/tokens';
 import Checkbox from '../../Checkbox';
+import { CheckboxTokens } from '../../Checkbox/tokens';
 import TouchableRipple from '../../TouchableRipple/TouchableRipple';
 
 afterEach(() => {
@@ -374,6 +381,77 @@ describe('Checkbox Space key', () => {
       expect(onPress).not.toHaveBeenCalled();
     }
   );
+});
+
+describe('Checkbox focus ring', () => {
+  const { thickness, outerOffset } = tokens.md.sys.state.focusIndicator;
+  const ringSize =
+    CheckboxTokens.stateLayerSize + 2 * (outerOffset + thickness);
+
+  /* eslint-disable testing-library/no-node-access, no-restricted-syntax --
+     Checkbox draws its ring as an unnamed view beside the pressable, with no
+     role or testID to query it by, so the outer container's children have to
+     be read to count it. */
+  const ringCount = () =>
+    (screen.root?.children ?? []).filter((child) => {
+      if (typeof child === 'string') return false;
+      const { width, height, borderWidth } =
+        StyleSheet.flatten(child.props.style) ?? {};
+      return (
+        width === ringSize && height === ringSize && borderWidth === thickness
+      );
+    }).length;
+  /* eslint-enable testing-library/no-node-access, no-restricted-syntax */
+
+  // A display-only checkbox is not exposed as a checkbox, so it is found by
+  // testID.
+  const Box = ({ onPress }: { onPress?: () => void }) => (
+    <Checkbox
+      status="unchecked"
+      onPress={onPress}
+      aria-label="Notify me"
+      testID="checkbox"
+    />
+  );
+
+  // On Android a TouchableRipple without a handler renders a plain View, so
+  // the focused Pressable is destroyed and its blur never reaches JS.
+  const renderOnAndroid = async (onPress?: () => void) => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+    jest.replaceProperty(TouchableRipple, 'supported', true);
+    await render(<Box onPress={onPress} />);
+  };
+
+  it('draws one ring on keyboard focus', async () => {
+    await renderOnAndroid(() => {});
+    await fireEvent(screen.getByTestId('checkbox'), 'focus');
+
+    expect(ringCount()).toBe(1);
+  });
+
+  it('drops the ring when onPress is removed', async () => {
+    const onPress = () => {};
+    await renderOnAndroid(onPress);
+    const pressable = screen.getByTestId('checkbox');
+    await fireEvent(screen.getByTestId('checkbox'), 'focus');
+
+    await screen.rerender(<Box />);
+
+    // The focused Pressable was replaced, not just left without a handler.
+    expect(screen.getByTestId('checkbox')).not.toBe(pressable);
+    expect(ringCount()).toBe(0);
+  });
+
+  it('shows no ring when onPress comes back until it is focused again', async () => {
+    const onPress = () => {};
+    await renderOnAndroid(onPress);
+    await fireEvent(screen.getByTestId('checkbox'), 'focus');
+
+    await screen.rerender(<Box />);
+    await screen.rerender(<Box onPress={onPress} />);
+
+    expect(ringCount()).toBe(0);
+  });
 });
 
 describe('Checkbox touch target', () => {

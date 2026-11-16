@@ -410,10 +410,12 @@ const Checkbox = ({
     : null;
 
   // Losing the handlers means the matching hover-out or press-out never
-  // arrives, so the state would otherwise linger.
+  // arrives, so the state would otherwise linger. The focus is lost too: the
+  // focused Pressable is replaced, and its blur never arrives either.
   React.useEffect(() => {
     if (isInteractive) return;
 
+    setFocused(false);
     setHovered(false);
     pressedSV.value = 0;
     rippleHoldSV.value = 0;
