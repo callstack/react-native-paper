@@ -23,6 +23,7 @@ import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler, {
   getNonControlA11yProps,
 } from '../../utils/hasTouchHandler';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
@@ -110,6 +111,8 @@ const DataTableTitle = ({
   numberOfLines = 1,
   maxFontSizeMultiplier,
   hitSlop,
+  onFocus,
+  onBlur,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -176,6 +179,17 @@ const DataTableTitle = ({
   const isControl = hasPassedTouchHandler || Boolean(disabledProp);
   const isInteractive = hasPassedTouchHandler && !disabledProp;
 
+  // A title with a touch handler is a control, so it gets the keyboard focus
+  // ring. It is a plain `Pressable`, not a `TouchableRipple`, so it calls the
+  // hook directly, above the early return below. Off whenever the title can't
+  // be pressed.
+  // Inward: titles sit side by side in the header row, like the rows below.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    !isInteractive,
+    theme.colors.secondary,
+    'inward'
+  );
+
   const content = (
     <>
       {icon}
@@ -194,6 +208,9 @@ const DataTableTitle = ({
     return (
       <View
         {...rest}
+        // taken out of `rest` for the ring, so passed on here unchanged
+        onFocus={onFocus}
+        onBlur={onBlur}
         {...getNonControlA11yProps(rest)}
         style={[...containerStyle, style]}
       >
@@ -204,6 +221,11 @@ const DataTableTitle = ({
 
   return (
     <Pressable
+      // Like Switch: a ripple drawable owns the focused state, so Android does
+      // not add its grey default focus highlight on top of the ring. Before
+      // `rest`, so a caller's own `android_ripple` wins, and it owns the state
+      // just as well.
+      android_ripple={{ color: 'transparent' }}
       {...rest}
       onPress={onPress}
       onLongPress={onLongPress}
@@ -214,7 +236,16 @@ const DataTableTitle = ({
       disabled={Boolean(disabledProp)}
       // a touch target only for something that can be pressed
       hitSlop={isInteractive ? hitSlop : undefined}
-      style={[...containerStyle, style]}
+      onFocus={(e) => {
+        focusTarget.onFocus?.(e);
+        onFocus?.(e);
+      }}
+      onBlur={(e) => {
+        focusTarget.onBlur?.();
+        onBlur?.(e);
+      }}
+      {...mergeDataSetProps(rest, focusRing.dataSetProps)}
+      style={[...containerStyle, style, ...focusRing.style]}
     >
       {content}
     </Pressable>

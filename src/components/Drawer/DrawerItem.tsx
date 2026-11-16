@@ -120,6 +120,9 @@ const DrawerItem = ({
     <View {...rest}>
       <TouchableRipple
         borderless
+        // Items stack with no gap, so an outward ring would run into the
+        // items above and below, like List.Item.
+        focusRing="inward"
         disabled={disabled}
         background={background}
         onPress={onPress}

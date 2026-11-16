@@ -25,6 +25,7 @@ import Text from './Typography/Text';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import type { Elevation, ThemeProp } from '../theme/types';
+import { FocusRingColorContext } from '../utils/useFocusRing';
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**
@@ -305,48 +306,52 @@ const Snackbar = ({
       >
         {content}
         {(action || isIconButton) && (
-          <View style={[styles.actionsContainer, { marginLeft }]}>
-            {action ? (
-              <Button
-                onPress={(event) => {
-                  onPressAction?.(event);
-                  onDismiss();
-                }}
-                style={[styles.button, actionStyle]}
-                textColor={buttonTextColor}
-                mode="text"
-                theme={theme}
-                {...actionProps}
-              >
-                {actionLabel}
-              </Button>
-            ) : null}
-            {isIconButton ? (
-              <IconButton
-                role="button"
-                borderless
-                onPress={onIconPress}
-                iconColor={colors.inverseOnSurface}
-                theme={theme}
-                icon={
-                  icon ||
-                  (({ size, color }) => {
-                    return (
-                      <MaterialCommunityIcon
-                        name="close"
-                        color={color}
-                        size={size}
-                        direction={direction}
-                      />
-                    );
-                  })
-                }
-                aria-label={iconAccessibilityLabel}
-                style={styles.icon}
-                testID={iconTestID}
-              />
-            ) : null}
-          </View>
+          // `secondary` barely shows on `inverseSurface`, so the action and
+          // close button ring in `inversePrimary`, the action label's color.
+          <FocusRingColorContext.Provider value={colors.inversePrimary}>
+            <View style={[styles.actionsContainer, { marginLeft }]}>
+              {action ? (
+                <Button
+                  onPress={(event) => {
+                    onPressAction?.(event);
+                    onDismiss();
+                  }}
+                  style={[styles.button, actionStyle]}
+                  textColor={buttonTextColor}
+                  mode="text"
+                  theme={theme}
+                  {...actionProps}
+                >
+                  {actionLabel}
+                </Button>
+              ) : null}
+              {isIconButton ? (
+                <IconButton
+                  role="button"
+                  borderless
+                  onPress={onIconPress}
+                  iconColor={colors.inverseOnSurface}
+                  theme={theme}
+                  icon={
+                    icon ||
+                    (({ size, color }) => {
+                      return (
+                        <MaterialCommunityIcon
+                          name="close"
+                          color={color}
+                          size={size}
+                          direction={direction}
+                        />
+                      );
+                    })
+                  }
+                  aria-label={iconAccessibilityLabel}
+                  style={styles.icon}
+                  testID={iconTestID}
+                />
+              ) : null}
+            </View>
+          </FocusRingColorContext.Provider>
         )}
       </Surface>
     </View>

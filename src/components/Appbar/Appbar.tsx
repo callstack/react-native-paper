@@ -258,12 +258,14 @@ const Appbar = ({
             {renderAppbarContent({
               children,
               isDark,
+              theme,
               renderOnly: ['Appbar.BackAction'],
               mode,
             })}
             {renderAppbarContent({
               children: filterAppbarActions(children, true),
               isDark,
+              theme,
               renderOnly: ['Appbar.Action'],
               mode,
             })}
@@ -272,6 +274,7 @@ const Appbar = ({
               {renderAppbarContent({
                 children: filterAppbarActions(children),
                 isDark,
+                theme,
                 renderExcept: [
                   'Appbar',
                   'Appbar.BackAction',
@@ -285,6 +288,7 @@ const Appbar = ({
           {renderAppbarContent({
             children,
             isDark,
+            theme,
             renderOnly: ['Appbar.Content'],
             mode,
           })}

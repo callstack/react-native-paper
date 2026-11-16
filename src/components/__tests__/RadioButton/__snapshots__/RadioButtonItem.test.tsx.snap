@@ -10,7 +10,7 @@ exports[`can render leading radio button control 1`] = `
   style={
     [
       false,
-      undefined,
+      [],
     ]
   }
 >
@@ -123,6 +123,20 @@ exports[`can render leading radio button control 1`] = `
       Default with leading control
     </Text>
   </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+  />
 </View>
 `;
 
@@ -136,7 +150,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
   style={
     [
       false,
-      undefined,
+      [],
     ]
   }
 >
@@ -223,6 +237,20 @@ exports[`can render the Android radio button on different platforms 1`] = `
       />
     </View>
   </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+  />
 </View>
 `;
 
@@ -238,7 +266,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
   style={
     [
       false,
-      undefined,
+      [],
     ]
   }
 >
@@ -353,6 +381,20 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       </View>
     </View>
   </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+  />
 </View>
 `;
 
@@ -366,7 +408,7 @@ exports[`renders unchecked 1`] = `
   style={
     [
       false,
-      undefined,
+      [],
     ]
   }
 >
@@ -479,5 +521,19 @@ exports[`renders unchecked 1`] = `
       </View>
     </View>
   </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+  />
 </View>
 `;

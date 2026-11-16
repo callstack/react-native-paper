@@ -12,9 +12,9 @@ import {
   it,
   jest,
 } from '@jest/globals';
-import { userEvent } from '@testing-library/react-native';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../test-utils';
+import { ownFocusEvent, render, screen } from '../../test-utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
 
 describe('TouchableRipple', () => {
@@ -538,5 +538,93 @@ describe('TouchableRipple', () => {
         opacity: 0.5,
       });
     });
+  });
+});
+
+describe('TouchableRipple focus ring', () => {
+  const focus = async () => {
+    await act(async () => {
+      await fireEvent(screen.getByTestId('ripple'), 'focus', ownFocusEvent());
+    });
+  };
+
+  it('rings on keyboard focus and clears on blur', async () => {
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}}>
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    await focus();
+    expect(screen.getByTestId('ripple')).toHaveStyle({
+      outlineWidth: 3,
+      outlineOffset: 2,
+    });
+
+    await act(async () => {
+      await fireEvent(screen.getByTestId('ripple'), 'blur');
+    });
+    expect(screen.getByTestId('ripple')).not.toHaveStyle({ outlineWidth: 3 });
+  });
+
+  // Inward is opt-in, for controls a clipping ancestor would trim.
+  it('draws the ring inward only when asked', async () => {
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}} focusRing="inward">
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    await focus();
+    expect(screen.getByTestId('ripple')).toHaveStyle({
+      outlineWidth: 3,
+      outlineOffset: -3,
+    });
+  });
+
+  // The disabled case is covered in useFocusRing's own tests. RNTL's focus()
+  // won't dispatch to a disabled element, so asserting it here would mean
+  // calling the host's onFocus directly.
+  it('does not ring when the ring is turned off', async () => {
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}} focusRing="none">
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    await focus();
+    expect(screen.getByTestId('ripple')).not.toHaveStyle({ outlineWidth: 3 });
+  });
+
+  it('still calls a caller onFocus', async () => {
+    const onFocus = jest.fn();
+    await render(
+      <TouchableRipple testID="ripple" onPress={() => {}} onFocus={onFocus}>
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    await focus();
+    expect(onFocus).toHaveBeenCalled();
+  });
+
+  // Without a touch handler it renders a plain View, which keeps the caller's
+  // focus handlers but takes none of the ring.
+  it('keeps caller focus handlers and draws no ring without a touch handler', async () => {
+    const onFocus = jest.fn();
+    const onBlur = jest.fn();
+    await render(
+      <TouchableRipple testID="ripple" onFocus={onFocus} onBlur={onBlur}>
+        <Text>Not a button</Text>
+      </TouchableRipple>
+    );
+
+    // Checked on the host view: `fireEvent` would also find them on the
+    // TouchableRipple element itself, so calling them proves nothing.
+    expect(screen.getByTestId('ripple')).toHaveProp('onFocus', onFocus);
+    expect(screen.getByTestId('ripple')).toHaveProp('onBlur', onBlur);
+
+    await focus();
+    expect(screen.getByTestId('ripple')).not.toHaveStyle({ outlineWidth: 3 });
   });
 });
