@@ -4,7 +4,6 @@ import type {
   ColorValue,
   GestureResponderEvent,
   LayoutChangeEvent,
-  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
   TextLayoutEvent,
@@ -24,9 +23,10 @@ import Animated, {
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
+import { ListAccordionContext } from './ListAccordionContext';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 import { ListTokens } from './tokens';
-import type { ListChildProps, Style } from './utils';
+import type { Style } from './utils';
 import { ListRowContext, getAccordionColors, getLeftStyles } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -355,6 +355,9 @@ const ListAccordion = ({
     [isDescriptionMultiline]
   );
 
+  const hasLeft = left != null;
+  const accordionContext = React.useMemo(() => ({ hasLeft }), [hasLeft]);
+
   return (
     <View>
       <View
@@ -372,6 +375,9 @@ const ListAccordion = ({
               isDescriptionMultiline && styles.containerThreeLine,
               style,
             ]}
+            // A full-width row, like List.Item: an outward ring would run into
+            // the rows around it.
+            focusRing="inward"
             onPress={handlePress}
             onLongPress={onLongPress}
             delayLongPress={delayLongPress}
@@ -495,9 +501,6 @@ const styles = StyleSheet.create({
   trailingItem: {
     alignSelf: 'center',
     paddingLeft: ListTokens.leadingSpace,
-  },
-  child: {
-    paddingLeft: 40,
   },
   expandedContent: {
     overflow: 'hidden',

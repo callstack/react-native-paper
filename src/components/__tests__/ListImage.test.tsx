@@ -6,16 +6,6 @@ import { render } from '../../test-utils';
 import ListImage from '../List/ListImage';
 
 const styles = StyleSheet.create({
-  image: {
-    width: 56,
-    height: 56,
-  },
-  video: {
-    width: 114,
-    height: 64,
-    marginLeft: 0,
-    marginVertical: 4,
-  },
   container: {
     width: 30,
     height: 56,

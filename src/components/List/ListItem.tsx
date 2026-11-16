@@ -10,6 +10,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { ListAccordionContext } from './ListAccordionContext';
 import { ListItemContext } from './ListItemContext';
 import { ListTokens } from './tokens';
 import { ListRowContext, getLeftStyles, getRightStyles } from './utils';
@@ -311,12 +312,15 @@ const ListItem = ({
   return (
     <ListRowContext.Provider value={rowContext}>
       <TouchableRipple
+        // Before `rest`, so a caller's `focusRing` wins
+        focusRing="inward"
         {...rest}
         ref={ref}
         style={[
           styles.container,
           description ? styles.containerTwoLine : styles.containerOneLine,
           isDescriptionMultiline && styles.containerThreeLine,
+          shouldIndent && styles.indent,
           { backgroundColor },
           style,
         ]}
@@ -357,6 +361,9 @@ const styles = StyleSheet.create({
   },
   containerThreeLine: {
     paddingVertical: ListTokens.threeLineVerticalPadding,
+  },
+  indent: {
+    paddingLeft: 40,
   },
   row: {
     width: '100%',

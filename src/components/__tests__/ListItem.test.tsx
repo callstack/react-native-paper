@@ -5,9 +5,9 @@ import { Text, View } from 'react-native';
 import { expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
-import { getTheme } from '../../core/theming';
 import { fireEvent, render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
+import { LightTheme } from '../../theme/schemes';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';

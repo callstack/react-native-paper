@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { StyleProp, TextProps, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, TextProps, ViewStyle } from 'react-native';
 
 import { ListTokens } from './tokens';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
@@ -61,7 +61,12 @@ export const getAccordionColors = ({
 }: {
   theme: InternalTheme;
   selected?: boolean;
-}) => {
+}): {
+  descriptionColor: ColorValue;
+  titleTextColor: ColorValue;
+  leadingIconColor: ColorValue;
+  trailingIconColor: ColorValue;
+} => {
   const selectedContentColor = theme.colors[ListTokens.selectedContentColor];
 
   return {
