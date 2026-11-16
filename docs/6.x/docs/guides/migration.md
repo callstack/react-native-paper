@@ -386,6 +386,8 @@ An outward ring sits outside the component, so a scroll view or a container with
 
 On web the ring comes from a stylesheet that Paper adds to the page, and on these elements it takes precedence over your own `:focus-visible` outline styles. There is no app-wide switch to turn the ring off. Its color follows `theme.colors.secondary`, from the theme or a component's `theme` prop.
 
+On web, `Button`, `Card`, the `Chip` body, `FAB`, `FAB.Extended` and the `FAB.Menu` trigger and items draw the ring with the CSS `:has()` selector. A browser without it (Chrome before 105, Safari before 15.4, Firefox before 121) shows its own focus outline just inside their edge instead.
+
 ### Libraries built on Paper
 
 Libraries built on Paper may not support 6.x yet. For example, `react-native-paper-dates` 0.24.1 still uses `HelperText`, the 5.x theme exports and `theme.roundness`, so its `DatePickerInput` crashes when it shows a validation error.

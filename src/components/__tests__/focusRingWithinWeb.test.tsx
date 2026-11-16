@@ -1,7 +1,8 @@
 /* eslint-disable testing-library/no-node-access, @typescript-eslint/no-unsafe-type-assertion, no-restricted-syntax --
    The ring view is an unnamed internal view (a clip view, a card's box), so
    the tree has to be walked to find it and its children. */
-import { Platform, Text, TextInput } from 'react-native';
+import { Platform, StyleSheet, Text, TextInput } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import {
   afterEach,
@@ -45,7 +46,8 @@ const withinRings = () =>
 
 // On web a `within` ring lights only for a focused direct child
 // (`:has(> :focus-visible)`), so each ring view has to hold its own focusable
-// element directly, and must not hold a control nested deeper inside it.
+// element directly, and must not hold a control nested deeper inside it. The
+// stylesheet also hides the browser's outline on that direct child.
 describe('focus ring `within` structure (web)', () => {
   const original = Platform.OS;
   beforeEach(() => {
@@ -85,7 +87,13 @@ describe('focus ring `within` structure (web)', () => {
 
       const rings = withinRings();
       expect(rings).toHaveLength(1);
-      expect(rings[0].children).toContain(screen.getByTestId('focusable'));
+      const focusable = screen.getByTestId('focusable');
+      expect(rings[0].children).toContain(focusable);
+      // No inline `outline: 'none'`: the stylesheet hides the browser's
+      // outline, and only where `:has()` draws the ring instead.
+      expect(
+        StyleSheet.flatten(focusable.props.style as ViewStyle) ?? {}
+      ).not.toHaveProperty('outline');
     }
   );
 

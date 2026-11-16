@@ -299,9 +299,9 @@ const Shell = ({
   );
 
   // `scope: 'within'`: the ring is drawn on the clip view below, not the
-  // inner `TouchableRipple` that actually receives focus - `target.style`
-  // suppresses the browser's own outline there on web, so only the clip
-  // view's ring shows.
+  // inner `TouchableRipple` that actually receives focus. On web the shared
+  // stylesheet hides the browser's own outline there, so only the clip view's
+  // ring shows, or only the outline in a browser without `:has()`.
   //
   // Off when `disabled` or without `onPress`: the inner TouchableRipple is
   // then a plain View, and a focused one unmounts without a blur reaching the

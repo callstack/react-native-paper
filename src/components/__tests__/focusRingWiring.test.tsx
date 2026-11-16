@@ -933,7 +933,7 @@ describe('focus ring wiring (web)', () => {
     ).toBe('inward');
   });
 
-  it('Card marks its own box as the ring and keeps the browser outline off the Pressable', async () => {
+  it("Card marks its own box as the ring and leaves the Pressable's outline to the stylesheet", async () => {
     await render(
       <Card testID="card" onPress={() => {}} style={{ height: 200 }}>
         <Text>card</Text>
@@ -941,7 +941,8 @@ describe('focus ring wiring (web)', () => {
     );
 
     const pressable = screen.getByTestId('card');
-    expect(style(pressable)).toMatchObject({ outline: 'none' });
+    // The stylesheet hides its outline, and only where `:has()` works.
+    expect(style(pressable)).not.toHaveProperty('outline');
 
     const root = (screen as unknown as { root: Node }).root;
     const ringed = walk(
@@ -966,7 +967,8 @@ describe('focus ring wiring (web)', () => {
     );
 
     const button = screen.getByRole('button');
-    expect(style(button)).toMatchObject({ outline: 'none' });
+    // The stylesheet hides its outline, and only where `:has()` works.
+    expect(style(button)).not.toHaveProperty('outline');
 
     const root = (screen as unknown as { root: Node }).root;
     const ringed = walk(
@@ -983,7 +985,7 @@ describe('focus ring wiring (web)', () => {
     expect(walk(ringed[0], (n) => n === button)).toHaveLength(1);
   });
 
-  it("Chip marks its own box as the ring, keeps the caller's dataSet and keeps the browser outline off the ripple", async () => {
+  it("Chip marks its own box as the ring, keeps the caller's dataSet and leaves the ripple's outline to the stylesheet", async () => {
     await render(
       <Chip
         testID="chip"
@@ -996,7 +998,8 @@ describe('focus ring wiring (web)', () => {
     );
 
     const ripple = screen.getByTestId('chip');
-    expect(style(ripple)).toMatchObject({ outline: 'none' });
+    // The stylesheet hides its outline, and only where `:has()` works.
+    expect(style(ripple)).not.toHaveProperty('outline');
 
     const root = (screen as unknown as { root: Node }).root;
     const ringed = walk(

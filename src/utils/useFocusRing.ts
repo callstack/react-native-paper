@@ -95,8 +95,8 @@ const EMPTY: FocusRingResult = {
 };
 
 /**
- * Suppresses the browser's own focus ring, for `scope: 'within'` and
- * `scope: 'descendant'` on web.
+ * Suppresses the browser's own focus ring, for `scope: 'descendant'` on web.
+ * `scope: 'within'` leaves that to the stylesheet below instead.
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const webNoOutlineStyle = { outline: 'none' } as unknown as ViewStyle;
@@ -115,8 +115,11 @@ const webNoOutlineStyle = { outline: 'none' } as unknown as ViewStyle;
  * `scope: 'within'` is for a control whose ring belongs on the parent of the
  * element that actually receives focus (FAB's clip view), and
  * `scope: 'descendant'` for one whose ring belongs on a child of it (Switch's
- * track): `target` also suppresses the browser's default outline on the
- * focused element itself on web, so only the ring shows.
+ * track). On web only the ring shows, not the browser's default outline on
+ * the focused element too. For `'descendant'`, `target` hides that outline.
+ * For `'within'`, the stylesheet hides it, and only in a browser that
+ * supports `:has()`: one that doesn't can't draw the ring, so it shows its
+ * own focus outline instead.
  *
  * iOS: a ringed element never gets its own `onFocus`/`onBlur` today. Fabric's
  * view does call `-becomeFirstResponder`/`-resignFirstResponder` for
@@ -186,7 +189,7 @@ export function useFocusRing(
             : 'focusRing';
       return {
         target: {
-          style: scope === 'self' ? [] : [webNoOutlineStyle],
+          style: scope === 'descendant' ? [webNoOutlineStyle] : [],
           dataSetProps: toDataSetProps(
             scope === 'descendant' ? { focusRingTarget: 'true' } : undefined
           ),
@@ -259,6 +262,23 @@ export const buildFocusRingStylesheet = (): string =>
     focusRingRule(
       (p) => `[data-focus-ring-within="${p}"]:has(> :focus-visible)`
     ),
+    // The `within` ring replaces the browser's own outline on the focused
+    // child, but only where the rule above works. A browser without `:has()`
+    // drops that rule, skips the block, and keeps its own outline, so the
+    // control still shows focus. `:focus` and `!important` match the inline
+    // `outline: 'none'` this replaces, which also beat an app's own outline
+    // rules in every state.
+    //
+    // The ring view often clips (FAB's clip view, a FAB.Menu item's pill),
+    // so the outline a browser without `:has()` draws goes inside the edge.
+    `@supports selector(:has(> :focus-visible)) {
+  [data-focus-ring-within] > :focus {
+    outline: none !important;
+  }
+}
+[data-focus-ring-within] > :focus {
+  outline-offset: ${-thickness}px;
+}`,
     focusRingRule(
       (p) =>
         `[data-focus-ring-target]:focus-visible [data-focus-ring-descendant="${p}"]`

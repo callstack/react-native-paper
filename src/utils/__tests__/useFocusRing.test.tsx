@@ -83,6 +83,29 @@ describe('buildFocusRingStylesheet', () => {
     );
   });
 
+  // The `within` ring replaces the browser's outline on the focused child, but
+  // only a browser that supports `:has()` draws it. One without keeps its own
+  // outline, so the control still shows focus.
+  it('hides the browser outline on a `within` target only where :has() works', () => {
+    expect(css).toMatch(
+      /@supports selector\(:has\(> :focus-visible\)\) \{\s*\[data-focus-ring-within\] > :focus \{\s*outline: none !important;\s*\}\s*\}/
+    );
+    // Nowhere else: the `descendant` target hides its outline inline.
+    expect(css.match(/outline: none/g)).toHaveLength(1);
+  });
+
+  // The ring view often clips (FAB's clip view, a FAB.Menu item's pill), so a
+  // browser without `:has()` draws its own outline inside the edge.
+  it('insets the browser outline on a `within` target, outside the :has() check', () => {
+    const { thickness } = tokens.md.sys.state.focusIndicator;
+
+    expect(css).toMatch(
+      new RegExp(
+        `\\}\\n\\[data-focus-ring-within\\] > :focus \\{\\s*outline-offset: ${-thickness}px;\\s*\\}`
+      )
+    );
+  });
+
   // Values must come from the design tokens, not be hardcoded here, or the
   // token is decorative. Derive the expectation from the token itself.
   it('takes its thickness and offsets from the focusIndicator tokens', () => {
@@ -278,17 +301,15 @@ describe('useFocusRing (web)', () => {
     );
   });
 
-  it('emits data-focus-ring-within for scope "within", and suppresses the target element\'s own outline', async () => {
+  it('emits data-focus-ring-within for scope "within", and leaves the target element\'s own outline to the stylesheet', async () => {
     await render(<WebProbe placement="inward" scope="within" />);
 
     // eslint-disable-next-line no-restricted-syntax
     expect(screen.getByTestId('probe').props.dataSet).toEqual({
       focusRingWithin: 'inward',
     });
-    expect(screen.getByTestId('target')).toHaveStyle(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-      { outline: 'none' } as unknown as ViewStyle
-    );
+    // eslint-disable-next-line no-restricted-syntax
+    expect(screen.getByTestId('target').props.style).toEqual([]);
   });
 
   it('marks the focused element and its ringed child for scope "descendant", and suppresses the target element\'s own outline', async () => {
