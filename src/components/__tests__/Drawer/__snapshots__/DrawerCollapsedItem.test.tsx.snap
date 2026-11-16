@@ -33,6 +33,7 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -68,6 +69,23 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
                   "scale": 1,
                 },
               ],
+            },
+          ]
+        }
+      />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": -5,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
             },
           ]
         }
@@ -152,6 +170,7 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -187,6 +206,23 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
                   "scale": 0.5,
                 },
               ],
+            },
+          ]
+        }
+      />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": -5,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
             },
           ]
         }
@@ -271,6 +307,7 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -306,6 +343,23 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
                   "scale": 0.5,
                 },
               ],
+            },
+          ]
+        }
+      />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": -5,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
             },
           ]
         }
@@ -390,6 +444,7 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -423,6 +478,23 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
                   "scaleX": 0.5,
                 },
               ],
+            },
+          ]
+        }
+      />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": -5,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
             },
           ]
         }
@@ -550,6 +622,7 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
+    style={[]}
   >
     <View
       style={
@@ -585,6 +658,23 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
                   "scale": 0.5,
                 },
               ],
+            },
+          ]
+        }
+      />
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "bottom": -5,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": -5,
+            },
+            {
+              "borderRadius": 8,
             },
           ]
         }

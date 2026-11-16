@@ -289,31 +289,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
     <View
@@ -529,31 +504,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -830,31 +780,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
     <View
@@ -1035,31 +960,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -1336,31 +1236,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
     <View
@@ -1575,31 +1450,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -2054,31 +1904,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
     <View
@@ -2259,31 +2084,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -2540,31 +2340,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
     <View
@@ -2779,31 +2554,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>

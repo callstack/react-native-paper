@@ -115,31 +115,6 @@ exports[`applies a static transform from style 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 25,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -286,31 +261,6 @@ exports[`renders a square icon button 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 17,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -446,31 +396,6 @@ exports[`renders disabled icon button 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 25,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -580,31 +505,6 @@ exports[`renders extraLarge icon button 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 73,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -714,31 +614,6 @@ exports[`renders filled icon button 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 25,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -848,31 +723,6 @@ exports[`renders icon button by default 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 25,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -982,31 +832,6 @@ exports[`renders icon button with color 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 25,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1154,31 +979,6 @@ exports[`renders icon change animated 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 25,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1288,31 +1088,6 @@ exports[`renders outlined icon button 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 25,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1422,30 +1197,5 @@ exports[`renders tonal icon button 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "opacity": 0,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 25,
-        },
-      ]
-    }
-  />
 </View>
 `;

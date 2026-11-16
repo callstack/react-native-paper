@@ -18,16 +18,11 @@ import { getDimensions, getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
-import {
-  FOCUS_RING_INSET,
-  FOCUS_RING_THICKNESS,
-  webNoOutline,
-} from '../../utils/focusRing';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler, {
   carriesToggleState,
 } from '../../utils/hasTouchHandler';
-import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { useFocusRing } from '../../utils/useFocusRing';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
@@ -175,7 +170,6 @@ const IconButton = ({
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
   const [pressed, setPressed] = React.useState(false);
-  const [focused, setFocused] = React.useState(false);
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
 
@@ -214,10 +208,6 @@ const IconButton = ({
     transitionDuration: reduceMotion ? 0 : theme.motion.duration.short4,
     transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
   };
-  const focusRingRadiusStyle: CSSStyle<ViewStyle> = {
-    ...radiusStyle,
-    borderRadius: borderRadius + FOCUS_RING_INSET,
-  };
 
   const handlePressIn = (e: GestureResponderEvent) => {
     setPressed(true);
@@ -229,24 +219,32 @@ const IconButton = ({
     onPressOutProp?.(e);
   };
 
-  const handleFocus = (e: Parameters<NonNullable<typeof onFocusProp>>[0]) => {
-    if (isKeyboardFocusEvent(e)) {
-      setFocused(true);
-    }
-    onFocusProp?.(e);
-  };
-
-  const handleBlur = (e: Parameters<NonNullable<typeof onBlurProp>>[0]) => {
-    setFocused(false);
-    onBlurProp?.(e);
-  };
-
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
     onLongPress: rest.onLongPress,
     onPressIn: onPressInProp,
     onPressOut: onPressOutProp,
   });
+
+  // The ring goes on the clip view, around the outline, rather than on the
+  // touchable inside it. Off whenever the button can't be pressed, as on
+  // TouchableRipple.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !hasPassedTouchHandler,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
+
+  const handleFocus = (e: Parameters<NonNullable<typeof onFocusProp>>[0]) => {
+    onFocusProp?.(e);
+    focusTarget.onFocus?.(e);
+  };
+
+  const handleBlur = (e: Parameters<NonNullable<typeof onBlurProp>>[0]) => {
+    onBlurProp?.(e);
+    focusTarget.onBlur?.();
+  };
 
   // The touchable sits inside the outline, so it is smaller than the container.
   const touchableWidth = dimensions.width - 2 * borderWidth;
@@ -301,7 +299,9 @@ const IconButton = ({
             borderColor,
           },
           radiusStyle,
+          ...focusRing.style,
         ]}
+        {...focusRing.dataSetProps}
       >
         {backgroundOpacity < 1 && (
           <View
@@ -318,13 +318,15 @@ const IconButton = ({
           onPress={onPress}
           onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
           onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
+          focusRing="none"
+          theme={theme}
           onFocus={handleFocus}
           onBlur={handleBlur}
           aria-label={ariaLabel}
           style={[
             styles.touchable,
             touchableShapeStyle,
-            Platform.OS === 'web' ? webNoOutline : styles.clipToShape,
+            Platform.OS !== 'web' && styles.clipToShape,
             contentStyle,
           ]}
           role={isWebImage ? 'img' : role}
@@ -349,14 +351,6 @@ const IconButton = ({
           </View>
         </TouchableRipple>
       </Animated.View>
-      <Animated.View
-        style={[
-          styles.focusRing,
-          focused ? styles.focusRingVisible : styles.focusRingHidden,
-          { borderColor: theme.colors.secondary },
-          focusRingRadiusStyle,
-        ]}
-      />
     </Animated.View>
   );
 };
@@ -382,21 +376,6 @@ const styles = StyleSheet.create({
   },
   clipToShape: {
     overflow: 'hidden',
-  },
-  focusRing: {
-    position: 'absolute',
-    top: -FOCUS_RING_INSET,
-    left: -FOCUS_RING_INSET,
-    right: -FOCUS_RING_INSET,
-    bottom: -FOCUS_RING_INSET,
-    borderWidth: FOCUS_RING_THICKNESS,
-    pointerEvents: 'none',
-  },
-  focusRingVisible: {
-    opacity: 1,
-  },
-  focusRingHidden: {
-    opacity: 0,
   },
 });
 

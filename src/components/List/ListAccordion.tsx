@@ -248,6 +248,9 @@ const ListAccordion = ({
       <View style={{ backgroundColor: theme?.colors?.background }}>
         <TouchableRipple
           style={[styles.container, style]}
+          // A full-width row, like List.Item: an outward ring would run into
+          // the rows around it.
+          focusRing="inward"
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}

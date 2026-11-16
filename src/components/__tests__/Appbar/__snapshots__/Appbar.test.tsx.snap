@@ -294,31 +294,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
     <TextInput
       keyboardAppearance="light"
@@ -508,31 +483,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             </View>
           </View>
         </View>
-        <View
-          collapsable={false}
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "opacity": 0,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": 25,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -823,31 +773,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
   <View
     pointerEvents="box-none"
@@ -1086,31 +1011,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
 </View>
 `;
@@ -1360,31 +1260,6 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
 </View>
 `;
@@ -1634,31 +1509,6 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
 </View>
 `;
@@ -1908,31 +1758,6 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
 </View>
 `;
@@ -2190,31 +2015,6 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
 </View>
 `;

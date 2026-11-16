@@ -31,7 +31,6 @@ import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
-import { webNoOutline } from '../../utils/focusRing';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
@@ -500,6 +499,8 @@ const Checkbox = ({
         onBlur={handleBlur}
         {...interactionHandlers}
         borderless
+        // Checkbox draws its own circular ring around the state layer.
+        focusRing="none"
         // The platform press paints the wrong thing: it covers the whole 48dp
         // target instead of the 40dp state layer, tints with a neutral role,
         // and on web its hover overlay doubles up with the layer. Android also
@@ -580,6 +581,10 @@ const Checkbox = ({
     </View>
   );
 };
+
+// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 const styles = StyleSheet.create({
   // A definite size keeps a stretching parent from widening the container and

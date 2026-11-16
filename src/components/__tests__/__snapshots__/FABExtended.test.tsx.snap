@@ -122,8 +122,6 @@ exports[`renders extended FAB collapsed 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        onBlur={[Function]}
-        onFocus={[Function]}
         role="none"
         style={
           [
@@ -131,7 +129,6 @@ exports[`renders extended FAB collapsed 1`] = `
               "overflow": "hidden",
             },
             [
-              null,
               null,
             ],
           ]
@@ -231,29 +228,6 @@ exports[`renders extended FAB collapsed 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 21,
-            "opacity": 0,
-          },
-        ]
-      }
-    />
   </View>
   <View
     aria-hidden={true}
@@ -421,8 +395,6 @@ exports[`renders extended FAB expanded 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        onBlur={[Function]}
-        onFocus={[Function]}
         role="none"
         style={
           [
@@ -430,7 +402,6 @@ exports[`renders extended FAB expanded 1`] = `
               "overflow": "hidden",
             },
             [
-              null,
               null,
             ],
           ]
@@ -530,29 +501,6 @@ exports[`renders extended FAB expanded 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 21,
-            "opacity": 0,
-          },
-        ]
-      }
-    />
   </View>
   <View
     aria-hidden={true}
@@ -720,8 +668,6 @@ exports[`renders extended FAB large size 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        onBlur={[Function]}
-        onFocus={[Function]}
         role="none"
         style={
           [
@@ -729,7 +675,6 @@ exports[`renders extended FAB large size 1`] = `
               "overflow": "hidden",
             },
             [
-              null,
               null,
             ],
           ]
@@ -829,29 +774,6 @@ exports[`renders extended FAB large size 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 33,
-            "opacity": 0,
-          },
-        ]
-      }
-    />
   </View>
   <View
     aria-hidden={true}
@@ -1019,8 +941,6 @@ exports[`renders extended FAB medium size 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        onBlur={[Function]}
-        onFocus={[Function]}
         role="none"
         style={
           [
@@ -1028,7 +948,6 @@ exports[`renders extended FAB medium size 1`] = `
               "overflow": "hidden",
             },
             [
-              null,
               null,
             ],
           ]
@@ -1128,29 +1047,6 @@ exports[`renders extended FAB medium size 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-            "opacity": 0,
-          },
-        ]
-      }
-    />
   </View>
   <View
     aria-hidden={true}
@@ -1318,8 +1214,6 @@ exports[`renders extended FAB not visible 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        onBlur={[Function]}
-        onFocus={[Function]}
         role="none"
         style={
           [
@@ -1327,7 +1221,6 @@ exports[`renders extended FAB not visible 1`] = `
               "overflow": "hidden",
             },
             [
-              null,
               null,
             ],
           ]
@@ -1427,29 +1320,6 @@ exports[`renders extended FAB not visible 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 21,
-            "opacity": 0,
-          },
-        ]
-      }
-    />
   </View>
   <View
     aria-hidden={true}
@@ -1617,8 +1487,6 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
       <View
         accessible={true}
         aria-label="New message"
-        onBlur={[Function]}
-        onFocus={[Function]}
         role="none"
         style={
           [
@@ -1626,7 +1494,6 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
               "overflow": "hidden",
             },
             [
-              null,
               null,
             ],
           ]
@@ -1726,29 +1593,6 @@ exports[`renders extended FAB transitioning to collapsed 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 21,
-            "opacity": 0,
-          },
-        ]
-      }
-    />
   </View>
   <View
     aria-hidden={true}

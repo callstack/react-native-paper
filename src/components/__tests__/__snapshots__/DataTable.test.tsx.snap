@@ -662,31 +662,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
     <View
       collapsable={false}
@@ -828,31 +803,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
   </View>
 </View>
@@ -1052,31 +1002,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
     <View
       collapsable={false}
@@ -1218,31 +1143,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
     <View
       collapsable={false}
@@ -1384,31 +1284,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
     <View
       collapsable={false}
@@ -1550,31 +1425,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
   </View>
 </View>
@@ -1774,31 +1624,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
     <View
       collapsable={false}
@@ -1940,31 +1765,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
   </View>
 </View>
@@ -2475,31 +2275,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
     <View
       collapsable={false}
@@ -2641,31 +2416,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
     <View
       collapsable={false}
@@ -2807,31 +2557,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
     <View
       collapsable={false}
@@ -2973,31 +2698,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
   </View>
 </View>

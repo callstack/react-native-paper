@@ -94,6 +94,7 @@ const AppbarAction = ({
       disabled={disabled}
       aria-label={ariaLabel}
       animated
+      theme={theme}
       ref={ref}
       {...rest}
     />

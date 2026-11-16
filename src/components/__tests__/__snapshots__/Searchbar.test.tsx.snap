@@ -196,31 +196,6 @@ exports[`activity indicator snapshot test 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
   <TextInput
     keyboardAppearance="light"
@@ -649,31 +624,6 @@ exports[`renders searchbar in "view" mode 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
   <TextInput
     keyboardAppearance="light"
@@ -863,31 +813,6 @@ exports[`renders searchbar in "view" mode 1`] = `
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
   </View>
   <View
@@ -1114,31 +1039,6 @@ exports[`renders with placeholder 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
   <TextInput
     keyboardAppearance="light"
@@ -1328,31 +1228,6 @@ exports[`renders with placeholder 1`] = `
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
   </View>
 </View>
@@ -1554,31 +1429,6 @@ exports[`renders with text 1`] = `
         </View>
       </View>
     </View>
-    <View
-      collapsable={false}
-      style={
-        [
-          {
-            "borderWidth": 3,
-            "bottom": -5,
-            "left": -5,
-            "pointerEvents": "none",
-            "position": "absolute",
-            "right": -5,
-            "top": -5,
-          },
-          {
-            "opacity": 0,
-          },
-          {
-            "borderColor": "rgba(98, 91, 113, 1)",
-          },
-          {
-            "borderRadius": 25,
-          },
-        ]
-      }
-    />
   </View>
   <TextInput
     keyboardAppearance="light"
@@ -1764,31 +1614,6 @@ exports[`renders with text 1`] = `
           </View>
         </View>
       </View>
-      <View
-        collapsable={false}
-        style={
-          [
-            {
-              "borderWidth": 3,
-              "bottom": -5,
-              "left": -5,
-              "pointerEvents": "none",
-              "position": "absolute",
-              "right": -5,
-              "top": -5,
-            },
-            {
-              "opacity": 0,
-            },
-            {
-              "borderColor": "rgba(98, 91, 113, 1)",
-            },
-            {
-              "borderRadius": 25,
-            },
-          ]
-        }
-      />
     </View>
   </View>
 </View>
