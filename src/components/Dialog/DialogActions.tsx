@@ -33,8 +33,8 @@ export type Props = ViewProps & {
  *   return (
  *     <Dialog visible={visible} onDismiss={hideDialog}>
  *       <Dialog.Actions>
- *         <Button onPress={() => console.log('Cancel')}>Cancel</Button>
- *         <Button onPress={() => console.log('Ok')}>Ok</Button>
+ *         <Button mode="text" onPress={() => console.log('Cancel')}>Cancel</Button>
+ *         <Button mode="text" onPress={() => console.log('Ok')}>Ok</Button>
  *       </Dialog.Actions>
  *     </Dialog>
  *   );

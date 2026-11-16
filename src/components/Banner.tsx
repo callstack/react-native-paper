@@ -74,7 +74,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   maxFontSizeMultiplier?: number;
   style?: StyleProp<SurfaceStyle>;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */
@@ -256,7 +256,6 @@ const Banner = ({
             {actions.map(({ label, ...others }, i) => (
               <Button
                 key={i}
-                compact
                 mode="text"
                 style={styles.button}
                 textColor={colors.primary}

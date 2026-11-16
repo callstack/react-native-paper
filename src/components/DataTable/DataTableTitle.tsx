@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PixelRatio, Pressable, StyleSheet } from 'react-native';
+import { PixelRatio, Pressable, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableProps,
@@ -20,6 +20,9 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
+import hasTouchHandler, {
+  getNonControlA11yProps,
+} from '../../utils/hasTouchHandler';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
@@ -41,7 +44,12 @@ export type Props = PressableProps & {
    */
   numberOfLines?: number;
   /**
-   * Function to execute on press.
+   * Function to execute on press. Without it, `onLongPress`, `onPressIn`,
+   * `onPressOut` and `disabled`, the title renders as a plain view that isn't a
+   * control, and a press goes to its parent. To turn the title off at runtime,
+   * pass `disabled` instead of removing the handler: going between having a
+   * handler or `disabled` and having neither renders another element and
+   * remounts the children.
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
@@ -83,18 +91,25 @@ export type Props = PressableProps & {
  *
  * export default MyComponent;
  * ```
+ *
+ * @extends Pressable props https://reactnative.dev/docs/Pressable#props
  */
 
 const DataTableTitle = ({
   numeric,
   children,
   onPress,
+  onLongPress,
+  onPressIn,
+  onPressOut,
+  disabled: disabledProp,
   sortDirection,
   textStyle,
   style,
   theme: themeOverrides,
   numberOfLines = 1,
   maxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -131,36 +146,77 @@ const DataTableTitle = ({
     </Animated.View>
   ) : null;
 
-  return (
-    <Pressable
-      disabled={!onPress}
-      onPress={onPress}
-      {...rest}
-      style={[styles.container, numeric && styles.right, style]}
-    >
+  const cellStyle = [
+    styles.cell,
+    // height must scale with numberOfLines
+    { maxHeight: 24 * PixelRatio.getFontScale() * numberOfLines },
+    // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
+    numberOfLines > 1
+      ? numeric
+        ? direction === 'rtl'
+          ? styles.leftText
+          : styles.rightText
+        : styles.centerText
+      : {},
+    sortDirection ? styles.sorted : { color: alphaTextColor },
+    textStyle,
+  ];
+
+  const containerStyle = [styles.container, numeric && styles.right];
+
+  // Without a touch handler and without `disabled` this is a column heading,
+  // not a control, so it renders as a plain View instead of a Pressable that
+  // would be announced as a disabled control.
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
+  const isControl = hasPassedTouchHandler || Boolean(disabledProp);
+  const isInteractive = hasPassedTouchHandler && !disabledProp;
+
+  const content = (
+    <>
       {icon}
 
       <Text
-        style={[
-          styles.cell,
-          // height must scale with numberOfLines
-          { maxHeight: 24 * PixelRatio.getFontScale() * numberOfLines },
-          // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
-          numberOfLines > 1
-            ? numeric
-              ? direction === 'rtl'
-                ? styles.leftText
-                : styles.rightText
-              : styles.centerText
-            : {},
-          sortDirection ? styles.sorted : { color: alphaTextColor },
-          textStyle,
-        ]}
+        style={cellStyle}
         numberOfLines={numberOfLines}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
       >
         {children}
       </Text>
+    </>
+  );
+
+  if (!isControl) {
+    return (
+      <View
+        {...rest}
+        {...getNonControlA11yProps(rest)}
+        style={[...containerStyle, style]}
+      >
+        {content}
+      </View>
+    );
+  }
+
+  return (
+    <Pressable
+      {...rest}
+      onPress={onPress}
+      onLongPress={onLongPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      // `false`, not undefined, when enabled: on iOS and Android, Pressable
+      // lets a caller's aria-disabled stand when `disabled` is undefined
+      disabled={Boolean(disabledProp)}
+      // a touch target only for something that can be pressed
+      hitSlop={isInteractive ? hitSlop : undefined}
+      style={[...containerStyle, style]}
+    >
+      {content}
     </Pressable>
   );
 };

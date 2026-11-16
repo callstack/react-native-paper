@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import type { StyleProp, TextProps, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, TextProps, ViewStyle } from 'react-native';
 
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 
@@ -93,7 +93,7 @@ export const getAccordionColors = ({
 }: {
   theme: InternalTheme;
   isExpanded?: boolean;
-}) => {
+}): { descriptionColor: ColorValue; titleTextColor: ColorValue } => {
   const titleColor = theme.colors.onSurface;
 
   const descriptionColor = theme.colors.onSurfaceVariant;

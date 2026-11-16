@@ -41,7 +41,7 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    */
   isLeading?: boolean;
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */
@@ -61,7 +61,7 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
  *
  * const MyComponent = () => (
  *   <Appbar.Header>
- *      <Appbar.Content title="Title" subtitle={'Subtitle'} />
+ *      <Appbar.Content title="Title" />
  *       <Appbar.Action icon="magnify" onPress={() => {}} />
  *       <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
  *   </Appbar.Header>
