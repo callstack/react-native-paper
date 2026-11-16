@@ -21,5 +21,15 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 const customRender = (ui: React.ReactElement, options?: RenderOptions) =>
   render(ui, { wrapper: Wrapper, ...options });
 
+/**
+ * A focus or blur event that the element fired itself, for `fireEvent`. Native
+ * focus events bubble, and the focus ring ignores one whose `target` isn't the
+ * element it is attached to, so the event needs a matching pair.
+ */
+export const ownFocusEvent = () => {
+  const node = {};
+  return { nativeEvent: { target: 0 }, target: node, currentTarget: node };
+};
+
 export * from '@testing-library/react-native';
 export { customRender as render };

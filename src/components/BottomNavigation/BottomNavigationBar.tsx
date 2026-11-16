@@ -213,6 +213,8 @@ const Touchable = <Route extends BaseRoute>({
   borderless,
   centered,
   rippleColor,
+  focusRing,
+  theme,
   ...rest
 }: TouchableProps<Route>) =>
   TouchableRipple.supported ? (
@@ -222,6 +224,8 @@ const Touchable = <Route extends BaseRoute>({
       borderless={borderless}
       centered={centered}
       rippleColor={rippleColor}
+      focusRing={focusRing}
+      theme={theme}
       style={style}
     >
       {children}
@@ -574,6 +578,11 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               borderless: true,
               centered: true,
               rippleColor: 'transparent',
+              // Tabs fill the bar edge to edge and the bar clips
+              // (`overflow: 'hidden'`), so an outward ring would lose its top
+              // and bottom and read as two vertical lines between tabs.
+              focusRing: 'inward',
+              theme,
               onPress: () => onTabPress(eventForIndex(index)),
               onLongPress: () => onTabLongPress?.(eventForIndex(index)),
               testID: getTestID({ route }),

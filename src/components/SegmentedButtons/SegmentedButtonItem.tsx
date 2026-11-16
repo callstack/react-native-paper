@@ -212,6 +212,11 @@ const SegmentedButtonItem = ({
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
         borderless
+        // Inward, as in the MD3 segmented button accessibility spec: the ring
+        // sits on the segment's edge in its shape. Segments share borders, so
+        // an outward ring would cover the neighbouring segment. Material Web
+        // (labs) rings segments outward; MD3's own figure wins here.
+        focusRing="inward"
         onPress={onPress}
         aria-label={ariaLabel}
         aria-disabled={disabled}
