@@ -61,7 +61,7 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
  *
  * const MyComponent = () => (
  *   <Appbar.Header>
- *      <Appbar.Content title="Title" subtitle={'Subtitle'} />
+ *      <Appbar.Content title="Title" />
  *       <Appbar.Action icon="magnify" onPress={() => {}} />
  *       <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
  *   </Appbar.Header>
@@ -100,6 +100,7 @@ const AppbarAction = ({
       disabled={disabled}
       aria-label={ariaLabel}
       animated
+      theme={theme}
       ref={ref}
       {...rest}
     />

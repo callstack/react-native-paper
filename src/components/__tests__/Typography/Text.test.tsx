@@ -1,3 +1,6 @@
+import { View } from 'react-native';
+import type { Text as NativeText } from 'react-native';
+
 import { expect, it, jest } from '@jest/globals';
 
 import PaperProvider from '../../../core/PaperProvider';
@@ -268,6 +271,60 @@ it('animated text uses its fallback font at the top level and nests like text', 
   });
   expect(screen.getByTestId('theme-child-text')).toHaveStyle({
     color: 'green',
+  });
+});
+
+it('text inside a View inside a text renders like a top-level text', async () => {
+  await render(
+    <Text variant="headlineSmall" style={{ color: parentColor }}>
+      Parent{' '}
+      <View>
+        <Text testID="child-text">child in a View</Text>
+      </View>
+      <View>
+        <AnimatedText testID="animated-child-text">
+          animated child in a View
+        </AnimatedText>
+      </View>
+    </Text>
+  );
+
+  expect(screen.getByTestId('child-text')).toHaveStyle({
+    ...LightTheme.fonts.default,
+    color: LightTheme.colors.onSurface,
+  });
+  expect(screen.getByTestId('animated-child-text')).toHaveStyle({
+    ...LightTheme.fonts.bodyMedium,
+    color: LightTheme.colors.onSurface,
+  });
+});
+
+it("detects nesting like React Native's own Text and View", async () => {
+  // Nesting relies on React Native's unstable text ancestor context, so check
+  // it against the real components instead of the test mocks
+  const { default: RealText } = jest.requireActual<{
+    default: typeof NativeText;
+  }>('react-native/Libraries/Text/Text');
+  const { default: RealView } = jest.requireActual<{
+    default: typeof View;
+  }>('react-native/Libraries/Components/View/View');
+
+  await render(
+    <RealText style={{ color: parentColor }}>
+      Parent <Text testID="child-text">child</Text>
+      <RealView>
+        <Text testID="view-child-text">child in a View</Text>
+      </RealView>
+    </RealText>
+  );
+
+  expect(screen.getByTestId('child-text')).toHaveStyle({
+    fontFamily: undefined,
+    color: undefined,
+  });
+  expect(screen.getByTestId('view-child-text')).toHaveStyle({
+    ...LightTheme.fonts.default,
+    color: LightTheme.colors.onSurface,
   });
 });
 

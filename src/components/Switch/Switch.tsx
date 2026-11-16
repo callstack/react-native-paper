@@ -31,6 +31,7 @@ import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { StateOpacityKey, ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Icon, { type IconSource } from '../Icon';
 
 // React Native 0.87+ exports `KeyDownEvent` and `KeyUpEvent`, but its legacy
@@ -96,13 +97,9 @@ const {
 
 const { state: stateTokens } = tokens.md.sys;
 const stateOpacity = stateTokens.opacity;
-const { thickness: FOCUS_THICKNESS, outerOffset: FOCUS_OUTER_OFFSET } =
-  stateTokens.focusIndicator;
-const FOCUS_RING_INSET = -(FOCUS_OUTER_OFFSET + FOCUS_THICKNESS);
 // Every painted layer is smaller than the touch target and absolutely
 // positioned, so each one is centered against it.
 const centerY = (size: number) => (TOUCH_TARGET_SIZE - size) / 2;
-const TRACK_TOP = centerY(TRACK_HEIGHT);
 
 function restingHandleSize(checked: boolean, hasIcon: boolean): number {
   if (hasIcon) return ICON_HANDLE;
@@ -224,6 +221,17 @@ const Switch = ({
   );
 
   const colors = React.useMemo(() => getDefaultSwitchColors(theme), [theme]);
+
+  // `scope: 'descendant'`: the ring is drawn on the track, a child of this
+  // Pressable, not on the Pressable itself - it also suppresses the browser's
+  // own outline here on web, so only the track's ring shows. Like the handle's
+  // focus state, the ring shows only while the switch can be operated.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    !isInteractive,
+    colors.focusIndicatorColor,
+    'outward',
+    'descendant'
+  );
 
   const reanimatedReduceMotion = reduceMotion
     ? ReduceMotion.Always
@@ -378,10 +386,6 @@ const Switch = ({
     ],
   }));
 
-  const focusRingAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: isFocusShownSV.value,
-  }));
-
   const paint = resolveSwitchPaint(colors, isEnabled, checked);
   const stateLayerColor = checked
     ? colors.checkedStateLayerColor
@@ -451,10 +455,16 @@ const Switch = ({
         tabIndex={isInteractive ? 0 : -1}
         aria-readonly={Platform.OS === 'web' ? isAnnouncedReadOnly : undefined}
         onFocus={(e) => {
-          if (!isKeyboardFocusEvent(e)) return;
-          focusedSV.value = 1;
+          // Not the ring - it's real CSS on web now. This drives the
+          // handle's own separate focused-visual animation, native and web
+          // alike, so it keeps its own keyboard-vs-pointer check. It is
+          // tracked while the switch is not interactive, too, and shown only
+          // while it is (`isFocusShownSV`).
+          focusTarget.onFocus?.(e);
+          if (isKeyboardFocusEvent(e)) focusedSV.value = 1;
         }}
         onBlur={() => {
+          focusTarget.onBlur?.();
           focusedSV.value = 0;
           pressedSV.value = 0;
           spacePressedRef.current = false;
@@ -467,7 +477,7 @@ const Switch = ({
         testID={testID}
         style={[
           styles.touchable,
-          Platform.OS === 'web' ? webNoOutline : undefined,
+          ...focusTarget.style,
           // A read-only switch stays enabled on web, where React Native Web's
           // Pressable would take the press and stop the click from reaching a
           // row that owns it. Native platforms disable the Pressable instead.
@@ -475,12 +485,15 @@ const Switch = ({
             ? styles.nonInteractiveTouchable
             : undefined,
         ]}
+        {...focusTarget.dataSetProps}
       >
         <View
           style={[
             styles.track,
             { backgroundColor: paint.track, opacity: trackOpacityValue },
+            ...focusRing.style,
           ]}
+          {...focusRing.dataSetProps}
         >
           {showOutline ? (
             <View style={[styles.outline, { borderColor: paint.border }]} />
@@ -542,22 +555,6 @@ const Switch = ({
           </View>
         </Animated.View>
       ) : null}
-
-      <Animated.View
-        style={[
-          styles.focusRing,
-          {
-            borderColor: colors.focusIndicatorColor,
-            borderWidth: FOCUS_THICKNESS,
-            top: TRACK_TOP + FOCUS_RING_INSET,
-            left: FOCUS_RING_INSET,
-            right: FOCUS_RING_INSET,
-            bottom: TRACK_TOP + FOCUS_RING_INSET,
-            borderRadius: cornerFull,
-          },
-          focusRingAnimatedStyle,
-        ]}
-      />
     </View>
   );
 };
@@ -624,10 +621,6 @@ const styles = StyleSheet.create({
     height: SELECTED_ICON,
     pointerEvents: 'none',
   },
-  focusRing: {
-    position: 'absolute',
-    pointerEvents: 'none',
-  },
   absoluteFill: {
     position: 'absolute',
     top: 0,
@@ -636,9 +629,5 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
-
-// Web-only style; not in StyleSheet because `outline` is outside ViewStyle.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export default Switch;

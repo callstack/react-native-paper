@@ -6,9 +6,11 @@ import type { JsonElement, JsonNode } from 'test-renderer';
 
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
+import { tokens } from '../../theme/tokens';
 import Switch from '../Switch/Switch';
 
 const { colors } = LightTheme;
+const { focusIndicator } = tokens.md.sys.state;
 
 const element = (node: JsonNode | null | undefined): JsonElement => {
   if (typeof node !== 'object' || node === null) {
@@ -18,9 +20,9 @@ const element = (node: JsonNode | null | undefined): JsonElement => {
   return node;
 };
 
-// The state layer, handle and focus ring are decorative views with no role or
-// test ID. They render after the control in this order, and the handle fill
-// is the last view inside the handle.
+// The state layer and handle are decorative views with no role or test ID.
+// They render after the control in this order, and the handle fill is the
+// last view inside the handle.
 const getLayers = () => {
   const { children } = element(screen.toJSON());
   const handle = element(children[2]);
@@ -30,8 +32,35 @@ const getLayers = () => {
     stateLayer: getAnimatedStyle(element(children[1])),
     handle: getAnimatedStyle(handle),
     handleFill: getAnimatedStyle(element(handleChildren.at(-1))),
-    focusRing: getAnimatedStyle(element(children.at(-1))),
   };
+};
+
+// The focus ring is drawn on the track, the first child of the control. On
+// native it is an outline style that is set while the switch has keyboard
+// focus. On web the browser draws it with CSS on `:focus-visible`, so a test
+// can only check that the track carries the ring attribute.
+const expectFocusRing = (shown: boolean) => {
+  const track = screen.getByRole('switch').children[0];
+  if (typeof track !== 'object') {
+    throw new Error('Expected the track view');
+  }
+
+  if (Platform.OS === 'web') {
+    const ring = { focusRingDescendant: 'outward' };
+    if (shown) {
+      expect(track).toHaveProp('dataSet', ring);
+    } else {
+      expect(track).not.toHaveProp('dataSet', ring);
+    }
+    return;
+  }
+
+  const outline = { outlineWidth: focusIndicator.thickness };
+  if (shown) {
+    expect(track).toHaveStyle(outline);
+  } else {
+    expect(track).not.toHaveStyle(outline);
+  }
 };
 
 afterEach(() => {
@@ -127,7 +156,7 @@ describe('Switch focus state', () => {
       await fireEvent(screen.getByRole('switch'), 'focus');
       await jest.runAllTimersAsync();
 
-      expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
+      expectFocusRing(true);
       expect(getLayers().stateLayer).toMatchObject({ opacity: 0.1 });
       expect(getLayers().handleFill).toMatchObject({
         backgroundColor: focusedHandle,
@@ -136,7 +165,7 @@ describe('Switch focus state', () => {
       await fireEvent(screen.getByRole('switch'), 'blur');
       await jest.runAllTimersAsync();
 
-      expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+      expectFocusRing(false);
       expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
       expect(getLayers().handleFill).toMatchObject({
         backgroundColor: restingHandle,
@@ -152,13 +181,13 @@ describe('Switch focus state', () => {
       currentTarget: { matches: () => false },
     });
     await jest.runAllTimersAsync();
-    expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+    expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
 
     await fireEvent(screen.getByRole('switch'), 'focus', {
       currentTarget: { matches: () => true },
     });
     await jest.runAllTimersAsync();
-    expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
+    expect(getLayers().stateLayer).toMatchObject({ opacity: 0.1 });
   });
 
   it('paints no focus feedback when a read-only switch receives focus on web', async () => {
@@ -170,7 +199,7 @@ describe('Switch focus state', () => {
     });
     await jest.runAllTimersAsync();
 
-    expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+    expectFocusRing(false);
     expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
     expect(getLayers().handleFill).toMatchObject({
       backgroundColor: colors.onPrimary,
@@ -191,13 +220,13 @@ describe('Switch focus state', () => {
         <Switch value onValueChange={onValueChange} {...{ [prop]: true }} />
       );
       await jest.runAllTimersAsync();
-      expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+      expectFocusRing(false);
       expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
 
       await view.rerender(<Switch value onValueChange={onValueChange} />);
       await jest.runAllTimersAsync();
 
-      expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
+      expectFocusRing(true);
       expect(getLayers().stateLayer).toMatchObject({ opacity: 0.1 });
       expect(getLayers().handleFill).toMatchObject({
         backgroundColor: colors.primaryContainer,
@@ -218,7 +247,7 @@ describe('Switch focus state', () => {
     await view.rerender(<Switch value onValueChange={onValueChange} />);
     await jest.runAllTimersAsync();
 
-    expect(getLayers().focusRing).toMatchObject({ opacity: 0 });
+    expect(getLayers().stateLayer).toMatchObject({ opacity: 0 });
   });
 
   it('shows focus feedback on web once a switch focused while read-only becomes operable', async () => {
@@ -234,7 +263,8 @@ describe('Switch focus state', () => {
     await view.rerender(<Switch value onValueChange={onValueChange} />);
     await jest.runAllTimersAsync();
 
-    expect(getLayers().focusRing).toMatchObject({ opacity: 1 });
+    expectFocusRing(true);
+    expect(getLayers().stateLayer).toMatchObject({ opacity: 0.1 });
   });
 
   it.each(['disabled', 'readOnly'] as const)(

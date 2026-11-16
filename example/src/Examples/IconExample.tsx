@@ -4,7 +4,7 @@ import { Icon, List } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-const AssetIcon = ({ size, testID }: { size: number; testID: string }) => (
+const AssetIcon = ({ size, testID }: { size: number; testID?: string }) => (
   <Image
     accessibilityIgnoresInvertColors
     source={require('../../assets/images/paper-icon.png')}

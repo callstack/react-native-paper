@@ -183,9 +183,8 @@ const Checkbox = ({
 
   const visual = getSelectionVisualState({ ...selectionColors, disabled });
 
-  // `TouchableRipple` disables itself when nothing can handle a press, so
-  // attaching press handlers unconditionally would make a handler-less
-  // checkbox enabled and focusable while doing nothing.
+  // A handler-less checkbox would claim the touch and do nothing with it, so
+  // the press handlers stay off unless there is something to call.
   const isInteractive =
     !disabled &&
     hasTouchHandler({
@@ -500,6 +499,8 @@ const Checkbox = ({
         onBlur={handleBlur}
         {...interactionHandlers}
         borderless
+        // Checkbox draws its own circular ring around the state layer.
+        focusRing="none"
         // The platform press paints the wrong thing: it covers the whole 48dp
         // target instead of the 40dp state layer, tints with a neutral role,
         // and on web its hover overlay doubles up with the layer. Android also

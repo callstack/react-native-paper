@@ -55,7 +55,6 @@ exports[`Switch render renders disabled off 1`] = `
           "width": 52,
         },
         undefined,
-        undefined,
       ]
     }
     tabIndex={-1}
@@ -191,29 +190,6 @@ exports[`Switch render renders disabled off 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": 3,
-          "left": -5,
-          "right": -5,
-          "top": 3,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -271,7 +247,6 @@ exports[`Switch render renders disabled on 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
-        undefined,
         undefined,
       ]
     }
@@ -388,29 +363,6 @@ exports[`Switch render renders disabled on 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": 3,
-          "left": -5,
-          "right": -5,
-          "top": 3,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -468,7 +420,6 @@ exports[`Switch render renders off 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
-        undefined,
         undefined,
       ]
     }
@@ -588,29 +539,6 @@ exports[`Switch render renders off 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": 3,
-          "left": -5,
-          "right": -5,
-          "top": 3,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -668,7 +596,6 @@ exports[`Switch render renders on 1`] = `
           "justifyContent": "center",
           "width": 52,
         },
-        undefined,
         undefined,
       ]
     }
@@ -769,29 +696,6 @@ exports[`Switch render renders on 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": 3,
-          "left": -5,
-          "right": -5,
-          "top": 3,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -850,7 +754,6 @@ exports[`Switch render renders with checked icon 1`] = `
           "width": 52,
         },
         undefined,
-        undefined,
       ]
     }
     tabIndex={0}
@@ -1020,29 +923,6 @@ exports[`Switch render renders with checked icon 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": 3,
-          "left": -5,
-          "right": -5,
-          "top": 3,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1101,7 +981,6 @@ exports[`Switch render renders with per-state icons 1`] = `
           "width": 52,
         },
         undefined,
-        undefined,
       ]
     }
     tabIndex={0}
@@ -1271,28 +1150,5 @@ exports[`Switch render renders with per-state icons 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 9999,
-          "borderWidth": 3,
-          "bottom": 3,
-          "left": -5,
-          "right": -5,
-          "top": 3,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
