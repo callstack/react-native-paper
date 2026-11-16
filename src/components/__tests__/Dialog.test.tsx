@@ -158,6 +158,63 @@ describe('Dialog', () => {
     expect(element).toHaveStyle({ paddingTop: 24 });
   });
 
+  it('does not add a top margin to the content of an icon dialog without a title', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          icon={() => <Text>Icon</Text>}
+          content="This is simple dialog"
+          contentProps={{ testID: 'dialog-content' }}
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('dialog-content')).not.toHaveStyle({
+      marginTop: 24,
+    });
+  });
+
+  it('centers the title of a dialog with an icon', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          icon={() => <Text>Icon</Text>}
+          title="Alert"
+          titleProps={{ testID: 'dialog-title' }}
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('dialog-title')).toHaveStyle({
+      textAlign: 'center',
+    });
+  });
+
+  it('passes titleProps to the title', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          title="Alert"
+          titleProps={{
+            testID: 'dialog-title',
+            numberOfLines: 2,
+            style: { color: 'red' },
+          }}
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    const title = screen.getByTestId('dialog-title');
+
+    expect(title).toHaveProp('numberOfLines', 2);
+    expect(title).toHaveStyle({ color: 'red' });
+  });
+
   it('should keep the bottom padding on a content-first dialog', async () => {
     await render(
       <Portal.Host>

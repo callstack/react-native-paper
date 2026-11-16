@@ -608,7 +608,7 @@ const buttonRef = React.useRef<React.ComponentRef<typeof View>>(null);
 +<Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 ```
 
-The dialog now has the `dialog` role. Its accessible name is set automatically from the `title` prop. A string title is used as the `aria-label` on all platforms. Any other title is linked through `aria-labelledby`, which applies on web only. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
+The dialog now has the `dialog` role. Its accessible name is set automatically from the `title` prop. A string title is used as the `aria-label` on all platforms. Any other title is linked through `aria-labelledby`, which applies on web only, so on iOS and Android the dialog has no name unless you set `aria-label`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
 
 ```jsx
 <Dialog
@@ -649,7 +649,7 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
 - **`contentProps`** passes props to the internal `Dialog.Content` when `scrollable` is not enabled.
 - **`scrollAreaProps`** passes props to the internal `Dialog.ScrollArea` when `scrollable` is enabled.
 - **`scrollViewProps`** passes props to the internal `ScrollView` when `scrollable` is enabled.
-- **`aria-label`** overrides the title as the dialog's accessible name.
+- **`aria-label`** overrides the title as the dialog's accessible name. Set it when the `title` isn't a string, since iOS and Android can't use `aria-labelledby`.
 - **`aria-labelledby`** is the `nativeID` of an element that provides the dialog's accessible name. It takes precedence over the title and is applied on web only.
 
 ```tsx

@@ -39,14 +39,16 @@ export type Props = {
    */
   dismissAccessibilityLabel?: string;
   /**
-   * Accessible name for the dialog. Defaults to the text of `Dialog.Title`
-   * when the title is a string.
+   * Accessible name for the dialog. Defaults to the `title` when it is a
+   * string. With any other title, iOS and Android have no name unless you set
+   * this prop, because `aria-labelledby` is web-only.
    */
   'aria-label'?: string;
   /**
    * `nativeID` of the element that provides the accessible name for the dialog.
    * Only applied on web. Defaults to the dialog's title when no `aria-label`
-   * is set.
+   * is set. On iOS and Android, use `aria-label` to name a dialog with a
+   * non-string title.
    */
   'aria-labelledby'?: string;
   /**
