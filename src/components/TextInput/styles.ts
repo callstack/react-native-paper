@@ -72,6 +72,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginStart: TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
   },
+  leadingAccessoryRTL: {
+    marginStart: 0,
+    marginEnd: TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
+  },
+  trailingAccessoryRTL: {
+    marginEnd: 0,
+    marginStart: TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
+  },
   disabled: {
     opacity: tokens.md.sys.state.opacity.disabled,
   },

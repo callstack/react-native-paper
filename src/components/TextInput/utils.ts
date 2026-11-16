@@ -243,6 +243,7 @@ export const getSharedTextInputStyleData = (
     styles.supportingText,
     {
       color: supportingTextColor,
+      textAlign: isRTL && Platform.OS === 'web' ? 'right' : 'left',
       writingDirection: isRTL ? 'rtl' : 'ltr',
     },
     isDisabled && styles.disabled,
@@ -252,6 +253,7 @@ export const getSharedTextInputStyleData = (
     styles.counter,
     {
       color: supportingTextColor,
+      textAlign: isRTL && Platform.OS === 'web' ? 'left' : 'right',
       writingDirection: isRTL ? 'rtl' : 'ltr',
     },
     isDisabled && styles.disabled,
@@ -279,11 +281,13 @@ export const getSharedTextInputStyleData = (
 
   const leadingAccessoryStyles: StyleProp<ViewStyle> = [
     styles.leadingAccessory,
+    isRTL && Platform.OS === 'web' && styles.leadingAccessoryRTL,
     isDisabled && styles.disabled,
   ];
 
   const trailingAccessoryStyles: StyleProp<ViewStyle> = [
     styles.trailingAccessory,
+    isRTL && Platform.OS === 'web' && styles.trailingAccessoryRTL,
     isDisabled && styles.disabled,
   ];
 

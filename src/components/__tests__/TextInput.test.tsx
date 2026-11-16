@@ -1035,7 +1035,7 @@ it('applies RTL text alignment and writing direction to the TextInput (outlined)
   });
 });
 
-it('applies RTL writing direction to supporting text', async () => {
+it('applies RTL writing direction and start alignment to supporting text on native', async () => {
   I18nManager.isRTL = true;
 
   await render(
@@ -1048,6 +1048,7 @@ it('applies RTL writing direction to supporting text', async () => {
   );
 
   expect(screen.getByText('Hint', includeHiddenElements)).toHaveStyle({
+    textAlign: 'left',
     writingDirection: 'rtl',
   });
 });
