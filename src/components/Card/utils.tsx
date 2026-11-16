@@ -4,33 +4,9 @@ import type { InternalTheme } from '../../theme/types';
 
 type CardMode = 'elevated' | 'outlined' | 'contained';
 
-type BorderRadiusStyles = Pick<
-  ViewStyle,
-  Extract<keyof ViewStyle, `border${string}Radius`>
->;
-
 export type CardActionChildProps = {
   mode?: string;
   style?: StyleProp<ViewStyle>;
-};
-
-export const getCardCoverStyle = ({
-  theme,
-  borderRadiusStyles,
-}: {
-  theme: InternalTheme;
-  borderRadiusStyles: BorderRadiusStyles;
-}) => {
-  if (Object.keys(borderRadiusStyles).length > 0) {
-    return {
-      borderRadius: theme.shapes.corner.medium,
-      ...borderRadiusStyles,
-    };
-  }
-
-  return {
-    borderRadius: theme.shapes.corner.medium,
-  };
 };
 
 const getBorderColor = ({ theme }: { theme: InternalTheme }) => {

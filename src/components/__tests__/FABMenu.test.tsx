@@ -40,6 +40,37 @@ it('renders FAB.Menu open', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+// A trigger without onPress has nothing to open the menu with, so it is off
+// while closed. Turning it off instead of dropping its handler keeps the same
+// element, so its icons aren't remounted on every open and close.
+it('keeps the trigger mounted across opening and closing without trigger.onPress', async () => {
+  const onDismiss = jest.fn();
+  const trigger = { icon: 'plus', testID: 'trigger' };
+  const { rerender } = await render(
+    <FAB.Menu
+      expanded={false}
+      onDismiss={onDismiss}
+      trigger={trigger}
+      items={makeItems()}
+    />
+  );
+  const closed = screen.getByTestId('trigger');
+
+  expect(closed).toBeDisabled();
+
+  await rerender(
+    <FAB.Menu
+      expanded
+      onDismiss={onDismiss}
+      trigger={trigger}
+      items={makeItems()}
+    />
+  );
+
+  expect(screen.getByTestId('trigger')).toBe(closed);
+  expect(closed).not.toBeDisabled();
+});
+
 it('renders FAB.Menu with 6 items', async () => {
   const tree = (
     await render(

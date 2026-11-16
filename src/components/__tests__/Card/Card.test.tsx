@@ -5,10 +5,9 @@ import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { render, screen } from '../../../test-utils';
 import { LightTheme } from '../../../theme/schemes';
-import { Palette } from '../../../theme/tokens';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
-import { getCardColors, getCardCoverStyle } from '../../Card/utils';
+import { getCardColors } from '../../Card/utils';
 
 const styles = StyleSheet.create({
   customCoverRadius: {
@@ -47,13 +46,9 @@ describe('Card', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
-  it('renders an outlined card with custom border color', async () => {
+  it('renders the outline with the color passed to borderColor prop', async () => {
     const { toJSON } = await render(
-      <Card
-        mode="outlined"
-        accessibilityLabel="card"
-        style={{ borderColor: Palette.error50 }}
-      >
+      <Card mode="outlined" borderColor="red">
         {null}
       </Card>
     );
@@ -119,6 +114,21 @@ describe('Card', () => {
 });
 
 describe('CardCover', () => {
+  it('renders with the theme border radius by default', async () => {
+    await render(
+      <Card>
+        <Card.Cover
+          source={{ uri: 'https://picsum.photos/700' }}
+          testID="card-cover"
+        />
+      </Card>
+    );
+
+    expect(screen.getByTestId('card-cover').parent).toHaveStyle({
+      borderRadius: LightTheme.shapes.corner.medium,
+    });
+  });
+
   it('renders with custom border radius', async () => {
     await render(
       <Card>
@@ -130,7 +140,8 @@ describe('CardCover', () => {
       </Card>
     );
 
-    expect(screen.getByTestId('card-cover')).toHaveStyle(
+    // The border radius is applied to the container which clips the image
+    expect(screen.getByTestId('card-cover').parent).toHaveStyle(
       styles.customCoverRadius
     );
   });
@@ -242,26 +253,6 @@ describe('getCardColors - border color', () => {
         mode: undefined,
       })
     ).toMatchObject({ borderColor: LightTheme.colors.outline });
-  });
-});
-
-describe('getCardCoverStyle - border radius', () => {
-  it('should return custom border radius', () => {
-    expect(
-      getCardCoverStyle({
-        theme: LightTheme,
-        borderRadiusStyles: styles.customCoverRadius,
-      })
-    ).toMatchObject(styles.customCoverRadius);
-  });
-
-  it('should return correct border radius based on roundness, for theme version 3', () => {
-    expect(
-      getCardCoverStyle({
-        theme: LightTheme,
-        borderRadiusStyles: {},
-      })
-    ).toMatchObject({ borderRadius: LightTheme.shapes.corner.medium });
   });
 });
 

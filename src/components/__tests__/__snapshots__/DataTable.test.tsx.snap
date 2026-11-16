@@ -2,35 +2,7 @@
 
 exports[`DataTable.Cell renders data table cell 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     [
       false,
@@ -73,35 +45,7 @@ exports[`DataTable.Cell renders data table cell 1`] = `
 
 exports[`DataTable.Cell renders data table cell children without wrapping text component 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     [
       false,
@@ -132,38 +76,15 @@ exports[`DataTable.Cell renders data table cell children without wrapping text c
     }
   >
     <View
-      accessibilityLabel="Select row"
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": true,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-checked={true}
+      aria-disabled={false}
+      aria-label="Select row"
+      aria-live="polite"
       centered={true}
-      collapsable={false}
-      focusable={true}
+      focusable={false}
       onBlur={[Function]}
-      onClick={[Function]}
       onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       role="checkbox"
       style={
         [
@@ -337,35 +258,7 @@ exports[`DataTable.Cell renders data table cell children without wrapping text c
 
 exports[`DataTable.Cell renders data table cell with text content 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     [
       false,
@@ -409,35 +302,7 @@ exports[`DataTable.Cell renders data table cell with text content 1`] = `
 
 exports[`DataTable.Cell renders right aligned data table cell 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     [
       false,
@@ -497,35 +362,7 @@ exports[`DataTable.Header renders data table header 1`] = `
   }
 >
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       [
         {
@@ -578,35 +415,7 @@ exports[`DataTable.Header renders data table header 1`] = `
     </Text>
   </View>
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       [
         {
@@ -719,7 +528,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -760,10 +568,10 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -784,8 +592,14 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -837,7 +651,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -878,10 +691,10 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -902,8 +715,14 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1013,7 +832,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1054,10 +872,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1078,8 +896,14 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1131,7 +955,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1172,10 +995,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1196,8 +1019,14 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1249,7 +1078,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1290,10 +1118,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1314,8 +1142,14 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1367,7 +1201,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1408,10 +1241,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1432,8 +1265,14 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1543,7 +1382,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1584,10 +1422,10 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1608,8 +1446,14 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1661,7 +1505,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1702,10 +1545,10 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1726,8 +1569,14 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2148,7 +1997,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -2189,10 +2037,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -2213,8 +2061,14 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2266,7 +2120,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -2307,10 +2160,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -2331,8 +2184,14 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2384,7 +2243,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -2425,10 +2283,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -2449,8 +2307,14 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2502,7 +2366,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -2543,10 +2406,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -2567,8 +2430,14 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2752,35 +2621,7 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
 
 exports[`DataTable.Title renders data table title with sort icon 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     [
       {
@@ -2884,35 +2725,7 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
 
 exports[`DataTable.Title renders right aligned data table title 1`] = `
 <View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     [
       {

@@ -10,12 +10,14 @@ import type {
 
 import type { PressableProps } from './Pressable';
 import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
+import { IDLE_STATE, getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import hasTouchHandler from '../../utils/hasTouchHandler';
+import hasTouchHandler, {
+  getNonControlA11yProps,
+} from '../../utils/hasTouchHandler';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -31,8 +33,6 @@ export type Props = PressableProps & {
   onPressOut?: (e: GestureResponderEvent) => void;
   rippleColor?: ColorValue;
   underlayColor?: string;
-  children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
   theme?: ThemeProp;
 };
@@ -46,6 +46,7 @@ const TouchableRipple = ({
   underlayColor,
   children,
   theme: themeOverrides,
+  hitSlop,
   ref,
   ...rest
 }: Props) => {
@@ -61,7 +62,17 @@ const TouchableRipple = ({
     onPressOut,
   });
 
-  const disabled = disabledProp || !hasPassedTouchHandler;
+  // With no touch handler and no explicit disabled this is not a control, so it
+  // renders as a plain View. A Pressable is wrong here either way: keep the old
+  // disabled flag and it gets announced as a disabled control, drop the flag and
+  // it starts claiming the touch, swallowing taps meant for whatever wraps it.
+  const isControl = hasPassedTouchHandler || Boolean(disabledProp);
+  const isInteractive = hasPassedTouchHandler && !disabledProp;
+
+  // A touch target only for something that can be pressed, as on web. Android
+  // never makes a disabled view a touch target, but iOS does, and the plain
+  // View would take touches in its slop on both.
+  const effectiveHitSlop = isInteractive ? hitSlop : undefined;
 
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
@@ -78,24 +89,57 @@ const TouchableRipple = ({
   const useForeground =
     Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
 
+  // Keep the static form when possible: `Pressable` only tracks the pressed
+  // state when `children` or `style` is a function.
+  const resolveStyle = (
+    baseStyle: StyleProp<ViewStyle>
+  ): PressableProps['style'] =>
+    typeof style === 'function'
+      ? (state) => [baseStyle, style(state)]
+      : [baseStyle, style];
+
+  if (!isControl) {
+    const baseStyle = TouchableRipple.supported
+      ? useForeground && styles.overflowHidden
+      : borderless && styles.overflowHidden;
+
+    return (
+      <View
+        {...rest}
+        ref={ref}
+        {...getNonControlA11yProps(rest)}
+        style={[
+          baseStyle,
+          typeof style === 'function' ? style(IDLE_STATE) : style,
+        ]}
+      >
+        {resolveChildren(children, IDLE_STATE)}
+      </View>
+    );
+  }
+
   if (TouchableRipple.supported) {
-    const androidRipple = rippleEffectEnabled
-      ? (background ?? {
-          color: calculatedRippleColor,
-          borderless,
-          foreground: useForeground,
-        })
-      : undefined;
+    const androidRipple =
+      rippleEffectEnabled && isInteractive
+        ? (background ?? {
+            color: calculatedRippleColor,
+            borderless,
+            foreground: useForeground,
+          })
+        : undefined;
 
     return (
       <Pressable
         {...rest}
         ref={ref}
-        disabled={disabled}
-        style={[useForeground && styles.overflowHidden, style]}
+        disabled={Boolean(disabledProp)}
+        hitSlop={effectiveHitSlop}
+        style={resolveStyle(useForeground && styles.overflowHidden)}
         android_ripple={androidRipple}
       >
-        {React.Children.only(children)}
+        {typeof children === 'function'
+          ? (state) => resolveChildren(children, state)
+          : children}
       </Pressable>
     );
   }
@@ -104,12 +148,13 @@ const TouchableRipple = ({
     <Pressable
       {...rest}
       ref={ref}
-      disabled={disabled}
-      style={[borderless && styles.overflowHidden, style]}
+      disabled={Boolean(disabledProp)}
+      hitSlop={effectiveHitSlop}
+      style={resolveStyle(borderless && styles.overflowHidden)}
     >
-      {({ pressed }) => (
+      {(state) => (
         <>
-          {pressed && rippleEffectEnabled && (
+          {state.pressed && rippleEffectEnabled && isInteractive && (
             <View
               style={[
                 styles.underlay,
@@ -117,7 +162,7 @@ const TouchableRipple = ({
               ]}
             />
           )}
-          {React.Children.only(children)}
+          {resolveChildren(children, state)}
         </>
       )}
     </Pressable>

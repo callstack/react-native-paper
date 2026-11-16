@@ -10,6 +10,7 @@ React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-r
 
 The following props now accept animated styles returned from `useAnimatedStyle`. They no longer accept `Animated.Value` or `Animated.AnimatedInterpolation` where these were previously supported:
 
+- `Appbar` and `Appbar.Header`: `style`
 - `Appbar.Action` and `Appbar.BackAction`: `style`
 - `Badge`: `style`
 - `Banner`: `style`
@@ -57,6 +58,8 @@ You can use an elevation level from `0` to `5` instead. Changes to the elevation
 
 The following component style props no longer support overriding their background color or border radius:
 
+- `Appbar` and `Appbar.Header`
+- `Avatar.Icon`, `Avatar.Image` and `Avatar.Text`: background color
 - `Banner`
 - `Button`
 - `Card`
@@ -66,7 +69,17 @@ The following component style props no longer support overriding their backgroun
 - `Searchbar`
 - `Snackbar`
 
-You can use the component's color prop where available, or override the corresponding theme colors.
+You can use the component's color prop where available, or override the corresponding theme colors. See the component sections below for details.
+
+Components no longer read values from the `style` prop to derive other styles, since this is not possible with animated styles. The affected props have been replaced with dedicated props:
+
+- `Appbar` and `Appbar.Header`: `backgroundColor` and the border radius props (`borderRadius`, `borderTopLeftRadius` etc.) replace `style.backgroundColor` and the border radius in `style`
+- `Avatar.Icon`, `Avatar.Image` and `Avatar.Text`: `backgroundColor` replaces `style.backgroundColor`
+- `Button`: `iconSize` replaces `labelStyle.fontSize` for the size of the icon and the loading indicator
+- `Button`: `textColor` replaces `labelStyle.color` for the color of the icon and the loading indicator
+- `Card`: `borderColor` replaces `style.borderColor` for the outline color
+
+`Tooltip` no longer reads positioning styles from the wrapped element. Apply them to a parent `View` wrapping the `Tooltip`, see [Tooltip](#tooltip).
 
 ### Ripple color
 
@@ -90,6 +103,8 @@ TypeScript reports an error, and in JavaScript the prop is ignored. `FAB`, `FAB.
   <Text>Press me</Text>
 </TouchableRipple>
 ```
+
+Components built on `TouchableRipple` that extend its props still take `rippleColor`, such as `IconButton` (and so `Appbar.Action` and `TextInput.Icon`), `List.Item` and `DataTable.Row`.
 
 ### Test IDs
 
@@ -180,6 +195,23 @@ The theme types were renamed too:
 - **`MD3TypescaleKey`** → **`TypescaleKey`**
 - **`ThemeBase`** and **`MD2Theme`** were removed. Use `Theme` instead.
 
+`IconSource`, the type of icon props such as `IconButton`'s `icon`, isn't exported from the package root. You can get it from the root through `IconButtonProps`:
+
+```tsx
+import type { IconButtonProps } from 'react-native-paper';
+
+type IconSource = IconButtonProps['icon'];
+```
+
+If you import it from Paper's type declarations instead, the path changed:
+
+```diff
+-import type { IconSource } from 'react-native-paper/lib/typescript/components/Icon';
++import type { IconSource } from 'react-native-paper/lib/typescript/src/components/Icon';
+```
+
+`Icon`'s `source` prop now uses this type too, see [Icon](#icon).
+
 #### `MD3Colors`
 
 `MD3Colors` was renamed to `Palette`. It has every key `MD3Colors` had, such as `Palette.tertiary70`, plus new tones such as `primary98` and `neutral94`. The `neutral` tones from `neutral10` to `neutral99` are slightly different colors.
@@ -194,7 +226,7 @@ The theme types were renamed too:
 
 #### `roundness`
 
-The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme, and TypeScript only reports it in a theme object written inline in a `theme` prop.
+The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme, and TypeScript only reports it in a theme object written inline in a `theme` prop or typed as `Theme`.
 
 In 5.x, each of these components multiplied `roundness` by a fixed number, and the 6.x defaults match the 5.x corners with the default `roundness` of 4. To port a custom `roundness`, set each role to your `roundness` times its multiplier:
 
@@ -246,6 +278,33 @@ A component's `theme` prop is merged deeply, so you can set only the role you ne
  <PaperProvider theme={theme}>{children}</PaperProvider>;
 ```
 
+#### Removed keys
+
+The 6.x theme has no `version`, `isV3`, `mode` or `animation.defaultAnimationDuration` keys. Paper 6 only supports Material Design 3, so `version` and `isV3` have nothing to select, and `mode` and `defaultAnimationDuration` have no replacement. Remove `version: 3` and `isV3` from your custom theme objects:
+
+```diff
+ const theme = {
+   ...LightTheme,
+-  version: 3,
+-  isV3: true,
+   colors: {
+     ...LightTheme.colors,
+     primary: 'tomato',
+   },
+ };
+```
+
+As with `roundness`, Paper ignores these keys, and TypeScript only reports them in a theme object written inline in a `theme` prop or typed as `Theme`. Code that reads `theme.isV3` gets `undefined` once the key is gone, so a check like `theme.isV3 ? a : b` takes the Material Design 2 branch. Keep only the Material Design 3 branch.
+
+#### `configureFonts`
+
+`configureFonts` only takes `config` now. The `isV3` option is gone, and so are the Material Design 2 fonts that `configureFonts({ isV3: false })` returned. In JavaScript the option is ignored, so that call returns the Material Design 3 typescale.
+
+```diff
+-const fonts = configureFonts({ config: fontConfig, isV3: true });
++const fonts = configureFonts({ config: fontConfig });
+```
+
 ### Accessibility props
 
 Components now use React Native's `aria-*` props and `role` instead of the `accessibility*` props. `accessibilityLabel` is now `aria-label`, the `accessibilityRole` of `Button` is now `role`, and the `accessibilityState` of `FAB` and `Menu.Item` is now `aria-checked` and `aria-selected`.
@@ -270,6 +329,37 @@ Keys inside data objects changed the same way: the `routes` of `BottomNavigation
  ];
 ```
 
+### TouchableRipple without a press handler
+
+A `TouchableRipple`, and anything built on it, is no longer a disabled control when it has no touch handler. Without `onPress`, `onLongPress`, `onPressIn` or `onPressOut`, and without `disabled`, it renders a plain view: assistive tech doesn't announce it as disabled, it isn't a keyboard stop, and it never takes the press, so a `Pressable` around it gets it. On Android and iOS a wrapping `Pressable` already got the press, except around a read-only radio (see below). On web it's new for components with the `button` role, such as `Button`, `Chip`, `IconButton` and `FAB`, which used to stop the press. `DataTable.Title` works the same way.
+
+Without a handler or `disabled`, an activatable role becomes `none`: a `role` or `accessibilityRole` of `button`, `link`, `menuitem` or `tab`, and an `accessibilityRole` of `imagebutton` or `togglebutton`. The role stays when the touchable reports a toggle state with `aria-checked`, `aria-pressed` or `accessibilityState.checked`, also when the value is `false`. A selection doesn't keep the role: Android and iOS still report it, and on web `aria-selected` is dropped with the role. Every other role, such as `checkbox`, `radio` or `switch`, stays too, so a read-only `Checkbox` is still a checkbox and keeps its state.
+
+```tsx
+// Still a toggle (pressed on web, checked on Android and iOS),
+// but does nothing when activated
+<Button mode="outlined" selected>Bold</Button>
+// No longer a button; still reports selected on Android and iOS
+<Chip selected>Info</Chip>
+```
+
+On web, an `IconButton` or icon-only `FAB` labelled with `aria-label`, with no handler, no `disabled` and no toggle state, is an image named by its label, since the plain view there can't carry a name. An image can't carry a selection either, so its `aria-selected` is dropped too.
+
+`hitSlop` applies only to a touchable that can be pressed. Without a handler, or with `disabled`, a touchable takes no touches outside its bounds, so it doesn't take them from its neighbors.
+
+`RadioButton`, `RadioButton.Android`, `RadioButton.IOS` and `RadioButton.Item` with no press handler and no `RadioButton.Group` no longer take the press. They stay read-only radios, a row around them gets the press, and on web they're no longer a tab stop.
+
+To have something look and announce disabled, pass `disabled`, which keeps the control and its role. Pass it to switch interactivity off at runtime too, instead of removing `onPress`. A touchable renders another element whenever it goes between having a handler or `disabled` and having neither, so its children remount and lose their state and focus. That includes toggling `disabled` on a touchable with no handler. `FAB.Menu` does this for its trigger: a trigger without `onPress` is a disabled button while the menu is closed, so it keeps its element when the menu opens.
+
+```diff
+-<Button onPress={isSaving ? undefined : save}>Save</Button>
++<Button onPress={save} disabled={isSaving}>Save</Button>
+```
+
+App tests change with it: a display-only element is no longer found by a role it lost, such as `button`, and is no longer disabled. Find it by its text or label instead.
+
+In a disabled `TextInput`, every `TextInput.Icon` takes the disabled color, also over `iconColor` and the error color. One with a handler is a disabled `IconButton`, and an `opacity` in its `style` doesn't apply.
+
 ### Libraries built on Paper
 
 Libraries built on Paper may not support 6.x yet. For example, `react-native-paper-dates` 0.24.1 still uses `HelperText`, the 5.x theme exports and `theme.roundness`, so its `DatePickerInput` crashes when it shows a validation error.
@@ -285,9 +375,66 @@ Libraries built on Paper may not support 6.x yet. For example, `react-native-pap
 +<Appbar.Content title="Inbox" />
 ```
 
-The `style` props for `Appbar` and `Appbar.Header` no longer accept `Animated.Value` or `Animated.AnimatedInterpolation`. They only accept static styles.
+- The `style` props for `Appbar` and `Appbar.Header` no longer configure the background color or border radius. Use the `backgroundColor` prop and the border radius props (`borderRadius`, `borderTopLeftRadius`, `borderCurve` etc.) instead.
+- The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+- The default height of `Appbar` now includes the `safeAreaInsets`, so the content area keeps the height of the selected `mode`.
+- The `height` specified in `style` for `Appbar.Header` now includes the status bar height. Previously, the status bar height was added to it automatically.
 
-The `style.elevation` property is no longer supported. Use the `elevated` prop to control Appbar elevation.
+e.g.:
+
+```diff
+<Appbar.Header
+- style={{ backgroundColor: 'red', borderBottomLeftRadius: 16 }}
++ backgroundColor="red"
++ borderBottomLeftRadius={16}
+>
+  <Appbar.Content title="Title" />
+</Appbar.Header>
+```
+
+To keep the height of the content row when setting `height` in `style`, add the top inset from `useSafeAreaInsets()` of `react-native-safe-area-context`:
+
+```diff
++const { top } = useSafeAreaInsets();
++
+<Appbar.Header
+- style={{ height: 80 }}
++ style={{ height: 80 + top }}
+>
+  <Appbar.Content title="Title" />
+</Appbar.Header>
+```
+
+### Avatar
+
+The `style` prop for `Avatar.Icon`, `Avatar.Image` and `Avatar.Text` no longer configures the background color. Use the `backgroundColor` prop instead. The text or icon color is still derived from the background color unless `color` is specified.
+
+e.g.:
+
+```diff
+<Avatar.Text
+  label="XD"
+- style={{ backgroundColor: 'red' }}
++ backgroundColor="red"
+/>
+```
+
+### Tooltip
+
+`Tooltip` no longer reads positioning styles such as `position: 'absolute'` from the `style` of the wrapped element. Apply them to a parent `View` wrapping the `Tooltip` instead.
+
+e.g.:
+
+```diff
+- <Tooltip title="Add">
+-   <FAB icon="plus" style={{ position: 'absolute', right: 16, bottom: 16 }} />
+- </Tooltip>
++ <View style={{ position: 'absolute', right: 16, bottom: 16 }}>
++   <Tooltip title="Add">
++     <FAB icon="plus" />
++   </Tooltip>
++ </View>
+```
 
 ### Surface
 
@@ -396,6 +543,30 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`,
 
 Previously, the Android back button dismissed the modal when `dismissable` was `true`, even if `dismissableBackButton` was `false`. The `dismissableBackButton` prop can now prevent the modal from being dismissed via the back button independently of the `dismissable` prop.
 
+The Escape key on web now dismisses the modal too, and `dismissableBackButton` controls it together with the back button. When several modals are open, back and Escape dismiss only the topmost one. When `dismissableBackButton` is `false`, back is absorbed and nothing is dismissed, rather than passed on to the content behind the modal. Escape dismisses nothing either, but it still reaches your own key handlers. A handler that calls `preventDefault()` on the key keeps the modal open. Escape also works while a text field has focus, and is ignored while an input method editor (IME) composition is active.
+
+Opening a modal now moves focus into it, and closing it hands focus back:
+
+- **Web:** focus returns to the element that had it before the modal opened. With `restoreFocusRef`, it goes there instead, unless that element is gone by then, such as a list row the modal deleted. Then focus returns to the element that had it before.
+- **iOS and Android:** focus comes back only with `restoreFocusRef`. Without it, nothing is restored.
+
+You can choose the elements with the new `initialFocusRef` and `restoreFocusRef` props. They accept the ref of any element or component with a `focus()` method, such as a `TextInput`. A component handle has `focus()` called. On iOS, a host element such as a `View` or `Pressable` gets screen reader focus, not keyboard focus. TalkBack on Android doesn't follow these props: when the modal opens, it moves its focus to the first element inside the modal by itself:
+
+```tsx
+const inputRef = React.useRef<TextInputHandles>(null);
+const buttonRef = React.useRef<React.ComponentRef<typeof View>>(null);
+
+<Modal
+  visible={visible}
+  onDismiss={hideModal}
+  aria-label="Rename file"
+  initialFocusRef={inputRef}
+  restoreFocusRef={buttonRef}
+>
+  <TextInput ref={inputRef} label="Name" />
+</Modal>;
+```
+
 ### Dialog
 
 `Dialog` now uses a `Portal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Dialog`:
@@ -420,6 +591,8 @@ The dialog now has the `dialog` role. On web, the dialog's accessible name is se
   </Dialog.Content>
 </Dialog>
 ```
+
+`Dialog` follows the same back button, Escape key and focus behavior as `Modal`, including the `initialFocusRef` and `restoreFocusRef` props. As with `Modal`, focus returns on iOS and Android only when you pass `restoreFocusRef`.
 
 When the dialog is `dismissable`, screen reader users can dismiss it with a visually hidden button inside the dialog. You can change the button's accessibility label with the new `dismissAccessibilityLabel` prop.
 
@@ -460,6 +633,10 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 </Menu>
 ```
 
+On web, a menu now closes on the Escape key when it is pressed down, instead of when it is released. Back and Escape dismiss only the topmost overlay, so a menu opened from a `Modal` or `Dialog` closes first and leaves the modal open.
+
+On Android, an open menu now also keeps the back press: it calls `onDismiss`, and the screen behind no longer goes back. Previously the press reached that screen as well. Without an `onDismiss`, the menu leaves the press to whatever is underneath, so pass one to close the menu on back.
+
 ### Searchbar
 
 The misspelled `traileringIcon` props have been renamed:
@@ -481,6 +658,20 @@ The misspelled `traileringIcon` props have been renamed:
 + onTrailingIconPress={onMicrophonePress}
 />
 ```
+
+### Chip
+
+The close button (`onClose`) now fills the trailing 34dp column reserved for it, instead of only the 26x18 area around its icon, and its touch target extends to 48dp in height. Taps in that column that used to activate the chip's `onPress` now activate `onClose`.
+
+### IconButton
+
+Corner radii set through `style` no longer shape the press, hover and disabled feedback.
+
+### TouchableRipple
+
+`borderless` has no effect on web. The web ripple is always clipped to the touchable's shape, including when `centered` is set, and the touchable no longer clips its own content. A child that needs a clipped or rounded shape should carry that shape itself.
+
+`hitSlop` now works on web: the touchable renders an invisible target that extends past its bounds. An ancestor with `overflow: 'hidden'` or a scroll view clips it, as on Android.
 
 ### TextInput
 
@@ -557,27 +748,36 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 />
 ```
 
+A `HelperText` that isn't tied to one input, such as an error under a group of inputs, has no `supportingText` to move to. Render a `Text` in the theme's error color instead:
+
+```tsx
+import { Text, useTheme } from 'react-native-paper';
+
+const GroupError = ({ visible }: { visible: boolean }) => {
+  const { colors } = useTheme();
+
+  if (!visible) {
+    return null;
+  }
+
+  return (
+    <Text variant="bodySmall" style={{ color: colors.error }}>
+      Enter at least one phone number
+    </Text>
+  );
+};
+```
+
 #### Removed props
 
 No direct `TextInput` equivalents for:
 
-- **`dense`**, **`contentStyle`**, **`underlineStyle`**
+- **`dense`**, **`contentStyle`**, **`underlineStyle`**, **`outlineStyle`**
 - **`underlineColor`**, **`activeUnderlineColor`**, **`outlineColor`**, **`activeOutlineColor`**, **`textColor`**
 
 Use **`style`** on the inner input and the **`theme`** for colors.
 
 ```tsx
-import { LightTheme, TextInput } from 'react-native-paper';
-
-const theme = {
-  ...LightTheme,
-  colors: {
-    ...LightTheme.colors,
-    outline: '#79747E',
-    primary: '#6750A4',
-  },
-};
-
 // Before (v5)
 <TextInput
   dense
@@ -595,12 +795,22 @@ const theme = {
   textColor="#1C1B1F"
   style={{ fontSize: 16 }}
 />
+```
+
+```tsx
+import { LightTheme, TextInput } from 'react-native-paper';
+
+const theme = {
+  ...LightTheme,
+  colors: {
+    ...LightTheme.colors,
+    outline: '#79747E',
+    primary: '#6750A4',
+  },
+};
 
 // After (v6)
-<TextInput
-  theme={theme}
-  style={{ fontSize: 16, color: '#1C1B1F' }}
-/>
+<TextInput theme={theme} style={{ fontSize: 16, color: '#1C1B1F' }} />;
 ```
 
 ### Button
@@ -738,6 +948,14 @@ below `minHeight` has no effect.
 </Button>
 ```
 
+#### Label style
+
+- `labelStyle={{ fontSize }}` no longer changes the icon size. The icon follows
+  `size`; use the `iconSize` prop to change the size of the icon and the
+  loading indicator.
+- `labelStyle={{ color }}` no longer changes the color of the icon and the
+  loading indicator. Use the `textColor` prop instead.
+
 #### Appearance changes
 
 These need no code change, but the rendering differs:
@@ -752,8 +970,6 @@ These need no code change, but the rendering differs:
   wider: **16dp** of horizontal padding at the default `small` size instead of
   **8dp**, and a **64dp** minimum width.
 - The default icon size is **20dp**, up from **18dp**.
-- `labelStyle={{ fontSize }}` no longer changes the icon size. The icon follows
-  `size`; set both if you need them to match.
 - The resting corner is the full pill radius instead of a fixed **20dp**.
 - At the default `small` size, the horizontal padding is **16dp** for every
   mode. In 5.x, the label margins were **24dp** for `filled`, `tonal`,
@@ -836,6 +1052,20 @@ We have also added a `direction` prop to the `Card` component, which lets you ar
 </Card>
 ```
 
+#### Outline color
+
+The `borderColor` in `style` no longer changes the outline color in `outlined` mode. Use the `borderColor` prop instead:
+
+```diff
+<Card
+  mode="outlined"
+- style={{ borderColor: 'red' }}
++ borderColor="red"
+>
+  <Card.Content>...</Card.Content>
+</Card>
+```
+
 #### `Card.Cover`
 
 The `style` prop of `Card.Cover` is now typed as a `View` style. Image style properties such as `resizeMode` or `tintColor` were never applied, so pass them as `Image` props instead:
@@ -844,6 +1074,8 @@ The `style` prop of `Card.Cover` is now typed as a `View` style. Image style pro
 - <Card.Cover source={cover} style={{ resizeMode: 'contain' }} />
 + <Card.Cover source={cover} resizeMode="contain" />
 ```
+
+`Card.Cover` no longer applies the border radius from `style` to the image directly. The image is clipped by the container, so any border radius passed in `style` still applies.
 
 #### `Card.Actions`
 
@@ -1093,4 +1325,30 @@ A standalone `Checkbox` has no visible label, so it now warns in development whe
 +  onValueChange={setValue}
 +  theme={{ colors: { primary: 'tomato' } }}
 +/>
+```
+
+### Icon
+
+`Icon`'s `source` prop is typed as `IconSource` instead of `any`, so a value that isn't an icon name, an image source or a render function, such as a boolean or `undefined`, is now a type error. `Icon` still renders nothing for those values.
+
+If you pass a field that can be `undefined`, such as an optional `focusedIcon` on a route in `BottomNavigation`'s `renderIcon`, check it first:
+
+```diff
+-renderIcon={({ route, color }) => (
+-  <Icon source={route.focusedIcon} color={color} size={24} />
+-)}
++renderIcon={({ route, color }) =>
++  route.focusedIcon ? (
++    <Icon source={route.focusedIcon} color={color} size={24} />
++  ) : null
++}
+```
+
+A render function's props are now typed as what `Icon` passes: `size`, `color`, `direction` and `testID`. For an icon that isn't directional, `direction` is now `'ltr'`, where 5.x passed `null`, and the `icon` function in `PaperProvider`'s `settings` gets `'ltr'` too. Paper's own icons look the same, since they only flip for `'rtl'`.
+
+`testID` is optional (`testID?: string`) in those props, so if you typed your render function's props with a required `testID: string`, you now get a type error. Make it optional:
+
+```diff
+-const renderIcon = ({ size, testID }: { size: number; testID: string }) => (
++const renderIcon = ({ size, testID }: { size: number; testID?: string }) => (
 ```

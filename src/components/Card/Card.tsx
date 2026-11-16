@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import type {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   ViewProps,
@@ -86,6 +87,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   elevation?: Elevation;
   /**
+   * Color of the outline in `outlined` mode.
+   */
+  borderColor?: ColorValue;
+  /**
    * Style of card's content.
    */
   contentStyle?: StyleProp<ViewStyle>;
@@ -151,6 +156,7 @@ const Card = ({
   children,
   style,
   contentStyle,
+  borderColor: customBorderColor,
   theme: themeOverrides,
   testID,
   accessible,
@@ -198,12 +204,7 @@ const Card = ({
     mode: cardMode,
   });
 
-  // TODO: Remove together with StyleSheet.flatten in #5114.
-  const flattenedStyles =
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    StyleSheet.flatten(style as StyleProp<ViewStyle>) || {};
-
-  const { borderColor = themedBorderColor } = flattenedStyles;
+  const borderColor = customBorderColor ?? themedBorderColor;
 
   const borderRadius = theme.shapes.corner.medium;
 
@@ -236,7 +237,7 @@ const Card = ({
       ref={ref}
       borderRadius={borderRadius}
       backgroundColor={!isMode('elevated') ? backgroundColor : undefined}
-      style={[{ borderColor }, style]}
+      style={style}
       theme={theme}
       elevation={elevation}
       testID={hasPassedTouchHandler ? undefined : testID}
