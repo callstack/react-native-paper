@@ -309,7 +309,7 @@ As with `roundness`, Paper ignores these keys, and TypeScript only reports them 
 
 Components now use React Native's `aria-*` props and `role` instead of the `accessibility*` props. `accessibilityLabel` is now `aria-label`, the `accessibilityRole` of `Button` is now `role`, and the `accessibilityState` of `FAB` and `Menu.Item` is now `aria-checked` and `aria-selected`.
 
-`Checkbox.Item`, `RadioButton.Item`, `FAB`, `Menu.Item`, `List.Accordion` and `Switch` no longer accept `accessibilityLabel`, so TypeScript reports an error. Components whose props extend React Native's view props, such as `Button`, `Chip` and `DataTable.Pagination`, still compile with the old props, but pass them to their outer container instead of the element they used to label.
+`Checkbox.Item`, `RadioButton.Item`, `FAB`, `Menu.Item`, `List.Accordion` and `Switch` no longer accept `accessibilityLabel`, so TypeScript reports an error. Components whose props extend React Native's view props, such as `Chip` and `DataTable.Pagination`, still compile with the old props, but pass them to their outer container instead of the element they used to label.
 
 Props that label a part of a component keep their names, e.g. `closeIconAccessibilityLabel` on `Chip` and `dismissAccessibilityLabel` on `Modal`.
 

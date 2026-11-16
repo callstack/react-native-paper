@@ -329,6 +329,108 @@ it('exposes the accessibility hint', async () => {
   expect(screen.getByRole('button')).toHaveProp('accessibilityHint', 'hint');
 });
 
+describe('accessibility props', () => {
+  it('exposes accessibilityLabel, accessibilityState and loading on the button only', async () => {
+    await render(
+      <Button
+        accessibilityLabel="Save draft"
+        accessibilityState={{ expanded: false }}
+        loading
+        onPress={() => {}}
+      >
+        Save
+      </Button>
+    );
+
+    expect(
+      screen.getByRole('button', {
+        name: 'Save draft',
+        expanded: false,
+        busy: true,
+      })
+    ).toBeOnTheScreen();
+    expect(screen.root).not.toHaveProp('accessibilityLabel');
+    expect(screen.root).not.toHaveProp('accessibilityState');
+    // The button itself is busy, so the indicator is hidden.
+    expect(screen.queryByRole('progressbar')).not.toBeOnTheScreen();
+    expect(
+      screen.getByRole('progressbar', { includeHiddenElements: true })
+    ).toBeOnTheScreen();
+  });
+
+  it('exposes aria-* states on the button, ahead of accessibilityState', async () => {
+    await render(
+      <Button
+        aria-expanded
+        aria-busy={false}
+        aria-selected
+        aria-checked="mixed"
+        accessibilityState={{ expanded: false, busy: true }}
+        onPress={() => {}}
+      >
+        Save
+      </Button>
+    );
+
+    const button = screen.getByRole('button', {
+      name: 'Save',
+      expanded: true,
+      busy: false,
+      selected: true,
+    });
+    // `getByRole` filters `checked` for checkable roles only.
+    expect(button).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: 'mixed' })
+    );
+    expect(screen.root).not.toHaveProp('accessibilityState');
+  });
+
+  // On Android, React Native puts "busy" into the content description, which
+  // TalkBack reads instead of the button's text, so a loading button without
+  // a label is labelled by its text there.
+  it('labels a loading button by its text on Android', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+
+    await render(
+      <Button loading onPress={() => {}}>
+        Uploading {3} files
+      </Button>
+    );
+
+    expect(screen.getByRole('button', { busy: true })).toHaveProp(
+      'accessibilityLabel',
+      'Uploading 3 files'
+    );
+  });
+
+  it('leaves the name of a loading button to content that is not only text on Android', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+
+    await render(
+      <Button loading onPress={() => {}}>
+        <>Uploading</>
+      </Button>
+    );
+
+    // The busy state is left out, so TalkBack reads the content.
+    expect(screen.getByRole('button', { busy: false })).not.toHaveProp(
+      'accessibilityLabel'
+    );
+  });
+
+  it('uses a given accessibilityRole instead of the default button role', async () => {
+    await render(
+      <Button accessibilityRole="link" onPress={() => {}}>
+        Docs
+      </Button>
+    );
+
+    expect(screen.getByRole('link', { name: 'Docs' })).toBeOnTheScreen();
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+  });
+});
+
 it('should execute onPressIn', async () => {
   const onPressInMock = jest.fn();
   const onPress = jest.fn();
