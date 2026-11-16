@@ -98,36 +98,10 @@ exports[`renders chip with close button 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={false}
+    role="none"
     style={
       [
         {
@@ -261,11 +235,12 @@ exports[`renders chip with close button 1`] = `
   <View
     style={
       {
-        "height": "100%",
+        "bottom": 0,
         "maxWidth": "50%",
         "minWidth": 26,
         "position": "absolute",
         "right": 0,
+        "top": 0,
         "width": 34,
       }
     }
@@ -313,11 +288,12 @@ exports[`renders chip with close button 1`] = `
       style={
         [
           {
-            "height": "100%",
+            "flex": 1,
             "justifyContent": "center",
-            "width": "100%",
           },
-          undefined,
+          {
+            "borderRadius": 8,
+          },
         ]
       }
     >
@@ -334,6 +310,12 @@ exports[`renders chip with close button 1`] = `
             {
               "marginRight": 0,
               "padding": 0,
+            },
+            {
+              "alignItems": "center",
+              "height": 20,
+              "justifyContent": "center",
+              "width": 20,
             },
           ]
         }
@@ -367,6 +349,23 @@ exports[`renders chip with close button 1`] = `
         >
           close
         </Text>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "borderRadius": 10,
+              },
+            ]
+          }
+        />
       </View>
     </View>
   </View>
@@ -471,36 +470,10 @@ exports[`renders chip with custom close button 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={false}
+    role="none"
     style={
       [
         {
@@ -634,11 +607,12 @@ exports[`renders chip with custom close button 1`] = `
   <View
     style={
       {
-        "height": "100%",
+        "bottom": 0,
         "maxWidth": "50%",
         "minWidth": 26,
         "position": "absolute",
         "right": 0,
+        "top": 0,
         "width": 34,
       }
     }
@@ -686,11 +660,12 @@ exports[`renders chip with custom close button 1`] = `
       style={
         [
           {
-            "height": "100%",
+            "flex": 1,
             "justifyContent": "center",
-            "width": "100%",
           },
-          undefined,
+          {
+            "borderRadius": 8,
+          },
         ]
       }
     >
@@ -707,6 +682,12 @@ exports[`renders chip with custom close button 1`] = `
             {
               "marginRight": 0,
               "padding": 0,
+            },
+            {
+              "alignItems": "center",
+              "height": 20,
+              "justifyContent": "center",
+              "width": 20,
             },
           ]
         }
@@ -740,6 +721,23 @@ exports[`renders chip with custom close button 1`] = `
         >
           arrow-down
         </Text>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "borderRadius": 10,
+              },
+            ]
+          }
+        />
       </View>
     </View>
   </View>
@@ -844,36 +842,10 @@ exports[`renders chip with icon 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={false}
+    role="none"
     style={
       [
         {
@@ -1545,36 +1517,10 @@ exports[`renders selected chip 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": true,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={true}
+    role="none"
     style={
       [
         {

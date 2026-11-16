@@ -139,6 +139,7 @@ const AppbarAction = ({
       selected={isStandard ? selected : true}
       style={[!isStandard && width === 'wide' && styles.wide, style]}
       animated
+      theme={theme}
       ref={ref}
       {...rest}
     />

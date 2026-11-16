@@ -329,6 +329,65 @@ Keys inside data objects changed the same way: the `routes` of `BottomNavigation
  ];
 ```
 
+### TouchableRipple without a press handler
+
+A `TouchableRipple`, and anything built on it, is no longer a disabled control when it has no touch handler. Without `onPress`, `onLongPress`, `onPressIn` or `onPressOut`, and without `disabled`, it renders a plain view: assistive tech doesn't announce it as disabled, it isn't a keyboard stop, and it never takes the press, so a `Pressable` around it gets it. On Android and iOS a wrapping `Pressable` already got the press, except around a read-only radio (see below). On web it's new for components with the `button` role, such as `Button`, `Chip`, `IconButton` and `FAB`, which used to stop the press. `DataTable.Title` works the same way.
+
+Without a handler or `disabled`, an activatable role becomes `none`: a `role` or `accessibilityRole` of `button`, `link`, `menuitem` or `tab`, and an `accessibilityRole` of `imagebutton` or `togglebutton`. The role stays when the touchable reports a toggle state with `aria-checked`, `aria-pressed` or `accessibilityState.checked`, also when the value is `false`. A selection doesn't keep the role: Android and iOS still report it, and on web `aria-selected` is dropped with the role. Every other role, such as `checkbox`, `radio` or `switch`, stays too, so a read-only `Checkbox` is still a checkbox and keeps its state.
+
+```tsx
+// Still a toggle (pressed on web, checked on Android and iOS),
+// but does nothing when activated
+<Button mode="outlined" selected>Bold</Button>
+// No longer a button; still reports selected on Android and iOS
+<Chip selected>Info</Chip>
+```
+
+On web, an `IconButton` or icon-only `FAB` labelled with `aria-label`, with no handler, no `disabled` and no toggle state, is an image named by its label, since the plain view there can't carry a name. An image can't carry a selection either, so its `aria-selected` is dropped too.
+
+`hitSlop` applies only to a touchable that can be pressed. Without a handler, or with `disabled`, a touchable takes no touches outside its bounds, so it doesn't take them from its neighbors.
+
+`RadioButton`, `RadioButton.Android`, `RadioButton.IOS` and `RadioButton.Item` with no press handler and no `RadioButton.Group` no longer take the press. They stay read-only radios, a row around them gets the press, and on web they're no longer a tab stop.
+
+To have something look and announce disabled, pass `disabled`, which keeps the control and its role. Pass it to switch interactivity off at runtime too, instead of removing `onPress`. A touchable renders another element whenever it goes between having a handler or `disabled` and having neither, so its children remount and lose their state and focus. That includes toggling `disabled` on a touchable with no handler. `FAB.Menu` does this for its trigger: a trigger without `onPress` is a disabled button while the menu is closed, so it keeps its element when the menu opens.
+
+```diff
+-<Button onPress={isSaving ? undefined : save}>Save</Button>
++<Button onPress={save} disabled={isSaving}>Save</Button>
+```
+
+App tests change with it: a display-only element is no longer found by a role it lost, such as `button`, and is no longer disabled. Find it by its text or label instead.
+
+In a disabled `TextInput`, every `TextInput.Icon` takes the disabled color, also over `iconColor` and the error color. One with a handler is a disabled `IconButton`, and an `opacity` in its `style` doesn't apply.
+
+### Focus indicator
+
+Interactive components now draw the Material Design 3 keyboard focus indicator: a 3dp ring in `theme.colors.secondary`, 2dp outside the component. On web it shows when an element gets focus from the keyboard (`:focus-visible`), and on Android when it gets focus from a hardware keyboard or D-pad. Clicking or touching an element shows no ring. iOS shows no ring.
+
+`Snackbar` rings its action and close button in `theme.colors.inversePrimary`, the color of its action label, because `secondary` barely shows on its `inverseSurface` background. If a component's background is the ring color, such as an `Appbar` with a `secondary` background, the rings of the controls on it don't show: give those controls a `theme` with a contrasting `secondary`. An `Appbar` passes its own `theme` on to the `Appbar.Action`, `Appbar.BackAction` and `Appbar.Content` placed directly in it.
+
+Components that fill a clipping container or touch their neighbours draw the ring 3dp inside their edge instead: `List.Item`, `List.Accordion`, `Checkbox.Item`, `RadioButton.Item`, `Menu.Item`, the `FAB.Menu` items, `Drawer.Item`, the `BottomNavigation` tabs, `DataTable.Row`, `DataTable.Cell`, `DataTable.Title` and `SegmentedButtons`. `Drawer.CollapsedItem` draws it around its icon and label, 2dp clear of the active indicator. `FAB` and `Switch` draw this ring instead of their own, and `Checkbox` keeps its circular ring around the state layer.
+
+A `TouchableRipple`, and every component built on it, rings only while it can be pressed. A disabled one shows no ring. One with no touch handler and no `disabled` is the plain view described in [TouchableRipple without a press handler](#touchableripple-without-a-press-handler): it isn't a keyboard stop, so it never rings. This applies to `TouchableRipple` only: a `Switch` or `Drawer.CollapsedItem` without a handler is still a keyboard stop and rings.
+
+An outward ring sits outside the component, so a scroll view or a container with `overflow: 'hidden'` clips it, and a neighbour that touches the component can cover it. Chips in a horizontal `ScrollView`, or a `TouchableRipple` that fills the width of a scroll view, show only part of the ring. Give the container 5dp of padding, or pass `focusRing="inward"` where the component takes it:
+
+```tsx
+<ScrollView horizontal contentContainerStyle={{ padding: 5 }}>
+  <Chip onPress={showMusic}>Music</Chip>
+</ScrollView>
+
+<TouchableRipple focusRing="inward" onPress={openSettings}>
+  <Text>Settings</Text>
+</TouchableRipple>
+```
+
+`TouchableRipple` takes a new `focusRing` prop, and so do the components whose props include it, such as `IconButton`, `List.Item`, `DataTable.Row` and `DataTable.Cell`. It is `'outward'`, `'inward'` or `'none'`. `'none'` draws no ring, but on web it leaves the browser's own focus outline, so a component that draws its own indicator also needs `outline: 'none'` on web.
+
+On web the ring comes from a stylesheet that Paper adds to the page, and on these elements it takes precedence over your own `:focus-visible` outline styles. There is no app-wide switch to turn the ring off. Its color follows `theme.colors.secondary`, from the theme or a component's `theme` prop.
+
+On web, `Button`, `Card`, the `Chip` body, `FAB`, `FAB.Extended` and the `FAB.Menu` trigger and items draw the ring with the CSS `:has()` selector. A browser without it (Chrome before 105, Safari before 15.4, Firefox before 121) shows its own focus outline just inside their edge instead.
+
 ### Libraries built on Paper
 
 Libraries built on Paper may not support 6.x yet. For example, `react-native-paper-dates` 0.24.1 still uses `HelperText`, the 5.x theme exports and `theme.roundness`, so its `DatePickerInput` crashes when it shows a validation error.
@@ -415,6 +474,8 @@ The parts are rendered in the order they are given, so render the leading action
 #### Bottom bar
 
 Using `Appbar` as a bottom bar is deprecated. Material Design 3 moves the bottom bar to toolbars. It continues to work in 6.x, and will be replaced by the `Toolbar` component once it is available.
+
+In every mode, `Appbar` now passes its `theme` to `Appbar.BackAction`, `Appbar.Action` and `Appbar.Content`. In 5.x, the `medium` and `large` modes didn't, so a bar with its own `theme` drew the icons, the title and the focus rings of these parts with the theme of the app. For example, a dark-themed bar in a light app drew dark icons and a dark title on its dark background.
 
 ### Avatar
 
@@ -683,6 +744,8 @@ Corner radii set through `style` no longer shape the press, hover and disabled f
 `borderless` has no effect on web. The web ripple is always clipped to the touchable's shape, including when `centered` is set, and the touchable no longer clips its own content. A child that needs a clipped or rounded shape should carry that shape itself.
 
 `hitSlop` now works on web: the touchable renders an invisible target that extends past its bounds. An ancestor with `overflow: 'hidden'` or a scroll view clips it, as on Android.
+
+`TouchableRipple` draws the keyboard focus ring and takes a new `focusRing` prop. See [Focus indicator](#focus-indicator).
 
 ### TextInput
 

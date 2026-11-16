@@ -161,9 +161,11 @@ export const getIconColor = ({
   hasError: boolean;
   isDisabled: boolean;
 }): ColorValue => {
+  // Disabled first, as in IconButton: a TextInput.Icon with a handler renders a
+  // disabled IconButton, so any other order splits the icons of one field
+  if (isDisabled) return theme.colors.onSurface;
   if (iconColor) return iconColor;
   if (hasError) return theme.colors.error;
-  if (isDisabled) return theme.colors.onSurface;
   return theme.colors.onSurfaceVariant;
 };
 

@@ -159,7 +159,7 @@ describe('Appbar context', () => {
     await render(
       <>
         <Appbar.Content title="Title" />
-        <Appbar.Action icon="menu" aria-label="Menu" />
+        <Appbar.Action icon="menu" aria-label="Menu" onPress={() => {}} />
       </>
     );
 
@@ -171,8 +171,13 @@ describe('Appbar context', () => {
     await render(
       <Appbar testID="appbar">
         <Appbar.Content title="Title" />
-        <Appbar.Action icon="menu" aria-label="Menu" isLeading />
-        <Appbar.BackAction />
+        <Appbar.Action
+          icon="menu"
+          aria-label="Menu"
+          isLeading
+          onPress={() => {}}
+        />
+        <Appbar.BackAction onPress={() => {}} />
       </Appbar>
     );
 

@@ -156,46 +156,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       }
     >
       <View
-        accessibilityLabel="search"
-        accessibilityState={
-          {
-            "busy": undefined,
-            "checked": undefined,
-            "disabled": true,
-            "expanded": undefined,
-            "selected": undefined,
-          }
-        }
-        accessibilityValue={
-          {
-            "max": undefined,
-            "min": undefined,
-            "now": undefined,
-            "text": undefined,
-          }
-        }
         accessible={true}
+        aria-label="search"
         centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          {
-            "bottom": 4,
-            "left": 4,
-            "right": 4,
-            "top": 4,
-          }
-        }
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        role="button"
+        role="none"
         style={
           [
             {
@@ -930,45 +894,9 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1140,45 +1068,9 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1350,45 +1242,9 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1560,46 +1416,10 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
     }
   >
     <View
-      accessibilityLabel="Back"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="Back"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 4,
-          "left": 4,
-          "right": 4,
-          "top": 4,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
