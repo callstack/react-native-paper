@@ -70,9 +70,15 @@ const BannerExample = () => {
           ))}
         </View>
       </ScreenWrapper>
-      <FAB icon="eye" style={styles.fab} onPress={() => setVisible(!visible)} />
+      <FAB
+        icon="eye"
+        aria-label={visible ? 'Hide banner' : 'Show banner'}
+        style={styles.fab}
+        onPress={() => setVisible(!visible)}
+      />
       <FAB
         icon="alert"
+        aria-label={urgent ? 'Make banner polite' : 'Make banner urgent'}
         style={styles.urgentFab}
         onPress={() => setUrgent(!urgent)}
       />
