@@ -84,9 +84,7 @@ export type { Props as DataTablePaginationProps } from './components/DataTable/D
 export type { Props as DataTableRowProps } from './components/DataTable/DataTableRow';
 export type { Props as DataTableTitleProps } from './components/DataTable/DataTableTitle';
 export type { Props as DialogProps } from './components/Dialog/Dialog';
-export type { Props as DialogActionsProps } from './components/Dialog/DialogActions';
 export type { Props as DialogContentProps } from './components/Dialog/DialogContent';
-export type { Props as DialogIconProps } from './components/Dialog/DialogIcon';
 export type { Props as DialogScrollAreaProps } from './components/Dialog/DialogScrollArea';
 export type { Props as DialogTitleProps } from './components/Dialog/DialogTitle';
 export type { Props as DividerProps } from './components/Divider';
