@@ -1,7 +1,6 @@
 version: 1.0
 
 user_settings:
-  # Who may trigger reviews, besides the account that connected the installation.
   reviewers:
     - doberjohn
     - lukewalczak
@@ -10,6 +9,7 @@ user_settings:
     - alpharius-ck
     - xdimota7x
     - jacekAtCK
+    - kachmashk
   report_floor: corroborated-minor
 
 issues: false
