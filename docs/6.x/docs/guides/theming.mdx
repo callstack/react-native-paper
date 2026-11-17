@@ -139,6 +139,8 @@ A theme usually contains the following properties:
 
 When creating a custom theme, you only need to provide the properties you change. `PaperProvider` merges your theme deeply with the default one, so a nested object such as `shapes` or `motion` keeps every key you leave out.
 
+Paper merges a custom theme onto `DarkTheme` when it sets `dark: true`, and onto `LightTheme` otherwise. The examples on this page still spread `LightTheme` or `DarkTheme`: that sets `dark`, and in TypeScript it gives the theme object the full `Theme` shape. Without TypeScript, nested spreads such as `...LightTheme.colors` are optional.
+
 If you don't use a custom theme, Paper will automatically turn animations on/off, depending on device settings.
 
 Otherwise, your custom theme will need to handle it manually, using React Native's [AccessibilityInfo API](https://reactnative.dev/docs/accessibilityinfo).
