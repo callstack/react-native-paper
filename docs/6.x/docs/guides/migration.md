@@ -633,7 +633,7 @@ The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialo
 **Removed**
 
 - **`children`** was removed from `Dialog`. A dialog with children renders none of them.
-- **`Dialog.Icon`**, **`Dialog.Title`**, **`Dialog.Content`**, **`Dialog.Actions`** and **`Dialog.ScrollArea`** were removed.
+- **`Dialog.Icon`**, **`Dialog.Title`**, **`Dialog.Content`**, **`Dialog.Actions`** and **`Dialog.ScrollArea`** were removed, with the `DialogActionsProps` and `DialogIconProps` types. `DialogTitleProps`, `DialogContentProps` and `DialogScrollAreaProps` stay, for typing `titleProps`, `contentProps` and `scrollAreaProps`.
 
 Use the dedicated props instead:
 
