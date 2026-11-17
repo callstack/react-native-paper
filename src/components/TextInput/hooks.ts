@@ -44,17 +44,20 @@ import {
 } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../theme/types';
 
 const useTextInputAnimation = ({
   variant,
   isRTL,
+  isDisabled,
   hasAccessory,
   value,
   defaultValue,
 }: {
   variant: TextInputVariant;
   isRTL: boolean;
+  isDisabled: boolean;
   hasAccessory: boolean;
   value: string | undefined;
   defaultValue: string | undefined;
@@ -113,6 +116,14 @@ const useTextInputAnimation = ({
     ),
   }));
 
+  // The resting label covers the prefix and suffix, so they fade in as it
+  // floats. This opacity replaces the static one, so it carries the disabled
+  // dim of the prefix and suffix styles too.
+  const affixOpacity = isDisabled ? tokens.md.sys.state.opacity.disabled : 1;
+  const animatedAffixStyle = useAnimatedStyle(() => ({
+    opacity: floatSV.value * affixOpacity,
+  }));
+
   const animatedActiveOutlineStyle = useAnimatedStyle(() => ({
     transform: [{ scaleX: focusSV.value }],
   }));
@@ -120,6 +131,7 @@ const useTextInputAnimation = ({
   return {
     animatedLabelWrapperStyle,
     animatedLabelTextStyle,
+    animatedAffixStyle,
     animatedActiveOutlineStyle:
       variant === 'filled' ? animatedActiveOutlineStyle : undefined,
     runFocusAnimation,
@@ -346,6 +358,7 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const animation = useTextInputAnimation({
     variant,
     isRTL,
+    isDisabled: !!props.disabled,
     hasAccessory,
     value: props.value,
     defaultValue: props.defaultValue,
@@ -483,6 +496,8 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     selectionColor,
     cursorColor,
     animatedActiveOutlineStyles: undefined,
+    // Without a label nothing covers the prefix and suffix.
+    animatedAffixStyle: props.label ? animation.animatedAffixStyle : undefined,
     placeholder,
     counterText,
     accessibilityProps,

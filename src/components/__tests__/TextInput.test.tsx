@@ -15,6 +15,7 @@ import {
   it,
   jest,
 } from '@jest/globals';
+import { getAnimatedStyle } from 'react-native-reanimated';
 import type { TestInstance } from 'test-renderer';
 
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
@@ -1316,6 +1317,55 @@ it('renders prefix and suffix while focused even when value is empty', async () 
 
   expect(screen.getByText('$')).toBeOnTheScreen();
   expect(screen.getByText(' kg')).toBeOnTheScreen();
+});
+
+it.each([
+  { affix: 'prefix', text: '$' },
+  { affix: 'suffix', text: ' kg' },
+] as const)(
+  'fades the $affix in as the label floats away from it',
+  async ({ affix, text }) => {
+    await render(
+      <TextInput
+        label="Amount"
+        value=""
+        onChangeText={() => {}}
+        {...{ [affix]: text }}
+        testID="tf-affix-float"
+      />
+    );
+
+    await fireEvent(screen.getByTestId('tf-affix-float'), 'focus');
+
+    // The label still rests over it when the field takes focus.
+    expect(screen.getByText(text)).not.toBeVisible();
+
+    await act(() => jest.advanceTimersByTimeAsync(1000));
+
+    expect(getAnimatedStyle(screen.getByText(text))).toMatchObject({
+      opacity: 1,
+    });
+  }
+);
+
+it('keeps the disabled dim on the prefix and suffix of a labelled field', async () => {
+  await render(
+    <TextInput
+      label="Amount"
+      value="5"
+      onChangeText={() => {}}
+      prefix="$"
+      suffix=" kg"
+      disabled
+    />
+  );
+
+  expect(screen.getByText('$')).toHaveStyle({
+    opacity: stateOpacity.disabled,
+  });
+  expect(screen.getByText(' kg')).toHaveStyle({
+    opacity: stateOpacity.disabled,
+  });
 });
 
 it('places prefix Text before the TextInput and suffix Text after it', async () => {

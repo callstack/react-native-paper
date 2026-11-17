@@ -29,6 +29,7 @@ import type { InternalTheme, ThemeProp } from '../../theme/types';
 export type TextInputAnimationState = {
   animatedLabelWrapperStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   animatedLabelTextStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
+  animatedAffixStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
   animatedActiveOutlineStyle?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
 };
 
@@ -152,6 +153,9 @@ export type TextInputHookReturn = SharedTextInputStyleData & {
   cursorColor: ColorValue;
   animatedActiveOutlineStyles:
     | StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>
+    | undefined;
+  animatedAffixStyle:
+    | StyleProp<AnimatedStyle<StyleProp<TextStyle>>>
     | undefined;
   animatedLabelWrapperStyles: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   containerStyles: StyleProp<ViewStyle>;
@@ -349,6 +353,7 @@ function TextInput({
     animatedActiveOutlineStyles,
     animatedLabelWrapperStyles,
     animatedLabelTextStyles,
+    animatedAffixStyle,
     containerStyles,
     inputStyles,
     prefixStyles,
@@ -446,7 +451,11 @@ function TextInput({
 
         {/* Keep the field visible to native accessibility even before focus. */}
         <View style={containerStyles}>
-          {hasPrefix && <Text style={prefixStyles}>{prefix}</Text>}
+          {hasPrefix && (
+            <Animated.Text style={[prefixStyles, animatedAffixStyle]}>
+              {prefix}
+            </Animated.Text>
+          )}
 
           {render({
             ref: input,
@@ -464,7 +473,11 @@ function TextInput({
             onBlur,
           })}
 
-          {hasSuffix && <Text style={suffixStyles}>{suffix}</Text>}
+          {hasSuffix && (
+            <Animated.Text style={[suffixStyles, animatedAffixStyle]}>
+              {suffix}
+            </Animated.Text>
+          )}
         </View>
 
         {renderTrailingAccessory ? (
