@@ -1266,18 +1266,18 @@ mutually exclusive options, use `SegmentedButtons`.
 
 #### `variant`
 
-The variants changed meaning. In 5.x, `primary`, `secondary` and `tertiary` painted the container role, e.g. `primaryContainer`. In 6.x they paint the role itself, e.g. `primary`, and the new tonal variants paint the container role. So a FAB with an explicit `variant` looks different. To keep the 5.x colors:
+The variants changed meaning. In 5.x, `primary`, `secondary` and `tertiary` painted the container role, e.g. `primaryContainer`. In 6.x they paint the role itself, e.g. `primary`, and the new `primaryContainer`, `secondaryContainer` and `tertiaryContainer` variants paint the container role. So a FAB with an explicit `variant` looks different. To keep the 5.x colors:
 
-- **`primary`** (the 5.x default) → **`tonalPrimary`** (the 6.x default)
-- **`secondary`** → **`tonalSecondary`**
-- **`tertiary`** → **`tonalTertiary`**
+- **`primary`** (the 5.x default) → **`primaryContainer`** (the 6.x default)
+- **`secondary`** → **`secondaryContainer`**
+- **`tertiary`** → **`tertiaryContainer`**
 - **`surface`** has no variant. Set `containerColor` and `contentColor` instead, e.g. to `theme.colors.surfaceContainerHigh` and `theme.colors.primary`.
 
 A FAB without a `variant` keeps its 5.x colors.
 
 ```diff
 -<FAB icon="plus" variant="secondary" onPress={onPress} />
-+<FAB icon="plus" variant="tonalSecondary" onPress={onPress} />
++<FAB icon="plus" variant="secondaryContainer" onPress={onPress} />
 ```
 
 #### `size`
