@@ -224,7 +224,8 @@ describe('Appbar modes', () => {
 
       expect(screen.getByTestId('appbar')).toHaveStyle({
         minHeight: (mode === 'medium-flexible' ? 112 : 120) + 20,
-        paddingTop: 20,
+        // the safe area inset and the space above the controls
+        paddingTop: 20 + 6,
       });
     }
   );
@@ -243,7 +244,7 @@ describe('Appbar modes', () => {
       });
 
       // the row with the controls and the content
-      expect(screen.getByTestId('appbar')).toHaveStyle({ minHeight: 56 + 120 });
+      expect(screen.getByTestId('appbar')).toHaveStyle({ minHeight: 64 + 120 });
     }
   );
 
@@ -268,6 +269,237 @@ describe('Appbar modes', () => {
     );
 
     expect(screen.getByText('A long title')).toHaveProp('numberOfLines', 1);
+  });
+});
+
+describe('Appbar layout', () => {
+  const layout = (x: number, width: number) => ({
+    nativeEvent: { layout: { x, y: 0, width, height: 64 } },
+  });
+
+  it.each([
+    { mode: 'small', offset: 0 },
+    { mode: 'center-aligned', offset: 0 },
+    { mode: 'medium', offset: 6 },
+    { mode: 'large', offset: 6 },
+    { mode: 'medium-flexible', offset: 6 },
+    { mode: 'large-flexible', offset: 6 },
+  ] as const)(
+    'places the controls of the $mode mode at the same height',
+    async ({ mode, offset }) => {
+      await render(
+        <Appbar mode={mode} testID="appbar">
+          <Appbar.Content title="Title" />
+        </Appbar>
+      );
+
+      // The controls are 64 high, and their buttons are 52 high with margins
+      expect(screen.getByTestId('appbar')).toHaveStyle({ paddingTop: offset });
+    }
+  );
+
+  describe('in the center-aligned mode', () => {
+    const renderAppbar = async (children: React.ReactNode) => {
+      await render(
+        <Appbar mode="center-aligned" testID="appbar">
+          {children}
+        </Appbar>
+      );
+    };
+
+    // The bar is 420 wide with 4 of padding on each side
+    const measure = async (contentX: number, contentWidth: number) => {
+      await fireEvent(screen.getByTestId('appbar'), 'layout', layout(0, 420));
+      await fireEvent(
+        screen.getByTestId('content'),
+        'layout',
+        layout(contentX, contentWidth)
+      );
+    };
+
+    it('adds a margin to the title on the side with less width', async () => {
+      await renderAppbar(
+        <>
+          <Appbar.BackAction onPress={() => {}} />
+          <Appbar.Content title="Title" testID="content" />
+        </>
+      );
+
+      expect(screen.getByTestId('content')).toHaveStyle({
+        marginLeft: 0,
+        marginRight: 0,
+      });
+
+      // 52 wide actions on the left, nothing on the right
+      await measure(56, 360);
+
+      expect(screen.getByTestId('content')).toHaveStyle({
+        marginLeft: 0,
+        marginRight: 52,
+      });
+    });
+
+    it('does not add a margin when an action before the title is not leading', async () => {
+      await renderAppbar(
+        <>
+          <Appbar.Action icon="menu" onPress={() => {}} />
+          <Appbar.Content title="Title" testID="content" />
+          <Appbar.Action icon="magnify" onPress={() => {}} />
+        </>
+      );
+
+      // 52 wide actions on both sides
+      await measure(56, 308);
+
+      expect(screen.getByTestId('content')).toHaveStyle({
+        marginLeft: 0,
+        marginRight: 0,
+      });
+    });
+
+    it('takes custom children into account', async () => {
+      await renderAppbar(
+        <>
+          <Appbar.BackAction onPress={() => {}} />
+          <Appbar.Content title="Title" testID="content" />
+          <View />
+        </>
+      );
+
+      // 52 wide actions on the left, and a 40 wide custom child on the right
+      await measure(56, 320);
+
+      expect(screen.getByTestId('content')).toHaveStyle({
+        marginLeft: 0,
+        marginRight: 12,
+      });
+    });
+
+    it('balances an asymmetric number of actions', async () => {
+      await renderAppbar(
+        <>
+          <Appbar.BackAction onPress={() => {}} />
+          <Appbar.Content title="Title" testID="content" />
+          <Appbar.Action icon="a" onPress={() => {}} />
+          <Appbar.Action icon="b" onPress={() => {}} />
+        </>
+      );
+
+      // 52 wide actions on the left, and two on the right
+      await measure(56, 256);
+
+      expect(screen.getByTestId('content')).toHaveStyle({
+        marginLeft: 52,
+        marginRight: 0,
+      });
+    });
+
+    it('does not center the title when there are more than two actions on a side', async () => {
+      await renderAppbar(
+        <>
+          <Appbar.BackAction onPress={() => {}} />
+          <Appbar.Content title="Title" testID="content" />
+          <Appbar.Action icon="a" onPress={() => {}} />
+          <Appbar.Action icon="b" onPress={() => {}} />
+          <Appbar.Action icon="c" onPress={() => {}} />
+        </>
+      );
+
+      // 52 wide actions on the left, and three on the right
+      await measure(56, 208);
+
+      expect(screen.getByTestId('content')).toHaveStyle({
+        marginLeft: 0,
+        marginRight: 0,
+      });
+    });
+
+    it('measures the bar again after it was resized', async () => {
+      await renderAppbar(
+        <>
+          <Appbar.BackAction onPress={() => {}} />
+          <Appbar.Content title="Title" testID="content" />
+        </>
+      );
+
+      await measure(56, 360);
+      expect(screen.getByTestId('content')).toHaveStyle({ marginRight: 52 });
+
+      // The content shrinks by its margin, which must not count as an action
+      await fireEvent(screen.getByTestId('content'), 'layout', layout(56, 308));
+
+      expect(screen.getByTestId('content')).toHaveStyle({ marginRight: 52 });
+    });
+  });
+
+  it('keeps the onLayout of Appbar.Content when the Appbar uses its layout', async () => {
+    const onLayout = jest.fn();
+
+    await render(
+      <Appbar mode="large-flexible" testID="appbar">
+        <Appbar.Content title="Title" testID="content" onLayout={onLayout} />
+      </Appbar>
+    );
+
+    await fireEvent(screen.getByTestId('content'), 'layout', layout(0, 300));
+
+    expect(onLayout).toHaveBeenCalledTimes(1);
+    // the Appbar still grows
+    expect(screen.getByTestId('appbar')).toHaveStyle({
+      minHeight: 64 + 64,
+    });
+  });
+
+  it('keeps the onLayout of the Appbar in the center-aligned mode', async () => {
+    const onLayout = jest.fn();
+
+    await render(
+      <Appbar mode="center-aligned" testID="appbar" onLayout={onLayout}>
+        <Appbar.Content title="Title" />
+      </Appbar>
+    );
+
+    await fireEvent(screen.getByTestId('appbar'), 'layout', layout(0, 420));
+
+    expect(onLayout).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(['medium', 'large', 'medium-flexible', 'large-flexible'] as const)(
+    'passes the Appbar settings to an action in a wrapper in the %s mode',
+    async (mode) => {
+      await render(
+        <Appbar mode={mode} dark>
+          <Appbar.Content title="Title" />
+          <Tooltip title="Menu">
+            <View>
+              <Appbar.Action
+                icon={({ color }) => (
+                  <NativeText testID="icon-color">{String(color)}</NativeText>
+                )}
+                aria-label="Menu"
+                onPress={() => {}}
+              />
+            </View>
+          </Tooltip>
+        </Appbar>
+      );
+
+      expect(screen.getByTestId('icon-color')).toHaveTextContent('#ffffff');
+      expect(screen.getByRole('button', { name: 'Menu' })).toBeOnTheScreen();
+    }
+  );
+
+  it('gives a theme set on a part priority over the theme of the Appbar', async () => {
+    await render(
+      <Appbar mode="large" theme={{ colors: { onSurface: 'tomato' } }}>
+        <Appbar.Content
+          title="Title"
+          theme={{ colors: { onSurface: 'navy' } }}
+        />
+      </Appbar>
+    );
+
+    expect(screen.getByText('Title')).toHaveStyle({ color: 'navy' });
   });
 });
 
@@ -379,7 +611,7 @@ describe('Appbar.Header', () => {
     expect(screen.getByTestId('appbar-header')).toHaveStyle({
       height: 112 + 40,
       // the status bar height and the space above the controls
-      paddingTop: 40 + 8,
+      paddingTop: 40 + 6,
     });
   });
 

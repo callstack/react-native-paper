@@ -1,14 +1,21 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type { ColorValue, StyleProp, ViewProps } from 'react-native';
+import { StyleSheet } from 'react-native';
+import type {
+  ColorValue,
+  LayoutChangeEvent,
+  LayoutRectangle,
+  StyleProp,
+  ViewProps,
+} from 'react-native';
 
 import { AppbarContext } from './AppbarContext';
-import type { AppbarContextType, AppbarItemKind } from './AppbarContext';
+import type { AppbarContextType } from './AppbarContext';
 import {
-  APPBAR_ACTION_WIDTH,
-  APPBAR_FLEXIBLE_CONTROLS_HEIGHT,
+  APPBAR_CONTROLS_HEIGHT,
+  APPBAR_CONTROLS_OFFSET,
   APPBAR_HORIZONTAL_PADDING,
   getAppbarBackgroundColor,
+  getCenteringMargins,
   isFlexibleMode,
   modeAppbarHeight,
 } from './utils';
@@ -81,8 +88,9 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
  * A component to display action items in a bar. It is usually placed at the top of the screen
  * and contains the screen title and controls such as navigation buttons, menu button etc.
  *
- * Its parts, `Appbar.BackAction`, `Appbar.Content` and `Appbar.Action`, read what they need from the `Appbar`
- * they are rendered in, so they can be wrapped in other components, for example in a `Tooltip` or a `Menu`.
+ * Its parts, `Appbar.BackAction`, `Appbar.Content` and `Appbar.Action`, read the colors and the theme from the `Appbar`
+ * they are rendered in. `Appbar.Action` and `Appbar.BackAction` can be wrapped in other components, for example in a `Tooltip` or a `Menu`.
+ * `Appbar.Content` positions the title in the `Appbar`, so render it directly in the `Appbar`, not in a wrapper.
  * The parts are laid out in the order they are rendered: render the leading actions first, then the content, then the trailing actions.
  *
  * ## Usage
@@ -169,16 +177,18 @@ const Appbar = ({
   safeAreaInsets,
   theme: themeOverrides,
   backgroundColor: customBackground,
+  onLayout,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const [items, setItems] = React.useState<Record<AppbarItemKind, number>>({
-    leading: 0,
-    trailing: 0,
-    content: 0,
-  });
   const [contentHeight, setContentHeight] = React.useState(0);
+  const [barWidth, setBarWidth] = React.useState(0);
+  const [centeredContent, setCenteredContent] = React.useState<{
+    x: number;
+    width: number;
+    spacers: { left: number; right: number };
+  } | null>(null);
 
   const backgroundColor = getAppbarBackgroundColor(
     theme,
@@ -198,12 +208,56 @@ const Appbar = ({
     right: safeAreaInsets?.right ?? 0,
   };
 
-  const registerItem = React.useCallback((kind: AppbarItemKind) => {
-    setItems((current) => ({ ...current, [kind]: current[kind] + 1 }));
+  const paddingLeft = insets.left + APPBAR_HORIZONTAL_PADDING;
+  const paddingRight = insets.right + APPBAR_HORIZONTAL_PADDING;
 
-    return () =>
-      setItems((current) => ({ ...current, [kind]: current[kind] - 1 }));
-  }, []);
+  // The title is centered by adding a margin to it on the side with less actions.
+  // The width of the actions on each side is what is left of the bar around the
+  // content, after taking the margins it was measured with out.
+  const sides =
+    isCenterAlignedMode && centeredContent && barWidth > 0
+      ? {
+          left: Math.round(
+            centeredContent.x - paddingLeft - centeredContent.spacers.left
+          ),
+          right: Math.round(
+            barWidth -
+              paddingRight -
+              (centeredContent.x + centeredContent.width) -
+              centeredContent.spacers.right
+          ),
+        }
+      : null;
+  const spacers = getCenteringMargins(sides);
+
+  // The margins the content was last measured with
+  const spacersRef = React.useRef(spacers);
+
+  React.useLayoutEffect(() => {
+    spacersRef.current = spacers;
+  });
+
+  const handleContentLayout = React.useCallback(
+    (layout: LayoutRectangle | null) => {
+      if (isFlexible) {
+        setContentHeight(layout?.height ?? 0);
+      } else {
+        setCenteredContent(
+          layout && {
+            x: layout.x,
+            width: layout.width,
+            spacers: spacersRef.current,
+          }
+        );
+      }
+    },
+    [isFlexible]
+  );
+
+  const handleLayout = (event: LayoutChangeEvent) => {
+    setBarWidth(event.nativeEvent.layout.width);
+    onLayout?.(event);
+  };
 
   const appbarContext = React.useMemo<AppbarContextType>(
     () => ({
@@ -216,8 +270,11 @@ const Appbar = ({
         right: insets.right,
       },
       theme: themeOverrides,
-      registerItem: isCenterAlignedMode ? registerItem : undefined,
-      onContentLayout: isFlexible ? setContentHeight : undefined,
+      onContentLayout:
+        isCenterAlignedMode || isFlexible ? handleContentLayout : undefined,
+      contentMargins: isCenterAlignedMode
+        ? { left: spacers.left, right: spacers.right }
+        : undefined,
     }),
     [
       mode,
@@ -229,24 +286,17 @@ const Appbar = ({
       themeOverrides,
       isCenterAlignedMode,
       isFlexible,
-      registerItem,
+      handleContentLayout,
+      spacers.left,
+      spacers.right,
     ]
   );
 
-  // The title is only centered when there is room for it between the actions
-  const shouldCenterContent =
-    isCenterAlignedMode &&
-    items.content > 0 &&
-    items.leading < 2 &&
-    items.trailing < 3;
-  const shouldAddLeftSpacing = shouldCenterContent && items.leading === 0;
-  const shouldAddRightSpacing = shouldCenterContent && items.trailing === 0;
-
   const paddingStyle = {
     paddingBottom: insets.bottom,
-    paddingTop: insets.top + topOffset[mode],
-    paddingLeft: insets.left + APPBAR_HORIZONTAL_PADDING,
-    paddingRight: insets.right + APPBAR_HORIZONTAL_PADDING,
+    paddingTop: insets.top + (isTopAligned ? APPBAR_CONTROLS_OFFSET : 0),
+    paddingLeft,
+    paddingRight,
   };
 
   // The safe area insets are applied as padding, so they need to be included in the height
@@ -256,7 +306,7 @@ const Appbar = ({
         minHeight:
           Math.max(
             modeAppbarHeight[mode],
-            APPBAR_FLEXIBLE_CONTROLS_HEIGHT + contentHeight
+            APPBAR_CONTROLS_HEIGHT + contentHeight
           ) + verticalInsets,
       }
     : { height: modeAppbarHeight[mode] + verticalInsets };
@@ -276,24 +326,13 @@ const Appbar = ({
         // The flat mode renders a single view, so an animated `style` is visible on iOS
         mode={elevated ? 'elevated' : 'flat'}
         {...rest}
+        onLayout={isCenterAlignedMode ? handleLayout : onLayout}
         theme={theme}
       >
-        {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
         {children}
-        {shouldAddRightSpacing ? <View style={styles.spacing} /> : null}
       </Surface>
     </AppbarContext.Provider>
   );
-};
-
-// Offsets the controls of the `medium` and `large` modes so they are vertically centered in the top half of the Appbar
-const topOffset = {
-  small: 0,
-  'center-aligned': 0,
-  'medium-flexible': 0,
-  'large-flexible': 0,
-  medium: 8,
-  large: 18,
 };
 
 const styles = StyleSheet.create({
@@ -303,9 +342,6 @@ const styles = StyleSheet.create({
   },
   topAligned: {
     alignItems: 'flex-start',
-  },
-  spacing: {
-    width: APPBAR_ACTION_WIDTH,
   },
 });
 

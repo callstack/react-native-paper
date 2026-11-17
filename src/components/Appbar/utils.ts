@@ -16,8 +16,13 @@ export const APPBAR_HORIZONTAL_PADDING = 4;
 // Width of an icon button with its margin.
 export const APPBAR_ACTION_WIDTH = 52;
 
-// Height of the row with the controls of a flexible Appbar.
-export const APPBAR_FLEXIBLE_CONTROLS_HEIGHT = 56;
+// Height of the row with the controls of the `medium`, `large` and flexible modes.
+export const APPBAR_CONTROLS_HEIGHT = 64;
+
+// Space above the controls of these modes, which centers them in the row,
+// at the same height as in the `small` mode.
+export const APPBAR_CONTROLS_OFFSET =
+  (APPBAR_CONTROLS_HEIGHT - APPBAR_ACTION_WIDTH) / 2;
 
 export const isFlexibleMode = (mode: AppbarModes) =>
   mode === 'medium-flexible' || mode === 'large-flexible';
@@ -81,3 +86,25 @@ export const modeTextVariant = {
   'medium-flexible': 'headlineMedium',
   'large-flexible': 'displaySmall',
 } as const;
+
+/**
+ * Margins that center the title of the `center-aligned` Appbar,
+ * from the width of the actions on each side of it. Wider actions on one side
+ * than room for two actions leave the title off-center, as there is not
+ * enough space to center it.
+ */
+export const getCenteringMargins = (
+  sides: { left: number; right: number } | null
+) => {
+  if (!sides) {
+    return { left: 0, right: 0 };
+  }
+
+  const { left, right } = sides;
+
+  if (Math.max(left, right) > 2 * APPBAR_ACTION_WIDTH) {
+    return { left: 0, right: 0 };
+  }
+
+  return { left: Math.max(0, right - left), right: Math.max(0, left - right) };
+};

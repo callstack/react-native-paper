@@ -4,7 +4,7 @@ import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 
 import type { AnimatedStyle } from 'react-native-reanimated';
 
-import { useAppbarContext, useAppbarItem } from './AppbarContext';
+import { useAppbarContext } from './AppbarContext';
 import { getAppbarColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -50,6 +50,8 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    * - `standard` - Icon without a container.
    * - `filled` - Icon in a container with the primary color.
    * - `tonal` - Icon in a container with the secondary container color.
+   *
+   * The `filled` and `tonal` variants set the `mode` and `selected` props of the icon button, which are ignored.
    */
   variant?: 'standard' | 'filled' | 'tonal';
   /**
@@ -111,8 +113,6 @@ const AppbarAction = ({
   const theme = useInternalTheme(themeOverrides ?? appbar?.theme);
   const { colors } = theme;
 
-  useAppbarItem(appbar, isLeading ? 'leading' : 'trailing');
-
   const isStandard = variant === 'standard';
 
   // The icon of a filled or tonal action takes the color of its container
@@ -120,6 +120,12 @@ const AppbarAction = ({
     ? (getAppbarColor({ color: iconColor, isDark: appbar?.dark ?? false }) ??
       (isLeading ? colors.onSurface : colors.onSurfaceVariant))
     : iconColor;
+
+  // A filled or tonal action is a selected icon button in the matching mode,
+  // so `variant` takes over the `mode` and `selected` props for these
+  const variantProps = isStandard
+    ? { mode, selected }
+    : variantIconButtonProps[variant];
 
   return (
     <IconButton
@@ -129,14 +135,8 @@ const AppbarAction = ({
       icon={icon}
       disabled={disabled}
       aria-label={ariaLabel}
-      mode={
-        variant === 'filled'
-          ? 'contained'
-          : variant === 'tonal'
-            ? 'contained-tonal'
-            : mode
-      }
-      selected={isStandard ? selected : true}
+      mode={variantProps.mode}
+      selected={variantProps.selected}
       style={[!isStandard && width === 'wide' && styles.wide, style]}
       animated
       theme={theme}
@@ -145,6 +145,11 @@ const AppbarAction = ({
     />
   );
 };
+
+const variantIconButtonProps = {
+  filled: { mode: 'contained', selected: true },
+  tonal: { mode: 'contained-tonal', selected: true },
+} as const;
 
 const styles = StyleSheet.create({
   wide: {

@@ -9,7 +9,7 @@ import type {
   ViewProps,
 } from 'react-native';
 
-import { useAppbarContext, useAppbarItem } from './AppbarContext';
+import { useAppbarContext } from './AppbarContext';
 import {
   APPBAR_HORIZONTAL_PADDING,
   getAppbarColor,
@@ -99,13 +99,12 @@ const AppbarContent = ({
   titleMaxFontSizeMultiplier,
   theme: themeOverrides,
   testID,
+  onLayout,
   ...rest
 }: Props) => {
   const appbar = useAppbarContext();
   const theme = useInternalTheme(themeOverrides ?? appbar?.theme);
   const { colors, fonts } = theme;
-
-  useAppbarItem(appbar, 'content');
 
   // With `onPress` the title is a button, so it gets the keyboard focus ring
   // (MD3: interactive elements in an app bar have focus rings). It is a plain
@@ -118,9 +117,10 @@ const AppbarContent = ({
   const mode = appbar?.mode ?? 'small';
   const insets = appbar?.insets;
   const onContentLayout = appbar?.onContentLayout;
+  const contentMargins = appbar?.contentMargins;
   const isFlexible = isFlexibleMode(mode);
 
-  React.useEffect(() => () => onContentLayout?.(0), [onContentLayout]);
+  React.useEffect(() => () => onContentLayout?.(null), [onContentLayout]);
 
   const titleTextColor =
     getAppbarColor({ color: titleColor, isDark: appbar?.dark ?? false }) ??
@@ -151,16 +151,25 @@ const AppbarContent = ({
       isBottomAligned
         ? bottomStyle
         : mode === 'center-aligned'
-          ? styles.centerAligned
+          ? [
+              styles.centerAligned,
+              contentMargins && {
+                marginLeft: contentMargins.left,
+                marginRight: contentMargins.right,
+              },
+            ]
           : styles.container,
       style,
     ],
     testID,
-    onLayout: isFlexible
-      ? (event: LayoutChangeEvent) =>
-          onContentLayout?.(event.nativeEvent.layout.height)
-      : undefined,
     ...rest,
+    // The Appbar grows with the title, or centers it, based on its layout
+    onLayout: onContentLayout
+      ? (event: LayoutChangeEvent) => {
+          onContentLayout(event.nativeEvent.layout);
+          onLayout?.(event);
+        }
+      : onLayout,
   } satisfies ViewProps;
 
   const content = (
@@ -253,7 +262,6 @@ const styles = StyleSheet.create({
     paddingBottom: 28,
   },
   flexibleBottom: {
-    paddingTop: 8,
     paddingBottom: 12,
   },
 });
