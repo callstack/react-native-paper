@@ -78,7 +78,7 @@ const BannerExample = () => {
       />
       <FAB
         icon="alert"
-        aria-label={urgent ? 'Make banner polite' : 'Make banner urgent'}
+        aria-label={urgent ? 'Make banner not urgent' : 'Make banner urgent'}
         style={styles.urgentFab}
         onPress={() => setUrgent(!urgent)}
       />
