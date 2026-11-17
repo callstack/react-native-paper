@@ -1,0 +1,15 @@
+version: 1.0
+
+user_settings:
+  reviewers:
+    - doberjohn
+    - lukewalczak
+    - artus9033
+    - Stoneski93
+    - alpharius-ck
+    - xdimota7x
+    - jacekAtCK
+    - kachmashk
+  report_floor: corroborated-minor
+
+issues: false
