@@ -31,6 +31,7 @@ export type TextInputAnimationState = {
   animatedLabelTextStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
   animatedAffixStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
   animatedActiveOutlineStyle?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+  isLabelFloated: boolean;
 };
 
 export type TextInputAnimationHandlers = {

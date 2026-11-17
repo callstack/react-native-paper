@@ -16,10 +16,12 @@ import type { BlurEvent, FocusEvent } from 'react-native';
 
 import {
   interpolate,
+  useAnimatedReaction,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import {
   ACTIVE_LABEL_FONT_SIZE,
@@ -66,6 +68,18 @@ const useTextInputAnimation = ({
 
   const focusSV = useSharedValue(0);
   const floatSV = useSharedValue(initialText.length > 0 ? 1 : 0);
+  const [isLabelFloated, setIsLabelFloated] = useState(initialText.length > 0);
+
+  // Track when the label has fully left its resting place, whichever animation
+  // moved it, so the placeholder does not show under the resting label.
+  useAnimatedReaction(
+    () => floatSV.value === 1,
+    (floated, previous) => {
+      if (previous !== null && floated !== previous) {
+        scheduleOnRN(setIsLabelFloated, floated);
+      }
+    }
+  );
 
   const { activeTop, inactiveTop, translateXEnd } = getTextInputAnimationLayout(
     {
@@ -134,6 +148,7 @@ const useTextInputAnimation = ({
     animatedAffixStyle,
     animatedActiveOutlineStyle:
       variant === 'filled' ? animatedActiveOutlineStyle : undefined,
+    isLabelFloated,
     runFocusAnimation,
     runBlurAnimation,
     syncFloatToValue,
@@ -480,9 +495,13 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     ? props.startAccessory
     : props.endAccessory;
 
+  // With a label, show the placeholder only once the label has floated away
+  // from it. A space keeps the iOS multiline placeholder updating:
   // https://github.com/facebook/react-native/issues/31573
   const placeholder =
-    isFocused || !props.label || hasValue ? props.placeholder : ' ';
+    !props.label || hasValue || (isFocused && animation.isLabelFloated)
+      ? props.placeholder
+      : ' ';
 
   return {
     input,

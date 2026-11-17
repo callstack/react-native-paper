@@ -1132,7 +1132,7 @@ it('shows placeholder when unfocused and no label is given', async () => {
   );
 });
 
-it('shows placeholder when the TextInput is focused', async () => {
+it('shows placeholder when the TextInput is focused, once the label floats away', async () => {
   await render(
     <TextInput
       label="Email"
@@ -1145,13 +1145,19 @@ it('shows placeholder when the TextInput is focused', async () => {
 
   await fireEvent(screen.getByTestId('tf-input'), 'focus');
 
+  // The label still rests over the input when the field takes focus.
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
+
+  await act(() => jest.advanceTimersByTimeAsync(1000));
+
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(screen.getByTestId('tf-input').props.placeholder).toBe(
     'e.g. user@example.com'
   );
 });
 
-it('shows placeholder on multiline TextInput when focused', async () => {
+it('shows placeholder on multiline TextInput when focused, once the label floats away', async () => {
   await render(
     <TextInput
       label="Notes"
@@ -1169,9 +1175,39 @@ it('shows placeholder on multiline TextInput when focused', async () => {
   await fireEvent(screen.getByTestId('tf-multiline'), 'focus');
 
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(' ');
+
+  await act(() => jest.advanceTimersByTimeAsync(1000));
+
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(
     'Add a note…'
   );
+});
+
+it('shows placeholder at once when a focused TextInput with a floated label is cleared', async () => {
+  const { rerender } = await render(
+    <TextInput
+      label="Email"
+      value="user@example.com"
+      onChangeText={() => {}}
+      placeholder="e.g. user@example.com"
+    />
+  );
+
+  await fireEvent(screen.getByLabelText('Email'), 'focus');
+  await rerender(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      placeholder="e.g. user@example.com"
+    />
+  );
+
+  expect(
+    screen.getByPlaceholderText('e.g. user@example.com')
+  ).toBeOnTheScreen();
 });
 
 it.each(['filled', 'outlined'] as const)(
