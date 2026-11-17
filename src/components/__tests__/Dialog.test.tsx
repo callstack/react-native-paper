@@ -29,6 +29,22 @@ describe('Dialog', () => {
     expect(getByTestId('dialog')).toHaveTextContent('This is simple dialog');
   });
 
+  it('should apply overlayAccessibilityLabel to the backdrop', () => {
+    const { getByTestId } = render(
+      <Dialog
+        visible
+        overlayAccessibilityLabel="Close dialog"
+        testID="dialog"
+      >
+        <Text>This is simple dialog</Text>
+      </Dialog>
+    );
+
+    expect(getByTestId('dialog-backdrop').props.accessibilityLabel).toBe(
+      'Close dialog'
+    );
+  });
+
   it('should call onDismiss when dismissable', () => {
     const onDismiss = jest.fn();
     const { getByTestId } = render(
