@@ -93,7 +93,7 @@ export type Props = {
    */
   title?: React.ReactNode;
   /**
-   * Props passed to `Dialog.Title` when `title` is provided.
+   * Props passed to the title's `Text` when `title` is provided.
    */
   titleProps?: Omit<DialogTitleProps, 'children'>;
   /**
@@ -112,11 +112,13 @@ export type Props = {
    */
   scrollable?: boolean;
   /**
-   * Props passed to `Dialog.Content` when `scrollable` is not enabled.
+   * Props passed to the `View` that holds the content when `scrollable` is
+   * not enabled.
    */
   contentProps?: Omit<DialogContentProps, 'children'>;
   /**
-   * Props passed to `Dialog.ScrollArea` when `scrollable` is enabled.
+   * Props passed to the `View` that holds the `ScrollView` and its dividers
+   * when `scrollable` is enabled.
    */
   scrollAreaProps?: Omit<DialogScrollAreaProps, 'children'>;
   /**
@@ -284,17 +286,6 @@ const Dialog = ({
     </Modal>
   );
 };
-
-// @component ./DialogContent.tsx
-Dialog.Content = DialogContent;
-// @component ./DialogActions.tsx
-Dialog.Actions = DialogActions;
-// @component ./DialogTitle.tsx
-Dialog.Title = DialogTitle;
-// @component ./DialogScrollArea.tsx
-Dialog.ScrollArea = DialogScrollArea;
-// @component ./DialogIcon.tsx
-Dialog.Icon = DialogIcon;
 
 const styles = StyleSheet.create({
   wrapper: {

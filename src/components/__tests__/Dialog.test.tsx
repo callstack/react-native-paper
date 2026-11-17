@@ -10,6 +10,7 @@ import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { act, userEvent } from '@testing-library/react-native';
 
 import Dialog from '../../components/Dialog/Dialog';
+import DialogActions from '../../components/Dialog/DialogActions';
 import { render, screen } from '../../test-utils';
 import Button from '../Button/Button';
 import Portal from '../Portal/Portal';
@@ -497,11 +498,13 @@ describe('DialogActions', () => {
   });
 
   it('applies default styles', async () => {
+    // The actions row isn't reachable through `Dialog`, so this renders the
+    // internal part directly.
     await render(
-      <Dialog.Actions testID="dialog-actions">
+      <DialogActions testID="dialog-actions">
         <Button testID="button-cancel">Cancel</Button>
         <Button testID="button-ok">Ok</Button>
-      </Dialog.Actions>
+      </DialogActions>
     );
 
     const dialogActionsContainer = screen.getByTestId('dialog-actions');
@@ -522,10 +525,16 @@ describe('DialogActions', () => {
     };
 
     await render(
-      <Dialog.Actions>
-        <ProbeButton>Cancel</ProbeButton>
-        <ProbeButton>Ok</ProbeButton>
-      </Dialog.Actions>
+      <Portal.Host>
+        <Dialog
+          visible
+          content="This is simple dialog"
+          actions={[
+            <ProbeButton key="cancel">Cancel</ProbeButton>,
+            <ProbeButton key="ok">Ok</ProbeButton>,
+          ]}
+        />
+      </Portal.Host>
     );
 
     const [cancelButtonProps] = buttonProps.mock.calls[0];
@@ -546,10 +555,20 @@ describe('DialogActions', () => {
     };
 
     await render(
-      <Dialog.Actions testID="dialog-actions">
-        <ProbeButton style={styles.spacing}>Cancel</ProbeButton>
-        <ProbeButton style={styles.noSpacing}>Ok</ProbeButton>
-      </Dialog.Actions>
+      <Portal.Host>
+        <Dialog
+          visible
+          content="This is simple dialog"
+          actions={[
+            <ProbeButton key="cancel" style={styles.spacing}>
+              Cancel
+            </ProbeButton>,
+            <ProbeButton key="ok" style={styles.noSpacing}>
+              Ok
+            </ProbeButton>,
+          ]}
+        />
+      </Portal.Host>
     );
 
     const [cancelButtonProps] = buttonProps.mock.calls[0];
