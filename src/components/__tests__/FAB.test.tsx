@@ -9,9 +9,24 @@ import {
   jest,
 } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
+import * as Reanimated from 'react-native-reanimated';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import FAB from '../FAB';
+
+jest.mock('react-native-reanimated', () => {
+  const ReanimatedModule = jest.requireActual<
+    typeof import('react-native-reanimated')
+  >('react-native-reanimated');
+
+  return {
+    __esModule: true,
+    ...ReanimatedModule,
+    default: ReanimatedModule.default,
+    withSpring: jest.fn(ReanimatedModule.withSpring),
+  };
+});
 
 it('renders FAB with default props', async () => {
   const tree = (await render(<FAB icon="plus" />)).toJSON();
@@ -92,6 +107,39 @@ it('renders FAB transitioning to visible', async () => {
   );
   await rerender(<FAB icon="plus" visible />);
   expect(toJSON()).toMatchSnapshot();
+});
+
+// Reanimated follows the device setting for a spring that doesn't say
+// otherwise, which would snap the FAB despite reduceMotion="off"
+it('keeps the visibility springs on with reduceMotion="off" whatever the device setting', async () => {
+  const { rerender } = await render(
+    <PaperProvider reduceMotion="off">
+      <FAB icon="plus" />
+    </PaperProvider>
+  );
+  jest.mocked(Reanimated.withSpring).mockClear();
+
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB icon="plus" visible={false} />
+    </PaperProvider>
+  );
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB icon="plus" visible />
+    </PaperProvider>
+  );
+
+  expect(
+    jest
+      .mocked(Reanimated.withSpring)
+      .mock.calls.map(([, config]) => config?.reduceMotion)
+  ).toEqual([
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+  ]);
 });
 
 it('calls onPress when FAB is pressed', async () => {

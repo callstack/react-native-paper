@@ -9,6 +9,7 @@ import type {
 } from 'react-native';
 
 import Animated, {
+  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -243,15 +244,18 @@ const Shell = ({
       return;
     }
 
-    scale.value = withSpring(
-      target,
-      toRawSpring(theme.motion.spring.fast.spatial)
-    );
+    // Reanimated defaults an unset `reduceMotion` to the OS setting, which
+    // would snap the FAB despite `<PaperProvider reduceMotion="off">`. Motion
+    // is already allowed here, so opt out of the OS check.
+    scale.value = withSpring(target, {
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: ReduceMotion.Never,
+    });
 
-    alpha.value = withSpring(
-      target,
-      toRawSpring(theme.motion.spring.fast.effects)
-    );
+    alpha.value = withSpring(target, {
+      ...toRawSpring(theme.motion.spring.fast.effects),
+      reduceMotion: ReduceMotion.Never,
+    });
   }, [visible, theme, reduceMotion, scale, alpha]);
 
   // Fallback shared values track the static size-driven dimensions. Consumers

@@ -11,6 +11,7 @@ import type {
 import Animated, {
   type AnimatedStyle,
   measure,
+  ReduceMotion,
   useAnimatedRef,
   useAnimatedStyle,
   useSharedValue,
@@ -211,16 +212,25 @@ const Extended = ({
       return;
     }
 
-    const widthSpring = toRawSpring(
-      expanded
-        ? theme.motion.spring.fast.spatial
-        : theme.motion.spring.default.spatial
-    );
-    const opacitySpring = toRawSpring(
-      expanded
-        ? theme.motion.spring.default.effects
-        : theme.motion.spring.fast.effects
-    );
+    // Reanimated defaults an unset `reduceMotion` to the OS setting, which
+    // would snap the FAB despite `<PaperProvider reduceMotion="off">`. Motion
+    // is already allowed here, so opt out of the OS check.
+    const widthSpring = {
+      ...toRawSpring(
+        expanded
+          ? theme.motion.spring.fast.spatial
+          : theme.motion.spring.default.spatial
+      ),
+      reduceMotion: ReduceMotion.Never,
+    };
+    const opacitySpring = {
+      ...toRawSpring(
+        expanded
+          ? theme.motion.spring.default.effects
+          : theme.motion.spring.fast.effects
+      ),
+      reduceMotion: ReduceMotion.Never,
+    };
 
     scheduleOnUI(() => {
       'worklet';

@@ -5,6 +5,7 @@ import { afterEach, expect, it, jest } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
 import * as Reanimated from 'react-native-reanimated';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import FAB from '../FAB';
 
@@ -18,6 +19,7 @@ jest.mock('react-native-reanimated', () => {
     ...ReanimatedModule,
     default: ReanimatedModule.default,
     measure: jest.fn(),
+    withSpring: jest.fn(ReanimatedModule.withSpring),
   };
 });
 
@@ -113,6 +115,42 @@ it('renders extended FAB transitioning to collapsed', async () => {
     <FAB.Extended icon="plus" label="New message" expanded={false} />
   );
   expect(toJSON()).toMatchSnapshot();
+});
+
+// Reanimated follows the device setting for a spring that doesn't say
+// otherwise, which would snap the FAB despite reduceMotion="off"
+it('keeps the expand and collapse springs on with reduceMotion="off" whatever the device setting', async () => {
+  const { rerender } = await render(
+    <PaperProvider reduceMotion="off">
+      <FAB.Extended icon="plus" label="New message" expanded />
+    </PaperProvider>
+  );
+  await jest.runAllTimersAsync();
+  jest.mocked(Reanimated.withSpring).mockClear();
+
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB.Extended icon="plus" label="New message" expanded={false} />
+    </PaperProvider>
+  );
+  await jest.runAllTimersAsync();
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB.Extended icon="plus" label="New message" expanded />
+    </PaperProvider>
+  );
+  await jest.runAllTimersAsync();
+
+  expect(
+    jest
+      .mocked(Reanimated.withSpring)
+      .mock.calls.map(([, config]) => config?.reduceMotion)
+  ).toEqual([
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+  ]);
 });
 
 it('uses label as default aria-label', async () => {

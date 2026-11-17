@@ -1,9 +1,25 @@
 import { expect, it, jest } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
+import * as Reanimated from 'react-native-reanimated';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import FAB from '../FAB';
 import type { MenuItemProps } from '../FAB/Menu';
+
+jest.mock('react-native-reanimated', () => {
+  const ReanimatedModule = jest.requireActual<
+    typeof import('react-native-reanimated')
+  >('react-native-reanimated');
+
+  return {
+    __esModule: true,
+    ...ReanimatedModule,
+    default: ReanimatedModule.default,
+    withDelay: jest.fn(ReanimatedModule.withDelay),
+    withSpring: jest.fn(ReanimatedModule.withSpring),
+  };
+});
 
 const makeItems = (
   onItemPress = jest.fn<(event?: unknown) => void>()
@@ -69,6 +85,58 @@ it('keeps the trigger mounted across opening and closing without trigger.onPress
 
   expect(screen.getByTestId('trigger')).toBe(closed);
   expect(closed).not.toBeDisabled();
+});
+
+// Reanimated follows the device setting for an animation that doesn't say
+// otherwise, which would snap the menu open and drop the item stagger despite
+// reduceMotion="off"
+it('keeps the opening springs and item stagger on with reduceMotion="off" whatever the device setting', async () => {
+  const { rerender } = await render(
+    <PaperProvider reduceMotion="off">
+      <FAB.Menu
+        expanded={false}
+        onDismiss={jest.fn()}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+      />
+    </PaperProvider>
+  );
+  jest.mocked(Reanimated.withSpring).mockClear();
+  jest.mocked(Reanimated.withDelay).mockClear();
+
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB.Menu
+        expanded
+        onDismiss={jest.fn()}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+      />
+    </PaperProvider>
+  );
+
+  // Scale and alpha for each of the two items, then the trigger's morph
+  expect(
+    jest
+      .mocked(Reanimated.withSpring)
+      .mock.calls.map(([, config]) => config?.reduceMotion)
+  ).toEqual([
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+  ]);
+  expect(
+    jest
+      .mocked(Reanimated.withDelay)
+      .mock.calls.map(([, , reduceMotion]) => reduceMotion)
+  ).toEqual([
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+  ]);
 });
 
 it('renders FAB.Menu with 6 items', async () => {
