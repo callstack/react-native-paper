@@ -4,7 +4,7 @@ import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider } from './settings';
 import type { Settings } from './settings';
-import { ThemeProvider, withoutUnsafeKeys } from './theming';
+import { safeMerge, ThemeProvider } from './theming';
 import {
   useResolvedReduceMotion,
   type ReduceMotionPreference,
@@ -36,14 +36,11 @@ const PaperProvider = (props: Props) => {
     const scale = resolvedReduceMotion
       ? 0
       : (props.theme?.animation?.scale ?? 1);
-    const safeTheme = withoutUnsafeKeys(props.theme);
+    // Merged deeply, like a component's `theme` prop: a nested key such as
+    // `motion` or `shapes` fills what it leaves out from the default theme.
+    const merged = safeMerge(base, props.theme);
 
-    return {
-      ...base,
-      ...safeTheme,
-      colors: { ...base.colors, ...safeTheme?.colors },
-      animation: { ...safeTheme?.animation, scale },
-    };
+    return { ...merged, animation: { ...merged.animation, scale } };
   }, [colorScheme, props.theme, resolvedReduceMotion]);
 
   const { children, settings } = props;
