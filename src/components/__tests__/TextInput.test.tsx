@@ -1367,11 +1367,10 @@ it.each([
         value=""
         onChangeText={() => {}}
         {...{ [affix]: text }}
-        testID="tf-affix-float"
       />
     );
 
-    await fireEvent(screen.getByTestId('tf-affix-float'), 'focus');
+    await fireEvent(screen.getByLabelText('Amount'), 'focus');
 
     // The label still rests over it when the field takes focus.
     expect(screen.getByText(text)).not.toBeVisible();
