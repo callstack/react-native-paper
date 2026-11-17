@@ -304,9 +304,10 @@ const getElevation = (
   return style.elevation;
 };
 
-it('renders a FAB without onPress as a disabled button', async () => {
+it('does not turn a FAB without onPress into a button', async () => {
   await render(<FAB icon="plus" aria-label="Create" />);
-  expect(screen.getByRole('button', { name: 'Create' })).toBeDisabled();
+  expect(screen.getByLabelText('Create')).toBeOnTheScreen();
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
 });
 
 it('hides an invisible FAB from accessibility and keyboard navigation without marking it disabled', async () => {
@@ -445,7 +446,9 @@ it('restores the resting elevation when a hovered FAB loses its action', async (
   expect(getStyle(ref)).not.toEqual(resting);
   await rerender(<FAB ref={ref} style={{}} icon="plus" aria-label="Create" />);
   expect(getStyle(ref)).toEqual(resting);
-  expect(screen.getByRole('button', { name: 'Create' })).toBeDisabled();
+  expect(
+    screen.queryByRole('button', { name: 'Create' })
+  ).not.toBeOnTheScreen();
   await rerender(<FAB ref={ref} style={{}} icon="plus" onPress={() => {}} />);
   expect(getStyle(ref)).toEqual(resting);
 });

@@ -329,10 +329,11 @@ const Shell = ({
   // stylesheet hides the browser's own outline there, so only the clip view's
   // ring shows, or only the outline in a browser without `:has()`.
   //
-  // Off when `disabled`, without a touch handler or while hidden: the inner
-  // TouchableRipple then can't be pressed, and a focused one unmounts without
-  // a blur reaching the hook. The public FAB has no `disabled`, so dropping
-  // the handlers is how an app turns it off.
+  // Off when `disabled` or without a touch handler: the inner TouchableRipple
+  // is then a plain View, and a focused one unmounts without a blur reaching
+  // the hook. The public FAB has no `disabled`, so dropping the handlers is how
+  // an app turns it off. Also off while hidden, which clears the focus state on
+  // native when the FAB hides while focused.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     disabled || !hasHandler || !visible,
     theme.colors.secondary,
@@ -415,28 +416,40 @@ const Shell = ({
           onPress={visible ? onPress : undefined}
           onLongPress={visible ? onLongPress : undefined}
           delayLongPress={delayLongPress}
-          disabled={disabled || !hasHandler}
-          accessible={visible}
-          focusable={visible && hasHandler}
+          disabled={disabled}
+          accessible={visible ? undefined : false}
+          focusable={visible ? undefined : false}
           tabIndex={visible ? undefined : -1}
-          onHoverIn={() => setHovered(true)}
-          onHoverOut={() => setHovered(false)}
-          onPressIn={() => setPressed(true)}
-          onPressOut={(event) => {
-            setPressed(false);
-            onPressOut?.(event);
-          }}
-          onFocus={(event) => {
-            if (Platform.OS === 'web') {
-              const previous =
-                'relatedTarget' in event.nativeEvent
-                  ? event.nativeEvent.relatedTarget
-                  : null;
-              previousFocusedElement.current =
-                previous instanceof HTMLElement ? previous : null;
-            }
-            focusTarget.onFocus?.(event);
-          }}
+          // Only with a touch handler: a FAB without one is a plain View that
+          // takes no focus, and the press handlers alone would make it a
+          // control. They also keep a hidden FAB's touchable mounted without
+          // `onPress`, so the effect above still finds the focused element.
+          onHoverIn={hasHandler ? () => setHovered(true) : undefined}
+          onHoverOut={hasHandler ? () => setHovered(false) : undefined}
+          onPressIn={hasHandler ? () => setPressed(true) : undefined}
+          onPressOut={
+            hasHandler
+              ? (event) => {
+                  setPressed(false);
+                  onPressOut?.(event);
+                }
+              : undefined
+          }
+          onFocus={
+            hasHandler
+              ? (event) => {
+                  if (Platform.OS === 'web') {
+                    const previous =
+                      'relatedTarget' in event.nativeEvent
+                        ? event.nativeEvent.relatedTarget
+                        : null;
+                    previousFocusedElement.current =
+                      previous instanceof HTMLElement ? previous : null;
+                  }
+                  focusTarget.onFocus?.(event);
+                }
+              : undefined
+          }
           onBlur={focusTarget.onBlur}
           aria-label={ariaLabel}
           role={isWebImage ? 'img' : 'button'}
