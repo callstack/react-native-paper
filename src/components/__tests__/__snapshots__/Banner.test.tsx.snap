@@ -113,7 +113,6 @@ exports[`render visible banner, with custom theme 1`] = `
       }
     />
     <View
-      aria-hidden={false}
       collapsable={false}
       onLayout={[Function]}
       pointerEvents="auto"
@@ -125,7 +124,6 @@ exports[`render visible banner, with custom theme 1`] = `
       }
     >
       <View
-        onLayout={[Function]}
         style={
           [
             {
@@ -135,10 +133,8 @@ exports[`render visible banner, with custom theme 1`] = `
               "marginHorizontal": 8,
               "marginTop": 16,
             },
-            {
-              "alignItems": "stretch",
-              "flexDirection": "column",
-            },
+            null,
+            null,
           ]
         }
       >
@@ -146,16 +142,18 @@ exports[`render visible banner, with custom theme 1`] = `
           style={
             [
               {
-                "alignItems": "center",
+                "alignItems": "flex-start",
                 "flexDirection": "row",
                 "flexShrink": 1,
               },
-              null,
+              {
+                "flexBasis": 0,
+                "flexGrow": 1,
+              },
             ]
           }
         >
           <View
-            accessible={true}
             style={
               {
                 "flex": 1,
@@ -164,8 +162,16 @@ exports[`render visible banner, with custom theme 1`] = `
             }
           >
             <Text
+              collapsable={false}
               style={
                 [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
                   {
                     "textAlign": "left",
                   },
@@ -173,18 +179,9 @@ exports[`render visible banner, with custom theme 1`] = `
                     "color": "rgba(29, 27, 32, 1)",
                     "writingDirection": "ltr",
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "400",
-                      "letterSpacing": 0.25,
-                      "lineHeight": 20,
-                    },
-                    {
-                      "color": "#00f",
-                    },
-                  ],
+                  {
+                    "color": "#00f",
+                  },
                 ]
               }
             >
@@ -557,7 +554,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
     <View
       aria-hidden={true}
       collapsable={false}
-      inert={true}
       onLayout={[Function]}
       pointerEvents="none"
       style={
@@ -581,7 +577,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       }
     >
       <View
-        onLayout={[Function]}
         style={
           [
             {
@@ -592,9 +587,9 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
               "marginTop": 16,
             },
             {
-              "alignItems": "stretch",
-              "flexDirection": "column",
+              "marginBottom": 8,
             },
+            null,
           ]
         }
       >
@@ -602,16 +597,18 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
           style={
             [
               {
-                "alignItems": "center",
+                "alignItems": "flex-start",
                 "flexDirection": "row",
                 "flexShrink": 1,
               },
-              null,
+              {
+                "flexBasis": 0,
+                "flexGrow": 1,
+              },
             ]
           }
         >
           <View
-            accessible={true}
             style={
               {
                 "flex": 1,
@@ -620,8 +617,16 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
             }
           >
             <Text
+              collapsable={false}
               style={
                 [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
                   {
                     "textAlign": "left",
                   },
@@ -629,18 +634,9 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
                     "color": "rgba(29, 27, 32, 1)",
                     "writingDirection": "ltr",
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "400",
-                      "letterSpacing": 0.25,
-                      "lineHeight": 20,
-                    },
-                    {
-                      "color": "rgba(29, 27, 32, 1)",
-                    },
-                  ],
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
                 ]
               }
             >
@@ -767,7 +763,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       }
     />
     <View
-      aria-hidden={false}
       collapsable={false}
       onLayout={[Function]}
       pointerEvents="auto"
@@ -779,7 +774,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       }
     >
       <View
-        onLayout={[Function]}
         style={
           [
             {
@@ -789,10 +783,8 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               "marginHorizontal": 8,
               "marginTop": 16,
             },
-            {
-              "alignItems": "stretch",
-              "flexDirection": "column",
-            },
+            null,
+            null,
           ]
         }
       >
@@ -800,11 +792,14 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
           style={
             [
               {
-                "alignItems": "center",
+                "alignItems": "flex-start",
                 "flexDirection": "row",
                 "flexShrink": 1,
               },
-              null,
+              {
+                "flexBasis": 0,
+                "flexGrow": 1,
+              },
             ]
           }
         >
@@ -832,7 +827,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             />
           </View>
           <View
-            accessible={true}
             style={
               {
                 "flex": 1,
@@ -841,8 +835,16 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             }
           >
             <Text
+              collapsable={false}
               style={
                 [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
                   {
                     "textAlign": "left",
                   },
@@ -850,18 +852,9 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                     "color": "rgba(29, 27, 32, 1)",
                     "writingDirection": "ltr",
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "400",
-                      "letterSpacing": 0.25,
-                      "lineHeight": 20,
-                    },
-                    {
-                      "color": "rgba(29, 27, 32, 1)",
-                    },
-                  ],
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
                 ]
               }
             >
@@ -1232,7 +1225,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       }
     />
     <View
-      aria-hidden={false}
       collapsable={false}
       onLayout={[Function]}
       pointerEvents="auto"
@@ -1244,7 +1236,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       }
     >
       <View
-        onLayout={[Function]}
         style={
           [
             {
@@ -1254,10 +1245,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               "marginHorizontal": 8,
               "marginTop": 16,
             },
-            {
-              "alignItems": "stretch",
-              "flexDirection": "column",
-            },
+            null,
+            null,
           ]
         }
       >
@@ -1265,16 +1254,18 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
           style={
             [
               {
-                "alignItems": "center",
+                "alignItems": "flex-start",
                 "flexDirection": "row",
                 "flexShrink": 1,
               },
-              null,
+              {
+                "flexBasis": 0,
+                "flexGrow": 1,
+              },
             ]
           }
         >
           <View
-            accessible={true}
             style={
               {
                 "flex": 1,
@@ -1283,8 +1274,16 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             }
           >
             <Text
+              collapsable={false}
               style={
                 [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
                   {
                     "textAlign": "left",
                   },
@@ -1292,18 +1291,9 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     "color": "rgba(29, 27, 32, 1)",
                     "writingDirection": "ltr",
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "400",
-                      "letterSpacing": 0.25,
-                      "lineHeight": 20,
-                    },
-                    {
-                      "color": "rgba(29, 27, 32, 1)",
-                    },
-                  ],
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
                 ]
               }
             >
@@ -1907,7 +1897,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       }
     />
     <View
-      aria-hidden={false}
       collapsable={false}
       onLayout={[Function]}
       pointerEvents="auto"
@@ -1919,7 +1908,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       }
     >
       <View
-        onLayout={[Function]}
         style={
           [
             {
@@ -1930,9 +1918,9 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
               "marginTop": 16,
             },
             {
-              "alignItems": "stretch",
-              "flexDirection": "column",
+              "marginBottom": 8,
             },
+            null,
           ]
         }
       >
@@ -1940,11 +1928,14 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
           style={
             [
               {
-                "alignItems": "center",
+                "alignItems": "flex-start",
                 "flexDirection": "row",
                 "flexShrink": 1,
               },
-              null,
+              {
+                "flexBasis": 0,
+                "flexGrow": 1,
+              },
             ]
           }
         >
@@ -1972,7 +1963,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
             />
           </View>
           <View
-            accessible={true}
             style={
               {
                 "flex": 1,
@@ -1981,8 +1971,16 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
             }
           >
             <Text
+              collapsable={false}
               style={
                 [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
                   {
                     "textAlign": "left",
                   },
@@ -1990,18 +1988,9 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
                     "color": "rgba(29, 27, 32, 1)",
                     "writingDirection": "ltr",
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "400",
-                      "letterSpacing": 0.25,
-                      "lineHeight": 20,
-                    },
-                    {
-                      "color": "rgba(29, 27, 32, 1)",
-                    },
-                  ],
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
                 ]
               }
             >
@@ -2128,7 +2117,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       }
     />
     <View
-      aria-hidden={false}
       collapsable={false}
       onLayout={[Function]}
       pointerEvents="auto"
@@ -2140,7 +2128,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       }
     >
       <View
-        onLayout={[Function]}
         style={
           [
             {
@@ -2151,9 +2138,9 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
               "marginTop": 16,
             },
             {
-              "alignItems": "stretch",
-              "flexDirection": "column",
+              "marginBottom": 8,
             },
+            null,
           ]
         }
       >
@@ -2161,16 +2148,18 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
           style={
             [
               {
-                "alignItems": "center",
+                "alignItems": "flex-start",
                 "flexDirection": "row",
                 "flexShrink": 1,
               },
-              null,
+              {
+                "flexBasis": 0,
+                "flexGrow": 1,
+              },
             ]
           }
         >
           <View
-            accessible={true}
             style={
               {
                 "flex": 1,
@@ -2179,8 +2168,16 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
             }
           >
             <Text
+              collapsable={false}
               style={
                 [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
                   {
                     "textAlign": "left",
                   },
@@ -2188,18 +2185,9 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
                     "color": "rgba(29, 27, 32, 1)",
                     "writingDirection": "ltr",
                   },
-                  [
-                    {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "400",
-                      "letterSpacing": 0.25,
-                      "lineHeight": 20,
-                    },
-                    {
-                      "color": "rgba(29, 27, 32, 1)",
-                    },
-                  ],
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                  },
                 ]
               }
             >

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
   AccessibilityInfo,
-  findNodeHandle,
   Platform,
   StyleSheet,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import type {
@@ -31,12 +31,13 @@ import Icon from './Icon';
 import type { IconSource } from './Icon';
 import Surface from './Surface';
 import type { SurfaceStyle } from './Surface';
+import AnimatedText from './Typography/AnimatedText';
 import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';
 import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../theme/types';
+import { addEventListener } from '../utils/addEventListener';
 import { mergeRefs } from '../utils/mergeRefs';
-import useLayout from '../utils/useLayout';
 
 const DEFAULT_MAX_WIDTH = 960;
 // banners carry at most two actions per the material spec
@@ -46,6 +47,9 @@ const COMPACT_BREAKPOINT = 600;
 // too short and the set and clear batch into one a11y update, too long and a
 // talkback swipe hears the message twice
 const ANNOUNCE_CLEAR_DELAY = 3000;
+// how long after an action's onPress a removal of that action still counts as
+// something the user did, and so is worth rescuing focus from
+const PRESS_RESCUE_WINDOW_MS = 1000;
 
 // only android and web have a real live region. everywhere else announces by hand
 const hasLiveRegion = () => Platform.OS === 'android' || Platform.OS === 'web';
@@ -198,7 +202,6 @@ const Banner = ({
   onHideAnimationFinished = () => {},
   maxFontSizeMultiplier,
   urgent = false,
-  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -304,23 +307,21 @@ const Banner = ({
     : { role: 'status', 'aria-live': 'polite' };
   const message = extractText(children);
 
-  React.useEffect(() => {
-    if (hasLiveRegion() || !visible || !message) {
-      return;
-    }
-
-    AccessibilityInfo.announceForAccessibilityWithOptions(message, {
-      queue: !urgent,
-    });
-  }, [visible, message, urgent]);
-
   // a region only fires when its text changes while already in the tree, and
   // the banner unmounts when hidden, so the message can never be that change
   const [announcement, setAnnouncement] = React.useState('');
-  React.useEffect(() => {
-    if (!hasLiveRegion() || !visible || !message) {
-      setAnnouncement('');
-      return;
+
+  // reads the latest message and urgency, so neither is a reason to announce
+  const announce = useLatestCallback(() => {
+    if (!message) {
+      return undefined;
+    }
+
+    if (!hasLiveRegion()) {
+      AccessibilityInfo.announceForAccessibilityWithOptions(message, {
+        queue: !urgent,
+      });
+      return undefined;
     }
 
     // re-setting the same string is not a render, so empty it first
@@ -331,70 +332,197 @@ const Banner = ({
       clearTimeout(fill);
       clearTimeout(clear);
     };
-  }, [visible, message, urgent]);
+  });
 
-  // one stable ref per action slot
-  const actionRefs = React.useRef<Array<React.RefObject<HostInstance | null>>>(
-    []
-  );
-  for (let i = 0; i < MAX_ACTIONS; i++) {
-    actionRefs.current[i] ??= React.createRef<HostInstance>();
-  }
-  // fixed length, so the dep list below keeps a constant size
-  const touchableRefs = Array.from(
-    { length: MAX_ACTIONS },
-    (_, i) => visibleActions[i]?.touchableRef
-  );
-  // a new callback each render would detach and reattach on every commit,
-  // handing a consumer's callback null each time
-  const mergedActionRefs = React.useMemo(
-    () =>
-      touchableRefs.map((touchableRef, i) =>
-        mergeRefs(actionRefs.current[i], touchableRef)
-      ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    touchableRefs
-  );
+  // announced only when the banner appears after mount: one that mounts
+  // visible is part of the page, not news, and a re-render while visible (a
+  // new message, a flipped `urgent`) is not a new appearance
+  const wasVisible = React.useRef(visible);
+  React.useEffect(() => {
+    const appeared = visible && !wasVisible.current;
+    wasVisible.current = visible;
 
-  const [row, onRowLayout] = useLayout();
-  const messageRef = React.useRef<HostInstance>(null);
-  const focusedAction = React.useRef<number | null>(null);
-
-  const focusNode = (node: HostInstance | null) => {
-    if (!node) {
-      return;
+    if (!visible) {
+      setAnnouncement('');
+      return undefined;
     }
 
-    // rnw's findNodeHandle throws; on web the host instance takes focus itself
-    if (Platform.OS === 'web') {
-      node.focus();
-      return;
+    return appeared ? announce() : undefined;
+  }, [announce, visible]);
+
+  // labels are the natural key, but two actions can carry the same one
+  const actionKeys = visibleActions.map(({ label }, i) =>
+    visibleActions.some((action, j) => j !== i && action.label === label)
+      ? `${label}-${i}`
+      : label
+  );
+
+  // each rendered action's host, by key. a ref per slot would go stale: the
+  // animated touchable reads its ref once, on mount, so an action that moves
+  // up a slot when the one before it goes would keep feeding the old slot
+  const actionNodes = React.useRef(new Map<string, HostInstance>());
+  // one callback per key, rebuilt only when the consumer's touchableRef
+  // changes: a new callback each render would hand that ref null each commit
+  const actionRefs = React.useRef(
+    new Map<
+      string,
+      {
+        touchableRef: ButtonProps['touchableRef'];
+        ref: React.RefCallback<HostInstance>;
+      }
+    >()
+  );
+  const actionRef = (
+    key: string,
+    touchableRef: ButtonProps['touchableRef']
+  ) => {
+    const cached = actionRefs.current.get(key);
+    if (cached && cached.touchableRef === touchableRef) {
+      return cached.ref;
     }
 
-    const handle = findNodeHandle(node);
-    if (handle != null) {
-      AccessibilityInfo.setAccessibilityFocus(handle);
-    }
+    const ref = mergeRefs<HostInstance>((node) => {
+      if (node) {
+        actionNodes.current.set(key, node);
+      } else {
+        actionNodes.current.delete(key);
+      }
+    }, touchableRef);
+    actionRefs.current.set(key, { touchableRef, ref });
+    return ref;
   };
 
-  // a removed action would otherwise strand focus at the top of the document
+  const wrapperRef = React.useRef<HostInstance>(null);
+  const messageRef = React.useRef<HostInstance>(null);
+  // both tracked by key, not slot: when a sibling goes, the survivor moves up.
+  // web only: the action with keyboard focus. native onFocus does not follow
+  // the screen reader cursor, so it is not used there
+  const focusedKey = React.useRef<string | null>(null);
+  // native only: the action a screen reader double tap just ran onPress on
+  const pressed = React.useRef<{ key: string; at: number } | null>(null);
+  const screenReaderEnabled = React.useRef(false);
+  // web only: the element that had focus at the moment the banner showed,
+  // given back on hide. it is not where focus was right before it entered
+  // the banner, which can be a different element minutes later
+  const focusBeforeShow = React.useRef<HTMLElement | null>(null);
+  // the keys of the previous commit, to find where a removed action was
+  const renderedKeys = React.useRef(actionKeys);
+
   React.useEffect(() => {
-    // the index is stale once hidden, and a later show would act on it
+    // rnw reports a screen reader whether or not one runs, and web does not
+    // need one: it follows dom focus
+    if (Platform.OS === 'web') {
+      return undefined;
+    }
+
+    // a change event is newer than whatever the initial query resolves to
+    let changed = false;
+
+    const init = async () => {
+      const enabled = await AccessibilityInfo.isScreenReaderEnabled();
+      if (!changed) {
+        screenReaderEnabled.current = enabled;
+      }
+    };
+    void init();
+
+    const subscription = addEventListener(
+      AccessibilityInfo,
+      'screenReaderChanged',
+      (enabled: boolean) => {
+        changed = true;
+        screenReaderEnabled.current = enabled;
+      }
+    );
+
+    return () => subscription.remove();
+  }, []);
+
+  // web only. the hidden content goes inert, which drops focus still inside
+  // it on the body, so a hide gives it back. inside is read from the dom, not
+  // from the trackers: focus can also sit on the message after a rescue
+  React.useLayoutEffect(() => {
+    if (Platform.OS !== 'web' || !('document' in global)) {
+      return;
+    }
+
+    const { activeElement } = document;
+    const wrapper = wrapperRef.current;
+    const focusInside =
+      activeElement instanceof HTMLElement &&
+      wrapper instanceof HTMLElement &&
+      wrapper.contains(activeElement);
+
+    if (visible) {
+      // focus still inside means a re-show mid-hide: keep the first one
+      if (activeElement instanceof HTMLElement && !focusInside) {
+        focusBeforeShow.current = activeElement;
+      }
+      return;
+    }
+
+    const previous = focusBeforeShow.current;
+    focusBeforeShow.current = null;
+    if (focusInside && previous?.isConnected) {
+      previous.focus();
+    }
+  }, [visible]);
+
+  // an action removed under focus would otherwise strand it: at the top of
+  // the document on web, wherever the screen reader likes on native.
+  // no deps, so it sees every commit that can change the rendered actions
+  React.useLayoutEffect(() => {
+    const previousKeys = renderedKeys.current;
+    renderedKeys.current = actionKeys;
+    for (const key of actionRefs.current.keys()) {
+      if (!actionKeys.includes(key)) {
+        actionRefs.current.delete(key);
+      }
+    }
+
+    const isWeb = Platform.OS === 'web';
+    const press = pressed.current;
+    const recentPress =
+      press && performance.now() - press.at <= PRESS_RESCUE_WINDOW_MS
+        ? press.key
+        : null;
+    const tracked = isWeb ? focusedKey.current : recentPress;
+
+    if (tracked === null || (visible && actionKeys.includes(tracked))) {
+      return;
+    }
+
+    focusedKey.current = null;
+    pressed.current = null;
+
+    // the hide itself is handled above on web. native has no element to go
+    // back to yet, so it is left alone
     if (!visible) {
-      focusedAction.current = null;
       return;
     }
 
-    const focused = focusedAction.current;
-
-    if (focused === null || focused < actionCount) {
+    if (!isWeb && !screenReaderEnabled.current) {
       return;
     }
 
-    const next = actionCount - 1;
-    focusedAction.current = next < 0 ? null : next;
-    focusNode(next < 0 ? messageRef.current : actionRefs.current[next].current);
-  }, [actionCount, visible]);
+    // the action now in the removed one's place, else the one before it,
+    // else the message
+    const slot = Math.min(previousKeys.indexOf(tracked), actionCount - 1);
+    const target =
+      slot >= 0
+        ? (actionNodes.current.get(actionKeys[slot]) ?? null)
+        : messageRef.current;
+
+    if (!target) {
+      return;
+    }
+
+    if (isWeb) {
+      target.focus();
+    } else {
+      AccessibilityInfo.sendAccessibilityEvent(target, 'focus');
+    }
+  });
 
   const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
     const { height } = nativeEvent.layout;
@@ -415,36 +543,28 @@ const Banner = ({
   // Once we have the height, we apply the height to the spacer and switch the banner to position: absolute
   // We need this because we need to move the content below as if banner's height was being animated
   // However we can't animated banner's height directly as it'll also resize the content inside
-  // rnw forwards `inert` to the dom, dropping the subtree from the a11y tree
-  // and the tab order. native ignores the unknown prop
-  const inertProps: { inert?: boolean } = visible ? {} : { inert: true };
 
-  const stacked = !row.measured || row.width < COMPACT_BREAKPOINT;
-
-  // no default: it would land on every banner and collide with the consumer's
-  const subTestID = (suffix: string) =>
-    testID ? `${testID}-${suffix}` : undefined;
-
-  const messageFocusProps: Pick<ViewProps, 'tabIndex' | 'accessible'> =
-    Platform.OS === 'web' ? { tabIndex: -1 } : { accessible: true };
+  const { width } = useWindowDimensions();
+  // the compact breakpoint is defined on the window width, not the banner's
+  // own width, so a banner squeezed into a side panel still lays out inline
+  const stacked = width < COMPACT_BREAKPOINT;
 
   return (
     <Surface
       {...rest}
-      testID={testID}
       style={[surfaceStyle, style]}
       theme={theme}
       elevation={elevation}
     >
-      <View style={[styles.wrapper, contentStyle]}>
+      <View ref={wrapperRef} style={[styles.wrapper, contentStyle]}>
         <Animated.View style={spacerStyle} />
         {exited ? null : (
           <Animated.View
-            testID={subTestID('content')}
             onLayout={handleLayout}
-            aria-hidden={!visible}
+            aria-hidden={!visible || undefined}
+            // @ts-expect-error: `ViewProps` doesn't expose the web-specific `inert` prop.
+            inert={Platform.OS === 'web' ? !visible || undefined : undefined}
             pointerEvents={visible ? 'auto' : 'none'}
-            {...inertProps}
             style={[
               layout.measured || !visible
                 ? // If we have measured banner's height or it's invisible,
@@ -460,16 +580,19 @@ const Banner = ({
             ]}
           >
             <View
-              testID={subTestID('row')}
-              onLayout={onRowLayout}
-              style={[styles.content, stacked ? styles.contentStacked : null]}
+              style={[
+                styles.content,
+                // without the actions row the message's own 8px is all that is
+                // left, so the banner would end 8 instead of 16 below the text
+                actionCount === 0 ? styles.contentWithoutActions : null,
+                stacked ? styles.contentStacked : null,
+              ]}
             >
               <View style={[styles.body, stacked ? null : styles.bodyInline]}>
                 {/* rnw renders this View as a plain div, which cannot take a
                     name, and gives the inner icon role="img" with none */}
                 {icon ? (
                   <View
-                    testID={subTestID('icon')}
                     style={styles.icon}
                     aria-hidden={!iconAccessibilityLabel}
                     accessible={iconAccessibilityLabel ? true : undefined}
@@ -479,39 +602,57 @@ const Banner = ({
                     <Icon source={icon} size={40} />
                   </View>
                 ) : null}
-                <View
-                  ref={messageRef}
-                  testID={subTestID('message')}
-                  style={styles.message}
-                  {...messageFocusProps}
-                >
-                  <Text
+                <View style={styles.message}>
+                  {/* the focus rescue's last resort. AnimatedText, because
+                      its ref is the host text. tabIndex -1 takes
+                      programmatic focus on web without being a tab stop;
+                      native needs nothing, the text already is an element */}
+                  <AnimatedText
+                    ref={messageRef}
                     variant="bodyMedium"
                     style={{ color: colors.onSurface }}
                     maxFontSizeMultiplier={maxFontSizeMultiplier}
+                    // @ts-expect-error: `TextProps` doesn't expose the web-specific `tabIndex` prop.
+                    tabIndex={Platform.OS === 'web' ? -1 : undefined}
                   >
                     {children}
-                  </Text>
+                  </AnimatedText>
                 </View>
               </View>
               {visibleActions.length ? (
                 <View style={styles.actions}>
                   {visibleActions.map(({ label, ...others }, i) => (
                     <Button
-                      key={i}
+                      key={actionKeys[i]}
                       mode="text"
                       style={styles.button}
                       textColor={colors.primary}
                       theme={theme}
                       {...others}
-                      touchableRef={mergedActionRefs[i]}
+                      touchableRef={actionRef(
+                        actionKeys[i],
+                        others.touchableRef
+                      )}
+                      // only wrapped when given: a Button without onPress
+                      // behaves differently from one with
+                      onPress={
+                        others.onPress
+                          ? (e) => {
+                              pressed.current = {
+                                key: actionKeys[i],
+                                at: performance.now(),
+                              };
+                              others.onPress?.(e);
+                            }
+                          : undefined
+                      }
                       onFocus={(e) => {
-                        focusedAction.current = i;
+                        focusedKey.current = actionKeys[i];
                         others.onFocus?.(e);
                       }}
                       onBlur={(e) => {
-                        if (focusedAction.current === i) {
-                          focusedAction.current = null;
+                        if (focusedKey.current === actionKeys[i]) {
+                          focusedKey.current = null;
                         }
                         others.onBlur?.(e);
                       }}
@@ -524,14 +665,13 @@ const Banner = ({
             </View>
           </Animated.View>
         )}
-        {/* last, so a screen reader reaches the real message first */}
+        {/* last, so a screen reader reaches the real message first. the
+            region lives on the Text whose content changes: a native View
+            would need accessible to be one, which makes it a keyboard tab
+            stop on android */}
         {hasLiveRegion() ? (
-          <View
-            testID={subTestID('announcer')}
-            style={styles.announcer}
-            {...region}
-          >
-            <Text>{announcement}</Text>
+          <View style={styles.announcer}>
+            <Text {...region}>{announcement}</Text>
           </View>
         ) : null}
       </View>
@@ -558,13 +698,20 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 0,
   },
+  contentWithoutActions: {
+    // the actions row used to add 4 + 4 of margin, so without it the banner
+    // would end 8 below the message instead of main's 16
+    marginBottom: 8,
+  },
   contentStacked: {
     flexDirection: 'column',
     alignItems: 'stretch',
   },
   body: {
     flexDirection: 'row',
-    alignItems: 'center',
+    // the icon sits at the top of a multi-line message, like before the
+    // actions row moved out of the content row
+    alignItems: 'flex-start',
     flexShrink: 1,
   },
   bodyInline: {
