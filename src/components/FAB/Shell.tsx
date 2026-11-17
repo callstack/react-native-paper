@@ -314,13 +314,13 @@ const Shell = ({
     [borderRadius, containerBg]
   );
 
+  const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
+
   // `scope: 'within'`: the ring is drawn on the clip view below, not the
   // inner `TouchableRipple` that actually receives focus. On web the shared
   // stylesheet hides the browser's own outline there, so only the clip view's
   // ring shows, or only the outline in a browser without `:has()`.
   //
-  const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
-
   // Off when `disabled` or without a touch handler: the inner TouchableRipple
   // is then a plain View, and a focused one unmounts without a blur reaching
   // the hook. The public FAB has no `disabled`, so dropping the handlers is how
