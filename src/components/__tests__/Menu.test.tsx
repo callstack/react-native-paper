@@ -10,6 +10,7 @@ import {
   jest,
 } from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
+import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { render } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
@@ -455,5 +456,59 @@ it('does not crash when Keyboard.metrics is unavailable (react-native-web)', asy
     Keyboard.metrics = original;
     measureSpy.mockRestore();
     dimensionsSpy.mockRestore();
+  }
+});
+
+it('scales in again when reopened at the same anchor', async () => {
+  const testID = 'reopened-menu';
+  const measureSpy = jest
+    .spyOn(ViewPrototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={<Button mode="outlined">Open menu</Button>}
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  // The style partway through the open animation.
+  const openAndSample = async () => {
+    await act(async () => {
+      await screen.rerender(makeMenu(true));
+    });
+    await act(() => jest.advanceTimersByTimeAsync(100));
+    const style = getAnimatedStyle(screen.getByTestId(testID));
+    await act(() => jest.advanceTimersByTimeAsync(500));
+    return style;
+  };
+
+  try {
+    await render(makeMenu(false));
+
+    const firstOpen = await openAndSample();
+    // Partway through the first open, the menu is still growing.
+    expect(firstOpen).not.toMatchObject({
+      transform: [{ scaleX: 1 }, { scaleY: 1 }],
+    });
+
+    await act(async () => {
+      await screen.rerender(makeMenu(false));
+    });
+    await act(() => jest.advanceTimersByTimeAsync(500));
+    expect(screen.queryByTestId(testID)).toBeNull();
+
+    const secondOpen = await openAndSample();
+    expect(secondOpen).toEqual(firstOpen);
+  } finally {
+    measureSpy.mockRestore();
   }
 });
