@@ -554,7 +554,7 @@ exports[`renders FAB.Menu closed 1`] = `
             }
             accessible={true}
             collapsable={false}
-            focusable={false}
+            focusable={true}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}

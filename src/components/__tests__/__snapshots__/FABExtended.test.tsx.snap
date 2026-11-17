@@ -1213,8 +1213,9 @@ exports[`renders extended FAB not visible 1`] = `
       }
     >
       <View
-        accessible={true}
+        accessible={false}
         aria-label="New message"
+        focusable={false}
         role="none"
         style={
           [
@@ -1226,6 +1227,7 @@ exports[`renders extended FAB not visible 1`] = `
             ],
           ]
         }
+        tabIndex={-1}
       >
         <View
           style={
