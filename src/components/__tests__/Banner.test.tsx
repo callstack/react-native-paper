@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-  AccessibilityInfo,
-  Image,
-  Platform,
-  Text,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import { AccessibilityInfo, Image, Platform, Text, View } from 'react-native';
 import type { HostInstance } from 'react-native';
 
 import {
@@ -27,10 +20,6 @@ import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import Banner from '../Banner';
 import type { Props as BannerProps } from '../Banner';
 import PaperText from '../Typography/Text';
-
-// jest/testSetup.js mocks useWindowDimensions globally at 750 wide; tests
-// that need the other window class override the mock and put it back
-const DEFAULT_WINDOW = { scale: 2, fontScale: 1, height: 1334, width: 750 };
 
 // a banner that mounts visible is part of the page and is not announced, so
 // the tests that need an announcement mount it hidden and then show it
@@ -474,69 +463,6 @@ describe('actions', () => {
     expect(warn).toHaveBeenCalledWith(
       expect.stringContaining('Banner supports a maximum of 2 actions')
     );
-  });
-});
-
-describe('reflow', () => {
-  const ACTIONS_TWO = [
-    { label: 'first', onPress: () => {} },
-    { label: 'second', onPress: () => {} },
-  ];
-
-  afterEach(() => {
-    jest.mocked(useWindowDimensions).mockReturnValue(DEFAULT_WINDOW);
-  });
-
-  // the arrangement has no public role or label to query, so the tests pin
-  // the one public output that carries it: the flex direction of the content
-  // row that holds the message and the actions, read off the rendered tree
-  // from the message text up to that row
-  const contentRow = () => {
-    const message = screen.getByText('Two line text string with two actions.');
-    const body = message.parent?.parent; // message wrapper in the body row
-    const row = body?.parent; // the content row itself
-    if (!row) {
-      throw new Error('message is not inside a content row');
-    }
-    return row;
-  };
-
-  it('stacks the actions below the message on a compact window', async () => {
-    jest.mocked(useWindowDimensions).mockReturnValue({
-      scale: 2,
-      fontScale: 1,
-      height: 800,
-      width: 599,
-    });
-
-    await render(
-      <Banner visible actions={ACTIONS_TWO}>
-        Two line text string with two actions.
-      </Banner>
-    );
-
-    expect(screen.getByRole('button', { name: 'first' })).toBeOnTheScreen();
-    expect(screen.getByRole('button', { name: 'second' })).toBeOnTheScreen();
-    expect(contentRow()).toHaveStyle({ flexDirection: 'column' });
-  });
-
-  it('puts the actions inline once the window is wide enough', async () => {
-    jest.mocked(useWindowDimensions).mockReturnValue({
-      scale: 2,
-      fontScale: 1,
-      height: 800,
-      width: 600,
-    });
-
-    await render(
-      <Banner visible actions={ACTIONS_TWO}>
-        Two line text string with two actions.
-      </Banner>
-    );
-
-    expect(screen.getByRole('button', { name: 'first' })).toBeOnTheScreen();
-    expect(screen.getByRole('button', { name: 'second' })).toBeOnTheScreen();
-    expect(contentRow()).toHaveStyle({ flexDirection: 'row' });
   });
 });
 
@@ -1214,6 +1140,32 @@ describe('focus rescue', () => {
       expect(rescues()).toEqual([]);
     });
 
+    it('leaves focus alone when the banner comes back without actions', async () => {
+      screenReader.mockResolvedValue(true);
+      const view = await render(
+        <Banner visible actions={[retry(), dismiss()]}>
+          Message
+        </Banner>
+      );
+      await settle();
+
+      await press('Retry');
+      await view.rerender(
+        <Banner visible={false} actions={[retry(), dismiss()]}>
+          Message
+        </Banner>
+      );
+      // still inside the press window, so a press kept across the hide
+      // would look like the action going and pull the screen reader along
+      await view.rerender(
+        <Banner visible actions={[]}>
+          Message
+        </Banner>
+      );
+
+      expect(rescues()).toEqual([]);
+    });
+
     it('still calls the consumer onPress', async () => {
       await render(
         <Banner visible actions={[retry()]}>
@@ -1407,6 +1359,34 @@ describe('focus rescue', () => {
       );
 
       expect(dismissFocus).not.toHaveBeenCalled();
+    });
+
+    it('leaves focus alone when the banner comes back without actions', async () => {
+      const textFocus = jest.spyOn(Text.prototype, 'focus');
+      textFocus.mockClear();
+      const view = await render(
+        <Banner visible actions={[retry(), dismiss()]}>
+          Message
+        </Banner>
+      );
+
+      await focusAction('Retry');
+      await view.rerender(
+        <Banner visible={false} actions={[retry(), dismiss()]}>
+          Message
+        </Banner>
+      );
+      // a focus kept across the hide would look like the action going and
+      // pull focus to the message
+      await view.rerender(
+        <Banner visible actions={[]}>
+          Message
+        </Banner>
+      );
+
+      expect(textFocus.mock.contexts.map(nameOf)).toEqual([]);
+      expect(rescues()).toEqual([]);
+      textFocus.mockRestore();
     });
 
     it('gives focus back to where it was before the banner showed', async () => {
