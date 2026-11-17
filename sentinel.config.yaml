@@ -10,6 +10,7 @@ user_settings:
     - xdimota7x
     - jacekAtCK
     - kachmashk
+  review_drafts: false
   report_floor: corroborated-minor
 
 issues: false
