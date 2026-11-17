@@ -9,6 +9,8 @@ export {
 
 export { useLocale, LocaleProvider } from './core/locale';
 
+export { useReduceMotion } from './theme/accessibility/ReduceMotionContext';
+
 export * from './theme/schemes';
 
 export { default as Provider } from './core/PaperProvider';
@@ -142,3 +144,4 @@ export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
 
 export { type TypescaleKey, type Theme, type Elevation } from './theme/types';
+export type { ReduceMotionPreference } from './core/useResolvedReduceMotion';

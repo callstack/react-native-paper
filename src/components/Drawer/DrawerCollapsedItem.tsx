@@ -18,6 +18,7 @@ import Animated, {
 import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import { useFocusRing } from '../../utils/useFocusRing';
@@ -118,7 +119,7 @@ const DrawerCollapsedItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { scale } = theme.animation;
+  const reduceMotion = useReduceMotion();
 
   // MD3 rings a navigation rail item as a whole (icon and label) with a
   // rounded rectangle inside the rail, like Material Web's navigation tab
@@ -144,7 +145,7 @@ const DrawerCollapsedItem = ({
 
   const expandOutline = useLatestCallback(() => {
     outlineScale.value = withTiming(1, {
-      duration: 150 * scale,
+      duration: reduceMotion ? 0 : 150,
       easing: Easing.inOut(Easing.ease),
       reduceMotion: ReduceMotion.Never,
     });

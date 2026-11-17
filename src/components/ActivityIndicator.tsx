@@ -3,7 +3,10 @@ import * as React from 'react';
 import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import useLatestCallback from 'use-latest-callback';
+
 import { useInternalTheme } from '../core/theming';
+import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../theme/types';
 
 export type Props = ViewProps & {
@@ -69,14 +72,15 @@ const ActivityIndicator = ({
     undefined
   );
 
-  const {
-    animation: { scale },
-  } = theme;
+  const reduceMotion = useReduceMotion();
+  // Read when a fade starts, so a reduce motion change doesn't restart the
+  // rotation.
+  const getFadeDuration = useLatestCallback(() => (reduceMotion ? 0 : 200));
 
   const startRotation = React.useCallback(() => {
     // Show indicator
     Animated.timing(fade, {
-      duration: 200 * scale,
+      duration: getFadeDuration(),
       toValue: 1,
       isInteraction: false,
       useNativeDriver: true,
@@ -88,7 +92,7 @@ const ActivityIndicator = ({
       // $FlowFixMe
       Animated.loop(rotation.current).start();
     }
-  }, [scale, fade, timer]);
+  }, [getFadeDuration, fade, timer]);
 
   const stopRotation = () => {
     if (rotation.current) {
@@ -114,7 +118,7 @@ const ActivityIndicator = ({
     } else if (hidesWhenStopped) {
       // Hide indicator first and then stop rotation
       Animated.timing(fade, {
-        duration: 200 * scale,
+        duration: getFadeDuration(),
         toValue: 0,
         useNativeDriver: true,
         isInteraction: false,
@@ -122,7 +126,14 @@ const ActivityIndicator = ({
     } else {
       stopRotation();
     }
-  }, [animating, fade, hidesWhenStopped, startRotation, scale, timer]);
+  }, [
+    animating,
+    fade,
+    hidesWhenStopped,
+    startRotation,
+    getFadeDuration,
+    timer,
+  ]);
 
   const color = indicatorColor || theme.colors?.primary;
   const size =

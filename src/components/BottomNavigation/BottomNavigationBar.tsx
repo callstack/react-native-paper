@@ -9,6 +9,7 @@ import type {
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import useLatestCallback from 'use-latest-callback';
 
 import {
   getActiveTintColor,
@@ -16,6 +17,7 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
@@ -334,7 +336,12 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme;
   const { bottom, left, right } = useSafeAreaInsets();
-  const { scale } = theme.animation;
+  const reduceMotion = useReduceMotion();
+  // Read when an animation starts, so a reduce motion change doesn't run the
+  // tab animation again.
+  const getDuration = useLatestCallback((duration: number) =>
+    reduceMotion ? 0 : duration
+  );
   const compact = compactProp ?? false;
   let shifting = shiftingProp ?? false;
 
@@ -374,20 +381,20 @@ const BottomNavigationBar = <Route extends BaseRoute>({
     setKeyboardVisible(true);
     Animated.timing(visibleAnim, {
       toValue: 0,
-      duration: 150 * scale,
+      duration: getDuration(150),
       useNativeDriver: true,
     }).start();
-  }, [scale, visibleAnim]);
+  }, [getDuration, visibleAnim]);
 
   const handleKeyboardHide = React.useCallback(() => {
     Animated.timing(visibleAnim, {
       toValue: 1,
-      duration: 100 * scale,
+      duration: getDuration(100),
       useNativeDriver: true,
     }).start(() => {
       setKeyboardVisible(false);
     });
-  }, [scale, visibleAnim]);
+  }, [getDuration, visibleAnim]);
 
   const animateToIndex = React.useCallback(
     (index: number) => {
@@ -395,7 +402,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
         navigationState.routes.map((_, i) =>
           Animated.timing(tabsAnims[i], {
             toValue: i === index ? 1 : 0,
-            duration: 150 * scale,
+            duration: getDuration(150),
             useNativeDriver: true,
             easing: animationEasing,
           })
@@ -405,7 +412,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
         tabsAnims.map((tab, i) => tab.setValue(i === index ? 1 : 0));
       });
     },
-    [scale, navigationState.routes, tabsAnims, animationEasing]
+    [getDuration, navigationState.routes, tabsAnims, animationEasing]
   );
 
   React.useEffect(() => {

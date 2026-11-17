@@ -13,6 +13,7 @@ import Portal from './Portal/Portal';
 import Surface from './Surface';
 import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
+import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
 import { useOverlayDismiss } from '../utils/useOverlayDismiss';
@@ -208,7 +209,10 @@ function Modal({
     setVisibleInternal(true);
   }
 
-  const { scale } = theme.animation;
+  const reduceMotion = useReduceMotion();
+  const duration = reduceMotion ? 0 : DEFAULT_DURATION;
+  // Read when a timer starts, so a reduce motion change doesn't restart it.
+  const getDuration = useLatestCallback(() => duration);
 
   const contentRef = React.useRef<React.ComponentRef<typeof View>>(null);
 
@@ -230,13 +234,10 @@ function Modal({
       return undefined;
     }
 
-    const timeout = setTimeout(
-      () => setVisibleInternal(false),
-      scale * DEFAULT_DURATION
-    );
+    const timeout = setTimeout(() => setVisibleInternal(false), getDuration());
 
     return () => clearTimeout(timeout);
-  }, [scale, visible, visibleInternal]);
+  }, [getDuration, visible, visibleInternal]);
 
   React.useEffect(() => {
     if (!visibleInternal) {
@@ -257,15 +258,15 @@ function Modal({
 
     // Transparent views are not in the accessibility tree, so focus has to
     // wait for the fade to finish.
-    const timeout = setTimeout(focusInitialTarget, scale * DEFAULT_DURATION);
+    const timeout = setTimeout(focusInitialTarget, getDuration());
 
     return () => clearTimeout(timeout);
-  }, [animatedVisible, focusInitialTarget, scale]);
+  }, [animatedVisible, focusInitialTarget, getDuration]);
 
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
   const backdropTransitionStyle: AnimatedStyle<ViewStyle> = {
-    transitionDuration: scale * DEFAULT_DURATION,
+    transitionDuration: duration,
     transitionProperty: 'opacity',
     transitionTimingFunction,
   };
@@ -338,7 +339,7 @@ function Modal({
               contentContainerStyle,
             ]}
             elevation={contentElevation}
-            transitionDuration={scale * DEFAULT_DURATION}
+            transitionDuration={duration}
           >
             {children}
             {dismissable ? (

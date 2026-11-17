@@ -42,6 +42,34 @@ const MyComponent = () => {
 };
 ```
 
+### Reduce motion
+
+The `animation` theme key and its `scale` were removed. The new `reduceMotion` prop of `PaperProvider` turns Paper's animations on or off instead:
+
+- `'auto'` (default): follows the reduce motion setting of the device.
+- `'on'`: turns Paper's animations off.
+- `'off'`: keeps Paper's animations on, even when the device setting is on.
+
+In 5.x, `PaperProvider` set the `scale` itself and replaced any `scale` in the theme passed to it, so a `scale` of `0` only turned animations off in a nested `ThemeProvider` or a component's `theme` prop. To turn animations off, for example in tests, remove that `scale` and pass `reduceMotion="on"` to `PaperProvider`:
+
+```diff
+-<PaperProvider>
+-  <ThemeProvider theme={{ ...LightTheme, animation: { scale: 0 } }}>
+-    <App />
+-  </ThemeProvider>
++<PaperProvider reduceMotion="on">
++  <App />
+ </PaperProvider>
+```
+
+If your app was written for a 6.0 alpha build, which also read a `scale` set on `PaperProvider`, remove it from that theme too.
+
+Other `scale` values, which made animations slower or faster, have no replacement in 6.0. A `scale` in a component's `theme` prop, such as `theme={{ animation: { scale: 2 } }}`, does nothing now, and it can no longer turn animations back on while reduce motion is on.
+
+In 5.x, `PaperProvider` also followed the device setting only when you passed no `theme`. In 6.x, `'auto'` follows the device setting with every theme, so if your app passes a custom theme, Paper's animations now stop when the user turns on reduce motion. 6.x also reads the setting when the app starts, while 5.x only reacted when it changed.
+
+To follow the same preference in your own components, use the `useReduceMotion()` hook, which returns `true` when reduce motion is on. See [Reduce motion](./theming#reduce-motion) in the theming guide.
+
 ### Elevation
 
 The `elevation` prop no longer accepts a React Native `Animated.Value` in the following components:
@@ -278,7 +306,7 @@ A component's `theme` prop is merged deeply, so you can set only the role you ne
 
 #### Removed keys
 
-The 6.x theme has no `version`, `isV3`, `mode` or `animation.defaultAnimationDuration` keys. Paper 6 only supports Material Design 3, so `version` and `isV3` have nothing to select, and `mode` and `defaultAnimationDuration` have no replacement. Remove `version: 3` and `isV3` from your custom theme objects:
+The 6.x theme has no `version`, `isV3`, `mode` or `animation` keys. Paper 6 only supports Material Design 3, so `version` and `isV3` have nothing to select. `mode` and `animation.defaultAnimationDuration` have no replacement, and `animation.scale` is replaced by the `reduceMotion` prop of `PaperProvider`, see [Reduce motion](#reduce-motion). Remove `version: 3` and `isV3` from your custom theme objects:
 
 ```diff
  const theme = {
@@ -389,6 +417,8 @@ On web, `Button`, `Card`, the `Chip` body, `FAB`, `FAB.Extended` and the `FAB.Me
 ### Libraries built on Paper
 
 Libraries built on Paper may not support 6.x yet. For example, `react-native-paper-dates` 0.24.1 still uses `HelperText`, the 5.x theme exports and `theme.roundness`, so its `DatePickerInput` crashes when it shows a validation error.
+
+A library that reads `theme.animation.scale` to turn its own animations off should read `useReduceMotion()` instead. The 6.x theme has no `animation` key, so `theme.animation.scale` throws.
 
 ## Components
 

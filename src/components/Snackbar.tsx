@@ -24,6 +24,7 @@ import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
+import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../theme/types';
 import { FocusRingColorContext } from '../utils/useFocusRing';
 
@@ -183,7 +184,12 @@ const Snackbar = ({
 
   const [hidden, setHidden] = React.useState(!visible);
 
-  const { scale } = theme.animation;
+  const reduceMotion = useReduceMotion();
+  // Read when the animation starts, so a reduce motion change doesn't replay it
+  // and restart the dismiss timer.
+  const getDuration = useLatestCallback((duration: number) =>
+    reduceMotion ? 0 : duration
+  );
 
   if (visible && hidden) {
     setHidden(false);
@@ -212,7 +218,7 @@ const Snackbar = ({
     opacity.value = withTiming(
       visible ? 1 : 0,
       {
-        duration: (visible ? 200 : 100) * scale,
+        duration: getDuration(visible ? 200 : 100),
         easing: visible ? Easing.out(Easing.ease) : Easing.inOut(Easing.ease),
         reduceMotion: ReduceMotion.Never,
       },
@@ -224,7 +230,7 @@ const Snackbar = ({
         }
       }
     );
-  }, [handleShowAnimationFinished, opacity, scale, visible]);
+  }, [getDuration, handleShowAnimationFinished, opacity, visible]);
 
   React.useEffect(() => {
     isMounted.current = true;

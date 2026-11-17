@@ -10,10 +10,12 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import useLatestCallback from 'use-latest-callback';
 
 import Icon, { isEqualIcon, isValidIcon } from './Icon';
 import type { IconSource } from './Icon';
 import { useInternalTheme } from '../core/theming';
+import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../theme/types';
 
 type Props = {
@@ -57,6 +59,10 @@ const CrossFadeIcon = ({
 
   const fade = useSharedValue(1);
 
+  const reduceMotion = useReduceMotion();
+  // Read when the swap starts, so a reduce motion change doesn't replay it.
+  const getDuration = useLatestCallback(() => (reduceMotion ? 0 : 200));
+
   if (currentIcon !== source) {
     setPreviousIcon(() => currentIcon);
     setCurrentIcon(() => source);
@@ -67,12 +73,12 @@ const CrossFadeIcon = ({
       fade.value = 1;
 
       fade.value = withTiming(0, {
-        duration: theme.animation.scale * 200,
+        duration: getDuration(),
         easing: Easing.inOut(Easing.ease),
         reduceMotion: ReduceMotion.Never,
       });
     }
-  }, [currentIcon, fade, previousIcon, theme.animation.scale]);
+  }, [currentIcon, fade, previousIcon, getDuration]);
 
   const hasPreviousIcon = Boolean(previousIcon);
 
