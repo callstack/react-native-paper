@@ -374,7 +374,7 @@ it('uses the shared FAB hover elevation for the menu trigger', async () => {
   expect(JSON.stringify(toJSON())).toBe(before);
 });
 
-// React Native 0.85 sends no hover events on iOS or Android by default. These
+// React Native 0.88 sends no hover events on iOS or Android by default. These
 // only check that the elevation logic itself has no platform check.
 it.each(['ios', 'android'] as const)(
   'keeps the resting elevation on focus and follows hover and press events when Platform.OS is %s',
