@@ -177,7 +177,8 @@ const RadioButtonItem = ({
   let radioButton: any;
 
   if (mode === 'android') {
-    radioButton = <RadioButtonAndroid {...radioButtonProps} />;
+    // aria-hidden ensures that Talkback does not read out the interior radio button as a separate element
+    radioButton = <RadioButtonAndroid {...radioButtonProps} aria-hidden />;
   } else if (mode === 'ios') {
     radioButton = <RadioButtonIOS {...radioButtonProps} />;
   } else {
