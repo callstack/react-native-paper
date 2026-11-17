@@ -165,10 +165,7 @@ const CardExample = () => {
                   icon="bookmark-outline"
                   onPress={() => showMessage('Saved')}
                 />
-                <Button
-                  mode="contained-tonal"
-                  onPress={() => showMessage('Opened')}
-                >
+                <Button mode="tonal" onPress={() => showMessage('Opened')}>
                   Open
                 </Button>
               </Card.Actions>
@@ -358,10 +355,6 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
     gap: 6,
     paddingLeft: 12,
-  },
-  bottomCover: {
-    marginTop: 0,
-    marginBottom: -16,
   },
 });
 

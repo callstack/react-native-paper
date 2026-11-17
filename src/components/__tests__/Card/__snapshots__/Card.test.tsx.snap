@@ -703,25 +703,59 @@ exports[`Card keeps the ripple, visual layers, and focus indicator on the Card s
     }
   />
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderBottomLeftRadius": 20,
-          "borderBottomRightRadius": 16,
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-          "borderTopLeftRadius": 4,
-          "borderTopRightRadius": 8,
-        },
-        {
-          "backgroundColor": "rgba(230, 224, 233, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderBottomLeftRadius": 20,
+            "borderBottomRightRadius": 16,
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+            "borderTopLeftRadius": 4,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+          },
+        ],
       ]
     }
+    testID="product-card"
   >
     <View
       pointerEvents="none"
@@ -780,99 +814,17 @@ exports[`Card keeps the ripple, visual layers, and focus indicator on the Card s
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderBottomLeftRadius": 20,
-              "borderBottomRightRadius": 16,
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-              "borderTopLeftRadius": 4,
-              "borderTopRightRadius": 8,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="product-card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderBottomLeftRadius": 25,
-          "borderBottomRightRadius": 21,
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-          "borderTopLeftRadius": 9,
-          "borderTopRightRadius": 13,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -996,6 +948,11 @@ exports[`Card lets only elevated Cards customize their resting elevation 1`] = `
 exports[`Card renders keyboard focus feedback for the elevated variant 1`] = `
 <View
   collapsable={false}
+  dataSet={
+    {
+      "focusRingWithin": "outward",
+    }
+  }
   style={
     [
       {},
@@ -1003,6 +960,9 @@ exports[`Card renders keyboard focus feedback for the elevated variant 1`] = `
         "pointerEvents": "auto",
       },
       undefined,
+      {
+        "--rnp-focus-ring-color": "rgba(98, 91, 113, 1)",
+      },
       {},
       {
         "backgroundColor": "transparent",
@@ -1033,21 +993,57 @@ exports[`Card renders keyboard focus feedback for the elevated variant 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(247, 242, 250, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(247, 242, 250, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -1098,101 +1094,28 @@ exports[`Card renders keyboard focus feedback for the elevated variant 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            {
-              "outline": "none",
-            },
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
 exports[`Card renders keyboard focus feedback for the filled variant 1`] = `
 <View
   collapsable={false}
+  dataSet={
+    {
+      "focusRingWithin": "outward",
+    }
+  }
   style={
     [
       {},
@@ -1200,6 +1123,9 @@ exports[`Card renders keyboard focus feedback for the filled variant 1`] = `
         "pointerEvents": "auto",
       },
       undefined,
+      {
+        "--rnp-focus-ring-color": "rgba(98, 91, 113, 1)",
+      },
       {},
       {
         "backgroundColor": "transparent",
@@ -1230,21 +1156,57 @@ exports[`Card renders keyboard focus feedback for the filled variant 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(230, 224, 233, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -1295,101 +1257,28 @@ exports[`Card renders keyboard focus feedback for the filled variant 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            {
-              "outline": "none",
-            },
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
 exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
 <View
   collapsable={false}
+  dataSet={
+    {
+      "focusRingWithin": "outward",
+    }
+  }
   style={
     [
       {},
@@ -1397,6 +1286,9 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
         "pointerEvents": "auto",
       },
       undefined,
+      {
+        "--rnp-focus-ring-color": "rgba(98, 91, 113, 1)",
+      },
       {},
       {
         "backgroundColor": "transparent",
@@ -1427,21 +1319,57 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -1492,66 +1420,16 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            {
-              "outline": "none",
-            },
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -1580,34 +1458,6 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1833,19 +1683,54 @@ exports[`Card renders the Material disabled treatment for elevated Cards 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
         false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          false,
+        ],
       ]
     }
+    tabIndex={-1}
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -1896,92 +1781,17 @@ exports[`Card renders the Material disabled treatment for elevated Cards 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={false}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      tabIndex={-1}
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -2022,19 +1832,54 @@ exports[`Card renders the Material disabled treatment for filled Cards 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
         false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          false,
+        ],
       ]
     }
+    tabIndex={-1}
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -2085,92 +1930,17 @@ exports[`Card renders the Material disabled treatment for filled Cards 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={false}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      tabIndex={-1}
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -2211,21 +1981,56 @@ exports[`Card renders the Material disabled treatment for outlined Cards 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    tabIndex={-1}
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -2276,63 +2081,16 @@ exports[`Card renders the Material disabled treatment for outlined Cards 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={false}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      tabIndex={-1}
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -2361,34 +2119,6 @@ exports[`Card renders the Material disabled treatment for outlined Cards 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -4743,6 +4473,12 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
     [
       {},
       undefined,
+      {
+        "outlineColor": "rgba(98, 91, 113, 1)",
+        "outlineOffset": 2,
+        "outlineStyle": "solid",
+        "outlineWidth": 3,
+      },
       {},
       {
         "backgroundColor": "transparent",
@@ -4773,21 +4509,55 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -4838,62 +4608,16 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -4922,34 +4646,6 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -4990,21 +4686,56 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    tabIndex={-1}
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -5055,63 +4786,16 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={false}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      tabIndex={-1}
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -5140,34 +4824,6 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -5276,21 +4932,69 @@ exports[`Card routes whole-Card accessibility semantics and callbacks to its tar
     }
   />
   <View
-    style={
+    accessibilityActions={
       [
         {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(230, 224, 233, 1)",
+          "label": "Open product",
+          "name": "activate",
         },
       ]
     }
+    accessibilityHint="Shows product details"
+    accessibilityLabel="Open product"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": true,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": "In stock",
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onAccessibilityAction={[MockFunction]}
+    onAccessibilityEscape={[MockFunction]}
+    onAccessibilityTap={[MockFunction]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMagicTap={[MockFunction]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="link"
+    style={
+      [
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+          },
+        ],
+      ]
+    }
+    testID="product-card"
   >
     <View
       pointerEvents="none"
@@ -5341,105 +5045,17 @@ exports[`Card routes whole-Card accessibility semantics and callbacks to its tar
       }
     />
     <View
-      accessibilityActions={
-        [
-          {
-            "label": "Open product",
-            "name": "activate",
-          },
-        ]
-      }
-      accessibilityHint="Shows product details"
-      accessibilityLabel="Open product"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": true,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": "In stock",
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onAccessibilityAction={[MockFunction]}
-      onAccessibilityEscape={[MockFunction]}
-      onAccessibilityTap={[MockFunction]}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMagicTap={[MockFunction]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="link"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="product-card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -5480,21 +5096,55 @@ exports[`Card settles rapid changes at the latest complete visual state 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -5545,62 +5195,16 @@ exports[`Card settles rapid changes at the latest complete visual state 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -5629,34 +5233,6 @@ exports[`Card settles rapid changes at the latest complete visual state 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -5765,21 +5341,55 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
     }
   />
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -5830,62 +5440,16 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -5914,34 +5478,6 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -5982,21 +5518,55 @@ exports[`Card shows and clears the elevated hover feedback 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(247, 242, 250, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(247, 242, 250, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -6047,91 +5617,17 @@ exports[`Card shows and clears the elevated hover feedback 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -6172,21 +5668,55 @@ exports[`Card shows and clears the elevated hover feedback 2`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(247, 242, 250, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(247, 242, 250, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -6237,91 +5767,17 @@ exports[`Card shows and clears the elevated hover feedback 2`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -6362,21 +5818,55 @@ exports[`Card shows and clears the elevated pressed feedback 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(247, 242, 250, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(247, 242, 250, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -6427,91 +5917,17 @@ exports[`Card shows and clears the elevated pressed feedback 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -6552,21 +5968,55 @@ exports[`Card shows and clears the elevated pressed feedback 2`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(247, 242, 250, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(247, 242, 250, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -6617,91 +6067,17 @@ exports[`Card shows and clears the elevated pressed feedback 2`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -6742,21 +6118,55 @@ exports[`Card shows and clears the filled hover feedback 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(230, 224, 233, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -6807,91 +6217,17 @@ exports[`Card shows and clears the filled hover feedback 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -6932,21 +6268,55 @@ exports[`Card shows and clears the filled hover feedback 2`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(230, 224, 233, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -6997,91 +6367,17 @@ exports[`Card shows and clears the filled hover feedback 2`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -7122,21 +6418,55 @@ exports[`Card shows and clears the filled pressed feedback 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(230, 224, 233, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -7187,91 +6517,17 @@ exports[`Card shows and clears the filled pressed feedback 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -7312,21 +6568,55 @@ exports[`Card shows and clears the filled pressed feedback 2`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(230, 224, 233, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -7377,91 +6667,17 @@ exports[`Card shows and clears the filled pressed feedback 2`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -7502,21 +6718,55 @@ exports[`Card shows and clears the outlined hover feedback 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -7567,62 +6817,16 @@ exports[`Card shows and clears the outlined hover feedback 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -7651,34 +6855,6 @@ exports[`Card shows and clears the outlined hover feedback 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -7719,21 +6895,55 @@ exports[`Card shows and clears the outlined hover feedback 2`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -7784,62 +6994,16 @@ exports[`Card shows and clears the outlined hover feedback 2`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -7868,34 +7032,6 @@ exports[`Card shows and clears the outlined hover feedback 2`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -7936,21 +7072,55 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -8001,62 +7171,16 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -8085,34 +7209,6 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -8153,21 +7249,55 @@ exports[`Card shows and clears the outlined pressed feedback 2`] = `
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -8218,62 +7348,16 @@ exports[`Card shows and clears the outlined pressed feedback 2`] = `
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -8302,40 +7386,17 @@ exports[`Card shows and clears the outlined pressed feedback 2`] = `
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
 exports[`Card shows focus feedback only for keyboard-visible focus and clears it on blur 1`] = `
 <View
   collapsable={false}
+  dataSet={
+    {
+      "focusRingWithin": "outward",
+    }
+  }
   style={
     [
       {},
@@ -8343,6 +7404,9 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
         "pointerEvents": "auto",
       },
       undefined,
+      {
+        "--rnp-focus-ring-color": "rgba(98, 91, 113, 1)",
+      },
       {},
       {
         "backgroundColor": "transparent",
@@ -8373,21 +7437,57 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -8438,66 +7538,16 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            {
-              "outline": "none",
-            },
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -8526,40 +7576,17 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
 exports[`Card shows focus feedback only for keyboard-visible focus and clears it on blur 2`] = `
 <View
   collapsable={false}
+  dataSet={
+    {
+      "focusRingWithin": "outward",
+    }
+  }
   style={
     [
       {},
@@ -8567,6 +7594,9 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
         "pointerEvents": "auto",
       },
       undefined,
+      {
+        "--rnp-focus-ring-color": "rgba(98, 91, 113, 1)",
+      },
       {},
       {
         "backgroundColor": "transparent",
@@ -8597,21 +7627,57 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -8662,66 +7728,16 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            {
-              "outline": "none",
-            },
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -8750,40 +7766,17 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
 exports[`Card shows focus feedback only for keyboard-visible focus and clears it on blur 3`] = `
 <View
   collapsable={false}
+  dataSet={
+    {
+      "focusRingWithin": "outward",
+    }
+  }
   style={
     [
       {},
@@ -8791,6 +7784,9 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
         "pointerEvents": "auto",
       },
       undefined,
+      {
+        "--rnp-focus-ring-color": "rgba(98, 91, 113, 1)",
+      },
       {},
       {
         "backgroundColor": "transparent",
@@ -8821,21 +7817,57 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -8886,66 +7918,16 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            {
-              "outline": "none",
-            },
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -8974,34 +7956,6 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -9042,21 +7996,55 @@ exports[`Card updates the controlled dragged presentation in both directions 1`]
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -9107,62 +8095,16 @@ exports[`Card updates the controlled dragged presentation in both directions 1`]
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -9191,34 +8133,6 @@ exports[`Card updates the controlled dragged presentation in both directions 1`]
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -9259,21 +8173,55 @@ exports[`Card updates the controlled dragged presentation in both directions 2`]
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -9324,62 +8272,16 @@ exports[`Card updates the controlled dragged presentation in both directions 2`]
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -9408,34 +8310,6 @@ exports[`Card updates the controlled dragged presentation in both directions 2`]
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -10028,6 +8902,12 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
     [
       {},
       undefined,
+      {
+        "outlineColor": "rgba(98, 91, 113, 1)",
+        "outlineOffset": 2,
+        "outlineStyle": "solid",
+        "outlineWidth": 3,
+      },
       {},
       {
         "backgroundColor": "transparent",
@@ -10126,21 +9006,55 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
     }
   />
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -10191,62 +9105,16 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -10275,34 +9143,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -10411,21 +9251,55 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
     }
   />
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -10476,62 +9350,16 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -10560,34 +9388,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -10696,21 +9496,55 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
     }
   />
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(254, 247, 255, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -10761,62 +9595,16 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
     <View
       collapsable={false}
       pointerEvents="none"
@@ -10845,34 +9633,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       }
     />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -10981,21 +9741,55 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
     }
   />
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
-        {
-          "backgroundColor": "rgba(230, 224, 233, 1)",
-        },
+        false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "backgroundColor": "rgba(230, 224, 233, 1)",
+          },
+        ],
       ]
     }
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -11046,91 +9840,17 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -11239,19 +9959,54 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
     }
   />
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
-        {
-          "flexShrink": 1,
-          "overflow": "hidden",
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 12,
-        },
         false,
+        [
+          {
+            "flexShrink": 1,
+            "overflow": "hidden",
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          false,
+        ],
       ]
     }
+    tabIndex={-1}
+    testID="card"
   >
     <View
       pointerEvents="none"
@@ -11302,92 +10057,17 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
       }
     />
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={false}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
       style={
         [
-          false,
-          [
-            {
-              "borderCurve": "continuous",
-              "borderRadius": 12,
-            },
-            undefined,
-          ],
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
         ]
       }
-      tabIndex={-1}
-      testID="card"
-    >
-      <View
-        style={
-          [
-            {
-              "flexShrink": 1,
-              "position": "relative",
-            },
-            undefined,
-          ]
-        }
-      />
-    </View>
+    />
   </View>
-  <View
-    collapsable={false}
-    pointerEvents="none"
-    style={
-      [
-        {
-          "pointerEvents": "none",
-          "position": "absolute",
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderCurve": "continuous",
-          "borderRadius": 17,
-        },
-        {},
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 

@@ -70,9 +70,12 @@ describe('focus ring `within` structure (web)', () => {
     ],
     [
       'Card',
-      <Card key="card" testID="focusable" onPress={() => {}}>
-        <Text>card</Text>
-      </Card>,
+      <Card
+        key="card"
+        testID="focusable"
+        onPress={() => {}}
+        content={<Text>card</Text>}
+      />,
     ],
     [
       'Chip',
@@ -123,20 +126,24 @@ describe('focus ring `within` structure (web)', () => {
   // must not light the Card's ring as well.
   it("does not hold a Card's nested controls directly inside the Card's ring", async () => {
     await render(
-      <Card testID="card" onPress={() => {}}>
-        <TextInput testID="input" />
-        <Card.Actions>
-          <Button onPress={() => {}}>OK</Button>
-        </Card.Actions>
-      </Card>
+      <Card
+        testID="card"
+        onPress={() => {}}
+        content={
+          <>
+            <TextInput testID="input" />
+            <Button testID="ok" onPress={() => {}}>
+              OK
+            </Button>
+          </>
+        }
+      />
     );
 
     const [cardRing] = withinRings();
     expect(cardRing.children).toContain(screen.getByTestId('card'));
     expect(cardRing.children).not.toContain(screen.getByTestId('input'));
-    expect(cardRing.children).not.toContain(
-      screen.getByRole('button', { name: 'OK' })
-    );
+    expect(cardRing.children).not.toContain(screen.getByTestId('ok'));
   });
 
   // The chip's box draws the ring, so a ring on the ripple inside it would

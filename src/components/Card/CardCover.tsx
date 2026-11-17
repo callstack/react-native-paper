@@ -53,8 +53,6 @@ export type Props = Omit<ImageProps, 'style'> & {
 const CardCover = ({ style, theme: _theme, ...rest }: Props) => {
   const usesAspectRatio = StyleSheet.flatten(style)?.aspectRatio !== undefined;
 
-  // The container clips the image with `overflow: 'hidden'`,
-  // so any border radius passed in `style` is applied to the image as well
   return (
     <Image
       {...rest}
