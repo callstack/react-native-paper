@@ -597,7 +597,7 @@ export const getAccessibilityData = ({
       ? labelId
       : undefined);
 
-  // React Native 0.85 does not implement described-by relationships on native.
+  // React Native 0.88 does not implement described-by relationships on native.
   // Expose the same description as a hint without changing the field's name.
   const hint =
     Platform.OS === 'web'
