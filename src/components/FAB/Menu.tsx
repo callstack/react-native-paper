@@ -178,10 +178,6 @@ const AnimatedItem = ({
       alpha.value = target;
       return;
     }
-    // Reanimated defaults an unset `reduceMotion` to the OS setting, which
-    // would snap the items and skip the stagger despite
-    // `<PaperProvider reduceMotion="off">`. Motion is already allowed here,
-    // so opt out of the OS check.
     scaleX.value = withDelay(
       delay,
       withSpring(target, {
@@ -381,8 +377,7 @@ const MorphingTrigger = ({
     }
     // Compose's ToggleFloatingActionButton uses a single FastSpatial spring
     // for the full open/close progress (size, corner, color, icon all share
-    // one timeline). `ReduceMotion.Never` keeps the OS setting from snapping
-    // it despite `<PaperProvider reduceMotion="off">`.
+    // one timeline).
     progress.value = withSpring(expanded ? 1 : 0, {
       ...toRawSpring(theme.motion.spring.fast.spatial),
       reduceMotion: ReduceMotion.Never,

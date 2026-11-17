@@ -244,9 +244,6 @@ const Shell = ({
       return;
     }
 
-    // Reanimated defaults an unset `reduceMotion` to the OS setting, which
-    // would snap the FAB despite `<PaperProvider reduceMotion="off">`. Motion
-    // is already allowed here, so opt out of the OS check.
     scale.value = withSpring(target, {
       ...toRawSpring(theme.motion.spring.fast.spatial),
       reduceMotion: ReduceMotion.Never,

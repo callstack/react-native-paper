@@ -117,8 +117,6 @@ it('renders extended FAB transitioning to collapsed', async () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
-// Reanimated follows the device setting for a spring that doesn't say
-// otherwise, which would snap the FAB despite reduceMotion="off"
 it('keeps the expand and collapse springs on with reduceMotion="off" whatever the device setting', async () => {
   const { rerender } = await render(
     <PaperProvider reduceMotion="off">

@@ -87,9 +87,6 @@ it('keeps the trigger mounted across opening and closing without trigger.onPress
   expect(closed).not.toBeDisabled();
 });
 
-// Reanimated follows the device setting for an animation that doesn't say
-// otherwise, which would snap the menu open and drop the item stagger despite
-// reduceMotion="off"
 it('keeps the opening springs and item stagger on with reduceMotion="off" whatever the device setting', async () => {
   const { rerender } = await render(
     <PaperProvider reduceMotion="off">
