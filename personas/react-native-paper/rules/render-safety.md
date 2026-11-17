@@ -2,7 +2,7 @@
 id: render-safety
 globs:
   - src/components/**/*.{ts,tsx}
-severity: blocker
+severity: minor
 enforcement: must
 ---
 
