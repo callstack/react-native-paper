@@ -480,14 +480,22 @@ it('renders decorative accessories outside the accessibility tree without button
   await render(
     <TextInput
       label="Search"
-      startAccessory={(props) => <TextInput.Icon {...props} icon="magnify" />}
-      endAccessory={(props) => <TextInput.Icon {...props} icon="account" />}
+      startAccessory={(props) => (
+        <TextInput.Icon {...props} icon="magnify" testID="search-icon" />
+      )}
+      endAccessory={(props) => (
+        <TextInput.Icon {...props} icon="account" testID="account-icon" />
+      )}
     />
   );
   expect(screen.queryAllByRole('button')).toHaveLength(0);
-  expect(screen.queryByText('magnify')).toBeNull();
+  expect(screen.queryByTestId('search-icon')).toBeNull();
+  expect(screen.queryByTestId('account-icon')).toBeNull();
   expect(
-    screen.getByText('magnify', { includeHiddenElements: true })
+    screen.getByTestId('search-icon', { includeHiddenElements: true })
+  ).toBeOnTheScreen();
+  expect(
+    screen.getByTestId('account-icon', { includeHiddenElements: true })
   ).toBeOnTheScreen();
 });
 
