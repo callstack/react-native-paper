@@ -630,9 +630,10 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialog layouts. If your dialog previously composed `Dialog.Title`, `Dialog.Content`, and `Dialog.Actions` via `children`, migrate to the dedicated `icon`, `title`, `content`, and `actions` props.
 
-**Removed props**
+**Removed**
 
-- **`children`** was removed from `Dialog`
+- **`children`** was removed from `Dialog`. A dialog with children renders none of them.
+- **`Dialog.Icon`**, **`Dialog.Title`**, **`Dialog.Content`**, **`Dialog.Actions`** and **`Dialog.ScrollArea`** were removed.
 
 Use the dedicated props instead:
 
@@ -640,14 +641,15 @@ Use the dedicated props instead:
 - **`Dialog.Title`** → **`title`**
 - **`Dialog.Content`** → **`content`**
 - **`Dialog.Actions`** → **`actions`**
+- **`Dialog.ScrollArea`** → **`scrollable`**
 
-The new **`actions`** prop is more customizable because it accepts **`React.ReactNode[]`**. Unlike the previous `Dialog.Actions` children behavior, the dialog no longer injects **`compact`** and **`uppercase`** into action components automatically. When **`actions`** is provided, the passed components are rendered through **`Dialog.Actions`** internally.
+The new **`actions`** prop is more customizable because it accepts **`React.ReactNode[]`**. Unlike the previous `Dialog.Actions` children behavior, the dialog no longer injects **`compact`** and **`uppercase`** into action components automatically. The passed components are laid out in the dialog's actions row, 8dp apart.
 
 **New props**
 
 - **`scrollable`** renders the dialog content inside a scrollable area.
-- **`contentProps`** passes props to the internal `Dialog.Content` when `scrollable` is not enabled.
-- **`scrollAreaProps`** passes props to the internal `Dialog.ScrollArea` when `scrollable` is enabled.
+- **`contentProps`** passes props to the `View` that holds the content when `scrollable` is not enabled.
+- **`scrollAreaProps`** passes props to the `View` that holds the `ScrollView` and its dividers when `scrollable` is enabled.
 - **`scrollViewProps`** passes props to the internal `ScrollView` when `scrollable` is enabled.
 - **`aria-label`** overrides the title as the dialog's accessible name. Set it when the `title` isn't a string, since iOS and Android can't use `aria-labelledby`.
 - **`aria-labelledby`** is the `nativeID` of an element that provides the dialog's accessible name. It takes precedence over the title and is applied on web only.
@@ -680,9 +682,9 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
 />
 ```
 
-#### `Dialog.Actions`
+#### Dialog actions
 
-`Dialog.Actions` no longer injects `compact` on its buttons, and the default [`Button`](#button) mode is now `filled`. Add `mode="text"` to each button. At the default `small` size, the buttons are **40dp** tall, the Material Design 3 size for dialog actions. The `compact` text buttons in 5.x were **38dp** tall. For a more compact look, also add `size="extra-small"`, which is **32dp** tall:
+The dialog no longer injects `compact` on its action buttons, and the default [`Button`](#button) mode is now `filled`. Add `mode="text"` to each button. At the default `small` size, the buttons are **40dp** tall, the Material Design 3 size for dialog actions. The `compact` text buttons in 5.x were **38dp** tall. For a more compact look, also add `size="extra-small"`, which is **32dp** tall:
 
 ```tsx
 // Before (v5)
