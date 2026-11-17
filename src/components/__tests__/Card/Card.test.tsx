@@ -26,12 +26,12 @@ const getVariantCard = (
   props: Pick<CardProps, 'disabled' | 'dragged' | 'onPress' | 'theme'> = {}
 ) => {
   if (variant === 'elevated') {
-    return <Card {...props} variant="elevated" />;
+    return <Card testID="card" {...props} variant="elevated" />;
   }
   if (variant === 'outlined') {
-    return <Card {...props} variant="outlined" />;
+    return <Card testID="card" {...props} variant="outlined" />;
   }
-  return <Card {...props} variant="filled" />;
+  return <Card testID="card" {...props} variant="filled" />;
 };
 
 // The Card shell, clipped visual region, background, state layer, outline,
@@ -65,7 +65,7 @@ describe('Card', () => {
     for (const isDark of [false, true] as const) {
       const theme = isDark ? DarkTheme : LightTheme;
       const { unmount } = await render(
-        <Card variant="outlined" theme={theme} />
+        <Card testID="card" variant="outlined" theme={theme} />
       );
 
       expectVisualSnapshot();
@@ -88,6 +88,7 @@ describe('Card', () => {
   it('uses filled as the default and resolves deeply merged custom colors', async () => {
     await render(
       <Card
+        testID="card"
         theme={{
           colors: {
             surfaceContainerHighest: '#111111',
@@ -103,6 +104,7 @@ describe('Card', () => {
   it('uses custom theme roles for elevated and outlined variants', async () => {
     const { unmount } = await render(
       <Card
+        testID="card"
         variant="elevated"
         theme={{ colors: { surfaceContainerLow: '#123456' } }}
       />
@@ -113,6 +115,7 @@ describe('Card', () => {
 
     await render(
       <Card
+        testID="card"
         variant="outlined"
         theme={{
           colors: { surface: '#abcdef', outlineVariant: '#654321' },
@@ -126,7 +129,7 @@ describe('Card', () => {
   it('lets only elevated Cards customize their resting elevation', async () => {
     jest.replaceProperty(Platform, 'OS', 'android');
 
-    await render(<Card variant="elevated" elevation={5} />);
+    await render(<Card testID="card" variant="elevated" elevation={5} />);
 
     expectVisualSnapshot();
   });
@@ -146,6 +149,7 @@ describe('Card', () => {
   it('applies the medium shape and asymmetric overrides across the shell', async () => {
     await render(
       <Card
+        testID="card"
         variant="outlined"
         borderTopLeftRadius={4}
         borderTopRightRadius={8}
@@ -192,7 +196,7 @@ describe('Card', () => {
   });
 
   it('renders omitted slots as a neutral filled grouping container', async () => {
-    await render(<Card />);
+    await render(<Card testID="card" />);
 
     expectVisualSnapshot();
     expect(screen.getByTestId('card')).not.toHaveProp('focusable');
@@ -233,6 +237,7 @@ describe('Card', () => {
     const hitSlop = { top: 4, right: 8, bottom: 12, left: 16 };
     await render(
       <Card
+        testID="card"
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={onPressIn}
@@ -363,6 +368,7 @@ describe('Card', () => {
     const touchableRef = React.createRef<React.ElementRef<typeof View>>();
     await render(
       <Card
+        testID="card"
         {...shape}
         ref={shellRef}
         touchableRef={touchableRef}
@@ -459,7 +465,13 @@ describe('Card', () => {
     jest.replaceProperty(Platform, 'OS', 'android');
     const theme = LightTheme;
     const { rerender } = await render(
-      <Card variant="outlined" dragged onPress={() => {}} theme={theme} />
+      <Card
+        testID="card"
+        variant="outlined"
+        dragged
+        onPress={() => {}}
+        theme={theme}
+      />
     );
     const target = screen.getByTestId('card');
 
@@ -474,6 +486,7 @@ describe('Card', () => {
 
     await rerender(
       <Card
+        testID="card"
         variant="outlined"
         dragged
         disabled
@@ -497,16 +510,16 @@ describe('Card', () => {
       onPress: () => {},
       theme,
     };
-    const { rerender } = await render(<Card {...props} />);
+    const { rerender } = await render(<Card testID="card" {...props} />);
 
-    await rerender(<Card {...props} dragged />);
+    await rerender(<Card testID="card" {...props} dragged />);
     await act(() => {
       jest.runOnlyPendingTimers();
     });
 
     expectVisualSnapshot();
 
-    await rerender(<Card {...props} dragged={false} />);
+    await rerender(<Card testID="card" {...props} dragged={false} />);
     await act(() => {
       jest.runOnlyPendingTimers();
     });
@@ -537,7 +550,9 @@ describe('Card', () => {
     expect.hasAssertions();
     jest.replaceProperty(Platform, 'OS', 'web');
     const theme = LightTheme;
-    await render(<Card variant="outlined" onPress={() => {}} theme={theme} />);
+    await render(
+      <Card testID="card" variant="outlined" onPress={() => {}} theme={theme} />
+    );
     const target = screen.getByTestId('card');
     const pointerTarget = { matches: () => false };
     const keyboardTarget = { matches: () => true };
@@ -567,7 +582,9 @@ describe('Card', () => {
   it('uses pressed, focused, then hovered precedence and settles at the latest state', async () => {
     expect.hasAssertions();
     const theme = LightTheme;
-    await render(<Card variant="outlined" onPress={() => {}} theme={theme} />);
+    await render(
+      <Card testID="card" variant="outlined" onPress={() => {}} theme={theme} />
+    );
     const target = screen.getByTestId('card');
 
     await fireEvent(target, 'hoverIn');
@@ -606,14 +623,16 @@ describe('Card', () => {
       },
     };
     const { rerender } = await render(
-      <Card onPress={() => {}} theme={theme} />
+      <Card testID="card" onPress={() => {}} theme={theme} />
     );
 
     // The scaled duration and easing are set on the state layer and shell,
     // both internal nodes with no public testID.
     expectVisualSnapshot();
 
-    await rerender(<Card disabled onPress={() => {}} theme={theme} />);
+    await rerender(
+      <Card testID="card" disabled onPress={() => {}} theme={theme} />
+    );
 
     expectVisualSnapshot();
   });
@@ -622,7 +641,7 @@ describe('Card', () => {
     expect.hasAssertions();
     await render(
       <ReduceMotionContext.Provider value>
-        <Card variant="outlined" onPress={() => {}} />
+        <Card testID="card" variant="outlined" onPress={() => {}} />
       </ReduceMotionContext.Provider>
     );
 
@@ -643,14 +662,14 @@ describe('Card', () => {
       onPress: () => {},
       theme,
     };
-    const { rerender } = await render(<Card {...props} />);
+    const { rerender } = await render(<Card testID="card" {...props} />);
     const target = screen.getByTestId('card');
 
     await fireEvent(target, 'hoverIn');
     await fireEvent(target, 'focus');
     await fireEvent(target, 'pressIn');
-    await rerender(<Card {...props} dragged />);
-    await rerender(<Card {...props} />);
+    await rerender(<Card testID="card" {...props} dragged />);
+    await rerender(<Card testID="card" {...props} />);
     await fireEvent(target, 'pressOut');
     await fireEvent(target, 'blur');
     await fireEvent(target, 'hoverOut');
@@ -668,7 +687,9 @@ describe('Card', () => {
       renderCount();
       return <Text>Stable content</Text>;
     });
-    await render(<Card onPress={() => {}} content={<StableContent />} />);
+    await render(
+      <Card testID="card" onPress={() => {}} content={<StableContent />} />
+    );
     const target = screen.getByTestId('card');
 
     await fireEvent(target, 'hoverIn');
@@ -687,13 +708,14 @@ describe('Card', () => {
   it('warns once when whole-Card interaction is combined with populated actions', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { rerender } = await render(
-      <Card onPress={() => {}} actions={null} />
+      <Card testID="card" onPress={() => {}} actions={null} />
     );
 
     expect(warn).not.toHaveBeenCalled();
 
     await rerender(
       <Card
+        testID="card"
         onPress={() => {}}
         actions={
           <Card.Actions>
@@ -704,6 +726,7 @@ describe('Card', () => {
     );
     await rerender(
       <Card
+        testID="card"
         onPress={() => {}}
         actions={
           <Card.Actions>
@@ -727,6 +750,7 @@ describe('Card', () => {
     try {
       await render(
         <Card
+          testID="card"
           onPress={() => {}}
           actions={
             <Card.Actions>
@@ -745,6 +769,7 @@ describe('Card', () => {
   it('renders the convenience header inputs', async () => {
     await render(
       <Card
+        testID="card"
         title="Card title"
         subtitle="Card subtitle"
         leading={({ size }) => <Text>Leading {size}</Text>}
@@ -760,7 +785,11 @@ describe('Card', () => {
 
   it('renders with a content style', async () => {
     await render(
-      <Card content={<Text>Content</Text>} contentStyle={styles.contentStyle} />
+      <Card
+        testID="card"
+        content={<Text>Content</Text>}
+        contentStyle={styles.contentStyle}
+      />
     );
 
     expect(screen.getByText('Content').parent).toHaveStyle(styles.contentStyle);
@@ -783,6 +812,7 @@ describe('Card', () => {
     };
     await render(
       <Card
+        testID="card"
         {...callbacks}
         disabled
         accessibilityActions={[{ name: 'activate' }]}
@@ -823,7 +853,7 @@ describe('Card', () => {
   });
 
   it('exposes disabled state on an explicitly semantic neutral Card', async () => {
-    await render(<Card disabled accessible role="summary" />);
+    await render(<Card testID="card" disabled accessible role="summary" />);
 
     expect(screen.getByRole('summary')).toBeDisabled();
   });
@@ -836,7 +866,7 @@ describe('Card', () => {
     },
   ] as const)('honors $name as a disabled Card state', async ({ props }) => {
     const onPress = jest.fn();
-    await render(<Card {...props} onPress={onPress} />);
+    await render(<Card testID="card" {...props} onPress={onPress} />);
 
     const target = screen.getByTestId('card');
 
@@ -850,8 +880,9 @@ describe('Card types', () => {
   it('accepts documented examples and rejects removed or mixed forms', () => {
     const typeCases = (
       <>
-        <Card />
+        <Card testID="card" />
         <Card
+          testID="card"
           accessibilityLabel="Open trip details"
           onPress={() => {}}
           media={<Card.Cover source={{ uri: 'https://picsum.photos/700' }} />}
@@ -864,6 +895,7 @@ describe('Card types', () => {
           }
         />
         <Card
+          testID="card"
           variant="elevated"
           title="Draft itinerary"
           content={
@@ -874,13 +906,14 @@ describe('Card types', () => {
           actions={
             <Card.Actions>
               <Button onPress={() => {}}>Discard</Button>
-              <Button mode="contained" onPress={() => {}}>
+              <Button mode="filled" onPress={() => {}}>
                 Save
               </Button>
             </Card.Actions>
           }
         />
         <Card
+          testID="card"
           variant="outlined"
           header={<Card.Title title="Custom header" subtitle="Outlined Card" />}
           content={
@@ -890,46 +923,48 @@ describe('Card types', () => {
           }
         />
         <Card
+          testID="card"
           title="Title"
           subtitle="Subtitle"
           leading={({ size }) => <View accessibilityLabel={`${size}`} />}
           trailing={({ size }) => <View accessibilityLabel={`${size}`} />}
         />
-        <Card header={<View />} />
+        <Card testID="card" header={<View />} />
         <Card
+          testID="card"
           content={<Text>Content</Text>}
           actions={[<View key="action" />]}
         />
-        <Card variant="filled" />
-        <Card variant="outlined" />
-        <Card variant="elevated" />
-        <Card variant="elevated" elevation={5} />
+        <Card testID="card" variant="filled" />
+        <Card testID="card" variant="outlined" />
+        <Card testID="card" variant="elevated" />
+        <Card testID="card" variant="elevated" elevation={5} />
 
         {/* @ts-expect-error: Arbitrary children composition was removed. */}
-        <Card>
+        <Card testID="card">
           <View />
         </Card>
 
         {/* @ts-expect-error: The old mode prop was removed. */}
-        <Card mode="contained" />
+        <Card testID="card" mode="contained" />
 
         {/* @ts-expect-error: Contained is not a Card variant. */}
-        <Card variant="contained" />
+        <Card testID="card" variant="contained" />
 
         {/* @ts-expect-error: The default filled Card cannot be elevated. */}
-        <Card elevation={1} />
+        <Card testID="card" elevation={1} />
 
         {/* @ts-expect-error: Filled Cards cannot be elevated. */}
-        <Card variant="filled" elevation={1} />
+        <Card testID="card" variant="filled" elevation={1} />
 
         {/* @ts-expect-error: Outlined Cards cannot be elevated. */}
-        <Card variant="outlined" elevation={1} />
+        <Card testID="card" variant="outlined" elevation={1} />
 
         {/* @ts-expect-error: Custom and convenience headers are mutually exclusive. */}
-        <Card header={<View />} title="Title" />
+        <Card testID="card" header={<View />} title="Title" />
 
         {/* @ts-expect-error: Custom and convenience headers are mutually exclusive. */}
-        <Card header={<View />} leading={() => <View />} />
+        <Card testID="card" header={<View />} leading={() => <View />} />
 
         {/* @ts-expect-error: Cover placement metadata is not public. */}
         <Card.Cover source={{ uri: 'cover' }} index={0} total={1} />
@@ -1047,6 +1082,23 @@ describe('CardCover', () => {
     expect(screen.getByTestId('edge-cover')).not.toHaveStyle({
       borderRadius: LightTheme.shapes.corner.medium,
     });
+  });
+});
+
+describe('CardTitle', () => {
+  // Card adds no padding around its slots, so the header pads itself like
+  // `Card.Content` does.
+  it('pads its own start edge and the end of its text', async () => {
+    await render(
+      <Card.Title testID="card-title" title="Title" subtitle="Subtitle" />
+    );
+
+    expect(screen.getByTestId('card-title')).toHaveStyle({
+      paddingLeft: 16,
+      minHeight: 72,
+    });
+    expect(screen.getByText('Title')).toHaveStyle({ paddingRight: 16 });
+    expect(screen.getByText('Subtitle')).toHaveStyle({ paddingRight: 16 });
   });
 });
 

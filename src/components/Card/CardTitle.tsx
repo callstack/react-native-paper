@@ -143,8 +143,11 @@ const CardTitle = ({
 }: Props) => {
   useInternalTheme(themeOverrides);
 
+  const minHeight = subtitle || left || right ? 72 : 50;
+  const marginBottom = subtitle ? 0 : 2;
+
   return (
-    <View style={[styles.container, style]} testID={testID}>
+    <View style={[styles.container, { minHeight }, style]} testID={testID}>
       {left ? (
         <View style={[styles.left, leftStyle]}>
           {left({
@@ -156,7 +159,7 @@ const CardTitle = ({
       <View style={[styles.titles]}>
         {title && (
           <Text
-            style={titleStyle}
+            style={[styles.title, { marginBottom }, titleStyle]}
             numberOfLines={titleNumberOfLines}
             variant={titleVariant}
             maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
@@ -166,7 +169,7 @@ const CardTitle = ({
         )}
         {subtitle && (
           <Text
-            style={subtitleStyle}
+            style={[styles.subtitle, subtitleStyle]}
             numberOfLines={subtitleNumberOfLines}
             variant={subtitleVariant}
             maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
@@ -187,17 +190,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 16,
+    paddingLeft: 16,
   },
+
   left: {
     justifyContent: 'center',
+    marginRight: 16,
     height: LEFT_SIZE,
     width: LEFT_SIZE,
   },
+
   titles: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+
+  title: {
+    minHeight: 30,
+    paddingRight: 16,
+  },
+
+  subtitle: {
+    minHeight: 20,
+    marginVertical: 0,
+    paddingRight: 16,
   },
 });
 
