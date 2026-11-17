@@ -410,10 +410,12 @@ const Checkbox = ({
     : null;
 
   // Losing the handlers means the matching hover-out or press-out never
-  // arrives, so the state would otherwise linger.
+  // arrives, so the state would otherwise linger. The focus is lost too: the
+  // focused Pressable is replaced, and its blur never arrives either.
   React.useEffect(() => {
     if (isInteractive) return;
 
+    setFocused(false);
     setHovered(false);
     pressedSV.value = 0;
     rippleHoldSV.value = 0;
@@ -499,6 +501,8 @@ const Checkbox = ({
         onBlur={handleBlur}
         {...interactionHandlers}
         borderless
+        // Checkbox draws its own circular ring around the state layer.
+        focusRing="none"
         // The platform press paints the wrong thing: it covers the whole 48dp
         // target instead of the 40dp state layer, tints with a neutral role,
         // and on web its hover overlay doubles up with the layer. Android also

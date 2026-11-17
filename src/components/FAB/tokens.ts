@@ -138,12 +138,4 @@ export const STATE_LAYER_OPACITY = {
   pressed: stateOpacity.pressed,
 } as const satisfies Record<Interaction, number>;
 
-const focusIndicator = tokens.md.sys.state.focusIndicator;
-export const FOCUS_RING_THICKNESS = focusIndicator.thickness;
-export const FOCUS_RING_OUTER_OFFSET = focusIndicator.outerOffset;
-export const FOCUS_RING_INSET = FOCUS_RING_OUTER_OFFSET + FOCUS_RING_THICKNESS;
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-export const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
-
 export const webNoHoverTint: ViewStyle = { backgroundColor: 'transparent' };

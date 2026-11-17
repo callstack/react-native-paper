@@ -24,20 +24,21 @@ import {
   MenuTokens,
   STATE_LAYER_OPACITY,
   Tokens,
-  FOCUS_RING_INSET,
-  FOCUS_RING_THICKNESS,
   webNoHoverTint,
-  webNoOutline,
 } from './tokens';
 import type { Interaction, Size, Variant } from './tokens';
 import { resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { tokens } from '../../theme/tokens';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { useFocusRing } from '../../utils/useFocusRing';
+import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
+import { useOverlayFocus } from '../../utils/useOverlayFocus';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -158,9 +159,13 @@ const getItemsVariant = (triggerVariant: Variant): Variant => {
 const STAGGER_MS = 30;
 
 // Room the items scroll view keeps around the items, so it doesn't clip the
-// focus ring and the hover shadow. Taps in this margin don't reach the content
-// below on Android, so keep it small.
-const ITEMS_SCROLL_INSET = FOCUS_RING_INSET + 4;
+// hover shadow. It stays as wide as it was when the focus ring was drawn
+// outside the items, so they don't move. Taps in this margin don't reach the
+// content below on Android, so keep it small.
+const { thickness: FOCUS_RING_THICKNESS, outerOffset: FOCUS_RING_OFFSET } =
+  tokens.md.sys.state.focusIndicator;
+const FOCUS_RING_FOOTPRINT = FOCUS_RING_OFFSET + FOCUS_RING_THICKNESS;
+const ITEMS_SCROLL_INSET = FOCUS_RING_FOOTPRINT + 4;
 
 type AnimatedItemProps = {
   expanded: boolean;
@@ -303,6 +308,22 @@ const MenuItem = ({
     transitionDuration: theme.motion.duration.short2 * theme.animation.scale,
   };
 
+  // `scope: 'within'`: the ring belongs on the pill below, not the inner
+  // `TouchableRipple` that actually receives focus.
+  //
+  // Inward, as in the MD3 FAB menu spec: items are only
+  // `MenuTokens.spacing.betweenItems` (4dp) apart, so an outward ring (2dp gap
+  // plus 3dp thickness) would run into the neighbouring item.
+  //
+  // `undefined` disabled: menu items have no `disabled` prop today. Wire the
+  // real value through here if that ever changes.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    undefined,
+    theme.colors.secondary,
+    'inward',
+    'within'
+  );
+
   const itemRef = React.useCallback(
     (node: React.ComponentRef<typeof View> | null) => registerRef(index, node),
     [registerRef, index]
@@ -317,14 +338,28 @@ const MenuItem = ({
         style={{ height }}
         theme={theme}
       >
-        <View style={[styles.menuItem, { height, borderRadius }]}>
+        <View
+          style={[
+            styles.menuItem,
+            { height, borderRadius },
+            ...focusRing.style,
+          ]}
+          {...focusRing.dataSetProps}
+        >
           <Animated.View style={[styles.stateLayer, stateLayerStyle]} />
           <TouchableRipple
             ref={itemRef}
             borderless
             onPress={onPress}
-            onFocus={(e) => setFocused(isKeyboardFocusEvent(e))}
-            onBlur={() => setFocused(false)}
+            focusRing="none"
+            onFocus={(e) => {
+              focusTarget.onFocus?.(e);
+              setFocused(isKeyboardFocusEvent(e));
+            }}
+            onBlur={() => {
+              focusTarget.onBlur?.();
+              setFocused(false);
+            }}
             onHoverIn={() => setHovered(true)}
             onHoverOut={() => setHovered(false)}
             onPressIn={() => setPressed(true)}
@@ -337,8 +372,9 @@ const MenuItem = ({
             tabIndex={expanded ? 0 : -1}
             style={[
               { borderRadius },
+              ...focusTarget.style,
               // The state layer replaces the hover tint of TouchableRipple.
-              Platform.OS === 'web' ? [webNoOutline, webNoHoverTint] : null,
+              Platform.OS === 'web' ? webNoHoverTint : null,
             ]}
             testID={testID}
           >
@@ -356,16 +392,6 @@ const MenuItem = ({
           </TouchableRipple>
         </View>
       </Surface>
-      <View
-        style={[
-          styles.menuItemFocusRing,
-          {
-            borderColor: theme.colors.secondary,
-            borderRadius: borderRadius + FOCUS_RING_INSET,
-          },
-          focused ? null : styles.invisible,
-        ]}
-      />
     </View>
   );
 };
@@ -646,15 +672,31 @@ const Menu = ({
 
   const effectiveExpanded = triggerVisible && expanded;
 
+  // Back (Android) and Escape (web) go through the overlay stack, so that a
+  // menu opened from a modal closes first and the modal stays.
+  useOverlayDismiss({
+    enabled: effectiveExpanded,
+    dismissable: true,
+    onDismiss,
+  });
+
   const triggerRef = React.useRef<React.ComponentRef<typeof View>>(null);
   const scrollRef = React.useRef<React.ComponentRef<typeof ScrollView>>(null);
   const itemRefs = React.useRef<(React.ComponentRef<typeof View> | null)[]>([]);
+  const itemsRef = React.useRef<React.ComponentRef<typeof View>>(null);
+  const firstItemRef = React.useRef<React.ComponentRef<typeof View> | null>(
+    null
+  );
 
   const [containerHeight, setContainerHeight] = React.useState<number>();
 
   const registerItemRef = React.useCallback(
     (index: number, node: React.ComponentRef<typeof View> | null) => {
       itemRefs.current[index] = node;
+
+      if (index === 0) {
+        firstItemRef.current = node;
+      }
     },
     []
   );
@@ -665,6 +707,45 @@ const Menu = ({
       onDismiss();
     };
 
+  // Focus moves to the first item when the menu opens, and back to the trigger
+  // when it closes.
+  const { focusInitialTarget, restoreFocus } = useOverlayFocus({
+    visible: effectiveExpanded,
+    containerRef: itemsRef,
+    initialFocusRef: firstItemRef,
+    restoreFocusRef: triggerRef,
+  });
+
+  const reduceMotion = useReduceMotion();
+  const { scale } = theme.animation;
+  const { duration } = theme.motion;
+
+  // Transparent views are not in the accessibility tree, so on iOS and Android
+  // focus waits for the first item to fade in: the items stagger, and the first
+  // one is the last to start. A browser can focus an item right away.
+  const focusDelay =
+    Platform.OS === 'web'
+      ? 0
+      : (reduceMotion
+          ? duration.short2
+          : (items.length - 1) * STAGGER_MS + duration.short4) * scale;
+
+  React.useEffect(() => {
+    if (!effectiveExpanded) {
+      return undefined;
+    }
+
+    const timeout = setTimeout(focusInitialTarget, focusDelay);
+
+    return () => clearTimeout(timeout);
+  }, [effectiveExpanded, focusInitialTarget, focusDelay]);
+
+  React.useEffect(() => {
+    if (!effectiveExpanded) {
+      restoreFocus();
+    }
+  }, [effectiveExpanded, restoreFocus]);
+
   // A long list scrolls, so start from the first item every time it opens.
   React.useEffect(() => {
     if (effectiveExpanded) {
@@ -673,10 +754,13 @@ const Menu = ({
   }, [effectiveExpanded]);
 
   // Arrow keys, Home and End move focus between the items and the close
-  // button. Opening, closing and dismissing the menu are left to the overlay
-  // handling.
+  // button. Dismissing the menu is left to `useOverlayDismiss` above.
   React.useEffect(() => {
-    if (Platform.OS !== 'web' || !effectiveExpanded) {
+    if (
+      Platform.OS !== 'web' ||
+      !('document' in global) ||
+      !effectiveExpanded
+    ) {
       return undefined;
     }
 
@@ -783,10 +867,13 @@ const Menu = ({
         },
       ]}
       onLayout={(e) => setContainerHeight(e.nativeEvent.layout.height)}
+      // The screen reader escape gesture (iOS).
+      onAccessibilityEscape={effectiveExpanded ? onDismiss : undefined}
       testID={testID}
     >
       <View style={[styles.stack, { alignItems: flexAlign }]}>
         <View
+          ref={itemsRef}
           style={[
             styles.items,
             alignment === 'start'
@@ -899,8 +986,8 @@ const styles = StyleSheet.create({
   },
   itemsScroll: {
     flexGrow: 0,
-    // Cancels the padding below, so the scroll view doesn't clip the shadow
-    // and focus ring of the items and the items keep their position.
+    // Cancels the padding below, so the scroll view doesn't clip the shadow of
+    // the items and the items keep their position.
     margin: -ITEMS_SCROLL_INSET,
   },
   itemsScrollContent: {
@@ -915,15 +1002,6 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     overflow: 'hidden',
-  },
-  menuItemFocusRing: {
-    position: 'absolute',
-    top: -FOCUS_RING_INSET,
-    left: -FOCUS_RING_INSET,
-    right: -FOCUS_RING_INSET,
-    bottom: -FOCUS_RING_INSET,
-    borderWidth: FOCUS_RING_THICKNESS,
-    pointerEvents: 'none',
   },
   triggerSlot: {
     justifyContent: 'flex-start',
@@ -943,9 +1021,6 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     pointerEvents: 'none',
-  },
-  invisible: {
-    opacity: 0,
   },
   pointerEventsAuto: {
     pointerEvents: 'auto',

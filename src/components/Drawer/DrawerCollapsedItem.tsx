@@ -17,7 +17,9 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
@@ -117,6 +119,24 @@ const DrawerCollapsedItem = ({
   const theme = useInternalTheme(themeOverrides);
   const { scale } = theme.animation;
 
+  // MD3 rings a navigation rail item as a whole (icon and label) with a
+  // rounded rectangle inside the rail, like Material Web's navigation tab
+  // (inward, small corner). The `Pressable` also spans the gap below the
+  // item, so the ring goes on an overlay inside it (`'descendant'`). An
+  // overlay, not the item itself: an inward ring is painted under the item's
+  // children, and the active indicator would cover its top edge. The overlay
+  // starts above the item, so the ring clears the indicator by the usual 2dp
+  // gap instead of cutting into it; the 12dp gap below the item above it
+  // leaves room. It ends below the item the same way, in the item's own 12dp
+  // gap, so it clears an icon-only item's round indicator and a label that
+  // sets the item's height (two lines, or a large font scale) by 2dp too.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled,
+    theme.colors.secondary,
+    'inward',
+    'descendant'
+  );
+
   const [numOfLines, setNumOfLines] = React.useState(1);
 
   const outlineScale = useSharedValue(active ? 1 : 0.5);
@@ -182,6 +202,13 @@ const DrawerCollapsedItem = ({
         aria-selected={active}
         aria-label={ariaLabel}
         testID={testID}
+        // Like Switch: a ripple drawable owns the focused state, so Android does
+        // not add its grey default focus highlight on top of the ring.
+        android_ripple={{ color: 'transparent' }}
+        onFocus={focusTarget.onFocus}
+        onBlur={focusTarget.onBlur}
+        {...focusTarget.dataSetProps}
+        style={focusTarget.style}
       >
         <View style={styles.wrapper}>
           <Animated.View
@@ -192,6 +219,19 @@ const DrawerCollapsedItem = ({
               style,
               animatedOutlineStyle,
             ]}
+          />
+
+          {/* After the indicator, so the indicator doesn't cover the ring, but
+              before the icon, so a text badge that pokes above the indicator
+              stays readable over it. */}
+          <View
+            pointerEvents="none"
+            style={[
+              styles.focusRing,
+              { borderRadius: theme.shapes.corner.small },
+              ...focusRing.style,
+            ]}
+            {...focusRing.dataSetProps}
           />
 
           <View style={[styles.icon, { top: iconPadding }]}>
@@ -229,7 +269,17 @@ const DrawerCollapsedItem = ({
 
 DrawerCollapsedItem.displayName = 'Drawer.CollapsedItem';
 
+const { thickness: focusThickness, outerOffset: focusOuterOffset } =
+  tokens.md.sys.state.focusIndicator;
+
 const styles = StyleSheet.create({
+  focusRing: {
+    position: 'absolute',
+    top: -(focusOuterOffset + focusThickness),
+    left: 0,
+    right: 0,
+    bottom: -(focusOuterOffset + focusThickness),
+  },
   wrapper: {
     width: 80,
     marginBottom: 12,

@@ -1,9 +1,31 @@
-import { expect, it, jest } from '@jest/globals';
-import { fireEvent, userEvent } from '@testing-library/react-native';
+import {
+  AccessibilityInfo,
+  BackHandler as RNBackHandler,
+  Platform,
+} from 'react-native';
+
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import FAB from '../FAB';
 import type { MenuItemProps } from '../FAB/Menu';
+
+type BackHandlerStatic = typeof RNBackHandler & {
+  mockPressBack(): void;
+  exitApp: jest.Mock<() => void>;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+const BackHandler = RNBackHandler as BackHandlerStatic;
 
 const makeItems = (
   onItemPress = jest.fn<(event?: unknown) => void>()
@@ -278,4 +300,299 @@ it('hides collapsed items from assistive technology and exposes expanded ones', 
     />
   );
   expect(screen.getByRole('button', { name: 'Send email' })).toBeOnTheScreen();
+});
+
+describe('dismissing the menu', () => {
+  beforeEach(() => {
+    BackHandler.exitApp.mockClear();
+  });
+
+  it('calls onDismiss when the back button is pressed while open', async () => {
+    const onDismiss = jest.fn();
+    await render(
+      <FAB.Menu
+        expanded
+        onDismiss={onDismiss}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+      />
+    );
+
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+    expect(BackHandler.exitApp).not.toHaveBeenCalled();
+  });
+
+  it('leaves the back button to the screen while closed', async () => {
+    const onDismiss = jest.fn();
+    await render(
+      <FAB.Menu
+        expanded={false}
+        onDismiss={onDismiss}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+      />
+    );
+
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(onDismiss).not.toHaveBeenCalled();
+    expect(BackHandler.exitApp).toHaveBeenCalledTimes(1);
+  });
+
+  it('stops taking the back button once it closes', async () => {
+    const onDismiss = jest.fn();
+    const { rerender } = await render(
+      <FAB.Menu
+        expanded
+        onDismiss={onDismiss}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+      />
+    );
+
+    await rerender(
+      <FAB.Menu
+        expanded={false}
+        onDismiss={onDismiss}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+      />
+    );
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(onDismiss).not.toHaveBeenCalled();
+  });
+
+  it('calls onDismiss on the screen reader escape gesture while open', async () => {
+    const onDismiss = jest.fn();
+    await render(
+      <FAB.Menu
+        expanded
+        onDismiss={onDismiss}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+        testID="menu"
+      />
+    );
+
+    await fireEvent(screen.getByTestId('menu'), 'accessibilityEscape');
+
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+
+  it('ignores the screen reader escape gesture while closed', async () => {
+    const onDismiss = jest.fn();
+    await render(
+      <FAB.Menu
+        expanded={false}
+        onDismiss={onDismiss}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+        testID="menu"
+      />
+    );
+
+    await fireEvent(screen.getByTestId('menu'), 'accessibilityEscape');
+
+    expect(onDismiss).not.toHaveBeenCalled();
+  });
+
+  describe('on the web', () => {
+    let platform: { restore(): void };
+    let keyDownListeners = new Set<(event: unknown) => void>();
+
+    beforeAll(() => {
+      platform = jest.replaceProperty(Platform, 'OS', 'web');
+
+      // There is no DOM under the React Native preset, so the test supplies
+      // what the menu and its overlay handling touch.
+      Object.defineProperty(global, 'HTMLElement', {
+        configurable: true,
+        value: class {},
+      });
+      Object.defineProperty(global, 'document', {
+        configurable: true,
+        value: {
+          activeElement: null,
+          addEventListener: (
+            type: string,
+            listener: (event: unknown) => void,
+            capture?: boolean
+          ) => {
+            if (type === 'keydown' && capture === true) {
+              keyDownListeners.add(listener);
+            }
+          },
+          removeEventListener: (
+            _type: string,
+            listener: (event: unknown) => void
+          ) => {
+            keyDownListeners.delete(listener);
+          },
+        },
+      });
+    });
+
+    afterAll(() => {
+      platform.restore();
+      delete (global as { document?: unknown }).document;
+      delete (global as { HTMLElement?: unknown }).HTMLElement;
+    });
+
+    beforeEach(() => {
+      keyDownListeners = new Set();
+    });
+
+    const pressEscape = async () => {
+      const event = {
+        key: 'Escape',
+        isComposing: false,
+        defaultPrevented: false,
+      };
+
+      await act(() => {
+        keyDownListeners.forEach((listener) => listener(event));
+        // The overlay waits until the key has been through the page.
+        jest.advanceTimersByTime(1);
+      });
+    };
+
+    it('calls onDismiss when Escape is pressed while open', async () => {
+      const onDismiss = jest.fn();
+      await render(
+        <FAB.Menu
+          expanded
+          onDismiss={onDismiss}
+          trigger={{ icon: 'plus' }}
+          items={makeItems()}
+        />
+      );
+
+      await pressEscape();
+
+      expect(onDismiss).toHaveBeenCalledTimes(1);
+    });
+
+    it('ignores Escape while closed', async () => {
+      const onDismiss = jest.fn();
+      await render(
+        <FAB.Menu
+          expanded={false}
+          onDismiss={onDismiss}
+          trigger={{ icon: 'plus' }}
+          items={makeItems()}
+        />
+      );
+
+      await pressEscape();
+
+      expect(onDismiss).not.toHaveBeenCalled();
+    });
+  });
+});
+
+describe('moving focus', () => {
+  const sendAccessibilityEvent = jest.mocked(
+    AccessibilityInfo.sendAccessibilityEvent
+  );
+
+  const renderMenu = (expanded: boolean) => (
+    <FAB.Menu
+      expanded={expanded}
+      onDismiss={jest.fn()}
+      trigger={{ icon: 'plus', testID: 'trigger' }}
+      items={makeItems()}
+    />
+  );
+
+  // The screen reader is sent to an element, which the test can only tell
+  // apart by the `testID` it was given.
+  const focusedTestID = () => {
+    const [target] = sendAccessibilityEvent.mock.calls[0] ?? [];
+
+    return typeof target === 'object' && target !== null && 'props' in target
+      ? // eslint-disable-next-line no-restricted-syntax, @typescript-eslint/no-unsafe-type-assertion
+        (target.props as { testID?: string }).testID
+      : undefined;
+  };
+
+  beforeEach(() => {
+    sendAccessibilityEvent.mockClear();
+  });
+
+  it('moves the screen reader to the first item once the items have faded in', async () => {
+    await render(renderMenu(true));
+
+    // The items stagger in, and transparent views are not in the
+    // accessibility tree.
+    expect(sendAccessibilityEvent).not.toHaveBeenCalled();
+
+    await act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+      expect.anything(),
+      'focus'
+    );
+    expect(focusedTestID()).toBe('item-0');
+  });
+
+  it('moves the screen reader into the menu each time it opens', async () => {
+    const { rerender } = await render(renderMenu(false));
+
+    await act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    expect(sendAccessibilityEvent).not.toHaveBeenCalled();
+
+    await rerender(renderMenu(true));
+    await act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+  });
+
+  it('sends the screen reader back to the trigger when it closes', async () => {
+    const { rerender } = await render(renderMenu(true));
+
+    await act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+    sendAccessibilityEvent.mockClear();
+
+    await rerender(renderMenu(false));
+    await act(() => {
+      jest.advanceTimersByTime(1);
+    });
+
+    expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+      expect.anything(),
+      'focus'
+    );
+    expect(focusedTestID()).toBe('trigger');
+  });
+
+  it('leaves the screen reader alone when it closes before it moved any in', async () => {
+    const { rerender } = await render(renderMenu(true));
+
+    await rerender(renderMenu(false));
+    await act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    expect(sendAccessibilityEvent).not.toHaveBeenCalled();
+  });
 });

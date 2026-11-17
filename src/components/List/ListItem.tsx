@@ -231,6 +231,8 @@ const ListItem = ({
 
   return (
     <TouchableRipple
+      // Before `rest`, so a caller's `focusRing` wins
+      focusRing="inward"
       {...rest}
       ref={ref}
       style={
