@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useId,
   useImperativeHandle,
   useRef,
   useState,
@@ -323,6 +324,7 @@ const useTextInputLayout = ({
 export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const { ref, variant = 'filled', theme: themeOverride } = props;
 
+  const id = useId();
   const input = useRef<ComponentRef<typeof NativeTextInput>>(null);
   const init = useRef(false);
 
@@ -421,6 +423,8 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   });
 
   const accessibilityProps = getAccessibilityData({
+    supportingTextId: `${id}-supporting-text`,
+    counterId: `${id}-counter`,
     hasError: flags.hasError,
     hasCounter: flags.hasCounter,
     isDisabled: flags.isDisabled,

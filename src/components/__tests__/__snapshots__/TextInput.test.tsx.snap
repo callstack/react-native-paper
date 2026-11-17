@@ -161,34 +161,13 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
       </Text>
     </View>
     <View
+      aria-hidden={true}
       style={
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "zIndex": 1,
-        }
-      }
-    >
-      <View
-        collapsable={false}
-        style={
+        [
+          {
+            "margin": 0,
+          },
           [
-            {
-              "margin": 6,
-            },
-            {
-              "backgroundColor": undefined,
-              "height": 40,
-              "width": 40,
-            },
-            {
-              "borderColor": "rgba(202, 196, 208, 1)",
-              "borderRadius": 20,
-              "borderWidth": 0,
-            },
-            {
-              "margin": 0,
-            },
             {
               "alignItems": "center",
               "alignSelf": "center",
@@ -200,76 +179,39 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             {
               "opacity": 0.38,
             },
-            null,
+          ],
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
           ]
         }
       >
-        <View
-          accessible={true}
-          centered={true}
-          multiline={false}
-          role="none"
-          style={
-            [
-              {
-                "overflow": "hidden",
-              },
-              [
-                {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "borderRadius": 20,
-                },
-                {
-                  "overflow": "hidden",
-                },
-                undefined,
-              ],
-            ]
-          }
-        >
-          <View
-            style={
-              {
-                "opacity": 1,
-              }
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                [
-                  {
-                    "color": "rgba(29, 27, 32, 1)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              magnify
-            </Text>
-          </View>
-        </View>
-      </View>
+        magnify
+      </Text>
     </View>
     <View
       collapsable={false}
@@ -541,7 +483,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             "right": 0,
           },
           {
-            "backgroundColor": "rgba(121, 116, 126, 1)",
+            "backgroundColor": "rgba(73, 69, 79, 1)",
             "height": 1,
           },
           false,
@@ -616,34 +558,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       </Text>
     </View>
     <View
+      aria-hidden={true}
       style={
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "zIndex": 1,
-        }
-      }
-    >
-      <View
-        collapsable={false}
-        style={
+        [
+          {
+            "margin": 0,
+          },
           [
-            {
-              "margin": 6,
-            },
-            {
-              "backgroundColor": undefined,
-              "height": 40,
-              "width": 40,
-            },
-            {
-              "borderColor": "rgba(202, 196, 208, 1)",
-              "borderRadius": 20,
-              "borderWidth": 0,
-            },
-            {
-              "margin": 0,
-            },
             {
               "alignItems": "center",
               "alignSelf": "center",
@@ -653,76 +574,39 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "width": 24,
             },
             false,
-            null,
+          ],
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "#49454F",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
           ]
         }
       >
-        <View
-          accessible={true}
-          centered={true}
-          multiline={false}
-          role="none"
-          style={
-            [
-              {
-                "overflow": "hidden",
-              },
-              [
-                {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "borderRadius": 20,
-                },
-                {
-                  "overflow": "hidden",
-                },
-                undefined,
-              ],
-            ]
-          }
-        >
-          <View
-            style={
-              {
-                "opacity": 1,
-              }
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                [
-                  {
-                    "color": "#49454F",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              magnify
-            </Text>
-          </View>
-        </View>
-      </View>
+        magnify
+      </Text>
     </View>
     <View
       collapsable={false}
@@ -776,34 +660,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       />
     </View>
     <View
+      aria-hidden={true}
       style={
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "zIndex": 1,
-        }
-      }
-    >
-      <View
-        collapsable={false}
-        style={
+        [
+          {
+            "margin": 0,
+          },
           [
-            {
-              "margin": 6,
-            },
-            {
-              "backgroundColor": undefined,
-              "height": 40,
-              "width": 40,
-            },
-            {
-              "borderColor": "rgba(202, 196, 208, 1)",
-              "borderRadius": 20,
-              "borderWidth": 0,
-            },
-            {
-              "margin": 0,
-            },
             {
               "alignItems": "center",
               "alignSelf": "center",
@@ -813,76 +676,39 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "width": 24,
             },
             false,
-            null,
+          ],
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "#49454F",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
           ]
         }
       >
-        <View
-          accessible={true}
-          centered={true}
-          multiline={false}
-          role="none"
-          style={
-            [
-              {
-                "overflow": "hidden",
-              },
-              [
-                {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "borderRadius": 20,
-                },
-                {
-                  "overflow": "hidden",
-                },
-                undefined,
-              ],
-            ]
-          }
-        >
-          <View
-            style={
-              {
-                "opacity": 1,
-              }
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                [
-                  {
-                    "color": "#49454F",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              close
-            </Text>
-          </View>
-        </View>
-      </View>
+        close
+      </Text>
     </View>
   </View>
   <View
@@ -1032,34 +858,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       </Text>
     </View>
     <View
+      aria-hidden={true}
       style={
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "zIndex": 1,
-        }
-      }
-    >
-      <View
-        collapsable={false}
-        style={
+        [
+          {
+            "margin": 0,
+          },
           [
-            {
-              "margin": 6,
-            },
-            {
-              "backgroundColor": undefined,
-              "height": 40,
-              "width": 40,
-            },
-            {
-              "borderColor": "rgba(202, 196, 208, 1)",
-              "borderRadius": 20,
-              "borderWidth": 0,
-            },
-            {
-              "margin": 0,
-            },
             {
               "alignItems": "center",
               "alignSelf": "center",
@@ -1069,76 +874,39 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "width": 24,
             },
             false,
-            null,
+          ],
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(179, 38, 30, 1)",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
           ]
         }
       >
-        <View
-          accessible={true}
-          centered={true}
-          multiline={false}
-          role="none"
-          style={
-            [
-              {
-                "overflow": "hidden",
-              },
-              [
-                {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "borderRadius": 20,
-                },
-                {
-                  "overflow": "hidden",
-                },
-                undefined,
-              ],
-            ]
-          }
-        >
-          <View
-            style={
-              {
-                "opacity": 1,
-              }
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                [
-                  {
-                    "color": "rgba(179, 38, 30, 1)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              magnify
-            </Text>
-          </View>
-        </View>
-      </View>
+        magnify
+      </Text>
     </View>
     <View
       collapsable={false}
@@ -1409,7 +1177,7 @@ exports[`renders filled TextInput with label and value 1`] = `
             "right": 0,
           },
           {
-            "backgroundColor": "rgba(121, 116, 126, 1)",
+            "backgroundColor": "rgba(73, 69, 79, 1)",
             "height": 1,
           },
           false,
@@ -1662,34 +1430,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       </Text>
     </View>
     <View
+      aria-hidden={true}
       style={
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "zIndex": 1,
-        }
-      }
-    >
-      <View
-        collapsable={false}
-        style={
+        [
+          {
+            "margin": 0,
+          },
           [
-            {
-              "margin": 6,
-            },
-            {
-              "backgroundColor": undefined,
-              "height": 40,
-              "width": 40,
-            },
-            {
-              "borderColor": "rgba(202, 196, 208, 1)",
-              "borderRadius": 20,
-              "borderWidth": 0,
-            },
-            {
-              "margin": 0,
-            },
             {
               "alignItems": "center",
               "alignSelf": "center",
@@ -1699,76 +1446,39 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "width": 24,
             },
             false,
-            null,
+          ],
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "#49454F",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
           ]
         }
       >
-        <View
-          accessible={true}
-          centered={true}
-          multiline={false}
-          role="none"
-          style={
-            [
-              {
-                "overflow": "hidden",
-              },
-              [
-                {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "borderRadius": 20,
-                },
-                {
-                  "overflow": "hidden",
-                },
-                undefined,
-              ],
-            ]
-          }
-        >
-          <View
-            style={
-              {
-                "opacity": 1,
-              }
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                [
-                  {
-                    "color": "#49454F",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              magnify
-            </Text>
-          </View>
-        </View>
-      </View>
+        magnify
+      </Text>
     </View>
     <View
       collapsable={false}
@@ -1822,34 +1532,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       />
     </View>
     <View
+      aria-hidden={true}
       style={
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "zIndex": 1,
-        }
-      }
-    >
-      <View
-        collapsable={false}
-        style={
+        [
+          {
+            "margin": 0,
+          },
           [
-            {
-              "margin": 6,
-            },
-            {
-              "backgroundColor": undefined,
-              "height": 40,
-              "width": 40,
-            },
-            {
-              "borderColor": "rgba(202, 196, 208, 1)",
-              "borderRadius": 20,
-              "borderWidth": 0,
-            },
-            {
-              "margin": 0,
-            },
             {
               "alignItems": "center",
               "alignSelf": "center",
@@ -1859,76 +1548,39 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "width": 24,
             },
             false,
-            null,
+          ],
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "#49454F",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
           ]
         }
       >
-        <View
-          accessible={true}
-          centered={true}
-          multiline={false}
-          role="none"
-          style={
-            [
-              {
-                "overflow": "hidden",
-              },
-              [
-                {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "borderRadius": 20,
-                },
-                {
-                  "overflow": "hidden",
-                },
-                undefined,
-              ],
-            ]
-          }
-        >
-          <View
-            style={
-              {
-                "opacity": 1,
-              }
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                [
-                  {
-                    "color": "#49454F",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              close
-            </Text>
-          </View>
-        </View>
-      </View>
+        close
+      </Text>
     </View>
   </View>
   <View
@@ -2058,34 +1710,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       </Text>
     </View>
     <View
+      aria-hidden={true}
       style={
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "zIndex": 1,
-        }
-      }
-    >
-      <View
-        collapsable={false}
-        style={
+        [
+          {
+            "margin": 0,
+          },
           [
-            {
-              "margin": 6,
-            },
-            {
-              "backgroundColor": undefined,
-              "height": 40,
-              "width": 40,
-            },
-            {
-              "borderColor": "rgba(202, 196, 208, 1)",
-              "borderRadius": 20,
-              "borderWidth": 0,
-            },
-            {
-              "margin": 0,
-            },
             {
               "alignItems": "center",
               "alignSelf": "center",
@@ -2095,76 +1726,39 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "width": 24,
             },
             false,
-            null,
+          ],
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(179, 38, 30, 1)",
+              "fontSize": 24,
+            },
+            [
+              {
+                "lineHeight": 24,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
           ]
         }
       >
-        <View
-          accessible={true}
-          centered={true}
-          multiline={false}
-          role="none"
-          style={
-            [
-              {
-                "overflow": "hidden",
-              },
-              [
-                {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "borderRadius": 20,
-                },
-                {
-                  "overflow": "hidden",
-                },
-                undefined,
-              ],
-            ]
-          }
-        >
-          <View
-            style={
-              {
-                "opacity": 1,
-              }
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                [
-                  {
-                    "color": "rgba(179, 38, 30, 1)",
-                    "fontSize": 24,
-                  },
-                  [
-                    {
-                      "lineHeight": 24,
-                      "transform": [
-                        {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                ]
-              }
-            >
-              magnify
-            </Text>
-          </View>
-        </View>
-      </View>
+        magnify
+      </Text>
     </View>
     <View
       collapsable={false}

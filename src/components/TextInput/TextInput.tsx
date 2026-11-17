@@ -8,6 +8,7 @@ import {
 import type { TextInputProps as NativeTextInputProps } from 'react-native';
 import type {
   AccessibilityProps,
+  PressableStateCallbackType,
   BlurEvent,
   ColorValue,
   FocusEvent,
@@ -23,7 +24,11 @@ import { useTextInput } from './hooks';
 import { styles } from './styles';
 import TextInputErrorIcon from './TextInputErrorIcon';
 import type { TextInputAccessoryProps } from './TextInputIcon';
+import { mergeAccessibilityText } from './utils';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
+
+// React Native Web adds `hovered` to the Pressable state; React Native omits it.
+type PressableState = PressableStateCallbackType & { hovered?: boolean };
 
 export type TextInputAnimationState = {
   animatedLabelWrapperStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
@@ -57,9 +62,12 @@ export type TextInputColors = {
 };
 
 export type GetAccessibilityDataReturn = {
-  input: AccessibilityProps & { 'aria-invalid'?: boolean };
-  supportingText: AccessibilityProps;
-  counter: AccessibilityProps;
+  input: AccessibilityProps & {
+    'aria-invalid'?: boolean;
+    'aria-describedby'?: string;
+  };
+  supportingText: AccessibilityProps & { nativeID: string };
+  counter: AccessibilityProps & { nativeID: string };
 };
 
 export type GetAccessibilityDataProps = {
@@ -68,6 +76,8 @@ export type GetAccessibilityDataProps = {
   hasError: boolean;
   hasCounter: boolean;
   isDisabled: boolean;
+  supportingTextId: string;
+  counterId: string;
 };
 
 export type TextInputVariant = 'filled' | 'outlined';
@@ -107,6 +117,7 @@ export type FilledTextInputHookData = SharedTextInputStyleData & {
   fieldStyles: StyleProp<ViewStyle>;
   disabledBackgroundStyles: StyleProp<ViewStyle> | undefined;
   outlineStyles: StyleProp<ViewStyle>;
+  hoveredOutlineStyles: StyleProp<ViewStyle> | undefined;
   animatedActiveOutlineStyles: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   inputStyles: StyleProp<TextStyle>;
 };
@@ -121,6 +132,7 @@ export type OutlinedTextInputHookData = SharedTextInputStyleData & {
   fieldStyles: StyleProp<ViewStyle>;
   disabledBackgroundStyles: undefined;
   outlineStyles: StyleProp<ViewStyle>;
+  hoveredOutlineStyles: undefined;
   inputStyles: StyleProp<TextStyle>;
 };
 
@@ -153,6 +165,7 @@ export type TextInputHookReturn = SharedTextInputStyleData & {
   fieldStyles: StyleProp<ViewStyle>;
   disabledBackgroundStyles: StyleProp<ViewStyle> | undefined;
   outlineStyles: StyleProp<ViewStyle>;
+  hoveredOutlineStyles: StyleProp<ViewStyle> | undefined;
   inputStyles: StyleProp<TextStyle>;
   placeholder: string | undefined;
   counterText: string;
@@ -321,6 +334,7 @@ function TextInput({
     fieldStyles,
     disabledBackgroundStyles,
     outlineStyles,
+    hoveredOutlineStyles,
     animatedActiveOutlineStyles,
     animatedLabelWrapperStyles,
     animatedLabelTextStyles,
@@ -361,92 +375,110 @@ function TextInput({
 
   return (
     <Pressable onPress={focusInput} accessible={false} role="none">
-      <View style={fieldStyles}>
-        {/* Disabled tint overlay — filled variant only. A childless
+      {({ hovered }: PressableState) => (
+        <>
+          <View style={fieldStyles}>
+            {/* Disabled tint overlay — filled variant only. A childless
           absolutely-positioned View whose translucent fill is applied via the
           `opacity` style, so it never affects label/input rendering and works
           with PlatformColor on Android. */}
-        {!!disabledBackgroundStyles && (
-          <View style={disabledBackgroundStyles} />
-        )}
+            {!!disabledBackgroundStyles && (
+              <View style={disabledBackgroundStyles} />
+            )}
 
-        {/* Inactive indicator — always-visible 1px bottom border (filled) or
+            {/* Inactive indicator — always-visible 1px bottom border (filled) or
           full border (outlined); height and color reflect error/disabled state
           but do not change on focus */}
-        <View style={outlineStyles} />
+            <View
+              style={
+                hovered && hoveredOutlineStyles
+                  ? hoveredOutlineStyles
+                  : outlineStyles
+              }
+            />
 
-        {/* Active indicator — filled variant only; 2px bar that expands from
+            {/* Active indicator — filled variant only; 2px bar that expands from
           the center outward via scaleX (0 → 1) on focus and collapses on blur */}
-        {!!animatedActiveOutlineStyles && (
-          <Animated.View style={animatedActiveOutlineStyles} />
-        )}
+            {!!animatedActiveOutlineStyles && (
+              <Animated.View style={animatedActiveOutlineStyles} />
+            )}
 
-        {!!label && (
-          <Animated.View aria-hidden style={animatedLabelWrapperStyles}>
-            <Animated.Text style={animatedLabelTextStyles}>
-              {label}
-            </Animated.Text>
-          </Animated.View>
-        )}
+            {!!label && (
+              <Animated.View aria-hidden style={animatedLabelWrapperStyles}>
+                <Animated.Text style={animatedLabelTextStyles}>
+                  {label}
+                </Animated.Text>
+              </Animated.View>
+            )}
 
-        {renderLeadingAccessory
-          ? renderLeadingAccessory({
-              style: leadingAccessoryStyles,
-              error: hasError,
-              disabled: isDisabled,
-              multiline: !!rest.multiline,
-            })
-          : null}
+            {renderLeadingAccessory
+              ? renderLeadingAccessory({
+                  style: leadingAccessoryStyles,
+                  error: hasError,
+                  disabled: isDisabled,
+                  multiline: !!rest.multiline,
+                })
+              : null}
 
-        <Animated.View style={[containerStyles, animatedContainerStyle]}>
-          {hasPrefix && <Text style={prefixStyles}>{prefix}</Text>}
+            <Animated.View style={[containerStyles, animatedContainerStyle]}>
+              {hasPrefix && <Text style={prefixStyles}>{prefix}</Text>}
 
-          {render({
-            ref: input,
-            selectionColor,
-            cursorColor,
-            placeholderTextColor,
-            ...accessibilityProps.input,
-            ...rest,
-            editable: isEditable,
-            placeholder,
-            style: inputStyles,
-            onChangeText,
-            onFocus,
-            onBlur,
-          })}
+              {render({
+                ref: input,
+                selectionColor,
+                cursorColor,
+                placeholderTextColor,
+                ...accessibilityProps.input,
+                ...rest,
+                accessibilityHint: mergeAccessibilityText(
+                  ', ',
+                  rest.accessibilityHint,
+                  accessibilityProps.input.accessibilityHint
+                ),
+                editable: isEditable,
+                placeholder,
+                style: inputStyles,
+                onChangeText,
+                onFocus,
+                onBlur,
+              })}
 
-          {hasSuffix && <Text style={suffixStyles}>{suffix}</Text>}
-        </Animated.View>
+              {hasSuffix && <Text style={suffixStyles}>{suffix}</Text>}
+            </Animated.View>
 
-        {renderTrailingAccessory ? (
-          renderTrailingAccessory({
-            style: trailingAccessoryStyles,
-            error: hasError,
-            disabled: isDisabled,
-            multiline: !!rest.multiline,
-          })
-        ) : hasError ? (
-          <TextInputErrorIcon style={trailingAccessoryStyles} theme={theme} />
-        ) : null}
-      </View>
+            {renderTrailingAccessory ? (
+              renderTrailingAccessory({
+                style: trailingAccessoryStyles,
+                error: hasError,
+                disabled: isDisabled,
+                multiline: !!rest.multiline,
+              })
+            ) : hasError ? (
+              <TextInputErrorIcon
+                style={trailingAccessoryStyles}
+                theme={theme}
+              />
+            ) : null}
+          </View>
 
-      <View style={styles.addendum}>
-        {!!supportingText && (
-          <Text
-            {...accessibilityProps.supportingText}
-            style={supportingTextStyles}
-          >
-            {supportingText}
-          </Text>
-        )}
+          <View style={styles.addendum}>
+            {!!supportingText && (
+              <Text
+                {...accessibilityProps.supportingText}
+                style={supportingTextStyles}
+              >
+                {supportingText}
+              </Text>
+            )}
 
-        {hasCounter && (
-          <Text {...accessibilityProps.counter} style={counterStyles}>
-            {counterText}
-          </Text>
-        )}
-      </View>
+            {hasCounter && (
+              <Text {...accessibilityProps.counter} style={counterStyles}>
+                {counterText}
+              </Text>
+            )}
+          </View>
+        </>
+      )}
     </Pressable>
   );
 }

@@ -7,6 +7,7 @@ import { getIconColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import Icon from '../Icon';
 import IconButton from '../IconButton/IconButton';
 import type { Props as IconButtonProps } from '../IconButton/IconButton';
 
@@ -33,8 +34,10 @@ export type TextInputIconProps = TextInputAccessoryProps &
  * `TextInputAccessoryProps`, which TextInput passes into those render props.
  *
  * Without `onPress`, `onLongPress`, `onPressIn` or `onPressOut`, the icon is
- * decorative: a plain element that keeps its label but isn't a control, and a
- * tap on it goes to the field.
+ * decorative: a plain element, not an `IconButton`, so it has no button role
+ * and isn't a focus stop. It is hidden from assistive tech unless you pass
+ * `aria-label`, and a tap on it goes to the field. An icon with a handler is a
+ * control and needs `aria-label` (or `accessibilityLabel`).
  *
  * ## Usage
  * ```js
@@ -91,9 +94,9 @@ const TextInputIcon = ({
     isDisabled: disabled,
   });
 
-  // A decorative icon is not a control, so `disabled` would only announce it as
-  // a disabled button. Must match TouchableRipple's predicate, or an icon with
-  // only `onLongPress` stays pressable on a disabled field.
+  // Decorative icons render no button at all. Must match TouchableRipple's
+  // predicate, or an icon with only `onLongPress` would count as decorative
+  // and stay pressable on a disabled field.
   const { onLongPress, onPressIn, onPressOut } = rest;
   const isInteractive = hasTouchHandler({
     onPress,
@@ -101,6 +104,23 @@ const TextInputIcon = ({
     onPressIn,
     onPressOut,
   });
+
+  const accessibleName = rest['aria-label'] ?? rest.accessibilityLabel;
+
+  if (!isInteractive) {
+    return (
+      <View
+        ref={rest.ref}
+        testID={rest.testID}
+        style={[styles.icon, style]}
+        {...(accessibleName
+          ? { accessible: true, role: 'img', 'aria-label': accessibleName }
+          : { 'aria-hidden': true })}
+      >
+        <Icon source={icon} color={color} size={iconSize} theme={theme} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.iconWrapper}>
@@ -117,10 +137,10 @@ const TextInputIcon = ({
           // TextInput already dims the whole accessory when the field is
           // disabled. Forwarding `disabled` makes IconButton dim the icon too,
           // and the two multiply, so let IconButton own it and cancel the outer
-          // one. A decorative icon keeps it, nothing else dims it.
-          isInteractive && disabled ? styles.notDimmed : null,
+          // one.
+          disabled ? styles.notDimmed : null,
         ]}
-        disabled={isInteractive ? disabled : undefined}
+        disabled={disabled}
         onPress={onPress}
       />
     </View>

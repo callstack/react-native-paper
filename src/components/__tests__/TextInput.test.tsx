@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   I18nManager,
+  Platform,
   StyleSheet,
   TextInput as NativeTextInput,
   View,
@@ -11,6 +12,7 @@ import {
   afterAll,
   afterEach,
   beforeAll,
+  describe,
   expect,
   it,
   jest,
@@ -241,13 +243,12 @@ it('disables TextInput.Icon when the field is disabled', async () => {
   expect(buttons[1]).toBeDisabled();
 });
 
-it('does not expose a handler-less TextInput.Icon as a control when the field is disabled', async () => {
+it('renders a handler-less TextInput.Icon as a plain element', async () => {
   await render(
     <TextInput
       label="Search"
       value="x"
       onChangeText={() => {}}
-      disabled
       startAccessory={(props: TextInputAccessoryProps) => (
         <TextInput.Icon {...props} icon="magnify" testID="decorative" />
       )}
@@ -256,20 +257,56 @@ it('does not expose a handler-less TextInput.Icon as a control when the field is
           {...props}
           icon="close"
           onPress={() => {}}
-          testID="clear"
+          aria-label="Clear"
         />
       )}
     />
   );
 
-  const decorative = screen.getByTestId('decorative');
-  expect(decorative).toHaveProp('role', 'none');
-  expect(decorative).not.toBeDisabled();
+  expect(screen.getAllByRole('button')).toHaveLength(1);
+  expect(screen.getByRole('button', { name: 'Clear' })).toBeOnTheScreen();
+  expect(screen.getByTestId('decorative', includeHiddenElements)).toHaveProp(
+    'aria-hidden',
+    true
+  );
+});
 
-  // control: a real handler still gets disabled
-  const clear = screen.getByTestId('clear');
-  expect(clear).toHaveProp('role', 'button');
-  expect(clear).toBeDisabled();
+it('focuses the field when a handler-less TextInput.Icon is tapped', async () => {
+  const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
+
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" testID="decorative" />
+      )}
+    />
+  );
+
+  await userEvent.press(
+    screen.getByTestId('decorative', includeHiddenElements)
+  );
+
+  expect(focusSpy).toHaveBeenCalled();
+  focusSpy.mockRestore();
+});
+
+it('does not expose a handler-less TextInput.Icon of a disabled field as a control', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" aria-label="Magnify" />
+      )}
+    />
+  );
+
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
 });
 
 it('dims a disabled TextInput with TextInput.Icon accessories exactly once', async () => {
@@ -414,7 +451,7 @@ it('renders supporting text below the field', async () => {
   ).toBeOnTheScreen();
 });
 
-it('uses polite aria-live on error supporting text', async () => {
+it('announces error supporting text as an alert', async () => {
   await render(
     <TextInput
       label="Email"
@@ -426,7 +463,10 @@ it('uses polite aria-live on error supporting text', async () => {
     />
   );
 
-  expect(screen.getByText('Invalid')).toHaveProp('aria-live', 'polite');
+  const supportingText = screen.getByText('Invalid');
+  expect(supportingText).toHaveProp('role', 'alert');
+  expect(supportingText).not.toHaveProp('aria-live');
+  expect(supportingText).not.toHaveProp('aria-hidden', true);
   expect(screen.getByLabelText('Email')).toHaveProp('aria-invalid', true);
 });
 
@@ -446,34 +486,135 @@ it('marks the input invalid when error is true without supporting text', async (
   expect(input).not.toHaveProp('accessibilityHint');
 });
 
-it('hides helper supporting text from the accessibility tree and omits aria-live', async () => {
-  await render(
-    <TextInput
-      label="Email"
-      value=""
-      onChangeText={() => {}}
-      supportingText="Optional"
-      testID="tf-input"
-    />
-  );
+const getNativeID = (element: TestInstance): string =>
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  element.props.nativeID;
 
-  const supportingText = screen.getByText('Optional', includeHiddenElements);
-  expect(supportingText).toHaveProp('aria-hidden', true);
-  expect(supportingText).not.toHaveProp('aria-live');
-  expect(screen.getByLabelText('Email, Optional')).toBeOnTheScreen();
-});
+describe('supporting text association', () => {
+  const originalOS = Platform.OS;
 
-it('includes supporting text in aria-label when label is omitted', async () => {
-  await render(
-    <TextInput
-      value=""
-      onChangeText={() => {}}
-      supportingText="Helper only"
-      testID="tf-input"
-    />
-  );
+  afterEach(() => {
+    Platform.OS = originalOS;
+  });
 
-  expect(screen.getByLabelText('Helper only')).toBeOnTheScreen();
+  it('reads helper text as the input hint on native', async () => {
+    await render(
+      <TextInput
+        label="Email"
+        value=""
+        onChangeText={() => {}}
+        supportingText="Optional"
+      />
+    );
+
+    const input = screen.getByLabelText('Email');
+    expect(input).toHaveProp('accessibilityHint', 'Optional');
+    expect(input).not.toHaveProp('aria-describedby');
+    expect(screen.getByText('Optional', includeHiddenElements)).toHaveProp(
+      'aria-hidden',
+      true
+    );
+  });
+
+  it('describes the input by the supporting text and counter on web', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <TextInput
+        label="Email"
+        value="ab"
+        onChangeText={() => {}}
+        supportingText="Optional"
+        maxLength={10}
+        counter
+      />
+    );
+
+    const input = screen.getByLabelText('Email');
+    const supportingText = screen.getByText('Optional');
+    const counter = screen.getByText('2/10');
+
+    expect(input).toHaveProp(
+      'aria-describedby',
+      `${getNativeID(supportingText)} ${getNativeID(counter)}`
+    );
+    expect(getNativeID(supportingText)).not.toBe(getNativeID(counter));
+    expect(input).not.toHaveProp('accessibilityHint');
+    expect(supportingText).not.toHaveProp('aria-hidden', true);
+  });
+
+  it('uses the supporting text as the name when the label is omitted', async () => {
+    await render(
+      <TextInput
+        value=""
+        onChangeText={() => {}}
+        supportingText="Helper only"
+      />
+    );
+
+    const input = screen.getByLabelText('Helper only');
+    expect(input).toBeOnTheScreen();
+    expect(input).not.toHaveProp('accessibilityHint');
+    expect(screen.queryByText('Helper only')).toBeNull();
+  });
+
+  it('does not describe a web input by the supporting text used as its name', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <TextInput
+        value=""
+        onChangeText={() => {}}
+        supportingText="Helper only"
+      />
+    );
+
+    expect(screen.getByLabelText('Helper only')).not.toHaveProp(
+      'aria-describedby'
+    );
+  });
+
+  it('merges a passed accessibilityHint with the supporting text hint on native', async () => {
+    await render(
+      <TextInput
+        label="Name"
+        value=""
+        onChangeText={() => {}}
+        supportingText="Helper"
+        accessibilityHint="Custom hint"
+      />
+    );
+
+    expect(screen.getByLabelText('Name')).toHaveProp(
+      'accessibilityHint',
+      'Custom hint, Helper'
+    );
+  });
+
+  it('gives each field its own ids', async () => {
+    Platform.OS = 'web';
+
+    await render(
+      <>
+        <TextInput
+          label="A"
+          value=""
+          onChangeText={() => {}}
+          supportingText="a"
+        />
+        <TextInput
+          label="B"
+          value=""
+          onChangeText={() => {}}
+          supportingText="b"
+        />
+      </>
+    );
+
+    expect(getNativeID(screen.getByText('a'))).not.toBe(
+      getNativeID(screen.getByText('b'))
+    );
+  });
 });
 
 it('does not mark the input as aria-disabled when editable is false (read-only)', async () => {

@@ -177,17 +177,21 @@ export const getIconColor = ({
  */
 export const getOutlineColor = ({
   theme,
+  variant,
   hasError,
   isFocused,
   isDisabled,
+  isHovered = false,
 }: {
   theme: InternalTheme;
+  variant: TextInputVariant;
   isFocused: boolean;
+  isHovered?: boolean;
   hasError: boolean;
   isDisabled: boolean;
 }): ColorValue => {
   const {
-    colors: { error, onSurface, primary, outline },
+    colors: { error, onSurface, onSurfaceVariant, primary, outline },
   } = theme;
 
   if (hasError) {
@@ -198,6 +202,9 @@ export const getOutlineColor = ({
   }
   if (isFocused) {
     return primary;
+  }
+  if (variant === 'filled') {
+    return isHovered ? onSurface : onSurfaceVariant;
   }
 
   return outline;
@@ -329,13 +336,24 @@ export const getFilledTextInputData = (
 
   const outlineColor = getOutlineColor({
     theme,
+    variant: 'filled',
     hasError,
     isFocused: false,
     isDisabled,
   });
 
+  const hoveredOutlineColor = getOutlineColor({
+    theme,
+    variant: 'filled',
+    hasError,
+    isFocused: false,
+    isDisabled,
+    isHovered: true,
+  });
+
   const activeOutlineColor = getOutlineColor({
     theme,
+    variant: 'filled',
     hasError,
     isFocused: true,
     isDisabled,
@@ -402,6 +420,13 @@ export const getFilledTextInputData = (
     isDisabled && styles.disabled,
   ];
 
+  /* Same indicator with the hover color. TextInput swaps it in while the
+     field is hovered (web only). */
+  const hoveredOutlineStyles: StyleProp<ViewStyle> = [
+    outlineStyles,
+    { backgroundColor: hoveredOutlineColor },
+  ];
+
   const animatedActiveOutlineStyles: StyleProp<
     AnimatedStyle<StyleProp<ViewStyle>>
   > = [
@@ -445,6 +470,7 @@ export const getFilledTextInputData = (
     fieldStyles,
     disabledBackgroundStyles,
     outlineStyles,
+    hoveredOutlineStyles,
     animatedActiveOutlineStyles,
     inputStyles,
     ...shared,
@@ -478,6 +504,7 @@ export const getOutlinedTextInputData = (
 
   const outlineColor = getOutlineColor({
     theme,
+    variant: 'outlined',
     isDisabled,
     isFocused,
     hasError,
@@ -563,9 +590,24 @@ export const getOutlinedTextInputData = (
     fieldStyles,
     disabledBackgroundStyles: undefined,
     outlineStyles,
+    hoveredOutlineStyles: undefined,
     inputStyles,
     ...shared,
   };
+};
+
+/**
+ * Joins the non-empty parts, or returns `undefined` when there are none. Used
+ * to merge a consumer's `accessibilityHint` with the one TextInput computes,
+ * instead of one replacing the other.
+ */
+export const mergeAccessibilityText = (
+  separator: string,
+  ...parts: (string | undefined)[]
+): string | undefined => {
+  const joined = parts.filter(Boolean).join(separator);
+
+  return joined || undefined;
 };
 
 export const getAccessibilityData = ({
@@ -574,6 +616,8 @@ export const getAccessibilityData = ({
   hasCounter,
   isDisabled,
   inputLength,
+  supportingTextId,
+  counterId,
 }: GetAccessibilityDataProps): GetAccessibilityDataReturn => {
   const { label, supportingText, ...props } = data;
 
@@ -583,7 +627,11 @@ export const getAccessibilityData = ({
   const isCounterExceeded = shouldEvaluateCounter && inputLength > maxLength;
   const isCounterReached = shouldEvaluateCounter && inputLength === maxLength;
   const isInvalid = hasError || isCounterExceeded;
-  const isSupportingTextHidden = !!(supportingText && !hasError);
+
+  const isWeb = Platform.OS === 'web';
+  const isSupportingTextName = !label && !!supportingText && !hasError;
+  const isSupportingTextInHint =
+    !isWeb && !!supportingText && !hasError && !isSupportingTextName;
 
   const chunks: string[] = [];
 
@@ -591,7 +639,7 @@ export const getAccessibilityData = ({
     chunks.push(label);
   }
 
-  if (isSupportingTextHidden) {
+  if (isSupportingTextName) {
     chunks.push(supportingText);
   }
 
@@ -601,32 +649,52 @@ export const getAccessibilityData = ({
 
   const ariaLabel = chunks.length > 0 ? chunks.join(', ') : label;
 
-  let hint: string | undefined;
+  const counterExceededHint = `Character limit exceeded ${inputLength} of ${maxLength}`;
+
+  const hints: string[] = [];
+
+  if (isSupportingTextInHint) {
+    hints.push(supportingText);
+  }
 
   if (isCounterExceeded && !(hasError && supportingText)) {
-    hint = `Character limit exceeded ${inputLength} of ${maxLength}`;
+    hints.push(counterExceededHint);
+  }
+
+  const describedBy: string[] = [];
+
+  if (isWeb && supportingText && !isSupportingTextName) {
+    describedBy.push(supportingTextId);
+  }
+
+  if (isWeb && shouldEvaluateCounter) {
+    describedBy.push(counterId);
   }
 
   const counterAccessibilityLabel = shouldEvaluateCounter
     ? isCounterExceeded
-      ? `Character limit exceeded ${inputLength} of ${maxLength}`
+      ? counterExceededHint
       : `Characters entered ${inputLength} of ${maxLength}`
     : undefined;
 
   return {
     input: {
       'aria-label': ariaLabel,
+      'aria-describedby':
+        describedBy.length > 0 ? describedBy.join(' ') : undefined,
       'aria-valuemax': isCounterReached ? maxLength : undefined,
       'aria-valuenow': isCounterReached ? inputLength : undefined,
       'aria-disabled': isDisabled,
       'aria-invalid': isInvalid,
-      accessibilityHint: hint,
+      accessibilityHint: hints.length > 0 ? hints.join(', ') : undefined,
     },
     supportingText: {
-      'aria-hidden': isSupportingTextHidden,
-      'aria-live': hasError && supportingText ? 'polite' : undefined,
+      nativeID: supportingTextId,
+      'aria-hidden': isSupportingTextInHint || isSupportingTextName,
+      role: hasError && supportingText ? 'alert' : undefined,
     },
     counter: {
+      nativeID: counterId,
       'aria-label': counterAccessibilityLabel,
       'aria-live': 'polite',
     },
