@@ -867,6 +867,22 @@ describe('Card', () => {
     );
   });
 
+  it.each([
+    ['an empty array', []],
+    ['an array of empty values', [null, false, undefined]],
+    ['nested empty arrays', [[], []]],
+    ['true', true],
+  ])(
+    'does not warn when whole-Card interaction is combined with %s in actions',
+    async (_, actions) => {
+      const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      await render(<Card testID="card" onPress={() => {}} actions={actions} />);
+
+      expect(warn).not.toHaveBeenCalled();
+    }
+  );
+
   it('does not warn about Card actions in production', async () => {
     const environment = process.env.NODE_ENV;
     process.env.NODE_ENV = 'production';
