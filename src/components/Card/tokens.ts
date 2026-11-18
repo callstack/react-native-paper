@@ -1,3 +1,5 @@
+import type { ColorValue } from 'react-native';
+
 import { tokens as systemTokens } from '../../theme/tokens';
 import type { Elevation, InternalTheme } from '../../theme/types';
 
@@ -243,6 +245,20 @@ export type ResolveCardVisualsOptions = CardStateFlags & {
   elevation?: Elevation;
 };
 
+export type CardVisuals = {
+  state: CardState;
+  containerColor: ColorValue;
+  containerOpacity: number;
+  outlineColor: ColorValue;
+  outlineOpacity: number;
+  outlineWidth: 0 | 1;
+  elevation: Elevation;
+  shape: number;
+  stateLayerColor: ColorValue;
+  stateLayerOpacity: number;
+  contentOpacity: number;
+};
+
 export const resolveCardVisuals = ({
   theme,
   variant,
@@ -252,7 +268,7 @@ export const resolveCardVisuals = ({
   pressed = false,
   focused = false,
   hovered = false,
-}: ResolveCardVisualsOptions) => {
+}: ResolveCardVisualsOptions): CardVisuals => {
   const state: CardState = disabled
     ? 'disabled'
     : dragged
