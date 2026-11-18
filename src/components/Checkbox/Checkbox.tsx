@@ -11,7 +11,6 @@ import type {
 } from 'react-native';
 
 import Animated, {
-  cubicBezier,
   Easing,
   ReduceMotion,
   useAnimatedReaction,
@@ -30,6 +29,7 @@ import { SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
+import { getTransition } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
@@ -228,52 +228,47 @@ const Checkbox = ({
   // A disabled ripple effect asks for no press at all.
   const ownsPress = isInteractive && Boolean(rippleEffectEnabled);
 
-  const fillTransitionTimingFunction = cubicBezier(
-    ...theme.motion.easing.standard
+  // Opacity is exempt from reduced motion (see `useReduceMotion`'s
+  // contract), so the fill/outline cross-fade always animates — pass
+  // `false`, not `reduceMotion`.
+  const fillTransition = getTransition<ViewStyle>(
+    theme,
+    ['opacity'],
+    'short2',
+    'standard',
+    false
   );
 
-  const fillTransitionDuration = reduceMotion
-    ? 0
-    : theme.motion.duration.short2;
-
-  const checkTransitionDuration = reduceMotion
-    ? 0
-    : theme.motion.duration.short3;
-
-  const checkTransitionTimingFunction = cubicBezier(
-    ...theme.motion.easing.standard
+  const checkTransition = getTransition<ViewStyle>(
+    theme,
+    ['width', 'opacity'],
+    'short3',
+    'standard',
+    reduceMotion
   );
 
   const outlineStyle: CSSStyle<ViewStyle> = {
     borderColor: visual.outlineColor,
     opacity: selected ? 0 : 1,
-    transitionDuration: fillTransitionDuration,
-    transitionProperty: ['opacity'],
-    transitionTimingFunction: fillTransitionTimingFunction,
+    ...fillTransition,
   };
 
   const fillStyle: CSSStyle<ViewStyle> = {
     backgroundColor: visual.containerColor,
     opacity: selected ? 1 : 0,
-    transitionDuration: fillTransitionDuration,
-    transitionProperty: ['opacity'],
-    transitionTimingFunction: fillTransitionTimingFunction,
+    ...fillTransition,
   };
 
   const stateLayerStyle: CSSStyle<ViewStyle> = {
     backgroundColor: stateLayerColor,
     opacity: stateLayer.opacity,
-    transitionDuration: fillTransitionDuration,
-    transitionProperty: ['opacity'],
-    transitionTimingFunction: fillTransitionTimingFunction,
+    ...fillTransition,
   };
 
   const maskStyle: CSSStyle<ViewStyle> = {
     width: selected ? CONTAINER_SIZE : 0,
     opacity: selected ? 1 : 0,
-    transitionDuration: checkTransitionDuration,
-    transitionProperty: ['width', 'opacity'],
-    transitionTimingFunction: checkTransitionTimingFunction,
+    ...checkTransition,
   };
 
   const rippleAlpha = useSharedValue(0);
