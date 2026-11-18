@@ -480,7 +480,6 @@ it('scales in again when reopened at the same anchor', async () => {
     );
   }
 
-  // The style partway through the open animation.
   const openAndSample = async () => {
     await act(async () => {
       await screen.rerender(makeMenu(true));
