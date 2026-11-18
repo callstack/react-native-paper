@@ -261,7 +261,7 @@ const CardExample = () => {
       />
 
       <Card
-        variant="outlined"
+        variant={variant}
         disabled
         onPress={() => showMessage('Disabled Card pressed')}
         title="Disabled"
@@ -273,13 +273,26 @@ const CardExample = () => {
       />
 
       <Card
-        variant="elevated"
+        variant={variant}
         dragged
         title="Dragged"
         content={
           <Card.Content>
             <Text variant="bodyMedium">
               The dragged look is controlled by the app.
+            </Text>
+          </Card.Content>
+        }
+      />
+
+      <Card
+        variant="elevated"
+        elevation={3}
+        title="Custom elevation"
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              Set with the elevation prop. Only elevated Cards accept it.
             </Text>
           </Card.Content>
         }
@@ -309,6 +322,19 @@ const CardExample = () => {
           />
         }
         title="Asymmetric shape"
+      />
+
+      <Card
+        variant={variant}
+        contentStyle={styles.horizontal}
+        media={
+          <Card.Cover
+            source={require('../../assets/images/forest.jpg')}
+            style={styles.horizontalCover}
+          />
+        }
+        title="Horizontal layout"
+        subtitle="Set flexDirection in contentStyle"
       />
 
       <Card
@@ -353,6 +379,13 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     marginTop: 16,
+  },
+  horizontal: {
+    flexDirection: 'row',
+  },
+  horizontalCover: {
+    height: 80,
+    width: 80,
   },
   customHeader: {
     alignItems: 'center',
