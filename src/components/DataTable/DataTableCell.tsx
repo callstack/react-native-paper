@@ -79,6 +79,9 @@ const DataTableCell = ({
 }: Props) => {
   return (
     <TouchableRipple
+      // Cells fill rows that stack edge to edge, so an outward ring would run
+      // into the rows above and below, like DataTable.Row's.
+      focusRing="inward"
       {...rest}
       testID={testID}
       theme={themeOverrides}

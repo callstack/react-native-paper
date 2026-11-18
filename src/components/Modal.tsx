@@ -13,24 +13,36 @@ import Portal from './Portal/Portal';
 import Surface from './Surface';
 import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
+import {
+  useMotionDuration,
+  useReduceMotion,
+} from '../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
-import { addEventListener } from '../utils/addEventListener';
-import { BackHandler } from '../utils/BackHandler/BackHandler';
+import { useOverlayDismiss } from '../utils/useOverlayDismiss';
+import { useOverlayFocus } from '../utils/useOverlayFocus';
+import type { OverlayFocusTarget } from '../utils/useOverlayFocus';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 export type Props = {
   /**
-   * Determines whether clicking outside the modal dismisses it.
+   * Determines whether clicking outside the modal dismisses it. It also decides
+   * whether the screen reader escape gesture and the visually hidden dismiss
+   * button dismiss it, and is the default for `dismissableBackButton`.
    */
   dismissable?: boolean;
   /**
-   * Determines whether clicking Android hardware back button dismisses the dialog.
+   * Determines whether the Android hardware back button and the Escape key on the web dismiss the modal.
+   * While a modal is visible, only the topmost one handles these. When this is `false`,
+   * back is absorbed and nothing is dismissed, rather than passed on to what is behind the modal.
+   * Escape dismisses nothing either, but it still reaches the rest of the page.
    */
   dismissableBackButton?: boolean;
   /**
    * Callback that is called when the user dismisses the modal.
+   * A visible modal always takes the back button and Escape key, so without
+   * this callback they do nothing, and on Android the user cannot go back.
    */
   onDismiss?: () => void;
   /**
@@ -54,6 +66,35 @@ export type Props = {
    * Determines Whether the modal is visible.
    */
   visible: boolean;
+  /**
+   * Element to focus when the modal opens.
+   *
+   * By default, focus moves to the first focusable element inside the modal on
+   * web, or to the modal itself when there is none. Focus that is already
+   * inside, such as on an `autoFocus` field, stays where it is. On iOS, screen
+   * reader focus moves to the modal. On Android, TalkBack moves its focus to
+   * the first element inside the modal by itself.
+   *
+   * Accepts a host element, such as a `View` or `Pressable`. On iOS it receives
+   * screen reader focus, not keyboard focus. A component handle with a
+   * `focus()` method, such as the one of a `TextInput`, has `focus()` called.
+   * TalkBack on Android follows neither.
+   */
+  initialFocusRef?: React.RefObject<OverlayFocusTarget | null>;
+  /**
+   * Element to focus when the modal closes.
+   *
+   * On web, focus returns to the element that had it before the modal opened,
+   * and this prop picks another one. If that element is gone by then, such as a
+   * list row the modal deleted, focus goes back to the one that had it before.
+   * On iOS and Android, nothing is restored unless this prop is given.
+   *
+   * Accepts a host element, such as a `View` or `Pressable`. On iOS it receives
+   * screen reader focus, not keyboard focus. A component handle with a
+   * `focus()` method, such as the one of a `TextInput`, has `focus()` called.
+   * TalkBack on Android doesn't move to a host element.
+   */
+  restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
   /**
    * Content of the `Modal`.
    */
@@ -94,6 +135,10 @@ export type Props = {
 };
 
 const DEFAULT_DURATION = 220;
+
+// Having the handler at all keeps the screen reader escape gesture on this
+// modal, instead of passing it on to the modal behind it.
+const absorbAccessibilityEscape = () => {};
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
@@ -138,6 +183,8 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
+  initialFocusRef,
+  restoreFocusRef,
   dismissAccessibilityLabel = 'Close modal',
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
@@ -165,7 +212,18 @@ function Modal({
     setVisibleInternal(true);
   }
 
-  const { scale } = theme.animation;
+  const reduceMotion = useReduceMotion();
+  const duration = reduceMotion ? 0 : DEFAULT_DURATION;
+  const getDuration = useMotionDuration();
+
+  const contentRef = React.useRef<React.ComponentRef<typeof View>>(null);
+
+  const { focusInitialTarget, restoreFocus } = useOverlayFocus({
+    visible,
+    containerRef: contentRef,
+    initialFocusRef,
+    restoreFocusRef,
+  });
 
   React.useEffect(() => {
     const timeout = setTimeout(() => setAnimatedVisible(visible), 0);
@@ -180,38 +238,43 @@ function Modal({
 
     const timeout = setTimeout(
       () => setVisibleInternal(false),
-      scale * DEFAULT_DURATION
+      getDuration(DEFAULT_DURATION)
     );
 
     return () => clearTimeout(timeout);
-  }, [scale, visible, visibleInternal]);
+  }, [getDuration, visible, visibleInternal]);
 
   React.useEffect(() => {
-    if (!visible) {
+    if (!visibleInternal) {
+      restoreFocus();
+    }
+  }, [restoreFocus, visibleInternal]);
+
+  useOverlayDismiss({
+    enabled: visible,
+    dismissable: dismissableBackButton,
+    onDismiss: onDismissCallback,
+  });
+
+  React.useEffect(() => {
+    if (!animatedVisible) {
       return undefined;
     }
 
-    const onHardwareBackPress = () => {
-      if (dismissableBackButton) {
-        onDismissCallback();
-      }
-
-      return true;
-    };
-
-    const subscription = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      onHardwareBackPress
+    // Transparent views are not in the accessibility tree, so focus has to
+    // wait for the fade to finish.
+    const timeout = setTimeout(
+      focusInitialTarget,
+      getDuration(DEFAULT_DURATION)
     );
 
-    return () => subscription.remove();
-  }, [dismissableBackButton, onDismissCallback, visible]);
+    return () => clearTimeout(timeout);
+  }, [animatedVisible, focusInitialTarget, getDuration]);
 
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
   const backdropTransitionStyle: AnimatedStyle<ViewStyle> = {
-    transitionDuration: scale * DEFAULT_DURATION,
+    transitionDuration: duration,
     transitionProperty: 'opacity',
     transitionTimingFunction,
   };
@@ -238,9 +301,10 @@ function Modal({
     <Portal modal={visibleInternal} theme={themeOverrides}>
       <Animated.View
         pointerEvents={visible ? 'auto' : 'none'}
-        aria-live="polite"
         style={StyleSheet.absoluteFill}
-        onAccessibilityEscape={dismissable ? onDismissCallback : undefined}
+        onAccessibilityEscape={
+          dismissable ? onDismissCallback : absorbAccessibilityEscape
+        }
         testID={testID}
       >
         <AnimatedPressable
@@ -261,8 +325,11 @@ function Modal({
           pointerEvents="box-none"
         >
           <Surface
+            ref={contentRef}
             role="dialog"
             aria-modal
+            // Focus has somewhere to go on the web when nothing inside can take it.
+            tabIndex={Platform.OS === 'web' ? -1 : undefined}
             aria-label={ariaLabel}
             aria-labelledby={
               // Only set `aria-labelledby` on web, it's ignored on iOS
@@ -280,7 +347,7 @@ function Modal({
               contentContainerStyle,
             ]}
             elevation={contentElevation}
-            transitionDuration={scale * DEFAULT_DURATION}
+            transitionDuration={duration}
           >
             {children}
             {dismissable ? (

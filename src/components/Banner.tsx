@@ -26,6 +26,7 @@ import Surface from './Surface';
 import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';
+import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../theme/types';
 
 const DEFAULT_MAX_WIDTH = 960;
@@ -74,7 +75,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   maxFontSizeMultiplier?: number;
   style?: StyleProp<SurfaceStyle>;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */
@@ -165,10 +166,8 @@ const Banner = ({
   const showCallback = useLatestCallback(onShowAnimationFinished);
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
+  const getDuration = useMotionDuration();
   const { duration, easing } = theme.motion;
-  const { scale } = theme.animation;
-  const animationDuration =
-    (visible ? duration.medium1 : duration.short4) * scale;
 
   React.useEffect(() => {
     const callback = visible ? showCallback : hideCallback;
@@ -176,15 +175,16 @@ const Banner = ({
     position.value = withTiming(
       visible ? 1 : 0,
       {
-        duration: animationDuration,
+        duration: getDuration(visible ? duration.medium1 : duration.short4),
         easing: Easing.bezier(...easing.standard),
         reduceMotion: ReduceMotion.Never,
       },
       (finished) => scheduleOnRN(callback, { finished: finished ?? false })
     );
   }, [
-    animationDuration,
+    duration,
     easing,
+    getDuration,
     hideCallback,
     position,
     showCallback,
@@ -265,7 +265,6 @@ const Banner = ({
             {actions.map(({ label, ...others }, i) => (
               <Button
                 key={i}
-                compact
                 mode="text"
                 style={styles.button}
                 textColor={colors.primary}

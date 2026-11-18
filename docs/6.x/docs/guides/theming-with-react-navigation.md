@@ -33,7 +33,7 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 Library exports also Material Design 3 themes in both modes:
 
 ```js
-import { MD3LightTheme, MD3DarkTheme } from 'react-native-paper';
+import { LightTheme, DarkTheme } from 'react-native-paper';
 ```
 
 ## Combining theme objects
@@ -49,6 +49,9 @@ import { TouchableOpacity } from 'react-native';
 import { Card, Text, List, PaperProvider } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
+
+const title = 'Card title';
+const content = 'Card content';
 
 const HomeScreen = ({ navigation }) => (
   <TouchableOpacity
@@ -94,13 +97,9 @@ export default function App() {
 
 Our goal here is to combine those two themes, so that we could control the theme for the entire application from a single place.
 
-To make things easier we can use [deepmerge](https://www.npmjs.com/package/deepmerge) package. We can install it with:
-
-```bash npm2yarn
-npm install deepmerge
-```
-
 ### Material Design 3
+
+We can merge them with object spread. React Navigation 7 themes also have `fonts`, with keys that Paper doesn't use (`regular`, `medium`, `bold` and `heavy`), so merge `fonts` the same way as `colors`. Otherwise React Navigation's `fonts` replace Paper's.
 
 ```js
 import {
@@ -109,45 +108,38 @@ import {
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
 import {
-  MD3DarkTheme,
-  MD3LightTheme,
+  DarkTheme as PaperDarkTheme,
+  LightTheme as PaperLightTheme,
   adaptNavigationTheme,
 } from 'react-native-paper';
-import merge from 'deepmerge';
 
-const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  reactNavigationLight: NavigationDefaultTheme,
-  reactNavigationDark: NavigationDarkTheme,
-});
-
-const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
-const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
-```
-
-Alternatively, we could merge those themes using vanilla JavaScript:
-
-### Material Design 3
-
-```js
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
   reactNavigationDark: NavigationDarkTheme,
 });
 
 const CombinedDefaultTheme = {
-  ...MD3LightTheme,
+  ...PaperLightTheme,
   ...LightTheme,
   colors: {
-    ...MD3LightTheme.colors,
+    ...PaperLightTheme.colors,
     ...LightTheme.colors,
+  },
+  fonts: {
+    ...PaperLightTheme.fonts,
+    ...LightTheme.fonts,
   },
 };
 const CombinedDarkTheme = {
-  ...MD3DarkTheme,
+  ...PaperDarkTheme,
   ...DarkTheme,
   colors: {
-    ...MD3DarkTheme.colors,
+    ...PaperDarkTheme.colors,
     ...DarkTheme.colors,
+  },
+  fonts: {
+    ...PaperDarkTheme.fonts,
+    ...DarkTheme.fonts,
   },
 };
 ```
@@ -265,7 +257,7 @@ const Header = ({ scene }) => {
       }}
     >
       <Appbar.Content title={scene.route?.name} />
-      <Switch color={'red'} value={isThemeDark} onValueChange={toggleTheme} />
+      <Switch value={isThemeDark} onValueChange={toggleTheme} />
     </Appbar.Header>
   );
 };

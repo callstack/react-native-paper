@@ -1,5 +1,11 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
-import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
+import type {
+  ColorValue,
+  StyleProp,
+  TextStyle,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
 
 import { DEFAULT_SIZE } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -7,7 +13,7 @@ import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
 
-export type Props = ViewProps & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Initials to show as the text in the `Avatar`.
    */
@@ -21,9 +27,15 @@ export type Props = ViewProps & {
    */
   color?: string;
   /**
-   * Style for text container
+   * Background color of the avatar.
    */
-  style?: StyleProp<ViewStyle>;
+  backgroundColor?: ColorValue;
+  /**
+   * Style for the text container.
+   *
+   * Background color should be specified via the `backgroundColor` prop instead.
+   */
+  style?: StyleProp<Omit<ViewStyle, 'backgroundColor'>>;
   /**
    * Style for the title.
    */
@@ -57,6 +69,7 @@ const AvatarText = ({
   style,
   labelStyle,
   color: customColor,
+  backgroundColor: customBackgroundColor,
   theme: themeOverrides,
   maxFontSizeMultiplier,
   ...rest
@@ -71,10 +84,13 @@ const AvatarText = ({
           width: size,
           height: size,
           borderRadius: cornerFull,
-          backgroundColor: theme.colors.primaryContainer,
         },
         styles.container,
         style,
+        {
+          backgroundColor:
+            customBackgroundColor ?? theme.colors.primaryContainer,
+        },
       ]}
       {...rest}
     >

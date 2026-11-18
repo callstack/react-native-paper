@@ -9,6 +9,7 @@ import type {
 } from 'react-native';
 
 import Animated, {
+  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -17,20 +18,16 @@ import type { SharedValue } from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
 
 import Content from './Content';
-import {
-  Tokens,
-  FOCUS_RING_INSET,
-  FOCUS_RING_THICKNESS,
-  webNoOutline,
-} from './tokens';
+import { Tokens } from './tokens';
 import type { Size, Variant } from './tokens';
-import { useFocusRing } from './useFocusRing';
 import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
+import hasTouchHandler from '../../utils/hasTouchHandler';
+import { useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -91,6 +88,23 @@ export type ShellProps = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
+   * Whether the shell can't be pressed. Turns a control off without removing
+   * `onPress`, which would render another element and remount the content.
+   */
+  disabled?: boolean;
   /**
    * Accessibility label. Falls back to `label` if unset.
    */
@@ -171,7 +185,7 @@ export type ShellProps = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -197,6 +211,10 @@ const Shell = ({
   elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
+  disabled,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
@@ -242,21 +260,21 @@ const Shell = ({
       return;
     }
 
-    scale.value = withSpring(
-      target,
-      toRawSpring(theme.motion.spring.fast.spatial)
-    );
+    scale.value = withSpring(target, {
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: ReduceMotion.Never,
+    });
 
-    alpha.value = withSpring(
-      target,
-      toRawSpring(theme.motion.spring.fast.effects)
-    );
+    alpha.value = withSpring(target, {
+      ...toRawSpring(theme.motion.spring.fast.effects),
+      reduceMotion: ReduceMotion.Never,
+    });
   }, [visible, theme, reduceMotion, scale, alpha]);
 
   // Fallback shared values track the static size-driven dimensions. Consumers
   // that don't supply their own animated shared values get these. Keeping
   // everything as a shared value means there's exactly one animated style
-  // per view — no static-vs-animated merge surprises.
+  // per view: no static-vs-animated merge surprises.
   const fallbackWidth = useSharedValue(dimensions.width);
   const fallbackHeight = useSharedValue(dimensions.height);
   const fallbackBorderRadius = useSharedValue(dimensions.borderRadius);
@@ -297,15 +315,35 @@ const Shell = ({
     [borderRadius, containerBg]
   );
 
-  const { focusedSV, onFocus, onBlur } = useFocusRing();
+  const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
 
-  const focusRingStyle = useAnimatedStyle(
-    () => ({
-      opacity: focusedSV.value ? 1 : 0,
-      borderRadius: borderRadius.value + FOCUS_RING_INSET,
-    }),
-    [borderRadius]
+  // `scope: 'within'`: the ring is drawn on the clip view below, not the
+  // inner `TouchableRipple` that actually receives focus. On web the shared
+  // stylesheet hides the browser's own outline there, so only the clip view's
+  // ring shows, or only the outline in a browser without `:has()`.
+  //
+  // Off when `disabled` or without a touch handler: the inner TouchableRipple
+  // is then a plain View, and a focused one unmounts without a blur reaching
+  // the hook. The public FAB has no `disabled`, so dropping the handlers is how
+  // an app turns it off.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !hasHandler,
+    theme.colors.secondary,
+    'outward',
+    'within'
   );
+
+  // Without a handler the touchable drops the button role, and on web that
+  // renders role="presentation", which can't carry a name. A labelled
+  // icon-only FAB that does nothing is an image there, named by its label.
+  const isWebImage =
+    Platform.OS === 'web' &&
+    !hasHandler &&
+    !disabled &&
+    label === undefined &&
+    children === undefined &&
+    ariaLabel !== undefined &&
+    ariaChecked === undefined;
 
   return (
     <Surface
@@ -321,25 +359,30 @@ const Shell = ({
       elevation={elevation}
       theme={theme}
     >
-      <Animated.View style={[styles.clip, clipStyle]}>
+      <Animated.View
+        style={[styles.clip, clipStyle, ...focusRing.style]}
+        {...focusRing.dataSetProps}
+      >
         {overlay}
         <TouchableRipple
           borderless
           background={background}
+          focusRing="none"
           onPress={onPress}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onLongPress={onLongPress}
+          onPressOut={onPressOut}
+          delayLongPress={delayLongPress}
+          disabled={disabled}
+          onFocus={focusTarget.onFocus}
+          onBlur={focusTarget.onBlur}
           aria-label={ariaLabel}
-          role="button"
+          role={isWebImage ? 'img' : 'button'}
           aria-checked={ariaChecked}
           aria-selected={ariaSelected}
           aria-busy={ariaBusy}
           aria-expanded={ariaExpanded}
           testID={testID}
-          style={[
-            children ? styles.fill : null,
-            Platform.OS === 'web' ? webNoOutline : null,
-          ]}
+          style={[children ? styles.fill : null, ...focusTarget.style]}
         >
           {children ?? (
             <Content
@@ -360,13 +403,6 @@ const Shell = ({
           )}
         </TouchableRipple>
       </Animated.View>
-      <Animated.View
-        style={[
-          styles.focusRing,
-          { borderColor: theme.colors.secondary },
-          focusRingStyle,
-        ]}
-      />
     </Surface>
   );
 };
@@ -387,15 +423,6 @@ const styles = StyleSheet.create({
     pointerEvents: 'auto',
   },
   pointerEventsNone: {
-    pointerEvents: 'none',
-  },
-  focusRing: {
-    position: 'absolute',
-    top: -FOCUS_RING_INSET,
-    left: -FOCUS_RING_INSET,
-    right: -FOCUS_RING_INSET,
-    bottom: -FOCUS_RING_INSET,
-    borderWidth: FOCUS_RING_THICKNESS,
     pointerEvents: 'none',
   },
 });

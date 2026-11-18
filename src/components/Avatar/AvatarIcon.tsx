@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
@@ -8,7 +8,7 @@ import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import { DEFAULT_SIZE } from './utils';
 
-export type Props = ViewProps & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Icon to display for the `Avatar`.
    */
@@ -21,7 +21,16 @@ export type Props = ViewProps & {
    * Custom color for the icon.
    */
   color?: string;
-  style?: StyleProp<ViewStyle>;
+  /**
+   * Background color of the avatar.
+   */
+  backgroundColor?: ColorValue;
+  /**
+   * Style for the icon container.
+   *
+   * Background color should be specified via the `backgroundColor` prop instead.
+   */
+  style?: StyleProp<Omit<ViewStyle, 'backgroundColor'>>;
   /**
    * @optional
    */
@@ -45,6 +54,7 @@ const Avatar = ({
   icon,
   size = DEFAULT_SIZE,
   style,
+  backgroundColor: customBackgroundColor,
   theme: themeOverrides,
   color: customColor,
   ...rest
@@ -58,10 +68,13 @@ const Avatar = ({
           width: size,
           height: size,
           borderRadius: cornerFull,
-          backgroundColor: theme.colors.primaryContainer,
         },
         styles.container,
         style,
+        {
+          backgroundColor:
+            customBackgroundColor ?? theme.colors.primaryContainer,
+        },
       ]}
       {...rest}
     >
