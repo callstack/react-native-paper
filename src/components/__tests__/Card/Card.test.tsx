@@ -1354,7 +1354,8 @@ describe('CardActions', () => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      padding: 8,
+      paddingHorizontal: 16,
+      paddingVertical: 8,
       gap: 8,
     });
     expect(screen.getByTestId('custom-action')).toBeOnTheScreen();
@@ -1365,7 +1366,12 @@ describe('CardActions', () => {
     await render(
       <Card.Actions
         testID="card-actions"
-        style={{ justifyContent: 'flex-start', padding: 4, gap: 12 }}
+        style={{
+          justifyContent: 'flex-start',
+          paddingHorizontal: 4,
+          paddingVertical: 4,
+          gap: 12,
+        }}
       >
         <Text>Action</Text>
       </Card.Actions>
@@ -1373,7 +1379,8 @@ describe('CardActions', () => {
 
     expect(screen.getByTestId('card-actions')).toHaveStyle({
       justifyContent: 'flex-start',
-      padding: 4,
+      paddingHorizontal: 4,
+      paddingVertical: 4,
       gap: 12,
     });
   });

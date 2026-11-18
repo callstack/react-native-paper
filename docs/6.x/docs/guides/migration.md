@@ -632,6 +632,8 @@ The Card clips media to its shape, so a `Card.Cover` in the `media` slot follows
 </Card.Actions>
 ```
 
+`Card.Actions` also has **16dp** of padding at the start and end, the Material Design 3 Card padding, instead of 8dp, and 8dp above and below. To keep the 5.x spacing, pass `style={{ paddingHorizontal: 8, paddingTop: 0 }}`.
+
 #### Choose one interaction model
 
 Give the Card an interaction handler when the whole Card represents one action. It becomes one accessibility target with button semantics by default, so do not place independent controls in its `actions` slot.
