@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Platform, View } from 'react-native';
-import type { LayoutChangeEvent } from 'react-native';
+import { Dimensions, Platform, View } from 'react-native';
+import type { LayoutChangeEvent, PointerEvent } from 'react-native';
 
 import { cubicBezier } from 'react-native-reanimated';
 
@@ -8,81 +8,88 @@ import { Tokens } from './tokens';
 import type { Measurement } from './utils';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { InternalTheme } from '../../theme/types';
+import { addEventListener } from '../../utils/addEventListener';
 
-// Ensures only one tooltip is visible at a time. When a tooltip calls
-// takeSingletonSlot it immediately hides the previous one.
-let dismissCurrentTooltip: (() => void) | null = null;
+// Scheduling replaces the pending timeout
+export const useTimeout = () => {
+  const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
-// When any tooltip opens, trigger re-measurement of all registered triggers so
-// scroll-invalidated coordinates are refreshed before the backdrop is used.
-type RefreshCallback = () => void;
-const triggerRefreshCallbacks = new Set<RefreshCallback>();
-
-export const subscribeToTriggerRefresh = (
-  cb: RefreshCallback
-): (() => void) => {
-  triggerRefreshCallbacks.add(cb);
-  return () => triggerRefreshCallbacks.delete(cb);
-};
-
-const refreshAllTriggers = () => {
-  triggerRefreshCallbacks.forEach((cb) => cb());
-};
-
-export const takeSingletonSlot = (dismiss: () => void) => {
-  dismissCurrentTooltip?.();
-  dismissCurrentTooltip = dismiss;
-  refreshAllTriggers();
-};
-
-// Mobile backdrop hit-forwarding: each RichTooltip registers its trigger's
-// screen rect so the backdrop can forward presses that land on another trigger
-// rather than consuming them. This allows one-tap switching between tooltips.
-type RichTriggerEntry = {
-  pageX: number;
-  pageY: number;
-  width: number;
-  height: number;
-  onPress: () => void;
-};
-const richTriggerRegistry = new Map<symbol, RichTriggerEntry>();
-
-export const registerRichTrigger = (
-  id: symbol,
-  entry: RichTriggerEntry
-): void => {
-  richTriggerRegistry.set(id, entry);
-};
-
-export const unregisterRichTrigger = (id: symbol): void => {
-  richTriggerRegistry.delete(id);
-};
-
-// Returns true if a registered trigger was hit and pressed (caller should NOT
-// also call hide() in this case — the singleton dismisses the current tooltip).
-export const forwardPressToTriggerAt = (
-  pageX: number,
-  pageY: number
-): boolean => {
-  for (const entry of richTriggerRegistry.values()) {
-    if (
-      pageX >= entry.pageX &&
-      pageX <= entry.pageX + entry.width &&
-      pageY >= entry.pageY &&
-      pageY <= entry.pageY + entry.height
-    ) {
-      entry.onPress();
-      return true;
+  const clear = React.useCallback(() => {
+    if (timer.current) {
+      clearTimeout(timer.current);
+      timer.current = null;
     }
-  }
-  return false;
+  }, []);
+
+  const schedule = React.useCallback(
+    (callback: () => void, delay: number) => {
+      clear();
+      timer.current = setTimeout(() => {
+        timer.current = null;
+        callback();
+      }, delay);
+    },
+    [clear]
+  );
+
+  React.useEffect(() => clear, [clear]);
+
+  return React.useMemo(() => ({ schedule, clear }), [schedule, clear]);
+};
+
+export const useTooltipTimers = () => ({
+  showTimer: useTimeout(),
+  hideTimer: useTimeout(),
+});
+
+/**
+ * Web only: a tap focuses the trigger, and that focus mustn't open the tooltip
+ * the way keyboard focus does.
+ */
+export const useTouchFocusGuard = () => {
+  const touching = React.useRef(false);
+
+  return React.useMemo(
+    () => ({
+      onPointerDown: (e: PointerEvent) => {
+        touching.current = e.nativeEvent.pointerType === 'touch';
+      },
+      // a touch that turns into a scroll ends without a focus or a press
+      onPointerCancel: () => {
+        touching.current = false;
+      },
+      // true once, for the focus that follows a tap
+      consumeTouchFocus: () => {
+        const wasTouch = touching.current;
+        touching.current = false;
+        return wasTouch;
+      },
+    }),
+    []
+  );
+};
+
+// After a resize or rotation the position no longer matches the trigger
+export const useHideOnDimensionsChange = (hide: () => void) => {
+  React.useEffect(() => {
+    const subscription = addEventListener(Dimensions, 'change', hide);
+
+    return () => subscription.remove();
+  }, [hide]);
 };
 
 export type TooltipHostElement = React.ComponentRef<typeof View> & {
   getBoundingClientRect?(): DOMRect;
-  querySelector?(selectors: string): TooltipHostElement | null;
   contains?(node: unknown): boolean;
-  focus?(): void;
+};
+
+const NO_SCROLL = { x: 0, y: 0 };
+
+const UNMEASURED: Measurement = {
+  children: { pageX: 0, pageY: 0, width: 0, height: 0 },
+  tooltip: { x: 0, y: 0, width: 0, height: 0 },
+  scroll: NO_SCROLL,
+  measured: false,
 };
 
 /**
@@ -98,11 +105,7 @@ export type TooltipHostElement = React.ComponentRef<typeof View> & {
 export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
   const reduceMotion = useReduceMotion();
   const [rendered, setRendered] = React.useState(false);
-  const [measurement, setMeasurement] = React.useState<Measurement>({
-    children: { pageX: 0, pageY: 0, width: 0, height: 0 },
-    tooltip: { x: 0, y: 0, width: 0, height: 0 },
-    measured: false,
-  });
+  const [measurement, setMeasurement] = React.useState<Measurement>(UNMEASURED);
   const childrenWrapperRef = React.useRef<TooltipHostElement>(null);
   // The trigger measurement and tooltip layout are each obtained via async
   // native calls that can complete in either order. Both refs are written by
@@ -112,6 +115,7 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     null
   );
   const tooltipLayout = React.useRef<Measurement['tooltip'] | null>(null);
+  const scroll = React.useRef(NO_SCROLL);
 
   const enterDuration = reduceMotion
     ? 0
@@ -120,8 +124,6 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     ? 0
     : theme.motion.duration[Tokens.motion.exit.duration];
 
-  // Mount as soon as the tooltip is requested — derived during render rather
-  // than synced from an effect.
   if (visible && !rendered) {
     setRendered(true);
   }
@@ -136,22 +138,16 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
 
     childrenWrapperRef.current?.measure(
       (_x, _y, width, height, pageX, pageY) => {
-        // On web, measure() returns viewport-relative coords but the Portal
-        // container is positioned at the document origin — add scroll offset.
-        const scrollX = Platform.OS === 'web' ? (window.scrollX ?? 0) : 0;
-        const scrollY = Platform.OS === 'web' ? (window.scrollY ?? 0) : 0;
-        childrenMeasurement.current = {
-          pageX: pageX + scrollX,
-          pageY: pageY + scrollY,
-          width,
-          height,
-        };
-        // If onLayout already fired before this callback, use the stashed
-        // tooltip layout to complete the measurement now.
+        childrenMeasurement.current = { pageX, pageY, width, height };
+        scroll.current =
+          Platform.OS === 'web'
+            ? { x: window.scrollX ?? 0, y: window.scrollY ?? 0 }
+            : NO_SCROLL;
         if (tooltipLayout.current) {
           setMeasurement({
             children: childrenMeasurement.current,
             tooltip: tooltipLayout.current,
+            scroll: scroll.current,
             measured: true,
           });
         }
@@ -159,7 +155,6 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     );
   }, [rendered, visible]);
 
-  // Keep the tooltip mounted through the exit fade, then unmount.
   React.useEffect(() => {
     if (!rendered || visible) {
       return;
@@ -167,11 +162,7 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
 
     const id = setTimeout(() => {
       setRendered(false);
-      setMeasurement({
-        children: { pageX: 0, pageY: 0, width: 0, height: 0 },
-        tooltip: { x: 0, y: 0, width: 0, height: 0 },
-        measured: false,
-      });
+      setMeasurement(UNMEASURED);
       childrenMeasurement.current = null;
       tooltipLayout.current = null;
     }, exitDuration);
@@ -179,9 +170,6 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     return () => clearTimeout(id);
   }, [rendered, visible, exitDuration]);
 
-  // The tooltip reports its own size on layout; combine it with the trigger
-  // measurement to compute the final position. Either side can arrive first:
-  // stash the layout and let the measure callback pick it up if it's late.
   const onLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
     // Positioning the tooltip causes another onLayout with different x/y but
     // the same dimensions. Only its size affects our position calculation, so
@@ -204,13 +192,11 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     setMeasurement({
       children: childrenMeasurement.current,
       tooltip: nextLayout,
+      scroll: scroll.current,
       measured: true,
     });
   };
 
-  // A Reanimated CSS transition drives the fade — no shared values. Opacity is
-  // held at 0 until the tooltip has been measured so it never flashes at the
-  // wrong position; entering decelerates in, exiting accelerates out.
   const fadeStyle = {
     opacity: visible && measurement.measured ? 1 : 0,
     transitionProperty: 'opacity',

@@ -1,13 +1,19 @@
 /**
- * Plain tooltip — a single line of text on an inverse-surface container.
+ * Plain tooltip - short text on an inverse-surface container, wrapping onto
+ * more lines past the max width.
  * https://m3.material.io/components/tooltips/specs#1e6d4d8a
  */
 const plain = {
   container: 'inverseSurface',
   content: 'inverseOnSurface',
   shape: 'extraSmall',
-  height: 32,
-  paddingHorizontal: 16,
+  minHeight: 24,
+  minWidth: 40,
+  maxWidth: 320,
+  // the 56dp max height at the default font size
+  maxLines: 3,
+  paddingHorizontal: 8,
+  paddingVertical: 4,
   typescale: 'bodySmall',
 } as const;
 

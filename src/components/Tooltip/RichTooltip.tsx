@@ -1,45 +1,43 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  View,
-  StyleSheet,
-  Platform,
-  Pressable,
-} from 'react-native';
+import { View, StyleSheet, Platform, Pressable } from 'react-native';
 import type {
+  GestureResponderEvent,
   NativeSyntheticEvent,
   PointerEvent,
   ViewStyle,
 } from 'react-native';
 
 import Reanimated from 'react-native-reanimated';
+import useLatestCallback from 'use-latest-callback';
 
 import {
-  takeSingletonSlot,
+  useHideOnDimensionsChange,
+  useTimeout,
   useTooltipFade,
-  registerRichTrigger,
-  unregisterRichTrigger,
-  forwardPressToTriggerAt,
-  subscribeToTriggerRefresh,
+  useTooltipTimers,
+  useTouchFocusGuard,
 } from './hooks';
 import type { TooltipHostElement } from './hooks';
+import {
+  forwardPressToTriggerAt,
+  refreshRichTriggers,
+  registerRichTrigger,
+  subscribeToTriggerRefresh,
+  takeSingletonSlot,
+  unregisterRichTrigger,
+} from './registry';
 import { Tokens } from './tokens';
-import { getTooltipPosition } from './utils';
+import { getTooltipPosition, isPointerInside } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import { addEventListener } from '../../utils/addEventListener';
 import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
+import { focusIntoContainer } from '../../utils/useOverlayFocus';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import Text from '../Typography/Text';
 
 const AnimatedSurface = Reanimated.createAnimatedComponent(Surface);
-
-// Tooltip renders in a portal at the end of document, so keyboard
-// users reach its actions by moving focus into 1st focusable element
-const FOCUSABLE_SELECTOR =
-  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 /**
  * Props passed to the `children` render function. Spread them onto the trigger
@@ -52,6 +50,9 @@ export type TooltipRichTriggerProps = {
   onKeyDown?: (event: NativeSyntheticEvent<{ key: string }>) => void;
   'aria-label'?: string;
   'aria-describedby'?: string;
+  'aria-haspopup'?: 'dialog';
+  'aria-expanded'?: boolean;
+  'aria-controls'?: string;
 };
 
 export type Props = {
@@ -89,8 +90,10 @@ export type Props = {
   /**
    * Called whenever the tooltip closes, whichever way it was dismissed: an
    * outside tap, re-pressing the trigger, an action calling `dismiss`, the
-   * pointer leaving (web), or another tooltip taking its place. It is not
-   * called when the component unmounts with the tooltip still open.
+   * pointer or focus leaving (web), Escape (web), the VoiceOver escape gesture
+   * (iOS), the screen size changing, or another
+   * tooltip, plain or rich, taking its place. It is not called when the
+   * component unmounts with the tooltip still open.
    */
   onDismiss?: () => void;
   /**
@@ -99,8 +102,8 @@ export type Props = {
    */
   enterTouchDelay?: number;
   /**
-   * The number of milliseconds after the pointer leaves both the trigger and
-   * the tooltip before hiding it (web only).
+   * The number of milliseconds after the pointer or the focus leaves both the
+   * trigger and the tooltip before hiding it (web only).
    */
   leaveTouchDelay?: number;
   /**
@@ -112,6 +115,15 @@ export type Props = {
    */
   contentMaxFontSizeMultiplier?: number;
   /**
+   * TestID used for testing purposes. Applied to the tooltip.
+   */
+  testID?: string;
+  /**
+   * TestID used for testing purposes. Applied to the backdrop that closes the
+   * tooltip on a press outside it (iOS and Android).
+   */
+  overlayTestID?: string;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -121,7 +133,12 @@ export type Props = {
  * Rich tooltips display informative text along with an optional subhead and
  * action buttons. Unlike plain tooltips they are persistent and interactive:
  * tap the element to toggle the tooltip, then tap outside or an action to
- * dismiss it. On web they open on hover and on keyboard focus.
+ * dismiss it.
+ *
+ * On web they open on hover and on keyboard focus, and Escape closes them.
+ * The down arrow key on the trigger moves focus into the actions, and focus
+ * that was in the tooltip goes back to the trigger when Escape or an action
+ * closes it.
  *
  * ## Usage
  * ```js
@@ -133,7 +150,7 @@ export type Props = {
  *     title="Add to library"
  *     content="Save this item to read it later."
  *     actions={({ dismiss }) => (
- *       <Button compact onPress={dismiss}>
+ *       <Button mode="text" onPress={dismiss}>
  *         Learn more
  *       </Button>
  *     )}
@@ -152,9 +169,11 @@ const RichTooltip = ({
   actions,
   onDismiss,
   enterTouchDelay = 100,
-  leaveTouchDelay = 500,
+  leaveTouchDelay = 1500,
   titleMaxFontSizeMultiplier,
   contentMaxFontSizeMultiplier,
+  testID,
+  overlayTestID,
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -165,65 +184,38 @@ const RichTooltip = ({
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
   const tooltipId = React.useId();
+  const titleId = React.useId();
+  const contentId = React.useId();
   // Web only: a non-touch pointer sits on the trigger
   const hoveringRef = React.useRef(false);
   const tooltipRef = React.useRef<TooltipHostElement>(null);
   // Web only: set while dismiss is returning focus to the trigger
   const refocusAfterDismissRef = React.useRef(false);
+  const touchFocusGuard = useTouchFocusGuard();
   const wasVisibleRef = React.useRef(visible);
-
-  const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const focusTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const clearShowTimer = React.useCallback(() => {
-    if (showTimer.current) {
-      clearTimeout(showTimer.current);
-      showTimer.current = null;
-    }
-  }, []);
-
-  const clearHideTimer = React.useCallback(() => {
-    if (hideTimer.current) {
-      clearTimeout(hideTimer.current);
-      hideTimer.current = null;
-    }
-  }, []);
-
-  React.useEffect(() => {
-    return () => {
-      clearShowTimer();
-      clearHideTimer();
-      if (focusTimer.current) clearTimeout(focusTimer.current);
-    };
-  }, [clearShowTimer, clearHideTimer]);
-
-  React.useEffect(() => {
-    const subscription = addEventListener(Dimensions, 'change', () =>
-      setVisible(false)
-    );
-
-    return () => subscription.remove();
-  }, []);
+  const { showTimer, hideTimer } = useTooltipTimers();
+  const focusTimer = useTimeout();
 
   const show = React.useCallback(() => {
+    showTimer.clear();
+    hideTimer.clear();
     takeSingletonSlot(() => setVisible(false));
-    clearHideTimer();
+    refreshRichTriggers();
     setVisible(true);
-  }, [clearHideTimer]);
+  }, [showTimer, hideTimer]);
 
   const hide = React.useCallback(() => {
-    clearShowTimer();
+    showTimer.clear();
+    hideTimer.clear();
     setVisible(false);
-  }, [clearShowTimer]);
+  }, [showTimer, hideTimer]);
 
   const scheduleHide = React.useCallback(() => {
-    clearShowTimer();
-    if (hideTimer.current) {
-      clearTimeout(hideTimer.current);
-    }
-    hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
-  }, [clearShowTimer, leaveTouchDelay]);
+    showTimer.clear();
+    hideTimer.schedule(() => setVisible(false), leaveTouchDelay);
+  }, [showTimer, hideTimer, leaveTouchDelay]);
+
+  useHideOnDimensionsChange(hide);
 
   // Report every dismissal from one place rather than calling the prop from
   // each path that hides the tooltip, so a future close path can't miss it
@@ -234,78 +226,80 @@ const RichTooltip = ({
     wasVisibleRef.current = visible;
   }, [visible, onDismiss]);
 
+  // Web: focus inside the tooltip would be lost when it unmounts, so it goes
+  // back to the trigger. Focus elsewhere, e.g. in a text input while the
+  // tooltip was opened by hover, stays put.
+  const hideAndRestoreFocus = () => {
+    const focused =
+      Platform.OS === 'web' && 'document' in global
+        ? document.activeElement
+        : null;
+    const hadFocus =
+      focused != null &&
+      (tooltipRef.current?.contains?.(focused) ||
+        childrenWrapperRef.current?.contains?.(focused));
+
+    hide();
+    // set before focusing, as the trigger's focus event fires during it and
+    // would reopen the tooltip; cleared if the browser refused the focus
+    refocusAfterDismissRef.current = Boolean(hadFocus);
+    if (hadFocus && !focusIntoContainer(childrenWrapperRef.current)) {
+      refocusAfterDismissRef.current = false;
+    }
+  };
+
   // Web only: tooltip opens on trigger focus, so it has to ignore the focus
-  // that Escape itself causes; later focus (or any blur) re-arms it
-  const handleFocus = React.useCallback(() => {
-    if (refocusAfterDismissRef.current) {
+  // that dismissing itself causes, and the focus a tap gives the trigger, as
+  // the press that follows toggles it; later focus (or any blur) re-arms it
+  const handleFocus = () => {
+    const isTouchFocus = touchFocusGuard.consumeTouchFocus();
+    if (refocusAfterDismissRef.current || isTouchFocus) {
       refocusAfterDismissRef.current = false;
       return;
     }
     show();
-  }, [show]);
+  };
 
-  const handleBlur = React.useCallback(() => {
+  const handleBlur = () => {
     refocusAfterDismissRef.current = false;
     scheduleHide();
-  }, [scheduleHide]);
+  };
 
-  // Mobile: a tap toggles the tooltip.
-  // takeSingletonSlot must be called outside the setVisible updater — calling
-  // setVisible inside an updater queues it for a later render, so the dismiss
-  // of the stale slot would undo the show on the same cycle.
-  const handlePress = React.useCallback(() => {
+  // On web a press on the hovered trigger keeps the tooltip open, as the hover
+  // already opened it. Stable, so the backdrop registry always calls the
+  // latest one.
+  const handlePress = useLatestCallback(() => {
     if (Platform.OS === 'web' && visible && hoveringRef.current) {
-      clearShowTimer();
-      clearHideTimer();
-      return;
-    }
-
-    if (!visible) {
-      show();
+      showTimer.clear();
+      hideTimer.clear();
+    } else if (visible) {
+      hide();
     } else {
-      setVisible(false);
+      show();
     }
-    clearShowTimer();
-    clearHideTimer();
-  }, [visible, show, clearShowTimer, clearHideTimer]);
+  });
 
-  // Web: open on hover (with a short enter delay) and on keyboard focus. Touch
-  // pointer is skipped - tap both enters & presses and only the press half
-  // should act so taps keep toggling the tooltip
+  // A tap fires both pointer enter and press, and only the press should act so
+  // taps keep toggling the tooltip
   const handlePointerEnter = React.useCallback(
-    (e?: PointerEvent) => {
-      if (e?.nativeEvent?.pointerType === 'touch') {
+    (e: PointerEvent) => {
+      if (e.nativeEvent.pointerType === 'touch') {
         return;
       }
 
       hoveringRef.current = true;
-      clearHideTimer();
-      clearShowTimer();
-      showTimer.current = setTimeout(show, enterTouchDelay);
+      hideTimer.clear();
+      showTimer.schedule(show, enterTouchDelay);
     },
-    [clearHideTimer, clearShowTimer, enterTouchDelay, show]
+    [showTimer, hideTimer, enterTouchDelay, show]
   );
 
   // On web, pointer events on the wrapper View handle hover without going
   // through RNW's Pressable lock/unlock mechanism that caused flicker.
-  // Guard against spurious pointerleave: only schedule hide when cursor has
-  // actually left wrapper bounds (same reasoning as Tooltip.tsx).
   const handlePointerLeave = React.useCallback(
-    (e?: PointerEvent) => {
-      if (Platform.OS === 'web' && e?.nativeEvent) {
-        const el = childrenWrapperRef.current;
-        if (el?.getBoundingClientRect) {
-          const { clientX, clientY } = e.nativeEvent;
-          const rect = el.getBoundingClientRect();
-          if (
-            clientX >= rect.left &&
-            clientX <= rect.right &&
-            clientY >= rect.top &&
-            clientY <= rect.bottom
-          ) {
-            return;
-          }
-        }
+    (e: PointerEvent) => {
+      if (isPointerInside(childrenWrapperRef.current, e.nativeEvent)) {
+        return;
       }
 
       hoveringRef.current = false;
@@ -317,6 +311,8 @@ const RichTooltip = ({
   const wrapperPointerProps =
     Platform.OS === 'web'
       ? {
+          onPointerDown: touchFocusGuard.onPointerDown,
+          onPointerCancel: touchFocusGuard.onPointerCancel,
           onPointerEnter: handlePointerEnter,
           onPointerLeave: handlePointerLeave,
         }
@@ -324,31 +320,17 @@ const RichTooltip = ({
 
   // Web only: `Tab` walks the document, and the tooltip renders in a portal at
   // its end, so the trigger needs a key that moves focus into the actions.
-  const focusTooltipContent = React.useCallback(() => {
-    // The tooltip mounts through the portal on the render that opens it, so
-    // wait for that commit: from this one the node isn't reachable yet and
-    // focus requested while it's missing is simply lost
-    if (focusTimer.current) clearTimeout(focusTimer.current);
-    focusTimer.current = setTimeout(() => {
-      focusTimer.current = null;
-      tooltipRef.current?.querySelector?.(FOCUSABLE_SELECTOR)?.focus?.();
-    }, 0);
-  }, []);
-
-  const focusTrigger = React.useCallback(() => {
-    const wrapper = childrenWrapperRef.current;
-    (wrapper?.querySelector?.(FOCUSABLE_SELECTOR) ?? wrapper)?.focus?.();
-  }, [childrenWrapperRef]);
-
-  const handleKeyDown = React.useCallback(
-    (event: NativeSyntheticEvent<{ key: string }>) => {
-      if (event.nativeEvent.key === 'ArrowDown') {
-        show();
-        focusTooltipContent();
-      }
-    },
-    [show, focusTooltipContent]
-  );
+  // The tooltip mounts through the portal on the render that opens it, so
+  // wait for that commit: from this one the node isn't reachable yet and
+  // focus requested while it's missing is simply lost
+  const handleKeyDown = (event: NativeSyntheticEvent<{ key: string }>) => {
+    if (actions != null && event.nativeEvent.key === 'ArrowDown') {
+      // focus moves after the tooltip mounts, so the page would scroll first
+      event.preventDefault();
+      show();
+      focusTimer.schedule(() => focusIntoContainer(tooltipRef.current), 0);
+    }
+  };
 
   // Web: the backdrop lets pointer events through, so a press outside closes
   // the tooltip here. Relying on blur misses triggers that a tap doesn't focus,
@@ -373,24 +355,24 @@ const RichTooltip = ({
     return () => document.removeEventListener('pointerdown', handlePointerDown);
   }, [visible, hide, childrenWrapperRef]);
 
-  // Escape (web) and back (Android) dismiss the tooltip the way the backdrop
-  // does on touch, and on web put focus back on the trigger so it's not lost
+  // Web: Escape dismisses the tooltip the way the backdrop does on touch. The
+  // back button is left to the screen, as the tooltip isn't modal.
   useOverlayDismiss({
-    enabled: visible,
+    enabled: visible && Platform.OS === 'web',
     dismissable: true,
-    onDismiss: () => {
-      refocusAfterDismissRef.current = Platform.OS === 'web';
-      hide();
-      focusTrigger();
-    },
+    onDismiss: hideAndRestoreFocus,
   });
 
-  // accessible name for trigger without its own label
+  const hasActions = actions != null;
+
   const description =
     typeof content === 'string'
       ? [title, content].filter(Boolean).join('. ')
       : title;
 
+  // A tooltip can't hold focusable content, so with actions it's a non-modal
+  // dialog (WAI-ARIA APG tooltip pattern). Either way the trigger is described
+  // by the title and content only, without the action labels.
   const triggerProps: TooltipRichTriggerProps =
     Platform.OS === 'web'
       ? {
@@ -398,7 +380,14 @@ const RichTooltip = ({
           onFocus: handleFocus,
           onBlur: handleBlur,
           onKeyDown: handleKeyDown,
-          'aria-describedby': tooltipId,
+          'aria-describedby': [title ? titleId : null, contentId]
+            .filter(Boolean)
+            .join(' '),
+          ...(hasActions && {
+            'aria-haspopup': 'dialog',
+            'aria-expanded': visible,
+            'aria-controls': tooltipId,
+          }),
         }
       : { onPress: handlePress, 'aria-label': description };
 
@@ -411,35 +400,27 @@ const RichTooltip = ({
   const tooltipInteractionProps =
     Platform.OS === 'web'
       ? {
-          onPointerEnter: clearHideTimer,
+          onPointerEnter: hideTimer.clear,
           onPointerLeave: scheduleHide,
-          onFocus: clearHideTimer,
+          onFocus: hideTimer.clear,
           onBlur: scheduleHide,
         }
       : {};
 
-  // Mobile: stable id + ref for the latest handlePress, used by the global
-  // trigger registry so the backdrop can forward taps to another trigger.
-  const triggerId = React.useRef<symbol>(Symbol()).current;
-  const handlePressRef = React.useRef(handlePress);
-  React.useEffect(() => {
-    handlePressRef.current = handlePress;
-  }, [handlePress]);
+  // Mobile: the registry lets the backdrop forward taps to this trigger
+  const [triggerId] = React.useState(() => Symbol());
 
   const updateTriggerRegistration = React.useCallback(() => {
     if (Platform.OS === 'web') return;
     childrenWrapperRef.current?.measure(
       (_x, _y, width, height, pageX, pageY) => {
         registerRichTrigger(triggerId, {
-          pageX,
-          pageY,
-          width,
-          height,
-          onPress: () => handlePressRef.current(),
+          rect: { x: pageX, y: pageY, width, height },
+          onPress: handlePress,
         });
       }
     );
-  }, [childrenWrapperRef, triggerId]);
+  }, [childrenWrapperRef, triggerId, handlePress]);
 
   React.useEffect(() => {
     return () => {
@@ -447,22 +428,23 @@ const RichTooltip = ({
     };
   }, [triggerId]);
 
-  // Re-measure this trigger whenever any tooltip opens so scroll-invalidated
+  // Re-measure this trigger whenever a rich tooltip opens so scroll-invalidated
   // coordinates are refreshed before the backdrop needs to hit-test against them.
   React.useEffect(() => {
     return subscribeToTriggerRefresh(updateTriggerRegistration);
   }, [updateTriggerRegistration]);
 
   const handleBackdropPress = React.useCallback(
-    (e: { nativeEvent: { pageX?: number; pageY?: number } }) => {
-      const pageX = e?.nativeEvent?.pageX ?? -1;
-      const pageY = e?.nativeEvent?.pageY ?? -1;
+    ({ nativeEvent: { pageX, pageY } }: GestureResponderEvent) => {
       if (!forwardPressToTriggerAt(pageX, pageY)) {
         hide();
       }
     },
     [hide]
   );
+
+  // web announces them through the trigger's `aria-describedby`
+  const textAnnouncement = Platform.OS === 'web' ? undefined : 'polite';
 
   return (
     <>
@@ -474,17 +456,19 @@ const RichTooltip = ({
             onPress={handleBackdropPress}
             pointerEvents={visible && Platform.OS !== 'web' ? 'auto' : 'none'}
             style={StyleSheet.absoluteFill}
+            testID={overlayTestID}
           />
           <Reanimated.View
             ref={tooltipRef}
-            id={tooltipId}
             nativeID={tooltipId}
-            // A tooltip can't hold focusable content, so with actions it's a
-            // non-modal dialog (WAI-ARIA APG tooltip pattern)
-            role={actions ? 'dialog' : 'tooltip'}
-            aria-label={actions ? title : undefined}
+            role={hasActions ? 'dialog' : 'tooltip'}
+            aria-labelledby={
+              hasActions ? (title ? titleId : contentId) : undefined
+            }
             onLayout={onLayout}
+            onAccessibilityEscape={hide}
             pointerEvents="box-none"
+            testID={testID}
             style={[
               styles.container,
               getTooltipPosition(measurement, direction),
@@ -499,7 +483,8 @@ const RichTooltip = ({
               >
                 {title ? (
                   <Text
-                    aria-live="polite"
+                    nativeID={titleId}
+                    aria-live={textAnnouncement}
                     selectable={false}
                     variant={Tokens.rich.titleTypescale}
                     style={{ color: theme.colors[Tokens.rich.title] }}
@@ -510,7 +495,8 @@ const RichTooltip = ({
                 ) : null}
                 {typeof content === 'string' ? (
                   <Text
-                    aria-live="polite"
+                    nativeID={contentId}
+                    aria-live={textAnnouncement}
                     selectable={false}
                     variant={Tokens.rich.contentTypescale}
                     style={{ color: theme.colors[Tokens.rich.content] }}
@@ -519,11 +505,11 @@ const RichTooltip = ({
                     {content}
                   </Text>
                 ) : (
-                  content
+                  <View nativeID={contentId}>{content}</View>
                 )}
                 {actions ? (
                   <View style={styles.actions}>
-                    {actions({ dismiss: hide })}
+                    {actions({ dismiss: hideAndRestoreFocus })}
                   </View>
                 ) : null}
               </AnimatedSurface>
@@ -561,6 +547,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  // RN types `cursor` as 'auto' | 'pointer', but RN Web accepts any CSS cursor
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   pressContainer: {
     alignSelf: 'flex-start',

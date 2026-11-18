@@ -69,11 +69,24 @@ const moveWebFocusTo = (target: OverlayFocusTarget | null) => {
   return false;
 };
 
-// The first element inside, or the container itself when nothing in it can
-// take focus.
+/**
+ * Web only: focuses the first element inside, or the container itself when
+ * nothing in it can take focus. Returns whether focus ended up inside, as the
+ * browser refuses it on a container that can't be focused.
+ */
+export const focusIntoContainer = (container: unknown) => {
+  if (!(container instanceof HTMLElement)) {
+    return false;
+  }
+
+  (findFirstTabbable(container) ?? container).focus();
+
+  return isFocusInside(container);
+};
+
 const moveWebFocusIntoContainer = (container: OverlayFocusTarget | null) => {
   if (container instanceof HTMLElement) {
-    (findFirstTabbable(container) ?? container).focus();
+    focusIntoContainer(container);
 
     return true;
   }

@@ -1,22 +1,21 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  Platform,
-  Pressable,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import type { PointerEvent, ViewStyle } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
-import { takeSingletonSlot, useTooltipFade } from './hooks';
+import {
+  useHideOnDimensionsChange,
+  useTooltipFade,
+  useTooltipTimers,
+  useTouchFocusGuard,
+} from './hooks';
+import { takeSingletonSlot } from './registry';
 import { Tokens } from './tokens';
-import { getTooltipPosition } from './utils';
+import { getTooltipPosition, isPointerInside } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
 
@@ -63,6 +62,10 @@ export type Props = {
    */
   titleMaxFontSizeMultiplier?: number;
   /**
+   * TestID used for testing purposes. Applied to the tooltip.
+   */
+  testID?: string;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -96,6 +99,7 @@ const Tooltip = ({
   title,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier,
+  testID,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
@@ -105,92 +109,62 @@ const Tooltip = ({
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
   const tooltipId = React.useId();
+  const { showTimer, hideTimer } = useTooltipTimers();
+  // Web only: a non-touch pointer sits on the trigger
+  const hoveringRef = React.useRef(false);
+  const touchFocusGuard = useTouchFocusGuard();
 
-  const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hide = React.useCallback(() => setVisible(false), []);
 
-  React.useEffect(() => {
-    return () => {
-      if (showTimer.current) clearTimeout(showTimer.current);
-      if (hideTimer.current) clearTimeout(hideTimer.current);
-    };
-  }, []);
+  useHideOnDimensionsChange(hide);
 
-  React.useEffect(() => {
-    const subscription = addEventListener(Dimensions, 'change', () =>
-      setVisible(false)
-    );
-
-    return () => subscription.remove();
-  }, []);
+  const show = React.useCallback(() => {
+    showTimer.clear();
+    hideTimer.clear();
+    takeSingletonSlot(hide);
+    setVisible(true);
+  }, [showTimer, hideTimer, hide]);
 
   const handleTouchStart = React.useCallback(() => {
-    if (hideTimer.current) {
-      clearTimeout(hideTimer.current);
-      hideTimer.current = null;
-    }
-
     if (Platform.OS === 'web') {
-      if (showTimer.current) clearTimeout(showTimer.current);
-      showTimer.current = setTimeout(() => {
-        takeSingletonSlot(() => setVisible(false));
-        setVisible(true);
-      }, enterTouchDelay);
+      hideTimer.clear();
+      showTimer.schedule(show, enterTouchDelay);
     } else {
-      takeSingletonSlot(() => setVisible(false));
-      setVisible(true);
+      show();
     }
-  }, [enterTouchDelay]);
+  }, [show, showTimer, hideTimer, enterTouchDelay]);
 
   const handleTouchEnd = React.useCallback(() => {
-    if (showTimer.current) {
-      clearTimeout(showTimer.current);
-      showTimer.current = null;
-    }
-    if (hideTimer.current) {
-      clearTimeout(hideTimer.current);
-    }
-    hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
-  }, [leaveTouchDelay]);
+    showTimer.clear();
+    hideTimer.schedule(hide, leaveTouchDelay);
+  }, [showTimer, hideTimer, hide, leaveTouchDelay]);
 
-  // Web: keyboard focus shows the tooltip right away, like `Tooltip.Rich`
-  const handleFocus = React.useCallback(() => {
-    if (showTimer.current) {
-      clearTimeout(showTimer.current);
-      showTimer.current = null;
+  // Web: releasing a click on the hovered trigger mustn't hide the tooltip
+  // the hover opened; the pointer leaving does
+  const handlePressOut = React.useCallback(() => {
+    if (Platform.OS === 'web' && hoveringRef.current) {
+      return;
     }
-    if (hideTimer.current) {
-      clearTimeout(hideTimer.current);
-      hideTimer.current = null;
-    }
-    takeSingletonSlot(() => setVisible(false));
-    setVisible(true);
-  }, []);
+    handleTouchEnd();
+  }, [handleTouchEnd]);
 
   // On web, pointer events on the wrapper View handle hover without going
   // through RNW's Pressable lock/unlock mechanism that caused flicker.
   // Long-press in triggerProps lets touchscreen-web users still trigger it.
-  //
-  // Guard against spurious pointerleave events (e.g. fired when the tooltip
-  // renders in the Portal): only start the hide timer when the cursor has
-  // actually left the wrapper bounds.
+  const handlePointerEnter = React.useCallback(
+    (e: PointerEvent) => {
+      hoveringRef.current = e.nativeEvent.pointerType !== 'touch';
+      handleTouchStart();
+    },
+    [handleTouchStart]
+  );
+
   const handlePointerLeave = React.useCallback(
-    (e?: PointerEvent) => {
-      if (Platform.OS === 'web' && e?.nativeEvent) {
-        const el = childrenWrapperRef.current;
-        if (el?.getBoundingClientRect) {
-          const { clientX, clientY } = e.nativeEvent;
-          const rect = el.getBoundingClientRect();
-          if (
-            clientX >= rect.left &&
-            clientX <= rect.right &&
-            clientY >= rect.top &&
-            clientY <= rect.bottom
-          ) {
-            return;
-          }
-        }
+    (e: PointerEvent) => {
+      if (isPointerInside(childrenWrapperRef.current, e.nativeEvent)) {
+        return;
       }
+      hoveringRef.current = false;
       handleTouchEnd();
     },
     [handleTouchEnd, childrenWrapperRef]
@@ -198,16 +172,25 @@ const Tooltip = ({
 
   const wrapperPointerProps =
     Platform.OS === 'web'
-      ? { onPointerEnter: handleTouchStart, onPointerLeave: handlePointerLeave }
+      ? {
+          onPointerDown: touchFocusGuard.onPointerDown,
+          onPointerCancel: touchFocusGuard.onPointerCancel,
+          onPointerEnter: handlePointerEnter,
+          onPointerLeave: handlePointerLeave,
+        }
       : {};
 
   const triggerProps: TooltipTriggerProps = {
     onLongPress: handleTouchStart,
-    onPressOut: handleTouchEnd,
+    onPressOut: handlePressOut,
     delayLongPress: enterTouchDelay,
     ...(Platform.OS === 'web'
       ? {
-          onFocus: handleFocus,
+          // keyboard focus shows it without the hover delay; a tap's focus
+          // doesn't, as a long-press shows it on touch
+          onFocus: () => {
+            if (!touchFocusGuard.consumeTouchFocus()) show();
+          },
           onBlur: handleTouchEnd,
           'aria-describedby': tooltipId,
         }
@@ -219,9 +202,9 @@ const Tooltip = ({
       {rendered && (
         <Portal>
           <Animated.View
-            id={tooltipId}
             nativeID={tooltipId}
             role="tooltip"
+            testID={testID}
             onLayout={onLayout}
             pointerEvents="none"
             style={[
@@ -235,8 +218,9 @@ const Tooltip = ({
             ]}
           >
             <Text
-              aria-live="polite"
-              numberOfLines={1}
+              // web announces it through the trigger's `aria-describedby`
+              aria-live={Platform.OS === 'web' ? undefined : 'polite'}
+              numberOfLines={Tokens.plain.maxLines}
               selectable={false}
               variant={Tokens.plain.typescale}
               style={{ color: theme.colors[Tokens.plain.content] }}
@@ -279,8 +263,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     justifyContent: 'center',
     paddingHorizontal: Tokens.plain.paddingHorizontal,
-    height: Tokens.plain.height,
-    maxHeight: Tokens.plain.height,
+    paddingVertical: Tokens.plain.paddingVertical,
+    minHeight: Tokens.plain.minHeight,
+    minWidth: Tokens.plain.minWidth,
+    maxWidth: Tokens.plain.maxWidth,
   },
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   pressContainer: {
