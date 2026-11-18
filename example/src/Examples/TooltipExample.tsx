@@ -195,7 +195,7 @@ const TooltipExample = () => {
                   <Button mode="text" size="extra-small" onPress={dismiss}>
                     Learn more
                   </Button>
-                  <Button mode="filled" size="extra-small" onPress={dismiss}>
+                  <Button mode="text" size="extra-small" onPress={dismiss}>
                     Add
                   </Button>
                 </>
