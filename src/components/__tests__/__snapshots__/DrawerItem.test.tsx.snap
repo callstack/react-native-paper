@@ -21,7 +21,6 @@ exports[`renders DrawerItem with icon 1`] = `
           {
             "backgroundColor": undefined,
             "borderRadius": 9999,
-            "opacity": 1,
           },
           undefined,
         ],
@@ -30,13 +29,17 @@ exports[`renders DrawerItem with icon 1`] = `
   >
     <View
       style={
-        {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "marginHorizontal": 16,
-        }
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginHorizontal": 16,
+          },
+          {
+            "opacity": 1,
+          },
+        ]
       }
-      testID="drawer-item-content"
     >
       <View
         style={
@@ -119,6 +122,154 @@ exports[`renders DrawerItem with icon 1`] = `
 </View>
 `;
 
+exports[`renders a disabled active DrawerItem 1`] = `
+<View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": true,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
+    style={
+      [
+        {
+          "overflow": "hidden",
+        },
+        [
+          {
+            "height": 56,
+            "justifyContent": "center",
+            "marginHorizontal": 12,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "borderRadius": 9999,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginHorizontal": 16,
+          },
+          {
+            "opacity": 0.38,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 25, 43, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          information
+        </Text>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "700",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "marginEnd": 32,
+                  },
+                  {
+                    "marginStart": 12,
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                  },
+                ],
+              ],
+            ]
+          }
+        >
+          Example item
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders active DrawerItem 1`] = `
 <View>
   <View
@@ -141,7 +292,6 @@ exports[`renders active DrawerItem 1`] = `
           {
             "backgroundColor": "rgba(232, 222, 248, 1)",
             "borderRadius": 9999,
-            "opacity": 1,
           },
           undefined,
         ],
@@ -150,13 +300,17 @@ exports[`renders active DrawerItem 1`] = `
   >
     <View
       style={
-        {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "marginHorizontal": 16,
-        }
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginHorizontal": 16,
+          },
+          {
+            "opacity": 1,
+          },
+        ]
       }
-      testID="drawer-item-content"
     >
       <View
         style={
@@ -286,7 +440,6 @@ exports[`renders basic DrawerItem 1`] = `
           {
             "backgroundColor": undefined,
             "borderRadius": 9999,
-            "opacity": 1,
           },
           undefined,
         ],
@@ -295,13 +448,17 @@ exports[`renders basic DrawerItem 1`] = `
   >
     <View
       style={
-        {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "marginHorizontal": 16,
-        }
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginHorizontal": 16,
+          },
+          {
+            "opacity": 1,
+          },
+        ]
       }
-      testID="drawer-item-content"
     >
       <View
         style={

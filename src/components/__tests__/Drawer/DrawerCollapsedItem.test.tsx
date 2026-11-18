@@ -117,17 +117,27 @@ describe('DrawerCollapsedItem', () => {
   it('should render at full opacity when enabled', async () => {
     await render(<DrawerCollapsedItem label="starred" focusedIcon="star" />);
 
-    expect(screen.getByRole('button')).toHaveStyle({
+    expect(screen.getByText('starred')).toHaveStyle({
       opacity: stateOpacity.enabled,
     });
   });
 
-  it('should dim the destination when disabled', async () => {
+  it('should dim the label when disabled', async () => {
     await render(
       <DrawerCollapsedItem label="starred" focusedIcon="star" disabled />
     );
 
-    expect(screen.getByRole('button')).toHaveStyle({
+    expect(screen.getByText('starred')).toHaveStyle({
+      opacity: stateOpacity.disabled,
+    });
+  });
+
+  it('should keep the active indicator at full opacity when disabled', async () => {
+    await render(
+      <DrawerCollapsedItem label="starred" focusedIcon="star" active disabled />
+    );
+
+    expect(screen.getByRole('button')).not.toHaveStyle({
       opacity: stateOpacity.disabled,
     });
   });

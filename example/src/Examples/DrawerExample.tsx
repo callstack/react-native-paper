@@ -147,6 +147,7 @@ const DrawerExample = () => {
             focusedIcon="bell"
             unfocusedIcon="bell-outline"
             badge
+            aria-label="Alerts"
             active={collapsed === 'alerts'}
             onPress={() => setCollapsed('alerts')}
           />

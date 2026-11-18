@@ -60,15 +60,6 @@ it('leaves an inactive destination without an indicator', async () => {
   });
 });
 
-it('insets destination content 28dp from both drawer edges', async () => {
-  await render(<DrawerItem label="Example item" onPress={() => {}} />);
-
-  expect(screen.getByRole('button')).toHaveStyle({ marginHorizontal: 12 });
-  expect(screen.getByTestId('drawer-item-content')).toHaveStyle({
-    marginHorizontal: 16,
-  });
-});
-
 it('strengthens the label of an inactive destination while focused', async () => {
   await render(<DrawerItem label="Example item" onPress={() => {}} />);
 
@@ -91,29 +82,39 @@ it('keeps the label of an active destination while focused', async () => {
   });
 });
 
-it('renders an enabled destination at full opacity', async () => {
-  await render(<DrawerItem label="Example item" onPress={() => {}} />);
+it('renders a disabled active DrawerItem', async () => {
+  const tree = (
+    await render(
+      <DrawerItem
+        icon="information"
+        active
+        disabled
+        label="Example item"
+        onPress={() => {}}
+      />
+    )
+  ).toJSON();
 
-  expect(screen.getByRole('button')).toHaveStyle({
-    opacity: stateOpacity.enabled,
-  });
+  expect(tree).toMatchSnapshot();
 });
 
-it('dims a disabled destination', async () => {
-  await render(<DrawerItem label="Example item" onPress={() => {}} disabled />);
-
-  expect(screen.getByRole('button')).toHaveStyle({
-    opacity: stateOpacity.disabled,
-  });
-});
-
-it('dims the active indicator of a disabled destination', async () => {
+it('keeps the active indicator of a disabled destination undimmed', async () => {
   await render(
     <DrawerItem label="Example item" onPress={() => {}} active disabled />
   );
 
-  expect(screen.getByRole('button')).toHaveStyle({
+  const indicator = screen.getByRole('button');
+  expect(indicator).toHaveStyle({
     backgroundColor: colors.secondaryContainer,
-    opacity: stateOpacity.disabled,
+  });
+  expect(indicator).not.toHaveStyle({ opacity: stateOpacity.disabled });
+});
+
+it('does not strengthen the label of a disabled destination on focus', async () => {
+  await render(<DrawerItem label="Example item" onPress={() => {}} disabled />);
+
+  await fireEvent(screen.getByRole('button'), 'focus');
+  expect(screen.getByText('Example item')).toHaveStyle({
+    color: colors.onSurfaceVariant,
   });
 });

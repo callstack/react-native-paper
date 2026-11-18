@@ -33,13 +33,7 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
-    style={
-      [
-        {
-          "opacity": 1,
-        },
-      ]
-    }
+    style={[]}
   >
     <View
       style={
@@ -104,6 +98,9 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
             },
             {
               "top": 16,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }
@@ -176,13 +173,7 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
-    style={
-      [
-        {
-          "opacity": 1,
-        },
-      ]
-    }
+    style={[]}
   >
     <View
       style={
@@ -247,6 +238,9 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
             },
             {
               "top": 16,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }
@@ -319,13 +313,7 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
-    style={
-      [
-        {
-          "opacity": 1,
-        },
-      ]
-    }
+    style={[]}
   >
     <View
       style={
@@ -390,6 +378,9 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
             },
             {
               "top": 16,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }
@@ -462,13 +453,7 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
-    style={
-      [
-        {
-          "opacity": 1,
-        },
-      ]
-    }
+    style={[]}
   >
     <View
       style={
@@ -531,6 +516,9 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
             },
             {
               "top": 4,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }
@@ -601,6 +589,9 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
                   "letterSpacing": 0.5,
                   "lineHeight": 16,
                 },
+                {
+                  "opacity": 1,
+                },
               ],
             ],
           ]
@@ -646,13 +637,7 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     role="button"
-    style={
-      [
-        {
-          "opacity": 1,
-        },
-      ]
-    }
+    style={[]}
   >
     <View
       style={
@@ -717,6 +702,9 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
             },
             {
               "top": 16,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }

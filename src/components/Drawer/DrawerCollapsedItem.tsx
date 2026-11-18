@@ -210,9 +210,13 @@ const DrawerCollapsedItem = ({
   const icon =
     !active && unfocusedIcon !== undefined ? unfocusedIcon : focusedIcon;
 
-  const opacity = disabled
-    ? DrawerCollapsedItemTokens.stateOpacity.disabled
-    : DrawerCollapsedItemTokens.stateOpacity.enabled;
+  // Dims the icon and label only, like Menu.Item: the active indicator keeps
+  // its color, so a disabled active destination still reads as active.
+  const contentOpacity = {
+    opacity: disabled
+      ? DrawerCollapsedItemTokens.stateOpacity.disabled
+      : DrawerCollapsedItemTokens.stateOpacity.enabled,
+  };
 
   const animatedOutlineStyle = useAnimatedStyle(() => ({
     transform: [
@@ -226,7 +230,9 @@ const DrawerCollapsedItem = ({
         onPress={onPress}
         onPressOut={onPress ? expandOutline : undefined}
         disabled={disabled}
-        role="button"
+        // `aria-selected` is only announced on a tab, and iOS has no tab role
+        // outside a tab bar, like BottomNavigation.
+        role={Platform.OS === 'ios' ? 'button' : 'tab'}
         aria-selected={active}
         aria-label={ariaLabel}
         testID={testID}
@@ -236,7 +242,7 @@ const DrawerCollapsedItem = ({
         onFocus={focusTarget.onFocus}
         onBlur={focusTarget.onBlur}
         {...focusTarget.dataSetProps}
-        style={[{ opacity }, ...focusTarget.style]}
+        style={focusTarget.style}
       >
         <View style={styles.wrapper}>
           <Animated.View
@@ -262,7 +268,7 @@ const DrawerCollapsedItem = ({
             {...focusRing.dataSetProps}
           />
 
-          <View style={[styles.icon, { top: iconPadding }]}>
+          <View style={[styles.icon, { top: iconPadding }, contentOpacity]}>
             {badge !== false && (
               <View style={styles.badgeContainer}>
                 {typeof badge === 'boolean' ? (
@@ -283,7 +289,12 @@ const DrawerCollapsedItem = ({
               selectable={false}
               numberOfLines={2}
               onTextLayout={onTextLayout}
-              style={[styles.label, androidLetterSpacingStyle, labelTextStyle]}
+              style={[
+                styles.label,
+                androidLetterSpacingStyle,
+                labelTextStyle,
+                contentOpacity,
+              ]}
               maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
             >
               {label}

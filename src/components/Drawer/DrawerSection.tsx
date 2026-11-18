@@ -92,13 +92,7 @@ const DrawerSection = ({
       )}
       {children}
       {showDivider && (
-        <Divider
-          horizontalInset
-          bold
-          style={styles.divider}
-          theme={theme}
-          testID="drawer-section-divider"
-        />
+        <Divider horizontalInset bold style={styles.divider} theme={theme} />
       )}
     </View>
   );

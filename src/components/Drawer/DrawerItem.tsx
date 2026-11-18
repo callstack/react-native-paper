@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -141,6 +141,8 @@ const DrawerItem = ({
     theme,
     DrawerItemTokens.indicatorShape
   );
+  // Dims the content only, like Menu.Item: the active indicator keeps its
+  // color, so a disabled active destination still reads as active.
   const opacity = disabled
     ? DrawerItemTokens.stateOpacity.disabled
     : DrawerItemTokens.stateOpacity.enabled;
@@ -157,19 +159,17 @@ const DrawerItem = ({
         onPress={onPress}
         onFocus={handleFocus}
         onBlur={() => setFocused(false)}
-        style={[
-          styles.container,
-          { backgroundColor, borderRadius, opacity },
-          style,
-        ]}
-        role="button"
+        style={[styles.container, { backgroundColor, borderRadius }, style]}
+        // `aria-selected` is only announced on a tab, and iOS has no tab role
+        // outside a tab bar, like BottomNavigation.
+        role={Platform.OS === 'ios' ? 'button' : 'tab'}
         aria-selected={active}
         aria-label={ariaLabel}
         theme={theme}
         hitSlop={hitSlop}
         testID={testID}
       >
-        <View style={styles.wrapper} testID="drawer-item-content">
+        <View style={[styles.wrapper, { opacity }]}>
           <View style={styles.content}>
             {icon ? (
               <Icon

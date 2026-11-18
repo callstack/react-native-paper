@@ -790,18 +790,15 @@ Corner radii set through `style` no longer shape the press, hover and disabled f
 
 ### Drawer
 
-The `Drawer` API is unchanged in Paper 6.x — no props were renamed, removed, or given new defaults. `Drawer.Item` and `Drawer.Section` were realigned with the current Material Design 3 navigation drawer spec, so their appearance changes:
+The `Drawer` API is unchanged in Paper 6.x — no props were renamed, removed, or given new defaults. `Drawer.Item`, `Drawer.CollapsedItem` and `Drawer.Section` were realigned with the current Material Design 3 navigation drawer spec, so their appearance changes:
 
-- **Trailing padding.** `Drawer.Item` reserved 36dp on the trailing edge and 28dp on the leading edge. Both are now 28dp, as the spec requires. Items sit 8dp wider.
+- **Trailing padding.** `Drawer.Item` reserved 36dp between the drawer edge and its content on the trailing side, and 28dp on the leading side. Both are now 28dp, as the spec requires. The active indicator keeps its size. The label and the `right` content get 8dp more room.
 - **Active label weight.** The label of an active `Drawer.Item` now uses the prominent `labelLargeEmphasized` weight (700). Inactive labels are unchanged at 500.
 - **Section divider colour.** `Drawer.Section` drew its divider in a fixed grey that ignored the theme and was wrong in dark mode. It now uses `theme.colors.outlineVariant`, like every other `Divider`.
-- **Focus indicator.** `Drawer.Item` gains a keyboard focus ring in `theme.colors.secondary`. It appears only on keyboard focus, not on press.
+- **Focus indicator.** `Drawer.Item` and `Drawer.CollapsedItem` gain a keyboard focus ring in `theme.colors.secondary`. It appears only on keyboard focus, not on press.
+- **Disabled state.** Disabled `Drawer.Item` and `Drawer.CollapsedItem` destinations are now dimmed to 38% opacity. In 5.x they looked the same as enabled ones.
 
-If you were pixel-matching a drawer against Paper 5.x, the first two points are the ones that will shift your layout. To restore the old trailing padding, pass it through `style`:
-
-```tsx
-<Drawer.Item label="Inbox" icon="inbox" style={{ marginEnd: 20 }} />
-```
+If you were pixel-matching a drawer against Paper 5.x, the first two points are the ones that will shift your layout.
 
 ### TextInput
 

@@ -32,7 +32,6 @@ exports[`DrawerSection renders properly 1`] = `
         },
       ]
     }
-    testID="drawer-section-divider"
   />
 </View>
 `;
