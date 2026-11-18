@@ -679,6 +679,8 @@ const Card = ({
           },
         ]}
       />
+      {content}
+      {/* Material draws state layers over the whole Card, media included. */}
       <Animated.View
         pointerEvents="none"
         style={[
@@ -691,7 +693,6 @@ const Card = ({
           stateLayerTransitionStyle,
         ]}
       />
-      {content}
       {visuals.outlineWidth > 0 ? (
         <Animated.View
           pointerEvents="none"
