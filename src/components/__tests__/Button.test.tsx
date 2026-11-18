@@ -5,6 +5,7 @@ import { fireEvent } from '@testing-library/react-native';
 import color from 'color';
 
 import { LocaleProvider } from '../../core/locale';
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import { pink500, white } from '../../theme/colors';
@@ -811,18 +812,17 @@ describe('getButtonShapeCurvePoints', () => {
 describe('getButtonTransitionDuration', () => {
   const theme = LightTheme;
   const opaque = theme.colors.primary;
-  const scaled = (key: 'short3' | 'short4') =>
-    theme.motion.duration[key] * theme.animation.scale;
 
   it('cross-fades between two opaque containers', () => {
     expect(
       getButtonTransitionDuration({
         theme,
         pressed: false,
+        reduceMotion: false,
         containerColor: opaque,
         previousContainerColor: theme.colors.secondaryContainer,
       })
-    ).toBe(scaled('short3'));
+    ).toBe(theme.motion.duration.short3);
   });
 
   it('uses the longer duration while pressed', () => {
@@ -830,17 +830,34 @@ describe('getButtonTransitionDuration', () => {
       getButtonTransitionDuration({
         theme,
         pressed: true,
+        reduceMotion: false,
         containerColor: opaque,
         previousContainerColor: opaque,
       })
-    ).toBe(scaled('short4'));
+    ).toBe(theme.motion.duration.short4);
   });
+
+  it.each([false, true])(
+    'snaps under reduce motion (pressed: %s)',
+    (pressed) => {
+      expect(
+        getButtonTransitionDuration({
+          theme,
+          pressed,
+          reduceMotion: true,
+          containerColor: opaque,
+          previousContainerColor: theme.colors.secondaryContainer,
+        })
+      ).toBe(0);
+    }
+  );
 
   it('snaps when the container becomes transparent', () => {
     expect(
       getButtonTransitionDuration({
         theme,
         pressed: false,
+        reduceMotion: false,
         containerColor: 'transparent',
         previousContainerColor: opaque,
       })
@@ -852,6 +869,7 @@ describe('getButtonTransitionDuration', () => {
       getButtonTransitionDuration({
         theme,
         pressed: false,
+        reduceMotion: false,
         containerColor: opaque,
         previousContainerColor: 'transparent',
       })
@@ -868,6 +886,7 @@ describe('getButtonTransitionDuration', () => {
         getButtonTransitionDuration({
           theme,
           pressed: false,
+          reduceMotion: false,
           containerColor,
           previousContainerColor,
         })
@@ -1418,5 +1437,64 @@ describe('shape morph animation', () => {
     );
 
     expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 48 });
+  });
+});
+
+describe('with reduce motion', () => {
+  const { short3, short4 } = LightTheme.motion.duration;
+  const shapeDuration = toSpringCurve(
+    LightTheme.motion.spring.fast.spatial
+  ).duration;
+
+  // The touchable sits in the clip, which sits in the container.
+  const containerOf = () =>
+    parentOf(
+      parentOf(screen.getByTestId('button'), 'the touchable'),
+      'the clip'
+    );
+
+  // Reanimated's Jest setup keeps CSS transitions out of `style`, and
+  // `getAnimatedStyle` can't read the container's nested style arrays. The
+  // container transitions its background and three shadow properties, then
+  // its corner.
+  const containerTransitionDuration = () =>
+    // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+    StyleSheet.flatten(containerOf().props.jestInlineStyle).transitionDuration;
+
+  const renderButton = (reduceMotion: 'on' | 'off') =>
+    render(
+      <PaperProvider reduceMotion={reduceMotion}>
+        <Button mode="elevated" onPress={() => {}} testID="button">
+          Go
+        </Button>
+      </PaperProvider>
+    );
+
+  it('transitions the container and morphs its corner when reduceMotion is "off"', async () => {
+    await renderButton('off');
+    expect(containerTransitionDuration()).toEqual([
+      short3,
+      short3,
+      short3,
+      short3,
+      shapeDuration,
+    ]);
+
+    await fireEvent(screen.getByTestId('button'), 'onPressIn');
+    expect(containerTransitionDuration()).toEqual([
+      short4,
+      short4,
+      short4,
+      short4,
+      shapeDuration,
+    ]);
+  });
+
+  it('snaps the container and its corner when reduceMotion is "on"', async () => {
+    await renderButton('on');
+    expect(containerTransitionDuration()).toEqual([0, 0, 0, 0, 0]);
+
+    await fireEvent(screen.getByTestId('button'), 'onPressIn');
+    expect(containerTransitionDuration()).toEqual([0, 0, 0, 0, 0]);
   });
 });

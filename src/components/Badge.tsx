@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
+import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
 import { cornerFull } from '../theme/tokens/sys/shape';
 import type { ThemeProp } from '../theme/types';
 
@@ -56,10 +57,7 @@ const Badge = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-
-  const {
-    animation: { scale },
-  } = theme;
+  const reduceMotion = useReduceMotion();
 
   const textColor = theme.colors.onError;
 
@@ -69,7 +67,7 @@ const Badge = ({
 
   const transitionStyle = {
     opacity: visible ? 1 : 0,
-    transitionDuration: 150 * scale,
+    transitionDuration: reduceMotion ? 0 : 150,
     transitionProperty: 'opacity',
   };
 

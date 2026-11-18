@@ -21,6 +21,20 @@ export type Props = {
   theme?: ThemeProp;
   settings?: Settings;
   direction?: Direction;
+  /**
+   * Whether Paper's components reduce motion. With reduce motion on, their
+   * transitions jump to the end state instead of animating. The theming guide
+   * lists the few animations that don't follow it.
+   *
+   * - `'auto'` (default): follows the reduce motion setting of the OS, whether
+   *   or not a `theme` is passed. It starts from the setting the OS had when
+   *   the app launched, then follows every change, as reported by
+   *   `AccessibilityInfo`.
+   * - `'on'`: reduces motion, whatever the OS setting.
+   * - `'off'`: doesn't reduce motion, whatever the OS setting.
+   *
+   * Components read the resolved value with `useReduceMotion()`.
+   */
   reduceMotion?: ReduceMotionPreference;
 };
 
@@ -33,13 +47,8 @@ const PaperProvider = (props: Props) => {
   const theme = React.useMemo(() => {
     const isDark = props.theme?.dark ?? colorScheme === 'dark';
     const base = isDark ? DarkTheme : LightTheme;
-    const scale = resolvedReduceMotion
-      ? 0
-      : (props.theme?.animation?.scale ?? 1);
-    const merged = safeMerge(base, props.theme);
-
-    return { ...merged, animation: { ...merged.animation, scale } };
-  }, [colorScheme, props.theme, resolvedReduceMotion]);
+    return safeMerge(base, props.theme);
+  }, [colorScheme, props.theme]);
 
   const { children, settings } = props;
 
