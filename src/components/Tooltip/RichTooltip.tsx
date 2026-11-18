@@ -389,12 +389,13 @@ const RichTooltip = ({
   // the trigger into the tooltip, and re-schedule the hide once it leaves. A
   // plain `View` carries these — a `Pressable` would be focusable and merge its
   // children into one accessibility element on iOS, so the title, the content
-  // and the actions would stop being reachable on their own.
+  // and the actions would stop being reachable on their own. React Native Web's
+  // `View` ignores `onHoverIn`/`onHoverOut`, so pointer events are used instead.
   const tooltipInteractionProps =
     Platform.OS === 'web'
       ? {
-          onHoverIn: clearHideTimer,
-          onHoverOut: scheduleHide,
+          onPointerEnter: clearHideTimer,
+          onPointerLeave: scheduleHide,
           onFocus: clearHideTimer,
           onBlur: scheduleHide,
         }

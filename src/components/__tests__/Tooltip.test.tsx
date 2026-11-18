@@ -1087,11 +1087,36 @@ describe('Tooltip.Rich', () => {
       await act(async () => {
         await fireEvent(getTrigger(getByText), 'pointerLeave');
         // ...but entering the tooltip cancels it.
-        await fireEvent(getByText('Body text'), 'hoverIn');
+        await fireEvent(getByText('Body text'), 'pointerEnter');
       });
       await runTimers(500);
 
       expect(getByText('Body text')).toBeTruthy();
+    });
+
+    it('hides the tooltip after the pointer leaves it', async () => {
+      const {
+        wrapper: { getByText, queryByText },
+      } = await setup({ enterTouchDelay: 0, leaveTouchDelay: 500 });
+
+      await act(async () => {
+        await fireEvent(getTrigger(getByText), 'pointerEnter');
+      });
+      await runTimers(0);
+
+      await act(async () => {
+        await fireEvent(getTrigger(getByText), 'pointerLeave');
+        await fireEvent(getByText('Body text'), 'pointerEnter');
+      });
+      await runTimers(500);
+
+      await act(async () => {
+        await fireEvent(getByText('Body text'), 'pointerLeave');
+      });
+      await runTimers(500); // leave delay → hide intent
+      await runTimers(); // exit fade → unmount
+
+      expect(queryByText('Body text')).toBeNull();
     });
 
     it('keeps the tooltip open when the hovered trigger is pressed', async () => {
