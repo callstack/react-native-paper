@@ -145,7 +145,7 @@ type MessageRowProps = {
   message: Message;
   selected: boolean;
   onPress: () => void;
-  onLongPress: () => void;
+  onToggleSelection: () => void;
   onToggleStar: () => void;
 };
 
@@ -153,7 +153,7 @@ const MessageRow = ({
   message,
   selected,
   onPress,
-  onLongPress,
+  onToggleSelection,
   onToggleStar,
 }: MessageRowProps) => {
   const { colors } = useTheme();
@@ -165,77 +165,108 @@ const MessageRow = ({
     ? [styles.unread, { color: colors.onSurface }]
     : { color: colors.onSurfaceVariant };
 
+  const accessibilityLabel = [
+    message.unread ? 'Unread' : null,
+    message.sender,
+    message.subject,
+    message.time,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
   return (
-    <TouchableRipple
-      onPress={onPress}
-      onLongPress={onLongPress}
-      aria-selected={selected}
-      style={[
-        styles.row,
-        selected && { backgroundColor: colors.secondaryContainer },
-      ]}
-    >
-      <View style={styles.rowContent}>
-        {selected ? (
-          <Avatar.Icon size={40} icon="check" />
-        ) : (
-          <Avatar.Text
-            size={40}
-            label={message.sender[0]}
-            backgroundColor={avatarBackground}
-            labelStyle={{ color: avatarColor }}
-          />
-        )}
-        <View style={styles.message}>
-          <View style={styles.line}>
-            <Text
-              variant="bodyLarge"
-              numberOfLines={1}
-              style={[styles.grow, emphasis]}
-            >
-              {message.sender}
-            </Text>
-            <Text
-              variant="labelSmall"
-              style={
-                message.unread
-                  ? [styles.unread, { color: colors.primary }]
-                  : { color: colors.onSurfaceVariant }
-              }
-            >
-              {message.time}
-            </Text>
-            {message.unread ? (
-              <Badge
-                style={[styles.unreadDot, { backgroundColor: colors.primary }]}
-              />
-            ) : null}
-          </View>
-          <View style={styles.line}>
-            <View style={styles.grow}>
-              <Text variant="bodyMedium" numberOfLines={1} style={emphasis}>
-                {message.subject}
+    <View style={selected && { backgroundColor: colors.secondaryContainer }}>
+      <TouchableRipple
+        role="button"
+        aria-label={accessibilityLabel}
+        aria-selected={selected}
+        accessibilityActions={[
+          {
+            name: 'toggleSelection',
+            label: selected ? 'Deselect' : 'Select',
+          },
+        ]}
+        onAccessibilityAction={({ nativeEvent }) => {
+          if (nativeEvent.actionName === 'toggleSelection') {
+            onToggleSelection();
+          }
+        }}
+        onPress={onPress}
+        onLongPress={onToggleSelection}
+        style={styles.row}
+      >
+        <View style={styles.rowContent}>
+          {selected ? (
+            <Avatar.Icon size={40} icon="check" />
+          ) : (
+            <Avatar.Text
+              size={40}
+              label={message.sender[0]}
+              backgroundColor={avatarBackground}
+              labelStyle={{ color: avatarColor }}
+            />
+          )}
+          <View style={styles.message}>
+            <View style={styles.line}>
+              <Text
+                variant="bodyLarge"
+                numberOfLines={1}
+                style={[styles.grow, emphasis]}
+              >
+                {message.sender}
               </Text>
               <Text
-                variant="bodyMedium"
-                numberOfLines={1}
-                style={{ color: colors.onSurfaceVariant }}
+                variant="labelSmall"
+                style={
+                  message.unread
+                    ? [styles.unread, { color: colors.primary }]
+                    : { color: colors.onSurfaceVariant }
+                }
               >
-                {message.snippet}
+                {message.time}
               </Text>
+              {message.unread ? (
+                <Badge
+                  style={[
+                    styles.unreadDot,
+                    { backgroundColor: colors.primary },
+                  ]}
+                />
+              ) : null}
             </View>
-            <IconButton
-              icon={message.starred ? 'star' : 'star-outline'}
-              selected={message.starred}
-              size={20}
-              aria-label={message.starred ? 'Unstar' : 'Star'}
-              onPress={onToggleStar}
-              style={styles.star}
-            />
+            <View style={styles.line}>
+              <View style={styles.grow}>
+                <Text variant="bodyMedium" numberOfLines={1} style={emphasis}>
+                  {message.subject}
+                </Text>
+                <Text
+                  variant="bodyMedium"
+                  numberOfLines={1}
+                  style={{ color: colors.onSurfaceVariant }}
+                >
+                  {message.snippet}
+                </Text>
+              </View>
+              <View style={styles.starSpace} />
+            </View>
           </View>
         </View>
+      </TouchableRipple>
+      <View pointerEvents="box-none" style={styles.starContainer}>
+        <IconButton
+          icon={message.starred ? 'star' : 'star-outline'}
+          selected={message.starred}
+          size={20}
+          aria-label={
+            message.starred
+              ? `Unstar message from ${message.sender}`
+              : `Star message from ${message.sender}`
+          }
+          onPress={onToggleStar}
+          style={styles.star}
+        />
       </View>
-    </TouchableRipple>
+    </View>
   );
 };
 
@@ -292,7 +323,7 @@ const Inbox = ({
                   ? onToggleSelection(message.id)
                   : onOpen(message.id)
               }
-              onLongPress={() => onToggleSelection(message.id)}
+              onToggleSelection={() => onToggleSelection(message.id)}
               onToggleStar={() => onToggleStar(message.id)}
             />
           ))
@@ -540,8 +571,18 @@ const styles = StyleSheet.create({
   unreadDot: {
     alignSelf: 'center',
   },
+  starSpace: {
+    width: 20,
+  },
+  starContainer: {
+    position: 'absolute',
+    left: 8,
+    right: 8,
+    bottom: 10,
+    alignItems: 'flex-end',
+  },
   star: {
-    marginEnd: -8,
+    margin: 0,
   },
   fabContainer: {
     position: 'absolute',
