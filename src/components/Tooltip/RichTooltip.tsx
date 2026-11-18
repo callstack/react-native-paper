@@ -178,8 +178,14 @@ const RichTooltip = ({
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const [visible, setVisible] = React.useState(false);
-  const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
-    useTooltipFade(theme, visible);
+  const {
+    rendered,
+    measurement,
+    fadeStyle,
+    fadeDuration,
+    onLayout,
+    childrenWrapperRef,
+  } = useTooltipFade(theme, visible);
   const tooltipId = React.useId();
   const titleId = React.useId();
   const contentId = React.useId();
@@ -471,6 +477,7 @@ const RichTooltip = ({
                 elevation={Tokens.rich.elevation}
                 backgroundColor={theme.colors[Tokens.rich.container]}
                 borderRadius={theme.shapes.corner[Tokens.rich.shape]}
+                transitionDuration={fadeDuration}
                 style={[styles.surface, fadeStyle]}
               >
                 {title ? (

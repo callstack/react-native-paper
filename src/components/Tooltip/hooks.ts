@@ -187,10 +187,11 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     });
   };
 
+  const fadeDuration = visible ? enterDuration : exitDuration;
   const fadeStyle = {
     opacity: visible && measurement.measured ? 1 : 0,
     transitionProperty: 'opacity',
-    transitionDuration: `${visible ? enterDuration : exitDuration}ms`,
+    transitionDuration: `${fadeDuration}ms`,
     transitionTimingFunction: visible
       ? cubicBezier(...theme.motion.easing[Tokens.motion.enter.easing])
       : cubicBezier(...theme.motion.easing[Tokens.motion.exit.easing]),
@@ -200,6 +201,7 @@ export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
     rendered,
     measurement,
     fadeStyle,
+    fadeDuration,
     onLayout,
     childrenWrapperRef,
   };
