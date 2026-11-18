@@ -280,5 +280,7 @@ export const resolveCardVisuals = ({
     shape: theme.shapes.corner.medium,
     stateLayerColor: theme.colors.onSurface,
     stateLayerOpacity: stateTokens.stateLayerOpacity,
+    // Compose dims disabled Card content to the content color at 38%.
+    contentOpacity: state === 'disabled' ? opacity.disabled : 1,
   };
 };

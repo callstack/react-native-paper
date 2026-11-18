@@ -543,7 +543,11 @@ const Card = ({
 
   const content = (
     <View
-      style={[styles.content, contentStyle]}
+      style={[
+        styles.content,
+        { opacity: visuals.contentOpacity },
+        contentStyle,
+      ]}
       testID={hasPassedTouchHandler ? undefined : testID}
     >
       {media}
