@@ -124,7 +124,7 @@ export function useSetupPreferences() {
     setPreferencesVisible(false);
 
     try {
-      await AsyncStorage.multiRemove([PREFERENCES_KEY, PERSISTENCE_KEY]);
+      await AsyncStorage.removeItem(PERSISTENCE_KEY);
     } catch (e) {
       // ignore error
     }
