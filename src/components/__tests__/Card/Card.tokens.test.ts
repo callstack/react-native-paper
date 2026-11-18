@@ -188,6 +188,7 @@ describe('resolveCardVisuals', () => {
             shape: theme.shapes.corner.medium,
             stateLayerColor: theme.colors.onSurface,
             stateLayerOpacity,
+            contentOpacity: cardStates[index] === 'disabled' ? 0.38 : 1,
           })
         )
       );

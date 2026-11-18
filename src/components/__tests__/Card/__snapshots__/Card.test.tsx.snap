@@ -140,6 +140,9 @@ exports[`Card applies the medium shape and asymmetric overrides across the shell
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -338,6 +341,9 @@ exports[`Card does not render an outline for the elevated variant 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -502,6 +508,9 @@ exports[`Card does not render an outline for the filled variant 1`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -710,6 +719,9 @@ exports[`Card keeps the ripple, visual layers, and focus indicator on the Card s
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -824,6 +836,9 @@ exports[`Card lets only elevated Cards customize their resting elevation 1`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -984,6 +999,9 @@ exports[`Card renders keyboard focus feedback for the elevated variant 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -1142,6 +1160,9 @@ exports[`Card renders keyboard focus feedback for the filled variant 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -1299,6 +1320,9 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -1489,6 +1513,9 @@ exports[`Card renders omitted slots as a neutral filled grouping container 1`] =
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -1634,6 +1661,9 @@ exports[`Card renders the Material disabled treatment for elevated Cards 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 0.38,
+          },
           undefined,
         ]
       }
@@ -1777,6 +1807,9 @@ exports[`Card renders the Material disabled treatment for filled Cards 1`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 0.38,
           },
           undefined,
         ]
@@ -1924,6 +1957,9 @@ exports[`Card renders the Material disabled treatment for outlined Cards 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 0.38,
+          },
           undefined,
         ]
       }
@@ -2060,6 +2096,9 @@ exports[`Card renders the consumer-controlled elevated dragged presentation 1`] 
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -2172,6 +2211,9 @@ exports[`Card renders the consumer-controlled filled dragged presentation 1`] = 
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -2283,6 +2325,9 @@ exports[`Card renders the consumer-controlled outlined dragged presentation 1`] 
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -2474,6 +2519,9 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 1
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -2639,6 +2687,9 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 2
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -2750,6 +2801,9 @@ exports[`Card renders the enabled elevated elevation 1`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -2916,6 +2970,9 @@ exports[`Card renders the enabled filled appearance in light and dark themes 1`]
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -3081,6 +3138,9 @@ exports[`Card renders the enabled filled appearance in light and dark themes 2`]
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -3192,6 +3252,9 @@ exports[`Card renders the enabled filled elevation 1`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -3357,6 +3420,9 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 1
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -3548,6 +3614,9 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 2
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -3684,6 +3753,9 @@ exports[`Card renders the enabled outlined elevation 1`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -3875,6 +3947,9 @@ exports[`Card renders the enabled outlined role in light and dark themes 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -4065,6 +4140,9 @@ exports[`Card renders the enabled outlined role in light and dark themes 2`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -4242,6 +4320,9 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -4412,6 +4493,9 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 0.38,
           },
           undefined,
         ]
@@ -4650,6 +4734,9 @@ exports[`Card routes whole-Card accessibility semantics and callbacks to its tar
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -4794,6 +4881,9 @@ exports[`Card settles rapid changes at the latest complete visual state 1`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -5018,6 +5108,9 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -5188,6 +5281,9 @@ exports[`Card shows and clears the elevated hover feedback 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -5332,6 +5428,9 @@ exports[`Card shows and clears the elevated hover feedback 2`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -5478,6 +5577,9 @@ exports[`Card shows and clears the elevated pressed feedback 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -5622,6 +5724,9 @@ exports[`Card shows and clears the elevated pressed feedback 2`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -5768,6 +5873,9 @@ exports[`Card shows and clears the filled hover feedback 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -5912,6 +6020,9 @@ exports[`Card shows and clears the filled hover feedback 2`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -6058,6 +6169,9 @@ exports[`Card shows and clears the filled pressed feedback 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -6203,6 +6317,9 @@ exports[`Card shows and clears the filled pressed feedback 2`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -6347,6 +6464,9 @@ exports[`Card shows and clears the outlined hover feedback 1`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -6518,6 +6638,9 @@ exports[`Card shows and clears the outlined hover feedback 2`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -6688,6 +6811,9 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -6857,6 +6983,9 @@ exports[`Card shows and clears the outlined pressed feedback 2`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -7041,6 +7170,9 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -7223,6 +7355,9 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -7407,6 +7542,9 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -7577,6 +7715,9 @@ exports[`Card updates the controlled dragged presentation in both directions 1`]
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -7746,6 +7887,9 @@ exports[`Card updates the controlled dragged presentation in both directions 2`]
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -7936,6 +8080,9 @@ exports[`Card uses custom theme roles for elevated and outlined variants 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -8100,6 +8247,9 @@ exports[`Card uses custom theme roles for elevated and outlined variants 2`] = `
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -8290,6 +8440,9 @@ exports[`Card uses filled as the default and resolves deeply merged custom color
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -8495,6 +8648,9 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -8719,6 +8875,9 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -8941,6 +9100,9 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -9165,6 +9327,9 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -9362,6 +9527,9 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
             "flexShrink": 1,
             "position": "relative",
           },
+          {
+            "opacity": 0.38,
+          },
           undefined,
         ]
       }
@@ -9533,6 +9701,9 @@ exports[`CardCover uses the Card clipping shape for edge media without double ro
           {
             "flexShrink": 1,
             "position": "relative",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]

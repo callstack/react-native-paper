@@ -852,6 +852,18 @@ describe('Card', () => {
     expect(onAccessibilityAction).not.toHaveBeenCalled();
   });
 
+  it('dims the slot content of a disabled Card', async () => {
+    const { rerender } = await render(
+      <Card testID="card" disabled content={<Text>Body</Text>} />
+    );
+
+    expect(screen.getByTestId('card')).toHaveStyle({ opacity: 0.38 });
+
+    await rerender(<Card testID="card" content={<Text>Body</Text>} />);
+
+    expect(screen.getByTestId('card')).toHaveStyle({ opacity: 1 });
+  });
+
   it('exposes disabled state on an explicitly semantic neutral Card', async () => {
     await render(<Card testID="card" disabled accessible role="summary" />);
 
