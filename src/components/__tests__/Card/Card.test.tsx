@@ -1045,9 +1045,18 @@ describe('Card', () => {
 
 describe('Card types', () => {
   it('accepts documented examples and rejects removed or mixed forms', () => {
+    const variant = 'filled' as 'filled' | 'elevated' | 'outlined';
     const typeCases = (
       <>
         <Card testID="card" />
+        <Card
+          testID="card"
+          variant={variant}
+          media={<Card.Cover source={{ uri: 'cover' }} />}
+          actions={<View />}
+        />
+        <Card testID="card" variant={variant} title="Title" />
+        <Card testID="card" variant={variant} header={<View />} />
         <Card
           testID="card"
           accessibilityLabel="Open trip details"

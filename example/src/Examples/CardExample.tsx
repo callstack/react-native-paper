@@ -244,7 +244,7 @@ const CardExample = () => {
       </Text>
 
       <Card
-        variant="elevated"
+        variant={variant}
         media={
           <Card.Cover source={require('../../assets/images/forest.jpg')} />
         }

@@ -59,7 +59,10 @@ type CustomHeaderProps = {
    * Fully custom header region. This cannot be combined with `title`,
    * `subtitle`, `leading`, or `trailing`.
    */
-  header: React.ReactNode;
+  // Optional, so a Card with no header region matches this branch too: with a
+  // required `header`, TypeScript rejects a header-less Card whose `variant`
+  // is a union, e.g. `variant={variant}`.
+  header?: React.ReactNode;
   /**
    * Unavailable when a custom header is supplied.
    */
