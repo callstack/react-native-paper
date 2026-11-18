@@ -463,6 +463,10 @@ const Card = ({
     ? 0
     : theme.motion.duration.short3 * theme.animation.scale;
   const transitionTimingFunction = cubicBezier(...theme.motion.easing.standard);
+  // TouchableRipple already draws the pressed state layer (the ripple on
+  // Android, the underlay elsewhere), so a second one would double it.
+  const stateLayerOpacity =
+    visuals.state === 'pressed' ? 0 : visuals.stateLayerOpacity;
   const stateLayerTransitionStyle: AnimatedStyle<ViewStyle> = {
     transitionProperty: 'opacity',
     transitionDuration,
@@ -682,7 +686,7 @@ const Card = ({
           shapeStyle,
           {
             backgroundColor: visuals.stateLayerColor,
-            opacity: visuals.stateLayerOpacity,
+            opacity: stateLayerOpacity,
           },
           stateLayerTransitionStyle,
         ]}
