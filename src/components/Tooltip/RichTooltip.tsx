@@ -355,6 +355,29 @@ const RichTooltip = ({
     [show, focusTooltipContent]
   );
 
+  // Web: the backdrop lets pointer events through, so a press outside closes
+  // the tooltip here. Relying on blur misses triggers that a tap doesn't focus,
+  // such as buttons in Safari.
+  React.useEffect(() => {
+    if (Platform.OS !== 'web' || !visible || !('document' in global)) {
+      return;
+    }
+
+    const handlePointerDown = ({ target }: { target: EventTarget | null }) => {
+      if (
+        tooltipRef.current?.contains?.(target) ||
+        childrenWrapperRef.current?.contains?.(target)
+      ) {
+        return;
+      }
+      hide();
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, [visible, hide, childrenWrapperRef]);
+
   // Escape (web) and back (Android) dismiss the tooltip the way the backdrop
   // does on touch, and on web put focus back on the trigger so it's not lost
   useOverlayDismiss({

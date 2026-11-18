@@ -1290,5 +1290,46 @@ describe('Tooltip.Rich', () => {
         Reflect.deleteProperty(globalThis, 'document');
       }
     });
+
+    it('closes on a press outside the tooltip and the trigger', async () => {
+      // A tap doesn't always focus the trigger (buttons in Safari), so blur
+      // can't be relied on: the tooltip listens for presses on the document
+      const listeners: Array<(event: { target: unknown }) => void> = [];
+      Reflect.defineProperty(globalThis, 'document', {
+        value: {
+          addEventListener: (
+            type: string,
+            listener: (event: { target: unknown }) => void
+          ) => {
+            if (type === 'pointerdown') listeners.push(listener);
+          },
+          removeEventListener: (type: string) => {
+            if (type === 'pointerdown') listeners.length = 0;
+          },
+        },
+        configurable: true,
+        writable: true,
+      });
+
+      try {
+        const {
+          wrapper: { getByText, queryByText, unmount },
+        } = await setup();
+
+        await user.press(getTrigger(getByText));
+        expect(getByText('Body text')).toBeTruthy();
+
+        await act(() => {
+          listeners.forEach((listener) => listener({ target: null }));
+        });
+        await runTimers();
+
+        expect(queryByText('Body text')).toBeNull();
+
+        await unmount();
+      } finally {
+        Reflect.deleteProperty(globalThis, 'document');
+      }
+    });
   });
 });

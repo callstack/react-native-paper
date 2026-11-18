@@ -89,7 +89,7 @@ const getTooltipYPosition = (
 export const getTooltipPosition = (
   { children, tooltip, measured }: Measurement,
   direction: Direction = 'ltr'
-): {} | { left: number; top: number } => {
+): { left?: number; top?: number } => {
   if (!measured) return {};
 
   let left = getTooltipXPosition(children, tooltip);
