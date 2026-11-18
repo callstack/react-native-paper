@@ -484,7 +484,10 @@ const RichTooltip = ({
             ref={tooltipRef}
             id={tooltipId}
             nativeID={tooltipId}
-            role="tooltip"
+            // A tooltip can't hold focusable content, so with actions it's a
+            // non-modal dialog (WAI-ARIA APG tooltip pattern)
+            role={actions ? 'dialog' : 'tooltip'}
+            aria-label={actions ? title : undefined}
             onLayout={onLayout}
             pointerEvents="box-none"
             style={[

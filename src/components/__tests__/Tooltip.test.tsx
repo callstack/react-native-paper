@@ -876,6 +876,20 @@ describe('Tooltip.Rich', () => {
       expect(queryByText('Body text')).toBeNull();
     });
 
+    it('is a dialog named by its title when it has actions', async () => {
+      const {
+        wrapper: { getByText },
+      } = await setup({
+        title: 'Heading',
+        actions: () => <Text>Learn more</Text>,
+      });
+
+      await user.press(getTrigger(getByText));
+
+      expect(getTooltipElement(getByText)).toHaveProp('role', 'dialog');
+      expect(getTooltipElement(getByText)).toHaveProp('aria-label', 'Heading');
+    });
+
     it('renders a custom element as content', async () => {
       const {
         wrapper: { getByText },
