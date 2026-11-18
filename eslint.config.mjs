@@ -219,10 +219,7 @@ export default defineConfig(
         },
       ],
 
-      'jest/expect-expect': [
-        'error',
-        { assertFunctionNames: ['expect', 'expectVisualSnapshot'] },
-      ],
+      'jest/expect-expect': 'error',
       'jest/no-commented-out-tests': 'error',
       'jest/no-disabled-tests': 'error',
       'jest/prefer-importing-jest-globals': 'error',

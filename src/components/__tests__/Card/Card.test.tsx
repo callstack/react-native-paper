@@ -4,13 +4,17 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { act } from '@testing-library/react-native';
+import { cubicBezier, getAnimatedStyle } from 'react-native-reanimated';
 
 import { fireEvent, render, screen, userEvent } from '../../../test-utils';
 import { ReduceMotionContext } from '../../../theme/accessibility/ReduceMotionContext';
 import { DarkTheme, LightTheme } from '../../../theme/schemes';
+import { androidElevationLevels } from '../../../theme/tokens/sys/elevation';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
 import type { Props as CardProps } from '../../Card/Card';
+import { resolveCardVisuals } from '../../Card/tokens';
+import type { CardVariant, CardStateFlags } from '../../Card/tokens';
 
 const styles = StyleSheet.create({
   contentStyle: {
@@ -34,11 +38,81 @@ const getVariantCard = (
   return <Card testID="card" {...props} variant="filled" />;
 };
 
-// The Card shell, clipped visual region, background, state layer, outline,
-// and focus indicator are internal nodes with no public testID. Their
-// styles are guarded with a snapshot of the rendered tree instead.
-const expectVisualSnapshot = () => {
-  expect(screen.toJSON()).toMatchSnapshot();
+type Layer = NonNullable<ReturnType<typeof screen.getByTestId>['parent']>;
+
+// The Card's visual layers are internal nodes with no public testID, so they
+// are reached from the node that has one. For an actionable Card that is the
+// interaction node; for a neutral Card it is the slot content. Either way the
+// layers are the children of the clipped visual node, in paint order:
+// container, slot content, state layer, then the outline of an outlined Card.
+// The Surface that carries the elevation and the focus ring is its parent.
+const getCardLayers = ({ neutral = false } = {}) => {
+  const target = screen.getByTestId('card');
+  const visual = neutral ? target.parent : target;
+
+  if (!visual?.parent) {
+    throw new Error('Card visual node not found');
+  }
+
+  const [container, content, stateLayer, outline] = visual.children.filter(
+    (child): child is Layer => typeof child !== 'string'
+  );
+
+  return {
+    surface: visual.parent,
+    visual,
+    container,
+    content,
+    stateLayer,
+    outline,
+  };
+};
+
+// Asserts that every layer shows the Material visuals of one state. The
+// values come from the token matrix, which `Card.tokens.test.ts` checks
+// against the specification.
+const expectCardState = (
+  variant: CardVariant,
+  flags: CardStateFlags = {},
+  { theme = LightTheme, neutral = false } = {}
+) => {
+  const visuals = resolveCardVisuals({ theme, variant, ...flags });
+  const { surface, container, content, stateLayer, outline } = getCardLayers({
+    neutral,
+  });
+
+  expect(container).toHaveStyle({
+    backgroundColor: visuals.containerColor,
+    opacity: visuals.containerOpacity,
+  });
+  expect(content).toHaveStyle({ opacity: visuals.contentOpacity });
+  // TouchableRipple draws the pressed layer, so Card skips its own.
+  expect(stateLayer).toHaveStyle({
+    backgroundColor: visuals.stateLayerColor,
+    opacity: visuals.state === 'pressed' ? 0 : visuals.stateLayerOpacity,
+  });
+
+  if (variant === 'outlined') {
+    expect(outline).toHaveStyle({
+      borderWidth: 1,
+      borderColor: visuals.outlineColor,
+      opacity: visuals.outlineOpacity,
+    });
+  } else {
+    expect(outline).toBeUndefined();
+  }
+
+  if (Platform.OS === 'android') {
+    expect(surface).toHaveStyle({
+      elevation: androidElevationLevels[visuals.elevation],
+    });
+  }
+};
+
+const settle = async () => {
+  await act(() => {
+    jest.runOnlyPendingTimers();
+  });
 };
 
 afterEach(() => {
@@ -47,45 +121,49 @@ afterEach(() => {
 
 describe('Card', () => {
   it.each(['filled', 'elevated', 'outlined'] as const)(
-    'renders the enabled %s appearance in light and dark themes',
+    'renders the enabled %s appearance',
     async (variant) => {
-      for (const isDark of [false, true] as const) {
-        const theme = isDark ? DarkTheme : LightTheme;
-        const card = getVariantCard(variant, { theme });
-        const { unmount } = await render(card);
+      await render(getVariantCard(variant));
 
-        expectVisualSnapshot();
+      expect(screen.toJSON()).toMatchSnapshot();
+    }
+  );
+
+  it.each<
+    [CardVariant, 'surfaceContainerHighest' | 'surfaceContainerLow' | 'surface']
+  >([
+    ['filled', 'surfaceContainerHighest'],
+    ['elevated', 'surfaceContainerLow'],
+    ['outlined', 'surface'],
+  ])(
+    'uses the %s theme roles in light and dark themes',
+    async (variant, containerRole) => {
+      jest.replaceProperty(Platform, 'OS', 'android');
+
+      for (const theme of [LightTheme, DarkTheme]) {
+        const { unmount } = await render(getVariantCard(variant, { theme }));
+
+        expect(getCardLayers({ neutral: true }).container).toHaveStyle({
+          backgroundColor: theme.colors[containerRole],
+        });
+        expectCardState(variant, {}, { theme, neutral: true });
 
         await unmount();
       }
     }
   );
 
-  it('renders the enabled outlined role in light and dark themes', async () => {
-    for (const isDark of [false, true] as const) {
-      const theme = isDark ? DarkTheme : LightTheme;
-      const { unmount } = await render(
-        <Card testID="card" variant="outlined" theme={theme} />
-      );
-
-      expectVisualSnapshot();
-
-      await unmount();
-    }
-  });
-
   it.each(['filled', 'elevated'] as const)(
     'does not render an outline for the %s variant',
     async (variant) => {
-      const card = getVariantCard(variant);
+      await render(getVariantCard(variant));
 
-      await render(card);
-
-      expectVisualSnapshot();
+      expect(getCardLayers({ neutral: true }).outline).toBeUndefined();
     }
   );
 
   it('uses filled as the default and resolves deeply merged custom colors', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
     await render(
       <Card
         testID="card"
@@ -98,7 +176,14 @@ describe('Card', () => {
       />
     );
 
-    expectVisualSnapshot();
+    const { surface, container, stateLayer, outline } = getCardLayers({
+      neutral: true,
+    });
+
+    expect(container).toHaveStyle({ backgroundColor: '#111111' });
+    expect(stateLayer).toHaveStyle({ backgroundColor: '#222222' });
+    expect(outline).toBeUndefined();
+    expect(surface).toHaveStyle({ elevation: 0 });
   });
 
   it('uses custom theme roles for elevated and outlined variants', async () => {
@@ -110,7 +195,9 @@ describe('Card', () => {
       />
     );
 
-    expectVisualSnapshot();
+    expect(getCardLayers({ neutral: true }).container).toHaveStyle({
+      backgroundColor: '#123456',
+    });
     await unmount();
 
     await render(
@@ -123,7 +210,10 @@ describe('Card', () => {
       />
     );
 
-    expectVisualSnapshot();
+    const { container, outline } = getCardLayers({ neutral: true });
+
+    expect(container).toHaveStyle({ backgroundColor: '#abcdef' });
+    expect(outline).toHaveStyle({ borderColor: '#654321' });
   });
 
   it('lets only elevated Cards customize their resting elevation', async () => {
@@ -131,34 +221,58 @@ describe('Card', () => {
 
     await render(<Card testID="card" variant="elevated" elevation={5} />);
 
-    expectVisualSnapshot();
+    expect(getCardLayers({ neutral: true }).surface).toHaveStyle({
+      elevation: androidElevationLevels[5],
+    });
   });
 
-  it.each(['filled', 'elevated', 'outlined'] as const)(
-    'renders the enabled %s elevation',
-    async (variant) => {
-      jest.replaceProperty(Platform, 'OS', 'android');
-      const card = getVariantCard(variant);
+  it.each<[CardVariant, number]>([
+    ['filled', 0],
+    ['elevated', 1],
+    ['outlined', 0],
+  ])('renders the enabled %s elevation at level %d', async (variant, level) => {
+    jest.replaceProperty(Platform, 'OS', 'android');
 
-      await render(card);
+    await render(getVariantCard(variant));
 
-      expectVisualSnapshot();
-    }
-  );
+    expect(getCardLayers({ neutral: true }).surface).toHaveStyle({
+      elevation: androidElevationLevels[level],
+    });
+  });
 
   it('applies the medium shape and asymmetric overrides across the shell', async () => {
-    await render(
-      <Card
-        testID="card"
-        variant="outlined"
-        borderTopLeftRadius={4}
-        borderTopRightRadius={8}
-        borderBottomRightRadius={16}
-        borderBottomLeftRadius={20}
-      />
-    );
+    const shape = {
+      borderTopLeftRadius: 4,
+      borderTopRightRadius: 8,
+      borderBottomRightRadius: 16,
+      borderBottomLeftRadius: 20,
+    };
+    const { unmount } = await render(<Card testID="card" variant="outlined" />);
 
-    expectVisualSnapshot();
+    const medium = getCardLayers({ neutral: true });
+
+    for (const layer of [
+      medium.surface,
+      medium.visual,
+      medium.container,
+      medium.stateLayer,
+      medium.outline,
+    ]) {
+      expect(layer).toHaveStyle({
+        borderRadius: LightTheme.shapes.corner.medium,
+      });
+    }
+    await unmount();
+
+    await render(<Card testID="card" variant="outlined" {...shape} />);
+
+    const { surface, visual, container, stateLayer, outline } = getCardLayers({
+      neutral: true,
+    });
+
+    for (const layer of [surface, visual, container, stateLayer, outline]) {
+      expect(layer).toHaveStyle(shape);
+    }
   });
 
   it('renders populated slots in deterministic order without rewriting nodes', async () => {
@@ -198,7 +312,7 @@ describe('Card', () => {
   it('renders omitted slots as a neutral filled grouping container', async () => {
     await render(<Card testID="card" />);
 
-    expectVisualSnapshot();
+    expectCardState('filled', {}, { neutral: true });
     expect(screen.getByTestId('card')).not.toHaveProp('focusable');
     expect(screen.queryByRole('button')).not.toBeOnTheScreen();
   });
@@ -326,7 +440,13 @@ describe('Card', () => {
     ]);
     // The shell only forwards accessibility semantics to the interaction
     // target, so the shell itself should carry none of them.
-    expectVisualSnapshot();
+    const shell = target.parent?.parent;
+
+    expect(shell).not.toHaveProp('role');
+    expect(shell).not.toHaveProp('accessibilityHint');
+    expect(shell).not.toHaveProp('accessibilityState');
+    expect(shell).not.toHaveProp('accessibilityValue');
+    expect(shell).not.toHaveProp('accessibilityActions');
 
     await fireEvent(target, 'accessibilityAction', accessibilityActionEvent);
     await fireEvent(target, 'accessibilityEscape');
@@ -353,12 +473,16 @@ describe('Card', () => {
     );
 
     const interaction = screen.getByTestId('product-card');
+    const [container, , stateLayer] = interaction.children.filter(
+      (child): child is Layer => typeof child !== 'string'
+    );
 
-    expect(interaction).toHaveStyle(shape);
-    // The clipped visual region and focus indicator are internal nodes with
-    // no public testID; the snapshot captures their shape, position, and the
-    // interaction node's place within the visual region.
-    expectVisualSnapshot();
+    // The interaction node is the clipped visual region, so the ripple
+    // stays inside the Card shape. The Surface around it draws the ring.
+    expect(interaction).toHaveStyle({ ...shape, overflow: 'hidden' });
+    expect(container).toHaveStyle(shape);
+    expect(stateLayer).toHaveStyle(shape);
+    expect(interaction.parent).toHaveStyle(shape);
     await unmount();
 
     // `ref` forwards to a Reanimated Animated.View, which the test renderer
@@ -384,236 +508,222 @@ describe('Card', () => {
   it.each(['filled', 'elevated', 'outlined'] as const)(
     'shows and clears the %s hover feedback',
     async (variant) => {
-      expect.hasAssertions();
       jest.replaceProperty(Platform, 'OS', 'android');
-      const card = getVariantCard(variant, { onPress: () => {} });
-      await render(card);
-
+      await render(getVariantCard(variant, { onPress: () => {} }));
       const target = screen.getByTestId('card');
 
       await fireEvent(target, 'hoverIn');
-      await act(() => {
-        jest.runOnlyPendingTimers();
-      });
+      await settle();
 
-      expectVisualSnapshot();
+      expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.08 });
+      expectCardState(variant, { hovered: true });
 
       await fireEvent(target, 'hoverOut');
+      await settle();
 
-      expectVisualSnapshot();
+      expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
+      expectCardState(variant);
     }
   );
 
   it.each(['filled', 'elevated', 'outlined'] as const)(
     'shows and clears the %s pressed feedback',
     async (variant) => {
-      expect.hasAssertions();
       jest.replaceProperty(Platform, 'OS', 'android');
-      const card = getVariantCard(variant, { onPress: () => {} });
-      await render(card);
-
+      await render(getVariantCard(variant, { onPress: () => {} }));
       const target = screen.getByTestId('card');
 
       await fireEvent(target, 'pressIn');
-      await act(() => {
-        jest.runOnlyPendingTimers();
-      });
+      await settle();
 
-      expectVisualSnapshot();
+      expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
+      expectCardState(variant, { pressed: true });
 
       await fireEvent(target, 'pressOut');
-      await act(() => {
-        jest.runOnlyPendingTimers();
-      });
+      await settle();
 
-      expectVisualSnapshot();
+      expectCardState(variant);
     }
   );
 
-  it.each(['filled', 'elevated', 'outlined'] as const)(
-    'renders the consumer-controlled %s dragged presentation',
-    async (variant) => {
+  it.each<[CardVariant, number]>([
+    ['filled', 3],
+    ['elevated', 4],
+    ['outlined', 3],
+  ])(
+    'renders the consumer-controlled %s dragged presentation at level %d',
+    async (variant, level) => {
       jest.replaceProperty(Platform, 'OS', 'android');
-      const theme = LightTheme;
-      const card = getVariantCard(variant, { dragged: true, theme });
 
-      await render(card);
+      await render(getVariantCard(variant, { dragged: true }));
 
-      expectVisualSnapshot();
+      const { surface, stateLayer } = getCardLayers({ neutral: true });
+
+      expect(surface).toHaveStyle({ elevation: androidElevationLevels[level] });
+      expect(stateLayer).toHaveStyle({ opacity: 0.16 });
+      expectCardState(variant, { dragged: true }, { neutral: true });
     }
   );
 
-  it.each(['filled', 'elevated', 'outlined'] as const)(
+  it.each(['filled', 'elevated'] as const)(
     'renders the Material disabled treatment for %s Cards',
     async (variant) => {
       jest.replaceProperty(Platform, 'OS', 'android');
-      const theme = LightTheme;
-      const card = getVariantCard(variant, {
-        disabled: true,
-        onPress: () => {},
-        theme,
-      });
+      await render(
+        getVariantCard(variant, { disabled: true, onPress: () => {} })
+      );
 
-      await render(card);
+      const { container, content } = getCardLayers();
 
-      expectVisualSnapshot();
+      expect(container).toHaveStyle({ opacity: 0.38 });
+      expect(content).toHaveStyle({ opacity: 0.38 });
+      expectCardState(variant, { disabled: true });
     }
   );
 
-  it('resolves disabled and dragged before pressed, focused, and hovered visuals', async () => {
-    expect.hasAssertions();
+  it('renders the Material disabled treatment for outlined Cards', async () => {
     jest.replaceProperty(Platform, 'OS', 'android');
-    const theme = LightTheme;
-    const { rerender } = await render(
-      <Card
-        testID="card"
-        variant="outlined"
-        dragged
-        onPress={() => {}}
-        theme={theme}
-      />
+    await render(
+      getVariantCard('outlined', { disabled: true, onPress: () => {} })
     );
+
+    const { container, content, outline } = getCardLayers();
+
+    expect(container).toHaveStyle({ opacity: 1 });
+    expect(outline).toHaveStyle({ opacity: 0.12 });
+    expect(content).toHaveStyle({ opacity: 0.38 });
+    expectCardState('outlined', { disabled: true });
+  });
+
+  it('resolves disabled and dragged before pressed, focused, and hovered visuals', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+    const props = {
+      variant: 'outlined' as const,
+      dragged: true,
+      onPress: () => {},
+    };
+    const { rerender } = await render(<Card testID="card" {...props} />);
     const target = screen.getByTestId('card');
 
     await fireEvent(target, 'hoverIn');
     await fireEvent(target, 'focus');
     await fireEvent(target, 'pressIn');
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.16 });
+    expectCardState('outlined', { dragged: true });
 
-    await rerender(
-      <Card
-        testID="card"
-        variant="outlined"
-        dragged
-        disabled
-        onPress={() => {}}
-        theme={theme}
-      />
-    );
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
+    await rerender(<Card testID="card" {...props} disabled />);
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().outline).toHaveStyle({ opacity: 0.12 });
+    expectCardState('outlined', { disabled: true });
   });
 
   it('updates the controlled dragged presentation in both directions', async () => {
-    expect.hasAssertions();
     jest.replaceProperty(Platform, 'OS', 'android');
-    const theme = LightTheme;
-    const props = {
-      variant: 'outlined' as const,
-      onPress: () => {},
-      theme,
-    };
+    const props = { variant: 'outlined' as const, onPress: () => {} };
     const { rerender } = await render(<Card testID="card" {...props} />);
 
     await rerender(<Card testID="card" {...props} dragged />);
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.16 });
+    expectCardState('outlined', { dragged: true });
 
     await rerender(<Card testID="card" {...props} dragged={false} />);
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
+    expectCardState('outlined');
   });
 
   it.each(['filled', 'elevated', 'outlined'] as const)(
     'renders keyboard focus feedback for the %s variant',
     async (variant) => {
-      expect.hasAssertions();
       jest.replaceProperty(Platform, 'OS', 'web');
-      const card = getVariantCard(variant, { onPress: () => {} });
-      await render(card);
+      await render(getVariantCard(variant, { onPress: () => {} }));
 
       await fireEvent(screen.getByTestId('card'), 'focus', {
         currentTarget: { matches: () => true },
       });
-      await act(() => {
-        jest.runOnlyPendingTimers();
-      });
+      await settle();
 
-      expectVisualSnapshot();
+      expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.1 });
+      expectCardState(variant, { focused: true });
+      // The ring itself is drawn by CSS on web when a direct child of the
+      // Surface has `:focus-visible`.
+      expect(getCardLayers().surface).toHaveProp('dataSet', {
+        focusRingWithin: 'outward',
+      });
+      expect(getCardLayers().surface).toHaveStyle(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+        {
+          ['--rnp-focus-ring-color']: LightTheme.colors.secondary,
+        } as unknown as ViewStyle
+      );
     }
   );
 
   it('shows focus feedback only for keyboard-visible focus and clears it on blur', async () => {
-    expect.hasAssertions();
     jest.replaceProperty(Platform, 'OS', 'web');
-    const theme = LightTheme;
-    await render(
-      <Card testID="card" variant="outlined" onPress={() => {}} theme={theme} />
-    );
+    await render(<Card testID="card" variant="outlined" onPress={() => {}} />);
     const target = screen.getByTestId('card');
-    const pointerTarget = { matches: () => false };
-    const keyboardTarget = { matches: () => true };
 
-    await fireEvent(target, 'focus', { currentTarget: pointerTarget });
-    await act(() => {
-      jest.runOnlyPendingTimers();
+    await fireEvent(target, 'focus', {
+      currentTarget: { matches: () => false },
     });
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
+    expectCardState('outlined');
 
-    await fireEvent(target, 'focus', { currentTarget: keyboardTarget });
-    await act(() => {
-      jest.runOnlyPendingTimers();
+    await fireEvent(target, 'focus', {
+      currentTarget: { matches: () => true },
     });
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.1 });
+    expectCardState('outlined', { focused: true });
 
     await fireEvent(target, 'blur');
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
+    expectCardState('outlined');
   });
 
   it('uses pressed, focused, then hovered precedence and settles at the latest state', async () => {
-    expect.hasAssertions();
-    const theme = LightTheme;
-    await render(
-      <Card testID="card" variant="outlined" onPress={() => {}} theme={theme} />
-    );
+    await render(<Card testID="card" variant="outlined" onPress={() => {}} />);
     const target = screen.getByTestId('card');
 
     await fireEvent(target, 'hoverIn');
     await fireEvent(target, 'focus');
     await fireEvent(target, 'pressIn');
-    await fireEvent(target, 'pressOut');
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
+    expectCardState('outlined', { pressed: true });
+
+    await fireEvent(target, 'pressOut');
+    await settle();
+
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.1 });
+    expectCardState('outlined', { focused: true });
 
     await fireEvent(target, 'blur');
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.08 });
+    expectCardState('outlined', { hovered: true });
 
     await fireEvent(target, 'hoverOut');
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
+    expectCardState('outlined');
   });
 
   it('uses scaled theme motion duration and easing for visual transitions', async () => {
-    expect.hasAssertions();
     const easing = [0.1, 0.2, 0.3, 0.4] as const;
     const theme = {
       animation: { scale: 0.5 },
@@ -622,23 +732,43 @@ describe('Card', () => {
         easing: { standard: easing },
       },
     };
+    const transition = {
+      transitionDuration: 160,
+      transitionTimingFunction: cubicBezier(...easing),
+    };
     const { rerender } = await render(
-      <Card testID="card" onPress={() => {}} theme={theme} />
+      <Card testID="card" variant="outlined" onPress={() => {}} theme={theme} />
     );
 
-    // The scaled duration and easing are set on the state layer and shell,
-    // both internal nodes with no public testID.
-    expectVisualSnapshot();
+    const expectTransitions = () => {
+      const { stateLayer, outline } = getCardLayers();
+
+      expect(getAnimatedStyle(stateLayer)).toMatchObject({
+        ...transition,
+        transitionProperty: 'opacity',
+      });
+      expect(getAnimatedStyle(outline)).toMatchObject({
+        ...transition,
+        transitionProperty: ['borderColor', 'opacity'],
+      });
+    };
+
+    expectTransitions();
 
     await rerender(
-      <Card testID="card" disabled onPress={() => {}} theme={theme} />
+      <Card
+        testID="card"
+        variant="outlined"
+        disabled
+        onPress={() => {}}
+        theme={theme}
+      />
     );
 
-    expectVisualSnapshot();
+    expectTransitions();
   });
 
   it('settles transitions immediately when reduced motion is enabled', async () => {
-    expect.hasAssertions();
     await render(
       <ReduceMotionContext.Provider value>
         <Card testID="card" variant="outlined" onPress={() => {}} />
@@ -646,22 +776,18 @@ describe('Card', () => {
     );
 
     await fireEvent(screen.getByTestId('card'), 'pressIn');
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
+    await settle();
 
-    expectVisualSnapshot();
+    const { stateLayer, outline } = getCardLayers();
+
+    for (const layer of [stateLayer, outline]) {
+      expect(getAnimatedStyle(layer)).toMatchObject({ transitionDuration: 0 });
+    }
   });
 
   it('settles rapid changes at the latest complete visual state', async () => {
-    expect.hasAssertions();
     jest.replaceProperty(Platform, 'OS', 'android');
-    const theme = LightTheme;
-    const props = {
-      variant: 'outlined' as const,
-      onPress: () => {},
-      theme,
-    };
+    const props = { variant: 'outlined' as const, onPress: () => {} };
     const { rerender } = await render(<Card testID="card" {...props} />);
     const target = screen.getByTestId('card');
 
@@ -674,11 +800,10 @@ describe('Card', () => {
     await fireEvent(target, 'blur');
     await fireEvent(target, 'hoverOut');
     await fireEvent(target, 'hoverIn');
-    await act(() => {
-      jest.runOnlyPendingTimers();
-    });
+    await settle();
 
-    expectVisualSnapshot();
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.08 });
+    expectCardState('outlined', { hovered: true });
   });
 
   it('does not rerender stable memoized slot content for transient feedback', async () => {
@@ -1110,8 +1235,15 @@ describe('CardCover', () => {
       />
     );
 
-    // The clipped visual region is an internal node with no public testID.
-    expectVisualSnapshot();
+    // The Card clips its media: the visual node around the slots carries
+    // the shape and hides the overflow, so the cover needs no radius.
+    expect(screen.getByTestId('edge-cover').parent?.parent).toHaveStyle({
+      overflow: 'hidden',
+      borderTopLeftRadius: 4,
+      borderTopRightRadius: 8,
+      borderBottomRightRadius: 16,
+      borderBottomLeftRadius: 20,
+    });
     expect(screen.getByTestId('edge-cover')).not.toHaveStyle({
       borderRadius: LightTheme.shapes.corner.medium,
     });
