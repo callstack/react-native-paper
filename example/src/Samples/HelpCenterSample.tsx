@@ -5,7 +5,6 @@ import {
   Icon,
   List,
   Modal,
-  Portal,
   Text,
   TouchableRipple,
   useTheme,
@@ -17,7 +16,7 @@ import ScreenWrapper from '../ScreenWrapper';
 export const HelpCenterSampleConfig: SampleConfig = {
   title: 'Help center',
   icon: 'help-circle-outline',
-  components: ['Icon', 'List', 'Modal', 'Portal', 'Text', 'TouchableRipple'],
+  components: ['Icon', 'List', 'Modal', 'Text', 'TouchableRipple'],
 };
 
 const TOPICS = [
@@ -73,23 +72,21 @@ const HelpCenterSample = () => {
         </TouchableRipple>
       </ScreenWrapper>
 
-      <Portal>
-        <Modal
-          visible={contactVisible}
-          onDismiss={() => setContactVisible(false)}
-          aria-label="Contact support"
-          dismissAccessibilityLabel="Close contact support"
-          contentBorderRadius={28}
-          contentBackgroundColor={colors.surface}
-          contentContainerStyle={styles.modal}
-        >
-          <Text variant="titleMedium">Contact support</Text>
-          <Text variant="bodyMedium">
-            Write to support@example.com and we will get back to you within one
-            business day.
-          </Text>
-        </Modal>
-      </Portal>
+      <Modal
+        visible={contactVisible}
+        onDismiss={() => setContactVisible(false)}
+        aria-label="Contact support"
+        dismissAccessibilityLabel="Close contact support"
+        contentBorderRadius={28}
+        contentBackgroundColor={colors.surface}
+        contentContainerStyle={styles.modal}
+      >
+        <Text variant="titleMedium">Contact support</Text>
+        <Text variant="bodyMedium">
+          Write to support@example.com and we will get back to you within one
+          business day.
+        </Text>
+      </Modal>
     </>
   );
 };

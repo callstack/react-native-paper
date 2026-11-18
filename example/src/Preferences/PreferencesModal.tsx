@@ -12,7 +12,6 @@ import {
   Button,
   Dialog,
   Modal,
-  Portal,
   Switch,
   Text,
   useTheme,
@@ -62,91 +61,89 @@ export default function PreferencesModal() {
 
   return (
     <>
-      <Portal>
-        <Modal
-          visible={preferencesVisible}
-          onDismiss={togglePreferences}
-          aria-label="Preferences"
-          dismissAccessibilityLabel="Close preferences"
-          contentBorderRadius={28}
-          contentBackgroundColor={theme.colors.elevation.level2}
-          contentContainerStyle={styles.modalContent}
+      <Modal
+        visible={preferencesVisible}
+        onDismiss={togglePreferences}
+        aria-label="Preferences"
+        dismissAccessibilityLabel="Close preferences"
+        contentBorderRadius={28}
+        contentBackgroundColor={theme.colors.elevation.level2}
+        contentContainerStyle={styles.modalContent}
+      >
+        <ScrollView
+          style={[styles.scrollView, { maxHeight: windowHeight * 0.7 }]}
+          contentContainerStyle={styles.scrollViewContent}
+          showsVerticalScrollIndicator={false}
+          alwaysBounceVertical={false}
         >
-          <ScrollView
-            style={[styles.scrollView, { maxHeight: windowHeight * 0.7 }]}
-            contentContainerStyle={styles.scrollViewContent}
-            showsVerticalScrollIndicator={false}
-            alwaysBounceVertical={false}
+          {dynamicThemeSupported ? (
+            <View style={styles.preference}>
+              <Text variant="labelLarge">Use Dynamic Theme</Text>
+              <Switch
+                value={shouldUseDynamicTheme}
+                onValueChange={toggleShouldUseDynamicTheme}
+                aria-label="Use dynamic theme"
+              />
+            </View>
+          ) : null}
+          <View style={styles.preference}>
+            <Text variant="labelLarge">Dark Theme</Text>
+            <Switch
+              value={isDarkTheme}
+              onValueChange={toggleTheme}
+              aria-label="Dark theme"
+            />
+          </View>
+
+          <View style={styles.preference}>
+            <Text variant="labelLarge">RTL</Text>
+            <Switch
+              value={rtl}
+              onValueChange={_handleToggleRTL}
+              aria-label="Right-to-left layout"
+            />
+          </View>
+
+          <View style={styles.preference}>
+            <Text variant="labelLarge">Custom font *</Text>
+            <Switch
+              value={customFontLoaded}
+              onValueChange={toggleCustomFont}
+              aria-label="Custom font"
+            />
+          </View>
+
+          <View style={styles.preference}>
+            <Text variant="labelLarge">{rippleEffectLabel} *</Text>
+            <Switch
+              value={rippleEffectEnabled}
+              onValueChange={toggleRippleEffect}
+              aria-label={rippleEffectLabel}
+            />
+          </View>
+
+          <Button
+            mode="tonal"
+            onPress={resetPreferences}
+            aria-label="Reset all preferences"
+            style={styles.resetButton}
           >
-            {dynamicThemeSupported ? (
-              <View style={styles.preference}>
-                <Text variant="labelLarge">Use Dynamic Theme</Text>
-                <Switch
-                  value={shouldUseDynamicTheme}
-                  onValueChange={toggleShouldUseDynamicTheme}
-                  aria-label="Use dynamic theme"
-                />
-              </View>
-            ) : null}
-            <View style={styles.preference}>
-              <Text variant="labelLarge">Dark Theme</Text>
-              <Switch
-                value={isDarkTheme}
-                onValueChange={toggleTheme}
-                aria-label="Dark theme"
-              />
-            </View>
+            Reset
+          </Button>
 
-            <View style={styles.preference}>
-              <Text variant="labelLarge">RTL</Text>
-              <Switch
-                value={rtl}
-                onValueChange={_handleToggleRTL}
-                aria-label="Right-to-left layout"
-              />
-            </View>
-
-            <View style={styles.preference}>
-              <Text variant="labelLarge">Custom font *</Text>
-              <Switch
-                value={customFontLoaded}
-                onValueChange={toggleCustomFont}
-                aria-label="Custom font"
-              />
-            </View>
-
-            <View style={styles.preference}>
-              <Text variant="labelLarge">{rippleEffectLabel} *</Text>
-              <Switch
-                value={rippleEffectEnabled}
-                onValueChange={toggleRippleEffect}
-                aria-label={rippleEffectLabel}
-              />
-            </View>
-
-            <Button
-              mode="tonal"
-              onPress={resetPreferences}
-              aria-label="Reset all preferences"
-              style={styles.resetButton}
-            >
-              Reset
-            </Button>
-
-            <Text
-              variant="bodySmall"
-              style={styles.annotation}
-              aria-label="Preferences marked with an asterisk are optional example toggles"
-            >
-              * - optional example toggles
-            </Text>
-            <Text variant="bodySmall" style={styles.annotation}>
-              React Native Paper Version{' '}
-              {require('react-native-paper/package.json').version}
-            </Text>
-          </ScrollView>
-        </Modal>
-      </Portal>
+          <Text
+            variant="bodySmall"
+            style={styles.annotation}
+            aria-label="Preferences marked with an asterisk are optional example toggles"
+          >
+            * - optional example toggles
+          </Text>
+          <Text variant="bodySmall" style={styles.annotation}>
+            React Native Paper Version{' '}
+            {require('react-native-paper/package.json').version}
+          </Text>
+        </ScrollView>
+      </Modal>
       <Dialog
         visible={showRTLDialog}
         onDismiss={_handleDismissRTLDialog}
