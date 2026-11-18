@@ -5,7 +5,6 @@ import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 import Animated, {
   cubicBezier,
   isSharedValue,
-  type SharedValue,
   type AnimatedStyle,
   type CSSTransitionTimingFunction,
   useAnimatedStyle,
@@ -132,9 +131,8 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
      *
      * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
      * It's no longer supported with theme version 3 and you should use `elevation` property instead.
-     * A Reanimated shared value can drive elevation without a React render.
      */
-    elevation?: Elevation | SharedValue<Elevation>;
+    elevation?: Elevation;
     /**
      * @supported Available in v5.x with theme version 3
      * Mode of the Surface.
@@ -156,12 +154,6 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
     testID?: string;
     ref?: React.Ref<React.ComponentRef<typeof View>>;
   };
-
-type StaticSurfaceProps = Omit<Props, 'elevation'> & {
-  elevation?: Elevation;
-  animatedSurfaceStyle?: AnimatedStyle<ViewStyle>;
-  animatedAmbientStyle?: AnimatedStyle<ViewStyle>;
-};
 
 /**
  * Surface is a basic container that can give depth to an element with elevation shadow.
@@ -194,7 +186,7 @@ type StaticSurfaceProps = Omit<Props, 'elevation'> & {
  * });
  * ```
  */
-const StaticSurface = ({
+const Surface = ({
   elevation = 1,
   children,
   theme: overriddenTheme,
@@ -219,11 +211,9 @@ const StaticSurface = ({
   transitionDuration: customTransitionDuration,
   shapeTransitionDuration,
   shapeTransitionTimingFunction,
-  animatedSurfaceStyle,
-  animatedAmbientStyle,
   ref,
   ...rest
-}: StaticSurfaceProps) => {
+}: Props) => {
   const theme = useInternalTheme(overriddenTheme);
   const reduceMotion = useReduceMotion();
 
@@ -326,7 +316,6 @@ const StaticSurface = ({
           visualStyle,
           ...radiusStyles,
           isElevated ? elevationShadow : null,
-          ...(animatedSurfaceStyle ? [animatedSurfaceStyle] : []),
         ]}
       >
         {children}
@@ -354,7 +343,6 @@ const StaticSurface = ({
           visualStyle,
           ...radiusStyles,
           isElevated && { elevation: elevationAndroid },
-          ...(animatedSurfaceStyle ? [animatedSurfaceStyle] : []),
         ]}
       >
         {children}
@@ -382,7 +370,6 @@ const StaticSurface = ({
         visualStyle,
         ...radiusStyles,
         isElevated && spotShadow,
-        ...(animatedSurfaceStyle ? [animatedSurfaceStyle] : []),
       ]}
       testID={testID}
     >
@@ -397,77 +384,11 @@ const StaticSurface = ({
             shadowVisualStyle,
             ...radiusStyles,
             ambientShadow,
-            ...(animatedAmbientStyle ? [animatedAmbientStyle] : []),
           ]}
         />
       ) : null}
       {children}
     </Animated.View>
-  );
-};
-
-const AnimatedElevationSurface = ({
-  elevation,
-  theme: themeOverrides,
-  backgroundColor: customBackgroundColor,
-  mode = 'elevated',
-  ...rest
-}: Props & { elevation: SharedValue<Elevation> }) => {
-  const theme = useInternalTheme(themeOverrides);
-  const elevationShadows = React.useMemo(
-    () =>
-      ([0, 1, 2, 3, 4, 5] as const).map((level) =>
-        shadow(level, theme.colors.shadow)
-      ),
-    [theme.colors.shadow]
-  );
-  const animatedSurfaceStyle = useAnimatedStyle<ViewStyle>(() => {
-    const level = elevation.value;
-    const backgroundStyle =
-      customBackgroundColor == null
-        ? { backgroundColor: theme.colors.elevation?.[`level${level}`] }
-        : {};
-
-    if (mode === 'flat') {
-      return backgroundStyle;
-    }
-    if (Platform.OS === 'android') {
-      return {
-        ...backgroundStyle,
-        elevation: androidElevationLevels[level],
-      };
-    }
-
-    return { ...backgroundStyle, ...elevationShadows[level][0] };
-  }, [customBackgroundColor, elevation, elevationShadows, mode, theme.colors]);
-  const animatedAmbientStyle = useAnimatedStyle<ViewStyle>(() => {
-    if (mode === 'flat') {
-      return {};
-    }
-
-    return elevationShadows[elevation.value][1] ?? {};
-  }, [elevation, elevationShadows, mode]);
-
-  return (
-    <StaticSurface
-      {...rest}
-      backgroundColor={customBackgroundColor}
-      elevation={0}
-      mode={mode}
-      theme={theme}
-      animatedSurfaceStyle={animatedSurfaceStyle}
-      animatedAmbientStyle={animatedAmbientStyle}
-    />
-  );
-};
-
-const Surface = (props: Props) => {
-  const elevation = props.elevation ?? 1;
-
-  return isSharedValue<Elevation>(elevation) ? (
-    <AnimatedElevationSurface {...props} elevation={elevation} />
-  ) : (
-    <StaticSurface {...props} elevation={elevation} />
   );
 };
 

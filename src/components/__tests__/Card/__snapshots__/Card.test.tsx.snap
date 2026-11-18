@@ -36,15 +36,6 @@ exports[`Card applies the medium shape and asymmetric overrides across the shell
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -82,15 +73,6 @@ exports[`Card applies the medium shape and asymmetric overrides across the shell
           "borderTopLeftRadius": 4,
           "borderTopRightRadius": 8,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -173,11 +155,9 @@ exports[`Card applies the medium shape and asymmetric overrides across the shell
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -214,13 +194,11 @@ exports[`Card applies the medium shape and asymmetric overrides across the shell
             "borderTopRightRadius": 8,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -254,15 +232,6 @@ exports[`Card does not render an outline for the elevated variant 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
@@ -310,15 +279,6 @@ exports[`Card does not render an outline for the elevated variant 1`] = `
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -389,11 +349,9 @@ exports[`Card does not render an outline for the elevated variant 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -449,15 +407,6 @@ exports[`Card does not render an outline for the filled variant 1`] = `
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -495,15 +444,6 @@ exports[`Card does not render an outline for the filled variant 1`] = `
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -574,11 +514,9 @@ exports[`Card does not render an outline for the filled variant 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -634,15 +572,6 @@ exports[`Card keeps the ripple, visual layers, and focus indicator on the Card s
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -680,15 +609,6 @@ exports[`Card keeps the ripple, visual layers, and focus indicator on the Card s
           "borderTopLeftRadius": 4,
           "borderTopRightRadius": 8,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -805,11 +725,9 @@ exports[`Card keeps the ripple, visual layers, and focus indicator on the Card s
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -854,9 +772,6 @@ exports[`Card lets only elevated Cards customize their resting elevation 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 12,
@@ -921,11 +836,9 @@ exports[`Card lets only elevated Cards customize their resting elevation 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -982,9 +895,6 @@ exports[`Card renders keyboard focus feedback for the elevated variant 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
       },
       {
         "boxShadow": "0px 0.55px 1.57px rgba(0, 0, 0, 0.19), 0px 0px 0.5px rgba(0, 0, 0, 0.039)",
@@ -1085,11 +995,9 @@ exports[`Card renders keyboard focus feedback for the elevated variant 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -1149,9 +1057,6 @@ exports[`Card renders keyboard focus feedback for the filled variant 1`] = `
       {
         "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
       },
-      {
-        "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
-      },
     ]
   }
 >
@@ -1248,11 +1153,9 @@ exports[`Card renders keyboard focus feedback for the filled variant 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -1312,9 +1215,6 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
       {
         "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
       },
-      {
-        "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
-      },
     ]
   }
 >
@@ -1411,11 +1311,9 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -1447,13 +1345,11 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
             "borderRadius": 12,
           },
           {
+            "borderColor": "rgba(29, 27, 32, 1)",
             "borderWidth": 1,
-          },
-          {},
-          {
-            "borderColor": "rgba(202, 196, 208, 1)",
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -1487,15 +1383,6 @@ exports[`Card renders omitted slots as a neutral filled grouping container 1`] =
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
@@ -1543,15 +1430,6 @@ exports[`Card renders omitted slots as a neutral filled grouping container 1`] =
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -1622,11 +1500,9 @@ exports[`Card renders omitted slots as a neutral filled grouping container 1`] =
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -1672,9 +1548,6 @@ exports[`Card renders the Material disabled treatment for elevated Cards 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 1,
@@ -1772,11 +1645,9 @@ exports[`Card renders the Material disabled treatment for elevated Cards 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -1821,9 +1692,6 @@ exports[`Card renders the Material disabled treatment for filled Cards 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 0,
@@ -1921,11 +1789,9 @@ exports[`Card renders the Material disabled treatment for filled Cards 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -1970,9 +1836,6 @@ exports[`Card renders the Material disabled treatment for outlined Cards 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 0,
@@ -2072,11 +1935,9 @@ exports[`Card renders the Material disabled treatment for outlined Cards 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -2108,13 +1969,11 @@ exports[`Card renders the Material disabled treatment for outlined Cards 1`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(121, 116, 126, 1)",
+            "borderWidth": 1,
             "opacity": 0.12,
           },
+          {},
         ]
       }
     />
@@ -2148,9 +2007,6 @@ exports[`Card renders the consumer-controlled elevated dragged presentation 1`] 
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 8,
@@ -2215,11 +2071,9 @@ exports[`Card renders the consumer-controlled elevated dragged presentation 1`] 
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0.16,
           },
+          {},
         ]
       }
     />
@@ -2265,9 +2119,6 @@ exports[`Card renders the consumer-controlled filled dragged presentation 1`] = 
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 6,
@@ -2332,11 +2183,9 @@ exports[`Card renders the consumer-controlled filled dragged presentation 1`] = 
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0.16,
           },
+          {},
         ]
       }
     />
@@ -2382,9 +2231,6 @@ exports[`Card renders the consumer-controlled outlined dragged presentation 1`] 
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 6,
@@ -2449,11 +2295,9 @@ exports[`Card renders the consumer-controlled outlined dragged presentation 1`] 
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0.16,
           },
+          {},
         ]
       }
     />
@@ -2486,13 +2330,11 @@ exports[`Card renders the consumer-controlled outlined dragged presentation 1`] 
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -2526,15 +2368,6 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 1
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
@@ -2582,15 +2415,6 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 1
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -2661,11 +2485,9 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 1
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -2715,15 +2537,6 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 2
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
           "height": 0.55,
           "width": 0,
         },
@@ -2767,15 +2580,6 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 2
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -2846,11 +2650,9 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 2
           },
           {
             "backgroundColor": "rgba(230, 224, 233, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -2896,9 +2698,6 @@ exports[`Card renders the enabled elevated elevation 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 1,
@@ -2963,11 +2762,9 @@ exports[`Card renders the enabled elevated elevation 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -3023,15 +2820,6 @@ exports[`Card renders the enabled filled appearance in light and dark themes 1`]
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -3069,15 +2857,6 @@ exports[`Card renders the enabled filled appearance in light and dark themes 1`]
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -3148,11 +2927,9 @@ exports[`Card renders the enabled filled appearance in light and dark themes 1`]
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -3208,15 +2985,6 @@ exports[`Card renders the enabled filled appearance in light and dark themes 2`]
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -3254,15 +3022,6 @@ exports[`Card renders the enabled filled appearance in light and dark themes 2`]
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -3333,11 +3092,9 @@ exports[`Card renders the enabled filled appearance in light and dark themes 2`]
           },
           {
             "backgroundColor": "rgba(230, 224, 233, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -3383,9 +3140,6 @@ exports[`Card renders the enabled filled elevation 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 0,
@@ -3450,11 +3204,9 @@ exports[`Card renders the enabled filled elevation 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -3510,15 +3262,6 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 1
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -3556,15 +3299,6 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 1
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -3635,11 +3369,9 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 1
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -3672,13 +3404,11 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 1
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -3722,15 +3452,6 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 2
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -3768,15 +3489,6 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 2
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -3847,11 +3559,9 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 2
           },
           {
             "backgroundColor": "rgba(230, 224, 233, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -3884,13 +3594,11 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 2
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(73, 69, 79, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -3924,9 +3632,6 @@ exports[`Card renders the enabled outlined elevation 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 0,
@@ -3991,11 +3696,9 @@ exports[`Card renders the enabled outlined elevation 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -4028,13 +3731,11 @@ exports[`Card renders the enabled outlined elevation 1`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -4078,15 +3779,6 @@ exports[`Card renders the enabled outlined role in light and dark themes 1`] = `
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -4124,15 +3816,6 @@ exports[`Card renders the enabled outlined role in light and dark themes 1`] = `
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -4203,11 +3886,9 @@ exports[`Card renders the enabled outlined role in light and dark themes 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -4240,13 +3921,11 @@ exports[`Card renders the enabled outlined role in light and dark themes 1`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -4280,15 +3959,6 @@ exports[`Card renders the enabled outlined role in light and dark themes 2`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
@@ -4336,15 +4006,6 @@ exports[`Card renders the enabled outlined role in light and dark themes 2`] = `
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -4415,11 +4076,9 @@ exports[`Card renders the enabled outlined role in light and dark themes 2`] = `
           },
           {
             "backgroundColor": "rgba(230, 224, 233, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -4452,13 +4111,11 @@ exports[`Card renders the enabled outlined role in light and dark themes 2`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(73, 69, 79, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -4498,9 +4155,6 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "elevation": 0,
       },
       {
         "elevation": 6,
@@ -4599,11 +4253,9 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0.16,
           },
+          {},
         ]
       }
     />
@@ -4635,13 +4287,11 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -4678,9 +4328,6 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
       },
       {
         "elevation": 0,
-      },
-      {
-        "elevation": 6,
       },
     ]
   }
@@ -4777,11 +4424,9 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0,
           },
           {},
-          {
-            "opacity": 0.16,
-          },
         ]
       }
     />
@@ -4813,13 +4458,11 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
             "borderRadius": 12,
           },
           {
+            "borderColor": "rgba(121, 116, 126, 1)",
             "borderWidth": 1,
+            "opacity": 0.12,
           },
           {},
-          {
-            "borderColor": "rgba(202, 196, 208, 1)",
-            "opacity": 1,
-          },
         ]
       }
     />
@@ -4853,15 +4496,6 @@ exports[`Card routes whole-Card accessibility semantics and callbacks to its tar
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
@@ -4909,15 +4543,6 @@ exports[`Card routes whole-Card accessibility semantics and callbacks to its tar
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -5036,11 +4661,9 @@ exports[`Card routes whole-Card accessibility semantics and callbacks to its tar
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -5087,10 +4710,7 @@ exports[`Card settles rapid changes at the latest complete visual state 1`] = `
         "borderTopStartRadius": undefined,
       },
       {
-        "elevation": 0,
-      },
-      {
-        "elevation": 0,
+        "elevation": 1,
       },
     ]
   }
@@ -5186,11 +4806,9 @@ exports[`Card settles rapid changes at the latest complete visual state 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.08,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -5222,13 +4840,11 @@ exports[`Card settles rapid changes at the latest complete visual state 1`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -5262,15 +4878,6 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
@@ -5318,15 +4925,6 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -5431,11 +5029,9 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -5467,13 +5063,11 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -5509,10 +5103,7 @@ exports[`Card shows and clears the elevated hover feedback 1`] = `
         "borderTopStartRadius": undefined,
       },
       {
-        "elevation": 0,
-      },
-      {
-        "elevation": 1,
+        "elevation": 3,
       },
     ]
   }
@@ -5608,11 +5199,9 @@ exports[`Card shows and clears the elevated hover feedback 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.08,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -5659,9 +5248,6 @@ exports[`Card shows and clears the elevated hover feedback 2`] = `
         "borderTopStartRadius": undefined,
       },
       {
-        "elevation": 0,
-      },
-      {
         "elevation": 1,
       },
     ]
@@ -5758,11 +5344,9 @@ exports[`Card shows and clears the elevated hover feedback 2`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -5809,9 +5393,6 @@ exports[`Card shows and clears the elevated pressed feedback 1`] = `
         "borderTopStartRadius": undefined,
       },
       {
-        "elevation": 0,
-      },
-      {
         "elevation": 1,
       },
     ]
@@ -5908,11 +5489,9 @@ exports[`Card shows and clears the elevated pressed feedback 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -5959,9 +5538,6 @@ exports[`Card shows and clears the elevated pressed feedback 2`] = `
         "borderTopStartRadius": undefined,
       },
       {
-        "elevation": 0,
-      },
-      {
         "elevation": 1,
       },
     ]
@@ -6058,11 +5634,9 @@ exports[`Card shows and clears the elevated pressed feedback 2`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -6109,10 +5683,7 @@ exports[`Card shows and clears the filled hover feedback 1`] = `
         "borderTopStartRadius": undefined,
       },
       {
-        "elevation": 0,
-      },
-      {
-        "elevation": 0,
+        "elevation": 1,
       },
     ]
   }
@@ -6208,11 +5779,9 @@ exports[`Card shows and clears the filled hover feedback 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.08,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -6261,9 +5830,6 @@ exports[`Card shows and clears the filled hover feedback 2`] = `
       {
         "elevation": 0,
       },
-      {
-        "elevation": 0,
-      },
     ]
   }
 >
@@ -6358,11 +5924,9 @@ exports[`Card shows and clears the filled hover feedback 2`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -6411,9 +5975,6 @@ exports[`Card shows and clears the filled pressed feedback 1`] = `
       {
         "elevation": 0,
       },
-      {
-        "elevation": 0,
-      },
     ]
   }
 >
@@ -6508,11 +6069,9 @@ exports[`Card shows and clears the filled pressed feedback 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -6561,9 +6120,6 @@ exports[`Card shows and clears the filled pressed feedback 2`] = `
       {
         "elevation": 0,
       },
-      {
-        "elevation": 0,
-      },
     ]
   }
 >
@@ -6658,11 +6214,9 @@ exports[`Card shows and clears the filled pressed feedback 2`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -6709,10 +6263,7 @@ exports[`Card shows and clears the outlined hover feedback 1`] = `
         "borderTopStartRadius": undefined,
       },
       {
-        "elevation": 0,
-      },
-      {
-        "elevation": 0,
+        "elevation": 1,
       },
     ]
   }
@@ -6808,11 +6359,9 @@ exports[`Card shows and clears the outlined hover feedback 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.08,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -6844,13 +6393,11 @@ exports[`Card shows and clears the outlined hover feedback 1`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -6888,9 +6435,6 @@ exports[`Card shows and clears the outlined hover feedback 2`] = `
       {
         "elevation": 0,
       },
-      {
-        "elevation": 0,
-      },
     ]
   }
 >
@@ -6985,11 +6529,9 @@ exports[`Card shows and clears the outlined hover feedback 2`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -7021,13 +6563,11 @@ exports[`Card shows and clears the outlined hover feedback 2`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -7065,9 +6605,6 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
       {
         "elevation": 0,
       },
-      {
-        "elevation": 0,
-      },
     ]
   }
 >
@@ -7162,11 +6699,9 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -7198,13 +6733,11 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -7242,9 +6775,6 @@ exports[`Card shows and clears the outlined pressed feedback 2`] = `
       {
         "elevation": 0,
       },
-      {
-        "elevation": 0,
-      },
     ]
   }
 >
@@ -7339,11 +6869,9 @@ exports[`Card shows and clears the outlined pressed feedback 2`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -7375,13 +6903,11 @@ exports[`Card shows and clears the outlined pressed feedback 2`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -7430,9 +6956,6 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       {
         "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
       },
-      {
-        "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
-      },
     ]
   }
 >
@@ -7529,11 +7052,9 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -7565,13 +7086,11 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -7620,9 +7139,6 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       {
         "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
       },
-      {
-        "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
-      },
     ]
   }
 >
@@ -7719,11 +7235,9 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -7755,13 +7269,11 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
             "borderRadius": 12,
           },
           {
+            "borderColor": "rgba(29, 27, 32, 1)",
             "borderWidth": 1,
-          },
-          {},
-          {
-            "borderColor": "rgba(202, 196, 208, 1)",
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -7810,9 +7322,6 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       {
         "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
       },
-      {
-        "boxShadow": "0px 0px 0px rgba(0, 0, 0, 0.19), 0px 0px 0px rgba(0, 0, 0, 0.039)",
-      },
     ]
   }
 >
@@ -7909,11 +7418,9 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -7945,13 +7452,11 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -7987,10 +7492,7 @@ exports[`Card updates the controlled dragged presentation in both directions 1`]
         "borderTopStartRadius": undefined,
       },
       {
-        "elevation": 0,
-      },
-      {
-        "elevation": 0,
+        "elevation": 6,
       },
     ]
   }
@@ -8086,11 +7588,9 @@ exports[`Card updates the controlled dragged presentation in both directions 1`]
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.16,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -8122,13 +7622,11 @@ exports[`Card updates the controlled dragged presentation in both directions 1`]
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -8166,9 +7664,6 @@ exports[`Card updates the controlled dragged presentation in both directions 2`]
       {
         "elevation": 0,
       },
-      {
-        "elevation": 0,
-      },
     ]
   }
 >
@@ -8263,11 +7758,9 @@ exports[`Card updates the controlled dragged presentation in both directions 2`]
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -8299,13 +7792,11 @@ exports[`Card updates the controlled dragged presentation in both directions 2`]
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -8339,15 +7830,6 @@ exports[`Card uses custom theme roles for elevated and outlined variants 1`] = `
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
@@ -8395,15 +7877,6 @@ exports[`Card uses custom theme roles for elevated and outlined variants 1`] = `
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -8474,11 +7947,9 @@ exports[`Card uses custom theme roles for elevated and outlined variants 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -8534,15 +8005,6 @@ exports[`Card uses custom theme roles for elevated and outlined variants 2`] = `
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -8580,15 +8042,6 @@ exports[`Card uses custom theme roles for elevated and outlined variants 2`] = `
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -8659,11 +8112,9 @@ exports[`Card uses custom theme roles for elevated and outlined variants 2`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -8696,13 +8147,11 @@ exports[`Card uses custom theme roles for elevated and outlined variants 2`] = `
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "#654321",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -8736,15 +8185,6 @@ exports[`Card uses filled as the default and resolves deeply merged custom color
         "borderTopLeftRadius": undefined,
         "borderTopRightRadius": undefined,
         "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
       },
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
@@ -8792,15 +8232,6 @@ exports[`Card uses filled as the default and resolves deeply merged custom color
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -8871,11 +8302,9 @@ exports[`Card uses filled as the default and resolves deeply merged custom color
           },
           {
             "backgroundColor": "#222222",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -8937,15 +8366,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -8983,15 +8403,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -9096,11 +8507,9 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -9132,13 +8541,11 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
             "borderRadius": 12,
           },
           {
+            "borderColor": "rgba(29, 27, 32, 1)",
             "borderWidth": 1,
-          },
-          {},
-          {
-            "borderColor": "rgba(202, 196, 208, 1)",
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -9176,20 +8583,11 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 0,
+          "height": 0.55,
           "width": 0,
         },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 0.79,
       },
     ]
   }
@@ -9235,17 +8633,8 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
             "height": 0,
             "width": 0,
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
+          "shadowOpacity": 0.039,
+          "shadowRadius": 0.25,
         },
       ]
     }
@@ -9341,11 +8730,9 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.08,
           },
           {},
-          {
-            "opacity": 0,
-          },
         ]
       }
     />
@@ -9377,13 +8764,11 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -9427,15 +8812,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -9473,15 +8849,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -9586,11 +8953,9 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -9622,13 +8987,11 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
             "borderRadius": 12,
           },
           {
-            "borderWidth": 1,
-          },
-          {},
-          {
             "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
             "opacity": 1,
           },
+          {},
         ]
       }
     />
@@ -9672,15 +9035,6 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -9718,15 +9072,6 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -9831,11 +9176,9 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -9890,15 +9233,6 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -9936,15 +9270,6 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
           "borderTopLeftRadius": undefined,
           "borderTopRightRadius": undefined,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -10048,11 +9373,9 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
@@ -10107,15 +9430,6 @@ exports[`CardCover uses the Card clipping shape for edge media without double ro
         "shadowOpacity": 0,
         "shadowRadius": 0,
       },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      },
     ]
   }
 >
@@ -10153,15 +9467,6 @@ exports[`CardCover uses the Card clipping shape for edge media without double ro
           "borderTopLeftRadius": 4,
           "borderTopRightRadius": 8,
           "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
         },
         {
           "shadowColor": "rgba(0, 0, 0, 1)",
@@ -10244,11 +9549,9 @@ exports[`CardCover uses the Card clipping shape for edge media without double ro
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-          },
-          {},
-          {
             "opacity": 0,
           },
+          {},
         ]
       }
     />
