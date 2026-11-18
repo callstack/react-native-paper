@@ -322,8 +322,6 @@ const Menu = ({
       return;
     }
 
-    // Start the next open from zero, as the first one does. Left at the
-    // measured size, a reopen with the same size would skip the scale animation.
     scaleX.value = 0;
     scaleY.value = 0;
     setMenuLayout({ width: 0, height: 0 });
