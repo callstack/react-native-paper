@@ -37,11 +37,6 @@ export const useTimeout = () => {
   return React.useMemo(() => ({ schedule, clear }), [schedule, clear]);
 };
 
-export const useTooltipTimers = () => ({
-  showTimer: useTimeout(),
-  hideTimer: useTimeout(),
-});
-
 /**
  * Web only: a tap focuses the trigger, and that focus mustn't open the tooltip
  * the way keyboard focus does.

@@ -6,8 +6,8 @@ import Animated from 'react-native-reanimated';
 
 import {
   useHideOnDimensionsChange,
+  useTimeout,
   useTooltipFade,
-  useTooltipTimers,
   useTouchFocusGuard,
 } from './hooks';
 import { takeSingletonSlot } from './registry';
@@ -109,7 +109,8 @@ const Tooltip = ({
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
   const tooltipId = React.useId();
-  const { showTimer, hideTimer } = useTooltipTimers();
+  const showTimer = useTimeout();
+  const hideTimer = useTimeout();
   // Web only: a non-touch pointer sits on the trigger
   const hoveringRef = React.useRef(false);
   const touchFocusGuard = useTouchFocusGuard();

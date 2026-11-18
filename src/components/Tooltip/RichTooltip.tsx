@@ -14,7 +14,6 @@ import {
   useHideOnDimensionsChange,
   useTimeout,
   useTooltipFade,
-  useTooltipTimers,
   useTouchFocusGuard,
 } from './hooks';
 import type { TooltipHostElement } from './hooks';
@@ -193,7 +192,8 @@ const RichTooltip = ({
   const refocusAfterDismissRef = React.useRef(false);
   const touchFocusGuard = useTouchFocusGuard();
   const wasVisibleRef = React.useRef(visible);
-  const { showTimer, hideTimer } = useTooltipTimers();
+  const showTimer = useTimeout();
+  const hideTimer = useTimeout();
   const focusTimer = useTimeout();
 
   const show = React.useCallback(() => {
