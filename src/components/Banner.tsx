@@ -244,7 +244,8 @@ const Banner = ({
   const prevVisible = React.useRef<boolean | null>(null);
 
   React.useEffect(() => {
-    // don't fire the callbacks on mount or when scale changes
+    // don't fire the callbacks on mount or when the effect runs again without
+    // a change of visible, such as strict mode running it twice
     if (prevVisible.current === visible) {
       return;
     }

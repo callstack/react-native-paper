@@ -1415,6 +1415,29 @@ describe('focus rescue', () => {
       expect(opener.focus).toHaveBeenCalledTimes(1);
     });
 
+    it('gives focus back on hide when reduceMotion is "on"', async () => {
+      const opener = new FakeElement();
+      activeElement = opener;
+      const makeBanner = (visible: boolean) => (
+        <PaperProvider reduceMotion="on">
+          <Banner visible={visible} actions={[retry()]}>
+            Message
+          </Banner>
+        </PaperProvider>
+      );
+      const view = await render(makeBanner(false));
+      await view.rerender(makeBanner(true));
+
+      await focusAction('Retry');
+      activeElement = new FakeElement(true);
+      await view.rerender(makeBanner(false));
+      await act(() => {
+        jest.runAllTimers();
+      });
+
+      expect(opener.focus).toHaveBeenCalledTimes(1);
+    });
+
     it('leaves focus alone on hide when it is not in the banner', async () => {
       const opener = new FakeElement();
       activeElement = opener;
@@ -1795,6 +1818,41 @@ describe('animations', () => {
         ).toEqual([show, hide]);
       }
     );
+
+    it('still finishes the show and the hide when reduceMotion is "on"', async () => {
+      const makeBanner = (visible: boolean) => (
+        <PaperProvider reduceMotion="on">
+          <Banner
+            onShowAnimationFinished={showCallback}
+            onHideAnimationFinished={hideCallback}
+            visible={visible}
+            actions={[{ label: 'Fix it', onPress: () => {} }]}
+          >
+            Message
+          </Banner>
+        </PaperProvider>
+      );
+
+      const view = await render(makeBanner(false));
+      await view.rerender(makeBanner(true));
+      await act(() => {
+        jest.runAllTimers();
+      });
+      expect(showCallback).toHaveBeenCalledWith({ finished: true });
+
+      await view.rerender(makeBanner(false));
+      await act(() => {
+        jest.runAllTimers();
+      });
+
+      // a 0 ms hide is still a finished one, so the content leaves the tree
+      expect(hideCallback).toHaveBeenCalledWith({ finished: true });
+      const ALL = { includeHiddenElements: true };
+      expect(screen.queryByText('Message', ALL)).toBeNull();
+      expect(
+        screen.queryByRole('button', { name: 'Fix it', ...ALL })
+      ).toBeNull();
+    });
 
     it.each([
       { state: 'visible', visible: true },

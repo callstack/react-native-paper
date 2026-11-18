@@ -481,7 +481,7 @@ e.g.:
 
 A hidden `Banner` is now inert while it animates out, then its content unmounts. Children lose their local state on hide.
 
-`onShowAnimationFinished` and `onHideAnimationFinished` run only after a `visible` change whose animation finished, not on mount or when interrupted.
+`onShowAnimationFinished` and `onHideAnimationFinished` run only after a `visible` change whose animation finished, not on mount or when interrupted. Under [reduce motion](#reduce-motion) the animation takes 0 ms and still counts as finished.
 
 At most 2 actions render, the rest are ignored with a dev warning. On a window 600dp or wider the actions sit next to the message. The breakpoint follows the window, not the banner.
 
