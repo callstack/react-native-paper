@@ -173,8 +173,7 @@ const Tooltip = ({
   //
   // Guard against spurious pointerleave events (e.g. fired when the tooltip
   // renders in the Portal): only start the hide timer when the cursor has
-  // actually left the wrapper bounds. In JSDOM getBoundingClientRect() returns
-  // a zero-size rect, so the check is skipped and tests continue to pass.
+  // actually left the wrapper bounds.
   const handlePointerLeave = React.useCallback(
     (e?: PointerEvent) => {
       if (Platform.OS === 'web' && e?.nativeEvent) {
@@ -183,7 +182,6 @@ const Tooltip = ({
           const { clientX, clientY } = e.nativeEvent;
           const rect = el.getBoundingClientRect();
           if (
-            (rect.width > 0 || rect.height > 0) &&
             clientX >= rect.left &&
             clientX <= rect.right &&
             clientY >= rect.top &&

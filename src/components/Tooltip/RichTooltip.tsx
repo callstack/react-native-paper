@@ -261,14 +261,13 @@ const RichTooltip = ({
     }
 
     if (!visible) {
-      takeSingletonSlot(() => setVisible(false));
-      setVisible(true);
+      show();
     } else {
       setVisible(false);
     }
     clearShowTimer();
     clearHideTimer();
-  }, [visible, clearShowTimer, clearHideTimer]);
+  }, [visible, show, clearShowTimer, clearHideTimer]);
 
   // Web: open on hover (with a short enter delay) and on keyboard focus. Touch
   // pointer is skipped - tap both enters & presses and only the press half
@@ -282,12 +281,9 @@ const RichTooltip = ({
       hoveringRef.current = true;
       clearHideTimer();
       clearShowTimer();
-      showTimer.current = setTimeout(() => {
-        takeSingletonSlot(() => setVisible(false));
-        setVisible(true);
-      }, enterTouchDelay);
+      showTimer.current = setTimeout(show, enterTouchDelay);
     },
-    [clearHideTimer, clearShowTimer, enterTouchDelay]
+    [clearHideTimer, clearShowTimer, enterTouchDelay, show]
   );
 
   // On web, pointer events on the wrapper View handle hover without going
@@ -302,7 +298,6 @@ const RichTooltip = ({
           const { clientX, clientY } = e.nativeEvent;
           const rect = el.getBoundingClientRect();
           if (
-            (rect.width > 0 || rect.height > 0) &&
             clientX >= rect.left &&
             clientX <= rect.right &&
             clientY >= rect.top &&
