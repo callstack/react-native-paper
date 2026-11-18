@@ -54,8 +54,6 @@ function OptionRow<T extends string>({
           <Chip
             key={option}
             mode="outlined"
-            compact
-            showSelectedOverlay
             selected={value === option}
             onPress={() => onChange(option)}
             style={styles.chip}

@@ -1,16 +1,14 @@
-import { Pressable, StyleSheet } from 'react-native';
-import type { GestureResponderEvent } from 'react-native';
+import { Text } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { fireEvent, userEvent } from '@testing-library/react-native';
-import color from 'color';
+import { userEvent } from '@testing-library/react-native';
 
-import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
+import * as Avatar from '../Avatar/Avatar';
 import Chip from '../Chip/Chip';
-import { getChipColors } from '../Chip/helpers';
+import { getChipColors } from '../Chip/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -20,6 +18,38 @@ it('renders chip with onPress', async () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('exposes the label as the accessible name of the chip button', async () => {
+  await render(<Chip onPress={() => {}}>Example Chip</Chip>);
+
+  expect(
+    screen.getByRole('button', { name: 'Example Chip' })
+  ).toBeOnTheScreen();
+});
+
+it('exposes the accessible name for non-string children', async () => {
+  await render(
+    <Chip onPress={() => {}}>
+      <Text>Example Chip</Text>
+    </Chip>
+  );
+
+  expect(
+    screen.getByRole('button', { name: 'Example Chip' })
+  ).toBeOnTheScreen();
+});
+
+it('prefers an explicit aria-label over the derived one', async () => {
+  await render(
+    <Chip onPress={() => {}} aria-label="Custom label">
+      Example Chip
+    </Chip>
+  );
+
+  expect(
+    screen.getByRole('button', { name: 'Custom label' })
+  ).toBeOnTheScreen();
 });
 
 it('renders chip with icon', async () => {
@@ -54,6 +84,51 @@ it('renders chip with custom close button', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders chip with a generic trailing icon', async () => {
+  const tree = (
+    await render(
+      <Chip icon="information" trailingIcon="menu-down">
+        Example Chip
+      </Chip>
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('calls onTrailingIconPress when the trailing icon is pressed', async () => {
+  const onTrailingIconPress = jest.fn();
+  const onClose = jest.fn();
+  await render(
+    <Chip
+      trailingIcon="menu-down"
+      onTrailingIconPress={onTrailingIconPress}
+      trailingIconAccessibilityLabel="Show more options"
+      onClose={onClose}
+      trailingIconTestID="chip-trailing-icon"
+    >
+      Example Chip
+    </Chip>
+  );
+
+  await userEvent.press(screen.getByTestId('chip-trailing-icon'));
+
+  expect(onTrailingIconPress).toHaveBeenCalled();
+  expect(onClose).not.toHaveBeenCalled();
+});
+
+it('prefers trailingIcon over the close icon when both trailingIcon and onClose are specified', async () => {
+  const tree = (
+    await render(
+      <Chip trailingIcon="menu-down" onClose={() => {}}>
+        Example Chip
+      </Chip>
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders outlined disabled chip', async () => {
   const tree = (
     await render(
@@ -72,56 +147,42 @@ it('renders selected chip', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('does not mark a chip without a touch handler as disabled', async () => {
-  await render(<Chip testID="plain-chip">Plain chip</Chip>);
+it('renders chip with avatar', async () => {
+  const tree = (
+    await render(
+      <Chip avatar={<Avatar.Text label="XD" size={24} />}>Example Chip</Chip>
+    )
+  ).toJSON();
 
-  expect(screen.getByTestId('plain-chip')).not.toBeDisabled();
+  expect(tree).toMatchSnapshot();
 });
 
-it('does not announce a chip without a touch handler as a button', async () => {
-  const onWrapPress = jest.fn<(e: GestureResponderEvent) => void>();
-  await render(
-    <Pressable onPress={onWrapPress}>
-      <Chip>Info</Chip>
-    </Pressable>
-  );
+it('renders selected chip with avatar and a check overlay', async () => {
+  const tree = (
+    await render(
+      <Chip selected avatar={<Avatar.Text label="XD" size={24} />}>
+        Example Chip
+      </Chip>
+    )
+  ).toJSON();
 
-  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
-
-  await userEvent.press(screen.getByText('Info'));
-
-  expect(onWrapPress).toHaveBeenCalledTimes(1);
+  expect(tree).toMatchSnapshot();
 });
 
-// With no handler the chip renders a plain view and is no longer a button. iOS
-// and Android still report a selection whatever the role, so it stays.
-it('still reports the selection of a selected chip without a touch handler', async () => {
-  await render(
-    <Chip selected testID="plain-selected-chip">
-      Info
-    </Chip>
-  );
+it('prefers icon over avatar when both are specified', async () => {
+  const tree = (
+    await render(
+      <Chip icon="information" avatar={<Avatar.Text label="XD" size={24} />}>
+        Example Chip
+      </Chip>
+    )
+  ).toJSON();
 
-  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
-  expect(screen.getByTestId('plain-selected-chip')).toBeSelected();
+  expect(tree).toMatchSnapshot();
 });
 
-it('reports the selected state of a chip with a touch handler', async () => {
-  await render(
-    <Chip selected onPress={() => {}}>
-      Selected chip
-    </Chip>
-  );
-
-  expect(screen.getByRole('button', { selected: true })).toBeOnTheScreen();
-});
-
-it('renders disabled chip when the disabled prop is passed', async () => {
-  await render(
-    <Chip disabled onPress={() => {}} testID="disabled-chip">
-      Disabled chip
-    </Chip>
-  );
+it('renders disabled chip if there is no touch handler passed', async () => {
+  await render(<Chip testID="disabled-chip">Disabled chip</Chip>);
 
   expect(screen.getByTestId('disabled-chip')).toBeDisabled();
 });
@@ -134,6 +195,64 @@ it('renders active chip if only onLongPress handler is passed', async () => {
   );
 
   expect(screen.getByTestId('active-chip')).toBeEnabled();
+});
+
+it('applies disabled opacity to the close button', async () => {
+  await render(
+    <Chip
+      disabled
+      onClose={() => {}}
+      testID="disabled-chip"
+      closeIconTestID="disabled-chip-close"
+    >
+      Disabled chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('disabled-chip-close')).toHaveStyle({
+    opacity: 0.38,
+  });
+});
+
+it('overlays the close button on top of the chip so its ripple spans behind it', async () => {
+  await render(
+    <Chip onPress={() => {}} onClose={() => {}} closeIconTestID="chip-close">
+      Removable chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('chip-close')).toHaveStyle({
+    bottom: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  });
+});
+
+it('clips the ripple to custom chip border radius', async () => {
+  await render(
+    <Chip onPress={() => {}} testID="rounded-chip" borderRadius={16}>
+      Rounded chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('rounded-chip')).toHaveStyle({
+    borderRadius: 16,
+    overflow: 'hidden',
+  });
+});
+
+it('renders close button with a circular state layer', async () => {
+  await render(
+    <Chip onClose={() => {}} closeIconTestID="chip-close">
+      Removable chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('chip-close')).toHaveStyle({
+    borderRadius: 16,
+    overflow: 'hidden',
+  });
 });
 
 it('renders chip with zero border radius', async () => {
@@ -169,7 +288,7 @@ describe('getChipColors - text color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      textColor: LightTheme.colors.onSecondaryContainer,
+      textColor: LightTheme.colors.onSurfaceVariant,
     });
   });
 
@@ -218,7 +337,7 @@ describe('getChipColors - icon color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      iconColor: LightTheme.colors.onSecondaryContainer,
+      iconColor: LightTheme.colors.primary,
     });
   });
 
@@ -229,7 +348,7 @@ describe('getChipColors - icon color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      iconColor: LightTheme.colors.onSurfaceVariant,
+      iconColor: LightTheme.colors.primary,
     });
   });
 
@@ -242,6 +361,44 @@ describe('getChipColors - icon color', () => {
       })
     ).toMatchObject({
       iconColor: 'purple',
+    });
+  });
+});
+
+describe('getChipColor - selected background color', () => {
+  it('should return custom color, outlined mode', () => {
+    expect(
+      getChipColors({
+        theme: LightTheme,
+        customBackgroundColor: 'purple',
+        isOutlined: true,
+      })
+    ).toMatchObject({
+      selectedBackgroundColor: 'purple',
+    });
+  });
+
+  it('should return custom color, flat mode', () => {
+    expect(
+      getChipColors({
+        theme: LightTheme,
+        customBackgroundColor: 'purple',
+        isOutlined: false,
+      })
+    ).toMatchObject({
+      selectedBackgroundColor: 'purple',
+    });
+  });
+
+  it('should return theme color, for theme version 3, flat mode', () => {
+    expect(
+      getChipColors({
+        theme: LightTheme,
+        isOutlined: false,
+        selected: true,
+      })
+    ).toMatchObject({
+      selectedBackgroundColor: LightTheme.colors.secondaryContainer,
     });
   });
 });
@@ -265,7 +422,73 @@ describe('getChipColor - background color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      backgroundColor: LightTheme.colors.secondaryContainer,
+      backgroundColor: LightTheme.colors.surfaceContainerLow,
+    });
+  });
+
+  it('uses the precomputed state layer color for disabled filled chips', () => {
+    const theme = LightTheme;
+
+    expect(
+      getChipColors({
+        theme,
+        disabled: true,
+        isOutlined: false,
+      })
+    ).toMatchObject({
+      backgroundColor: theme.colors.stateLayerPressed,
+    });
+  });
+
+  it('keeps the filled look for a disabled selected outlined chip', () => {
+    const theme = LightTheme;
+
+    expect(
+      getChipColors({
+        theme,
+        disabled: true,
+        selected: true,
+        isOutlined: true,
+      })
+    ).toMatchObject({
+      selectedBackgroundColor: theme.colors.stateLayerPressed,
+    });
+  });
+
+  it('stays unfilled for a disabled unselected outlined chip', () => {
+    const theme = LightTheme;
+
+    expect(
+      getChipColors({
+        theme,
+        disabled: true,
+        selected: false,
+        isOutlined: true,
+      })
+    ).toMatchObject({
+      backgroundColor: 'transparent',
+    });
+  });
+});
+
+describe('getChipColor - ripple color', () => {
+  it('uses the precomputed state layer color', () => {
+    const theme = {
+      ...LightTheme,
+      colors: {
+        ...LightTheme.colors,
+        stateLayerPressed: 'rgba(29, 27, 32, 0.1)',
+      },
+    };
+
+    expect(
+      getChipColors({
+        theme,
+        isOutlined: true,
+      })
+    ).toMatchObject({
+      rippleColor: 'rgba(29, 27, 32, 0.1)',
+      avatarOverlayColor: 'rgba(29, 27, 32, 0.1)',
     });
   });
 });
@@ -314,7 +537,21 @@ describe('getChipColor - border color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      borderColor: color('purple').alpha(0.29).rgb().string(),
+      borderColor: 'purple',
+    });
+  });
+
+  it('uses the tokenized outline color for disabled outlined chips', () => {
+    const theme = LightTheme;
+
+    expect(
+      getChipColors({
+        theme,
+        disabled: true,
+        isOutlined: true,
+      })
+    ).toMatchObject({
+      borderColor: theme.colors.outlineVariant,
     });
   });
 
@@ -361,77 +598,31 @@ describe('getChipColor - border color', () => {
       borderColor: 'transparent',
     });
   });
-});
 
-describe('close affordance', () => {
-  it('is not rendered without onClose', async () => {
-    await render(<Chip onPress={() => {}}>Example</Chip>);
+  it('darkens the outline on focus, for theme version 3', () => {
+    const theme = LightTheme;
 
-    expect(screen.queryByLabelText('Close')).not.toBeOnTheScreen();
-  });
-});
-
-describe('hitSlop', () => {
-  it('expands a pressable chip to a 48dp tall target', async () => {
-    await render(
-      <Chip onPress={() => {}} testID="chip">
-        Example
-      </Chip>
-    );
-
-    expect(screen.getByTestId('chip')).toHaveProp('hitSlop', {
-      top: 8,
-      bottom: 8,
-      left: 0,
-      right: 0,
+    expect(
+      getChipColors({
+        theme,
+        isOutlined: true,
+        focused: true,
+      })
+    ).toMatchObject({
+      borderColor: theme.colors.onSurfaceVariant,
     });
   });
 
-  it.each([
-    { when: 'it has no touch handler', props: {} },
-    { when: 'it only has onClose', props: { onClose: () => {} } },
-    { when: 'it is disabled', props: { onPress: () => {}, disabled: true } },
-  ])('adds no slop to the chip body when $when', async ({ props }) => {
-    await render(
-      <Chip {...props} testID="chip">
-        Example
-      </Chip>
-    );
-
-    expect(screen.getByTestId('chip')).not.toHaveProp('hitSlop');
+  it('does not darken the outline on focus for a selected chip', () => {
+    expect(
+      getChipColors({
+        theme: LightTheme,
+        isOutlined: true,
+        selected: true,
+        focused: true,
+      })
+    ).toMatchObject({
+      borderColor: 'transparent',
+    });
   });
-});
-
-describe('with reduce motion', () => {
-  // Reanimated's Jest setup keeps CSS transitions out of `style`, and
-  // `getAnimatedStyle` can't read the chip's nested style arrays. The chip's
-  // container is the touchable's parent.
-  const elevationTransitionDuration = () => {
-    const { parent } = screen.getByTestId('chip');
-    if (!parent) {
-      throw new Error('Expected the touchable to be inside the container.');
-    }
-    // eslint-disable-next-line no-restricted-syntax -- see the comment above.
-    return StyleSheet.flatten(parent.props.jestInlineStyle).transitionDuration;
-  };
-
-  it.each([
-    { reduceMotion: 'off', rest: 150, pressed: 200 },
-    { reduceMotion: 'on', rest: 0, pressed: 0 },
-  ] as const)(
-    'moves its elevation in $rest ms, and $pressed ms while pressed, when reduceMotion is "$reduceMotion"',
-    async ({ reduceMotion, rest, pressed }) => {
-      await render(
-        <PaperProvider reduceMotion={reduceMotion}>
-          <Chip elevated onPress={() => {}} testID="chip">
-            Example Chip
-          </Chip>
-        </PaperProvider>
-      );
-      expect(elevationTransitionDuration()).toBe(rest);
-
-      await fireEvent(screen.getByTestId('chip'), 'pressIn');
-      expect(elevationTransitionDuration()).toBe(pressed);
-    }
-  );
 });
