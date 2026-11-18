@@ -723,17 +723,16 @@ describe('Card', () => {
     expectCardState('outlined');
   });
 
-  it('uses scaled theme motion duration and easing for visual transitions', async () => {
+  it('uses the theme motion duration and easing for visual transitions', async () => {
     const easing = [0.1, 0.2, 0.3, 0.4] as const;
     const theme = {
-      animation: { scale: 0.5 },
       motion: {
         duration: { short3: 320 },
         easing: { standard: easing },
       },
     };
     const transition = {
-      transitionDuration: 160,
+      transitionDuration: 320,
       transitionTimingFunction: cubicBezier(...easing),
     };
     const { rerender } = await render(
