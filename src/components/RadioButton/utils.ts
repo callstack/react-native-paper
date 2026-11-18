@@ -77,7 +77,7 @@ export const getSelectionControlIOSColor = ({
   disabled?: boolean;
   customColor?: ColorValue;
   error?: boolean;
-}) => {
+}): { checkedColor: ColorValue; checkedColorOpacity: number } => {
   const checkedColor = getIOSCheckedColor({
     theme,
     disabled,

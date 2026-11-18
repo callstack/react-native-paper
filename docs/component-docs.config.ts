@@ -77,11 +77,6 @@ const pages = {
   },
   Dialog: {
     Dialog: 'Dialog/Dialog',
-    DialogActions: 'Dialog/DialogActions',
-    DialogContent: 'Dialog/DialogContent',
-    DialogIcon: 'Dialog/DialogIcon',
-    DialogScrollArea: 'Dialog/DialogScrollArea',
-    DialogTitle: 'Dialog/DialogTitle',
   },
   Divider: 'Divider',
   Drawer: {

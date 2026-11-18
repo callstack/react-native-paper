@@ -12,6 +12,7 @@ import type {
 import Animated, {
   type AnimatedStyle,
   measure,
+  ReduceMotion,
   useAnimatedRef,
   useAnimatedStyle,
   useSharedValue,
@@ -39,7 +40,7 @@ export type Props = {
    */
   label: string;
   /**
-   * Role-color preset. Defaults to `tonalPrimary`.
+   * Role-color preset. Defaults to `primaryContainer`.
    */
   variant?: Variant;
   /**
@@ -69,6 +70,18 @@ export type Props = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
   /**
    * Accessibility label. Falls back to `label` if unset.
    */
@@ -115,7 +128,7 @@ export type Props = {
   /**
    * @optional
    */
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -158,13 +171,16 @@ export type Props = {
 const Extended = ({
   icon,
   label,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   containerColor,
   contentColor,
   size = 'default',
   expanded,
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
@@ -215,16 +231,22 @@ const Extended = ({
       return;
     }
 
-    const widthSpring = toRawSpring(
-      expanded
-        ? theme.motion.spring.fast.spatial
-        : theme.motion.spring.default.spatial
-    );
-    const opacitySpring = toRawSpring(
-      expanded
-        ? theme.motion.spring.default.effects
-        : theme.motion.spring.fast.effects
-    );
+    const widthSpring = {
+      ...toRawSpring(
+        expanded
+          ? theme.motion.spring.fast.spatial
+          : theme.motion.spring.default.spatial
+      ),
+      reduceMotion: ReduceMotion.Never,
+    };
+    const opacitySpring = {
+      ...toRawSpring(
+        expanded
+          ? theme.motion.spring.default.effects
+          : theme.motion.spring.fast.effects
+      ),
+      reduceMotion: ReduceMotion.Never,
+    };
 
     scheduleOnUI(() => {
       'worklet';
@@ -270,6 +292,9 @@ const Extended = ({
         size={size}
         visible={visible}
         onPress={onPress}
+        onLongPress={onLongPress}
+        onPressOut={onPressOut}
+        delayLongPress={delayLongPress}
         aria-label={ariaLabel}
         aria-checked={ariaChecked}
         aria-selected={ariaSelected}

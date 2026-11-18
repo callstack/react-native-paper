@@ -21,7 +21,7 @@ export type Props = {
    */
   icon: IconSource;
   /**
-   * Role-color preset. Defaults to `tonalPrimary`.
+   * Role-color preset. Defaults to `primaryContainer`.
    */
   variant?: Variant;
   /**
@@ -50,7 +50,7 @@ export type Props = {
    */
   onLongPress?: (e: GestureResponderEvent) => void;
   /**
-   * Function to execute when a touch is released.
+   * Function to execute as soon as the touch is released.
    */
   onPressOut?: (e: GestureResponderEvent) => void;
   /**
@@ -104,7 +104,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -138,7 +138,7 @@ export type Props = {
  */
 const FAB = ({
   icon,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   size = 'default',
   visible = true,
   onPress,

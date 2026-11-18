@@ -192,10 +192,10 @@ const TooltipExample = () => {
               content="Save this item to read it later from any of your devices."
               actions={({ dismiss }) => (
                 <>
-                  <Button compact onPress={dismiss}>
+                  <Button mode="text" size="extra-small" onPress={dismiss}>
                     Learn more
                   </Button>
-                  <Button compact mode="contained" onPress={dismiss}>
+                  <Button mode="filled" size="extra-small" onPress={dismiss}>
                     Add
                   </Button>
                 </>

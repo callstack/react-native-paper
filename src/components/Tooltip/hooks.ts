@@ -78,7 +78,7 @@ export const forwardPressToTriggerAt = (
   return false;
 };
 
-export type TooltipHostElement = View & {
+export type TooltipHostElement = React.ComponentRef<typeof View> & {
   getBoundingClientRect?(): DOMRect;
   querySelector?(selectors: string): TooltipHostElement | null;
   focus?(): void;

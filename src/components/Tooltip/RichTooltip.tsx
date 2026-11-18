@@ -6,7 +6,7 @@ import {
   Platform,
   Pressable,
 } from 'react-native';
-import type { PointerEvent, ViewStyle } from 'react-native';
+import type { KeyDownEvent, PointerEvent, ViewStyle } from 'react-native';
 
 import Reanimated from 'react-native-reanimated';
 
@@ -44,7 +44,7 @@ export type TooltipRichTriggerProps = {
   onPress?: () => void;
   onFocus?: () => void;
   onBlur?: () => void;
-  onKeyDown?: (event: { key?: string }) => void;
+  onKeyDown?: (event: KeyDownEvent) => void;
   'aria-label'?: string;
   'aria-describedby'?: string;
 };
@@ -336,8 +336,8 @@ const RichTooltip = ({
   }, [childrenWrapperRef]);
 
   const handleKeyDown = React.useCallback(
-    (event: { key?: string }) => {
-      if (event.key === 'ArrowDown') {
+    (event: KeyDownEvent) => {
+      if (event.nativeEvent.key === 'ArrowDown') {
         show();
         focusTooltipContent();
       }

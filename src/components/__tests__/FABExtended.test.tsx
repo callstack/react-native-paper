@@ -5,6 +5,7 @@ import { afterEach, expect, it, jest } from '@jest/globals';
 import { fireEvent, screen, userEvent } from '@testing-library/react-native';
 import * as Reanimated from 'react-native-reanimated';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render } from '../../test-utils';
 import FAB from '../FAB';
 
@@ -18,6 +19,7 @@ jest.mock('react-native-reanimated', () => {
     ...ReanimatedModule,
     default: ReanimatedModule.default,
     measure: jest.fn(),
+    withSpring: jest.fn(ReanimatedModule.withSpring),
   };
 });
 
@@ -44,7 +46,7 @@ it('expands to fit the measured label width', async () => {
     pageY: 0,
   });
 
-  const ref = React.createRef<View>();
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
   await render(
     <FAB.Extended
       icon="plus"
@@ -60,7 +62,11 @@ it('expands to fit the measured label width', async () => {
     throw new Error('Expected FAB ref to be attached');
   }
 
-  expect(Reanimated.getAnimatedStyle(ref.current)).toMatchObject({
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const animatedComponent = ref.current as unknown as {
+    props: Record<string, unknown>;
+  };
+  expect(Reanimated.getAnimatedStyle(animatedComponent)).toMatchObject({
     width: 144,
   });
 });
@@ -111,9 +117,43 @@ it('renders extended FAB transitioning to collapsed', async () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
+it('keeps the expand and collapse springs on with reduceMotion="off" whatever the device setting', async () => {
+  const { rerender } = await render(
+    <PaperProvider reduceMotion="off">
+      <FAB.Extended icon="plus" label="New message" expanded />
+    </PaperProvider>
+  );
+  await jest.runAllTimersAsync();
+  jest.mocked(Reanimated.withSpring).mockClear();
+
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB.Extended icon="plus" label="New message" expanded={false} />
+    </PaperProvider>
+  );
+  await jest.runAllTimersAsync();
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB.Extended icon="plus" label="New message" expanded />
+    </PaperProvider>
+  );
+  await jest.runAllTimersAsync();
+
+  expect(
+    jest
+      .mocked(Reanimated.withSpring)
+      .mock.calls.map(([, config]) => config?.reduceMotion)
+  ).toEqual([
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+  ]);
+});
+
 it('uses label as default aria-label', async () => {
   await render(<FAB.Extended icon="plus" label="New message" expanded />);
-  expect(screen.getByRole('button', { name: 'New message' })).toBeTruthy();
+  expect(screen.getByLabelText('New message')).toBeOnTheScreen();
 });
 
 it('respects explicit aria-label', async () => {
@@ -125,9 +165,7 @@ it('respects explicit aria-label', async () => {
       aria-label="Create new message"
     />
   );
-  expect(
-    screen.getByRole('button', { name: 'Create new message' })
-  ).toBeTruthy();
+  expect(screen.getByLabelText('Create new message')).toBeOnTheScreen();
 });
 
 it('calls onPress when pressed', async () => {
@@ -153,4 +191,25 @@ it('forwards event object to onPress', async () => {
     }
   );
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
+});
+
+it('calls onLongPress and onPressOut when long pressed', async () => {
+  const user = userEvent.setup();
+  const onLongPress = jest.fn();
+  const onPressOut = jest.fn();
+  await render(
+    <FAB.Extended
+      icon="plus"
+      label="New message"
+      expanded
+      onLongPress={onLongPress}
+      onPressOut={onPressOut}
+      delayLongPress={300}
+    />
+  );
+  await user.longPress(screen.getByRole('button', { name: 'New message' }), {
+    duration: 400,
+  });
+  expect(onLongPress).toHaveBeenCalledTimes(1);
+  expect(onPressOut).toHaveBeenCalledTimes(1);
 });

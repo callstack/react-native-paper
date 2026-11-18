@@ -20,6 +20,8 @@ import { LightTheme } from '../../theme/schemes';
 import TooltipCompound from '../Tooltip';
 import Tooltip, { type TooltipTriggerProps } from '../Tooltip/Tooltip';
 
+const ViewPrototype: React.ComponentRef<typeof View> = View.prototype;
+
 const mockedRemoveEventListener = jest.fn();
 
 jest.mock('../../utils/addEventListener', () => ({
@@ -33,7 +35,7 @@ const DummyComponent = ({
   ...props
 }: ViewProps &
   TooltipTriggerProps & {
-    ref?: React.RefObject<View | null>;
+    ref?: React.RefObject<React.ComponentRef<typeof View> | null>;
   }) => (
   <View {...props} ref={ref}>
     <Text>dummy component</Text>
@@ -97,7 +99,7 @@ describe('Tooltip', () => {
     };
 
     jest
-      .spyOn(View.prototype, 'measure')
+      .spyOn(ViewPrototype, 'measure')
       .mockImplementation((cb) => cb(x, y, width, height, pageX, pageY));
 
     const wrapper = await render(
@@ -185,7 +187,7 @@ describe('Tooltip', () => {
     describe('anchor that ignores the trigger props', () => {
       it('shows the tooltip on long press as the wrapper handles it', async () => {
         jest
-          .spyOn(View.prototype, 'measure')
+          .spyOn(ViewPrototype, 'measure')
           .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
 
         // An anchor like `Avatar.Text` never receives the handlers, so the
@@ -354,12 +356,39 @@ describe('Tooltip', () => {
             top: 250, // pageY (200) + height (50)
           });
         });
+
+        it('anchors the tooltip to the wrapper when the child is absolutely positioned', async () => {
+          const {
+            wrapper: { getByText, findByText },
+          } = await setup({
+            children: (props: TooltipTriggerProps) => (
+              <DummyComponent
+                {...props}
+                style={{ position: 'absolute', left: 10, top: 20 }}
+              />
+            ),
+          });
+
+          await userEvent.longPress(getTrigger(getByText));
+
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
+            nativeEvent: {
+              layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
+            },
+          });
+
+          expect(tooltip.parent).toHaveStyle({
+            left: 210,
+            top: 250,
+          });
+        });
       });
 
       describe('When the locale is RTL', () => {
         it('mirrors the position to the trailing edge', async () => {
           jest
-            .spyOn(View.prototype, 'measure')
+            .spyOn(ViewPrototype, 'measure')
             .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
 
           const { getByText, findByText } = await render(
@@ -756,10 +785,10 @@ describe('Tooltip.Rich', () => {
     propOverrides?: Partial<React.ComponentProps<typeof TooltipCompound.Rich>>
   ) => {
     jest
-      .spyOn(View.prototype, 'measure')
+      .spyOn(ViewPrototype, 'measure')
       .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
     jest
-      .spyOn(View.prototype, 'measureInWindow')
+      .spyOn(ViewPrototype, 'measureInWindow')
       .mockImplementation((cb) => cb(0, 0, 0, 0));
 
     const wrapper = await render(
@@ -882,7 +911,7 @@ describe('Tooltip.Rich', () => {
         wrapper: { getByText },
       } = await setup();
 
-      const measureInWindow = jest.spyOn(View.prototype, 'measureInWindow');
+      const measureInWindow = jest.spyOn(ViewPrototype, 'measureInWindow');
 
       await user.press(getTrigger(getByText));
 
@@ -891,10 +920,10 @@ describe('Tooltip.Rich', () => {
 
     it('dismisses the open tooltip when another tooltip trigger is pressed', async () => {
       jest
-        .spyOn(View.prototype, 'measure')
+        .spyOn(ViewPrototype, 'measure')
         .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
       jest
-        .spyOn(View.prototype, 'measureInWindow')
+        .spyOn(ViewPrototype, 'measureInWindow')
         .mockImplementation((cb) => cb(0, 0, 0, 0));
 
       const { getAllByText, getByText, queryByText } = await render(
