@@ -597,12 +597,22 @@ export const getAccessibilityData = ({
       ? labelId
       : undefined);
 
+  // A labelled field blanks its placeholder until the label floats away, so
+  // assistive technology moving to the empty field would not hear it.
+  const placeholderHint =
+    label && inputLength === 0 ? props.placeholder : undefined;
+
   // React Native 0.88 does not implement described-by relationships on native.
   // Expose the same description as a hint without changing the field's name.
   const hint =
     Platform.OS === 'web'
       ? props.accessibilityHint
-      : [props.accessibilityHint, supportingText, counterAccessibilityLabel]
+      : [
+          props.accessibilityHint,
+          placeholderHint,
+          supportingText,
+          counterAccessibilityLabel,
+        ]
           .filter(Boolean)
           .join(', ') || undefined;
 

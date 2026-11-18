@@ -234,6 +234,43 @@ it.each(['ios', 'android'] as const)(
   }
 );
 
+it.each(['ios', 'android'] as const)(
+  'reads the placeholder of an empty labelled field from the hint on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    await render(
+      <TextInput
+        label="Email"
+        accessibilityHint="Signs you in"
+        placeholder="name@example.com"
+        supportingText="Use a work address"
+      />
+    );
+    const input = screen.getByLabelText('Email');
+    expect(input).toHaveProp(
+      'accessibilityHint',
+      'Signs you in, name@example.com, Use a work address'
+    );
+
+    await userEvent.type(input, 'a');
+    expect(input).toHaveProp(
+      'accessibilityHint',
+      'Signs you in, Use a work address'
+    );
+  }
+);
+
+it.each(['ios', 'android'] as const)(
+  'leaves the placeholder of an unlabelled field out of the hint on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    await render(
+      <TextInput aria-label="Email" placeholder="name@example.com" />
+    );
+    expect(screen.getByLabelText('Email')).not.toHaveProp('accessibilityHint');
+  }
+);
+
 it('uses web descriptions without duplicating them in a hint', async () => {
   jest.replaceProperty(Platform, 'OS', 'web');
   await render(
