@@ -365,6 +365,37 @@ it('ignores a long press once the FAB hides mid-press but still reports the rele
   expect(onPressOut).toHaveBeenCalledTimes(1);
 });
 
+it.each([
+  ['loses its action', { onPress: undefined }],
+  ['hides', { visible: false }],
+])(
+  'shows the hover elevation again after a FAB that %s mid-press comes back',
+  async (_, interruption) => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const fabProps = {
+      ref,
+      style: {},
+      icon: 'plus',
+      'aria-label': 'Create',
+      onPress: () => {},
+    };
+    const { rerender } = await render(<FAB {...fabProps} />);
+    const resting = getStyle(ref);
+
+    // The interruption ends the press without a release.
+    await fireEvent(
+      screen.getByRole('button', { name: 'Create' }),
+      'responderGrant',
+      touch
+    );
+    await rerender(<FAB {...fabProps} {...interruption} />);
+    await rerender(<FAB {...fabProps} />);
+    await fireEvent(screen.getByRole('button', { name: 'Create' }), 'hoverIn');
+
+    expect(getStyle(ref)).not.toEqual(resting);
+  }
+);
+
 it('clears interaction elevation when a FAB is hidden and shown again', async () => {
   const ref = React.createRef<React.ComponentRef<typeof View>>();
   const onPress = jest.fn();
