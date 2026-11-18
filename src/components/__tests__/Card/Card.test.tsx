@@ -1286,6 +1286,23 @@ describe('CardTitle', () => {
     expect(screen.getByText('Title')).toHaveStyle({ paddingRight: 16 });
     expect(screen.getByText('Subtitle')).toHaveStyle({ paddingRight: 16 });
   });
+
+  // A zero flex basis would collapse the titles in a row-laid-out Card on
+  // iOS and Android, so they size from their text and grow into free space.
+  it('sizes the titles from their text in a row-laid-out Card', async () => {
+    await render(
+      <Card
+        contentStyle={{ flexDirection: 'row' }}
+        media={<Card.Cover source={{ uri: 'cover' }} />}
+        title="Title"
+      />
+    );
+
+    const titles = screen.getByText('Title').parent;
+
+    expect(titles).toHaveStyle({ flexGrow: 1, flexShrink: 1 });
+    expect(titles).not.toHaveStyle({ flex: 1 });
+  });
 });
 
 describe('CardContent', () => {
