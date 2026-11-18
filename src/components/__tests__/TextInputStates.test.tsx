@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
-import { render, screen } from '../../test-utils';
+import { fireEvent, render, screen } from '../../test-utils';
 import { LightTheme as theme } from '../../theme/schemes';
 import TextInput from '../TextInput';
 import { getOutlineColor } from '../TextInput/utils';
@@ -60,6 +60,24 @@ describe.each([
       })
     ).toBe(theme.colors[role]);
   });
+});
+
+it('keeps the hover color on web when a touch leaves a field the mouse is over', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  await render(<TextInput variant="outlined" label="Email" />);
+  const input = screen.getByLabelText('Email');
+  const pointer = (pointerType: string) => ({ nativeEvent: { pointerType } });
+  const getBorderColor = () =>
+    /"borderColor":"([^"]+)"/.exec(JSON.stringify(screen.toJSON()))?.[1];
+
+  await fireEvent(input, 'pointerEnter', pointer('mouse'));
+  expect(getBorderColor()).toBe(theme.colors.onSurface);
+
+  await fireEvent(input, 'pointerLeave', pointer('touch'));
+  expect(getBorderColor()).toBe(theme.colors.onSurface);
+
+  await fireEvent(input, 'pointerLeave', pointer('mouse'));
+  expect(getBorderColor()).toBe(theme.colors.outline);
 });
 
 it('uses the disabled colors for a disabled invalid field and keeps it invalid on web', async () => {

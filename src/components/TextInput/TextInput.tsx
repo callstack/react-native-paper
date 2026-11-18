@@ -402,6 +402,7 @@ function TextInput({
       <View
         style={fieldStyles}
         // Nested web Pressables contain hover events; track the whole field.
+        // Touches don't hover, so they neither set nor clear a mouse hover.
         onPointerEnter={
           Platform.OS === 'web'
             ? (event) => {
@@ -409,7 +410,13 @@ function TextInput({
               }
             : undefined
         }
-        onPointerLeave={Platform.OS === 'web' ? onHoverOut : undefined}
+        onPointerLeave={
+          Platform.OS === 'web'
+            ? (event) => {
+                if (event.nativeEvent.pointerType !== 'touch') onHoverOut();
+              }
+            : undefined
+        }
       >
         {/* Disabled tint overlay — filled variant only. A childless
           absolutely-positioned View whose translucent fill is applied via the
