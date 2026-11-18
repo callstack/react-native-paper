@@ -27,13 +27,15 @@ export default function ExampleListHeader({ query, onQueryChange }: Props) {
         }
         onIconPress={canGoBack ? () => navigation.goBack() : undefined}
         searchAccessibilityLabel={canGoBack ? 'go back' : 'search'}
-        trailingIcon="cog"
-        trailingIconAccessibilityLabel="preferences"
-        onTrailingIconPress={togglePreferences}
         clearAccessibilityLabel="clear search"
         autoCorrect={false}
         autoCapitalize="none"
         style={styles.searchbar}
+      />
+      <Appbar.Action
+        icon="cog"
+        aria-label="preferences"
+        onPress={togglePreferences}
       />
     </Appbar.Header>
   );

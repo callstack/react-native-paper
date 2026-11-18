@@ -4551,26 +4551,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/drawer@npm:^8.0.0-alpha.58":
-  version: 8.0.0-alpha.58
-  resolution: "@react-navigation/drawer@npm:8.0.0-alpha.58"
-  dependencies:
-    "@react-navigation/elements": "npm:^3.0.0-alpha.55"
-    react-native-drawer-layout: "npm:^5.0.0-alpha.20"
-    use-latest-callback: "npm:^0.3.5"
-  peerDependencies:
-    "@react-navigation/native": ^8.0.0-alpha.51
-    react: ">= 19.2.0"
-    react-native: "*"
-    react-native-gesture-handler: ">= 3.0.0"
-    react-native-reanimated: ">= 4.0.0"
-    react-native-safe-area-context: ">= 5.5.0"
-    react-native-screens: ">= 4.30.0"
-    react-native-worklets: ">= 0.4.0"
-  checksum: 10c0/9e7967a382f8f976efa7db2f98be67dbff414d30101565e68f7ea944a01babaf4d5c185327b51150c3dad95f66452821044d070b408040555f59281431625661
-  languageName: node
-  linkType: hard
-
 "@react-navigation/elements@npm:3.0.0-alpha.55, @react-navigation/elements@npm:^3.0.0-alpha.55":
   version: 3.0.0-alpha.55
   resolution: "@react-navigation/elements@npm:3.0.0-alpha.55"
@@ -18043,21 +18023,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-drawer-layout@npm:^5.0.0-alpha.20":
-  version: 5.0.0-alpha.20
-  resolution: "react-native-drawer-layout@npm:5.0.0-alpha.20"
-  dependencies:
-    use-latest-callback: "npm:^0.3.5"
-  peerDependencies:
-    react: ">= 19.2.0"
-    react-native: "*"
-    react-native-gesture-handler: ">= 3.0.0"
-    react-native-reanimated: ">= 4.0.0"
-    react-native-worklets: ">= 0.4.0"
-  checksum: 10c0/59ba0aad7c6faadcbda2d97ef676e9b0009f50f402fe9f62eef9251f9371d477b3bc28bfaf8174c3af16087d9235f7da812d819cbcc32b619f79f9f533257ebc
-  languageName: node
-  linkType: hard
-
 "react-native-gesture-handler@npm:~3.3.0":
   version: 3.3.0
   resolution: "react-native-gesture-handler@npm:3.3.0"
@@ -18110,7 +18075,6 @@ __metadata:
     "@react-native-async-storage/async-storage": "npm:2.2.0"
     "@react-native-masked-view/masked-view": "npm:0.3.2"
     "@react-navigation/bottom-tabs": "npm:^8.0.0-alpha.57"
-    "@react-navigation/drawer": "npm:^8.0.0-alpha.58"
     "@react-navigation/elements": "npm:3.0.0-alpha.55"
     "@react-navigation/native": "npm:^8.0.0-alpha.51"
     "@react-navigation/native-stack": "npm:^8.0.0-alpha.59"

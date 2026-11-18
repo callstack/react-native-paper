@@ -13,7 +13,7 @@ import {
 import type { Preferences } from './PreferencesContext';
 import { dynamicThemeSupported } from '../../utils';
 
-const PERSISTENCE_KEY = 'NAVIGATION_STATE';
+const PERSISTENCE_KEY = 'NAVIGATION_STATE_V2';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
 const getInitialRtl = () => {
@@ -38,12 +38,10 @@ export const navigationPersistor = {
 export function useSetupPreferences() {
   const [isReady, setIsReady] = React.useState(false);
 
-  const [initialRtl] = React.useState(getInitialRtl);
-
   const [shouldUseDynamicTheme, setShouldUseDynamicTheme] =
     React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
-  const [rtl, setRtl] = React.useState(initialRtl);
+  const [rtl, setRtl] = React.useState(getInitialRtl);
   const [customFontLoaded, setCustomFont] = React.useState(false);
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
   const [preferencesVisible, setPreferencesVisible] = React.useState(false);

@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
-import { Avatar, Card, Chip } from 'react-native-paper';
+import { Avatar, Card, Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ArticleSample, { ArticleSampleConfig } from './Samples/ArticleSample';
@@ -37,6 +37,7 @@ const data = objectKeys(samples).map((id) => ({
 export default function SamplesList() {
   const navigation = useNavigation('SamplesList');
   const safeArea = useSafeAreaInsets();
+  const { colors } = useTheme();
 
   return (
     <FlatList
@@ -60,9 +61,13 @@ export default function SamplesList() {
           <Card.Content>
             <View style={styles.tags}>
               {item.components.map((component) => (
-                <Chip key={component} compact>
+                <Text
+                  key={component}
+                  variant="labelMedium"
+                  style={[styles.tag, { borderColor: colors.outlineVariant }]}
+                >
                   {component}
-                </Chip>
+                </Text>
               ))}
             </View>
           </Card.Content>
@@ -81,5 +86,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
+  },
+  tag: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
 });

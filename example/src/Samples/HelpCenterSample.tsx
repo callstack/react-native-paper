@@ -65,7 +65,7 @@ const HelpCenterSample = () => {
           </List.Section>
         </List.AccordionGroup>
 
-        <TouchableRipple onPress={() => setContactVisible(true)}>
+        <TouchableRipple role="button" onPress={() => setContactVisible(true)}>
           <View style={styles.contact}>
             <Icon source="chat-question-outline" size={24} />
             <Text variant="bodyLarge">Still stuck? Contact support</Text>
@@ -77,6 +77,8 @@ const HelpCenterSample = () => {
         <Modal
           visible={contactVisible}
           onDismiss={() => setContactVisible(false)}
+          aria-label="Contact support"
+          dismissAccessibilityLabel="Close contact support"
           contentBorderRadius={28}
           contentBackgroundColor={colors.surface}
           contentContainerStyle={styles.modal}

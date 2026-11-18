@@ -66,6 +66,7 @@ export default function PreferencesModal() {
         <Modal
           visible={preferencesVisible}
           onDismiss={togglePreferences}
+          aria-label="Preferences"
           dismissAccessibilityLabel="Close preferences"
           contentBorderRadius={28}
           contentBackgroundColor={theme.colors.elevation.level2}
@@ -173,6 +174,9 @@ export default function PreferencesModal() {
 const styles = StyleSheet.create({
   modalContent: {
     marginHorizontal: 24,
+    width: '100%',
+    maxWidth: 360,
+    alignSelf: 'center',
   },
   scrollView: {
     flexGrow: 0,

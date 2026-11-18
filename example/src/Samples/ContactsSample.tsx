@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 import {
   Avatar,
@@ -81,13 +81,17 @@ const ContactsSample = () => {
         />
       </ScreenWrapper>
 
-      <FAB.Extended
-        icon="account-plus"
-        label="New contact"
-        expanded
-        onPress={() => {}}
-        style={[styles.fab, { bottom: insets.bottom + 16 }]}
-      />
+      <View
+        pointerEvents="box-none"
+        style={[styles.fabContainer, { bottom: insets.bottom + 16 }]}
+      >
+        <FAB.Extended
+          icon="account-plus"
+          label="New contact"
+          expanded
+          onPress={() => {}}
+        />
+      </View>
     </>
   );
 };
@@ -99,9 +103,11 @@ const styles = StyleSheet.create({
   badge: {
     alignSelf: 'center',
   },
-  fab: {
+  fabContainer: {
     position: 'absolute',
+    left: 16,
     right: 16,
+    alignItems: 'flex-end',
   },
 });
 

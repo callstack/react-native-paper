@@ -27,7 +27,9 @@ function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
           isLeading
           icon="folder-search"
           aria-label="search examples"
-          onPress={() => navigation.navigate('ExampleList')}
+          onPress={() =>
+            navigation.navigate('Examples', { screen: 'ExampleList' })
+          }
         />
       )}
       <Appbar.Content title={options.title || route.name} />
@@ -40,37 +42,12 @@ function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
   );
 }
 
-const Root = createNativeStackNavigator({
-  initialRouteName: 'SamplesList',
-  layout: ({ children }) => (
-    <>
-      <View style={styles.stackWrapper}>{children}</View>
-      <PreferencesModal />
-    </>
-  ),
+const Examples = createNativeStackNavigator({
+  initialRouteName: 'ExampleList',
   screenOptions: {
     header: (props) => <Header {...props} />,
   },
   screens: {
-    SamplesList: createNativeStackScreen({
-      screen: SamplesList,
-      options: {
-        title: 'Samples',
-      },
-      linking: '',
-    }),
-    ...objectFromEntries(
-      objectEntries(samples).map(([id, sample]) => [
-        id,
-        createNativeStackScreen({
-          screen: sample.screen,
-          options: {
-            title: sample.title,
-            headerShown: sample.headerShown ?? true,
-          },
-        }),
-      ])
-    ),
     ExampleList: createNativeStackScreen({
       screen: ExampleList,
       options: {
@@ -106,6 +83,50 @@ const Root = createNativeStackNavigator({
               : 'paper',
           darkMode: (value) => value === 'true',
         },
+      },
+    }),
+  },
+});
+
+const Root = createNativeStackNavigator({
+  initialRouteName: 'SamplesList',
+  layout: ({ children }) => (
+    <>
+      <View style={styles.stackWrapper}>{children}</View>
+      <PreferencesModal />
+    </>
+  ),
+  screenOptions: {
+    header: (props) => <Header {...props} />,
+  },
+  screens: {
+    SamplesList: createNativeStackScreen({
+      screen: SamplesList,
+      options: {
+        title: 'Samples',
+      },
+      linking: '',
+    }),
+    ...objectFromEntries(
+      objectEntries(samples).map(([id, sample]) => [
+        id,
+        createNativeStackScreen({
+          screen: sample.screen,
+          options: {
+            title: sample.title,
+            headerShown: sample.headerShown ?? true,
+          },
+        }),
+      ])
+    ),
+    Examples: createNativeStackScreen({
+      screen: Examples,
+      options: {
+        headerShown: false,
+      },
+      // @ts-expect-error `path` is optional at runtime; an empty path would clash with SamplesList
+      linking: {
+        initialRouteName: 'ExampleList',
       },
     }),
   },

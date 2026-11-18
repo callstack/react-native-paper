@@ -65,6 +65,7 @@ const ArticleSample = () => {
                 <IconButton
                   icon={liked ? 'heart' : 'heart-outline'}
                   selected={liked}
+                  aria-label={liked ? 'Remove like' : 'Like'}
                   onPress={() => setLiked(!liked)}
                 />
               </Tooltip>
@@ -72,6 +73,7 @@ const ArticleSample = () => {
                 <IconButton
                   icon={bookmarked ? 'bookmark' : 'bookmark-outline'}
                   selected={bookmarked}
+                  aria-label={bookmarked ? 'Remove bookmark' : 'Bookmark'}
                   onPress={() => setBookmarked(!bookmarked)}
                 />
               </Tooltip>
@@ -88,6 +90,7 @@ const ArticleSample = () => {
         onDismiss={() => setMenuExpanded(false)}
         trigger={{
           icon: 'share-variant',
+          'aria-label': 'Share',
           onPress: () => setMenuExpanded(true),
         }}
         items={[

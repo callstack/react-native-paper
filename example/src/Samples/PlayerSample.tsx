@@ -27,9 +27,9 @@ export const PlayerSampleConfig: SampleConfig = {
 };
 
 const repeatModes = [
-  { value: 'off', icon: 'repeat-off' },
-  { value: 'one', icon: 'repeat-once' },
-  { value: 'all', icon: 'repeat' },
+  { value: 'off', icon: 'repeat-off', label: 'Repeat off' },
+  { value: 'one', icon: 'repeat-once', label: 'Repeat one' },
+  { value: 'all', icon: 'repeat', label: 'Repeat all' },
 ];
 
 const PlayerSample = () => {
@@ -50,11 +50,12 @@ const PlayerSample = () => {
       <ProgressBar progress={0.45} />
 
       <View style={styles.row}>
-        {repeatModes.map(({ value, icon }) => (
+        {repeatModes.map(({ value, icon, label }) => (
           <IconButton
             key={value}
             icon={icon}
             selected={repeat === value}
+            aria-label={label}
             onPress={() => setRepeat(value)}
           />
         ))}

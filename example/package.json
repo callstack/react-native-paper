@@ -15,7 +15,6 @@
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-masked-view/masked-view": "0.3.2",
     "@react-navigation/bottom-tabs": "^8.0.0-alpha.57",
-    "@react-navigation/drawer": "^8.0.0-alpha.58",
     "@react-navigation/elements": "3.0.0-alpha.55",
     "@react-navigation/native": "^8.0.0-alpha.51",
     "@react-navigation/native-stack": "^8.0.0-alpha.59",
