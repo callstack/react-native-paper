@@ -14,6 +14,7 @@ import Animated, {
 import Icon, { isEqualIcon, isValidIcon } from './Icon';
 import type { IconSource } from './Icon';
 import { useInternalTheme } from '../core/theming';
+import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../theme/types';
 
 type Props = {
@@ -57,6 +58,8 @@ const CrossFadeIcon = ({
 
   const fade = useSharedValue(1);
 
+  const getDuration = useMotionDuration();
+
   if (currentIcon !== source) {
     setPreviousIcon(() => currentIcon);
     setCurrentIcon(() => source);
@@ -67,12 +70,12 @@ const CrossFadeIcon = ({
       fade.value = 1;
 
       fade.value = withTiming(0, {
-        duration: theme.animation.scale * 200,
+        duration: getDuration(200),
         easing: Easing.inOut(Easing.ease),
         reduceMotion: ReduceMotion.Never,
       });
     }
-  }, [currentIcon, fade, previousIcon, theme.animation.scale]);
+  }, [currentIcon, fade, previousIcon, getDuration]);
 
   const hasPreviousIcon = Boolean(previousIcon);
 

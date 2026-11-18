@@ -12,9 +12,6 @@ exports[`renders list section with custom title style 1`] = `
   }
   theme={
     {
-      "animation": {
-        "scale": 1,
-      },
       "colors": {
         "background": "rgba(254, 247, 255, 1)",
         "elevation": {
@@ -734,9 +731,6 @@ exports[`renders list section with subheader 1`] = `
   }
   theme={
     {
-      "animation": {
-        "scale": 1,
-      },
       "colors": {
         "background": "rgba(254, 247, 255, 1)",
         "elevation": {
@@ -1454,9 +1448,6 @@ exports[`renders list section without subheader 1`] = `
   }
   theme={
     {
-      "animation": {
-        "scale": 1,
-      },
       "colors": {
         "background": "rgba(254, 247, 255, 1)",
         "elevation": {
