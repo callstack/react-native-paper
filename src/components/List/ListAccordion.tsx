@@ -280,7 +280,9 @@ const ListAccordion = ({
   const [contentPhase, setContentPhase] = React.useState<ContentPhase>(
     isExpanded ? 'expanded' : 'collapsed'
   );
-  const [contentHeight, setContentHeight] = React.useState(0);
+  // A shared value, so a nested accordion that animates does not re-render
+  // this one on every frame
+  const contentHeight = useSharedValue(0);
 
   if (
     isExpanded &&
@@ -326,12 +328,12 @@ const ListAccordion = ({
     height:
       contentPhase === 'expanded'
         ? 'auto'
-        : contentProgress.value * contentHeight,
+        : contentProgress.value * contentHeight.value,
     opacity: contentProgress.value,
   }));
 
   const onContentLayout = (event: LayoutChangeEvent) => {
-    setContentHeight(event.nativeEvent.layout.height);
+    contentHeight.value = event.nativeEvent.layout.height;
   };
 
   const {
@@ -458,7 +460,14 @@ const ListAccordion = ({
       </View>
 
       {contentPhase !== 'collapsed' ? (
-        <Animated.View style={[styles.expandedContent, contentTransitionStyle]}>
+        <Animated.View
+          style={[
+            // Clip only while animating, so shadows and badges in the
+            // expanded content are not cut off
+            contentPhase !== 'expanded' && styles.transitioningClip,
+            contentTransitionStyle,
+          ]}
+        >
           <View
             onLayout={onContentLayout}
             style={
@@ -502,7 +511,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingLeft: ListTokens.leadingSpace,
   },
-  expandedContent: {
+  transitioningClip: {
     overflow: 'hidden',
   },
   transitioningContent: {

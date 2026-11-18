@@ -368,11 +368,11 @@ it.each([
     LightTheme.colors.onSurfaceVariant,
   ],
   [
-    'a selected item on the primary container',
+    'a selected item on the secondary container',
     true,
-    LightTheme.colors.primaryContainer,
-    LightTheme.colors.onPrimaryContainer,
-    LightTheme.colors.onPrimaryContainer,
+    LightTheme.colors.secondaryContainer,
+    LightTheme.colors.onSecondaryContainer,
+    LightTheme.colors.onSecondaryContainer,
   ],
 ])(
   'renders %s',
@@ -393,3 +393,35 @@ it.each([
     });
   }
 );
+
+it('announces a pressable item as a button', async () => {
+  await render(<ListItem title="First Item" onPress={() => {}} />);
+
+  expect(screen.getByRole('button', { name: 'First Item' })).toBeOnTheScreen();
+});
+
+it('does not give an item without onPress the button role', async () => {
+  await render(<ListItem title="First Item" />);
+
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+});
+
+it('announces a selected item to screen readers', async () => {
+  await render(<ListItem title="First Item" onPress={() => {}} selected />);
+
+  expect(screen.getByRole('button', { name: 'First Item' })).toBeSelected();
+});
+
+it('lets a caller override the role and the selected state', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      onPress={() => {}}
+      selected
+      role="link"
+      aria-selected={false}
+    />
+  );
+
+  expect(screen.getByRole('link', { name: 'First Item' })).not.toBeSelected();
+});

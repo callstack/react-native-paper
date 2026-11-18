@@ -16,8 +16,8 @@ const colors = {
   leadingIconColor: 'onSurfaceVariant',
   trailingIconColor: 'onSurfaceVariant',
   expandTrailingIconColor: 'onSurface',
-  selectedContainerColor: 'primaryContainer',
-  selectedContentColor: 'onPrimaryContainer',
+  selectedContainerColor: 'secondaryContainer',
+  selectedContentColor: 'onSecondaryContainer',
 } as const satisfies Record<string, ColorRole>;
 
 export const ListTokens = { ...sizes, ...colors };

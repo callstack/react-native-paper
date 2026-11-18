@@ -1212,7 +1212,52 @@ The `style` prop of `Card.Cover` is now typed as a `View` style. Image style pro
 
 ### List
 
+#### Size and typography
+
+`List.Item` and `List.Accordion` now use the Material Design 3 list sizes and the typography of the theme:
+
+- Rows are 56dp tall with one line, 72dp with two lines and 88dp with three lines.
+- A three-line row has 12dp of vertical padding instead of 8dp.
+- The space after the trailing element is 16dp instead of 24dp.
+- The title uses the `bodyLarge` font of the theme instead of `fontSize` 16. The description uses `bodyMedium` instead of `fontSize` 14.
+
+To keep the 24dp trailing space of 5.x, set it in `style`:
+
+```diff
+-<List.Item title="Inbox" />
++<List.Item title="Inbox" style={{ paddingRight: 24 }} />
+```
+
+#### `List.Item`
+
+`List.Item` has new `leading` and `trailing` props. They take an element, not a render function, and `List.Icon` in them gets the icon color of the row. The `left` and `right` props of `List.Item` are deprecated and will be removed in 7.0. `List.Accordion` keeps `left` and `right`.
+
+```diff
+<List.Item
+  title="Inbox"
+- left={props => <List.Icon {...props} icon="inbox" />}
++ leading={<List.Icon icon="inbox" />}
+/>
+```
+
+A `List.Item` with `onPress` now has the `button` role, so screen readers announce it as a button. If your tests find elements with `getByRole('button')`, these rows now match too.
+
 #### `List.Accordion`
+
+The header keeps its colors when the accordion expands. In 5.x, the title and the `left` icon turned `primary`. The header background is `surface` instead of `background`, and the chevron is `onSurface` instead of `onSurfaceVariant`. The chevron rotates instead of switching to `chevron-up`.
+
+To keep the `primary` title of an expanded accordion, set it in `titleStyle`:
+
+```diff
+<List.Accordion
+  title="Inbox"
+  expanded={expanded}
+  onPress={() => setExpanded(!expanded)}
++ titleStyle={expanded ? { color: theme.colors.primary } : undefined}
+>
+```
+
+The content now animates its height when the accordion expands or collapses. It stays mounted until the collapse animation ends, so it unmounts later than in 5.x.
 
 An accordion with a `left` element now indents only its `List.Item` children. Anything else you put inside keeps its own padding, so indent it yourself to line it up with the items.
 
@@ -1233,6 +1278,10 @@ An accordion with a `left` element now indents only its `List.Item` children. An
 ```
 
 `theme` set on `List.Accordion` no longer reaches its children either. Pass it to the child that needs the override.
+
+#### `List.Image`
+
+`List.Image` with `variant="video"` now has a vertical margin, so a row with a video thumbnail is 88dp tall for one, two or three lines.
 
 ### Typography components
 

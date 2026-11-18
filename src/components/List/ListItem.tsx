@@ -61,10 +61,12 @@ export type Props = Omit<
   trailing?: React.ReactNode;
   /**
    * Callback which returns a React element to display on the left side.
+   * @deprecated Use `leading` instead. `left` will be removed in 7.0.
    */
   left?: (props: { color: ColorValue; style: Style }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
+   * @deprecated Use `trailing` instead. `right` will be removed in 7.0.
    */
   right?: (props: { color: ColorValue; style?: Style }) => React.ReactNode;
   /**
@@ -148,7 +150,7 @@ export type Props = Omit<
  *   <List.Item
  *     title="First Item"
  *     description="Item description"
- *     left={props => <List.Icon {...props} icon="folder" />}
+ *     leading={<List.Icon icon="folder" />}
  *   />
  * );
  *
@@ -312,8 +314,10 @@ const ListItem = ({
   return (
     <ListRowContext.Provider value={rowContext}>
       <TouchableRipple
-        // Before `rest`, so a caller's `focusRing` wins
+        // Before `rest`, so a caller's own value wins
         focusRing="inward"
+        role={onPress ? 'button' : undefined}
+        aria-selected={selected}
         {...rest}
         ref={ref}
         style={[
@@ -325,7 +329,6 @@ const ListItem = ({
           style,
         ]}
         onPress={onPress}
-        aria-selected={selected}
         theme={theme}
         testID={testID}
       >

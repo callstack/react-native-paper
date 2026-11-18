@@ -178,9 +178,7 @@ exports[`renders expanded accordion 1`] = `
     collapsable={false}
     style={
       [
-        {
-          "overflow": "hidden",
-        },
+        false,
         {
           "height": "auto",
           "opacity": 1,

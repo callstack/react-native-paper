@@ -39,12 +39,24 @@ const ListItemExample = () => {
         <Divider />
         <List.Item
           title="Headline"
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"
@@ -79,13 +91,25 @@ const ListItemExample = () => {
         <List.Item
           title="Headline"
           left={(props) => <List.Icon {...props} icon="account-outline" />}
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
           left={(props) => <List.Icon {...props} icon="account-outline" />}
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"
@@ -129,7 +153,13 @@ const ListItemExample = () => {
           left={(props) => (
             <Avatar.Text style={props.style} label="A" size={40} />
           )}
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"
@@ -137,7 +167,13 @@ const ListItemExample = () => {
           left={(props) => (
             <Avatar.Text style={props.style} label="A" size={40} />
           )}
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"
@@ -195,7 +231,13 @@ const ListItemExample = () => {
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
           )}
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"
@@ -206,7 +248,13 @@ const ListItemExample = () => {
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
           )}
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"
@@ -271,7 +319,13 @@ const ListItemExample = () => {
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
           )}
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"
@@ -283,7 +337,13 @@ const ListItemExample = () => {
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
           )}
-          right={(props) => <Checkbox status="checked" style={props.style} />}
+          right={(props) => (
+            <Checkbox
+              status="checked"
+              aria-label="Headline"
+              style={props.style}
+            />
+          )}
         />
         <List.Item
           title="Headline"

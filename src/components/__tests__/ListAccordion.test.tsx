@@ -167,6 +167,27 @@ it('keeps the content on screen until the collapse animation ends', async () => 
   expect(screen.queryByText('List item 1')).not.toBeOnTheScreen();
 });
 
+it('clips the content only while it animates', async () => {
+  await render(
+    <ListAccordion title="Accordion item 1">
+      <ListItem title="List item 1" testID="accordion-child" />
+    </ListAccordion>
+  );
+
+  await userEvent.press(screen.getByText('Accordion item 1'));
+
+  // The child sits in a measuring view inside the animated wrapper
+  const getWrapper = () => screen.getByTestId('accordion-child').parent?.parent;
+
+  expect(getWrapper()).toHaveStyle({ overflow: 'hidden' });
+
+  await act(() => {
+    jest.runAllTimers();
+  });
+
+  expect(getWrapper()).not.toHaveStyle({ overflow: 'hidden' });
+});
+
 describe('ListAccordion', () => {
   it('should not throw an error when id={0}', async () => {
     const ListAccordionTest = () => (
@@ -299,7 +320,7 @@ describe('ListAccordion', () => {
     });
   });
 
-  it('renders a selected accordion on the primary container', async () => {
+  it('renders a selected accordion on the secondary container', async () => {
     await render(
       <ListAccordion title="Accordion item 1" description="Supporting" selected>
         <ListItem title="List item 1" />
@@ -307,10 +328,41 @@ describe('ListAccordion', () => {
     );
 
     expect(screen.getByText('Accordion item 1')).toHaveStyle({
-      color: LightTheme.colors.onPrimaryContainer,
+      color: LightTheme.colors.onSecondaryContainer,
     });
     expect(screen.getByText('Supporting')).toHaveStyle({
-      color: LightTheme.colors.onPrimaryContainer,
+      color: LightTheme.colors.onSecondaryContainer,
     });
+  });
+
+  // The name is a regex because the icon mock renders the glyph name as text
+  it('announces the expanded state to screen readers', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1">
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    const header = screen.getByRole('button', { name: /^Accordion item 1/ });
+
+    expect(header).toBeCollapsed();
+
+    await userEvent.press(header);
+
+    expect(
+      screen.getByRole('button', { name: /^Accordion item 1/ })
+    ).toBeExpanded();
+  });
+
+  it('announces a selected accordion to screen readers', async () => {
+    await render(
+      <ListAccordion title="Accordion item 1" selected>
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    expect(
+      screen.getByRole('button', { name: /^Accordion item 1/ })
+    ).toBeSelected();
   });
 });

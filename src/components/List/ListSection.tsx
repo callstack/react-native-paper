@@ -37,10 +37,10 @@ export type Props = ViewProps & {
  * const MyComponent = () => (
  *   <List.Section>
  *     <List.Subheader>Some title</List.Subheader>
- *     <List.Item title="First Item" left={() => <List.Icon icon="folder" />} />
+ *     <List.Item title="First Item" leading={<List.Icon icon="folder" />} />
  *     <List.Item
  *       title="Second Item"
- *       left={() => <List.Icon color={Palette.tertiary70} icon="folder" />}
+ *       leading={<List.Icon color={Palette.tertiary70} icon="folder" />}
  *     />
  *   </List.Section>
  * );
