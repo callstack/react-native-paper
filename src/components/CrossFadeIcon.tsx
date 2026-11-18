@@ -10,12 +10,11 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import useLatestCallback from 'use-latest-callback';
 
 import Icon, { isEqualIcon, isValidIcon } from './Icon';
 import type { IconSource } from './Icon';
 import { useInternalTheme } from '../core/theming';
-import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
+import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../theme/types';
 
 type Props = {
@@ -59,8 +58,7 @@ const CrossFadeIcon = ({
 
   const fade = useSharedValue(1);
 
-  const reduceMotion = useReduceMotion();
-  const getDuration = useLatestCallback(() => (reduceMotion ? 0 : 200));
+  const getDuration = useMotionDuration();
 
   if (currentIcon !== source) {
     setPreviousIcon(() => currentIcon);
@@ -72,7 +70,7 @@ const CrossFadeIcon = ({
       fade.value = 1;
 
       fade.value = withTiming(0, {
-        duration: getDuration(),
+        duration: getDuration(200),
         easing: Easing.inOut(Easing.ease),
         reduceMotion: ReduceMotion.Never,
       });

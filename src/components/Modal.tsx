@@ -13,7 +13,10 @@ import Portal from './Portal/Portal';
 import Surface from './Surface';
 import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
-import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
+import {
+  useMotionDuration,
+  useReduceMotion,
+} from '../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../theme/tokens';
 import type { Elevation, ThemeProp } from '../theme/types';
 import { useOverlayDismiss } from '../utils/useOverlayDismiss';
@@ -211,7 +214,7 @@ function Modal({
 
   const reduceMotion = useReduceMotion();
   const duration = reduceMotion ? 0 : DEFAULT_DURATION;
-  const getDuration = useLatestCallback(() => duration);
+  const getDuration = useMotionDuration();
 
   const contentRef = React.useRef<React.ComponentRef<typeof View>>(null);
 
@@ -233,7 +236,10 @@ function Modal({
       return undefined;
     }
 
-    const timeout = setTimeout(() => setVisibleInternal(false), getDuration());
+    const timeout = setTimeout(
+      () => setVisibleInternal(false),
+      getDuration(DEFAULT_DURATION)
+    );
 
     return () => clearTimeout(timeout);
   }, [getDuration, visible, visibleInternal]);
@@ -257,7 +263,10 @@ function Modal({
 
     // Transparent views are not in the accessibility tree, so focus has to
     // wait for the fade to finish.
-    const timeout = setTimeout(focusInitialTarget, getDuration());
+    const timeout = setTimeout(
+      focusInitialTarget,
+      getDuration(DEFAULT_DURATION)
+    );
 
     return () => clearTimeout(timeout);
   }, [animatedVisible, focusInitialTarget, getDuration]);

@@ -2,13 +2,11 @@ import * as React from 'react';
 // eslint-disable-next-line no-restricted-imports -- TODO: migrate RadioButtonAndroid to Reanimated.
 import { Animated, StyleSheet, View } from 'react-native';
 
-import useLatestCallback from 'use-latest-callback';
-
 import { RadioButtonContext } from './RadioButtonGroup';
 import type { RadioButtonContextType } from './RadioButtonGroup';
 import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -82,8 +80,7 @@ const RadioButtonAndroid = ({
 
   const isFirstRendering = React.useRef<boolean>(true);
 
-  const reduceMotion = useReduceMotion();
-  const getDuration = useLatestCallback(() => (reduceMotion ? 0 : 150));
+  const getDuration = useMotionDuration();
 
   React.useEffect(() => {
     // Do not run animation on very first rendering
@@ -97,7 +94,7 @@ const RadioButtonAndroid = ({
 
       Animated.timing(radioAnim, {
         toValue: 1,
-        duration: getDuration(),
+        duration: getDuration(150),
         useNativeDriver: true,
       }).start();
     } else {
@@ -105,7 +102,7 @@ const RadioButtonAndroid = ({
 
       Animated.timing(borderAnim, {
         toValue: BORDER_WIDTH,
-        duration: getDuration(),
+        duration: getDuration(150),
         useNativeDriver: false,
       }).start();
     }

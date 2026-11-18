@@ -8,11 +8,9 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import useLatestCallback from 'use-latest-callback';
-
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
+import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../theme/types';
 
 export type Props = ViewProps & {
@@ -98,8 +96,7 @@ const ProgressBar = ({
   const indeterminateAnimation =
     React.useRef<Animated.CompositeAnimation | null>(null);
 
-  const reduceMotion = useReduceMotion();
-  const getDuration = useLatestCallback(() => (reduceMotion ? 0 : 200));
+  const getDuration = useMotionDuration();
 
   React.useEffect(() => {
     passedAnimatedValue.current = animatedValue;
@@ -108,7 +105,7 @@ const ProgressBar = ({
   const startAnimation = React.useCallback(() => {
     // Show progress bar
     Animated.timing(fade, {
-      duration: getDuration(),
+      duration: getDuration(200),
       toValue: 1,
       useNativeDriver: true,
       isInteraction: false,
@@ -146,7 +143,7 @@ const ProgressBar = ({
       Animated.loop(indeterminateAnimation.current).start();
     } else {
       Animated.timing(timer, {
-        duration: getDuration(),
+        duration: getDuration(200),
         toValue: progress ? progress : 0,
         useNativeDriver: true,
         isInteraction: false,
@@ -161,7 +158,7 @@ const ProgressBar = ({
     }
 
     Animated.timing(fade, {
-      duration: getDuration(),
+      duration: getDuration(200),
       toValue: 0,
       useNativeDriver: true,
       isInteraction: false,

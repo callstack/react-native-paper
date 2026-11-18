@@ -32,7 +32,7 @@ import useLatestCallback from 'use-latest-callback';
 import MenuItem from './MenuItem';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
@@ -331,10 +331,7 @@ const Menu = ({
     focusFirstDOMNode(anchorRef.current);
   });
 
-  const reduceMotion = useReduceMotion();
-  const getDuration = useLatestCallback(() =>
-    reduceMotion ? 0 : ANIMATION_DURATION
-  );
+  const getDuration = useMotionDuration();
 
   const show = React.useCallback(async () => {
     const windowLayoutResult = Dimensions.get('window');
@@ -392,7 +389,7 @@ const Menu = ({
       }
 
       const config = {
-        duration: getDuration(),
+        duration: getDuration(ANIMATION_DURATION),
         easing: EASING,
         reduceMotion: ReduceMotion.Never,
       };
@@ -422,7 +419,7 @@ const Menu = ({
     opacity.value = withTiming(
       0,
       {
-        duration: getDuration(),
+        duration: getDuration(ANIMATION_DURATION),
         easing: EASING,
         reduceMotion: ReduceMotion.Never,
       },

@@ -9,7 +9,6 @@ import type {
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useLatestCallback from 'use-latest-callback';
 
 import {
   getActiveTintColor,
@@ -17,7 +16,7 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
@@ -336,10 +335,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme;
   const { bottom, left, right } = useSafeAreaInsets();
-  const reduceMotion = useReduceMotion();
-  const getDuration = useLatestCallback((duration: number) =>
-    reduceMotion ? 0 : duration
-  );
+  const getDuration = useMotionDuration();
   const compact = compactProp ?? false;
   let shifting = shiftingProp ?? false;
 

@@ -24,7 +24,7 @@ import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
+import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../theme/types';
 import { FocusRingColorContext } from '../utils/useFocusRing';
 
@@ -184,10 +184,7 @@ const Snackbar = ({
 
   const [hidden, setHidden] = React.useState(!visible);
 
-  const reduceMotion = useReduceMotion();
-  const getDuration = useLatestCallback((duration: number) =>
-    reduceMotion ? 0 : duration
-  );
+  const getDuration = useMotionDuration();
 
   if (visible && hidden) {
     setHidden(false);
