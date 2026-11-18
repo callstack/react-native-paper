@@ -47,7 +47,7 @@ export type TooltipRichTriggerProps = {
   onFocus?: () => void;
   onBlur?: () => void;
   onKeyDown?: (event: NativeSyntheticEvent<{ key: string }>) => void;
-  'aria-label'?: string;
+  accessibilityHint?: string;
   'aria-describedby'?: string;
   'aria-haspopup'?: 'dialog';
   'aria-expanded'?: boolean;
@@ -61,7 +61,7 @@ export type Props = {
    *
    * ```js
    * <Tooltip.Rich content="...">
-   *   {(props) => <IconButton {...props} icon="plus" />}
+   *   {(props) => <IconButton {...props} icon="plus" aria-label="Add" />}
    * </Tooltip.Rich>
    * ```
    */
@@ -154,7 +154,7 @@ export type Props = {
  *       </Button>
  *     )}
  *   >
- *     {(props) => <IconButton {...props} icon="plus" />}
+ *     {(props) => <IconButton {...props} icon="plus" aria-label="Add" />}
  *   </Tooltip.Rich>
  * );
  *
@@ -384,7 +384,7 @@ const RichTooltip = ({
             'aria-controls': tooltipId,
           }),
         }
-      : { onPress: handlePress, 'aria-label': description };
+      : { onPress: handlePress, accessibilityHint: description };
 
   // Web only: keep the tooltip open while the pointer or the focus travels from
   // the trigger into the tooltip, and re-schedule the hide once it leaves. A

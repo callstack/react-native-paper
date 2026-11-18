@@ -994,10 +994,10 @@ describe('Tooltip.Rich', () => {
       expect(isHiddenFromAccessibility(getBackdrop())).toBe(true);
     });
 
-    it('names the trigger with the title and content', async () => {
+    it('describes the trigger with the title and content', async () => {
       await setup({ title: 'Heading' });
 
-      expect(getTrigger()).toHaveAccessibleName('Heading. Body text');
+      expect(screen.getByHintText('Heading. Body text')).toBe(getTrigger());
     });
 
     it('opens another tooltip when the backdrop is pressed over its trigger', async () => {

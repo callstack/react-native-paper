@@ -201,11 +201,18 @@ const TooltipExample = () => {
                 </>
               )}
             >
-              {(props) => <IconButton {...props} icon="plus" size={24} />}
+              {(props) => (
+                <IconButton {...props} icon="plus" size={24} aria-label="Add" />
+              )}
             </Tooltip.Rich>
             <Tooltip.Rich content="A rich tooltip with body text only — no title or actions.">
               {(props) => (
-                <IconButton {...props} icon="information" size={24} />
+                <IconButton
+                  {...props}
+                  icon="information"
+                  size={24}
+                  aria-label="More information"
+                />
               )}
             </Tooltip.Rich>
           </View>
