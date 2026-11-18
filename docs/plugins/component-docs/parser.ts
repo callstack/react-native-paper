@@ -164,6 +164,61 @@ const isPathInside = (parentPath: string, childPath: string) => {
   return !relativePath.startsWith('..') && !path.isAbsolute(relativePath);
 };
 
+const unionMemberAliasesCache = new WeakMap<ts.SourceFile, Set<string>>();
+
+// Names of the type aliases that a file uses as union members, such as the
+// branches of `type Props = Base & (WithTitle | WithHeader)`.
+const getUnionMemberAliases = (sourceFile: ts.SourceFile) => {
+  const cached = unionMemberAliasesCache.get(sourceFile);
+
+  if (cached) {
+    return cached;
+  }
+
+  const names = new Set<string>();
+  const visit = (node: ts.Node) => {
+    if (ts.isUnionTypeNode(node)) {
+      for (const member of node.types) {
+        if (
+          ts.isTypeReferenceNode(member) &&
+          ts.isIdentifier(member.typeName)
+        ) {
+          names.add(member.typeName.text);
+        }
+      }
+    }
+
+    ts.forEachChild(node, visit);
+  };
+
+  visit(sourceFile);
+  unionMemberAliasesCache.set(sourceFile, names);
+
+  return names;
+};
+
+// A prop belongs to a union branch when a union encloses its declaration
+// directly, or when the type alias that declares it is a union member.
+const isUnionBranchDeclaration = (declaration: ts.Declaration) => {
+  let parent: ts.Node | undefined = declaration.parent;
+
+  while (parent) {
+    if (ts.isUnionTypeNode(parent)) {
+      return true;
+    }
+
+    if (ts.isTypeAliasDeclaration(parent)) {
+      return getUnionMemberAliases(parent.getSourceFile()).has(
+        parent.name.text
+      );
+    }
+
+    parent = parent.parent;
+  }
+
+  return false;
+};
+
 const getProps = (
   checker: ts.TypeChecker,
   sourceRootDir: string,
@@ -206,15 +261,28 @@ const getProps = (
           ? [item.type.getText(item.getSourceFile())]
           : []
       );
+      // A `never` branch only marks a prop as unavailable in that branch, so
+      // a prop typed `never` everywhere but one branch keeps that branch's text.
+      const availableTypes = new Set(
+        declarationTypes.filter((item) => item !== 'never')
+      );
+      // A declaration outside the union branches is the documented type, as
+      // in `Appbar.Content`, so only merge the types when every one is a branch.
+      const hasOnlyUnionDeclarations = declarations.every(
+        isUnionBranchDeclaration
+      );
       const type =
-        new Set(declarationTypes).size > 1 || !declarations.includes(property)
-          ? checker.typeToString(
-              checker.getTypeOfSymbolAtLocation(symbol, property),
-              property,
-              ts.TypeFormatFlags.NoTruncation |
-                ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
-            )
-          : property.type.getText(propertySourceFile);
+        hasOnlyUnionDeclarations && availableTypes.size === 1
+          ? [...availableTypes][0]
+          : (hasOnlyUnionDeclarations && new Set(declarationTypes).size > 1) ||
+              !declarations.includes(property)
+            ? checker.typeToString(
+                checker.getTypeOfSymbolAtLocation(symbol, property),
+                property,
+                ts.TypeFormatFlags.NoTruncation |
+                  ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
+              )
+            : property.type.getText(propertySourceFile);
 
       return [
         {
