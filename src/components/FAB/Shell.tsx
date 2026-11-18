@@ -233,6 +233,8 @@ const Shell = ({
   const [pressed, setPressed] = React.useState(false);
   const touchableRef = React.useRef<React.ComponentRef<typeof View>>(null);
   const previousFocusedElement = React.useRef<HTMLElement | null>(null);
+  const hoveredRef = React.useRef(false);
+  const pressingRef = React.useRef(false);
 
   const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
 
@@ -364,6 +366,8 @@ const Shell = ({
           if (target === document.activeElement) target.blur();
         }
       }
+      hoveredRef.current = false;
+      pressingRef.current = false;
       setHovered(false);
       setPressed(false);
     }
@@ -371,10 +375,40 @@ const Shell = ({
 
   React.useEffect(() => {
     if (!hasHandler) {
+      hoveredRef.current = false;
+      pressingRef.current = false;
       setHovered(false);
       setPressed(false);
     }
   }, [hasHandler]);
+
+  // The pressed elevation matches the resting one, so a press only shows on a
+  // hovered FAB, and `pressed` is set only then. iOS and Android send no hover
+  // events by default, so a tap there doesn't re-render the FAB itself. The
+  // refs hold the pointer state between events: a quick click on web runs both
+  // press handlers before a render, and a press can start before the hover.
+  const handleHoverIn = () => {
+    hoveredRef.current = true;
+    setHovered(true);
+    if (pressingRef.current) setPressed(true);
+  };
+
+  const handleHoverOut = () => {
+    hoveredRef.current = false;
+    setHovered(false);
+    setPressed(false);
+  };
+
+  const handlePressIn = () => {
+    pressingRef.current = true;
+    if (hoveredRef.current) setPressed(true);
+  };
+
+  const handlePressOut = (event: GestureResponderEvent) => {
+    pressingRef.current = false;
+    if (hoveredRef.current) setPressed(false);
+    onPressOut?.(event);
+  };
 
   // Without a handler the touchable drops the button role, and on web that
   // renders role="presentation", which can't carry a name. A labelled
@@ -423,18 +457,12 @@ const Shell = ({
           // Only with a touch handler: a FAB without one is a plain View that
           // takes no focus, and the press handlers alone would make it a
           // control. They also keep a hidden FAB's touchable mounted without
-          // `onPress`, so the effect above still finds the focused element.
-          onHoverIn={hasHandler ? () => setHovered(true) : undefined}
-          onHoverOut={hasHandler ? () => setHovered(false) : undefined}
-          onPressIn={hasHandler ? () => setPressed(true) : undefined}
-          onPressOut={
-            hasHandler
-              ? (event) => {
-                  setPressed(false);
-                  onPressOut?.(event);
-                }
-              : undefined
-          }
+          // `onPress` or `onLongPress`, so the effect above still finds the
+          // focused element.
+          onHoverIn={hasHandler ? handleHoverIn : undefined}
+          onHoverOut={hasHandler ? handleHoverOut : undefined}
+          onPressIn={hasHandler ? handlePressIn : undefined}
+          onPressOut={hasHandler ? handlePressOut : undefined}
           onFocus={
             hasHandler
               ? (event) => {

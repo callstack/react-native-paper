@@ -15,7 +15,7 @@ import * as Reanimated from 'react-native-reanimated';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
 import PaperProvider from '../../core/PaperProvider';
-import { render, screen } from '../../test-utils';
+import { act, render, screen } from '../../test-utils';
 import FAB from '../FAB';
 import Tooltip from '../Tooltip/Tooltip';
 
@@ -408,6 +408,73 @@ it.each(['ios', 'android'] as const)(
     expect(getStyle(ref)).toEqual(resting);
   }
 );
+
+it('does not re-render the FAB shell for a press without hover', async () => {
+  const onRender = jest.fn();
+  await render(
+    <React.Profiler id="fab" onRender={onRender}>
+      <FAB icon="plus" aria-label="Create" onPress={() => {}} />
+    </React.Profiler>
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+  onRender.mockClear();
+
+  // fireEvent calls the shell's press handlers directly. On iOS a real tap
+  // still re-renders the touchable for its own press feedback.
+  await fireEvent(fab, 'pressIn');
+  await fireEvent(fab, 'pressOut', { nativeEvent: {} });
+
+  expect(onRender).not.toHaveBeenCalled();
+});
+
+// react-native-web runs both press handlers before a render when a click
+// takes less than 50 ms, e.g. a tap-to-click on a trackpad.
+it('returns a hovered FAB to its hover elevation after a quick click', async () => {
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
+  await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={() => {}}
+    />
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+  await fireEvent(fab, 'hoverIn');
+  const hovered = getStyle(ref);
+
+  // The outer act holds the render back until both handlers have run, as
+  // react-native-web does for a quick click.
+  await act(async () => {
+    await fireEvent(fab, 'pressIn');
+    await fireEvent(fab, 'pressOut', { nativeEvent: {} });
+  });
+
+  expect(getStyle(ref)).toEqual(hovered);
+});
+
+it('shows the pressed elevation when the pointer arrives during a press', async () => {
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
+  await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={() => {}}
+    />
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+  const resting = getStyle(ref);
+
+  // e.g. a keyboard press, with the mouse moving onto the FAB before release
+  await fireEvent(fab, 'pressIn');
+  await fireEvent(fab, 'hoverIn');
+  expect(getStyle(ref)).toEqual(resting);
+  await fireEvent(fab, 'pressOut', { nativeEvent: {} });
+  expect(getStyle(ref)).not.toEqual(resting);
+});
 
 it('raises the elevation while hovered and lowers it while pressed when Platform.OS is android', async () => {
   jest.replaceProperty(Platform, 'OS', 'android');
