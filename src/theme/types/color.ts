@@ -6,6 +6,24 @@ export type ColorRole = {
   [K in keyof ThemeColors]: ThemeColors[K] extends ColorValue ? K : never;
 }[keyof ThemeColors];
 
+/**
+ * Surface-family color roles that can be used as a Surface container fill.
+ * @see https://m3.material.io/styles/color/roles#surface-colors
+ */
+export type SurfaceRole = keyof Pick<
+  ThemeColors,
+  | 'surface'
+  | 'surfaceDim'
+  | 'surfaceBright'
+  | 'surfaceVariant'
+  | 'surfaceContainerLowest'
+  | 'surfaceContainerLow'
+  | 'surfaceContainer'
+  | 'surfaceContainerHigh'
+  | 'surfaceContainerHighest'
+  | 'inverseSurface'
+>;
+
 export type ThemeColors = {
   primary: ColorValue;
   primaryContainer: ColorValue;
