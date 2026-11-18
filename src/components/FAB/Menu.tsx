@@ -62,6 +62,9 @@ export type MenuTriggerProps = {
   contentColor?: ColorValue;
   visible?: boolean;
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Accessibility label for the trigger FAB.
+   */
   'aria-label'?: string;
   testID?: string;
 };
@@ -228,6 +231,9 @@ type ItemProps = {
   variant: Variant;
   theme: InternalTheme;
   onPress: (e: GestureResponderEvent) => void;
+  /**
+   * Accessibility label. Falls back to `label`.
+   */
   'aria-label'?: string;
   testID?: string;
 };
