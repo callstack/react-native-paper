@@ -167,8 +167,6 @@ const Banner = ({
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
   const reduceMotion = useReduceMotion();
-  // Read when the animation starts, so a reduce motion change doesn't replay it
-  // and call the callbacks again.
   const getDuration = useLatestCallback((duration: number) =>
     reduceMotion ? 0 : duration
   );

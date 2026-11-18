@@ -60,7 +60,6 @@ const CrossFadeIcon = ({
   const fade = useSharedValue(1);
 
   const reduceMotion = useReduceMotion();
-  // Read when the swap starts, so a reduce motion change doesn't replay it.
   const getDuration = useLatestCallback(() => (reduceMotion ? 0 : 200));
 
   if (currentIcon !== source) {

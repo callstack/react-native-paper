@@ -344,8 +344,6 @@ const BottomNavigation = <Route extends BaseRoute>({
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
-  // Read when an animation starts, so a reduce motion change doesn't run the
-  // tab animation again.
   const getDuration = useLatestCallback(() => (reduceMotion ? 0 : 150));
   const compact = compactProp ?? false;
   let shifting = shiftingProp ?? false;

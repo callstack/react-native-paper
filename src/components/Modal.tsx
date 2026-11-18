@@ -211,7 +211,6 @@ function Modal({
 
   const reduceMotion = useReduceMotion();
   const duration = reduceMotion ? 0 : DEFAULT_DURATION;
-  // Read when a timer starts, so a reduce motion change doesn't restart it.
   const getDuration = useLatestCallback(() => duration);
 
   const contentRef = React.useRef<React.ComponentRef<typeof View>>(null);

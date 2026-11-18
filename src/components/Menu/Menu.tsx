@@ -332,8 +332,6 @@ const Menu = ({
   });
 
   const reduceMotion = useReduceMotion();
-  // Read when an animation starts, so a reduce motion change doesn't start
-  // opening the menu again.
   const getDuration = useLatestCallback(() =>
     reduceMotion ? 0 : ANIMATION_DURATION
   );

@@ -337,8 +337,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   const { colors } = theme;
   const { bottom, left, right } = useSafeAreaInsets();
   const reduceMotion = useReduceMotion();
-  // Read when an animation starts, so a reduce motion change doesn't run the
-  // tab animation again.
   const getDuration = useLatestCallback((duration: number) =>
     reduceMotion ? 0 : duration
   );

@@ -83,8 +83,6 @@ const RadioButtonAndroid = ({
   const isFirstRendering = React.useRef<boolean>(true);
 
   const reduceMotion = useReduceMotion();
-  // Read when the animation starts, so a reduce motion change doesn't replay
-  // the last check or uncheck.
   const getDuration = useLatestCallback(() => (reduceMotion ? 0 : 150));
 
   React.useEffect(() => {

@@ -99,8 +99,6 @@ const ProgressBar = ({
     React.useRef<Animated.CompositeAnimation | null>(null);
 
   const reduceMotion = useReduceMotion();
-  // Read when an animation starts, so a reduce motion change doesn't restart
-  // the indeterminate loop.
   const getDuration = useLatestCallback(() => (reduceMotion ? 0 : 200));
 
   React.useEffect(() => {

@@ -73,8 +73,6 @@ const ActivityIndicator = ({
   );
 
   const reduceMotion = useReduceMotion();
-  // Read when a fade starts, so a reduce motion change doesn't restart the
-  // rotation.
   const getFadeDuration = useLatestCallback(() => (reduceMotion ? 0 : 200));
 
   const startRotation = React.useCallback(() => {

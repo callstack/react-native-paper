@@ -185,8 +185,6 @@ const Snackbar = ({
   const [hidden, setHidden] = React.useState(!visible);
 
   const reduceMotion = useReduceMotion();
-  // Read when the animation starts, so a reduce motion change doesn't replay it
-  // and restart the dismiss timer.
   const getDuration = useLatestCallback((duration: number) =>
     reduceMotion ? 0 : duration
   );
