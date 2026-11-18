@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { createContext } from 'react';
 
 import type { Theme } from 'react-native-paper';
 
@@ -18,4 +18,4 @@ export type Preferences = {
   shouldUseDynamicTheme: boolean;
 };
 
-export const PreferencesContext = React.createContext<Preferences | null>(null);
+export const PreferencesContext = createContext<Preferences | null>(null);

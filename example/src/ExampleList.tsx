@@ -48,6 +48,7 @@ import ThemeExample from './Examples/ThemeExample';
 import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
 import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
+import { filterByQuery } from '../utils/filterByQuery';
 import { objectEntries } from '../utils/typedObject';
 
 export const mainExamples = {
@@ -117,14 +118,10 @@ export default function ExampleList() {
 
   const [query, setQuery] = useState('');
 
-  const search = query.trim().toLowerCase();
-  const filteredData = search
-    ? data.filter(
-        ({ id, data: example }) =>
-          example.title.toLowerCase().includes(search) ||
-          id.toLowerCase().includes(search)
-      )
-    : data;
+  const filteredData = filterByQuery(data, query, ({ id, data: example }) => [
+    example.title,
+    id,
+  ]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

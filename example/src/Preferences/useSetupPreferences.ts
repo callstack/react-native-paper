@@ -12,9 +12,11 @@ import {
 
 import type { Preferences } from './PreferencesContext';
 import { dynamicThemeSupported } from '../../utils';
+import { clearNavigationState } from '../navigationPersistence';
 
-const PERSISTENCE_KEY = 'NAVIGATION_STATE_V2';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
+
+export const getDirection = (rtl: boolean) => (rtl ? 'rtl' : 'ltr');
 
 const getInitialRtl = () => {
   if (Platform.OS === 'web' && typeof document !== 'undefined') {
@@ -22,17 +24,6 @@ const getInitialRtl = () => {
   }
 
   return I18nManager.getConstants().isRTL;
-};
-
-export const navigationPersistor = {
-  async persist(state: unknown) {
-    await AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state));
-  },
-  async restore() {
-    const state = await AsyncStorage.getItem(PERSISTENCE_KEY);
-
-    return state ? JSON.parse(state) : undefined;
-  },
 };
 
 export function useSetupPreferences() {
@@ -57,7 +48,7 @@ export function useSetupPreferences() {
         ? DarkTheme
         : LightTheme;
 
-  const direction: 'rtl' | 'ltr' = rtl ? 'rtl' : 'ltr';
+  const direction = getDirection(rtl);
 
   React.useEffect(() => {
     const restorePrefs = async () => {
@@ -124,7 +115,7 @@ export function useSetupPreferences() {
     setPreferencesVisible(false);
 
     try {
-      await AsyncStorage.removeItem(PERSISTENCE_KEY);
+      await clearNavigationState();
     } catch (e) {
       // ignore error
     }

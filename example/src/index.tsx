@@ -7,9 +7,10 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { PaperProvider } from 'react-native-paper';
 
+import { navigationPersistor } from './navigationPersistence';
 import { PreferencesContext } from './Preferences/PreferencesContext';
 import {
-  navigationPersistor,
+  getDirection,
   useSetupPreferences,
 } from './Preferences/useSetupPreferences';
 import App from './RootNavigator';
@@ -42,7 +43,7 @@ export default function PaperExample() {
   }
 
   const { theme, customFontLoaded, rippleEffectEnabled, rtl } = preferences;
-  const direction = rtl ? 'rtl' : 'ltr';
+  const direction = getDirection(rtl);
 
   const combinedTheme = theme.dark ? CombinedDarkTheme : CombinedDefaultTheme;
   const configuredFontTheme = createConfiguredFontTheme(combinedTheme);
@@ -65,7 +66,9 @@ export default function PaperExample() {
           theme={navigationTheme}
           direction={direction}
           persistor={navigationPersistor}
-          linking={{ config: { initialRouteName: 'SamplesList' } }}
+          linking={{
+            config: { initialRouteName: App.config.initialRouteName },
+          }}
           onReady={() => {
             void SplashScreen.hideAsync();
           }}

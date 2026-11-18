@@ -12,6 +12,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type { SampleConfig } from './types';
+import { filterByQuery } from '../../utils/filterByQuery';
 import ScreenWrapper from '../ScreenWrapper';
 
 export const ContactsSampleConfig: SampleConfig = {
@@ -39,10 +40,7 @@ const ContactsSample = () => {
   const insets = useSafeAreaInsets();
   const [query, setQuery] = React.useState('');
 
-  const search = query.trim().toLowerCase();
-  const contacts = search
-    ? CONTACTS.filter((contact) => contact.name.toLowerCase().includes(search))
-    : CONTACTS;
+  const contacts = filterByQuery(CONTACTS, query, ({ name }) => [name]);
 
   return (
     <>
