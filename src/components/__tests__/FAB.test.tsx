@@ -476,6 +476,31 @@ it('shows the pressed elevation when the pointer arrives during a press', async 
   expect(getStyle(ref)).not.toEqual(resting);
 });
 
+it('calls onPressOut and drops the pressed elevation when a hovered FAB is released', async () => {
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
+  const onPressOut = jest.fn();
+  await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={() => {}}
+      onPressOut={onPressOut}
+    />
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+
+  await fireEvent(fab, 'hoverIn');
+  const hovered = getStyle(ref);
+  await fireEvent(fab, 'pressIn');
+  expect(getStyle(ref)).not.toEqual(hovered);
+  await fireEvent(fab, 'pressOut', { nativeEvent: {} });
+
+  expect(onPressOut).toHaveBeenCalledWith({ nativeEvent: {} });
+  expect(getStyle(ref)).toEqual(hovered);
+});
+
 it('raises the elevation while hovered and lowers it while pressed when Platform.OS is android', async () => {
   jest.replaceProperty(Platform, 'OS', 'android');
   const ref = React.createRef<React.ComponentRef<typeof View>>();
