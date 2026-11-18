@@ -14,6 +14,7 @@ import * as Reanimated from 'react-native-reanimated';
 import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import FAB from '../FAB';
+import Tooltip from '../Tooltip/Tooltip';
 
 jest.mock('react-native-reanimated', () => {
   const ReanimatedModule = jest.requireActual<
@@ -157,6 +158,39 @@ it('forwards event object to onPress', async () => {
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
 });
 
+it('calls onLongPress and onPressOut when FAB is long pressed', async () => {
+  const user = userEvent.setup();
+  const onLongPress = jest.fn();
+  const onPressOut = jest.fn();
+  await render(
+    <FAB
+      icon="plus"
+      aria-label="Add item"
+      onLongPress={onLongPress}
+      onPressOut={onPressOut}
+      delayLongPress={300}
+    />
+  );
+  await user.longPress(screen.getByRole('button', { name: 'Add item' }), {
+    duration: 400,
+  });
+  expect(onLongPress).toHaveBeenCalledTimes(1);
+  expect(onPressOut).toHaveBeenCalledTimes(1);
+});
+
+it('shows Tooltip when FAB is long pressed', async () => {
+  const user = userEvent.setup();
+  await render(
+    <PaperProvider>
+      <Tooltip title="Press Me">
+        <FAB icon="plus" aria-label="Add item" onPress={() => {}} />
+      </Tooltip>
+    </PaperProvider>
+  );
+  await user.longPress(screen.getByRole('button', { name: 'Add item' }));
+  expect(screen.getByText('Press Me')).toBeOnTheScreen();
+});
+
 describe('without a touch handler', () => {
   describe.each(['ios', 'android'] as const)('on %s', (os) => {
     beforeEach(() => {
@@ -200,18 +234,12 @@ describe('without a touch handler', () => {
       );
     });
 
-    it('stays a button with a touch handler', async () => {
-      await render(
-        <FAB icon="star" aria-label="Favorite" onPress={() => {}} />
-      );
-
-      expect(
-        screen.getByRole('button', { name: 'Favorite' })
-      ).toBeOnTheScreen();
-    });
-
-    it('stays a button while it reports a toggle state', async () => {
-      await render(<FAB icon="star" aria-label="Favorite" aria-checked />);
+    it.each([
+      ['with only onPress', { onPress: () => {} }],
+      ['with only onLongPress', { onLongPress: () => {} }],
+      ['while it reports a toggle state', { 'aria-checked': true }],
+    ])('stays a button %s', async (_, props) => {
+      await render(<FAB icon="star" aria-label="Favorite" {...props} />);
 
       expect(
         screen.getByRole('button', { name: 'Favorite' })

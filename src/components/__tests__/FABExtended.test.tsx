@@ -214,3 +214,24 @@ it('forwards event object to onPress', async () => {
   );
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
 });
+
+it('calls onLongPress and onPressOut when long pressed', async () => {
+  const user = userEvent.setup();
+  const onLongPress = jest.fn();
+  const onPressOut = jest.fn();
+  await render(
+    <FAB.Extended
+      icon="plus"
+      label="New message"
+      expanded
+      onLongPress={onLongPress}
+      onPressOut={onPressOut}
+      delayLongPress={300}
+    />
+  );
+  await user.longPress(screen.getByRole('button', { name: 'New message' }), {
+    duration: 400,
+  });
+  expect(onLongPress).toHaveBeenCalledTimes(1);
+  expect(onPressOut).toHaveBeenCalledTimes(1);
+});

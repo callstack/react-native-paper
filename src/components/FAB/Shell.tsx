@@ -26,6 +26,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import { useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -87,6 +88,18 @@ export type ShellProps = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
   /**
    * Whether the shell can't be pressed. Turns a control off without removing
    * `onPress`, which would render another element and remount the content.
@@ -198,6 +211,9 @@ const Shell = ({
   elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
   disabled,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
@@ -299,17 +315,19 @@ const Shell = ({
     [borderRadius, containerBg]
   );
 
+  const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
+
   // `scope: 'within'`: the ring is drawn on the clip view below, not the
   // inner `TouchableRipple` that actually receives focus. On web the shared
   // stylesheet hides the browser's own outline there, so only the clip view's
   // ring shows, or only the outline in a browser without `:has()`.
   //
-  // Off when `disabled` or without `onPress`: the inner TouchableRipple is
-  // then a plain View, and a focused one unmounts without a blur reaching the
-  // hook. The public FAB has no `disabled`, so dropping `onPress` is how an app
-  // turns it off.
+  // Off when `disabled` or without a touch handler: the inner TouchableRipple
+  // is then a plain View, and a focused one unmounts without a blur reaching
+  // the hook. The public FAB has no `disabled`, so dropping the handlers is how
+  // an app turns it off.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
-    disabled || !onPress,
+    disabled || !hasHandler,
     theme.colors.secondary,
     'outward',
     'within'
@@ -320,7 +338,7 @@ const Shell = ({
   // icon-only FAB that does nothing is an image there, named by its label.
   const isWebImage =
     Platform.OS === 'web' &&
-    !onPress &&
+    !hasHandler &&
     !disabled &&
     label === undefined &&
     children === undefined &&
@@ -351,6 +369,9 @@ const Shell = ({
           background={background}
           focusRing="none"
           onPress={onPress}
+          onLongPress={onLongPress}
+          onPressOut={onPressOut}
+          delayLongPress={delayLongPress}
           disabled={disabled}
           onFocus={focusTarget.onFocus}
           onBlur={focusTarget.onBlur}
