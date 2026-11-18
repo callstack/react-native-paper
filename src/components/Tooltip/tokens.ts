@@ -28,7 +28,7 @@ const rich = {
   content: 'onSurfaceVariant',
   shape: 'medium',
   elevation: 2,
-  maxWidth: 312,
+  maxWidth: 320,
   paddingHorizontal: 16,
   paddingTop: 12,
   paddingBottom: 8,
