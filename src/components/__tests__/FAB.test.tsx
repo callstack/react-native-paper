@@ -304,7 +304,7 @@ const getElevation = (
   return style.elevation;
 };
 
-it('does not turn a FAB without onPress into a button', async () => {
+it('does not turn a FAB without a touch handler into a button', async () => {
   await render(<FAB icon="plus" aria-label="Create" />);
   expect(screen.getByLabelText('Create')).toBeOnTheScreen();
   expect(screen.queryByRole('button')).not.toBeOnTheScreen();
