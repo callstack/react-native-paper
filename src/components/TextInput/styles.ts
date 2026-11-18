@@ -40,6 +40,9 @@ export const styles = StyleSheet.create({
     opacity: 0,
     pointerEvents: 'none',
   },
+  addendumSpacer: {
+    flex: 1,
+  },
   supportingText: {
     flex: 1,
     marginTop: SUPPORTING_TEXT_MARGIN_TOP,
