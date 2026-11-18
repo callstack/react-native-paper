@@ -9,8 +9,9 @@ import type { View } from 'react-native';
 
 import { afterEach, expect, it, jest } from '@jest/globals';
 
-import { fireEvent, render, screen, userEvent } from '../../test-utils';
+import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import TextInput from '../TextInput';
+import { ERROR_ANNOUNCEMENT_DELAY_MS } from '../TextInput/constants';
 import type {
   TextInputProps,
   TextInputRenderProps,
@@ -381,21 +382,29 @@ it.each([true, false, 'true', 'false', 'grammar', 'spelling'] as const)(
   }
 );
 
+const settleError = () =>
+  act(() => jest.advanceTimersByTime(ERROR_ANNOUNCEMENT_DELAY_MS));
+
+const spyOnAnnounce = () =>
+  jest
+    .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
+    .mockClear();
+
 it.each(['ios', 'android'] as const)(
   'announces each changed error message once on %s',
   async (platform) => {
     jest.replaceProperty(Platform, 'OS', platform);
-    const announce = jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
-      .mockClear();
+    const announce = spyOnAnnounce();
     const { rerender } = await render(
       <TextInput label="Email" supportingText="Optional" />
     );
+    await settleError();
     expect(announce).not.toHaveBeenCalled();
 
     await rerender(
       <TextInput label="Email" supportingText="Invalid address" error />
     );
+    await settleError();
     expect(announce).toHaveBeenLastCalledWith('Invalid address', {
       queue: true,
     });
@@ -407,14 +416,17 @@ it.each(['ios', 'android'] as const)(
         value="a"
       />
     );
+    await settleError();
     expect(announce).toHaveBeenCalledTimes(1);
     await rerender(
       <TextInput label="Email" supportingText="Address is required" error />
     );
+    await settleError();
     expect(announce).toHaveBeenLastCalledWith('Address is required', {
       queue: true,
     });
     await rerender(<TextInput label="Email" supportingText="Optional" />);
+    await settleError();
     expect(announce).toHaveBeenCalledTimes(2);
   }
 );
@@ -423,17 +435,17 @@ it.each(['ios', 'android'] as const)(
   'does not announce an error that is shown on mount on %s',
   async (platform) => {
     jest.replaceProperty(Platform, 'OS', platform);
-    const announce = jest
-      .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
-      .mockClear();
+    const announce = spyOnAnnounce();
     const { rerender } = await render(
       <TextInput label="Email" supportingText="Invalid address" error />
     );
+    await settleError();
     expect(announce).not.toHaveBeenCalled();
 
     await rerender(
       <TextInput label="Email" supportingText="Address is required" error />
     );
+    await settleError();
     expect(announce).toHaveBeenCalledTimes(1);
     expect(announce).toHaveBeenLastCalledWith('Address is required', {
       queue: true,
@@ -441,10 +453,112 @@ it.each(['ios', 'android'] as const)(
   }
 );
 
+it.each(['ios', 'android'] as const)(
+  'waits for the error to stop changing and announces only the last one on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    const announce = spyOnAnnounce();
+    const { rerender } = await render(<TextInput label="Code" />);
+
+    for (const remaining of [5, 4, 3]) {
+      await rerender(
+        <TextInput
+          label="Code"
+          supportingText={`Enter ${remaining} more digits`}
+          error
+        />
+      );
+      await act(() =>
+        jest.advanceTimersByTime(ERROR_ANNOUNCEMENT_DELAY_MS - 1)
+      );
+    }
+    expect(announce).not.toHaveBeenCalled();
+
+    await act(() => jest.advanceTimersByTime(1));
+    expect(announce.mock.calls).toEqual([
+      ['Enter 3 more digits', { queue: true }],
+    ]);
+  }
+);
+
+it.each(['ios', 'android'] as const)(
+  'announces a message that stays the same while typing a second after it appears on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    const announce = spyOnAnnounce();
+    const invalid = (value: string) => (
+      <TextInput
+        label="Password"
+        supportingText="Use at least 8 characters"
+        error
+        value={value}
+      />
+    );
+    const { rerender } = await render(<TextInput label="Password" />);
+
+    await rerender(invalid('a'));
+    await act(() => jest.advanceTimersByTime(ERROR_ANNOUNCEMENT_DELAY_MS - 1));
+    await rerender(invalid('ab'));
+    await act(() => jest.advanceTimersByTime(1));
+    expect(announce.mock.calls).toEqual([
+      ['Use at least 8 characters', { queue: true }],
+    ]);
+  }
+);
+
+it.each(['ios', 'android'] as const)(
+  'does not announce an error that clears before it settles on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    const announce = spyOnAnnounce();
+    const { rerender, unmount } = await render(<TextInput label="Email" />);
+
+    await rerender(
+      <TextInput label="Email" supportingText="Invalid address" error />
+    );
+    await rerender(<TextInput label="Email" />);
+    await settleError();
+    expect(announce).not.toHaveBeenCalled();
+
+    await rerender(
+      <TextInput label="Email" supportingText="Invalid address" error />
+    );
+    await unmount();
+    await settleError();
+    expect(announce).not.toHaveBeenCalled();
+  }
+);
+
+it.each(['ios', 'android'] as const)(
+  'announces an error again only after it stays cleared on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    const announce = spyOnAnnounce();
+    const invalid = (
+      <TextInput label="Email" supportingText="Invalid address" error />
+    );
+    const valid = <TextInput label="Email" supportingText="Optional" />;
+    const { rerender } = await render(valid);
+
+    await rerender(invalid);
+    await settleError();
+    expect(announce).toHaveBeenCalledTimes(1);
+
+    await rerender(valid);
+    await rerender(invalid);
+    await settleError();
+    expect(announce).toHaveBeenCalledTimes(1);
+
+    await rerender(valid);
+    await settleError();
+    await rerender(invalid);
+    await settleError();
+    expect(announce).toHaveBeenCalledTimes(2);
+  }
+);
+
 const makeTwoFieldsInvalid = async () => {
-  const announce = jest
-    .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
-    .mockClear();
+  const announce = spyOnAnnounce();
   const { rerender } = await render(
     <>
       <TextInput label="Email" supportingText="Optional" />
@@ -458,6 +572,7 @@ const makeTwoFieldsInvalid = async () => {
       <TextInput label="Password" supportingText="Password is required" error />
     </>
   );
+  await settleError();
 
   return announce;
 };
@@ -485,9 +600,7 @@ it('queues the error announcements on iOS so they do not cut each other off', as
 
 it('announces errors on web through the alert role', async () => {
   jest.replaceProperty(Platform, 'OS', 'web');
-  const announce = jest
-    .spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions')
-    .mockClear();
+  const announce = spyOnAnnounce();
   const { rerender } = await render(
     <TextInput label="Email" supportingText="Optional" />
   );
@@ -497,6 +610,7 @@ it('announces errors on web through the alert role', async () => {
     <TextInput label="Email" supportingText="Invalid address" error />
   );
   expect(screen.getByRole('alert')).toHaveTextContent('Invalid address');
+  await settleError();
   expect(announce).not.toHaveBeenCalled();
 });
 

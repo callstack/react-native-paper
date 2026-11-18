@@ -25,6 +25,7 @@ import { scheduleOnRN } from 'react-native-worklets';
 
 import {
   ACTIVE_LABEL_FONT_SIZE,
+  ERROR_ANNOUNCEMENT_DELAY_MS,
   INACTIVE_LABEL_FONT_SIZE,
   TIMING_CONFIG,
 } from './constants';
@@ -470,22 +471,32 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   // hidden, so a live region would not announce it. Announce changed errors
   // instead, but not errors present on mount, so a screen that opens with
   // several invalid fields does not queue an announcement for each of them.
+  // Wait until the error has stayed the same for ERROR_ANNOUNCEMENT_DELAY_MS,
+  // so a message that changes on every keystroke is announced once it stops
+  // changing, not once per change.
   // Queue them so that fields becoming invalid together do not cut each other
   // off on iOS.
   const errorMessage = flags.hasError ? props.supportingText : undefined;
-  const previousErrorMessage = useRef(errorMessage);
+  const announcedErrorMessage = useRef(errorMessage);
   useEffect(() => {
     if (
-      Platform.OS !== 'web' &&
-      errorMessage &&
-      errorMessage !== previousErrorMessage.current
+      Platform.OS === 'web' ||
+      errorMessage === announcedErrorMessage.current
     ) {
-      AccessibilityInfo.announceForAccessibilityWithOptions(errorMessage, {
-        queue: true,
-      });
+      return;
     }
 
-    previousErrorMessage.current = errorMessage;
+    const timeout = setTimeout(() => {
+      announcedErrorMessage.current = errorMessage;
+
+      if (errorMessage) {
+        AccessibilityInfo.announceForAccessibilityWithOptions(errorMessage, {
+          queue: true,
+        });
+      }
+    }, ERROR_ANNOUNCEMENT_DELAY_MS);
+
+    return () => clearTimeout(timeout);
   }, [errorMessage]);
 
   const counterText = `${inputLength}/${props.maxLength}`;
