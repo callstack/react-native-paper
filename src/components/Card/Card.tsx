@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   ViewProps,
@@ -146,6 +147,10 @@ type FilledCardProps = {
    * Resting elevation. Available only when `variant="elevated"`.
    */
   elevation?: never;
+  /**
+   * Outline color. Available only when `variant="outlined"`.
+   */
+  borderColor?: never;
 };
 
 type ElevatedCardProps = {
@@ -157,6 +162,10 @@ type ElevatedCardProps = {
    * Resting shadow elevation for an elevated Card.
    */
   elevation?: Elevation;
+  /**
+   * Outline color. Available only when `variant="outlined"`.
+   */
+  borderColor?: never;
 };
 
 type OutlinedCardProps = {
@@ -168,6 +177,11 @@ type OutlinedCardProps = {
    * Outlined Cards do not support custom elevation.
    */
   elevation?: never;
+  /**
+   * Color of the outline. It replaces the theme color in every state; the
+   * state opacities still apply, so a disabled outline stays at 12%.
+   */
+  borderColor?: ColorValue;
 };
 
 type CardVariantProps = FilledCardProps | ElevatedCardProps | OutlinedCardProps;
@@ -346,6 +360,7 @@ export type Props = Omit<ViewProps, 'children' | 'style'> &
 const Card = ({
   variant: cardVariant = 'filled',
   elevation: customElevation,
+  borderColor: customBorderColor,
   delayLongPress,
   onPress,
   onLongPress,
@@ -467,6 +482,7 @@ const Card = ({
   // Android, the underlay elsewhere), so a second one would double it.
   const stateLayerOpacity =
     visuals.state === 'pressed' ? 0 : visuals.stateLayerOpacity;
+  const outlineColor = customBorderColor ?? visuals.outlineColor;
   const stateLayerTransitionStyle: AnimatedStyle<ViewStyle> = {
     transitionProperty: 'opacity',
     transitionDuration,
@@ -475,9 +491,7 @@ const Card = ({
   const outlineTransitionStyle: AnimatedStyle<ViewStyle> = {
     // A PlatformColor outline cannot be interpolated.
     transitionProperty:
-      typeof visuals.outlineColor === 'string'
-        ? ['borderColor', 'opacity']
-        : 'opacity',
+      typeof outlineColor === 'string' ? ['borderColor', 'opacity'] : 'opacity',
     transitionDuration,
     transitionTimingFunction,
   };
@@ -705,7 +719,7 @@ const Card = ({
             shapeStyle,
             {
               borderWidth: visuals.outlineWidth,
-              borderColor: visuals.outlineColor,
+              borderColor: outlineColor,
               opacity: visuals.outlineOpacity,
             },
             outlineTransitionStyle,
