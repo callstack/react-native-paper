@@ -46,6 +46,18 @@ export type Props = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * Accessibility label. Falls back to nothing if unset.
    */
   'aria-label'?: string;
@@ -122,6 +134,9 @@ const FAB = ({
   size = 'default',
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
   containerColor,
   contentColor,
   'aria-label': ariaLabel,
@@ -142,6 +157,9 @@ const FAB = ({
     size={size}
     visible={visible}
     onPress={onPress}
+    onLongPress={onLongPress}
+    onPressOut={onPressOut}
+    delayLongPress={delayLongPress}
     containerColor={containerColor}
     contentColor={contentColor}
     aria-label={ariaLabel}

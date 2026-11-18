@@ -322,6 +322,8 @@ const Menu = ({
       return;
     }
 
+    scaleX.value = 0;
+    scaleY.value = 0;
     setMenuLayout({ width: 0, height: 0 });
     setRendered(false);
     isShownRef.current = false;

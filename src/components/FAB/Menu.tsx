@@ -4,6 +4,7 @@ import type { ColorValue, GestureResponderEvent } from 'react-native';
 
 import Animated, {
   interpolate,
+  ReduceMotion,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -179,11 +180,19 @@ const AnimatedItem = ({
     }
     scaleX.value = withDelay(
       delay,
-      withSpring(target, toRawSpring(theme.motion.spring.fast.spatial))
+      withSpring(target, {
+        ...toRawSpring(theme.motion.spring.fast.spatial),
+        reduceMotion: ReduceMotion.Never,
+      }),
+      ReduceMotion.Never
     );
     alpha.value = withDelay(
       delay,
-      withSpring(target, toRawSpring(theme.motion.spring.fast.effects))
+      withSpring(target, {
+        ...toRawSpring(theme.motion.spring.fast.effects),
+        reduceMotion: ReduceMotion.Never,
+      }),
+      ReduceMotion.Never
     );
   }, [expanded, index, itemCount, theme, reduceMotion, scaleX, alpha]);
 
@@ -369,10 +378,10 @@ const MorphingTrigger = ({
     // Compose's ToggleFloatingActionButton uses a single FastSpatial spring
     // for the full open/close progress (size, corner, color, icon all share
     // one timeline).
-    progress.value = withSpring(
-      expanded ? 1 : 0,
-      toRawSpring(theme.motion.spring.fast.spatial)
-    );
+    progress.value = withSpring(expanded ? 1 : 0, {
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: ReduceMotion.Never,
+    });
   }, [expanded, theme, reduceMotion, progress]);
 
   // Derived shared values for the morph shape. Passing them to Shell as
