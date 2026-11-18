@@ -7,7 +7,6 @@ exports[`renders disabled icon button 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -22,7 +21,6 @@ exports[`renders disabled icon button 1`] = `
       undefined,
     ]
   }
-  testID="icon-button-container"
 >
   <View
     accessibilityState={
@@ -46,14 +44,6 @@ exports[`renders disabled icon button 1`] = `
     centered={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -72,14 +62,19 @@ exports[`renders disabled icon button 1`] = `
         [
           {
             "alignItems": "center",
-            "flexGrow": 1,
+            "flex": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderRadius": 20,
+          },
+          {
+            "overflow": "hidden",
           },
           undefined,
         ],
       ]
     }
-    testID="icon-button"
   >
     <View
       style={
@@ -129,7 +124,6 @@ exports[`renders icon button by default 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -144,48 +138,11 @@ exports[`renders icon button by default 1`] = `
       undefined,
     ]
   }
-  testID="icon-button-container"
 >
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
     centered={true}
-    collapsable={false}
-    focusable={true}
-    hitSlop={
-      {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
-      }
-    }
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    role="none"
     style={
       [
         {
@@ -194,14 +151,19 @@ exports[`renders icon button by default 1`] = `
         [
           {
             "alignItems": "center",
-            "flexGrow": 1,
+            "flex": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderRadius": 20,
+          },
+          {
+            "overflow": "hidden",
           },
           undefined,
         ],
       ]
     }
-    testID="icon-button"
   >
     <View
       style={
@@ -251,7 +213,6 @@ exports[`renders icon button with color 1`] = `
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
@@ -266,48 +227,11 @@ exports[`renders icon button with color 1`] = `
       undefined,
     ]
   }
-  testID="icon-button-container"
 >
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
     centered={true}
-    collapsable={false}
-    focusable={true}
-    hitSlop={
-      {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
-      }
-    }
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    role="none"
     style={
       [
         {
@@ -316,14 +240,19 @@ exports[`renders icon button with color 1`] = `
         [
           {
             "alignItems": "center",
-            "flexGrow": 1,
+            "flex": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderRadius": 20,
+          },
+          {
+            "overflow": "hidden",
           },
           undefined,
         ],
       ]
     }
-    testID="icon-button"
   >
     <View
       style={
@@ -366,36 +295,36 @@ exports[`renders icon button with color 1`] = `
 </View>
 `;
 
-exports[`renders icon button with size 1`] = `
+exports[`renders icon button with custom border radius 1`] = `
 <View
   collapsable={false}
   style={
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
-        "height": 46,
-        "width": 46,
+        "height": 52,
+        "width": 52,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 23,
+        "borderRadius": 26,
         "borderWidth": 0,
       },
-      undefined,
+      {
+        "borderRadius": 0,
+      },
     ]
   }
-  testID="icon-button-container"
 >
   <View
     accessibilityState={
       {
         "busy": undefined,
         "checked": undefined,
-        "disabled": true,
+        "disabled": false,
         "expanded": undefined,
         "selected": undefined,
       }
@@ -412,14 +341,6 @@ exports[`renders icon button with size 1`] = `
     centered={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -438,14 +359,109 @@ exports[`renders icon button with size 1`] = `
         [
           {
             "alignItems": "center",
-            "flexGrow": 1,
+            "flex": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderRadius": 26,
+          },
+          {
+            "overflow": "hidden",
           },
           undefined,
         ],
       ]
     }
     testID="icon-button"
+  >
+    <View
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 36,
+            },
+            [
+              {
+                "lineHeight": 36,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        camera
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders icon button with size 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+      },
+      {
+        "backgroundColor": undefined,
+        "height": 46,
+        "width": 46,
+      },
+      {
+        "borderColor": "rgba(202, 196, 208, 1)",
+        "borderRadius": 23,
+        "borderWidth": 0,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessible={true}
+    centered={true}
+    role="none"
+    style={
+      [
+        {
+          "overflow": "hidden",
+        },
+        [
+          {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          {
+            "borderRadius": 23,
+          },
+          {
+            "overflow": "hidden",
+          },
+          undefined,
+        ],
+      ]
+    }
   >
     <View
       style={
@@ -488,36 +504,36 @@ exports[`renders icon button with size 1`] = `
 </View>
 `;
 
-exports[`renders icon change animated 1`] = `
+exports[`renders icon button with small border radius 1`] = `
 <View
   collapsable={false}
   style={
     [
       {
         "margin": 6,
-        "overflow": "hidden",
       },
       {
         "backgroundColor": undefined,
-        "height": 40,
-        "width": 40,
+        "height": 52,
+        "width": 52,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 20,
+        "borderRadius": 26,
         "borderWidth": 0,
       },
-      undefined,
+      {
+        "borderRadius": 4,
+      },
     ]
   }
-  testID="icon-button-container"
 >
   <View
     accessibilityState={
       {
         "busy": undefined,
         "checked": undefined,
-        "disabled": true,
+        "disabled": false,
         "expanded": undefined,
         "selected": undefined,
       }
@@ -534,14 +550,6 @@ exports[`renders icon change animated 1`] = `
     centered={true}
     collapsable={false}
     focusable={true}
-    hitSlop={
-      {
-        "bottom": 6,
-        "left": 6,
-        "right": 6,
-        "top": 6,
-      }
-    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -560,14 +568,109 @@ exports[`renders icon change animated 1`] = `
         [
           {
             "alignItems": "center",
-            "flexGrow": 1,
+            "flex": 1,
             "justifyContent": "center",
+          },
+          {
+            "borderRadius": 26,
+          },
+          {
+            "overflow": "hidden",
           },
           undefined,
         ],
       ]
     }
     testID="icon-button"
+  >
+    <View
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 36,
+            },
+            [
+              {
+                "lineHeight": 36,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        camera
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders icon change animated 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+      },
+      {
+        "backgroundColor": undefined,
+        "height": 40,
+        "width": 40,
+      },
+      {
+        "borderColor": "rgba(202, 196, 208, 1)",
+        "borderRadius": 20,
+        "borderWidth": 0,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessible={true}
+    centered={true}
+    role="none"
+    style={
+      [
+        {
+          "overflow": "hidden",
+        },
+        [
+          {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          {
+            "borderRadius": 20,
+          },
+          {
+            "overflow": "hidden",
+          },
+          undefined,
+        ],
+      ]
+    }
   >
     <View
       style={
@@ -611,7 +714,6 @@ exports[`renders icon change animated 1`] = `
               },
             ]
           }
-          testID="cross-fade-icon-current"
         >
           <Text
             accessibilityElementsHidden={true}

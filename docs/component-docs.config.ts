@@ -77,11 +77,6 @@ const pages = {
   },
   Dialog: {
     Dialog: 'Dialog/Dialog',
-    DialogActions: 'Dialog/DialogActions',
-    DialogContent: 'Dialog/DialogContent',
-    DialogIcon: 'Dialog/DialogIcon',
-    DialogScrollArea: 'Dialog/DialogScrollArea',
-    DialogTitle: 'Dialog/DialogTitle',
   },
   Divider: 'Divider',
   Drawer: {
@@ -148,11 +143,6 @@ const pages = {
       source: 'TextInput/TextInputIcon',
       props: 'TextInputAccessoryProps',
     },
-  },
-  ToggleButton: {
-    ToggleButton: 'ToggleButton/ToggleButton',
-    ToggleButtonGroup: 'ToggleButton/ToggleButtonGroup',
-    ToggleButtonRow: 'ToggleButton/ToggleButtonRow',
   },
   Tooltip: {
     Tooltip: 'Tooltip/Tooltip',

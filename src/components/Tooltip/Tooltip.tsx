@@ -11,14 +11,16 @@ import type { LayoutChangeEvent, ViewStyle } from 'react-native';
 import { getTooltipPosition } from './utils';
 import type { Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
 
 export type Props = {
   /**
-   * Tooltip reference element. Needs to be able to hold a ref.
+   * Tooltip reference element.
+   *
+   * Positioning styles such as `position: 'absolute'` should be applied to a parent `View` wrapping the `Tooltip` instead of the element.
    */
   children: React.ReactElement;
   /**
@@ -71,8 +73,6 @@ const Tooltip = ({
   titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
-
   const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
@@ -84,7 +84,8 @@ const Tooltip = ({
   const showTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
   const hideTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const childrenWrapperRef = React.useRef<View>(null);
+  const childrenWrapperRef =
+    React.useRef<React.ComponentRef<typeof View>>(null);
   const touched = React.useRef(false);
 
   const isValidChild = React.useMemo(
@@ -120,7 +121,7 @@ const Tooltip = ({
       hideTooltipTimer.current = [];
     }
 
-    if (isWeb) {
+    if (Platform.OS === 'web') {
       const id = setTimeout(() => {
         touched.current = true;
         setVisible(true);
@@ -130,7 +131,7 @@ const Tooltip = ({
       touched.current = true;
       setVisible(true);
     }
-  }, [isWeb, enterTouchDelay]);
+  }, [enterTouchDelay]);
 
   const handleTouchEnd = React.useCallback(() => {
     touched.current = false;
@@ -210,15 +211,12 @@ const Tooltip = ({
                 backgroundColor: theme.colors.onSurface,
                 ...getTooltipPosition(
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-                  measurement as Measurement,
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-                  children as React.ReactElement<TooltipChildProps>
+                  measurement as Measurement
                 ),
                 borderRadius: theme.shapes.corner.extraSmall,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
             ]}
-            testID="tooltip-container"
           >
             <Text
               aria-live="polite"
@@ -236,11 +234,11 @@ const Tooltip = ({
       <Pressable
         ref={childrenWrapperRef}
         style={styles.pressContainer}
-        {...(isWeb ? webPressProps : mobilePressProps)}
+        {...(Platform.OS === 'web' ? webPressProps : mobilePressProps)}
       >
         {React.cloneElement(children, {
           ...rest,
-          ...(isWeb ? webPressProps : mobilePressProps),
+          ...(Platform.OS === 'web' ? webPressProps : mobilePressProps),
         })}
       </Pressable>
     </>

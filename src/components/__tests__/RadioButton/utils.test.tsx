@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { getTheme } from '../../../core/theming';
+import { DarkTheme, LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';
 import { getSelectionControlIOSColor } from '../../RadioButton/utils';
 
@@ -10,11 +10,11 @@ describe('getSelectionControlIOSColor - checked color', () => {
   it('should return correct disabled color, for theme version 3', () => {
     expect(
       getSelectionControlIOSColor({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
       })
     ).toMatchObject({
-      checkedColor: getTheme().colors.primary,
+      checkedColor: LightTheme.colors.primary,
       checkedColorOpacity: stateOpacity.disabled,
     });
   });
@@ -22,7 +22,7 @@ describe('getSelectionControlIOSColor - checked color', () => {
   it('should return custom color, checked', () => {
     expect(
       getSelectionControlIOSColor({
-        theme: getTheme(),
+        theme: LightTheme,
         customColor: 'purple',
       })
     ).toMatchObject({
@@ -33,44 +33,44 @@ describe('getSelectionControlIOSColor - checked color', () => {
   it('should return theme color, for theme version 3, checked', () => {
     expect(
       getSelectionControlIOSColor({
-        theme: getTheme(),
+        theme: LightTheme,
       })
     ).toMatchObject({
-      checkedColor: getTheme().colors.primary,
+      checkedColor: LightTheme.colors.primary,
     });
   });
 
   it('should return error color when error is true', () => {
     expect(
       getSelectionControlIOSColor({
-        theme: getTheme(),
+        theme: LightTheme,
         error: true,
       })
     ).toMatchObject({
-      checkedColor: getTheme().colors.error,
+      checkedColor: LightTheme.colors.error,
     });
   });
 
   it('should return error color, dark mode, when error is true', () => {
     expect(
       getSelectionControlIOSColor({
-        theme: getTheme(true),
+        theme: DarkTheme,
         error: true,
       })
     ).toMatchObject({
-      checkedColor: getTheme(true).colors.error,
+      checkedColor: DarkTheme.colors.error,
     });
   });
 
   it('should return disabled color when both disabled and error are true (disabled wins)', () => {
     expect(
       getSelectionControlIOSColor({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
         error: true,
       })
     ).toMatchObject({
-      checkedColor: getTheme().colors.primary,
+      checkedColor: LightTheme.colors.primary,
       checkedColorOpacity: stateOpacity.disabled,
     });
   });
@@ -78,7 +78,7 @@ describe('getSelectionControlIOSColor - checked color', () => {
   it('should return custom color when both customColor and error are true (customColor wins)', () => {
     expect(
       getSelectionControlIOSColor({
-        theme: getTheme(),
+        theme: LightTheme,
         customColor: 'purple',
         error: true,
       })

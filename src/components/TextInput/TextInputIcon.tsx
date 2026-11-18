@@ -1,4 +1,3 @@
-import React from 'react';
 import { View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
@@ -6,8 +5,17 @@ import { ACCESSORY_SIZE } from './constants';
 import { styles } from './styles';
 import { getIconColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit } from '../../types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import IconButton from '../IconButton/IconButton';
+import type { Props as IconButtonProps } from '../IconButton/IconButton';
+
+// TextInput shrinks the button to ACCESSORY_SIZE through `style`, which
+// IconButton can't see when computing its own slop.
+const ACCESSORY_HIT_SLOP = getMinInteractiveSizeHitSlop({
+  width: ACCESSORY_SIZE,
+  height: ACCESSORY_SIZE,
+});
 
 export type TextInputAccessoryProps = {
   style: StyleProp<ViewStyle>;
@@ -17,12 +25,16 @@ export type TextInputAccessoryProps = {
 };
 
 export type TextInputIconProps = TextInputAccessoryProps &
-  $Omit<React.ComponentProps<typeof IconButton>, keyof TextInputAccessoryProps>;
+  Omit<IconButtonProps, keyof TextInputAccessoryProps>;
 
 /**
  * A component to render a leading / trailing icon in the TextInput
  * (return it from `startAccessory` or `endAccessory`). Accepts icon-specific props as well as
  * `TextInputAccessoryProps`, which TextInput passes into those render props.
+ *
+ * Without `onPress`, `onLongPress`, `onPressIn` or `onPressOut`, the icon is
+ * decorative: a plain element that keeps its label but isn't a control, and a
+ * tap on it goes to the field.
  *
  * ## Usage
  * ```js
@@ -65,6 +77,7 @@ const TextInputIcon = ({
   disabled,
   theme: themeOverride,
   onPress,
+  hitSlop,
   ...rest
 }: TextInputIconProps) => {
   const theme = useInternalTheme(themeOverride);
@@ -78,17 +91,37 @@ const TextInputIcon = ({
     isDisabled: disabled,
   });
 
-  const onPressHandler = disabled ? undefined : onPress;
+  // A decorative icon is not a control, so `disabled` would only announce it as
+  // a disabled button. Must match TouchableRipple's predicate, or an icon with
+  // only `onLongPress` stays pressable on a disabled field.
+  const { onLongPress, onPressIn, onPressOut } = rest;
+  const isInteractive = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
 
   return (
     <View style={styles.iconWrapper}>
       <IconButton
         {...rest}
+        hitSlop={hitSlop !== undefined ? hitSlop : ACCESSORY_HIT_SLOP}
         icon={icon}
         iconColor={color}
         size={iconSize}
-        style={[styles.icon, style]}
-        onPress={onPressHandler}
+        theme={themeOverride}
+        style={[
+          styles.icon,
+          style,
+          // TextInput already dims the whole accessory when the field is
+          // disabled. Forwarding `disabled` makes IconButton dim the icon too,
+          // and the two multiply, so let IconButton own it and cancel the outer
+          // one. A decorative icon keeps it, nothing else dims it.
+          isInteractive && disabled ? styles.notDimmed : null,
+        ]}
+        disabled={isInteractive ? disabled : undefined}
+        onPress={onPress}
       />
     </View>
   );

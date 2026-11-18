@@ -1,6 +1,6 @@
 import * as React from 'react';
 // eslint-disable-next-line no-restricted-imports -- TODO: migrate BottomNavigation to Reanimated.
-import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   EasingFunction,
@@ -16,7 +16,7 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -24,6 +24,7 @@ import useLayout from '../../utils/useLayout';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
+import { Pressable } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -212,6 +213,8 @@ const Touchable = <Route extends BaseRoute>({
   borderless,
   centered,
   rippleColor,
+  focusRing,
+  theme,
   ...rest
 }: TouchableProps<Route>) =>
   TouchableRipple.supported ? (
@@ -221,6 +224,8 @@ const Touchable = <Route extends BaseRoute>({
       borderless={borderless}
       centered={centered}
       rippleColor={rippleColor}
+      focusRing={focusRing}
+      theme={theme}
       style={style}
     >
       {children}
@@ -323,7 +328,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
-  testID = 'bottom-navigation-bar',
+  testID,
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
@@ -433,15 +438,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   const { routes } = navigationState;
 
-  const {
-    backgroundColor: customBackground,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  } = (StyleSheet.flatten(style) || {}) as {
-    backgroundColor?: ColorValue;
-  };
-
-  const backgroundColor = customBackground || colors.surfaceContainer;
-
   const activeTintColor = getActiveTintColor({
     activeColor,
     theme,
@@ -472,6 +468,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       testID={testID}
       style={[
         styles.bar,
+        { backgroundColor: colors.surfaceContainer },
         keyboardHidesNavigationBar // eslint-disable-next-line react-native/no-inline-styles
           ? {
               // When the keyboard is shown, slide down the navigation bar
@@ -493,10 +490,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       ]}
       onLayout={onLayout}
     >
-      <Animated.View
-        style={[styles.barContent, { backgroundColor }]}
-        testID={`${testID}-content`}
-      >
+      <View style={styles.barContent}>
         <View
           style={[
             styles.items,
@@ -509,7 +503,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             },
           ]}
           role={'tablist'}
-          testID={`${testID}-content-wrapper`}
         >
           {routes.map((route, index) => {
             const focused = navigationState.index === index;
@@ -585,6 +578,11 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               borderless: true,
               centered: true,
               rippleColor: 'transparent',
+              // Tabs fill the bar edge to edge and the bar clips
+              // (`overflow: 'hidden'`), so an outward ring would lose its top
+              // and bottom and read as two vertical lines between tabs.
+              focusRing: 'inward',
+              theme,
               onPress: () => onTabPress(eventForIndex(index)),
               onLongPress: () => onTabLongPress?.(eventForIndex(index)),
               testID: getTestID({ route }),
@@ -767,7 +765,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             });
           })}
         </View>
-      </Animated.View>
+      </View>
     </Animated.View>
   );
 };
@@ -799,6 +797,9 @@ const styles = StyleSheet.create({
     // Top padding is 6 and bottom padding is 10
     // The extra 4dp bottom padding is offset by label's height
     paddingVertical: 6,
+    // `borderless` doesn't clip on web, so a label wider than its tab would
+    // spill into the neighbouring tabs.
+    ...(Platform.OS === 'web' ? { overflow: 'hidden' } : null),
   },
   v3Item: {
     paddingVertical: 0,

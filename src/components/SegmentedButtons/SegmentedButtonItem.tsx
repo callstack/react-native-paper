@@ -22,7 +22,8 @@ import {
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -59,7 +60,7 @@ export type Props = {
    */
   disabled?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -192,6 +193,10 @@ const SegmentedButtonItem = ({
   };
 
   const paddingVertical = getSegmentedButtonDensityPadding({ density });
+  const contentHeight = 2 * paddingVertical + iconSize;
+  const defaultHitSlop = disabled
+    ? undefined
+    : getMinInteractiveSizeHitSlop({ height: contentHeight });
 
   const rippleStyle: ViewStyle = {
     borderRadius,
@@ -207,6 +212,11 @@ const SegmentedButtonItem = ({
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
         borderless
+        // Inward, as in the MD3 segmented button accessibility spec: the ring
+        // sits on the segment's edge in its shape. Segments share borders, so
+        // an outward ring would cover the neighbouring segment. Material Web
+        // (labs) rings segments outward; MD3's own figure wins here.
+        focusRing="inward"
         onPress={onPress}
         aria-label={ariaLabel}
         aria-disabled={disabled}
@@ -217,24 +227,18 @@ const SegmentedButtonItem = ({
         style={rippleStyle}
         background={background}
         theme={theme}
-        hitSlop={hitSlop}
+        hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
       >
         <View
           style={[styles.content, { paddingVertical, opacity: textOpacity }]}
         >
           {showCheckedIcon ? (
-            <Animated.View
-              testID={`${testID}-check-icon`}
-              style={[iconStyle, checkAnimatedStyle]}
-            >
+            <Animated.View style={[iconStyle, checkAnimatedStyle]}>
               <Icon source={'check'} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
-          {showIcon ? (
-            <Animated.View
-              testID={`${testID}-icon`}
-              style={[iconStyle, iconAnimatedStyle]}
-            >
+          {showIcon && icon ? (
+            <Animated.View style={[iconStyle, iconAnimatedStyle]}>
               <Icon source={icon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
@@ -244,7 +248,6 @@ const SegmentedButtonItem = ({
             selectable={false}
             numberOfLines={1}
             maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            testID={`${testID}-label`}
           >
             {label}
           </Text>

@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
@@ -40,6 +40,7 @@ describe('Menu Item', () => {
 
     await render(
       <Menu.Item
+        testID="menu-item"
         titleMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         leadingIcon="content-cut"
         onPress={() => {}}
@@ -47,14 +48,16 @@ describe('Menu Item', () => {
       />
     );
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('menu-item-title').props.maxFontSizeMultiplier
-    ).toBe(labelMaxFontSizeMultiplier);
+    expect(screen.getByText('Cut')).toHaveProp(
+      'maxFontSizeMultiplier',
+      labelMaxFontSizeMultiplier
+    );
   });
 
   it('accepts aria-checked prop', async () => {
-    await render(<Menu.Item aria-checked={true} title="Option 1" />);
+    await render(
+      <Menu.Item aria-checked={true} onPress={() => {}} title="Option 1" />
+    );
 
     expect(screen.getByRole('menuitem')).toHaveProp(
       'accessibilityState',
@@ -67,11 +70,11 @@ describe('getMenuItemColor - title color', () => {
   it('should return disabled color if disabled, for theme version 3', () => {
     expect(
       getMenuItemColor({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
       })
     ).toMatchObject({
-      titleColor: getTheme().colors.onSurface,
+      titleColor: LightTheme.colors.onSurface,
       contentOpacity: stateOpacity.disabled,
     });
   });
@@ -79,10 +82,10 @@ describe('getMenuItemColor - title color', () => {
   it('should return correct theme color, for theme version 3', () => {
     expect(
       getMenuItemColor({
-        theme: getTheme(),
+        theme: LightTheme,
       })
     ).toMatchObject({
-      titleColor: getTheme().colors.onSurface,
+      titleColor: LightTheme.colors.onSurface,
     });
   });
 });
@@ -91,11 +94,11 @@ describe('getMenuItemColor - icon color', () => {
   it('should return disabled color if disabled, for theme version 3', () => {
     expect(
       getMenuItemColor({
-        theme: getTheme(),
+        theme: LightTheme,
         disabled: true,
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSurfaceVariant,
+      iconColor: LightTheme.colors.onSurfaceVariant,
       contentOpacity: stateOpacity.disabled,
     });
   });
@@ -103,10 +106,10 @@ describe('getMenuItemColor - icon color', () => {
   it('should return correct theme color, for theme version 3', () => {
     expect(
       getMenuItemColor({
-        theme: getTheme(),
+        theme: LightTheme,
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSurfaceVariant,
+      iconColor: LightTheme.colors.onSurfaceVariant,
     });
   });
 });

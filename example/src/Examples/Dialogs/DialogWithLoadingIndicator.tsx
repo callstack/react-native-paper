@@ -1,10 +1,6 @@
 import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 
-import { Dialog, Palette, Portal } from 'react-native-paper';
-
-import { TextComponent } from './DialogTextComponent';
-
-const isIOS = Platform.OS === 'ios';
+import { Dialog, Palette, Text, useTheme } from 'react-native-paper';
 
 const DialogWithLoadingIndicator = ({
   visible,
@@ -13,27 +9,32 @@ const DialogWithLoadingIndicator = ({
   visible: boolean;
   close: () => void;
 }) => {
+  const theme = useTheme();
+  const textColor = { color: theme.colors.onSurfaceVariant };
+
   return (
-    <Portal>
-      <Dialog onDismiss={close} visible={visible}>
-        <Dialog.Title>Progress Dialog</Dialog.Title>
-        <Dialog.Content>
-          <View style={styles.flexing}>
-            <ActivityIndicator
-              color={Palette.tertiary30}
-              size={isIOS ? 'large' : 48}
-              style={styles.marginRight}
-            />
-            <TextComponent>Loading.....</TextComponent>
-          </View>
-        </Dialog.Content>
-      </Dialog>
-    </Portal>
+    <Dialog
+      onDismiss={close}
+      visible={visible}
+      title="Progress Dialog"
+      content={
+        <View style={styles.content}>
+          <ActivityIndicator
+            color={Palette.tertiary30}
+            size={Platform.OS === 'ios' ? 'large' : 48}
+            style={styles.marginRight}
+          />
+          <Text variant="bodyMedium" style={textColor}>
+            Loading.....
+          </Text>
+        </View>
+      }
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  flexing: {
+  content: {
     flexDirection: 'row',
     alignItems: 'center',
   },

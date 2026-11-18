@@ -3,11 +3,11 @@ import { StyleSheet, View } from 'react-native';
 
 import {
   Icon,
+  IconButton,
   ProgressBar,
   SegmentedButtons,
   Surface,
   Text,
-  ToggleButton,
 } from 'react-native-paper';
 
 import type { SampleConfig } from './types';
@@ -18,13 +18,19 @@ export const PlayerSampleConfig: SampleConfig = {
   icon: 'play-circle-outline',
   components: [
     'Icon',
+    'IconButton',
     'ProgressBar',
     'SegmentedButtons',
     'Surface',
     'Text',
-    'ToggleButton',
   ],
 };
+
+const repeatModes = [
+  { value: 'off', icon: 'repeat-off' },
+  { value: 'one', icon: 'repeat-once' },
+  { value: 'all', icon: 'repeat' },
+];
 
 const PlayerSample = () => {
   const [repeat, setRepeat] = React.useState('off');
@@ -43,14 +49,16 @@ const PlayerSample = () => {
 
       <ProgressBar progress={0.45} />
 
-      <ToggleButton.Row
-        value={repeat}
-        onValueChange={(value) => value && setRepeat(value)}
-      >
-        <ToggleButton icon="repeat-off" value="off" />
-        <ToggleButton icon="repeat-once" value="one" />
-        <ToggleButton icon="repeat" value="all" />
-      </ToggleButton.Row>
+      <View style={styles.row}>
+        {repeatModes.map(({ value, icon }) => (
+          <IconButton
+            key={value}
+            icon={icon}
+            selected={repeat === value}
+            onPress={() => setRepeat(value)}
+          />
+        ))}
+      </View>
 
       <SegmentedButtons
         value={speed}
@@ -70,6 +78,10 @@ const styles = StyleSheet.create({
   content: {
     padding: 16,
     gap: 24,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   cover: {
     height: 200,

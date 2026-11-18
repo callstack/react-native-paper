@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props = ViewProps & {
   /**
@@ -24,8 +24,7 @@ export type Props = ViewProps & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ScrollView } from 'react-native';
- * import { Dialog, Portal, Text } from 'react-native-paper';
+ * import { Dialog } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -33,15 +32,12 @@ export type Props = ViewProps & {
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Portal>
- *       <Dialog visible={visible} onDismiss={hideDialog}>
- *         <Dialog.ScrollArea>
- *           <ScrollView contentContainerStyle={{paddingHorizontal: 24}}>
- *             <Text>This is a scrollable area</Text>
- *           </ScrollView>
- *         </Dialog.ScrollArea>
- *       </Dialog>
- *     </Portal>
+ *     <Dialog
+ *       visible={visible}
+ *       onDismiss={hideDialog}
+ *       scrollable
+ *       content="This is a scrollable area"
+ *     />
  *   );
  * };
  *
@@ -52,7 +48,7 @@ const DialogScrollArea = (props: Props) => {
   const theme = useInternalTheme(props.theme);
   const { colors } = theme;
   const borderStyles = {
-    borderColor: colors.surfaceVariant,
+    borderColor: colors.outlineVariant,
     borderTopWidth: 1,
     borderBottomWidth: 1,
   };

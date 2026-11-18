@@ -10,7 +10,6 @@ import {
   FAB,
   IconButton,
   List,
-  ToggleButton,
   Tooltip,
   Card,
 } from 'react-native-paper';
@@ -39,7 +38,7 @@ const formOfTransport = [
 const TooltipExample = () => {
   const navigation = useNavigation('TooltipExample');
 
-  const [textAlign, setTextAlign] = React.useState('bold');
+  const [textAlign, setTextAlign] = React.useState('left');
   React.useLayoutEffect(() => {
     navigation.setOptions({
       header: () => (
@@ -91,22 +90,34 @@ const TooltipExample = () => {
             ))}
           </View>
         </List.Section>
-        <List.Section title="Toggle Buttons">
-          <ToggleButton.Row
-            value={textAlign}
-            style={styles.toggleButtonRow}
-            onValueChange={setTextAlign}
-          >
+        <List.Section title="Icon toggles">
+          <View style={styles.toggleRow}>
             <Tooltip title="Align left">
-              <ToggleButton icon="format-align-left" value="left" />
+              <IconButton
+                icon="format-align-left"
+                mode="contained-tonal"
+                selected={textAlign === 'left'}
+                onPress={() => setTextAlign('left')}
+              />
             </Tooltip>
             <Tooltip title="Align center">
-              <ToggleButton icon="format-align-center" value="center" />
+              <IconButton
+                icon="format-align-center"
+                mode="contained-tonal"
+                selected={textAlign === 'center'}
+                onPress={() => setTextAlign('center')}
+              />
             </Tooltip>
             <Tooltip title="Align right">
-              <ToggleButton icon="format-align-right" value="right" disabled />
+              <IconButton
+                icon="format-align-right"
+                mode="contained-tonal"
+                selected={textAlign === 'right'}
+                disabled
+                onPress={() => setTextAlign('right')}
+              />
             </Tooltip>
-          </ToggleButton.Row>
+          </View>
         </List.Section>
         <List.Section title="Avatar">
           <View style={styles.avatarContainer}>
@@ -178,7 +189,8 @@ const styles = StyleSheet.create({
   cardContainer: {
     margin: 16,
   },
-  toggleButtonRow: {
+  toggleRow: {
+    flexDirection: 'row',
     paddingHorizontal: 16,
   },
   iconButtonContainer: {

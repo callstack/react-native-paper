@@ -20,8 +20,8 @@ import {
   useSharedValue,
 } from 'react-native-reanimated';
 
-import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import Surface from '../Surface';
 
 const SPOT_SHADOW_OPACITY = 0.19;
@@ -103,7 +103,7 @@ describe('Surface', () => {
         shadowOpacity: expect.any(Number),
       });
       expect(screen.getByTestId('surface-test')).toHaveStyle({
-        backgroundColor: getTheme().colors.surfaceContainerHighest,
+        backgroundColor: LightTheme.colors.surfaceContainerHighest,
       });
     });
 
@@ -192,7 +192,7 @@ describe('Surface', () => {
         elevation: expect.any(Number),
       });
       expect(screen.getByTestId('surface-container')).toHaveStyle({
-        backgroundColor: getTheme().colors.surfaceContainerHighest,
+        backgroundColor: LightTheme.colors.surfaceContainerHighest,
       });
     });
 

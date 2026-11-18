@@ -6,16 +6,22 @@ import type {
   ViewStyle,
   GestureResponderEvent,
   ColorValue,
+  NativeSyntheticEvent,
+  TargetedEvent,
 } from 'react-native';
 
 import type { PressableProps } from './Pressable';
 import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
+import { IDLE_STATE, getTouchableRippleColors, resolveChildren } from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { ThemeProp } from '../../theme/types';
+import hasTouchHandler, {
+  getNonControlA11yProps,
+} from '../../utils/hasTouchHandler';
+import type { FocusRingPlacement } from '../../utils/useFocusRing';
+import { useFocusRing } from '../../utils/useFocusRing';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -25,15 +31,27 @@ export type Props = PressableProps & {
   background?: PressableAndroidRippleConfig;
   centered?: boolean;
   disabled?: boolean;
+  /**
+   * Where to draw the MD3 keyboard focus indicator.
+   *
+   * - `outward` - just outside the bounds. The MD3 default.
+   * - `inward` - just inside, for controls a clipping ancestor would trim or
+   *   that sit flush against a neighbour.
+   * - `none` - no indicator. On web the browser's own focus outline still
+   *   shows, so a control that draws its own indicator also needs
+   *   `outline: 'none'` there.
+   *
+   * The ring shows only while the touchable can be pressed: not when it is
+   * disabled or has no touch handler. There is no ring on iOS.
+   */
+  focusRing?: FocusRingPlacement;
   onPress?: (e: GestureResponderEvent) => void | null;
   onLongPress?: (e: GestureResponderEvent) => void;
   onPressIn?: (e: GestureResponderEvent) => void;
   onPressOut?: (e: GestureResponderEvent) => void;
   rippleColor?: ColorValue;
   underlayColor?: string;
-  children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   theme?: ThemeProp;
 };
 
@@ -46,6 +64,10 @@ const TouchableRipple = ({
   underlayColor,
   children,
   theme: themeOverrides,
+  focusRing = 'outward',
+  onFocus,
+  onBlur,
+  hitSlop,
   ref,
   ...rest
 }: Props) => {
@@ -61,7 +83,37 @@ const TouchableRipple = ({
     onPressOut,
   });
 
-  const disabled = disabledProp || !hasPassedTouchHandler;
+  // With no touch handler and no explicit disabled this is not a control, so it
+  // renders as a plain View. A Pressable is wrong here either way: keep the old
+  // disabled flag and it gets announced as a disabled control, drop the flag and
+  // it starts claiming the touch, swallowing taps meant for whatever wraps it.
+  const isControl = hasPassedTouchHandler || Boolean(disabledProp);
+  const isInteractive = hasPassedTouchHandler && !disabledProp;
+
+  // A touch target only for something that can be pressed, as on web. Android
+  // never makes a disabled view a touch target, but iOS does, and the plain
+  // View would take touches in its slop on both.
+  const effectiveHitSlop = isInteractive ? hitSlop : undefined;
+
+  // Called above the non-control early return, so the hook runs on every
+  // render. Keyed off `!isInteractive`: on the Pressable that is `disabled`,
+  // and when the touchable drops to the plain View it resets the focus state.
+  // A focused Pressable that unmounts sends no blur here, so without the reset
+  // the ring would come back with the handler. The plain View takes neither
+  // the ring's focus handlers nor its style.
+  const { target, ring } = useFocusRing(
+    !isInteractive,
+    theme.colors.secondary,
+    focusRing
+  );
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onFocus?.(e);
+    target.onFocus?.(e);
+  };
+  const handleBlur = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onBlur?.(e);
+    target.onBlur?.();
+  };
 
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
@@ -78,24 +130,62 @@ const TouchableRipple = ({
   const useForeground =
     Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
 
+  // Keep the static form when possible: `Pressable` only tracks the pressed
+  // state when `children` or `style` is a function.
+  const resolveStyle = (
+    baseStyle: StyleProp<ViewStyle>
+  ): PressableProps['style'] =>
+    typeof style === 'function'
+      ? (state) => [baseStyle, style(state), ...ring.style]
+      : [baseStyle, style, ...ring.style];
+
+  if (!isControl) {
+    const baseStyle = TouchableRipple.supported
+      ? useForeground && styles.overflowHidden
+      : borderless && styles.overflowHidden;
+
+    return (
+      <View
+        {...rest}
+        ref={ref}
+        // taken out of `rest` for the ring, so passed on here unchanged
+        onFocus={onFocus}
+        onBlur={onBlur}
+        {...getNonControlA11yProps(rest)}
+        style={[
+          baseStyle,
+          typeof style === 'function' ? style(IDLE_STATE) : style,
+        ]}
+      >
+        {resolveChildren(children, IDLE_STATE)}
+      </View>
+    );
+  }
+
   if (TouchableRipple.supported) {
-    const androidRipple = rippleEffectEnabled
-      ? (background ?? {
-          color: calculatedRippleColor,
-          borderless,
-          foreground: useForeground,
-        })
-      : undefined;
+    const androidRipple =
+      rippleEffectEnabled && isInteractive
+        ? (background ?? {
+            color: calculatedRippleColor,
+            borderless,
+            foreground: useForeground,
+          })
+        : undefined;
 
     return (
       <Pressable
         {...rest}
         ref={ref}
-        disabled={disabled}
-        style={[useForeground && styles.overflowHidden, style]}
+        disabled={Boolean(disabledProp)}
+        hitSlop={effectiveHitSlop}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        style={resolveStyle(useForeground && styles.overflowHidden)}
         android_ripple={androidRipple}
       >
-        {React.Children.only(children)}
+        {typeof children === 'function'
+          ? (state) => resolveChildren(children, state)
+          : children}
       </Pressable>
     );
   }
@@ -104,21 +194,23 @@ const TouchableRipple = ({
     <Pressable
       {...rest}
       ref={ref}
-      disabled={disabled}
-      style={[borderless && styles.overflowHidden, style]}
+      disabled={Boolean(disabledProp)}
+      hitSlop={effectiveHitSlop}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      style={resolveStyle(borderless && styles.overflowHidden)}
     >
-      {({ pressed }) => (
+      {(state) => (
         <>
-          {pressed && rippleEffectEnabled && (
+          {state.pressed && rippleEffectEnabled && isInteractive && (
             <View
-              testID="touchable-ripple-underlay"
               style={[
                 styles.underlay,
                 { backgroundColor: calculatedUnderlayColor },
               ]}
             />
           )}
-          {React.Children.only(children)}
+          {resolveChildren(children, state)}
         </>
       )}
     </Pressable>

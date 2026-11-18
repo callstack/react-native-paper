@@ -57,7 +57,7 @@ Older Material Design 2 platform-split font configuration (`configureFonts` with
 In the latest version fonts in theme are structured based on the `variant` keys e.g. `displayLarge` or `bodyMedium` which are then used in `Text`'s component throughout the whole library.
 
 :::info
-The default `fontFamily` is different per particular platfrom:
+The default `fontFamily` is different per particular platform:
 
 ```js
 Platform.select({
@@ -66,6 +66,13 @@ Platform.select({
   default: 'sans-serif', // and 'sans-serif-medium' for `fontWeight:"500"`
 }),
 ```
+
+Material Design 3 typescale uses two font families:
+
+- **Brand**: Display, Headline and Title Large
+- **Plain**: Title Medium/Small, Label and Body
+
+The default theme uses the platform default for both font families.
 
 :::
 
@@ -291,13 +298,28 @@ Platform.select({
   "fontFamily": "Font",
   "fontSize": 16,
   "fontWeight": "400",
-  "letterSpacing": 0.15,
+  "letterSpacing": 0.5,
   "lineHeight": 24,
 }
 ```
 
   </div>
 </div>
+
+- #### Emphasized
+
+Each variant also has an `Emphasized` counterpart with a heavier font weight: `displayLargeEmphasized`,
+`bodyMediumEmphasized` etc.
+
+```json
+"bodyMediumEmphasized": {
+  "fontFamily": "Font",
+  "fontSize": 14,
+  "fontWeight": "500",
+  "letterSpacing": 0.25,
+  "lineHeight": 20,
+}
+```
 
 :::info
 If any component uses Paper's `Text` component, without specified <b>variant</b>, then `default` variant is applied:
@@ -316,13 +338,10 @@ If any component uses Paper's `Text` component, without specified <b>variant</b>
 
 - If there is a need to create a custom font variant, prepare its config object including required all fonts properties. After that, defined `fontConfig` has to be passed under the <b>`variant`</b> name as `config` into the params object:
 
-```js
+```tsx
 import * as React from 'react';
-import {
-  configureFonts,
-  MD3LightTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { Platform } from 'react-native';
+import { configureFonts, LightTheme, PaperProvider } from 'react-native-paper';
 import App from './App';
 
 const fontConfig = {
@@ -337,10 +356,10 @@ const fontConfig = {
     lineHeight: 22,
     fontSize: 20,
   },
-};
+} as const;
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
   fonts: configureFonts({ config: fontConfig }),
 };
 
@@ -366,11 +385,7 @@ export const Text = customText<'customVariant'>();
 
 ```js
 import * as React from 'react';
-import {
-  configureFonts,
-  MD3LightTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { configureFonts, LightTheme, PaperProvider } from 'react-native-paper';
 import App from './App';
 
 const fontConfig = {
@@ -382,7 +397,7 @@ const fontConfig = {
 };
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
   fonts: configureFonts({ config: fontConfig }),
 };
 
@@ -399,11 +414,7 @@ export default function Main() {
 
 ```js
 import * as React from 'react';
-import {
-  configureFonts,
-  MD3LightTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { configureFonts, LightTheme, PaperProvider } from 'react-native-paper';
 import App from './App';
 
 const fontConfig = {
@@ -411,7 +422,7 @@ const fontConfig = {
 };
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
   fonts: configureFonts({ config: fontConfig }),
 };
 

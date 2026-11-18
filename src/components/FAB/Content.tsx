@@ -27,7 +27,6 @@ export type ContentProps = {
   labelAnimatedStyle?: StyleProp<AnimatedStyle<ViewStyle>>;
   labelNumberOfLines?: number;
   labelEllipsisMode?: 'clip' | 'tail' | 'head' | 'middle';
-  testID?: string;
 };
 
 /**
@@ -50,7 +49,6 @@ const Content = ({
   labelAnimatedStyle,
   labelNumberOfLines,
   labelEllipsisMode,
-  testID,
 }: ContentProps) => {
   const hasLabel = label !== undefined && label !== '';
   const colorStyle = { color: contentColor };
@@ -86,7 +84,6 @@ const Content = ({
               ellipsizeMode={labelEllipsisMode}
               maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               style={colorStyle}
-              testID={testID ? `${testID}-text` : undefined}
             >
               {label}
             </AnimatedText>

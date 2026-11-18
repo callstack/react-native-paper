@@ -1,3 +1,4 @@
+import type * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
@@ -6,11 +7,15 @@ import type { RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
 import { getSelectionControlIOSColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
-export type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Value of the radio button
    */
@@ -24,7 +29,9 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   disabled?: boolean;
   /**
-   * Function to execute on press.
+   * Function to execute on press. Without it, and outside a
+   * `RadioButton.Group`, the radio is read only: it can't be pressed, and a
+   * press goes to its parent.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
@@ -80,10 +87,14 @@ const RadioButtonIOS = ({
           <TouchableRipple
             {...rest}
             borderless
+            // A radio with nothing to call (no `onPress` and no
+            // `RadioButton.Group`) is read only and gets no handler, so it never
+            // takes a press meant for its parent. A live radio is turned off with
+            // `disabled`, which keeps the same element instead of remounting it;
+            // a read-only one still swaps elements when `disabled` toggles.
             onPress={
-              disabled
-                ? undefined
-                : (event) => {
+              onPress || context?.onValueChange
+                ? (event) => {
                     handlePress({
                       onPress,
                       value,
@@ -91,7 +102,9 @@ const RadioButtonIOS = ({
                       event,
                     });
                   }
+                : undefined
             }
+            disabled={disabled}
             role="radio"
             aria-disabled={disabled}
             aria-checked={checked}

@@ -1,67 +1,66 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { getTheme } from '../../core/theming';
+import { LightTheme } from '../../theme/schemes';
 import { getDimensions, resolveColors } from '../FAB/utils';
 
 describe('resolveColors', () => {
   it('returns theme colors for default variant (tonalPrimary)', () => {
-    const theme = getTheme();
-    const colors = resolveColors({ theme });
+    const colors = resolveColors({ theme: LightTheme });
     expect(colors).toEqual({
-      container: theme.colors.primaryContainer,
-      content: theme.colors.onPrimaryContainer,
+      container: LightTheme.colors.primaryContainer,
+      content: LightTheme.colors.onPrimaryContainer,
     });
   });
 
   it('returns theme colors for primary variant', () => {
-    const theme = getTheme();
-    const colors = resolveColors({ theme, variant: 'primary' });
+    const colors = resolveColors({ theme: LightTheme, variant: 'primary' });
     expect(colors).toEqual({
-      container: theme.colors.primary,
-      content: theme.colors.onPrimary,
+      container: LightTheme.colors.primary,
+      content: LightTheme.colors.onPrimary,
     });
   });
 
   it('returns theme colors for secondary variant', () => {
-    const theme = getTheme();
-    const colors = resolveColors({ theme, variant: 'secondary' });
+    const colors = resolveColors({ theme: LightTheme, variant: 'secondary' });
     expect(colors).toEqual({
-      container: theme.colors.secondary,
-      content: theme.colors.onSecondary,
+      container: LightTheme.colors.secondary,
+      content: LightTheme.colors.onSecondary,
     });
   });
 
   it('returns theme colors for tertiary variant', () => {
-    const theme = getTheme();
-    const colors = resolveColors({ theme, variant: 'tertiary' });
+    const colors = resolveColors({ theme: LightTheme, variant: 'tertiary' });
     expect(colors).toEqual({
-      container: theme.colors.tertiary,
-      content: theme.colors.onTertiary,
+      container: LightTheme.colors.tertiary,
+      content: LightTheme.colors.onTertiary,
     });
   });
 
   it('returns theme colors for tonalSecondary variant', () => {
-    const theme = getTheme();
-    const colors = resolveColors({ theme, variant: 'tonalSecondary' });
+    const colors = resolveColors({
+      theme: LightTheme,
+      variant: 'tonalSecondary',
+    });
     expect(colors).toEqual({
-      container: theme.colors.secondaryContainer,
-      content: theme.colors.onSecondaryContainer,
+      container: LightTheme.colors.secondaryContainer,
+      content: LightTheme.colors.onSecondaryContainer,
     });
   });
 
   it('returns theme colors for tonalTertiary variant', () => {
-    const theme = getTheme();
-    const colors = resolveColors({ theme, variant: 'tonalTertiary' });
+    const colors = resolveColors({
+      theme: LightTheme,
+      variant: 'tonalTertiary',
+    });
     expect(colors).toEqual({
-      container: theme.colors.tertiaryContainer,
-      content: theme.colors.onTertiaryContainer,
+      container: LightTheme.colors.tertiaryContainer,
+      content: LightTheme.colors.onTertiaryContainer,
     });
   });
 
   it('containerColor override wins over variant', () => {
-    const theme = getTheme();
     const colors = resolveColors({
-      theme,
+      theme: LightTheme,
       variant: 'primary',
       containerColor: '#custom',
     });
@@ -69,20 +68,18 @@ describe('resolveColors', () => {
   });
 
   it('derives content color from containerColor when contentColor is not set', () => {
-    const theme = getTheme();
     // Use a known theme color so contentColorFor can derive the on-color pairing
     const colors = resolveColors({
-      theme,
-      containerColor: theme.colors.primary,
+      theme: LightTheme,
+      containerColor: LightTheme.colors.primary,
     });
-    expect(colors.container).toBe(theme.colors.primary);
-    expect(colors.content).toBe(theme.colors.onPrimary);
+    expect(colors.container).toBe(LightTheme.colors.primary);
+    expect(colors.content).toBe(LightTheme.colors.onPrimary);
   });
 
   it('both containerColor and contentColor overrides win', () => {
-    const theme = getTheme();
     const colors = resolveColors({
-      theme,
+      theme: LightTheme,
       containerColor: '#bg',
       contentColor: '#fg',
     });
@@ -90,20 +87,19 @@ describe('resolveColors', () => {
   });
 
   it('contentColor-only override uses variant container', () => {
-    const theme = getTheme();
     const colors = resolveColors({
-      theme,
+      theme: LightTheme,
       variant: 'primary',
       contentColor: '#custom',
     });
-    expect(colors.container).toBe(theme.colors.primary);
+    expect(colors.container).toBe(LightTheme.colors.primary);
     expect(colors.content).toBe('#custom');
   });
 });
 
 describe('getDimensions', () => {
   it('returns correct dimensions for default size', () => {
-    const dims = getDimensions({ theme: getTheme() });
+    const dims = getDimensions({ theme: LightTheme });
     expect(dims.height).toBe(56);
     expect(dims.width).toBe(56);
     expect(dims.iconSize).toBe(24);
@@ -114,7 +110,7 @@ describe('getDimensions', () => {
   });
 
   it('returns correct dimensions for medium size', () => {
-    const dims = getDimensions({ theme: getTheme(), size: 'medium' });
+    const dims = getDimensions({ theme: LightTheme, size: 'medium' });
     expect(dims.height).toBe(80);
     expect(dims.width).toBe(80);
     expect(dims.iconSize).toBe(28);
@@ -125,7 +121,7 @@ describe('getDimensions', () => {
   });
 
   it('returns correct dimensions for large size', () => {
-    const dims = getDimensions({ theme: getTheme(), size: 'large' });
+    const dims = getDimensions({ theme: LightTheme, size: 'large' });
     expect(dims.height).toBe(96);
     expect(dims.width).toBe(96);
     expect(dims.iconSize).toBe(36);
@@ -136,20 +132,19 @@ describe('getDimensions', () => {
   });
 
   it('shape override changes borderRadius compared to default', () => {
-    const theme = getTheme();
-    const defaultDims = getDimensions({ theme });
-    const fullDims = getDimensions({ theme, shape: 'full' });
+    const defaultDims = getDimensions({ theme: LightTheme });
+    const fullDims = getDimensions({ theme: LightTheme, shape: 'full' });
     expect(fullDims.borderRadius).not.toBe(defaultDims.borderRadius);
   });
 
   it('iconSize override wins over size spec', () => {
-    const dims = getDimensions({ theme: getTheme(), iconSize: 32 });
+    const dims = getDimensions({ theme: LightTheme, iconSize: 32 });
     expect(dims.iconSize).toBe(32);
   });
 
   it('leading and trailing overrides win over size spec', () => {
     const dims = getDimensions({
-      theme: getTheme(),
+      theme: LightTheme,
       leading: 20,
       trailing: 24,
     });

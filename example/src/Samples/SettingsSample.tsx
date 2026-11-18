@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
 
 import {
   Button,
   Dialog,
   Divider,
   List,
-  Portal,
   RadioButton,
   Switch,
   Text,
@@ -23,7 +21,6 @@ export const SettingsSampleConfig: SampleConfig = {
     'Dialog',
     'Divider',
     'List',
-    'Portal',
     'RadioButton',
     'Switch',
     'Text',
@@ -89,29 +86,27 @@ const SettingsSample = () => {
         />
       </List.Section>
 
-      <Portal>
-        <Dialog visible={dialogVisible} onDismiss={hideDialog}>
-          <Dialog.Icon icon="logout" />
-          <Dialog.Title style={styles.dialogTitle}>Sign out?</Dialog.Title>
-          <Dialog.Content>
-            <Text variant="bodyMedium">
-              You will need to sign in again to access your workspace.
-            </Text>
-          </Dialog.Content>
-          <Dialog.Actions>
-            <Button onPress={hideDialog}>Cancel</Button>
-            <Button onPress={hideDialog}>Sign out</Button>
-          </Dialog.Actions>
-        </Dialog>
-      </Portal>
+      <Dialog
+        visible={dialogVisible}
+        onDismiss={hideDialog}
+        icon="logout"
+        title="Sign out?"
+        content={
+          <Text variant="bodyMedium">
+            You will need to sign in again to access your workspace.
+          </Text>
+        }
+        actions={[
+          <Button mode="text" key="cancel" onPress={hideDialog}>
+            Cancel
+          </Button>,
+          <Button mode="text" key="sign-out" onPress={hideDialog}>
+            Sign out
+          </Button>,
+        ]}
+      />
     </ScreenWrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  dialogTitle: {
-    textAlign: 'center',
-  },
-});
 
 export default SettingsSample;

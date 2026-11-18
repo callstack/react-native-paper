@@ -49,7 +49,6 @@ exports[`renders chip with close button 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -99,36 +98,10 @@ exports[`renders chip with close button 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={false}
+    role="none"
     style={
       [
         {
@@ -144,7 +117,6 @@ exports[`renders chip with close button 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -234,6 +206,7 @@ exports[`renders chip with close button 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "marginVertical": 6,
                   "textAlignVertical": "center",
                 },
@@ -262,11 +235,13 @@ exports[`renders chip with close button 1`] = `
   <View
     style={
       {
-        "alignItems": "center",
-        "height": "100%",
-        "justifyContent": "center",
+        "bottom": 0,
+        "maxWidth": "50%",
+        "minWidth": 26,
         "position": "absolute",
         "right": 0,
+        "top": 0,
+        "width": 34,
       }
     }
   >
@@ -292,6 +267,14 @@ exports[`renders chip with close button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "left": 0,
+          "right": 0,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -302,6 +285,17 @@ exports[`renders chip with close button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       role="button"
+      style={
+        [
+          {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          {
+            "borderRadius": 8,
+          },
+        ]
+      }
     >
       <View
         style={
@@ -314,8 +308,14 @@ exports[`renders chip with close button 1`] = `
               "marginRight": 4,
             },
             {
-              "marginRight": 8,
+              "marginRight": 0,
               "padding": 0,
+            },
+            {
+              "alignItems": "center",
+              "height": 20,
+              "justifyContent": "center",
+              "width": 20,
             },
           ]
         }
@@ -349,6 +349,23 @@ exports[`renders chip with close button 1`] = `
         >
           close
         </Text>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "borderRadius": 10,
+              },
+            ]
+          }
+        />
       </View>
     </View>
   </View>
@@ -404,7 +421,6 @@ exports[`renders chip with custom close button 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -454,36 +470,10 @@ exports[`renders chip with custom close button 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={false}
+    role="none"
     style={
       [
         {
@@ -499,7 +489,6 @@ exports[`renders chip with custom close button 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -589,6 +578,7 @@ exports[`renders chip with custom close button 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "marginVertical": 6,
                   "textAlignVertical": "center",
                 },
@@ -617,11 +607,13 @@ exports[`renders chip with custom close button 1`] = `
   <View
     style={
       {
-        "alignItems": "center",
-        "height": "100%",
-        "justifyContent": "center",
+        "bottom": 0,
+        "maxWidth": "50%",
+        "minWidth": 26,
         "position": "absolute",
         "right": 0,
+        "top": 0,
+        "width": 34,
       }
     }
   >
@@ -647,6 +639,14 @@ exports[`renders chip with custom close button 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "left": 0,
+          "right": 0,
+          "top": 8,
+        }
+      }
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
@@ -657,6 +657,17 @@ exports[`renders chip with custom close button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       role="button"
+      style={
+        [
+          {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          {
+            "borderRadius": 8,
+          },
+        ]
+      }
     >
       <View
         style={
@@ -669,8 +680,14 @@ exports[`renders chip with custom close button 1`] = `
               "marginRight": 4,
             },
             {
-              "marginRight": 8,
+              "marginRight": 0,
               "padding": 0,
+            },
+            {
+              "alignItems": "center",
+              "height": 20,
+              "justifyContent": "center",
+              "width": 20,
             },
           ]
         }
@@ -704,6 +721,23 @@ exports[`renders chip with custom close button 1`] = `
         >
           arrow-down
         </Text>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "borderRadius": 10,
+              },
+            ]
+          }
+        />
       </View>
     </View>
   </View>
@@ -759,7 +793,6 @@ exports[`renders chip with icon 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -809,36 +842,10 @@ exports[`renders chip with icon 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": false,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={false}
+    role="none"
     style={
       [
         {
@@ -854,7 +861,6 @@ exports[`renders chip with icon 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -944,6 +950,7 @@ exports[`renders chip with icon 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "marginVertical": 6,
                   "textAlignVertical": "center",
                 },
@@ -1021,7 +1028,6 @@ exports[`renders chip with onPress 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -1091,6 +1097,14 @@ exports[`renders chip with onPress 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    hitSlop={
+      {
+        "bottom": 8,
+        "left": 0,
+        "right": 0,
+        "top": 8,
+      }
+    }
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -1116,7 +1130,6 @@ exports[`renders chip with onPress 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -1161,6 +1174,7 @@ exports[`renders chip with onPress 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "marginVertical": 6,
                   "textAlignVertical": "center",
                 },
@@ -1238,7 +1252,6 @@ exports[`renders outlined disabled chip 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -1333,7 +1346,6 @@ exports[`renders outlined disabled chip 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -1378,6 +1390,7 @@ exports[`renders outlined disabled chip 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "marginVertical": 6,
                   "textAlignVertical": "center",
                 },
@@ -1455,7 +1468,6 @@ exports[`renders selected chip 1`] = `
       },
     ]
   }
-  testID="chip-container"
 >
   <View
     collapsable={false}
@@ -1505,36 +1517,10 @@ exports[`renders selected chip 1`] = `
     }
   />
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": true,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
     accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
+    aria-disabled={false}
+    aria-selected={true}
+    role="none"
     style={
       [
         {
@@ -1550,7 +1536,6 @@ exports[`renders selected chip 1`] = `
         ],
       ]
     }
-    testID="chip"
   >
     <View
       style={
@@ -1640,6 +1625,7 @@ exports[`renders selected chip 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "marginVertical": 6,
                   "textAlignVertical": "center",
                 },

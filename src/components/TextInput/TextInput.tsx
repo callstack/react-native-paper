@@ -23,7 +23,7 @@ import { useTextInput } from './hooks';
 import { styles } from './styles';
 import TextInputErrorIcon from './TextInputErrorIcon';
 import type { TextInputAccessoryProps } from './TextInputIcon';
-import type { InternalTheme, ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../theme/types';
 
 export type TextInputAnimationState = {
   animatedLabelWrapperStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
@@ -73,7 +73,7 @@ export type GetAccessibilityDataProps = {
 export type TextInputVariant = 'filled' | 'outlined';
 
 export type TextInputSharedApi = {
-  input: React.RefObject<NativeTextInput | null>;
+  input: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
   theme: InternalTheme;
   isFocused: boolean;
   isRTL: boolean;
@@ -98,7 +98,7 @@ export type SharedTextInputStyleData = {
 };
 
 export type FilledTextInputHookData = SharedTextInputStyleData & {
-  input: React.RefObject<NativeTextInput | null>;
+  input: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
   isDisabled: boolean;
   hasError: boolean;
   hasSuffix: boolean;
@@ -112,7 +112,7 @@ export type FilledTextInputHookData = SharedTextInputStyleData & {
 };
 
 export type OutlinedTextInputHookData = SharedTextInputStyleData & {
-  input: React.RefObject<NativeTextInput | null>;
+  input: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
   isDisabled: boolean;
   hasError: boolean;
   hasSuffix: boolean;
@@ -134,7 +134,7 @@ export type TextInputLayoutState = Omit<
 >;
 
 export type TextInputHookReturn = SharedTextInputStyleData & {
-  input: React.RefObject<NativeTextInput | null>;
+  input: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
   isDisabled: boolean;
   isEditable: boolean | undefined;
   hasPrefix: boolean;
@@ -172,11 +172,11 @@ export type TextInputHookReturn = SharedTextInputStyleData & {
 export type TextInputRenderProps = React.ComponentPropsWithoutRef<
   typeof NativeTextInput
 > & {
-  ref?: React.RefObject<NativeTextInput | null>;
+  ref?: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
 };
 
 export type TextInputHandles = Pick<
-  NativeTextInput,
+  React.ComponentRef<typeof NativeTextInput>,
   'focus' | 'clear' | 'blur' | 'isFocused' | 'setNativeProps' | 'setSelection'
 >;
 

@@ -76,7 +76,7 @@ const ArticleSample = () => {
                 />
               </Tooltip>
             </View>
-            <Button mode="contained" onPress={() => {}}>
+            <Button mode="filled" onPress={() => {}}>
               Read
             </Button>
           </Card.Actions>

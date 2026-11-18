@@ -32,9 +32,9 @@ import useLatestCallback from 'use-latest-callback';
 import MenuItem from './MenuItem';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
-import { BackHandler } from '../../utils/BackHandler/BackHandler';
+import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
@@ -67,7 +67,11 @@ export type Props = {
   /**
    * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the menu.
    */
-  overlayAccessibilityLabel?: string;
+  dismissAccessibilityLabel?: string;
+  /**
+   * testID for the overlay that is displayed behind the menu.
+   */
+  overlayTestID?: string;
   /**
    * Content of the `Menu`.
    */
@@ -113,10 +117,14 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 const WINDOW_LAYOUT = Dimensions.get('window');
 
+const getKeyboardHeight = (fallback: number) =>
+  Keyboard.metrics?.()?.height ?? fallback;
 const DEFAULT_ELEVATION: Elevation = 2;
 const DEFAULT_MODE = 'elevated';
 
-const focusFirstDOMNode = (el: View | null | undefined) => {
+const focusFirstDOMNode = (
+  el: React.ComponentRef<typeof View> | null | undefined
+) => {
   if (el && Platform.OS === 'web') {
     // When in the browser, we want to focus the first focusable item on toggle
     // For example, when menu is shown, focus the first item in the menu
@@ -185,8 +193,9 @@ const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
 const Menu = ({
   visible,
   statusBarHeight,
-  overlayAccessibilityLabel = 'Close menu',
-  testID = 'menu',
+  dismissAccessibilityLabel = 'Close menu',
+  overlayTestID,
+  testID,
   anchor,
   onDismiss,
   anchorPosition,
@@ -221,9 +230,9 @@ const Menu = ({
   const scaleY = useSharedValue(0);
 
   const keyboardHeightRef = React.useRef(0);
-  const prevVisible = React.useRef<boolean | null>(null);
-  const anchorRef = React.useRef<View | null>(null);
-  const menuRef = React.useRef<View | null>(null);
+  const prevVisible = React.useRef(visible);
+  const anchorRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
+  const menuRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
   const isShownRef = React.useRef(false);
 
   const keyboardDidShow = React.useCallback((e: RNKeyboardEvent) => {
@@ -242,9 +251,6 @@ const Menu = ({
     EmitterSubscription | undefined
   > = React.useRef(undefined);
 
-  const backHandlerSubscriptionRef: React.RefObject<
-    NativeEventSubscription | undefined
-  > = React.useRef(undefined);
   const dimensionsSubscriptionRef: React.RefObject<
     NativeEventSubscription | undefined
   > = React.useRef(undefined);
@@ -255,37 +261,26 @@ const Menu = ({
     }
   }, [onDismiss, visible]);
 
-  const handleKeypress = React.useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onDismiss?.();
-      }
-    },
-    [onDismiss]
-  );
+  // Back and Escape go through the overlay stack, so that a menu opened from a
+  // modal closes first and the modal stays. Without `onDismiss` there is
+  // nothing to close, and the press is left to whatever is underneath.
+  useOverlayDismiss({
+    enabled: visible && onDismiss !== undefined,
+    dismissable: true,
+    onDismiss,
+  });
 
   const removeListeners = React.useCallback(() => {
-    backHandlerSubscriptionRef.current?.remove();
     dimensionsSubscriptionRef.current?.remove();
-
-    if (Platform.OS === 'web' && 'document' in global) {
-      document.removeEventListener('keyup', handleKeypress);
-    }
-  }, [handleKeypress]);
+  }, []);
 
   const attachListeners = React.useCallback(() => {
-    backHandlerSubscriptionRef.current = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      handleDismiss
-    );
     dimensionsSubscriptionRef.current = addEventListener(
       Dimensions,
       'change',
       handleDismiss
     );
-    Platform.OS === 'web' && document.addEventListener('keyup', handleKeypress);
-  }, [handleDismiss, handleKeypress]);
+  }, [handleDismiss]);
 
   const measureMenuLayout = () =>
     new Promise<LayoutRectangle>((resolve) => {
@@ -327,6 +322,8 @@ const Menu = ({
       return;
     }
 
+    scaleX.value = 0;
+    scaleY.value = 0;
     setMenuLayout({ width: 0, height: 0 });
     setRendered(false);
     isShownRef.current = false;
@@ -375,7 +372,9 @@ const Menu = ({
     });
 
     setWindowLayout({
-      height: windowLayoutResult.height - keyboardHeightRef.current,
+      height:
+        windowLayoutResult.height -
+        getKeyboardHeight(keyboardHeightRef.current),
       width: windowLayoutResult.width,
     });
 
@@ -456,6 +455,8 @@ const Menu = ({
       'keyboardDidHide',
       keyboardDidHide
     );
+    // iOS does not replay keyboardDidShow for a keyboard that is already open.
+    keyboardHeightRef.current = getKeyboardHeight(keyboardHeightRef.current);
 
     return () => {
       removeListeners();
@@ -676,11 +677,12 @@ const Menu = ({
       {rendered ? (
         <Portal>
           <Pressable
-            aria-label={overlayAccessibilityLabel}
+            aria-label={dismissAccessibilityLabel}
             role="button"
             onPress={onDismiss}
             pointerEvents={visible ? 'auto' : 'none'}
             style={styles.pressableOverlay}
+            testID={overlayTestID}
           />
           <View
             ref={(ref) => {
@@ -691,7 +693,6 @@ const Menu = ({
             style={[styles.wrapper, positionStyle, style]}
             pointerEvents={pointerEvents}
             onAccessibilityEscape={onDismiss}
-            testID={`${testID}-view`}
           >
             <Animated.View
               pointerEvents={pointerEvents}
@@ -707,7 +708,7 @@ const Menu = ({
                   shadowMenuAnimationStyle,
                 ]}
                 elevation={elevation}
-                testID={`${testID}-surface`}
+                testID={testID}
                 theme={theme}
               >
                 <Animated.View

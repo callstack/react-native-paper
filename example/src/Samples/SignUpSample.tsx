@@ -83,13 +83,15 @@ const SignUpSample = () => {
         <Divider />
 
         <Button
-          mode="contained"
+          mode="filled"
           disabled={!accepted}
           onPress={() => setSubmitted(true)}
         >
           Sign up
         </Button>
-        <Button onPress={() => {}}>I already have an account</Button>
+        <Button mode="text" onPress={() => {}}>
+          I already have an account
+        </Button>
       </ScreenWrapper>
 
       <Snackbar visible={submitted} onDismiss={() => setSubmitted(false)}>

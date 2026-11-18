@@ -1,28 +1,24 @@
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-import type { ColorValue, StyleProp } from 'react-native';
+import type { StyleProp } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Appbar } from './Appbar';
-import type { AppbarStyle } from './Appbar';
-import { getAppbarBackgroundColor, modeAppbarHeight } from './utils';
+import type { Props as AppbarProps } from './Appbar';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
+import type { SurfaceStyle } from '../Surface';
 
-export type Props = Omit<
-  React.ComponentProps<typeof Appbar>,
-  'safeAreaInsets' | 'style'
-> & {
+export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
   /**
    * Whether the background color is a dark color. A dark header will render light text and vice-versa.
    */
   dark?: boolean;
   /**
-   * Extra padding to add at the top of header to account for translucent status bar.
-   * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
-   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
-   * Pass `0` or a custom value to disable the default behaviour, and customize the height.
+   * Padding at the top of the header, to keep its content clear of the status bar.
+   * By default, the header uses the top safe area inset, on every platform.
+   * Pass a number, such as `0`, to use that padding instead.
    */
   statusBarHeight?: number;
   /**
@@ -48,7 +44,13 @@ export type Props = Omit<
    * @optional
    */
   theme?: ThemeProp;
-  style?: StyleProp<AppbarStyle>;
+  /**
+   * Style of the header.
+   *
+   * Background color and border radius should be specified via props instead.
+   * A `height` set here is the total height of the header, including the status bar.
+   */
+  style?: StyleProp<SurfaceStyle>;
 };
 
 /**
@@ -81,52 +83,26 @@ export type Props = Omit<
  * ```
  */
 const AppbarHeader = ({
-  // Don't use default props since we check it to know whether we should use SafeAreaView
+  // No default, because `undefined` falls back to the top safe area inset
   statusBarHeight,
   style,
   dark,
   mode = Platform.OS === 'ios' ? 'center-aligned' : 'small',
   elevated = false,
   theme: themeOverrides,
-  testID = 'appbar-header',
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const flattenedStyle = StyleSheet.flatten(style);
-  const {
-    height = modeAppbarHeight[mode],
-    backgroundColor: customBackground,
-    zIndex = elevated ? 1 : 0,
-    ...restStyle
-  } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
-    height?: AppbarStyle['height'];
-    backgroundColor?: ColorValue;
-    zIndex?: number;
-  };
-
-  const backgroundColor = getAppbarBackgroundColor(
-    theme,
-    elevated,
-    customBackground
-  );
-
   const { top, left, right } = useSafeAreaInsets();
   const topInset = statusBarHeight ?? top;
   const horizontalInset = Math.max(left, right);
-  const headerHeight = typeof height === 'number' ? height + topInset : height;
 
   return (
     <Appbar
       testID={testID}
-      style={[
-        {
-          height: headerHeight,
-          backgroundColor,
-          zIndex,
-        },
-        restStyle,
-      ]}
+      style={[elevated ? styles.elevated : styles.flat, style]}
       safeAreaInsets={{
         top: topInset,
         left: horizontalInset,
@@ -142,6 +118,15 @@ const AppbarHeader = ({
 };
 
 AppbarHeader.displayName = 'Appbar.Header';
+
+const styles = StyleSheet.create({
+  elevated: {
+    zIndex: 1,
+  },
+  flat: {
+    zIndex: 0,
+  },
+});
 
 export default AppbarHeader;
 

@@ -1,10 +1,5 @@
-import type { StyleProp, ViewStyle } from 'react-native';
+import * as React from 'react';
 
-export type DialogChildProps = {
-  style?: StyleProp<ViewStyle>;
-};
-
-export type DialogActionChildProps = DialogChildProps & {
-  compact?: boolean;
-  uppercase?: boolean;
-};
+export const DialogTitleIdContext = React.createContext<string | undefined>(
+  undefined
+);

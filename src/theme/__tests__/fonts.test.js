@@ -340,6 +340,97 @@ describe('configureFonts', () => {
     });
   });
 
+  it('resolves the Android font families per MD3 family assignment', () => {
+    mockPlatform('android');
+    const { typescale } = loadFonts();
+
+    for (const variant of ['bodyLarge', 'bodyMedium', 'bodySmall']) {
+      expect(typescale[variant]).toMatchObject({
+        fontFamily: 'sans-serif',
+        fontWeight: '400',
+      });
+    }
+
+    for (const variant of [
+      'displayLargeEmphasized',
+      'displayMediumEmphasized',
+      'displaySmallEmphasized',
+      'headlineLargeEmphasized',
+      'headlineMediumEmphasized',
+      'headlineSmallEmphasized',
+      'titleLargeEmphasized',
+    ]) {
+      expect(typescale[variant]).toMatchObject({
+        fontFamily: 'sans-serif-medium',
+        fontWeight: '500',
+      });
+    }
+
+    for (const variant of ['displayLarge', 'headlineLarge', 'titleLarge']) {
+      expect(typescale[variant]).toMatchObject({
+        fontFamily: 'sans-serif',
+        fontWeight: '400',
+      });
+    }
+
+    for (const variant of [
+      'titleMediumEmphasized',
+      'titleSmallEmphasized',
+      'labelLargeEmphasized',
+      'labelMediumEmphasized',
+      'labelSmallEmphasized',
+    ]) {
+      expect(typescale[variant]).toMatchObject({
+        fontFamily: 'sans-serif',
+        fontWeight: '700',
+      });
+    }
+  });
+
+  it('applies flat properties to every variant when the config also has per-variant entries', () => {
+    mockPlatform('ios');
+    const { configureFonts, typescale } = loadFonts();
+
+    const fonts = configureFonts({
+      config: {
+        fontFamily: 'NotoSans',
+        bodyLarge: {
+          fontSize: 18,
+        },
+      },
+    });
+
+    expect(fonts).toEqual({
+      ...Object.fromEntries(
+        Object.entries(typescale).map(([variantName, variantProperties]) => [
+          variantName,
+          { ...variantProperties, fontFamily: 'NotoSans' },
+        ])
+      ),
+      bodyLarge: {
+        ...typescale.bodyLarge,
+        fontFamily: 'NotoSans',
+        fontSize: 18,
+      },
+    });
+  });
+
+  it('does not add flat properties of a mixed config as typescale variants', () => {
+    mockPlatform('ios');
+    const { configureFonts } = loadFonts();
+
+    const fonts = configureFonts({
+      config: {
+        fontFamily: 'NotoSans',
+        bodyLarge: {
+          fontSize: 18,
+        },
+      },
+    });
+
+    expect(fonts.fontFamily).toBeUndefined();
+  });
+
   it('should be deterministic', () => {
     mockPlatform('ios');
     const { configureFonts } = loadFonts();

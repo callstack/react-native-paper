@@ -7,11 +7,14 @@ import type {
   GestureResponderEvent,
 } from 'react-native';
 
-import type { $RemoveChildren } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Content of the `DataTableCell`.
    */
@@ -75,13 +78,15 @@ const DataTableCell = ({
 }: Props) => {
   return (
     <TouchableRipple
+      // Cells fill rows that stack edge to edge, so an outward ring would run
+      // into the rows above and below, like DataTable.Row's.
+      focusRing="inward"
       {...rest}
       testID={testID}
       style={[styles.container, numeric && styles.right, style]}
     >
       <CellContent
         textStyle={textStyle}
-        testID={testID}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
       >
         {children}
@@ -94,11 +99,7 @@ const CellContent = ({
   children,
   textStyle,
   maxFontSizeMultiplier,
-  testID,
-}: Pick<
-  Props,
-  'children' | 'textStyle' | 'testID' | 'maxFontSizeMultiplier'
->) => {
+}: Pick<Props, 'children' | 'textStyle' | 'maxFontSizeMultiplier'>) => {
   if (React.isValidElement(children)) {
     return children;
   }
@@ -108,7 +109,6 @@ const CellContent = ({
       style={textStyle}
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
-      testID={`${testID}-text-container`}
     >
       {children}
     </Text>

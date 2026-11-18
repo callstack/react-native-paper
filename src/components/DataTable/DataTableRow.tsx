@@ -8,10 +8,14 @@ import type {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
-export type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children'
+> & {
   /**
    * Content of the `DataTableRow`.
    */
@@ -66,8 +70,12 @@ const DataTableRow = ({
 
   return (
     <TouchableRipple
+      // Rows stack edge to edge, so an outward ring would run into the rows
+      // above and below. MD3 has no data table; this follows its lists.
+      focusRing="inward"
       {...rest}
       onPress={onPress}
+      theme={theme}
       style={[styles.container, { borderBottomColor }, style]}
     >
       <View style={styles.content} pointerEvents={pointerEvents}>

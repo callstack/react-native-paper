@@ -1,7 +1,7 @@
 import type { ColorValue, GestureResponderEvent } from 'react-native';
 
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -77,7 +77,7 @@ export const getSelectionControlIOSColor = ({
   disabled?: boolean;
   customColor?: ColorValue;
   error?: boolean;
-}) => {
+}): { checkedColor: ColorValue; checkedColorOpacity: number } => {
   const checkedColor = getIOSCheckedColor({
     theme,
     disabled,
