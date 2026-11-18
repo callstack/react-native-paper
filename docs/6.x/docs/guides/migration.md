@@ -680,7 +680,7 @@ The Card clips media to its shape, so a `Card.Cover` in the `media` slot follows
 
 #### `Card.Actions` no longer styles its buttons
 
-`Card.Actions` no longer assigns `mode="outlined"` to its first button, `mode="contained"` (now `mode="filled"`) to the rest, or `compact` to any of them. It only lays its children out in a row; set each `Button`'s `mode` and `compact` explicitly to keep the old look:
+`Card.Actions` no longer assigns `mode="outlined"` to its first button, `mode="contained"` (now `mode="filled"`) to the rest, or `compact` to any of them. It only lays its children out in a row; set each `Button`'s `mode` explicitly to keep the old look. `compact` was removed from `Button`; see [`Button`](#button) for its `size` replacement:
 
 ```tsx
 // Before (v5) — Card.Actions styled the buttons automatically
@@ -689,10 +689,10 @@ The Card clips media to its shape, so a `Card.Cover` in the `media` slot follows
   <Button onPress={save}>Save</Button>
 </Card.Actions>
 
-// After (v6) — set mode and compact explicitly
+// After (v6) — set mode explicitly
 <Card.Actions>
-  <Button mode="outlined" compact onPress={discard}>Discard</Button>
-  <Button mode="filled" compact onPress={save}>Save</Button>
+  <Button mode="outlined" onPress={discard}>Discard</Button>
+  <Button mode="filled" onPress={save}>Save</Button>
 </Card.Actions>
 ```
 
