@@ -495,6 +495,39 @@ A library that reads `theme.animation.scale` to turn its own animations off shou
 
 ## Components
 
+### Chip
+
+#### Default mode
+
+- The default **`mode`** changed from **`"flat"`** to **`"outlined"`**.
+
+```tsx
+// Before (v5) - no mode passed, rendered flat
+<Chip onPress={() => {}}>Example Chip</Chip>
+
+// After (v6) - no mode passed, renders outlined; pass mode="flat" to keep the old look
+<Chip mode="flat" onPress={() => {}}>Example Chip</Chip>
+```
+
+#### Removed props
+
+- **`compact`**, **`showSelectedOverlay`** were removed and have no direct equivalent.
+
+- **`avatar`** is rendered as is inside a clipped 24dp circle; Chip no longer injects a `style` into it. Size the avatar to 24dp yourself.
+
+#### New props
+
+- **`trailingIcon`** / **`onTrailingIconPress`** / **`trailingIconAccessibilityLabel`** add a trailing action (e.g. a dropdown) independent of the close button. `trailingIcon` takes precedence over `onClose`'s close icon when both are specified.
+- **`backgroundColor`** / **`borderRadius`** replace overriding the chip's background color or border radius through `style`. `style` no longer accepts `backgroundColor` or `borderRadius`.
+
+```tsx
+// Before (v5)
+<Chip onPress={() => {}} style={{ backgroundColor: 'purple', borderRadius: 16 }}>Example Chip</Chip>
+
+// After (v6)
+<Chip onPress={() => {}} backgroundColor="purple" borderRadius={16}>Example Chip</Chip>
+```
+
 ### Appbar
 
 `Appbar.Content` no longer takes `subtitle` or `subtitleStyle`, which were deprecated in 5.x. In 5.x they only rendered with a Material Design 2 theme, so removing them doesn't change how a Material Design 3 app looks.

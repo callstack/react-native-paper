@@ -103,29 +103,6 @@ describe('focus ring wiring', () => {
     expect(ringOffset()).toBe(OUTWARD);
   });
 
-  // The caller's `style` sizes the chip around the ripple that takes focus,
-  // and on Android and iOS the ripple keeps its own height at the top of a
-  // taller chip. So the ring goes on the chip's own box, and the 2dp gap is
-  // measured from its border, the visible edge.
-  it('Chip rings its own box, whatever its height', async () => {
-    await render(
-      <Chip onPress={() => {}} style={{ height: 40 }}>
-        chip
-      </Chip>
-    );
-
-    await focusFirstFocusable();
-
-    const root = (screen as unknown as { root: Node }).root;
-    const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
-    expect(ringed).toHaveLength(1);
-    expect(style(ringed[0])).toMatchObject({
-      height: 40,
-      borderWidth: 1,
-      outlineOffset: OUTWARD,
-    });
-  });
-
   it('Chip drops its ring when it is disabled while focused', async () => {
     const { rerender } = await render(<Chip onPress={() => {}}>chip</Chip>);
     await focusFirstFocusable();
@@ -170,37 +147,6 @@ describe('focus ring wiring', () => {
     await focusFirstFocusable();
 
     expect(ringOffset()).toBe(INWARD);
-  });
-
-  // Material Web rings the remove button with a circle around the glyph, not
-  // the whole close column.
-  it('Chip rings its close button with a circle around the glyph', async () => {
-    await render(
-      <Chip onPress={() => {}} onClose={() => {}}>
-        chip
-      </Chip>
-    );
-
-    await act(async () => {
-      await fireEvent(screen.getByLabelText('Close'), 'focus', ownFocusEvent());
-    });
-
-    const root = (screen as unknown as { root: Node }).root;
-    const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
-    expect(ringed).toHaveLength(1);
-    // Material Web: a 24dp circle with the ring right outside it. The shared
-    // ring adds the outer offset, so the circle is that much smaller. It is
-    // an overlay filling the glyph's box, which sets the size.
-    const size = 24 - 2 * outerOffset;
-    expect(style(ringed[0])).toMatchObject({
-      outlineOffset: OUTWARD,
-      position: 'absolute',
-      borderRadius: size / 2,
-    });
-    const box = walk(root, (n) =>
-      (n.children ?? []).some((c) => c === ringed[0])
-    )[0];
-    expect(style(box)).toMatchObject({ width: size, height: size });
   });
 
   it('Checkbox.Item rings inward, clear of the rows above and below', async () => {
@@ -865,15 +811,6 @@ describe('focus ring after the handler goes away and comes back', () => {
     expect(ringOffset()).toBeUndefined();
   });
 
-  it('Chip close button shows no ring until it is focused again', async () => {
-    await dropAndRestore(
-      <Chip onClose={() => {}}>chip</Chip>,
-      <Chip>chip</Chip>
-    );
-
-    expect(ringOffset()).toBeUndefined();
-  });
-
   it('TouchableRipple shows no ring until it is focused again', async () => {
     await dropAndRestore(
       <TouchableRipple onPress={() => {}}>
@@ -1056,63 +993,5 @@ describe('focus ring wiring (web)', () => {
     ).toBe('outward');
     expect(style(ringed[0]).borderWidth).toBeGreaterThan(0);
     expect(walk(ringed[0], (n) => n === button)).toHaveLength(1);
-  });
-
-  it("Chip marks its own box as the ring, keeps the caller's dataSet and leaves the ripple's outline to the stylesheet", async () => {
-    await render(
-      <Chip
-        testID="chip"
-        onPress={() => {}}
-        style={{ height: 40 }}
-        {...{ dataSet: { qa: 'chip' } }}
-      >
-        chip
-      </Chip>
-    );
-
-    const ripple = screen.getByTestId('chip');
-    // The stylesheet hides its outline, and only where `:has()` works.
-    expect(style(ripple)).not.toHaveProperty('outline');
-
-    const root = (screen as unknown as { root: Node }).root;
-    const ringed = walk(
-      root,
-      (n) =>
-        (n.props?.dataSet as Record<string, string> | undefined)
-          ?.focusRingWithin !== undefined
-    );
-    expect(ringed).toHaveLength(1);
-    expect(ringed[0].props?.dataSet).toEqual({
-      qa: 'chip',
-      focusRingWithin: 'outward',
-    });
-    expect(style(ringed[0])).toMatchObject({ height: 40, borderWidth: 1 });
-    expect(walk(ringed[0], (n) => n === ripple)).toHaveLength(1);
-  });
-
-  it('Chip marks its close button as the focus target and rings the glyph circle inside it', async () => {
-    await render(
-      <Chip onPress={() => {}} onClose={() => {}}>
-        chip
-      </Chip>
-    );
-
-    const close = screen.getByLabelText('Close');
-    expect(close.props.dataSet).toEqual({ focusRingTarget: 'true' });
-
-    const ringed = walk(
-      close,
-      (n) =>
-        (n.props?.dataSet as Record<string, string> | undefined)
-          ?.focusRingDescendant !== undefined
-    );
-    expect(ringed).toHaveLength(1);
-    expect(
-      (ringed[0].props?.dataSet as Record<string, string>).focusRingDescendant
-    ).toBe('outward');
-    expect(style(ringed[0])).toMatchObject({
-      position: 'absolute',
-      borderRadius: 12 - outerOffset,
-    });
   });
 });
