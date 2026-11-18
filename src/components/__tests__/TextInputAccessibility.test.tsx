@@ -271,6 +271,71 @@ it.each(['ios', 'android'] as const)(
   }
 );
 
+it('describes the field on web with its prefix and suffix instead of exposing them', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  await render(
+    <TextInput
+      label="Weight"
+      defaultValue="5"
+      prefix="~"
+      suffix=" kg"
+      supportingText="Packed weight"
+      render={renderInput}
+    />
+  );
+  const ids =
+    renderInput.mock.lastCall?.[0]['aria-describedby']?.split(' ') ?? [];
+
+  expect(ids).toHaveLength(3);
+  expect(screen.queryByText('~')).toBeNull();
+  expect(screen.queryByText(' kg')).toBeNull();
+  expect(screen.getByText('~', { includeHiddenElements: true })).toHaveProp(
+    'nativeID',
+    ids[0]
+  );
+  expect(screen.getByText(' kg', { includeHiddenElements: true })).toHaveProp(
+    'nativeID',
+    ids[1]
+  );
+  expect(screen.getByText('Packed weight')).toHaveProp('nativeID', ids[2]);
+});
+
+it('does not reference a prefix or suffix that is not rendered on web', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  await render(
+    <TextInput label="Weight" prefix="~" suffix=" kg" render={renderInput} />
+  );
+
+  expect(screen.queryByText('~', { includeHiddenElements: true })).toBeNull();
+  expect(renderInput.mock.lastCall?.[0]['aria-describedby']).toBeUndefined();
+});
+
+it.each(['ios', 'android'] as const)(
+  'reads the prefix and suffix from the hint instead of as separate text on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    await render(
+      <TextInput
+        label="Weight"
+        placeholder="0.0"
+        prefix="~"
+        suffix=" kg"
+        supportingText="Packed weight"
+      />
+    );
+    const input = screen.getByLabelText('Weight');
+    expect(input).toHaveProp('accessibilityHint', '0.0, ~, kg, Packed weight');
+
+    await userEvent.type(input, '5');
+    expect(input).toHaveProp('accessibilityHint', '~, kg, Packed weight');
+    expect(screen.queryByText('~')).toBeNull();
+    expect(screen.queryByText(' kg')).toBeNull();
+    expect(
+      screen.getByText('~', { includeHiddenElements: true })
+    ).not.toHaveProp('nativeID');
+  }
+);
+
 it('uses web descriptions without duplicating them in a hint', async () => {
   jest.replaceProperty(Platform, 'OS', 'web');
   await render(

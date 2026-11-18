@@ -64,6 +64,8 @@ export type GetAccessibilityDataReturn = {
     'aria-describedby'?: string;
   };
   label: { nativeID?: string };
+  prefix: AccessibilityProps & { nativeID?: string };
+  suffix: AccessibilityProps & { nativeID?: string };
   supportingText: AccessibilityProps & { nativeID?: string };
   counter: AccessibilityProps & { nativeID?: string };
 };
@@ -74,6 +76,8 @@ export type GetAccessibilityDataProps = {
   inputLength: number;
   hasError: boolean;
   hasCounter: boolean;
+  hasPrefix: boolean;
+  hasSuffix: boolean;
   isDisabled: boolean;
 };
 
@@ -201,8 +205,9 @@ export type TextInputProps = NativeTextInputProps & {
    */
   'aria-invalid'?: React.AriaAttributes['aria-invalid'];
   /**
-   * Space-separated IDs of additional descriptions on web. The IDs of rendered
-   * supporting text and the character counter are appended automatically.
+   * Space-separated IDs of additional descriptions on web. The IDs of the
+   * rendered prefix, suffix, supporting text and character counter are
+   * appended automatically.
    * On Android and iOS, provide external descriptions with `accessibilityHint`.
    */
   'aria-describedby'?: string;
@@ -460,7 +465,10 @@ function TextInput({
         {/* Keep the field visible to native accessibility even before focus. */}
         <View style={containerStyles}>
           {hasPrefix && (
-            <Animated.Text style={[prefixStyles, animatedAffixStyle]}>
+            <Animated.Text
+              {...accessibilityProps.prefix}
+              style={[prefixStyles, animatedAffixStyle]}
+            >
               {prefix}
             </Animated.Text>
           )}
@@ -482,7 +490,10 @@ function TextInput({
           })}
 
           {hasSuffix && (
-            <Animated.Text style={[suffixStyles, animatedAffixStyle]}>
+            <Animated.Text
+              {...accessibilityProps.suffix}
+              style={[suffixStyles, animatedAffixStyle]}
+            >
               {suffix}
             </Animated.Text>
           )}

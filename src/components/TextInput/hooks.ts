@@ -459,6 +459,8 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     id,
     hasError: flags.hasError,
     hasCounter: flags.hasCounter,
+    hasPrefix: flags.hasPrefix,
+    hasSuffix: flags.hasSuffix,
     isDisabled: flags.isDisabled,
     data: props,
     inputLength,

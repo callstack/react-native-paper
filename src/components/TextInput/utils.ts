@@ -566,10 +566,12 @@ export const getAccessibilityData = ({
   id,
   hasError,
   hasCounter,
+  hasPrefix,
+  hasSuffix,
   isDisabled,
   inputLength,
 }: GetAccessibilityDataProps): GetAccessibilityDataReturn => {
-  const { label, supportingText, maxLength, ...props } = data;
+  const { label, supportingText, maxLength, prefix, suffix, ...props } = data;
   const isCounterExceeded =
     hasCounter && maxLength != null && inputLength > maxLength;
   const counterAccessibilityLabel = hasCounter
@@ -580,6 +582,10 @@ export const getAccessibilityData = ({
 
   // Generated IDs only link the label and descriptions on web.
   const labelId = Platform.OS === 'web' ? `${id}-label` : undefined;
+  const prefixId =
+    Platform.OS === 'web' && hasPrefix ? `${id}-prefix` : undefined;
+  const suffixId =
+    Platform.OS === 'web' && hasSuffix ? `${id}-suffix` : undefined;
   const supportingTextId =
     Platform.OS === 'web' && supportingText
       ? `${id}-supporting-text`
@@ -587,7 +593,7 @@ export const getAccessibilityData = ({
   const counterId =
     Platform.OS === 'web' && hasCounter ? `${id}-counter` : undefined;
   const describedBy =
-    [props['aria-describedby'], supportingTextId, counterId]
+    [props['aria-describedby'], prefixId, suffixId, supportingTextId, counterId]
       .filter(Boolean)
       .join(' ') || undefined;
   const explicitLabel = props['aria-label'] ?? props.accessibilityLabel;
@@ -610,6 +616,8 @@ export const getAccessibilityData = ({
       : [
           props.accessibilityHint,
           placeholderHint,
+          prefix?.trim(),
+          suffix?.trim(),
           supportingText,
           counterAccessibilityLabel,
         ]
@@ -626,6 +634,10 @@ export const getAccessibilityData = ({
       accessibilityHint: hint,
     },
     label: { nativeID: labelId },
+    // The prefix and suffix describe the value, so they are read with the
+    // field instead of as separate text next to it.
+    prefix: { nativeID: prefixId, 'aria-hidden': true },
+    suffix: { nativeID: suffixId, 'aria-hidden': true },
     // On native, the hint above already contains these texts. Hide their nodes
     // so they are not read twice or merged into the field wrapper's label.
     supportingText: {

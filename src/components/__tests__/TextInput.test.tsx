@@ -1315,8 +1315,8 @@ it('shows prefix and suffix when the field is floating and hides them after valu
     />
   );
 
-  expect(screen.getByText('$')).toBeOnTheScreen();
-  expect(screen.getByText('/100')).toBeOnTheScreen();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText('/100', includeHiddenElements)).toBeOnTheScreen();
 
   await rerender(
     <TextInput
@@ -1329,8 +1329,10 @@ it('shows prefix and suffix when the field is floating and hides them after valu
     />
   );
 
-  expect(screen.queryByText('$')).not.toBeOnTheScreen();
-  expect(screen.queryByText('/100')).not.toBeOnTheScreen();
+  expect(screen.queryByText('$', includeHiddenElements)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
   expect(screen.getByTestId('tf-ps')).toBeOnTheScreen();
 });
 
@@ -1346,13 +1348,15 @@ it('renders prefix and suffix while focused even when value is empty', async () 
     />
   );
 
-  expect(screen.queryByText('$')).not.toBeOnTheScreen();
-  expect(screen.queryByText(' kg')).not.toBeOnTheScreen();
+  expect(screen.queryByText('$', includeHiddenElements)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText(' kg', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 
   await fireEvent(screen.getByTestId('tf-ps-focus'), 'focus');
 
-  expect(screen.getByText('$')).toBeOnTheScreen();
-  expect(screen.getByText(' kg')).toBeOnTheScreen();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText(' kg', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it.each([
@@ -1373,11 +1377,15 @@ it.each([
     await fireEvent(screen.getByLabelText('Amount'), 'focus');
 
     // The label still rests over it when the field takes focus.
-    expect(screen.getByText(text)).not.toBeVisible();
+    expect(
+      getAnimatedStyle(screen.getByText(text, includeHiddenElements))
+    ).toMatchObject({ opacity: 0 });
 
     await act(() => jest.advanceTimersByTimeAsync(1000));
 
-    expect(getAnimatedStyle(screen.getByText(text))).toMatchObject({
+    expect(
+      getAnimatedStyle(screen.getByText(text, includeHiddenElements))
+    ).toMatchObject({
       opacity: 1,
     });
   }
@@ -1395,10 +1403,10 @@ it('keeps the disabled dim on the prefix and suffix of a labelled field', async 
     />
   );
 
-  expect(screen.getByText('$')).toHaveStyle({
+  expect(screen.getByText('$', includeHiddenElements)).toHaveStyle({
     opacity: stateOpacity.disabled,
   });
-  expect(screen.getByText(' kg')).toHaveStyle({
+  expect(screen.getByText(' kg', includeHiddenElements)).toHaveStyle({
     opacity: stateOpacity.disabled,
   });
 });
@@ -1495,10 +1503,18 @@ it('does not apply the TextInput style prop to prefix or suffix Text', async () 
     letterSpacing: 9,
   });
 
-  expect(screen.getByText('$')).not.toHaveStyle({ fontSize: 40 });
-  expect(screen.getByText('$')).not.toHaveStyle({ letterSpacing: 9 });
-  expect(screen.getByText(']')).not.toHaveStyle({ fontSize: 40 });
-  expect(screen.getByText(']')).not.toHaveStyle({ letterSpacing: 9 });
+  expect(screen.getByText('$', includeHiddenElements)).not.toHaveStyle({
+    fontSize: 40,
+  });
+  expect(screen.getByText('$', includeHiddenElements)).not.toHaveStyle({
+    letterSpacing: 9,
+  });
+  expect(screen.getByText(']', includeHiddenElements)).not.toHaveStyle({
+    fontSize: 40,
+  });
+  expect(screen.getByText(']', includeHiddenElements)).not.toHaveStyle({
+    letterSpacing: 9,
+  });
 });
 
 it('passes defaultValue to the native input when uncontrolled without counter', async () => {
@@ -1555,16 +1571,18 @@ it('resets counter and hides prefix/suffix when clear() is called on uncontrolle
   );
 
   expect(screen.getByText('3/200', includeHiddenElements)).toBeOnTheScreen();
-  expect(screen.getByText('$')).toBeOnTheScreen();
-  expect(screen.getByText('/100')).toBeOnTheScreen();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText('/100', includeHiddenElements)).toBeOnTheScreen();
 
   await act(() => {
     ref.current?.clear();
   });
 
   expect(screen.getByText('0/200', includeHiddenElements)).toBeOnTheScreen();
-  expect(screen.queryByText('$')).not.toBeOnTheScreen();
-  expect(screen.queryByText('/100')).not.toBeOnTheScreen();
+  expect(screen.queryByText('$', includeHiddenElements)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 });
 
 it('resets counter but keeps prefix/suffix visible when clear() is called on uncontrolled field while focused', async () => {
@@ -1651,8 +1669,10 @@ it('hides prefix/suffix when blurring after clear() was called while focused', a
   await fireEvent(screen.getByTestId('tf-clear-then-blur'), 'blur');
 
   // After blur with no text, prefix/suffix should be hidden
-  expect(screen.queryByText('$')).not.toBeOnTheScreen();
-  expect(screen.queryByText('/100')).not.toBeOnTheScreen();
+  expect(screen.queryByText('$', includeHiddenElements)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 });
 
 it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined', async () => {
