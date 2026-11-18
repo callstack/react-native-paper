@@ -10,9 +10,6 @@ import type {
 import Animated, {
   cubicBezier,
   type AnimatedStyle,
-  useAnimatedStyle,
-  useDerivedValue,
-  useSharedValue,
 } from 'react-native-reanimated';
 
 import CardActions from './CardActions';
@@ -437,136 +434,49 @@ const Card = ({
     disabled || ariaDisabled || accessibilityState?.disabled
   );
 
+  // Hover, focus and press are changes between fixed states, so they live in
+  // React state: Reanimated CSS transitions start when React commits the new
+  // style, which a value written from a worklet would never do.
+  const [hovered, setHovered] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isDisabled) {
+      setHovered(false);
+      setFocused(false);
+      setPressed(false);
+    }
+  }, [isDisabled]);
+
   const visuals = resolveCardVisuals({
     theme,
     variant: cardVariant,
     elevation: customElevation,
     disabled: isDisabled,
     dragged,
-  });
-
-  const enabledVisuals = resolveCardVisuals({
-    theme,
-    variant: cardVariant,
-    elevation: customElevation,
-  });
-  const hoveredVisuals = resolveCardVisuals({
-    theme,
-    variant: cardVariant,
-    elevation: customElevation,
-    hovered: true,
-  });
-  const focusedVisuals = resolveCardVisuals({
-    theme,
-    variant: cardVariant,
-    elevation: customElevation,
-    focused: true,
-  });
-  const pressedVisuals = resolveCardVisuals({
-    theme,
-    variant: cardVariant,
-    elevation: customElevation,
-    pressed: true,
-  });
-  const draggedVisuals = resolveCardVisuals({
-    theme,
-    variant: cardVariant,
-    elevation: customElevation,
-    dragged: true,
-  });
-  const disabledVisuals = resolveCardVisuals({
-    theme,
-    variant: cardVariant,
-    elevation: customElevation,
-    disabled: true,
-  });
-  const disabledState = useSharedValue(isDisabled);
-  const draggedState = useSharedValue(dragged);
-  const hovered = useSharedValue(false);
-  const focused = useSharedValue(false);
-  const pressed = useSharedValue(false);
-  const currentInteractiveVisuals = useDerivedValue(() => {
-    if (disabledState.value) {
-      return disabledVisuals;
-    }
-    if (draggedState.value) {
-      return draggedVisuals;
-    }
-    if (pressed.value) {
-      return pressedVisuals;
-    }
-    if (focused.value) {
-      return focusedVisuals;
-    }
-    if (hovered.value) {
-      return hoveredVisuals;
-    }
-    return enabledVisuals;
-  }, [
-    disabledState,
-    disabledVisuals,
-    draggedState,
-    draggedVisuals,
-    enabledVisuals,
-    focusedVisuals,
-    hoveredVisuals,
-    pressedVisuals,
-  ]);
-  const interactiveElevation = useDerivedValue<Elevation>(() => {
-    return currentInteractiveVisuals.value.elevation;
+    pressed,
+    focused,
+    hovered,
   });
   const transitionDuration = reduceMotion
     ? 0
     : theme.motion.duration.short3 * theme.animation.scale;
   const transitionTimingFunction = cubicBezier(...theme.motion.easing.standard);
-  // Parametrized timing functions are class instances and cannot cross the
-  // worklet boundary, so keep them in regular styles.
   const stateLayerTransitionStyle: AnimatedStyle<ViewStyle> = {
+    transitionProperty: 'opacity',
+    transitionDuration,
     transitionTimingFunction,
   };
   const outlineTransitionStyle: AnimatedStyle<ViewStyle> = {
+    // A PlatformColor outline cannot be interpolated.
+    transitionProperty:
+      typeof visuals.outlineColor === 'string'
+        ? ['borderColor', 'opacity']
+        : 'opacity',
+    transitionDuration,
     transitionTimingFunction,
   };
-  const stateLayerAnimatedStyle = useAnimatedStyle(
-    () => ({
-      opacity: currentInteractiveVisuals.value.stateLayerOpacity,
-      transitionDuration,
-      transitionProperty: ['opacity'],
-    }),
-    [currentInteractiveVisuals, transitionDuration]
-  );
-  const outlineAnimatedStyle = useAnimatedStyle(() => {
-    const outlineColor = currentInteractiveVisuals.value.outlineColor;
-
-    return {
-      borderColor: outlineColor,
-      opacity: currentInteractiveVisuals.value.outlineOpacity,
-      transitionDuration,
-      transitionProperty:
-        typeof outlineColor === 'string'
-          ? ['borderColor', 'opacity']
-          : ['opacity'],
-    };
-  }, [currentInteractiveVisuals, transitionDuration]);
-
-  React.useEffect(() => {
-    disabledState.value = isDisabled;
-    draggedState.value = dragged;
-
-    if (isDisabled) {
-      hovered.value = false;
-      focused.value = false;
-      pressed.value = false;
-    }
-  }, [
-    disabledState,
-    dragged,
-    draggedState,
-    focused,
-    hovered,
-    isDisabled,
-    pressed,
-  ]);
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -704,52 +614,52 @@ const Card = ({
   };
   const handlePressIn = React.useCallback(
     (event: GestureResponderEvent) => {
-      pressed.value = true;
+      setPressed(true);
       onPressIn?.(event);
     },
-    [onPressIn, pressed]
+    [onPressIn]
   );
   const handlePressOut = React.useCallback(
     (event: GestureResponderEvent) => {
-      pressed.value = false;
+      setPressed(false);
       onPressOut?.(event);
     },
-    [onPressOut, pressed]
+    [onPressOut]
   );
   const handleFocus: NonNullable<TouchableRippleProps['onFocus']> =
     React.useCallback(
       (event) => {
         focusTarget.onFocus?.(event);
-        focused.value = isKeyboardFocusEvent(event);
+        setFocused(isKeyboardFocusEvent(event));
         onFocus?.(event);
       },
-      [focusTarget, focused, onFocus]
+      [focusTarget, onFocus]
     );
   const handleBlur: NonNullable<TouchableRippleProps['onBlur']> =
     React.useCallback(
       (event) => {
         focusTarget.onBlur?.();
-        focused.value = false;
-        pressed.value = false;
+        setFocused(false);
+        setPressed(false);
         onBlur?.(event);
       },
-      [focusTarget, focused, onBlur, pressed]
+      [focusTarget, onBlur]
     );
   const handleHoverIn: NonNullable<TouchableRippleProps['onHoverIn']> =
     React.useCallback(
       (event) => {
-        hovered.value = true;
+        setHovered(true);
         onHoverIn?.(event);
       },
-      [hovered, onHoverIn]
+      [onHoverIn]
     );
   const handleHoverOut: NonNullable<TouchableRippleProps['onHoverOut']> =
     React.useCallback(
       (event) => {
-        hovered.value = false;
+        setHovered(false);
         onHoverOut?.(event);
       },
-      [hovered, onHoverOut]
+      [onHoverOut]
     );
 
   const layers = (
@@ -772,9 +682,9 @@ const Card = ({
           shapeStyle,
           {
             backgroundColor: visuals.stateLayerColor,
+            opacity: visuals.stateLayerOpacity,
           },
           stateLayerTransitionStyle,
-          stateLayerAnimatedStyle,
         ]}
       />
       {content}
@@ -784,9 +694,12 @@ const Card = ({
           style={[
             StyleSheet.absoluteFill,
             shapeStyle,
-            { borderWidth: visuals.outlineWidth },
+            {
+              borderWidth: visuals.outlineWidth,
+              borderColor: visuals.outlineColor,
+              opacity: visuals.outlineOpacity,
+            },
             outlineTransitionStyle,
-            outlineAnimatedStyle,
           ]}
         />
       ) : null}
@@ -807,7 +720,7 @@ const Card = ({
       backgroundColor="transparent"
       style={[style, ...focusRing.style]}
       theme={theme}
-      elevation={interactiveElevation}
+      elevation={visuals.elevation}
       transitionDuration={transitionDuration}
       {...(!hasPassedTouchHandler && neutralAccessibilityProps)}
       onFocus={!hasPassedTouchHandler ? onFocus : undefined}
