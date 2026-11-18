@@ -103,8 +103,6 @@ const Tooltip = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
-  // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
-  // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);

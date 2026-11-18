@@ -88,14 +88,9 @@ const UNMEASURED: Measurement = {
 };
 
 /**
- * Drives the show/hide fade shared by both tooltip variants.
- *
- * Given a `visible` intent it keeps the tooltip mounted (`rendered`) through
- * the exit fade so the animation can play before unmounting, holds the opacity
- * at 0 until the tooltip has been measured (so it never flashes at the wrong
- * position), and honors the reduce-motion preference. The fade itself is a
- * Reanimated CSS transition on `opacity`; the unmount is deferred by the exit
- * duration via a timer, which keeps the behavior deterministic and testable.
+ * Fades both tooltip variants in and out. Keeps the tooltip mounted through the
+ * exit fade and transparent until it is measured, so it never flashes at the
+ * wrong position.
  */
 export const useTooltipFade = (theme: InternalTheme, visible: boolean) => {
   const reduceMotion = useReduceMotion();

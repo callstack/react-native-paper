@@ -90,9 +90,9 @@ export type Props = {
    * Called whenever the tooltip closes, whichever way it was dismissed: an
    * outside tap, re-pressing the trigger, an action calling `dismiss`, the
    * pointer or focus leaving (web), Escape (web), the VoiceOver escape gesture
-   * (iOS), the screen size changing, or another
-   * tooltip, plain or rich, taking its place. It is not called when the
-   * component unmounts with the tooltip still open.
+   * (iOS), the screen size changing, or another tooltip, plain or rich, taking
+   * its place. It is not called when the component unmounts with the tooltip
+   * still open.
    */
   onDismiss?: () => void;
   /**
@@ -177,8 +177,6 @@ const RichTooltip = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
-  // `visible` is the show/hide intent; the fade hook keeps the tooltip mounted
-  // through the exit animation and owns the measurement + opacity.
   const [visible, setVisible] = React.useState(false);
   const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
     useTooltipFade(theme, visible);
@@ -266,8 +264,7 @@ const RichTooltip = ({
   };
 
   // On web a press on the hovered trigger keeps the tooltip open, as the hover
-  // already opened it. Stable, so the backdrop registry always calls the
-  // latest one.
+  // already opened it.
   const handlePress = useLatestCallback(() => {
     if (Platform.OS === 'web' && visible && hoveringRef.current) {
       showTimer.clear();
@@ -294,8 +291,6 @@ const RichTooltip = ({
     [showTimer, hideTimer, enterTouchDelay, show]
   );
 
-  // On web, pointer events on the wrapper View handle hover without going
-  // through RNW's Pressable lock/unlock mechanism that caused flicker.
   const handlePointerLeave = React.useCallback(
     (e: PointerEvent) => {
       if (isPointerInside(childrenWrapperRef.current, e.nativeEvent)) {
@@ -407,7 +402,6 @@ const RichTooltip = ({
         }
       : {};
 
-  // Mobile: the registry lets the backdrop forward taps to this trigger
   const [triggerId] = React.useState(() => Symbol());
 
   const updateTriggerRegistration = React.useCallback(() => {
@@ -428,8 +422,6 @@ const RichTooltip = ({
     };
   }, [triggerId]);
 
-  // Re-measure this trigger whenever a rich tooltip opens so scroll-invalidated
-  // coordinates are refreshed before the backdrop needs to hit-test against them.
   React.useEffect(() => {
     return subscribeToTriggerRefresh(updateTriggerRegistration);
   }, [updateTriggerRegistration]);

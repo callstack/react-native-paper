@@ -254,7 +254,7 @@ describe('Tooltip', () => {
         await findByText('some tooltip text');
 
         await runTimers(); // leaveTouchDelay → schedules the exit fade
-        await runTimers(); // exit fade duration → unmounts
+        await runTimers();
 
         expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
       });
@@ -579,7 +579,7 @@ describe('Tooltip', () => {
           await fireEvent(getTrigger(), 'pointerLeave', mousePointer);
         });
         await runTimers(); // leaveTouchDelay → schedules the exit fade
-        await runTimers(); // exit fade duration → unmounts
+        await runTimers();
 
         expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
       });
@@ -622,7 +622,7 @@ describe('Tooltip', () => {
           await fireEvent(getTrigger(), 'blur');
         });
         await runTimers(); // leaveTouchDelay → schedules the exit fade
-        await runTimers(); // exit fade duration → unmounts
+        await runTimers();
 
         expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
       });
@@ -919,7 +919,7 @@ describe('Tooltip.Rich', () => {
       expect(getByText('Body text')).toBeTruthy();
       expect(getByText('Learn more')).toBeTruthy();
       await user.press(getTrigger());
-      await runTimers(); // exit fade → unmount
+      await runTimers();
 
       expect(queryByText('Body text')).toBeNull();
     });
@@ -981,7 +981,7 @@ describe('Tooltip.Rich', () => {
       expect(getByText('Body text')).toBeTruthy();
 
       await user.press(getBackdrop());
-      await runTimers(); // exit fade → unmount
+      await runTimers();
 
       expect(queryByText('Body text')).toBeNull();
     });
@@ -1039,7 +1039,7 @@ describe('Tooltip.Rich', () => {
         'press',
         { nativeEvent: { pageX: 240, pageY: 425 } }
       );
-      await runTimers(); // exit fade → unmount
+      await runTimers();
 
       expect(queryByText('First tooltip')).toBeNull();
       expect(getByText('Second tooltip')).toBeTruthy();
@@ -1070,7 +1070,7 @@ describe('Tooltip.Rich', () => {
       expect(getByText('First tooltip')).toBeTruthy();
 
       await user.press(triggerB);
-      await runTimers(); // exit fade → unmount
+      await runTimers();
 
       expect(queryByText('First tooltip')).toBeNull();
       expect(getByText('Second tooltip')).toBeTruthy();
@@ -1107,7 +1107,7 @@ describe('Tooltip.Rich', () => {
           'accessibilityEscape'
         );
       });
-      await runTimers(); // exit fade → unmount
+      await runTimers();
 
       expect(queryByText('Body text')).toBeNull();
     });
@@ -1123,7 +1123,7 @@ describe('Tooltip.Rich', () => {
       expect(getByText('Body text')).toBeTruthy();
 
       await user.press(getByText('Learn more'));
-      await runTimers(); // exit fade → unmount
+      await runTimers();
 
       expect(queryByText('Body text')).toBeNull();
     });
@@ -1152,7 +1152,7 @@ describe('Tooltip.Rich', () => {
 
         await user.press(getTrigger());
         await user.press(getByText('Learn more'));
-        await runTimers(); // exit fade → unmount
+        await runTimers();
 
         expect(onDismiss).toHaveBeenCalledTimes(1);
       });
@@ -1163,7 +1163,7 @@ describe('Tooltip.Rich', () => {
 
         await user.press(getTrigger());
         await user.press(getBackdrop());
-        await runTimers(); // exit fade → unmount
+        await runTimers();
 
         expect(onDismiss).toHaveBeenCalledTimes(1);
       });
@@ -1174,7 +1174,7 @@ describe('Tooltip.Rich', () => {
 
         await user.press(getTrigger());
         await user.press(getTrigger());
-        await runTimers(); // exit fade → unmount
+        await runTimers();
 
         expect(onDismiss).toHaveBeenCalledTimes(1);
       });
@@ -1220,7 +1220,7 @@ describe('Tooltip.Rich', () => {
         await fireEvent(getTrigger(), 'blur');
       });
       await runTimers(500); // leave delay → hide intent
-      await runTimers(); // exit fade → unmount
+      await runTimers();
 
       expect(queryByText('Body text')).toBeNull();
     });
@@ -1236,10 +1236,8 @@ describe('Tooltip.Rich', () => {
       await runTimers(0);
       expect(getByText('Body text')).toBeTruthy();
 
-      // Leaving the trigger schedules a hide...
       await act(async () => {
         await fireEvent(getTrigger(), 'pointerLeave', mousePointer);
-        // ...but entering the tooltip cancels it.
         await fireEvent(getByText('Body text'), 'pointerEnter', mousePointer);
       });
       await runTimers(500);
@@ -1267,7 +1265,7 @@ describe('Tooltip.Rich', () => {
         await fireEvent(getByText('Body text'), 'pointerLeave', mousePointer);
       });
       await runTimers(500); // leave delay → hide intent
-      await runTimers(); // exit fade → unmount
+      await runTimers();
 
       expect(queryByText('Body text')).toBeNull();
     });
@@ -1295,7 +1293,7 @@ describe('Tooltip.Rich', () => {
         await fireEvent(trigger, 'pointerLeave', mousePointer);
       });
       await runTimers(500); // leave delay -> hide intent
-      await runTimers(); // exit fade -> unmount
+      await runTimers();
 
       expect(queryByText('Body text')).toBeNull();
     });
@@ -1397,7 +1395,7 @@ describe('Tooltip.Rich', () => {
 
       await touchDown();
       await user.press(getTrigger());
-      await runTimers(); // exit fade → unmount
+      await runTimers();
 
       expect(queryByText('Body text')).toBeNull();
     });
@@ -1436,7 +1434,7 @@ describe('Tooltip.Rich', () => {
           );
         });
         await runTimers(); // hide intent
-        await runTimers(); // exit fade -> unmount
+        await runTimers();
       };
 
       beforeEach(() => {
@@ -1570,7 +1568,7 @@ describe('Tooltip.Rich', () => {
           await fireEvent(getTrigger(), 'focus');
         });
         await user.press(getByText('Learn more'));
-        await runTimers(); // exit fade -> unmount
+        await runTimers();
 
         expect(queryByText('Body text')).toBeNull();
         expect(focus).toHaveBeenCalled();
