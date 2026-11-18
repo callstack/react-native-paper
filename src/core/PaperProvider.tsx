@@ -36,8 +36,6 @@ const PaperProvider = (props: Props) => {
     const scale = resolvedReduceMotion
       ? 0
       : (props.theme?.animation?.scale ?? 1);
-    // Merged deeply, like a component's `theme` prop: a nested key such as
-    // `motion` or `shapes` fills what it leaves out from the default theme.
     const merged = safeMerge(base, props.theme);
 
     return { ...merged, animation: { ...merged.animation, scale } };
