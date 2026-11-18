@@ -143,11 +143,16 @@ const TextInputDemo = ({ variant }: TextInputDemoProps) => {
       {/* Controls */}
       <List.Subheader style={styles.subheader}>Controls</List.Subheader>
       {SWITCH_CONTROLS.map(({ label, key }) => (
-        <TouchableRipple key={key} onPress={() => toggleControl(key)}>
+        <TouchableRipple
+          key={key}
+          onPress={() => toggleControl(key)}
+          role="switch"
+          aria-checked={controls[key]}
+        >
           <View style={styles.switchRow}>
             <Text variant="bodyMedium">{label}</Text>
-            <View pointerEvents="none">
-              <Switch value={controls[key]} />
+            <View pointerEvents="none" aria-hidden>
+              <Switch value={controls[key]} readOnly />
             </View>
           </View>
         </TouchableRipple>
