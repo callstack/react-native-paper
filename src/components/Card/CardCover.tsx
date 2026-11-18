@@ -60,7 +60,11 @@ const CardCover = ({ aspectRatio, style, theme: _theme, ...rest }: Props) => {
       {...rest}
       style={[
         styles.image,
-        aspectRatio === undefined ? styles.defaultHeight : { aspectRatio },
+        // `height: 'auto'` lets the ratio win over the intrinsic height that
+        // React Native gives an image from a static `require()` source.
+        aspectRatio === undefined
+          ? styles.defaultHeight
+          : [styles.autoHeight, { aspectRatio }],
         style,
       ]}
       accessibilityIgnoresInvertColors
@@ -78,6 +82,9 @@ const styles = StyleSheet.create({
   },
   defaultHeight: {
     height: 195,
+  },
+  autoHeight: {
+    height: 'auto',
   },
 });
 

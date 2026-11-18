@@ -1159,8 +1159,13 @@ describe('CardCover', () => {
 
     const cover = screen.getByTestId('responsive-cover');
 
-    expect(cover).toHaveStyle({ width: '100%', aspectRatio: 16 / 9 });
-    expect(cover).not.toHaveStyle({ height: 195 });
+    // `height: 'auto'` overrides the intrinsic height React Native gives a
+    // static `require()` source, which would otherwise win over the ratio.
+    expect(cover).toHaveStyle({
+      width: '100%',
+      height: 'auto',
+      aspectRatio: 16 / 9,
+    });
   });
 
   it('exposes supplied semantics for an informative image', async () => {
