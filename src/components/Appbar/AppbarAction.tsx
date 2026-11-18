@@ -51,7 +51,9 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    * - `filled` - Icon in a container with the primary color.
    * - `tonal` - Icon in a container with the secondary container color.
    *
-   * The `filled` and `tonal` variants set the `mode` and `selected` props of the icon button, which are ignored.
+   * The `filled` and `tonal` variants set the `mode` of the icon button, so its `mode` prop is ignored.
+   * They are selected by default, with the primary or the secondary container color. Pass `selected={false}` to
+   * show the unselected container, for example to toggle the action.
    */
   variant?: 'standard' | 'filled' | 'tonal';
   /**
@@ -121,11 +123,11 @@ const AppbarAction = ({
       (isLeading ? colors.onSurface : colors.onSurfaceVariant))
     : iconColor;
 
-  // A filled or tonal action is a selected icon button in the matching mode,
-  // so `variant` takes over the `mode` and `selected` props for these
+  // A filled or tonal action is an icon button in the matching mode, which is
+  // selected unless `selected` is passed, so `variant` takes over `mode`
   const variantProps = isStandard
     ? { mode, selected }
-    : variantIconButtonProps[variant];
+    : { mode: variantIconButtonModes[variant], selected: selected ?? true };
 
   return (
     <IconButton
@@ -146,9 +148,9 @@ const AppbarAction = ({
   );
 };
 
-const variantIconButtonProps = {
-  filled: { mode: 'contained', selected: true },
-  tonal: { mode: 'contained-tonal', selected: true },
+const variantIconButtonModes = {
+  filled: 'contained',
+  tonal: 'contained-tonal',
 } as const;
 
 const styles = StyleSheet.create({

@@ -456,7 +456,7 @@ A `theme` set on a part takes precedence over the `theme` of the `Appbar`. In 5.
 #### Material 3 Expressive
 
 - The `mode` prop of `Appbar` and `Appbar.Header` accepts two new values: `medium-flexible` and `large-flexible`. Their height is the minimum height (`112` and `120`), and they grow when the title wraps onto a second line.
-- `Appbar.Action` has new `variant` and `width` props. `variant="filled"` and `variant="tonal"` render the action in a container, and `width="wide"` makes the container wider.
+- `Appbar.Action` has new `variant` and `width` props. `variant="filled"` and `variant="tonal"` render the action in a container, and `width="wide"` makes the container wider. A filled or tonal action is selected by default, and passing `selected={false}` shows the unselected container.
 - `Appbar` and `Appbar.Header` have a new `isScrolled` prop. Set it when the content below has scrolled, to switch the container to the `surfaceContainer` color. Unlike `elevated`, it doesn't add elevation.
 
 ```tsx

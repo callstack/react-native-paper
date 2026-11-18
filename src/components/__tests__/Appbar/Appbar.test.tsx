@@ -717,6 +717,72 @@ describe('AppbarAction', () => {
     }
   );
 
+  describe.each([
+    {
+      variant: 'filled',
+      selected: { container: 'primary', icon: 'onPrimary' },
+      unselected: { container: 'surfaceVariant', icon: 'primary' },
+    },
+    {
+      variant: 'tonal',
+      selected: {
+        container: 'secondaryContainer',
+        icon: 'onSecondaryContainer',
+      },
+      unselected: { container: 'surfaceVariant', icon: 'onSurfaceVariant' },
+    },
+  ] as const)('a $variant action', ({ variant, selected, unselected }) => {
+    const renderAction = async (props: { selected?: boolean }) => {
+      await render(
+        <Appbar>
+          <Appbar.Action
+            icon={({ color }) => (
+              <NativeText testID="icon-color">{String(color)}</NativeText>
+            )}
+            aria-label="Favorite"
+            variant={variant}
+            onPress={() => {}}
+            {...props}
+          />
+        </Appbar>
+      );
+    };
+
+    // The container is the view around the button
+    const container = () =>
+      screen.getByRole('button', { name: 'Favorite' }).parent;
+
+    it('is selected when selected is not passed', async () => {
+      await renderAction({});
+
+      expect(container()).toHaveStyle({
+        backgroundColor: LightTheme.colors[selected.container],
+      });
+      expect(screen.getByTestId('icon-color')).toHaveTextContent(
+        String(LightTheme.colors[selected.icon])
+      );
+    });
+
+    it('is selected when selected is true', async () => {
+      await renderAction({ selected: true });
+
+      expect(container()).toHaveStyle({
+        backgroundColor: LightTheme.colors[selected.container],
+      });
+    });
+
+    it('shows the unselected container when selected is false', async () => {
+      await renderAction({ selected: false });
+
+      expect(container()).toHaveStyle({
+        backgroundColor: LightTheme.colors[unselected.container],
+      });
+      expect(screen.getByTestId('icon-color')).toHaveTextContent(
+        String(LightTheme.colors[unselected.icon])
+      );
+    });
+  });
+
   it('does not override the icon color of a filled action by the Appbar', async () => {
     await render(
       <Appbar dark>
