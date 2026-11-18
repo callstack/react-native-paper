@@ -1,19 +1,22 @@
+import * as React from 'react';
 import { Alert, Platform, StyleSheet, View } from 'react-native';
 
 import {
   Avatar,
   Button,
   Card,
-  DarkTheme,
+  Chip,
   IconButton,
-  LightTheme,
   Text,
-  ThemeProvider,
   useTheme,
 } from 'react-native-paper';
-import type { CardCoverProps, Theme } from 'react-native-paper';
 
+import { PreferencesContext } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
+
+type Variant = 'filled' | 'elevated' | 'outlined';
+
+const variants: Variant[] = ['filled', 'elevated', 'outlined'];
 
 const showMessage = (message: string) => {
   if (Platform.OS === 'web') {
@@ -28,262 +31,309 @@ const CustomHeader = () => (
     <Avatar.Icon icon="leaf" size={40} />
     <View style={styles.customHeaderText}>
       <Text variant="titleMedium">Custom header</Text>
-      <Text variant="bodySmall">Neutral container, independent actions</Text>
+      <Text variant="bodySmall">Any React node in the header slot</Text>
     </View>
   </View>
 );
 
-const ResponsiveCover = ({
-  aspectRatio = 16 / 9,
-  ...props
-}: CardCoverProps) => <Card.Cover {...props} aspectRatio={aspectRatio} />;
-
-const ThemePreview = ({ name }: { name: string }) => {
-  const theme = useTheme();
+const CardExample = () => {
+  const { colors } = useTheme();
+  const [variant, setVariant] = React.useState<Variant>('filled');
+  const [isFavorite, setIsFavorite] = React.useState(false);
+  const preferences = React.useContext(PreferencesContext);
 
   return (
-    <View
-      style={[
-        styles.themePreview,
-        {
-          backgroundColor: theme.colors.background,
-          borderColor: theme.colors.outlineVariant,
-        },
-      ]}
-    >
-      <Text variant="titleMedium">{name}</Text>
+    <ScreenWrapper contentContainerStyle={styles.screen}>
+      <View style={styles.variants}>
+        {variants.map((item) => (
+          <Chip
+            key={item}
+            selected={variant === item}
+            mode="outlined"
+            onPress={() => setVariant(item)}
+          >
+            {item}
+          </Chip>
+        ))}
+      </View>
+
       <Card
-        testID={`card-theme-${name.toLowerCase()}-filled`}
-        onPress={() => showMessage(`${name} filled Card pressed`)}
-        onLongPress={() => showMessage(`${name} filled Card long pressed`)}
-        title="Filled interaction"
-        subtitle="Tab, hover, press, or long press"
+        variant={variant}
+        media={
+          <Card.Cover
+            source={require('../../assets/images/wrecked-ship.jpg')}
+          />
+        }
+        title="Abandoned Ship"
         content={
           <Card.Content>
-            <Text variant="bodySmall">
-              State layers and keyboard focus stay inside the shape.
+            <Text variant="bodyMedium">
+              The Abandoned Ship is a wrecked ship located on Route 108 in
+              Hoenn, originally being a ship named the S.S. Cactus. The second
+              part of the ship can only be accessed by using Dive and contains
+              the Scanner.
             </Text>
           </Card.Content>
         }
       />
+
       <Card
-        variant="elevated"
-        dragged
-        title="Elevated · dragged"
+        variant={variant}
+        media={
+          <Card.Cover
+            source={require('../../assets/images/bridge.jpg')}
+            aspectRatio={16 / 9}
+          />
+        }
+        header={
+          <Card.Title
+            title="Title variant"
+            subtitle="Subtitle variant"
+            titleVariant="headlineMedium"
+            subtitleVariant="bodyLarge"
+          />
+        }
         content={
           <Card.Content>
-            <Text variant="bodySmall">Compare the raised surface.</Text>
+            <Text variant="bodyMedium">
+              A responsive 16:9 cover with a title and subtitle in custom
+              variants.
+            </Text>
           </Card.Content>
         }
       />
+
       <Card
-        variant="outlined"
-        borderTopLeftRadius={4}
-        borderTopRightRadius={28}
-        borderBottomRightRadius={4}
-        borderBottomLeftRadius={28}
+        variant={variant}
+        title="Berries that are trimmed at the end"
+        subtitle="Omega Ruby"
+        leading={(props) => <Avatar.Icon {...props} icon="folder" />}
+        trailing={(props) => (
+          <IconButton
+            {...props}
+            accessibilityLabel="More options"
+            icon="dots-vertical"
+            onPress={() => showMessage('More options')}
+          />
+        )}
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              Dotted around the Hoenn region, you will find loamy soil, many of
+              which are housing berries. Once you have picked the berries, then
+              you have the ability to use that loamy soil to grow your own
+              berries.
+            </Text>
+          </Card.Content>
+        }
+      />
+
+      <Card
+        variant={variant}
         media={
-          <ResponsiveCover
-            aspectRatio={2}
-            accessible={false}
-            aria-hidden
-            source={require('../../assets/images/forest.jpg')}
+          <Card.Cover
+            source={require('../../assets/images/restaurant-1.jpg')}
           />
         }
-        title="Outlined clipping"
+        title="Custom Button styles"
+        actions={
+          <Card.Actions>
+            <Button
+              mode="outlined"
+              shape="square"
+              theme={{ shapes: { corner: { medium: 12 } } }}
+              onPress={() => showMessage('Shared')}
+            >
+              Share
+            </Button>
+            <Button
+              mode="filled"
+              shape="square"
+              theme={{ shapes: { corner: { medium: 12 } } }}
+              onPress={() => showMessage('Explored')}
+            >
+              Explore
+            </Button>
+          </Card.Actions>
+        }
       />
-    </View>
-  );
-};
 
-const ThemedPreview = ({ name, theme }: { name: string; theme: Theme }) => (
-  <ThemeProvider theme={theme}>
-    <ThemePreview name={name} />
-  </ThemeProvider>
-);
+      <Card
+        variant={variant}
+        theme={{ shapes: { corner: { medium: 24 } } }}
+        media={
+          <Card.Cover source={require('../../assets/images/artist-2.jpg')} />
+        }
+        title="Custom border radius"
+        subtitle="The cover follows the Card's shape"
+      />
 
-const CardExample = () => {
-  const theme = useTheme();
-
-  return (
-    <ScreenWrapper contentContainerStyle={styles.screen}>
-      <View style={styles.intro}>
-        <Text variant="headlineSmall">Expressive Card gallery</Text>
-        <Text variant="bodyMedium">
-          Filled is the default. Whole-Card actions are shown without nested
-          controls; neutral Cards own any independent actions.
-        </Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text variant="titleLarge">Variants and composition</Text>
-        <View style={styles.gallery}>
-          <Card
-            style={styles.galleryCard}
-            testID="card-gallery-filled"
-            accessibilityLabel="Open the default filled Card example"
-            onPress={() => showMessage('Default filled Card pressed')}
-            onLongPress={() => showMessage('Default filled Card long pressed')}
-            media={
-              <ResponsiveCover
-                accessible={false}
-                aria-hidden
-                source={require('../../assets/images/wrecked-ship.jpg')}
-              />
-            }
-            title="Filled (default)"
-            subtitle="Actionable Card"
-            content={
-              <Card.Content>
-                <Text variant="bodyMedium">
-                  One coherent target with direct title and content slots.
-                </Text>
-              </Card.Content>
-            }
+      <Card
+        variant={variant}
+        media={
+          <Card.Cover
+            source={require('../../assets/images/strawberries.jpg')}
           />
+        }
+        title="Just Strawberries"
+        subtitle="... and only Strawberries"
+        trailing={(props) => (
+          <IconButton
+            {...props}
+            accessibilityLabel={
+              isFavorite ? 'Remove from favorites' : 'Add to favorites'
+            }
+            icon={isFavorite ? 'heart' : 'heart-outline'}
+            onPress={() => setIsFavorite(!isFavorite)}
+          />
+        )}
+      />
 
-          <Card
-            style={styles.galleryCard}
-            variant="elevated"
-            header={<CustomHeader />}
-            content={
-              <Card.Content>
-                <Text variant="bodyMedium">
-                  Card.Actions preserves each control&apos;s own presentation.
-                </Text>
-              </Card.Content>
-            }
-            actions={
-              <Card.Actions>
-                <IconButton
-                  accessibilityLabel="Save custom header example"
-                  icon="bookmark-outline"
-                  onPress={() => showMessage('Saved')}
-                />
-                <Button mode="tonal" onPress={() => showMessage('Opened')}>
-                  Open
-                </Button>
-              </Card.Actions>
-            }
-          />
+      <Card
+        variant={variant}
+        accessibilityLabel="Pressable Chameleon"
+        onPress={() => showMessage('The Chameleon is Pressed')}
+        media={
+          <Card.Cover source={require('../../assets/images/chameleon.jpg')} />
+        }
+        title="Pressable Chameleon"
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              The whole Card is one target. If you press me, I will alert.
+            </Text>
+          </Card.Content>
+        }
+      />
 
-          <Card
-            style={styles.galleryCard}
-            variant="outlined"
-            media={
-              <ResponsiveCover
-                accessible
-                accessibilityRole="image"
-                accessibilityLabel="A bridge crossing a green valley"
-                source={require('../../assets/images/bridge.jpg')}
-              />
-            }
-            title="Outlined"
-            subtitle="Responsive informative media"
-          />
-        </View>
-      </View>
+      <Card
+        variant={variant}
+        accessibilityLabel="Long Pressable City"
+        onLongPress={() => showMessage('The City is Long Pressed')}
+        media={<Card.Cover source={require('../../assets/images/city.jpg')} />}
+        title="Long Pressable City"
+        leading={(props) => <Avatar.Icon {...props} icon="city" />}
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              This is a long press only city. If you long press me, I will
+              alert.
+            </Text>
+          </Card.Content>
+        }
+      />
 
-      <View style={styles.section}>
-        <Text variant="titleLarge">States, shapes, and omitted slots</Text>
-        <View style={styles.gallery}>
-          <Card
-            style={styles.compactCard}
-            variant="outlined"
-            disabled
-            onPress={() => showMessage('Disabled Card pressed')}
-            title="Disabled action"
-            content={
-              <Card.Content>
-                <Text variant="bodySmall">Not focusable or pressable.</Text>
-              </Card.Content>
-            }
-          />
-          <Card
-            style={styles.compactCard}
-            variant="elevated"
-            dragged
-            title="Dragged presentation"
-            content={
-              <Card.Content>
-                <Text variant="bodySmall">Controlled visual state.</Text>
-              </Card.Content>
-            }
-          />
-          <Card
-            style={styles.compactCard}
-            borderTopLeftRadius={4}
-            borderTopRightRadius={32}
-            borderBottomRightRadius={8}
-            borderBottomLeftRadius={24}
-            media={
-              <ResponsiveCover
-                accessible={false}
-                aria-hidden
-                source={require('../../assets/images/strawberries.jpg')}
-              />
-            }
-            content={
-              <Card.Content>
-                <Text variant="bodyMedium">Asymmetric shape, no header.</Text>
-              </Card.Content>
-            }
-          />
-          <Card
-            style={styles.compactCard}
-            header={
-              <Card.Title
-                title="Header only"
-                subtitle="Media, content, and actions omitted"
-                titleVariant="headlineSmall"
-                subtitleVariant="bodyMedium"
-                left={(props) => <Avatar.Icon {...props} icon="folder" />}
-                right={(props) => (
-                  <IconButton
-                    {...props}
-                    accessibilityLabel="More header-only options"
-                    icon="dots-vertical"
-                    onPress={() => showMessage('More options')}
-                  />
-                )}
-              />
-            }
-          />
-        </View>
-      </View>
+      <Card
+        variant={variant}
+        accessibilityLabel="Switch the theme"
+        onPress={() => preferences?.toggleTheme()}
+        title="Pressable Theme Change"
+        leading={(props) => <Avatar.Icon {...props} icon="format-paint" />}
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              This is a pressable Card. If you press me, I will switch the
+              theme.
+            </Text>
+          </Card.Content>
+        }
+      />
 
-      <View style={styles.section}>
-        <Text variant="titleLarge">Light and dark verification</Text>
-        <Text variant="bodyMedium">
-          Compare surfaces, outlines, elevation, clipping, and interaction
-          feedback without changing the application theme.
-        </Text>
-        <View style={styles.gallery}>
-          <ThemedPreview name="Light" theme={LightTheme} />
-          <ThemedPreview name="Dark" theme={DarkTheme} />
-        </View>
-      </View>
+      <Text variant="titleMedium" style={styles.sectionTitle}>
+        States and customization
+      </Text>
 
-      <View
-        style={[
-          styles.verification,
-          { borderColor: theme.colors.outlineVariant },
-        ]}
-      >
-        <Text variant="titleMedium">Platform verification</Text>
-        <Text variant="bodySmall">
-          Android · iOS · web: compare layout, both themes, surface roles,
-          outlines, clipping, and elevation.
-        </Text>
-        <Text variant="bodySmall">
-          Web: use Tab and hover on actionable Cards to inspect focus and state
-          layers.
-        </Text>
-        <Text variant="bodySmall">
-          Native: touch actionable Cards to inspect bounded ripple, clipping,
-          and elevation. Current platform: {Platform.OS}.
-        </Text>
-      </View>
+      <Card
+        variant="elevated"
+        media={
+          <Card.Cover source={require('../../assets/images/forest.jpg')} />
+        }
+        actions={
+          <Card.Actions>
+            <Button mode="outlined" onPress={() => showMessage('Shared')}>
+              Share
+            </Button>
+            <Button mode="filled" onPress={() => showMessage('Explored')}>
+              Explore
+            </Button>
+          </Card.Actions>
+        }
+      />
+
+      <Card
+        variant="outlined"
+        disabled
+        onPress={() => showMessage('Disabled Card pressed')}
+        title="Disabled"
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">Not focusable or pressable.</Text>
+          </Card.Content>
+        }
+      />
+
+      <Card
+        variant="elevated"
+        dragged
+        title="Dragged"
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              The dragged look is controlled by the app.
+            </Text>
+          </Card.Content>
+        }
+      />
+
+      <Card
+        variant="outlined"
+        borderColor={colors.primary}
+        title="Custom outline color"
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">Set with the borderColor prop.</Text>
+          </Card.Content>
+        }
+      />
+
+      <Card
+        variant={variant}
+        borderTopLeftRadius={4}
+        borderTopRightRadius={32}
+        borderBottomRightRadius={8}
+        borderBottomLeftRadius={24}
+        media={
+          <Card.Cover
+            source={require('../../assets/images/beach.jpg')}
+            aspectRatio={2}
+          />
+        }
+        title="Asymmetric shape"
+      />
+
+      <Card
+        variant={variant}
+        header={<CustomHeader />}
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              A neutral Card with independent actions.
+            </Text>
+          </Card.Content>
+        }
+        actions={
+          <Card.Actions>
+            <IconButton
+              accessibilityLabel="Save"
+              icon="bookmark-outline"
+              onPress={() => showMessage('Saved')}
+            />
+            <Button mode="tonal" onPress={() => showMessage('Opened')}>
+              Open
+            </Button>
+          </Card.Actions>
+        }
+      />
     </ScreenWrapper>
   );
 };
@@ -292,30 +342,17 @@ CardExample.title = 'Card';
 
 const styles = StyleSheet.create({
   screen: {
-    gap: 28,
-    padding: 16,
-  },
-  intro: {
     gap: 8,
+    padding: 8,
   },
-  section: {
-    gap: 12,
-  },
-  gallery: {
-    alignItems: 'flex-start',
+  variants: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 16,
+    gap: 8,
+    paddingVertical: 4,
   },
-  galleryCard: {
-    minWidth: 260,
-    flexBasis: 300,
-    flexGrow: 1,
-  },
-  compactCard: {
-    minWidth: 220,
-    flexBasis: 250,
-    flexGrow: 1,
+  sectionTitle: {
+    marginTop: 16,
   },
   customHeader: {
     alignItems: 'center',
@@ -326,19 +363,6 @@ const styles = StyleSheet.create({
   },
   customHeaderText: {
     flex: 1,
-  },
-  themePreview: {
-    borderWidth: 1,
-    flexBasis: 300,
-    flexGrow: 1,
-    gap: 12,
-    minWidth: 260,
-    padding: 16,
-  },
-  verification: {
-    borderLeftWidth: 4,
-    gap: 6,
-    paddingLeft: 12,
   },
 });
 
