@@ -517,8 +517,7 @@ const Card = ({
     'within'
   );
   const hasWarnedAboutActions = React.useRef(false);
-  const hasActions =
-    actions !== null && actions !== undefined && actions !== false;
+  const hasActions = React.Children.toArray(actions).length > 0;
 
   React.useEffect(() => {
     if (
