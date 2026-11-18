@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -57,14 +57,6 @@ export type Props = {
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
   delayLongPress?: number;
-  /**
-   * Called when the pointer enters the element (web only).
-   */
-  onHoverIn?: () => void;
-  /**
-   * Called when the pointer leaves the element (web only).
-   */
-  onHoverOut?: () => void;
   /**
    * Accessibility label. Falls back to nothing if unset.
    */
@@ -145,8 +137,6 @@ const FAB = ({
   onLongPress,
   onPressOut,
   delayLongPress,
-  onHoverIn,
-  onHoverOut,
   containerColor,
   contentColor,
   'aria-label': ariaLabel,
@@ -170,8 +160,6 @@ const FAB = ({
     onLongPress={onLongPress}
     onPressOut={onPressOut}
     delayLongPress={delayLongPress}
-    onHoverIn={onHoverIn}
-    onHoverOut={onHoverOut}
     containerColor={containerColor}
     contentColor={contentColor}
     aria-label={ariaLabel}

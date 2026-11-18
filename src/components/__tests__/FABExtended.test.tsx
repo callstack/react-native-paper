@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 
 import { afterEach, expect, it, jest } from '@jest/globals';
-import { fireEvent, screen, userEvent } from '@testing-library/react-native';
+import { fireEvent, userEvent } from '@testing-library/react-native';
 import * as Reanimated from 'react-native-reanimated';
 
 import PaperProvider from '../../core/PaperProvider';
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import FAB from '../FAB';
 
 jest.mock('react-native-reanimated', () => {
@@ -152,7 +152,15 @@ it('keeps the expand and collapse springs on with reduceMotion="off" whatever th
 });
 
 it('uses label as default aria-label', async () => {
-  await render(<FAB.Extended icon="plus" label="New message" expanded />);
+  await render(
+    <FAB.Extended
+      icon="plus"
+      label="New message"
+      expanded
+      testID="extended-fab"
+    />
+  );
+
   expect(screen.getByLabelText('New message')).toBeOnTheScreen();
 });
 
@@ -163,8 +171,10 @@ it('respects explicit aria-label', async () => {
       label="New message"
       expanded
       aria-label="Create new message"
+      testID="extended-fab"
     />
   );
+
   expect(screen.getByLabelText('Create new message')).toBeOnTheScreen();
 });
 
@@ -172,7 +182,13 @@ it('calls onPress when pressed', async () => {
   const user = userEvent.setup();
   const onPress = jest.fn();
   await render(
-    <FAB.Extended icon="plus" label="New message" expanded onPress={onPress} />
+    <FAB.Extended
+      icon="plus"
+      label="New message"
+      expanded
+      onPress={onPress}
+      testID="extended-fab"
+    />
   );
   await user.press(screen.getByRole('button', { name: 'New message' }));
   expect(onPress).toHaveBeenCalledTimes(1);
@@ -181,7 +197,13 @@ it('calls onPress when pressed', async () => {
 it('forwards event object to onPress', async () => {
   const onPress = jest.fn();
   await render(
-    <FAB.Extended icon="plus" label="New message" expanded onPress={onPress} />
+    <FAB.Extended
+      icon="plus"
+      label="New message"
+      expanded
+      onPress={onPress}
+      testID="extended-fab"
+    />
   );
   await fireEvent(
     screen.getByRole('button', { name: 'New message' }),

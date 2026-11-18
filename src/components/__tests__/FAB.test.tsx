@@ -70,6 +70,13 @@ it('renders FAB with tertiaryContainer variant', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders FAB with aria-label', async () => {
+  const tree = (
+    await render(<FAB icon="plus" aria-label="Add item" />)
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders FAB medium size', async () => {
   const tree = (await render(<FAB icon="plus" size="medium" />)).toJSON();
   expect(tree).toMatchSnapshot();
@@ -92,13 +99,6 @@ it('renders FAB with containerColor and contentColor overrides', async () => {
     await render(
       <FAB icon="plus" containerColor="#ff5722" contentColor="#ffffff" />
     )
-  ).toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders FAB with aria-label', async () => {
-  const tree = (
-    await render(<FAB icon="plus" aria-label="Add item" />)
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });

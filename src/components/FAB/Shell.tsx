@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -14,9 +13,9 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  type AnimatedStyle,
-  type SharedValue,
 } from 'react-native-reanimated';
+import type { SharedValue } from 'react-native-reanimated';
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import Content from './Content';
 import { Tokens } from './tokens';
@@ -96,14 +95,6 @@ export type ShellProps = {
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
   delayLongPress?: number;
-  /**
-   * Called when the pointer enters the element (web only).
-   */
-  onHoverIn?: () => void;
-  /**
-   * Called when the pointer leaves the element (web only).
-   */
-  onHoverOut?: () => void;
   /**
    * Whether the shell can't be pressed. Turns a control off without removing
    * `onPress`, which would render another element and remount the content.
@@ -217,8 +208,6 @@ const Shell = ({
   onLongPress,
   onPressOut,
   delayLongPress,
-  onHoverIn,
-  onHoverOut,
   disabled,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
@@ -402,14 +391,12 @@ const Shell = ({
     hoveredRef.current = true;
     setHovered(true);
     if (pressingRef.current) setPressed(true);
-    onHoverIn?.();
   };
 
   const handleHoverOut = () => {
     hoveredRef.current = false;
     setHovered(false);
     setPressed(false);
-    onHoverOut?.();
   };
 
   const handlePressIn = () => {
