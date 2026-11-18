@@ -393,8 +393,9 @@ const Banner = ({
     return ref;
   };
 
-  const wrapperRef = React.useRef<HostInstance>(null);
-  const messageRef = React.useRef<HostInstance>(null);
+  const wrapperRef = React.useRef<React.ComponentRef<typeof View>>(null);
+  const messageRef =
+    React.useRef<React.ComponentRef<typeof AnimatedText>>(null);
   // both tracked by key, not slot: when a sibling goes, the survivor moves up.
   // web only: the action with keyboard focus. native onFocus does not follow
   // the screen reader cursor, so it is not used there
