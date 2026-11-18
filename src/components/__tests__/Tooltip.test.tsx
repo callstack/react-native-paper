@@ -12,7 +12,12 @@ import {
   it,
   jest,
 } from '@jest/globals';
-import { act, fireEvent, userEvent } from '@testing-library/react-native';
+import {
+  act,
+  fireEvent,
+  isHiddenFromAccessibility,
+  userEvent,
+} from '@testing-library/react-native';
 
 import PaperProvider from '../../core/PaperProvider';
 import { render } from '../../test-utils';
@@ -608,6 +613,27 @@ describe('Tooltip', () => {
       });
     });
 
+    describe('keyboard focus', () => {
+      it('shows the tooltip on focus and hides it on blur', async () => {
+        const {
+          wrapper: { getByText, queryByText },
+        } = await setup({ enterTouchDelay: 500, leaveTouchDelay: 0 });
+
+        await act(async () => {
+          await fireEvent(getTrigger(getByText), 'focus');
+        });
+        expect(getByText('some tooltip text')).toBeOnTheScreen();
+
+        await act(async () => {
+          await fireEvent(getTrigger(getByText), 'blur');
+        });
+        await runTimers(); // leaveTouchDelay → schedules the exit fade
+        await runTimers(); // exit fade duration → unmounts
+
+        expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
+      });
+    });
+
     describe('accessibility', () => {
       it('describes the trigger with the tooltip so it is announced', async () => {
         const {
@@ -770,6 +796,20 @@ describe('Tooltip.Rich', () => {
     getByText: Awaited<ReturnType<typeof render>>['getByText']
   ) => getSurface(getByText).parent?.parent;
 
+  // The backdrop is hidden from screen readers, so it's reached through the
+  // tooltip it sits next to in the portal
+  const getBackdrop = (
+    getByText: Awaited<ReturnType<typeof render>>['getByText']
+  ) => {
+    const backdrop = getTooltipElement(getByText)?.parent?.children[0];
+
+    if (!backdrop || typeof backdrop === 'string') {
+      throw new Error('Expected Tooltip.Rich backdrop');
+    }
+
+    return backdrop;
+  };
+
   const runTimers = async (ms = 1000) => {
     await act(async () => {
       await jest.advanceTimersByTimeAsync(ms);
@@ -886,16 +926,26 @@ describe('Tooltip.Rich', () => {
 
     it('dismisses when the backdrop is pressed', async () => {
       const {
-        wrapper: { getByText, getByRole, queryByText },
+        wrapper: { getByText, queryByText },
       } = await setup();
 
       await user.press(getTrigger(getByText));
       expect(getByText('Body text')).toBeTruthy();
 
-      await user.press(getByRole('button', { name: 'Close' }));
+      await user.press(getBackdrop(getByText));
       await runTimers(); // exit fade → unmount
 
       expect(queryByText('Body text')).toBeNull();
+    });
+
+    it('hides the backdrop from screen readers', async () => {
+      const {
+        wrapper: { getByText },
+      } = await setup();
+
+      await user.press(getTrigger(getByText));
+
+      expect(isHiddenFromAccessibility(getBackdrop(getByText))).toBe(true);
     });
 
     it('names the trigger with the title and content', async () => {
@@ -1003,11 +1053,11 @@ describe('Tooltip.Rich', () => {
       it('fires when the backdrop is pressed', async () => {
         const onDismiss = jest.fn();
         const {
-          wrapper: { getByText, getByRole },
+          wrapper: { getByText },
         } = await setup({ onDismiss });
 
         await user.press(getTrigger(getByText));
-        await user.press(getByRole('button', { name: 'Close' }));
+        await user.press(getBackdrop(getByText));
         await runTimers(); // exit fade → unmount
 
         expect(onDismiss).toHaveBeenCalledTimes(1);

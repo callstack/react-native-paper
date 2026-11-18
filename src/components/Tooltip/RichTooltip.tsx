@@ -452,8 +452,8 @@ const RichTooltip = ({
       {rendered && (
         <Portal>
           <Pressable
-            role="button"
-            aria-label="Close"
+            aria-hidden
+            tabIndex={-1}
             onPress={handleBackdropPress}
             pointerEvents={visible && Platform.OS !== 'web' ? 'auto' : 'none'}
             style={StyleSheet.absoluteFill}

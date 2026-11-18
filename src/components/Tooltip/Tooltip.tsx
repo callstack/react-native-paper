@@ -28,6 +28,8 @@ export type TooltipTriggerProps = {
   onLongPress?: () => void;
   onPressOut?: () => void;
   delayLongPress?: number;
+  onFocus?: () => void;
+  onBlur?: () => void;
   'aria-label'?: string;
   'aria-describedby'?: string;
 };
@@ -150,6 +152,20 @@ const Tooltip = ({
     hideTimer.current = setTimeout(() => setVisible(false), leaveTouchDelay);
   }, [leaveTouchDelay]);
 
+  // Web: keyboard focus shows the tooltip right away, like `Tooltip.Rich`
+  const handleFocus = React.useCallback(() => {
+    if (showTimer.current) {
+      clearTimeout(showTimer.current);
+      showTimer.current = null;
+    }
+    if (hideTimer.current) {
+      clearTimeout(hideTimer.current);
+      hideTimer.current = null;
+    }
+    takeSingletonSlot(() => setVisible(false));
+    setVisible(true);
+  }, []);
+
   // On web, pointer events on the wrapper View handle hover without going
   // through RNW's Pressable lock/unlock mechanism that caused flicker.
   // Long-press in triggerProps lets touchscreen-web users still trigger it.
@@ -191,7 +207,11 @@ const Tooltip = ({
     onPressOut: handleTouchEnd,
     delayLongPress: enterTouchDelay,
     ...(Platform.OS === 'web'
-      ? { 'aria-describedby': tooltipId }
+      ? {
+          onFocus: handleFocus,
+          onBlur: handleTouchEnd,
+          'aria-describedby': tooltipId,
+        }
       : { 'aria-label': title }),
   };
 
