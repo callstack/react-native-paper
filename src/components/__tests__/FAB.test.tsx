@@ -332,6 +332,39 @@ it('hides an invisible FAB from accessibility and keyboard navigation without ma
   expect(onPress).not.toHaveBeenCalled();
 });
 
+// Drives Pressability itself, so the press is held through its timers.
+const touch = {
+  nativeEvent: { touches: [], changedTouches: [], identifier: 1 },
+  currentTarget: { measure: () => {} },
+  persist: () => {},
+};
+
+it('ignores a long press once the FAB hides mid-press but still reports the release', async () => {
+  const onPress = jest.fn();
+  const onLongPress = jest.fn();
+  const onPressOut = jest.fn();
+  const fabProps = {
+    icon: 'plus',
+    'aria-label': 'Create',
+    onPress,
+    onLongPress,
+    onPressOut,
+    delayLongPress: 300,
+  };
+  const { rerender } = await render(<FAB {...fabProps} />);
+  const fab = screen.getByRole('button', { name: 'Create' });
+
+  await fireEvent(fab, 'responderGrant', touch);
+  await rerender(<FAB {...fabProps} visible={false} />);
+  await act(() => jest.advanceTimersByTime(500));
+  await fireEvent(fab, 'responderRelease', touch);
+  await act(() => jest.advanceTimersByTime(500));
+
+  expect(onLongPress).not.toHaveBeenCalled();
+  expect(onPress).not.toHaveBeenCalled();
+  expect(onPressOut).toHaveBeenCalledTimes(1);
+});
+
 it('clears interaction elevation when a FAB is hidden and shown again', async () => {
   const ref = React.createRef<React.ComponentRef<typeof View>>();
   const onPress = jest.fn();
