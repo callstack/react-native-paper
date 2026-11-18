@@ -937,24 +937,28 @@ const GroupError = ({ visible }: { visible: boolean }) => {
 };
 ```
 
-Supporting text and the character counter describe the field instead of
-becoming part of its accessible name. On web, the input references them with
-`aria-describedby`, and IDs you pass in `aria-describedby` are kept. On Android
-and iOS, they are only exposed through `accessibilityHint`, alongside any hint
-you pass, and the visible text is hidden from assistive technology. Users who
-turn hints off, for example with the VoiceOver Speak Hints setting, do not hear
-them.
+Supporting text, the character counter, `prefix` and `suffix` describe the field
+instead of becoming part of its accessible name, and the prefix and suffix are
+no longer read as separate text. On web, the input references them with
+`aria-describedby` (the prefix and suffix while they are shown), and IDs you
+pass in `aria-describedby` are kept. On Android and iOS, they are only exposed
+through `accessibilityHint`, alongside any hint you pass, and the visible text
+is hidden from assistive technology. The hint of an empty field with a label
+also includes its placeholder, which stays blank until the label floats. Users
+who turn hints off, for example with the VoiceOver Speak Hints setting, do not
+hear them.
 
 When no label or explicit accessible name is supplied, the placeholder names the
 field, including after text is entered. A disabled field always exposes its
 disabled state, even when `aria-disabled={false}` is supplied.
 
 On web, error supporting text uses `role="alert"`. On Android and iOS, a new or
-changed error message is announced through `AccessibilityInfo`, and an error
-that is already shown when the field mounts is not announced there. On web,
-explicit `aria-invalid` values are kept; when omitted, validity is derived from
-`error` and the character counter. Custom input renderers should forward the
-accessibility props they receive.
+changed error message is announced through `AccessibilityInfo` once it has
+stayed the same for a second, so a message that changes on every keystroke is
+announced once it stops changing. An error that is already shown when the field
+mounts is not announced there. On web, explicit `aria-invalid` values are kept;
+when omitted, validity is derived from `error` and the character counter. Custom
+input renderers should forward the accessibility props they receive.
 
 The filled indicator uses `onSurfaceVariant` and the outlined border uses
 `outline` at rest. On web, both change to `onSurface` on hover, and an invalid
