@@ -13,7 +13,6 @@ import {
 } from 'react-native-paper';
 import type { CardCoverProps, Theme } from 'react-native-paper';
 
-import CardRenderCountExample from './CardRenderCountExample';
 import ScreenWrapper from '../ScreenWrapper';
 
 const showMessage = (message: string) => {
@@ -37,11 +36,7 @@ const CustomHeader = () => (
 const ResponsiveCover = ({
   aspectRatio = 16 / 9,
   ...props
-}: Omit<CardCoverProps, 'style'> & { aspectRatio?: number }) => (
-  <View style={[styles.mediaFrame, { aspectRatio }]}>
-    <Card.Cover {...props} style={styles.mediaFill} />
-  </View>
-);
+}: CardCoverProps) => <Card.Cover {...props} aspectRatio={aspectRatio} />;
 
 const ThemePreview = ({ name }: { name: string }) => {
   const theme = useTheme();
@@ -289,10 +284,6 @@ const CardExample = () => {
           and elevation. Current platform: {Platform.OS}.
         </Text>
       </View>
-
-      <View style={styles.section}>
-        <CardRenderCountExample />
-      </View>
     </ScreenWrapper>
   );
 };
@@ -325,13 +316,6 @@ const styles = StyleSheet.create({
     minWidth: 220,
     flexBasis: 250,
     flexGrow: 1,
-  },
-  mediaFrame: {
-    overflow: 'hidden',
-    width: '100%',
-  },
-  mediaFill: {
-    height: '100%',
   },
   customHeader: {
     alignItems: 'center',
