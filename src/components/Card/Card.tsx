@@ -240,6 +240,9 @@ export type Props = Omit<ViewProps, 'children' | 'style'> &
      * Whether to show the Card's controlled Material dragged presentation.
      * This controls visuals only; gesture recognition, drag lifecycle, list
      * reordering, and drop behavior remain the consumer's responsibility.
+     * Material requires a single-pointer alternative to dragging, such as a
+     * menu with move and delete actions opened by tapping or long-pressing
+     * the Card.
      */
     dragged?: boolean;
     /**
