@@ -46,7 +46,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: 8,
+    // Material Card specs: 16dp left/right padding.
+    paddingHorizontal: 16,
+    paddingVertical: 8,
     gap: 8,
   },
 });
