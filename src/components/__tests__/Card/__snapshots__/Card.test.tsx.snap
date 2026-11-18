@@ -134,6 +134,18 @@ exports[`Card applies the medium shape and asymmetric overrides across the shell
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -160,18 +172,6 @@ exports[`Card applies the medium shape and asymmetric overrides across the shell
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
     <View
       collapsable={false}
@@ -332,6 +332,18 @@ exports[`Card does not render an outline for the elevated variant 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -354,18 +366,6 @@ exports[`Card does not render an outline for the elevated variant 1`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -497,6 +497,18 @@ exports[`Card does not render an outline for the filled variant 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -519,18 +531,6 @@ exports[`Card does not render an outline for the filled variant 1`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -704,6 +704,17 @@ exports[`Card keeps the ripple, visual layers, and focus indicator on the Card s
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -728,17 +739,6 @@ exports[`Card keeps the ripple, visual layers, and focus indicator on the Card s
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -819,6 +819,18 @@ exports[`Card lets only elevated Cards customize their resting elevation 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -841,18 +853,6 @@ exports[`Card lets only elevated Cards customize their resting elevation 1`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -978,6 +978,17 @@ exports[`Card renders keyboard focus feedback for the elevated variant 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -998,17 +1009,6 @@ exports[`Card renders keyboard focus feedback for the elevated variant 1`] = `
             "opacity": 0.1,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -1136,6 +1136,17 @@ exports[`Card renders keyboard focus feedback for the filled variant 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -1156,17 +1167,6 @@ exports[`Card renders keyboard focus feedback for the filled variant 1`] = `
             "opacity": 0.1,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -1294,6 +1294,17 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -1314,17 +1325,6 @@ exports[`Card renders keyboard focus feedback for the outlined variant 1`] = `
             "opacity": 0.1,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -1483,6 +1483,18 @@ exports[`Card renders omitted slots as a neutral filled grouping container 1`] =
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -1505,18 +1517,6 @@ exports[`Card renders omitted slots as a neutral filled grouping container 1`] =
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -1628,6 +1628,17 @@ exports[`Card renders the Material disabled treatment for elevated Cards 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -1648,17 +1659,6 @@ exports[`Card renders the Material disabled treatment for elevated Cards 1`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -1772,6 +1772,17 @@ exports[`Card renders the Material disabled treatment for filled Cards 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -1792,17 +1803,6 @@ exports[`Card renders the Material disabled treatment for filled Cards 1`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -1918,6 +1918,17 @@ exports[`Card renders the Material disabled treatment for outlined Cards 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -1938,17 +1949,6 @@ exports[`Card renders the Material disabled treatment for outlined Cards 1`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -2054,6 +2054,18 @@ exports[`Card renders the consumer-controlled elevated dragged presentation 1`] 
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -2076,18 +2088,6 @@ exports[`Card renders the consumer-controlled elevated dragged presentation 1`] 
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -2166,6 +2166,18 @@ exports[`Card renders the consumer-controlled filled dragged presentation 1`] = 
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -2188,18 +2200,6 @@ exports[`Card renders the consumer-controlled filled dragged presentation 1`] = 
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -2278,6 +2278,18 @@ exports[`Card renders the consumer-controlled outlined dragged presentation 1`] 
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -2300,18 +2312,6 @@ exports[`Card renders the consumer-controlled outlined dragged presentation 1`] 
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
     <View
       collapsable={false}
@@ -2468,6 +2468,18 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 1
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -2490,18 +2502,6 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 1
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -2633,6 +2633,18 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 2
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -2655,18 +2667,6 @@ exports[`Card renders the enabled elevated appearance in light and dark themes 2
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -2745,6 +2745,18 @@ exports[`Card renders the enabled elevated elevation 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -2767,18 +2779,6 @@ exports[`Card renders the enabled elevated elevation 1`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -2910,6 +2910,18 @@ exports[`Card renders the enabled filled appearance in light and dark themes 1`]
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -2932,18 +2944,6 @@ exports[`Card renders the enabled filled appearance in light and dark themes 1`]
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -3075,6 +3075,18 @@ exports[`Card renders the enabled filled appearance in light and dark themes 2`]
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -3097,18 +3109,6 @@ exports[`Card renders the enabled filled appearance in light and dark themes 2`]
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -3187,6 +3187,18 @@ exports[`Card renders the enabled filled elevation 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -3209,18 +3221,6 @@ exports[`Card renders the enabled filled elevation 1`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -3352,6 +3352,18 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 1
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -3374,18 +3386,6 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 1
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
     <View
       collapsable={false}
@@ -3542,6 +3542,18 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 2
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -3564,18 +3576,6 @@ exports[`Card renders the enabled outlined appearance in light and dark themes 2
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
     <View
       collapsable={false}
@@ -3679,6 +3679,18 @@ exports[`Card renders the enabled outlined elevation 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -3701,18 +3713,6 @@ exports[`Card renders the enabled outlined elevation 1`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
     <View
       collapsable={false}
@@ -3869,6 +3869,18 @@ exports[`Card renders the enabled outlined role in light and dark themes 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -3891,18 +3903,6 @@ exports[`Card renders the enabled outlined role in light and dark themes 1`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
     <View
       collapsable={false}
@@ -4059,6 +4059,18 @@ exports[`Card renders the enabled outlined role in light and dark themes 2`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -4081,18 +4093,6 @@ exports[`Card renders the enabled outlined role in light and dark themes 2`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
     <View
       collapsable={false}
@@ -4236,6 +4236,17 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -4256,17 +4267,6 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
             "opacity": 0.16,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -4407,6 +4407,17 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -4427,17 +4438,6 @@ exports[`Card resolves disabled and dragged before pressed, focused, and hovered
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -4644,6 +4644,17 @@ exports[`Card routes whole-Card accessibility semantics and callbacks to its tar
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -4664,17 +4675,6 @@ exports[`Card routes whole-Card accessibility semantics and callbacks to its tar
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -4789,6 +4789,17 @@ exports[`Card settles rapid changes at the latest complete visual state 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -4809,17 +4820,6 @@ exports[`Card settles rapid changes at the latest complete visual state 1`] = `
             "opacity": 0.08,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -5012,6 +5012,17 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -5032,17 +5043,6 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -5182,6 +5182,17 @@ exports[`Card shows and clears the elevated hover feedback 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -5202,17 +5213,6 @@ exports[`Card shows and clears the elevated hover feedback 1`] = `
             "opacity": 0.08,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -5327,6 +5327,17 @@ exports[`Card shows and clears the elevated hover feedback 2`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -5347,17 +5358,6 @@ exports[`Card shows and clears the elevated hover feedback 2`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -5472,6 +5472,17 @@ exports[`Card shows and clears the elevated pressed feedback 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -5492,17 +5503,6 @@ exports[`Card shows and clears the elevated pressed feedback 1`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -5617,6 +5617,17 @@ exports[`Card shows and clears the elevated pressed feedback 2`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -5637,17 +5648,6 @@ exports[`Card shows and clears the elevated pressed feedback 2`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -5762,6 +5762,17 @@ exports[`Card shows and clears the filled hover feedback 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -5782,17 +5793,6 @@ exports[`Card shows and clears the filled hover feedback 1`] = `
             "opacity": 0.08,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -5907,6 +5907,17 @@ exports[`Card shows and clears the filled hover feedback 2`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -5927,17 +5938,6 @@ exports[`Card shows and clears the filled hover feedback 2`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -6052,6 +6052,17 @@ exports[`Card shows and clears the filled pressed feedback 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -6072,17 +6083,6 @@ exports[`Card shows and clears the filled pressed feedback 1`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -6197,6 +6197,17 @@ exports[`Card shows and clears the filled pressed feedback 2`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -6217,17 +6228,6 @@ exports[`Card shows and clears the filled pressed feedback 2`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -6342,6 +6342,17 @@ exports[`Card shows and clears the outlined hover feedback 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -6362,17 +6373,6 @@ exports[`Card shows and clears the outlined hover feedback 1`] = `
             "opacity": 0.08,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -6512,6 +6512,17 @@ exports[`Card shows and clears the outlined hover feedback 2`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -6532,17 +6543,6 @@ exports[`Card shows and clears the outlined hover feedback 2`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -6682,6 +6682,17 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -6702,17 +6713,6 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -6852,6 +6852,17 @@ exports[`Card shows and clears the outlined pressed feedback 2`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -6872,17 +6883,6 @@ exports[`Card shows and clears the outlined pressed feedback 2`] = `
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -7035,6 +7035,17 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -7055,17 +7066,6 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -7218,6 +7218,17 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -7238,17 +7249,6 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
             "opacity": 0.1,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -7401,6 +7401,17 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -7421,17 +7432,6 @@ exports[`Card shows focus feedback only for keyboard-visible focus and clears it
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -7571,6 +7571,17 @@ exports[`Card updates the controlled dragged presentation in both directions 1`]
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -7591,17 +7602,6 @@ exports[`Card updates the controlled dragged presentation in both directions 1`]
             "opacity": 0.16,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -7741,6 +7741,17 @@ exports[`Card updates the controlled dragged presentation in both directions 2`]
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -7761,17 +7772,6 @@ exports[`Card updates the controlled dragged presentation in both directions 2`]
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -7930,6 +7930,18 @@ exports[`Card uses custom theme roles for elevated and outlined variants 1`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -7952,18 +7964,6 @@ exports[`Card uses custom theme roles for elevated and outlined variants 1`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -8095,6 +8095,18 @@ exports[`Card uses custom theme roles for elevated and outlined variants 2`] = `
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -8117,18 +8129,6 @@ exports[`Card uses custom theme roles for elevated and outlined variants 2`] = `
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
     <View
       collapsable={false}
@@ -8285,6 +8285,18 @@ exports[`Card uses filled as the default and resolves deeply merged custom color
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -8307,18 +8319,6 @@ exports[`Card uses filled as the default and resolves deeply merged custom color
           {},
         ]
       }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
-        ]
-      }
-      testID="card"
     />
   </View>
 </View>
@@ -8490,6 +8490,17 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -8510,17 +8521,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
             "opacity": 0.1,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -8713,6 +8713,17 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -8733,17 +8744,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
             "opacity": 0.08,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -8936,6 +8936,17 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -8956,17 +8967,6 @@ exports[`Card uses pressed, focused, then hovered precedence and settles at the 
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -9159,6 +9159,17 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -9179,17 +9190,6 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -9356,6 +9356,17 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
       }
     />
     <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
       collapsable={false}
       pointerEvents="none"
       style={
@@ -9376,17 +9387,6 @@ exports[`Card uses scaled theme motion duration and easing for visual transition
             "opacity": 0,
           },
           {},
-        ]
-      }
-    />
-    <View
-      style={
-        [
-          {
-            "flexShrink": 1,
-            "position": "relative",
-          },
-          undefined,
         ]
       }
     />
@@ -9528,34 +9528,6 @@ exports[`CardCover uses the Card clipping shape for edge media without double ro
       }
     />
     <View
-      collapsable={false}
-      pointerEvents="none"
-      style={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          {
-            "borderBottomLeftRadius": 20,
-            "borderBottomRightRadius": 16,
-            "borderCurve": "continuous",
-            "borderRadius": 12,
-            "borderTopLeftRadius": 4,
-            "borderTopRightRadius": 8,
-          },
-          {
-            "backgroundColor": "rgba(29, 27, 32, 1)",
-            "opacity": 0,
-          },
-          {},
-        ]
-      }
-    />
-    <View
       style={
         [
           {
@@ -9590,6 +9562,34 @@ exports[`CardCover uses the Card clipping shape for edge media without double ro
         testID="edge-cover"
       />
     </View>
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "borderBottomLeftRadius": 20,
+            "borderBottomRightRadius": 16,
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+            "borderTopLeftRadius": 4,
+            "borderTopRightRadius": 8,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0,
+          },
+          {},
+        ]
+      }
+    />
   </View>
 </View>
 `;
