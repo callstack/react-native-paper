@@ -64,7 +64,7 @@ In 5.x, `PaperProvider` set the `scale` itself and replaced any `scale` in the t
 
 If your app was written for a 6.0 alpha build, which also read a `scale` set on `PaperProvider`, remove it from that theme too.
 
-Other `scale` values, which made animations slower or faster, have no replacement in 6.0. A `scale` in a component's `theme` prop, such as `theme={{ animation: { scale: 2 } }}`, does nothing now, and it can no longer turn animations back on while reduce motion is on.
+Other `scale` values, which made animations slower or faster, have no replacement in 6.0. A `scale` in a component's `theme` prop, such as `theme={{ animation: { scale: 2 } }}`, does nothing now, and it can no longer turn animations back on while reduce motion is on. Paper ignores an `animation` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider` or a component, or typed as `Theme`, but not in the `theme` prop of `ThemeProvider`, which accepts any value, or in an untyped variable that also holds other theme keys.
 
 In 5.x, `PaperProvider` also followed the device setting only when you passed no `theme`. In 6.x, `'auto'` follows the device setting with every theme, so if your app passes a custom theme, Paper's animations now stop when the user turns on reduce motion. 6.x also reads the setting when the app starts, while 5.x only reacted when it changed.
 
