@@ -1324,7 +1324,7 @@ A FAB without a `variant` keeps its 5.x colors.
 - **`color`** → **`contentColor`**. Set the background with `containerColor`, as `style` is only for positioning.
 - **`mode`**: no replacement. A FAB always has its resting elevation.
 - **`disabled`**: no replacement. To take the action away, hide the FAB with `visible={false}`.
-- **`loading`**, **`animated`**, **`onLongPress`** and **`delayLongPress`**: no replacement.
+- **`loading`** and **`animated`**: no replacement.
 - **`rippleColor`**: see [Ripple color](#ripple-color).
 
 TypeScript reports an error for each of them, and in JavaScript they're ignored.
