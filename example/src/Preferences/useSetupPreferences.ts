@@ -163,8 +163,6 @@ export function useSetupPreferences() {
   return {
     preferences,
     isReady,
-    isDarkMode,
-    direction,
     navigationKey,
   };
 }

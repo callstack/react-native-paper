@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Appbar, Searchbar } from 'react-native-paper';
 
-import { usePreferences } from './Preferences/usePreferences';
+import PreferencesAction from './Preferences/PreferencesAction';
 
 type Props = {
   query: string;
@@ -12,7 +12,6 @@ type Props = {
 
 export default function ExampleListHeader({ query, onQueryChange }: Props) {
   const navigation = useNavigation('ExampleList');
-  const { togglePreferences } = usePreferences();
 
   const canGoBack = navigation.canGoBack();
 
@@ -32,11 +31,7 @@ export default function ExampleListHeader({ query, onQueryChange }: Props) {
         autoCapitalize="none"
         style={styles.searchbar}
       />
-      <Appbar.Action
-        icon="cog"
-        aria-label="preferences"
-        onPress={togglePreferences}
-      />
+      <PreferencesAction />
     </Appbar.Header>
   );
 }

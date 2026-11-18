@@ -9,16 +9,14 @@ import { Appbar } from 'react-native-paper';
 
 import ExampleList, { examples } from './ExampleList';
 import { colorThemes } from '../utils';
+import PreferencesAction from './Preferences/PreferencesAction';
 import PreferencesModal from './Preferences/PreferencesModal';
 import SamplesList, { samples } from './SamplesList';
 import { objectEntries, objectFromEntries } from '../utils/typedObject';
-import { usePreferences } from './Preferences/usePreferences';
 
 const { TeamDetails, ...examplesWithoutParams } = examples;
 
 function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
-  const { togglePreferences } = usePreferences();
-
   return (
     <Appbar.Header>
       {back && <Appbar.BackAction onPress={() => navigation.goBack()} />}
@@ -33,11 +31,7 @@ function Header({ navigation, route, options, back }: NativeStackHeaderProps) {
         />
       )}
       <Appbar.Content title={options.title || route.name} />
-      <Appbar.Action
-        icon="cog"
-        aria-label="preferences"
-        onPress={togglePreferences}
-      />
+      <PreferencesAction />
     </Appbar.Header>
   );
 }

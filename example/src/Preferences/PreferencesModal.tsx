@@ -11,12 +11,12 @@ import Constants, { ExecutionEnvironment } from 'expo-constants';
 import {
   Button,
   Dialog,
+  Modal,
   Portal,
   Switch,
   Text,
   useTheme,
 } from 'react-native-paper';
-import { Modal } from 'react-native-paper';
 
 import { usePreferences } from './usePreferences';
 import { dynamicThemeSupported } from '../../utils';
@@ -34,7 +34,7 @@ export default function PreferencesModal() {
   const {
     toggleShouldUseDynamicTheme,
     toggleTheme,
-    toggleRtl: toggleRTL,
+    toggleRtl,
     toggleCustomFont,
     toggleRippleEffect,
     togglePreferences,
@@ -42,7 +42,7 @@ export default function PreferencesModal() {
     preferencesVisible,
     customFontLoaded,
     rippleEffectEnabled,
-    rtl: isRTL,
+    rtl,
     theme: { dark: isDarkTheme },
     shouldUseDynamicTheme,
   } = usePreferences();
@@ -53,7 +53,7 @@ export default function PreferencesModal() {
       return;
     }
 
-    toggleRTL();
+    toggleRtl();
   };
 
   const _handleDismissRTLDialog = () => {
@@ -79,7 +79,7 @@ export default function PreferencesModal() {
             alwaysBounceVertical={false}
           >
             {dynamicThemeSupported ? (
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Use Dynamic Theme</Text>
                 <Switch
                   value={shouldUseDynamicTheme}
@@ -88,7 +88,7 @@ export default function PreferencesModal() {
                 />
               </View>
             ) : null}
-            <View style={[styles.preference, styles.v3Preference]}>
+            <View style={styles.preference}>
               <Text variant="labelLarge">Dark Theme</Text>
               <Switch
                 value={isDarkTheme}
@@ -97,16 +97,16 @@ export default function PreferencesModal() {
               />
             </View>
 
-            <View style={[styles.preference, styles.v3Preference]}>
+            <View style={styles.preference}>
               <Text variant="labelLarge">RTL</Text>
               <Switch
-                value={isRTL}
+                value={rtl}
                 onValueChange={_handleToggleRTL}
                 aria-label="Right-to-left layout"
               />
             </View>
 
-            <View style={[styles.preference, styles.v3Preference]}>
+            <View style={styles.preference}>
               <Text variant="labelLarge">Custom font *</Text>
               <Switch
                 value={customFontLoaded}
@@ -115,7 +115,7 @@ export default function PreferencesModal() {
               />
             </View>
 
-            <View style={[styles.preference, styles.v3Preference]}>
+            <View style={styles.preference}>
               <Text variant="labelLarge">{rippleEffectLabel} *</Text>
               <Switch
                 value={rippleEffectEnabled}
@@ -189,11 +189,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  v3Preference: {
     height: 56,
+    paddingVertical: 12,
     paddingHorizontal: 28,
   },
   resetButton: {

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -48,6 +48,7 @@ import ThemeExample from './Examples/ThemeExample';
 import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
 import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
+import { objectEntries } from '../utils/typedObject';
 
 export const mainExamples = {
   ActivityIndicator: ActivityIndicatorExample,
@@ -103,7 +104,7 @@ export const examples = {
   ...nestedExamples,
 };
 
-const data = Object.entries(mainExamples).map(([id, example]) => ({
+const data = objectEntries(mainExamples).map(([id, example]) => ({
   id,
   data: example,
 }));
@@ -116,19 +117,14 @@ export default function ExampleList() {
 
   const [query, setQuery] = useState('');
 
-  const filteredData = useMemo(() => {
-    const search = query.trim().toLowerCase();
-
-    if (!search) {
-      return data;
-    }
-
-    return data.filter(
-      ({ id, data: example }) =>
-        example.title.toLowerCase().includes(search) ||
-        id.toLowerCase().includes(search)
-    );
-  }, [query]);
+  const search = query.trim().toLowerCase();
+  const filteredData = search
+    ? data.filter(
+        ({ id, data: example }) =>
+          example.title.toLowerCase().includes(search) ||
+          id.toLowerCase().includes(search)
+      )
+    : data;
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

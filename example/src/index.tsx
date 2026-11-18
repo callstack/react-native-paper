@@ -35,16 +35,16 @@ export default function PaperExample() {
     Abel: require('../assets/fonts/Abel-Regular.ttf'),
   });
 
-  const { preferences, isReady, isDarkMode, direction, navigationKey } =
-    useSetupPreferences();
+  const { preferences, isReady, navigationKey } = useSetupPreferences();
 
   if (!isReady || !fontsLoaded) {
     return null;
   }
 
-  const { theme, customFontLoaded, rippleEffectEnabled } = preferences;
+  const { theme, customFontLoaded, rippleEffectEnabled, rtl } = preferences;
+  const direction = rtl ? 'rtl' : 'ltr';
 
-  const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
+  const combinedTheme = theme.dark ? CombinedDarkTheme : CombinedDefaultTheme;
   const configuredFontTheme = createConfiguredFontTheme(combinedTheme);
   const configuredFontNavigationTheme =
     createConfiguredFontNavigationTheme(combinedTheme);

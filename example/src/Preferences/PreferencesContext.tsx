@@ -8,14 +8,14 @@ export type Preferences = {
   toggleCustomFont: () => void;
   togglePreferences: () => void;
   toggleRippleEffect: () => void;
-  toggleShouldUseDynamicTheme?: () => void;
+  toggleShouldUseDynamicTheme: () => void;
   resetPreferences: () => void;
   theme: Theme;
   rtl: boolean;
   customFontLoaded: boolean;
   preferencesVisible: boolean;
   rippleEffectEnabled: boolean;
-  shouldUseDynamicTheme?: boolean;
+  shouldUseDynamicTheme: boolean;
 };
 
 export const PreferencesContext = React.createContext<Preferences | null>(null);
