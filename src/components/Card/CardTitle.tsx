@@ -201,7 +201,10 @@ const styles = StyleSheet.create({
   },
 
   titles: {
-    flex: 1,
+    // Not `flex: 1`: its zero basis gives the titles no width when a Card
+    // lays its regions out in a row, as with `contentStyle={{ flexDirection: 'row' }}`.
+    flexGrow: 1,
+    flexShrink: 1,
     flexDirection: 'column',
     justifyContent: 'center',
   },
