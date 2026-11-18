@@ -120,6 +120,8 @@ const AppbarContent = ({
   const contentMargins = appbar?.contentMargins;
   const isFlexible = isFlexibleMode(mode);
 
+  // The cleanup of the effect runs when the content unmounts, and when the
+  // callback changes, so the Appbar forgets the layout of a content that is gone
   React.useEffect(() => () => onContentLayout?.(null), [onContentLayout]);
 
   const titleTextColor =

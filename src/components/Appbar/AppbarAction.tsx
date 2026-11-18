@@ -40,7 +40,8 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
   /**
    * @supported Available in v5.x with theme version 3
    *
-   * Whether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons.
+   * Whether it's the leading button: it takes the `onSurface` icon color instead of `onSurfaceVariant`.
+   * It does not reorder the action, the parts are laid out in the order they are rendered.
    */
   isLeading?: boolean;
   /**

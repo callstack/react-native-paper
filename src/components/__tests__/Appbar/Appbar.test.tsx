@@ -432,6 +432,57 @@ describe('Appbar layout', () => {
     });
   });
 
+  it('resets the height of a flexible Appbar when the content unmounts', async () => {
+    const { rerender } = await render(
+      <Appbar mode="large-flexible" testID="appbar">
+        <Appbar.Content title="Title" testID="content" />
+      </Appbar>
+    );
+
+    await fireEvent(screen.getByTestId('content'), 'layout', layout(0, 300));
+    expect(screen.getByTestId('appbar')).toHaveStyle({ minHeight: 64 + 64 });
+
+    await rerender(
+      <Appbar mode="large-flexible" testID="appbar">
+        {null}
+      </Appbar>
+    );
+
+    // back to the minimum height, which is larger than the controls and content
+    expect(screen.getByTestId('appbar')).toHaveStyle({ minHeight: 120 });
+  });
+
+  it('forgets the measured content of a center-aligned Appbar when it unmounts', async () => {
+    const { rerender } = await render(
+      <Appbar mode="center-aligned" testID="appbar">
+        <Appbar.BackAction onPress={() => {}} />
+        <Appbar.Content title="Title" testID="content" />
+      </Appbar>
+    );
+
+    await fireEvent(screen.getByTestId('appbar'), 'layout', layout(0, 420));
+    await fireEvent(screen.getByTestId('content'), 'layout', layout(56, 360));
+    expect(screen.getByTestId('content')).toHaveStyle({ marginRight: 52 });
+
+    await rerender(
+      <Appbar mode="center-aligned" testID="appbar">
+        <Appbar.BackAction onPress={() => {}} />
+      </Appbar>
+    );
+    await rerender(
+      <Appbar mode="center-aligned" testID="appbar">
+        <Appbar.BackAction onPress={() => {}} />
+        <Appbar.Content title="Title" testID="content" />
+      </Appbar>
+    );
+
+    // A new content starts without the margin of the removed one
+    expect(screen.getByTestId('content')).toHaveStyle({
+      marginLeft: 0,
+      marginRight: 0,
+    });
+  });
+
   it('keeps the onLayout of Appbar.Content when the Appbar uses its layout', async () => {
     const onLayout = jest.fn();
 

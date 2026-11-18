@@ -437,7 +437,9 @@ To keep the height of the content row when setting `height` in `style`, add the 
 
 `Appbar` no longer inspects its children and clones them to pass `color`, `theme`, `mode` and `style`. `Appbar.BackAction`, `Appbar.Content` and `Appbar.Action` now read the `dark` and `theme` props and the `mode` of the `Appbar` they are rendered in from context. This means `Appbar.Action` and `Appbar.BackAction` can be wrapped in other components, for example in a `Tooltip` or a `View`, and still get the colors and the theme of the `Appbar`. `Appbar.Content` positions the title in the `Appbar`, so render it directly in the `Appbar`, not in a wrapper.
 
-The parts are rendered in the order they are given, so render the leading actions first, then `Appbar.Content`, then the trailing actions. Previously, `Appbar.BackAction` and the actions with `isLeading` were moved before the rest.
+Only these three parts read the colors and the theme of the `Appbar`. Other children, such as a custom icon or an inline SVG, never got them, and they still need an explicit `color` or `theme`. A `Tooltip` was the exception: the `Appbar` passed it its `theme`, and now it doesn't, so pass `theme` to a `Tooltip` that needs the theme of the `Appbar`.
+
+The parts are rendered in the order they are given, so render the leading actions first, then `Appbar.Content`, then the trailing actions. Previously, `Appbar.BackAction` and the actions with `isLeading` were moved before the rest. The `isLeading` prop now only selects the icon color of the action (`onSurface` instead of `onSurfaceVariant`).
 
 - `Appbar.Content` always has a `12dp` margin before its title. Previously, the margin was only added when the title was the first item after `Appbar.BackAction`.
 - The `mode` prop of `Appbar.Content`, which was for internal use, is removed.

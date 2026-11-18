@@ -91,6 +91,8 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
  * Its parts, `Appbar.BackAction`, `Appbar.Content` and `Appbar.Action`, read the colors and the theme from the `Appbar`
  * they are rendered in. `Appbar.Action` and `Appbar.BackAction` can be wrapped in other components, for example in a `Tooltip` or a `Menu`.
  * `Appbar.Content` positions the title in the `Appbar`, so render it directly in the `Appbar`, not in a wrapper.
+ * Only these parts read the colors and the theme of the `Appbar`. A custom child, such as an icon or a `Tooltip`, doesn't get them,
+ * so pass it the `color` or the `theme` it needs.
  * The parts are laid out in the order they are rendered: render the leading actions first, then the content, then the trailing actions.
  *
  * ## Usage
