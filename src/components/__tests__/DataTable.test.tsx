@@ -1,4 +1,8 @@
-import { describe, expect, it } from '@jest/globals';
+import { Pressable } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
+
+import { describe, expect, it, jest } from '@jest/globals';
+import { userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
 import Checkbox from '../Checkbox';
@@ -20,6 +24,53 @@ describe('DataTable.Header', () => {
 });
 
 describe('DataTable.Title', () => {
+  it.each(['onLongPress', 'onPressIn', 'onPressOut'] as const)(
+    'is an enabled control with only %s, takes the press and calls it',
+    async (name) => {
+      const handler = jest.fn<(e: GestureResponderEvent) => void>();
+      const parent = jest.fn<(e: GestureResponderEvent) => void>();
+      await render(
+        <Pressable onPress={parent}>
+          <DataTable.Title {...{ [name]: handler }}>Dessert</DataTable.Title>
+        </Pressable>
+      );
+
+      expect(screen.getByText('Dessert')).not.toBeDisabled();
+
+      if (name === 'onLongPress') {
+        await userEvent.longPress(screen.getByText('Dessert'));
+      } else {
+        await userEvent.press(screen.getByText('Dessert'));
+      }
+
+      expect(handler).toHaveBeenCalledTimes(1);
+      expect(parent).not.toHaveBeenCalled();
+    }
+  );
+
+  it.each([
+    { when: 'without a touch handler', props: {} },
+    { when: 'when disabled', props: { onPress: () => {}, disabled: true } },
+  ])('takes no touches outside its bounds $when', async ({ props }) => {
+    await render(
+      <DataTable.Title testID="title" hitSlop={16} {...props}>
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(screen.getByTestId('title')).not.toHaveProp('hitSlop');
+  });
+
+  it('is reported as enabled with a touch handler, even with aria-disabled', async () => {
+    await render(
+      <DataTable.Title testID="title" onPress={() => {}} aria-disabled>
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(screen.getByTestId('title')).not.toBeDisabled();
+  });
+
   it('renders data table title with sort icon', async () => {
     const tree = (
       await render(
@@ -49,6 +100,76 @@ describe('DataTable.Title', () => {
 
     expect(tree).toMatchSnapshot();
   });
+
+  it('is not disabled when no press handler is passed', async () => {
+    await render(<DataTable.Title>Dessert</DataTable.Title>);
+
+    expect(screen.getByText('Dessert')).not.toBeDisabled();
+  });
+
+  it('lets a press reach the parent when no press handler is passed', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Pressable onPress={onPress}>
+        <DataTable.Title>Dessert</DataTable.Title>
+      </Pressable>
+    );
+
+    await userEvent.press(screen.getByText('Dessert'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onPress when the title is pressed', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(<DataTable.Title onPress={onPress}>Dessert</DataTable.Title>);
+
+    await userEvent.press(screen.getByText('Dessert'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('is disabled when the disabled prop is passed', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <DataTable.Title disabled onPress={onPress}>
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(screen.getByText('Dessert')).toBeDisabled();
+
+    await userEvent.press(screen.getByText('Dessert'));
+
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('stays a disabled control when only the disabled prop is passed', async () => {
+    await render(<DataTable.Title disabled>Dessert</DataTable.Title>);
+
+    expect(screen.getByText('Dessert')).toBeDisabled();
+  });
+
+  it('drops a button role when no press handler is passed', async () => {
+    await render(<DataTable.Title role="button">Dessert</DataTable.Title>);
+
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+
+    // hiding the element instead would silence the title text
+    expect(screen.getByText('Dessert')).toBeOnTheScreen();
+  });
+
+  it('keeps a button role carrying a state when no press handler is passed', async () => {
+    // a toggle reports a state of its own, so the role reporting it stays: a
+    // state a presentational element carries goes unannounced
+    await render(
+      <DataTable.Title role="button" aria-checked>
+        Dessert
+      </DataTable.Title>
+    );
+
+    expect(screen.getByRole('button')).toHaveProp('aria-checked', true);
+  });
 });
 
 describe('DataTable.Cell', () => {
@@ -66,25 +187,32 @@ describe('DataTable.Cell', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders data table cell with text container', async () => {
-    await render(
-      <DataTable.Cell testID="table-cell">Table cell</DataTable.Cell>
-    );
+  it('renders data table cell with text content', async () => {
+    const tree = (
+      await render(
+        <DataTable.Cell testID="table-cell">Table cell</DataTable.Cell>
+      )
+    ).toJSON();
 
     expect(screen.getByText('Table cell')).toBeOnTheScreen();
-    expect(screen.getByTestId('table-cell-text-container')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 
-  it('renders data table cell children without text container', async () => {
-    await render(
-      <DataTable.Cell testID="table-cell">
-        <Checkbox status="checked" testID="table-cell-checkbox" />
-      </DataTable.Cell>
-    );
+  it('renders data table cell children without wrapping text component', async () => {
+    const tree = (
+      await render(
+        <DataTable.Cell testID="table-cell">
+          <Checkbox
+            status="checked"
+            testID="table-cell-checkbox"
+            aria-label="Select row"
+          />
+        </DataTable.Cell>
+      )
+    ).toJSON();
 
-    expect(
-      screen.queryByTestId('table-cell-text-container')
-    ).not.toBeOnTheScreen();
+    expect(screen.getByTestId('table-cell-checkbox')).toBeOnTheScreen();
+    expect(tree).toMatchSnapshot();
   });
 });
 

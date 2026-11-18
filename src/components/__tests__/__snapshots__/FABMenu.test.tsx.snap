@@ -21,7 +21,6 @@ exports[`renders FAB.Menu closed 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -56,6 +55,7 @@ exports[`renders FAB.Menu closed 1`] = `
     >
       <View
         aria-hidden={true}
+        collapsable={false}
         importantForAccessibility="no-hide-descendants"
         style={
           [
@@ -139,7 +139,6 @@ exports[`renders FAB.Menu closed 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -162,6 +161,7 @@ exports[`renders FAB.Menu closed 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -176,18 +176,26 @@ exports[`renders FAB.Menu closed 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -195,32 +203,11 @@ exports[`renders FAB.Menu closed 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={true}
+        collapsable={false}
         importantForAccessibility="no-hide-descendants"
         style={
           [
@@ -304,7 +291,6 @@ exports[`renders FAB.Menu closed 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -327,6 +313,7 @@ exports[`renders FAB.Menu closed 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -341,18 +328,26 @@ exports[`renders FAB.Menu closed 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -360,28 +355,6 @@ exports[`renders FAB.Menu closed 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -403,41 +376,108 @@ exports[`renders FAB.Menu closed 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           [
+            {},
             undefined,
             {
               "transformOrigin": "center",
             },
             {
-              "backgroundColor": "transparent",
-              "borderRadius": undefined,
-              "height": undefined,
+              "height": 56,
               "opacity": 1,
               "transform": [
                 {
                   "scale": 1,
                 },
               ],
-              "width": undefined,
-            },
-            {
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 4,
-                "width": 0,
-              },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "width": 56,
             },
             {
               "pointerEvents": "auto",
             },
+            {},
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 16,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 3.33,
+                "width": 0,
+              },
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
+            },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
+          collapsable={false}
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "pointerEvents": "none",
+              },
+              {},
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": 16,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.039,
+                "shadowRadius": 1.5,
+              },
+            ]
+          }
+        />
+        <View
+          collapsable={false}
           style={
             [
               {
@@ -447,12 +487,13 @@ exports[`renders FAB.Menu closed 1`] = `
               },
               {
                 "backgroundColor": "transparent",
-                "borderRadius": undefined,
+                "borderRadius": 16,
               },
             ]
           }
         >
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -473,6 +514,7 @@ exports[`renders FAB.Menu closed 1`] = `
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -532,11 +574,9 @@ exports[`renders FAB.Menu closed 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -549,6 +589,7 @@ exports[`renders FAB.Menu closed 1`] = `
               }
             >
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -561,10 +602,10 @@ exports[`renders FAB.Menu closed 1`] = `
                       "opacity": 1,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 16,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 16,
                         },
                       ],
                     },
@@ -602,6 +643,7 @@ exports[`renders FAB.Menu closed 1`] = `
                 </Text>
               </View>
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -614,10 +656,10 @@ exports[`renders FAB.Menu closed 1`] = `
                       "opacity": 0,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 18,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 18,
                         },
                       ],
                     },
@@ -657,28 +699,6 @@ exports[`renders FAB.Menu closed 1`] = `
             </View>
           </View>
         </View>
-        <View
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": NaN,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -706,7 +726,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -741,6 +760,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
     >
       <View
         aria-hidden={true}
+        collapsable={false}
         importantForAccessibility="no-hide-descendants"
         style={
           [
@@ -824,7 +844,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -847,6 +866,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -861,18 +881,26 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -880,32 +908,11 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={true}
+        collapsable={false}
         importantForAccessibility="no-hide-descendants"
         style={
           [
@@ -989,7 +996,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -1012,6 +1018,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -1026,18 +1033,26 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -1045,28 +1060,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -1088,41 +1081,109 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
       }
     >
       <View
+        aria-hidden={true}
+        collapsable={false}
         style={
           [
+            {},
             undefined,
             {
               "transformOrigin": "center",
             },
             {
-              "backgroundColor": "transparent",
-              "borderRadius": undefined,
-              "height": undefined,
+              "height": 56,
               "opacity": 0,
               "transform": [
                 {
                   "scale": 0,
                 },
               ],
-              "width": undefined,
-            },
-            {
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 4,
-                "width": 0,
-              },
-              "shadowOpacity": 0,
-              "shadowRadius": 4,
+              "width": 56,
             },
             {
               "pointerEvents": "none",
             },
+            {},
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 16,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 3.33,
+                "width": 0,
+              },
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
+            },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
+          collapsable={false}
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "pointerEvents": "none",
+              },
+              {},
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": 16,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.039,
+                "shadowRadius": 1.5,
+              },
+            ]
+          }
+        />
+        <View
+          collapsable={false}
           style={
             [
               {
@@ -1132,12 +1193,13 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
               },
               {
                 "backgroundColor": "transparent",
-                "borderRadius": undefined,
+                "borderRadius": 16,
               },
             ]
           }
         >
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -1158,6 +1220,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -1195,9 +1258,9 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 "text": undefined,
               }
             }
-            accessible={true}
+            accessible={false}
             collapsable={false}
-            focusable={true}
+            focusable={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1217,11 +1280,10 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
-            testID="fab-shell"
+            tabIndex={-1}
           >
             <View
               style={
@@ -1234,6 +1296,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
               }
             >
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -1246,10 +1309,10 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                       "opacity": 1,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 16,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 16,
                         },
                       ],
                     },
@@ -1287,6 +1350,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 </Text>
               </View>
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -1299,10 +1363,10 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                       "opacity": 0,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 18,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 18,
                         },
                       ],
                     },
@@ -1342,28 +1406,6 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
             </View>
           </View>
         </View>
-        <View
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": NaN,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -1391,7 +1433,6 @@ exports[`renders FAB.Menu open 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -1426,6 +1467,7 @@ exports[`renders FAB.Menu open 1`] = `
     >
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -1509,7 +1551,6 @@ exports[`renders FAB.Menu open 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -1532,6 +1573,7 @@ exports[`renders FAB.Menu open 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -1546,18 +1588,26 @@ exports[`renders FAB.Menu open 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -1565,32 +1615,11 @@ exports[`renders FAB.Menu open 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -1674,7 +1703,6 @@ exports[`renders FAB.Menu open 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -1697,6 +1725,7 @@ exports[`renders FAB.Menu open 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -1711,18 +1740,26 @@ exports[`renders FAB.Menu open 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -1730,28 +1767,6 @@ exports[`renders FAB.Menu open 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -1773,41 +1788,108 @@ exports[`renders FAB.Menu open 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           [
+            {},
             undefined,
             {
               "transformOrigin": "center",
             },
             {
-              "backgroundColor": "transparent",
-              "borderRadius": undefined,
-              "height": undefined,
+              "height": 56,
               "opacity": 1,
               "transform": [
                 {
                   "scale": 1,
                 },
               ],
-              "width": undefined,
-            },
-            {
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 4,
-                "width": 0,
-              },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "width": 56,
             },
             {
               "pointerEvents": "auto",
             },
+            {},
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 28,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 3.33,
+                "width": 0,
+              },
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
+            },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
+          collapsable={false}
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "pointerEvents": "none",
+              },
+              {},
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": 28,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.039,
+                "shadowRadius": 1.5,
+              },
+            ]
+          }
+        />
+        <View
+          collapsable={false}
           style={
             [
               {
@@ -1817,12 +1899,13 @@ exports[`renders FAB.Menu open 1`] = `
               },
               {
                 "backgroundColor": "transparent",
-                "borderRadius": undefined,
+                "borderRadius": 28,
               },
             ]
           }
         >
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -1843,6 +1926,7 @@ exports[`renders FAB.Menu open 1`] = `
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -1902,11 +1986,9 @@ exports[`renders FAB.Menu open 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -1919,6 +2001,7 @@ exports[`renders FAB.Menu open 1`] = `
               }
             >
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -1931,10 +2014,10 @@ exports[`renders FAB.Menu open 1`] = `
                       "opacity": 0,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 16,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 16,
                         },
                       ],
                     },
@@ -1972,6 +2055,7 @@ exports[`renders FAB.Menu open 1`] = `
                 </Text>
               </View>
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -1984,10 +2068,10 @@ exports[`renders FAB.Menu open 1`] = `
                       "opacity": 1,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 18,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 18,
                         },
                       ],
                     },
@@ -2027,28 +2111,6 @@ exports[`renders FAB.Menu open 1`] = `
             </View>
           </View>
         </View>
-        <View
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": NaN,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -2076,7 +2138,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -2111,6 +2172,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
     >
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2194,7 +2256,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -2217,6 +2278,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -2231,18 +2293,26 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-0-text"
                   >
                     Item 1
                   </Text>
@@ -2250,32 +2320,11 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2359,7 +2408,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -2382,6 +2430,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -2396,18 +2445,26 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-1-text"
                   >
                     Item 2
                   </Text>
@@ -2415,32 +2472,11 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2524,7 +2560,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -2547,6 +2582,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -2561,18 +2597,26 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-2-text"
                   >
                     Item 3
                   </Text>
@@ -2580,32 +2624,11 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2689,7 +2712,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -2712,6 +2734,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -2726,18 +2749,26 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-3-text"
                   >
                     Item 4
                   </Text>
@@ -2745,32 +2776,11 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -2854,7 +2864,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -2877,6 +2886,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -2891,18 +2901,26 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-4-text"
                   >
                     Item 5
                   </Text>
@@ -2910,32 +2928,11 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -3019,7 +3016,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -3042,6 +3038,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -3056,18 +3053,26 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-5-text"
                   >
                     Item 6
                   </Text>
@@ -3075,28 +3080,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -3118,41 +3101,108 @@ exports[`renders FAB.Menu with 6 items 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           [
+            {},
             undefined,
             {
               "transformOrigin": "center",
             },
             {
-              "backgroundColor": "transparent",
-              "borderRadius": undefined,
-              "height": undefined,
+              "height": 56,
               "opacity": 1,
               "transform": [
                 {
                   "scale": 1,
                 },
               ],
-              "width": undefined,
-            },
-            {
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 4,
-                "width": 0,
-              },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "width": 56,
             },
             {
               "pointerEvents": "auto",
             },
+            {},
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 28,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 3.33,
+                "width": 0,
+              },
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
+            },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
+          collapsable={false}
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "pointerEvents": "none",
+              },
+              {},
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": 28,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.039,
+                "shadowRadius": 1.5,
+              },
+            ]
+          }
+        />
+        <View
+          collapsable={false}
           style={
             [
               {
@@ -3162,12 +3212,13 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               },
               {
                 "backgroundColor": "transparent",
-                "borderRadius": undefined,
+                "borderRadius": 28,
               },
             ]
           }
         >
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -3188,6 +3239,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -3247,11 +3299,9 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -3264,6 +3314,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
               }
             >
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -3276,10 +3327,10 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                       "opacity": 0,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 16,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 16,
                         },
                       ],
                     },
@@ -3317,6 +3368,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                 </Text>
               </View>
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -3329,10 +3381,10 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                       "opacity": 1,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 18,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 18,
                         },
                       ],
                     },
@@ -3372,28 +3424,6 @@ exports[`renders FAB.Menu with 6 items 1`] = `
             </View>
           </View>
         </View>
-        <View
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": NaN,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -3421,7 +3451,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -3457,6 +3486,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
     >
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -3540,7 +3570,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -3563,6 +3592,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -3577,18 +3607,26 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -3596,32 +3634,11 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -3705,7 +3722,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -3728,6 +3744,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -3742,18 +3759,26 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -3761,28 +3786,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -3804,41 +3807,108 @@ exports[`renders FAB.Menu with center alignment 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           [
+            {},
             undefined,
             {
               "transformOrigin": "center",
             },
             {
-              "backgroundColor": "transparent",
-              "borderRadius": undefined,
-              "height": undefined,
+              "height": 56,
               "opacity": 1,
               "transform": [
                 {
                   "scale": 1,
                 },
               ],
-              "width": undefined,
-            },
-            {
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 4,
-                "width": 0,
-              },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "width": 56,
             },
             {
               "pointerEvents": "auto",
             },
+            {},
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 28,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 3.33,
+                "width": 0,
+              },
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
+            },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
+          collapsable={false}
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "pointerEvents": "none",
+              },
+              {},
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": 28,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.039,
+                "shadowRadius": 1.5,
+              },
+            ]
+          }
+        />
+        <View
+          collapsable={false}
           style={
             [
               {
@@ -3848,12 +3918,13 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               },
               {
                 "backgroundColor": "transparent",
-                "borderRadius": undefined,
+                "borderRadius": 28,
               },
             ]
           }
         >
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -3874,6 +3945,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -3933,11 +4005,9 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -3950,6 +4020,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
               }
             >
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -3962,10 +4033,10 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                       "opacity": 0,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 16,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 16,
                         },
                       ],
                     },
@@ -4003,6 +4074,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                 </Text>
               </View>
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -4015,10 +4087,10 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                       "opacity": 1,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 18,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 18,
                         },
                       ],
                     },
@@ -4058,28 +4130,6 @@ exports[`renders FAB.Menu with center alignment 1`] = `
             </View>
           </View>
         </View>
-        <View
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": NaN,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -4107,7 +4157,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -4142,6 +4191,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
     >
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -4225,7 +4275,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -4276,6 +4325,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                   email
                 </Text>
                 <View
+                  collapsable={false}
                   style={
                     [
                       {
@@ -4292,16 +4342,25 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                   >
                     Send email
@@ -4310,32 +4369,11 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -4419,7 +4457,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -4470,6 +4507,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                   bell
                 </Text>
                 <View
+                  collapsable={false}
                   style={
                     [
                       {
@@ -4486,16 +4524,25 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
                   >
                     Set reminder
@@ -4504,28 +4551,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -4547,41 +4572,108 @@ exports[`renders FAB.Menu with items having icons 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           [
+            {},
             undefined,
             {
               "transformOrigin": "center",
             },
             {
-              "backgroundColor": "transparent",
-              "borderRadius": undefined,
-              "height": undefined,
+              "height": 56,
               "opacity": 1,
               "transform": [
                 {
                   "scale": 1,
                 },
               ],
-              "width": undefined,
-            },
-            {
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 4,
-                "width": 0,
-              },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "width": 56,
             },
             {
               "pointerEvents": "auto",
             },
+            {},
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 28,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 3.33,
+                "width": 0,
+              },
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
+            },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
+          collapsable={false}
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "pointerEvents": "none",
+              },
+              {},
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": 28,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.039,
+                "shadowRadius": 1.5,
+              },
+            ]
+          }
+        />
+        <View
+          collapsable={false}
           style={
             [
               {
@@ -4591,12 +4683,13 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               },
               {
                 "backgroundColor": "transparent",
-                "borderRadius": undefined,
+                "borderRadius": 28,
               },
             ]
           }
         >
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -4617,6 +4710,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -4676,11 +4770,9 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -4693,6 +4785,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
               }
             >
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -4705,10 +4798,10 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                       "opacity": 0,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 16,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 16,
                         },
                       ],
                     },
@@ -4746,6 +4839,7 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                 </Text>
               </View>
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -4758,10 +4852,10 @@ exports[`renders FAB.Menu with items having icons 1`] = `
                       "opacity": 1,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 18,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 18,
                         },
                       ],
                     },
@@ -4801,28 +4895,6 @@ exports[`renders FAB.Menu with items having icons 1`] = `
             </View>
           </View>
         </View>
-        <View
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": NaN,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>
@@ -4850,7 +4922,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
       },
     ]
   }
-  testID="floating-action-button-menu"
 >
   <View
     style={
@@ -4885,6 +4956,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
     >
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -4968,7 +5040,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -4991,6 +5062,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -5005,18 +5077,26 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-0-text"
                   >
                     Send email
                   </Text>
@@ -5024,32 +5104,11 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
       <View
         aria-hidden={false}
+        collapsable={false}
         importantForAccessibility="yes"
         style={
           [
@@ -5133,7 +5192,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                     {
                       "borderRadius": 9999,
                     },
-                    null,
                   ],
                 ]
               }
@@ -5156,6 +5214,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     [
                       null,
@@ -5170,18 +5229,26 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                     collapsable={false}
                     selectable={false}
                     style={
-                      {
-                        "color": "rgba(33, 0, 93, 1)",
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                        "textAlign": "left",
-                        "writingDirection": "ltr",
-                      }
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        {
+                          "textAlign": "left",
+                        },
+                        {
+                          "color": "rgba(29, 27, 32, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        {
+                          "color": "rgba(33, 0, 93, 1)",
+                        },
+                      ]
                     }
-                    testID="item-1-text"
                   >
                     Set reminder
                   </Text>
@@ -5189,28 +5256,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               </View>
             </View>
           </View>
-          <View
-            style={
-              [
-                {
-                  "borderWidth": 3,
-                  "bottom": -5,
-                  "left": -5,
-                  "pointerEvents": "none",
-                  "position": "absolute",
-                  "right": -5,
-                  "top": -5,
-                },
-                {
-                  "borderColor": "rgba(98, 91, 113, 1)",
-                  "borderRadius": 10004,
-                },
-                {
-                  "opacity": 0,
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -5232,41 +5277,108 @@ exports[`renders FAB.Menu with start alignment 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           [
+            {},
             undefined,
             {
               "transformOrigin": "center",
             },
             {
-              "backgroundColor": "transparent",
-              "borderRadius": undefined,
-              "height": undefined,
+              "height": 56,
               "opacity": 1,
               "transform": [
                 {
                   "scale": 1,
                 },
               ],
-              "width": undefined,
-            },
-            {
-              "shadowColor": "rgba(0, 0, 0, 1)",
-              "shadowOffset": {
-                "height": 4,
-                "width": 0,
-              },
-              "shadowOpacity": 0.3,
-              "shadowRadius": 4,
+              "width": 56,
             },
             {
               "pointerEvents": "auto",
             },
+            {},
+            {
+              "backgroundColor": "transparent",
+            },
+            {
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderCurve": "continuous",
+              "borderEndEndRadius": undefined,
+              "borderEndStartRadius": undefined,
+              "borderRadius": 28,
+              "borderStartEndRadius": undefined,
+              "borderStartStartRadius": undefined,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+            },
+            {
+              "shadowColor": "rgba(0, 0, 0, 1)",
+              "shadowOffset": {
+                "height": 3.33,
+                "width": 0,
+              },
+              "shadowOpacity": 0.19,
+              "shadowRadius": 4.75,
+            },
           ]
         }
-        testID="fab-shell-container"
       >
         <View
+          collapsable={false}
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "pointerEvents": "none",
+              },
+              {},
+              {},
+              {
+                "backgroundColor": "transparent",
+              },
+              {
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
+                "borderCurve": "continuous",
+                "borderEndEndRadius": undefined,
+                "borderEndStartRadius": undefined,
+                "borderRadius": 28,
+                "borderStartEndRadius": undefined,
+                "borderStartStartRadius": undefined,
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
+              },
+              {
+                "shadowColor": "rgba(0, 0, 0, 1)",
+                "shadowOffset": {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.039,
+                "shadowRadius": 1.5,
+              },
+            ]
+          }
+        />
+        <View
+          collapsable={false}
           style={
             [
               {
@@ -5276,12 +5388,13 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               },
               {
                 "backgroundColor": "transparent",
-                "borderRadius": undefined,
+                "borderRadius": 28,
               },
             ]
           }
         >
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -5302,6 +5415,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
             }
           />
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -5361,11 +5475,9 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                   {
                     "flex": 1,
                   },
-                  null,
                 ],
               ]
             }
-            testID="fab-shell"
           >
             <View
               style={
@@ -5378,6 +5490,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
               }
             >
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -5390,10 +5503,10 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                       "opacity": 0,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 16,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 16,
                         },
                       ],
                     },
@@ -5431,6 +5544,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                 </Text>
               </View>
               <View
+                collapsable={false}
                 style={
                   [
                     {
@@ -5443,10 +5557,10 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                       "opacity": 1,
                       "transform": [
                         {
-                          "translateX": NaN,
+                          "translateX": 18,
                         },
                         {
-                          "translateY": NaN,
+                          "translateY": 18,
                         },
                       ],
                     },
@@ -5486,28 +5600,6 @@ exports[`renders FAB.Menu with start alignment 1`] = `
             </View>
           </View>
         </View>
-        <View
-          style={
-            [
-              {
-                "borderWidth": 3,
-                "bottom": -5,
-                "left": -5,
-                "pointerEvents": "none",
-                "position": "absolute",
-                "right": -5,
-                "top": -5,
-              },
-              {
-                "borderColor": "rgba(98, 91, 113, 1)",
-              },
-              {
-                "borderRadius": NaN,
-                "opacity": 0,
-              },
-            ]
-          }
-        />
       </View>
     </View>
   </View>

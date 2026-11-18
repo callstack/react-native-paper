@@ -9,6 +9,8 @@ export {
 
 export { useLocale, LocaleProvider } from './core/locale';
 
+export { useReduceMotion } from './theme/accessibility/ReduceMotionContext';
+
 export * from './theme/schemes';
 
 export { default as Provider } from './core/PaperProvider';
@@ -47,7 +49,6 @@ export { default as Switch } from './components/Switch/Switch';
 export { default as Appbar } from './components/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput';
-export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
 
@@ -85,9 +86,7 @@ export type { Props as DataTablePaginationProps } from './components/DataTable/D
 export type { Props as DataTableRowProps } from './components/DataTable/DataTableRow';
 export type { Props as DataTableTitleProps } from './components/DataTable/DataTableTitle';
 export type { Props as DialogProps } from './components/Dialog/Dialog';
-export type { Props as DialogActionsProps } from './components/Dialog/DialogActions';
 export type { Props as DialogContentProps } from './components/Dialog/DialogContent';
-export type { Props as DialogIconProps } from './components/Dialog/DialogIcon';
 export type { Props as DialogScrollAreaProps } from './components/Dialog/DialogScrollArea';
 export type { Props as DialogTitleProps } from './components/Dialog/DialogTitle';
 export type { Props as DividerProps } from './components/Divider';
@@ -138,13 +137,11 @@ export type {
   TextInputAccessoryProps,
   TextInputIconProps,
 } from './components/TextInput/TextInputIcon';
-export type { Props as ToggleButtonProps } from './components/ToggleButton/ToggleButton';
-export type { Props as ToggleButtonGroupProps } from './components/ToggleButton/ToggleButtonGroup';
-export type { Props as ToggleButtonRowProps } from './components/ToggleButton/ToggleButtonRow';
 export type { Props as TouchableRippleProps } from './components/TouchableRipple/TouchableRipple';
 export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
 
-export { type TypescaleKey, type Theme, type Elevation } from './types';
+export { type TypescaleKey, type Theme, type Elevation } from './theme/types';
+export type { ReduceMotionPreference } from './core/useResolvedReduceMotion';

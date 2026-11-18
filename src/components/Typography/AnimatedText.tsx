@@ -1,14 +1,18 @@
 import * as React from 'react';
 import type { ReactNode } from 'react';
-import { Animated, StyleSheet, Text } from 'react-native';
-import type { StyleProp, TextProps, TextStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 
+import Animated from 'react-native-reanimated';
+
+import { useIsNestedText, markChildrenAsNested } from './NestedTextContext';
 import type { VariantProp } from './types';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
-type Props<T> = Animated.AnimatedProps<TextProps> & {
+type AnimatedTextProps = React.ComponentProps<typeof Animated.Text>;
+
+type Props<T> = AnimatedTextProps & {
   /**
    * Variant defines appropriate text styles for type role and its size.
    * Available variants:
@@ -24,8 +28,6 @@ type Props<T> = Animated.AnimatedProps<TextProps> & {
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
   variant?: VariantProp<T>;
-  style?: StyleProp<TextStyle>;
-  ref?: React.Ref<Text & HTMLElement>;
   /**
    * @optional
    */
@@ -45,7 +47,12 @@ function AnimatedText({
   ...rest
 }: Props<never>) {
   const theme = useInternalTheme(themeOverrides);
+
   const { direction: writingDirection } = useLocale();
+  // Nested text inherits the parent's style unless it has its own theme
+  const inheritsStyle = useIsNestedText() && !themeOverrides;
+
+  let element: React.ReactElement;
 
   if (variant) {
     const font = theme.fonts[variant];
@@ -57,25 +64,31 @@ function AnimatedText({
       );
     }
 
-    return (
+    element = (
       <Animated.Text
         ref={ref}
         {...rest}
-        style={[
-          font,
-          styles.text,
-          { writingDirection, color: theme.colors.onSurface },
-          style,
-        ]}
+        style={
+          inheritsStyle
+            ? [font, style]
+            : [
+                font,
+                styles.text,
+                { writingDirection, color: theme.colors.onSurface },
+                style,
+              ]
+        }
       />
     );
+  } else if (inheritsStyle) {
+    element = <Animated.Text ref={ref} {...rest} style={style} />;
   } else {
     const font = theme.fonts.bodyMedium;
     const textStyle = {
       ...font,
       color: theme.colors.onSurface,
     };
-    return (
+    element = (
       <Animated.Text
         ref={ref}
         {...rest}
@@ -90,6 +103,8 @@ function AnimatedText({
       />
     );
   }
+
+  return markChildrenAsNested(element, rest.children);
 }
 
 const styles = StyleSheet.create({
@@ -99,6 +114,7 @@ const styles = StyleSheet.create({
 });
 
 export const customAnimatedText = <T,>() =>
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   AnimatedText as (props: Props<T>) => ReactNode;
 
 export default AnimatedText;

@@ -3,6 +3,9 @@ import { defineConfig } from '@rspress/core';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
+import componentDocsConfig from './component-docs.config.ts';
+import { pluginComponentDocs } from './plugins/component-docs/index.ts';
+
 const REPO_NAME = 'react-native-paper';
 const REPO_ORG = 'callstack';
 
@@ -60,6 +63,13 @@ export default withCallstackPreset(
       default: '5.x',
       versions: ['5.x', '6.x'],
     },
+    plugins: [
+      pluginComponentDocs({
+        ...componentDocsConfig,
+        tsconfigPath: path.resolve(__dirname, '..', 'tsconfig.source.json'),
+        version: '6.x',
+      }),
+    ],
     route: {
       cleanUrls: true,
       extensions: ['.md', '.mdx'],
@@ -72,7 +82,6 @@ export default withCallstackPreset(
         'test-results/**',
         'tests/**',
         'visual/**',
-        'component-docs-plugin/**',
         'README.md',
       ],
     },
@@ -120,15 +129,16 @@ export default withCallstackPreset(
           react: resolve('react'),
           'react-dom': resolve('react-dom'),
           'react-native$': resolve('react-native-web'),
-          'react-native-web/dist/exports/StyleSheet/compiler/createReactDOMStyle':
+          'react-native-web/dist/cjs/exports/StyleSheet/compiler/createReactDOMStyle.js':
             path.resolve(
               resolve('react-native-web'),
-              'dist/exports/StyleSheet/compiler/createReactDOMStyle.js'
+              'dist/cjs/exports/StyleSheet/compiler/createReactDOMStyle.js'
             ),
-          'react-native-web/dist/exports/StyleSheet/preprocess': path.resolve(
-            resolve('react-native-web'),
-            'dist/exports/StyleSheet/preprocess.js'
-          ),
+          'react-native-web/dist/cjs/exports/StyleSheet/preprocess.js':
+            path.resolve(
+              resolve('react-native-web'),
+              'dist/cjs/exports/StyleSheet/preprocess.js'
+            ),
           'react-native-paper': paper,
         },
       },
@@ -154,6 +164,7 @@ export default withCallstackPreset(
           config.plugins.push(
             new rspack.DefinePlugin({
               __DEV__: JSON.stringify(isDev),
+              global: 'globalThis',
               'process.env.JEST_WORKER_ID': 'undefined',
               'process.env.NODE_ENV': JSON.stringify(
                 isDev ? 'development' : 'production'

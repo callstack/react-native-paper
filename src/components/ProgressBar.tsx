@@ -1,4 +1,5 @@
 import * as React from 'react';
+// eslint-disable-next-line no-restricted-imports -- TODO: migrate ProgressBar to Reanimated.
 import { Animated, Platform, StyleSheet, View } from 'react-native';
 import type {
   LayoutChangeEvent,
@@ -9,7 +10,8 @@ import type {
 
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
+import type { ThemeProp } from '../theme/types';
 
 export type Props = ViewProps & {
   /**
@@ -76,10 +78,9 @@ const ProgressBar = ({
   animatedValue,
   style,
   fillStyle,
-  testID = 'progress-bar',
+  testID,
   ...rest
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const isRTL = direction === 'rtl';
@@ -95,7 +96,7 @@ const ProgressBar = ({
   const indeterminateAnimation =
     React.useRef<Animated.CompositeAnimation | null>(null);
 
-  const { scale } = theme.animation;
+  const getDuration = useMotionDuration();
 
   React.useEffect(() => {
     passedAnimatedValue.current = animatedValue;
@@ -104,7 +105,7 @@ const ProgressBar = ({
   const startAnimation = React.useCallback(() => {
     // Show progress bar
     Animated.timing(fade, {
-      duration: 200 * scale,
+      duration: getDuration(200),
       toValue: 1,
       useNativeDriver: true,
       isInteraction: false,
@@ -131,7 +132,7 @@ const ProgressBar = ({
           duration: INDETERMINATE_DURATION,
           toValue: 1,
           // Animated.loop does not work if useNativeDriver is true on web
-          useNativeDriver: !isWeb,
+          useNativeDriver: Platform.OS !== 'web',
           isInteraction: false,
         });
       }
@@ -142,13 +143,13 @@ const ProgressBar = ({
       Animated.loop(indeterminateAnimation.current).start();
     } else {
       Animated.timing(timer, {
-        duration: 200 * scale,
+        duration: getDuration(200),
         toValue: progress ? progress : 0,
         useNativeDriver: true,
         isInteraction: false,
       }).start();
     }
-  }, [fade, scale, indeterminate, timer, progress, isWeb]);
+  }, [fade, getDuration, indeterminate, timer, progress]);
 
   const stopAnimation = React.useCallback(() => {
     // Stop indeterminate animation
@@ -157,12 +158,12 @@ const ProgressBar = ({
     }
 
     Animated.timing(fade, {
-      duration: 200 * scale,
+      duration: getDuration(200),
       toValue: 0,
       useNativeDriver: true,
       isInteraction: false,
     }).start();
-  }, [fade, scale]);
+  }, [fade, getDuration]);
 
   React.useEffect(() => {
     if (visible) startAnimation();
@@ -200,7 +201,7 @@ const ProgressBar = ({
       aria-valuemin={indeterminate ? undefined : 0}
       aria-valuemax={indeterminate ? undefined : 100}
       aria-valuenow={indeterminate ? undefined : Math.round(progress * 100)}
-      style={isWeb && styles.webContainer}
+      style={Platform.OS === 'web' && styles.webContainer}
       testID={testID}
     >
       <Animated.View
@@ -212,7 +213,6 @@ const ProgressBar = ({
       >
         {width ? (
           <Animated.View
-            testID={`${testID}-fill`}
             style={[
               styles.progressBar,
               {

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
@@ -14,8 +15,9 @@ import type { RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp, TypescaleKey } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
-import type { ThemeProp, TypescaleKey } from '../../types';
+import { useFocusRing } from '../../utils/useFocusRing';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -34,12 +36,14 @@ export type Props = {
    */
   disabled?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
   /**
-   * Function to execute on press.
+   * Function to execute on press. Without it, and outside a
+   * `RadioButton.Group`, the row is read only: it can't be pressed, and a press
+   * goes to its parent.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
@@ -179,14 +183,27 @@ const RadioButtonItem = ({
 
   const textAlign = isLeading ? 'right' : 'left';
 
-  const computedStyle = {
+  const computedStyle: TextStyle = {
     ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
-  } as TextStyle;
+  };
+
+  // Rows stack edge to edge, so the ring is inward. It goes on a childless
+  // overlay painted last (`'descendant'`): drawn on the row itself, it would
+  // sit under the content view, and a background set through `style` would
+  // hide it. Off whenever the row can't be pressed, as on TouchableRipple.
+  // The hook needs the group above the consumer below.
+  const group = React.useContext(RadioButtonContext);
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !(onPress || group?.onValueChange || onLongPress),
+    theme.colors.secondary,
+    'inward',
+    'descendant'
+  );
 
   return (
     <RadioButtonContext.Consumer>
-      {(context?: RadioButtonContextType) => {
+      {(context: RadioButtonContextType | null) => {
         const checked =
           isChecked({
             contextValue: context?.value,
@@ -195,13 +212,27 @@ const RadioButtonItem = ({
           }) === 'checked';
         return (
           <TouchableRipple
-            onPress={(event) =>
-              handlePress({
-                onPress: onPress,
-                onValueChange: context?.onValueChange,
-                value,
-                event,
-              })
+            focusRing="none"
+            onFocus={focusTarget.onFocus}
+            onBlur={focusTarget.onBlur}
+            {...focusTarget.dataSetProps}
+            style={focusTarget.style}
+            // A row with nothing to call (no `onPress` and no
+            // `RadioButton.Group`) is read only and gets no handler, so it never
+            // takes a press meant for its parent. A live row is turned off with
+            // `disabled`, which keeps the same element instead of remounting it.
+            // Outside a `RadioButton.Group` the radio inside has no handler of
+            // its own, so it still swaps elements when `disabled` toggles.
+            onPress={
+              onPress || context?.onValueChange
+                ? (event) =>
+                    handlePress({
+                      onPress: onPress,
+                      onValueChange: context?.onValueChange,
+                      value,
+                      event,
+                    })
+                : undefined
             }
             onLongPress={onLongPress}
             aria-label={ariaLabel}
@@ -225,6 +256,11 @@ const RadioButtonItem = ({
               </Text>
               {!isLeading && radioButton}
             </View>
+            <View
+              pointerEvents="none"
+              style={[StyleSheet.absoluteFill, ...focusRing.style]}
+              {...focusRing.dataSetProps}
+            />
           </TouchableRipple>
         );
       }}

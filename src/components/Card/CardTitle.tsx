@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { TypescaleKey, ThemeProp } from '../../types';
+import type { TypescaleKey, ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
 
 export type Props = ViewProps & {
@@ -82,14 +82,6 @@ export type Props = ViewProps & {
    */
   rightStyle?: StyleProp<ViewStyle>;
   /**
-   * @internal
-   */
-  index?: number;
-  /**
-   * @internal
-   */
-  total?: number;
-  /**
    * Specifies the largest possible scale a title font can reach.
    */
   titleMaxFontSizeMultiplier?: number;
@@ -102,6 +94,10 @@ export type Props = ViewProps & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 const LEFT_SIZE = 40;
@@ -143,14 +139,12 @@ const CardTitle = ({
   rightStyle,
   style,
   theme: themeOverrides,
+  testID,
 }: Props) => {
   useInternalTheme(themeOverrides);
 
-  const minHeight = subtitle || left || right ? 72 : 50;
-  const marginBottom = subtitle ? 0 : 2;
-
   return (
-    <View style={[styles.container, { minHeight }, style]}>
+    <View style={[styles.container, style]} testID={testID}>
       {left ? (
         <View style={[styles.left, leftStyle]}>
           {left({
@@ -162,7 +156,7 @@ const CardTitle = ({
       <View style={[styles.titles]}>
         {title && (
           <Text
-            style={[styles.title, { marginBottom }, titleStyle]}
+            style={titleStyle}
             numberOfLines={titleNumberOfLines}
             variant={titleVariant}
             maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
@@ -172,7 +166,7 @@ const CardTitle = ({
         )}
         {subtitle && (
           <Text
-            style={[styles.subtitle, subtitleStyle]}
+            style={subtitleStyle}
             numberOfLines={subtitleNumberOfLines}
             variant={subtitleVariant}
             maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
@@ -193,31 +187,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingLeft: 16,
+    gap: 16,
   },
-
   left: {
     justifyContent: 'center',
-    marginRight: 16,
     height: LEFT_SIZE,
     width: LEFT_SIZE,
   },
-
   titles: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-  },
-
-  title: {
-    minHeight: 30,
-    paddingRight: 16,
-  },
-
-  subtitle: {
-    minHeight: 20,
-    marginVertical: 0,
-    paddingRight: 16,
   },
 });
 

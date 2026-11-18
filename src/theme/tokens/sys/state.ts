@@ -14,6 +14,5 @@ export const state = {
   focusIndicator: {
     thickness: 3,
     outerOffset: 2,
-    innerOffset: -3,
   },
 } as const;

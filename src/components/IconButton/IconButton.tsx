@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -7,21 +7,30 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated, { type AnimatedStyle } from 'react-native-reanimated';
+
 import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
+import hasTouchHandler, {
+  carriesToggleState,
+} from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 const PADDING = 8;
 
 type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
-export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
+export type Props = Omit<
+  React.PropsWithoutRef<TouchableRippleProps>,
+  'children' | 'style'
+> & {
   /**
    * Icon to display.
    */
@@ -69,8 +78,8 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  ref?: React.Ref<View>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * TestID used for testing purposes
    */
@@ -120,9 +129,11 @@ const IconButton = ({
   mode,
   style,
   theme: themeOverrides,
-  testID = 'icon-button',
+  testID,
   loading = false,
   contentStyle,
+  hitSlop,
+  role = 'button',
   ref,
   ...rest
 }: Props) => {
@@ -146,34 +157,55 @@ const IconButton = ({
   });
 
   const buttonSize = size + 2 * PADDING;
+  const borderWidth = mode === 'outlined' && !selected ? 1 : 0;
 
-  const {
-    borderWidth = mode === 'outlined' && !selected ? 1 : 0,
-    borderRadius = buttonSize / 2,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const shapeStyle = { borderRadius: buttonSize / 2 };
 
   const borderStyles = {
     borderWidth,
-    borderRadius,
     borderColor,
+    ...shapeStyle,
   };
 
+  const touchableSize = buttonSize - 2 * borderWidth;
+
+  const defaultHitSlop = disabled
+    ? undefined
+    : getMinInteractiveSizeHitSlop({
+        width: touchableSize,
+        height: touchableSize,
+      });
+
+  // Without a handler the touchable drops the button role, and on web that
+  // renders role="presentation", which can't carry a name. A labelled icon
+  // that does nothing is an image there, named by its label. An explicit
+  // role="button", as Searchbar passes, counts as the default.
+  const isWebImage =
+    Platform.OS === 'web' &&
+    role === 'button' &&
+    !disabled &&
+    ariaLabel !== undefined &&
+    !hasTouchHandler({
+      onPress,
+      onLongPress: rest.onLongPress,
+      onPressIn: rest.onPressIn,
+      onPressOut: rest.onPressOut,
+    }) &&
+    !carriesToggleState(rest);
+
   return (
-    <Surface
+    <Animated.View
       ref={ref}
-      testID={`${testID}-container`}
       style={[
+        styles.container,
         {
           backgroundColor: backgroundOpacity < 1 ? undefined : backgroundColor,
           width: buttonSize,
           height: buttonSize,
         },
-        styles.container,
         borderStyles,
         style,
       ]}
-      container
-      elevation={0}
     >
       {backgroundOpacity < 1 && (
         <View
@@ -181,6 +213,7 @@ const IconButton = ({
           style={[
             StyleSheet.absoluteFill,
             { backgroundColor, opacity: backgroundOpacity },
+            shapeStyle,
           ]}
         />
       )}
@@ -188,17 +221,21 @@ const IconButton = ({
         borderless
         centered
         onPress={onPress}
+        theme={theme}
         aria-label={ariaLabel}
-        style={[styles.touchable, contentStyle]}
-        role="button"
+        style={[
+          styles.touchable,
+          shapeStyle,
+          // Clip the ripple to the button shape. Not on web, where
+          // `overflow: 'hidden'` would also clip the hit slop target.
+          Platform.OS !== 'web' && styles.clipToShape,
+          contentStyle,
+        ]}
+        role={isWebImage ? 'img' : role}
         aria-disabled={disabled}
         disabled={disabled}
-        hitSlop={
-          TouchableRipple.supported
-            ? { top: 10, left: 10, bottom: 10, right: 10 }
-            : { top: 6, left: 6, bottom: 6, right: 6 }
-        }
         testID={testID}
+        hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
         {...rest}
       >
         <View style={{ opacity: iconOpacity }}>
@@ -209,20 +246,21 @@ const IconButton = ({
           )}
         </View>
       </TouchableRipple>
-    </Surface>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    overflow: 'hidden',
     margin: 6,
-    elevation: 0,
   },
   touchable: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  clipToShape: {
+    overflow: 'hidden',
   },
 });
 

@@ -1,18 +1,15 @@
 import * as React from 'react';
-import type {
-  Animated,
-  ColorValue,
-  StyleProp,
-  View,
-  ViewStyle,
-} from 'react-native';
+import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
+
+import type { AnimatedStyle } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../../core/theming';
-import type { Theme, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
+import type { Props as IconButtonProps } from '../IconButton/IconButton';
 
-export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
+export type Props = React.PropsWithoutRef<IconButtonProps> & {
   /**
    *  Custom color for action icon.
    */
@@ -43,8 +40,8 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    * Whether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons.
    */
   isLeading?: boolean;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  ref?: React.Ref<View>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */
@@ -64,7 +61,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
  *
  * const MyComponent = () => (
  *   <Appbar.Header>
- *      <Appbar.Content title="Title" subtitle={'Subtitle'} />
+ *      <Appbar.Content title="Title" />
  *       <Appbar.Action icon="magnify" onPress={() => {}} />
  *       <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
  *   </Appbar.Header>
@@ -86,7 +83,7 @@ const AppbarAction = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as Theme;
+  const { colors } = theme;
 
   const actionIconColor = iconColor
     ? iconColor
@@ -103,6 +100,7 @@ const AppbarAction = ({
       disabled={disabled}
       aria-label={ariaLabel}
       animated
+      theme={theme}
       ref={ref}
       {...rest}
     />

@@ -1,19 +1,27 @@
 import * as React from 'react';
-import { Animated, StyleSheet, Pressable, View } from 'react-native';
-import type { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, Pressable, View } from 'react-native';
+import type {
+  ColorValue,
+  GestureResponderEvent,
+  StyleProp,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
 import CardActions from './CardActions';
 import CardContent from './CardContent';
+import { CardContext } from './CardContext';
 import CardCover from './CardCover';
 import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import { splitStyles } from '../../utils/splitStyles';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import Surface from '../Surface';
+import type { SurfaceStyle } from '../Surface';
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -22,7 +30,7 @@ type OutlinedCardProps = {
 
 type ElevatedCardProps = {
   mode?: 'elevated';
-  elevation?: number;
+  elevation?: Elevation;
 };
 
 type ContainedCardProps = {
@@ -30,11 +38,10 @@ type ContainedCardProps = {
   elevation?: never;
 };
 
-type HandlePressType = 'in' | 'out';
-
 type Mode = 'elevated' | 'outlined' | 'contained';
+type Direction = 'vertical' | 'horizontal';
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
@@ -42,6 +49,12 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * - `outlined` - Card with an outline.
    */
   mode?: Mode;
+  /**
+   * Direction of the Card's content.
+   * - `vertical`
+   * - `horizontal`
+   */
+  direction?: Direction;
   /**
    * Content of the `Card`.
    */
@@ -73,12 +86,16 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Changes Card shadow and background on iOS and Android.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  elevation?: Elevation;
   /**
-   * Style of card's inner content.
+   * Color of the outline in `outlined` mode.
+   */
+  borderColor?: ColorValue;
+  /**
+   * Style of card's content.
    */
   contentStyle?: StyleProp<ViewStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<SurfaceStyle>;
   /**
    * @optional
    */
@@ -91,7 +108,14 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Pass down accessible from card props to touchable
    */
   accessible?: boolean;
+  /**
+   * Reference to the card container.
+   */
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
+
+const DEFAULT_CARD_GAP = 16;
+const DEFAULT_CARD_PADDING = 16;
 
 /**
  * A card is a sheet of material that serves as an entry point to more detailed information.
@@ -105,15 +129,15 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  *
  * const MyComponent = () => (
  *   <Card>
+ *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *     <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
  *     <Card.Content>
  *       <Text variant="titleLarge">Card title</Text>
  *       <Text variant="bodyMedium">Card content</Text>
  *     </Card.Content>
- *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *     <Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button mode="outlined">Cancel</Button>
+ *       <Button mode="filled">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );
@@ -121,7 +145,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * export default MyComponent;
  * ```
  */
-
 const Card = ({
   elevation: cardElevation = 1,
   delayLongPress,
@@ -130,11 +153,13 @@ const Card = ({
   onPressOut,
   onPressIn,
   mode: cardMode = 'elevated',
+  direction: cardDirection = 'vertical',
   children,
   style,
   contentStyle,
+  borderColor: customBorderColor,
   theme: themeOverrides,
-  testID = 'card',
+  testID,
   accessible,
   disabled,
   ref,
@@ -155,101 +180,93 @@ const Card = ({
     onPressOut,
   });
 
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(cardElevation)
+  // The ring goes on the Surface, the card's visible box (`scope: 'within'`),
+  // not on the `Pressable` that takes focus: the caller's `style` sizes and
+  // pads the Surface, so a ring on the content-sized `Pressable` would stop
+  // short of a taller card's edge or sit inside its padding.
+  //
+  // Off without a touch handler too: the `Pressable` unmounts then, and a
+  // focused one sends no blur, so the ring would come back with the handler.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !hasPassedTouchHandler,
+    theme.colors.secondary,
+    'outward',
+    'within'
   );
-  const { animation } = theme;
 
-  const animationDuration = 150 * animation.scale;
-
-  const runElevationAnimation = (pressType: HandlePressType) => {
-    if (isMode('contained')) {
-      return;
-    }
-
-    const isPressTypeIn = pressType === 'in';
-    Animated.timing(elevation, {
-      toValue: isPressTypeIn ? 2 : cardElevation,
-      duration: animationDuration,
-      useNativeDriver: false,
-    }).start();
-  };
+  const [pressed, setPressed] = React.useState(false);
+  const elevation = isMode('elevated') ? (pressed ? 2 : cardElevation) : 0;
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
     onPressIn?.(e);
-    runElevationAnimation('in');
+
+    if (isMode('elevated')) {
+      setPressed(true);
+    }
   });
 
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
     onPressOut?.(e);
-    runElevationAnimation('out');
-  });
 
-  const total = React.Children.count(children);
-  const siblings = React.Children.map(children, (child) =>
-    React.isValidElement(child) && child.type
-      ? (child.type as any).displayName
-      : null
-  );
+    if (isMode('elevated')) {
+      setPressed(false);
+    }
+  });
 
   const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
     theme,
     mode: cardMode,
   });
 
-  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const borderColor = customBorderColor ?? themedBorderColor;
 
-  const { borderColor = themedBorderColor } = flattenedStyles;
+  const borderRadius = theme.shapes.corner.medium;
 
-  const [, borderRadiusStyles] = splitStyles(
-    flattenedStyles,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
+  const cardContext = React.useMemo(
+    () => ({ padding: DEFAULT_CARD_PADDING, direction: cardDirection }),
+    [cardDirection]
   );
 
-  const borderRadiusCombinedStyles = {
-    borderRadius: theme.shapes.corner.medium,
-    ...borderRadiusStyles,
-  };
-
   const content = (
-    <View style={[styles.innerContainer, contentStyle]} testID={testID}>
-      {React.Children.map(children, (child, index) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<any>, {
-              index,
-              total,
-              siblings,
-              borderRadiusStyles,
-            })
-          : child
-      )}
-    </View>
+    <CardContext.Provider value={cardContext}>
+      <View
+        style={[
+          styles.content,
+          { borderRadius },
+          cardDirection === 'horizontal' ? styles.horizontal : styles.vertical,
+          contentStyle,
+          {
+            padding: DEFAULT_CARD_PADDING,
+            gap: DEFAULT_CARD_GAP,
+          },
+        ]}
+      >
+        {children}
+      </View>
+    </CardContext.Provider>
   );
 
   return (
     <Surface
       ref={ref}
-      style={[
-        !isMode('elevated') && { backgroundColor },
-        borderRadiusCombinedStyles,
-        style,
-      ]}
+      borderRadius={borderRadius}
+      backgroundColor={!isMode('elevated') ? backgroundColor : undefined}
+      style={[style, ...focusRing.style]}
       theme={theme}
-      elevation={isMode('elevated') ? elevation : 0}
-      testID={`${testID}-container`}
-      container
+      elevation={elevation}
+      testID={hasPassedTouchHandler ? undefined : testID}
       {...rest}
+      {...mergeDataSetProps(rest, focusRing.dataSetProps)}
     >
       {isMode('outlined') && (
         <View
           pointerEvents="none"
-          testID={`${testID}-outline`}
           style={[
             {
               borderColor,
             },
             styles.outline,
-            borderRadiusCombinedStyles,
+            { borderRadius },
           ]}
         />
       )}
@@ -264,6 +281,13 @@ const Card = ({
           onPress={onPress}
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
+          testID={testID}
+          // Like Switch: a ripple drawable owns the focused state, so Android does
+          // not add its grey default focus highlight on top of the ring.
+          android_ripple={{ color: 'transparent' }}
+          onFocus={focusTarget.onFocus}
+          onBlur={focusTarget.onBlur}
+          style={[{ borderRadius }, ...focusTarget.style]}
         >
           {content}
         </Pressable>
@@ -286,8 +310,15 @@ Card.Cover = CardCover;
 Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
-  innerContainer: {
+  content: {
     flexShrink: 1,
+    overflow: 'hidden',
+  },
+  horizontal: {
+    flexDirection: 'row',
+  },
+  vertical: {
+    flexDirection: 'column',
   },
   outline: {
     borderWidth: 1,

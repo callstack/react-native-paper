@@ -10,12 +10,8 @@ import type {
 
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type {
-  $RemoveChildren,
-  Theme,
-  TypescaleKey,
-  ThemeProp,
-} from '../../types';
+import type { ThemeProp } from '../../theme/types';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
 
@@ -26,7 +22,7 @@ type TitleString = {
 
 type TitleElement = { title: React.ReactNode; titleStyle?: never };
 
-export type Props = $RemoveChildren<typeof View> & {
+export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
   // For `title` and `titleStyle` props their types are duplicated due to the generation of documentation.
   // Appropriate type for them are either `TitleString` or `TitleElement`, depends on `title` type.
   /**
@@ -100,11 +96,19 @@ const AppbarContent = ({
   titleMaxFontSizeMultiplier,
   mode = 'small',
   theme: themeOverrides,
-  testID = 'appbar-content',
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors, fonts } = theme as Theme;
+  const { colors, fonts } = theme;
+
+  // With `onPress` the title is a button, so it gets the keyboard focus ring
+  // (MD3: interactive elements in an app bar have focus rings). It is a plain
+  // `Pressable`, so it calls the hook directly. Outward, the default.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !onPress,
+    colors.secondary
+  );
 
   const titleTextColor = titleColor ? titleColor : colors.onSurface;
 
@@ -115,14 +119,14 @@ const AppbarContent = ({
     'center-aligned': styles.v3DefaultContainer,
   };
 
-  const variant = modeTextVariant[mode] as TypescaleKey;
+  const variant = modeTextVariant[mode];
 
   const contentWrapperProps = {
-    pointerEvents: 'box-none' as ViewProps['pointerEvents'],
+    pointerEvents: 'box-none',
     style: [styles.container, modeContainerStyles[mode], style],
     testID,
     ...rest,
-  };
+  } satisfies ViewProps;
 
   const content = (
     <>
@@ -140,7 +144,6 @@ const AppbarContent = ({
           numberOfLines={1}
           accessible
           role={onPress ? 'none' : 'heading'}
-          testID={`${testID}-title-text`}
           maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
         >
           {title}
@@ -159,6 +162,19 @@ const AppbarContent = ({
         onPress={onPress}
         disabled={disabled}
         {...contentWrapperProps}
+        // Like Switch: a ripple drawable owns the focused state, so Android does
+        // not add its grey default focus highlight on top of the ring.
+        android_ripple={{ color: 'transparent' }}
+        onFocus={(e) => {
+          focusTarget.onFocus?.(e);
+          rest.onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          focusTarget.onBlur?.();
+          rest.onBlur?.(e);
+        }}
+        {...mergeDataSetProps(rest, focusRing.dataSetProps)}
+        style={[...contentWrapperProps.style, ...focusRing.style]}
       >
         {content}
       </Pressable>

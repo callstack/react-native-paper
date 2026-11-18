@@ -1,796 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders button with an accessibility hint 1`] = `
-<View
-  collapsable={false}
-  style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
-      {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      }
-    }
-    testID="button-container"
-  >
-    <View
-      accessibilityHint="hint"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
-      }
-      testID="button"
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            {
-              "opacity": 1,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 12,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="button-text"
-        >
-          Button with accessibility hint
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders button with an accessibility label 1`] = `
-<View
-  collapsable={false}
-  style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    accessibilityLabel="label"
-    collapsable={false}
-    style={
-      {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      }
-    }
-    testID="button-container"
-  >
-    <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
-      }
-      testID="button"
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            {
-              "opacity": 1,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 12,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="button-text"
-        >
-          Button with accessibility label
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders button with button color 1`] = `
-<View
-  collapsable={false}
-  style={
-    {
-      "backgroundColor": "#e91e63",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
-      {
-        "backgroundColor": "#e91e63",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      }
-    }
-    testID="button-container"
-  >
-    <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
-      }
-      testID="button"
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            {
-              "opacity": 1,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 12,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="button-text"
-        >
-          Custom Button
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders button with color 1`] = `
-<View
-  collapsable={false}
-  style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
-      {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      }
-    }
-    testID="button-container"
-  >
-    <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
-      }
-      testID="button"
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            {
-              "opacity": 1,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 12,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "#e91e63",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="button-text"
-        >
-          Custom Button
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders button with custom testID 1`] = `
-<View
-  collapsable={false}
-  style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="custom:testID-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
-      {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      }
-    }
-    testID="custom:testID-container"
-  >
-    <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
-      }
-      testID="custom:testID"
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            {
-              "opacity": 1,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 12,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="custom:testID-text"
-        >
-          Button with custom testID
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
 exports[`renders button with icon 1`] = `
 <View
   collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
+      {},
       {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      undefined,
+      {},
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": undefined,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "borderRadius": 20,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -798,52 +41,93 @@ exports[`renders button with icon 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": undefined,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "borderRadius": 20,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
-    testID="button-container"
+  />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "borderStyle": "solid",
+        },
+        {
+          "borderColor": "transparent",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          [
+            {
+              "borderRadius": 20,
+            },
+          ],
         ]
       }
-      testID="button"
     >
       <View
         style={
@@ -853,6 +137,13 @@ exports[`renders button with icon 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
+            {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
             {
               "opacity": 1,
             },
@@ -860,25 +151,7 @@ exports[`renders button with icon 1`] = `
           ]
         }
       >
-        <View
-          style={
-            [
-              {
-                "marginLeft": 12,
-                "marginRight": -4,
-              },
-              {
-                "marginLeft": 16,
-                "marginRight": -16,
-              },
-              {
-                "marginLeft": 12,
-                "marginRight": -8,
-              },
-            ]
-          }
-          testID="button-icon-container"
-        >
+        <View>
           <Text
             accessibilityElementsHidden={true}
             importantForAccessibility="no-hide-descendants"
@@ -887,12 +160,12 @@ exports[`renders button with icon 1`] = `
             style={
               [
                 {
-                  "color": "rgba(103, 80, 164, 1)",
-                  "fontSize": 18,
+                  "color": "rgba(255, 255, 255, 1)",
+                  "fontSize": 20,
                 },
                 [
                   {
-                    "lineHeight": 18,
+                    "lineHeight": 20,
                     "transform": [
                       {
                         "scaleX": 1,
@@ -931,371 +204,8 @@ exports[`renders button with icon 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 16,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="button-text"
-        >
-          Icon Button
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders button with icon in reverse order 1`] = `
-<View
-  collapsable={false}
-  style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
-      {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      }
-    }
-    testID="button-container"
-  >
-    <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
-      }
-      testID="button"
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            {
-              "opacity": 1,
-            },
-            {
-              "flexDirection": "row-reverse",
-            },
-          ]
-        }
-      >
-        <View
-          style={
-            [
-              {
-                "marginLeft": -4,
-                "marginRight": 12,
-              },
-              {
-                "marginLeft": -16,
-                "marginRight": 16,
-              },
-              {
-                "marginLeft": -8,
-                "marginRight": 12,
-              },
-            ]
-          }
-          testID="button-icon-container"
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
-              [
-                {
-                  "color": "rgba(103, 80, 164, 1)",
-                  "fontSize": 18,
-                },
-                [
-                  {
-                    "lineHeight": 18,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
-            }
-          >
-            chevron-right
-          </Text>
-        </View>
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 16,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="button-text"
-        >
-          Right Icon
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders contained contained with mode 1`] = `
-<View
-  collapsable={false}
-  style={
-    {
-      "backgroundColor": "rgba(103, 80, 164, 1)",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
-      {
-        "backgroundColor": "rgba(103, 80, 164, 1)",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      }
-    }
-    testID="button-container"
-  >
-    <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
-      }
-      testID="button"
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            {
-              "opacity": 1,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 24,
-                    "marginVertical": 10,
-                  },
-                  undefined,
-                  false,
                   {
                     "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
@@ -1309,9 +219,8 @@ exports[`renders contained contained with mode 1`] = `
               ],
             ]
           }
-          testID="button-text"
         >
-          Contained Button
+          Icon Button
         </Text>
       </View>
     </View>
@@ -1323,31 +232,36 @@ exports[`renders disabled button 1`] = `
 <View
   collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {},
+      {
+        "minWidth": 64,
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+      undefined,
+      {},
       {
         "backgroundColor": "transparent",
-        "borderColor": "transparent",
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": undefined,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
         "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1355,10 +269,99 @@ exports[`renders disabled button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "transparent",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": undefined,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "borderRadius": 20,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
-    testID="button-container"
+  />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "borderStyle": "solid",
+        },
+        {
+          "borderColor": "transparent",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
   >
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "borderRadius": 20,
+          },
+          {
+            "backgroundColor": "rgba(29, 27, 32, 1)",
+            "opacity": 0.1,
+          },
+        ]
+      }
+    />
     <View
       accessibilityState={
         {
@@ -1395,12 +398,13 @@ exports[`renders disabled button 1`] = `
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          [
+            {
+              "borderRadius": 20,
+            },
+          ],
         ]
       }
-      testID="button"
     >
       <View
         style={
@@ -1409,6 +413,13 @@ exports[`renders disabled button 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            false,
+            {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 0.38,
@@ -1439,15 +450,8 @@ exports[`renders disabled button 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 12,
-                  },
-                  undefined,
-                  false,
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
@@ -1461,9 +465,205 @@ exports[`renders disabled button 1`] = `
               ],
             ]
           }
-          testID="button-text"
         >
           Disabled Button
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders filled button by default 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {},
+      {
+        "minWidth": 64,
+      },
+      undefined,
+      {},
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": undefined,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "borderRadius": 20,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": undefined,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "borderRadius": 20,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "borderStyle": "solid",
+        },
+        {
+          "borderColor": "transparent",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      role="none"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "borderRadius": 20,
+            },
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            false,
+            {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+            {
+              "opacity": 1,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(255, 255, 255, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Filled Button
         </Text>
       </View>
     </View>
@@ -1475,31 +675,36 @@ exports[`renders loading button 1`] = `
 <View
   collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+    [
+      {},
       {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
         "minWidth": 64,
+      },
+      undefined,
+      {},
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": undefined,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "borderRadius": 20,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1507,52 +712,93 @@ exports[`renders loading button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": undefined,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "borderRadius": 20,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
-    testID="button-container"
+  />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "borderStyle": "solid",
+        },
+        {
+          "borderColor": "transparent",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          [
+            {
+              "borderRadius": 20,
+            },
+          ],
         ]
       }
-      testID="button"
     >
       <View
         style={
@@ -1561,6 +807,13 @@ exports[`renders loading button 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            false,
+            {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -1579,20 +832,7 @@ exports[`renders loading button 1`] = `
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              [
-                {
-                  "marginLeft": 12,
-                  "marginRight": -4,
-                },
-                {
-                  "marginLeft": 16,
-                  "marginRight": -16,
-                },
-                {
-                  "marginLeft": 12,
-                  "marginRight": -8,
-                },
-              ],
+              undefined,
             ]
           }
         >
@@ -1600,9 +840,9 @@ exports[`renders loading button 1`] = `
             collapsable={false}
             style={
               {
-                "height": 18,
+                "height": 20,
                 "opacity": 1,
-                "width": 18,
+                "width": 20,
               }
             }
           >
@@ -1624,13 +864,13 @@ exports[`renders loading button 1`] = `
                 collapsable={false}
                 style={
                   {
-                    "height": 18,
+                    "height": 20,
                     "transform": [
                       {
                         "rotate": "45deg",
                       },
                     ],
-                    "width": 18,
+                    "width": 20,
                   }
                 }
               >
@@ -1638,9 +878,9 @@ exports[`renders loading button 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "height": 9,
+                      "height": 10,
                       "overflow": "hidden",
-                      "width": 18,
+                      "width": 20,
                     }
                   }
                 >
@@ -1648,7 +888,7 @@ exports[`renders loading button 1`] = `
                     collapsable={false}
                     style={
                       {
-                        "height": 18,
+                        "height": 20,
                         "transform": [
                           {
                             "translateY": 0,
@@ -1657,7 +897,7 @@ exports[`renders loading button 1`] = `
                             "rotate": "-165deg",
                           },
                         ],
-                        "width": 18,
+                        "width": 20,
                       }
                     }
                   >
@@ -1665,9 +905,9 @@ exports[`renders loading button 1`] = `
                       collapsable={false}
                       style={
                         {
-                          "height": 9,
+                          "height": 10,
                           "overflow": "hidden",
-                          "width": 18,
+                          "width": 20,
                         }
                       }
                     >
@@ -1675,11 +915,11 @@ exports[`renders loading button 1`] = `
                         collapsable={false}
                         style={
                           {
-                            "borderColor": "rgba(103, 80, 164, 1)",
-                            "borderRadius": 9,
-                            "borderWidth": 1.8,
-                            "height": 18,
-                            "width": 18,
+                            "borderColor": "rgba(255, 255, 255, 1)",
+                            "borderRadius": 10,
+                            "borderWidth": 2,
+                            "height": 20,
+                            "width": 20,
                           }
                         }
                       />
@@ -1706,13 +946,13 @@ exports[`renders loading button 1`] = `
                 collapsable={false}
                 style={
                   {
-                    "height": 18,
+                    "height": 20,
                     "transform": [
                       {
                         "rotate": "45deg",
                       },
                     ],
-                    "width": 18,
+                    "width": 20,
                   }
                 }
               >
@@ -1720,10 +960,10 @@ exports[`renders loading button 1`] = `
                   collapsable={false}
                   style={
                     {
-                      "height": 9,
+                      "height": 10,
                       "overflow": "hidden",
-                      "top": 9,
-                      "width": 18,
+                      "top": 10,
+                      "width": 20,
                     }
                   }
                 >
@@ -1731,16 +971,16 @@ exports[`renders loading button 1`] = `
                     collapsable={false}
                     style={
                       {
-                        "height": 18,
+                        "height": 20,
                         "transform": [
                           {
-                            "translateY": -9,
+                            "translateY": -10,
                           },
                           {
                             "rotate": "345deg",
                           },
                         ],
-                        "width": 18,
+                        "width": 20,
                       }
                     }
                   >
@@ -1748,9 +988,9 @@ exports[`renders loading button 1`] = `
                       collapsable={false}
                       style={
                         {
-                          "height": 9,
+                          "height": 10,
                           "overflow": "hidden",
-                          "width": 18,
+                          "width": 20,
                         }
                       }
                     >
@@ -1758,11 +998,11 @@ exports[`renders loading button 1`] = `
                         collapsable={false}
                         style={
                           {
-                            "borderColor": "rgba(103, 80, 164, 1)",
-                            "borderRadius": 9,
-                            "borderWidth": 1.8,
-                            "height": 18,
-                            "width": 18,
+                            "borderColor": "rgba(255, 255, 255, 1)",
+                            "borderRadius": 10,
+                            "borderWidth": 2,
+                            "height": 20,
+                            "width": 20,
                           }
                         }
                       />
@@ -1795,17 +1035,10 @@ exports[`renders loading button 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
                   {
-                    "marginHorizontal": 16,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
+                    "color": "rgba(255, 255, 255, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
@@ -1817,7 +1050,6 @@ exports[`renders loading button 1`] = `
               ],
             ]
           }
-          testID="button-text"
         >
           Loading Button
         </Text>
@@ -1831,31 +1063,36 @@ exports[`renders outlined button with mode 1`] = `
 <View
   collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {},
+      {
+        "minWidth": 64,
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+      undefined,
+      {},
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(202, 196, 208, 1)",
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": undefined,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
         "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 1,
-        "flex": undefined,
-        "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -1863,52 +1100,93 @@ exports[`renders outlined button with mode 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "transparent",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": undefined,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "borderRadius": 20,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
-    testID="button-container"
+  />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "borderStyle": "solid",
+        },
+        {
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 1,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 19,
-          },
+          [
+            {
+              "borderRadius": 19,
+            },
+          ],
         ]
       }
-      testID="button"
     >
       <View
         style={
@@ -1917,6 +1195,13 @@ exports[`renders outlined button with mode 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            false,
+            {
+              "gap": 8,
+              "minHeight": 38,
+              "paddingEnd": 15,
+              "paddingStart": 15,
             },
             {
               "opacity": 1,
@@ -1947,18 +1232,10 @@ exports[`renders outlined button with mode 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
                   {
-                    "marginHorizontal": 24,
-                    "marginVertical": 10,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
+                    "color": "rgba(73, 69, 79, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
@@ -1970,161 +1247,8 @@ exports[`renders outlined button with mode 1`] = `
               ],
             ]
           }
-          testID="button-text"
         >
           Outlined Button
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders text button by default 1`] = `
-<View
-  collapsable={false}
-  style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
-      },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
-      {
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-      }
-    }
-    testID="button-container"
-  >
-    <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 20,
-          },
-        ]
-      }
-      testID="button"
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            {
-              "opacity": 1,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            [
-              {
-                "textAlign": "left",
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "writingDirection": "ltr",
-              },
-              [
-                {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                [
-                  {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 12,
-                  },
-                  undefined,
-                  false,
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="button-text"
-        >
-          Text Button
         </Text>
       </View>
     </View>
@@ -2136,31 +1260,36 @@ exports[`renders text button with mode 1`] = `
 <View
   collapsable={false}
   style={
-    {
-      "backgroundColor": "transparent",
-      "borderRadius": 20,
-      "shadowColor": "rgba(0, 0, 0, 1)",
-      "shadowOffset": {
-        "height": 0,
-        "width": 0,
+    [
+      {},
+      {
+        "minWidth": 64,
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
-    }
-  }
-  testID="button-container-outer-layer"
->
-  <View
-    collapsable={false}
-    style={
+      undefined,
+      {},
       {
         "backgroundColor": "transparent",
-        "borderColor": "transparent",
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": undefined,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
         "borderRadius": 20,
-        "borderStyle": "solid",
-        "borderWidth": 0,
-        "flex": undefined,
-        "minWidth": 64,
+      },
+      {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
@@ -2168,52 +1297,93 @@ exports[`renders text button with mode 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-      }
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "transparent",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": undefined,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "borderRadius": 20,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
     }
-    testID="button-container"
+  />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "borderStyle": "solid",
+        },
+        {
+          "borderColor": "transparent",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 20,
-          },
+          [
+            {
+              "borderRadius": 20,
+            },
+          ],
         ]
       }
-      testID="button"
     >
       <View
         style={
@@ -2222,6 +1392,13 @@ exports[`renders text button with mode 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            false,
+            {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingEnd": 16,
+              "paddingStart": 16,
             },
             {
               "opacity": 1,
@@ -2252,15 +1429,8 @@ exports[`renders text button with mode 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  {
-                    "marginHorizontal": 12,
-                  },
-                  undefined,
-                  false,
                   {
                     "color": "rgba(103, 80, 164, 1)",
                     "fontFamily": "System",
@@ -2274,9 +1444,396 @@ exports[`renders text button with mode 1`] = `
               ],
             ]
           }
-          testID="button-text"
         >
           Text Button
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders the loading indicator at the size set by iconSize 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {},
+      {
+        "minWidth": 64,
+      },
+      undefined,
+      {},
+      {
+        "backgroundColor": "rgba(103, 80, 164, 1)",
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": undefined,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "borderRadius": 20,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": undefined,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "borderRadius": 20,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "borderStyle": "solid",
+        },
+        {
+          "borderColor": "transparent",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      role="none"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "borderRadius": 20,
+            },
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            false,
+            {
+              "gap": 8,
+              "minHeight": 40,
+              "paddingEnd": 16,
+              "paddingStart": 16,
+            },
+            {
+              "opacity": 1,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          accessible={true}
+          aria-busy={true}
+          role="progressbar"
+          style={
+            [
+              {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "height": 24,
+                "opacity": 1,
+                "width": 24,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "height": 24,
+                    "transform": [
+                      {
+                        "rotate": "45deg",
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "height": 12,
+                      "overflow": "hidden",
+                      "width": 24,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "height": 24,
+                        "transform": [
+                          {
+                            "translateY": 0,
+                          },
+                          {
+                            "rotate": "-165deg",
+                          },
+                        ],
+                        "width": 24,
+                      }
+                    }
+                  >
+                    <View
+                      collapsable={false}
+                      style={
+                        {
+                          "height": 12,
+                          "overflow": "hidden",
+                          "width": 24,
+                        }
+                      }
+                    >
+                      <View
+                        collapsable={false}
+                        style={
+                          {
+                            "borderColor": "rgba(255, 255, 255, 1)",
+                            "borderRadius": 12,
+                            "borderWidth": 2.4,
+                            "height": 24,
+                            "width": 24,
+                          }
+                        }
+                      />
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View
+              collapsable={false}
+              style={
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "height": 24,
+                    "transform": [
+                      {
+                        "rotate": "45deg",
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "height": 12,
+                      "overflow": "hidden",
+                      "top": 12,
+                      "width": 24,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "height": 24,
+                        "transform": [
+                          {
+                            "translateY": -12,
+                          },
+                          {
+                            "rotate": "345deg",
+                          },
+                        ],
+                        "width": 24,
+                      }
+                    }
+                  >
+                    <View
+                      collapsable={false}
+                      style={
+                        {
+                          "height": 12,
+                          "overflow": "hidden",
+                          "width": 24,
+                        }
+                      }
+                    >
+                      <View
+                        collapsable={false}
+                        style={
+                          {
+                            "borderColor": "rgba(255, 255, 255, 1)",
+                            "borderRadius": 12,
+                            "borderWidth": 2.4,
+                            "height": 24,
+                            "width": 24,
+                          }
+                        }
+                      />
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "textAlign": "center",
+                  },
+                  {
+                    "color": "rgba(255, 255, 255, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+        >
+          Loading Button
         </Text>
       </View>
     </View>

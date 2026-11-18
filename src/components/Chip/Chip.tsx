@@ -1,31 +1,38 @@
 import * as React from 'react';
-import { Animated, Platform, StyleSheet, Pressable, View } from 'react-native';
+import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TextProps,
   TextStyle,
-  ViewStyle,
+  ViewProps,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
 import { getChipColors } from './helpers';
 import type { ChipAvatarProps } from './helpers';
+import { ChipTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { white } from '../../theme/colors';
-import type { $Omit, EllipsizeProp, Theme, ThemeProp } from '../../types';
+import { tokens } from '../../theme/tokens';
+import type { ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
+import type { SurfaceStyle } from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.
@@ -73,7 +80,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   disabled?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -85,6 +92,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Accessibility label for the close icon. This is read by the screen reader when the user taps the close icon.
    */
   closeIconAccessibilityLabel?: string;
+  /**
+   * testID for the close icon button.
+   */
+  closeIconTestID?: string;
   /**
    * Function to execute on press.
    */
@@ -123,7 +134,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Style of chip's text
    */
   textStyle?: StyleProp<TextStyle>;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  style?: StyleProp<SurfaceStyle>;
   /**
    * Sets additional distance outside of element in which a press can be detected.
    */
@@ -139,12 +150,51 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Ellipsize Mode for the children text
    */
-  ellipsizeMode?: EllipsizeProp;
+  ellipsizeMode?: TextProps['ellipsizeMode'];
   /**
    * Specifies the largest possible scale a text font can reach.
    */
   maxFontSizeMultiplier?: number;
+  /**
+   * Reference to the chip container.
+   */
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
+
+/**
+ * Width reserved on the right for the close button.
+ */
+const CLOSE_AFFORDANCE_WIDTH = 34;
+
+/**
+ * Floor for the clamp below. The 18dp glyph is centered in the column, so at
+ * this width it sits 4dp from each side. Any narrower and part of the visible
+ * icon would activate the chip instead of removing it.
+ */
+const CLOSE_AFFORDANCE_MIN_WIDTH = 26;
+
+/**
+ * The close button's focus ring is a circle around the glyph, not around the
+ * whole column, matching Material Web's trailing action: a 24dp circle (4/3
+ * of the 18dp icon) with the 3dp ring right outside it and no outer offset
+ * (`inset: unset`). The shared ring adds the 2dp offset, so the view is that
+ * much smaller. The ring ends 30dp across, 2dp clear of the label.
+ */
+const CLOSE_FOCUS_RING_SIZE =
+  24 - 2 * tokens.md.sys.state.focusIndicator.outerOffset;
+
+/**
+ * The label makes a default chip 32dp tall, so the slop to reach the 48dp
+ * minimum is a constant rather than something to measure. Width grows with the
+ * label and the whole pill is already the target, so only the vertical axis
+ * needs it.
+ */
+const { containerHeight: CHIP_BODY_HEIGHT } = ChipTokens;
+const CHIP_BODY_HIT_SLOP = getMinInteractiveSizeHitSlop({
+  height: CHIP_BODY_HEIGHT,
+});
+// The close column spans the chip's height, so it gets the same vertical slop.
+const CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET = CHIP_BODY_HIT_SLOP?.top ?? 0;
 
 /**
  * Chips are compact elements that can represent inputs, attributes, or actions.
@@ -180,6 +230,7 @@ const Chip = ({
   'aria-label': ariaLabel,
   role = 'button',
   closeIconAccessibilityLabel = 'Close',
+  closeIconTestID,
   onPress,
   onLongPress,
   onPressOut,
@@ -190,7 +241,7 @@ const Chip = ({
   textStyle,
   style,
   theme: themeOverrides,
-  testID = 'chip',
+  testID,
   selectedColor,
   showSelectedCheck = true,
   ellipsizeMode,
@@ -201,11 +252,23 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const isWeb = Platform.OS === 'web';
-
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(elevated ? 1 : 0)
+  // The close affordance is a plain `Pressable`, not a `TouchableRipple`
+  // (see below). The `Pressable` is the whole close column, but the ring
+  // follows the glyph's round shape, so it goes on a circle inside it
+  // (`'descendant'`). The circle is a childless overlay on the glyph: Android
+  // drew the ring square when it sat on the view holding the icon, ignoring
+  // its border radius.
+  // Off without `onClose` too: the close `Pressable` unmounts then, and a
+  // focused one sends no blur, so the ring would come back with `onClose`.
+  const { target: closeFocusTarget, ring: closeFocusRing } = useFocusRing(
+    disabled || !onClose,
+    theme.colors.secondary,
+    'outward',
+    'descendant'
   );
+
+  const [pressed, setPressed] = React.useState(false);
+  const elevation = elevated ? (pressed ? 2 : 1) : 0;
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -214,38 +277,42 @@ const Chip = ({
     onPressOut,
   });
 
+  // The body's ring goes on the Surface, the chip's visible box
+  // (`scope: 'within'`), not on the ripple that takes focus. The ripple sits
+  // inside the Surface's border, so a ring measured from it would lose the
+  // border width from its 2dp gap. And on Android and iOS the ripple keeps its
+  // own height at the top of a chip that `style` makes taller, so a ring on it
+  // would sit high. Off whenever the body can't be pressed, as on
+  // TouchableRipple.
+  const { target: bodyFocusTarget, ring: bodyFocusRing } = useFocusRing(
+    disabled || !hasPassedTouchHandler,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
+
   const isOutlined = mode === 'outlined';
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressIn?.(e);
-    Animated.timing(elevation, {
-      toValue: elevated ? 2 : 0,
-      duration: 200 * scale,
-      useNativeDriver:
-        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-    }).start();
+    setPressed(true);
   });
 
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressOut?.(e);
-    Animated.timing(elevation, {
-      toValue: elevated ? 1 : 0,
-      duration: 150 * scale,
-      useNativeDriver:
-        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-    }).start();
+    setPressed(false);
   });
+
+  const reduceMotion = useReduceMotion();
+  const elevationTransitionDuration = reduceMotion
+    ? 0
+    : theme.motion.duration[pressed ? 'short4' : 'short3'];
 
   const opacity = 0.38;
   const defaultBorderRadius = theme.shapes.corner.small;
   const iconSize = 18;
 
-  const {
-    backgroundColor: customBackgroundColor,
-    borderRadius = defaultBorderRadius,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const borderRadius = defaultBorderRadius;
 
   const {
     borderColor,
@@ -258,12 +325,11 @@ const Chip = ({
     isOutlined,
     theme,
     selectedColor,
-    customBackgroundColor,
     disabled,
   });
 
-  const elevationStyle = elevation;
   const multiplier = compact ? 1.5 : 2;
+
   const labelSpacings = {
     marginRight: onClose ? 0 : 8 * multiplier,
     marginLeft:
@@ -271,35 +337,40 @@ const Chip = ({
         ? 4 * multiplier
         : 8 * multiplier,
   };
+
   const contentSpacings = {
-    paddingRight: onClose ? 34 : 0,
+    paddingRight: onClose ? CLOSE_AFFORDANCE_WIDTH : 0,
   };
+
   const labelTextStyle = {
     color: textColor,
-    ...(theme as Theme).fonts.labelLarge,
+    ...theme.fonts.labelLarge,
   };
+
   return (
     <Surface
+      backgroundColor={selected ? selectedBackgroundColor : backgroundColor}
+      borderRadius={borderRadius}
       style={[
         styles.container,
         styles.md3Container,
-        {
-          backgroundColor: selected ? selectedBackgroundColor : backgroundColor,
-          borderColor,
-          borderRadius,
-        },
+        { borderColor },
         style,
+        ...bodyFocusRing.style,
       ]}
-      elevation={elevationStyle}
+      elevation={elevation}
+      transitionDuration={elevationTransitionDuration}
       {...rest}
-      testID={`${testID}-container`}
+      {...mergeDataSetProps(rest, bodyFocusRing.dataSetProps)}
       theme={theme}
-      container
     >
       <TouchableRipple
         borderless
         background={background}
-        style={[{ borderRadius }, styles.touchable]}
+        style={[{ borderRadius }, styles.touchable, ...bodyFocusTarget.style]}
+        focusRing="none"
+        onFocus={bodyFocusTarget.onFocus}
+        onBlur={bodyFocusTarget.onBlur}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
@@ -312,7 +383,13 @@ const Chip = ({
         aria-disabled={disabled}
         testID={testID}
         theme={theme}
-        hitSlop={hitSlop}
+        hitSlop={
+          hitSlop !== undefined
+            ? hitSlop
+            : disabled || !hasPassedTouchHandler
+              ? undefined
+              : CHIP_BODY_HIT_SLOP
+        }
       >
         <View
           style={[
@@ -358,7 +435,7 @@ const Chip = ({
                     avatar
                       ? white
                       : !disabled
-                        ? (theme as Theme).colors.primary
+                        ? theme.colors.primary
                         : iconColor
                   }
                   size={18}
@@ -398,8 +475,34 @@ const Chip = ({
             disabled={disabled}
             role="button"
             aria-label={closeIconAccessibilityLabel}
+            testID={closeIconTestID}
+            hitSlop={disabled ? undefined : CHIP_BODY_HIT_SLOP}
+            // Like Switch: a ripple drawable owns the focused state, so Android does
+            // not add its grey default focus highlight on top of the ring.
+            android_ripple={{ color: 'transparent' }}
+            onFocus={closeFocusTarget.onFocus}
+            onBlur={closeFocusTarget.onBlur}
+            {...closeFocusTarget.dataSetProps}
+            style={[
+              styles.closeButton,
+              { borderRadius },
+              ...closeFocusTarget.style,
+            ]}
           >
-            <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
+            {/* react-native-web removed `hitSlop` in 0.13.0,
+                so web needs a real element the browser can
+                hit-test instead of a native responder inset. */}
+            {Platform.OS === 'web' && !disabled && (
+              <View aria-hidden style={styles.closeButtonWebTouchTarget} />
+            )}
+            <View
+              style={[
+                styles.icon,
+                styles.closeIcon,
+                styles.md3CloseIcon,
+                styles.closeFocusRing,
+              ]}
+            >
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
@@ -410,6 +513,15 @@ const Chip = ({
                   direction="ltr"
                 />
               )}
+              <View
+                pointerEvents="none"
+                style={[
+                  StyleSheet.absoluteFill,
+                  styles.closeFocusRingShape,
+                  ...closeFocusRing.style,
+                ]}
+                {...closeFocusRing.dataSetProps}
+              />
             </View>
           </Pressable>
         </View>
@@ -448,12 +560,13 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   md3CloseIcon: {
-    marginRight: 8,
+    marginRight: 0,
     padding: 0,
   },
   md3LabelText: {
     textAlignVertical: 'center',
     marginVertical: 6,
+    flexShrink: 1,
   },
   avatar: {
     width: 24,
@@ -480,9 +593,34 @@ const styles = StyleSheet.create({
   closeButtonStyle: {
     position: 'absolute',
     right: 0,
-    height: '100%',
+    width: CLOSE_AFFORDANCE_WIDTH,
+    // A chip narrower than this column would hand the whole thing to the close
+    // button. Never more than half, never less than the glyph needs; minWidth
+    // wins over maxWidth.
+    minWidth: CLOSE_AFFORDANCE_MIN_WIDTH,
+    maxWidth: '50%',
+    top: 0,
+    bottom: 0,
+  },
+  closeButton: {
+    flex: 1,
     justifyContent: 'center',
+  },
+  closeFocusRing: {
+    width: CLOSE_FOCUS_RING_SIZE,
+    height: CLOSE_FOCUS_RING_SIZE,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  closeFocusRingShape: {
+    borderRadius: CLOSE_FOCUS_RING_SIZE / 2,
+  },
+  closeButtonWebTouchTarget: {
+    position: 'absolute',
+    top: -CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET,
+    bottom: -CLOSE_BUTTON_WEB_TOUCH_TARGET_INSET,
+    left: 0,
+    right: 0,
   },
   touchable: {
     width: '100%',

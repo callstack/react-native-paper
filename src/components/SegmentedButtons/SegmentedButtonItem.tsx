@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -8,18 +8,33 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
   getSegmentedButtonDensityPadding,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import type { ThemeProp } from '../../theme/types';
+import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+
+const CHECK_SPRING_CONFIG = {
+  stiffness: 230.2,
+  damping: 22,
+  mass: 1,
+};
 
 export type Props = {
   /**
@@ -45,7 +60,7 @@ export type Props = {
    */
   disabled?: boolean;
   /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -121,25 +136,28 @@ const SegmentedButtonItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
 
-  const checkScale = React.useRef(new Animated.Value(0)).current;
+  const checkScale = useSharedValue(0);
 
   React.useEffect(() => {
     if (!showSelectedCheck) {
       return;
     }
-    if (checked) {
-      Animated.spring(checkScale, {
-        toValue: 1,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.spring(checkScale, {
-        toValue: 0,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [checked, checkScale, showSelectedCheck]);
+
+    checkScale.value = withSpring(checked ? 1 : 0, {
+      ...CHECK_SPRING_CONFIG,
+      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
+    });
+  }, [checked, checkScale, reduceMotion, showSelectedCheck]);
+
+  const checkAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: checkScale.value }],
+  }));
+
+  const iconAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: label ? 1 - checkScale.value : 1 }],
+  }));
 
   const { borderColor, textColor, textOpacity, borderWidth, backgroundColor } =
     getSegmentedButtonColors({
@@ -151,26 +169,19 @@ const SegmentedButtonItem = ({
     });
 
   const borderRadius = theme.shapes.corner.largeIncreased;
+
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
     theme,
     segment,
   });
+
   const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
   const showCheckedIcon = checked && showSelectedCheck;
 
   const iconSize = 18;
+
   const iconStyle = {
     marginRight: label ? 5 : showCheckedIcon ? 3 : 0,
-    ...(label && {
-      transform: [
-        {
-          scale: checkScale.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, 0],
-          }),
-        },
-      ],
-    }),
   };
 
   const buttonStyle: ViewStyle = {
@@ -180,11 +191,18 @@ const SegmentedButtonItem = ({
     borderRadius,
     ...segmentBorderRadius,
   };
+
   const paddingVertical = getSegmentedButtonDensityPadding({ density });
+  const contentHeight = 2 * paddingVertical + iconSize;
+  const defaultHitSlop = disabled
+    ? undefined
+    : getMinInteractiveSizeHitSlop({ height: contentHeight });
+
   const rippleStyle: ViewStyle = {
     borderRadius,
     ...segmentBorderRadius,
   };
+
   const labelTextStyle: TextStyle = {
     ...theme.fonts.labelLarge,
     color: textColor,
@@ -194,6 +212,11 @@ const SegmentedButtonItem = ({
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
         borderless
+        // Inward, as in the MD3 segmented button accessibility spec: the ring
+        // sits on the segment's edge in its shape. Segments share borders, so
+        // an outward ring would cover the neighbouring segment. Material Web
+        // (labs) rings segments outward; MD3's own figure wins here.
+        focusRing="inward"
         onPress={onPress}
         aria-label={ariaLabel}
         aria-disabled={disabled}
@@ -204,21 +227,18 @@ const SegmentedButtonItem = ({
         style={rippleStyle}
         background={background}
         theme={theme}
-        hitSlop={hitSlop}
+        hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
       >
         <View
           style={[styles.content, { paddingVertical, opacity: textOpacity }]}
         >
           {showCheckedIcon ? (
-            <Animated.View
-              testID={`${testID}-check-icon`}
-              style={[iconStyle, { transform: [{ scale: checkScale }] }]}
-            >
+            <Animated.View style={[iconStyle, checkAnimatedStyle]}>
               <Icon source={'check'} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
-          {showIcon ? (
-            <Animated.View testID={`${testID}-icon`} style={iconStyle}>
+          {showIcon && icon ? (
+            <Animated.View style={[iconStyle, iconAnimatedStyle]}>
               <Icon source={icon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
@@ -228,7 +248,6 @@ const SegmentedButtonItem = ({
             selectable={false}
             numberOfLines={1}
             maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            testID={`${testID}-label`}
           >
             {label}
           </Text>

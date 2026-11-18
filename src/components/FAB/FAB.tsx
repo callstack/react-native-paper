@@ -8,9 +8,11 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import type { AnimatedStyle } from 'react-native-reanimated';
+
 import Shell from './Shell';
 import type { Size, Variant } from './tokens';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 
 export type Props = {
@@ -19,7 +21,7 @@ export type Props = {
    */
   icon: IconSource;
   /**
-   * Role-color preset. Defaults to `tonalPrimary`.
+   * Role-color preset. Defaults to `primaryContainer`.
    */
   variant?: Variant;
   /**
@@ -43,6 +45,18 @@ export type Props = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
   /**
    * Accessibility label. Falls back to nothing if unset.
    */
@@ -73,7 +87,7 @@ export type Props = {
    * Style for positioning the FAB. The visual treatment (size, shape, color)
    * is driven by `variant` and `size`.
    */
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   /**
    * TestID used for testing purposes.
    */
@@ -82,7 +96,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -116,10 +130,13 @@ export type Props = {
  */
 const FAB = ({
   icon,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   size = 'default',
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
   containerColor,
   contentColor,
   'aria-label': ariaLabel,
@@ -129,7 +146,7 @@ const FAB = ({
   'aria-expanded': ariaExpanded,
   background,
   style,
-  testID = 'floating-action-button',
+  testID,
   theme,
   ref,
 }: Props) => (
@@ -140,6 +157,9 @@ const FAB = ({
     size={size}
     visible={visible}
     onPress={onPress}
+    onLongPress={onLongPress}
+    onPressOut={onPressOut}
+    delayLongPress={delayLongPress}
     containerColor={containerColor}
     contentColor={contentColor}
     aria-label={ariaLabel}

@@ -38,22 +38,13 @@ const itemColors = {
   inactiveLabelTextColor: 'onSurfaceVariant',
   inactiveFocusIconColor: 'onSurface',
   inactiveFocusLabelTextColor: 'onSurface',
-  focusIndicatorColor: 'secondary',
 } as const satisfies Record<string, ColorRole>;
-
-const { thickness, innerOffset } = tokens.md.sys.state.focusIndicator;
-
-const itemFocusIndicator = {
-  thickness,
-  inset: -innerOffset,
-} as const;
 
 export const DrawerItemTokens = {
   ...itemSizes,
   ...itemShape,
   ...itemTypescale,
   ...itemColors,
-  focusIndicator: itemFocusIndicator,
   stateOpacity,
 };
 

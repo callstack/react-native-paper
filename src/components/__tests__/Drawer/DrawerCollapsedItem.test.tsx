@@ -1,6 +1,9 @@
-import { describe, expect, it } from '@jest/globals';
+import * as React from 'react';
 
-import { render, screen } from '../../../test-utils';
+import { describe, expect, it, jest } from '@jest/globals';
+import { getAnimatedStyle } from 'react-native-reanimated';
+
+import { act, render, screen, userEvent } from '../../../test-utils';
 import { tokens } from '../../../theme/tokens';
 import DrawerCollapsedItem from '../../Drawer/DrawerCollapsedItem';
 
@@ -8,71 +11,113 @@ const stateOpacity = tokens.md.sys.state.opacity;
 
 describe('DrawerCollapsedItem', () => {
   it('should have regular outline if label is specified', async () => {
-    await render(
-      <DrawerCollapsedItem
-        label="starred"
-        focusedIcon="star"
-        unfocusedIcon="star-outline"
-      />
-    );
+    const tree = (
+      await render(
+        <DrawerCollapsedItem
+          label="starred"
+          focusedIcon="star"
+          unfocusedIcon="star-outline"
+        />
+      )
+    ).toJSON();
 
-    expect(screen.getByTestId('drawer-collapsed-item-outline')).toHaveStyle({
-      height: 32,
-    });
+    expect(tree).toMatchSnapshot();
   });
 
   it('should have rounded outline if label is not specified', async () => {
-    await render(
-      <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
-    );
+    const tree = (
+      await render(
+        <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
+      )
+    ).toJSON();
 
-    expect(screen.getByTestId('drawer-collapsed-item-outline')).toHaveStyle({
-      height: 56,
-    });
+    expect(tree).toMatchSnapshot();
   });
 
   it('should display unfocused icon in inactive state, if unfocused icon is specified', async () => {
-    await render(
-      <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
-    );
+    const tree = (
+      await render(
+        <DrawerCollapsedItem focusedIcon="star" unfocusedIcon="star-outline" />
+      )
+    ).toJSON();
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('drawer-collapsed-item-container').props.children[1]
-        .props.source
-    ).toBe('star-outline');
+    expect(tree).toMatchSnapshot();
   });
 
   it('should display focused icon in inactive state, if unfocused icon is not specified', async () => {
-    await render(<DrawerCollapsedItem focusedIcon="star" />);
+    const tree = (
+      await render(<DrawerCollapsedItem focusedIcon="star" />)
+    ).toJSON();
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('drawer-collapsed-item-container').props.children[1]
-        .props.source
-    ).toBe('star');
+    expect(tree).toMatchSnapshot();
   });
 
   it('should display focused icon in active state', async () => {
-    await render(
-      <DrawerCollapsedItem
-        active
-        focusedIcon="star"
-        unfocusedIcon="star-outline"
-      />
-    );
+    const tree = (
+      await render(
+        <DrawerCollapsedItem
+          active
+          focusedIcon="star"
+          unfocusedIcon="star-outline"
+        />
+      )
+    ).toJSON();
 
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('drawer-collapsed-item-container').props.children[1]
-        .props.source
-    ).toBe('star');
+    expect(tree).toMatchSnapshot();
+  });
+
+  describe('active indicator', () => {
+    const indicatorStyle = () => {
+      const [indicator] = screen
+        .getByRole('button')
+        .queryAll((node) => 'transform' in getAnimatedStyle(node));
+      return getAnimatedStyle(indicator);
+    };
+
+    it('expands to full size when the item becomes active without a press', async () => {
+      await render(
+        <DrawerCollapsedItem label="Inbox" focusedIcon="inbox" active={false} />
+      );
+
+      await screen.rerender(
+        <DrawerCollapsedItem label="Inbox" focusedIcon="inbox" active />
+      );
+      await act(() => jest.advanceTimersByTimeAsync(300));
+
+      expect(indicatorStyle().transform).toEqual([{ scaleX: 1 }]);
+    });
+
+    it('animates the expansion when a press makes the item active', async () => {
+      const Item = () => {
+        const [active, setActive] = React.useState(false);
+        return (
+          <DrawerCollapsedItem
+            label="Inbox"
+            focusedIcon="inbox"
+            active={active}
+            onPress={() => setActive(true)}
+          />
+        );
+      };
+      await render(<Item />);
+      const collapsed = indicatorStyle().transform;
+
+      await userEvent.press(screen.getByRole('button'));
+      await act(() => jest.advanceTimersByTimeAsync(75));
+      const midway = indicatorStyle().transform;
+      await act(() => jest.advanceTimersByTimeAsync(300));
+      const expanded = indicatorStyle().transform;
+
+      expect(expanded).toEqual([{ scaleX: 1 }]);
+      expect(midway).not.toEqual(collapsed);
+      expect(midway).not.toEqual(expanded);
+    });
   });
 
   it('should render at full opacity when enabled', async () => {
     await render(<DrawerCollapsedItem label="starred" focusedIcon="star" />);
 
-    expect(screen.getByTestId('drawer-collapsed-item')).toHaveStyle({
+    expect(screen.getByRole('button')).toHaveStyle({
       opacity: stateOpacity.enabled,
     });
   });
@@ -82,7 +127,7 @@ describe('DrawerCollapsedItem', () => {
       <DrawerCollapsedItem label="starred" focusedIcon="star" disabled />
     );
 
-    expect(screen.getByTestId('drawer-collapsed-item')).toHaveStyle({
+    expect(screen.getByRole('button')).toHaveStyle({
       opacity: stateOpacity.disabled,
     });
   });

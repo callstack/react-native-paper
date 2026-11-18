@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
-import Reanimated from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
 
 import type { TypescaleKey } from '../../theme/types';
@@ -27,7 +27,6 @@ export type ContentProps = {
   labelAnimatedStyle?: StyleProp<AnimatedStyle<ViewStyle>>;
   labelNumberOfLines?: number;
   labelEllipsisMode?: 'clip' | 'tail' | 'head' | 'middle';
-  testID?: string;
 };
 
 /**
@@ -50,7 +49,6 @@ const Content = ({
   labelAnimatedStyle,
   labelNumberOfLines,
   labelEllipsisMode,
-  testID,
 }: ContentProps) => {
   const hasLabel = label !== undefined && label !== '';
   const colorStyle = { color: contentColor };
@@ -72,7 +70,7 @@ const Content = ({
           <Icon source={icon} size={iconSize} color={contentColor} />
         ) : null}
         {hasLabel ? (
-          <Reanimated.View
+          <Animated.View
             style={[
               icon ? { marginStart: iconLabelGap } : null,
               labelAnimatedStyle,
@@ -86,11 +84,10 @@ const Content = ({
               ellipsizeMode={labelEllipsisMode}
               maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               style={colorStyle}
-              testID={testID ? `${testID}-text` : undefined}
             >
               {label}
             </AnimatedText>
-          </Reanimated.View>
+          </Animated.View>
         ) : null}
       </View>
     </>

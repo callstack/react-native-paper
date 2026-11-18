@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { ColorValue, StyleProp, TextProps, ViewStyle } from 'react-native';
 
-import type { EllipsizeProp, InternalTheme, ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../theme/types';
 
 type Description =
   | React.ReactNode
   | ((props: {
       selectable: boolean;
-      ellipsizeMode: EllipsizeProp | undefined;
+      ellipsizeMode: TextProps['ellipsizeMode'];
       color: string;
       fontSize: number;
     }) => React.ReactNode);
@@ -93,7 +93,7 @@ export const getAccordionColors = ({
 }: {
   theme: InternalTheme;
   isExpanded?: boolean;
-}) => {
+}): { descriptionColor: ColorValue; titleTextColor: ColorValue } => {
   const titleColor = theme.colors.onSurface;
 
   const descriptionColor = theme.colors.onSurfaceVariant;

@@ -45,7 +45,7 @@ const AppbarExample = () => {
     navigation.setOptions({
       header: () => (
         <Appbar.Header
-          style={showCustomColor ? styles.customColor : null}
+          backgroundColor={showCustomColor ? Palette.secondary80 : undefined}
           mode={appbarMode}
           elevated={showElevated}
         >
@@ -140,6 +140,7 @@ const AppbarExample = () => {
           <RadioButton.Group
             value={appbarMode}
             onValueChange={(value: string) =>
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
               setAppbarMode(value as AppbarModes)
             }
           >
@@ -168,10 +169,8 @@ const AppbarExample = () => {
           {
             height: height + bottom,
           },
-          {
-            backgroundColor: theme.colors.surfaceContainerHigh,
-          },
         ]}
+        backgroundColor={theme.colors.surfaceContainerHigh}
         safeAreaInsets={{ bottom, left, right }}
       >
         <Appbar.Action icon="archive" onPress={() => {}} />
@@ -215,8 +214,5 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     right: 16,
-  },
-  customColor: {
-    backgroundColor: Palette.secondary80,
   },
 });

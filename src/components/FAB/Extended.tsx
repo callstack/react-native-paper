@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -8,14 +8,16 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Reanimated, {
+import Animated, {
+  type AnimatedStyle,
   measure,
+  ReduceMotion,
   useAnimatedRef,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import { scheduleOnUI } from 'react-native-worklets';
+import { isUIRuntime, scheduleOnUI } from 'react-native-worklets';
 
 import Shell from './Shell';
 import type { Size, Variant } from './tokens';
@@ -23,7 +25,7 @@ import { getDimensions } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import AnimatedText from '../Typography/AnimatedText';
 
@@ -37,7 +39,7 @@ export type Props = {
    */
   label: string;
   /**
-   * Role-color preset. Defaults to `tonalPrimary`.
+   * Role-color preset. Defaults to `primaryContainer`.
    */
   variant?: Variant;
   /**
@@ -67,6 +69,18 @@ export type Props = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
   /**
    * Accessibility label. Falls back to `label` if unset.
    */
@@ -101,7 +115,7 @@ export type Props = {
    * Style for positioning the FAB. The visual treatment (size, shape, color)
    * is driven by `variant` and `size`.
    */
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<AnimatedStyle<ViewStyle>>;
   /**
    * TestID used for testing purposes.
    */
@@ -110,7 +124,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -153,13 +167,16 @@ export type Props = {
 const Extended = ({
   icon,
   label,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   containerColor,
   contentColor,
   size = 'default',
   expanded,
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
@@ -168,7 +185,7 @@ const Extended = ({
   labelMaxFontSizeMultiplier,
   background,
   style,
-  testID = 'extended-floating-action-button',
+  testID,
   theme: themeOverrides,
   ref,
 }: Props) => {
@@ -177,7 +194,7 @@ const Extended = ({
 
   const dimensions = getDimensions({ theme, size });
 
-  const offscreenLabelRef = useAnimatedRef<Reanimated.View>();
+  const offscreenLabelRef = useAnimatedRef<Animated.View>();
 
   const widthValue = useSharedValue(dimensions.width);
   const labelOpacity = useSharedValue(expanded ? 1 : 0);
@@ -190,37 +207,54 @@ const Extended = ({
       iconLabelGap,
       trailing,
     } = dimensions;
+
     const targetOpacity = expanded ? 1 : 0;
 
     if (reduceMotion) {
       scheduleOnUI(() => {
         'worklet';
-        const m = measure(offscreenLabelRef);
-        const lw = m?.width ?? 0;
+
+        const labelWidth =
+          Platform.OS === 'web' || isUIRuntime()
+            ? (measure(offscreenLabelRef)?.width ?? 0)
+            : 0;
+
         widthValue.value = expanded
-          ? leading + iconSize + iconLabelGap + lw + trailing
+          ? leading + iconSize + iconLabelGap + labelWidth + trailing
           : collapsedWidth;
         labelOpacity.value = targetOpacity;
       });
       return;
     }
 
-    const widthSpring = toRawSpring(
-      expanded
-        ? theme.motion.spring.fast.spatial
-        : theme.motion.spring.default.spatial
-    );
-    const opacitySpring = toRawSpring(
-      expanded
-        ? theme.motion.spring.default.effects
-        : theme.motion.spring.fast.effects
-    );
+    const widthSpring = {
+      ...toRawSpring(
+        expanded
+          ? theme.motion.spring.fast.spatial
+          : theme.motion.spring.default.spatial
+      ),
+      reduceMotion: ReduceMotion.Never,
+    };
+    const opacitySpring = {
+      ...toRawSpring(
+        expanded
+          ? theme.motion.spring.default.effects
+          : theme.motion.spring.fast.effects
+      ),
+      reduceMotion: ReduceMotion.Never,
+    };
 
     scheduleOnUI(() => {
       'worklet';
-      const m = measure(offscreenLabelRef);
-      const lw = m?.width ?? 0;
-      const expandedWidth = leading + iconSize + iconLabelGap + lw + trailing;
+
+      const labelWidth =
+        Platform.OS === 'web' || isUIRuntime()
+          ? (measure(offscreenLabelRef)?.width ?? 0)
+          : 0;
+
+      const expandedWidth =
+        leading + iconSize + iconLabelGap + labelWidth + trailing;
+
       widthValue.value = withSpring(
         expanded ? expandedWidth : collapsedWidth,
         widthSpring
@@ -254,6 +288,9 @@ const Extended = ({
         size={size}
         visible={visible}
         onPress={onPress}
+        onLongPress={onLongPress}
+        onPressOut={onPressOut}
+        delayLongPress={delayLongPress}
         aria-label={ariaLabel}
         aria-checked={ariaChecked}
         aria-selected={ariaSelected}
@@ -267,7 +304,7 @@ const Extended = ({
         testID={testID}
         theme={themeOverrides}
       />
-      <Reanimated.View
+      <Animated.View
         ref={offscreenLabelRef}
         style={styles.offscreenMeasure}
         importantForAccessibility="no-hide-descendants"
@@ -280,7 +317,7 @@ const Extended = ({
         >
           {label}
         </AnimatedText>
-      </Reanimated.View>
+      </Animated.View>
     </>
   );
 };

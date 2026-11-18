@@ -1,7 +1,7 @@
 import type { ColorValue } from 'react-native';
 
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -110,7 +110,13 @@ export const getIconButtonColor = ({
   mode?: IconButtonMode;
   customIconColor?: ColorValue;
   customContainerColor?: ColorValue;
-}) => {
+}): {
+  iconColor: ColorValue;
+  iconOpacity: number;
+  backgroundColor: ColorValue | undefined;
+  borderColor: ColorValue;
+  backgroundOpacity: number;
+} => {
   const isMode = (modeToCompare: IconButtonMode) => {
     return mode === modeToCompare;
   };

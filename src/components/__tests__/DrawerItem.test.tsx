@@ -1,11 +1,11 @@
 import { expect, it } from '@jest/globals';
 
-import { defaultThemes } from '../../core/theming';
 import { fireEvent, render, screen } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import DrawerItem from '../Drawer/DrawerItem';
 
-const { colors } = defaultThemes.light;
+const { colors } = LightTheme;
 const stateOpacity = tokens.md.sys.state.opacity;
 
 it('renders basic DrawerItem', async () => {
@@ -45,7 +45,7 @@ it('does not emphasize the label of an inactive destination', async () => {
 });
 
 it('marks the active destination with a filled indicator', async () => {
-  await render(<DrawerItem active label="Active item" />);
+  await render(<DrawerItem active label="Active item" onPress={() => {}} />);
 
   expect(screen.getByRole('button')).toHaveStyle({
     backgroundColor: colors.secondaryContainer,
@@ -53,7 +53,7 @@ it('marks the active destination with a filled indicator', async () => {
 });
 
 it('leaves an inactive destination without an indicator', async () => {
-  await render(<DrawerItem label="Inactive item" />);
+  await render(<DrawerItem label="Inactive item" onPress={() => {}} />);
 
   expect(screen.getByRole('button')).toHaveStyle({
     backgroundColor: undefined,
@@ -61,26 +61,12 @@ it('leaves an inactive destination without an indicator', async () => {
 });
 
 it('insets destination content 28dp from both drawer edges', async () => {
-  await render(<DrawerItem label="Example item" />);
+  await render(<DrawerItem label="Example item" onPress={() => {}} />);
 
   expect(screen.getByRole('button')).toHaveStyle({ marginHorizontal: 12 });
   expect(screen.getByTestId('drawer-item-content')).toHaveStyle({
     marginHorizontal: 16,
   });
-});
-
-it('shows a focus indicator while focused', async () => {
-  await render(<DrawerItem label="Example item" onPress={() => {}} />);
-
-  expect(screen.queryByTestId('drawer-item-focus-ring')).toBeNull();
-
-  await fireEvent(screen.getByRole('button'), 'focus');
-  expect(screen.getByTestId('drawer-item-focus-ring')).toHaveStyle({
-    borderColor: colors.secondary,
-  });
-
-  await fireEvent(screen.getByRole('button'), 'blur');
-  expect(screen.queryByTestId('drawer-item-focus-ring')).toBeNull();
 });
 
 it('strengthens the label of an inactive destination while focused', async () => {
@@ -119,13 +105,6 @@ it('dims a disabled destination', async () => {
   expect(screen.getByRole('button')).toHaveStyle({
     opacity: stateOpacity.disabled,
   });
-});
-
-it('does not show a focus indicator on a disabled destination', async () => {
-  await render(<DrawerItem label="Example item" onPress={() => {}} disabled />);
-
-  await fireEvent(screen.getByRole('button'), 'focus');
-  expect(screen.queryByTestId('drawer-item-focus-ring')).toBeNull();
 });
 
 it('dims the active indicator of a disabled destination', async () => {

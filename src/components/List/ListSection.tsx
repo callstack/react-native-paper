@@ -4,7 +4,7 @@ import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
 import ListSubheader from './ListSubheader';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props = ViewProps & {
   /**

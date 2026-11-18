@@ -2,8 +2,8 @@ import { View } from 'react-native';
 
 import { describe, expect, it } from '@jest/globals';
 
-import { defaultThemes } from '../../../core/theming';
 import { render, screen } from '../../../test-utils';
+import { LightTheme } from '../../../theme/schemes';
 import DrawerSection from '../../Drawer/DrawerSection';
 
 describe('DrawerSection', () => {
@@ -27,7 +27,7 @@ describe('DrawerSection', () => {
     );
 
     expect(screen.getByTestId('drawer-section-divider')).toHaveStyle({
-      backgroundColor: defaultThemes.light.colors.outlineVariant,
+      backgroundColor: LightTheme.colors.outlineVariant,
     });
   });
 

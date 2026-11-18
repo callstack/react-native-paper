@@ -1,0 +1,149 @@
+name: Build example apps
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!**/*.md'
+      - '!**/__tests__/**'
+      - '!jest/**'
+      - '!.github/workflows/**'
+      - '.github/workflows/build-example-apps.yml'
+  pull_request:
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!**/*.md'
+      - '!**/__tests__/**'
+      - '!jest/**'
+      - '!.github/workflows/**'
+      - '.github/workflows/build-example-apps.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build-android:
+    name: Build Android
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Calculate fingerprint
+        id: fingerprint
+        working-directory: example
+        run: |
+          fingerprint=$(yarn expo-updates fingerprint:generate --platform android | jq -er .hash)
+          echo "fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
+
+      - name: Cache release build
+        id: cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          path: react-native-paper-example.apk
+          key: android-${{ steps.fingerprint.outputs.fingerprint }}-${{ hashFiles('.github/workflows/build-example-apps.yml') }}
+
+      - name: Setup JDK
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build Android app
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: example
+        run: |
+          yarn expo prebuild --platform android --no-install
+          cd android
+          ./gradlew :app:assembleRelease -Dorg.gradle.jvmargs=-XX:MaxMetaspaceSize=1g -PreactNativeArchitectures=arm64-v8a,x86_64
+          mv app/build/outputs/apk/release/app-release.apk ../../react-native-paper-example.apk
+
+      - name: Repack cached build
+        if: steps.cache.outputs.cache-hit == 'true'
+        working-directory: example
+        run: |
+          yarn dlx @expo/repack-app@0.10.3 \
+            --platform android \
+            --source-app ../react-native-paper-example.apk \
+            --output ../react-native-paper-example.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          path: react-native-paper-example.apk
+          archive: false
+          retention-days: 30
+
+  build-ios:
+    name: Build iOS
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Calculate fingerprint
+        id: fingerprint
+        working-directory: example
+        run: |
+          fingerprint=$(yarn expo-updates fingerprint:generate --platform ios | jq -er .hash)
+          echo "fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
+
+      - name: Cache release build
+        id: cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          path: react-native-paper-example.app
+          key: ios-${{ steps.fingerprint.outputs.fingerprint }}-${{ hashFiles('.github/workflows/build-example-apps.yml') }}
+
+      - name: Build iOS app
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: example
+        run: |
+          yarn expo prebuild --platform ios --no-install
+          cd ios
+          pod install
+          xcodebuild build \
+            -workspace ReactNativePaperExample.xcworkspace \
+            -scheme ReactNativePaperExample \
+            -configuration Release \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build \
+            ARCHS=arm64
+          mv build/Build/Products/Release-iphonesimulator/ReactNativePaperExample.app ../../react-native-paper-example.app
+
+      - name: Repack cached build
+        if: steps.cache.outputs.cache-hit == 'true'
+        working-directory: example
+        run: |
+          mv ../react-native-paper-example.app "$RUNNER_TEMP/cached.app"
+          yarn dlx @expo/repack-app@0.10.3 \
+            --platform ios \
+            --source-app "$RUNNER_TEMP/cached.app" \
+            --output ../react-native-paper-example.app
+
+      - name: Archive app
+        run: ditto -c -k --keepParent react-native-paper-example.app react-native-paper-example.app.zip
+
+      - name: Upload app
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          path: react-native-paper-example.app.zip
+          archive: false
+          retention-days: 30

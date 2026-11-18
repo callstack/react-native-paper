@@ -1,7 +1,7 @@
-import type { ViewStyle } from 'react-native';
+import type { ColorValue, ViewStyle } from 'react-native';
 
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from '../../theme/types';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -125,7 +125,13 @@ export const getSegmentedButtonColors = ({
   checked,
   checkedColor,
   uncheckedColor,
-}: SegmentedButtonProps) => {
+}: SegmentedButtonProps): {
+  backgroundColor: ColorValue;
+  borderColor: ColorValue;
+  textColor: ColorValue;
+  textOpacity: number;
+  borderWidth: number;
+} => {
   const backgroundColor = getSegmentedButtonBackgroundColor({
     theme,
     checked,

@@ -1,49 +1,124 @@
 import * as React from 'react';
-import { Animated, Easing, StyleSheet, Pressable, View } from 'react-native';
+import { Platform, StyleSheet, Pressable, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
+import Animated, {
+  cubicBezier,
+  type AnimatedStyle,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
+import Portal from './Portal/Portal';
 import Surface from './Surface';
+import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
 import { useInternalTheme } from '../core/theming';
+import {
+  useMotionDuration,
+  useReduceMotion,
+} from '../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../theme/tokens';
-import type { ThemeProp } from '../types';
-import { addEventListener } from '../utils/addEventListener';
-import { BackHandler } from '../utils/BackHandler/BackHandler';
-import useAnimatedValue from '../utils/useAnimatedValue';
+import type { Elevation, ThemeProp } from '../theme/types';
+import { useOverlayDismiss } from '../utils/useOverlayDismiss';
+import { useOverlayFocus } from '../utils/useOverlayFocus';
+import type { OverlayFocusTarget } from '../utils/useOverlayFocus';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 export type Props = {
   /**
-   * Determines whether clicking outside the modal dismisses it.
+   * Determines whether clicking outside the modal dismisses it. It also decides
+   * whether the screen reader escape gesture and the visually hidden dismiss
+   * button dismiss it, and is the default for `dismissableBackButton`.
    */
   dismissable?: boolean;
   /**
-   * Determines whether clicking Android hardware back button dismisses the dialog.
+   * Determines whether the Android hardware back button and the Escape key on the web dismiss the modal.
+   * While a modal is visible, only the topmost one handles these. When this is `false`,
+   * back is absorbed and nothing is dismissed, rather than passed on to what is behind the modal.
+   * Escape dismisses nothing either, but it still reaches the rest of the page.
    */
   dismissableBackButton?: boolean;
   /**
    * Callback that is called when the user dismisses the modal.
+   * A visible modal always takes the back button and Escape key, so without
+   * this callback they do nothing, and on Android the user cannot go back.
    */
   onDismiss?: () => void;
   /**
-   * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the modal.
+   * Accessibility label for dismissing the modal if it's `dismissable`.
    */
-  overlayAccessibilityLabel?: string;
+  dismissAccessibilityLabel?: string;
+  /**
+   * Accessible name for the modal.
+   */
+  'aria-label'?: string;
+  /**
+   * `nativeID` of the element which provides the accessible name for the modal,
+   * such as a title. Supported on web.
+   */
+  'aria-labelledby'?: string;
+  /**
+   * testID for the overlay that is displayed behind the modal content.
+   */
+  overlayTestID?: string;
   /**
    * Determines Whether the modal is visible.
    */
   visible: boolean;
   /**
+   * Element to focus when the modal opens.
+   *
+   * By default, focus moves to the first focusable element inside the modal on
+   * web, or to the modal itself when there is none. Focus that is already
+   * inside, such as on an `autoFocus` field, stays where it is. On iOS, screen
+   * reader focus moves to the modal. On Android, TalkBack moves its focus to
+   * the first element inside the modal by itself.
+   *
+   * Accepts a host element, such as a `View` or `Pressable`. On iOS it receives
+   * screen reader focus, not keyboard focus. A component handle with a
+   * `focus()` method, such as the one of a `TextInput`, has `focus()` called.
+   * TalkBack on Android follows neither.
+   */
+  initialFocusRef?: React.RefObject<OverlayFocusTarget | null>;
+  /**
+   * Element to focus when the modal closes.
+   *
+   * On web, focus returns to the element that had it before the modal opened,
+   * and this prop picks another one. If that element is gone by then, such as a
+   * list row the modal deleted, focus goes back to the one that had it before.
+   * On iOS and Android, nothing is restored unless this prop is given.
+   *
+   * Accepts a host element, such as a `View` or `Pressable`. On iOS it receives
+   * screen reader focus, not keyboard focus. A component handle with a
+   * `focus()` method, such as the one of a `TextInput`, has `focus()` called.
+   * TalkBack on Android doesn't move to a host element.
+   */
+  restoreFocusRef?: React.RefObject<OverlayFocusTarget | null>;
+  /**
    * Content of the `Modal`.
    */
   children: React.ReactNode;
   /**
-   * Style for the content of the modal
+   * Style for the content of the modal.
+   *
+   * Background color and border radius should be specified via props instead:
+   * - `contentBackgroundColor`
+   * - `contentBorderRadius`
    */
-  contentContainerStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  contentContainerStyle?: StyleProp<SurfaceStyle>;
+  /**
+   * Background color of the modal content. Defaults to transparent.
+   */
+  contentBackgroundColor?: SurfaceProps['backgroundColor'];
+  /**
+   * Border radius of the modal content.
+   */
+  contentBorderRadius?: SurfaceProps['borderRadius'];
+  /**
+   * Elevation level of the modal content. Defaults to level 1.
+   */
+  contentElevation?: Elevation;
   /**
    * Style for the wrapper of the modal.
    * Use this prop to change the default wrapper style or to override safe area insets with marginTop and marginBottom.
@@ -60,32 +135,40 @@ export type Props = {
 };
 
 const DEFAULT_DURATION = 220;
+
+// Having the handler at all keeps the screen reader escape gesture on this
+// modal, instead of passing it on to the modal behind it.
+const absorbAccessibilityEscape = () => {};
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
- * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
- * Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
+ * Give the modal an accessible name with `aria-label`.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
+ * import { Modal, Text, Button, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
  *
  *   const showModal = () => setVisible(true);
  *   const hideModal = () => setVisible(false);
- *   const containerStyle = { backgroundColor: 'white', padding: 20 };
+ *
+ *   const containerStyle = { padding: 20 };
  *
  *   return (
  *     <PaperProvider>
- *       <Portal>
- *         <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
- *           <Text>Example Modal.  Click outside this area to dismiss.</Text>
- *         </Modal>
- *       </Portal>
+ *       <Modal
+ *         visible={visible}
+ *         onDismiss={hideModal}
+ *         aria-label="Example modal"
+ *         contentBackgroundColor="white"
+ *         contentContainerStyle={containerStyle}
+ *       >
+ *         <Text>Example Modal.  Click outside this area to dismiss.</Text>
+ *       </Modal>
  *       <Button style={{ marginTop: 30 }} onPress={showModal}>
  *         Show
  *       </Button>
@@ -100,131 +183,188 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
-  overlayAccessibilityLabel = 'Close modal',
+  initialFocusRef,
+  restoreFocusRef,
+  dismissAccessibilityLabel = 'Close modal',
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  overlayTestID,
   onDismiss = () => {},
   children,
   contentContainerStyle,
+  contentBackgroundColor = 'transparent',
+  contentBorderRadius,
+  contentElevation,
   style,
   theme: themeOverrides,
-  testID = 'modal',
+  testID,
 }: Props) {
   const theme = useInternalTheme(themeOverrides);
+
   const onDismissCallback = useLatestCallback(onDismiss);
-  const { scale } = theme.animation;
+
   const { top, bottom } = useSafeAreaInsets();
-  const opacity = useAnimatedValue(visible ? 1 : 0);
+
   const [visibleInternal, setVisibleInternal] = React.useState(visible);
+  const [animatedVisible, setAnimatedVisible] = React.useState(visible);
 
-  const showModalAnimation = React.useCallback(() => {
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: scale * DEFAULT_DURATION,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start();
-  }, [opacity, scale]);
+  if (visible && !visibleInternal) {
+    setVisibleInternal(true);
+  }
 
-  const hideModalAnimation = React.useCallback(() => {
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: scale * DEFAULT_DURATION,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (!finished) {
-        return;
-      }
+  const reduceMotion = useReduceMotion();
+  const duration = reduceMotion ? 0 : DEFAULT_DURATION;
+  const getDuration = useMotionDuration();
 
-      setVisibleInternal(false);
-    });
-  }, [opacity, scale]);
+  const contentRef = React.useRef<React.ComponentRef<typeof View>>(null);
+
+  const { focusInitialTarget, restoreFocus } = useOverlayFocus({
+    visible,
+    containerRef: contentRef,
+    initialFocusRef,
+    restoreFocusRef,
+  });
 
   React.useEffect(() => {
-    if (visibleInternal === visible) {
-      return;
-    }
+    const timeout = setTimeout(() => setAnimatedVisible(visible), 0);
 
-    if (!visibleInternal && visible) {
-      setVisibleInternal(true);
-      return showModalAnimation();
-    }
-
-    if (visibleInternal && !visible) {
-      return hideModalAnimation();
-    }
-  }, [visible, showModalAnimation, hideModalAnimation, visibleInternal]);
+    return () => clearTimeout(timeout);
+  }, [visible]);
 
   React.useEffect(() => {
-    if (!visible) {
+    if (visible || !visibleInternal) {
       return undefined;
     }
 
-    const onHardwareBackPress = () => {
-      if (dismissable || dismissableBackButton) {
-        onDismissCallback();
-      }
-
-      return true;
-    };
-
-    const subscription = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      onHardwareBackPress
+    const timeout = setTimeout(
+      () => setVisibleInternal(false),
+      getDuration(DEFAULT_DURATION)
     );
-    return () => subscription.remove();
-  }, [dismissable, dismissableBackButton, onDismissCallback, visible]);
 
-  if (!visibleInternal) {
+    return () => clearTimeout(timeout);
+  }, [getDuration, visible, visibleInternal]);
+
+  React.useEffect(() => {
+    if (!visibleInternal) {
+      restoreFocus();
+    }
+  }, [restoreFocus, visibleInternal]);
+
+  useOverlayDismiss({
+    enabled: visible,
+    dismissable: dismissableBackButton,
+    onDismiss: onDismissCallback,
+  });
+
+  React.useEffect(() => {
+    if (!animatedVisible) {
+      return undefined;
+    }
+
+    // Transparent views are not in the accessibility tree, so focus has to
+    // wait for the fade to finish.
+    const timeout = setTimeout(
+      focusInitialTarget,
+      getDuration(DEFAULT_DURATION)
+    );
+
+    return () => clearTimeout(timeout);
+  }, [animatedVisible, focusInitialTarget, getDuration]);
+
+  const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
+
+  const backdropTransitionStyle: AnimatedStyle<ViewStyle> = {
+    transitionDuration: duration,
+    transitionProperty: 'opacity',
+    transitionTimingFunction,
+  };
+
+  const contentTransitionStyle: AnimatedStyle<ViewStyle> = {
+    transitionProperty: 'opacity',
+    transitionTimingFunction,
+  };
+
+  const backdropStyle: AnimatedStyle<ViewStyle> = {
+    backgroundColor: theme.colors.scrim,
+    opacity: animatedVisible ? scrimAlpha : 0,
+  };
+
+  const contentStyle: AnimatedStyle<ViewStyle> = {
+    opacity: animatedVisible ? 1 : 0,
+  };
+
+  if (!visible && !visibleInternal) {
     return null;
   }
 
   return (
-    <Animated.View
-      pointerEvents={visible ? 'auto' : 'none'}
-      aria-modal
-      aria-live="polite"
-      style={StyleSheet.absoluteFill}
-      onAccessibilityEscape={onDismissCallback}
-      testID={testID}
-    >
-      <AnimatedPressable
-        aria-label={overlayAccessibilityLabel}
-        role="button"
-        disabled={!dismissable}
-        onPress={dismissable ? onDismissCallback : undefined}
-        importantForAccessibility="no"
-        style={[
-          styles.backdrop,
-          {
-            backgroundColor: theme.colors.scrim,
-            opacity: opacity.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, scrimAlpha],
-            }),
-          },
-        ]}
-        testID={`${testID}-backdrop`}
-      />
-      <View
-        style={[
-          styles.wrapper,
-          { marginTop: top, marginBottom: bottom },
-          style,
-        ]}
-        pointerEvents="box-none"
-        testID={`${testID}-wrapper`}
+    <Portal modal={visibleInternal} theme={themeOverrides}>
+      <Animated.View
+        pointerEvents={visible ? 'auto' : 'none'}
+        style={StyleSheet.absoluteFill}
+        onAccessibilityEscape={
+          dismissable ? onDismissCallback : absorbAccessibilityEscape
+        }
+        testID={testID}
       >
-        <Surface
-          testID={`${testID}-surface`}
-          theme={theme}
-          style={[{ opacity }, styles.content, contentContainerStyle]}
-          container
+        <AnimatedPressable
+          aria-hidden
+          accessible={false}
+          tabIndex={-1}
+          disabled={!dismissable}
+          onPress={dismissable ? onDismissCallback : undefined}
+          style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
+          testID={overlayTestID}
+        />
+        <View
+          style={[
+            styles.wrapper,
+            { marginTop: top, marginBottom: bottom },
+            style,
+          ]}
+          pointerEvents="box-none"
         >
-          {children}
-        </Surface>
-      </View>
-    </Animated.View>
+          <Surface
+            ref={contentRef}
+            role="dialog"
+            aria-modal
+            // Focus has somewhere to go on the web when nothing inside can take it.
+            tabIndex={Platform.OS === 'web' ? -1 : undefined}
+            aria-label={ariaLabel}
+            aria-labelledby={
+              // Only set `aria-labelledby` on web, it's ignored on iOS
+              // On Android, it results in the content being read on opening the dialog,
+              // and then again when the first focusable element receives focus.
+              Platform.OS === 'web' ? ariaLabelledBy : undefined
+            }
+            theme={theme}
+            backgroundColor={contentBackgroundColor}
+            borderRadius={contentBorderRadius}
+            style={[
+              styles.content,
+              contentStyle,
+              contentTransitionStyle,
+              contentContainerStyle,
+            ]}
+            elevation={contentElevation}
+            transitionDuration={duration}
+          >
+            {children}
+            {dismissable ? (
+              // The backdrop is hidden for screen reader users,
+              // so we provide a visually hidden dismiss button.
+              <Pressable
+                role="button"
+                aria-label={dismissAccessibilityLabel}
+                tabIndex={-1}
+                onPress={onDismissCallback}
+                style={styles.dismiss}
+              />
+            ) : null}
+          </Surface>
+        </View>
+      </Animated.View>
+    </Portal>
   );
 }
 
@@ -238,9 +378,12 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFill,
     justifyContent: 'center',
   },
-  // eslint-disable-next-line react-native/no-color-literals
   content: {
-    backgroundColor: 'transparent',
     justifyContent: 'center',
+  },
+  dismiss: {
+    position: 'absolute',
+    width: 1,
+    height: 1,
   },
 });

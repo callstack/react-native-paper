@@ -18,6 +18,7 @@ import {
 import type { TestInstance } from 'test-renderer';
 
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import TextInput from '../TextInput';
 import type {
@@ -240,6 +241,143 @@ it('disables TextInput.Icon when the field is disabled', async () => {
   expect(buttons[1]).toBeDisabled();
 });
 
+it('does not expose a handler-less TextInput.Icon as a control when the field is disabled', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" testID="decorative" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          onPress={() => {}}
+          testID="clear"
+        />
+      )}
+    />
+  );
+
+  const decorative = screen.getByTestId('decorative');
+  expect(decorative).toHaveProp('role', 'none');
+  expect(decorative).not.toBeDisabled();
+
+  // control: a real handler still gets disabled
+  const clear = screen.getByTestId('clear');
+  expect(clear).toHaveProp('role', 'button');
+  expect(clear).toBeDisabled();
+});
+
+it('dims a disabled TextInput with TextInput.Icon accessories exactly once', async () => {
+  // The snapshot pins the opacity values: the accessory wrapper carries the
+  // disabled dim for the decorative icon, whose IconButton stays enabled, and
+  // IconButton carries it for the interactive one, whose wrapper is cancelled.
+  // Both firing multiplies the dim to 0.14.
+  const tree = (
+    await render(
+      <TextInput
+        label="Search"
+        value="x"
+        onChangeText={() => {}}
+        disabled
+        startAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="magnify" />
+        )}
+        endAccessory={(props: TextInputAccessoryProps) => (
+          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        )}
+      />
+    )
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('uses the disabled color for every TextInput.Icon of a disabled field with an error', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      error
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+      )}
+    />
+  );
+
+  for (const icon of ['magnify', 'close']) {
+    expect(screen.getByText(icon, includeHiddenElements)).toHaveStyle({
+      color: LightTheme.colors.onSurface,
+    });
+  }
+});
+
+it('uses the disabled color over iconColor for every TextInput.Icon of a disabled field', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      startAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon {...props} icon="magnify" iconColor="#6750A4" />
+      )}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          iconColor="#6750A4"
+          onPress={() => {}}
+        />
+      )}
+    />
+  );
+
+  for (const icon of ['magnify', 'close']) {
+    expect(screen.getByText(icon, includeHiddenElements)).toHaveStyle({
+      color: LightTheme.colors.onSurface,
+    });
+  }
+});
+
+it('disables a TextInput.Icon that only has onLongPress when the field is disabled', async () => {
+  const onLongPress = jest.fn<(e: GestureResponderEvent) => void>();
+  await render(
+    <TextInput
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      disabled
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          onLongPress={onLongPress}
+          testID="long"
+        />
+      )}
+    />
+  );
+
+  // onLongPress alone still makes this a control; keying off onPress would
+  // leave it live
+  const long = screen.getByTestId('long');
+  expect(long).toHaveProp('role', 'button');
+  expect(long).toBeDisabled();
+
+  await userEvent.longPress(long);
+  expect(onLongPress).not.toHaveBeenCalled();
+});
+
 it('does not disable TextInput.Icon when the field is read-only (editable false)', async () => {
   await render(
     <TextInput
@@ -382,7 +520,10 @@ it('renders the input via render with merged props', async () => {
 
   expect(screen.getByTestId('custom-input')).toBeOnTheScreen();
   expect(renderInput).toHaveBeenCalled();
-  const merged = renderInput.mock.calls[0]?.[0] as TextInputRenderProps;
+  const merged = renderInput.mock.calls[0]?.[0];
+  if (!merged) {
+    throw new Error('Expected the custom input renderer to be called.');
+  }
   expect(merged['aria-label']).toBe('Pin');
   expect(merged.value).toBe('12');
 });
@@ -976,6 +1117,35 @@ it('shows placeholder on multiline TextInput when focused', async () => {
   );
 });
 
+it.each(['filled', 'outlined'] as const)(
+  'keeps an empty, unfocused %s TextInput without a label visible',
+  async (variant) => {
+    await render(
+      <TextInput
+        variant={variant}
+        value=""
+        onChangeText={() => {}}
+        placeholder="Search for plugins..."
+      />
+    );
+
+    expect(screen.getByPlaceholderText('Search for plugins...')).toBeVisible();
+  }
+);
+
+it('hides the input of an empty, unfocused TextInput while its label rests in place', async () => {
+  await render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  expect(screen.getByTestId('tf-input')).not.toBeVisible();
+});
+
 it('does not expose the placeholder string again after the TextInput loses focus', async () => {
   await render(
     <TextInput
@@ -1336,4 +1506,30 @@ it('hides prefix/suffix when blurring after clear() was called while focused', a
   // After blur with no text, prefix/suffix should be hidden
   expect(screen.queryByText('$')).not.toBeOnTheScreen();
   expect(screen.queryByText('/100')).not.toBeOnTheScreen();
+});
+
+it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
+      endAccessory={(props: TextInputAccessoryProps) => (
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          onPress={() => {}}
+          hitSlop={undefined}
+          testID="clear-icon"
+        />
+      )}
+    />
+  );
+
+  expect(screen.getByTestId('clear-icon')).toHaveProp('hitSlop', {
+    top: 12,
+    bottom: 12,
+    left: 12,
+    right: 12,
+  });
 });

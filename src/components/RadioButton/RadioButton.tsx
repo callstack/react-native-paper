@@ -4,7 +4,7 @@ import type { GestureResponderEvent } from 'react-native';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp } from '../../theme/types';
 
 export type Props = {
   /**
@@ -20,7 +20,9 @@ export type Props = {
    */
   disabled?: boolean;
   /**
-   * Function to execute on press.
+   * Function to execute on press. Without it, and outside a
+   * `RadioButton.Group`, the radio is read only: it can't be pressed, and a
+   * press goes to its parent.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
