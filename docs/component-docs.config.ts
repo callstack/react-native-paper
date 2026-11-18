@@ -130,11 +130,7 @@ const pages = {
     SegmentedButtons: 'SegmentedButtons/SegmentedButtons',
   },
   Snackbar: 'Snackbar',
-  Surface: {
-    source: 'Surface',
-    component: 'StaticSurface',
-    title: 'Surface',
-  },
+  Surface: 'Surface',
   Switch: {
     Switch: 'Switch/Switch',
   },
