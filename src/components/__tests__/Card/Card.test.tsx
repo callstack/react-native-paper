@@ -852,6 +852,20 @@ describe('Card', () => {
     expect(onAccessibilityAction).not.toHaveBeenCalled();
   });
 
+  it('uses a custom outline color in every state', async () => {
+    const { rerender } = await render(
+      <Card testID="card" variant="outlined" borderColor="red" />
+    );
+
+    expect(JSON.stringify(screen.toJSON())).toContain('"borderColor":"red"');
+
+    await rerender(
+      <Card testID="card" variant="outlined" borderColor="red" disabled />
+    );
+
+    expect(JSON.stringify(screen.toJSON())).toContain('"borderColor":"red"');
+  });
+
   it('dims the slot content of a disabled Card', async () => {
     const { rerender } = await render(
       <Card testID="card" disabled content={<Text>Body</Text>} />
@@ -951,6 +965,7 @@ describe('Card types', () => {
         <Card testID="card" variant="outlined" />
         <Card testID="card" variant="elevated" />
         <Card testID="card" variant="elevated" elevation={5} />
+        <Card testID="card" variant="outlined" borderColor="red" />
 
         {/* @ts-expect-error: Arbitrary children composition was removed. */}
         <Card testID="card">
@@ -971,6 +986,12 @@ describe('Card types', () => {
 
         {/* @ts-expect-error: Outlined Cards cannot be elevated. */}
         <Card testID="card" variant="outlined" elevation={1} />
+
+        {/* @ts-expect-error: Only outlined Cards have an outline color. */}
+        <Card testID="card" borderColor="red" />
+
+        {/* @ts-expect-error: Only outlined Cards have an outline color. */}
+        <Card testID="card" variant="elevated" borderColor="red" />
 
         {/* @ts-expect-error: Custom and convenience headers are mutually exclusive. */}
         <Card testID="card" header={<View />} title="Title" />
