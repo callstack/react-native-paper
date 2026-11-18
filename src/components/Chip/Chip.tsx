@@ -16,6 +16,7 @@ import { getChipColors } from './helpers';
 import type { ChipAvatarProps } from './helpers';
 import { ChipTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
@@ -302,9 +303,10 @@ const Chip = ({
     setPressed(false);
   });
 
-  const elevationTransitionDuration =
-    theme.motion.duration[pressed ? 'short4' : 'short3'] *
-    theme.animation.scale;
+  const reduceMotion = useReduceMotion();
+  const elevationTransitionDuration = reduceMotion
+    ? 0
+    : theme.motion.duration[pressed ? 'short4' : 'short3'];
 
   const opacity = 0.38;
   const defaultBorderRadius = theme.shapes.corner.small;

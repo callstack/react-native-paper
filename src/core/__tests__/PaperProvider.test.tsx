@@ -1,4 +1,10 @@
-import { Appearance, AccessibilityInfo, Platform, View } from 'react-native';
+import {
+  Appearance,
+  AccessibilityInfo,
+  Platform,
+  Text,
+  View,
+} from 'react-native';
 import type { ColorSchemeName } from 'react-native';
 
 import {
@@ -34,7 +40,6 @@ declare module 'react-native' {
 
   interface ViewProps {
     theme?: object;
-    reduceMotion?: boolean;
   }
 }
 
@@ -111,6 +116,11 @@ const FakeChild = () => {
   return <View testID="provider-child-view" theme={theme} />;
 };
 
+const ReduceMotionProbe = () => {
+  const reduceMotion = useReduceMotion();
+  return <Text>{`reduceMotion: ${reduceMotion}`}</Text>;
+};
+
 type ThemeReaderProps = {
   onTheme: (theme: Theme) => void;
 };
@@ -140,9 +150,6 @@ const createProvider = (theme?: ThemeProp) => {
   );
 };
 
-const ExtendedLightTheme: ThemeProp = { ...LightTheme };
-const ExtendedDarkTheme: ThemeProp = { ...DarkTheme };
-
 const defaultPlatform = Platform.OS;
 
 describe('PaperProvider', () => {
@@ -156,62 +163,78 @@ describe('PaperProvider', () => {
     await render(createProvider());
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(screen.getByTestId('provider-child-view').props.theme).toStrictEqual(
-      ExtendedLightTheme
+      LightTheme
     );
     await act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(screen.getByTestId('provider-child-view').props.theme).toStrictEqual(
-      ExtendedDarkTheme
+      DarkTheme
     );
   });
 
-  it('subscribes to AccessibilityInfo and adapts theme.animation.scale when OS reduce-motion is enabled (auto mode)', async () => {
+  it.each([
+    { label: 'without a theme', theme: undefined },
+    { label: 'with a custom theme', theme: DarkTheme },
+  ])(
+    'follows the OS reduce-motion setting in "auto" mode $label',
+    async ({ theme }) => {
+      mockAppearance();
+      mockAccessibilityInfo();
+
+      await render(
+        <PaperProvider theme={theme} reduceMotion="auto">
+          <ReduceMotionProbe />
+        </PaperProvider>
+      );
+
+      expect(AccessibilityInfo.addEventListener).toHaveBeenCalled();
+      expect(screen.getByText('reduceMotion: false')).toBeOnTheScreen();
+
+      await act(() =>
+        getMockedAccessibilityInfo().__internalListeners[0](true)
+      );
+      expect(screen.getByText('reduceMotion: true')).toBeOnTheScreen();
+
+      await act(() =>
+        getMockedAccessibilityInfo().__internalListeners[0](false)
+      );
+      expect(screen.getByText('reduceMotion: false')).toBeOnTheScreen();
+    }
+  );
+
+  it('follows the OS reduce-motion setting from its first answer when reduceMotion is not set', async () => {
     mockAppearance();
     mockAccessibilityInfo();
+    mockJest
+      .mocked(AccessibilityInfo.isReduceMotionEnabled)
+      .mockResolvedValue(true);
 
     await render(
-      <PaperProvider reduceMotion="auto">
-        <FakeChild />
+      <PaperProvider>
+        <ReduceMotionProbe />
       </PaperProvider>
     );
 
-    expect(AccessibilityInfo.addEventListener).toHaveBeenCalled();
-    await act(() => getMockedAccessibilityInfo().__internalListeners[0](true));
-
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('provider-child-view').props.theme.animation.scale
-    ).toStrictEqual(0);
+    expect(await screen.findByText('reduceMotion: true')).toBeOnTheScreen();
   });
 
   it('exposes the resolved reduce-motion boolean via useReduceMotion to children', async () => {
     mockAppearance();
     mockAccessibilityInfo();
 
-    const Probe = () => {
-      const reduceMotion = useReduceMotion();
-      return <View testID="reduce-motion-probe" reduceMotion={reduceMotion} />;
-    };
-
     const { rerender } = await render(
       <PaperProvider reduceMotion="on">
-        <Probe />
+        <ReduceMotionProbe />
       </PaperProvider>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(screen.getByTestId('reduce-motion-probe').props.reduceMotion).toBe(
-      true
-    );
+    expect(screen.getByText('reduceMotion: true')).toBeOnTheScreen();
 
     await rerender(
       <PaperProvider reduceMotion="off">
-        <Probe />
+        <ReduceMotionProbe />
       </PaperProvider>
     );
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-    expect(screen.getByTestId('reduce-motion-probe').props.reduceMotion).toBe(
-      false
-    );
+    expect(screen.getByText('reduceMotion: false')).toBeOnTheScreen();
   });
 
   it('removes the AccessibilityInfo listener when reduceMotion switches from "auto" to "off"', async () => {
@@ -244,32 +267,43 @@ describe('PaperProvider', () => {
     mockAppearance();
     mockAccessibilityInfo();
     await render(
-      <PaperProvider theme={ExtendedDarkTheme} reduceMotion="off">
-        <FakeChild />
+      <PaperProvider theme={DarkTheme} reduceMotion="off">
+        <ReduceMotionProbe />
       </PaperProvider>
     );
 
     expect(AccessibilityInfo.addEventListener).not.toHaveBeenCalled();
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('provider-child-view').props.theme.animation.scale
-    ).toStrictEqual(1);
+    expect(screen.getByText('reduceMotion: false')).toBeOnTheScreen();
   });
 
-  it('forces animation.scale to 0 when reduceMotion is "on" without subscribing', async () => {
+  it('reduces motion when reduceMotion is "on" without subscribing to AccessibilityInfo', async () => {
     mockAppearance();
     mockAccessibilityInfo();
     await render(
       <PaperProvider reduceMotion="on">
-        <FakeChild />
+        <ReduceMotionProbe />
       </PaperProvider>
     );
 
     expect(AccessibilityInfo.addEventListener).not.toHaveBeenCalled();
-    expect(
-      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-      screen.getByTestId('provider-child-view').props.theme.animation.scale
-    ).toStrictEqual(0);
+    expect(screen.getByText('reduceMotion: true')).toBeOnTheScreen();
+  });
+
+  it('keeps the same theme object when the OS reduce-motion setting changes', async () => {
+    mockAppearance();
+    mockAccessibilityInfo();
+    const onTheme = mockJest.fn<(theme: Theme) => void>();
+
+    await render(
+      <PaperProvider>
+        <UseThemeReader onTheme={onTheme} />
+      </PaperProvider>
+    );
+    const themeBefore = onTheme.mock.lastCall?.[0];
+
+    await act(() => getMockedAccessibilityInfo().__internalListeners[0](true));
+
+    expect(onTheme.mock.lastCall?.[0]).toBe(themeBefore);
   });
 
   it('DynamicLightTheme falls back to LightTheme on non-Android platforms', () => {
@@ -285,19 +319,19 @@ describe('PaperProvider', () => {
     await act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(screen.getByTestId('provider-child-view').props.theme).toStrictEqual(
-      ExtendedDarkTheme
+      DarkTheme
     );
   });
 
   it('should not set Appearance listeners, if the theme is passed', async () => {
     mockAppearance();
-    await render(createProvider(ExtendedLightTheme));
+    await render(createProvider(LightTheme));
 
     expect(Appearance.addChangeListener).not.toHaveBeenCalled();
     expect(Appearance.removeChangeListener).not.toHaveBeenCalled();
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(screen.getByTestId('provider-child-view').props.theme).toStrictEqual(
-      ExtendedLightTheme
+      LightTheme
     );
   });
 
@@ -309,19 +343,19 @@ describe('PaperProvider', () => {
     expect(Appearance).toEqual(null);
     // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
     expect(screen.getByTestId('provider-child-view').props.theme).toStrictEqual(
-      ExtendedLightTheme
+      LightTheme
     );
   });
 
   it.each([
     {
       label: 'default theme',
-      theme: ExtendedLightTheme,
+      theme: LightTheme,
       colorScheme: 'light',
     },
     {
       label: 'dark theme',
-      theme: ExtendedDarkTheme,
+      theme: DarkTheme,
       colorScheme: 'dark',
     },
   ] satisfies Array<{
@@ -344,9 +378,9 @@ describe('PaperProvider', () => {
   it('uses provided custom theme', async () => {
     mockAppearance();
     const customTheme: ThemeProp = {
-      ...ExtendedLightTheme,
+      ...LightTheme,
       colors: {
-        ...ExtendedLightTheme.colors,
+        ...LightTheme.colors,
         primary: 'tomato',
       },
     };
@@ -377,7 +411,7 @@ describe('PaperProvider', () => {
     'drops prototype keys from a theme parsed from JSON, read with $label',
     async ({ Reader, secondary }) => {
       const theme: ThemeProp = JSON.parse(
-        '{"__proto__": {"polluted": "yes"}, "colors": {"__proto__": {"polluted": "yes"}, "primary": "red"}, "animation": {"__proto__": {"polluted": "yes"}}}'
+        '{"__proto__": {"polluted": "yes"}, "colors": {"__proto__": {"polluted": "yes"}, "primary": "red"}}'
       );
       const onTheme = mockJest.fn<(theme: Theme) => void>();
 
@@ -389,7 +423,7 @@ describe('PaperProvider', () => {
 
       expect(onTheme).toHaveBeenCalled();
       const [received] = onTheme.mock.calls[0];
-      for (const value of [received, received.colors, received.animation]) {
+      for (const value of [received, received.colors]) {
         expect(Object.getPrototypeOf(value)).toBe(Object.prototype);
         expect(Object.prototype.hasOwnProperty.call(value, '__proto__')).toBe(
           false
@@ -399,7 +433,6 @@ describe('PaperProvider', () => {
       expect(received.colors.primary).toBe('red');
       expect(received.colors.secondary).toBe(secondary);
       expect(received.colors.tertiary).toBe(LightTheme.colors.tertiary);
-      expect(received.animation.scale).toBe(1);
       expect(received.fonts).toEqual(LightTheme.fonts);
       expect({}).not.toHaveProperty('polluted');
     }
