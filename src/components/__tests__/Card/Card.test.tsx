@@ -995,7 +995,7 @@ describe('CardCover', () => {
       <Card.Cover
         source={{ uri: 'https://picsum.photos/700' }}
         testID="responsive-cover"
-        style={{ aspectRatio: 16 / 9 }}
+        aspectRatio={16 / 9}
       />
     );
 

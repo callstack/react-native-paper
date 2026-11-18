@@ -6,9 +6,13 @@ import type { ThemeProp } from '../../theme/types';
 
 export type Props = Omit<ImageProps, 'style'> & {
   /**
+   * Width-to-height ratio of the cover, for example `16 / 9`. When set, the
+   * cover drops its default height of 195 and resizes with the Card's width.
+   */
+  aspectRatio?: number;
+  /**
    * Style for the cover image. The default size is full width by 195. Consumer
-   * styles are applied after these defaults. Supplying an `aspectRatio`
-   * removes the default height so the cover can resize responsively.
+   * styles are applied after these defaults.
    */
   style?: StyleProp<ImageStyle>;
   /**
@@ -36,7 +40,7 @@ export type Props = Omit<ImageProps, 'style'> & {
  *     media={
  *       <Card.Cover
  *         source={{ uri: 'https://picsum.photos/700' }}
- *         style={{ aspectRatio: 16 / 9 }}
+ *         aspectRatio={16 / 9}
  *         accessible
  *         accessibilityRole="image"
  *         accessibilityLabel="Mountain landscape"
@@ -50,13 +54,15 @@ export type Props = Omit<ImageProps, 'style'> & {
  *
  * @extends Image props https://reactnative.dev/docs/image#props
  */
-const CardCover = ({ style, theme: _theme, ...rest }: Props) => {
-  const usesAspectRatio = StyleSheet.flatten(style)?.aspectRatio !== undefined;
-
+const CardCover = ({ aspectRatio, style, theme: _theme, ...rest }: Props) => {
   return (
     <Image
       {...rest}
-      style={[styles.image, !usesAspectRatio && styles.defaultHeight, style]}
+      style={[
+        styles.image,
+        aspectRatio === undefined ? styles.defaultHeight : { aspectRatio },
+        style,
+      ]}
       accessibilityIgnoresInvertColors
     />
   );
