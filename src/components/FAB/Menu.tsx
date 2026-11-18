@@ -4,6 +4,7 @@ import type { ColorValue, GestureResponderEvent } from 'react-native';
 
 import Animated, {
   interpolate,
+  ReduceMotion,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -116,23 +117,29 @@ export type MenuProps = {
  * tonal (container) role color.
  */
 const getCloseVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
     return 'primary';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
     return 'secondary';
   }
   return 'tertiary';
 };
 
 const getItemsVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
-    return 'tonalPrimary';
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
+    return 'primaryContainer';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
-    return 'tonalSecondary';
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
+    return 'secondaryContainer';
   }
-  return 'tonalTertiary';
+  return 'tertiaryContainer';
 };
 
 // Per-item delay used by the stagger. Compose uses a single SlowEffects-driven
@@ -179,11 +186,19 @@ const AnimatedItem = ({
     }
     scaleX.value = withDelay(
       delay,
-      withSpring(target, toRawSpring(theme.motion.spring.fast.spatial))
+      withSpring(target, {
+        ...toRawSpring(theme.motion.spring.fast.spatial),
+        reduceMotion: ReduceMotion.Never,
+      }),
+      ReduceMotion.Never
     );
     alpha.value = withDelay(
       delay,
-      withSpring(target, toRawSpring(theme.motion.spring.fast.effects))
+      withSpring(target, {
+        ...toRawSpring(theme.motion.spring.fast.effects),
+        reduceMotion: ReduceMotion.Never,
+      }),
+      ReduceMotion.Never
     );
   }, [expanded, index, itemCount, theme, reduceMotion, scaleX, alpha]);
 
@@ -369,10 +384,10 @@ const MorphingTrigger = ({
     // Compose's ToggleFloatingActionButton uses a single FastSpatial spring
     // for the full open/close progress (size, corner, color, icon all share
     // one timeline).
-    progress.value = withSpring(
-      expanded ? 1 : 0,
-      toRawSpring(theme.motion.spring.fast.spatial)
-    );
+    progress.value = withSpring(expanded ? 1 : 0, {
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: ReduceMotion.Never,
+    });
   }, [expanded, theme, reduceMotion, progress]);
 
   // Derived shared values for the morph shape. Passing them to Shell as
@@ -542,7 +557,7 @@ const Menu = ({
   const isRTL = direction === 'rtl';
   const insets = useSafeAreaInsets();
 
-  const triggerVariant: Variant = trigger.variant ?? 'tonalPrimary';
+  const triggerVariant: Variant = trigger.variant ?? 'primaryContainer';
   const size: Size = trigger.size ?? 'default';
   const openIcon: IconSource = trigger.icon;
   const openOnPress = trigger.onPress;

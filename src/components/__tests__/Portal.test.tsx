@@ -37,7 +37,7 @@ it('portal content reflects theme, direction, and reduced motion changes', async
     const reduceMotion = useReduceMotion();
 
     return (
-      <Text>{`${theme.animation.scale} ${direction} ${reduceMotion}`}</Text>
+      <Text>{`${theme.shapes.corner.small} ${direction} ${reduceMotion}`}</Text>
     );
   };
 
@@ -45,7 +45,7 @@ it('portal content reflects theme, direction, and reduced motion changes', async
     <Portal.Host>
       <ReduceMotionContext.Provider value={true}>
         <LocaleProvider direction="rtl">
-          <Portal theme={{ animation: { scale: 2 } }}>
+          <Portal theme={{ shapes: { corner: { small: 2 } } }}>
             <PortalContent />
           </Portal>
         </LocaleProvider>
@@ -59,7 +59,7 @@ it('portal content reflects theme, direction, and reduced motion changes', async
     <Portal.Host>
       <ReduceMotionContext.Provider value={false}>
         <LocaleProvider direction="ltr">
-          <Portal theme={{ animation: { scale: 3 } }}>
+          <Portal theme={{ shapes: { corner: { small: 3 } } }}>
             <PortalContent />
           </Portal>
         </LocaleProvider>
@@ -100,9 +100,7 @@ it('keeps dialog content accessible above a modal when both are visible', async 
       <Modal visible onDismiss={() => {}}>
         <Text>modal content</Text>
       </Modal>
-      <Dialog visible onDismiss={() => {}}>
-        <Text>dialog content</Text>
-      </Dialog>
+      <Dialog visible onDismiss={() => {}} content="dialog content" />
     </Portal.Host>
   );
 
