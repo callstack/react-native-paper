@@ -1299,18 +1299,18 @@ mutually exclusive options, use `SegmentedButtons`.
 
 #### `variant`
 
-The variants changed meaning. In 5.x, `primary`, `secondary` and `tertiary` painted the container role, e.g. `primaryContainer`. In 6.x they paint the role itself, e.g. `primary`, and the new tonal variants paint the container role. So a FAB with an explicit `variant` looks different. To keep the 5.x colors:
+The variants changed meaning. In 5.x, `primary`, `secondary` and `tertiary` painted the container role, e.g. `primaryContainer`. In 6.x they paint the role itself, e.g. `primary`, and the new `primaryContainer`, `secondaryContainer` and `tertiaryContainer` variants paint the container role. So a FAB with an explicit `variant` looks different. To keep the 5.x colors:
 
-- **`primary`** (the 5.x default) → **`tonalPrimary`** (the 6.x default)
-- **`secondary`** → **`tonalSecondary`**
-- **`tertiary`** → **`tonalTertiary`**
+- **`primary`** (the 5.x default) → **`primaryContainer`** (the 6.x default)
+- **`secondary`** → **`secondaryContainer`**
+- **`tertiary`** → **`tertiaryContainer`**
 - **`surface`** has no variant. Set `containerColor` and `contentColor` instead, e.g. to `theme.colors.surfaceContainerHigh` and `theme.colors.primary`.
 
 A FAB without a `variant` keeps its 5.x colors.
 
 ```diff
 -<FAB icon="plus" variant="secondary" onPress={onPress} />
-+<FAB icon="plus" variant="tonalSecondary" onPress={onPress} />
++<FAB icon="plus" variant="secondaryContainer" onPress={onPress} />
 ```
 
 #### `size`
@@ -1327,7 +1327,7 @@ A FAB without a `variant` keeps its 5.x colors.
 - **`color`** → **`contentColor`**. Set the background with `containerColor`, as `style` is only for positioning.
 - **`mode`**: no replacement. A FAB always has its resting elevation.
 - **`disabled`**: no replacement. To take the action away, hide the FAB with `visible={false}`.
-- **`loading`**, **`animated`**, **`onLongPress`** and **`delayLongPress`**: no replacement.
+- **`loading`** and **`animated`**: no replacement.
 - **`rippleColor`**: see [Ripple color](#ripple-color).
 
 TypeScript reports an error for each of them, and in JavaScript they're ignored.
@@ -1443,6 +1443,77 @@ A standalone `Checkbox` has no visible label, so it now warns in development whe
 +  onValueChange={setValue}
 +  theme={{ colors: { primary: 'tomato' } }}
 +/>
+```
+
+#### Size
+
+`Switch` draws a 52×32 track inside a 48dp tall touch target, so rows containing a switch may change height.
+
+#### Switches without `onValueChange`
+
+A `Switch` with no `onValueChange` used to render as an enabled, focusable control that did nothing when activated, and screen readers announced it as operable. It now renders as read-only and logs a warning. Pass `onValueChange` to make it interactive, or set `readOnly` or `disabled` to render it as a state indicator:
+
+```tsx
+// Before (v5)
+<Switch value={isDarkTheme} />
+
+// After (v6)
+<Switch value={isDarkTheme} onValueChange={setIsDarkTheme} />
+<Switch value={isDarkTheme} readOnly />
+<Switch value={isDarkTheme} disabled />
+```
+
+A read-only switch keeps its enabled appearance and exposes its on/off state to screen readers, but it cannot be focused with a keyboard or pressed. On web it exposes `aria-readonly`. On iOS and Android it exposes a disabled accessibility state, because React Native has no read-only state for switches. Use `disabled` when you also want the disabled appearance.
+
+This most often shows up where the switch sits inside a row that owns the press. Give the row the switch role and state, and hide the inner switch from assistive technology, so screen readers announce the row as one switch with its on/off state:
+
+```diff
+-<TouchableRipple onPress={toggleTheme}>
++<TouchableRipple
++  onPress={toggleTheme}
++  role="switch"
++  aria-checked={isDarkTheme}
++>
+   <View style={styles.row}>
+     <Text>Dark Theme</Text>
+-    <View pointerEvents="none">
+-      <Switch value={isDarkTheme} />
++    <View pointerEvents="none" aria-hidden>
++      <Switch value={isDarkTheme} readOnly />
+     </View>
+   </View>
+ </TouchableRipple>
+```
+
+On web, such a row toggles with Enter but not with Space, because React Native Web only handles Space for elements with the `button` role.
+
+#### Icon color
+
+When selected, an icon set with `checkedIcon` uses `onPrimaryContainer`. If you set `checkedIcon` and pass a `theme` with a partial `theme.colors` override, include `onPrimaryContainer`, because omitted roles fall back to the app theme:
+
+```tsx
+import { Switch, useTheme } from 'react-native-paper';
+
+const TertiarySwitch = ({ value, onValueChange }) => {
+  const theme = useTheme();
+  const switchTheme = {
+    colors: {
+      primary: theme.colors.tertiary,
+      onPrimary: theme.colors.onTertiary,
+      primaryContainer: theme.colors.tertiaryContainer,
+      onPrimaryContainer: theme.colors.onTertiaryContainer,
+    },
+  };
+
+  return (
+    <Switch
+      value={value}
+      onValueChange={onValueChange}
+      checkedIcon="check"
+      theme={switchTheme}
+    />
+  );
+};
 ```
 
 ### Icon
