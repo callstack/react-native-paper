@@ -5029,7 +5029,7 @@ exports[`Card settles transitions immediately when reduced motion is enabled 1`]
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-            "opacity": 0.1,
+            "opacity": 0,
           },
           {},
         ]
@@ -5489,7 +5489,7 @@ exports[`Card shows and clears the elevated pressed feedback 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-            "opacity": 0.1,
+            "opacity": 0,
           },
           {},
         ]
@@ -6069,7 +6069,7 @@ exports[`Card shows and clears the filled pressed feedback 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-            "opacity": 0.1,
+            "opacity": 0,
           },
           {},
         ]
@@ -6699,7 +6699,7 @@ exports[`Card shows and clears the outlined pressed feedback 1`] = `
           },
           {
             "backgroundColor": "rgba(29, 27, 32, 1)",
-            "opacity": 0.1,
+            "opacity": 0,
           },
           {},
         ]
