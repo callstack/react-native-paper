@@ -339,7 +339,7 @@ export type Props = Omit<ViewProps, 'children' | 'style'> &
  *     </Card.Content>}
  *     actions={<Card.Actions>
  *       <Button onPress={() => console.log('Discard')}>Discard</Button>
- *       <Button mode="contained" onPress={() => console.log('Save')}>Save</Button>
+ *       <Button mode="filled" onPress={() => console.log('Save')}>Save</Button>
  *     </Card.Actions>}
  *   />
  *
