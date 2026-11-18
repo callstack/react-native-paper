@@ -9,6 +9,7 @@ import type {
 } from 'react-native';
 
 import Animated, {
+  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -259,15 +260,15 @@ const Shell = ({
       return;
     }
 
-    scale.value = withSpring(
-      target,
-      toRawSpring(theme.motion.spring.fast.spatial)
-    );
+    scale.value = withSpring(target, {
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: ReduceMotion.Never,
+    });
 
-    alpha.value = withSpring(
-      target,
-      toRawSpring(theme.motion.spring.fast.effects)
-    );
+    alpha.value = withSpring(target, {
+      ...toRawSpring(theme.motion.spring.fast.effects),
+      reduceMotion: ReduceMotion.Never,
+    });
   }, [visible, theme, reduceMotion, scale, alpha]);
 
   // Fallback shared values track the static size-driven dimensions. Consumers

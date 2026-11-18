@@ -251,7 +251,7 @@ A component's `theme` prop is merged deeply, so you can set only the role you ne
 +</Button>
 ```
 
-`PaperProvider` doesn't merge `shapes` deeply: a `shapes` key in its `theme` replaces the default one. So spread the base `shapes` and `corner`, or the roles you leave out are `undefined` and those components lose their rounded corners:
+`PaperProvider` merges its `theme` deeply too, so a custom theme only needs the roles it changes:
 
 ```diff
 -import { MD3LightTheme, PaperProvider } from 'react-native-paper';
@@ -262,9 +262,7 @@ A component's `theme` prop is merged deeply, so you can set only the role you ne
 -  roundness: 2,
 +  ...LightTheme,
 +  shapes: {
-+    ...LightTheme.shapes,
 +    corner: {
-+      ...LightTheme.shapes.corner,
 +      extraSmall: 2,
 +      small: 4,
 +      medium: 6,
