@@ -29,6 +29,7 @@ import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
+import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import Text from '../Typography/Text';
@@ -173,6 +174,7 @@ const RichTooltip = ({
 
   const showTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const focusTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearShowTimer = React.useCallback(() => {
     if (showTimer.current) {
@@ -192,6 +194,7 @@ const RichTooltip = ({
     return () => {
       clearShowTimer();
       clearHideTimer();
+      if (focusTimer.current) clearTimeout(focusTimer.current);
     };
   }, [clearShowTimer, clearHideTimer]);
 
@@ -278,12 +281,13 @@ const RichTooltip = ({
 
       hoveringRef.current = true;
       clearHideTimer();
+      clearShowTimer();
       showTimer.current = setTimeout(() => {
         takeSingletonSlot(() => setVisible(false));
         setVisible(true);
       }, enterTouchDelay);
     },
-    [clearHideTimer, enterTouchDelay]
+    [clearHideTimer, clearShowTimer, enterTouchDelay]
   );
 
   // On web, pointer events on the wrapper View handle hover without going
@@ -329,7 +333,9 @@ const RichTooltip = ({
     // The tooltip mounts through the portal on the render that opens it, so
     // wait for that commit: from this one the node isn't reachable yet and
     // focus requested while it's missing is simply lost
-    setTimeout(() => {
+    if (focusTimer.current) clearTimeout(focusTimer.current);
+    focusTimer.current = setTimeout(() => {
+      focusTimer.current = null;
       tooltipRef.current?.querySelector?.(FOCUSABLE_SELECTOR)?.focus?.();
     }, 0);
   }, []);
@@ -349,28 +355,17 @@ const RichTooltip = ({
     [show, focusTooltipContent]
   );
 
-  // Web: Escape dismisses the tooltip the way the backdrop does on touch and
-  // puts focus back on the trigger so it's not lost
-  const handleKeypress = React.useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        refocusAfterDismissRef.current = true;
-        hide();
-        focusTrigger();
-      }
+  // Escape (web) and back (Android) dismiss the tooltip the way the backdrop
+  // does on touch, and on web put focus back on the trigger so it's not lost
+  useOverlayDismiss({
+    enabled: visible,
+    dismissable: true,
+    onDismiss: () => {
+      refocusAfterDismissRef.current = Platform.OS === 'web';
+      hide();
+      focusTrigger();
     },
-    [hide, focusTrigger]
-  );
-
-  React.useEffect(() => {
-    if (Platform.OS !== 'web' || !visible || !('document' in global)) {
-      return;
-    }
-
-    document.addEventListener('keyup', handleKeypress);
-
-    return () => document.removeEventListener('keyup', handleKeypress);
-  }, [visible, handleKeypress]);
+  });
 
   // accessible name for trigger without its own label
   const description =

@@ -1223,17 +1223,22 @@ describe('Tooltip.Rich', () => {
     it('closes on Escape without reopening from the focus it returns', async () => {
       // The tooltip listens for Escape on the document, which the native test
       // renderer has none of: stand in just enough of it to reach the listener
-      const listeners: Array<(event: { key?: string }) => void> = [];
+      const listeners: Array<
+        (event: { key?: string; defaultPrevented?: boolean }) => void
+      > = [];
       Reflect.defineProperty(globalThis, 'document', {
         value: {
           addEventListener: (
             type: string,
-            listener: (event: { key?: string }) => void
+            listener: (event: {
+              key?: string;
+              defaultPrevented?: boolean;
+            }) => void
           ) => {
-            if (type === 'keyup') listeners.push(listener);
+            if (type === 'keydown') listeners.push(listener);
           },
           removeEventListener: (type: string) => {
-            if (type === 'keyup') listeners.length = 0;
+            if (type === 'keydown') listeners.length = 0;
           },
         },
         configurable: true,
@@ -1252,7 +1257,9 @@ describe('Tooltip.Rich', () => {
         expect(getByText('Body text')).toBeTruthy();
 
         await act(() => {
-          listeners.forEach((listener) => listener({ key: 'Escape' }));
+          listeners.forEach((listener) =>
+            listener({ key: 'Escape', defaultPrevented: false })
+          );
         });
         await runTimers(); // hide intent
         await runTimers(); // exit fade -> unmount

@@ -131,6 +131,7 @@ const Tooltip = ({
     }
 
     if (Platform.OS === 'web') {
+      if (showTimer.current) clearTimeout(showTimer.current);
       showTimer.current = setTimeout(() => {
         takeSingletonSlot(() => setVisible(false));
         setVisible(true);
