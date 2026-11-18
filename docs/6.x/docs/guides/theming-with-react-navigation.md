@@ -64,7 +64,6 @@ const HomeScreen = ({ navigation }) => (
     title={title}
     content={
       <Card.Content>
-        <Text variant="titleLarge">{title}</Text>
         <Text variant="bodyMedium">{content}</Text>
       </Card.Content>
     }
