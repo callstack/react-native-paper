@@ -254,7 +254,7 @@ If you import it from Paper's type declarations instead, the path changed:
 
 #### `roundness`
 
-The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme, and TypeScript only reports it in a theme object written inline in a `theme` prop or typed as `Theme`.
+The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider` or a component, or typed as `Theme`, but not in the `theme` prop of `ThemeProvider`, which accepts any value, or in an untyped variable that also holds other theme keys.
 
 In 5.x, each of these components multiplied `roundness` by a fixed number, and the 6.x defaults match the 5.x corners with the default `roundness` of 4. To port a custom `roundness`, set each role to your `roundness` times its multiplier:
 
@@ -320,7 +320,7 @@ The 6.x theme has no `version`, `isV3`, `mode` or `animation` keys. Paper 6 only
  };
 ```
 
-As with `roundness`, Paper ignores these keys, and TypeScript only reports them in a theme object written inline in a `theme` prop or typed as `Theme`. Code that reads `theme.isV3` gets `undefined` once the key is gone, so a check like `theme.isV3 ? a : b` takes the Material Design 2 branch. Keep only the Material Design 3 branch.
+As with `roundness`, Paper ignores these keys, and TypeScript reports them in the same cases. Code that reads `theme.isV3` gets `undefined` once the key is gone, so a check like `theme.isV3 ? a : b` takes the Material Design 2 branch. Keep only the Material Design 3 branch.
 
 #### `configureFonts`
 
