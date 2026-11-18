@@ -161,7 +161,9 @@ export const getDimensions = ({
   const padding = spec.widths[width];
   const resolvedIcon = iconSize ?? spec.icon;
   const height = spec.containerHeight;
-  const containerWidth = resolvedIcon + padding.leading + padding.trailing;
+  // From the spec icon, not `iconSize`: the container keeps the scale of its
+  // `size` and a `default` width stays square when the glyph is resized.
+  const containerWidth = spec.icon + padding.leading + padding.trailing;
 
   const restingToken = resolveShapeToken({
     size,

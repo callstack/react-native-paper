@@ -59,7 +59,8 @@ export type Props = Omit<
   /**
    * Toggle state. Omit for the default (non-toggle) color set;
    * `true` / `false` use the toggle-ON / toggle-OFF color sets and invert
-   * the resting shape.
+   * the resting shape. Screen readers announce the toggle state: `aria-pressed`
+   * on web, `aria-checked` on native.
    */
   selected?: boolean;
   /**
@@ -160,6 +161,7 @@ const IconButton = ({
   contentStyle,
   hitSlop,
   role = 'button',
+  focusRing: focusRingPlacement = 'outward',
   ref,
   onPressIn: onPressInProp,
   onPressOut: onPressOutProp,
@@ -199,7 +201,26 @@ const IconButton = ({
     outlineWidth: dimensions.outlineWidth,
   });
 
-  const borderRadius = pressed
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress: rest.onLongPress,
+    onPressIn: onPressInProp,
+    onPressOut: onPressOutProp,
+  });
+
+  const canBePressed = hasPassedTouchHandler && !disabled;
+
+  // The handlers that reset `pressed` are only attached while the button can be
+  // pressed, so a stale `pressed` must not outlive that.
+  const isPressed = pressed && canBePressed;
+  React.useEffect(() => {
+    // Clears it too, so the shape doesn't snap back to pressed if the handler
+    // returns.
+    if (!canBePressed) {
+      setPressed(false);
+    }
+  }, [canBePressed]);
+  const borderRadius = isPressed
     ? dimensions.pressedRadius
     : dimensions.restingRadius;
   const radiusStyle: CSSStyle<ViewStyle> = {
@@ -219,20 +240,13 @@ const IconButton = ({
     onPressOutProp?.(e);
   };
 
-  const hasPassedTouchHandler = hasTouchHandler({
-    onPress,
-    onLongPress: rest.onLongPress,
-    onPressIn: onPressInProp,
-    onPressOut: onPressOutProp,
-  });
-
   // The ring goes on the clip view, around the outline, rather than on the
   // touchable inside it. Off whenever the button can't be pressed, as on
   // TouchableRipple.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     disabled || !hasPassedTouchHandler,
     theme.colors.secondary,
-    'outward',
+    focusRingPlacement,
     'within'
   );
 
@@ -245,6 +259,16 @@ const IconButton = ({
     onBlurProp?.(e);
     focusTarget.onBlur?.();
   };
+
+  // Announced like Button: `aria-pressed` on web, `aria-checked` on native.
+  // `aria-selected` isn't valid on `role="button"`, so it would go unannounced.
+  // React Native's types have no `aria-pressed`.
+  const toggleStateProps =
+    selected === undefined
+      ? {}
+      : Platform.OS === 'web'
+        ? { 'aria-pressed': selected }
+        : { 'aria-checked': selected };
 
   // The touchable sits inside the outline, so it is smaller than the container.
   const touchableWidth = dimensions.width - 2 * borderWidth;
@@ -269,7 +293,7 @@ const IconButton = ({
     !disabled &&
     ariaLabel !== undefined &&
     !hasPassedTouchHandler &&
-    !carriesToggleState(rest);
+    !carriesToggleState({ ...rest, ...toggleStateProps });
 
   // The touchable clips its own ripple to the container shape. Not on web,
   // where `overflow: 'hidden'` would also clip the hit slop target.
@@ -331,7 +355,7 @@ const IconButton = ({
           ]}
           role={isWebImage ? 'img' : role}
           aria-disabled={disabled}
-          aria-selected={selected}
+          {...toggleStateProps}
           disabled={disabled}
           hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
           testID={testID}

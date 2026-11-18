@@ -20,11 +20,11 @@ import ScreenWrapper from '../ScreenWrapper';
 
 const modes: IconButtonMode[] = ['standard', 'filled', 'tonal', 'outlined'];
 const sizes: IconButtonSize[] = [
-  'extraSmall',
+  'extra-small',
   'small',
   'medium',
   'large',
-  'extraLarge',
+  'extra-large',
 ];
 const widths: IconButtonWidth[] = ['narrow', 'default', 'wide'];
 const shapes: IconButtonShape[] = ['round', 'square'];

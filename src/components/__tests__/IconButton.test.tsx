@@ -63,9 +63,9 @@ it('renders outlined icon button', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders extraLarge icon button', async () => {
+it('renders extra-large icon button', async () => {
   const tree = (
-    await render(<IconButton icon="camera" size="extraLarge" />)
+    await render(<IconButton icon="camera" size="extra-large" />)
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -144,18 +144,28 @@ it('calls onPress', async () => {
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
-it('exposes a selected toggle to assistive technology', async () => {
-  await render(<IconButton icon="camera" selected onPress={() => {}} />);
+it.each([true, false])(
+  'announces the toggle state %s with aria-checked on native',
+  async (selected) => {
+    await render(
+      <IconButton icon="camera" selected={selected} onPress={() => {}} />
+    );
 
-  expect(screen.getByRole('button', { selected: true })).toBeOnTheScreen();
-});
+    expect(screen.getByRole('button')).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ checked: selected })
+    );
+    expect(screen.getByRole('button')).not.toBeSelected();
+  }
+);
 
-it('exposes an unselected toggle to assistive technology', async () => {
-  await render(
-    <IconButton icon="camera" selected={false} onPress={() => {}} />
+it('does not claim a toggle state without `selected`', async () => {
+  await render(<IconButton icon="camera" onPress={() => {}} />);
+
+  expect(screen.getByRole('button')).not.toHaveProp(
+    'accessibilityState',
+    expect.objectContaining({ checked: expect.any(Boolean) })
   );
-
-  expect(screen.getByRole('button', { selected: false })).toBeOnTheScreen();
 });
 
 it('does not expose a selected state when it is not a toggle', async () => {
@@ -220,6 +230,30 @@ it('morphs to the pressed shape with only onLongPress', async () => {
 
   expect(screen.getByTestId('icon-button-container')).toHaveStyle({
     borderRadius: getDimensions({ theme }).pressedRadius,
+  });
+});
+
+it('drops the pressed shape when the handler is removed mid-press', async () => {
+  const { rerender } = await render(
+    <IconButton icon="camera" testID="icon-button" onPress={() => {}} />
+  );
+
+  await fireEvent(screen.getByTestId('icon-button'), 'pressIn');
+  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+    borderRadius: getDimensions({ theme }).pressedRadius,
+  });
+
+  await rerender(<IconButton icon="camera" testID="icon-button" />);
+  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+    borderRadius: getDimensions({ theme }).restingRadius,
+  });
+
+  // Back with a handler, the shape is at rest, not stuck pressed.
+  await rerender(
+    <IconButton icon="camera" testID="icon-button" onPress={() => {}} />
+  );
+  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+    borderRadius: getDimensions({ theme }).restingRadius,
   });
 });
 
@@ -552,9 +586,9 @@ describe('getDimensions', () => {
     });
   });
 
-  it('returns extraSmall narrow size', () => {
+  it('returns extra-small narrow size', () => {
     expect(
-      getDimensions({ theme, size: 'extraSmall', width: 'narrow' })
+      getDimensions({ theme, size: 'extra-small', width: 'narrow' })
     ).toMatchObject({
       width: 28,
       height: 32,
@@ -562,14 +596,47 @@ describe('getDimensions', () => {
     });
   });
 
-  it('returns extraLarge wide size', () => {
+  it('keeps a default width square when `iconSize` changes the glyph', () => {
+    expect(getDimensions({ theme, iconSize: 32 })).toMatchObject({
+      width: 40,
+      height: 40,
+      iconSize: 32,
+    });
+  });
+
+  it('returns extra-large wide size', () => {
     expect(
-      getDimensions({ theme, size: 'extraLarge', width: 'wide' })
+      getDimensions({ theme, size: 'extra-large', width: 'wide' })
     ).toMatchObject({
       width: 184,
       height: 136,
       iconSize: 40,
     });
+  });
+});
+
+describe('toggle state on web', () => {
+  beforeEach(() => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('is announced with aria-pressed, which fits a button', async () => {
+    await render(
+      <IconButton
+        icon="heart"
+        aria-label="Favorite"
+        selected
+        onPress={() => {}}
+      />
+    );
+
+    const button = screen.getByRole('button', { name: 'Favorite' });
+    expect(button).toHaveProp('aria-pressed', true);
+    expect(button).not.toHaveProp('aria-selected');
   });
 });
 

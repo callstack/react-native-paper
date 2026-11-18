@@ -1170,9 +1170,9 @@ An accordion with a `left` element now indents only its `List.Item` children. An
 
 #### Size
 
-`size` is a named scale: `'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge'`. It defaults to `'small'`, which still uses a 24dp icon.
+`size` is a named scale: `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`, the same names as `Button`. It defaults to `'small'`, which still uses a 24dp icon.
 
-To set the glyph size in dp without changing the container scale, use `iconSize`.
+To set the glyph size in dp without changing the container scale, use `iconSize`. The container keeps the size of its `size` (a square 40dp for the default), so a glyph larger than it is clipped. Pick a larger `size` instead.
 
 ```tsx
 // Before (v5)
@@ -1186,11 +1186,11 @@ To set the glyph size in dp without changing the container scale, use `iconSize`
 
 ```tsx
 // After (v6) — named container sizes
-<IconButton icon="plus" size="extraSmall" onPress={onPress} />
+<IconButton icon="plus" size="extra-small" onPress={onPress} />
 <IconButton icon="plus" size="small" onPress={onPress} />
 <IconButton icon="plus" size="medium" onPress={onPress} />
 <IconButton icon="plus" size="large" onPress={onPress} />
-<IconButton icon="plus" size="extraLarge" onPress={onPress} />
+<IconButton icon="plus" size="extra-large" onPress={onPress} />
 ```
 
 #### Shape
@@ -1207,7 +1207,7 @@ To set the glyph size in dp without changing the container scale, use `iconSize`
 
 #### Touch target
 
-An `IconButton` with a touch handler reaches the 48dp minimum target through hit slop, without changing what is drawn. This applies to `extraSmall` and `small`, whose containers are smaller than 48dp. Pass `hitSlop` to override it, or `hitSlop={0}` to opt out. A disabled button, or one with no touch handler, gets no extra target.
+An `IconButton` with a touch handler reaches the 48dp minimum target through hit slop, without changing what is drawn. This applies to `extra-small` and `small`, whose containers are smaller than 48dp. Pass `hitSlop` to override it, or `hitSlop={0}` to opt out. A disabled button, or one with no touch handler, gets no extra target.
 
 #### `Appbar.Action` and `Appbar.BackAction`
 

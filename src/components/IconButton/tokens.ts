@@ -1,7 +1,7 @@
 import type { ColorRole } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
 
-export type Size = 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
+export type Size = 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large';
 
 export type Width = 'narrow' | 'default' | 'wide';
 
@@ -35,7 +35,7 @@ export type ColorSet = {
  * @see androidx `{XSmall|Small|Medium|Large|XLarge}IconButtonTokens` 14_1_0
  */
 const sizes = {
-  extraSmall: {
+  'extra-small': {
     containerHeight: 32,
     icon: 20,
     outlineWidth: 1,
@@ -83,7 +83,7 @@ const sizes = {
       wide: { leading: 48, trailing: 48 },
     },
   },
-  extraLarge: {
+  'extra-large': {
     containerHeight: 136,
     icon: 40,
     outlineWidth: 3,

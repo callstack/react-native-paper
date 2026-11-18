@@ -399,7 +399,7 @@ exports[`renders disabled icon button 1`] = `
 </View>
 `;
 
-exports[`renders extraLarge icon button 1`] = `
+exports[`renders extra-large icon button 1`] = `
 <View
   collapsable={false}
   style={
