@@ -480,9 +480,7 @@ const Card = ({
     focused,
     hovered,
   });
-  const transitionDuration = reduceMotion
-    ? 0
-    : theme.motion.duration.short3 * theme.animation.scale;
+  const transitionDuration = reduceMotion ? 0 : theme.motion.duration.short3;
   const transitionTimingFunction = cubicBezier(...theme.motion.easing.standard);
   // TouchableRipple already draws the pressed state layer (the ripple on
   // Android, the underlay elsewhere), so a second one would double it.
