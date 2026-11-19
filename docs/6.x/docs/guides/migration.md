@@ -1306,6 +1306,10 @@ An `IconButton` with a touch handler reaches the 48dp minimum target through hit
 <Appbar.BackAction onPress={onPress} />
 ```
 
+#### `containerColor` while disabled
+
+A disabled `filled` or `tonal` button, or a disabled selected `outlined` one, takes the disabled container color, `onSurface` at 0.10 opacity, and ignores `containerColor`. As in 5.x, a disabled button doesn't keep the color passed for its container, just as `iconColor` doesn't apply either.
+
 #### `selected={false}` uses toggle-off colors
 
 `selected` is tri-state. Omit it for the default (non-toggle) colors. Pass `true` / `false` only for a toggle.

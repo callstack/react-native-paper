@@ -18,6 +18,7 @@ import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import IconButton from '../IconButton/IconButton';
+import { IconButtonTokens } from '../IconButton/tokens';
 import {
   getDimensions,
   getIconButtonColor,
@@ -335,6 +336,23 @@ describe('getIconButtonColor - icon color', () => {
       iconOpacity: stateOpacity.disabled,
     });
   });
+
+  it.each(['filled', 'tonal'] as const)(
+    'should let the disabled container outrank an explicit container color in %s mode',
+    (mode) => {
+      expect(
+        getIconButtonColor({
+          theme: LightTheme,
+          mode,
+          disabled: true,
+          customContainerColor: 'purple',
+        })
+      ).toMatchObject({
+        backgroundColor: LightTheme.colors.onSurface,
+        backgroundOpacity: IconButtonTokens.disabled.containerOpacity,
+      });
+    }
+  );
 
   it('should return filled default icon color', () => {
     expect(

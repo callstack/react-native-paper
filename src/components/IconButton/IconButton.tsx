@@ -60,7 +60,9 @@ export type Props = Omit<
    */
   iconColor?: ColorValue;
   /**
-   * Background color of the icon container.
+   * Background color of the icon container. A disabled `filled` or `tonal`
+   * button, or a disabled selected `outlined` one, takes the disabled
+   * container color instead.
    */
   containerColor?: ColorValue;
   /**
