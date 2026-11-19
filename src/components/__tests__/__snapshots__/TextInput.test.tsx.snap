@@ -224,6 +224,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
           <View
             accessible={true}
             centered={true}
+            collapsable={false}
             multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
@@ -715,6 +716,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           <View
             accessible={true}
             centered={true}
+            collapsable={false}
             multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
@@ -895,6 +897,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
           <View
             accessible={true}
             centered={true}
+            collapsable={false}
             multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
@@ -1171,6 +1174,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           <View
             accessible={true}
             centered={true}
+            collapsable={false}
             multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
@@ -1839,6 +1843,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           <View
             accessible={true}
             centered={true}
+            collapsable={false}
             multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
@@ -2019,6 +2024,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           <View
             accessible={true}
             centered={true}
+            collapsable={false}
             multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
@@ -2275,6 +2281,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           <View
             accessible={true}
             centered={true}
+            collapsable={false}
             multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}

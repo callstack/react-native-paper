@@ -48,6 +48,7 @@ exports[`applies a static transform from style 1`] = `
     <View
       accessible={true}
       centered={true}
+      collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
       role="none"
@@ -437,6 +438,7 @@ exports[`renders extra-large icon button 1`] = `
     <View
       accessible={true}
       centered={true}
+      collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
       role="none"
@@ -546,6 +548,7 @@ exports[`renders filled icon button 1`] = `
     <View
       accessible={true}
       centered={true}
+      collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
       role="none"
@@ -655,6 +658,7 @@ exports[`renders icon button by default 1`] = `
     <View
       accessible={true}
       centered={true}
+      collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
       role="none"
@@ -764,6 +768,7 @@ exports[`renders icon button with color 1`] = `
     <View
       accessible={true}
       centered={true}
+      collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
       role="none"
@@ -873,6 +878,7 @@ exports[`renders icon change animated 1`] = `
     <View
       accessible={true}
       centered={true}
+      collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
       role="none"
@@ -1020,6 +1026,7 @@ exports[`renders outlined icon button 1`] = `
     <View
       accessible={true}
       centered={true}
+      collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
       role="none"
@@ -1035,7 +1042,7 @@ exports[`renders outlined icon button 1`] = `
               "justifyContent": "center",
             },
             {
-              "borderRadius": 20,
+              "borderRadius": 19,
             },
             {
               "overflow": "hidden",
@@ -1129,6 +1136,7 @@ exports[`renders tonal icon button 1`] = `
     <View
       accessible={true}
       centered={true}
+      collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
       role="none"

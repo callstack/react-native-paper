@@ -869,3 +869,45 @@ describe('shape morph', () => {
     expect(transitionDuration()).toBe(0);
   });
 });
+
+describe('inner corner', () => {
+  it('is the container corner less the outline on the touchable', async () => {
+    const { restingRadius, outlineWidth } = getDimensions({
+      theme,
+      size: 'extra-large',
+    });
+
+    await render(
+      <IconButton
+        icon="camera"
+        mode="outlined"
+        size="extra-large"
+        testID="icon-button"
+        onPress={() => {}}
+      />
+    );
+
+    expect(outlineWidth).toBeGreaterThan(0);
+    expect(screen.getByTestId('icon-button')).toHaveStyle({
+      borderRadius: restingRadius - outlineWidth,
+    });
+  });
+
+  it('is the container corner without an outline', async () => {
+    const { restingRadius } = getDimensions({ theme, size: 'extra-large' });
+
+    await render(
+      <IconButton
+        icon="camera"
+        mode="filled"
+        size="extra-large"
+        testID="icon-button"
+        onPress={() => {}}
+      />
+    );
+
+    expect(screen.getByTestId('icon-button')).toHaveStyle({
+      borderRadius: restingRadius,
+    });
+  });
+});

@@ -37,6 +37,9 @@ import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
+const AnimatedTouchableRipple =
+  Animated.createAnimatedComponent(TouchableRipple);
+
 export type Props = Omit<
   React.PropsWithoutRef<TouchableRippleProps>,
   'children' | 'style' | 'onPress'
@@ -111,6 +114,10 @@ export type Props = Omit<
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Style of the button container, for positioning and size. The corner comes
+   * from `shape`, so a `borderRadius` here is ignored.
+   */
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
@@ -329,9 +336,15 @@ const IconButton = ({
     !hasPassedTouchHandler &&
     !carriesToggleState({ ...rest, ...toggleStateProps });
 
-  // The touchable clips its own ripple to the container shape. Not on web,
-  // where `overflow: 'hidden'` would also clip the hit slop target.
-  const touchableShapeStyle = { borderRadius };
+  // The touchable and the disabled layer sit inside the outline, so their
+  // corner is the container's less the outline, and they morph with it. The
+  // touchable clips its own ripple to it, though not on web, where
+  // `overflow: 'hidden'` would also clip the hit slop target; there the ripple
+  // container follows the touchable's corner.
+  const innerRadiusStyle: CSSStyle<ViewStyle> = {
+    ...radiusStyle,
+    borderRadius: Math.max(0, borderRadius - borderWidth),
+  };
 
   return (
     <Animated.View
@@ -361,15 +374,16 @@ const IconButton = ({
         {...focusRing.dataSetProps}
       >
         {backgroundOpacity < 1 && (
-          <View
+          <Animated.View
             style={[
               StyleSheet.absoluteFill,
               styles.overlay,
-              { backgroundColor, opacity: backgroundOpacity, borderRadius },
+              innerRadiusStyle,
+              { backgroundColor, opacity: backgroundOpacity },
             ]}
           />
         )}
-        <TouchableRipple
+        <AnimatedTouchableRipple
           borderless
           centered
           onPress={onPress}
@@ -383,7 +397,7 @@ const IconButton = ({
           aria-label={ariaLabel}
           style={[
             styles.touchable,
-            touchableShapeStyle,
+            innerRadiusStyle,
             Platform.OS !== 'web' && styles.clipToShape,
             contentStyle,
           ]}
@@ -406,7 +420,7 @@ const IconButton = ({
               />
             )}
           </View>
-        </TouchableRipple>
+        </AnimatedTouchableRipple>
       </Animated.View>
     </Animated.View>
   );

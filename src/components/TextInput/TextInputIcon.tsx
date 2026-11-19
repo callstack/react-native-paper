@@ -25,9 +25,9 @@ export type TextInputAccessoryProps = {
 };
 
 export type TextInputIconProps = TextInputAccessoryProps &
-  Omit<IconButtonProps, keyof TextInputAccessoryProps | 'size'> & {
+  Omit<IconButtonProps, keyof TextInputAccessoryProps | 'size' | 'iconSize'> & {
     /**
-     * Size of the icon.
+     * Size of the icon. `iconSize` isn't accepted: the size comes from here.
      */
     size?: number;
   };
