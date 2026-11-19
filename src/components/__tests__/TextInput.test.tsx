@@ -80,6 +80,11 @@ afterAll(() => {
 
 afterEach(() => {
   I18nManager.isRTL = defaultI18nIsRTL;
+  jest.restoreAllMocks();
+  jest.spyOn(I18nManager, 'getConstants').mockImplementation(() => ({
+    ...getConstantsOriginal(),
+    isRTL: I18nManager.isRTL,
+  }));
 });
 
 function firstIndexOfTestIdInTree(tree: unknown, testID: string): number {
@@ -1035,7 +1040,7 @@ it('applies RTL text alignment and writing direction to the TextInput (outlined)
   });
 });
 
-it('applies RTL writing direction and start alignment to supporting text on native', async () => {
+it('uses left text alignment and rtl writing direction for supporting text in RTL on native', async () => {
   I18nManager.isRTL = true;
 
   await render(
