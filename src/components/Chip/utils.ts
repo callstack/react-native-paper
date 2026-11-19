@@ -65,12 +65,12 @@ const getBorderColor = ({
     return theme.colors.outlineVariant;
   }
 
-  if (selectedColor !== undefined) {
-    return selectedColor;
-  }
-
   if (focused) {
     return theme.colors[ChipTokens.focusOutlineColor];
+  }
+
+  if (selectedColor !== undefined) {
+    return selectedColor;
   }
 
   return theme.colors[ChipTokens.outlineColor];
@@ -148,11 +148,6 @@ export const getChipColors = ({
     contentOpacity,
     backgroundColor: getContainerColor({
       ...baseChipColorProps,
-      customBackgroundColor,
-    }),
-    selectedBackgroundColor: getContainerColor({
-      ...baseChipColorProps,
-      selected: true,
       customBackgroundColor,
     }),
     rippleColor: theme.colors.stateLayerPressed,
