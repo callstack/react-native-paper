@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   I18nManager,
+  Platform,
   StyleSheet,
   TextInput as NativeTextInput,
   View,
@@ -11,6 +12,8 @@ import {
   afterAll,
   afterEach,
   beforeAll,
+  beforeEach,
+  describe,
   expect,
   it,
   jest,
@@ -20,7 +23,11 @@ import type { TestInstance } from 'test-renderer';
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import TextInput from '../TextInput';
-import { LABEL_START_OFFSET_WITHOUT_ACCESSORY } from '../TextInput/constants';
+import {
+  FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
+  LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+  OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
+} from '../TextInput/constants';
 import type {
   TextInputRenderProps,
   TextInputHandles,
@@ -1110,39 +1117,73 @@ it('keeps the label at the field edge in RTL when only an EndAccessory is set', 
   });
 });
 
-it('uses logical start offset on label wrapper for filled and outlined TextInput in RTL', async () => {
-  I18nManager.isRTL = true;
+// React Native Web resolves `start` from a `dir` prop on its own Views, not
+// from `<html dir>`, so on web the label takes its side from Paper's direction.
+describe('on web in RTL', () => {
+  let platformOS: { restore(): void } | undefined;
 
-  function StartAccessory() {
-    return <View testID="rtl-start-acc" />;
-  }
+  beforeEach(() => {
+    platformOS = jest.replaceProperty(Platform, 'OS', 'web');
+    I18nManager.isRTL = true;
+  });
 
-  const { toJSON: toJsonFilled } = await render(
-    <TextInput
-      label="Email"
-      value=""
-      onChangeText={() => {}}
-      startAccessory={StartAccessory}
-    />
+  afterEach(() => {
+    platformOS?.restore();
+  });
+
+  it.each([
+    {
+      variant: 'filled' as const,
+      offset: FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
+    },
+    {
+      variant: 'outlined' as const,
+      offset: OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
+    },
+  ])(
+    'places the $variant label next to the StartAccessory on the right',
+    async ({ variant, offset }) => {
+      function StartAccessory() {
+        return <View testID="web-rtl-start-acc" />;
+      }
+
+      await render(
+        <TextInput
+          variant={variant}
+          label="Email"
+          value=""
+          onChangeText={() => {}}
+          startAccessory={StartAccessory}
+        />
+      );
+
+      const labelWrapper = screen.getByText(
+        'Email',
+        includeHiddenElements
+      ).parent;
+      expect(labelWrapper).toHaveStyle({ right: offset });
+      expect(labelWrapper).not.toHaveStyle({ start: offset });
+    }
   );
 
-  const { toJSON: toJsonOutlined } = await render(
-    <TextInput
-      variant="outlined"
-      label="Email"
-      value=""
-      onChangeText={() => {}}
-      startAccessory={StartAccessory}
-    />
-  );
+  it('keeps the label on the right, clear of a lone EndAccessory', async () => {
+    function EndAccessory() {
+      return <View testID="web-rtl-end-acc" />;
+    }
 
-  const serializedFilled = JSON.stringify(toJsonFilled());
-  const serializedOutlined = JSON.stringify(toJsonOutlined());
+    await render(
+      <TextInput
+        label="Email"
+        value=""
+        onChangeText={() => {}}
+        endAccessory={EndAccessory}
+      />
+    );
 
-  expect(serializedFilled).toContain('"start":52');
-  expect(serializedFilled).not.toContain('"left":52');
-  expect(serializedOutlined).toContain('"start":48');
-  expect(serializedOutlined).not.toContain('"left":48');
+    expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle(
+      { right: LABEL_START_OFFSET_WITHOUT_ACCESSORY }
+    );
+  });
 });
 
 it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', async () => {
