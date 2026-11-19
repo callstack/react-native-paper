@@ -71,7 +71,12 @@ export const resolveChildren = (
  * The hover layer of a touchable on web. It is a background image, so it
  * paints on top of a background color that `style` sets, such as the color of
  * a selected row, and it keeps the border radius of the touchable.
+ *
+ * While the touchable is hovered, this layer replaces a `backgroundImage` that
+ * `style` sets. A color that is not a string cannot go in a CSS gradient, so
+ * it gets no hover layer.
  */
-export const getHoverStyle = (hoverColor: ColorValue): ViewStyle => ({
-  backgroundImage: `linear-gradient(${String(hoverColor)}, ${String(hoverColor)})`,
-});
+export const getHoverStyle = (hoverColor: ColorValue): ViewStyle | undefined =>
+  typeof hoverColor === 'string'
+    ? { backgroundImage: `linear-gradient(${hoverColor}, ${hoverColor})` }
+    : undefined;
