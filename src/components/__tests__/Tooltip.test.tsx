@@ -418,6 +418,24 @@ describe('Tooltip', () => {
             top: 254,
           });
         });
+
+        it('keeps a wide tooltip clear of the right edge', async () => {
+          const {
+            wrapper: { findByText },
+          } = await setup({}, { pageX: 60 });
+
+          await user.longPress(getTrigger());
+
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
+            nativeEvent: { layout: { width: 320, height: TOOLTIP_HEIGHT } },
+          });
+
+          expect(getTooltipContainer()).toHaveStyle({
+            left: 32, // LAYOUT_WIDTH (360) - width (320) - EDGE_MARGIN (8)
+            top: 254,
+          });
+        });
       });
 
       describe('When it overflows to right', () => {

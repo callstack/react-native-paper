@@ -68,7 +68,15 @@ const getTooltipXPosition = (
       ? childrenX + (childrenWidth - tooltipWidth) / 2
       : childrenX;
 
-  if (overflowLeft(center)) return Math.max(EDGE_MARGIN, childrenX);
+  if (overflowLeft(center)) {
+    // a tooltip wider than the room on either side of the trigger must still
+    // keep clear of the right edge
+    const { width: layoutWidth } = Dimensions.get('window');
+    return Math.max(
+      EDGE_MARGIN,
+      Math.min(childrenX, layoutWidth - tooltipWidth - EDGE_MARGIN)
+    );
+  }
 
   if (overflowRight(center, tooltipWidth)) {
     const { width: layoutWidth } = Dimensions.get('window');
