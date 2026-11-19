@@ -160,8 +160,8 @@ const TextInputDemo = ({ variant }: TextInputDemoProps) => {
         >
           <View style={styles.switchRow}>
             <Text variant="bodyMedium">{label}</Text>
-            <View pointerEvents="none" aria-hidden>
-              <Switch value={controls[key]} readOnly />
+            <View pointerEvents="none">
+              <Switch value={controls[key]} readOnly aria-hidden />
             </View>
           </View>
         </TouchableRipple>
