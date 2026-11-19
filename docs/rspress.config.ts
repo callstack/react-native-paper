@@ -129,15 +129,16 @@ export default withCallstackPreset(
           react: resolve('react'),
           'react-dom': resolve('react-dom'),
           'react-native$': resolve('react-native-web'),
-          'react-native-web/dist/exports/StyleSheet/compiler/createReactDOMStyle':
+          'react-native-web/dist/cjs/exports/StyleSheet/compiler/createReactDOMStyle.js':
             path.resolve(
               resolve('react-native-web'),
-              'dist/exports/StyleSheet/compiler/createReactDOMStyle.js'
+              'dist/cjs/exports/StyleSheet/compiler/createReactDOMStyle.js'
             ),
-          'react-native-web/dist/exports/StyleSheet/preprocess': path.resolve(
-            resolve('react-native-web'),
-            'dist/exports/StyleSheet/preprocess.js'
-          ),
+          'react-native-web/dist/cjs/exports/StyleSheet/preprocess.js':
+            path.resolve(
+              resolve('react-native-web'),
+              'dist/cjs/exports/StyleSheet/preprocess.js'
+            ),
           'react-native-paper': paper,
         },
       },
@@ -163,6 +164,7 @@ export default withCallstackPreset(
           config.plugins.push(
             new rspack.DefinePlugin({
               __DEV__: JSON.stringify(isDev),
+              global: 'globalThis',
               'process.env.JEST_WORKER_ID': 'undefined',
               'process.env.NODE_ENV': JSON.stringify(
                 isDev ? 'development' : 'production'

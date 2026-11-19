@@ -3,7 +3,6 @@
 exports[`activity indicator snapshot test 1`] = `
 <View
   collapsable={false}
-  forwardedRef={[Function]}
   style={
     [
       {},
@@ -100,7 +99,6 @@ exports[`activity indicator snapshot test 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -117,46 +115,10 @@ exports[`activity indicator snapshot test 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -165,8 +127,14 @@ exports[`activity indicator snapshot test 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -447,7 +415,6 @@ exports[`activity indicator snapshot test 1`] = `
 exports[`fills a custom vertical layout {"flex":1} 1`] = `
 <View
   collapsable={false}
-  forwardedRef={[Function]}
   style={
     [
       {},
@@ -546,7 +513,6 @@ exports[`fills a custom vertical layout {"flex":1} 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -563,46 +529,10 @@ exports[`fills a custom vertical layout {"flex":1} 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -611,8 +541,14 @@ exports[`fills a custom vertical layout {"flex":1} 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -713,7 +649,6 @@ exports[`fills a custom vertical layout {"flex":1} 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -754,10 +689,10 @@ exports[`fills a custom vertical layout {"flex":1} 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -778,8 +713,14 @@ exports[`fills a custom vertical layout {"flex":1} 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -832,7 +773,6 @@ exports[`fills a custom vertical layout {"flex":1} 1`] = `
 exports[`fills a custom vertical layout {"height":80} 1`] = `
 <View
   collapsable={false}
-  forwardedRef={[Function]}
   style={
     [
       {},
@@ -931,7 +871,6 @@ exports[`fills a custom vertical layout {"height":80} 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -948,46 +887,10 @@ exports[`fills a custom vertical layout {"height":80} 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -996,8 +899,14 @@ exports[`fills a custom vertical layout {"height":80} 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1098,7 +1007,6 @@ exports[`fills a custom vertical layout {"height":80} 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1139,10 +1047,10 @@ exports[`fills a custom vertical layout {"height":80} 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1163,8 +1071,14 @@ exports[`fills a custom vertical layout {"height":80} 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1217,7 +1131,6 @@ exports[`fills a custom vertical layout {"height":80} 1`] = `
 exports[`renders searchbar in "divided" mode 1`] = `
 <View
   collapsable={false}
-  forwardedRef={[Function]}
   style={
     [
       {},
@@ -1312,7 +1225,6 @@ exports[`renders searchbar in "divided" mode 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -1329,46 +1241,10 @@ exports[`renders searchbar in "divided" mode 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1377,8 +1253,14 @@ exports[`renders searchbar in "divided" mode 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1479,7 +1361,6 @@ exports[`renders searchbar in "divided" mode 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1520,10 +1401,10 @@ exports[`renders searchbar in "divided" mode 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1544,8 +1425,14 @@ exports[`renders searchbar in "divided" mode 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -1623,7 +1510,6 @@ exports[`renders searchbar in "divided" mode 1`] = `
 exports[`renders with placeholder 1`] = `
 <View
   collapsable={false}
-  forwardedRef={[Function]}
   style={
     [
       {},
@@ -1720,7 +1606,6 @@ exports[`renders with placeholder 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -1737,46 +1622,10 @@ exports[`renders with placeholder 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -1785,8 +1634,14 @@ exports[`renders with placeholder 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -1887,7 +1742,6 @@ exports[`renders with placeholder 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -1928,10 +1782,10 @@ exports[`renders with placeholder 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -1952,8 +1806,14 @@ exports[`renders with placeholder 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2006,7 +1866,6 @@ exports[`renders with placeholder 1`] = `
 exports[`renders with text 1`] = `
 <View
   collapsable={false}
-  forwardedRef={[Function]}
   style={
     [
       {},
@@ -2103,7 +1962,6 @@ exports[`renders with text 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -2120,46 +1978,10 @@ exports[`renders with text 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -2168,8 +1990,14 @@ exports[`renders with text 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -2266,7 +2094,6 @@ exports[`renders with text 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -2307,10 +2134,10 @@ exports[`renders with text 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -2331,8 +2158,14 @@ exports[`renders with text 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2385,7 +2218,6 @@ exports[`renders with text 1`] = `
 exports[`respects custom horizontal margins {"marginHorizontal":0} 1`] = `
 <View
   collapsable={false}
-  forwardedRef={[Function]}
   style={
     [
       {},
@@ -2484,7 +2316,6 @@ exports[`respects custom horizontal margins {"marginHorizontal":0} 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -2501,46 +2332,10 @@ exports[`respects custom horizontal margins {"marginHorizontal":0} 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -2549,8 +2344,14 @@ exports[`respects custom horizontal margins {"marginHorizontal":0} 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -2651,7 +2452,6 @@ exports[`respects custom horizontal margins {"marginHorizontal":0} 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -2692,10 +2492,10 @@ exports[`respects custom horizontal margins {"marginHorizontal":0} 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -2716,8 +2516,14 @@ exports[`respects custom horizontal margins {"marginHorizontal":0} 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -2770,7 +2576,6 @@ exports[`respects custom horizontal margins {"marginHorizontal":0} 1`] = `
 exports[`respects custom horizontal margins {"marginInline":0} 1`] = `
 <View
   collapsable={false}
-  forwardedRef={[Function]}
   style={
     [
       {},
@@ -2869,7 +2674,6 @@ exports[`respects custom horizontal margins {"marginInline":0} 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -2886,46 +2690,10 @@ exports[`respects custom horizontal margins {"marginInline":0} 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -2934,8 +2702,14 @@ exports[`respects custom horizontal margins {"marginInline":0} 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -3036,7 +2810,6 @@ exports[`respects custom horizontal margins {"marginInline":0} 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -3077,10 +2850,10 @@ exports[`respects custom horizontal margins {"marginInline":0} 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -3101,8 +2874,14 @@ exports[`respects custom horizontal margins {"marginInline":0} 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],
@@ -3155,7 +2934,6 @@ exports[`respects custom horizontal margins {"marginInline":0} 1`] = `
 exports[`uses the MD3 color roles for the input and its placeholder 1`] = `
 <View
   collapsable={false}
-  forwardedRef={[Function]}
   style={
     [
       {},
@@ -3252,7 +3030,6 @@ exports[`uses the MD3 color roles for the input and its placeholder 1`] = `
       [
         {
           "margin": 6,
-          "overflow": "hidden",
         },
         {
           "backgroundColor": undefined,
@@ -3269,46 +3046,10 @@ exports[`uses the MD3 color roles for the input and its placeholder 1`] = `
     }
   >
     <View
-      accessibilityLabel="search"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
+      aria-label="search"
       centered={true}
-      collapsable={false}
-      focusable={true}
-      hitSlop={
-        {
-          "bottom": 6,
-          "left": 6,
-          "right": 6,
-          "top": 6,
-        }
-      }
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
@@ -3317,8 +3058,14 @@ exports[`uses the MD3 color roles for the input and its placeholder 1`] = `
           [
             {
               "alignItems": "center",
-              "flexGrow": 1,
+              "flex": 1,
               "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
             },
             undefined,
           ],
@@ -3415,7 +3162,6 @@ exports[`uses the MD3 color roles for the input and its placeholder 1`] = `
         [
           {
             "margin": 6,
-            "overflow": "hidden",
           },
           {
             "backgroundColor": undefined,
@@ -3456,10 +3202,10 @@ exports[`uses the MD3 color roles for the input and its placeholder 1`] = `
         focusable={true}
         hitSlop={
           {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
+            "bottom": 4,
+            "left": 4,
+            "right": 4,
+            "top": 4,
           }
         }
         onBlur={[Function]}
@@ -3480,8 +3226,14 @@ exports[`uses the MD3 color roles for the input and its placeholder 1`] = `
             [
               {
                 "alignItems": "center",
-                "flexGrow": 1,
+                "flex": 1,
                 "justifyContent": "center",
+              },
+              {
+                "borderRadius": 20,
+              },
+              {
+                "overflow": "hidden",
               },
               undefined,
             ],

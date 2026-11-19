@@ -9,6 +9,8 @@ export {
 
 export { useLocale, LocaleProvider } from './core/locale';
 
+export { useReduceMotion } from './theme/accessibility/ReduceMotionContext';
+
 export * from './theme/schemes';
 
 export { default as Provider } from './core/PaperProvider';
@@ -84,9 +86,7 @@ export type { Props as DataTablePaginationProps } from './components/DataTable/D
 export type { Props as DataTableRowProps } from './components/DataTable/DataTableRow';
 export type { Props as DataTableTitleProps } from './components/DataTable/DataTableTitle';
 export type { Props as DialogProps } from './components/Dialog/Dialog';
-export type { Props as DialogActionsProps } from './components/Dialog/DialogActions';
 export type { Props as DialogContentProps } from './components/Dialog/DialogContent';
-export type { Props as DialogIconProps } from './components/Dialog/DialogIcon';
 export type { Props as DialogScrollAreaProps } from './components/Dialog/DialogScrollArea';
 export type { Props as DialogTitleProps } from './components/Dialog/DialogTitle';
 export type { Props as DividerProps } from './components/Divider';
@@ -145,3 +145,4 @@ export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
 
 export { type TypescaleKey, type Theme, type Elevation } from './theme/types';
+export type { ReduceMotionPreference } from './core/useResolvedReduceMotion';

@@ -1,4 +1,4 @@
-import { Pressable, Text } from 'react-native';
+import { Platform, Pressable, Text } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
@@ -342,4 +342,16 @@ it('keeps a custom horizontal margin instead of animating it', async () => {
   expect(screen.root).toHaveStyle({
     marginHorizontal: 40,
   });
+});
+
+it('names its search icon as an image on web when it has no onIconPress', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+
+  try {
+    await render(<Searchbar value="" onChangeText={() => {}} />);
+
+    expect(screen.getByRole('img', { name: 'search' })).toBeOnTheScreen();
+  } finally {
+    jest.restoreAllMocks();
+  }
 });

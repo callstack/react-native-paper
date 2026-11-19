@@ -21,7 +21,7 @@ export type Props = {
    */
   icon: IconSource;
   /**
-   * Role-color preset. Defaults to `tonalPrimary`.
+   * Role-color preset. Defaults to `primaryContainer`.
    */
   variant?: Variant;
   /**
@@ -45,6 +45,18 @@ export type Props = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
   /**
    * Accessibility label. Falls back to nothing if unset.
    */
@@ -84,7 +96,7 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -118,10 +130,13 @@ export type Props = {
  */
 const FAB = ({
   icon,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   size = 'default',
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
   containerColor,
   contentColor,
   'aria-label': ariaLabel,
@@ -142,6 +157,9 @@ const FAB = ({
     size={size}
     visible={visible}
     onPress={onPress}
+    onLongPress={onLongPress}
+    onPressOut={onPressOut}
+    delayLongPress={delayLongPress}
     containerColor={containerColor}
     contentColor={contentColor}
     aria-label={ariaLabel}

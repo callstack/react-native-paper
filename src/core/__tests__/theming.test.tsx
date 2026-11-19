@@ -264,6 +264,26 @@ describe('adaptNavigationTheme', () => {
     });
   });
 
+  it('should keep fonts and custom colors when adapting a single theme', () => {
+    const { LightTheme: navLight } = adaptNavigationTheme({
+      reactNavigationLight: {
+        ...NavigationThemeWithFonts,
+        colors: NavigationCustomLightTheme.colors,
+      },
+    });
+    const { DarkTheme: navDark } = adaptNavigationTheme({
+      reactNavigationDark: { ...NavigationThemeWithFonts, dark: true },
+    });
+
+    expect(navLight.colors.secondary).toBe('rgb(150,45,85)');
+    expect(navLight.fonts.regular.fontFamily).toBe(
+      LightTheme.fonts.bodyMedium.fontFamily
+    );
+    expect(navDark.fonts.regular.fontFamily).toBe(
+      DarkTheme.fonts.bodyMedium.fontFamily
+    );
+  });
+
   it('should not expect fonts on theme without fonts', () => {
     const { LightTheme: navLight, DarkTheme: navDark } = adaptNavigationTheme({
       reactNavigationLight: NavigationLightTheme,

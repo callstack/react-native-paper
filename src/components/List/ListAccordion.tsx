@@ -3,10 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
-  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  TextLayoutEventData,
+  TextLayoutEvent,
   TextStyle,
   ViewProps,
   ViewStyle,
@@ -204,9 +203,7 @@ const ListAccordion = ({
   );
   const [alignToTop, setAlignToTop] = React.useState(false);
 
-  const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
-  ) => {
+  const onDescriptionTextLayout = (event: TextLayoutEvent) => {
     const { nativeEvent } = event;
     setAlignToTop(nativeEvent.lines.length >= 2);
   };
@@ -251,6 +248,9 @@ const ListAccordion = ({
       <View style={{ backgroundColor: theme?.colors?.background }}>
         <TouchableRipple
           style={[styles.container, style]}
+          // A full-width row, like List.Item: an outward ring would run into
+          // the rows around it.
+          focusRing="inward"
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}

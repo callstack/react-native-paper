@@ -2,41 +2,15 @@
 
 exports[`can render leading radio button control 1`] = `
 <View
-  accessibilityLabel="Default with leading control"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-label="Default with leading control"
+  focusable={false}
   role="radio"
   style={
     [
       false,
-      undefined,
+      [],
     ]
   }
 >
@@ -56,36 +30,10 @@ exports[`can render leading radio button control 1`] = `
     }
   >
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      aria-checked={false}
+      aria-live="polite"
+      focusable={false}
       role="radio"
       style={
         [
@@ -175,46 +123,34 @@ exports[`can render leading radio button control 1`] = `
       Default with leading control
     </Text>
   </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+  />
 </View>
 `;
 
 exports[`can render the Android radio button on different platforms 1`] = `
 <View
-  accessibilityLabel="iOS Checkbox"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-label="iOS Checkbox"
+  focusable={false}
   role="radio"
   style={
     [
       false,
-      undefined,
+      [],
     ]
   }
 >
@@ -270,36 +206,10 @@ exports[`can render the Android radio button on different platforms 1`] = `
       iOS Checkbox
     </Text>
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      aria-checked={false}
+      aria-live="polite"
+      focusable={false}
       role="radio"
       style={
         [
@@ -327,46 +237,36 @@ exports[`can render the Android radio button on different platforms 1`] = `
       />
     </View>
   </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+  />
 </View>
 `;
 
 exports[`can render the iOS radio button on different platforms 1`] = `
 <View
-  accessibilityLabel="iOS Radio button"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
-  accessible={true}
+  accessible={false}
+  aria-checked={false}
+  aria-label="iOS Radio button"
   collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  focusable={false}
   role="radio"
+  screenReaderFocusable={true}
   style={
     [
       false,
-      undefined,
+      [],
     ]
   }
 >
@@ -422,37 +322,13 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       iOS Radio button
     </Text>
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
+      accessible={false}
+      aria-checked={false}
+      aria-live="polite"
       collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      focusable={false}
       role="radio"
+      screenReaderFocusable={true}
       style={
         [
           {
@@ -505,46 +381,34 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       </View>
     </View>
   </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+  />
 </View>
 `;
 
 exports[`renders unchecked 1`] = `
 <View
-  accessibilityLabel="Unchecked Button"
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": false,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  aria-checked={false}
+  aria-label="Unchecked Button"
+  focusable={false}
   role="radio"
   style={
     [
       false,
-      undefined,
+      [],
     ]
   }
 >
@@ -600,36 +464,10 @@ exports[`renders unchecked 1`] = `
       Unchecked Button
     </Text>
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": false,
-          "disabled": false,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      aria-checked={false}
+      aria-live="polite"
+      focusable={false}
       role="radio"
       style={
         [
@@ -683,5 +521,19 @@ exports[`renders unchecked 1`] = `
       </View>
     </View>
   </View>
+  <View
+    pointerEvents="none"
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+  />
 </View>
 `;

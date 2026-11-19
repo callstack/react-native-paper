@@ -204,7 +204,7 @@ export type Props = Omit<TextInputProps, 'style'> & {
 };
 
 type TextInputHandles = Pick<
-  TextInput,
+  React.ComponentRef<typeof TextInput>,
   'setNativeProps' | 'isFocused' | 'clear' | 'blur' | 'focus' | 'setSelection'
 >;
 
@@ -266,7 +266,7 @@ const Searchbar = ({
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const reduceMotion = useReduceMotion();
-  const root = React.useRef<TextInput>(null);
+  const root = React.useRef<React.ComponentRef<typeof TextInput>>(null);
 
   React.useImperativeHandle(ref, () => ({
     focus: () => root.current?.focus(),
@@ -322,11 +322,14 @@ const Searchbar = ({
   const barNodeRef = React.useRef<HTMLElement | null>(null);
   const expanded = focused || focusHeldInside;
 
-  const handleBarRef = React.useCallback((instance: View | null) => {
-    // On web react-native-web resolves a view ref to the DOM node it rendered.
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-    barNodeRef.current = instance as unknown as HTMLElement | null;
-  }, []);
+  const handleBarRef = React.useCallback(
+    (instance: React.ComponentRef<typeof View> | null) => {
+      // On web react-native-web resolves a view ref to the DOM node it rendered.
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      barNodeRef.current = instance as unknown as HTMLElement | null;
+    },
+    []
+  );
 
   React.useEffect(() => {
     if (!focusHeldInside || Platform.OS !== 'web') {
@@ -385,9 +388,7 @@ const Searchbar = ({
         style,
       ]}
       // `Surface` applies its own duration after `style`, hence the prop.
-      transitionDuration={
-        reduceMotion ? 0 : theme.motion.duration.medium2 * theme.animation.scale
-      }
+      transitionDuration={reduceMotion ? 0 : theme.motion.duration.medium2}
       elevation={elevation}
       theme={theme}
     >

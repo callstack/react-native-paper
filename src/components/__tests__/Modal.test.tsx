@@ -1,27 +1,65 @@
-import { BackHandler as RNBackHandler, Text } from 'react-native';
-import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
+import * as React from 'react';
+import {
+  AccessibilityInfo,
+  BackHandler as RNBackHandler,
+  Text,
+  View,
+} from 'react-native';
 
-import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Modal from '../Modal';
 import Portal from '../Portal/Portal';
+import TextInput from '../TextInput';
+import type { TextInputHandles } from '../TextInput/TextInput';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 jest.mock('react-native-safe-area-context', () => ({
+  ...jest.requireActual<typeof import('react-native-safe-area-context')>(
+    'react-native-safe-area-context'
+  ),
   useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
 }));
 
-interface BackHandlerStatic extends RNBackHandlerStatic {
+type BackHandlerStatic = typeof RNBackHandler & {
   mockPressBack(): void;
-}
+  exitApp: jest.Mock<() => void>;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
+
+const sendAccessibilityEvent = jest.mocked(
+  AccessibilityInfo.sendAccessibilityEvent
+);
+
+// The modal queues its fade, and the fade finishing queues the focus move that
+// follows it. Drained in passes so that tests need not count the steps.
+const settle = async () => {
+  for (let pass = 0; pass < 5; pass += 1) {
+    await act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    if (jest.getTimerCount() === 0) {
+      return;
+    }
+  }
+};
 
 describe('Modal', () => {
   beforeAll(() => {
@@ -38,6 +76,13 @@ describe('Modal', () => {
       window.requestAnimationFrame as unknown as { mockRestore(): void }
     ).mockRestore();
     /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
+  });
+
+  // `exitApp` is one module-level `jest.fn` shared by every test in the file,
+  // and nothing clears it globally.
+  beforeEach(() => {
+    BackHandler.exitApp.mockClear();
+    sendAccessibilityEvent.mockClear();
   });
 
   it('renders passed children', async () => {
@@ -420,6 +465,39 @@ describe('Modal', () => {
     expect(onDismiss).not.toHaveBeenCalled();
   });
 
+  it('does not pass the accessibility escape gesture of a non-dismissible modal on to the modal behind it', async () => {
+    const onDismissOuter = jest.fn();
+    const onDismissInner = jest.fn();
+
+    await render(
+      <Portal.Host>
+        <Modal
+          testID="outer"
+          visible
+          onDismiss={onDismissOuter}
+          aria-label="Outer"
+        >
+          <Portal.Host>
+            <Modal
+              testID="inner"
+              visible
+              dismissable={false}
+              onDismiss={onDismissInner}
+              aria-label="Inner"
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
+        </Modal>
+      </Portal.Host>
+    );
+
+    await fireEvent(screen.getByTestId('inner'), 'accessibilityEscape');
+
+    expect(onDismissInner).not.toHaveBeenCalled();
+    expect(onDismissOuter).not.toHaveBeenCalled();
+  });
+
   it('keeps a non-dismissible modal on screen on the accessibility escape gesture', async () => {
     const onDismiss = jest.fn();
 
@@ -509,6 +587,131 @@ describe('Modal', () => {
     });
 
     expect(onDismiss).not.toHaveBeenCalled();
+  });
+
+  it('does not let the Android back button leave the screen behind a non-dismissible modal', async () => {
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible onDismiss={() => {}} dismissable={false}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(BackHandler.exitApp).not.toHaveBeenCalled();
+  });
+
+  it('moves the screen reader into the content when it opens', async () => {
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible>
+          <Text>Modal content</Text>
+        </Modal>
+      </Portal.Host>
+    );
+
+    await settle();
+
+    expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+      expect.anything(),
+      'focus'
+    );
+  });
+
+  it('moves the screen reader to initialFocusRef when it opens', async () => {
+    const initialFocusRef = React.createRef<React.ComponentRef<typeof View>>();
+
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible initialFocusRef={initialFocusRef}>
+          <View testID="first-field" ref={initialFocusRef} />
+          <Text>Modal content</Text>
+        </Modal>
+      </Portal.Host>
+    );
+
+    await settle();
+
+    expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+      initialFocusRef.current,
+      'focus'
+    );
+  });
+
+  it('focuses a Paper TextInput given as initialFocusRef through its own handle', async () => {
+    const initialFocusRef = React.createRef<TextInputHandles>();
+
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible initialFocusRef={initialFocusRef}>
+          <TextInput ref={initialFocusRef} label="Name" />
+        </Modal>
+      </Portal.Host>
+    );
+
+    // The handle is not a native node, so the screen reader has nothing to
+    // land on. The input is focused instead.
+    const handle = initialFocusRef.current;
+
+    if (!handle) {
+      throw new Error('The TextInput did not set its ref');
+    }
+
+    const focus = jest.spyOn(handle, 'focus');
+
+    await settle();
+
+    expect(focus).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).not.toHaveBeenCalled();
+  });
+
+  it('sends the screen reader back to restoreFocusRef when it closes', async () => {
+    const restoreFocusRef = React.createRef<React.ComponentRef<typeof View>>();
+
+    const { rerender } = await render(
+      <Portal.Host>
+        <View testID="trigger" ref={restoreFocusRef} />
+        <Modal testID="modal" visible restoreFocusRef={restoreFocusRef}>
+          <Text>Modal content</Text>
+        </Modal>
+      </Portal.Host>
+    );
+
+    await settle();
+
+    sendAccessibilityEvent.mockClear();
+
+    await rerender(
+      <Portal.Host>
+        <View testID="trigger" ref={restoreFocusRef} />
+        <Modal testID="modal" visible={false} restoreFocusRef={restoreFocusRef}>
+          <Text>Modal content</Text>
+        </Modal>
+      </Portal.Host>
+    );
+    await act(() => {
+      jest.advanceTimersByTime(1);
+    });
+
+    // The screen behind the modal stays inert until the fade is over, so
+    // focus waits with it.
+    expect(sendAccessibilityEvent).not.toHaveBeenCalled();
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
+    await settle();
+
+    expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+      restoreFocusRef.current,
+      'focus'
+    );
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
   });
 
   it('runs the fade-in animation when visible changes from false to true', async () => {
@@ -776,6 +979,91 @@ describe('Modal', () => {
 
     await act(() => {
       jest.runAllTimers();
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('stays on the screen while it fades out when reduceMotion is "off"', async () => {
+    const makeModal = (visible: boolean) => (
+      <PaperProvider reduceMotion="off">
+        <Modal testID="modal" visible={visible}>
+          {null}
+        </Modal>
+      </PaperProvider>
+    );
+
+    const { rerender } = await render(makeModal(true));
+    await settle();
+
+    await rerender(makeModal(false));
+    await act(() => {
+      jest.advanceTimersByTime(219);
+    });
+
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
+    await act(() => {
+      jest.advanceTimersByTime(1);
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('leaves the screen at once when reduceMotion is "on"', async () => {
+    const makeModal = (visible: boolean) => (
+      <PaperProvider reduceMotion="on">
+        <Modal testID="modal" visible={visible}>
+          {null}
+        </Modal>
+      </PaperProvider>
+    );
+
+    const { rerender } = await render(makeModal(true));
+    await settle();
+
+    await rerender(makeModal(false));
+    await act(() => {
+      jest.advanceTimersByTime(0);
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('keeps its close timer when the OS reduce motion setting changes while it closes', async () => {
+    const addEventListener = jest.mocked(AccessibilityInfo.addEventListener);
+    const reduceMotionListeners = () =>
+      addEventListener.mock.calls
+        .filter(([eventName]) => eventName === 'reduceMotionChanged')
+        .map(([, listener]) => listener);
+    addEventListener.mockClear();
+    const makeModal = (visible: boolean) => (
+      <PaperProvider>
+        <Modal testID="modal" visible={visible}>
+          {null}
+        </Modal>
+      </PaperProvider>
+    );
+
+    const { rerender } = await render(makeModal(true));
+    await settle();
+    expect(reduceMotionListeners()).not.toHaveLength(0);
+
+    await rerender(makeModal(false));
+    await act(() => {
+      jest.advanceTimersByTime(100);
+    });
+
+    for (const enabled of [true, false]) {
+      await act(() => {
+        reduceMotionListeners().forEach((listener) => listener(enabled));
+      });
+    }
+
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
+    await act(() => {
+      jest.advanceTimersByTime(120);
     });
 
     expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();

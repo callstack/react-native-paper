@@ -27,7 +27,7 @@ export type Props = ViewProps & {
  *   <Card>
  *     <Card.Actions>
  *       <Button mode="outlined">Cancel</Button>
- *       <Button mode="contained">Ok</Button>
+ *       <Button mode="filled">Ok</Button>
  *     </Card.Actions>
  *   </Card>
  * );
