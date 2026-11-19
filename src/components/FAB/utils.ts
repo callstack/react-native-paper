@@ -19,7 +19,7 @@ export type ResolvedColors = {
  */
 export const resolveColors = ({
   theme,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   containerColor,
   contentColor,
 }: {

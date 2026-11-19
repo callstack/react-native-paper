@@ -139,17 +139,9 @@ export const themeColors = {
   },
   Dialog: {
     '-': {
-      backgroundColor: 'theme.colors.elevation.level3',
-    },
-  },
-  'Dialog.Icon': {
-    '-': {
+      backgroundColor: 'theme.colors.surfaceContainerHigh',
       iconColor: 'theme.colors.secondary',
-    },
-  },
-  'Dialog.ScrollArea': {
-    '-': {
-      borderColor: 'theme.colors.surfaceVariant',
+      dividerColor: 'theme.colors.outlineVariant',
     },
   },
   Divider: {

@@ -119,43 +119,14 @@ exports[`renders FAB large size 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -213,29 +184,6 @@ exports[`renders FAB large size 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 33,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -358,43 +306,14 @@ exports[`renders FAB medium size 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -452,34 +371,12 @@ exports[`renders FAB medium size 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 25,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
 exports[`renders FAB transitioning to not visible 1`] = `
 <View
+  aria-hidden={true}
   collapsable={false}
   style={
     [
@@ -597,36 +494,9 @@ exports[`renders FAB transitioning to not visible 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      accessible={false}
+      focusable={false}
+      role="none"
       style={
         [
           {
@@ -634,10 +504,10 @@ exports[`renders FAB transitioning to not visible 1`] = `
           },
           [
             null,
-            null,
           ],
         ]
       }
+      tabIndex={-1}
     >
       <View
         style={
@@ -691,29 +561,6 @@ exports[`renders FAB transitioning to not visible 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -836,43 +683,14 @@ exports[`renders FAB transitioning to visible 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -930,29 +748,6 @@ exports[`renders FAB transitioning to visible 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1075,44 +870,15 @@ exports[`renders FAB with aria-label 1`] = `
     }
   >
     <View
-      accessibilityLabel="Add item"
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      aria-label="Add item"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -1170,29 +936,6 @@ exports[`renders FAB with aria-label 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1315,43 +1058,14 @@ exports[`renders FAB with containerColor and contentColor overrides 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -1409,29 +1123,6 @@ exports[`renders FAB with containerColor and contentColor overrides 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1554,43 +1245,14 @@ exports[`renders FAB with containerColor override 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -1648,29 +1310,6 @@ exports[`renders FAB with containerColor override 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1793,43 +1432,14 @@ exports[`renders FAB with default props 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -1887,29 +1497,6 @@ exports[`renders FAB with default props 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -2032,43 +1619,14 @@ exports[`renders FAB with primary variant 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -2126,29 +1684,6 @@ exports[`renders FAB with primary variant 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -2271,43 +1806,14 @@ exports[`renders FAB with secondary variant 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -2365,29 +1871,193 @@ exports[`renders FAB with secondary variant 1`] = `
       </View>
     </View>
   </View>
+</View>
+`;
+
+exports[`renders FAB with secondaryContainer variant 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {},
+      undefined,
+      {
+        "transformOrigin": "center",
+      },
+      {
+        "height": 56,
+        "opacity": 1,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
+        "width": 56,
+      },
+      {
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(232, 222, 248, 1)",
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
+      },
+    ]
+  }
+>
   <View
     collapsable={false}
     style={
       [
         {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
+          "bottom": 0,
+          "left": 0,
           "position": "absolute",
-          "right": -5,
-          "top": -5,
+          "right": 0,
+          "top": 0,
         },
         {
-          "borderColor": "rgba(98, 91, 113, 1)",
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
         },
         {
-          "borderRadius": 21,
-          "opacity": 0,
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
         },
       ]
     }
   />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "height": "100%",
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderRadius": 16,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      role="none"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            null,
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "pointerEvents": "none",
+            },
+            [
+              {
+                "justifyContent": "center",
+              },
+              {
+                "height": 56,
+                "width": 56,
+              },
+            ],
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 25, 43, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          plus
+        </Text>
+      </View>
+    </View>
+  </View>
 </View>
 `;
 
@@ -2510,43 +2180,14 @@ exports[`renders FAB with tertiary variant 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -2604,272 +2245,10 @@ exports[`renders FAB with tertiary variant 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
-exports[`renders FAB with tonalSecondary variant 1`] = `
-<View
-  collapsable={false}
-  style={
-    [
-      {},
-      undefined,
-      {
-        "transformOrigin": "center",
-      },
-      {
-        "height": 56,
-        "opacity": 1,
-        "transform": [
-          {
-            "scale": 1,
-          },
-        ],
-        "width": 56,
-      },
-      {
-        "pointerEvents": "auto",
-      },
-      {},
-      {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
-      },
-      {
-        "borderBottomEndRadius": undefined,
-        "borderBottomLeftRadius": undefined,
-        "borderBottomRightRadius": undefined,
-        "borderBottomStartRadius": undefined,
-        "borderCurve": "continuous",
-        "borderEndEndRadius": undefined,
-        "borderEndStartRadius": undefined,
-        "borderRadius": 16,
-        "borderStartEndRadius": undefined,
-        "borderStartStartRadius": undefined,
-        "borderTopEndRadius": undefined,
-        "borderTopLeftRadius": undefined,
-        "borderTopRightRadius": undefined,
-        "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 3.33,
-          "width": 0,
-        },
-        "shadowOpacity": 0.19,
-        "shadowRadius": 4.75,
-      },
-    ]
-  }
->
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(232, 222, 248, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": 16,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0.039,
-          "shadowRadius": 1.5,
-        },
-      ]
-    }
-  />
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "height": "100%",
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "backgroundColor": "rgba(232, 222, 248, 1)",
-          "borderRadius": 16,
-        },
-      ]
-    }
-  >
-    <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          [
-            null,
-            null,
-          ],
-        ]
-      }
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "pointerEvents": "none",
-            },
-            [
-              {
-                "justifyContent": "center",
-              },
-              {
-                "height": 56,
-                "width": 56,
-              },
-            ],
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            [
-              {
-                "color": "rgba(29, 25, 43, 1)",
-                "fontSize": 24,
-              },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
-            ]
-          }
-        >
-          plus
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
-</View>
-`;
-
-exports[`renders FAB with tonalTertiary variant 1`] = `
+exports[`renders FAB with tertiaryContainer variant 1`] = `
 <View
   collapsable={false}
   style={
@@ -2988,43 +2367,14 @@ exports[`renders FAB with tonalTertiary variant 1`] = `
     }
   >
     <View
-      accessibilityState={
-        {
-          "busy": undefined,
-          "checked": undefined,
-          "disabled": true,
-          "expanded": undefined,
-          "selected": undefined,
-        }
-      }
-      accessibilityValue={
-        {
-          "max": undefined,
-          "min": undefined,
-          "now": undefined,
-          "text": undefined,
-        }
-      }
       accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      role="button"
+      role="none"
       style={
         [
           {
             "overflow": "hidden",
           },
           [
-            null,
             null,
           ],
         ]
@@ -3082,28 +2432,5 @@ exports[`renders FAB with tonalTertiary variant 1`] = `
       </View>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -5,
-          "left": -5,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "borderRadius": 21,
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;

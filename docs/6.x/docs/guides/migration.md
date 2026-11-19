@@ -42,6 +42,34 @@ const MyComponent = () => {
 };
 ```
 
+### Reduce motion
+
+The `animation` theme key and its `scale` were removed. The new `reduceMotion` prop of `PaperProvider` turns Paper's animations on or off instead:
+
+- `'auto'` (default): follows the reduce motion setting of the device.
+- `'on'`: turns Paper's animations off.
+- `'off'`: keeps Paper's animations on, even when the device setting is on.
+
+In 5.x, `PaperProvider` set the `scale` itself and replaced any `scale` in the theme passed to it, so a `scale` of `0` only turned animations off in a nested `ThemeProvider` or a component's `theme` prop. To turn animations off, for example in tests, remove that `scale` and pass `reduceMotion="on"` to `PaperProvider`:
+
+```diff
+-<PaperProvider>
+-  <ThemeProvider theme={{ ...LightTheme, animation: { scale: 0 } }}>
+-    <App />
+-  </ThemeProvider>
++<PaperProvider reduceMotion="on">
++  <App />
+ </PaperProvider>
+```
+
+If your app was written for a 6.0 alpha build, which also read a `scale` set on `PaperProvider`, remove it from that theme too.
+
+Other `scale` values, which made animations slower or faster, have no replacement in 6.0. A `scale` in a component's `theme` prop, such as `theme={{ animation: { scale: 2 } }}`, does nothing now, and it can no longer turn animations back on while reduce motion is on. Paper ignores an `animation` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider`, `ThemeProvider` or a component, or typed as `Theme`, but not in an untyped variable that also holds other theme keys.
+
+In 5.x, `PaperProvider` also followed the device setting only when you passed no `theme`. In 6.x, `'auto'` follows the device setting with every theme, so if your app passes a custom theme, Paper's animations now stop when the user turns on reduce motion. 6.x also reads the setting when the app starts, while 5.x only reacted when it changed.
+
+To follow the same preference in your own components, use the `useReduceMotion()` hook, which returns `true` when reduce motion is on. See [Reduce motion](./theming#reduce-motion) in the theming guide.
+
 ### Elevation
 
 The `elevation` prop no longer accepts a React Native `Animated.Value` in the following components:
@@ -226,7 +254,7 @@ If you import it from Paper's type declarations instead, the path changed:
 
 #### `roundness`
 
-The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme, and TypeScript only reports it in a theme object written inline in a `theme` prop or typed as `Theme`.
+The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider`, `ThemeProvider` or a component, or typed as `Theme`, but not in an untyped variable that also holds other theme keys.
 
 In 5.x, each of these components multiplied `roundness` by a fixed number, and the 6.x defaults match the 5.x corners with the default `roundness` of 4. To port a custom `roundness`, set each role to your `roundness` times its multiplier:
 
@@ -251,7 +279,7 @@ A component's `theme` prop is merged deeply, so you can set only the role you ne
 +</Button>
 ```
 
-`PaperProvider` doesn't merge `shapes` deeply: a `shapes` key in its `theme` replaces the default one. So spread the base `shapes` and `corner`, or the roles you leave out are `undefined` and those components lose their rounded corners:
+`PaperProvider` merges its `theme` deeply too, so a custom theme only needs the roles it changes:
 
 ```diff
 -import { MD3LightTheme, PaperProvider } from 'react-native-paper';
@@ -262,9 +290,7 @@ A component's `theme` prop is merged deeply, so you can set only the role you ne
 -  roundness: 2,
 +  ...LightTheme,
 +  shapes: {
-+    ...LightTheme.shapes,
 +    corner: {
-+      ...LightTheme.shapes.corner,
 +      extraSmall: 2,
 +      small: 4,
 +      medium: 6,
@@ -280,7 +306,7 @@ A component's `theme` prop is merged deeply, so you can set only the role you ne
 
 #### Removed keys
 
-The 6.x theme has no `version`, `isV3`, `mode` or `animation.defaultAnimationDuration` keys. Paper 6 only supports Material Design 3, so `version` and `isV3` have nothing to select, and `mode` and `defaultAnimationDuration` have no replacement. Remove `version: 3` and `isV3` from your custom theme objects:
+The 6.x theme has no `version`, `isV3`, `mode` or `animation` keys. Paper 6 only supports Material Design 3, so `version` and `isV3` have nothing to select. `mode` and `animation.defaultAnimationDuration` have no replacement, and `animation.scale` is replaced by the `reduceMotion` prop of `PaperProvider`, see [Reduce motion](#reduce-motion). Remove `version: 3` and `isV3` from your custom theme objects:
 
 ```diff
  const theme = {
@@ -294,7 +320,7 @@ The 6.x theme has no `version`, `isV3`, `mode` or `animation.defaultAnimationDur
  };
 ```
 
-As with `roundness`, Paper ignores these keys, and TypeScript only reports them in a theme object written inline in a `theme` prop or typed as `Theme`. Code that reads `theme.isV3` gets `undefined` once the key is gone, so a check like `theme.isV3 ? a : b` takes the Material Design 2 branch. Keep only the Material Design 3 branch.
+As with `roundness`, Paper ignores these keys, and TypeScript reports them in the same cases. Code that reads `theme.isV3` gets `undefined` once the key is gone, so a check like `theme.isV3 ? a : b` takes the Material Design 2 branch. Keep only the Material Design 3 branch.
 
 #### `configureFonts`
 
@@ -304,6 +330,26 @@ As with `roundness`, Paper ignores these keys, and TypeScript only reports them 
 -const fonts = configureFonts({ config: fontConfig, isV3: true });
 +const fonts = configureFonts({ config: fontConfig });
 ```
+
+#### `ThemeProvider`
+
+`ThemeProvider` now merges its `theme` deeply onto the theme above it, as `PaperProvider` and a component's `theme` prop do, so a nested theme only needs the keys it changes. In 5.x it replaced the theme above it, so a partial theme made Paper's components throw when they rendered.
+
+```diff
+ <PaperProvider>
+   <ThemeProvider
+-    theme={{
+-      ...LightTheme,
+-      colors: { ...LightTheme.colors, primary: 'tomato' },
+-    }}
++    theme={{ colors: { primary: 'tomato' } }}
+   >
+     <App />
+   </ThemeProvider>
+ </PaperProvider>
+```
+
+A full theme, such as `DarkTheme` or the theme `useTheme()` returns, gives the same result as before, except that custom keys of the theme above it are kept. The `theme` prop is now typed as a partial `Theme`, as on `PaperProvider`, so TypeScript reports a value that isn't a theme, such as a number, and keys the theme doesn't have, such as `roundness`. The `theme` prop of a component returned by `withTheme` gets the same type, and the component you wrap must take a `Theme` in its `theme` prop. A `ThemeProvider` without a `theme` now passes the theme above it on. In 5.x it gave its children the default light theme. To keep that, pass `theme={LightTheme}`.
 
 ### Accessibility props
 
@@ -329,9 +375,70 @@ Keys inside data objects changed the same way: the `routes` of `BottomNavigation
  ];
 ```
 
+### TouchableRipple without a press handler
+
+A `TouchableRipple`, and anything built on it, is no longer a disabled control when it has no touch handler. Without `onPress`, `onLongPress`, `onPressIn` or `onPressOut`, and without `disabled`, it renders a plain view: assistive tech doesn't announce it as disabled, it isn't a keyboard stop, and it never takes the press, so a `Pressable` around it gets it. On Android and iOS a wrapping `Pressable` already got the press, except around a read-only radio (see below). On web it's new for components with the `button` role, such as `Button`, `Chip`, `IconButton` and `FAB`, which used to stop the press. `DataTable.Title` works the same way.
+
+Without a handler or `disabled`, an activatable role becomes `none`: a `role` or `accessibilityRole` of `button`, `link`, `menuitem` or `tab`, and an `accessibilityRole` of `imagebutton` or `togglebutton`. The role stays when the touchable reports a toggle state with `aria-checked`, `aria-pressed` or `accessibilityState.checked`, also when the value is `false`. A selection doesn't keep the role: Android and iOS still report it, and on web `aria-selected` is dropped with the role. Every other role, such as `checkbox`, `radio` or `switch`, stays too, so a read-only `Checkbox` is still a checkbox and keeps its state.
+
+```tsx
+// Still a toggle (pressed on web, checked on Android and iOS),
+// but does nothing when activated
+<Button mode="outlined" selected>Bold</Button>
+// No longer a button; still reports selected on Android and iOS
+<Chip selected>Info</Chip>
+```
+
+On web, an `IconButton` or icon-only `FAB` labelled with `aria-label`, with no handler, no `disabled` and no toggle state, is an image named by its label, since the plain view there can't carry a name. An image can't carry a selection either, so its `aria-selected` is dropped too.
+
+`hitSlop` applies only to a touchable that can be pressed. Without a handler, or with `disabled`, a touchable takes no touches outside its bounds, so it doesn't take them from its neighbors.
+
+`RadioButton`, `RadioButton.Android`, `RadioButton.IOS` and `RadioButton.Item` with no press handler and no `RadioButton.Group` no longer take the press. They stay read-only radios, a row around them gets the press, and on web they're no longer a tab stop.
+
+To have something look and announce disabled, pass `disabled`, which keeps the control and its role. Pass it to switch interactivity off at runtime too, instead of removing `onPress`. A touchable renders another element whenever it goes between having a handler or `disabled` and having neither, so its children remount and lose their state and focus. That includes toggling `disabled` on a touchable with no handler. `FAB.Menu` does this for its trigger: a trigger without `onPress` is a disabled button while the menu is closed, so it keeps its element when the menu opens.
+
+```diff
+-<Button onPress={isSaving ? undefined : save}>Save</Button>
++<Button onPress={save} disabled={isSaving}>Save</Button>
+```
+
+App tests change with it: a display-only element is no longer found by a role it lost, such as `button`, and is no longer disabled. Find it by its text or label instead.
+
+In a disabled `TextInput`, every `TextInput.Icon` takes the disabled color, also over `iconColor` and the error color. One with a handler is a disabled `IconButton`, and an `opacity` in its `style` doesn't apply.
+
+### Focus indicator
+
+Interactive components now draw the Material Design 3 keyboard focus indicator: a 3dp ring in `theme.colors.secondary`, 2dp outside the component. On web it shows when an element gets focus from the keyboard (`:focus-visible`), and on Android when it gets focus from a hardware keyboard or D-pad. Clicking or touching an element shows no ring. iOS shows no ring.
+
+`Snackbar` rings its action and close button in `theme.colors.inversePrimary`, the color of its action label, because `secondary` barely shows on its `inverseSurface` background. If a component's background is the ring color, such as an `Appbar` with a `secondary` background, the rings of the controls on it don't show: give those controls a `theme` with a contrasting `secondary`. An `Appbar` passes its own `theme` on to the `Appbar.Action`, `Appbar.BackAction` and `Appbar.Content` placed directly in it.
+
+Components that fill a clipping container or touch their neighbours draw the ring 3dp inside their edge instead: `List.Item`, `List.Accordion`, `Checkbox.Item`, `RadioButton.Item`, `Menu.Item`, the `FAB.Menu` items, `Drawer.Item`, the `BottomNavigation` tabs, `DataTable.Row`, `DataTable.Cell`, `DataTable.Title` and `SegmentedButtons`. `Drawer.CollapsedItem` draws it around its icon and label, 2dp clear of the active indicator. `FAB` and `Switch` draw this ring instead of their own, and `Checkbox` keeps its circular ring around the state layer.
+
+A `TouchableRipple`, and every component built on it, rings only while it can be pressed. A disabled one shows no ring. One with no touch handler and no `disabled` is the plain view described in [TouchableRipple without a press handler](#touchableripple-without-a-press-handler): it isn't a keyboard stop, so it never rings. This applies to `TouchableRipple` only: a `Switch` or `Drawer.CollapsedItem` without a handler is still a keyboard stop and rings.
+
+An outward ring sits outside the component, so a scroll view or a container with `overflow: 'hidden'` clips it, and a neighbour that touches the component can cover it. Chips in a horizontal `ScrollView`, or a `TouchableRipple` that fills the width of a scroll view, show only part of the ring. Give the container 5dp of padding, or pass `focusRing="inward"` where the component takes it:
+
+```tsx
+<ScrollView horizontal contentContainerStyle={{ padding: 5 }}>
+  <Chip onPress={showMusic}>Music</Chip>
+</ScrollView>
+
+<TouchableRipple focusRing="inward" onPress={openSettings}>
+  <Text>Settings</Text>
+</TouchableRipple>
+```
+
+`TouchableRipple` takes a new `focusRing` prop, and so do the components whose props include it, such as `IconButton`, `List.Item`, `DataTable.Row` and `DataTable.Cell`. It is `'outward'`, `'inward'` or `'none'`. `'none'` draws no ring, but on web it leaves the browser's own focus outline, so a component that draws its own indicator also needs `outline: 'none'` on web.
+
+On web the ring comes from a stylesheet that Paper adds to the page, and on these elements it takes precedence over your own `:focus-visible` outline styles. There is no app-wide switch to turn the ring off. Its color follows `theme.colors.secondary`, from the theme or a component's `theme` prop.
+
+On web, `Button`, `Card`, the `Chip` body, `FAB`, `FAB.Extended` and the `FAB.Menu` trigger and items draw the ring with the CSS `:has()` selector. A browser without it (Chrome before 105, Safari before 15.4, Firefox before 121) shows its own focus outline just inside their edge instead.
+
 ### Libraries built on Paper
 
 Libraries built on Paper may not support 6.x yet. For example, `react-native-paper-dates` 0.24.1 still uses `HelperText`, the 5.x theme exports and `theme.roundness`, so its `DatePickerInput` crashes when it shows a validation error.
+
+A library that reads `theme.animation.scale` to turn its own animations off should read `useReduceMotion()` instead. The 6.x theme has no `animation` key, so `theme.animation.scale` throws.
 
 ## Components
 
@@ -373,6 +480,8 @@ To keep the height of the content row when setting `height` in `style`, add the 
   <Appbar.Content title="Title" />
 </Appbar.Header>
 ```
+
+In `medium` and `large` mode, `Appbar` now passes its `theme` to `Appbar.BackAction`, `Appbar.Action` and `Appbar.Content`, as the `small` and `center-aligned` modes already did. These children of a medium or large bar with its own `theme` now take their colors, the title's font and their focus rings from that theme, not from the app's. In 5.x, a dark-themed bar in a light app drew dark icons and a dark title on its dark background.
 
 ### Avatar
 
@@ -542,23 +651,20 @@ const buttonRef = React.useRef<React.ComponentRef<typeof View>>(null);
 
 ```diff
 -<Portal>
--  <Dialog visible={visible} onDismiss={hideDialog}>
--    <Dialog.Title>Alert</Dialog.Title>
--  </Dialog>
+-  <Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 -</Portal>
-+<Dialog visible={visible} onDismiss={hideDialog}>
-+  <Dialog.Title>Alert</Dialog.Title>
-+</Dialog>
++<Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 ```
 
-The dialog now has the `dialog` role. On web, the dialog's accessible name is set automatically by `Dialog.Title`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
+The dialog now has the `dialog` role. Its accessible name is set automatically from the `title` prop. A string title is used as the `aria-label` on all platforms. Any other title is linked through `aria-labelledby`, which applies on web only, so on iOS and Android the dialog has no name unless you set `aria-label`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
 
 ```jsx
-<Dialog visible={visible} onDismiss={hideDialog} aria-label="Delete file">
-  <Dialog.Content>
-    <Text>Are you sure?</Text>
-  </Dialog.Content>
-</Dialog>
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  content="Are you sure?"
+  aria-label="Delete file"
+/>
 ```
 
 `Dialog` follows the same back button, Escape key and focus behavior as `Modal`, including the `initialFocusRef` and `restoreFocusRef` props. As with `Modal`, focus returns on iOS and Android only when you pass `restoreFocusRef`.
@@ -568,9 +674,65 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 - The default elevation changed from level `1` to level `3`.
 - The `style` prop no longer configures the background color or border radius. You can override `theme.colors.surfaceContainerHigh` and `theme.shapes.corner.extraLarge` using the `theme` prop instead.
 
-#### `Dialog.Actions`
+#### Prop-based API
 
-`Dialog.Actions` no longer injects `compact` on its buttons, and the default [`Button`](#button) mode is now `filled`. Add `mode="text"` to each button. At the default `small` size, the buttons are **40dp** tall, the Material Design 3 size for dialog actions. The `compact` text buttons in 5.x were **38dp** tall. For a more compact look, also add `size="extra-small"`, which is **32dp** tall:
+The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialog layouts. If your dialog previously composed `Dialog.Title`, `Dialog.Content`, and `Dialog.Actions` via `children`, migrate to the dedicated `icon`, `title`, `content`, and `actions` props.
+
+**Removed**
+
+- **`children`** was removed from `Dialog`. A dialog with children renders none of them.
+- **`Dialog.Icon`**, **`Dialog.Title`**, **`Dialog.Content`**, **`Dialog.Actions`** and **`Dialog.ScrollArea`** were removed, with the `DialogActionsProps` and `DialogIconProps` types. `DialogTitleProps`, `DialogContentProps` and `DialogScrollAreaProps` stay, for typing `titleProps`, `contentProps` and `scrollAreaProps`.
+
+Use the dedicated props instead:
+
+- **`Dialog.Icon`** → **`icon`**
+- **`Dialog.Title`** → **`title`**
+- **`Dialog.Content`** → **`content`**
+- **`Dialog.Actions`** → **`actions`**
+- **`Dialog.ScrollArea`** → **`scrollable`**
+
+The new **`actions`** prop is more customizable because it accepts **`React.ReactNode[]`**. Unlike the previous `Dialog.Actions` children behavior, the dialog no longer injects **`compact`** and **`uppercase`** into action components automatically. The passed components are laid out in the dialog's actions row, 8dp apart.
+
+**New props**
+
+- **`scrollable`** renders the dialog content inside a scrollable area.
+- **`contentProps`** passes props to the `View` that holds the content when `scrollable` is not enabled.
+- **`scrollAreaProps`** passes props to the `View` that holds the `ScrollView` and its dividers when `scrollable` is enabled.
+- **`scrollViewProps`** passes props to the internal `ScrollView` when `scrollable` is enabled.
+- **`aria-label`** overrides the title as the dialog's accessible name. Set it when the `title` isn't a string, since iOS and Android can't use `aria-labelledby`.
+- **`aria-labelledby`** is the `nativeID` of an element that provides the dialog's accessible name. It takes precedence over the title and is applied on web only.
+
+```tsx
+// Before (v5)
+<Portal>
+  <Dialog visible={visible} onDismiss={hideDialog}>
+    <Dialog.Title>Alert</Dialog.Title>
+    <Dialog.Content>
+      <Text variant="bodyMedium">This is a simple dialog</Text>
+    </Dialog.Content>
+    <Dialog.Actions>
+      <Button onPress={hideDialog}>Done</Button>
+    </Dialog.Actions>
+  </Dialog>
+</Portal>
+
+// After (v6)
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  title="Alert"
+  content="This is a simple dialog"
+  actions={[
+    <Button key="done" onPress={hideDialog}>
+      Done
+    </Button>,
+  ]}
+/>
+```
+
+#### Dialog actions
+
+The dialog no longer injects `compact` on its action buttons, and the default [`Button`](#button) mode is now `filled`. Add `mode="text"` to each button. At the default `small` size, the buttons are **40dp** tall, the Material Design 3 size for dialog actions. The `compact` text buttons in 5.x were **38dp** tall. For a more compact look, also add `size="extra-small"`, which is **32dp** tall:
 
 ```tsx
 // Before (v5)
@@ -579,11 +741,13 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 </Dialog.Actions>
 
 // After (v6)
-<Dialog.Actions>
-  <Button mode="text" onPress={hide}>
-    Done
-  </Button>
-</Dialog.Actions>
+<Dialog
+  actions={[
+    <Button key="done" mode="text" onPress={hide}>
+      Done
+    </Button>,
+  ]}
+/>
 ```
 
 ### Menu
@@ -641,6 +805,8 @@ Corner radii set through `style` no longer shape the press, hover and disabled f
 `borderless` has no effect on web. The web ripple is always clipped to the touchable's shape, including when `centered` is set, and the touchable no longer clips its own content. A child that needs a clipped or rounded shape should carry that shape itself.
 
 `hitSlop` now works on web: the touchable renders an invisible target that extends past its bounds. An ancestor with `overflow: 'hidden'` or a scroll view clips it, as on Android.
+
+`TouchableRipple` draws the keyboard focus ring and takes a new `focusRing` prop. See [Focus indicator](#focus-indicator).
 
 ### TextInput
 
@@ -1152,18 +1318,18 @@ mutually exclusive options, use `SegmentedButtons`.
 
 #### `variant`
 
-The variants changed meaning. In 5.x, `primary`, `secondary` and `tertiary` painted the container role, e.g. `primaryContainer`. In 6.x they paint the role itself, e.g. `primary`, and the new tonal variants paint the container role. So a FAB with an explicit `variant` looks different. To keep the 5.x colors:
+The variants changed meaning. In 5.x, `primary`, `secondary` and `tertiary` painted the container role, e.g. `primaryContainer`. In 6.x they paint the role itself, e.g. `primary`, and the new `primaryContainer`, `secondaryContainer` and `tertiaryContainer` variants paint the container role. So a FAB with an explicit `variant` looks different. To keep the 5.x colors:
 
-- **`primary`** (the 5.x default) → **`tonalPrimary`** (the 6.x default)
-- **`secondary`** → **`tonalSecondary`**
-- **`tertiary`** → **`tonalTertiary`**
+- **`primary`** (the 5.x default) → **`primaryContainer`** (the 6.x default)
+- **`secondary`** → **`secondaryContainer`**
+- **`tertiary`** → **`tertiaryContainer`**
 - **`surface`** has no variant. Set `containerColor` and `contentColor` instead, e.g. to `theme.colors.surfaceContainerHigh` and `theme.colors.primary`.
 
 A FAB without a `variant` keeps its 5.x colors.
 
 ```diff
 -<FAB icon="plus" variant="secondary" onPress={onPress} />
-+<FAB icon="plus" variant="tonalSecondary" onPress={onPress} />
++<FAB icon="plus" variant="secondaryContainer" onPress={onPress} />
 ```
 
 #### `size`
@@ -1180,7 +1346,7 @@ A FAB without a `variant` keeps its 5.x colors.
 - **`color`** → **`contentColor`**. Set the background with `containerColor`, as `style` is only for positioning.
 - **`mode`**: no replacement. A FAB always has its resting elevation.
 - **`disabled`**: no replacement. To take the action away, hide the FAB with `visible={false}`.
-- **`loading`**, **`animated`**, **`onLongPress`** and **`delayLongPress`**: no replacement.
+- **`loading`** and **`animated`**: no replacement.
 - **`rippleColor`**: see [Ripple color](#ripple-color).
 
 TypeScript reports an error for each of them, and in JavaScript they're ignored.
@@ -1296,6 +1462,77 @@ A standalone `Checkbox` has no visible label, so it now warns in development whe
 +  onValueChange={setValue}
 +  theme={{ colors: { primary: 'tomato' } }}
 +/>
+```
+
+#### Size
+
+`Switch` draws a 52×32 track inside a 48dp tall touch target, so rows containing a switch may change height.
+
+#### Switches without `onValueChange`
+
+A `Switch` with no `onValueChange` used to render as an enabled, focusable control that did nothing when activated, and screen readers announced it as operable. It now renders as read-only and logs a warning. Pass `onValueChange` to make it interactive, or set `readOnly` or `disabled` to render it as a state indicator:
+
+```tsx
+// Before (v5)
+<Switch value={isDarkTheme} />
+
+// After (v6)
+<Switch value={isDarkTheme} onValueChange={setIsDarkTheme} />
+<Switch value={isDarkTheme} readOnly />
+<Switch value={isDarkTheme} disabled />
+```
+
+A read-only switch keeps its enabled appearance and exposes its on/off state to screen readers, but it cannot be focused with a keyboard or pressed. On web it exposes `aria-readonly`. On iOS and Android it exposes a disabled accessibility state, because React Native has no read-only state for switches. Use `disabled` when you also want the disabled appearance.
+
+This most often shows up where the switch sits inside a row that owns the press. Give the row the switch role and state, and hide the inner switch from assistive technology, so screen readers announce the row as one switch with its on/off state:
+
+```diff
+-<TouchableRipple onPress={toggleTheme}>
++<TouchableRipple
++  onPress={toggleTheme}
++  role="switch"
++  aria-checked={isDarkTheme}
++>
+   <View style={styles.row}>
+     <Text>Dark Theme</Text>
+-    <View pointerEvents="none">
+-      <Switch value={isDarkTheme} />
++    <View pointerEvents="none" aria-hidden>
++      <Switch value={isDarkTheme} readOnly />
+     </View>
+   </View>
+ </TouchableRipple>
+```
+
+On web, such a row toggles with Enter but not with Space, because React Native Web only handles Space for elements with the `button` role.
+
+#### Icon color
+
+When selected, an icon set with `checkedIcon` uses `onPrimaryContainer`. If you set `checkedIcon` and pass a `theme` with a partial `theme.colors` override, include `onPrimaryContainer`, because omitted roles fall back to the app theme:
+
+```tsx
+import { Switch, useTheme } from 'react-native-paper';
+
+const TertiarySwitch = ({ value, onValueChange }) => {
+  const theme = useTheme();
+  const switchTheme = {
+    colors: {
+      primary: theme.colors.tertiary,
+      onPrimary: theme.colors.onTertiary,
+      primaryContainer: theme.colors.tertiaryContainer,
+      onPrimaryContainer: theme.colors.onTertiaryContainer,
+    },
+  };
+
+  return (
+    <Switch
+      value={value}
+      onValueChange={onValueChange}
+      checkedIcon="check"
+      theme={switchTheme}
+    />
+  );
+};
 ```
 
 ### Icon

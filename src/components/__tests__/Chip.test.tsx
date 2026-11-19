@@ -1,6 +1,11 @@
-import { describe, expect, it } from '@jest/globals';
+import { Pressable, StyleSheet } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
+
+import { describe, expect, it, jest } from '@jest/globals';
+import { fireEvent, userEvent } from '@testing-library/react-native';
 import color from 'color';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -67,8 +72,56 @@ it('renders selected chip', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled chip if there is no touch handler passed', async () => {
-  await render(<Chip testID="disabled-chip">Disabled chip</Chip>);
+it('does not mark a chip without a touch handler as disabled', async () => {
+  await render(<Chip testID="plain-chip">Plain chip</Chip>);
+
+  expect(screen.getByTestId('plain-chip')).not.toBeDisabled();
+});
+
+it('does not announce a chip without a touch handler as a button', async () => {
+  const onWrapPress = jest.fn<(e: GestureResponderEvent) => void>();
+  await render(
+    <Pressable onPress={onWrapPress}>
+      <Chip>Info</Chip>
+    </Pressable>
+  );
+
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+
+  await userEvent.press(screen.getByText('Info'));
+
+  expect(onWrapPress).toHaveBeenCalledTimes(1);
+});
+
+// With no handler the chip renders a plain view and is no longer a button. iOS
+// and Android still report a selection whatever the role, so it stays.
+it('still reports the selection of a selected chip without a touch handler', async () => {
+  await render(
+    <Chip selected testID="plain-selected-chip">
+      Info
+    </Chip>
+  );
+
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+  expect(screen.getByTestId('plain-selected-chip')).toBeSelected();
+});
+
+it('reports the selected state of a chip with a touch handler', async () => {
+  await render(
+    <Chip selected onPress={() => {}}>
+      Selected chip
+    </Chip>
+  );
+
+  expect(screen.getByRole('button', { selected: true })).toBeOnTheScreen();
+});
+
+it('renders disabled chip when the disabled prop is passed', async () => {
+  await render(
+    <Chip disabled onPress={() => {}} testID="disabled-chip">
+      Disabled chip
+    </Chip>
+  );
 
   expect(screen.getByTestId('disabled-chip')).toBeDisabled();
 });
@@ -347,4 +400,38 @@ describe('hitSlop', () => {
 
     expect(screen.getByTestId('chip')).not.toHaveProp('hitSlop');
   });
+});
+
+describe('with reduce motion', () => {
+  // Reanimated's Jest setup keeps CSS transitions out of `style`, and
+  // `getAnimatedStyle` can't read the chip's nested style arrays. The chip's
+  // container is the touchable's parent.
+  const elevationTransitionDuration = () => {
+    const { parent } = screen.getByTestId('chip');
+    if (!parent) {
+      throw new Error('Expected the touchable to be inside the container.');
+    }
+    // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+    return StyleSheet.flatten(parent.props.jestInlineStyle).transitionDuration;
+  };
+
+  it.each([
+    { reduceMotion: 'off', rest: 150, pressed: 200 },
+    { reduceMotion: 'on', rest: 0, pressed: 0 },
+  ] as const)(
+    'moves its elevation in $rest ms, and $pressed ms while pressed, when reduceMotion is "$reduceMotion"',
+    async ({ reduceMotion, rest, pressed }) => {
+      await render(
+        <PaperProvider reduceMotion={reduceMotion}>
+          <Chip elevated onPress={() => {}} testID="chip">
+            Example Chip
+          </Chip>
+        </PaperProvider>
+      );
+      expect(elevationTransitionDuration()).toBe(rest);
+
+      await fireEvent(screen.getByTestId('chip'), 'pressIn');
+      expect(elevationTransitionDuration()).toBe(pressed);
+    }
+  );
 });

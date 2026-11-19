@@ -1,6 +1,9 @@
-import { describe, expect, it } from '@jest/globals';
+import * as React from 'react';
 
-import { render } from '../../../test-utils';
+import { describe, expect, it, jest } from '@jest/globals';
+import { getAnimatedStyle } from 'react-native-reanimated';
+
+import { act, render, screen, userEvent } from '../../../test-utils';
 import DrawerCollapsedItem from '../../Drawer/DrawerCollapsedItem';
 
 describe('DrawerCollapsedItem', () => {
@@ -58,5 +61,53 @@ describe('DrawerCollapsedItem', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
+  });
+
+  describe('active indicator', () => {
+    const indicatorStyle = () => {
+      const [indicator] = screen
+        .getByRole('button')
+        .queryAll((node) => 'transform' in getAnimatedStyle(node));
+      return getAnimatedStyle(indicator);
+    };
+
+    it('expands to full size when the item becomes active without a press', async () => {
+      await render(
+        <DrawerCollapsedItem label="Inbox" focusedIcon="inbox" active={false} />
+      );
+
+      await screen.rerender(
+        <DrawerCollapsedItem label="Inbox" focusedIcon="inbox" active />
+      );
+      await act(() => jest.advanceTimersByTimeAsync(300));
+
+      expect(indicatorStyle().transform).toEqual([{ scaleX: 1 }]);
+    });
+
+    it('animates the expansion when a press makes the item active', async () => {
+      const Item = () => {
+        const [active, setActive] = React.useState(false);
+        return (
+          <DrawerCollapsedItem
+            label="Inbox"
+            focusedIcon="inbox"
+            active={active}
+            onPress={() => setActive(true)}
+          />
+        );
+      };
+      await render(<Item />);
+      const collapsed = indicatorStyle().transform;
+
+      await userEvent.press(screen.getByRole('button'));
+      await act(() => jest.advanceTimersByTimeAsync(75));
+      const midway = indicatorStyle().transform;
+      await act(() => jest.advanceTimersByTimeAsync(300));
+      const expanded = indicatorStyle().transform;
+
+      expect(expanded).toEqual([{ scaleX: 1 }]);
+      expect(midway).not.toEqual(collapsed);
+      expect(midway).not.toEqual(expanded);
+    });
   });
 });
