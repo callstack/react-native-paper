@@ -7,9 +7,6 @@ import type { Theme } from '../types';
 type ThemeDefaults = Omit<Theme, 'dark' | 'colors'>;
 
 export const themeDefaults: ThemeDefaults = {
-  animation: {
-    scale: 1.0,
-  },
   fonts: defaultFonts,
   shapes: defaultShapes,
   motion: expressiveMotion,

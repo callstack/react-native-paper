@@ -6,6 +6,7 @@ import { RadioButtonContext } from './RadioButtonGroup';
 import type { RadioButtonContextType } from './RadioButtonGroup';
 import { getSelectionControlColor, handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -79,7 +80,7 @@ const RadioButtonAndroid = ({
 
   const isFirstRendering = React.useRef<boolean>(true);
 
-  const { scale } = theme.animation;
+  const getDuration = useMotionDuration();
 
   React.useEffect(() => {
     // Do not run animation on very first rendering
@@ -93,7 +94,7 @@ const RadioButtonAndroid = ({
 
       Animated.timing(radioAnim, {
         toValue: 1,
-        duration: 150 * scale,
+        duration: getDuration(150),
         useNativeDriver: true,
       }).start();
     } else {
@@ -101,11 +102,11 @@ const RadioButtonAndroid = ({
 
       Animated.timing(borderAnim, {
         toValue: BORDER_WIDTH,
-        duration: 150 * scale,
+        duration: getDuration(150),
         useNativeDriver: false,
       }).start();
     }
-  }, [status, borderAnim, radioAnim, scale]);
+  }, [status, borderAnim, radioAnim, getDuration]);
 
   return (
     <RadioButtonContext.Consumer>

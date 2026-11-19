@@ -17,6 +17,7 @@ import {
 } from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -28,6 +29,9 @@ import type { TextInputHandles } from '../TextInput/TextInput';
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 jest.mock('react-native-safe-area-context', () => ({
+  ...jest.requireActual<typeof import('react-native-safe-area-context')>(
+    'react-native-safe-area-context'
+  ),
   useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
 }));
 
@@ -975,6 +979,91 @@ describe('Modal', () => {
 
     await act(() => {
       jest.runAllTimers();
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('stays on the screen while it fades out when reduceMotion is "off"', async () => {
+    const makeModal = (visible: boolean) => (
+      <PaperProvider reduceMotion="off">
+        <Modal testID="modal" visible={visible}>
+          {null}
+        </Modal>
+      </PaperProvider>
+    );
+
+    const { rerender } = await render(makeModal(true));
+    await settle();
+
+    await rerender(makeModal(false));
+    await act(() => {
+      jest.advanceTimersByTime(219);
+    });
+
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
+    await act(() => {
+      jest.advanceTimersByTime(1);
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('leaves the screen at once when reduceMotion is "on"', async () => {
+    const makeModal = (visible: boolean) => (
+      <PaperProvider reduceMotion="on">
+        <Modal testID="modal" visible={visible}>
+          {null}
+        </Modal>
+      </PaperProvider>
+    );
+
+    const { rerender } = await render(makeModal(true));
+    await settle();
+
+    await rerender(makeModal(false));
+    await act(() => {
+      jest.advanceTimersByTime(0);
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('keeps its close timer when the OS reduce motion setting changes while it closes', async () => {
+    const addEventListener = jest.mocked(AccessibilityInfo.addEventListener);
+    const reduceMotionListeners = () =>
+      addEventListener.mock.calls
+        .filter(([eventName]) => eventName === 'reduceMotionChanged')
+        .map(([, listener]) => listener);
+    addEventListener.mockClear();
+    const makeModal = (visible: boolean) => (
+      <PaperProvider>
+        <Modal testID="modal" visible={visible}>
+          {null}
+        </Modal>
+      </PaperProvider>
+    );
+
+    const { rerender } = await render(makeModal(true));
+    await settle();
+    expect(reduceMotionListeners()).not.toHaveLength(0);
+
+    await rerender(makeModal(false));
+    await act(() => {
+      jest.advanceTimersByTime(100);
+    });
+
+    for (const enabled of [true, false]) {
+      await act(() => {
+        reduceMotionListeners().forEach((listener) => listener(enabled));
+      });
+    }
+
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
+    await act(() => {
+      jest.advanceTimersByTime(120);
     });
 
     expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();

@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useInternalTheme } from '../core/theming';
+import { useReduceMotion } from '../theme/accessibility/ReduceMotionContext';
 import { androidElevationLevels, shadow } from '../theme/tokens/sys/elevation';
 import type { Elevation, ThemeProp } from '../theme/types';
 
@@ -214,6 +215,7 @@ const Surface = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(overriddenTheme);
+  const reduceMotion = useReduceMotion();
 
   const { colors } = theme;
 
@@ -253,7 +255,7 @@ const Surface = ({
 
   const transitionDuration =
     customTransitionDuration ??
-    theme.motion.duration.short3 * theme.animation.scale;
+    (reduceMotion ? 0 : theme.motion.duration.short3);
   const transitionTimingFunction = cubicBezier(...theme.motion.easing.standard);
   const colorTransitionProperty =
     // FIXME: Reanimated can't animate PlatformColor and DynamicColorIOS

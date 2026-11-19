@@ -15,8 +15,10 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../../core/theming';
+import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import { useFocusRing } from '../../utils/useFocusRing';
@@ -117,7 +119,7 @@ const DrawerCollapsedItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { scale } = theme.animation;
+  const getDuration = useMotionDuration();
 
   // MD3 rings a navigation rail item as a whole (icon and label) with a
   // rounded rectangle inside the rail, like Material Web's navigation tab
@@ -141,19 +143,24 @@ const DrawerCollapsedItem = ({
 
   const outlineScale = useSharedValue(active ? 1 : 0.5);
 
-  React.useEffect(() => {
-    if (!active) {
-      outlineScale.value = 0.5;
-    }
-  }, [active, outlineScale]);
-
-  const handlePressOut = () => {
+  const expandOutline = useLatestCallback(() => {
     outlineScale.value = withTiming(1, {
-      duration: 150 * scale,
+      duration: getDuration(150),
       easing: Easing.inOut(Easing.ease),
       reduceMotion: ReduceMotion.Never,
     });
-  };
+  });
+
+  React.useEffect(() => {
+    if (active) {
+      // The item can become active without a press, for example when the
+      // current route changes. After a press the indicator is already at full
+      // size or on its way there, and this carries on from where it is.
+      expandOutline();
+    } else {
+      outlineScale.value = 0.5;
+    }
+  }, [active, expandOutline, outlineScale]);
 
   const iconPadding = ((!label ? itemSize : outlineHeight) - iconSize) / 2;
 
@@ -196,7 +203,7 @@ const DrawerCollapsedItem = ({
     <View {...rest}>
       <Pressable
         onPress={onPress}
-        onPressOut={onPress ? handlePressOut : undefined}
+        onPressOut={onPress ? expandOutline : undefined}
         disabled={disabled}
         role="button"
         aria-selected={active}
