@@ -859,7 +859,8 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 `TextInput.Icon` without a press handler is decorative: it is hidden from
 assistive technology and is not a keyboard focus stop. An icon with `onPress`,
 `onLongPress`, `onPressIn` or `onPressOut` requires an `aria-label` or
-`accessibilityLabel` that names its action:
+`accessibilityLabel` that names its action, and warns in development without
+one:
 
 ```tsx
 const [value, setValue] = React.useState('');

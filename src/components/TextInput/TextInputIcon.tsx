@@ -37,7 +37,7 @@ export type TextInputIconProps = TextInputAccessoryProps &
  * decorative: it is hidden from assistive technology, and a tap on it goes to
  * the field. An actionable icon requires an `aria-label` (or
  * `accessibilityLabel`) that names its action, such as "Clear text" or
- * "Show password".
+ * "Show password", and warns in development without one.
  *
  * ## Usage
  * ```js
