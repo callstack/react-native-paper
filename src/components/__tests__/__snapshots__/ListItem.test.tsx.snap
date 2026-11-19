@@ -349,7 +349,6 @@ exports[`renders list item with custom description 1`] = `
                     {
                       "borderRadius": 8,
                     },
-                    undefined,
                   ],
                 ]
               }
@@ -451,29 +450,6 @@ exports[`renders list item with custom description 1`] = `
                 </Text>
               </View>
             </View>
-            <View
-              collapsable={false}
-              style={
-                [
-                  {
-                    "borderWidth": 3,
-                    "bottom": -2,
-                    "left": -2,
-                    "pointerEvents": "none",
-                    "position": "absolute",
-                    "right": -2,
-                    "top": -2,
-                  },
-                  {
-                    "borderColor": "rgba(98, 91, 113, 1)",
-                    "borderRadius": 10,
-                  },
-                  {
-                    "opacity": 0,
-                  },
-                ]
-              }
-            />
           </View>
         </View>
       </View>

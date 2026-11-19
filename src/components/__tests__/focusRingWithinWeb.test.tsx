@@ -16,6 +16,7 @@ import {
 import { render, screen } from '../../test-utils';
 import Button from '../Button/Button';
 import Card from '../Card/Card';
+import Chip from '../Chip/Chip';
 import FAB from '../FAB/FAB';
 import FABMenu from '../FAB/Menu';
 
@@ -72,6 +73,12 @@ describe('focus ring `within` structure (web)', () => {
       <Card key="card" testID="focusable" onPress={() => {}}>
         <Text>card</Text>
       </Card>,
+    ],
+    [
+      'Chip',
+      <Chip key="chip" testID="focusable" onPress={() => {}}>
+        chip
+      </Chip>,
     ],
   ])(
     '%s holds its focusable element directly inside its ring',
@@ -130,5 +137,36 @@ describe('focus ring `within` structure (web)', () => {
     expect(cardRing.children).not.toContain(
       screen.getByRole('button', { name: 'OK' })
     );
+  });
+
+  // The chip's box draws the ring, so a ring on the ripple inside it would
+  // show a second one.
+  it("Chip's ripple carries no ring of its own", async () => {
+    await render(
+      <Chip testID="chip" onPress={() => {}}>
+        chip
+      </Chip>
+    );
+
+    expect(screen.getByTestId('chip').props.dataSet).toBeUndefined();
+  });
+
+  // The close button is focused on its own and rings its glyph, so it must not
+  // light the chip's ring as well.
+  it("does not hold a Chip's close button directly inside the Chip's ring", async () => {
+    await render(
+      <Chip
+        testID="chip"
+        closeIconTestID="close"
+        onPress={() => {}}
+        onClose={() => {}}
+      >
+        chip
+      </Chip>
+    );
+
+    const [chipRing] = withinRings();
+    expect(chipRing.children).toContain(screen.getByTestId('chip'));
+    expect(chipRing.children).not.toContain(screen.getByTestId('close'));
   });
 });

@@ -142,7 +142,6 @@ exports[`prefers icon over avatar when both are specified 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -244,29 +243,6 @@ exports[`prefers icon over avatar when both are specified 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -412,7 +388,6 @@ exports[`prefers trailingIcon over the close icon when both trailingIcon and onC
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -474,112 +449,76 @@ exports[`prefers trailingIcon over the close icon when both trailingIcon and onC
     </View>
   </View>
   <View
-    accessible={true}
-    aria-disabled={false}
-    aria-label="Trailing icon"
-    centered={true}
-    onBlur={[Function]}
-    onFocus={[Function]}
-    role="none"
     style={
       [
         {
-          "overflow": "hidden",
+          "borderRadius": 16,
+          "bottom": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "width": 32,
         },
-        [
-          {
-            "alignItems": "center",
-            "borderRadius": 16,
-            "bottom": 0,
-            "justifyContent": "center",
-            "overflow": "hidden",
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "width": 32,
-          },
-          undefined,
-          null,
-        ],
       ]
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
+    <View
+      accessible={true}
+      aria-disabled={false}
+      aria-label="Trailing icon"
+      centered={true}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
       style={
         [
           {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontSize": 18,
+            "overflow": "hidden",
           },
           [
             {
-              "lineHeight": 18,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
+              "alignItems": "center",
+              "borderRadius": 16,
+              "flex": 1,
+              "justifyContent": "center",
+              "overflow": "hidden",
             },
-            {
-              "backgroundColor": "transparent",
-            },
+            null,
           ],
         ]
       }
     >
-      menu-down
-    </Text>
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 18,
+            },
+            [
+              {
+                "lineHeight": 18,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        menu-down
+      </Text>
+    </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderRadius": 18,
-          "borderWidth": 3,
-          "bottom": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-          "width": 36,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -725,7 +664,6 @@ exports[`renders chip with a generic trailing icon 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -828,112 +766,76 @@ exports[`renders chip with a generic trailing icon 1`] = `
     </View>
   </View>
   <View
-    accessible={true}
-    aria-disabled={false}
-    aria-label="Trailing icon"
-    centered={true}
-    onBlur={[Function]}
-    onFocus={[Function]}
-    role="none"
     style={
       [
         {
-          "overflow": "hidden",
+          "borderRadius": 16,
+          "bottom": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "width": 32,
         },
-        [
-          {
-            "alignItems": "center",
-            "borderRadius": 16,
-            "bottom": 0,
-            "justifyContent": "center",
-            "overflow": "hidden",
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "width": 32,
-          },
-          undefined,
-          null,
-        ],
       ]
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
+    <View
+      accessible={true}
+      aria-disabled={false}
+      aria-label="Trailing icon"
+      centered={true}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
       style={
         [
           {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontSize": 18,
+            "overflow": "hidden",
           },
           [
             {
-              "lineHeight": 18,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
+              "alignItems": "center",
+              "borderRadius": 16,
+              "flex": 1,
+              "justifyContent": "center",
+              "overflow": "hidden",
             },
-            {
-              "backgroundColor": "transparent",
-            },
+            null,
           ],
         ]
       }
     >
-      menu-down
-    </Text>
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 18,
+            },
+            [
+              {
+                "lineHeight": 18,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        menu-down
+      </Text>
+    </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderRadius": 18,
-          "borderWidth": 3,
-          "bottom": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-          "width": 36,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1079,7 +981,6 @@ exports[`renders chip with avatar 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -1208,29 +1109,6 @@ exports[`renders chip with avatar 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1376,7 +1254,6 @@ exports[`renders chip with close button 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -1479,145 +1356,109 @@ exports[`renders chip with close button 1`] = `
     </View>
   </View>
   <View
-    accessibilityLabel="Close"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": false,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    centered={true}
-    collapsable={false}
-    focusable={true}
-    hitSlop={
-      {
-        "bottom": 8,
-        "left": 8,
-        "right": 8,
-        "top": 8,
-      }
-    }
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
-          "overflow": "hidden",
+          "borderRadius": 16,
+          "bottom": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "width": 32,
         },
-        [
-          {
-            "alignItems": "center",
-            "borderRadius": 16,
-            "bottom": 0,
-            "justifyContent": "center",
-            "overflow": "hidden",
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "width": 32,
-          },
-          undefined,
-          null,
-        ],
       ]
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
+    <View
+      accessibilityLabel="Close"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "left": 8,
+          "right": 8,
+          "top": 8,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontSize": 18,
+            "overflow": "hidden",
           },
           [
             {
-              "lineHeight": 18,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
+              "alignItems": "center",
+              "borderRadius": 16,
+              "flex": 1,
+              "justifyContent": "center",
+              "overflow": "hidden",
             },
-            {
-              "backgroundColor": "transparent",
-            },
+            null,
           ],
         ]
       }
     >
-      close
-    </Text>
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 18,
+            },
+            [
+              {
+                "lineHeight": 18,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        close
+      </Text>
+    </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderRadius": 18,
-          "borderWidth": 3,
-          "bottom": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-          "width": 36,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -1763,7 +1604,6 @@ exports[`renders chip with custom close button 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -1866,145 +1706,109 @@ exports[`renders chip with custom close button 1`] = `
     </View>
   </View>
   <View
-    accessibilityLabel="Close"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": false,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    centered={true}
-    collapsable={false}
-    focusable={true}
-    hitSlop={
-      {
-        "bottom": 8,
-        "left": 8,
-        "right": 8,
-        "top": 8,
-      }
-    }
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
-          "overflow": "hidden",
+          "borderRadius": 16,
+          "bottom": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "width": 32,
         },
-        [
-          {
-            "alignItems": "center",
-            "borderRadius": 16,
-            "bottom": 0,
-            "justifyContent": "center",
-            "overflow": "hidden",
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "width": 32,
-          },
-          undefined,
-          null,
-        ],
       ]
     }
   >
-    <Text
-      accessibilityElementsHidden={true}
-      importantForAccessibility="no-hide-descendants"
-      pointerEvents="none"
-      selectable={false}
+    <View
+      accessibilityLabel="Close"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "left": 8,
+          "right": 8,
+          "top": 8,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontSize": 18,
+            "overflow": "hidden",
           },
           [
             {
-              "lineHeight": 18,
-              "transform": [
-                {
-                  "scaleX": 1,
-                },
-              ],
+              "alignItems": "center",
+              "borderRadius": 16,
+              "flex": 1,
+              "justifyContent": "center",
+              "overflow": "hidden",
             },
-            {
-              "backgroundColor": "transparent",
-            },
+            null,
           ],
         ]
       }
     >
-      arrow-down
-    </Text>
+      <Text
+        accessibilityElementsHidden={true}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 18,
+            },
+            [
+              {
+                "lineHeight": 18,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+          ]
+        }
+      >
+        arrow-down
+      </Text>
+    </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderRadius": 18,
-          "borderWidth": 3,
-          "bottom": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-          "width": 36,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -2150,7 +1954,6 @@ exports[`renders chip with icon 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -2252,29 +2055,6 @@ exports[`renders chip with icon 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -2426,7 +2206,6 @@ exports[`renders chip with onPress 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -2487,29 +2266,6 @@ exports[`renders chip with onPress 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -2655,7 +2411,6 @@ exports[`renders outlined disabled chip 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -2716,29 +2471,6 @@ exports[`renders outlined disabled chip 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -2884,7 +2616,6 @@ exports[`renders selected chip 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -2986,29 +2717,6 @@ exports[`renders selected chip 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;
 
@@ -3154,7 +2862,6 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
           {
             "borderRadius": 8,
           },
-          undefined,
         ],
       ]
     }
@@ -3331,28 +3038,5 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
       </Text>
     </View>
   </View>
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "borderWidth": 3,
-          "bottom": -2,
-          "left": -2,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "right": -2,
-          "top": -2,
-        },
-        {
-          "borderColor": "rgba(98, 91, 113, 1)",
-          "borderRadius": 10,
-        },
-        {
-          "opacity": 0,
-        },
-      ]
-    }
-  />
 </View>
 `;

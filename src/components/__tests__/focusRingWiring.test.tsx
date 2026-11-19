@@ -28,6 +28,7 @@ import Button from '../Button/Button';
 import Card from '../Card/Card';
 import CheckboxItem from '../Checkbox/CheckboxItem';
 import Chip from '../Chip/Chip';
+import { ChipTokens } from '../Chip/tokens';
 import DataTableCell from '../DataTable/DataTableCell';
 import DataTableRow from '../DataTable/DataTableRow';
 import DataTableTitle from '../DataTable/DataTableTitle';
@@ -69,6 +70,14 @@ const ringOffset = () => {
   return ringed.length ? style(ringed[0]).outlineOffset : undefined;
 };
 
+const ringedStyle = () =>
+  style(
+    walk(
+      (screen as unknown as { root: Node }).root,
+      (n) => style(n).outlineStyle === 'solid'
+    )[0]
+  );
+
 /** Focus whichever node actually has the handler wired. */
 const focusFirstFocusable = async () => {
   const root = (screen as unknown as { root: Node }).root;
@@ -94,13 +103,19 @@ describe('focus ring wiring', () => {
   });
 
   // Outward like MD3 and Material Web. A scrolling chip row that trims it is
-  // the app's container, not the chip's own view.
-  it('Chip rings outward', async () => {
-    await render(<Chip onPress={() => {}}>chip</Chip>);
+  // the app's container, not the chip's own view. The ring goes on the chip's
+  // own box, not the ripple that sits at the top of a taller chip.
+  it('Chip rings its own box outward', async () => {
+    await render(
+      <Chip onPress={() => {}} style={{ height: 40 }}>
+        chip
+      </Chip>
+    );
 
     await focusFirstFocusable();
 
     expect(ringOffset()).toBe(OUTWARD);
+    expect(ringedStyle()).toMatchObject({ height: 40 });
   });
 
   it('Chip drops its ring when it is disabled while focused', async () => {
@@ -147,6 +162,25 @@ describe('focus ring wiring', () => {
     await focusFirstFocusable();
 
     expect(ringOffset()).toBe(INWARD);
+  });
+
+  it('Chip rings its close button with a circle', async () => {
+    await render(
+      <Chip onPress={() => {}} onClose={() => {}}>
+        chip
+      </Chip>
+    );
+
+    await act(async () => {
+      await fireEvent(screen.getByLabelText('Close'), 'focus', ownFocusEvent());
+    });
+
+    // The ring sits on an unclipped wrapper around the close ripple, a circle
+    // as tall as the chip, so the ripple's own clipping can't cut it.
+    expect(ringedStyle()).toMatchObject({
+      width: ChipTokens.containerHeight,
+      borderRadius: ChipTokens.containerHeight / 2,
+    });
   });
 
   it('Checkbox.Item rings inward, clear of the rows above and below', async () => {
@@ -738,6 +772,26 @@ describe('focus ring after the handler goes away and comes back', () => {
     expect(ringOffset()).toBeUndefined();
   });
 
+  it('Chip close button shows no ring until it is focused again', async () => {
+    // The body is a disabled control here, so the close button is focused by
+    // its label rather than as the first focusable node.
+    const { rerender } = await render(<Chip onClose={() => {}}>chip</Chip>);
+    await act(async () => {
+      await fireEvent(screen.getByLabelText('Close'), 'focus', ownFocusEvent());
+    });
+    expect(ringOffset()).toBeDefined();
+
+    await act(async () => {
+      await rerender(<Chip>chip</Chip>);
+    });
+    expect(ringOffset()).toBeUndefined();
+
+    await act(async () => {
+      await rerender(<Chip onClose={() => {}}>chip</Chip>);
+    });
+    expect(ringOffset()).toBeUndefined();
+  });
+
   it('TouchableRipple shows no ring until it is focused again', async () => {
     await dropAndRestore(
       <TouchableRipple onPress={() => {}}>
@@ -820,10 +874,13 @@ describe('focus ring wiring (web)', () => {
 
   // These spread the caller's props onto the ringed element, so the ring's
   // `data-*` attribute must join the caller's `dataSet`, not replace it.
-  it("DataTable.Title and Appbar.Content keep a caller's own dataSet", async () => {
+  it("DataTable.Title, Appbar.Content and Chip keep a caller's own dataSet", async () => {
     const dataSet = { qa: 'title' };
     await render(
       <>
+        <Chip testID="chip" onPress={() => {}} {...{ dataSet }}>
+          chip
+        </Chip>
         <DataTableTitle onPress={() => {}} testID="table" {...{ dataSet }}>
           title
         </DataTableTitle>
@@ -843,6 +900,10 @@ describe('focus ring wiring (web)', () => {
     expect(screen.getByTestId('appbar').props.dataSet).toEqual({
       qa: 'title',
       focusRing: 'outward',
+    });
+    expect(screen.getByTestId('chip').parent?.props.dataSet).toEqual({
+      qa: 'title',
+      focusRingWithin: 'outward',
     });
   });
 
@@ -920,5 +981,16 @@ describe('focus ring wiring (web)', () => {
     ).toBe('outward');
     expect(style(ringed[0]).borderWidth).toBeGreaterThan(0);
     expect(walk(ringed[0], (n) => n === button)).toHaveLength(1);
+  });
+
+  it('Chip marks the wrapper around its close button as the ring', async () => {
+    await render(
+      <Chip onPress={() => {}} onClose={() => {}}>
+        chip
+      </Chip>
+    );
+
+    const wrapper = screen.getByLabelText('Close').parent;
+    expect(wrapper?.props.dataSet).toEqual({ focusRingWithin: 'outward' });
   });
 });

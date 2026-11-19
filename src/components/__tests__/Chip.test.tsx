@@ -221,7 +221,7 @@ it('overlays the close button on top of the chip so its ripple spans behind it',
     </Chip>
   );
 
-  expect(screen.getByTestId('chip-close')).toHaveStyle({
+  expect(screen.getByTestId('chip-close').parent).toHaveStyle({
     bottom: 0,
     position: 'absolute',
     right: 0,
