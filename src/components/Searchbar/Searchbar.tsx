@@ -33,22 +33,34 @@ interface Style {
 /**
  * The properties `Surface` transitions by default. A `transitionProperty` set
  * through `style` replaces the one `Surface` applies, so the useful ones are
- * repeated here next to the animated focus margin below. The list mirrors
- * `Surface` and differs per platform because shadow properties do.
+ * repeated next to the animated focus margin below. Keep this in step with
+ * `Surface`, including its gating: shadow properties differ per platform, and
+ * `backgroundColor` is only listed when it is a string (see
+ * `getSurfaceTransitionProperties`).
  */
 type SurfaceTransitionProperty = keyof ViewStyle;
 
-const SURFACE_TRANSITION_PROPERTIES: SurfaceTransitionProperty[] =
+const SURFACE_SHADOW_TRANSITION_PROPERTIES: SurfaceTransitionProperty[] =
   Platform.select({
-    web: ['backgroundColor', 'boxShadow'],
-    android: ['backgroundColor', 'elevation'],
-    default: [
-      'backgroundColor',
-      'shadowOpacity',
-      'shadowOffset',
-      'shadowRadius',
-    ],
+    web: ['boxShadow'],
+    android: ['elevation'],
+    default: ['shadowOpacity', 'shadowOffset', 'shadowRadius'],
   });
+
+/**
+ * Reanimated can't animate `PlatformColor` or `DynamicColorIOS`, so like
+ * `Surface` only a string background color is transitioned.
+ */
+function getSurfaceTransitionProperties(
+  backgroundColor: ColorValue
+): SurfaceTransitionProperty[] {
+  return [
+    ...(typeof backgroundColor === 'string'
+      ? (['backgroundColor'] as const)
+      : []),
+    ...SURFACE_SHADOW_TRANSITION_PROPERTIES,
+  ];
+}
 
 /**
  * Whether the blur event below moves focus to one of the bar's own buttons.
@@ -91,7 +103,8 @@ export type Props = Omit<TextInputProps, 'style'> & {
    * Search layout mode, the default value is "contained".
    * - `contained` - the recommended M3 Expressive style: a rounded bar
    *   whose horizontal margins animate from 24dp down to 12dp on focus
-   *   (grow-wider effect). A `marginHorizontal`, `marginStart`, `marginEnd`,
+   *   (grow-wider effect). A `marginHorizontal`, `marginInline`,
+   *   `marginStart`, `marginEnd`, `marginInlineStart`, `marginInlineEnd`,
    *   `marginLeft` or `marginRight` set through `style` replaces the animated
    *   margin on that side, so the bar keeps it. The `margin` shorthand does
    *   not, since a per-axis margin takes precedence over it.
@@ -317,7 +330,7 @@ const Searchbar = ({
   // collapsing then moves the button out from under the pointer. The bar stays
   // expanded until focus leaves it entirely.
   const [focusHeldInside, setFocusHeldInside] = React.useState(false);
-  // An object ref would reach `Surface` as a `forwardedRef` prop. Typed as an
+  // Filled by the callback ref below, which stores the bar's node as an
   // `HTMLElement` so `focusout` resolves to a typed `FocusEvent` listener.
   const barNodeRef = React.useRef<HTMLElement | null>(null);
   const expanded = focused || focusHeldInside;
@@ -372,7 +385,7 @@ const Searchbar = ({
       ...(Platform.OS === 'web'
         ? (['marginInline'] as SurfaceTransitionProperty[])
         : []),
-      ...SURFACE_TRANSITION_PROPERTIES,
+      ...getSurfaceTransitionProperties(containerColor),
     ],
     transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
   };

@@ -779,7 +779,8 @@ axis; it replaces the built-in margin and disables the focus animation:
 />
 ```
 
-Only a margin naming that axis - `marginHorizontal`, `marginStart`, `marginEnd`,
+Only a margin naming that axis - `marginHorizontal`, `marginInline`,
+`marginStart`, `marginEnd`, `marginInlineStart`, `marginInlineEnd`,
 `marginLeft` or `marginRight` - replaces the animated one. The `margin`
 shorthand is less specific, so the horizontal margins keep animating around it.
 Use `marginVertical` when you only need vertical spacing and want to keep the

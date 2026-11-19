@@ -1,4 +1,10 @@
-import { Platform, Pressable, Text } from 'react-native';
+import {
+  Platform,
+  PlatformColor,
+  Pressable,
+  StyleSheet,
+  Text,
+} from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { expect, it, jest } from '@jest/globals';
@@ -332,6 +338,35 @@ it('shrinks its horizontal margin while the input is focused', async () => {
   expect(screen.root).toHaveStyle({
     marginHorizontal: SearchbarTokens.marginFocused,
   });
+});
+
+// Reanimated's Jest setup keeps CSS transition props off `style`, on the host
+// view's `jestInlineStyle` prop, and `getAnimatedStyle` can't read this view's
+// nested style arrays.
+const getTransitionProperty = () =>
+  // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+  StyleSheet.flatten(screen.root?.props.jestInlineStyle)?.transitionProperty;
+
+it('transitions a string container color along with the focus margin', async () => {
+  await render(<Searchbar value="" />);
+
+  expect(getTransitionProperty()).toEqual(
+    expect.arrayContaining(['marginHorizontal', 'backgroundColor'])
+  );
+});
+
+it('does not transition a PlatformColor container color', async () => {
+  await render(
+    <Searchbar
+      value=""
+      theme={{
+        colors: { surfaceContainerHigh: PlatformColor('?attr/colorSurface') },
+      }}
+    />
+  );
+
+  expect(getTransitionProperty()).toContain('marginHorizontal');
+  expect(getTransitionProperty()).not.toContain('backgroundColor');
 });
 
 it('keeps a custom horizontal margin instead of animating it', async () => {
