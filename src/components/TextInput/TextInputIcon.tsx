@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
@@ -33,8 +34,10 @@ export type TextInputIconProps = TextInputAccessoryProps &
  * `TextInputAccessoryProps`, which TextInput passes into those render props.
  *
  * Without `onPress`, `onLongPress`, `onPressIn` or `onPressOut`, the icon is
- * decorative: a plain element that keeps its label but isn't a control, and a
- * tap on it goes to the field.
+ * decorative: it is hidden from assistive technology, and a tap on it goes to
+ * the field. An actionable icon requires an `aria-label` (or
+ * `accessibilityLabel`) that names its action, such as "Clear text" or
+ * "Show password", and warns in development without one.
  *
  * ## Usage
  * ```js
@@ -49,7 +52,7 @@ export type TextInputIconProps = TextInputAccessoryProps &
  *   );
  *
  *   const clearAccessory = (props) => (
- *     <TextInput.Icon {...props} icon="close" onPress={() => setText('')} />
+ *     <TextInput.Icon {...props} icon="close" aria-label="Clear text" onPress={() => setText('')} />
  *   );
  *
  *   return (
@@ -78,6 +81,7 @@ const TextInputIcon = ({
   theme: themeOverride,
   onPress,
   hitSlop,
+  multiline: _multiline,
   ...rest
 }: TextInputIconProps) => {
   const theme = useInternalTheme(themeOverride);
@@ -91,19 +95,38 @@ const TextInputIcon = ({
     isDisabled: disabled,
   });
 
-  // A decorative icon is not a control, so `disabled` would only announce it as
-  // a disabled button. Must match TouchableRipple's predicate, or an icon with
+  // Decides both the accessibility contract and `disabled`. A decorative icon
+  // is not a control, and forwarding `disabled` would turn it back into a
+  // disabled button. Must match TouchableRipple's predicate, or an icon with
   // only `onLongPress` stays pressable on a disabled field.
   const { onLongPress, onPressIn, onPressOut } = rest;
-  const isInteractive = hasTouchHandler({
+  const actionable = hasTouchHandler({
     onPress,
     onLongPress,
     onPressIn,
     onPressOut,
   });
+  const accessibleName = rest['aria-label'] ?? rest.accessibilityLabel;
+  React.useEffect(() => {
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      actionable &&
+      !accessibleName?.trim()
+    ) {
+      console.warn(
+        'TextInput.Icon: an actionable icon requires an aria-label or accessibilityLabel.'
+      );
+    }
+  }, [actionable, accessibleName]);
+
+  void _multiline;
 
   return (
-    <View style={styles.iconWrapper}>
+    <View
+      style={styles.iconWrapper}
+      aria-hidden={!actionable}
+      pointerEvents={actionable ? 'auto' : 'none'}
+    >
       <IconButton
         {...rest}
         hitSlop={hitSlop !== undefined ? hitSlop : ACCESSORY_HIT_SLOP}
@@ -118,9 +141,9 @@ const TextInputIcon = ({
           // disabled. Forwarding `disabled` makes IconButton dim the icon too,
           // and the two multiply, so let IconButton own it and cancel the outer
           // one. A decorative icon keeps it, nothing else dims it.
-          isInteractive && disabled ? styles.notDimmed : null,
+          actionable && disabled ? styles.notDimmed : null,
         ]}
-        disabled={isInteractive ? disabled : undefined}
+        disabled={actionable ? disabled : undefined}
         onPress={onPress}
       />
     </View>

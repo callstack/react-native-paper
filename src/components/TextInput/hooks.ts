@@ -1,23 +1,31 @@
 import {
   useEffect,
   useImperativeHandle,
+  useId,
   useRef,
   useState,
   type ComponentRef,
   type RefObject,
 } from 'react';
-import { TextInput as NativeTextInput } from 'react-native';
+import {
+  AccessibilityInfo,
+  Platform,
+  TextInput as NativeTextInput,
+} from 'react-native';
 import type { BlurEvent, FocusEvent } from 'react-native';
 
 import {
   interpolate,
+  useAnimatedReaction,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import {
   ACTIVE_LABEL_FONT_SIZE,
+  ERROR_ANNOUNCEMENT_DELAY_MS,
   INACTIVE_LABEL_FONT_SIZE,
   TIMING_CONFIG,
 } from './constants';
@@ -39,17 +47,20 @@ import {
 } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../theme/types';
 
 const useTextInputAnimation = ({
   variant,
   isRTL,
+  isDisabled,
   hasAccessory,
   value,
   defaultValue,
 }: {
   variant: TextInputVariant;
   isRTL: boolean;
+  isDisabled: boolean;
   hasAccessory: boolean;
   value: string | undefined;
   defaultValue: string | undefined;
@@ -58,6 +69,18 @@ const useTextInputAnimation = ({
 
   const focusSV = useSharedValue(0);
   const floatSV = useSharedValue(initialText.length > 0 ? 1 : 0);
+  const [isLabelFloated, setIsLabelFloated] = useState(initialText.length > 0);
+
+  // Track when the label has fully left its resting place, whichever animation
+  // moved it, so the placeholder does not show under the resting label.
+  useAnimatedReaction(
+    () => floatSV.value === 1,
+    (floated, previous) => {
+      if (previous !== null && floated !== previous) {
+        scheduleOnRN(setIsLabelFloated, floated);
+      }
+    }
+  );
 
   const { activeTop, inactiveTop, translateXEnd } = getTextInputAnimationLayout(
     {
@@ -108,8 +131,12 @@ const useTextInputAnimation = ({
     ),
   }));
 
-  const animatedContainerStyle = useAnimatedStyle(() => ({
-    opacity: floatSV.value,
+  // The resting label covers the prefix and suffix, so they fade in as it
+  // floats. This opacity replaces the static one, so it carries the disabled
+  // dim of the prefix and suffix styles too.
+  const affixOpacity = isDisabled ? tokens.md.sys.state.opacity.disabled : 1;
+  const animatedAffixStyle = useAnimatedStyle(() => ({
+    opacity: floatSV.value * affixOpacity,
   }));
 
   const animatedActiveOutlineStyle = useAnimatedStyle(() => ({
@@ -119,9 +146,10 @@ const useTextInputAnimation = ({
   return {
     animatedLabelWrapperStyle,
     animatedLabelTextStyle,
-    animatedContainerStyle,
+    animatedAffixStyle,
     animatedActiveOutlineStyle:
       variant === 'filled' ? animatedActiveOutlineStyle : undefined,
+    isLabelFloated,
     runFocusAnimation,
     runBlurAnimation,
     syncFloatToValue,
@@ -254,6 +282,7 @@ const useTextInputLayout = ({
   theme,
   flags,
   isFocused,
+  isHovered,
   animation,
 }: {
   variant: TextInputVariant;
@@ -262,6 +291,7 @@ const useTextInputLayout = ({
   theme: InternalTheme;
   flags: TextInputFlags;
   isFocused: boolean;
+  isHovered: boolean;
   animation: TextInputAnimationState;
 }): TextInputLayoutState => {
   const { isRTL, isDisabled, hasError, hasAccessory, hasSuffix } = flags;
@@ -284,6 +314,7 @@ const useTextInputLayout = ({
           input,
           theme,
           isFocused,
+          isHovered,
           isRTL,
           isDisabled,
           hasAccessory,
@@ -300,6 +331,7 @@ const useTextInputLayout = ({
           input,
           theme,
           isFocused,
+          isHovered,
           isRTL,
           isDisabled,
           hasAccessory,
@@ -324,6 +356,8 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const { ref, variant = 'filled', theme: themeOverride } = props;
 
   const input = useRef<ComponentRef<typeof NativeTextInput>>(null);
+  const id = useId();
+  const [isHovered, setIsHovered] = useState(false);
   const init = useRef(false);
 
   const theme = useInternalTheme(themeOverride);
@@ -340,6 +374,7 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const animation = useTextInputAnimation({
     variant,
     isRTL,
+    isDisabled: !!props.disabled,
     hasAccessory,
     value: props.value,
     defaultValue: props.defaultValue,
@@ -417,25 +452,67 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     theme,
     flags,
     isFocused,
+    isHovered,
     animation,
   });
 
+  // With a label, show the placeholder only once the label has floated away
+  // from it.
+  const isPlaceholderShown =
+    !props.label || hasValue || (isFocused && animation.isLabelFloated);
+
   const accessibilityProps = getAccessibilityData({
+    id,
     hasError: flags.hasError,
     hasCounter: flags.hasCounter,
+    hasPrefix: flags.hasPrefix,
+    hasSuffix: flags.hasSuffix,
     isDisabled: flags.isDisabled,
+    isPlaceholderShown,
     data: props,
     inputLength,
   });
+
+  // On native, the error is read from the input's hint and its text node is
+  // hidden, so a live region would not announce it. Announce changed errors
+  // instead, but not errors present on mount, so a screen that opens with
+  // several invalid fields does not queue an announcement for each of them.
+  // Wait until the error has stayed the same for ERROR_ANNOUNCEMENT_DELAY_MS,
+  // so a message that changes on every keystroke is announced once it stops
+  // changing, not once per change.
+  // Queue them so that fields becoming invalid together do not cut each other
+  // off on iOS.
+  const errorMessage = flags.hasError ? props.supportingText : undefined;
+  const announcedErrorMessage = useRef(errorMessage);
+  useEffect(() => {
+    if (
+      Platform.OS === 'web' ||
+      errorMessage === announcedErrorMessage.current
+    ) {
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      announcedErrorMessage.current = errorMessage;
+
+      if (errorMessage) {
+        AccessibilityInfo.announceForAccessibilityWithOptions(errorMessage, {
+          queue: true,
+        });
+      }
+    }, ERROR_ANNOUNCEMENT_DELAY_MS);
+
+    return () => clearTimeout(timeout);
+  }, [errorMessage]);
 
   const counterText = `${inputLength}/${props.maxLength}`;
 
   const renderLeadingAccessory = props.startAccessory;
   const renderTrailingAccessory = props.endAccessory;
 
+  // A space keeps the iOS multiline placeholder updating:
   // https://github.com/facebook/react-native/issues/31573
-  const placeholder =
-    isFocused || !props.label || hasValue ? props.placeholder : ' ';
+  const placeholder = isPlaceholderShown ? props.placeholder : ' ';
 
   return {
     input,
@@ -449,11 +526,8 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     selectionColor,
     cursorColor,
     animatedActiveOutlineStyles: undefined,
-    // The input only fades out while a label rests in its place; without a
-    // label the input and its placeholder stay visible.
-    animatedContainerStyle: props.label
-      ? animation.animatedContainerStyle
-      : undefined,
+    // Without a label nothing covers the prefix and suffix.
+    animatedAffixStyle: props.label ? animation.animatedAffixStyle : undefined,
     placeholder,
     counterText,
     accessibilityProps,
@@ -464,5 +538,7 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     onFocus,
     onBlur,
     focusInput,
+    onHoverIn: () => setIsHovered(true),
+    onHoverOut: () => setIsHovered(false),
   };
 };

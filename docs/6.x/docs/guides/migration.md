@@ -858,6 +858,41 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 />
 ```
 
+`TextInput.Icon` without a press handler is decorative: it is hidden from
+assistive technology and is not a keyboard focus stop. An icon with `onPress`,
+`onLongPress`, `onPressIn` or `onPressOut` requires an `aria-label` or
+`accessibilityLabel` that names its action, and warns in development without
+one:
+
+```tsx
+const [value, setValue] = React.useState('');
+
+// Before (v5)
+<TextInput
+  label="Search"
+  value={value}
+  onChangeText={setValue}
+  left={<TextInput.Icon icon="magnify" />}
+  right={<TextInput.Icon icon="close" onPress={() => setValue('')} />}
+/>
+
+// After (v6)
+<TextInput
+  label="Search"
+  value={value}
+  onChangeText={setValue}
+  startAccessory={(props) => <TextInput.Icon {...props} icon="magnify" />}
+  endAccessory={(props) => (
+    <TextInput.Icon
+      {...props}
+      icon="close"
+      aria-label="Clear search"
+      onPress={() => setValue('')}
+    />
+  )}
+/>
+```
+
 #### Label and supporting text
 
 - **`label: React.Element | string`** → **`string`**
@@ -904,6 +939,39 @@ const GroupError = ({ visible }: { visible: boolean }) => {
   );
 };
 ```
+
+Supporting text, the character counter, `prefix` and `suffix` describe the field
+instead of becoming part of its accessible name, and the prefix and suffix are
+no longer read as separate text. On web, the input references them with
+`aria-describedby` (the prefix and suffix while they are shown), and IDs you
+pass in `aria-describedby` are kept. On Android and iOS, they are only exposed
+through `accessibilityHint`, alongside any hint you pass, and the visible text
+is hidden from assistive technology, so tests that find these texts with
+`getByText` need `{ includeHiddenElements: true }`. Users who turn hints off,
+for example with the VoiceOver Speak Hints setting, do not hear them. The
+placeholder of an empty field with a label stays blank until the label floats,
+so it describes the field as well: on web until the input shows it, and on
+Android and iOS in the hint. The input no longer sets `aria-valuenow` and
+`aria-valuemax` when the counter reaches `maxLength`.
+
+When no label or explicit accessible name is supplied, the placeholder names the
+field, including after text is entered. A disabled field always exposes its
+disabled state, even when `aria-disabled={false}` is supplied.
+
+On web, error supporting text uses `role="alert"`. On Android and iOS, a new or
+changed error message is announced through `AccessibilityInfo` once it has
+stayed the same for a second, so a message that changes on every keystroke is
+announced once it stops changing. An error that is already shown when the field
+mounts is not announced there. On web, explicit `aria-invalid` values are kept;
+when omitted, validity is derived from `error` and the character counter. Custom
+input renderers should forward the accessibility props they receive.
+
+The filled indicator uses `onSurfaceVariant` and the outlined border uses
+`outline` at rest. On web, both change to `onSurface` on hover, and an invalid
+field changes from `error` to `onErrorContainer`. Focus takes precedence over
+hover and uses `primary`, or `error` for an invalid field. A disabled field uses
+the disabled colors even when `error` is set. On web it keeps `aria-invalid`; on
+Android and iOS the error text stays in its hint.
 
 #### Removed props
 
