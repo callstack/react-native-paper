@@ -127,7 +127,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             "position": "absolute",
           },
           {
-            "left": 52,
+            "start": 52,
           },
           {
             "top": 16,
