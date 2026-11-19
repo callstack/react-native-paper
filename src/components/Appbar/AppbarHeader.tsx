@@ -47,7 +47,7 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    * @supported Available in v6.x
    *
    * Whether the content below the header has scrolled. A scrolled header uses the `surfaceContainer` color for its background,
-   * without elevation. Overridden by `backgroundColor`.
+   * without elevation. An `elevated` header keeps its shadow when it is scrolled. Overridden by `backgroundColor`.
    */
   isScrolled?: boolean;
   /**

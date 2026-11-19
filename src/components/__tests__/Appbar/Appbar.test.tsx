@@ -657,6 +657,27 @@ describe('Appbar scroll-aware color', () => {
     });
   });
 
+  it('keeps the shadow of an elevated Appbar when it is scrolled', async () => {
+    await render(
+      <>
+        <Appbar elevated isScrolled testID="both">
+          <Appbar.Content title="Title" />
+        </Appbar>
+        <Appbar isScrolled testID="scrolled">
+          <Appbar.Content title="Title" />
+        </Appbar>
+      </>
+    );
+
+    expect(screen.getByTestId('both')).toHaveStyle({
+      backgroundColor: LightTheme.colors.surfaceContainer,
+      shadowOpacity: 0.19,
+    });
+    expect(screen.getByTestId('scrolled')).not.toHaveStyle({
+      shadowOpacity: 0.19,
+    });
+  });
+
   it('prefers the custom background color', async () => {
     await render(
       <Appbar isScrolled backgroundColor="#FF0000" testID="appbar">

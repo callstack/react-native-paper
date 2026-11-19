@@ -61,7 +61,7 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
      * @supported Available in v6.x
      *
      * Whether the content below the Appbar has scrolled. A scrolled Appbar uses the `surfaceContainer` color for its background,
-     * without elevation. Overridden by `backgroundColor`.
+     * without elevation. An `elevated` Appbar keeps its shadow when it is scrolled. Overridden by `backgroundColor`.
      */
     isScrolled?: boolean;
     /**
