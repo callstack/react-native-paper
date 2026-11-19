@@ -4,6 +4,7 @@ import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 import { getSelectionControlIOSColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import Icon, { type IconSource } from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -32,6 +33,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * custom icon.
+   */
+  icon?: IconSource;
 };
 
 /**
@@ -47,6 +52,7 @@ const CheckboxIOS = ({
   onPress,
   theme: themeOverrides,
   testID,
+  icon: customIcon,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -77,13 +83,17 @@ const CheckboxIOS = ({
       theme={theme}
     >
       <View style={{ opacity }}>
-        <MaterialCommunityIcon
-          allowFontScaling={false}
-          name={icon}
-          size={24}
-          color={checkedColor}
-          direction="ltr"
-        />
+        {customIcon ? (
+          <Icon source={customIcon} size={24} color={checkedColor} />
+        ) : (
+          <MaterialCommunityIcon
+            allowFontScaling={false}
+            name={icon}
+            size={24}
+            color={checkedColor}
+            direction="ltr"
+          />
+        )}
       </View>
     </TouchableRipple>
   );
