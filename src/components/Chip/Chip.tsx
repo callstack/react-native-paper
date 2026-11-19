@@ -384,11 +384,11 @@ const Chip = ({
           setFocused(false);
         }}
         delayLongPress={delayLongPress}
-        disabled={isTouchableDisabled}
+        disabled={disabled}
         aria-label={ariaLabel}
         role={role}
         aria-selected={selected}
-        aria-disabled={isTouchableDisabled}
+        aria-disabled={disabled}
         testID={testID}
         theme={theme}
         hitSlop={hitSlop ?? touchTargetHitSlop}
@@ -447,6 +447,7 @@ const Chip = ({
       </TouchableRipple>
       {showTrailingIcon ? (
         <View
+          pointerEvents={isTrailingInteractive ? undefined : 'none'}
           style={[styles.trailingIconWrapper, ...trailingFocusRing.style]}
           {...trailingFocusRing.dataSetProps}
         >
@@ -466,7 +467,7 @@ const Chip = ({
             }
             aria-disabled={isTrailingInteractive ? disabled : undefined}
             testID={hasTrailingIcon ? trailingIconTestID : closeIconTestID}
-            hitSlop={trailingIconHitSlop}
+            hitSlop={isTrailingInteractive ? trailingIconHitSlop : undefined}
             background={trailingIconAndroidRipple}
             rippleColor={rippleColor}
             onFocus={trailingFocusTarget.onFocus}
