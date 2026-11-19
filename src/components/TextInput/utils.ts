@@ -312,6 +312,7 @@ export const getFilledTextInputData = (
     isDisabled,
     hasAccessory,
     hasError,
+    isHovered,
     animatedLabelWrapperStyle,
     animatedActiveOutlineStyle,
   } = api;
@@ -329,7 +330,7 @@ export const getFilledTextInputData = (
     isFocused: false,
     isDisabled,
     variant: 'filled',
-    isHovered: api.isHovered,
+    isHovered,
   });
 
   const activeOutlineColor = getOutlineColor({
@@ -460,6 +461,7 @@ export const getOutlinedTextInputData = (
     hasAccessory,
     hasError,
     hasSuffix,
+    isHovered,
     animatedLabelWrapperStyle,
   } = api;
 
@@ -476,7 +478,7 @@ export const getOutlinedTextInputData = (
     isDisabled,
     isFocused,
     hasError,
-    isHovered: api.isHovered,
+    isHovered,
   });
 
   /**
