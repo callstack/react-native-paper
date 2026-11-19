@@ -3,6 +3,7 @@
 exports[`Appbar does not pass any additional props to Searchbar 1`] = `
 <View
   collapsable={false}
+  onLayout={[Function]}
   style={
     [
       {},
@@ -400,6 +401,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
 exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and AppbarAction 1`] = `
 <View
   collapsable={false}
+  onLayout={[Function]}
   style={
     [
       {},
@@ -612,6 +614,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     </View>
   </View>
   <View
+    onLayout={[Function]}
     pointerEvents="box-none"
     style={
       [
@@ -829,6 +832,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
 exports[`AppbarAction should be rendered with custom color 1`] = `
 <View
   collapsable={false}
+  onLayout={[Function]}
   style={
     [
       {},
@@ -1003,6 +1007,7 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
 exports[`AppbarAction should be rendered with default theme color 1`] = `
 <View
   collapsable={false}
+  onLayout={[Function]}
   style={
     [
       {},
@@ -1177,6 +1182,7 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
 exports[`AppbarAction should be rendered with specific theme color if is leading 1`] = `
 <View
   collapsable={false}
+  onLayout={[Function]}
   style={
     [
       {},
@@ -1351,6 +1357,7 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
 exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
 <View
   collapsable={false}
+  onLayout={[Function]}
   style={
     [
       {},

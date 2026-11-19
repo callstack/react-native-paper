@@ -9,14 +9,13 @@ import type {
   ViewProps,
 } from 'react-native';
 
-import { useAppbarContext } from './AppbarContext';
+import { useAppbarContext, useAppbarTheme } from './AppbarContext';
 import {
   APPBAR_HORIZONTAL_PADDING,
   getAppbarColor,
   isFlexibleMode,
   modeTextVariant,
 } from './utils';
-import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import Text from '../Typography/Text';
@@ -103,7 +102,7 @@ const AppbarContent = ({
   ...rest
 }: Props) => {
   const appbar = useAppbarContext();
-  const theme = useInternalTheme(themeOverrides ?? appbar?.theme);
+  const theme = useAppbarTheme(themeOverrides);
   const { colors, fonts } = theme;
 
   // With `onPress` the title is a button, so it gets the keyboard focus ring
@@ -165,13 +164,12 @@ const AppbarContent = ({
     ],
     testID,
     ...rest,
-    // The Appbar grows with the title, or centers it, based on its layout
-    onLayout: onContentLayout
-      ? (event: LayoutChangeEvent) => {
-          onContentLayout(event.nativeEvent.layout);
-          onLayout?.(event);
-        }
-      : onLayout,
+    // The Appbar grows with the title, or centers it, based on its layout. The
+    // handler is always set, as on the web it is only called if it is set when the content mounts.
+    onLayout: (event: LayoutChangeEvent) => {
+      onContentLayout?.(event.nativeEvent.layout);
+      onLayout?.(event);
+    },
   } satisfies ViewProps;
 
   const content = (

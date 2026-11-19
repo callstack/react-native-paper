@@ -34,8 +34,8 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    * - `medium` - Appbar with medium height (112).
    * - `large` - Appbar with large height (152).
    * - `center-aligned` - Appbar with default height and center-aligned title.
-   * - `medium-flexible` - Material 3 Expressive Appbar with a larger title and a minimum height of 112. It grows when the title wraps onto a second line.
-   * - `large-flexible` - Material 3 Expressive Appbar with a prominent title and a minimum height of 120. It grows when the title wraps onto a second line.
+   * - `medium-flexible` - Available in v6.x. Material 3 Expressive Appbar with a larger title and a minimum height of 112. It grows when the title wraps onto a second line.
+   * - `large-flexible` - Available in v6.x. Material 3 Expressive Appbar with a prominent title and a minimum height of 120. It grows when the title wraps onto a second line.
    */
   mode?: AppbarModes;
   /**
@@ -44,6 +44,8 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    */
   elevated?: boolean;
   /**
+   * @supported Available in v6.x
+   *
    * Whether the content below the header has scrolled. A scrolled header uses the `surfaceContainer` color for its background,
    * without elevation. Overridden by `backgroundColor`.
    */

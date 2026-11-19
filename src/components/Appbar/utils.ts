@@ -1,3 +1,4 @@
+import { I18nManager } from 'react-native';
 import type { ColorValue } from 'react-native';
 
 import { white } from '../../theme/colors';
@@ -107,4 +108,15 @@ export const getCenteringMargins = (
   }
 
   return { left: Math.max(0, right - left), right: Math.max(0, left - right) };
+};
+
+/**
+ * Whether React Native swaps the left and right of the styles, which it does in RTL,
+ * so they apply to the right and the left of the screen. The layout it reports
+ * is not swapped.
+ */
+export const isLeftRightSwapped = () => {
+  const constants = I18nManager.getConstants?.();
+
+  return !!constants?.isRTL && !!constants.doLeftAndRightSwapInRTL;
 };

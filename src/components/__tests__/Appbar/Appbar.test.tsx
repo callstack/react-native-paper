@@ -1,7 +1,14 @@
-import { Text as NativeText, View } from 'react-native';
+import { I18nManager, Text as NativeText, View } from 'react-native';
 import type { ColorValue } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import {
   getAnimatedStyle,
   useAnimatedStyle,
@@ -153,6 +160,23 @@ describe('Appbar context', () => {
     );
 
     expect(screen.getByText('Title')).toHaveStyle({ color: 'navy' });
+  });
+
+  it('merges the theme of a part over the theme of the Appbar', async () => {
+    await render(
+      <Appbar theme={{ colors: { onSurface: 'tomato' } }}>
+        <Appbar.Action
+          icon={ColorIcon}
+          isLeading
+          theme={{ colors: { primary: 'navy' } }}
+        />
+        <Appbar.Content title="Title" theme={{ colors: { primary: 'navy' } }} />
+      </Appbar>
+    );
+
+    // A part that sets other values still gets the rest from the Appbar
+    expect(screen.getByTestId('icon-color')).toHaveTextContent('tomato');
+    expect(screen.getByText('Title')).toHaveStyle({ color: 'tomato' });
   });
 
   it('renders parts on their own, outside of an Appbar', async () => {
@@ -430,6 +454,73 @@ describe('Appbar layout', () => {
 
       expect(screen.getByTestId('content')).toHaveStyle({ marginRight: 52 });
     });
+
+    describe.each([
+      // React Native applies the left of a style to the right in RTL
+      { swapped: true, margin: { marginLeft: 52, marginRight: 0 } },
+      { swapped: false, margin: { marginLeft: 0, marginRight: 52 } },
+    ])('in RTL, with the sides swapped: $swapped', ({ swapped, margin }) => {
+      beforeEach(() => {
+        jest.spyOn(I18nManager, 'getConstants').mockReturnValue({
+          isRTL: true,
+          doLeftAndRightSwapInRTL: swapped,
+          localeIdentifier: 'ar',
+        });
+      });
+
+      afterEach(() => {
+        jest.restoreAllMocks();
+      });
+
+      it('adds the margin on the side with less width and settles', async () => {
+        await renderAppbar(
+          <>
+            <Appbar.BackAction onPress={() => {}} />
+            <Appbar.Content title="Title" testID="content" />
+            <Appbar.Action icon="menu" onPress={() => {}} />
+            <Appbar.Action icon="dots-vertical" onPress={() => {}} />
+          </>
+        );
+
+        // The back action is on the right, and two actions are on the left
+        await measure(108, 256);
+
+        // The margin is on the right, where there is less width
+        expect(screen.getByTestId('content')).toHaveStyle(margin);
+
+        // The content shrinks by its margin on the right, and the margin must settle
+        await fireEvent(
+          screen.getByTestId('content'),
+          'layout',
+          layout(108, 204)
+        );
+
+        expect(screen.getByTestId('content')).toHaveStyle(margin);
+      });
+    });
+
+    // The web only observes an element that has `onLayout` when it mounts, so
+    // the handlers are set in every mode
+    it('uses the layout measured before the mode changed to center-aligned', async () => {
+      const { rerender } = await render(
+        <Appbar testID="appbar">
+          <Appbar.BackAction onPress={() => {}} />
+          <Appbar.Content title="Title" testID="content" />
+        </Appbar>
+      );
+
+      // The bar and the content are measured in the small mode
+      await measure(56, 360);
+
+      await rerender(
+        <Appbar mode="center-aligned" testID="appbar">
+          <Appbar.BackAction onPress={() => {}} />
+          <Appbar.Content title="Title" testID="content" />
+        </Appbar>
+      );
+
+      expect(screen.getByTestId('content')).toHaveStyle({ marginRight: 52 });
+    });
   });
 
   it('resets the height of a flexible Appbar when the content unmounts', async () => {
@@ -539,19 +630,6 @@ describe('Appbar layout', () => {
       expect(screen.getByRole('button', { name: 'Menu' })).toBeOnTheScreen();
     }
   );
-
-  it('gives a theme set on a part priority over the theme of the Appbar', async () => {
-    await render(
-      <Appbar mode="large" theme={{ colors: { onSurface: 'tomato' } }}>
-        <Appbar.Content
-          title="Title"
-          theme={{ colors: { onSurface: 'navy' } }}
-        />
-      </Appbar>
-    );
-
-    expect(screen.getByText('Title')).toHaveStyle({ color: 'navy' });
-  });
 });
 
 describe('Appbar scroll-aware color', () => {
@@ -765,6 +843,32 @@ describe('AppbarAction', () => {
       await userEvent.press(screen.getByRole('button', { name: 'Favorite' }));
 
       expect(onPress).toHaveBeenCalledTimes(1);
+    }
+  );
+
+  it.each([
+    { variant: 'filled', width: 'wide', expected: 52 },
+    { variant: 'tonal', width: 'wide', expected: 52 },
+    { variant: 'filled', width: 'default', expected: 40 },
+  ] as const)(
+    'makes a $variant action with $width width $expected wide',
+    async ({ variant, width, expected }) => {
+      await render(
+        <Appbar>
+          <Appbar.Action
+            icon="star"
+            aria-label="Favorite"
+            variant={variant}
+            width={width}
+            onPress={() => {}}
+          />
+        </Appbar>
+      );
+
+      // The container of the button is the one with the width
+      expect(
+        screen.getByRole('button', { name: 'Favorite' }).parent
+      ).toHaveStyle({ width: expected });
     }
   );
 

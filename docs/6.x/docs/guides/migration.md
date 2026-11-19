@@ -474,14 +474,14 @@ The parts are rendered in the order they are given, so render the leading action
 
 #### Layout of the modes
 
-- In the `medium` and `large` modes, `Appbar` now lays out the actions in a single row and `Appbar.Content` places the title below them, instead of the `Appbar` rendering a row for the actions and a row for the title. The actions of all modes are centered vertically in a `64dp` row, so those of `medium` and `large` moved up by `2dp` and `12dp`.
+- In the `medium` and `large` modes, `Appbar` now lays out the actions in a single row and `Appbar.Content` places the title below them, instead of the `Appbar` rendering a row for the actions and a row for the title. The actions of all modes are centered vertically in a `64dp` row, so those of `medium` moved down by `4dp` and those of `large` moved up by `6dp`.
 - In the `center-aligned` mode, the title is centered by measuring the width of the items on each side of it, so any actions, in any order, and custom children are taken into account. Previously, the actions before the title only counted as leading when they were `Appbar.BackAction` or had `isLeading`, and custom children were not counted. The title is centered when each side is at most two actions wide, as before.
 
 #### Theme
 
 `Appbar` now passes its `theme` to its parts in every mode. In 5.x, the `medium` and `large` modes didn't, so a bar with its own `theme` drew the icons, the title and the focus rings of these parts with the theme of the app. For example, a dark-themed bar in a light app drew dark icons and a dark title on its dark background.
 
-A `theme` set on a part takes precedence over the `theme` of the `Appbar`. In 5.x, the `theme` of the `Appbar` overrode it.
+A `theme` set on a part is merged over the `theme` of the `Appbar`, so it takes precedence for the values it sets and the rest comes from the `Appbar`. In 5.x, the `theme` of the `Appbar` overrode it.
 
 #### Material 3 Expressive
 

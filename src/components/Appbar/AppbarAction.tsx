@@ -4,9 +4,8 @@ import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 
 import type { AnimatedStyle } from 'react-native-reanimated';
 
-import { useAppbarContext } from './AppbarContext';
+import { useAppbarContext, useAppbarTheme } from './AppbarContext';
 import { getAppbarColor } from './utils';
-import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
@@ -113,7 +112,7 @@ const AppbarAction = ({
   ...rest
 }: Props) => {
   const appbar = useAppbarContext();
-  const theme = useInternalTheme(themeOverrides ?? appbar?.theme);
+  const theme = useAppbarTheme(themeOverrides);
   const { colors } = theme;
 
   const isStandard = variant === 'standard';
@@ -156,7 +155,7 @@ const variantIconButtonModes = {
 
 const styles = StyleSheet.create({
   wide: {
-    width: 56,
+    width: 52,
   },
 });
 

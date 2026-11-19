@@ -17,6 +17,7 @@ import {
   getAppbarBackgroundColor,
   getCenteringMargins,
   isFlexibleMode,
+  isLeftRightSwapped,
   modeAppbarHeight,
 } from './utils';
 import type { AppbarModes } from './utils';
@@ -47,8 +48,8 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
      * - `medium` - Appbar with medium height (112).
      * - `large` - Appbar with large height (152).
      * - `center-aligned` - Appbar with default height and center-aligned title.
-     * - `medium-flexible` - Material 3 Expressive Appbar with a larger title and a minimum height of 112. It grows when the title wraps onto a second line.
-     * - `large-flexible` - Material 3 Expressive Appbar with a prominent title and a minimum height of 120. It grows when the title wraps onto a second line.
+     * - `medium-flexible` - Available in v6.x. Material 3 Expressive Appbar with a larger title and a minimum height of 112. It grows when the title wraps onto a second line.
+     * - `large-flexible` - Available in v6.x. Material 3 Expressive Appbar with a prominent title and a minimum height of 120. It grows when the title wraps onto a second line.
      */
     mode?: AppbarModes;
     /**
@@ -57,6 +58,8 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
      */
     elevated?: boolean;
     /**
+     * @supported Available in v6.x
+     *
      * Whether the content below the Appbar has scrolled. A scrolled Appbar uses the `surfaceContainer` color for its background,
      * without elevation. Overridden by `backgroundColor`.
      */
@@ -184,11 +187,11 @@ const Appbar = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const [contentHeight, setContentHeight] = React.useState(0);
   const [barWidth, setBarWidth] = React.useState(0);
-  const [centeredContent, setCenteredContent] = React.useState<{
-    x: number;
-    width: number;
+  // The layout of `Appbar.Content`, with the margins it was measured with.
+  // It is recorded in every mode, so the Appbar can use it when the mode changes.
+  const [content, setContent] = React.useState<{
+    layout: LayoutRectangle;
     spacers: { left: number; right: number };
   } | null>(null);
 
@@ -213,24 +216,34 @@ const Appbar = ({
   const paddingLeft = insets.left + APPBAR_HORIZONTAL_PADDING;
   const paddingRight = insets.right + APPBAR_HORIZONTAL_PADDING;
 
+  // In RTL, React Native applies the left of a style to the right, and the other way round.
+  // The layout it reports and the sides below are not swapped, so the styles are mapped to them.
+  const isSwapped = isLeftRightSwapped();
+
   // The title is centered by adding a margin to it on the side with less actions.
   // The width of the actions on each side is what is left of the bar around the
   // content, after taking the margins it was measured with out.
   const sides =
-    isCenterAlignedMode && centeredContent && barWidth > 0
+    isCenterAlignedMode && content && barWidth > 0
       ? {
           left: Math.round(
-            centeredContent.x - paddingLeft - centeredContent.spacers.left
+            content.layout.x -
+              (isSwapped ? paddingRight : paddingLeft) -
+              content.spacers.left
           ),
           right: Math.round(
             barWidth -
-              paddingRight -
-              (centeredContent.x + centeredContent.width) -
-              centeredContent.spacers.right
+              (isSwapped ? paddingLeft : paddingRight) -
+              (content.layout.x + content.layout.width) -
+              content.spacers.right
           ),
         }
       : null;
   const spacers = getCenteringMargins(sides);
+
+  // The margins as styles
+  const marginLeft = isSwapped ? spacers.right : spacers.left;
+  const marginRight = isSwapped ? spacers.left : spacers.right;
 
   // The margins the content was last measured with
   const spacersRef = React.useRef(spacers);
@@ -239,21 +252,13 @@ const Appbar = ({
     spacersRef.current = spacers;
   });
 
+  // The layout handlers are passed in every mode: on the web, an element is only
+  // observed if it has `onLayout` when it mounts, so one added when the mode changes would never be called
   const handleContentLayout = React.useCallback(
     (layout: LayoutRectangle | null) => {
-      if (isFlexible) {
-        setContentHeight(layout?.height ?? 0);
-      } else {
-        setCenteredContent(
-          layout && {
-            x: layout.x,
-            width: layout.width,
-            spacers: spacersRef.current,
-          }
-        );
-      }
+      setContent(layout && { layout, spacers: spacersRef.current });
     },
-    [isFlexible]
+    []
   );
 
   const handleLayout = (event: LayoutChangeEvent) => {
@@ -272,10 +277,9 @@ const Appbar = ({
         right: insets.right,
       },
       theme: themeOverrides,
-      onContentLayout:
-        isCenterAlignedMode || isFlexible ? handleContentLayout : undefined,
+      onContentLayout: handleContentLayout,
       contentMargins: isCenterAlignedMode
-        ? { left: spacers.left, right: spacers.right }
+        ? { left: marginLeft, right: marginRight }
         : undefined,
     }),
     [
@@ -287,10 +291,9 @@ const Appbar = ({
       insets.right,
       themeOverrides,
       isCenterAlignedMode,
-      isFlexible,
       handleContentLayout,
-      spacers.left,
-      spacers.right,
+      marginLeft,
+      marginRight,
     ]
   );
 
@@ -308,7 +311,7 @@ const Appbar = ({
         minHeight:
           Math.max(
             modeAppbarHeight[mode],
-            APPBAR_CONTROLS_HEIGHT + contentHeight
+            APPBAR_CONTROLS_HEIGHT + (content?.layout.height ?? 0)
           ) + verticalInsets,
       }
     : { height: modeAppbarHeight[mode] + verticalInsets };
@@ -328,7 +331,7 @@ const Appbar = ({
         // The flat mode renders a single view, so an animated `style` is visible on iOS
         mode={elevated ? 'elevated' : 'flat'}
         {...rest}
-        onLayout={isCenterAlignedMode ? handleLayout : onLayout}
+        onLayout={handleLayout}
         theme={theme}
       >
         {children}
