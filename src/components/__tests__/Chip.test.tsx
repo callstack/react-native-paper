@@ -130,6 +130,21 @@ it('prefers trailingIcon over the close icon when both trailingIcon and onClose 
   expect(tree).toMatchSnapshot();
 });
 
+it('renders a trailing icon without a handler as a decorative view', async () => {
+  await render(
+    <Chip
+      onPress={() => {}}
+      trailingIcon="menu-down"
+      trailingIconTestID="chip-trailing-icon"
+    >
+      Example Chip
+    </Chip>
+  );
+
+  expect(screen.queryByRole('button', { name: 'Trailing icon' })).toBeNull();
+  expect(screen.getByTestId('chip-trailing-icon')).toBeOnTheScreen();
+});
+
 it('renders outlined disabled chip', async () => {
   const tree = (
     await render(
@@ -373,9 +388,10 @@ describe('getChipColor - selected background color', () => {
         theme: LightTheme,
         customBackgroundColor: 'purple',
         isOutlined: true,
+        selected: true,
       })
     ).toMatchObject({
-      selectedBackgroundColor: 'purple',
+      backgroundColor: 'purple',
     });
   });
 
@@ -385,9 +401,10 @@ describe('getChipColor - selected background color', () => {
         theme: LightTheme,
         customBackgroundColor: 'purple',
         isOutlined: false,
+        selected: true,
       })
     ).toMatchObject({
-      selectedBackgroundColor: 'purple',
+      backgroundColor: 'purple',
     });
   });
 
@@ -399,7 +416,7 @@ describe('getChipColor - selected background color', () => {
         selected: true,
       })
     ).toMatchObject({
-      selectedBackgroundColor: LightTheme.colors.secondaryContainer,
+      backgroundColor: LightTheme.colors.secondaryContainer,
     });
   });
 });
@@ -452,7 +469,7 @@ describe('getChipColor - background color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      selectedBackgroundColor: theme.colors.stateLayerPressed,
+      backgroundColor: theme.colors.stateLayerPressed,
     });
   });
 
@@ -611,6 +628,19 @@ describe('getChipColor - border color', () => {
       })
     ).toMatchObject({
       borderColor: theme.colors.onSurfaceVariant,
+    });
+  });
+
+  it('shows the focus outline over selectedColor on a focused unselected chip', () => {
+    expect(
+      getChipColors({
+        theme: LightTheme,
+        isOutlined: true,
+        focused: true,
+        selectedColor: 'purple',
+      })
+    ).toMatchObject({
+      borderColor: LightTheme.colors.onSurfaceVariant,
     });
   });
 

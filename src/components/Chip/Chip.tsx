@@ -60,6 +60,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   trailingIcon?: IconSource;
   /**
    * Function to execute when the trailing icon is pressed. Only called when `trailingIcon` is specified.
+   * Without it the trailing icon is decorative: not focusable and not announced as a button.
    */
   onTrailingIconPress?: (e: GestureResponderEvent) => void;
   /**
@@ -81,7 +82,8 @@ export type Props = Omit<ViewProps, 'style'> & {
   selected?: boolean;
   /**
    * Custom color to use for the label, leading icon, trailing icon, and outlined border,
-   * overriding the default selected/unselected theme colors.
+   * overriding the default selected/unselected theme colors. A focused outlined chip
+   * shows the focus outline color instead of the border, and a disabled chip ignores it.
    */
   selectedColor?: ColorValue;
   /**
@@ -159,6 +161,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   style?: StyleProp<Omit<ViewStyle, 'backgroundColor' | 'borderRadius'>>;
   /**
    * Sets additional distance outside of element in which a press can be detected.
+   * Defaults to extending the touch target to 48dp tall; a custom value replaces that default.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
   /**
@@ -275,7 +278,6 @@ const Chip = ({
     iconColor,
     trailingIconColor,
     contentOpacity,
-    selectedBackgroundColor,
     backgroundColor,
     rippleColor,
     avatarOverlayColor,
@@ -297,12 +299,14 @@ const Chip = ({
   const hasTrailingIcon = !!trailingIcon;
   const hasClose = !hasTrailingIcon && !!onClose;
   const showTrailingIcon = hasTrailingIcon || hasClose;
+  const onTrailingPress = hasTrailingIcon ? onTrailingIconPress : onClose;
+  const isTrailingInteractive = !!onTrailingPress;
 
   // The trailing ripple clips to a circle, so its ring sits on an unclipped
   // wrapper around it. Off without a trailing control too: a focused node that
   // unmounts sends no blur.
   const { target: trailingFocusTarget, ring: trailingFocusRing } = useFocusRing(
-    disabled || !showTrailingIcon,
+    disabled || !isTrailingInteractive,
     theme.colors.secondary,
     'outward',
     'within'
@@ -324,10 +328,11 @@ const Chip = ({
   };
   const trailingIconTouchTargetInset =
     (ChipTokens.minimumTouchTarget - TRAILING_ICON_AREA_SIZE) / 2;
+  // No slop on the left: it would overlap the chip body's touch area, and the
+  // later sibling would take presses meant for the label.
   const trailingIconHitSlop = {
     top: trailingIconTouchTargetInset,
     bottom: trailingIconTouchTargetInset,
-    left: trailingIconTouchTargetInset,
     right: trailingIconTouchTargetInset,
   };
   const trailingIconAndroidRipple =
@@ -341,7 +346,7 @@ const Chip = ({
 
   return (
     <Surface
-      backgroundColor={selected ? selectedBackgroundColor : backgroundColor}
+      backgroundColor={backgroundColor}
       borderRadius={borderRadius}
       style={[styles.container, { borderColor }, style, ...bodyFocusRing.style]}
       elevation={
@@ -399,7 +404,7 @@ const Chip = ({
           ]}
         >
           {hasAvatar ? (
-            <View style={[styles.avatarWrapper, disabled && styles.disabled]}>
+            <View style={styles.avatarWrapper}>
               {avatar}
               {showSelectedIcon ? (
                 <View
@@ -449,15 +454,17 @@ const Chip = ({
             borderless
             centered
             focusRing="none"
-            onPress={hasTrailingIcon ? onTrailingIconPress : onClose}
-            disabled={disabled}
-            role="button"
+            onPress={onTrailingPress}
+            disabled={isTrailingInteractive ? disabled : undefined}
+            role={isTrailingInteractive ? 'button' : undefined}
             aria-label={
-              hasTrailingIcon
-                ? trailingIconAccessibilityLabel
-                : closeIconAccessibilityLabel
+              isTrailingInteractive
+                ? hasTrailingIcon
+                  ? trailingIconAccessibilityLabel
+                  : closeIconAccessibilityLabel
+                : undefined
             }
-            aria-disabled={disabled}
+            aria-disabled={isTrailingInteractive ? disabled : undefined}
             testID={hasTrailingIcon ? trailingIconTestID : closeIconTestID}
             hitSlop={trailingIconHitSlop}
             background={trailingIconAndroidRipple}
@@ -542,9 +549,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  disabled: {
-    opacity: ChipTokens.disabledContentOpacity,
   },
 });
 

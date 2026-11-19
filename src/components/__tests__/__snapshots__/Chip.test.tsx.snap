@@ -464,12 +464,7 @@ exports[`prefers trailingIcon over the close icon when both trailingIcon and onC
   >
     <View
       accessible={true}
-      aria-disabled={false}
-      aria-label="Trailing icon"
       centered={true}
-      onBlur={[Function]}
-      onFocus={[Function]}
-      role="none"
       style={
         [
           {
@@ -781,12 +776,7 @@ exports[`renders chip with a generic trailing icon 1`] = `
   >
     <View
       accessible={true}
-      aria-disabled={false}
-      aria-label="Trailing icon"
       centered={true}
-      onBlur={[Function]}
-      onFocus={[Function]}
-      role="none"
       style={
         [
           {
@@ -1005,16 +995,13 @@ exports[`renders chip with avatar 1`] = `
     >
       <View
         style={
-          [
-            {
-              "borderRadius": 12,
-              "height": 24,
-              "marginRight": 8,
-              "overflow": "hidden",
-              "width": 24,
-            },
-            false,
-          ]
+          {
+            "borderRadius": 12,
+            "height": 24,
+            "marginRight": 8,
+            "overflow": "hidden",
+            "width": 24,
+          }
         }
       >
         <View
@@ -1395,7 +1382,6 @@ exports[`renders chip with close button 1`] = `
       hitSlop={
         {
           "bottom": 8,
-          "left": 8,
           "right": 8,
           "top": 8,
         }
@@ -1745,7 +1731,6 @@ exports[`renders chip with custom close button 1`] = `
       hitSlop={
         {
           "bottom": 8,
-          "left": 8,
           "right": 8,
           "top": 8,
         }
@@ -2886,16 +2871,13 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
     >
       <View
         style={
-          [
-            {
-              "borderRadius": 12,
-              "height": 24,
-              "marginRight": 8,
-              "overflow": "hidden",
-              "width": 24,
-            },
-            false,
-          ]
+          {
+            "borderRadius": 12,
+            "height": 24,
+            "marginRight": 8,
+            "overflow": "hidden",
+            "width": 24,
+          }
         }
       >
         <View
