@@ -694,6 +694,20 @@ describe('Card', () => {
     expectCardState('outlined');
   });
 
+  it('ignores focus that bubbles up from a focused descendant', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(<Card testID="card" variant="outlined" onPress={() => {}} />);
+
+    await fireEvent(screen.getByTestId('card'), 'focus', {
+      target: {},
+      currentTarget: { matches: () => true },
+    });
+    await settle();
+
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
+    expectCardState('outlined');
+  });
+
   it('clears hover feedback when the Card stops being actionable', async () => {
     jest.replaceProperty(Platform, 'OS', 'android');
     const { rerender } = await render(

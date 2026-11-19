@@ -659,7 +659,14 @@ const Card = ({
     React.useCallback(
       (event) => {
         focusTarget.onFocus?.(event);
-        setFocused(isKeyboardFocusEvent(event));
+        // Possibly missing, as `useFocusRing` allows: an app test can fire
+        // focus with no event at all.
+        const focusEvent: typeof event | undefined = event;
+        // Native focus events bubble: a focused descendant, such as a
+        // TextInput in the content, reaches this handler too.
+        if (!focusEvent || focusEvent.target === focusEvent.currentTarget) {
+          setFocused(!focusEvent || isKeyboardFocusEvent(focusEvent));
+        }
         onFocus?.(event);
       },
       [focusTarget, onFocus]
