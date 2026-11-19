@@ -12,7 +12,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
-import Surface from './Surface';
+import Surface, { Props as SurfaceProps } from './Surface';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
@@ -53,6 +53,10 @@ export type Props = {
    * Use this prop to change the default wrapper style or to override safe area insets with marginTop and marginBottom.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Surface elevation
+   */
+  elevation?: SurfaceProps['elevation'];
   /**
    * @optional
    */
@@ -109,6 +113,7 @@ function Modal({
   children,
   contentContainerStyle,
   style,
+  elevation,
   theme: themeOverrides,
   testID = 'modal',
 }: Props) {
@@ -220,6 +225,7 @@ function Modal({
           testID={`${testID}-surface`}
           theme={theme}
           style={[{ opacity }, styles.content, contentContainerStyle]}
+          elevation={elevation}
           container
         >
           {children}
