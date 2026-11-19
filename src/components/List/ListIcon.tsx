@@ -19,6 +19,10 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Size of the icon.
+   */
+  iconSize?: number;
 };
 
 const ICON_SIZE = 24;
@@ -34,19 +38,21 @@ const ICON_SIZE = 24;
  * const MyComponent = () => (
  *   <>
  *     <List.Icon color={MD3Colors.tertiary70} icon="folder" />
- *     <List.Icon color={MD3Colors.tertiary70} icon="equal" />
- *     <List.Icon color={MD3Colors.tertiary70} icon="calendar" />
+ *     <List.Icon color={MD3Colors.tertiary70} icon="equal" iconSize={32} />  // 👈 NEW EXAMPLE
+ *     <List.Icon color={MD3Colors.tertiary70} icon="calendar" iconSize={18} />
  *   </>
  * );
- *
- * export default MyComponent;
  * ```
+ *
+ * @property iconSize Size of the icon.
  */
+
 const ListIcon = ({
   icon,
   color: iconColor,
   style,
   theme: themeOverrides,
+  iconSize,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
@@ -55,7 +61,12 @@ const ListIcon = ({
       style={[theme.isV3 ? styles.itemV3 : styles.item, style]}
       pointerEvents="box-none"
     >
-      <Icon source={icon} size={ICON_SIZE} color={iconColor} theme={theme} />
+      <Icon
+        source={icon}
+        size={iconSize || ICON_SIZE}
+        color={iconColor}
+        theme={theme}
+      />
     </View>
   );
 };
