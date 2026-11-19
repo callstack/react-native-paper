@@ -1,7 +1,14 @@
 import * as React from 'react';
-import { PlatformColor, Text } from 'react-native';
+import { Platform, PlatformColor, Text } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import color from 'color';
 
 import { render, screen } from '../../test-utils';
@@ -40,6 +47,14 @@ const hoverLayer = `linear-gradient(${hoverColor}, ${hoverColor})`;
 const rowColor = LightTheme.colors.secondaryContainer;
 
 describe('TouchableRipple hover (web)', () => {
+  const original = Platform.OS;
+  beforeEach(() => {
+    Platform.OS = 'web';
+  });
+  afterEach(() => {
+    Platform.OS = original;
+  });
+
   it('paints the hover layer when style sets no background', async () => {
     await render(
       <TouchableRipple onPress={() => {}} testID="ripple">
