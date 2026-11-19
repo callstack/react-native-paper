@@ -757,6 +757,20 @@ it.each<{
   expect(warn).not.toHaveBeenCalled();
 });
 
+it('does not warn for an unnamed actionable accessory in production', async () => {
+  jest.replaceProperty(process.env, 'NODE_ENV', 'production');
+  const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  await render(
+    <TextInput
+      label="Search"
+      endAccessory={(props) => (
+        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+      )}
+    />
+  );
+  expect(warn).not.toHaveBeenCalled();
+});
+
 it.each(['ios', 'android', 'web'] as const)(
   'renders decorative accessories outside the accessibility tree without buttons on %s',
   async (platform) => {

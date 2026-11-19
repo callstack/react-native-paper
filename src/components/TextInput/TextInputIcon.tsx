@@ -108,7 +108,11 @@ const TextInputIcon = ({
   });
   const accessibleName = rest['aria-label'] ?? rest.accessibilityLabel;
   React.useEffect(() => {
-    if (__DEV__ && actionable && !accessibleName?.trim()) {
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      actionable &&
+      !accessibleName?.trim()
+    ) {
       console.warn(
         'TextInput.Icon: an actionable icon requires an aria-label or accessibilityLabel.'
       );
