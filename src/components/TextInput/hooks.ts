@@ -332,7 +332,7 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
 
   const isControlled = props.value !== undefined;
   const isRTL = direction === 'rtl';
-  const hasAccessory = isRTL ? !!props.endAccessory : !!props.startAccessory;
+  const hasAccessory = !!props.startAccessory;
 
   const { hasValue, inputLength, getHasText, onChangeText } =
     useTextInputInput(props);
@@ -430,12 +430,8 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
 
   const counterText = `${inputLength}/${props.maxLength}`;
 
-  const renderLeadingAccessory = flags.isRTL
-    ? props.endAccessory
-    : props.startAccessory;
-  const renderTrailingAccessory = flags.isRTL
-    ? props.startAccessory
-    : props.endAccessory;
+  const renderLeadingAccessory = props.startAccessory;
+  const renderTrailingAccessory = props.endAccessory;
 
   // https://github.com/facebook/react-native/issues/31573
   const placeholder =

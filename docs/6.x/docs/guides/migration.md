@@ -838,6 +838,8 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 - **`left` / `right`** → **`startAccessory` / `endAccessory`**
 - **`TextInput.Affix`** → **`prefix` / `suffix`**, or **`TextInput.Icon`**, or **`startAccessory` / `endAccessory`**
 
+`startAccessory` and `endAccessory` follow the writing direction. In RTL, `startAccessory` sits on the right on every platform, while v5's `left` stayed on the left on web.
+
 ```tsx
 // Before (v5)
 <TextInput
