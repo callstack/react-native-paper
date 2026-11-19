@@ -207,11 +207,8 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
         }
       >
         <View
-          accessibilityRole="none"
-          accessible={false}
-          aria-hidden={true}
+          accessible={true}
           centered={true}
-          focusable={false}
           role="none"
           style={
             [
@@ -234,7 +231,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
               ],
             ]
           }
-          tabIndex={-1}
         >
           <View
             style={
@@ -659,11 +655,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         }
       >
         <View
-          accessibilityRole="none"
-          accessible={false}
-          aria-hidden={true}
+          accessible={true}
           centered={true}
-          focusable={false}
           role="none"
           style={
             [
@@ -686,7 +679,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
-          tabIndex={-1}
         >
           <View
             style={
@@ -817,11 +809,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         }
       >
         <View
-          accessibilityRole="none"
-          accessible={false}
-          aria-hidden={true}
+          accessible={true}
           centered={true}
-          focusable={false}
           role="none"
           style={
             [
@@ -844,7 +833,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
-          tabIndex={-1}
         >
           <View
             style={
@@ -1078,11 +1066,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         }
       >
         <View
-          accessibilityRole="none"
-          accessible={false}
-          aria-hidden={true}
+          accessible={true}
           centered={true}
-          focusable={false}
           role="none"
           style={
             [
@@ -1105,7 +1090,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               ],
             ]
           }
-          tabIndex={-1}
         >
           <View
             style={
@@ -1701,11 +1685,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         }
       >
         <View
-          accessibilityRole="none"
-          accessible={false}
-          aria-hidden={true}
+          accessible={true}
           centered={true}
-          focusable={false}
           role="none"
           style={
             [
@@ -1728,7 +1709,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
-          tabIndex={-1}
         >
           <View
             style={
@@ -1859,11 +1839,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         }
       >
         <View
-          accessibilityRole="none"
-          accessible={false}
-          aria-hidden={true}
+          accessible={true}
           centered={true}
-          focusable={false}
           role="none"
           style={
             [
@@ -1886,7 +1863,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               ],
             ]
           }
-          tabIndex={-1}
         >
           <View
             style={
@@ -2100,11 +2076,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         }
       >
         <View
-          accessibilityRole="none"
-          accessible={false}
-          aria-hidden={true}
+          accessible={true}
           centered={true}
-          focusable={false}
           role="none"
           style={
             [
@@ -2127,7 +2100,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               ],
             ]
           }
-          tabIndex={-1}
         >
           <View
             style={

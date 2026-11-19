@@ -140,14 +140,6 @@ const TextInputIcon = ({
     >
       <IconButton
         {...rest}
-        {...(!actionable && {
-          role: 'none',
-          accessibilityRole: 'none',
-          accessible: false,
-          focusable: false,
-          tabIndex: -1,
-          'aria-hidden': true,
-        })}
         hitSlop={hitSlop !== undefined ? hitSlop : ACCESSORY_HIT_SLOP}
         icon={icon}
         iconColor={color}

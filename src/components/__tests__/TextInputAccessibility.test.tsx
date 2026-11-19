@@ -751,28 +751,38 @@ it.each<{
   expect(warn).not.toHaveBeenCalled();
 });
 
-it('renders decorative accessories outside the accessibility tree without buttons', async () => {
-  await render(
-    <TextInput
-      label="Search"
-      startAccessory={(props) => (
-        <TextInput.Icon {...props} icon="magnify" testID="search-icon" />
-      )}
-      endAccessory={(props) => (
-        <TextInput.Icon {...props} icon="account" testID="account-icon" />
-      )}
-    />
-  );
-  expect(screen.queryAllByRole('button')).toHaveLength(0);
-  expect(screen.queryByTestId('search-icon')).toBeNull();
-  expect(screen.queryByTestId('account-icon')).toBeNull();
-  expect(
-    screen.getByTestId('search-icon', { includeHiddenElements: true })
-  ).toBeOnTheScreen();
-  expect(
-    screen.getByTestId('account-icon', { includeHiddenElements: true })
-  ).toBeOnTheScreen();
-});
+it.each(['ios', 'android', 'web'] as const)(
+  'renders decorative accessories outside the accessibility tree without buttons on %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    await render(
+      <TextInput
+        label="Search"
+        startAccessory={(props) => (
+          <TextInput.Icon {...props} icon="magnify" testID="search-icon" />
+        )}
+        endAccessory={(props) => (
+          <TextInput.Icon
+            {...props}
+            icon="account"
+            aria-label="Account"
+            testID="account-icon"
+          />
+        )}
+      />
+    );
+    expect(screen.queryAllByRole('button')).toHaveLength(0);
+    expect(screen.queryAllByRole('img')).toHaveLength(0);
+    for (const testID of ['search-icon', 'account-icon']) {
+      expect(screen.queryByTestId(testID)).toBeNull();
+      const icon = screen.getByTestId(testID, { includeHiddenElements: true });
+      expect(icon).toBeOnTheScreen();
+      // Not a keyboard focus stop either.
+      expect(icon).not.toHaveProp('focusable', true);
+      expect(icon).not.toHaveProp('tabIndex', 0);
+    }
+  }
+);
 
 it('preserves decorative loading and content styles without accessible controls', async () => {
   await render(
