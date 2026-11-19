@@ -24,7 +24,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: (param?: any) => void;
+  onPress?: () => void;
   /**
    * Custom color for unchecked radio.
    */
