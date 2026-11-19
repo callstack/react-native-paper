@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { PlatformColor, Text } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 import color from 'color';
@@ -83,6 +83,22 @@ describe('TouchableRipple hover (web)', () => {
     expect(screen.getByTestId('ripple')).toHaveStyle({
       backgroundColor: rowColor,
       backgroundImage: hoverLayer,
+    });
+  });
+
+  it('does not paint a hover layer for a ripple color that is not a string', async () => {
+    await render(
+      <TouchableRipple
+        onPress={() => {}}
+        rippleColor={PlatformColor('systemBlue')}
+        testID="ripple"
+      >
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    expect(screen.getByTestId('ripple')).toHaveStyle({
+      backgroundImage: undefined,
     });
   });
 
