@@ -943,10 +943,10 @@ no longer read as separate text. On web, the input references them with
 `aria-describedby` (the prefix and suffix while they are shown), and IDs you
 pass in `aria-describedby` are kept. On Android and iOS, they are only exposed
 through `accessibilityHint`, alongside any hint you pass, and the visible text
-is hidden from assistive technology. The hint of an empty field with a label
-also includes its placeholder, which stays blank until the label floats. Users
-who turn hints off, for example with the VoiceOver Speak Hints setting, do not
-hear them.
+is hidden from assistive technology. Users who turn hints off, for example with
+the VoiceOver Speak Hints setting, do not hear them. The placeholder of an empty
+field with a label stays blank until the label floats, so it describes the field
+as well: on web until the input shows it, and on Android and iOS in the hint.
 
 When no label or explicit accessible name is supplied, the placeholder names the
 field, including after text is entered. A disabled field always exposes its
