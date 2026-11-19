@@ -875,9 +875,6 @@ describe('Tooltip.Rich', () => {
     jest
       .spyOn(ViewPrototype, 'measure')
       .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
-    jest
-      .spyOn(ViewPrototype, 'measureInWindow')
-      .mockImplementation((cb) => cb(0, 0, 0, 0));
 
     const wrapper = await render(
       <PaperProvider>
@@ -1225,7 +1222,7 @@ describe('Tooltip.Rich', () => {
       expect(queryByText('Body text')).toBeNull();
     });
 
-    it('keeps the tooltip open while the pointer moves into it (gap bridge)', async () => {
+    it('keeps the tooltip open while the pointer moves into it', async () => {
       const {
         wrapper: { getByText },
       } = await setup({ enterTouchDelay: 0, leaveTouchDelay: 500 });

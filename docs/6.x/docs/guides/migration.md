@@ -529,7 +529,15 @@ On web, the tooltip also opens when the trigger gets keyboard focus, and the tri
   )}
 >
   {(props) => (
-    <IconButton {...props} icon="information-outline" aria-label="More info" />
+    <IconButton
+      {...props}
+      icon="information-outline"
+      aria-label="More info"
+      onPress={() => {
+        props.onPress?.();
+        handleInfoPress();
+      }}
+    />
   )}
 </Tooltip.Rich>
 ```
