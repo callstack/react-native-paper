@@ -1242,6 +1242,17 @@ To keep the 24dp trailing space of 5.x, set it in `style`:
 
 A `List.Item` with `onPress` now has the `button` role, so screen readers announce it as a button. If your tests find elements with `getByRole('button')`, these rows now match too.
 
+`List.Item` and `List.Accordion` have a new `selected` prop. A selected row uses `secondaryContainer` for its background and `onSecondaryContainer` for its title, description and icons. Screen readers announce it as selected. If you highlighted a row with your own `style` and `titleStyle`, you can use `selected` instead:
+
+```diff
+<List.Item
+  title="Inbox"
+- style={{ backgroundColor: theme.colors.secondaryContainer }}
+- titleStyle={{ color: theme.colors.onSecondaryContainer }}
++ selected
+/>
+```
+
 #### `List.Accordion`
 
 The header keeps its colors when the accordion expands. In 5.x, the title and the `left` icon turned `primary`. The header background is `surface` instead of `background`, and the chevron is `onSurface` instead of `onSurfaceVariant`. The chevron rotates instead of switching to `chevron-up`.
