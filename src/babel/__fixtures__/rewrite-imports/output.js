@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import PaperProvider from "react-native-paper/lib/module/core/PaperProvider";
+import NavigationBar from "react-native-paper/lib/module/components/NavigationBar";
 import Button from "react-native-paper/lib/module/components/Button/Button";
 import FAB from "react-native-paper/lib/module/components/FAB";
 import Appbar from "react-native-paper/lib/module/components/Appbar";

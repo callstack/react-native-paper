@@ -2,7 +2,12 @@ import type { ColorValue } from 'react-native';
 
 import { CheckboxTokens } from './tokens';
 import { tokens } from '../../theme/tokens';
-import type { InternalTheme } from '../../theme/types';
+import type {
+  InternalTheme,
+  StateLayer,
+  StateOpacityKey,
+} from '../../theme/types';
+import { getStateLayer } from '../../theme/utils/state';
 
 // MD3 Checkbox spec: https://m3.material.io/components/checkbox/specs
 
@@ -76,8 +81,8 @@ const getIconColor = ({
 
 /**
  * Resolve the static (non-interactive) colors + opacity for the Checkbox
- * renderer. Hover / pressed / focused visuals are owned by `TouchableRipple`
- * and the focus-ring outline, so they don't appear here.
+ * renderer. The interaction states are resolved by `getCheckboxStateLayer`
+ * instead.
  */
 export const getSelectionVisualState = ({
   theme,
@@ -114,4 +119,71 @@ export const getSelectionVisualState = ({
       customUncheckedColor,
     }),
   };
+};
+
+/** Interaction the state layer is painting, or `null` when it is idle. */
+export type CheckboxInteraction = Extract<
+  StateOpacityKey,
+  'hovered' | 'focused' | 'pressed'
+>;
+
+type StateLayerState = {
+  theme: InternalTheme;
+  selected: boolean;
+  error?: boolean;
+  customColor?: ColorValue;
+  customUncheckedColor?: ColorValue;
+};
+
+/**
+ * Resolve the MD3 state layer for the current interaction. Hover and focus use
+ * `primary` when selected and `onSurface` when not; pressing swaps them. An
+ * error checkbox stays on `error` throughout, and `color`/`uncheckedColor`
+ * override the role they already override on the box itself.
+ */
+export const getCheckboxStateLayer = ({
+  theme,
+  selected,
+  error,
+  interaction,
+  customColor,
+  customUncheckedColor,
+}: StateLayerState & {
+  interaction: CheckboxInteraction | null;
+}): StateLayer => {
+  if (interaction === null) {
+    return { color: 'transparent', opacity: 0 };
+  }
+
+  // A press previews the state being moved to, so the layer takes the opposite
+  // selection's color -- the same inversion the tokens below encode.
+  const followsSelected = interaction === 'pressed' ? !selected : selected;
+  const custom = followsSelected ? customColor : customUncheckedColor;
+
+  if (custom) {
+    return { color: custom, opacity: stateOpacity[interaction] };
+  }
+
+  if (error) {
+    return getStateLayer(
+      theme,
+      CheckboxTokens.errorStateLayerColor,
+      interaction
+    );
+  }
+
+  const role =
+    interaction === 'pressed'
+      ? selected
+        ? CheckboxTokens.selectedPressedStateLayerColor
+        : CheckboxTokens.unselectedPressedStateLayerColor
+      : interaction === 'focused'
+        ? selected
+          ? CheckboxTokens.selectedFocusStateLayerColor
+          : CheckboxTokens.unselectedFocusStateLayerColor
+        : selected
+          ? CheckboxTokens.selectedHoverStateLayerColor
+          : CheckboxTokens.unselectedHoverStateLayerColor;
+
+  return getStateLayer(theme, role, interaction);
 };

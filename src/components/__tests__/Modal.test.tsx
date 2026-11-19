@@ -1,26 +1,65 @@
-import { BackHandler as RNBackHandler, Text } from 'react-native';
-import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
+import * as React from 'react';
+import {
+  AccessibilityInfo,
+  BackHandler as RNBackHandler,
+  Text,
+  View,
+} from 'react-native';
 
-import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
-import { act, userEvent } from '@testing-library/react-native';
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Modal from '../Modal';
+import Portal from '../Portal/Portal';
+import TextInput from '../TextInput';
+import type { TextInputHandles } from '../TextInput/TextInput';
 
 const scrimAlpha = tokens.md.sys.scrim.alpha;
 
 jest.mock('react-native-safe-area-context', () => ({
+  ...jest.requireActual<typeof import('react-native-safe-area-context')>(
+    'react-native-safe-area-context'
+  ),
   useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
 }));
 
-interface BackHandlerStatic extends RNBackHandlerStatic {
+type BackHandlerStatic = typeof RNBackHandler & {
   mockPressBack(): void;
-}
+  exitApp: jest.Mock<() => void>;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
+
+const sendAccessibilityEvent = jest.mocked(
+  AccessibilityInfo.sendAccessibilityEvent
+);
+
+// The modal queues its fade, and the fade finishing queues the focus move that
+// follows it. Drained in passes so that tests need not count the steps.
+const settle = async () => {
+  for (let pass = 0; pass < 5; pass += 1) {
+    await act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    if (jest.getTimerCount() === 0) {
+      return;
+    }
+  }
+};
 
 describe('Modal', () => {
   beforeAll(() => {
@@ -39,34 +78,48 @@ describe('Modal', () => {
     /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
   });
 
-  describe('by default', () => {
-    it('should render passed children', async () => {
-      await render(
-        <Modal visible={true} testID="modal">
+  // `exitApp` is one module-level `jest.fn` shared by every test in the file,
+  // and nothing clears it globally.
+  beforeEach(() => {
+    BackHandler.exitApp.mockClear();
+    sendAccessibilityEvent.mockClear();
+  });
+
+  it('renders passed children', async () => {
+    await render(
+      <Portal.Host>
+        <Modal visible testID="modal" overlayTestID="backdrop">
           <Text>Children</Text>
         </Modal>
-      );
+      </Portal.Host>
+    );
 
-      expect(screen.getByTestId('modal')).toHaveTextContent('Children');
-    });
+    expect(screen.getByTestId('modal')).toHaveTextContent('Children');
+  });
 
-    it("should render a backdrop in default theme's color", async () => {
-      await render(
-        <Modal visible={true} testID="modal">
+  it("renders a backdrop in default theme's color", async () => {
+    await render(
+      <Portal.Host>
+        <Modal visible testID="modal" overlayTestID="backdrop">
           {null}
         </Modal>
-      );
+      </Portal.Host>
+    );
 
-      expect(screen.getByLabelText('Close modal')).toHaveStyle({
-        backgroundColor: LightTheme.colors.scrim,
-      });
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      backgroundColor: LightTheme.colors.scrim,
     });
+  });
 
-    it('should render a custom backdrop color if specified', async () => {
-      await render(
+  it('renders a custom backdrop color if specified', async () => {
+    await render(
+      <Portal.Host>
         <Modal
-          visible={true}
+          visible
           testID="modal"
+          overlayTestID="backdrop"
           theme={{
             colors: {
               scrim: 'transparent',
@@ -75,451 +128,944 @@ describe('Modal', () => {
         >
           {null}
         </Modal>
-      );
+      </Portal.Host>
+    );
 
-      expect(screen.getByLabelText('Close modal')).toHaveStyle({
-        backgroundColor: 'transparent',
-      });
-    });
-
-    it('should receive appropriate top and bottom insets', async () => {
-      const { toJSON } = await render(
-        <Modal visible={true} testID="modal">
-          {null}
-        </Modal>
-      );
-
-      expect(toJSON()).toMatchSnapshot();
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      backgroundColor: 'transparent',
     });
   });
-  describe('when open', () => {
-    describe('if backdrop touched', () => {
-      it('should invoke the onDismiss function immediately', async () => {
-        const onDismiss = jest.fn();
-        const { toJSON } = await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
-        );
 
-        expect(onDismiss).not.toHaveBeenCalled();
+  it('receives appropriate top and bottom insets', async () => {
+    const { toJSON } = await render(
+      <Portal.Host>
+        <Modal visible testID="modal" overlayTestID="backdrop">
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
 
-        await userEvent.press(screen.getByLabelText('Close modal'));
+    expect(toJSON()).toMatchSnapshot();
+  });
 
-        expect(onDismiss).toHaveBeenCalled();
+  it('exposes the modal as a dialog with an accessible name', async () => {
+    await render(
+      <Portal.Host>
+        <Modal visible aria-label="Example modal">
+          <Text>Modal content</Text>
+        </Modal>
+      </Portal.Host>
+    );
 
-        expect(toJSON()).toMatchSnapshot();
+    // Role queries only match accessibility elements, and the dialog
+    // container must not be one or it would swallow its children on iOS.
+    expect(screen.getByLabelText('Example modal')).toHaveProp('role', 'dialog');
+  });
 
-        await act(() => {
-          jest.runAllTimers();
-        });
+  it('hides the backdrop from assistive technology', async () => {
+    await render(
+      <Portal.Host>
+        <Modal visible testID="modal" overlayTestID="backdrop">
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
 
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
+    expect(screen.queryByTestId('backdrop')).not.toBeOnTheScreen();
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toBeOnTheScreen();
+  });
 
-        expect(toJSON()).toMatchSnapshot();
+  it('invokes onDismiss immediately when the backdrop is pressed', async () => {
+    const onDismiss = jest.fn();
 
-        expect(onDismiss).toHaveBeenCalledTimes(1);
-      });
+    const { toJSON } = await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={onDismiss}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    await userEvent.press(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    );
+
+    expect(onDismiss).toHaveBeenCalled();
+
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      jest.runAllTimers();
     });
 
-    it('runs the closing animation if visible toggled', async () => {
-      const { rerender, toJSON } = await render(
-        <Modal testID="modal" visible onDismiss={() => {}}>
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+
+    expect(toJSON()).toMatchSnapshot();
+
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+
+  it('runs the closing animation when visible changes to false after dismissing', async () => {
+    const { rerender, toJSON } = await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={() => {}}
+        >
           {null}
         </Modal>
-      );
+      </Portal.Host>
+    );
 
-      expect(toJSON()).toMatchSnapshot();
+    expect(toJSON()).toMatchSnapshot();
 
-      await userEvent.press(screen.getByLabelText('Close modal'));
+    await userEvent.press(screen.getByRole('button', { name: 'Close modal' }));
 
-      await rerender(
-        <Modal testID="modal" visible={false} onDismiss={() => {}}>
+    await rerender(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible={false}
+          onDismiss={() => {}}
+        >
           {null}
         </Modal>
-      );
+      </Portal.Host>
+    );
 
-      expect(toJSON()).toMatchSnapshot();
+    expect(toJSON()).toMatchSnapshot();
 
-      expect(screen.getByLabelText('Close modal')).toHaveStyle({
-        opacity: scrimAlpha,
-      });
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
 
-      expect(toJSON()).toMatchSnapshot();
+    expect(toJSON()).toMatchSnapshot();
 
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('invokes onDismiss when the visually hidden dismiss button is pressed', async () => {
+    const onDismiss = jest.fn();
+
+    await render(
+      <Portal.Host>
+        <Modal
+          visible
+          onDismiss={onDismiss}
+          dismissAccessibilityLabel="Dismiss dialog"
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await userEvent.press(
+      screen.getByRole('button', { name: 'Dismiss dialog' })
+    );
+
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+
+  it('invokes onDismiss on the accessibility escape gesture', async () => {
+    const onDismiss = jest.fn();
+
+    await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={onDismiss}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await fireEvent(screen.getByTestId('modal'), 'accessibilityEscape');
+
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+
+  it('invokes onDismiss when the Android back button is pressed', async () => {
+    const onDismiss = jest.fn();
+
+    const { toJSON } = await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={onDismiss}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+
+    expect(toJSON()).toMatchSnapshot();
+
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not invoke onDismiss on Android back button press when dismissableBackButton is false', async () => {
+    const onDismiss = jest.fn();
+
+    await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={onDismiss}
+          dismissableBackButton={false}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await act(() => {
+      BackHandler.mockPressBack();
+      jest.runAllTimers();
+    });
+
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    await userEvent.press(screen.getByRole('button', { name: 'Close modal' }));
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not render the visually hidden dismiss button for a non-dismissible modal', async () => {
+    await render(
+      <Portal.Host>
+        <Modal visible dismissable={false} onDismiss={() => {}}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(
+      screen.queryByRole('button', { name: 'Close modal' })
+    ).not.toBeOnTheScreen();
+  });
+
+  it('keeps a non-dismissible modal visible when the backdrop is pressed', async () => {
+    const { toJSON } = await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={() => {}}
+          dismissable={false}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(toJSON()).toMatchSnapshot();
+
+    await userEvent.press(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    );
+
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('does not invoke onDismiss for a non-dismissible modal when the backdrop is pressed', async () => {
+    const onDismiss = jest.fn();
+
+    await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={onDismiss}
+          dismissable={false}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    await userEvent.press(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    );
+
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(onDismiss).not.toHaveBeenCalled();
+  });
+
+  it('does not pass the accessibility escape gesture of a non-dismissible modal on to the modal behind it', async () => {
+    const onDismissOuter = jest.fn();
+    const onDismissInner = jest.fn();
+
+    await render(
+      <Portal.Host>
+        <Modal
+          testID="outer"
+          visible
+          onDismiss={onDismissOuter}
+          aria-label="Outer"
+        >
+          <Portal.Host>
+            <Modal
+              testID="inner"
+              visible
+              dismissable={false}
+              onDismiss={onDismissInner}
+              aria-label="Inner"
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
+        </Modal>
+      </Portal.Host>
+    );
+
+    await fireEvent(screen.getByTestId('inner'), 'accessibilityEscape');
+
+    expect(onDismissInner).not.toHaveBeenCalled();
+    expect(onDismissOuter).not.toHaveBeenCalled();
+  });
+
+  it('keeps a non-dismissible modal on screen on the accessibility escape gesture', async () => {
+    const onDismiss = jest.fn();
+
+    await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={onDismiss}
+          dismissable={false}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await fireEvent(screen.getByTestId('modal'), 'accessibilityEscape');
+
+    expect(onDismiss).not.toHaveBeenCalled();
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+  });
+
+  it('keeps a non-dismissible modal visible when the Android back button is pressed', async () => {
+    const { toJSON } = await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={() => {}}
+          dismissable={false}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('does not invoke onDismiss for a non-dismissible modal when the Android back button is pressed', async () => {
+    const onDismiss = jest.fn();
+
+    await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={onDismiss}
+          dismissable={false}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(onDismiss).not.toHaveBeenCalled();
+  });
+
+  it('does not let the Android back button leave the screen behind a non-dismissible modal', async () => {
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible onDismiss={() => {}} dismissable={false}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await act(() => {
+      BackHandler.mockPressBack();
+    });
+
+    expect(BackHandler.exitApp).not.toHaveBeenCalled();
+  });
+
+  it('moves the screen reader into the content when it opens', async () => {
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible>
+          <Text>Modal content</Text>
+        </Modal>
+      </Portal.Host>
+    );
+
+    await settle();
+
+    expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+      expect.anything(),
+      'focus'
+    );
+  });
+
+  it('moves the screen reader to initialFocusRef when it opens', async () => {
+    const initialFocusRef = React.createRef<React.ComponentRef<typeof View>>();
+
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible initialFocusRef={initialFocusRef}>
+          <View testID="first-field" ref={initialFocusRef} />
+          <Text>Modal content</Text>
+        </Modal>
+      </Portal.Host>
+    );
+
+    await settle();
+
+    expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+      initialFocusRef.current,
+      'focus'
+    );
+  });
+
+  it('focuses a Paper TextInput given as initialFocusRef through its own handle', async () => {
+    const initialFocusRef = React.createRef<TextInputHandles>();
+
+    await render(
+      <Portal.Host>
+        <Modal testID="modal" visible initialFocusRef={initialFocusRef}>
+          <TextInput ref={initialFocusRef} label="Name" />
+        </Modal>
+      </Portal.Host>
+    );
+
+    // The handle is not a native node, so the screen reader has nothing to
+    // land on. The input is focused instead.
+    const handle = initialFocusRef.current;
+
+    if (!handle) {
+      throw new Error('The TextInput did not set its ref');
+    }
+
+    const focus = jest.spyOn(handle, 'focus');
+
+    await settle();
+
+    expect(focus).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).not.toHaveBeenCalled();
+  });
+
+  it('sends the screen reader back to restoreFocusRef when it closes', async () => {
+    const restoreFocusRef = React.createRef<React.ComponentRef<typeof View>>();
+
+    const { rerender } = await render(
+      <Portal.Host>
+        <View testID="trigger" ref={restoreFocusRef} />
+        <Modal testID="modal" visible restoreFocusRef={restoreFocusRef}>
+          <Text>Modal content</Text>
+        </Modal>
+      </Portal.Host>
+    );
+
+    await settle();
+
+    sendAccessibilityEvent.mockClear();
+
+    await rerender(
+      <Portal.Host>
+        <View testID="trigger" ref={restoreFocusRef} />
+        <Modal testID="modal" visible={false} restoreFocusRef={restoreFocusRef}>
+          <Text>Modal content</Text>
+        </Modal>
+      </Portal.Host>
+    );
+    await act(() => {
+      jest.advanceTimersByTime(1);
+    });
+
+    // The screen behind the modal stays inert until the fade is over, so
+    // focus waits with it.
+    expect(sendAccessibilityEvent).not.toHaveBeenCalled();
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
+    await settle();
+
+    expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
+    expect(sendAccessibilityEvent).toHaveBeenCalledWith(
+      restoreFocusRef.current,
+      'focus'
+    );
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('runs the fade-in animation when visible changes from false to true', async () => {
+    const { rerender, toJSON } = await render(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible={false}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+
+    await rerender(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: 0,
+    });
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('runs the fade-out animation when visible changes from true to false', async () => {
+    const { rerender, toJSON } = await render(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+    expect(toJSON()).toMatchSnapshot();
+
+    await rerender(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible={false}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('does not invoke onDismiss when visible changes from true to false', async () => {
+    const onDismiss = jest.fn();
+
+    const { rerender } = await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          onDismiss={onDismiss}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    await rerender(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible={false}
+          onDismiss={onDismiss}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(onDismiss).not.toHaveBeenCalled();
+  });
+
+  it('closes a non-dismissible modal when visible changes from true to false', async () => {
+    const { rerender, toJSON } = await render(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible
+          dismissable={false}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+    expect(toJSON()).toMatchSnapshot();
+
+    await rerender(
+      <Portal.Host>
+        <Modal
+          testID="modal"
+          overlayTestID="backdrop"
+          visible={false}
+          dismissable={false}
+        >
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('keeps the modal open when visible changes back to true while closing', async () => {
+    const { rerender, toJSON } = await render(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+    expect(toJSON()).toMatchSnapshot();
+
+    await rerender(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible={false}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      // Not a real seconds, this depends on how frequently
+      // requestAnimationFrame is called
+      jest.advanceTimersToNextTimer(1000);
+    });
+
+    await rerender(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: scrimAlpha,
+    });
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('keeps the modal closed when visible changes back to false while opening', async () => {
+    const { rerender, toJSON } = await render(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible={false}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+
+    await rerender(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    expect(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    ).toHaveStyle({
+      opacity: 0,
+    });
+    expect(toJSON()).toMatchSnapshot();
+
+    await act(() => {
+      // Not a real seconds, this depends on how frequently
+      // requestAnimationFrame is called
+      jest.advanceTimersToNextTimer(1000);
+    });
+
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
+    await rerender(
+      <Portal.Host>
+        <Modal testID="modal" overlayTestID="backdrop" visible={false}>
+          {null}
+        </Modal>
+      </Portal.Host>
+    );
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('stays on the screen while it fades out when reduceMotion is "off"', async () => {
+    const makeModal = (visible: boolean) => (
+      <PaperProvider reduceMotion="off">
+        <Modal testID="modal" visible={visible}>
+          {null}
+        </Modal>
+      </PaperProvider>
+    );
+
+    const { rerender } = await render(makeModal(true));
+    await settle();
+
+    await rerender(makeModal(false));
+    await act(() => {
+      jest.advanceTimersByTime(219);
+    });
+
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
+    await act(() => {
+      jest.advanceTimersByTime(1);
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('leaves the screen at once when reduceMotion is "on"', async () => {
+    const makeModal = (visible: boolean) => (
+      <PaperProvider reduceMotion="on">
+        <Modal testID="modal" visible={visible}>
+          {null}
+        </Modal>
+      </PaperProvider>
+    );
+
+    const { rerender } = await render(makeModal(true));
+    await settle();
+
+    await rerender(makeModal(false));
+    await act(() => {
+      jest.advanceTimersByTime(0);
+    });
+
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
+  });
+
+  it('keeps its close timer when the OS reduce motion setting changes while it closes', async () => {
+    const addEventListener = jest.mocked(AccessibilityInfo.addEventListener);
+    const reduceMotionListeners = () =>
+      addEventListener.mock.calls
+        .filter(([eventName]) => eventName === 'reduceMotionChanged')
+        .map(([, listener]) => listener);
+    addEventListener.mockClear();
+    const makeModal = (visible: boolean) => (
+      <PaperProvider>
+        <Modal testID="modal" visible={visible}>
+          {null}
+        </Modal>
+      </PaperProvider>
+    );
+
+    const { rerender } = await render(makeModal(true));
+    await settle();
+    expect(reduceMotionListeners()).not.toHaveLength(0);
+
+    await rerender(makeModal(false));
+    await act(() => {
+      jest.advanceTimersByTime(100);
+    });
+
+    for (const enabled of [true, false]) {
       await act(() => {
-        jest.runAllTimers();
+        reduceMotionListeners().forEach((listener) => listener(enabled));
       });
+    }
 
-      expect(toJSON()).toBeNull();
+    expect(screen.getByTestId('modal')).toBeOnTheScreen();
+
+    await act(() => {
+      jest.advanceTimersByTime(120);
     });
 
-    describe('if closed via Android back button', () => {
-      it('invokes onDismiss', async () => {
-        const onDismiss = jest.fn();
-        const { toJSON } = await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
-        );
-
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          BackHandler.mockPressBack();
-        });
-
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-
-        expect(toJSON()).toMatchSnapshot();
-
-        expect(onDismiss).toHaveBeenCalledTimes(1);
-      });
-    });
-  });
-
-  describe('when open as non-dismissible modal', () => {
-    describe('if closed via touching backdrop', () => {
-      it('will run the animation but not fade out', async () => {
-        const { toJSON } = await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={() => {}}
-            dismissable={false}
-          >
-            {null}
-          </Modal>
-        );
-
-        expect(toJSON()).toMatchSnapshot();
-
-        await userEvent.press(screen.getByLabelText('Close modal'));
-
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-
-        expect(toJSON()).toMatchSnapshot();
-      });
-
-      it('should not invoke onDismiss', async () => {
-        const onDismiss = jest.fn();
-        await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={onDismiss}
-            dismissable={false}
-          >
-            {null}
-          </Modal>
-        );
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        await userEvent.press(screen.getByLabelText('Close modal'));
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(onDismiss).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('if closed via Android back button', () => {
-      it('will run the animation but not fade out', async () => {
-        const { toJSON } = await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={() => {}}
-            dismissable={false}
-          >
-            {null}
-          </Modal>
-        );
-
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          BackHandler.mockPressBack();
-        });
-
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-
-        expect(toJSON()).toMatchSnapshot();
-      });
-
-      it('should not invoke onDismiss', async () => {
-        const onDismiss = jest.fn();
-
-        await render(
-          <Modal
-            testID="modal"
-            visible
-            onDismiss={onDismiss}
-            dismissable={false}
-          >
-            {null}
-          </Modal>
-        );
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        await act(() => {
-          BackHandler.mockPressBack();
-        });
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(onDismiss).not.toHaveBeenCalled();
-      });
-    });
-  });
-
-  describe('when visible prop changes', () => {
-    describe('from false to true (closed to open)', () => {
-      it('should run fade-in animation on opening', async () => {
-        const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
-
-        await rerender(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: 0,
-        });
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-        expect(toJSON()).toMatchSnapshot();
-      });
-    });
-
-    describe('from true to false (open to closed)', () => {
-      it('should run fade-out animation on closing', async () => {
-        const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-        expect(toJSON()).toMatchSnapshot();
-
-        await rerender(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
-      });
-
-      it('should not invoke onDismiss', async () => {
-        const onDismiss = jest.fn();
-
-        const { rerender } = await render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
-        );
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        await rerender(
-          <Modal testID="modal" visible={false} onDismiss={onDismiss}>
-            {null}
-          </Modal>
-        );
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(onDismiss).not.toHaveBeenCalled();
-      });
-
-      it('should close even if the dialog is not dismissible', async () => {
-        const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible dismissable={false}>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-        expect(toJSON()).toMatchSnapshot();
-
-        await rerender(
-          <Modal testID="modal" visible={false} dismissable={false}>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
-      });
-    });
-  });
-
-  describe('when visible prop changes again during the open/close animation', () => {
-    describe('while closing, back to true (visible)', () => {
-      it('should keep the modal open', async () => {
-        const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-        expect(toJSON()).toMatchSnapshot();
-
-        await rerender(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          // Not a real seconds, this depends on how frequently
-          // requestAnimationFrame is called
-          jest.advanceTimersToNextTimer(1000);
-        });
-
-        await rerender(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
-        );
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: scrimAlpha,
-        });
-        expect(toJSON()).toMatchSnapshot();
-      });
-    });
-
-    describe('while opening, back to false (hidden)', () => {
-      it('should keep the modal closed', async () => {
-        const { rerender, toJSON } = await render(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.queryByLabelText('Close modal')).not.toBeOnTheScreen();
-
-        await rerender(
-          <Modal testID="modal" visible>
-            {null}
-          </Modal>
-        );
-
-        expect(screen.getByLabelText('Close modal')).toHaveStyle({
-          opacity: 0,
-        });
-        expect(toJSON()).toMatchSnapshot();
-
-        await act(() => {
-          // Not a real seconds, this depends on how frequently
-          // requestAnimationFrame is called
-          jest.advanceTimersToNextTimer(1000);
-        });
-
-        expect(screen.getByLabelText('Close modal')).toBeOnTheScreen();
-
-        await rerender(
-          <Modal testID="modal" visible={false}>
-            {null}
-          </Modal>
-        );
-
-        await act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(screen.queryByLabelText('Close modal')).not.toBeOnTheScreen();
-      });
-    });
+    expect(screen.queryByTestId('modal')).not.toBeOnTheScreen();
   });
 });

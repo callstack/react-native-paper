@@ -29,7 +29,7 @@ function SettingsScreen() {
   );
 }
 
-const BottomNavigationBarExample = createBottomTabNavigator({
+const NavigationBarReactNavigationExample = createBottomTabNavigator({
   screenOptions: {
     headerShown: false,
   },
@@ -37,10 +37,17 @@ const BottomNavigationBarExample = createBottomTabNavigator({
     <NavigationBar
       navigationState={state}
       onTabPress={({ route }) => {
+        const isRepeatedPress = state.routes[state.index].key === route.key;
         const event = navigation.emit({
           type: 'tabPress',
           target: route.key,
           canPreventDefault: true,
+          data: {
+            behavior: {
+              scrollToTop: isRepeatedPress,
+              popToTop: isRepeatedPress,
+            },
+          },
         });
 
         if (!event.defaultPrevented) {
@@ -116,7 +123,7 @@ const BottomNavigationBarExample = createBottomTabNavigator({
   },
 });
 
-export default Object.assign(BottomNavigationBarExample, {
+export default Object.assign(NavigationBarReactNavigationExample, {
   title: 'Navigation Bar (React Navigation)',
 });
 

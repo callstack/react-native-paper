@@ -1,6 +1,3 @@
-import type { ViewStyle } from 'react-native';
-
-import { tokens } from '../../theme/tokens';
 import type {
   ColorRole,
   Elevation,
@@ -12,9 +9,9 @@ export type Variant =
   | 'primary'
   | 'secondary'
   | 'tertiary'
-  | 'tonalPrimary'
-  | 'tonalSecondary'
-  | 'tonalTertiary';
+  | 'primaryContainer'
+  | 'secondaryContainer'
+  | 'tertiaryContainer';
 
 export type Size = 'default' | 'medium' | 'large';
 
@@ -71,15 +68,15 @@ const variants = {
   primary: { container: 'primary', content: 'onPrimary' },
   secondary: { container: 'secondary', content: 'onSecondary' },
   tertiary: { container: 'tertiary', content: 'onTertiary' },
-  tonalPrimary: {
+  primaryContainer: {
     container: 'primaryContainer',
     content: 'onPrimaryContainer',
   },
-  tonalSecondary: {
+  secondaryContainer: {
     container: 'secondaryContainer',
     content: 'onSecondaryContainer',
   },
-  tonalTertiary: {
+  tertiaryContainer: {
     container: 'tertiaryContainer',
     content: 'onTertiaryContainer',
   },
@@ -119,11 +116,3 @@ export const MenuTokens = {
   listItem,
   spacing,
 };
-
-const focusIndicator = tokens.md.sys.state.focusIndicator;
-export const FOCUS_RING_THICKNESS = focusIndicator.thickness;
-export const FOCUS_RING_OUTER_OFFSET = focusIndicator.outerOffset;
-export const FOCUS_RING_INSET = FOCUS_RING_OUTER_OFFSET + FOCUS_RING_THICKNESS;
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-export const webNoOutline = { outline: 'none' } as unknown as ViewStyle;

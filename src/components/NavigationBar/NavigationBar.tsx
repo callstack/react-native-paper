@@ -1,18 +1,24 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Pressable, View } from 'react-native';
-import type { ColorValue, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import type {
+  ColorValue,
+  NativeSyntheticEvent,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 import Animated, {
   cubicBezier,
   type CSSStyle,
   Easing,
   ReduceMotion,
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import {
   BAR_HEIGHT,
@@ -40,9 +46,11 @@ import type { Theme, ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
 import useLayout from '../../utils/useLayout';
+import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
+import { Pressable } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -69,14 +77,11 @@ type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
   borderless?: boolean;
   centered?: boolean;
   rippleColor?: ColorValue;
-  onKeyDown?: (event: TabKeyboardEvent) => void;
 };
 
-type TabKeyboardEvent = {
-  key: string;
-  currentTarget: unknown;
-  preventDefault: () => void;
-};
+// React Native 0.87+ exports `KeyDownEvent`, but its legacy types, the default
+// before 0.87, do not, so type only what is read.
+type TabKeyEvent = NativeSyntheticEvent<{ key: string; repeat?: boolean }>;
 
 export type Props<Route extends BaseRoute> = {
   /**
@@ -93,11 +98,13 @@ export type Props<Route extends BaseRoute> = {
    */
   variant?: 'stacked' | 'horizontal';
   /**
-   * Whether tabs should be spread across the entire width.
+   * Whether to limit the width of the tab row and center it in the bar. Each
+   * tab then gets at most 168dp, or 96dp when there are more than 3 tabs. When
+   * `false`, the tabs fill the full width of the bar.
    */
   compact?: boolean;
   /**
-   * State for the bottom navigation. The state should contain the following properties:
+   * State for the navigation bar. The state contains the following properties:
    *
    * - `index`: a number representing the index of the active route in the `routes` array
    * - `routes`: an array containing a list of route objects used for rendering the tabs
@@ -106,10 +113,10 @@ export type Props<Route extends BaseRoute> = {
    *
    * - `key`: a unique key to identify the route (required)
    * - `title`: title of the route to use as the tab label
-   * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
-   * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
+   * - `focusedIcon`: icon to use as the focused tab icon, can be a string, an image source or a react component
+   * - `unfocusedIcon`: icon to use as the unfocused tab icon, can be a string, an image source or a react component. Falls back to `focusedIcon`.
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
-   * - `aria-label`: accessibility label for the tab button
+   * - `aria-label`: accessibility label for the tab button. Replaces the default label, which is the label text and the badge.
    * - `testID`: test id for the tab button
    *
    * Example:
@@ -147,13 +154,20 @@ export type Props<Route extends BaseRoute> = {
   }) => React.ReactNode;
   /**
    * Callback which returns a React element to be used as the touchable for the tab item.
-   * Renders a `TouchableRipple` on Android and `Pressable` on iOS.
+   * Renders a `TouchableRipple` on Android and web, and a `Pressable` on iOS.
+   *
+   * A custom touchable must pass on the `onPress`, `onLongPress`,
+   * `onPressIn`, `onPressOut`, `onHoverIn`, `onHoverOut`, `onFocus`,
+   * `onBlur`, `onKeyDown` and `onKeyUp` handlers and the `tabIndex` it
+   * receives. Without them, the state layers and the keyboard support on web
+   * stop working.
    */
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
-   * Uses `route['aria-label']`, falling back to the label text (`getLabelText`)
-   * so icon-only tabs keep an accessible name.
+   * Uses `route['aria-label']`. Without it, the label is the label text
+   * (`getLabelText`) and, for a text or number badge, the badge
+   * (for example "Inbox, 3"), so icon-only tabs keep an accessible name.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
@@ -185,7 +199,7 @@ export type Props<Route extends BaseRoute> = {
    */
   inactiveColor?: string;
   /**
-   * Whether the bottom navigation bar is hidden when keyboard is shown.
+   * Whether the navigation bar is hidden when keyboard is shown.
    * On Android, this works best when [`windowSoftInputMode`](https://developer.android.com/guide/topics/manifest/activity-element#wsoft) is set to `adjustResize`.
    */
   keyboardHidesNavigationBar?: boolean;
@@ -203,7 +217,15 @@ export type Props<Route extends BaseRoute> = {
    * Specifies the largest possible scale a label font can reach.
    */
   labelMaxFontSizeMultiplier?: number;
+  /**
+   * Style for the bar container. The default background color is
+   * `surfaceContainer`. Set `backgroundColor` here to change it.
+   */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style for the active indicator, the pill behind the icon of the active
+   * tab (or behind the icon and the label in the `horizontal` variant).
+   */
   activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -222,6 +244,8 @@ const Touchable = <Route extends BaseRoute>({
   borderless,
   centered,
   rippleColor,
+  focusRing,
+  theme,
   ...rest
 }: TouchableProps<Route>) =>
   TouchableRipple.supported ? (
@@ -231,6 +255,8 @@ const Touchable = <Route extends BaseRoute>({
       borderless={borderless}
       centered={centered}
       rippleColor={rippleColor}
+      focusRing={focusRing}
+      theme={theme}
       style={style}
     >
       {children}
@@ -258,7 +284,7 @@ type ItemProps<Route extends BaseRoute> = {
   getTestID: NonNullable<Props<Route>['getTestID']>;
   getAccessibilityLabel: NonNullable<Props<Route>['getAccessibilityLabel']>;
   onPress: () => void;
-  onLongPress: () => void;
+  onLongPress?: () => void;
   activeIndicatorStyle?: StyleProp<ViewStyle>;
   labelMaxFontSizeMultiplier?: number;
   theme: Theme;
@@ -338,13 +364,29 @@ const NavigationBarItem = <Route extends BaseRoute>({
     hovered,
   });
 
-  // React Native Web activates only `button`s with Space and keeps `role="tab"`
-  // out of the tab order, so Space and the arrow keys the tabs pattern expects
-  // are handled here. Native focus systems do not deliver these keys.
-  const handleKeyDown = (event: TabKeyboardEvent) => {
-    const { currentTarget, key } = event;
+  const handlePressIn = () => setPressed(true);
+  const handlePressOut = () => setPressed(false);
 
-    if (!(currentTarget instanceof HTMLElement)) return;
+  // React Native Web presses only `button`s on Space, so the hook presses a
+  // tab on Space release, the same way Enter does.
+  const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
+    useSpaceKeyPress({
+      onPress,
+      onPressIn: handlePressIn,
+      onPressOut: handlePressOut,
+    });
+
+  // The tabs pattern moves focus between tabs with the arrow keys, Home and
+  // End. Only web gets these key events. Native focus systems move focus
+  // themselves.
+  const moveFocus = (event: TabKeyEvent) => {
+    const { currentTarget } = event;
+
+    if (
+      typeof HTMLElement === 'undefined' ||
+      !(currentTarget instanceof HTMLElement)
+    )
+      return;
 
     const tabs =
       currentTarget.parentElement?.querySelectorAll<HTMLElement>(
@@ -357,13 +399,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
     const step = direction === 'rtl' ? -1 : 1;
     let nextIndex: number | undefined;
 
-    switch (key) {
-      // `Enter` is activated by React Native Web, `Space` is not
-      case ' ':
-      case 'Spacebar':
-        event.preventDefault();
-        onPress();
-        return;
+    switch (event.nativeEvent.key) {
       case 'ArrowRight':
         nextIndex = (index + step + tabs.length) % tabs.length;
         break;
@@ -380,11 +416,22 @@ const NavigationBarItem = <Route extends BaseRoute>({
         return;
     }
 
-    if (nextIndex !== undefined && nextIndex !== index) {
+    if (nextIndex !== index) {
       event.preventDefault();
       tabs[nextIndex]?.focus();
     }
   };
+
+  const keyHandlers =
+    Platform.OS === 'web'
+      ? {
+          onKeyDown: (event: TabKeyEvent) => {
+            spaceKeyHandlers?.onKeyDown(event);
+            moveFocus(event);
+          },
+          onKeyUp: spaceKeyHandlers?.onKeyUp,
+        }
+      : null;
 
   const itemTestID = getTestID({ route });
 
@@ -394,17 +441,15 @@ const NavigationBarItem = <Route extends BaseRoute>({
 
   // Item pieces shared across both layouts. The active/inactive distinction is
   // a plain color swap (no cross-fade), so a single icon and label suffice.
+  const iconSource = focused
+    ? route.focusedIcon
+    : (route.unfocusedIcon ?? route.focusedIcon);
+
   const icon = renderIcon ? (
     renderIcon({ route, focused, color: iconColor })
-  ) : (
-    <Icon
-      source={
-        focused ? route.focusedIcon : (route.unfocusedIcon ?? route.focusedIcon)
-      }
-      color={iconColor}
-      size={ICON_SIZE}
-    />
-  );
+  ) : iconSource !== undefined ? (
+    <Icon source={iconSource} color={iconColor} size={ICON_SIZE} />
+  ) : null;
 
   const tabBadge = (
     <View style={[styles.badgeContainer, badgeStyle]}>
@@ -440,7 +485,12 @@ const NavigationBarItem = <Route extends BaseRoute>({
       pointerEvents="none"
       style={labeled ? styles.stackedContainer : styles.noLabelContainer}
     >
-      <View style={styles.iconContainer}>
+      <View
+        style={[
+          styles.iconContainer,
+          labeled ? styles.iconContainerLabeled : null,
+        ]}
+      >
         <Animated.View
           style={[
             styles.stackedIndicator,
@@ -457,7 +507,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
       </View>
       {labeled ? (
         <View style={styles.labelContainer}>
-          {renderTabLabel(styles.label)}
+          {renderTabLabel(styles.label, 1)}
         </View>
       ) : null}
     </View>
@@ -482,8 +532,10 @@ const NavigationBarItem = <Route extends BaseRoute>({
             stateLayerColor,
           ]}
         />
-        <View>
-          {icon}
+        {/* The same 32dp box as the stacked icon, so the badge sits at the
+            same place on the icon in both layouts. */}
+        <View style={styles.horizontalIconContainer}>
+          <View style={styles.iconWrapper}>{icon}</View>
           {tabBadge}
         </View>
         {renderTabLabel(styles.horizontalLabel, 1)}
@@ -497,10 +549,17 @@ const NavigationBarItem = <Route extends BaseRoute>({
     borderless: true,
     centered: true,
     rippleColor: 'transparent',
+    // Tabs fill the bar edge to edge and the bar clips
+    // (`overflow: 'hidden'`), so an outward ring would lose its top and bottom
+    // and read as two vertical lines between tabs.
+    focusRing: 'inward',
+    theme,
     onPress,
-    onLongPress,
-    onPressIn: () => setPressed(true),
-    onPressOut: () => setPressed(false),
+    // Only with a handler: while `onLongPress` is set, a press longer than
+    // 500ms does not call `onPress`.
+    ...(onLongPress ? { onLongPress } : null),
+    onPressIn: handlePressIn,
+    onPressOut: handlePressOut,
     onHoverIn: () => setHovered(true),
     onHoverOut: () => setHovered(false),
     onFocus: (event) => {
@@ -508,13 +567,18 @@ const NavigationBarItem = <Route extends BaseRoute>({
         setKeyboardFocused(true);
       }
     },
-    onBlur: () => setKeyboardFocused(false),
+    onBlur: (event) => {
+      handleSpaceKeyBlur(event);
+      setKeyboardFocused(false);
+    },
+    ...keyHandlers,
     testID: itemTestID,
     'aria-label': getAccessibilityLabel({ route }),
     role: Platform.OS === 'ios' ? 'button' : 'tab',
     'aria-selected': focused,
-    focusable: Platform.OS === 'web' ? true : undefined,
-    onKeyDown: Platform.OS === 'web' ? handleKeyDown : undefined,
+    // React Native Web gives every pressable `tabIndex={0}`. The tabs pattern
+    // has one Tab stop, the selected tab, and the arrow keys move focus.
+    tabIndex: Platform.OS === 'web' ? (focused ? 0 : -1) : undefined,
     style: horizontal ? styles.horizontalTouchable : styles.item,
     children: horizontal ? horizontalContent : stackedContent,
   });
@@ -546,7 +610,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
  *   return (
  *     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
  *       <Text>Settings!</Text>
- *   </View>
+ *     </View>
  *   );
  * }
  *
@@ -596,8 +660,22 @@ const NavigationBar = <Route extends BaseRoute>({
   ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
-  getAccessibilityLabel = ({ route }: { route: Route }) =>
-    route['aria-label'] ?? getLabelText({ route }),
+  getAccessibilityLabel = ({ route }: { route: Route }) => {
+    if (route['aria-label'] !== undefined) return route['aria-label'];
+
+    // The label replaces the text inside the tab, so the badge goes into it.
+    // A dot badge (`true`) has no text to read.
+    const label = getLabelText({ route });
+    const badge = getBadge({ route });
+
+    if (
+      (typeof badge !== 'string' && typeof badge !== 'number') ||
+      badge === ''
+    )
+      return label;
+
+    return label ? `${label}, ${badge}` : String(badge);
+  },
   getTestID = ({ route }: { route: Route }) => route.testID,
   activeColor,
   inactiveColor,
@@ -660,7 +738,7 @@ const NavigationBar = <Route extends BaseRoute>({
       },
       (finished) => {
         if (finished) {
-          runOnJS(setKeyboardVisible)(false);
+          scheduleOnRN(setKeyboardVisible, false);
         }
       }
     );
@@ -691,6 +769,10 @@ const NavigationBar = <Route extends BaseRoute>({
     inactiveColor,
     theme,
   });
+
+  // `horizontal` applies only when labels are shown.
+  const itemLayout =
+    variant === 'horizontal' && labeled ? 'horizontal' : 'stacked';
 
   const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
   const maxTabBarWidth = maxTabWidth * routes.length;
@@ -724,10 +806,15 @@ const NavigationBar = <Route extends BaseRoute>({
     >
       <View style={styles.barContent}>
         <View
-          key={`items-${variant === 'horizontal' && labeled ? 'horizontal' : 'stacked'}`}
+          // On iOS and Android, tabs keep content-based widths after a change
+          // from `horizontal` to `stacked`, even with explicit `flexGrow`,
+          // `flexShrink` and `flexBasis`. The cause is not known. A remount
+          // gives the tabs a new layout. It also drops keyboard focus, so web,
+          // where CSS lays out the tabs again, keeps the mounted tabs.
+          key={Platform.OS === 'web' ? undefined : `items-${itemLayout}`}
           style={[
             styles.items,
-            variant === 'horizontal' && labeled ? styles.horizontalItems : null,
+            itemLayout === 'horizontal' ? styles.horizontalItems : null,
             {
               marginBottom: insets.bottom,
               marginHorizontal: Math.max(insets.left, insets.right),
@@ -760,7 +847,11 @@ const NavigationBar = <Route extends BaseRoute>({
                 getTestID={getTestID}
                 getAccessibilityLabel={getAccessibilityLabel}
                 onPress={() => onTabPress(eventForIndex(index))}
-                onLongPress={() => onTabLongPress?.(eventForIndex(index))}
+                onLongPress={
+                  onTabLongPress
+                    ? () => onTabLongPress(eventForIndex(index))
+                    : undefined
+                }
                 activeIndicatorStyle={activeIndicatorStyle}
                 labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
                 theme={theme}
@@ -801,6 +892,9 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     paddingVertical: 0,
+    // `borderless` does not clip on web, so a label wider than its tab would
+    // spill into the neighboring tabs.
+    ...(Platform.OS === 'web' ? { overflow: 'hidden' } : null),
   },
   horizontalTouchable: {
     flexGrow: 0,
@@ -808,14 +902,23 @@ const styles = StyleSheet.create({
     maxWidth: MAX_TAB_WIDTH,
     paddingVertical: 0,
   },
+  // A 32dp square around the 24dp icon. The pill is wider and overflows it.
+  // The square is the anchor for the badge.
   iconContainer: {
     height: INDICATOR_HEIGHT,
     width: INDICATOR_HEIGHT,
-    marginTop: 0,
-    marginBottom: ICON_LABEL_GAP,
-    marginHorizontal: 12,
     alignSelf: 'center',
     justifyContent: 'center',
+  },
+  iconContainerLabeled: {
+    marginBottom: ICON_LABEL_GAP,
+  },
+  // The same square as `iconContainer`. The negative margins keep the 24dp
+  // icon width in the row, so the item padding stays 16dp.
+  horizontalIconContainer: {
+    height: INDICATOR_HEIGHT,
+    width: INDICATOR_HEIGHT,
+    marginHorizontal: (ICON_SIZE - INDICATOR_HEIGHT) / 2,
   },
   iconWrapper: {
     ...StyleSheet.absoluteFill,
@@ -885,7 +988,7 @@ const styles = StyleSheet.create({
   },
   horizontalLabel: {
     flexShrink: 1,
-    marginLeft: ICON_LABEL_GAP,
+    marginStart: ICON_LABEL_GAP,
     textAlign: 'center',
     ...(Platform.OS === 'web'
       ? {

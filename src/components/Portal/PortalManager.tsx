@@ -1,33 +1,49 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import PortalLayer from './PortalLayer';
+
+type Props = {
+  children: React.ReactNode;
+};
 
 type State = {
   portals: Array<{
     key: number;
     children: React.ReactNode;
+    modal: boolean | undefined;
   }>;
 };
 
 /**
  * Portal host is the component which actually renders all Portals.
  */
-export default class PortalManager extends React.PureComponent<{}, State> {
+export default class PortalManager extends React.Component<Props, State> {
   state: State = {
     portals: [],
   };
 
-  mount = (key: number, children: React.ReactNode) => {
+  mount = (
+    key: number,
+    children: React.ReactNode,
+    modal: boolean | undefined
+  ) => {
     this.setState((state) => ({
-      portals: [...state.portals, { key, children }],
+      portals: [...state.portals, { key, children, modal }],
     }));
   };
 
-  update = (key: number, children: React.ReactNode) =>
+  update = (
+    key: number,
+    children: React.ReactNode,
+    modal: boolean | undefined
+  ) =>
     this.setState((state) => ({
       portals: state.portals.map((item) => {
         if (item.key === key) {
-          return { ...item, children };
+          return { ...item, children, modal };
         }
+
         return item;
       }),
     }));
@@ -38,17 +54,42 @@ export default class PortalManager extends React.PureComponent<{}, State> {
     }));
 
   render() {
-    return this.state.portals.map(({ key, children }) => (
-      <View
-        key={key}
-        collapsable={
-          false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
-        }
-        pointerEvents="box-none"
-        style={StyleSheet.absoluteFill}
-      >
-        {children}
-      </View>
-    ));
+    const { portals } = this.state;
+
+    const topmostModalIndex = portals.findLastIndex((portal) => portal.modal);
+
+    return (
+      <>
+        <PortalLayer
+          inert={topmostModalIndex >= 0}
+          style={styles.container}
+          collapsable={
+            false /* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */
+          }
+          pointerEvents="box-none"
+        >
+          {this.props.children}
+        </PortalLayer>
+        {portals.map(({ key, children }, index) => (
+          <PortalLayer
+            key={key}
+            inert={index < topmostModalIndex}
+            collapsable={
+              false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
+            }
+            pointerEvents="box-none"
+            style={StyleSheet.absoluteFill}
+          >
+            {children}
+          </PortalLayer>
+        ))}
+      </>
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

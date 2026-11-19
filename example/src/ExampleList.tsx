@@ -9,7 +9,6 @@ import AppbarExample from './Examples/AppbarExample';
 import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
 import BannerExample from './Examples/BannerExample';
-import BottomNavigationBarExample from './Examples/BottomNavigationBarExample';
 import ButtonExample from './Examples/ButtonExample';
 import CardExample from './Examples/CardExample';
 import CheckboxExample from './Examples/CheckboxExample';
@@ -27,6 +26,7 @@ import ListItemExample from './Examples/ListItemExample';
 import ListSectionExample from './Examples/ListSectionExample';
 import MenuExample from './Examples/MenuExample';
 import NavigationBarExample from './Examples/NavigationBarExample';
+import NavigationBarReactNavigationExample from './Examples/NavigationBarReactNavigationExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
@@ -53,7 +53,7 @@ export const mainExamples = {
   Avatar: AvatarExample,
   Badge: BadgeExample,
   Banner: BannerExample,
-  BottomNavigationBarExample,
+  NavigationBarReactNavigationExample,
   Button: ButtonExample,
   Card: CardExample,
   Checkbox: CheckboxExample,

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {
   PaperProvider,
+  NavigationBar,
   Button,
   FAB,
   Appbar,

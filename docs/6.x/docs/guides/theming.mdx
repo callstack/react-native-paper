@@ -28,7 +28,7 @@ export default function Main() {
 }
 ```
 
-By default React Native Paper will apply the [Material You theme (MD3)](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx) if no `theme` or `version` prop is passed to the `PaperProvider`.
+By default React Native Paper will apply the [Material You theme (MD3)](https://github.com/callstack/react-native-paper/blob/main/src/theme/schemes/LightTheme.tsx) if no `theme` prop is passed to the `PaperProvider`.
 
 ## Accessing theme properties
 
@@ -36,6 +36,7 @@ Use the built-in `useTheme()` hook to get access to the theme's variables:
 
 ```js
 import * as React from 'react';
+import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 export default function PaymentScreen() {
@@ -49,6 +50,7 @@ You can also use the `withTheme()` HOC exported from the library. If you wrap yo
 
 ```js
 import * as React from 'react';
+import { View } from 'react-native';
 import { withTheme } from 'react-native-paper';
 
 function PaymentScreen({ theme }) {
@@ -65,8 +67,7 @@ You can change the theme prop dynamically and all the components will automatica
 A theme usually contains the following properties:
 
 - `dark` (`boolean`): whether this is a dark theme or light theme.
-- `version`: Material You (MD3); kept for compatibility and normalized to `3` by `PaperProvider`
-- `roundness` (`number`): roundness of common elements, such as buttons.
+- `shapes` (`object`): corner radii of components, under `corner`, from `extraSmall` (4) to `extraExtraLarge` (48). Each component uses one of them, e.g. `Card` uses `medium`. `Button` is a full pill by default; with `shape="square"` it uses the role of its `size`, `medium` at the default `small` size.
 - `colors` (`object`): various colors used throughout different elements.
 
   > The primary key color is used to derive roles for key components across the UI, such as the FAB, prominent buttons, active states, as well as the tint of elevated surfaces.
@@ -133,14 +134,58 @@ A theme usually contains the following properties:
     - `fontWeight`
     - `lineHeight`
     - `fontSize`
-- `animation` (`object`)
-  - `scale` - scale for all animations
 
-When creating a custom theme, you will need to provide all of these properties.
+When creating a custom theme, you only need to provide the properties you change. `PaperProvider` merges your theme deeply with the default one, so a nested object such as `shapes` or `motion` keeps every key you leave out.
 
-If you don't use a custom theme, Paper will automatically turn animations on/off, depending on device settings.
+Paper merges a custom theme onto `DarkTheme` when it sets `dark: true`, and onto `LightTheme` otherwise. The examples on this page still spread `LightTheme` or `DarkTheme`: that sets `dark`, and in TypeScript it gives the theme object the full `Theme` shape. Without TypeScript, nested spreads such as `...LightTheme.colors` are optional.
 
-Otherwise, your custom theme will need to handle it manually, using React Native's [AccessibilityInfo API](https://reactnative.dev/docs/accessibilityinfo).
+## Reduce motion
+
+`PaperProvider` takes a `reduceMotion` prop, typed `ReduceMotionPreference`, that turns Paper's animations on or off:
+
+- `'auto'` (default): follows the reduce motion setting of the device, read with React Native's [AccessibilityInfo API](https://reactnative.dev/docs/accessibilityinfo).
+- `'on'`: turns Paper's animations off.
+- `'off'`: keeps Paper's animations on, even when the device setting is on.
+
+It works the same whether or not you pass a custom `theme`. With `'auto'`, Paper starts from the setting the device had when the app launched and follows every change after that.
+
+When reduce motion is on, Paper's components skip their animations. A few still move: the `ActivityIndicator` rotation, the indeterminate `ProgressBar` and the `TouchableRipple` ripple on web. The `TextInput` label and active indicator follow only the device setting: they don't read the `reduceMotion` prop.
+
+To turn Paper's animations off in tests and screenshots, whatever the device setting, pass `reduceMotion="on"`:
+
+```js
+import * as React from 'react';
+import { PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+export default function Main() {
+  return (
+    <PaperProvider reduceMotion="on">
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+To follow the same preference in your own components, use the `useReduceMotion()` hook. It returns `true` when reduce motion is on. Reanimated's animations follow the device setting on their own too, so give them `ReduceMotion.Never` to leave the choice to the hook:
+
+```js
+import * as React from 'react';
+import { useReduceMotion } from 'react-native-paper';
+import Animated, { ReduceMotion, SlideInDown } from 'react-native-reanimated';
+
+const slideIn = SlideInDown.reduceMotion(ReduceMotion.Never);
+
+export default function Toast({ children }) {
+  const reduceMotion = useReduceMotion();
+
+  return (
+    <Animated.View entering={reduceMotion ? undefined : slideIn}>
+      {children}
+    </Animated.View>
+  );
+}
+```
 
 ## Extending the theme
 
@@ -148,19 +193,16 @@ Keeping your own properties in the theme is fully supported by our library:
 
 ```js
 import * as React from 'react';
-import {
-  MD3LightTheme as DefaultTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...DefaultTheme,
+  ...LightTheme,
   // Specify custom property
   myOwnProperty: true,
   // Specify custom property in nested object
   colors: {
-    ...DefaultTheme.colors,
+    ...LightTheme.colors,
     myOwnColor: '#BADA55',
   },
 };
@@ -195,14 +237,11 @@ Once we have copied the color schemes from the generated JSON above, we can use 
 
 ```jsx
 import * as React from 'react';
-import {
-  MD3LightTheme as DefaultTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...DefaultTheme,
+  ...LightTheme,
   colors: yourGeneratedLightOrDarkScheme.colors, // Copy it from the color codes scheme and then use it here
 };
 
@@ -300,7 +339,7 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   PaperProvider,
-  MD3LightTheme,
+  LightTheme as PaperLightTheme,
   adaptNavigationTheme,
 } from 'react-native-paper';
 
@@ -312,7 +351,7 @@ const { LightTheme } = adaptNavigationTheme({
 
 export default function App() {
   return (
-    <PaperProvider theme={MD3LightTheme}>
+    <PaperProvider theme={PaperLightTheme}>
       <NavigationContainer theme={LightTheme}>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} />
@@ -350,14 +389,17 @@ You can provide a `theme` prop with a theme object with the same properties as t
 
 ```js
 import * as React from 'react';
-import { MD3LightTheme, PaperProvider } from 'react-native-paper';
+import { LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...MD3LightTheme, // or MD3DarkTheme
-  roundness: 2,
+  ...LightTheme, // or DarkTheme
+  shapes: {
+    corner: {
+      largeIncreased: 10,
+    },
+  },
   colors: {
-    ...MD3LightTheme.colors,
     primary: '#3498db',
     secondary: '#f1c40f',
     tertiary: '#a1b2c3',
@@ -381,18 +423,18 @@ If you need to modify the built-in theme schema by adding a new property or chan
 
 ```ts
 import * as React from 'react';
-import { MD3LightTheme, PaperProvider } from 'react-native-paper';
+import { LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
 
   // Specify a custom property
   custom: 'property',
 
   // Specify a custom property in nested object
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     brandPrimary: '#fefefe',
     brandSecondary: 'red',
   },
@@ -411,18 +453,18 @@ export default function Main() {
 
 ```ts
 import * as React from 'react';
-import { MD3LightTheme, PaperProvider, useTheme } from 'react-native-paper';
+import { LightTheme, PaperProvider, useTheme } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
 
   // Specify a custom property
   custom: 'property',
 
   // Specify a custom property in nested object
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     brandPrimary: '#fefefe',
     brandSecondary: 'red',
   },
@@ -445,6 +487,7 @@ export default function Main() {
 
 ```ts
 import * as React from 'react';
+import { View } from 'react-native';
 import { useAppTheme } from './App';
 
 export default function HomeScreen() {
@@ -458,7 +501,27 @@ export default function HomeScreen() {
 
 ## Material Design 3
 
-React Native Paper ships with Material Design 3 (Material You) only. Customize the default experience by extending `MD3LightTheme` or `MD3DarkTheme` (see [Extending the theme](#extending-the-theme) and [Advanced theme overrides](#advanced-theme-overrides)).
+React Native Paper ships with Material Design 3 (Material You) only. Customize the default experience by extending `LightTheme` or `DarkTheme` (see [Extending the theme](#extending-the-theme) and [Advanced theme overrides](#advanced-theme-overrides)).
+
+## Applying a theme to part of the app
+
+To change the theme of every component in one part of your app, wrap that part in `ThemeProvider`. Like a component's `theme` prop, its `theme` is merged deeply onto the theme above it, so pass only the keys you change:
+
+```js
+import * as React from 'react';
+import { Button, ThemeProvider } from 'react-native-paper';
+
+export default function CheckoutActions() {
+  return (
+    <ThemeProvider theme={{ colors: { primary: 'tomato' } }}>
+      <Button>Pay</Button>
+      <Button mode="outlined">Cancel</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+Unlike `PaperProvider`, `ThemeProvider` doesn't choose between `LightTheme` and `DarkTheme` from `dark`. To show part of the app in the dark theme, pass `DarkTheme` itself.
 
 ## Applying a theme to a paper component
 
@@ -470,7 +533,10 @@ import { Button } from 'react-native-paper';
 
 export default function ButtonExample() {
   return (
-    <Button raised theme={{ roundness: 3 }}>
+    <Button
+      shape="square"
+      theme={{ shapes: { corner: { medium: 15 } } }}
+    >
       Press me
     </Button>
   );
@@ -490,7 +556,7 @@ import { Button } from 'react-native-paper';
 export default function FancyButton(props) {
   return (
     <Button
-      theme={{ typescale: { labelLarge: { letterSpacing: 1 } } }}
+      theme={{ fonts: { labelLarge: { letterSpacing: 1 } } }}
       {...props}
     />
   );

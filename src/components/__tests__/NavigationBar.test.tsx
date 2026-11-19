@@ -1,19 +1,15 @@
 import type { ComponentProps } from 'react';
 import { Platform } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
 
+import { LocaleProvider } from '../../core/locale';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { Palette } from '../../theme/tokens';
 import NavigationBar from '../NavigationBar/NavigationBar';
-import {
-  getActiveTintColor,
-  getInactiveTintColor,
-  getLabelColor,
-  getStateLayerColor,
-} from '../NavigationBar/utils';
+import { getStateLayerColor } from '../NavigationBar/utils';
 
 const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
 
@@ -60,9 +56,17 @@ it('renders tab labels when labeled', async () => {
     />
   );
 
-  // Each tab renders a single label (no cross-fade layers).
-  expect(screen.getAllByText('Alpha').length).toBeGreaterThan(0);
-  expect(screen.getAllByText('Beta').length).toBeGreaterThan(0);
+  expect(screen.getByText('Alpha')).toBeOnTheScreen();
+  expect(screen.getByText('Beta')).toBeOnTheScreen();
+});
+
+it('keeps stacked labels on one line', async () => {
+  await render(
+    <NavigationBar navigationState={createState(0, 3)} onTabPress={jest.fn()} />
+  );
+
+  expect(screen.getByText('Route: 0')).toHaveProp('numberOfLines', 1);
+  expect(screen.getByText('Route: 0')).toHaveProp('ellipsizeMode', 'tail');
 });
 
 it('exposes the tabs pattern through accessibility roles', async () => {
@@ -169,6 +173,19 @@ it('calls onTabLongPress with the pressed route', async () => {
   });
 });
 
+it('calls onTabPress after a long press when there is no onTabLongPress', async () => {
+  const navigationState = createState(0, 3);
+  const onTabPress = jest.fn();
+
+  const user = userEvent.setup();
+  await renderLaidOutBar({ navigationState, onTabPress });
+
+  await user.longPress(screen.getByRole(tabRole, { name: 'Route: 1' }));
+
+  expect(onTabPress).toHaveBeenCalledTimes(1);
+  expect(onTabPress).toHaveBeenCalledWith({ route: navigationState.routes[1] });
+});
+
 it('renders the horizontal (flexible) variant', async () => {
   const tree = (
     await render(
@@ -194,6 +211,34 @@ it('truncates a long label instead of growing past the tab in the horizontal var
 
   expect(screen.getByText('Route: 0')).toHaveProp('numberOfLines', 1);
   expect(screen.getByText('Route: 0')).toHaveProp('ellipsizeMode', 'tail');
+});
+
+it('gives the tabs equal widths again after a change from horizontal to stacked', async () => {
+  const navigationState = createState(0, 3);
+
+  await render(
+    <NavigationBar
+      navigationState={navigationState}
+      onTabPress={jest.fn()}
+      variant="horizontal"
+    />
+  );
+
+  for (const tab of screen.getAllByRole(tabRole)) {
+    expect(tab).not.toHaveStyle({ flex: 1 });
+  }
+
+  await screen.rerender(
+    <NavigationBar
+      navigationState={navigationState}
+      onTabPress={jest.fn()}
+      variant="stacked"
+    />
+  );
+
+  for (const tab of screen.getAllByRole(tabRole)) {
+    expect(tab).toHaveStyle({ flex: 1 });
+  }
 });
 
 it('falls back to icon-only when horizontal is combined with labeled=false', async () => {
@@ -340,13 +385,67 @@ it('colors the focused tab label with secondary and others with onSurfaceVariant
     />
   );
 
-  expect(screen.getAllByText('Alpha').at(-1)).toHaveStyle({
+  expect(screen.getByText('Alpha')).toHaveStyle({
     color: LightTheme.colors.secondary,
   });
-  expect(screen.getAllByText('Beta').at(-1)).toHaveStyle({
+  expect(screen.getByText('Beta')).toHaveStyle({
     color: LightTheme.colors.onSurfaceVariant,
   });
 });
+
+it('colors the labels with activeColor and inactiveColor', async () => {
+  await render(
+    <NavigationBar
+      navigationState={{
+        index: 0,
+        routes: [
+          { key: 'a', title: 'Alpha', focusedIcon: 'magnify' },
+          { key: 'b', title: 'Beta', focusedIcon: 'camera' },
+        ],
+      }}
+      activeColor="#FBF7DB"
+      inactiveColor="#853D4B"
+      onTabPress={jest.fn()}
+    />
+  );
+
+  expect(screen.getByText('Alpha')).toHaveStyle({ color: '#FBF7DB' });
+  expect(screen.getByText('Beta')).toHaveStyle({ color: '#853D4B' });
+});
+
+it.each([
+  {
+    colors: {},
+    active: LightTheme.colors.onSecondaryContainer,
+    inactive: LightTheme.colors.onSurfaceVariant,
+  },
+  {
+    colors: { activeColor: '#FBF7DB', inactiveColor: '#853D4B' },
+    active: '#FBF7DB',
+    inactive: '#853D4B',
+  },
+])(
+  'passes the icon colors to renderIcon with $colors',
+  async ({ colors, active, inactive }) => {
+    const renderIcon = jest.fn(() => null);
+
+    await render(
+      <NavigationBar
+        navigationState={createState(0, 2)}
+        renderIcon={renderIcon}
+        onTabPress={jest.fn()}
+        {...colors}
+      />
+    );
+
+    expect(renderIcon).toHaveBeenCalledWith(
+      expect.objectContaining({ focused: true, color: active })
+    );
+    expect(renderIcon).toHaveBeenCalledWith(
+      expect.objectContaining({ focused: false, color: inactive })
+    );
+  }
+);
 
 it('renders a badge for routes that define one', async () => {
   await render(
@@ -362,66 +461,175 @@ it('renders a badge for routes that define one', async () => {
     />
   );
 
-  expect(screen.getByText('3')).toBeTruthy();
-  expect(screen.getByRole(tabRole, { name: /Alpha/ })).toBeSelected();
+  expect(screen.getByText('3')).toBeOnTheScreen();
+  expect(screen.getByRole(tabRole, { name: 'Alpha, 3' })).toBeSelected();
+  expect(screen.getByRole(tabRole, { name: 'Beta' })).not.toBeSelected();
 });
 
-describe('getActiveTintColor', () => {
-  it.each`
-    activeColor  | expected
-    ${'#FBF7DB'} | ${'#FBF7DB'}
-    ${undefined} | ${Palette.secondary10}
-  `(
-    'returns $expected when activeColor: $activeColor',
-    ({ activeColor, expected }) => {
-      const theme = LightTheme;
-      const result = getActiveTintColor({ activeColor, theme });
-      expect(result).toBe(expected);
-    }
+it('leaves a dot badge out of the accessible name', async () => {
+  await render(
+    <NavigationBar
+      navigationState={{
+        index: 0,
+        routes: [
+          { key: 'a', title: 'Alpha', focusedIcon: 'magnify', badge: true },
+        ],
+      }}
+      onTabPress={jest.fn()}
+    />
   );
+
+  expect(screen.getByRole(tabRole, { name: 'Alpha' })).toBeOnTheScreen();
 });
 
-describe('getInactiveTintColor', () => {
-  it.each`
-    inactiveColor | expected
-    ${'#853D4B'}  | ${'#853D4B'}
-    ${undefined}  | ${Palette.neutralVariant30}
-  `(
-    'returns $expected when inactiveColor: $inactiveColor',
-    ({ inactiveColor, expected }) => {
-      const theme = LightTheme;
-      const result = getInactiveTintColor({
-        inactiveColor,
-        theme,
-      });
-      expect(result).toBe(expected);
-    }
+it('names an icon-only tab with its badge', async () => {
+  await render(
+    <NavigationBar
+      navigationState={{
+        index: 0,
+        routes: [
+          { key: 'a', title: 'Inbox', focusedIcon: 'inbox', badge: '99+' },
+        ],
+      }}
+      labeled={false}
+      onTabPress={jest.fn()}
+    />
   );
+
+  expect(screen.getByRole(tabRole, { name: 'Inbox, 99+' })).toBeOnTheScreen();
 });
 
-describe('getLabelColor', () => {
+describe('on web', () => {
+  // A stand-in for the DOM tab elements that React Native Web renders.
+  class FakeTab {
+    focus = jest.fn();
+    parentElement: { querySelectorAll: () => FakeTab[] };
+
+    constructor(siblings: FakeTab[]) {
+      // eslint-disable-next-line testing-library/no-node-access -- The fake stands in for the DOM element that the bar reads its sibling tabs from.
+      this.parentElement = { querySelectorAll: () => siblings };
+    }
+  }
+
+  const key = (name: string, currentTarget?: FakeTab, repeat = false) => ({
+    nativeEvent: { key: name, repeat },
+    currentTarget,
+    preventDefault: jest.fn(),
+  });
+
+  const createTabs = () => {
+    const tabs: FakeTab[] = [];
+    tabs.push(new FakeTab(tabs), new FakeTab(tabs), new FakeTab(tabs));
+    return tabs;
+  };
+
+  const setUpWeb = () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    Object.defineProperty(globalThis, 'HTMLElement', {
+      configurable: true,
+      value: FakeTab,
+    });
+  };
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    Reflect.deleteProperty(globalThis, 'HTMLElement');
+  });
+
+  it('makes only the selected tab a Tab stop', async () => {
+    setUpWeb();
+    await render(
+      <NavigationBar
+        navigationState={createState(1, 3)}
+        onTabPress={jest.fn()}
+      />
+    );
+
+    const [first, selected, last] = screen.getAllByRole('tab');
+
+    expect(first).toHaveProp('tabIndex', -1);
+    expect(selected).toHaveProp('tabIndex', 0);
+    expect(last).toHaveProp('tabIndex', -1);
+  });
+
+  it('presses a tab once on Space release, even when Space is held', async () => {
+    setUpWeb();
+    const navigationState = createState(0, 3);
+    const onTabPress = jest.fn();
+    await render(
+      <NavigationBar
+        navigationState={navigationState}
+        onTabPress={onTabPress}
+      />
+    );
+    const tab = screen.getByRole('tab', { name: 'Route: 1' });
+    const down = key(' ');
+
+    await fireEvent(tab, 'keyDown', down);
+    await fireEvent(tab, 'keyDown', key(' ', undefined, true));
+    await fireEvent(tab, 'keyDown', key(' ', undefined, true));
+
+    expect(down.preventDefault).toHaveBeenCalled();
+    expect(onTabPress).not.toHaveBeenCalled();
+
+    await fireEvent(tab, 'keyUp', key(' '));
+
+    expect(onTabPress).toHaveBeenCalledTimes(1);
+    expect(onTabPress).toHaveBeenCalledWith({
+      route: navigationState.routes[1],
+    });
+  });
+
   it.each([
-    { tintColor: '#FBF7DB', focused: true, expected: '#FBF7DB' },
-    { tintColor: '#853D4B', focused: true, expected: '#853D4B' },
-    { tintColor: undefined, focused: true, expected: Palette.secondary40 },
-    {
-      tintColor: undefined,
-      focused: false,
-      expected: Palette.neutralVariant30,
-    },
-  ])(
-    'returns $expected when tintColor: $tintColor, focused: $focused',
-    ({ tintColor, focused, expected }) => {
-      const theme = LightTheme;
-      const result = getLabelColor({
-        tintColor: tintColor ?? '',
-        hasColor: Boolean(tintColor),
-        focused,
-        theme,
-      });
-      expect(result).toBe(expected);
+    { direction: 'ltr', name: 'ArrowRight', from: 0, to: 1 },
+    { direction: 'ltr', name: 'ArrowLeft', from: 0, to: 2 },
+    { direction: 'ltr', name: 'ArrowRight', from: 2, to: 0 },
+    { direction: 'rtl', name: 'ArrowRight', from: 1, to: 0 },
+    { direction: 'rtl', name: 'ArrowLeft', from: 1, to: 2 },
+    { direction: 'ltr', name: 'Home', from: 2, to: 0 },
+    { direction: 'ltr', name: 'End', from: 0, to: 2 },
+  ] as const)(
+    'moves focus from tab $from to tab $to on $name in $direction',
+    async ({ direction, name, from, to }) => {
+      setUpWeb();
+      const onTabPress = jest.fn();
+      await render(
+        <LocaleProvider direction={direction}>
+          <NavigationBar
+            navigationState={createState(0, 3)}
+            onTabPress={onTabPress}
+          />
+        </LocaleProvider>
+      );
+      const tabs = createTabs();
+      const event = key(name, tabs[from]);
+
+      await fireEvent(screen.getAllByRole('tab')[from], 'keyDown', event);
+
+      expect(tabs[to].focus).toHaveBeenCalledTimes(1);
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(onTabPress).not.toHaveBeenCalled();
     }
   );
+
+  it('leaves other keys to the browser', async () => {
+    setUpWeb();
+    await render(
+      <NavigationBar
+        navigationState={createState(0, 3)}
+        onTabPress={jest.fn()}
+      />
+    );
+    const tabs = createTabs();
+    const event = key('ArrowDown', tabs[0]);
+
+    await fireEvent(screen.getAllByRole('tab')[0], 'keyDown', event);
+
+    expect(event.preventDefault).not.toHaveBeenCalled();
+    for (const tab of tabs) {
+      expect(tab.focus).not.toHaveBeenCalled();
+    }
+  });
 });
 
 describe('getStateLayerColor', () => {

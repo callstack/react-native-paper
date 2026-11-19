@@ -27,6 +27,7 @@ exports[`only shows the focus state layer for keyboard focus on web: keyboard-fo
   onClick={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
+  onKeyUp={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onResponderGrant={[Function]}
@@ -42,6 +43,7 @@ exports[`only shows the focus state layer for keyboard focus on web: keyboard-fo
       "paddingVertical": 0,
     }
   }
+  tabIndex={-1}
   testID="tab"
 >
   <View
@@ -55,15 +57,17 @@ exports[`only shows the focus state layer for keyboard focus on web: keyboard-fo
   >
     <View
       style={
-        {
-          "alignSelf": "center",
-          "height": 32,
-          "justifyContent": "center",
-          "marginBottom": 4,
-          "marginHorizontal": 12,
-          "marginTop": 0,
-          "width": 32,
-        }
+        [
+          {
+            "alignSelf": "center",
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+          {
+            "marginBottom": 4,
+          },
+        ]
       }
     >
       <View
@@ -215,7 +219,9 @@ exports[`only shows the focus state layer for keyboard focus on web: keyboard-fo
       }
     >
       <Text
+        ellipsizeMode="tail"
         maxFontSizeMultiplier={1}
+        numberOfLines={1}
         selectable={false}
         style={
           [
@@ -287,6 +293,7 @@ exports[`only shows the focus state layer for keyboard focus on web: pointer-foc
   onClick={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
+  onKeyUp={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onResponderGrant={[Function]}
@@ -302,6 +309,7 @@ exports[`only shows the focus state layer for keyboard focus on web: pointer-foc
       "paddingVertical": 0,
     }
   }
+  tabIndex={-1}
   testID="tab"
 >
   <View
@@ -315,15 +323,17 @@ exports[`only shows the focus state layer for keyboard focus on web: pointer-foc
   >
     <View
       style={
-        {
-          "alignSelf": "center",
-          "height": 32,
-          "justifyContent": "center",
-          "marginBottom": 4,
-          "marginHorizontal": 12,
-          "marginTop": 0,
-          "width": 32,
-        }
+        [
+          {
+            "alignSelf": "center",
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+          {
+            "marginBottom": 4,
+          },
+        ]
       }
     >
       <View
@@ -475,7 +485,9 @@ exports[`only shows the focus state layer for keyboard focus on web: pointer-foc
       }
     >
       <Text
+        ellipsizeMode="tail"
         maxFontSizeMultiplier={1}
+        numberOfLines={1}
         selectable={false}
         style={
           [
@@ -572,15 +584,17 @@ exports[`renders the MD3 state layer for hover, focus and press: focused 1`] = `
   >
     <View
       style={
-        {
-          "alignSelf": "center",
-          "height": 32,
-          "justifyContent": "center",
-          "marginBottom": 4,
-          "marginHorizontal": 12,
-          "marginTop": 0,
-          "width": 32,
-        }
+        [
+          {
+            "alignSelf": "center",
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+          {
+            "marginBottom": 4,
+          },
+        ]
       }
     >
       <View
@@ -732,7 +746,9 @@ exports[`renders the MD3 state layer for hover, focus and press: focused 1`] = `
       }
     >
       <Text
+        ellipsizeMode="tail"
         maxFontSizeMultiplier={1}
+        numberOfLines={1}
         selectable={false}
         style={
           [
@@ -829,15 +845,17 @@ exports[`renders the MD3 state layer for hover, focus and press: hovered 1`] = `
   >
     <View
       style={
-        {
-          "alignSelf": "center",
-          "height": 32,
-          "justifyContent": "center",
-          "marginBottom": 4,
-          "marginHorizontal": 12,
-          "marginTop": 0,
-          "width": 32,
-        }
+        [
+          {
+            "alignSelf": "center",
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+          {
+            "marginBottom": 4,
+          },
+        ]
       }
     >
       <View
@@ -989,7 +1007,9 @@ exports[`renders the MD3 state layer for hover, focus and press: hovered 1`] = `
       }
     >
       <Text
+        ellipsizeMode="tail"
         maxFontSizeMultiplier={1}
+        numberOfLines={1}
         selectable={false}
         style={
           [
@@ -1086,15 +1106,17 @@ exports[`renders the MD3 state layer for hover, focus and press: idle 1`] = `
   >
     <View
       style={
-        {
-          "alignSelf": "center",
-          "height": 32,
-          "justifyContent": "center",
-          "marginBottom": 4,
-          "marginHorizontal": 12,
-          "marginTop": 0,
-          "width": 32,
-        }
+        [
+          {
+            "alignSelf": "center",
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+          {
+            "marginBottom": 4,
+          },
+        ]
       }
     >
       <View
@@ -1243,7 +1265,9 @@ exports[`renders the MD3 state layer for hover, focus and press: idle 1`] = `
       }
     >
       <Text
+        ellipsizeMode="tail"
         maxFontSizeMultiplier={1}
+        numberOfLines={1}
         selectable={false}
         style={
           [
@@ -1340,15 +1364,17 @@ exports[`renders the MD3 state layer for hover, focus and press: pressed 1`] = `
   >
     <View
       style={
-        {
-          "alignSelf": "center",
-          "height": 32,
-          "justifyContent": "center",
-          "marginBottom": 4,
-          "marginHorizontal": 12,
-          "marginTop": 0,
-          "width": 32,
-        }
+        [
+          {
+            "alignSelf": "center",
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+          {
+            "marginBottom": 4,
+          },
+        ]
       }
     >
       <View
@@ -1500,7 +1526,9 @@ exports[`renders the MD3 state layer for hover, focus and press: pressed 1`] = `
       }
     >
       <Text
+        ellipsizeMode="tail"
         maxFontSizeMultiplier={1}
+        numberOfLines={1}
         selectable={false}
         style={
           [
@@ -1597,15 +1625,17 @@ exports[`renders the MD3 state layer for hover, focus and press: released 1`] = 
   >
     <View
       style={
-        {
-          "alignSelf": "center",
-          "height": 32,
-          "justifyContent": "center",
-          "marginBottom": 4,
-          "marginHorizontal": 12,
-          "marginTop": 0,
-          "width": 32,
-        }
+        [
+          {
+            "alignSelf": "center",
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+          {
+            "marginBottom": 4,
+          },
+        ]
       }
     >
       <View
@@ -1754,7 +1784,9 @@ exports[`renders the MD3 state layer for hover, focus and press: released 1`] = 
       }
     >
       <Text
+        ellipsizeMode="tail"
         maxFontSizeMultiplier={1}
+        numberOfLines={1}
         selectable={false}
         style={
           [
@@ -1956,36 +1988,57 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                 ]
               }
             />
-            <View>
-              <Text
-                accessibilityElementsHidden={true}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
+            <View
+              style={
+                {
+                  "height": 32,
+                  "marginHorizontal": -4,
+                  "width": 32,
+                }
+              }
+            >
+              <View
                 style={
-                  [
-                    {
-                      "color": "rgba(29, 25, 43, 1)",
-                      "fontSize": 24,
-                    },
-                    [
-                      {
-                        "lineHeight": 24,
-                        "transform": [
-                          {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
-                  ]
+                  {
+                    "alignItems": "center",
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 4,
+                  }
                 }
               >
-                magnify
-              </Text>
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "rgba(29, 25, 43, 1)",
+                        "fontSize": 24,
+                      },
+                      [
+                        {
+                          "lineHeight": 24,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  magnify
+                </Text>
+              </View>
               <View
                 style={
                   [
@@ -2054,7 +2107,7 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                     [
                       {
                         "flexShrink": 1,
-                        "marginLeft": 4,
+                        "marginStart": 4,
                         "textAlign": "center",
                       },
                       {
@@ -2185,36 +2238,57 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                 ]
               }
             />
-            <View>
-              <Text
-                accessibilityElementsHidden={true}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
+            <View
+              style={
+                {
+                  "height": 32,
+                  "marginHorizontal": -4,
+                  "width": 32,
+                }
+              }
+            >
+              <View
                 style={
-                  [
-                    {
-                      "color": "rgba(73, 69, 79, 1)",
-                      "fontSize": 24,
-                    },
-                    [
-                      {
-                        "lineHeight": 24,
-                        "transform": [
-                          {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
-                  ]
+                  {
+                    "alignItems": "center",
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 4,
+                  }
                 }
               >
-                camera
-              </Text>
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                        "fontSize": 24,
+                      },
+                      [
+                        {
+                          "lineHeight": 24,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  camera
+                </Text>
+              </View>
               <View
                 style={
                   [
@@ -2283,7 +2357,7 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                     [
                       {
                         "flexShrink": 1,
-                        "marginLeft": 4,
+                        "marginStart": 4,
                         "textAlign": "center",
                       },
                       {
@@ -2414,36 +2488,57 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                 ]
               }
             />
-            <View>
-              <Text
-                accessibilityElementsHidden={true}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
+            <View
+              style={
+                {
+                  "height": 32,
+                  "marginHorizontal": -4,
+                  "width": 32,
+                }
+              }
+            >
+              <View
                 style={
-                  [
-                    {
-                      "color": "rgba(73, 69, 79, 1)",
-                      "fontSize": 24,
-                    },
-                    [
-                      {
-                        "lineHeight": 24,
-                        "transform": [
-                          {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
-                  ]
+                  {
+                    "alignItems": "center",
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 4,
+                  }
                 }
               >
-                inbox
-              </Text>
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "rgba(73, 69, 79, 1)",
+                        "fontSize": 24,
+                      },
+                      [
+                        {
+                          "lineHeight": 24,
+                          "transform": [
+                            {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  inbox
+                </Text>
+              </View>
               <View
                 style={
                   [
@@ -2512,7 +2607,7 @@ exports[`renders the horizontal (flexible) variant 1`] = `
                     [
                       {
                         "flexShrink": 1,
-                        "marginLeft": 4,
+                        "marginStart": 4,
                         "textAlign": "center",
                       },
                       {

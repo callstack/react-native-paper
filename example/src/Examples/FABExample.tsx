@@ -34,9 +34,9 @@ const variants: FabColor[] = [
   'primary',
   'secondary',
   'tertiary',
-  'tonalPrimary',
-  'tonalSecondary',
-  'tonalTertiary',
+  'primaryContainer',
+  'secondaryContainer',
+  'tertiaryContainer',
   'custom',
 ];
 
@@ -91,7 +91,7 @@ const FABExample = () => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
-  const [variant, setVariant] = React.useState<FabColor>('tonalPrimary');
+  const [variant, setVariant] = React.useState<FabColor>('primaryContainer');
   const activeVariant = variant === 'custom' ? undefined : variant;
   const activeContainerColor =
     variant === 'custom' ? CUSTOM_CONTAINER_COLOR : undefined;
@@ -152,9 +152,11 @@ const FABExample = () => {
         />
         <List.Item
           title="Show FAB"
+          role="switch"
+          aria-checked={showFab}
           right={() => (
-            <View pointerEvents="none">
-              <Switch value={showFab} />
+            <View pointerEvents="none" aria-hidden>
+              <Switch value={showFab} readOnly />
             </View>
           )}
           onPress={() => setShowFab((v) => !v)}
@@ -187,6 +189,7 @@ const FABExample = () => {
         {type === 'icon' && (
           <FAB
             icon="pencil"
+            aria-label="Compose"
             variant={activeVariant}
             containerColor={activeContainerColor}
             size={size}
@@ -214,6 +217,7 @@ const FABExample = () => {
           alignment={position}
           trigger={{
             icon: 'pencil',
+            'aria-label': 'Compose',
             variant: activeVariant,
             containerColor: activeContainerColor,
             size,

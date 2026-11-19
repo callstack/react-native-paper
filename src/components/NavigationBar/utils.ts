@@ -10,7 +10,7 @@ export const getActiveTintColor = ({
 }: {
   activeColor: ColorValue | undefined;
   theme: InternalTheme;
-}) => {
+}): ColorValue => {
   if (activeColor != null) {
     return activeColor;
   }
@@ -24,7 +24,7 @@ export const getInactiveTintColor = ({
 }: {
   inactiveColor: ColorValue | undefined;
   theme: InternalTheme;
-}) => {
+}): ColorValue => {
   if (inactiveColor != null) {
     return inactiveColor;
   }
@@ -42,7 +42,7 @@ export const getLabelColor = ({
   hasColor: boolean;
   focused: boolean;
   theme: InternalTheme;
-}) => {
+}): ColorValue => {
   const { colors } = theme;
   if (hasColor) {
     return tintColor;
@@ -65,7 +65,7 @@ export const getStateLayerColor = ({
   pressed: boolean;
   keyboardFocused: boolean;
   hovered: boolean;
-}) => {
+}): { backgroundColor: ColorValue; opacity: number } | null => {
   const interactionsByPriority: [StateOpacityKey, boolean][] = [
     ['pressed', pressed],
     ['focused', keyboardFocused],

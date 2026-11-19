@@ -22,35 +22,10 @@ export default function useIsKeyboardShown({ onShow, onHide }: Props) {
     }
 
     return () => {
-      if (Platform.OS === 'ios') {
-        if (willShowSubscription?.remove) {
-          willShowSubscription.remove();
-        } else {
-          // @ts-expect-error: We keep deprecated listener remove method for backwards compat with old RN versions
-          Keyboard.removeListener('keyboardWillShow', onShow);
-        }
-
-        if (willHideSubscription?.remove) {
-          willHideSubscription.remove();
-        } else {
-          // @ts-expect-error: We keep deprecated listener remove method for backwards compat with old RN versions
-          Keyboard.removeListener('keyboardWillHide', onHide);
-        }
-      } else {
-        if (didShowSubscription?.remove) {
-          didShowSubscription.remove();
-        } else {
-          // @ts-expect-error: We keep deprecated listener remove method for backwards compat with old RN versions
-          Keyboard.removeListener('keyboardDidShow', onShow);
-        }
-
-        if (didHideSubscription?.remove) {
-          didHideSubscription.remove();
-        } else {
-          // @ts-expect-error: We keep deprecated listener remove method for backwards compat with old RN versions
-          Keyboard.removeListener('keyboardDidHide', onHide);
-        }
-      }
+      willShowSubscription?.remove();
+      willHideSubscription?.remove();
+      didShowSubscription?.remove();
+      didHideSubscription?.remove();
     };
   }, [onHide, onShow]);
 }
