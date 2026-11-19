@@ -360,10 +360,10 @@ const TouchableRipple = ({
         !isInteractive && styles.disabled,
         typeof style === 'function' ? style(state) : style,
         // After `style`, so a background set there does not hide the hover.
+        state.hovered && isInteractive && getHoverStyle(hoverColor),
         // RNW's own `state.focused` fires for mouse clicks too, which is
         // exactly the distinction `:focus-visible` exists to make.
         // https://github.com/necolas/react-native-web/issues/1849
-        state.hovered && isInteractive && getHoverStyle(hoverColor),
         ...ring.style,
       ]}
     >
