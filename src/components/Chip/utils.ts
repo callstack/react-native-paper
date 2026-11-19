@@ -12,6 +12,17 @@ type BaseProps = {
   focused?: boolean;
 };
 
+export type ChipColors = {
+  borderColor: ColorValue;
+  textColor: ColorValue;
+  iconColor: ColorValue;
+  trailingIconColor: ColorValue;
+  contentOpacity: number;
+  backgroundColor: ColorValue;
+  rippleColor: ColorValue;
+  avatarOverlayColor: ColorValue;
+};
+
 const getContainerColor = ({
   theme,
   isOutlined,
@@ -110,7 +121,7 @@ export const getChipColors = ({
   customBackgroundColor?: ColorValue;
   disabled?: boolean;
   selectedColor?: ColorValue;
-}) => {
+}): ChipColors => {
   const baseChipColorProps = {
     theme,
     isOutlined,
