@@ -708,23 +708,29 @@ it.each(['onLongPress', 'onPressIn', 'onPressOut'] as const)(
 const accessoryNameWarning =
   'TextInput.Icon: an actionable icon requires an aria-label or accessibilityLabel.';
 
-it('warns when an actionable accessory has a blank accessible name', async () => {
-  const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-  await render(
-    <TextInput
-      label="Search"
-      endAccessory={(props) => (
-        <TextInput.Icon
-          {...props}
-          icon="close"
-          aria-label="  "
-          onPress={() => {}}
-        />
-      )}
-    />
-  );
-  expect(warn).toHaveBeenCalledWith(accessoryNameWarning);
-});
+it.each([
+  { name: 'no', label: undefined },
+  { name: 'a blank', label: '  ' },
+])(
+  'warns when an actionable accessory has $name accessible name',
+  async ({ label }) => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    await render(
+      <TextInput
+        label="Search"
+        endAccessory={(props) => (
+          <TextInput.Icon
+            {...props}
+            icon="close"
+            aria-label={label}
+            onPress={() => {}}
+          />
+        )}
+      />
+    );
+    expect(warn).toHaveBeenCalledWith(accessoryNameWarning);
+  }
+);
 
 it.each<{
   accessory: string;

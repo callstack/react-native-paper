@@ -26,22 +26,7 @@ export type TextInputAccessoryProps = {
 };
 
 export type TextInputIconProps = TextInputAccessoryProps &
-  Omit<
-    IconButtonProps,
-    keyof TextInputAccessoryProps | 'aria-label' | 'accessibilityLabel'
-  > &
-  (
-    | {
-        onPress?: undefined;
-        onLongPress?: undefined;
-        onPressIn?: undefined;
-        onPressOut?: undefined;
-        'aria-label'?: string;
-        accessibilityLabel?: string;
-      }
-    | { 'aria-label': string; accessibilityLabel?: string }
-    | { 'aria-label'?: string; accessibilityLabel: string }
-  );
+  Omit<IconButtonProps, keyof TextInputAccessoryProps>;
 
 /**
  * A component to render a leading / trailing icon in the TextInput
