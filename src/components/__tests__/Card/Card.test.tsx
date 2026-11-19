@@ -68,6 +68,13 @@ const getCardLayers = ({ neutral = false } = {}) => {
   };
 };
 
+// A focus event the Card's own interaction node receives. On web,
+// `focusVisible` is what `:focus-visible` matches.
+const selfFocus = (focusVisible: boolean) => {
+  const node = { matches: () => focusVisible };
+  return { target: node, currentTarget: node };
+};
+
 // Asserts that every layer shows the Material visuals of one state. The
 // values come from the token matrix, which `Card.tokens.test.ts` checks
 // against the specification.
@@ -644,9 +651,7 @@ describe('Card', () => {
       jest.replaceProperty(Platform, 'OS', 'web');
       await render(getVariantCard(variant, { onPress: () => {} }));
 
-      await fireEvent(screen.getByTestId('card'), 'focus', {
-        currentTarget: { matches: () => true },
-      });
+      await fireEvent(screen.getByTestId('card'), 'focus', selfFocus(true));
       await settle();
 
       expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.1 });
@@ -670,23 +675,40 @@ describe('Card', () => {
     await render(<Card testID="card" variant="outlined" onPress={() => {}} />);
     const target = screen.getByTestId('card');
 
-    await fireEvent(target, 'focus', {
-      currentTarget: { matches: () => false },
-    });
+    await fireEvent(target, 'focus', selfFocus(false));
     await settle();
 
     expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
     expectCardState('outlined');
 
-    await fireEvent(target, 'focus', {
-      currentTarget: { matches: () => true },
-    });
+    await fireEvent(target, 'focus', selfFocus(true));
     await settle();
 
     expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0.1 });
     expectCardState('outlined', { focused: true });
 
     await fireEvent(target, 'blur');
+    await settle();
+
+    expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
+    expectCardState('outlined');
+  });
+
+  it('clears hover feedback when the Card stops being actionable', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+    const { rerender } = await render(
+      <Card testID="card" variant="outlined" onPressIn={() => {}} />
+    );
+
+    await fireEvent(screen.getByTestId('card'), 'hoverIn');
+    await settle();
+    expectCardState('outlined', { hovered: true });
+
+    // The interaction node unmounts without a handler, so it sends no hover out.
+    await rerender(<Card testID="card" variant="outlined" />);
+    await rerender(
+      <Card testID="card" variant="outlined" onPressIn={() => {}} />
+    );
     await settle();
 
     expect(getCardLayers().stateLayer).toHaveStyle({ opacity: 0 });
