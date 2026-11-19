@@ -20,6 +20,7 @@ import type { TestInstance } from 'test-renderer';
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import TextInput from '../TextInput';
+import { LABEL_START_OFFSET_WITHOUT_ACCESSORY } from '../TextInput/constants';
 import type {
   TextInputRenderProps,
   TextInputHandles,
@@ -849,7 +850,7 @@ it('applies RTL writing direction to supporting text', async () => {
   });
 });
 
-it('keeps StartAccessory before EndAccessory in tree order when RTL so flex row mirrors once', async () => {
+it('renders StartAccessory before EndAccessory in RTL', async () => {
   I18nManager.isRTL = true;
 
   function StartAccessory() {
@@ -1064,6 +1065,49 @@ it('keeps a lone StartAccessory before the input in both LTR and RTL (tree order
   expect(firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')).toBeLessThan(
     firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')
   );
+});
+
+it('shows the error icon in RTL when only a StartAccessory is set', async () => {
+  I18nManager.isRTL = true;
+
+  function StartAccessory() {
+    return <View testID="rtl-error-start-acc" />;
+  }
+
+  await render(
+    <TextInput
+      label="Email"
+      value=""
+      error
+      onChangeText={() => {}}
+      startAccessory={StartAccessory}
+    />
+  );
+
+  expect(
+    screen.getByText('alert-circle', includeHiddenElements)
+  ).toBeOnTheScreen();
+});
+
+it('keeps the label at the field edge in RTL when only an EndAccessory is set', async () => {
+  I18nManager.isRTL = true;
+
+  function EndAccessory() {
+    return <View testID="rtl-lone-end-acc" />;
+  }
+
+  await render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      endAccessory={EndAccessory}
+    />
+  );
+
+  expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle({
+    start: LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+  });
 });
 
 it('uses logical start offset on label wrapper for filled and outlined TextInput in RTL', async () => {
