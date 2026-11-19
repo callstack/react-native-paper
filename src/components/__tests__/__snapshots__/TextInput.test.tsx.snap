@@ -127,7 +127,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             "position": "absolute",
           },
           {
-            "left": 52,
+            "start": 52,
           },
           {
             "top": 16,
@@ -584,7 +584,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             "position": "absolute",
           },
           {
-            "left": 52,
+            "start": 52,
           },
           {
             "top": 16,
@@ -1000,7 +1000,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             "position": "absolute",
           },
           {
-            "left": 52,
+            "start": 52,
           },
           {
             "top": 16,
@@ -1452,7 +1452,7 @@ exports[`renders filled TextInput with label and value 1`] = `
             "position": "absolute",
           },
           {
-            "left": 16,
+            "start": 16,
           },
           {
             "top": 16,
@@ -1625,7 +1625,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           },
           {
             "backgroundColor": "rgba(254, 247, 255, 1)",
-            "left": 48,
+            "start": 48,
           },
           {
             "top": -12,
@@ -2021,7 +2021,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           },
           {
             "backgroundColor": "rgba(254, 247, 255, 1)",
-            "left": 48,
+            "start": 48,
           },
           {
             "top": -12,
@@ -2453,7 +2453,7 @@ exports[`renders outlined TextInput with label and value 1`] = `
           },
           {
             "backgroundColor": "rgba(254, 247, 255, 1)",
-            "left": 16,
+            "start": 16,
           },
           {
             "top": -12,

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   I18nManager,
+  Platform,
   StyleSheet,
   TextInput as NativeTextInput,
   View,
@@ -11,6 +12,8 @@ import {
   afterAll,
   afterEach,
   beforeAll,
+  beforeEach,
+  describe,
   expect,
   it,
   jest,
@@ -21,6 +24,11 @@ import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import TextInput from '../TextInput';
+import {
+  FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
+  LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+  OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
+} from '../TextInput/constants';
 import type {
   TextInputRenderProps,
   TextInputHandles,
@@ -987,7 +995,7 @@ it('applies RTL writing direction to supporting text', async () => {
   });
 });
 
-it('places EndAccessory before StartAccessory in the tree when RTL', async () => {
+it('renders StartAccessory before EndAccessory in RTL', async () => {
   I18nManager.isRTL = true;
 
   function StartAccessory() {
@@ -1010,9 +1018,9 @@ it('places EndAccessory before StartAccessory in the tree when RTL', async () =>
   );
 
   const tree = toJSON();
-  expect(firstIndexOfTestIdInTree(tree, 'rtl-acc-from-end-prop')).toBeLessThan(
+  expect(
     firstIndexOfTestIdInTree(tree, 'rtl-acc-from-start-prop')
-  );
+  ).toBeLessThan(firstIndexOfTestIdInTree(tree, 'rtl-acc-from-end-prop'));
 });
 
 it('places StartAccessory before EndAccessory in the tree when LTR', async () => {
@@ -1164,7 +1172,7 @@ it('does not expose the placeholder string again after the TextInput loses focus
   expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
 });
 
-it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order)', async () => {
+it('keeps a lone StartAccessory before the input in both LTR and RTL (tree order)', async () => {
   function LoneStartAccessory() {
     return <View testID="lone-start-acc" />;
   }
@@ -1199,9 +1207,121 @@ it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order
   );
 
   const rtlTree = toJsonRtl();
-  expect(firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')).toBeLessThan(
-    firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')
+  expect(firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')).toBeLessThan(
+    firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')
   );
+});
+
+it('shows the error icon in RTL when only a StartAccessory is set', async () => {
+  I18nManager.isRTL = true;
+
+  function StartAccessory() {
+    return <View testID="rtl-error-start-acc" />;
+  }
+
+  await render(
+    <TextInput
+      label="Email"
+      value=""
+      error
+      onChangeText={() => {}}
+      startAccessory={StartAccessory}
+    />
+  );
+
+  expect(
+    screen.getByText('alert-circle', includeHiddenElements)
+  ).toBeOnTheScreen();
+});
+
+it('keeps the label at the field edge in RTL when only an EndAccessory is set', async () => {
+  I18nManager.isRTL = true;
+
+  function EndAccessory() {
+    return <View testID="rtl-lone-end-acc" />;
+  }
+
+  await render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      endAccessory={EndAccessory}
+    />
+  );
+
+  expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle({
+    start: LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+  });
+});
+
+// React Native Web resolves `start` from a `dir` prop on its own Views, not
+// from `<html dir>`, so on web the label takes its side from Paper's direction.
+describe('on web in RTL', () => {
+  let platformOS: { restore(): void } | undefined;
+
+  beforeEach(() => {
+    platformOS = jest.replaceProperty(Platform, 'OS', 'web');
+    I18nManager.isRTL = true;
+  });
+
+  afterEach(() => {
+    platformOS?.restore();
+  });
+
+  it.each([
+    {
+      variant: 'filled' as const,
+      offset: FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
+    },
+    {
+      variant: 'outlined' as const,
+      offset: OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
+    },
+  ])(
+    'places the $variant label next to the StartAccessory on the right',
+    async ({ variant, offset }) => {
+      function StartAccessory() {
+        return <View testID="web-rtl-start-acc" />;
+      }
+
+      await render(
+        <TextInput
+          variant={variant}
+          label="Email"
+          value=""
+          onChangeText={() => {}}
+          startAccessory={StartAccessory}
+        />
+      );
+
+      const labelWrapper = screen.getByText(
+        'Email',
+        includeHiddenElements
+      ).parent;
+      expect(labelWrapper).toHaveStyle({ right: offset });
+      expect(labelWrapper).not.toHaveStyle({ start: offset });
+    }
+  );
+
+  it('keeps the label on the right, clear of a lone EndAccessory', async () => {
+    function EndAccessory() {
+      return <View testID="web-rtl-end-acc" />;
+    }
+
+    await render(
+      <TextInput
+        label="Email"
+        value=""
+        onChangeText={() => {}}
+        endAccessory={EndAccessory}
+      />
+    );
+
+    expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle(
+      { right: LABEL_START_OFFSET_WITHOUT_ACCESSORY }
+    );
+  });
 });
 
 it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', async () => {

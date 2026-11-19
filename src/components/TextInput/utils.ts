@@ -353,15 +353,17 @@ export const getFilledTextInputData = (
    * Variant-specific styles
    */
 
+  const filledLabelOffset = hasAccessory
+    ? FILLED_LABEL_START_OFFSET_WITH_ACCESSORY
+    : LABEL_START_OFFSET_WITHOUT_ACCESSORY;
+
   const animatedLabelWrapperStyles: StyleProp<
     AnimatedStyle<StyleProp<ViewStyle>>
   > = [
     filledStyles.labelWrapper,
-    {
-      left: hasAccessory
-        ? FILLED_LABEL_START_OFFSET_WITH_ACCESSORY
-        : LABEL_START_OFFSET_WITHOUT_ACCESSORY,
-    },
+    Platform.OS === 'web' && shared.isRTL
+      ? { right: filledLabelOffset }
+      : { start: filledLabelOffset },
     animatedLabelWrapperStyle,
   ];
 
@@ -518,14 +520,18 @@ export const getOutlinedTextInputData = (
     isDisabled && { opacity: OUTLINED_DISABLED_OUTLINE_OPACITY },
   ];
 
+  const outlinedLabelOffset = hasAccessory
+    ? OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY
+    : LABEL_START_OFFSET_WITHOUT_ACCESSORY;
+
   const animatedLabelWrapperStyles: StyleProp<
     AnimatedStyle<StyleProp<ViewStyle>>
   > = [
     outlinedStyles.labelWrapper,
     {
-      left: hasAccessory
-        ? OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY
-        : LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+      ...(Platform.OS === 'web' && shared.isRTL
+        ? { right: outlinedLabelOffset }
+        : { start: outlinedLabelOffset }),
       backgroundColor: labelBackgroundColor,
     },
     animatedLabelWrapperStyle,
