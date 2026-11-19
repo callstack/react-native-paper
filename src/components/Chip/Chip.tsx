@@ -11,17 +11,13 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-} from 'react-native-reanimated';
-
 import { ChipTokens } from './tokens';
 import { getChipColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import Surface from '../Surface';
@@ -37,11 +33,6 @@ const TRAILING_ICON_AREA_SIZE = ChipTokens.containerHeight;
 // The icon glyph is centered inside that (larger) touch target, so its own
 // edge sits this far in from the touch target's edge.
 const TRAILING_ICON_INSET = (TRAILING_ICON_AREA_SIZE - ChipTokens.iconSize) / 2;
-
-// Suppresses the browser's native focus outline so only our own focus
-// indicator ring is visible. Not in StyleSheet because `outline` is outside ViewStyle.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const webNoOutline = { outline: 'none' } as unknown as ViewStyle;
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**
@@ -265,20 +256,18 @@ const Chip = ({
 
   const [hovered, setHovered] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
-  const focusedSV = useSharedValue(0);
-  const focusRingStyle = useAnimatedStyle(
-    () => ({ opacity: focusedSV.value }),
-    []
-  );
-
-  const trailingIconFocusedSV = useSharedValue(0);
-  const trailingIconFocusRingStyle = useAnimatedStyle(
-    () => ({ opacity: trailingIconFocusedSV.value }),
-    []
-  );
 
   const borderRadius = borderRadiusProp ?? theme.shapes.corner.small;
-  const focusRingBorderRadius = borderRadius + ChipTokens.focusIndicatorOffset;
+
+  // The body's ring goes on the Surface, the chip's visible box
+  // (`scope: 'within'`), not on the ripple that takes focus, so it follows the
+  // chip's border box. Off whenever the body can't be pressed.
+  const { target: bodyFocusTarget, ring: bodyFocusRing } = useFocusRing(
+    isTouchableDisabled,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
 
   const {
     borderColor,
@@ -308,6 +297,16 @@ const Chip = ({
   const hasTrailingIcon = !!trailingIcon;
   const hasClose = !hasTrailingIcon && !!onClose;
   const showTrailingIcon = hasTrailingIcon || hasClose;
+
+  // The trailing ripple clips to a circle, so its ring sits on an unclipped
+  // wrapper around it. Off without a trailing control too: a focused node that
+  // unmounts sends no blur.
+  const { target: trailingFocusTarget, ring: trailingFocusRing } = useFocusRing(
+    disabled || !showTrailingIcon,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
 
   const leftPadding = hasAvatar
     ? ChipTokens.avatarLeadingPadding
@@ -344,7 +343,7 @@ const Chip = ({
     <Surface
       backgroundColor={selected ? selectedBackgroundColor : backgroundColor}
       borderRadius={borderRadius}
-      style={[styles.container, { borderColor }, style]}
+      style={[styles.container, { borderColor }, style, ...bodyFocusRing.style]}
       elevation={
         disabled
           ? 0
@@ -355,17 +354,15 @@ const Chip = ({
             : ChipTokens.flatElevation
       }
       {...rest}
+      {...mergeDataSetProps(rest, bodyFocusRing.dataSetProps)}
       theme={theme}
     >
       <TouchableRipple
         borderless
         background={background}
         rippleColor={rippleColor}
-        style={[
-          styles.touchable,
-          { borderRadius },
-          Platform.OS === 'web' ? webNoOutline : undefined,
-        ]}
+        style={[styles.touchable, { borderRadius }, ...bodyFocusTarget.style]}
+        focusRing="none"
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={onPressIn}
@@ -373,12 +370,12 @@ const Chip = ({
         onHoverIn={() => setHovered(true)}
         onHoverOut={() => setHovered(false)}
         onFocus={(e) => {
-          if (!isKeyboardFocusEvent(e)) return;
-          focusedSV.value = 1;
+          bodyFocusTarget.onFocus?.(e);
+          if (e.target !== e.currentTarget || !isKeyboardFocusEvent(e)) return;
           setFocused(true);
         }}
         onBlur={() => {
-          focusedSV.value = 0;
+          bodyFocusTarget.onBlur?.();
           setFocused(false);
         }}
         delayLongPress={delayLongPress}
@@ -444,63 +441,45 @@ const Chip = ({
         </View>
       </TouchableRipple>
       {showTrailingIcon ? (
-        <TouchableRipple
-          borderless
-          centered
-          onPress={hasTrailingIcon ? onTrailingIconPress : onClose}
-          disabled={disabled}
-          role="button"
-          aria-label={
-            hasTrailingIcon
-              ? trailingIconAccessibilityLabel
-              : closeIconAccessibilityLabel
-          }
-          aria-disabled={disabled}
-          testID={hasTrailingIcon ? trailingIconTestID : closeIconTestID}
-          hitSlop={trailingIconHitSlop}
-          background={trailingIconAndroidRipple}
-          rippleColor={rippleColor}
-          onFocus={(e) => {
-            if (!isKeyboardFocusEvent(e)) return;
-            trailingIconFocusedSV.value = 1;
-          }}
-          onBlur={() => {
-            trailingIconFocusedSV.value = 0;
-          }}
-          style={[
-            styles.closeButton,
-            Platform.OS === 'web' ? webNoOutline : undefined,
-            disabled ? { opacity: contentOpacity } : null,
-          ]}
-          theme={theme}
+        <View
+          style={[styles.trailingIconWrapper, ...trailingFocusRing.style]}
+          {...trailingFocusRing.dataSetProps}
         >
-          <Icon
-            source={hasTrailingIcon ? trailingIcon : (closeIcon ?? 'close')}
-            color={trailingIconColor}
-            size={ChipTokens.iconSize}
+          <TouchableRipple
+            borderless
+            centered
+            focusRing="none"
+            onPress={hasTrailingIcon ? onTrailingIconPress : onClose}
+            disabled={disabled}
+            role="button"
+            aria-label={
+              hasTrailingIcon
+                ? trailingIconAccessibilityLabel
+                : closeIconAccessibilityLabel
+            }
+            aria-disabled={disabled}
+            testID={hasTrailingIcon ? trailingIconTestID : closeIconTestID}
+            hitSlop={trailingIconHitSlop}
+            background={trailingIconAndroidRipple}
+            rippleColor={rippleColor}
+            onFocus={trailingFocusTarget.onFocus}
+            onBlur={trailingFocusTarget.onBlur}
+            style={[
+              styles.closeButton,
+              ...trailingFocusTarget.style,
+              disabled ? { opacity: contentOpacity } : null,
+            ]}
             theme={theme}
-          />
-        </TouchableRipple>
+          >
+            <Icon
+              source={hasTrailingIcon ? trailingIcon : (closeIcon ?? 'close')}
+              color={trailingIconColor}
+              size={ChipTokens.iconSize}
+              theme={theme}
+            />
+          </TouchableRipple>
+        </View>
       ) : null}
-      {showTrailingIcon ? (
-        <Animated.View
-          style={[
-            styles.trailingIconFocusRing,
-            { borderColor: theme.colors[ChipTokens.focusIndicatorColor] },
-            trailingIconFocusRingStyle,
-          ]}
-        />
-      ) : null}
-      <Animated.View
-        style={[
-          styles.focusRing,
-          {
-            borderRadius: focusRingBorderRadius,
-            borderColor: theme.colors[ChipTokens.focusIndicatorColor],
-          },
-          focusRingStyle,
-        ]}
-      />
     </Surface>
   );
 };
@@ -518,15 +497,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     alignSelf: 'stretch',
     justifyContent: 'center',
-  },
-  focusRing: {
-    position: 'absolute',
-    top: -ChipTokens.focusIndicatorOffset,
-    left: -ChipTokens.focusIndicatorOffset,
-    right: -ChipTokens.focusIndicatorOffset,
-    bottom: -ChipTokens.focusIndicatorOffset,
-    borderWidth: ChipTokens.focusIndicatorThickness,
-    pointerEvents: 'none',
   },
   content: {
     flexShrink: 1,
@@ -558,26 +528,20 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     includeFontPadding: false,
   },
-  closeButton: {
+  trailingIconWrapper: {
     position: 'absolute',
     top: 0,
     bottom: 0,
     right: 0,
     width: TRAILING_ICON_AREA_SIZE,
     borderRadius: TRAILING_ICON_AREA_SIZE / 2,
+  },
+  closeButton: {
+    flex: 1,
+    borderRadius: TRAILING_ICON_AREA_SIZE / 2,
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  trailingIconFocusRing: {
-    position: 'absolute',
-    top: -ChipTokens.focusIndicatorOffset,
-    bottom: -ChipTokens.focusIndicatorOffset,
-    right: -ChipTokens.focusIndicatorOffset,
-    width: TRAILING_ICON_AREA_SIZE + ChipTokens.focusIndicatorOffset * 2,
-    borderRadius: TRAILING_ICON_AREA_SIZE / 2 + ChipTokens.focusIndicatorOffset,
-    borderWidth: ChipTokens.focusIndicatorThickness,
-    pointerEvents: 'none',
   },
   disabled: {
     opacity: ChipTokens.disabledContentOpacity,

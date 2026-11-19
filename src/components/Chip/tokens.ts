@@ -23,9 +23,6 @@ const sizes = {
   flatElevation: 0,
   elevatedElevation: 1,
   elevatedHoverElevation: 2,
-
-  focusIndicatorThickness: 3,
-  focusIndicatorOffset: 2,
 } as const;
 
 const colors = {
@@ -33,7 +30,6 @@ const colors = {
   flatContainerColor: 'surfaceContainerLow',
   selectedContainerColor: 'secondaryContainer',
   outlinedContainerColor: 'surface',
-  focusIndicatorColor: 'secondary',
   labelColor: 'onSurfaceVariant',
   selectedLabelColor: 'onSecondaryContainer',
   leadingIconColor: 'primary',
