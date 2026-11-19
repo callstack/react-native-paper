@@ -462,14 +462,6 @@ const Card = ({
   const [focused, setFocused] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
 
-  React.useEffect(() => {
-    if (isDisabled) {
-      setHovered(false);
-      setFocused(false);
-      setPressed(false);
-    }
-  }, [isDisabled]);
-
   const visuals = resolveCardVisuals({
     theme,
     variant: cardVariant,
@@ -506,6 +498,18 @@ const Card = ({
     onPressIn,
     onPressOut,
   });
+
+  // A disabled Card gets no hover, focus or press events, and without a touch
+  // handler the interaction node unmounts and sends no hover out or blur, so
+  // the flags are cleared here rather than left for a later state to show.
+  React.useEffect(() => {
+    if (isDisabled || !hasPassedTouchHandler) {
+      setHovered(false);
+      setFocused(false);
+      setPressed(false);
+    }
+  }, [isDisabled, hasPassedTouchHandler]);
+
   // The ring goes on the Surface, the Card's visible box (`scope: 'within'`),
   // not on the interaction node: the caller's `style` sizes and pads the
   // Surface, so a ring on the interaction node would stop short of a taller
