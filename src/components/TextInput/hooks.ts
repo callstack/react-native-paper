@@ -456,6 +456,11 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     animation,
   });
 
+  // With a label, show the placeholder only once the label has floated away
+  // from it.
+  const isPlaceholderShown =
+    !props.label || hasValue || (isFocused && animation.isLabelFloated);
+
   const accessibilityProps = getAccessibilityData({
     id,
     hasError: flags.hasError,
@@ -463,6 +468,7 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     hasPrefix: flags.hasPrefix,
     hasSuffix: flags.hasSuffix,
     isDisabled: flags.isDisabled,
+    isPlaceholderShown,
     data: props,
     inputLength,
   });
@@ -508,13 +514,9 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     ? props.startAccessory
     : props.endAccessory;
 
-  // With a label, show the placeholder only once the label has floated away
-  // from it. A space keeps the iOS multiline placeholder updating:
+  // A space keeps the iOS multiline placeholder updating:
   // https://github.com/facebook/react-native/issues/31573
-  const placeholder =
-    !props.label || hasValue || (isFocused && animation.isLabelFloated)
-      ? props.placeholder
-      : ' ';
+  const placeholder = isPlaceholderShown ? props.placeholder : ' ';
 
   return {
     input,

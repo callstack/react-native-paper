@@ -571,6 +571,7 @@ export const getAccessibilityData = ({
   hasPrefix,
   hasSuffix,
   isDisabled,
+  isPlaceholderShown,
   inputLength,
 }: GetAccessibilityDataProps): GetAccessibilityDataReturn => {
   const { label, supportingText, maxLength, prefix, suffix, ...props } = data;
@@ -582,8 +583,19 @@ export const getAccessibilityData = ({
       : `Characters entered ${inputLength} of ${maxLength}`
     : undefined;
 
+  // A labelled field blanks its placeholder until the label floats away, so
+  // assistive technology moving to the empty field would not hear it.
+  const placeholderDescription =
+    label && inputLength === 0 ? props.placeholder : undefined;
+
   // Generated IDs only link the label and descriptions on web.
   const labelId = Platform.OS === 'web' ? `${id}-label` : undefined;
+  // The input exposes its own placeholder once it shows it, so only describe
+  // the field with it before then. Otherwise it is read twice.
+  const placeholderId =
+    Platform.OS === 'web' && placeholderDescription && !isPlaceholderShown
+      ? `${id}-placeholder`
+      : undefined;
   const prefixId =
     Platform.OS === 'web' && hasPrefix ? `${id}-prefix` : undefined;
   const suffixId =
@@ -595,7 +607,14 @@ export const getAccessibilityData = ({
   const counterId =
     Platform.OS === 'web' && hasCounter ? `${id}-counter` : undefined;
   const describedBy =
-    [props['aria-describedby'], prefixId, suffixId, supportingTextId, counterId]
+    [
+      props['aria-describedby'],
+      placeholderId,
+      prefixId,
+      suffixId,
+      supportingTextId,
+      counterId,
+    ]
       .filter(Boolean)
       .join(' ') || undefined;
   const explicitLabel = props['aria-label'] ?? props.accessibilityLabel;
@@ -605,11 +624,6 @@ export const getAccessibilityData = ({
       ? labelId
       : undefined);
 
-  // A labelled field blanks its placeholder until the label floats away, so
-  // assistive technology moving to the empty field would not hear it.
-  const placeholderHint =
-    label && inputLength === 0 ? props.placeholder : undefined;
-
   // React Native 0.88 does not implement described-by relationships on native.
   // Expose the same description as a hint without changing the field's name.
   const hint =
@@ -617,7 +631,7 @@ export const getAccessibilityData = ({
       ? props.accessibilityHint
       : [
           props.accessibilityHint,
-          placeholderHint,
+          placeholderDescription,
           prefix?.trim(),
           suffix?.trim(),
           supportingText,
@@ -636,6 +650,7 @@ export const getAccessibilityData = ({
       accessibilityHint: hint,
     },
     label: { nativeID: labelId },
+    placeholder: { nativeID: placeholderId, 'aria-hidden': true },
     // The prefix and suffix describe the value, so they are read with the
     // field instead of as separate text next to it.
     prefix: { nativeID: prefixId, 'aria-hidden': true },

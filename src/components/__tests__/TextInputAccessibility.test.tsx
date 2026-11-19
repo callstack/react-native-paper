@@ -252,12 +252,71 @@ it.each(['ios', 'android'] as const)(
       'accessibilityHint',
       'Signs you in, name@example.com, Use a work address'
     );
+    expect(
+      screen.queryByText('name@example.com', { includeHiddenElements: true })
+    ).toBeNull();
 
     await userEvent.type(input, 'a');
     expect(input).toHaveProp(
       'accessibilityHint',
       'Signs you in, Use a work address'
     );
+  }
+);
+
+it('describes an empty labelled field with its placeholder on web until the input shows it', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  await render(
+    <TextInput
+      label="Email"
+      placeholder="name@example.com"
+      supportingText="Use a work address"
+      render={renderInput}
+    />
+  );
+  const input = screen.getByLabelText('Email');
+  const getDescriptionIds = () =>
+    renderInput.mock.lastCall?.[0]['aria-describedby']?.split(' ') ?? [];
+  const ids = getDescriptionIds();
+
+  expect(input).toHaveProp('placeholder', ' ');
+  expect(ids).toHaveLength(2);
+  expect(screen.queryByText('name@example.com')).toBeNull();
+  expect(
+    screen.getByText('name@example.com', { includeHiddenElements: true })
+  ).toHaveProp('nativeID', ids[0]);
+  expect(screen.getByText('Use a work address')).toHaveProp('nativeID', ids[1]);
+
+  await fireEvent(input, 'focus');
+  await act(() => jest.advanceTimersByTimeAsync(1000));
+
+  // The input exposes its own placeholder now, so it is not read twice.
+  expect(input).toHaveProp('placeholder', 'name@example.com');
+  expect(getDescriptionIds()).toEqual([ids[1]]);
+  expect(
+    screen.queryByText('name@example.com', { includeHiddenElements: true })
+  ).toBeNull();
+});
+
+it.each<TextInputProps>([
+  { label: 'Email', defaultValue: 'a' },
+  { 'aria-label': 'Email' },
+])(
+  'does not describe the field with a placeholder the input shows on web: %j',
+  async (props) => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(
+      <TextInput
+        {...props}
+        placeholder="name@example.com"
+        render={renderInput}
+      />
+    );
+
+    expect(renderInput.mock.lastCall?.[0]['aria-describedby']).toBeUndefined();
+    expect(
+      screen.queryByText('name@example.com', { includeHiddenElements: true })
+    ).toBeNull();
   }
 );
 

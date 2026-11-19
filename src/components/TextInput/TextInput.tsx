@@ -64,6 +64,7 @@ export type GetAccessibilityDataReturn = {
     'aria-describedby'?: string;
   };
   label: { nativeID?: string };
+  placeholder: AccessibilityProps & { nativeID?: string };
   prefix: AccessibilityProps & { nativeID?: string };
   suffix: AccessibilityProps & { nativeID?: string };
   supportingText: AccessibilityProps & { nativeID?: string };
@@ -79,6 +80,7 @@ export type GetAccessibilityDataProps = {
   hasPrefix: boolean;
   hasSuffix: boolean;
   isDisabled: boolean;
+  isPlaceholderShown: boolean;
 };
 
 export type TextInputVariant = 'filled' | 'outlined';
@@ -206,8 +208,8 @@ export type TextInputProps = NativeTextInputProps & {
   'aria-invalid'?: React.AriaAttributes['aria-invalid'];
   /**
    * Space-separated IDs of additional descriptions on web. The IDs of the
-   * rendered prefix, suffix, supporting text and character counter are
-   * appended automatically.
+   * rendered prefix, suffix, supporting text and character counter, and of the
+   * placeholder while the label covers it, are appended automatically.
    * On Android and iOS, provide external descriptions with `accessibilityHint`.
    */
   'aria-describedby'?: string;
@@ -451,6 +453,15 @@ function TextInput({
               {label}
             </Animated.Text>
           </Animated.View>
+        )}
+
+        {!!accessibilityProps.placeholder.nativeID && (
+          <Text
+            {...accessibilityProps.placeholder}
+            style={styles.placeholderDescription}
+          >
+            {rest.placeholder}
+          </Text>
         )}
 
         {renderLeadingAccessory
