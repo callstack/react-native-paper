@@ -4,7 +4,7 @@ import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider } from './settings';
 import type { Settings } from './settings';
-import { safeMerge, ThemeProvider } from './theming';
+import { InternalThemeProvider, safeMerge } from './theming';
 import {
   useResolvedReduceMotion,
   type ReduceMotionPreference,
@@ -69,7 +69,9 @@ const PaperProvider = (props: Props) => {
         <SettingsProvider value={settingsValue}>
           <ReduceMotionContext.Provider value={resolvedReduceMotion}>
             <LocaleProvider direction={direction}>
-              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+              <InternalThemeProvider theme={theme}>
+                {children}
+              </InternalThemeProvider>
             </LocaleProvider>
           </ReduceMotionContext.Provider>
         </SettingsProvider>
