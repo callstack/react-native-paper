@@ -846,8 +846,7 @@ describe('focus ring after the handler goes away and comes back', () => {
   });
 
   it('Chip close button shows no ring until it is focused again', async () => {
-    // The body is a disabled control here, so the close button is focused by
-    // its label rather than as the first focusable node.
+    // Focus the close button by its label: it is the only focusable node.
     const { rerender } = await render(<Chip onClose={() => {}}>chip</Chip>);
     await act(async () => {
       await fireEvent(screen.getByLabelText('Close'), 'focus', ownFocusEvent());

@@ -145,6 +145,23 @@ it('renders a trailing icon without a handler as a decorative view', async () =>
   expect(screen.getByTestId('chip-trailing-icon')).toBeOnTheScreen();
 });
 
+it('lets touches through a decorative trailing icon to the chip body', async () => {
+  await render(
+    <Chip
+      onPress={() => {}}
+      trailingIcon="menu-down"
+      trailingIconTestID="chip-trailing-icon"
+    >
+      Example Chip
+    </Chip>
+  );
+
+  expect(screen.getByTestId('chip-trailing-icon').parent).toHaveProp(
+    'pointerEvents',
+    'none'
+  );
+});
+
 it('renders outlined disabled chip', async () => {
   const tree = (
     await render(
@@ -197,8 +214,18 @@ it('prefers icon over avatar when both are specified', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled chip if there is no touch handler passed', async () => {
-  await render(<Chip testID="disabled-chip">Disabled chip</Chip>);
+it('does not announce a chip without a touch handler as disabled', async () => {
+  await render(<Chip testID="static-chip">Static chip</Chip>);
+
+  expect(screen.getByTestId('static-chip')).not.toBeDisabled();
+});
+
+it('disables only a chip that is explicitly disabled', async () => {
+  await render(
+    <Chip disabled onPress={() => {}} testID="disabled-chip">
+      Disabled chip
+    </Chip>
+  );
 
   expect(screen.getByTestId('disabled-chip')).toBeDisabled();
 });

@@ -528,10 +528,14 @@ A library that reads `theme.animation.scale` to turn its own animations off shou
 
 #### Colors and states
 
-- **`selectedColor`** now also tints the trailing icon and the border of an unselected outlined chip. A disabled chip ignores it.
+- **`selectedColor`** now also tints the trailing icon and the border of an unselected outlined chip, at full strength (the border used to be at 29% opacity). A disabled chip ignores it, and a keyboard-focused outlined chip shows the focus outline color on its border instead.
 - An unselected `flat` chip uses `surfaceContainerLow` instead of `secondaryContainer`, with an `onSurfaceVariant` label and a `primary` leading icon.
 - A selected chip uses the `secondaryContainer` color in both modes (outlined chips used to stay on `surface`), and `elevated` chips use `surfaceContainerLow`.
 - Disabled chips use the `stateLayerPressed` container color.
+
+#### Layout
+
+- A `Chip` now sizes to its content (`alignSelf: 'flex-start'`). In 5.x it stretched to the full width of a column container, which is React Native's default. To keep the old width, pass `style={{ alignSelf: 'stretch' }}`.
 
 #### Close button and touch targets
 
