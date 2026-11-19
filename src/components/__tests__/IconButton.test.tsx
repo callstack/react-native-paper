@@ -9,17 +9,21 @@ import {
   it,
   jest,
 } from '@jest/globals';
+import color from 'color';
 
+import PaperProvider from '../../core/PaperProvider';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
+import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import IconButton from '../IconButton/IconButton';
 import {
   getDimensions,
   getIconButtonColor,
   resolveShapeToken,
 } from '../IconButton/utils';
+import * as rippleUtils from '../TouchableRipple/utils';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 const theme = LightTheme;
@@ -187,7 +191,7 @@ it('uses a square resting shape when a round button is selected', async () => {
     />
   );
 
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
     borderRadius: theme.shapes.corner.medium,
   });
 });
@@ -210,13 +214,13 @@ it('keeps the inverted resting shape after a tap that selects the button', async
   await render(<ToggleIconButton />);
   await user.press(screen.getByTestId('icon-button'));
 
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
     borderRadius: theme.shapes.corner.medium,
   });
 
   await user.press(screen.getByTestId('icon-button'));
 
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
     borderRadius: getDimensions({ theme }).restingRadius,
   });
 });
@@ -228,7 +232,7 @@ it('morphs to the pressed shape with only onLongPress', async () => {
 
   await fireEvent(screen.getByTestId('icon-button'), 'pressIn');
 
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
     borderRadius: getDimensions({ theme }).pressedRadius,
   });
 });
@@ -239,12 +243,12 @@ it('drops the pressed shape when the handler is removed mid-press', async () => 
   );
 
   await fireEvent(screen.getByTestId('icon-button'), 'pressIn');
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
     borderRadius: getDimensions({ theme }).pressedRadius,
   });
 
   await rerender(<IconButton icon="camera" testID="icon-button" />);
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
     borderRadius: getDimensions({ theme }).restingRadius,
   });
 
@@ -252,7 +256,7 @@ it('drops the pressed shape when the handler is removed mid-press', async () => 
   await rerender(
     <IconButton icon="camera" testID="icon-button" onPress={() => {}} />
   );
-  expect(screen.getByTestId('icon-button-container')).toHaveStyle({
+  expect(screen.getByTestId('icon-button')).toHaveStyle({
     borderRadius: getDimensions({ theme }).restingRadius,
   });
 });
@@ -758,5 +762,92 @@ describe('without a touch handler', () => {
 
       expect(screen.getByRole('img', { name: 'Favorite' })).toBeOnTheScreen();
     });
+  });
+});
+
+describe('state layer', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('follows the icon color, not the surface color', async () => {
+    const spy = jest.spyOn(rippleUtils, 'getTouchableRippleColors');
+
+    await render(
+      <IconButton
+        icon="camera"
+        mode="filled"
+        testID="icon-button"
+        onPress={() => {}}
+      />
+    );
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        rippleColor: color(String(theme.colors.onPrimary))
+          .alpha(stateOpacity.pressed)
+          .rgb()
+          .string(),
+      })
+    );
+  });
+
+  it('follows a custom icon color', async () => {
+    const spy = jest.spyOn(rippleUtils, 'getTouchableRippleColors');
+
+    await render(
+      <IconButton
+        icon="camera"
+        iconColor="#123456"
+        testID="icon-button"
+        onPress={() => {}}
+      />
+    );
+
+    expect(spy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        rippleColor: color('#123456')
+          .alpha(stateOpacity.pressed)
+          .rgb()
+          .string(),
+      })
+    );
+  });
+});
+
+describe('shape morph', () => {
+  const springDuration = toSpringCurve(
+    theme.motion.spring.fast.spatial
+  ).duration;
+
+  // The touchable sits in the clip, which carries the radius transition.
+  const transitionDuration = () => {
+    const clip = screen.getByTestId('icon-button').parent;
+
+    if (!clip) {
+      throw new Error('Expected the touchable to be wrapped in the clip view.');
+    }
+
+    // Reanimated's Jest setup keeps CSS transitions out of `style`.
+    // eslint-disable-next-line no-restricted-syntax
+    return StyleSheet.flatten(clip.props.jestInlineStyle).transitionDuration;
+  };
+
+  it('runs on the fast spatial spring', async () => {
+    await render(
+      <IconButton icon="camera" testID="icon-button" onPress={() => {}} />
+    );
+
+    expect(transitionDuration()).toBe(springDuration);
+  });
+
+  it('snaps under reduce motion', async () => {
+    await render(
+      <PaperProvider reduceMotion="on">
+        <IconButton icon="camera" testID="icon-button" onPress={() => {}} />
+      </PaperProvider>
+    );
+
+    expect(transitionDuration()).toBe(0);
   });
 });

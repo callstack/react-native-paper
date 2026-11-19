@@ -1132,7 +1132,6 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
         },
       ]
     }
-    testID="appbar-action-container"
   >
     <View
       collapsable={false}
@@ -1202,7 +1201,6 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
                 },
               ]
             }
-            testID="appbar-action-icon"
           >
             <View
               collapsable={false}
@@ -1381,7 +1379,6 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
         },
       ]
     }
-    testID="appbar-action-container"
   >
     <View
       collapsable={false}
@@ -1451,7 +1448,6 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
                 },
               ]
             }
-            testID="appbar-action-icon"
           >
             <View
               collapsable={false}
@@ -1630,7 +1626,6 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
         },
       ]
     }
-    testID="appbar-action-container"
   >
     <View
       collapsable={false}
@@ -1700,7 +1695,6 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
                 },
               ]
             }
-            testID="appbar-action-icon"
           >
             <View
               collapsable={false}
@@ -1879,7 +1873,6 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
         },
       ]
     }
-    testID="appbar-action-container"
   >
     <View
       collapsable={false}
@@ -1950,7 +1943,6 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
                 },
               ]
             }
-            testID="appbar-action-icon"
           >
             <View
               collapsable={false}

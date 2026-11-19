@@ -88,28 +88,16 @@ export const getIconButtonColor = ({
     };
   }
 
-  if (disabled) {
-    const set = colorSetFor(mode, selected);
-    return {
-      iconColor: theme.colors[IconButtonTokens.disabled.icon],
-      iconOpacity,
-      backgroundColor: customContainerColor,
-      backgroundOpacity: stateOpacity.enabled,
-      borderColor:
-        theme.colors[set.outline ?? IconButtonTokens.disabled.outline],
-      borderWidth: set.outline ? outlineWidth : 0,
-    };
-  }
-
   const set = colorSetFor(mode, selected);
-  const backgroundColor =
-    customContainerColor ??
-    (set.container ? theme.colors[set.container] : undefined);
 
   return {
-    iconColor: customIconColor ?? theme.colors[set.icon],
+    iconColor: disabled
+      ? theme.colors[IconButtonTokens.disabled.icon]
+      : (customIconColor ?? theme.colors[set.icon]),
     iconOpacity,
-    backgroundColor,
+    backgroundColor:
+      customContainerColor ??
+      (set.container ? theme.colors[set.container] : undefined),
     backgroundOpacity: stateOpacity.enabled,
     borderColor: theme.colors[set.outline ?? 'outlineVariant'],
     borderWidth: set.outline ? outlineWidth : 0,

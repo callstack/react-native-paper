@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import type {
+  BlurEvent,
   ColorValue,
+  FocusEvent,
   GestureResponderEvent,
   StyleProp,
   ViewStyle,
@@ -9,7 +11,7 @@ import type {
 
 import Animated, {
   type AnimatedStyle,
-  cubicBezier,
+  linear,
   type CSSStyle,
 } from 'react-native-reanimated';
 
@@ -17,6 +19,7 @@ import type { Mode, Shape, Size, Width } from './tokens';
 import { getDimensions, getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler, {
@@ -24,6 +27,10 @@ import hasTouchHandler, {
 } from '../../utils/hasTouchHandler';
 import { useFocusRing } from '../../utils/useFocusRing';
 import ActivityIndicator from '../ActivityIndicator';
+import {
+  getButtonRippleColor,
+  getButtonShapeCurvePoints,
+} from '../Button/utils';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
@@ -223,12 +230,38 @@ const IconButton = ({
   const borderRadius = isPressed
     ? dimensions.pressedRadius
     : dimensions.restingRadius;
+  // The morph follows the MD3 fast spatial spring, as on Button. The curve is
+  // capped so a bouncy spring can't push the corner below 0 on its way back
+  // from the largest radius (the round one).
+  const shapeSpring = React.useMemo(
+    () => toSpringCurve(theme.motion.spring.fast.spatial),
+    [theme.motion.spring.fast.spatial]
+  );
+  const largestRadius = Math.max(
+    dimensions.height / 2,
+    dimensions.restingRadius,
+    dimensions.pressedRadius
+  );
+  const shapeTimingFunction = React.useMemo(
+    () =>
+      linear(
+        ...getButtonShapeCurvePoints({
+          points: shapeSpring.points,
+          radius: borderRadius,
+          largestRadius,
+        })
+      ),
+    [shapeSpring.points, borderRadius, largestRadius]
+  );
   const radiusStyle: CSSStyle<ViewStyle> = {
     borderRadius,
     transitionProperty: ['borderRadius'],
-    transitionDuration: reduceMotion ? 0 : theme.motion.duration.short4,
-    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+    transitionDuration: reduceMotion ? 0 : shapeSpring.duration,
+    transitionTimingFunction: shapeTimingFunction,
   };
+
+  // The state layer takes the icon color, as Button's takes its label color.
+  const rippleColor = getButtonRippleColor({ labelColor: iconColor });
 
   const handlePressIn = (e: GestureResponderEvent) => {
     setPressed(true);
@@ -244,18 +277,18 @@ const IconButton = ({
   // touchable inside it. Off whenever the button can't be pressed, as on
   // TouchableRipple.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
-    disabled || !hasPassedTouchHandler,
+    !canBePressed,
     theme.colors.secondary,
     focusRingPlacement,
     'within'
   );
 
-  const handleFocus = (e: Parameters<NonNullable<typeof onFocusProp>>[0]) => {
+  const handleFocus = (e: FocusEvent) => {
     onFocusProp?.(e);
     focusTarget.onFocus?.(e);
   };
 
-  const handleBlur = (e: Parameters<NonNullable<typeof onBlurProp>>[0]) => {
+  const handleBlur = (e: BlurEvent) => {
     onBlurProp?.(e);
     focusTarget.onBlur?.();
   };
@@ -275,13 +308,12 @@ const IconButton = ({
   const touchableHeight = dimensions.height - 2 * borderWidth;
 
   // Disabled and handler-less buttons get no extra target.
-  const defaultHitSlop =
-    disabled || !hasPassedTouchHandler
-      ? undefined
-      : getMinInteractiveSizeHitSlop({
-          width: touchableWidth,
-          height: touchableHeight,
-        });
+  const defaultHitSlop = canBePressed
+    ? getMinInteractiveSizeHitSlop({
+        width: touchableWidth,
+        height: touchableHeight,
+      })
+    : undefined;
 
   // Without a handler the touchable drops the button role, and on web that
   // renders role="presentation", which can't carry a name. A labelled icon
@@ -302,7 +334,6 @@ const IconButton = ({
   return (
     <Animated.View
       ref={ref}
-      testID={testID ? `${testID}-container` : undefined}
       style={[
         styles.container,
         {
@@ -343,6 +374,7 @@ const IconButton = ({
           onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
           onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
           focusRing="none"
+          rippleColor={rippleColor}
           theme={theme}
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -369,7 +401,6 @@ const IconButton = ({
                 color={iconColor}
                 source={icon}
                 size={dimensions.iconSize}
-                testID={testID ? `${testID}-icon` : undefined}
               />
             )}
           </View>

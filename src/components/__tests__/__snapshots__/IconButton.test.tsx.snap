@@ -25,7 +25,6 @@ exports[`applies a static transform from style 1`] = `
       },
     ]
   }
-  testID="icon-button-container"
 >
   <View
     collapsable={false}
@@ -108,7 +107,6 @@ exports[`applies a static transform from style 1`] = `
               ],
             ]
           }
-          testID="icon-button-icon"
         >
           camera
         </Text>
@@ -137,7 +135,6 @@ exports[`renders a square icon button 1`] = `
       },
     ]
   }
-  testID="icon-button-container"
 >
   <View
     collapsable={false}
@@ -254,7 +251,6 @@ exports[`renders a square icon button 1`] = `
               ],
             ]
           }
-          testID="icon-button-icon"
         >
           camera
         </Text>
