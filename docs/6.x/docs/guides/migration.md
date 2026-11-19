@@ -64,7 +64,7 @@ In 5.x, `PaperProvider` set the `scale` itself and replaced any `scale` in the t
 
 If your app was written for a 6.0 alpha build, which also read a `scale` set on `PaperProvider`, remove it from that theme too.
 
-Other `scale` values, which made animations slower or faster, have no replacement in 6.0. A `scale` in a component's `theme` prop, such as `theme={{ animation: { scale: 2 } }}`, does nothing now, and it can no longer turn animations back on while reduce motion is on. Paper ignores an `animation` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider` or a component, or typed as `Theme`, but not in the `theme` prop of `ThemeProvider`, which accepts any value, or in an untyped variable that also holds other theme keys.
+Other `scale` values, which made animations slower or faster, have no replacement in 6.0. A `scale` in a component's `theme` prop, such as `theme={{ animation: { scale: 2 } }}`, does nothing now, and it can no longer turn animations back on while reduce motion is on. Paper ignores an `animation` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider`, `ThemeProvider` or a component, or typed as `Theme`, but not in an untyped variable that also holds other theme keys.
 
 In 5.x, `PaperProvider` also followed the device setting only when you passed no `theme`. In 6.x, `'auto'` follows the device setting with every theme, so if your app passes a custom theme, Paper's animations now stop when the user turns on reduce motion. 6.x also reads the setting when the app starts, while 5.x only reacted when it changed.
 
@@ -254,7 +254,7 @@ If you import it from Paper's type declarations instead, the path changed:
 
 #### `roundness`
 
-The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider` or a component, or typed as `Theme`, but not in the `theme` prop of `ThemeProvider`, which accepts any value, or in an untyped variable that also holds other theme keys.
+The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider`, `ThemeProvider` or a component, or typed as `Theme`, but not in an untyped variable that also holds other theme keys.
 
 In 5.x, each of these components multiplied `roundness` by a fixed number, and the 6.x defaults match the 5.x corners with the default `roundness` of 4. To port a custom `roundness`, set each role to your `roundness` times its multiplier:
 
@@ -330,6 +330,26 @@ As with `roundness`, Paper ignores these keys, and TypeScript reports them in th
 -const fonts = configureFonts({ config: fontConfig, isV3: true });
 +const fonts = configureFonts({ config: fontConfig });
 ```
+
+#### `ThemeProvider`
+
+`ThemeProvider` now merges its `theme` deeply onto the theme above it, as `PaperProvider` and a component's `theme` prop do, so a nested theme only needs the keys it changes. In 5.x it replaced the theme above it, so a partial theme made Paper's components throw when they rendered.
+
+```diff
+ <PaperProvider>
+   <ThemeProvider
+-    theme={{
+-      ...LightTheme,
+-      colors: { ...LightTheme.colors, primary: 'tomato' },
+-    }}
++    theme={{ colors: { primary: 'tomato' } }}
+   >
+     <App />
+   </ThemeProvider>
+ </PaperProvider>
+```
+
+A full theme, such as `DarkTheme` or the theme `useTheme()` returns, gives the same result as before, except that custom keys of the theme above it are kept. The `theme` prop is now typed as a partial `Theme`, as on `PaperProvider`, so TypeScript reports a value that isn't a theme, such as a number, and keys the theme doesn't have, such as `roundness`. The `theme` prop of a component returned by `withTheme` gets the same type, and the component you wrap must take a `Theme` in its `theme` prop. A `ThemeProvider` without a `theme` now passes the theme above it on. In 5.x it gave its children the default light theme. To keep that, pass `theme={LightTheme}`.
 
 ### Accessibility props
 
