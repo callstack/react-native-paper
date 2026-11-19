@@ -542,6 +542,8 @@ On web, the tooltip also opens when the trigger gets keyboard focus, and the tri
 </Tooltip.Rich>
 ```
 
+While a rich tooltip is open on iOS and Android, a press on another rich tooltip's trigger only switches the tooltips, so that trigger's own `onPress` doesn't run.
+
 On iOS and Android, its trigger gets the title and the text content as its `accessibilityHint`. Give an icon-only trigger its own `aria-label`.
 
 A rich tooltip closes on a press outside it, on a press on an action that calls `dismiss`, on another press on the trigger, when the screen size changes and on the VoiceOver escape gesture on iOS. The Android back button isn't taken by the tooltip, so it still goes back. On web it opens on hover and on keyboard focus, and closes on Escape and when the pointer or the focus leaves both the trigger and the tooltip. The down arrow key on the trigger moves focus into the actions, and focus that was in the tooltip goes back to the trigger when it closes.

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View, Image } from 'react-native';
+import { Linking, Platform, StyleSheet, View, Image } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -212,6 +212,32 @@ const TooltipExample = () => {
                   icon="information"
                   size={24}
                   aria-label="More information"
+                />
+              )}
+            </Tooltip.Rich>
+            <Tooltip.Rich
+              content="A rich tooltip without a title, with a link as its action."
+              actions={({ dismiss }) => (
+                <Button
+                  mode="text"
+                  size="extra-small"
+                  onPress={() => {
+                    dismiss();
+                    void Linking.openURL(
+                      'https://m3.material.io/components/tooltips/overview'
+                    );
+                  }}
+                >
+                  Open MD3 guidelines
+                </Button>
+              )}
+            >
+              {(props) => (
+                <IconButton
+                  {...props}
+                  icon="help-circle-outline"
+                  size={24}
+                  aria-label="Help"
                 />
               )}
             </Tooltip.Rich>
