@@ -1573,6 +1573,27 @@ describe('Tooltip.Rich', () => {
         await unmount();
       });
 
+      it('stays open when the pointer leaves while focus is inside it', async () => {
+        activeElement = 'inside';
+        const {
+          wrapper: { getByText, unmount },
+        } = await setup({ leaveTouchDelay: 500 });
+
+        await act(async () => {
+          await fireEvent(getTrigger(), 'focus');
+        });
+        await act(async () => {
+          await fireEvent(getByText('Body text'), 'pointerEnter', mousePointer);
+          await fireEvent(getByText('Body text'), 'pointerLeave', mousePointer);
+        });
+        await runTimers(500); // leave delay → hide intent
+        await runTimers();
+
+        expect(getByText('Body text')).toBeTruthy();
+
+        await unmount();
+      });
+
       it('leaves focus that is outside the tooltip and the trigger alone', async () => {
         activeElement = 'elsewhere';
         const {

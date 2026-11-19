@@ -216,7 +216,15 @@ const RichTooltip = ({
 
   const scheduleHide = React.useCallback(() => {
     showTimer.clear();
-    hideTimer.schedule(() => setVisible(false), leaveTouchDelay);
+    hideTimer.schedule(() => {
+      // Web: hiding would drop focus that is inside the tooltip, so it stays
+      // open until that focus leaves or Escape closes it
+      const focused = 'document' in global ? document.activeElement : null;
+      if (focused != null && tooltipRef.current?.contains?.(focused)) {
+        return;
+      }
+      setVisible(false);
+    }, leaveTouchDelay);
   }, [showTimer, hideTimer, leaveTouchDelay]);
 
   useHideOnDimensionsChange(hide);
