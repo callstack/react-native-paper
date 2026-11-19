@@ -5,11 +5,11 @@ export type Props = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: string) => void;
+  onValueChange?: (value: string) => void;
   /**
    * Value of the currently selected radio button.
    */
-  value: string;
+  value?: string;
   /**
    * React elements containing radio buttons.
    */
