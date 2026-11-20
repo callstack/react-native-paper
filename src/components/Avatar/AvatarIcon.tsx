@@ -22,7 +22,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Custom color for the icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Background color of the avatar.
    */

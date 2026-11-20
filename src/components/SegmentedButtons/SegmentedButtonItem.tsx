@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type {
+  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -49,12 +50,12 @@ export type Props = {
    * @supported Available in v5.x with theme version 3
    * Custom color for unchecked Text and Icon.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * @supported Available in v5.x with theme version 3
    * Custom color for checked Text and Icon.
    */
-  checkedColor?: string;
+  checkedColor?: ColorValue;
   /**
    * Whether the button is disabled.
    */

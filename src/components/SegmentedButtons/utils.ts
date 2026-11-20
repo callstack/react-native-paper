@@ -12,8 +12,8 @@ type BaseProps = {
 };
 
 type SegmentedButtonProps = {
-  checkedColor?: string;
-  uncheckedColor?: string;
+  checkedColor?: ColorValue;
+  uncheckedColor?: ColorValue;
 } & BaseProps;
 
 const DEFAULT_PADDING = 9;

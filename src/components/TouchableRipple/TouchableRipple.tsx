@@ -87,7 +87,7 @@ export type Props = PressableProps & {
   /**
    * Color of the underlay for the highlight effect (Android < 5.0 and iOS).
    */
-  underlayColor?: string;
+  underlayColor?: ColorValue;
   /**
    * Content of the `TouchableRipple`: any React node, including several
    * children, fragments and `null`. Can be a function that receives the
