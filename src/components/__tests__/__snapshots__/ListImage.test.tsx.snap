@@ -36,6 +36,9 @@ exports[`renders ListImage with \`video\` variant 1`] = `
         "marginLeft": 0,
         "width": 114,
       },
+      {
+        "marginVertical": 4,
+      },
     ]
   }
 />
