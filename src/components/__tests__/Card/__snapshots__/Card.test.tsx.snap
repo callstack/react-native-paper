@@ -104,28 +104,6 @@ exports[`Card renders the enabled elevated appearance 1`] = `
     }
   >
     <View
-      pointerEvents="none"
-      style={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          {
-            "borderCurve": "continuous",
-            "borderRadius": 12,
-          },
-          {
-            "backgroundColor": "rgba(247, 242, 250, 1)",
-            "opacity": 1,
-          },
-        ]
-      }
-    />
-    <View
       style={
         [
           {
@@ -139,30 +117,6 @@ exports[`Card renders the enabled elevated appearance 1`] = `
         ]
       }
       testID="card"
-    />
-    <View
-      collapsable={false}
-      pointerEvents="none"
-      style={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          {
-            "borderCurve": "continuous",
-            "borderRadius": 12,
-          },
-          {
-            "backgroundColor": "rgba(29, 27, 32, 1)",
-            "opacity": 0,
-          },
-          {},
-        ]
-      }
     />
   </View>
 </View>
@@ -272,28 +226,6 @@ exports[`Card renders the enabled filled appearance 1`] = `
     }
   >
     <View
-      pointerEvents="none"
-      style={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          {
-            "borderCurve": "continuous",
-            "borderRadius": 12,
-          },
-          {
-            "backgroundColor": "rgba(230, 224, 233, 1)",
-            "opacity": 1,
-          },
-        ]
-      }
-    />
-    <View
       style={
         [
           {
@@ -307,30 +239,6 @@ exports[`Card renders the enabled filled appearance 1`] = `
         ]
       }
       testID="card"
-    />
-    <View
-      collapsable={false}
-      pointerEvents="none"
-      style={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          {
-            "borderCurve": "continuous",
-            "borderRadius": 12,
-          },
-          {
-            "backgroundColor": "rgba(29, 27, 32, 1)",
-            "opacity": 0,
-          },
-          {},
-        ]
-      }
     />
   </View>
 </View>
@@ -440,28 +348,6 @@ exports[`Card renders the enabled outlined appearance 1`] = `
     }
   >
     <View
-      pointerEvents="none"
-      style={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          {
-            "borderCurve": "continuous",
-            "borderRadius": 12,
-          },
-          {
-            "backgroundColor": "rgba(254, 247, 255, 1)",
-            "opacity": 1,
-          },
-        ]
-      }
-    />
-    <View
       style={
         [
           {
@@ -475,30 +361,6 @@ exports[`Card renders the enabled outlined appearance 1`] = `
         ]
       }
       testID="card"
-    />
-    <View
-      collapsable={false}
-      pointerEvents="none"
-      style={
-        [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-          {
-            "borderCurve": "continuous",
-            "borderRadius": 12,
-          },
-          {
-            "backgroundColor": "rgba(29, 27, 32, 1)",
-            "opacity": 0,
-          },
-          {},
-        ]
-      }
     />
     <View
       collapsable={false}

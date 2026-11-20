@@ -44,9 +44,19 @@ type Layer = NonNullable<ReturnType<typeof screen.getByTestId>['parent']>;
 // The Card's visual layers are internal nodes with no public testID, so they
 // are reached from the node that has one. For an actionable Card that is the
 // interaction node; for a neutral Card it is the slot content. Either way the
-// layers are the children of the clipped visual node, in paint order:
-// container, slot content, state layer, then the outline of an outlined Card.
-// The Surface that carries the elevation and the focus ring is its parent.
+// layers are the children of the clipped visual node, in paint order: the
+// container layer of a disabled Card, the slot content, the state layer of an
+// actionable or dragged Card, then the outline of an outlined Card. The
+// Surface that carries the elevation and the focus ring is the visual node's
+// parent. The layers have no role, text or testID, so only their props tell
+// them apart: a layer ignores touches, and only the outline has a border.
+const isLayer = (child: Layer) =>
+  // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+  child.props.pointerEvents === 'none';
+const hasBorder = (child: Layer) =>
+  // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+  (StyleSheet.flatten(child.props.style)?.borderWidth ?? 0) > 0;
+
 const getCardLayers = ({ neutral = false } = {}) => {
   const target = screen.getByTestId('card');
   const visual = neutral ? target.parent : target;
@@ -55,18 +65,38 @@ const getCardLayers = ({ neutral = false } = {}) => {
     throw new Error('Card visual node not found');
   }
 
-  const [container, content, stateLayer, outline] = visual.children.filter(
+  const children = visual.children.filter(
     (child): child is Layer => typeof child !== 'string'
   );
+  const contentIndex = children.findIndex((child) => !isLayer(child));
+
+  if (contentIndex === -1) {
+    throw new Error('Card content region not found');
+  }
+  const [containerLayer] = children.slice(0, contentIndex);
+  const overlays = children.slice(contentIndex + 1);
+  const outline = overlays.find(hasBorder);
+  const stateLayer = overlays.find((child) => child !== outline);
 
   return {
     surface: visual.parent,
     visual,
-    container,
-    content,
+    // The node that paints the container color: the visual node itself, or
+    // the container layer of a disabled Card, which fades it on its own.
+    container: containerLayer ?? visual,
+    containerLayer,
+    content: children[contentIndex],
     stateLayer,
     outline,
   };
+};
+
+// For a layer the Card under test is known to draw.
+const present = (layer: Layer | undefined) => {
+  if (!layer) {
+    throw new Error('Card layer not found');
+  }
+  return layer;
 };
 
 // A focus event the Card's own interaction node receives. On web,
@@ -85,20 +115,29 @@ const expectCardState = (
   { theme = LightTheme, neutral = false } = {}
 ) => {
   const visuals = resolveCardVisuals({ theme, variant, ...flags });
-  const { surface, container, content, stateLayer, outline } = getCardLayers({
-    neutral,
-  });
+  const { surface, visual, containerLayer, content, stateLayer, outline } =
+    getCardLayers({ neutral });
 
-  expect(container).toHaveStyle({
-    backgroundColor: visuals.containerColor,
-    opacity: visuals.containerOpacity,
-  });
+  if (visuals.containerOpacity === 1) {
+    expect(containerLayer).toBeUndefined();
+    expect(visual).toHaveStyle({ backgroundColor: visuals.containerColor });
+  } else {
+    expect(containerLayer).toHaveStyle({
+      backgroundColor: visuals.containerColor,
+      opacity: visuals.containerOpacity,
+    });
+  }
   expect(content).toHaveStyle({ opacity: visuals.contentOpacity });
-  // TouchableRipple draws the pressed layer, so Card skips its own.
-  expect(stateLayer).toHaveStyle({
-    backgroundColor: visuals.stateLayerColor,
-    opacity: visuals.state === 'pressed' ? 0 : visuals.stateLayerOpacity,
-  });
+  if (neutral && !flags.dragged) {
+    // A neutral Card has no hover, focus or press to show.
+    expect(stateLayer).toBeUndefined();
+  } else {
+    // TouchableRipple draws the pressed layer, so Card skips its own.
+    expect(stateLayer).toHaveStyle({
+      backgroundColor: visuals.stateLayerColor,
+      opacity: visuals.state === 'pressed' ? 0 : visuals.stateLayerOpacity,
+    });
+  }
 
   if (variant === 'outlined') {
     expect(outline).toHaveStyle({
@@ -175,6 +214,7 @@ describe('Card', () => {
     await render(
       <Card
         testID="card"
+        onPress={() => {}}
         theme={{
           colors: {
             surfaceContainerHighest: '#111111',
@@ -184,9 +224,7 @@ describe('Card', () => {
       />
     );
 
-    const { surface, container, stateLayer, outline } = getCardLayers({
-      neutral: true,
-    });
+    const { surface, container, stateLayer, outline } = getCardLayers();
 
     expect(container).toHaveStyle({ backgroundColor: '#111111' });
     expect(stateLayer).toHaveStyle({ backgroundColor: '#222222' });
@@ -259,28 +297,31 @@ describe('Card', () => {
 
     const medium = getCardLayers({ neutral: true });
 
-    for (const layer of [
-      medium.surface,
-      medium.visual,
-      medium.container,
-      medium.stateLayer,
-      medium.outline,
-    ]) {
+    for (const layer of [medium.surface, medium.visual, medium.outline]) {
       expect(layer).toHaveStyle({
         borderRadius: LightTheme.shapes.corner.medium,
       });
     }
     await unmount();
 
-    await render(<Card testID="card" variant="outlined" {...shape} />);
+    const { unmount: unmountOutlined } = await render(
+      <Card testID="card" variant="outlined" {...shape} />
+    );
 
-    const { surface, visual, container, stateLayer, outline } = getCardLayers({
-      neutral: true,
-    });
+    const { surface, visual, outline } = getCardLayers({ neutral: true });
 
-    for (const layer of [surface, visual, container, stateLayer, outline]) {
+    for (const layer of [surface, visual, outline]) {
       expect(layer).toHaveStyle(shape);
     }
+    await unmountOutlined();
+
+    // A disabled, dragged Card also draws its own container and state layers.
+    await render(<Card testID="card" disabled dragged {...shape} />);
+
+    const { containerLayer, stateLayer } = getCardLayers({ neutral: true });
+
+    expect(containerLayer).toHaveStyle(shape);
+    expect(stateLayer).toHaveStyle(shape);
   });
 
   it('renders populated slots in deterministic order without rewriting nodes', async () => {
@@ -481,14 +522,14 @@ describe('Card', () => {
     );
 
     const interaction = screen.getByTestId('product-card');
-    const [container, , stateLayer] = interaction.children.filter(
-      (child): child is Layer => typeof child !== 'string'
-    );
+    const stateLayer = interaction.children
+      .filter((child): child is Layer => typeof child !== 'string')
+      .find(isLayer);
 
-    // The interaction node is the clipped visual region, so the ripple
-    // stays inside the Card shape. The Surface around it draws the ring.
+    // The interaction node is the clipped visual region and paints the
+    // container, so the ripple stays inside the Card shape. The Surface
+    // around it draws the ring.
     expect(interaction).toHaveStyle({ ...shape, overflow: 'hidden' });
-    expect(container).toHaveStyle(shape);
     expect(stateLayer).toHaveStyle(shape);
     expect(interaction.parent).toHaveStyle(shape);
     await unmount();
@@ -595,9 +636,10 @@ describe('Card', () => {
       getVariantCard('outlined', { disabled: true, onPress: () => {} })
     );
 
-    const { container, content, outline } = getCardLayers();
+    const { containerLayer, content, outline } = getCardLayers();
 
-    expect(container).toHaveStyle({ opacity: 1 });
+    // The outlined container stays opaque, so it needs no layer to fade it.
+    expect(containerLayer).toBeUndefined();
     expect(outline).toHaveStyle({ opacity: 0.12 });
     expect(content).toHaveStyle({ opacity: 0.38 });
     expectCardState('outlined', { disabled: true });
@@ -779,11 +821,11 @@ describe('Card', () => {
     const expectTransitions = () => {
       const { stateLayer, outline } = getCardLayers();
 
-      expect(getAnimatedStyle(stateLayer)).toMatchObject({
+      expect(getAnimatedStyle(present(stateLayer))).toMatchObject({
         ...transition,
         transitionProperty: 'opacity',
       });
-      expect(getAnimatedStyle(outline)).toMatchObject({
+      expect(getAnimatedStyle(present(outline))).toMatchObject({
         ...transition,
         transitionProperty: ['borderColor', 'opacity'],
       });
@@ -817,7 +859,9 @@ describe('Card', () => {
     const { stateLayer, outline } = getCardLayers();
 
     for (const layer of [stateLayer, outline]) {
-      expect(getAnimatedStyle(layer)).toMatchObject({ transitionDuration: 0 });
+      expect(getAnimatedStyle(present(layer))).toMatchObject({
+        transitionDuration: 0,
+      });
     }
   });
 
@@ -1068,6 +1112,38 @@ describe('Card', () => {
     await settle();
 
     expect(getCardLayers().outline).toHaveStyle({ borderColor: 'red' });
+  });
+
+  it('draws a separate container layer only for a disabled Card', async () => {
+    const { rerender } = await render(
+      <Card testID="card" onPress={() => {}} />
+    );
+
+    expect(getCardLayers().containerLayer).toBeUndefined();
+    expect(getCardLayers().visual).toHaveStyle({
+      backgroundColor: LightTheme.colors.surfaceContainerHighest,
+    });
+
+    await rerender(<Card testID="card" onPress={() => {}} disabled />);
+
+    expect(getCardLayers().containerLayer).toHaveStyle({
+      backgroundColor: LightTheme.colors.onSurface,
+      opacity: 0.38,
+    });
+  });
+
+  it('draws a state layer on a neutral Card only while it is dragged', async () => {
+    const { rerender } = await render(
+      <Card testID="card" content={<Text>Body</Text>} />
+    );
+
+    expect(getCardLayers({ neutral: true }).stateLayer).toBeUndefined();
+
+    await rerender(<Card testID="card" dragged content={<Text>Body</Text>} />);
+
+    expect(getCardLayers({ neutral: true }).stateLayer).toHaveStyle({
+      opacity: 0.16,
+    });
   });
 
   it('dims the slot content of a disabled Card', async () => {
