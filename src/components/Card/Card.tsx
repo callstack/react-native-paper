@@ -181,8 +181,10 @@ type OutlinedCardProps = {
    */
   elevation?: never;
   /**
-   * Color of the outline. It replaces the theme color in every state; the
-   * state opacities still apply, so a disabled outline stays at 12%.
+   * Color of the outline. It replaces the theme color in every state except
+   * keyboard focus, where the outline turns `onSurface` as Material 3
+   * specifies. The state opacities still apply, so a disabled outline stays
+   * at 12%.
    */
   borderColor?: ColorValue;
 };
@@ -478,7 +480,12 @@ const Card = ({
   // Android, the underlay elsewhere), so a second one would double it.
   const stateLayerOpacity =
     visuals.state === 'pressed' ? 0 : visuals.stateLayerOpacity;
-  const outlineColor = customBorderColor ?? visuals.outlineColor;
+  // Focus is the one state where Material changes the outline color, so a
+  // custom color gives way to it there.
+  const outlineColor =
+    visuals.state === 'focused'
+      ? visuals.outlineColor
+      : (customBorderColor ?? visuals.outlineColor);
   const stateLayerTransitionStyle: AnimatedStyle<ViewStyle> = {
     transitionProperty: 'opacity',
     transitionDuration,
