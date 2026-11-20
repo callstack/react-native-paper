@@ -1552,24 +1552,25 @@ it('places prefix Text before the TextInput and suffix Text after it', async () 
   );
 });
 
-it('aligns input text toward the suffix when suffix is active (LTR)', async () => {
+it('start-aligns input text even when suffix is active (LTR)', async () => {
   await render(
     <TextInput
       label="Label"
       value="5"
       onChangeText={() => {}}
+      prefix="$"
       suffix="/100"
       testID="tf-suffix-align-ltr"
     />
   );
 
   expect(screen.getByTestId('tf-suffix-align-ltr')).toHaveStyle({
-    textAlign: 'right',
+    textAlign: 'left',
     writingDirection: 'ltr',
   });
 });
 
-it('aligns input text toward the suffix when suffix is active (RTL)', async () => {
+it('start-aligns input text even when suffix is active (RTL)', async () => {
   I18nManager.isRTL = true;
 
   await render(
@@ -1577,13 +1578,14 @@ it('aligns input text toward the suffix when suffix is active (RTL)', async () =
       label="Label"
       value="5"
       onChangeText={() => {}}
+      prefix="$"
       suffix="/100"
       testID="tf-suffix-align-rtl"
     />
   );
 
   expect(screen.getByTestId('tf-suffix-align-rtl')).toHaveStyle({
-    textAlign: 'left',
+    textAlign: 'right',
     writingDirection: 'rtl',
   });
 });
