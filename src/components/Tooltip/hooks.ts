@@ -39,33 +39,6 @@ export const useTimeout = () => {
   return React.useMemo(() => ({ schedule, clear }), [schedule, clear]);
 };
 
-/**
- * Web only: a tap focuses the trigger, and that focus mustn't open the tooltip
- * the way keyboard focus does.
- */
-const useTouchFocusGuard = () => {
-  const touching = React.useRef(false);
-
-  return React.useMemo(
-    () => ({
-      onPointerDown: (e: PointerEvent) => {
-        touching.current = e.nativeEvent.pointerType === 'touch';
-      },
-      // a touch that turns into a scroll ends without a focus or a press
-      onPointerCancel: () => {
-        touching.current = false;
-      },
-      // true once, for the focus that follows a tap
-      consumeTouchFocus: () => {
-        const wasTouch = touching.current;
-        touching.current = false;
-        return wasTouch;
-      },
-    }),
-    []
-  );
-};
-
 type TriggerHoverOptions = {
   wrapperRef: React.RefObject<TooltipHostElement | null>;
   onEnter: (isTouch: boolean) => void;
@@ -84,7 +57,16 @@ export const useTriggerHover = ({
 }: TriggerHoverOptions) => {
   // a non-touch pointer sits on the trigger
   const hoveringRef = React.useRef(false);
-  const touchFocusGuard = useTouchFocusGuard();
+  // a tap focuses the trigger, and that focus mustn't open the tooltip the way
+  // keyboard focus does
+  const touchingRef = React.useRef(false);
+
+  // true once, for the focus that follows a tap
+  const consumeTouchFocus = () => {
+    const wasTouch = touchingRef.current;
+    touchingRef.current = false;
+    return wasTouch;
+  };
 
   const onPointerEnter = useLatestCallback((e: PointerEvent) => {
     const isTouch = e.nativeEvent.pointerType === 'touch';
@@ -103,8 +85,13 @@ export const useTriggerHover = ({
   const wrapperProps =
     Platform.OS === 'web'
       ? {
-          onPointerDown: touchFocusGuard.onPointerDown,
-          onPointerCancel: touchFocusGuard.onPointerCancel,
+          onPointerDown: (e: PointerEvent) => {
+            touchingRef.current = e.nativeEvent.pointerType === 'touch';
+          },
+          // a touch that turns into a scroll ends without a focus or a press
+          onPointerCancel: () => {
+            touchingRef.current = false;
+          },
           onPointerEnter,
           onPointerLeave,
         }
@@ -112,7 +99,7 @@ export const useTriggerHover = ({
 
   return {
     hoveringRef,
-    consumeTouchFocus: touchFocusGuard.consumeTouchFocus,
+    consumeTouchFocus,
     wrapperProps,
   };
 };

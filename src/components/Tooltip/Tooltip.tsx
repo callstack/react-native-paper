@@ -144,19 +144,19 @@ const Tooltip = ({
     setVisible(true);
   }, [showTimer, hideTimer, hide]);
 
-  const handleTouchStart = React.useCallback(() => {
+  const handleTouchStart = () => {
     if (Platform.OS === 'web') {
       hideTimer.clear();
       showTimer.schedule(show, enterTouchDelay);
     } else {
       show();
     }
-  }, [show, showTimer, hideTimer, enterTouchDelay]);
+  };
 
-  const handleTouchEnd = React.useCallback(() => {
+  const handleTouchEnd = () => {
     showTimer.clear();
     hideTimer.schedule(hide, leaveTouchDelay);
-  }, [showTimer, hideTimer, hide, leaveTouchDelay]);
+  };
 
   const { hoveringRef, consumeTouchFocus, wrapperProps } = useTriggerHover({
     wrapperRef: childrenWrapperRef,
@@ -166,12 +166,12 @@ const Tooltip = ({
 
   // Web: releasing a click on the hovered trigger mustn't hide the tooltip
   // the hover opened; the pointer leaving does
-  const handlePressOut = React.useCallback(() => {
+  const handlePressOut = () => {
     if (Platform.OS === 'web' && hoveringRef.current) {
       return;
     }
     handleTouchEnd();
-  }, [handleTouchEnd, hoveringRef]);
+  };
 
   const triggerProps: TooltipTriggerProps = {
     // on web too, so touchscreen users can still show it
@@ -216,8 +216,6 @@ const Tooltip = ({
             ]}
           >
             <Text
-              // web announces it through the trigger's `aria-describedby` or `aria-label`
-              aria-live={Platform.OS === 'web' ? undefined : 'polite'}
               numberOfLines={Tokens.plain.maxLines}
               selectable={false}
               variant={Tokens.plain.typescale}

@@ -352,17 +352,13 @@ const RichTooltip = ({
     return subscribeToTriggerRefresh(updateTriggerRegistration);
   }, [updateTriggerRegistration]);
 
-  const handleBackdropPress = React.useCallback(
-    ({ nativeEvent: { pageX, pageY } }: GestureResponderEvent) => {
-      if (!forwardPressToTriggerAt(pageX, pageY)) {
-        hide();
-      }
-    },
-    [hide]
-  );
-
-  // web announces them through the trigger's `aria-describedby`
-  const textAnnouncement = Platform.OS === 'web' ? undefined : 'polite';
+  const handleBackdropPress = ({
+    nativeEvent: { pageX, pageY },
+  }: GestureResponderEvent) => {
+    if (!forwardPressToTriggerAt(pageX, pageY)) {
+      hide();
+    }
+  };
 
   return (
     <>
@@ -403,7 +399,6 @@ const RichTooltip = ({
                 {title ? (
                   <Text
                     nativeID={titleId}
-                    aria-live={textAnnouncement}
                     selectable={false}
                     variant={Tokens.rich.titleTypescale}
                     style={{ color: theme.colors[Tokens.rich.title] }}
@@ -415,7 +410,6 @@ const RichTooltip = ({
                 {typeof content === 'string' ? (
                   <Text
                     nativeID={contentId}
-                    aria-live={textAnnouncement}
                     selectable={false}
                     variant={Tokens.rich.contentTypescale}
                     style={{ color: theme.colors[Tokens.rich.content] }}
