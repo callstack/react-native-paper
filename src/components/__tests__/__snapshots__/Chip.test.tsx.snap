@@ -112,14 +112,15 @@ exports[`prefers icon over avatar when both are specified 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -205,6 +206,7 @@ exports[`prefers icon over avatar when both are specified 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -336,14 +338,15 @@ exports[`prefers trailingIcon over the close icon when both trailingIcon and onC
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -388,6 +391,7 @@ exports[`prefers trailingIcon over the close icon when both trailingIcon and onC
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -586,14 +590,15 @@ exports[`renders chip with a generic trailing icon 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -679,6 +684,7 @@ exports[`renders chip with a generic trailing icon 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -877,14 +883,15 @@ exports[`renders chip with avatar 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -994,6 +1001,7 @@ exports[`renders chip with avatar 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -1125,14 +1133,15 @@ exports[`renders chip with close button 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -1218,6 +1227,7 @@ exports[`renders chip with close button 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -1452,14 +1462,15 @@ exports[`renders chip with custom close button 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -1545,6 +1556,7 @@ exports[`renders chip with custom close button 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -1779,14 +1791,15 @@ exports[`renders chip with icon 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -1872,6 +1885,7 @@ exports[`renders chip with icon 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -2031,14 +2045,15 @@ exports[`renders chip with onPress 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -2083,6 +2098,7 @@ exports[`renders chip with onPress 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -2236,14 +2252,15 @@ exports[`renders outlined disabled chip 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -2288,6 +2305,7 @@ exports[`renders outlined disabled chip 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -2419,14 +2437,15 @@ exports[`renders selected chip 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -2512,6 +2531,7 @@ exports[`renders selected chip 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },
@@ -2643,14 +2663,15 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
         },
         [
           {
+            "borderRadius": 8,
+          },
+          {
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
             "minHeight": 32,
           },
-          {
-            "borderRadius": 8,
-          },
+          undefined,
         ],
       ]
     }
@@ -2808,6 +2829,7 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
               },
               [
                 {
+                  "flexShrink": 1,
                   "includeFontPadding": false,
                   "textAlignVertical": "center",
                 },

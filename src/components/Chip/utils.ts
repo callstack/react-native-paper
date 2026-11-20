@@ -9,7 +9,6 @@ type BaseProps = {
   selected?: boolean;
   disabled?: boolean;
   elevated?: boolean;
-  focused?: boolean;
 };
 
 export type ChipColors = {
@@ -20,6 +19,7 @@ export type ChipColors = {
   contentOpacity: number;
   backgroundColor: ColorValue;
   rippleColor: ColorValue;
+  focusedColor: ColorValue;
   avatarOverlayColor: ColorValue;
 };
 
@@ -63,7 +63,6 @@ const getBorderColor = ({
   isOutlined,
   selected,
   disabled,
-  focused,
   selectedColor,
 }: BaseProps & {
   selectedColor?: ColorValue;
@@ -74,10 +73,6 @@ const getBorderColor = ({
 
   if (disabled) {
     return theme.colors.outlineVariant;
-  }
-
-  if (focused) {
-    return theme.colors[ChipTokens.focusOutlineColor];
   }
 
   if (selectedColor !== undefined) {
@@ -116,7 +111,6 @@ export const getChipColors = ({
   customBackgroundColor,
   disabled,
   elevated,
-  focused,
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
   disabled?: boolean;
@@ -128,7 +122,6 @@ export const getChipColors = ({
     selected,
     disabled,
     elevated,
-    focused,
   };
 
   const contentOpacity = disabled ? ChipTokens.disabledContentOpacity : 1;
@@ -162,6 +155,7 @@ export const getChipColors = ({
       customBackgroundColor,
     }),
     rippleColor: theme.colors.stateLayerPressed,
+    focusedColor: theme.colors.stateLayerPressed,
     avatarOverlayColor: theme.colors.stateLayerPressed,
   };
 };

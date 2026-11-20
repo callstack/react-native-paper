@@ -1,10 +1,17 @@
-import { Text } from 'react-native';
+import { Platform, Text } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
 
 import PaperProvider from '../../core/PaperProvider';
-import { render, screen, transitionOf } from '../../test-utils';
+import { ownFocusEvent, render, screen, transitionOf } from '../../test-utils';
 import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import * as Avatar from '../Avatar/Avatar';
@@ -160,6 +167,89 @@ it('lets touches through a decorative trailing icon to the chip body', async () 
     'pointerEvents',
     'none'
   );
+});
+
+it('drops the hover elevation of an elevated chip that stops being pressable while hovered', async () => {
+  const pressable = (
+    <Chip elevated onPress={() => {}} testID="chip">
+      Example Chip
+    </Chip>
+  );
+  const { rerender } = await render(pressable);
+  const resting = JSON.stringify(screen.toJSON());
+
+  await fireEvent(screen.getByTestId('chip'), 'hoverIn');
+  expect(JSON.stringify(screen.toJSON())).not.toBe(resting);
+
+  await rerender(
+    <Chip elevated testID="chip">
+      Example Chip
+    </Chip>
+  );
+  await rerender(pressable);
+
+  expect(JSON.stringify(screen.toJSON())).toBe(resting);
+});
+
+describe('keyboard focus fill (web)', () => {
+  const original = Platform.OS;
+  beforeEach(() => {
+    Platform.OS = 'web';
+  });
+  afterEach(() => {
+    Platform.OS = original;
+  });
+
+  const { focusedColor } = getChipColors({
+    theme: LightTheme,
+    isOutlined: true,
+  });
+
+  it('fills the chip body on keyboard focus and clears it on blur', async () => {
+    await render(
+      <Chip onPress={() => {}} testID="chip">
+        Example Chip
+      </Chip>
+    );
+
+    await fireEvent(screen.getByTestId('chip'), 'focus', ownFocusEvent());
+    expect(screen.getByTestId('chip')).toHaveStyle({
+      backgroundColor: focusedColor,
+    });
+
+    await fireEvent(screen.getByTestId('chip'), 'blur');
+    expect(screen.getByTestId('chip')).not.toHaveStyle({
+      backgroundColor: focusedColor,
+    });
+  });
+
+  it('clears the fill when the chip is disabled while focused', async () => {
+    const { rerender } = await render(
+      <Chip onPress={() => {}} testID="chip">
+        Example Chip
+      </Chip>
+    );
+
+    await fireEvent(screen.getByTestId('chip'), 'focus', ownFocusEvent());
+    expect(screen.getByTestId('chip')).toHaveStyle({
+      backgroundColor: focusedColor,
+    });
+
+    await rerender(
+      <Chip disabled onPress={() => {}} testID="chip">
+        Example Chip
+      </Chip>
+    );
+    await rerender(
+      <Chip onPress={() => {}} testID="chip">
+        Example Chip
+      </Chip>
+    );
+
+    expect(screen.getByTestId('chip')).not.toHaveStyle({
+      backgroundColor: focusedColor,
+    });
+  });
 });
 
 it('renders outlined disabled chip', async () => {
@@ -638,46 +728,6 @@ describe('getChipColor - border color', () => {
       getChipColors({
         theme: DarkTheme,
         isOutlined: false,
-      })
-    ).toMatchObject({
-      borderColor: 'transparent',
-    });
-  });
-
-  it('darkens the outline on focus, for theme version 3', () => {
-    const theme = LightTheme;
-
-    expect(
-      getChipColors({
-        theme,
-        isOutlined: true,
-        focused: true,
-      })
-    ).toMatchObject({
-      borderColor: theme.colors.onSurfaceVariant,
-    });
-  });
-
-  it('shows the focus outline over selectedColor on a focused unselected chip', () => {
-    expect(
-      getChipColors({
-        theme: LightTheme,
-        isOutlined: true,
-        focused: true,
-        selectedColor: 'purple',
-      })
-    ).toMatchObject({
-      borderColor: LightTheme.colors.onSurfaceVariant,
-    });
-  });
-
-  it('does not darken the outline on focus for a selected chip', () => {
-    expect(
-      getChipColors({
-        theme: LightTheme,
-        isOutlined: true,
-        selected: true,
-        focused: true,
       })
     ).toMatchObject({
       borderColor: 'transparent',
