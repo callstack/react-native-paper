@@ -3,7 +3,7 @@ import * as React from 'react';
 import { render, type RenderOptions } from '@testing-library/react-native';
 
 import MaterialCommunityIcon from './components/MaterialCommunityIcon';
-import { getDefaultDirection, LocaleProvider } from './core/locale';
+import { DirectionProvider, getDefaultDirection } from './core/locale';
 import { Provider as SettingsProvider } from './core/settings';
 import { ThemeProvider } from './core/theming';
 import { LightTheme } from './theme/schemes';
@@ -12,9 +12,9 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
   <SettingsProvider
     value={{ icon: MaterialCommunityIcon, rippleEffectEnabled: true }}
   >
-    <LocaleProvider direction={getDefaultDirection()}>
+    <DirectionProvider direction={getDefaultDirection()}>
       <ThemeProvider theme={LightTheme}>{children}</ThemeProvider>
-    </LocaleProvider>
+    </DirectionProvider>
   </SettingsProvider>
 );
 
