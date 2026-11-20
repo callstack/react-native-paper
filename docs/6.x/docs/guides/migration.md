@@ -606,7 +606,7 @@ The `borderColor` in `style` no longer changes the outline color of an outlined 
 
 #### `Card.Cover`
 
-Use the `aspectRatio` prop to size a cover responsively. It replaces the default height of `195`:
+Use the `aspectRatio` prop to size a cover responsively. It replaces the default height of `194`:
 
 ```tsx
 <Card media={<Card.Cover source={cover} aspectRatio={16 / 9} />} />

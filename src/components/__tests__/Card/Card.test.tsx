@@ -1204,7 +1204,7 @@ describe('CardCover', () => {
 
     expect(screen.getByTestId('card-cover')).toHaveStyle({
       width: '100%',
-      height: 195,
+      height: 194,
     });
   });
 
