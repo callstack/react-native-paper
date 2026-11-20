@@ -933,6 +933,18 @@ const [value, setValue] = React.useState('');
 />
 ```
 
+#### Icon size
+
+`TextInput.Icon`'s `size` is renamed `iconSize`, as on `IconButton`, where `size` is now a named container scale.
+
+```tsx
+// Before (v5)
+<TextInput.Icon icon="magnify" size={20} />
+
+// After (v6)
+<TextInput.Icon icon="magnify" iconSize={20} />
+```
+
 #### Label and supporting text
 
 - **`label: React.Element | string`** → **`string`**
