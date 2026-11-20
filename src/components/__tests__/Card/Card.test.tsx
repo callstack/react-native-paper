@@ -1028,7 +1028,7 @@ describe('Card', () => {
     expect(onAccessibilityAction).not.toHaveBeenCalled();
   });
 
-  it('uses a custom outline color in every state', async () => {
+  it('uses a custom outline color at rest and when disabled', async () => {
     const { rerender } = await render(
       <Card testID="card" variant="outlined" borderColor="red" />
     );
@@ -1040,6 +1040,33 @@ describe('Card', () => {
     );
 
     expect(JSON.stringify(screen.toJSON())).toContain('"borderColor":"red"');
+  });
+
+  it('gives way to the focused outline color on keyboard focus', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(
+      <Card
+        testID="card"
+        variant="outlined"
+        borderColor="red"
+        onPress={() => {}}
+      />
+    );
+    const target = screen.getByTestId('card');
+
+    expect(getCardLayers().outline).toHaveStyle({ borderColor: 'red' });
+
+    await fireEvent(target, 'focus', selfFocus(true));
+    await settle();
+
+    expect(getCardLayers().outline).toHaveStyle({
+      borderColor: LightTheme.colors.onSurface,
+    });
+
+    await fireEvent(target, 'blur');
+    await settle();
+
+    expect(getCardLayers().outline).toHaveStyle({ borderColor: 'red' });
   });
 
   it('dims the slot content of a disabled Card', async () => {
