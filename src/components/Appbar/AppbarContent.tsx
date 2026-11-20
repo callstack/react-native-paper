@@ -8,7 +8,7 @@ import type {
   ViewProps,
 } from 'react-native';
 
-import { modeTextVariant } from './utils';
+import { modeTextVariant, modeTitleMaxFontSizeMultiplier } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
@@ -51,6 +51,9 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
   color?: string;
   /**
    * Specifies the largest possible scale a title font can reach.
+   * Defaults to the largest scale at which the title fits in the appbar:
+   * `2` in `small` and `center-aligned` mode, `1.25` in `medium` mode
+   * and `1.1` in `large` mode. Pass `0` to remove the limit.
    */
   titleMaxFontSizeMultiplier?: number;
   /**
@@ -144,7 +147,9 @@ const AppbarContent = ({
           numberOfLines={1}
           accessible
           role={onPress ? 'none' : 'heading'}
-          maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+          maxFontSizeMultiplier={
+            titleMaxFontSizeMultiplier ?? modeTitleMaxFontSizeMultiplier[mode]
+          }
         >
           {title}
         </Text>

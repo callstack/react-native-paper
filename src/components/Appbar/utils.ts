@@ -75,6 +75,16 @@ export const modeTextVariant = {
   'center-aligned': 'titleLarge',
 } as const;
 
+// The appbar has a fixed height, so the title can only scale until its line
+// height fills the space left for it: 64 in small mode, 40 below the actions
+// row in medium and large mode. Past that, the bar clips the title.
+export const modeTitleMaxFontSizeMultiplier = {
+  small: 2,
+  medium: 1.25,
+  large: 1.1,
+  'center-aligned': 2,
+};
+
 export const filterAppbarActions = (
   children: React.ReactNode,
   isLeading = false

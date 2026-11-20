@@ -312,6 +312,38 @@ describe('AppbarContent', () => {
     })
   );
 
+  (
+    [
+      ['small', 2],
+      ['medium', 1.25],
+      ['large', 1.1],
+      ['center-aligned', 2],
+    ] as const
+  ).forEach(([mode, multiplier]) =>
+    it(`limits the title font scale so it fits the appbar in ${mode} mode`, async () => {
+      await render(
+        <Appbar mode={mode}>
+          <Appbar.Content title="Title" />
+        </Appbar>
+      );
+
+      expect(screen.getByText('Title')).toHaveProp(
+        'maxFontSizeMultiplier',
+        multiplier
+      );
+    })
+  );
+
+  it('uses titleMaxFontSizeMultiplier instead of the default limit', async () => {
+    await render(
+      <Appbar mode="large">
+        <Appbar.Content title="Title" titleMaxFontSizeMultiplier={3} />
+      </Appbar>
+    );
+
+    expect(screen.getByText('Title')).toHaveProp('maxFontSizeMultiplier', 3);
+  });
+
   it('should render component passed to title', async () => {
     await render(
       <Appbar>
