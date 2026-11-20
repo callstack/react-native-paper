@@ -80,11 +80,6 @@ afterAll(() => {
 
 afterEach(() => {
   I18nManager.isRTL = defaultI18nIsRTL;
-  jest.restoreAllMocks();
-  jest.spyOn(I18nManager, 'getConstants').mockImplementation(() => ({
-    ...getConstantsOriginal(),
-    isRTL: I18nManager.isRTL,
-  }));
 });
 
 function firstIndexOfTestIdInTree(tree: unknown, testID: string): number {
@@ -1426,6 +1421,65 @@ describe('on web in RTL', () => {
     expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle(
       { right: LABEL_START_OFFSET_WITHOUT_ACCESSORY }
     );
+  });
+
+  it('uses physical margins for the accessories', async () => {
+    await render(
+      <TextInput
+        label="Email"
+        value=""
+        onChangeText={() => {}}
+        startAccessory={({ style }) => (
+          <View testID="web-rtl-leading" style={style} />
+        )}
+        endAccessory={({ style }) => (
+          <View testID="web-rtl-trailing" style={style} />
+        )}
+      />
+    );
+
+    expect(screen.getByTestId('web-rtl-leading')).toHaveStyle({
+      marginStart: 0,
+      marginRight: 12,
+    });
+    expect(screen.getByTestId('web-rtl-trailing')).toHaveStyle({
+      marginEnd: 0,
+      marginLeft: 12,
+    });
+  });
+
+  it('aligns supporting text to the right and the counter to the left', async () => {
+    await render(
+      <TextInput
+        label="Email"
+        value="ab"
+        maxLength={10}
+        counter
+        supportingText="Helper"
+        onChangeText={() => {}}
+      />
+    );
+
+    expect(screen.getByText('Helper', includeHiddenElements)).toHaveStyle({
+      textAlign: 'right',
+    });
+    expect(screen.getByText('2/10', includeHiddenElements)).toHaveStyle({
+      textAlign: 'left',
+    });
+  });
+
+  it('renders the counter without supporting text', async () => {
+    await render(
+      <TextInput
+        label="Email"
+        value="ab"
+        maxLength={10}
+        counter
+        onChangeText={() => {}}
+      />
+    );
+
+    expect(screen.getByText('2/10', includeHiddenElements)).toBeOnTheScreen();
   });
 });
 

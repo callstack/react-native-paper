@@ -265,6 +265,7 @@ export const getSharedTextInputStyleData = (
       fontSize: INPUT_FONT_SIZE,
       color: onSurfaceVariant,
       paddingEnd: PREFIX_END_PADDING,
+      writingDirection: isRTL ? 'rtl' : 'ltr',
     },
     isDisabled && styles.disabled,
   ];
@@ -275,6 +276,7 @@ export const getSharedTextInputStyleData = (
       fontSize: INPUT_FONT_SIZE,
       color: onSurfaceVariant,
       paddingStart: SUFFIX_START_PADDING,
+      writingDirection: isRTL ? 'rtl' : 'ltr',
     },
     isDisabled && styles.disabled,
   ];
