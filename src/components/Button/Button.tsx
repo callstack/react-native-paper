@@ -265,9 +265,8 @@ const Button = ({
   'aria-selected': ariaSelected,
   accessibilityLabel,
   accessibilityState,
-  accessibilityRole,
   accessibilityHint,
-  role,
+  role = 'button',
   hitSlop,
   onPress,
   onPressIn,
@@ -329,16 +328,17 @@ const Button = ({
   const busy = loading || (ariaBusy ?? accessibilityState?.busy);
   const checked = ariaChecked ?? accessibilityState?.checked;
 
-  // Android only: React Native puts a busy view's state into its content
-  // description ("Save draft, busy"), and TalkBack reads that instead of the
-  // text inside the button. Without a label, the description would be just
-  // "busy", so the button's text becomes its label. When the content is not
-  // only text (strings and numbers, e.g. `Uploading {count} files`), it
-  // cannot be read here: the busy state is left out instead, so TalkBack
-  // still reads the content.
+  // Android only: TalkBack reads the content description React Native builds
+  // from the label and the busy state ("Save draft, busy"), instead of the
+  // text inside the button. React Native rewrites that description only when
+  // it has text to write, so without a label a busy button would read "busy"
+  // and keep reading it once it is no longer busy. The button's own text is
+  // therefore always its label there, and `busy` always a boolean. When the
+  // content is not only text (strings and numbers, e.g.
+  // `Uploading {count} files`), it cannot be read here: the button is not
+  // marked busy, so TalkBack still reads the content.
   const needsAndroidBusyLabel =
     Platform.OS === 'android' &&
-    busy === true &&
     ariaLabel === undefined &&
     accessibilityLabel === undefined;
   const childrenParts = React.Children.toArray(children);
@@ -351,7 +351,11 @@ const Button = ({
       : undefined;
   const pressableLabel = needsAndroidBusyLabel ? childrenText : ariaLabel;
   const pressableBusy =
-    needsAndroidBusyLabel && childrenText === undefined ? undefined : busy;
+    Platform.OS === 'android'
+      ? needsAndroidBusyLabel && childrenText === undefined
+        ? false
+        : busy === true
+      : busy;
 
   // React Native's types have no `aria-pressed`. A given `checked` state
   // still applies where the toggle state is not exposed as checked.
@@ -567,18 +571,12 @@ const Button = ({
           onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
           delayLongPress={delayLongPress}
           accessibilityLabel={accessibilityLabel}
-          accessibilityRole={accessibilityRole}
           aria-label={pressableLabel}
           aria-expanded={ariaExpanded ?? accessibilityState?.expanded}
           aria-busy={pressableBusy}
           aria-selected={ariaSelected ?? accessibilityState?.selected}
           accessibilityHint={accessibilityHint}
-          // `role` wins over `accessibilityRole`, so the default role steps
-          // aside for a given `accessibilityRole`. The two use different
-          // names (`header` / `heading`), so one is never passed as the other.
-          role={
-            role ?? (accessibilityRole === undefined ? 'button' : undefined)
-          }
+          role={role}
           aria-disabled={disabled}
           {...toggleStateProps}
           accessible={accessible}

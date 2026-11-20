@@ -419,15 +419,34 @@ describe('accessibility props', () => {
     );
   });
 
-  it('uses a given accessibilityRole instead of the default button role', async () => {
-    await render(
-      <Button accessibilityRole="link" onPress={() => {}}>
-        Docs
+  it('stops marking a button busy on Android once it stops loading', async () => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+
+    const { rerender } = await render(
+      <Button loading onPress={() => {}}>
+        Uploading
       </Button>
     );
 
-    expect(screen.getByRole('link', { name: 'Docs' })).toBeOnTheScreen();
-    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+    expect(screen.getByRole('button', { busy: true })).toHaveProp(
+      'accessibilityLabel',
+      'Uploading'
+    );
+
+    await rerender(
+      <Button loading={false} onPress={() => {}}>
+        Upload
+      </Button>
+    );
+
+    // `false`, not unset: React Native rewrites the content description
+    // TalkBack reads only for a value, so "Uploading, busy" would stay.
+    const button = screen.getByRole('button');
+    expect(button).toHaveProp('accessibilityLabel', 'Upload');
+    expect(button).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ busy: false })
+    );
   });
 });
 
