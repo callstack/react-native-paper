@@ -296,6 +296,22 @@ describe('Appbar modes', () => {
   });
 });
 
+describe('Appbar.Content accessibility', () => {
+  it('makes a pressable title a single focus stop', async () => {
+    await render(<Appbar.Content title="Title" onPress={() => {}} />);
+
+    expect(screen.getByRole('button', { name: 'Title' })).toBeOnTheScreen();
+    expect(screen.getByText('Title')).toHaveProp('accessible', false);
+  });
+
+  it('keeps a static title accessible as a heading', async () => {
+    await render(<Appbar.Content title="Title" />);
+
+    expect(screen.getByRole('heading', { name: 'Title' })).toBeOnTheScreen();
+    expect(screen.getByText('Title')).toHaveProp('accessible', true);
+  });
+});
+
 describe('Appbar layout', () => {
   const layout = (x: number, width: number) => ({
     nativeEvent: { layout: { x, y: 0, width, height: 64 } },
