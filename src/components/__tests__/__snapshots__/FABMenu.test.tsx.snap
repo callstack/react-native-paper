@@ -1610,6 +1610,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
       }
     >
       <View
+        aria-hidden={true}
         collapsable={false}
         style={
           [
@@ -1788,10 +1789,10 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 "text": undefined,
               }
             }
-            accessible={true}
+            accessible={false}
             aria-haspopup="menu"
             collapsable={false}
-            focusable={true}
+            focusable={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1814,6 +1815,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                 ],
               ]
             }
+            tabIndex={-1}
           >
             <View
               style={

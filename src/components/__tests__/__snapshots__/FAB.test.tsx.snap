@@ -376,6 +376,7 @@ exports[`renders FAB medium size 1`] = `
 
 exports[`renders FAB transitioning to not visible 1`] = `
 <View
+  aria-hidden={true}
   collapsable={false}
   style={
     [
@@ -493,7 +494,8 @@ exports[`renders FAB transitioning to not visible 1`] = `
     }
   >
     <View
-      accessible={true}
+      accessible={false}
+      focusable={false}
       role="none"
       style={
         [
@@ -505,6 +507,7 @@ exports[`renders FAB transitioning to not visible 1`] = `
           ],
         ]
       }
+      tabIndex={-1}
     >
       <View
         style={
@@ -1871,6 +1874,193 @@ exports[`renders FAB with secondary variant 1`] = `
 </View>
 `;
 
+exports[`renders FAB with secondaryContainer variant 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {},
+      undefined,
+      {
+        "transformOrigin": "center",
+      },
+      {
+        "height": 56,
+        "opacity": 1,
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
+        "width": 56,
+      },
+      {
+        "pointerEvents": "auto",
+      },
+      {},
+      {
+        "backgroundColor": "rgba(232, 222, 248, 1)",
+      },
+      {
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderCurve": "continuous",
+        "borderEndEndRadius": undefined,
+        "borderEndStartRadius": undefined,
+        "borderRadius": 16,
+        "borderStartEndRadius": undefined,
+        "borderStartStartRadius": undefined,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+      },
+      {
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 3.33,
+          "width": 0,
+        },
+        "shadowOpacity": 0.19,
+        "shadowRadius": 4.75,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        {
+          "pointerEvents": "none",
+        },
+        {},
+        {},
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+        },
+        {
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderCurve": "continuous",
+          "borderEndEndRadius": undefined,
+          "borderEndStartRadius": undefined,
+          "borderRadius": 16,
+          "borderStartEndRadius": undefined,
+          "borderStartStartRadius": undefined,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
+        },
+        {
+          "shadowColor": "rgba(0, 0, 0, 1)",
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.039,
+          "shadowRadius": 1.5,
+        },
+      ]
+    }
+  />
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "height": "100%",
+          "overflow": "hidden",
+          "width": "100%",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderRadius": 16,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      role="none"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            null,
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "pointerEvents": "none",
+            },
+            [
+              {
+                "justifyContent": "center",
+              },
+              {
+                "height": 56,
+                "width": 56,
+              },
+            ],
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 25, 43, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          plus
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders FAB with tertiary variant 1`] = `
 <View
   collapsable={false}
@@ -2058,194 +2248,7 @@ exports[`renders FAB with tertiary variant 1`] = `
 </View>
 `;
 
-exports[`renders FAB with tonalSecondary variant 1`] = `
-<View
-  collapsable={false}
-  style={
-    [
-      {},
-      undefined,
-      {
-        "transformOrigin": "center",
-      },
-      {
-        "height": 56,
-        "opacity": 1,
-        "transform": [
-          {
-            "scale": 1,
-          },
-        ],
-        "width": 56,
-      },
-      {
-        "pointerEvents": "auto",
-      },
-      {},
-      {
-        "backgroundColor": "rgba(232, 222, 248, 1)",
-      },
-      {
-        "borderBottomEndRadius": undefined,
-        "borderBottomLeftRadius": undefined,
-        "borderBottomRightRadius": undefined,
-        "borderBottomStartRadius": undefined,
-        "borderCurve": "continuous",
-        "borderEndEndRadius": undefined,
-        "borderEndStartRadius": undefined,
-        "borderRadius": 16,
-        "borderStartEndRadius": undefined,
-        "borderStartStartRadius": undefined,
-        "borderTopEndRadius": undefined,
-        "borderTopLeftRadius": undefined,
-        "borderTopRightRadius": undefined,
-        "borderTopStartRadius": undefined,
-      },
-      {
-        "shadowColor": "rgba(0, 0, 0, 1)",
-        "shadowOffset": {
-          "height": 3.33,
-          "width": 0,
-        },
-        "shadowOpacity": 0.19,
-        "shadowRadius": 4.75,
-      },
-    ]
-  }
->
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        {
-          "pointerEvents": "none",
-        },
-        {},
-        {},
-        {
-          "backgroundColor": "rgba(232, 222, 248, 1)",
-        },
-        {
-          "borderBottomEndRadius": undefined,
-          "borderBottomLeftRadius": undefined,
-          "borderBottomRightRadius": undefined,
-          "borderBottomStartRadius": undefined,
-          "borderCurve": "continuous",
-          "borderEndEndRadius": undefined,
-          "borderEndStartRadius": undefined,
-          "borderRadius": 16,
-          "borderStartEndRadius": undefined,
-          "borderStartStartRadius": undefined,
-          "borderTopEndRadius": undefined,
-          "borderTopLeftRadius": undefined,
-          "borderTopRightRadius": undefined,
-          "borderTopStartRadius": undefined,
-        },
-        {
-          "shadowColor": "rgba(0, 0, 0, 1)",
-          "shadowOffset": {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0.039,
-          "shadowRadius": 1.5,
-        },
-      ]
-    }
-  />
-  <View
-    collapsable={false}
-    style={
-      [
-        {
-          "height": "100%",
-          "overflow": "hidden",
-          "width": "100%",
-        },
-        {
-          "backgroundColor": "rgba(232, 222, 248, 1)",
-          "borderRadius": 16,
-        },
-      ]
-    }
-  >
-    <View
-      accessible={true}
-      role="none"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          [
-            null,
-          ],
-        ]
-      }
-    >
-      <View
-        style={
-          [
-            {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "pointerEvents": "none",
-            },
-            [
-              {
-                "justifyContent": "center",
-              },
-              {
-                "height": 56,
-                "width": 56,
-              },
-            ],
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            [
-              {
-                "color": "rgba(29, 25, 43, 1)",
-                "fontSize": 24,
-              },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
-            ]
-          }
-        >
-          plus
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders FAB with tonalTertiary variant 1`] = `
+exports[`renders FAB with tertiaryContainer variant 1`] = `
 <View
   collapsable={false}
   style={

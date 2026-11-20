@@ -120,11 +120,12 @@ const SPRING_SAMPLE_COUNT = 30;
  * with the time the spring takes to settle in milliseconds.
  *
  * @example
+ * const reduceMotion = useReduceMotion();
  * const { points, duration } = toSpringCurve(theme.motion.spring.fast.spatial);
  *
  * const style = {
  *   transitionProperty: 'borderRadius',
- *   transitionDuration: duration * theme.animation.scale,
+ *   transitionDuration: reduceMotion ? 0 : duration,
  *   transitionTimingFunction: linear(...points),
  * };
  */

@@ -172,58 +172,82 @@ function DrawerItems() {
 
           <Drawer.Section title="Preferences">
             {dynamicThemeSupported ? (
-              <TouchableRipple onPress={toggleShouldUseDynamicTheme}>
+              <TouchableRipple
+                onPress={toggleShouldUseDynamicTheme}
+                role="switch"
+                aria-checked={shouldUseDynamicTheme}
+              >
                 <View style={[styles.preference, styles.v3Preference]}>
                   <Text variant="labelLarge">Use Dynamic Theme</Text>
-                  <View pointerEvents="none">
-                    <Switch value={shouldUseDynamicTheme} />
+                  <View pointerEvents="none" aria-hidden>
+                    <Switch value={shouldUseDynamicTheme} readOnly />
                   </View>
                 </View>
               </TouchableRipple>
             ) : null}
-            <TouchableRipple onPress={toggleTheme}>
+            <TouchableRipple
+              onPress={toggleTheme}
+              role="switch"
+              aria-checked={isDarkTheme}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Dark Theme</Text>
-                <View pointerEvents="none">
-                  <Switch value={isDarkTheme} />
+                <View pointerEvents="none" aria-hidden>
+                  <Switch value={isDarkTheme} readOnly />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={_handleToggleRTL}>
+            <TouchableRipple
+              onPress={_handleToggleRTL}
+              role="switch"
+              aria-checked={isRTL}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">RTL</Text>
-                <View pointerEvents="none">
-                  <Switch value={isRTL} />
+                <View pointerEvents="none" aria-hidden>
+                  <Switch value={isRTL} readOnly />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={toggleCollapsed}>
+            <TouchableRipple
+              onPress={toggleCollapsed}
+              role="switch"
+              aria-checked={collapsed}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Collapsed drawer *</Text>
-                <View pointerEvents="none">
-                  <Switch value={collapsed} />
+                <View pointerEvents="none" aria-hidden>
+                  <Switch value={collapsed} readOnly />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={toggleCustomFont}>
+            <TouchableRipple
+              onPress={toggleCustomFont}
+              role="switch"
+              aria-checked={customFontLoaded}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Custom font *</Text>
-                <View pointerEvents="none">
-                  <Switch value={customFontLoaded} />
+                <View pointerEvents="none" aria-hidden>
+                  <Switch value={customFontLoaded} readOnly />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={toggleRippleEffect}>
+            <TouchableRipple
+              onPress={toggleRippleEffect}
+              role="switch"
+              aria-checked={rippleEffectEnabled}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">
                   {Platform.OS === 'ios' ? 'Highlight' : 'Ripple'} effect *
                 </Text>
-                <View pointerEvents="none">
-                  <Switch value={rippleEffectEnabled} />
+                <View pointerEvents="none" aria-hidden>
+                  <Switch value={rippleEffectEnabled} readOnly />
                 </View>
               </View>
             </TouchableRipple>

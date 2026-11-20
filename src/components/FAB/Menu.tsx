@@ -9,6 +9,7 @@ import type {
 import Animated, {
   cubicBezier,
   interpolate,
+  ReduceMotion,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -134,23 +135,29 @@ export type MenuProps = {
  * tonal (container) role color.
  */
 const getCloseVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
     return 'primary';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
     return 'secondary';
   }
   return 'tertiary';
 };
 
 const getItemsVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
-    return 'tonalPrimary';
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
+    return 'primaryContainer';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
-    return 'tonalSecondary';
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
+    return 'secondaryContainer';
   }
-  return 'tonalTertiary';
+  return 'tertiaryContainer';
 };
 
 // Per-item delay used by the stagger. Compose uses a single SlowEffects-driven
@@ -187,7 +194,6 @@ const AnimatedItem = ({
   children,
 }: AnimatedItemProps) => {
   const reduceMotion = useReduceMotion();
-  const { scale } = theme.animation;
   const { duration, easing } = theme.motion;
 
   // Bottom-up on open, top-down on close (matches Compose).
@@ -197,11 +203,8 @@ const AnimatedItem = ({
   // the stagger.
   const transitionStyle: AnimatedStyle<ViewStyle> = {
     transitionProperty: ['opacity', 'transform'],
-    transitionDuration: [
-      duration.short2 * scale,
-      reduceMotion ? 0 : duration.short4 * scale,
-    ],
-    transitionDelay: reduceMotion ? 0 : staggerIndex * STAGGER_MS * scale,
+    transitionDuration: [duration.short2, reduceMotion ? 0 : duration.short4],
+    transitionDelay: reduceMotion ? 0 : staggerIndex * STAGGER_MS,
     transitionTimingFunction: cubicBezier(...easing.standard),
   };
 
@@ -305,7 +308,7 @@ const MenuItem = ({
     backgroundColor: colors.content,
     opacity: STATE_LAYER_OPACITY[interaction],
     transitionProperty: 'opacity',
-    transitionDuration: theme.motion.duration.short2 * theme.animation.scale,
+    transitionDuration: theme.motion.duration.short2,
   };
 
   // `scope: 'within'`: the ring belongs on the pill below, not the inner
@@ -438,7 +441,6 @@ const MorphingTrigger = ({
   ref,
 }: MorphingTriggerProps) => {
   const reduceMotion = useReduceMotion();
-  const { scale } = theme.animation;
 
   const closedSpec = Tokens.sizes[size];
   const closedContainer = closedSpec.container;
@@ -472,10 +474,10 @@ const MorphingTrigger = ({
     // Compose's ToggleFloatingActionButton uses a single FastSpatial spring
     // for the full open/close progress (size, corner, color, icon all share
     // one timeline).
-    progress.value = withSpring(
-      expanded ? 1 : 0,
-      toRawSpring(theme.motion.spring.fast.spatial)
-    );
+    progress.value = withSpring(expanded ? 1 : 0, {
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: ReduceMotion.Never,
+    });
   }, [expanded, theme, reduceMotion, progress]);
 
   // Derived shared values for the morph shape. Passing them to Shell as
@@ -507,7 +509,7 @@ const MorphingTrigger = ({
   // color and icon cross-fades are effects, so they are CSS transitions.
   const fadeTransition: AnimatedStyle<ViewStyle> = {
     transitionProperty: 'opacity',
-    transitionDuration: theme.motion.duration.short3 * scale,
+    transitionDuration: theme.motion.duration.short3,
     transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
   };
   const openPlaneStyle: AnimatedStyle<ViewStyle> = {
@@ -662,7 +664,7 @@ const Menu = ({
   const isRTL = direction === 'rtl';
   const insets = useSafeAreaInsets();
 
-  const triggerVariant: Variant = trigger.variant ?? 'tonalPrimary';
+  const triggerVariant: Variant = trigger.variant ?? 'primaryContainer';
   const size: Size = trigger.size ?? 'default';
   const openIcon: IconSource = trigger.icon;
   const openOnPress = trigger.onPress;
@@ -717,7 +719,6 @@ const Menu = ({
   });
 
   const reduceMotion = useReduceMotion();
-  const { scale } = theme.animation;
   const { duration } = theme.motion;
 
   // Transparent views are not in the accessibility tree, so on iOS and Android
@@ -726,9 +727,9 @@ const Menu = ({
   const focusDelay =
     Platform.OS === 'web'
       ? 0
-      : (reduceMotion
-          ? duration.short2
-          : (items.length - 1) * STAGGER_MS + duration.short4) * scale;
+      : reduceMotion
+        ? duration.short2
+        : (items.length - 1) * STAGGER_MS + duration.short4;
 
   React.useEffect(() => {
     if (!effectiveExpanded) {

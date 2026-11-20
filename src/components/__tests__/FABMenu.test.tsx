@@ -14,7 +14,9 @@ import {
   jest,
 } from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
+import * as Reanimated from 'react-native-reanimated';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import FAB from '../FAB';
 import type { MenuItemProps } from '../FAB/Menu';
@@ -26,6 +28,19 @@ type BackHandlerStatic = typeof RNBackHandler & {
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
+
+jest.mock('react-native-reanimated', () => {
+  const ReanimatedModule = jest.requireActual<
+    typeof import('react-native-reanimated')
+  >('react-native-reanimated');
+
+  return {
+    __esModule: true,
+    ...ReanimatedModule,
+    default: ReanimatedModule.default,
+    withSpring: jest.fn(ReanimatedModule.withSpring),
+  };
+});
 
 const makeItems = (
   onItemPress = jest.fn<(event?: unknown) => void>()
@@ -91,6 +106,39 @@ it('keeps the trigger mounted across opening and closing without trigger.onPress
 
   expect(screen.getByTestId('trigger')).toBe(closed);
   expect(closed).not.toBeDisabled();
+});
+
+it('keeps the trigger morph spring on with reduceMotion="off" whatever the device setting', async () => {
+  const { rerender } = await render(
+    <PaperProvider reduceMotion="off">
+      <FAB.Menu
+        expanded={false}
+        onDismiss={jest.fn()}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+      />
+    </PaperProvider>
+  );
+  jest.mocked(Reanimated.withSpring).mockClear();
+
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB.Menu
+        expanded
+        onDismiss={jest.fn()}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+      />
+    </PaperProvider>
+  );
+
+  // The items fade and scale with CSS transitions, so the trigger's morph is
+  // the only spring left.
+  expect(
+    jest
+      .mocked(Reanimated.withSpring)
+      .mock.calls.map(([, config]) => config?.reduceMotion)
+  ).toEqual([Reanimated.ReduceMotion.Never]);
 });
 
 it('renders FAB.Menu with 6 items', async () => {
