@@ -7,7 +7,7 @@ import {
   SettingsContext,
   Provider as SettingsProvider,
 } from '../../core/settings';
-import { ThemeProvider, useInternalTheme } from '../../core/theming';
+import { InternalThemeProvider, useInternalTheme } from '../../core/theming';
 import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 
@@ -60,7 +60,9 @@ const Portal = ({ children, modal, theme: themeOverrides }: Props) => {
       <SettingsProvider value={settings}>
         <ReduceMotionContext.Provider value={reduceMotion}>
           <LocaleProvider direction={direction}>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <InternalThemeProvider theme={theme}>
+              {children}
+            </InternalThemeProvider>
           </LocaleProvider>
         </ReduceMotionContext.Provider>
       </SettingsProvider>

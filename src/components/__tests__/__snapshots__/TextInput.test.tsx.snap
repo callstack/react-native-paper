@@ -127,7 +127,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             "position": "absolute",
           },
           {
-            "left": 52,
+            "start": 52,
           },
           {
             "top": 16,
@@ -161,6 +161,8 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
       </Text>
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -225,7 +227,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             accessible={true}
             centered={true}
             collapsable={false}
-            multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
             role="none"
@@ -293,22 +294,13 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          {
-            "opacity": 0.38,
-          },
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "flex-end",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -321,6 +313,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
         onChangeText={[Function]}
         onFocus={[Function]}
         placeholderTextColor="rgba(73, 69, 79, 1)"
+        readOnly={true}
         selectionColor="rgba(103, 80, 164, 1)"
         style={
           [
@@ -349,6 +342,8 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
       />
     </View>
     <View
+      aria-hidden={false}
+      pointerEvents="auto"
       style={
         {
           "alignItems": "center",
@@ -412,6 +407,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
           }
         >
           <View
+            accessibilityLabel="Clear"
             accessibilityState={
               {
                 "busy": undefined,
@@ -433,7 +429,6 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             centered={true}
             collapsable={false}
             focusable={true}
-            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -580,7 +575,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             "right": 0,
           },
           {
-            "backgroundColor": "rgba(121, 116, 126, 1)",
+            "backgroundColor": "rgba(73, 69, 79, 1)",
             "height": 1,
           },
           false,
@@ -623,7 +618,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             "position": "absolute",
           },
           {
-            "left": 52,
+            "start": 52,
           },
           {
             "top": 16,
@@ -655,6 +650,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       </Text>
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -717,7 +714,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             accessible={true}
             centered={true}
             collapsable={false}
-            multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
             role="none"
@@ -785,20 +781,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "flex-end",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -836,6 +825,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       />
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -898,7 +889,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             accessible={true}
             centered={true}
             collapsable={false}
-            multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
             role="none"
@@ -1081,7 +1071,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             "position": "absolute",
           },
           {
-            "left": 52,
+            "start": 52,
           },
           {
             "top": 16,
@@ -1113,6 +1103,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       </Text>
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -1175,7 +1167,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             accessible={true}
             centered={true}
             collapsable={false}
-            multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
             role="none"
@@ -1243,20 +1234,13 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "flex-end",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -1294,6 +1278,8 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       />
     </View>
     <View
+      aria-hidden={false}
+      pointerEvents="auto"
       style={
         {
           "alignItems": "center",
@@ -1353,6 +1339,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
           }
         >
           <View
+            accessibilityLabel="Clear"
             accessibilityState={
               {
                 "busy": undefined,
@@ -1382,7 +1369,6 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
                 "top": 12,
               }
             }
-            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1529,7 +1515,7 @@ exports[`renders filled TextInput with label and value 1`] = `
             "right": 0,
           },
           {
-            "backgroundColor": "rgba(121, 116, 126, 1)",
+            "backgroundColor": "rgba(73, 69, 79, 1)",
             "height": 1,
           },
           false,
@@ -1572,7 +1558,7 @@ exports[`renders filled TextInput with label and value 1`] = `
             "position": "absolute",
           },
           {
-            "left": 16,
+            "start": 16,
           },
           {
             "top": 16,
@@ -1604,20 +1590,13 @@ exports[`renders filled TextInput with label and value 1`] = `
       </Text>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "flex-end",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "flex-end",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -1745,7 +1724,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
           },
           {
             "backgroundColor": "rgba(254, 247, 255, 1)",
-            "left": 48,
+            "start": 48,
           },
           {
             "top": -12,
@@ -1782,6 +1761,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       </Text>
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -1844,7 +1825,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             accessible={true}
             centered={true}
             collapsable={false}
-            multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
             role="none"
@@ -1912,20 +1892,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -1963,6 +1936,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       />
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -2025,7 +2000,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             accessible={true}
             centered={true}
             collapsable={false}
-            multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
             role="none"
@@ -2183,7 +2157,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           },
           {
             "backgroundColor": "rgba(254, 247, 255, 1)",
-            "left": 48,
+            "start": 48,
           },
           {
             "top": -12,
@@ -2220,6 +2194,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       </Text>
     </View>
     <View
+      aria-hidden={true}
+      pointerEvents="none"
       style={
         {
           "alignItems": "center",
@@ -2282,7 +2258,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             accessible={true}
             centered={true}
             collapsable={false}
-            multiline={false}
             onBlur={[Function]}
             onFocus={[Function]}
             role="none"
@@ -2350,20 +2325,13 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       </View>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
@@ -2401,6 +2369,8 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       />
     </View>
     <View
+      aria-hidden={false}
+      pointerEvents="auto"
       style={
         {
           "alignItems": "center",
@@ -2460,6 +2430,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
           }
         >
           <View
+            accessibilityLabel="Clear"
             accessibilityState={
               {
                 "busy": undefined,
@@ -2489,7 +2460,6 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
                 "top": 12,
               }
             }
-            multiline={false}
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -2654,7 +2624,7 @@ exports[`renders outlined TextInput with label and value 1`] = `
           },
           {
             "backgroundColor": "rgba(254, 247, 255, 1)",
-            "left": 16,
+            "start": 16,
           },
           {
             "top": -12,
@@ -2691,20 +2661,13 @@ exports[`renders outlined TextInput with label and value 1`] = `
       </Text>
     </View>
     <View
-      collapsable={false}
       style={
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "paddingHorizontal": 16,
-          },
-          false,
-          {
-            "opacity": 1,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 16,
+        }
       }
     >
       <TextInput
