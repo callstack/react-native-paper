@@ -109,6 +109,10 @@ export const isWithinRect = (
 
 type PointerPosition = { clientX: number; clientY: number };
 
+// Web only: null where there is no document
+export const getActiveElement = (): Element | null =>
+  'document' in global ? document.activeElement : null;
+
 /**
  * Web only: pointer leave also fires spuriously, e.g. when the tooltip mounts
  * in the portal, so a leave is only real once the pointer is outside the

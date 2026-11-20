@@ -3,8 +3,10 @@ import { Dimensions, Platform, View } from 'react-native';
 import type { LayoutChangeEvent, PointerEvent } from 'react-native';
 
 import { cubicBezier } from 'react-native-reanimated';
+import useLatestCallback from 'use-latest-callback';
 
 import { Tokens } from './tokens';
+import { isPointerInside } from './utils';
 import type { Measurement } from './utils';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { InternalTheme } from '../../theme/types';
@@ -41,7 +43,7 @@ export const useTimeout = () => {
  * Web only: a tap focuses the trigger, and that focus mustn't open the tooltip
  * the way keyboard focus does.
  */
-export const useTouchFocusGuard = () => {
+const useTouchFocusGuard = () => {
   const touching = React.useRef(false);
 
   return React.useMemo(
@@ -62,6 +64,57 @@ export const useTouchFocusGuard = () => {
     }),
     []
   );
+};
+
+type TriggerHoverOptions = {
+  wrapperRef: React.RefObject<TooltipHostElement | null>;
+  onEnter: (isTouch: boolean) => void;
+  onLeave: () => void;
+};
+
+/**
+ * Web only: hover over the trigger's wrapper, through pointer events, as
+ * React Native Web's `View` ignores `onHoverIn`/`onHoverOut` and its
+ * `Pressable` hover flickers.
+ */
+export const useTriggerHover = ({
+  wrapperRef,
+  onEnter,
+  onLeave,
+}: TriggerHoverOptions) => {
+  // a non-touch pointer sits on the trigger
+  const hoveringRef = React.useRef(false);
+  const touchFocusGuard = useTouchFocusGuard();
+
+  const onPointerEnter = useLatestCallback((e: PointerEvent) => {
+    const isTouch = e.nativeEvent.pointerType === 'touch';
+    hoveringRef.current = !isTouch;
+    onEnter(isTouch);
+  });
+
+  const onPointerLeave = useLatestCallback((e: PointerEvent) => {
+    if (isPointerInside(wrapperRef.current, e.nativeEvent)) {
+      return;
+    }
+    hoveringRef.current = false;
+    onLeave();
+  });
+
+  const wrapperProps =
+    Platform.OS === 'web'
+      ? {
+          onPointerDown: touchFocusGuard.onPointerDown,
+          onPointerCancel: touchFocusGuard.onPointerCancel,
+          onPointerEnter,
+          onPointerLeave,
+        }
+      : {};
+
+  return {
+    hoveringRef,
+    consumeTouchFocus: touchFocusGuard.consumeTouchFocus,
+    wrapperProps,
+  };
 };
 
 // After a resize or rotation the position no longer matches the trigger

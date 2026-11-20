@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
-import type { PointerEvent, ViewStyle } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
@@ -8,11 +8,11 @@ import {
   useHideOnDimensionsChange,
   useTimeout,
   useTooltipFade,
-  useTouchFocusGuard,
+  useTriggerHover,
 } from './hooks';
 import { releaseSingletonSlot, takeSingletonSlot } from './registry';
 import { Tokens } from './tokens';
-import { getTooltipPosition, isPointerInside } from './utils';
+import { getTooltipPosition } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -118,9 +118,6 @@ const Tooltip = ({
   const tooltipId = React.useId();
   const showTimer = useTimeout();
   const hideTimer = useTimeout();
-  // Web only: a non-touch pointer sits on the trigger
-  const hoveringRef = React.useRef(false);
-  const touchFocusGuard = useTouchFocusGuard();
 
   const hide = React.useCallback(() => setVisible(false), []);
 
@@ -161,6 +158,12 @@ const Tooltip = ({
     hideTimer.schedule(hide, leaveTouchDelay);
   }, [showTimer, hideTimer, hide, leaveTouchDelay]);
 
+  const { hoveringRef, consumeTouchFocus, wrapperProps } = useTriggerHover({
+    wrapperRef: childrenWrapperRef,
+    onEnter: handleTouchStart,
+    onLeave: handleTouchEnd,
+  });
+
   // Web: releasing a click on the hovered trigger mustn't hide the tooltip
   // the hover opened; the pointer leaving does
   const handlePressOut = React.useCallback(() => {
@@ -168,41 +171,10 @@ const Tooltip = ({
       return;
     }
     handleTouchEnd();
-  }, [handleTouchEnd]);
-
-  // On web, pointer events on the wrapper View handle hover without going
-  // through RNW's Pressable lock/unlock mechanism that caused flicker.
-  // Long-press in triggerProps lets touchscreen-web users still trigger it.
-  const handlePointerEnter = React.useCallback(
-    (e: PointerEvent) => {
-      hoveringRef.current = e.nativeEvent.pointerType !== 'touch';
-      handleTouchStart();
-    },
-    [handleTouchStart]
-  );
-
-  const handlePointerLeave = React.useCallback(
-    (e: PointerEvent) => {
-      if (isPointerInside(childrenWrapperRef.current, e.nativeEvent)) {
-        return;
-      }
-      hoveringRef.current = false;
-      handleTouchEnd();
-    },
-    [handleTouchEnd, childrenWrapperRef]
-  );
-
-  const wrapperPointerProps =
-    Platform.OS === 'web'
-      ? {
-          onPointerDown: touchFocusGuard.onPointerDown,
-          onPointerCancel: touchFocusGuard.onPointerCancel,
-          onPointerEnter: handlePointerEnter,
-          onPointerLeave: handlePointerLeave,
-        }
-      : {};
+  }, [handleTouchEnd, hoveringRef]);
 
   const triggerProps: TooltipTriggerProps = {
+    // on web too, so touchscreen users can still show it
     onLongPress: handleTouchStart,
     onPressOut: handlePressOut,
     delayLongPress: enterTouchDelay,
@@ -211,7 +183,7 @@ const Tooltip = ({
           // keyboard focus shows it without the hover delay; a tap's focus
           // doesn't, as a long-press shows it on touch
           onFocus: () => {
-            if (!touchFocusGuard.consumeTouchFocus()) show();
+            if (!consumeTouchFocus()) show();
           },
           onBlur: handleTouchEnd,
         }
@@ -262,7 +234,7 @@ const Tooltip = ({
           ref={childrenWrapperRef}
           collapsable={false}
           style={styles.pressContainer}
-          {...wrapperPointerProps}
+          {...wrapperProps}
         >
           {children(triggerProps)}
         </View>

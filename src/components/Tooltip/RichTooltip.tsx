@@ -3,7 +3,6 @@ import { View, StyleSheet, Platform, Pressable } from 'react-native';
 import type {
   GestureResponderEvent,
   NativeSyntheticEvent,
-  PointerEvent,
   ViewStyle,
 } from 'react-native';
 
@@ -14,7 +13,7 @@ import {
   useHideOnDimensionsChange,
   useTimeout,
   useTooltipFade,
-  useTouchFocusGuard,
+  useTriggerHover,
 } from './hooks';
 import type { TooltipHostElement } from './hooks';
 import {
@@ -27,12 +26,11 @@ import {
   unregisterRichTrigger,
 } from './registry';
 import { Tokens } from './tokens';
-import { getTooltipPosition, isPointerInside } from './utils';
+import { useRichTooltipFocus } from './useRichTooltipFocus';
+import { getActiveElement, getTooltipPosition } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
-import { focusIntoContainer } from '../../utils/useOverlayFocus';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import Text from '../Typography/Text';
@@ -190,18 +188,11 @@ const RichTooltip = ({
   const tooltipId = React.useId();
   const titleId = React.useId();
   const contentId = React.useId();
-  // Web only: a non-touch pointer sits on the trigger
-  const hoveringRef = React.useRef(false);
-  // Web only: the trigger's keyboard focus opened the tooltip
-  const focusOpenedRef = React.useRef(false);
   const tooltipRef = React.useRef<TooltipHostElement>(null);
-  // Web only: set while dismiss is returning focus to the trigger
-  const refocusAfterDismissRef = React.useRef(false);
-  const touchFocusGuard = useTouchFocusGuard();
   const wasVisibleRef = React.useRef(visible);
   const showTimer = useTimeout();
   const hideTimer = useTimeout();
-  const focusTimer = useTimeout();
+  const hasActions = actions != null;
 
   const dismissFromSlot = React.useCallback(() => setVisible(false), []);
 
@@ -215,7 +206,6 @@ const RichTooltip = ({
 
   React.useEffect(() => {
     if (!visible) {
-      focusOpenedRef.current = false;
       return undefined;
     }
     return () => releaseSingletonSlot(dismissFromSlot);
@@ -232,7 +222,7 @@ const RichTooltip = ({
     hideTimer.schedule(() => {
       // Web: hiding would drop focus that is inside the tooltip, so it stays
       // open until that focus leaves or Escape closes it
-      const focused = 'document' in global ? document.activeElement : null;
+      const focused = getActiveElement();
       if (focused != null && tooltipRef.current?.contains?.(focused)) {
         return;
       }
@@ -251,46 +241,33 @@ const RichTooltip = ({
     wasVisibleRef.current = visible;
   }, [visible, onDismiss]);
 
-  // Web: focus inside the tooltip would be lost when it unmounts, so it goes
-  // back to the trigger. Focus elsewhere, e.g. in a text input while the
-  // tooltip was opened by hover, stays put.
-  const hideAndRestoreFocus = () => {
-    const focused =
-      Platform.OS === 'web' && 'document' in global
-        ? document.activeElement
-        : null;
-    const hadFocus =
-      focused != null &&
-      (tooltipRef.current?.contains?.(focused) ||
-        childrenWrapperRef.current?.contains?.(focused));
+  const { hoveringRef, consumeTouchFocus, wrapperProps } = useTriggerHover({
+    wrapperRef: childrenWrapperRef,
+    onEnter: (isTouch) => {
+      // a tap also fires a press, which toggles the tooltip
+      if (isTouch) {
+        return;
+      }
+      hideTimer.clear();
+      showTimer.schedule(show, enterTouchDelay);
+    },
+    onLeave: scheduleHide,
+  });
 
-    hide();
-    // set before focusing, as the trigger's focus event fires during it and
-    // would reopen the tooltip; cleared if the browser refused the focus
-    refocusAfterDismissRef.current = Boolean(hadFocus);
-    if (hadFocus && !focusIntoContainer(childrenWrapperRef.current)) {
-      refocusAfterDismissRef.current = false;
-    }
-  };
-
-  // Web only: tooltip opens on trigger focus, so it has to ignore the focus
-  // that dismissing itself causes, and the focus a tap gives the trigger, as
-  // the press that follows toggles it; later focus (or any blur) re-arms it
-  const handleFocus = () => {
-    const isTouchFocus = touchFocusGuard.consumeTouchFocus();
-    if (refocusAfterDismissRef.current || isTouchFocus) {
-      refocusAfterDismissRef.current = false;
-      return;
-    }
-    focusOpenedRef.current = true;
-    show();
-  };
-
-  const handleBlur = () => {
-    refocusAfterDismissRef.current = false;
-    focusOpenedRef.current = false;
-    scheduleHide();
-  };
+  const {
+    triggerProps: focusTriggerProps,
+    hideAndRestoreFocus,
+    isOpenedByFocus,
+  } = useRichTooltipFocus({
+    visible,
+    hasActions,
+    tooltipRef,
+    triggerRef: childrenWrapperRef,
+    show,
+    hide,
+    scheduleHide,
+    consumeTouchFocus,
+  });
 
   // On web a press on the hovered or keyboard-focused trigger keeps the
   // tooltip open, as the hover or the focus already opened it.
@@ -298,7 +275,7 @@ const RichTooltip = ({
     if (
       Platform.OS === 'web' &&
       visible &&
-      (hoveringRef.current || focusOpenedRef.current)
+      (hoveringRef.current || isOpenedByFocus())
     ) {
       showTimer.clear();
       hideTimer.clear();
@@ -308,90 +285,6 @@ const RichTooltip = ({
       show();
     }
   });
-
-  // A tap fires both pointer enter and press, and only the press should act so
-  // taps keep toggling the tooltip
-  const handlePointerEnter = React.useCallback(
-    (e: PointerEvent) => {
-      if (e.nativeEvent.pointerType === 'touch') {
-        return;
-      }
-
-      hoveringRef.current = true;
-      hideTimer.clear();
-      showTimer.schedule(show, enterTouchDelay);
-    },
-    [showTimer, hideTimer, enterTouchDelay, show]
-  );
-
-  const handlePointerLeave = React.useCallback(
-    (e: PointerEvent) => {
-      if (isPointerInside(childrenWrapperRef.current, e.nativeEvent)) {
-        return;
-      }
-
-      hoveringRef.current = false;
-      scheduleHide();
-    },
-    [scheduleHide, childrenWrapperRef]
-  );
-
-  const wrapperPointerProps =
-    Platform.OS === 'web'
-      ? {
-          onPointerDown: touchFocusGuard.onPointerDown,
-          onPointerCancel: touchFocusGuard.onPointerCancel,
-          onPointerEnter: handlePointerEnter,
-          onPointerLeave: handlePointerLeave,
-        }
-      : {};
-
-  // Web only: `Tab` walks the document, and the tooltip renders in a portal at
-  // its end, so the trigger needs a key that moves focus into the actions.
-  // The tooltip mounts through the portal on the render that opens it, so
-  // wait for that commit: from this one the node isn't reachable yet and
-  // focus requested while it's missing is simply lost
-  const handleKeyDown = (event: NativeSyntheticEvent<{ key: string }>) => {
-    if (actions != null && event.nativeEvent.key === 'ArrowDown') {
-      // focus moves after the tooltip mounts, so the page would scroll first
-      event.preventDefault();
-      show();
-      focusTimer.schedule(() => focusIntoContainer(tooltipRef.current), 0);
-    }
-  };
-
-  // Web: the backdrop lets pointer events through, so a press outside closes
-  // the tooltip here. Relying on blur misses triggers that a tap doesn't focus,
-  // such as buttons in Safari.
-  React.useEffect(() => {
-    if (Platform.OS !== 'web' || !visible || !('document' in global)) {
-      return;
-    }
-
-    const handlePointerDown = ({ target }: { target: EventTarget | null }) => {
-      if (
-        tooltipRef.current?.contains?.(target) ||
-        childrenWrapperRef.current?.contains?.(target)
-      ) {
-        return;
-      }
-      hide();
-    };
-
-    document.addEventListener('pointerdown', handlePointerDown);
-
-    return () => document.removeEventListener('pointerdown', handlePointerDown);
-  }, [visible, hide, childrenWrapperRef]);
-
-  // Web: Escape dismisses the tooltip the way the backdrop does on touch. The
-  // back button is left to the screen, as the tooltip isn't modal.
-  useOverlayDismiss({
-    enabled: visible && Platform.OS === 'web',
-    dismissable: true,
-    onDismiss: hideAndRestoreFocus,
-  });
-
-  const hasActions = actions != null;
 
   const description =
     typeof content === 'string'
@@ -405,9 +298,7 @@ const RichTooltip = ({
     Platform.OS === 'web'
       ? {
           onPress: handlePress,
-          onFocus: handleFocus,
-          onBlur: handleBlur,
-          onKeyDown: handleKeyDown,
+          ...focusTriggerProps,
           'aria-describedby': [title ? titleId : null, contentId]
             .filter(Boolean)
             .join(' '),
@@ -548,7 +439,7 @@ const RichTooltip = ({
         collapsable={false}
         onLayout={updateTriggerRegistration}
         style={styles.pressContainer}
-        {...wrapperPointerProps}
+        {...wrapperProps}
       >
         {children(triggerProps)}
       </View>
