@@ -28,6 +28,10 @@ export type TextInputAccessoryProps = {
 export type TextInputIconProps = TextInputAccessoryProps &
   Omit<IconButtonProps, keyof TextInputAccessoryProps | 'size'>;
 
+export const TextInputAccessoryPlacementContext = React.createContext<
+  'start' | 'end'
+>('end');
+
 /**
  * A component to render a leading / trailing icon in the TextInput
  * (return it from `startAccessory` or `endAccessory`). Accepts icon-specific props as well as
@@ -85,11 +89,12 @@ const TextInputIcon = ({
   ...rest
 }: TextInputIconProps) => {
   const theme = useInternalTheme(themeOverride);
+  const placement = React.useContext(TextInputAccessoryPlacementContext);
 
   const color = getIconColor({
     theme,
     iconColor,
-    hasError: error,
+    hasError: placement === 'start' ? false : error,
     isDisabled: disabled,
   });
 
