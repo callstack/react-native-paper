@@ -20,7 +20,11 @@ import { fireEvent, render, screen, userEvent } from '../../../test-utils';
 import { DarkTheme, LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';
 import Appbar from '../../Appbar';
-import { getAppbarBackgroundColor, modeTextVariant } from '../../Appbar/utils';
+import {
+  flexibleModeSubtitleVariant,
+  getAppbarBackgroundColor,
+  modeTextVariant,
+} from '../../Appbar/utils';
 import Searchbar from '../../Searchbar';
 import Tooltip from '../../Tooltip/Tooltip';
 import Text from '../../Typography/Text';
@@ -523,6 +527,31 @@ describe('Appbar layout', () => {
     });
   });
 
+  it.each([
+    { mode: 'medium-flexible', height: 136 },
+    { mode: 'large-flexible', height: 152 },
+  ] as const)(
+    'grows the $mode mode to $height with a subtitle',
+    async ({ mode, height }) => {
+      await render(
+        <Appbar mode={mode} testID="appbar">
+          <Appbar.Content title="Inbox" subtitle="3 unread" testID="content" />
+        </Appbar>
+      );
+
+      // The content takes up the space below the controls
+      const content = screen.getByTestId('content');
+      expect(content).toHaveStyle({ minHeight: height - 64 });
+
+      await fireEvent(content, 'layout', {
+        nativeEvent: {
+          layout: { x: 0, y: 0, width: 300, height: height - 64 },
+        },
+      });
+      expect(screen.getByTestId('appbar')).toHaveStyle({ minHeight: height });
+    }
+  );
+
   it('resets the height of a flexible Appbar when the content unmounts', async () => {
     const { rerender } = await render(
       <Appbar mode="large-flexible" testID="appbar">
@@ -1015,6 +1044,87 @@ describe('AppbarContent', () => {
       );
     })
   );
+
+  it.each(['medium-flexible', 'large-flexible'] as const)(
+    'renders the subtitle with the type style of the %s mode',
+    async (mode) => {
+      await render(
+        <Appbar mode={mode}>
+          <Appbar.Content title="Inbox" subtitle="3 unread messages" />
+        </Appbar>
+      );
+
+      const subtitle = screen.getByText('3 unread messages');
+      expect(subtitle).toHaveStyle({
+        ...LightTheme.fonts[flexibleModeSubtitleVariant[mode]],
+        color: LightTheme.colors.onSurfaceVariant,
+      });
+      expect(subtitle).toHaveProp('numberOfLines', 1);
+    }
+  );
+
+  it.each(['small', 'medium', 'large', 'center-aligned'] as const)(
+    'does not render the subtitle in the %s mode',
+    async (mode) => {
+      await render(
+        <Appbar mode={mode}>
+          <Appbar.Content title="Inbox" subtitle="3 unread messages" />
+        </Appbar>
+      );
+
+      expect(screen.queryByText('3 unread messages')).not.toBeOnTheScreen();
+    }
+  );
+
+  it('renders the subtitle in the custom color of the content', async () => {
+    await render(
+      <Appbar mode="medium-flexible">
+        <Appbar.Content title="Inbox" subtitle="3 unread" color="red" />
+      </Appbar>
+    );
+
+    expect(screen.getByText('3 unread')).toHaveStyle({ color: 'red' });
+  });
+
+  it('renders the subtitle in a light color when the Appbar is dark', async () => {
+    await render(
+      <Appbar mode="large-flexible" dark>
+        <Appbar.Content title="Inbox" subtitle="3 unread" />
+      </Appbar>
+    );
+
+    expect(screen.getByText('3 unread')).toHaveStyle({ color: '#ffffff' });
+  });
+
+  it('applies subtitleStyle over the default subtitle style', async () => {
+    await render(
+      <Appbar mode="medium-flexible">
+        <Appbar.Content
+          title="Inbox"
+          subtitle="3 unread"
+          subtitleStyle={{ color: LightTheme.colors.tertiary, fontSize: 10 }}
+        />
+      </Appbar>
+    );
+
+    expect(screen.getByText('3 unread')).toHaveStyle({
+      color: LightTheme.colors.tertiary,
+      fontSize: 10,
+    });
+  });
+
+  it('should render component passed to subtitle', async () => {
+    await render(
+      <Appbar mode="large-flexible">
+        <Appbar.Content
+          title="Inbox"
+          subtitle={<Text testID="subtitle">3 unread</Text>}
+        />
+      </Appbar>
+    );
+
+    expect(screen.getByTestId('subtitle')).toBeOnTheScreen();
+  });
 
   it('should render component passed to title', async () => {
     await render(

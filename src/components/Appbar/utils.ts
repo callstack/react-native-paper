@@ -25,7 +25,11 @@ export const APPBAR_CONTROLS_HEIGHT = 64;
 export const APPBAR_CONTROLS_OFFSET =
   (APPBAR_CONTROLS_HEIGHT - APPBAR_ACTION_WIDTH) / 2;
 
-export const isFlexibleMode = (mode: AppbarModes) =>
+type AppbarFlexibleModes = 'medium-flexible' | 'large-flexible';
+
+export const isFlexibleMode = (
+  mode: AppbarModes
+): mode is AppbarFlexibleModes =>
   mode === 'medium-flexible' || mode === 'large-flexible';
 
 export const getAppbarBackgroundColor = (
@@ -79,6 +83,15 @@ export const modeAppbarHeight = {
   'large-flexible': 120,
 };
 
+/**
+ * Minimum height of the content area of a flexible Appbar with a subtitle,
+ * without the safe area insets.
+ */
+export const flexibleModeHeightWithSubtitle = {
+  'medium-flexible': 136,
+  'large-flexible': 152,
+};
+
 export const modeTextVariant = {
   small: 'titleLarge',
   medium: 'headlineSmall',
@@ -86,6 +99,11 @@ export const modeTextVariant = {
   'center-aligned': 'titleLarge',
   'medium-flexible': 'headlineMedium',
   'large-flexible': 'displaySmall',
+} as const;
+
+export const flexibleModeSubtitleVariant = {
+  'medium-flexible': 'labelLarge',
+  'large-flexible': 'titleMedium',
 } as const;
 
 /**
