@@ -1,12 +1,9 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { LightTheme } from '../../../theme/schemes';
-import {
-  cardStates,
-  cardVariants,
-  resolveCardVisuals,
-} from '../../Card/tokens';
+import { cardStates, cardVariants } from '../../Card/tokens';
 import type { CardState, CardVariant } from '../../Card/tokens';
+import { resolveCardVisuals } from '../../Card/utils';
 
 const stateFlags: Record<
   CardState,

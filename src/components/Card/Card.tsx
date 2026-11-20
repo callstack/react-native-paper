@@ -18,7 +18,7 @@ import CardContent from './CardContent';
 import CardCover from './CardCover';
 import CardTitle from './CardTitle';
 import type { Props as CardTitleProps } from './CardTitle';
-import { resolveCardVisuals } from './tokens';
+import { resolveCardVisuals } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../../theme/types';
