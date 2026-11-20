@@ -1452,7 +1452,7 @@ describe('CardCover', () => {
     });
   });
 
-  it('uses the Card clipping shape for edge media without double rounding', async () => {
+  it('rounds its own corners inside the Card clipping shape', async () => {
     await render(
       <Card
         testID="shaped-card"
@@ -1470,7 +1470,7 @@ describe('CardCover', () => {
     );
 
     // The Card clips its media: the visual node around the slots carries
-    // the shape and hides the overflow, so the cover needs no radius.
+    // the shape and hides the overflow.
     expect(screen.getByTestId('edge-cover').parent?.parent).toHaveStyle({
       overflow: 'hidden',
       borderTopLeftRadius: 4,
@@ -1478,8 +1478,24 @@ describe('CardCover', () => {
       borderBottomRightRadius: 16,
       borderBottomLeftRadius: 20,
     });
-    expect(screen.getByTestId('edge-cover')).not.toHaveStyle({
+    // The cover still rounds its own corners, the inner ones included, as
+    // the Material 3 card examples show.
+    expect(screen.getByTestId('edge-cover')).toHaveStyle({
       borderRadius: LightTheme.shapes.corner.medium,
+    });
+  });
+
+  it('takes its corner rounding from the theme', async () => {
+    await render(
+      <Card.Cover
+        source={{ uri: 'https://picsum.photos/700' }}
+        testID="themed-cover"
+        theme={{ shapes: { corner: { medium: 20 } } }}
+      />
+    );
+
+    expect(screen.getByTestId('themed-cover')).toHaveStyle({
+      borderRadius: 20,
     });
   });
 });

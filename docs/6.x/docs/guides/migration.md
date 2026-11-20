@@ -668,7 +668,7 @@ Use the `aspectRatio` prop to size a cover responsively. It replaces the default
 <Card media={<Card.Cover source={cover} aspectRatio={16 / 9} />} />
 ```
 
-The Card clips media to its shape, so a `Card.Cover` in the `media` slot follows the Card's corners without its own border radius.
+`Card.Cover` rounds all four corners with the theme's `corner.medium`, as in Paper 5, and the Card also clips its media to the Card's shape. Pass `borderRadius` in the cover's `style` to change the rounding.
 
 `Card.Cover` no longer wraps its image in a `View`. Its `style` is now typed as `ImageStyle` and applies to the `Image` itself instead of a wrapper `View`. To style the area around the cover, wrap the cover in your own `View`:
 

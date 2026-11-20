@@ -165,7 +165,7 @@ const CardExample = () => {
           <Card.Cover source={require('../../assets/images/artist-2.jpg')} />
         }
         title="Custom border radius"
-        subtitle="The cover follows the Card's shape"
+        subtitle="The Card clips the cover to its shape"
       />
 
       <Card

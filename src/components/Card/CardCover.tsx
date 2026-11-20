@@ -1,6 +1,7 @@
 import { Image, StyleSheet } from 'react-native';
 import type { ImageProps, ImageStyle, StyleProp } from 'react-native';
 
+import { useInternalTheme } from '../../core/theming';
 import { grey200 } from '../../theme/colors';
 import type { ThemeProp } from '../../theme/types';
 
@@ -11,8 +12,9 @@ export type Props = Omit<ImageProps, 'style'> & {
    */
   aspectRatio?: number;
   /**
-   * Style for the cover image. The default size is full width by 194. Consumer
-   * styles are applied after these defaults.
+   * Style for the cover image. The default size is full width by 194, with
+   * `corner.medium` rounding on every corner. Consumer styles are applied
+   * after these defaults, so `borderRadius` replaces the rounding.
    */
   style?: StyleProp<ImageStyle>;
   /**
@@ -24,8 +26,10 @@ export type Props = Omit<ImageProps, 'style'> & {
 /**
  * A component to show a cover image inside a Card.
  *
- * Card owns clipping when the cover is used in its `media` slot, so the image
- * follows the Card's default or custom shape without adding another radius.
+ * The cover rounds all four corners with the theme's `corner.medium`, as the
+ * Material 3 card examples show, including the inner corners where it meets
+ * the rest of the Card. In the `media` slot the Card also clips it to the
+ * Card's own shape.
  * Hide decorative covers from screen readers with `accessible={false}` and
  * `aria-hidden`. For informative covers, provide `accessible`,
  * `accessibilityRole="image"`, and a useful `accessibilityLabel`.
@@ -54,12 +58,20 @@ export type Props = Omit<ImageProps, 'style'> & {
  *
  * @extends Image props https://reactnative.dev/docs/image#props
  */
-const CardCover = ({ aspectRatio, style, theme: _theme, ...rest }: Props) => {
+const CardCover = ({
+  aspectRatio,
+  style,
+  theme: themeOverrides,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+
   return (
     <Image
       {...rest}
       style={[
         styles.image,
+        { borderRadius: theme.shapes.corner.medium },
         // `height: 'auto'` lets the ratio win over the intrinsic height that
         // React Native gives an image from a static `require()` source.
         aspectRatio === undefined
