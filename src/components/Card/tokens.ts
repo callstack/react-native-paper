@@ -1,7 +1,5 @@
-import type { ColorValue } from 'react-native';
-
 import { tokens as systemTokens } from '../../theme/tokens';
-import type { Elevation, InternalTheme } from '../../theme/types';
+import type { Elevation } from '../../theme/types';
 
 export const cardVariants = ['filled', 'elevated', 'outlined'] as const;
 
@@ -60,7 +58,7 @@ const { opacity } = systemTokens.md.sys.state;
  * token set 34.0.0 at commit 4d3710682140722f48a5965b68109b240e1fe79e.
  * https://github.com/material-components/material-components-android/tree/4d3710682140722f48a5965b68109b240e1fe79e/lib/java/com/google/android/material
  */
-const cardTokenMatrix = {
+export const CardTokens = {
   filled: {
     enabled: {
       containerColor: 'surfaceContainerHighest',
@@ -230,73 +228,3 @@ const cardTokenMatrix = {
     },
   },
 } as const satisfies CardTokenMatrix;
-
-export type CardStateFlags = {
-  disabled?: boolean;
-  dragged?: boolean;
-  pressed?: boolean;
-  focused?: boolean;
-  hovered?: boolean;
-};
-
-export type ResolveCardVisualsOptions = CardStateFlags & {
-  theme: InternalTheme;
-  variant: CardVariant;
-  elevation?: Elevation;
-};
-
-export type CardVisuals = {
-  state: CardState;
-  containerColor: ColorValue;
-  containerOpacity: number;
-  outlineColor: ColorValue;
-  outlineOpacity: number;
-  outlineWidth: 0 | 1;
-  elevation: Elevation;
-  shape: number;
-  stateLayerColor: ColorValue;
-  stateLayerOpacity: number;
-  contentOpacity: number;
-};
-
-export const resolveCardVisuals = ({
-  theme,
-  variant,
-  elevation: customElevation,
-  disabled = false,
-  dragged = false,
-  pressed = false,
-  focused = false,
-  hovered = false,
-}: ResolveCardVisualsOptions): CardVisuals => {
-  const state: CardState = disabled
-    ? 'disabled'
-    : dragged
-      ? 'dragged'
-      : pressed
-        ? 'pressed'
-        : focused
-          ? 'focused'
-          : hovered
-            ? 'hovered'
-            : 'enabled';
-  const stateTokens = cardTokenMatrix[variant][state];
-
-  return {
-    state,
-    containerColor: theme.colors[stateTokens.containerColor],
-    containerOpacity: stateTokens.containerOpacity,
-    outlineColor: theme.colors[stateTokens.outlineColor],
-    outlineOpacity: stateTokens.outlineOpacity,
-    outlineWidth: stateTokens.outlineWidth,
-    elevation:
-      variant === 'elevated' && state === 'enabled' && customElevation != null
-        ? customElevation
-        : stateTokens.elevation,
-    shape: theme.shapes.corner.medium,
-    stateLayerColor: theme.colors.onSurface,
-    stateLayerOpacity: stateTokens.stateLayerOpacity,
-    // Compose dims disabled Card content to the content color at 38%.
-    contentOpacity: state === 'disabled' ? opacity.disabled : 1,
-  };
-};

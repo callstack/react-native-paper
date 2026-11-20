@@ -13,8 +13,9 @@ import { androidElevationLevels } from '../../../theme/tokens/sys/elevation';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
 import type { Props as CardProps } from '../../Card/Card';
-import { resolveCardVisuals } from '../../Card/tokens';
-import type { CardVariant, CardStateFlags } from '../../Card/tokens';
+import type { CardVariant } from '../../Card/tokens';
+import { resolveCardVisuals } from '../../Card/utils';
+import type { CardStateFlags } from '../../Card/utils';
 
 const styles = StyleSheet.create({
   contentStyle: {
