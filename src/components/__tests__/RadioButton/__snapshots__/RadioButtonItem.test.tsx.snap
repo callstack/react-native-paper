@@ -112,7 +112,7 @@ exports[`can render leading radio button control 1`] = `
               {
                 "color": "rgba(29, 27, 32, 1)",
                 "opacity": 1,
-                "textAlign": "right",
+                "textAlign": "left",
               },
               undefined,
             ],
