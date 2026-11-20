@@ -41,7 +41,7 @@ CardContent.displayName = 'Card.Content';
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: CardSpacing.horizontalPadding,
-    paddingVertical: CardSpacing.contentVerticalPadding,
+    paddingTop: CardSpacing.regionGap,
   },
 });
 

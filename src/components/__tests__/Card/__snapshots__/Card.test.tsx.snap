@@ -110,6 +110,7 @@ exports[`Card renders the enabled elevated appearance 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -232,6 +233,7 @@ exports[`Card renders the enabled filled appearance 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          false,
           {
             "opacity": 1,
           },
@@ -354,6 +356,7 @@ exports[`Card renders the enabled outlined appearance 1`] = `
             "flexShrink": 1,
             "position": "relative",
           },
+          false,
           {
             "opacity": 1,
           },

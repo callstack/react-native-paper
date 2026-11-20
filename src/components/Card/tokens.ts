@@ -235,26 +235,21 @@ export const CardTokens = {
 } as const satisfies CardTokenMatrix;
 
 /**
- * Spacing of the Card layout helpers.
+ * Spacing of the Card and its layout helpers.
  *
- * Material 3 specifies only the 16dp left/right padding
- * (https://m3.material.io/components/cards/specs). It sets no header height,
- * so the `Card.Title` heights below are kept from Paper 5 and headers keep
- * their size.
+ * Material 3 specifies the 16dp left/right padding
+ * (https://m3.material.io/components/cards/specs) and no vertical spacing,
+ * so the vertical rhythm follows the Paper 6 Card from #5076: 16dp above
+ * each region and below the last one, 8dp below an action row.
  */
 export const CardSpacing = {
   horizontalPadding: 16,
-  contentVerticalPadding: 16,
-  actionsVerticalPadding: 8,
+  /** Above each region, and below the last one when it is not an action row. */
+  regionGap: 16,
+  /** Below an action row. */
+  actionsBottomPadding: 8,
+  /** Between the controls of an action row. */
   actionsGap: 8,
-  /** Between `Card.Title`'s leading element and its text. */
-  titleLeadingGap: 16,
-  /** `Card.Title` with only a title. */
-  titleMinHeight: 50,
-  /** `Card.Title` with a subtitle, a leading or a trailing element. */
-  titleWithSupportingMinHeight: 72,
-  titleTextMinHeight: 30,
-  /** Below the title when there is no subtitle. */
-  titleBottomMargin: 2,
-  subtitleTextMinHeight: 20,
+  /** Between `Card.Title`'s leading element, its text and its trailing element. */
+  titleGap: 16,
 } as const;

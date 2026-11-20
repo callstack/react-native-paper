@@ -144,14 +144,8 @@ const CardTitle = ({
 }: Props) => {
   useInternalTheme(themeOverrides);
 
-  const minHeight =
-    subtitle || left || right
-      ? CardSpacing.titleWithSupportingMinHeight
-      : CardSpacing.titleMinHeight;
-  const marginBottom = subtitle ? 0 : CardSpacing.titleBottomMargin;
-
   return (
-    <View style={[styles.container, { minHeight }, style]} testID={testID}>
+    <View style={[styles.container, style]} testID={testID}>
       {left ? (
         <View style={[styles.left, leftStyle]}>
           {left({
@@ -163,7 +157,7 @@ const CardTitle = ({
       <View style={[styles.titles]}>
         {title && (
           <Text
-            style={[styles.title, { marginBottom }, titleStyle]}
+            style={titleStyle}
             numberOfLines={titleNumberOfLines}
             variant={titleVariant}
             maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
@@ -173,7 +167,7 @@ const CardTitle = ({
         )}
         {subtitle && (
           <Text
-            style={[styles.subtitle, subtitleStyle]}
+            style={subtitleStyle}
             numberOfLines={subtitleNumberOfLines}
             variant={subtitleVariant}
             maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
@@ -182,7 +176,7 @@ const CardTitle = ({
           </Text>
         )}
       </View>
-      <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
+      {right ? <View style={rightStyle}>{right({ size: 24 })}</View> : null}
     </View>
   );
 };
@@ -194,12 +188,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingLeft: CardSpacing.horizontalPadding,
+    gap: CardSpacing.titleGap,
+    paddingHorizontal: CardSpacing.horizontalPadding,
+    paddingTop: CardSpacing.regionGap,
   },
 
   left: {
     justifyContent: 'center',
-    marginRight: CardSpacing.titleLeadingGap,
     height: LEFT_SIZE,
     width: LEFT_SIZE,
   },
@@ -211,17 +206,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-  },
-
-  title: {
-    minHeight: CardSpacing.titleTextMinHeight,
-    paddingRight: CardSpacing.horizontalPadding,
-  },
-
-  subtitle: {
-    minHeight: CardSpacing.subtitleTextMinHeight,
-    marginVertical: 0,
-    paddingRight: CardSpacing.horizontalPadding,
   },
 });
 
