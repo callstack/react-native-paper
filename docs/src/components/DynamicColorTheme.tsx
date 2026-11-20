@@ -10,8 +10,13 @@ import {
   getMatchingColor,
   getPreviewColors,
   hexThemeFromColor,
-  prepareThemes,
-} from '../utils/themes';
+  prepareThemes as prepareThemes5x,
+} from '../utils/themes5x';
+import {
+  getDefaultAccentColors,
+  prepareThemes as prepareThemes6x,
+  previewColors,
+} from '../utils/themes6x';
 
 type ColorProps = {
   color?: string;
@@ -30,6 +35,38 @@ type CustomColorEntry = {
   key: string;
   name: string;
   hex: string;
+};
+
+type Version = '5.x' | '6.x';
+
+type ThemeInput = {
+  primary: string;
+  secondary?: string;
+  tertiary?: string;
+  custom: [string, string][];
+  matchInputColors: boolean;
+};
+
+type Mode = 'light' | 'dark';
+
+type GeneratedTheme = Record<string, string | Record<string, string>>;
+
+type Preview = {
+  background: string;
+  color: string;
+  borderColor: string;
+  boxes: {
+    key: string;
+    background: string;
+    color: string;
+    gridColumn?: string;
+  }[];
+};
+
+type GeneratedThemes = Record<Mode, GeneratedTheme> & {
+  defaultSecondary: string;
+  defaultTertiary: string;
+  preview: Record<Mode, Preview>;
 };
 
 const defaultColor = '#663399';
@@ -315,8 +352,69 @@ const CustomColor = ({
   );
 };
 
-const DynamicColorTheme = () => {
+const generateThemes5x = (colors: ThemeInput): GeneratedThemes => {
+  const baseTheme = hexThemeFromColor(colors.primary);
+  const themes = prepareThemes5x(colors);
+
+  const getPreview = (mode: Mode): Preview => {
+    const theme = themes[mode];
+    // These roles come from the primary color only
+    const { background, onBackground, outlineVariant } = hexThemeFromColor(
+      colors.primary,
+      mode
+    );
+
+    return {
+      background,
+      color: onBackground,
+      borderColor: outlineVariant,
+      boxes: getPreviewColors(theme).map(([key, color]) => ({
+        key,
+        background: color,
+        color: getMatchingColor(key, theme),
+        gridColumn: key === 'outline' ? 'span 2' : undefined,
+      })),
+    };
+  };
+
+  return {
+    ...themes,
+    defaultSecondary: baseTheme.secondary,
+    defaultTertiary: baseTheme.tertiary,
+    preview: { light: getPreview('light'), dark: getPreview('dark') },
+  };
+};
+
+const generateThemes6x = (colors: ThemeInput): GeneratedThemes => {
+  const defaults = getDefaultAccentColors(
+    colors.primary,
+    colors.matchInputColors
+  );
+  const themes = prepareThemes6x(colors);
+
+  const getPreview = (theme: (typeof themes)[Mode]): Preview => ({
+    background: theme.background,
+    color: theme.onBackground,
+    borderColor: theme.outlineVariant,
+    boxes: previewColors.map(([key, text, columns]) => ({
+      key,
+      background: theme[key],
+      color: theme[text],
+      gridColumn: columns ? `span ${columns}` : undefined,
+    })),
+  });
+
+  return {
+    ...themes,
+    defaultSecondary: defaults.secondary,
+    defaultTertiary: defaults.tertiary,
+    preview: { light: getPreview(themes.light), dark: getPreview(themes.dark) },
+  };
+};
+
+const DynamicColorTheme = ({ version }: { version: Version }) => {
   const [isDark, setIsDark] = useState(false);
+  const [matchInputColors, setMatchInputColors] = useState(false);
 
   const [primary, setPrimary] = useState<string>(defaultColor);
   const [secondary, setSecondary] = useState<string | undefined>();
@@ -324,13 +422,14 @@ const DynamicColorTheme = () => {
   const [customColors, setCustomColors] = useState<CustomColorEntry[]>([]);
 
   const darkMode = isDark ? 'dark' : 'light';
-  const baseTheme = hexThemeFromColor(primary);
-  const themes = prepareThemes({
+  const themes = (version === '5.x' ? generateThemes5x : generateThemes6x)({
     primary,
     secondary,
     tertiary,
     custom: customColors.map(({ name, hex }) => [name, hex]),
+    matchInputColors,
   });
+  const preview = themes.preview[darkMode];
 
   return (
     <div>
@@ -340,14 +439,14 @@ const DynamicColorTheme = () => {
           <AdditionalColor
             color={secondary}
             setColor={setSecondary}
-            base={baseTheme.secondary}
+            base={themes.defaultSecondary}
           >
             Secondary
           </AdditionalColor>
           <AdditionalColor
             color={tertiary}
             setColor={setTertiary}
-            base={baseTheme.tertiary}
+            base={themes.defaultTertiary}
           >
             Tertiary
           </AdditionalColor>
@@ -356,18 +455,33 @@ const DynamicColorTheme = () => {
             customColors={customColors}
             setCustomColors={setCustomColors}
           />
+
+          {version === '6.x' ? (
+            <tr>
+              <td>
+                <label htmlFor="color-picker-match-input-colors">
+                  Match input colors
+                </label>
+              </td>
+              <td>
+                <Switch
+                  id="color-picker-match-input-colors"
+                  value={matchInputColors}
+                  color="green"
+                  onValueChange={() => setMatchInputColors(!matchInputColors)}
+                />
+              </td>
+            </tr>
+          ) : null}
         </tbody>
       </table>
 
       <div
         className="color-picker-preview"
         style={{
-          //@ts-ignore
-          background: themes[darkMode].background,
-          //@ts-ignore
-          color: themes[darkMode].onBackground,
-          //@ts-ignore
-          borderColor: themes[darkMode].outlineVariant,
+          background: preview.background,
+          color: preview.color,
+          borderColor: preview.borderColor,
         }}
       >
         <div className="color-picker-preview-header">
@@ -375,6 +489,7 @@ const DynamicColorTheme = () => {
           <div>
             <p>Dark Mode:</p>
             <Switch
+              id="color-picker-dark-mode"
               value={isDark}
               color="green"
               onValueChange={() => setIsDark(!isDark)}
@@ -383,22 +498,15 @@ const DynamicColorTheme = () => {
         </div>
 
         <div className="color-picker-grid-column">
-          {getPreviewColors(themes[darkMode]).map(([key, color]) => {
-            const gridColumn = key === 'outline' ? 'span 2' : undefined;
-            return (
-              <div
-                key={key}
-                className="color-picker-preview-box"
-                style={{
-                  backgroundColor: color,
-                  color: getMatchingColor(key, themes[darkMode]),
-                  gridColumn,
-                }}
-              >
-                {key}
-              </div>
-            );
-          })}
+          {preview.boxes.map(({ key, background, color, gridColumn }) => (
+            <div
+              key={key}
+              className="color-picker-preview-box"
+              style={{ backgroundColor: background, color, gridColumn }}
+            >
+              {key}
+            </div>
+          ))}
         </div>
       </div>
 
