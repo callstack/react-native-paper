@@ -256,6 +256,7 @@ const RichTooltip = ({
 
   const {
     triggerProps: focusTriggerProps,
+    onTooltipKeyDown,
     hideAndRestoreFocus,
     isOpenedByFocus,
   } = useRichTooltipFocus({
@@ -323,6 +324,7 @@ const RichTooltip = ({
           onPointerLeave: scheduleHide,
           onFocus: hideTimer.clear,
           onBlur: scheduleHide,
+          onKeyDown: onTooltipKeyDown,
         }
       : {};
 

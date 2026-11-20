@@ -6,7 +6,7 @@ import { useTimeout } from './hooks';
 import type { TooltipHostElement } from './hooks';
 import { getActiveElement } from './utils';
 import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
-import { focusIntoContainer } from '../../utils/useOverlayFocus';
+import { focusIntoContainer, getTabbables } from '../../utils/useOverlayFocus';
 
 type Options = {
   visible: boolean;
@@ -91,6 +91,47 @@ export const useRichTooltipFocus = ({
     }
   };
 
+  // Out of `Tab` order in the portal, `Tab` past the tooltip's last element
+  // goes on from the trigger, and `Shift+Tab` past its first goes back to it
+  const onTooltipKeyDown = (
+    event: NativeSyntheticEvent<{ key: string; shiftKey?: boolean }>
+  ) => {
+    const tooltip: unknown = tooltipRef.current;
+    const trigger: unknown = triggerRef.current;
+    if (
+      event.nativeEvent.key !== 'Tab' ||
+      !(tooltip instanceof HTMLElement) ||
+      !(trigger instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    const inside = getTabbables(tooltip);
+    const focused = getActiveElement();
+
+    if (event.nativeEvent.shiftKey) {
+      if (focused === inside[0]) {
+        event.preventDefault();
+        focusIntoContainer(trigger);
+      }
+      return;
+    }
+
+    if (focused === inside[inside.length - 1]) {
+      const page = getTabbables(document).filter(
+        (element) => !tooltip.contains(element)
+      );
+      const lastInTrigger = page
+        .map((element) => trigger.contains(element))
+        .lastIndexOf(true);
+      const next = lastInTrigger === -1 ? undefined : page[lastInTrigger + 1];
+      if (next) {
+        event.preventDefault();
+        next.focus();
+      }
+    }
+  };
+
   // The backdrop lets pointer events through, so a press outside closes the
   // tooltip here; blur misses triggers a tap doesn't focus, as in Safari
   React.useEffect(() => {
@@ -122,6 +163,7 @@ export const useRichTooltipFocus = ({
 
   return {
     triggerProps: { onFocus, onBlur, onKeyDown },
+    onTooltipKeyDown,
     hideAndRestoreFocus,
     isOpenedByFocus: () => focusOpenedRef.current,
   };

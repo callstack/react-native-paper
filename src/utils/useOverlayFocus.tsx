@@ -19,10 +19,14 @@ const isVisible = (element: HTMLElement) =>
   element.getClientRects().length > 0 &&
   getComputedStyle(element).visibility !== 'hidden';
 
-const findFirstTabbable = (container: HTMLElement) =>
-  Array.from(container.querySelectorAll<HTMLElement>(TABBABLE_SELECTOR)).find(
+// Web only: the visible elements `Tab` reaches inside `container`, in order
+export const getTabbables = (container: ParentNode) =>
+  Array.from(container.querySelectorAll<HTMLElement>(TABBABLE_SELECTOR)).filter(
     isVisible
-  ) ?? null;
+  );
+
+const findFirstTabbable = (container: HTMLElement) =>
+  getTabbables(container)[0] ?? null;
 
 /**
  * Anything that can take focus: a host element, or the handle of a component

@@ -29,6 +29,7 @@ import {
 import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
+import * as overlayFocus from '../../utils/useOverlayFocus';
 import TooltipCompound from '../Tooltip';
 import * as registry from '../Tooltip/registry';
 import { releaseSingletonSlot, takeSingletonSlot } from '../Tooltip/registry';
@@ -1729,6 +1730,138 @@ describe('Tooltip.Rich', () => {
 
         expect(queryByText('Body text')).toBeNull();
         expect(focus).not.toHaveBeenCalled();
+
+        await unmount();
+      });
+    });
+
+    describe('Tab out of the tooltip', () => {
+      // Views stand in for DOM elements: the tooltip holds two actions, and
+      // the page has the trigger's own element followed by the next one
+      const firstAction = Object.create(ViewPrototype);
+      const lastAction = Object.create(ViewPrototype);
+      const triggerElement = Object.create(ViewPrototype);
+      const nextElement = Object.create(ViewPrototype);
+      let tooltipNode: unknown = null;
+      let activeElement: unknown = null;
+      const focus = jest.fn(function (this: unknown) {
+        activeElement = this;
+      });
+
+      const pressTab = async (shiftKey = false) => {
+        const preventDefault = jest.fn();
+        await act(async () => {
+          await fireEvent(screen.getByText('Body text'), 'keyDown', {
+            nativeEvent: { key: 'Tab', shiftKey },
+            preventDefault,
+          });
+        });
+        return preventDefault;
+      };
+
+      beforeEach(() => {
+        activeElement = null;
+        tooltipNode = null;
+        focus.mockClear();
+        Reflect.defineProperty(globalThis, 'document', {
+          value: {
+            get activeElement() {
+              return activeElement;
+            },
+            addEventListener: () => {},
+            removeEventListener: () => {},
+          },
+          configurable: true,
+          writable: true,
+        });
+        Reflect.defineProperty(globalThis, 'HTMLElement', {
+          value: View,
+          configurable: true,
+        });
+        Reflect.defineProperty(ViewPrototype, 'contains', {
+          value(this: unknown, node: unknown) {
+            if (this === tooltipNode) {
+              return node === firstAction || node === lastAction;
+            }
+            return node === this || node === triggerElement;
+          },
+          configurable: true,
+        });
+        Reflect.defineProperty(ViewPrototype, 'querySelectorAll', {
+          value: () => [],
+          configurable: true,
+        });
+        Reflect.defineProperty(ViewPrototype, 'focus', {
+          value: focus,
+          configurable: true,
+        });
+        jest
+          .spyOn(overlayFocus, 'getTabbables')
+          .mockImplementation((container) => {
+            if (container === document) {
+              return [triggerElement, nextElement];
+            }
+            tooltipNode = container;
+            return [firstAction, lastAction];
+          });
+      });
+
+      afterEach(() => {
+        Reflect.deleteProperty(globalThis, 'document');
+        Reflect.deleteProperty(globalThis, 'HTMLElement');
+        Reflect.deleteProperty(ViewPrototype, 'contains');
+        Reflect.deleteProperty(ViewPrototype, 'querySelectorAll');
+        Reflect.deleteProperty(ViewPrototype, 'focus');
+      });
+
+      it('moves Tab past the last element to the element after the trigger', async () => {
+        const {
+          wrapper: { unmount },
+        } = await setup();
+        await act(async () => {
+          await fireEvent(getTrigger(), 'focus');
+        });
+
+        activeElement = lastAction;
+        const preventDefault = await pressTab();
+
+        expect(preventDefault).toHaveBeenCalled();
+        expect(activeElement).toBe(nextElement);
+
+        await unmount();
+      });
+
+      it('moves Shift+Tab past the first element back to the trigger', async () => {
+        const {
+          wrapper: { unmount },
+        } = await setup();
+        await act(async () => {
+          await fireEvent(getTrigger(), 'focus');
+        });
+
+        activeElement = firstAction;
+        const preventDefault = await pressTab(true);
+
+        expect(preventDefault).toHaveBeenCalled();
+        expect(focus).toHaveBeenCalled();
+        expect(activeElement).not.toBe(firstAction);
+
+        await unmount();
+      });
+
+      it('leaves Tab between the elements inside the tooltip to the browser', async () => {
+        const {
+          wrapper: { unmount },
+        } = await setup();
+        await act(async () => {
+          await fireEvent(getTrigger(), 'focus');
+        });
+
+        activeElement = firstAction;
+        const preventDefault = await pressTab();
+
+        expect(preventDefault).not.toHaveBeenCalled();
+        expect(activeElement).toBe(firstAction);
 
         await unmount();
       });
