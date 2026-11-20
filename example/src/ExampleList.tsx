@@ -1,9 +1,11 @@
-import { FlatList } from 'react-native';
+import { useState } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
-import { Divider, List, useTheme } from 'react-native-paper';
+import { Divider, List, Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import ExampleListHeader from './ExampleListHeader';
 import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
 import AppbarExample from './Examples/AppbarExample';
 import AvatarExample from './Examples/AvatarExample';
@@ -46,6 +48,8 @@ import ThemeExample from './Examples/ThemeExample';
 import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
 import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
+import { filterByQuery } from '../utils/filterByQuery';
+import { objectEntries } from '../utils/typedObject';
 
 export const mainExamples = {
   ActivityIndicator: ActivityIndicatorExample,
@@ -101,7 +105,7 @@ export const examples = {
   ...nestedExamples,
 };
 
-const data = Object.entries(mainExamples).map(([id, example]) => ({
+const data = objectEntries(mainExamples).map(([id, example]) => ({
   id,
   data: example,
 }));
@@ -112,32 +116,62 @@ export default function ExampleList() {
   const { colors } = useTheme();
   const safeArea = useSafeAreaInsets();
 
+  const [query, setQuery] = useState('');
+
+  const filteredData = filterByQuery(data, query, ({ id, data: example }) => [
+    example.title,
+    id,
+  ]);
+
   return (
-    <FlatList
-      contentContainerStyle={{
-        backgroundColor: colors.background,
-        paddingBottom: safeArea.bottom,
-        paddingLeft: safeArea.left,
-        paddingRight: safeArea.right,
-      }}
-      style={{
-        backgroundColor: colors.background,
-      }}
-      showsVerticalScrollIndicator={false}
-      ItemSeparatorComponent={Divider}
-      renderItem={({ item }) => (
-        <List.Item
-          unstable_pressDelay={65}
-          title={item.data.title}
-          onPress={() => {
-            // @ts-expect-error TypeScript can't call overloaded functions with union arguments.
-            // https://github.com/microsoft/TypeScript/issues/40803
-            navigation.navigate(item.id);
-          }}
-        />
-      )}
-      keyExtractor={({ id }) => id}
-      data={data}
-    />
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <ExampleListHeader query={query} onQueryChange={setQuery} />
+      <FlatList
+        contentContainerStyle={{
+          backgroundColor: colors.background,
+          paddingBottom: safeArea.bottom,
+          paddingLeft: safeArea.left,
+          paddingRight: safeArea.right,
+        }}
+        style={{
+          backgroundColor: colors.background,
+        }}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+        ItemSeparatorComponent={Divider}
+        renderItem={({ item }) => (
+          <List.Item
+            unstable_pressDelay={65}
+            title={item.data.title}
+            onPress={() => {
+              // @ts-expect-error TypeScript can't call overloaded functions with union arguments.
+              // https://github.com/microsoft/TypeScript/issues/40803
+              navigation.navigate(item.id);
+            }}
+          />
+        )}
+        ListEmptyComponent={
+          <Text
+            variant="bodyLarge"
+            style={[styles.empty, { color: colors.onSurfaceVariant }]}
+          >
+            {`No examples match "${query.trim()}"`}
+          </Text>
+        }
+        keyExtractor={({ id }) => id}
+        data={filteredData}
+      />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  empty: {
+    padding: 16,
+    textAlign: 'center',
+  },
+});
