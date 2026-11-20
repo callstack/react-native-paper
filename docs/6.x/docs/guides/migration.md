@@ -1624,7 +1624,13 @@ When selected, an icon set with `checkedIcon` uses `onPrimaryContainer`. If you 
 ```tsx
 import { Switch, useTheme } from 'react-native-paper';
 
-const TertiarySwitch = ({ value, onValueChange }) => {
+const TertiarySwitch = ({
+  value,
+  onValueChange,
+}: {
+  value: boolean;
+  onValueChange: (value: boolean) => void;
+}) => {
   const theme = useTheme();
   const switchTheme = {
     colors: {
