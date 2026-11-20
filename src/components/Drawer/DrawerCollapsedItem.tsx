@@ -17,10 +17,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import useLatestCallback from 'use-latest-callback';
 
+import { DrawerCollapsedItemTokens } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
+import { resolveCornerRadius } from '../../theme/utils/shape';
 import { useFocusRing } from '../../utils/useFocusRing';
 import Badge from '../Badge';
 import Icon from '../Icon';
@@ -37,7 +39,7 @@ export type Props = ViewProps & {
    */
   badge?: string | number | boolean;
   /**
-   * Whether the item is disabled.
+   * Whether the item is disabled. Disabled items are dimmed and don't respond to touch.
    */
   disabled?: boolean;
   /**
@@ -78,9 +80,12 @@ export type Props = ViewProps & {
   testID?: string;
 };
 
-const iconSize = 24;
-const itemSize = 56;
-const outlineHeight = 32;
+const {
+  iconSize,
+  activeIndicatorWidth,
+  activeIndicatorHeight,
+  noLabelActiveIndicatorHeight,
+} = DrawerCollapsedItemTokens;
 
 /**
  * Note: Available in v5.x with theme version 3
@@ -145,8 +150,12 @@ const DrawerCollapsedItem = ({
 
   const expandOutline = useLatestCallback(() => {
     outlineScale.value = withTiming(1, {
-      duration: getDuration(150),
-      easing: Easing.inOut(Easing.ease),
+      duration: getDuration(
+        theme.motion.duration[DrawerCollapsedItemTokens.activeIndicatorDuration]
+      ),
+      easing: Easing.bezier(
+        ...theme.motion.easing[DrawerCollapsedItemTokens.activeIndicatorEasing]
+      ),
       reduceMotion: ReduceMotion.Never,
     });
   });
@@ -162,19 +171,27 @@ const DrawerCollapsedItem = ({
     }
   }, [active, expandOutline, outlineScale]);
 
-  const iconPadding = ((!label ? itemSize : outlineHeight) - iconSize) / 2;
+  const iconPadding =
+    ((!label ? noLabelActiveIndicatorHeight : activeIndicatorHeight) -
+      iconSize) /
+    2;
+
+  const activeIndicatorRadius = resolveCornerRadius(
+    theme,
+    DrawerCollapsedItemTokens.activeIndicatorShape
+  );
 
   const backgroundColor = active
-    ? theme.colors.secondaryContainer
+    ? theme.colors[DrawerCollapsedItemTokens.activeIndicatorColor]
     : 'transparent';
 
   const labelColor = active
-    ? theme.colors.onSurface
-    : theme.colors.onSurfaceVariant;
+    ? theme.colors[DrawerCollapsedItemTokens.activeLabelTextColor]
+    : theme.colors[DrawerCollapsedItemTokens.inactiveLabelTextColor];
 
   const iconColor = active
-    ? theme.colors.onSecondaryContainer
-    : theme.colors.onSurfaceVariant;
+    ? theme.colors[DrawerCollapsedItemTokens.activeIconColor]
+    : theme.colors[DrawerCollapsedItemTokens.inactiveIconColor];
 
   const onTextLayout = ({ nativeEvent }: TextLayoutEvent) => {
     setNumOfLines(nativeEvent.lines.length);
@@ -187,11 +204,19 @@ const DrawerCollapsedItem = ({
 
   const labelTextStyle = {
     color: labelColor,
-    ...theme.fonts.labelMedium,
+    ...theme.fonts[DrawerCollapsedItemTokens.labelText],
   };
 
   const icon =
     !active && unfocusedIcon !== undefined ? unfocusedIcon : focusedIcon;
+
+  // Dims the icon and label only, like Menu.Item: the active indicator keeps
+  // its color, so a disabled active destination still reads as active.
+  const contentOpacity = {
+    opacity: disabled
+      ? DrawerCollapsedItemTokens.stateOpacity.disabled
+      : DrawerCollapsedItemTokens.stateOpacity.enabled,
+  };
 
   const animatedOutlineStyle = useAnimatedStyle(() => ({
     transform: [
@@ -205,7 +230,9 @@ const DrawerCollapsedItem = ({
         onPress={onPress}
         onPressOut={onPress ? expandOutline : undefined}
         disabled={disabled}
-        role="button"
+        // `aria-selected` is only announced on a tab, and iOS has no tab role
+        // outside a tab bar, like BottomNavigation.
+        role={Platform.OS === 'ios' ? 'button' : 'tab'}
         aria-selected={active}
         aria-label={ariaLabel}
         testID={testID}
@@ -222,7 +249,7 @@ const DrawerCollapsedItem = ({
             style={[
               styles.outline,
               !label && styles.roundedOutline,
-              { backgroundColor },
+              { backgroundColor, borderRadius: activeIndicatorRadius },
               style,
               animatedOutlineStyle,
             ]}
@@ -241,7 +268,7 @@ const DrawerCollapsedItem = ({
             {...focusRing.dataSetProps}
           />
 
-          <View style={[styles.icon, { top: iconPadding }]}>
+          <View style={[styles.icon, { top: iconPadding }, contentOpacity]}>
             {badge !== false && (
               <View style={styles.badgeContainer}>
                 {typeof badge === 'boolean' ? (
@@ -258,11 +285,16 @@ const DrawerCollapsedItem = ({
 
           {label ? (
             <Text
-              variant="labelMedium"
+              variant={DrawerCollapsedItemTokens.labelText}
               selectable={false}
               numberOfLines={2}
               onTextLayout={onTextLayout}
-              style={[styles.label, androidLetterSpacingStyle, labelTextStyle]}
+              style={[
+                styles.label,
+                androidLetterSpacingStyle,
+                labelTextStyle,
+                contentOpacity,
+              ]}
               maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
             >
               {label}
@@ -288,20 +320,19 @@ const styles = StyleSheet.create({
     bottom: -(focusOuterOffset + focusThickness),
   },
   wrapper: {
-    width: 80,
-    marginBottom: 12,
-    minHeight: itemSize,
+    width: DrawerCollapsedItemTokens.containerWidth,
+    marginBottom: DrawerCollapsedItemTokens.containerSpacing,
+    minHeight: noLabelActiveIndicatorHeight,
     alignItems: 'center',
   },
   outline: {
-    width: itemSize,
-    height: outlineHeight,
-    borderRadius: itemSize / 2,
+    width: activeIndicatorWidth,
+    height: activeIndicatorHeight,
     alignItems: 'center',
     justifyContent: 'center',
   },
   roundedOutline: {
-    height: itemSize,
+    height: noLabelActiveIndicatorHeight,
   },
   icon: {
     position: 'absolute',
@@ -311,8 +342,8 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   label: {
-    marginHorizontal: 12,
-    marginTop: 4,
+    marginHorizontal: DrawerCollapsedItemTokens.labelPadding,
+    marginTop: DrawerCollapsedItemTokens.labelSpacing,
     textAlign: 'center',
   },
   badgeContainer: {

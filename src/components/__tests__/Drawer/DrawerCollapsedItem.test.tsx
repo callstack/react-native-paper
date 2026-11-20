@@ -4,7 +4,10 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { act, render, screen, userEvent } from '../../../test-utils';
+import { tokens } from '../../../theme/tokens';
 import DrawerCollapsedItem from '../../Drawer/DrawerCollapsedItem';
+
+const stateOpacity = tokens.md.sys.state.opacity;
 
 describe('DrawerCollapsedItem', () => {
   it('should have regular outline if label is specified', async () => {
@@ -108,6 +111,34 @@ describe('DrawerCollapsedItem', () => {
       expect(expanded).toEqual([{ scaleX: 1 }]);
       expect(midway).not.toEqual(collapsed);
       expect(midway).not.toEqual(expanded);
+    });
+  });
+
+  it('should render at full opacity when enabled', async () => {
+    await render(<DrawerCollapsedItem label="starred" focusedIcon="star" />);
+
+    expect(screen.getByText('starred')).toHaveStyle({
+      opacity: stateOpacity.enabled,
+    });
+  });
+
+  it('should dim the label when disabled', async () => {
+    await render(
+      <DrawerCollapsedItem label="starred" focusedIcon="star" disabled />
+    );
+
+    expect(screen.getByText('starred')).toHaveStyle({
+      opacity: stateOpacity.disabled,
+    });
+  });
+
+  it('should keep the active indicator at full opacity when disabled', async () => {
+    await render(
+      <DrawerCollapsedItem label="starred" focusedIcon="star" active disabled />
+    );
+
+    expect(screen.getByRole('button')).not.toHaveStyle({
+      opacity: stateOpacity.disabled,
     });
   });
 });

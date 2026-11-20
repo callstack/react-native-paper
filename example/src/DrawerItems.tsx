@@ -133,11 +133,10 @@ function DrawerItems() {
 
   return (
     <DrawerContentScrollView
-      alwaysBounceVertical={false}
       style={[
         styles.drawerContent,
         {
-          backgroundColor: colors.surface,
+          backgroundColor: colors.surfaceContainerLow,
         },
       ]}
     >
@@ -177,7 +176,7 @@ function DrawerItems() {
                 role="switch"
                 aria-checked={shouldUseDynamicTheme}
               >
-                <View style={[styles.preference, styles.v3Preference]}>
+                <View style={styles.preference}>
                   <Text variant="labelLarge">Use Dynamic Theme</Text>
                   <View pointerEvents="none" aria-hidden>
                     <Switch value={shouldUseDynamicTheme} readOnly />
@@ -190,7 +189,7 @@ function DrawerItems() {
               role="switch"
               aria-checked={isDarkTheme}
             >
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Dark Theme</Text>
                 <View pointerEvents="none" aria-hidden>
                   <Switch value={isDarkTheme} readOnly />
@@ -203,7 +202,7 @@ function DrawerItems() {
               role="switch"
               aria-checked={isRTL}
             >
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">RTL</Text>
                 <View pointerEvents="none" aria-hidden>
                   <Switch value={isRTL} readOnly />
@@ -216,7 +215,7 @@ function DrawerItems() {
               role="switch"
               aria-checked={collapsed}
             >
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Collapsed drawer *</Text>
                 <View pointerEvents="none" aria-hidden>
                   <Switch value={collapsed} readOnly />
@@ -229,7 +228,7 @@ function DrawerItems() {
               role="switch"
               aria-checked={customFontLoaded}
             >
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Custom font *</Text>
                 <View pointerEvents="none" aria-hidden>
                   <Switch value={customFontLoaded} readOnly />
@@ -242,7 +241,7 @@ function DrawerItems() {
               role="switch"
               aria-checked={rippleEffectEnabled}
             >
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">
                   {Platform.OS === 'ios' ? 'Highlight' : 'Ripple'} effect *
                 </Text>
@@ -295,10 +294,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  v3Preference: {
     height: 56,
     paddingHorizontal: 28,
   },
