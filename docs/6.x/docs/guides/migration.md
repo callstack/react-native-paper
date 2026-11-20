@@ -166,7 +166,7 @@ If you were relying on internal test IDs, update your tests not to rely on inter
 Some components now accept explicit `testID` props for their interactable elements:
 
 - `BottomNavigation`: `barTestID` for the internal `BottomNavigation.Bar`, replacing the previous `${testID}-bar` derivation.
-- `Chip`: `closeIconTestID` for the close icon button.
+- `Chip`: `closeIconTestID` for the close icon button and `trailingIconTestID` for the trailing icon button.
 - `Dialog` and `Modal`: `overlayTestID` for the overlay displayed behind the content.
 - `Menu`: `overlayTestID` for the overlay displayed behind the menu.
 - `Searchbar`: `searchTestID`, `clearTestID`, and `trailingTestID` for the search, clear, and trailing icon buttons.
@@ -441,6 +441,52 @@ Libraries built on Paper may not support 6.x yet. For example, `react-native-pap
 A library that reads `theme.animation.scale` to turn its own animations off should read `useReduceMotion()` instead. The 6.x theme has no `animation` key, so `theme.animation.scale` throws.
 
 ## Components
+
+### Chip
+
+#### Default mode
+
+- The default **`mode`** changed from **`"flat"`** to **`"outlined"`**.
+
+```tsx
+// Before (v5) - no mode passed, rendered flat
+<Chip onPress={() => {}}>Example Chip</Chip>
+
+// After (v6) - no mode passed, renders outlined; pass mode="flat" to keep the old look
+<Chip mode="flat" onPress={() => {}}>Example Chip</Chip>
+```
+
+#### Removed props
+
+- **`compact`** The chip always uses the MD3 32dp height; to change the size, use `style`.
+- **`showSelectedOverlay`** A selected chip shows a check icon (`showSelectedCheck`, on by default). With an `avatar`, the check is drawn over the avatar automatically.
+- **`avatar`** is rendered as is inside a clipped 24dp circle; Chip no longer injects a `style` into it. Size the avatar to 24dp yourself.
+
+#### New props
+
+- **`trailingIcon`** / **`onTrailingIconPress`** / **`trailingIconAccessibilityLabel`** add a trailing action (e.g. a dropdown) independent of the close button. `trailingIcon` takes precedence over `onClose`'s close icon when both are specified.
+- **`backgroundColor`** / **`borderRadius`** replace overriding the chip's background color or border radius through `style`. `style` no longer accepts `backgroundColor` or `borderRadius`.
+
+```tsx
+// Before (v5)
+<Chip onPress={() => {}} style={{ backgroundColor: 'purple', borderRadius: 16 }}>Example Chip</Chip>
+
+// After (v6)
+<Chip onPress={() => {}} backgroundColor="purple" borderRadius={16}>Example Chip</Chip>
+```
+
+#### Colors and states
+
+- **`selectedColor`** now also tints the trailing icon and the border of an unselected outlined chip, at full strength (the border used to be at 29% opacity). A disabled chip ignores it.
+- An unselected `flat` chip uses `surfaceContainerLow` instead of `secondaryContainer`, with an `onSurfaceVariant` label and a `primary` leading icon.
+- A selected chip uses the `secondaryContainer` color in both modes (outlined chips used to stay on `surface`), and `elevated` chips use `surfaceContainerLow`.
+- Disabled chips use the `stateLayerPressed` container color.
+
+#### Close button and touch targets
+
+- The close button (`onClose`) is now a 32dp circle flush with the trailing edge of the chip, instead of a column. Its touch target extends to 48dp above, below and past the trailing edge (not over the label), and taps in that area that used to activate the chip's `onPress` now activate `onClose`.
+- The chip's own touch target is 48dp tall by default. A custom **`hitSlop`** replaces that default entirely.
+- A `trailingIcon` without `onTrailingIconPress` is decorative: it is not focusable and not announced as a button.
 
 ### Appbar
 
@@ -834,10 +880,6 @@ The misspelled `traileringIcon` props have been renamed:
 + onTrailingIconPress={onMicrophonePress}
 />
 ```
-
-### Chip
-
-The close button (`onClose`) now fills the trailing 34dp column reserved for it, instead of only the 26x18 area around its icon, and its touch target extends to 48dp in height. Taps in that column that used to activate the chip's `onPress` now activate `onClose`.
 
 ### IconButton
 
