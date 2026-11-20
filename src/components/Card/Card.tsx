@@ -18,6 +18,7 @@ import CardContent from './CardContent';
 import CardCover from './CardCover';
 import CardTitle from './CardTitle';
 import type { Props as CardTitleProps } from './CardTitle';
+import { CardSpacing } from './tokens';
 import { resolveCardVisuals } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
@@ -251,7 +252,10 @@ export type Props = Omit<ViewProps, 'children' | 'style'> &
      */
     dragged?: boolean;
     /**
-     * Style of the inner region that contains all Card slots.
+     * Style of the inner region that contains all Card slots. It applies
+     * after the Card's own spacing, so `paddingBottom` can replace the `16dp`
+     * the Card adds below a last header or content region, for example in a
+     * row layout.
      */
     contentStyle?: StyleProp<ViewStyle>;
     /**
@@ -284,6 +288,9 @@ export type Props = Omit<ViewProps, 'children' | 'style'> &
     ref?: React.Ref<React.ComponentRef<typeof View>>;
   } & (ConvenienceHeaderProps | CustomHeaderProps) &
   CardVariantProps;
+
+const isPopulated = (slot: React.ReactNode) =>
+  React.Children.toArray(slot).length > 0;
 
 /**
  * A Card groups related media, header content, body content, and actions. It
@@ -532,9 +539,9 @@ const Card = ({
     'within'
   );
   const hasWarnedAboutActions = React.useRef(false);
-  // `React.Children` is used only so an empty slot (`[]`, `null`, `false`)
-  // does not trigger the warning below; layout never depends on it.
-  const hasActions = React.Children.toArray(actions).length > 0;
+  // `React.Children` only tells an empty slot (`[]`, `null`, `false`) from a
+  // populated one; it never looks inside the slot.
+  const hasActions = isPopulated(actions);
 
   React.useEffect(() => {
     if (
@@ -570,26 +577,34 @@ const Card = ({
   );
   const hasConvenienceHeader =
     title != null || subtitle != null || leading != null || trailing != null;
+  const headerRegion =
+    header ??
+    (hasConvenienceHeader ? (
+      <CardTitle
+        title={title}
+        subtitle={subtitle}
+        left={leading}
+        right={trailing}
+      />
+    ) : null);
+  // Each region pads its own top, so the Card closes the bottom when the
+  // last region is the header or the content. An action row pads its own
+  // bottom, and media stays flush with the Card's edge.
+  const closesBottom =
+    !hasActions && (isPopulated(cardContent) || headerRegion != null);
 
   const content = (
     <View
       style={[
         styles.content,
+        closesBottom && styles.closedContent,
         { opacity: visuals.contentOpacity },
         contentStyle,
       ]}
       testID={hasPassedTouchHandler ? undefined : testID}
     >
       {media}
-      {header ??
-        (hasConvenienceHeader ? (
-          <CardTitle
-            title={title}
-            subtitle={subtitle}
-            left={leading}
-            right={trailing}
-          />
-        ) : null)}
+      {headerRegion}
       {cardContent}
       {actions}
     </View>
@@ -841,6 +856,9 @@ const styles = StyleSheet.create({
   content: {
     flexShrink: 1,
     position: 'relative',
+  },
+  closedContent: {
+    paddingBottom: CardSpacing.regionGap,
   },
 });
 

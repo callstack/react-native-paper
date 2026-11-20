@@ -1146,6 +1146,71 @@ describe('Card', () => {
     });
   });
 
+  const body = (
+    <Card.Content>
+      <Text>Body</Text>
+    </Card.Content>
+  );
+  const actionRow = (
+    <Card.Actions>
+      <Text>Action</Text>
+    </Card.Actions>
+  );
+
+  it.each<[string, React.ReactElement]>([
+    ['a header', <Card key="h" testID="card" title="Title" />],
+    ['content', <Card key="c" testID="card" content={body} />],
+    [
+      'a header and content',
+      <Card key="hc" testID="card" title="Title" content={body} />,
+    ],
+  ])('closes the bottom with 16dp when %s comes last', async (_, card) => {
+    await render(card);
+
+    // A neutral Card puts its testID on the region that holds the slots.
+    expect(screen.getByTestId('card')).toHaveStyle({ paddingBottom: 16 });
+  });
+
+  it.each<[string, React.ReactElement]>([
+    [
+      'an action row',
+      <Card
+        key="a"
+        testID="card"
+        title="Title"
+        content={body}
+        actions={actionRow}
+      />,
+    ],
+    ['only media', <Card key="m" testID="card" media={<View />} />],
+    ['no slot', <Card key="n" testID="card" />],
+  ])(
+    'leaves the bottom to the last region when %s comes last',
+    async (_, card) => {
+      await render(card);
+
+      expect(screen.getByTestId('card')).not.toHaveStyle({
+        paddingBottom: 16,
+      });
+    }
+  );
+
+  it('lets contentStyle remove the closing space of a row layout', async () => {
+    await render(
+      <Card
+        testID="card"
+        contentStyle={{ flexDirection: 'row', paddingBottom: 0 }}
+        media={<View />}
+        title="Title"
+      />
+    );
+
+    expect(screen.getByTestId('card')).toHaveStyle({
+      flexDirection: 'row',
+      paddingBottom: 0,
+    });
+  });
+
   it('dims the slot content of a disabled Card', async () => {
     const { rerender } = await render(
       <Card testID="card" disabled content={<Text>Body</Text>} />
@@ -1422,17 +1487,20 @@ describe('CardCover', () => {
 describe('CardTitle', () => {
   // Card adds no padding around its slots, so the header pads itself like
   // `Card.Content` does.
-  it('pads its own start edge and the end of its text', async () => {
+  it('pads its top and sides and spaces its parts by 16dp', async () => {
     await render(
       <Card.Title testID="card-title" title="Title" subtitle="Subtitle" />
     );
 
     expect(screen.getByTestId('card-title')).toHaveStyle({
-      paddingLeft: 16,
+      paddingHorizontal: 16,
+      paddingTop: 16,
+      gap: 16,
+    });
+    // The header sizes from its content, with no minimum height.
+    expect(screen.getByTestId('card-title')).not.toHaveStyle({
       minHeight: 72,
     });
-    expect(screen.getByText('Title')).toHaveStyle({ paddingRight: 16 });
-    expect(screen.getByText('Subtitle')).toHaveStyle({ paddingRight: 16 });
   });
 
   // A zero flex basis would collapse the titles in a row-laid-out Card on
@@ -1454,7 +1522,7 @@ describe('CardTitle', () => {
 });
 
 describe('CardContent', () => {
-  it('uses fixed padding when rendered standalone', async () => {
+  it('pads its top and sides when rendered standalone', async () => {
     await render(
       <Card.Content testID="card-content">
         <Text>Content</Text>
@@ -1463,7 +1531,11 @@ describe('CardContent', () => {
 
     expect(screen.getByTestId('card-content')).toHaveStyle({
       paddingHorizontal: 16,
-      paddingVertical: 16,
+      paddingTop: 16,
+    });
+    // The Card, not Card.Content, closes the bottom.
+    expect(screen.getByTestId('card-content')).not.toHaveStyle({
+      paddingBottom: 16,
     });
   });
 
@@ -1484,7 +1556,7 @@ describe('CardContent', () => {
 
     expect(screen.getByTestId('card-content')).toHaveStyle({
       paddingHorizontal: 16,
-      paddingVertical: 16,
+      paddingTop: 16,
     });
   });
 
@@ -1520,7 +1592,8 @@ describe('CardActions', () => {
       alignItems: 'center',
       justifyContent: 'flex-end',
       paddingHorizontal: 16,
-      paddingVertical: 8,
+      paddingTop: 16,
+      paddingBottom: 8,
       gap: 8,
     });
     expect(screen.getByTestId('custom-action')).toBeOnTheScreen();

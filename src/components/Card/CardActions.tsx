@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingHorizontal: CardSpacing.horizontalPadding,
-    paddingVertical: CardSpacing.actionsVerticalPadding,
+    paddingTop: CardSpacing.regionGap,
+    paddingBottom: CardSpacing.actionsBottomPadding,
     gap: CardSpacing.actionsGap,
   },
 });

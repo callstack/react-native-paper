@@ -382,6 +382,8 @@ const styles = StyleSheet.create({
   },
   horizontal: {
     flexDirection: 'row',
+    // The cover reaches the bottom edge, so the row needs no closing space.
+    paddingBottom: 0,
   },
   horizontalCover: {
     height: 80,

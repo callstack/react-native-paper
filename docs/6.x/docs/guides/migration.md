@@ -560,31 +560,23 @@ Use `header` when the complete header is custom. It is mutually exclusive with `
 
 #### `Card.Content` padding
 
-`Card.Content` no longer changes its padding based on its neighbors. In Paper 5 it added top padding only when it came first and bottom padding only when it came last. It now always uses `16dp` on every side. A `Card.Content` followed by `Card.Actions` gets `24dp` between the text and the buttons (`16dp` from `Card.Content` and `8dp` from `Card.Actions`). Override the padding with the `style` prop of `Card.Content` to keep a tighter layout:
+`Card.Content` no longer changes its padding based on its neighbors. In Paper 5 it added top padding only when it came first and bottom padding only when it came last. Now each region pads its own top and sides with `16dp`, and the Card adds `16dp` below its last region. An action row instead ends `8dp` below its buttons. `Card.Title` no longer has a minimum height: it sizes from its content.
+
+Used outside a Card, `Card.Content` has no bottom padding. Add it with the `style` prop:
 
 ```tsx
-<Card
-  title="Weekend trip"
-  content={
-    <Card.Content style={{ paddingBottom: 0 }}>
-      <Text>View the itinerary.</Text>
-    </Card.Content>
-  }
-  actions={
-    <Card.Actions>
-      <Button onPress={openDetails}>Open</Button>
-    </Card.Actions>
-  }
-/>
+<Card.Content style={{ paddingBottom: 16 }}>
+  <Text>Shown outside a Card</Text>
+</Card.Content>
 ```
 
 #### Horizontal layout
 
-To place the regions in a row, set `flexDirection` in `contentStyle`, which styles the wrapper around the slots:
+To place the regions in a row, set `flexDirection` in `contentStyle`, which styles the wrapper around the slots. Also set `paddingBottom: 0`, so the media in the row reaches the Card's bottom edge instead of sitting above the `16dp` the Card adds below its last region:
 
 ```tsx
 <Card
-  contentStyle={{ flexDirection: 'row' }}
+  contentStyle={{ flexDirection: 'row', paddingBottom: 0 }}
   media={<Card.Cover source={cover} style={{ width: 72, height: 72 }} />}
   title="Card title"
 />
