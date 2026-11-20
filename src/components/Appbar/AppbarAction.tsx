@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
 import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 
 import type { AnimatedStyle } from 'react-native-reanimated';
@@ -20,10 +19,6 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    * Name of the icon to show.
    */
   icon: IconSource;
-  /**
-   * Optional icon size.
-   */
-  size?: number;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -52,8 +47,8 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    * - `tonal` - Icon in a container with the secondary container color.
    *
    * The `filled` and `tonal` variants set the `mode` of the icon button, so its `mode` prop is ignored.
-   * They are selected by default, with the primary or the secondary container color. Pass `selected={false}` to
-   * show the unselected container, for example to toggle the action.
+   * Without `selected` they show the primary or the secondary container color. `selected` makes the action a
+   * toggle, with the selected and unselected colors of the icon button.
    */
   variant?: 'standard' | 'filled' | 'tonal';
   /**
@@ -95,7 +90,6 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
  * ```
  */
 const AppbarAction = ({
-  size = 24,
   color: iconColor,
   icon,
   disabled,
@@ -123,23 +117,22 @@ const AppbarAction = ({
       (isLeading ? colors.onSurface : colors.onSurfaceVariant))
     : iconColor;
 
-  // A filled or tonal action is an icon button in the matching mode, which is
-  // selected unless `selected` is passed, so `variant` takes over `mode`
-  const variantProps = isStandard
-    ? { mode, selected }
-    : { mode: variantIconButtonModes[variant], selected: selected ?? true };
+  // `filled` and `tonal` are also modes of the icon button, so `variant` takes
+  // over `mode`. `selected` goes through as it is: without it the action is no
+  // toggle and has the default container color.
+  const iconButtonMode = isStandard ? mode : variant;
 
   return (
     <IconButton
-      size={size}
       onPress={onPress}
       iconColor={actionIconColor}
       icon={icon}
       disabled={disabled}
       aria-label={ariaLabel}
-      mode={variantProps.mode}
-      selected={variantProps.selected}
-      style={[!isStandard && width === 'wide' && styles.wide, style]}
+      mode={iconButtonMode}
+      selected={selected}
+      width={isStandard ? undefined : width}
+      style={style}
       animated
       theme={theme}
       ref={ref}
@@ -147,17 +140,6 @@ const AppbarAction = ({
     />
   );
 };
-
-const variantIconButtonModes = {
-  filled: 'contained',
-  tonal: 'contained-tonal',
-} as const;
-
-const styles = StyleSheet.create({
-  wide: {
-    width: 52,
-  },
-});
 
 AppbarAction.displayName = 'Appbar.Action';
 

@@ -565,6 +565,79 @@ describe('focus ring wiring', () => {
   });
 });
 
+describe('IconButton focus ring', () => {
+  it('draws one ring, on the view that carries the outline', async () => {
+    await render(
+      <IconButton
+        icon="heart"
+        mode="outlined"
+        aria-label="Favorite"
+        onPress={() => {}}
+      />
+    );
+
+    await focusFirstFocusable();
+
+    const root = (screen as unknown as { root: Node }).root;
+    const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
+    expect(ringed).toHaveLength(1);
+    // The border sits on the same view, so the ring clears it.
+    expect(style(ringed[0])).toMatchObject({
+      outlineOffset: OUTWARD,
+      borderWidth: 1,
+    });
+  });
+
+  it('takes its placement from `focusRing`', async () => {
+    await render(
+      <IconButton
+        icon="heart"
+        aria-label="Favorite"
+        onPress={() => {}}
+        focusRing="inward"
+      />
+    );
+
+    await focusFirstFocusable();
+
+    const root = (screen as unknown as { root: Node }).root;
+    const ringed = walk(root, (n) => style(n).outlineStyle === 'solid');
+    // One ring only: the caller's value must not also reach the touchable.
+    expect(ringed).toHaveLength(1);
+    expect(style(ringed[0]).outlineOffset).toBe(INWARD);
+  });
+
+  it('draws no ring with focusRing="none"', async () => {
+    await render(
+      <IconButton
+        icon="heart"
+        aria-label="Favorite"
+        onPress={() => {}}
+        focusRing="none"
+      />
+    );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBeUndefined();
+  });
+
+  it('draws no ring while disabled', async () => {
+    await render(
+      <IconButton
+        icon="heart"
+        aria-label="Favorite"
+        onPress={() => {}}
+        disabled
+      />
+    );
+
+    await focusFirstFocusable();
+
+    expect(ringOffset()).toBeUndefined();
+  });
+});
+
 // A component's `theme` prop sets its ring color, not only the provider's.
 describe('focus ring color follows the theme prop', () => {
   const theme = { colors: { secondary: 'rgb(255, 0, 0)' } };
