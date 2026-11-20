@@ -1824,14 +1824,14 @@ it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined',
   });
 });
 
-it('takes the glyph size from `size`, not `iconSize`', async () => {
+it('accepts `iconSize` but not the named `size`', async () => {
   await render(
     <TextInput
       label="Search"
       value=""
       startAccessory={(props) => (
-        // @ts-expect-error `iconSize` is not a TextInput.Icon prop
-        <TextInput.Icon {...props} icon="magnify" size={30} iconSize={12} />
+        // @ts-expect-error `size` is not a TextInput.Icon prop
+        <TextInput.Icon {...props} icon="magnify" size="small" iconSize={12} />
       )}
     />
   );
