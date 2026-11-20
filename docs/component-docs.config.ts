@@ -146,6 +146,10 @@ const pages = {
   },
   Tooltip: {
     Tooltip: 'Tooltip/Tooltip',
+    TooltipRich: {
+      source: 'Tooltip/RichTooltip',
+      title: 'Tooltip.Rich',
+    },
   },
   TouchableRipple: {
     TouchableRipple: 'TouchableRipple/TouchableRipple',

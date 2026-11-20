@@ -1,28 +1,52 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  View,
-  StyleSheet,
-  Platform,
-  Pressable,
-} from 'react-native';
-import type { LayoutChangeEvent, ViewStyle } from 'react-native';
+import { Platform, Pressable, StyleSheet, View } from 'react-native';
+import type { ViewStyle } from 'react-native';
 
+import Animated from 'react-native-reanimated';
+
+import {
+  useHideOnDimensionsChange,
+  useTimeout,
+  useTooltipFade,
+  useTriggerHover,
+} from './hooks';
+import { releaseSingletonSlot, takeSingletonSlot } from './registry';
+import { Tokens } from './tokens';
 import { getTooltipPosition } from './utils';
-import type { Measurement, TooltipChildProps } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import { addEventListener } from '../../utils/addEventListener';
+import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
 
+/**
+ * Props passed to the `children` render function. Spread them onto the trigger
+ * element (and merge with your own handlers when you have them).
+ */
+export type TooltipTriggerProps = {
+  onLongPress?: () => void;
+  onPressOut?: () => void;
+  delayLongPress?: number;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  'aria-label'?: string;
+  'aria-describedby'?: string;
+  accessibilityHint?: string;
+};
+
 export type Props = {
   /**
-   * Tooltip reference element.
+   * Render function returning the trigger element. The provided props wire the
+   * tooltip's show/hide behavior and must be spread onto the returned element:
    *
-   * Positioning styles such as `position: 'absolute'` should be applied to a parent `View` wrapping the `Tooltip` instead of the element.
+   * ```js
+   * <Tooltip title="Selected Camera" titleAsAriaLabel>
+   *   {(props) => <IconButton {...props} icon="camera" selected onPress={() => {}} />}
+   * </Tooltip>
+   * ```
    */
-  children: React.ReactElement;
+  children: (props: TooltipTriggerProps) => React.ReactElement;
   /**
    * The number of milliseconds a user must touch the element before showing the tooltip.
    */
@@ -36,9 +60,19 @@ export type Props = {
    */
   title: string;
   /**
+   * Uses the title as the trigger's accessible name instead of its description.
+   * Set it for a trigger without a visible label, such as an icon button. Leave
+   * it off when the trigger has its own name, or the title replaces it.
+   */
+  titleAsAriaLabel?: boolean;
+  /**
    * Specifies the largest possible scale a title font can reach.
    */
   titleMaxFontSizeMultiplier?: number;
+  /**
+   * TestID used for testing purposes. Applied to the tooltip.
+   */
+  testID?: string;
   /**
    * @optional
    */
@@ -50,14 +84,16 @@ export type Props = {
  *
  * Plain tooltips, when activated, display a text label identifying an element, such as a description of its function. Tooltips should include only short, descriptive text and avoid restating visible UI text.
  *
+ * For tooltips with a title, supporting text and action buttons, see `Tooltip.Rich`.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { IconButton, Tooltip } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Tooltip title="Selected Camera">
- *     <IconButton icon="camera" selected onPress={() => {}} />
+ *   <Tooltip title="Selected Camera" titleAsAriaLabel>
+ *     {(props) => <IconButton {...props} icon="camera" selected onPress={() => {}} />}
  *   </Tooltip>
  * );
  *
@@ -69,178 +105,150 @@ const Tooltip = ({
   enterTouchDelay = 500,
   leaveTouchDelay = 1500,
   title,
+  titleAsAriaLabel = false,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier,
-  ...rest
+  testID,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const [visible, setVisible] = React.useState(false);
+  const { rendered, measurement, fadeStyle, onLayout, childrenWrapperRef } =
+    useTooltipFade(theme, visible);
+  const tooltipId = React.useId();
+  const showTimer = useTimeout();
+  const hideTimer = useTimeout();
 
-  const [measurement, setMeasurement] = React.useState({
-    children: {},
-    tooltip: {},
-    measured: false,
+  const hide = React.useCallback(() => setVisible(false), []);
+
+  useHideOnDimensionsChange(hide);
+
+  React.useEffect(() => {
+    if (!visible) {
+      return undefined;
+    }
+    return () => releaseSingletonSlot(hide);
+  }, [visible, hide]);
+
+  // Web: Escape closes it, as focus alone keeps it open
+  useOverlayDismiss({
+    enabled: visible && Platform.OS === 'web',
+    dismissable: true,
+    onDismiss: hide,
   });
-  const showTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
-  const hideTooltipTimer = React.useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const childrenWrapperRef =
-    React.useRef<React.ComponentRef<typeof View>>(null);
-  const touched = React.useRef(false);
+  const show = React.useCallback(() => {
+    showTimer.clear();
+    hideTimer.clear();
+    takeSingletonSlot(hide);
+    setVisible(true);
+  }, [showTimer, hideTimer, hide]);
 
-  const isValidChild = React.useMemo(
-    () => React.isValidElement<TooltipChildProps>(children),
-    [children]
-  );
-
-  React.useEffect(() => {
-    return () => {
-      if (showTooltipTimer.current.length) {
-        showTooltipTimer.current.forEach((t) => clearTimeout(t));
-        showTooltipTimer.current = [];
-      }
-
-      if (hideTooltipTimer.current.length) {
-        hideTooltipTimer.current.forEach((t) => clearTimeout(t));
-        hideTooltipTimer.current = [];
-      }
-    };
-  }, []);
-
-  React.useEffect(() => {
-    const subscription = addEventListener(Dimensions, 'change', () =>
-      setVisible(false)
-    );
-
-    return () => subscription.remove();
-  }, []);
-
-  const handleTouchStart = React.useCallback(() => {
-    if (hideTooltipTimer.current.length) {
-      hideTooltipTimer.current.forEach((t) => clearTimeout(t));
-      hideTooltipTimer.current = [];
-    }
-
+  const handleTouchStart = () => {
     if (Platform.OS === 'web') {
-      const id = setTimeout(() => {
-        touched.current = true;
-        setVisible(true);
-      }, enterTouchDelay);
-      showTooltipTimer.current.push(id);
+      hideTimer.clear();
+      showTimer.schedule(show, enterTouchDelay);
     } else {
-      touched.current = true;
-      setVisible(true);
+      show();
     }
-  }, [enterTouchDelay]);
+  };
 
-  const handleTouchEnd = React.useCallback(() => {
-    touched.current = false;
-    if (showTooltipTimer.current.length) {
-      showTooltipTimer.current.forEach((t) => clearTimeout(t));
-      showTooltipTimer.current = [];
+  const handleTouchEnd = () => {
+    showTimer.clear();
+    hideTimer.schedule(hide, leaveTouchDelay);
+  };
+
+  const { hoveringRef, consumeTouchFocus, wrapperProps } = useTriggerHover({
+    wrapperRef: childrenWrapperRef,
+    onEnter: handleTouchStart,
+    onLeave: handleTouchEnd,
+  });
+
+  // Web: releasing a click on the hovered trigger mustn't hide the tooltip
+  // the hover opened; the pointer leaving does
+  const handlePressOut = () => {
+    if (Platform.OS === 'web' && hoveringRef.current) {
+      return;
     }
-
-    const id = setTimeout(() => {
-      setVisible(false);
-      setMeasurement({ children: {}, tooltip: {}, measured: false });
-    }, leaveTouchDelay);
-    hideTooltipTimer.current.push(id);
-  }, [leaveTouchDelay]);
-
-  const handlePress = React.useCallback(() => {
-    if (touched.current) {
-      return null;
-    }
-    if (!isValidChild) return null;
-    const props =
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-      children.props as TooltipChildProps;
-    if (props.disabled) return null;
-    return props.onPress?.();
-  }, [children.props, isValidChild]);
-
-  const handleHoverIn = React.useCallback(() => {
-    handleTouchStart();
-    if (isValidChild) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-      (children.props as TooltipChildProps).onHoverIn?.();
-    }
-  }, [children.props, handleTouchStart, isValidChild]);
-
-  const handleHoverOut = React.useCallback(() => {
     handleTouchEnd();
-    if (isValidChild) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-      (children.props as TooltipChildProps).onHoverOut?.();
-    }
-  }, [children.props, handleTouchEnd, isValidChild]);
-
-  const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-    childrenWrapperRef.current?.measure(
-      (_x, _y, width, height, pageX, pageY) => {
-        setMeasurement({
-          children: { pageX, pageY, height, width },
-          tooltip: { ...layout },
-          measured: true,
-        });
-      }
-    );
   };
 
-  const mobilePressProps = {
-    onPress: handlePress,
-    onLongPress: () => handleTouchStart(),
-    onPressOut: () => handleTouchEnd(),
+  const triggerProps: TooltipTriggerProps = {
+    // on web too, so touchscreen users can still show it
+    onLongPress: handleTouchStart,
+    onPressOut: handlePressOut,
     delayLongPress: enterTouchDelay,
-  };
-
-  const webPressProps = {
-    onHoverIn: handleHoverIn,
-    onHoverOut: handleHoverOut,
+    ...(Platform.OS === 'web'
+      ? {
+          // keyboard focus shows it without the hover delay; a tap's focus
+          // doesn't, as a long-press shows it on touch
+          onFocus: () => {
+            if (!consumeTouchFocus()) show();
+          },
+          onBlur: handleTouchEnd,
+        }
+      : {}),
+    ...(titleAsAriaLabel
+      ? { 'aria-label': title }
+      : Platform.OS === 'web'
+        ? { 'aria-describedby': tooltipId }
+        : { accessibilityHint: title }),
   };
 
   return (
     <>
-      {visible && (
+      {rendered && (
         <Portal>
-          <View
-            onLayout={handleOnLayout}
+          <Animated.View
+            nativeID={tooltipId}
+            role="tooltip"
+            testID={testID}
+            onLayout={onLayout}
+            pointerEvents="none"
             style={[
               styles.tooltip,
               {
-                backgroundColor: theme.colors.onSurface,
-                ...getTooltipPosition(
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-                  measurement as Measurement
-                ),
-                borderRadius: theme.shapes.corner.extraSmall,
-                ...(measurement.measured ? styles.visible : styles.hidden),
+                backgroundColor: theme.colors[Tokens.plain.container],
+                ...getTooltipPosition(measurement, direction),
+                borderRadius: theme.shapes.corner[Tokens.plain.shape],
               },
+              fadeStyle,
             ]}
           >
             <Text
-              aria-live="polite"
-              numberOfLines={1}
+              numberOfLines={Tokens.plain.maxLines}
               selectable={false}
-              variant="labelLarge"
-              style={{ color: theme.colors.surface }}
+              variant={Tokens.plain.typescale}
+              style={{ color: theme.colors[Tokens.plain.content] }}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
             </Text>
-          </View>
+          </Animated.View>
         </Portal>
       )}
-      <Pressable
-        ref={childrenWrapperRef}
-        style={styles.pressContainer}
-        {...(Platform.OS === 'web' ? webPressProps : mobilePressProps)}
-      >
-        {React.cloneElement(children, {
-          ...rest,
-          ...(Platform.OS === 'web' ? webPressProps : mobilePressProps),
-        })}
-      </Pressable>
+      {Platform.OS === 'web' ? (
+        <View
+          ref={childrenWrapperRef}
+          collapsable={false}
+          style={styles.pressContainer}
+          {...wrapperProps}
+        >
+          {children(triggerProps)}
+        </View>
+      ) : (
+        <Pressable
+          ref={childrenWrapperRef}
+          collapsable={false}
+          accessible={false}
+          style={styles.pressContainer}
+          onLongPress={handleTouchStart}
+          onPressOut={handleTouchEnd}
+          delayLongPress={enterTouchDelay}
+        >
+          {children(triggerProps)}
+        </Pressable>
+      )}
     </>
   );
 };
@@ -251,15 +259,11 @@ const styles = StyleSheet.create({
   tooltip: {
     alignSelf: 'flex-start',
     justifyContent: 'center',
-    paddingHorizontal: 16,
-    height: 32,
-    maxHeight: 32,
-  },
-  visible: {
-    opacity: 1,
-  },
-  hidden: {
-    opacity: 0,
+    paddingHorizontal: Tokens.plain.paddingHorizontal,
+    paddingVertical: Tokens.plain.paddingVertical,
+    minHeight: Tokens.plain.minHeight,
+    minWidth: Tokens.plain.minWidth,
+    maxWidth: Tokens.plain.maxWidth,
   },
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   pressContainer: {

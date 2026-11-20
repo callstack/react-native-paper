@@ -19,10 +19,14 @@ const isVisible = (element: HTMLElement) =>
   element.getClientRects().length > 0 &&
   getComputedStyle(element).visibility !== 'hidden';
 
-const findFirstTabbable = (container: HTMLElement) =>
-  Array.from(container.querySelectorAll<HTMLElement>(TABBABLE_SELECTOR)).find(
+// Web only: the visible elements `Tab` reaches inside `container`, in order
+export const getTabbables = (container: ParentNode) =>
+  Array.from(container.querySelectorAll<HTMLElement>(TABBABLE_SELECTOR)).filter(
     isVisible
-  ) ?? null;
+  );
+
+const findFirstTabbable = (container: HTMLElement) =>
+  getTabbables(container)[0] ?? null;
 
 /**
  * Anything that can take focus: a host element, or the handle of a component
@@ -69,11 +73,24 @@ const moveWebFocusTo = (target: OverlayFocusTarget | null) => {
   return false;
 };
 
-// The first element inside, or the container itself when nothing in it can
-// take focus.
+/**
+ * Web only: focuses the first element inside, or the container itself when
+ * nothing in it can take focus. Returns whether focus ended up inside, as the
+ * browser refuses it on a container that can't be focused.
+ */
+export const focusIntoContainer = (container: unknown) => {
+  if (!(container instanceof HTMLElement)) {
+    return false;
+  }
+
+  (findFirstTabbable(container) ?? container).focus();
+
+  return isFocusInside(container);
+};
+
 const moveWebFocusIntoContainer = (container: OverlayFocusTarget | null) => {
   if (container instanceof HTMLElement) {
-    (findFirstTabbable(container) ?? container).focus();
+    focusIntoContainer(container);
 
     return true;
   }

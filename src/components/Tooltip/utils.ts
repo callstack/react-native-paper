@@ -1,5 +1,7 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, PixelRatio, Platform } from 'react-native';
 import type { LayoutRectangle } from 'react-native';
+
+import type { Direction } from '../../core/locale';
 
 type ChildrenMeasurement = {
   width: number;
@@ -11,24 +13,24 @@ type ChildrenMeasurement = {
 type TooltipLayout = LayoutRectangle;
 
 export type Measurement = {
+  // viewport coordinates, as `measure` reports them
   children: ChildrenMeasurement;
   tooltip: TooltipLayout;
+  // Web only: page scroll when measured, as the portal sits at the document
+  // origin
+  scroll: { x: number; y: number };
   measured: boolean;
 };
 
-export type TooltipChildProps = {
-  disabled?: boolean;
-  onPress?: () => void;
-  onHoverIn?: () => void;
-  onHoverOut?: () => void;
-};
+const EDGE_MARGIN = 8;
+const ANCHOR_GAP = 4;
 
 /**
  * Return true when the tooltip center x-coordinate relative to the wrapped element is negative.
  * The tooltip will be placed at the starting x-coordinate from the wrapped element.
  */
 const overflowLeft = (center: number): boolean => {
-  return center < 0;
+  return center < EDGE_MARGIN;
 };
 
 /**
@@ -38,7 +40,7 @@ const overflowLeft = (center: number): boolean => {
 const overflowRight = (center: number, tooltipWidth: number): boolean => {
   const { width: layoutWidth } = Dimensions.get('window');
 
-  return center + tooltipWidth > layoutWidth;
+  return center + tooltipWidth > layoutWidth - EDGE_MARGIN;
 };
 
 /**
@@ -52,7 +54,7 @@ const overflowBottom = (
 ): boolean => {
   const { height: layoutHeight } = Dimensions.get('window');
 
-  return childrenY + childrenHeight + tooltipHeight > layoutHeight;
+  return childrenY + childrenHeight + ANCHOR_GAP + tooltipHeight > layoutHeight;
 };
 
 const getTooltipXPosition = (
@@ -66,10 +68,23 @@ const getTooltipXPosition = (
       ? childrenX + (childrenWidth - tooltipWidth) / 2
       : childrenX;
 
-  if (overflowLeft(center)) return childrenX;
+  if (overflowLeft(center)) {
+    // a tooltip wider than the room on either side of the trigger must still
+    // keep clear of the right edge
+    const { width: layoutWidth } = Dimensions.get('window');
+    return Math.max(
+      EDGE_MARGIN,
+      Math.min(childrenX, layoutWidth - tooltipWidth - EDGE_MARGIN)
+    );
+  }
 
-  if (overflowRight(center, tooltipWidth))
-    return childrenX + childrenWidth - tooltipWidth;
+  if (overflowRight(center, tooltipWidth)) {
+    const { width: layoutWidth } = Dimensions.get('window');
+    return Math.min(
+      childrenX + childrenWidth - tooltipWidth,
+      layoutWidth - tooltipWidth - EDGE_MARGIN
+    );
+  }
 
   return center;
 };
@@ -78,21 +93,62 @@ const getTooltipYPosition = (
   { pageY: childrenY, height: childrenHeight }: ChildrenMeasurement,
   { height: tooltipHeight }: TooltipLayout
 ): number => {
+  // A tooltip too tall for either side stays on screen over the trigger
   if (overflowBottom(childrenY, childrenHeight, tooltipHeight))
-    return childrenY - tooltipHeight;
+    return Math.max(EDGE_MARGIN, childrenY - ANCHOR_GAP - tooltipHeight);
 
-  return childrenY + childrenHeight;
+  return childrenY + childrenHeight + ANCHOR_GAP;
 };
 
-export const getTooltipPosition = ({
-  children,
-  tooltip,
-  measured,
-}: Measurement): { left?: number; top?: number } => {
+export const isWithinRect = (
+  pointX: number,
+  pointY: number,
+  { x, y, width, height }: LayoutRectangle
+): boolean =>
+  pointX >= x && pointX <= x + width && pointY >= y && pointY <= y + height;
+
+type PointerPosition = { clientX: number; clientY: number };
+
+// Web only: null where there is no document
+export const getActiveElement = (): Element | null =>
+  'document' in global ? document.activeElement : null;
+
+/**
+ * Web only: pointer leave also fires spuriously, e.g. when the tooltip mounts
+ * in the portal, so a leave is only real once the pointer is outside the
+ * element's bounds.
+ */
+export const isPointerInside = (
+  element: { getBoundingClientRect?(): DOMRect } | null,
+  { clientX, clientY }: PointerPosition
+): boolean => {
+  const rect = element?.getBoundingClientRect?.();
+
+  return rect !== undefined && isWithinRect(clientX, clientY, rect);
+};
+
+export const getTooltipPosition = (
+  { children, tooltip, scroll, measured }: Measurement,
+  direction: Direction = 'ltr'
+): { left?: number; top?: number } => {
   if (!measured) return {};
 
-  return {
-    left: getTooltipXPosition(children, tooltip),
-    top: getTooltipYPosition(children, tooltip),
-  };
+  let left = getTooltipXPosition(children, tooltip);
+  const top = getTooltipYPosition(children, tooltip);
+
+  if (direction === 'rtl') {
+    // `measure` reports the physical left edge, but in RTL the tooltip starts
+    // at the right one: native resolves `left` from it, and on web the tooltip
+    // isn't absolutely positioned, so `left` offsets it from there.
+    const trailingOffset =
+      Dimensions.get('window').width - tooltip.width - left;
+    left = Platform.OS === 'web' ? -trailingOffset : trailingOffset;
+  }
+
+  return Platform.OS === 'web'
+    ? { left: left + scroll.x, top: top + scroll.y }
+    : {
+        left: PixelRatio.roundToNearestPixel(left),
+        top: PixelRatio.roundToNearestPixel(top),
+      };
 };

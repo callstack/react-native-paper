@@ -10,7 +10,7 @@ import {
   it,
   jest,
 } from '@jest/globals';
-import { fireEvent, userEvent } from '@testing-library/react-native';
+import { fireEvent, userEvent, waitFor } from '@testing-library/react-native';
 import * as Reanimated from 'react-native-reanimated';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
@@ -190,7 +190,14 @@ it('shows Tooltip when FAB is long pressed', async () => {
   await render(
     <PaperProvider>
       <Tooltip title="Press Me">
-        <FAB icon="plus" aria-label="Add item" onPress={() => {}} />
+        {(props) => (
+          <FAB
+            {...props}
+            icon="plus"
+            aria-label="Add item"
+            onPress={() => {}}
+          />
+        )}
       </Tooltip>
     </PaperProvider>
   );
@@ -648,6 +655,8 @@ describe('on web', () => {
         get activeElement() {
           return activeElement;
         },
+        addEventListener: () => {},
+        removeEventListener: () => {},
       },
     });
     Object.defineProperty(View.prototype, 'matches', {
@@ -726,6 +735,37 @@ describe('on web', () => {
     });
     return { blur, hide: () => rerender(fab(false)) };
   };
+
+  it('shows Tooltip when FAB gets keyboard focus', async () => {
+    await render(
+      <PaperProvider>
+        <Tooltip title="Press Me" leaveTouchDelay={0}>
+          {(props) => (
+            <FAB
+              {...props}
+              icon="plus"
+              aria-label="Add item"
+              onPress={() => {}}
+            />
+          )}
+        </Tooltip>
+      </PaperProvider>
+    );
+    const fab = screen.getByRole('button', { name: 'Add item' });
+
+    await act(async () => {
+      await fireEvent(fab, 'focus', { nativeEvent: {} });
+    });
+    expect(screen.getByText('Press Me')).toBeOnTheScreen();
+    expect(fab).toHaveProp('aria-describedby', expect.any(String));
+
+    await act(async () => {
+      await fireEvent(fab, 'blur');
+    });
+    await waitFor(() =>
+      expect(screen.queryByText('Press Me')).not.toBeOnTheScreen()
+    );
+  });
 
   it.each(['icon', 'extended'] as const)(
     'keeps the %s FAB at rest on focus, changes its elevation while hovered and restores it while pressed',

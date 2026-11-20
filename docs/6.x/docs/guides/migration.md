@@ -543,6 +543,19 @@ e.g.:
 
 ### Tooltip
 
+The trigger is now a render function. Spread the props it receives onto the trigger element, so the tooltip can attach its handlers and accessibility props without cloning the element:
+
+```diff
+- <Tooltip title="Print">
+-   <Appbar.Action icon="printer" onPress={handlePrint} />
+- </Tooltip>
++ <Tooltip title="Print">
++   {(props) => (
++     <Appbar.Action {...props} icon="printer" onPress={handlePrint} />
++   )}
++ </Tooltip>
+```
+
 `Tooltip` no longer reads positioning styles such as `position: 'absolute'` from the `style` of the wrapped element. Apply them to a parent `View` wrapping the `Tooltip` instead.
 
 e.g.:
@@ -553,10 +566,51 @@ e.g.:
 - </Tooltip>
 + <View style={{ position: 'absolute', right: 16, bottom: 16 }}>
 +   <Tooltip title="Add">
-+     <FAB icon="plus" />
++     {(props) => <FAB {...props} icon="plus" />}
 +   </Tooltip>
 + </View>
 ```
+
+The tooltip now follows the Material Design 3 plain tooltip:
+
+- It uses the `inverseSurface` container and `inverseOnSurface` text in the `bodySmall` type style, instead of `onSurface` and `surface` in `labelLarge`.
+- It has 8dp horizontal padding, a 24dp minimum height and a 40dp minimum width, and long titles wrap onto up to three lines at a 320dp width, instead of being cut to one line.
+- It fades in and out, and appears 4dp away from the trigger, below it or above it when there's no room. It keeps at least 8dp from the left and right screen edges, and from the top one when it's too tall for either side.
+- In right-to-left layouts it is placed from the trailing edge.
+
+On web, the tooltip also opens when the trigger gets keyboard focus, and the trigger is described by the tooltip through `aria-describedby`. On iOS and Android, the trigger gets the title as its `accessibilityHint`. For a trigger without a visible label, such as an icon button, set `titleAsAriaLabel` so the title becomes its `aria-label` on every platform instead.
+
+`Tooltip.Rich` is new. It shows an optional title, supporting text and action buttons, and uses the same render function for its trigger. Pressing the trigger toggles the tooltip, so the trigger's own `onPress` replaces it. Use a trigger without an `onPress`, or call both:
+
+```tsx
+<Tooltip.Rich
+  title="Add to library"
+  content="Save this item to read it later."
+  actions={({ dismiss }) => (
+    <Button mode="text" onPress={dismiss}>
+      Learn more
+    </Button>
+  )}
+>
+  {(props) => (
+    <IconButton
+      {...props}
+      icon="information-outline"
+      aria-label="More info"
+      onPress={() => {
+        props.onPress?.();
+        handleInfoPress();
+      }}
+    />
+  )}
+</Tooltip.Rich>
+```
+
+While a rich tooltip is open on iOS and Android, a press on another rich tooltip's trigger only switches the tooltips, so that trigger's own `onPress` doesn't run.
+
+On iOS and Android, its trigger gets the title and the text content as its `accessibilityHint`. Give an icon-only trigger its own `aria-label`.
+
+A rich tooltip closes on a press outside it, on a press on an action that calls `dismiss`, on another press on the trigger, when the screen size changes and on the VoiceOver escape gesture on iOS. The Android back button isn't taken by the tooltip, so it still goes back. On web it opens on hover and on keyboard focus, and closes on Escape and when the pointer or the focus leaves both the trigger and the tooltip. The down arrow key on the trigger moves focus into the actions, and focus that was in the tooltip goes back to the trigger when it closes.
 
 ### Surface
 
