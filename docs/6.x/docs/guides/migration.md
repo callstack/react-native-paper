@@ -1741,7 +1741,7 @@ A `Switch` with no `onValueChange` used to render as an enabled, focusable contr
 
 A read-only switch keeps its enabled appearance and exposes its on/off state to screen readers, but it cannot be focused with a keyboard or pressed. On web it exposes `aria-readonly`. On iOS and Android it exposes a disabled accessibility state, because React Native has no read-only state for switches. Use `disabled` when you also want the disabled appearance.
 
-This most often shows up where the switch sits inside a row that owns the press. Give the row the switch role and state, and hide the inner switch from assistive technology, so screen readers announce the row as one switch with its on/off state:
+This most often shows up where the switch sits inside a row that owns the press. Give the row the switch role and state, and set `aria-hidden` on the inner switch, so screen readers announce the row as one switch with its on/off state. A hidden read-only switch renders with no role and cannot take focus, so the row does not nest a second interactive control:
 
 ```diff
 -<TouchableRipple onPress={toggleTheme}>
@@ -1752,10 +1752,9 @@ This most often shows up where the switch sits inside a row that owns the press.
 +>
    <View style={styles.row}>
      <Text>Dark Theme</Text>
--    <View pointerEvents="none">
+     <View pointerEvents="none">
 -      <Switch value={isDarkTheme} />
-+    <View pointerEvents="none" aria-hidden>
-+      <Switch value={isDarkTheme} readOnly />
++      <Switch value={isDarkTheme} readOnly aria-hidden />
      </View>
    </View>
  </TouchableRipple>
