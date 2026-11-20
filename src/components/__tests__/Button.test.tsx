@@ -1498,3 +1498,41 @@ describe('with reduce motion', () => {
     expect(containerTransitionDuration()).toEqual([0, 0, 0, 0, 0]);
   });
 });
+
+describe('removed 5.x modes warning', () => {
+  it.each([
+    ['contained', 'filled'],
+    ['contained-tonal', 'tonal'],
+  ])(
+    'warns in development when mode="%s" is passed',
+    async (oldMode, newMode) => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      try {
+        await render(
+          <Button mode={oldMode as any} onPress={() => {}}>
+            Save
+          </Button>
+        );
+        expect(warnSpy).toHaveBeenCalledWith(
+          `Button: \`mode="${oldMode}"\` was removed in 6.x; use \`mode="${newMode}"\` instead.`
+        );
+      } finally {
+        warnSpy.mockRestore();
+      }
+    }
+  );
+
+  it('does not warn for valid 6.x modes', async () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    try {
+      await render(
+        <Button mode="filled" onPress={() => {}}>
+          Save
+        </Button>
+      );
+      expect(warnSpy).not.toHaveBeenCalled();
+    } finally {
+      warnSpy.mockRestore();
+    }
+  });
+});
