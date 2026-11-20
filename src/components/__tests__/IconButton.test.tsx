@@ -868,6 +868,65 @@ describe('shape morph', () => {
 
     expect(transitionDuration()).toBe(0);
   });
+
+  // Reanimated's Jest setup keeps CSS transitions out of `style`.
+  const transitionOf = (element: ReturnType<typeof screen.getByTestId>) => {
+    const { transitionDuration, transitionTimingFunction } = StyleSheet.flatten(
+      // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+      element.props.jestInlineStyle
+    );
+    return { transitionDuration, transitionTimingFunction };
+  };
+
+  it('morphs the touchable inside the outline in step with the outline', async () => {
+    const { pressedRadius, outlineWidth } = getDimensions({
+      theme,
+      size: 'extra-large',
+    });
+
+    await render(
+      <IconButton
+        icon="camera"
+        mode="outlined"
+        size="extra-large"
+        testID="icon-button"
+        onPress={() => {}}
+      />
+    );
+    const touchable = screen.getByTestId('icon-button');
+    const clip = touchable.parent;
+
+    if (!clip) {
+      throw new Error('Expected the touchable to be wrapped in the clip view.');
+    }
+
+    expect(transitionOf(touchable)).toEqual(transitionOf(clip));
+
+    await fireEvent(touchable, 'pressIn');
+
+    expect(transitionOf(touchable)).toEqual(transitionOf(clip));
+    expect(clip).toHaveStyle({ borderRadius: pressedRadius });
+    expect(touchable).toHaveStyle({
+      borderRadius: pressedRadius - outlineWidth,
+    });
+  });
+
+  it('snaps the touchable corner too under reduce motion', async () => {
+    await render(
+      <PaperProvider reduceMotion="on">
+        <IconButton
+          icon="camera"
+          mode="outlined"
+          testID="icon-button"
+          onPress={() => {}}
+        />
+      </PaperProvider>
+    );
+
+    expect(
+      transitionOf(screen.getByTestId('icon-button')).transitionDuration
+    ).toBe(0);
+  });
 });
 
 describe('inner corner', () => {

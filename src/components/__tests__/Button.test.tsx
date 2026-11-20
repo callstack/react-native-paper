@@ -1418,6 +1418,56 @@ describe('shape morph animation', () => {
     expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 20 });
   });
 
+  // Reanimated's Jest setup keeps CSS transitions out of `style`.
+  const transitionOf = (element: ReturnType<typeof screen.getByTestId>) => {
+    const { transitionDuration, transitionTimingFunction } = StyleSheet.flatten(
+      // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+      element.props.jestInlineStyle
+    );
+    return { transitionDuration, transitionTimingFunction };
+  };
+
+  it('morphs the ripple inside the outline in step with the outline', async () => {
+    await render(
+      <Button mode="outlined" size="large" onPress={() => {}} testID="button">
+        {null}
+      </Button>
+    );
+    const touchable = screen.getByTestId('button');
+    const clip = parentOf(touchable, 'the touchable');
+
+    expect(transitionOf(touchable)).toEqual(transitionOf(clip));
+
+    await fireEvent(touchable, 'onPressIn');
+
+    expect(transitionOf(touchable)).toEqual(transitionOf(clip));
+    expect(clip).toHaveStyle({ borderRadius: LightTheme.shapes.corner.large });
+    expect(touchable).toHaveStyle({
+      borderRadius:
+        LightTheme.shapes.corner.large -
+        Tokens.sizes.large.outlinedOutlineWidth,
+    });
+  });
+
+  it('snaps the corner when animateShape is false', async () => {
+    await render(
+      <Button
+        mode="outlined"
+        animateShape={false}
+        onPress={() => {}}
+        testID="button"
+      >
+        {null}
+      </Button>
+    );
+    const touchable = screen.getByTestId('button');
+
+    expect(transitionOf(touchable).transitionDuration).toBe(0);
+    expect(
+      transitionOf(parentOf(touchable, 'the touchable')).transitionDuration
+    ).toBe(0);
+  });
+
   it('still changes the shape when animateShape is false and selected flips', async () => {
     await render(
       <Button shape="square" size="large" animateShape={false} testID="button">
