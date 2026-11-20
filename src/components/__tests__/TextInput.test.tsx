@@ -1824,14 +1824,41 @@ it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined',
   });
 });
 
-it('accepts `iconSize` but not the named `size`', async () => {
+it('sizes the TextInput.Icon glyph with `iconSize`', async () => {
   await render(
     <TextInput
       label="Search"
       value=""
       startAccessory={(props) => (
-        // @ts-expect-error `size` is not a TextInput.Icon prop
-        <TextInput.Icon {...props} icon="magnify" size="small" iconSize={12} />
+        <TextInput.Icon
+          {...props}
+          iconSize={12}
+          icon={({ size }) => (
+            <View testID="glyph" style={{ width: size, height: size }} />
+          )}
+        />
+      )}
+    />
+  );
+
+  expect(screen.getByTestId('glyph', includeHiddenElements)).toHaveStyle({
+    width: 12,
+    height: 12,
+  });
+});
+
+it('rejects the named `size` on TextInput.Icon', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value=""
+      startAccessory={(props) => (
+        <TextInput.Icon
+          {...props}
+          icon="magnify"
+          // @ts-expect-error `size` is not a TextInput.Icon prop
+          size="small"
+        />
       )}
     />
   );
