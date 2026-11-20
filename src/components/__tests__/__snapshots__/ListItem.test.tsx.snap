@@ -341,14 +341,15 @@ exports[`renders list item with custom description 1`] = `
                   },
                   [
                     {
+                      "borderRadius": 8,
+                    },
+                    {
                       "alignSelf": "stretch",
                       "flexShrink": 1,
                       "justifyContent": "center",
                       "minHeight": 32,
                     },
-                    {
-                      "borderRadius": 8,
-                    },
+                    undefined,
                   ],
                 ]
               }
@@ -434,6 +435,7 @@ exports[`renders list item with custom description 1`] = `
                         },
                         [
                           {
+                            "flexShrink": 1,
                             "includeFontPadding": false,
                             "textAlignVertical": "center",
                           },

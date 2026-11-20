@@ -37,7 +37,6 @@ const colors = {
   trailingIconColor: 'onSurfaceVariant',
   selectedTrailingIconColor: 'onSecondaryContainer',
   outlineColor: 'outlineVariant',
-  focusOutlineColor: 'onSurfaceVariant',
   disabledColor: 'onSurface',
 } as const satisfies Record<string, ColorRole>;
 

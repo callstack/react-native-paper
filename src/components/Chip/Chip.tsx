@@ -82,8 +82,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   selected?: boolean;
   /**
    * Custom color to use for the label, leading icon, trailing icon, and outlined border,
-   * overriding the default selected/unselected theme colors. A focused outlined chip
-   * shows the focus outline color instead of the border, and a disabled chip ignores it.
+   * overriding the default selected/unselected theme colors. A disabled chip ignores it.
    */
   selectedColor?: ColorValue;
   /**
@@ -260,6 +259,15 @@ const Chip = ({
   const [hovered, setHovered] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
 
+  // A chip that can't be pressed has no element left to send `onHoverOut` or
+  // `onBlur`, so clear both when it stops being pressable.
+  React.useEffect(() => {
+    if (isTouchableDisabled) {
+      setHovered(false);
+      setFocused(false);
+    }
+  }, [isTouchableDisabled]);
+
   const borderRadius = borderRadiusProp ?? theme.shapes.corner.small;
 
   // The body's ring goes on the Surface, the chip's visible box
@@ -280,12 +288,12 @@ const Chip = ({
     contentOpacity,
     backgroundColor,
     rippleColor,
+    focusedColor,
     avatarOverlayColor,
   } = getChipColors({
     isOutlined,
     selected,
     elevated,
-    focused,
     theme,
     selectedColor,
     customBackgroundColor,
@@ -366,7 +374,14 @@ const Chip = ({
         borderless
         background={background}
         rippleColor={rippleColor}
-        style={[styles.touchable, { borderRadius }, ...bodyFocusTarget.style]}
+        style={[
+          { borderRadius },
+          styles.touchable,
+          Platform.OS === 'web' && focused
+            ? { backgroundColor: focusedColor }
+            : undefined,
+          ...bodyFocusTarget.style,
+        ]}
         focusRing="none"
         onPress={onPress}
         onLongPress={onLongPress}
@@ -535,6 +550,7 @@ const styles = StyleSheet.create({
   labelText: {
     textAlignVertical: 'center',
     includeFontPadding: false,
+    flexShrink: 1,
   },
   trailingIconWrapper: {
     position: 'absolute',
