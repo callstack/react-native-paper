@@ -1509,8 +1509,8 @@ describe('removed 5.x modes warning', () => {
       const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       try {
         await render(
-          {/* @ts-expect-error: testing removed 5.x mode warning */}
-          <Button mode={oldMode as never} onPress={() => {}}>
+          // @ts-expect-error: testing removed 5.x mode warning
+          <Button mode={oldMode} onPress={() => {}}>
             Save
           </Button>
         );
