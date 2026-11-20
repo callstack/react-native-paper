@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { ReactNode } from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
@@ -49,6 +49,12 @@ function AnimatedText({
   const theme = useInternalTheme(themeOverrides);
 
   const { direction: writingDirection } = useLocale();
+  // A `left` alignment follows the layout direction on Android and iOS, but
+  // stays physical on web, so right-to-left text aligns right there.
+  const alignStyle =
+    Platform.OS === 'web' && writingDirection === 'rtl'
+      ? styles.textRTLWeb
+      : styles.text;
   // Nested text inherits the parent's style unless it has its own theme
   const inheritsStyle = useIsNestedText() && !themeOverrides;
 
@@ -73,7 +79,7 @@ function AnimatedText({
             ? [font, style]
             : [
                 font,
-                styles.text,
+                alignStyle,
                 { writingDirection, color: theme.colors.onSurface },
                 style,
               ]
@@ -93,7 +99,7 @@ function AnimatedText({
         ref={ref}
         {...rest}
         style={[
-          styles.text,
+          alignStyle,
           textStyle,
           {
             writingDirection,
@@ -110,6 +116,9 @@ function AnimatedText({
 const styles = StyleSheet.create({
   text: {
     textAlign: 'left',
+  },
+  textRTLWeb: {
+    textAlign: 'right',
   },
 });
 
