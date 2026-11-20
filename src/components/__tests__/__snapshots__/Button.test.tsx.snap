@@ -785,6 +785,7 @@ exports[`renders loading button 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={true}
       collapsable={false}
       role="none"
       style={
@@ -825,6 +826,7 @@ exports[`renders loading button 1`] = `
         <View
           accessible={true}
           aria-busy={true}
+          aria-hidden={true}
           role="progressbar"
           style={
             [
@@ -1567,6 +1569,7 @@ exports[`renders the loading indicator at the size set by iconSize 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={true}
       collapsable={false}
       role="none"
       style={
@@ -1607,6 +1610,7 @@ exports[`renders the loading indicator at the size set by iconSize 1`] = `
         <View
           accessible={true}
           aria-busy={true}
+          aria-hidden={true}
           role="progressbar"
           style={
             [
