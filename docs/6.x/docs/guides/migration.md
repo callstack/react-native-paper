@@ -540,6 +540,32 @@ e.g.:
 />
 ```
 
+### Banner
+
+A hidden `Banner` is now inert while it animates out, then its content unmounts. Children lose their local state on hide.
+
+`onShowAnimationFinished` and `onHideAnimationFinished` run only after a `visible` change whose animation finished, not on mount or when interrupted. Under [reduce motion](#reduce-motion) the animation takes 0 ms and still counts as finished.
+
+At most 2 actions render, the rest are ignored with a dev warning. On a window 600dp or wider the actions sit next to the message. The breakpoint follows the window, not the banner.
+
+The banner is now a polite `status` live region instead of `alert`. Use `urgent` for messages that should interrupt:
+
+```diff
+-<Banner visible={visible} actions={actions}>
++<Banner visible={visible} actions={actions} urgent>
+   Your payment failed.
+ </Banner>
+```
+
+The message is announced only when the banner goes from hidden to visible. Tests that use `getByRole('alert')` need `urgent`, or should find the message by text.
+
+The icon is hidden from screen readers. Set `iconAccessibilityLabel` if it carries its own meaning.
+
+When a focused action is removed, focus moves to the next action, or the message:
+
+- **Web:** keyboard focus moves. On hide, focus returns to the element that had it when the banner showed.
+- **iOS and Android:** the screen reader cursor moves if the action was just pressed. Keyboard focus doesn't move, and nothing is restored on hide.
+
 ### Tooltip
 
 `Tooltip` no longer reads positioning styles such as `position: 'absolute'` from the `style` of the wrapped element. Apply them to a parent `View` wrapping the `Tooltip` instead.
