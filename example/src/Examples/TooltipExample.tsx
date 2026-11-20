@@ -98,7 +98,6 @@ const TooltipExample = () => {
                   <IconButton
                     {...props}
                     icon={transport.title.split(' ')[0].toLowerCase()}
-                    size={24}
                     onPress={() => {}}
                   />
                 )}
@@ -113,7 +112,7 @@ const TooltipExample = () => {
                 <IconButton
                   {...props}
                   icon="format-align-left"
-                  mode="contained-tonal"
+                  mode="tonal"
                   selected={textAlign === 'left'}
                   onPress={() => setTextAlign('left')}
                 />
@@ -124,7 +123,7 @@ const TooltipExample = () => {
                 <IconButton
                   {...props}
                   icon="format-align-center"
-                  mode="contained-tonal"
+                  mode="tonal"
                   selected={textAlign === 'center'}
                   onPress={() => setTextAlign('center')}
                 />
@@ -135,7 +134,7 @@ const TooltipExample = () => {
                 <IconButton
                   {...props}
                   icon="format-align-right"
-                  mode="contained-tonal"
+                  mode="tonal"
                   selected={textAlign === 'right'}
                   disabled
                   onPress={() => setTextAlign('right')}
@@ -203,7 +202,7 @@ const TooltipExample = () => {
               )}
             >
               {(props) => (
-                <IconButton {...props} icon="plus" size={24} aria-label="Add" />
+                <IconButton {...props} icon="plus" aria-label="Add" />
               )}
             </Tooltip.Rich>
             <Tooltip.Rich content="A rich tooltip with body text only — no title or actions.">
@@ -211,7 +210,6 @@ const TooltipExample = () => {
                 <IconButton
                   {...props}
                   icon="information"
-                  size={24}
                   aria-label="More information"
                 />
               )}
@@ -237,7 +235,6 @@ const TooltipExample = () => {
                 <IconButton
                   {...props}
                   icon="help-circle-outline"
-                  size={24}
                   aria-label="Help"
                 />
               )}

@@ -93,6 +93,7 @@ The following component style props no longer support overriding their backgroun
 - `Card`
 - `Chip`
 - `Dialog`
+- `IconButton`
 - `Menu`: `contentStyle`
 - `Searchbar`
 - `Snackbar`
@@ -506,7 +507,7 @@ A `theme` set on a part is merged over the `theme` of the `Appbar`, so it takes 
 #### Material 3 Expressive
 
 - The `mode` prop of `Appbar` and `Appbar.Header` accepts two new values: `medium-flexible` and `large-flexible`. Their height is the minimum height (`112` and `120`), and they grow when the title wraps onto a second line.
-- `Appbar.Action` has new `variant` and `width` props. `variant="filled"` and `variant="tonal"` render the action in a container, and `width="wide"` makes the container wider. A filled or tonal action is selected by default, and passing `selected={false}` shows the unselected container.
+- `Appbar.Action` has new `variant` and `width` props. `variant="filled"` and `variant="tonal"` render the action in a container, and `width="wide"` makes the container wider. Without `selected` the action shows the primary or the secondary container color. Pass `selected` to make it a toggle, with the selected and unselected colors of the icon button.
 - `Appbar` and `Appbar.Header` have a new `isScrolled` prop. Set it when the content below has scrolled, to switch the container to the `surfaceContainer` color. Unlike `elevated`, it doesn't add elevation.
 
 ```tsx
@@ -892,10 +893,6 @@ The misspelled `traileringIcon` props have been renamed:
 ### Chip
 
 The close button (`onClose`) now fills the trailing 34dp column reserved for it, instead of only the 26x18 area around its icon, and its touch target extends to 48dp in height. Taps in that column that used to activate the chip's `onPress` now activate `onClose`.
-
-### IconButton
-
-Corner radii set through `style` no longer shape the press, hover and disabled feedback.
 
 ### TouchableRipple
 
@@ -1421,6 +1418,141 @@ An accordion with a `left` element now indents only its `List.Item` children. An
 
 `theme` set on `List.Accordion` no longer reaches its children either. Pass it to the child that needs the override.
 
+### IconButton
+
+`IconButton` now follows the Material 3 Expressive spec. The color modes, size API, and toggle `selected` behavior have changed. Passing the old numeric `size` (for example `size={24}`) crashes at runtime, because `size` is now a named token and `IconButtonTokens.sizes[24]` is `undefined`.
+
+#### Mode names
+
+- **`contained`** → **`filled`**
+- **`contained-tonal`** → **`tonal`**
+- Unspecified mode is now **`standard`** (no container fill), which matches the previous default.
+
+```tsx
+// Before (v5)
+<IconButton icon="camera" mode="contained" onPress={onPress} />
+<IconButton icon="camera" mode="contained-tonal" onPress={onPress} />
+
+// After (v6)
+<IconButton icon="camera" mode="filled" onPress={onPress} />
+<IconButton icon="camera" mode="tonal" onPress={onPress} />
+```
+
+#### Size
+
+`size` is a named scale: `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`, the same names as `Button`. It defaults to `'small'`, which still uses a 24dp icon.
+
+To set the glyph size in dp without changing the container scale, use `iconSize`. The container keeps the size of its `size` (a square 40dp for the default), so a glyph larger than it is clipped. Pick a larger `size` instead.
+
+```tsx
+// Before (v5)
+<IconButton icon="camera" size={24} onPress={onPress} />
+<IconButton icon="camera" size={32} onPress={onPress} />
+
+// After (v6)
+<IconButton icon="camera" onPress={onPress} />
+<IconButton icon="camera" iconSize={32} onPress={onPress} />
+```
+
+```tsx
+// After (v6): named container sizes
+<IconButton icon="plus" size="extra-small" onPress={onPress} />
+<IconButton icon="plus" size="small" onPress={onPress} />
+<IconButton icon="plus" size="medium" onPress={onPress} />
+<IconButton icon="plus" size="large" onPress={onPress} />
+<IconButton icon="plus" size="extra-large" onPress={onPress} />
+```
+
+#### Shape
+
+`style.borderRadius` no longer overrides the container corner or shapes the press, hover and disabled feedback. Use `shape`: `'round'` (default) or `'square'`. Toggle-ON inverts the resting shape; press uses a shared corner for both. Arbitrary radii from `style` are not supported.
+
+```tsx
+// Before (v5)
+<IconButton icon="camera" style={{ borderRadius: 0 }} onPress={onPress} />
+
+// After (v6)
+<IconButton icon="camera" shape="square" onPress={onPress} />
+```
+
+#### Touch target
+
+An `IconButton` with a touch handler reaches the 48dp minimum target through hit slop, without changing what is drawn. This applies to `extra-small` and `small`, whose containers are smaller than 48dp. Pass `hitSlop` to override it, or `hitSlop={0}` to opt out. A disabled button, or one with no touch handler, gets no extra target.
+
+#### `Appbar.Action` and `Appbar.BackAction`
+
+`size` is no longer a numeric prop on `Appbar.Action` or `Appbar.BackAction`. They inherit `IconButton`'s named `size` (default `'small'`). Drop `size={24}`. For a custom glyph size, pass `iconSize`.
+
+```tsx
+// Before (v5)
+<Appbar.Action icon="magnify" size={24} onPress={onPress} />
+<Appbar.BackAction size={24} onPress={onPress} />
+
+// After (v6)
+<Appbar.Action icon="magnify" onPress={onPress} />
+<Appbar.BackAction onPress={onPress} />
+```
+
+#### `containerColor` while disabled
+
+A disabled `filled` or `tonal` button, or a disabled selected `outlined` one, takes the disabled container color, `onSurface` at 0.10 opacity, and ignores `containerColor`. As in 5.x, a disabled button doesn't keep the color passed for its container, just as `iconColor` doesn't apply either.
+
+#### `selected={false}` uses toggle-off colors
+
+`selected` is tri-state. Omit it for the default (non-toggle) colors. Pass `true` / `false` only for a toggle.
+
+For `filled`, the default and toggle-on containers use `primary`. Toggle-off (`selected={false}`) uses `surfaceContainer` instead of `primary`.
+
+```tsx
+// Before (v5): selected={false} still used the default (non-toggle) colors
+<IconButton icon="star-outline" mode="contained" selected={false} onPress={onPress} />
+
+// After (v6): omit selected unless the button is a toggle
+<IconButton icon="star-outline" mode="filled" onPress={onPress} />
+
+// After (v6): explicit toggle off / on
+<IconButton
+  icon={isStarred ? 'star' : 'star-outline'}
+  mode="filled"
+  selected={isStarred}
+  onPress={toggleStarred}
+/>
+```
+
+#### `Card.Title` `right` props
+
+`Card.Title` still calls `right({ size: 24 })`. Do not spread those props onto `IconButton`: `size` is no longer a number. Ignore the callback argument, or pass it as `iconSize`.
+
+```tsx
+// Before (v5)
+<Card.Title
+  title="Card title"
+  right={(props) => (
+    <IconButton {...props} icon="dots-vertical" onPress={onPress} />
+  )}
+/>
+
+// After (v6)
+<Card.Title
+  title="Card title"
+  right={() => <IconButton icon="dots-vertical" onPress={onPress} />}
+/>
+```
+
+```tsx
+// After (v6): keep the 24dp glyph from Card.Title
+<Card.Title
+  title="Card title"
+  right={(props) => (
+    <IconButton
+      icon="dots-vertical"
+      iconSize={props.size}
+      onPress={onPress}
+    />
+  )}
+/>
+```
+
 ### Typography components
 
 The Material Design 2 typography components were removed. Use `Text` with the matching `variant` instead:
@@ -1448,6 +1580,8 @@ In JavaScript, the old components import as `undefined`, so the app builds but f
 A `Text` nested in another `Text` now inherits the parent's font and color, as React Native's own `Text` does. In 5.x it reset them to the theme's default font and `onSurface`, so a `Text` with a variant inside a contained `Button` lost the button's label color, and a plain `Text` inside a `Chip` lost the chip's font. A nested `Text` with a `variant` still takes that variant's font, and its own `style` still wins over the parent's. To give a nested `Text` its own color, set `color` in its `style`, or pass it a `theme`, which makes it render like a top-level `Text`.
 
 On iOS and Android, nesting follows React Native: a `Text` inside React Native's own `Text` inherits from it as well, and a `Text` inside a `View` isn't nested, so it renders like a top-level `Text`.
+
+On the web, a `Text` under `direction="rtl"` (on `PaperProvider` or `LocaleProvider`) now aligns right by default. In 5.x it stayed left. A `textAlign` in `style` still wins.
 
 ### ToggleButton
 

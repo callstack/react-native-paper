@@ -42,7 +42,7 @@ export type Props = {
    *
    * ```js
    * <Tooltip title="Selected Camera" titleAsAriaLabel>
-   *   {(props) => <IconButton {...props} icon="camera" selected size={24} onPress={() => {}} />}
+   *   {(props) => <IconButton {...props} icon="camera" selected onPress={() => {}} />}
    * </Tooltip>
    * ```
    */
@@ -93,7 +93,7 @@ export type Props = {
  *
  * const MyComponent = () => (
  *   <Tooltip title="Selected Camera" titleAsAriaLabel>
- *     {(props) => <IconButton {...props} icon="camera" selected size={24} onPress={() => {}} />}
+ *     {(props) => <IconButton {...props} icon="camera" selected onPress={() => {}} />}
  *   </Tooltip>
  * );
  *

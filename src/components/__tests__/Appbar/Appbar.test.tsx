@@ -891,9 +891,9 @@ describe('AppbarAction', () => {
         </Appbar>
       );
 
-      // The container of the button is the one with the width
+      // The container of the button is the one with the width, around the clip
       expect(
-        screen.getByRole('button', { name: 'Favorite' }).parent
+        screen.getByRole('button', { name: 'Favorite' }).parent?.parent
       ).toHaveStyle({ width: expected });
     }
   );
@@ -901,68 +901,76 @@ describe('AppbarAction', () => {
   describe.each([
     {
       variant: 'filled',
+      defaults: { container: 'primary', icon: 'onPrimary' },
       selected: { container: 'primary', icon: 'onPrimary' },
-      unselected: { container: 'surfaceVariant', icon: 'primary' },
+      unselected: { container: 'surfaceContainer', icon: 'onSurfaceVariant' },
     },
     {
       variant: 'tonal',
-      selected: {
+      defaults: {
         container: 'secondaryContainer',
         icon: 'onSecondaryContainer',
       },
-      unselected: { container: 'surfaceVariant', icon: 'onSurfaceVariant' },
+      selected: { container: 'secondary', icon: 'onSecondary' },
+      unselected: {
+        container: 'secondaryContainer',
+        icon: 'onSecondaryContainer',
+      },
     },
-  ] as const)('a $variant action', ({ variant, selected, unselected }) => {
-    const renderAction = async (props: { selected?: boolean }) => {
-      await render(
-        <Appbar>
-          <Appbar.Action
-            icon={({ color }) => (
-              <NativeText testID="icon-color">{String(color)}</NativeText>
-            )}
-            aria-label="Favorite"
-            variant={variant}
-            onPress={() => {}}
-            {...props}
-          />
-        </Appbar>
-      );
-    };
+  ] as const)(
+    'a $variant action',
+    ({ variant, defaults, selected, unselected }) => {
+      const renderAction = async (props: { selected?: boolean }) => {
+        await render(
+          <Appbar>
+            <Appbar.Action
+              icon={({ color }) => (
+                <NativeText testID="icon-color">{String(color)}</NativeText>
+              )}
+              aria-label="Favorite"
+              variant={variant}
+              onPress={() => {}}
+              {...props}
+            />
+          </Appbar>
+        );
+      };
 
-    // The container is the view around the button
-    const container = () =>
-      screen.getByRole('button', { name: 'Favorite' }).parent;
+      // The clip, the view around the button, has the background
+      const container = () =>
+        screen.getByRole('button', { name: 'Favorite' }).parent;
 
-    it('is selected when selected is not passed', async () => {
-      await renderAction({});
+      it('has the default container color when selected is not passed', async () => {
+        await renderAction({});
 
-      expect(container()).toHaveStyle({
-        backgroundColor: LightTheme.colors[selected.container],
+        expect(container()).toHaveStyle({
+          backgroundColor: LightTheme.colors[defaults.container],
+        });
+        expect(screen.getByTestId('icon-color')).toHaveTextContent(
+          String(LightTheme.colors[defaults.icon])
+        );
       });
-      expect(screen.getByTestId('icon-color')).toHaveTextContent(
-        String(LightTheme.colors[selected.icon])
-      );
-    });
 
-    it('is selected when selected is true', async () => {
-      await renderAction({ selected: true });
+      it('is selected when selected is true', async () => {
+        await renderAction({ selected: true });
 
-      expect(container()).toHaveStyle({
-        backgroundColor: LightTheme.colors[selected.container],
+        expect(container()).toHaveStyle({
+          backgroundColor: LightTheme.colors[selected.container],
+        });
       });
-    });
 
-    it('shows the unselected container when selected is false', async () => {
-      await renderAction({ selected: false });
+      it('shows the unselected container when selected is false', async () => {
+        await renderAction({ selected: false });
 
-      expect(container()).toHaveStyle({
-        backgroundColor: LightTheme.colors[unselected.container],
+        expect(container()).toHaveStyle({
+          backgroundColor: LightTheme.colors[unselected.container],
+        });
+        expect(screen.getByTestId('icon-color')).toHaveTextContent(
+          String(LightTheme.colors[unselected.icon])
+        );
       });
-      expect(screen.getByTestId('icon-color')).toHaveTextContent(
-        String(LightTheme.colors[unselected.icon])
-      );
-    });
-  });
+    }
+  );
 
   it('does not override the icon color of a filled action by the Appbar', async () => {
     await render(

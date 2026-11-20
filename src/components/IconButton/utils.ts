@@ -1,155 +1,181 @@
 import type { ColorValue } from 'react-native';
 
+import { IconButtonTokens } from './tokens';
+import type { ColorSet, Mode, Shape, Size, Width } from './tokens';
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../theme/types';
+import { resolveCornerRadius } from '../../theme/utils/shape';
+import type { ShapeToken } from '../../theme/utils/shape';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
-type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
-
-type BaseProps = {
-  theme: InternalTheme;
-  isMode: (mode: IconButtonMode) => boolean;
-  disabled?: boolean;
-  selected?: boolean;
-};
-
-const getBackgroundColor = ({
-  theme,
-  isMode,
-  disabled,
-  selected,
-  customContainerColor,
-}: BaseProps & { customContainerColor?: ColorValue }) => {
-  if (disabled) {
-    if (isMode('contained') || isMode('contained-tonal')) {
-      return theme.colors.onSurface;
-    }
-  }
-
-  if (typeof customContainerColor !== 'undefined') {
-    return customContainerColor;
-  }
-
-  if (isMode('contained')) {
-    if (selected) {
-      return theme.colors.primary;
-    }
-    return theme.colors.surfaceVariant;
-  }
-
-  if (isMode('contained-tonal')) {
-    if (selected) {
-      return theme.colors.secondaryContainer;
-    }
-    return theme.colors.surfaceVariant;
-  }
-
-  if (isMode('outlined')) {
-    if (selected) {
-      return theme.colors.inverseSurface;
-    }
-  }
-
-  return undefined;
-};
-
-const getIconColor = ({
-  theme,
-  isMode,
-  disabled,
-  selected,
-  customIconColor,
-}: BaseProps & { customIconColor?: ColorValue }) => {
-  if (disabled) {
-    return theme.colors.onSurface;
-  }
-
-  if (typeof customIconColor !== 'undefined') {
-    return customIconColor;
-  }
-
-  if (isMode('contained')) {
-    if (selected) {
-      return theme.colors.onPrimary;
-    }
-    return theme.colors.primary;
-  }
-
-  if (isMode('contained-tonal')) {
-    if (selected) {
-      return theme.colors.onSecondaryContainer;
-    }
-    return theme.colors.onSurfaceVariant;
-  }
-
-  if (isMode('outlined')) {
-    if (selected) {
-      return theme.colors.inverseOnSurface;
-    }
-    return theme.colors.onSurfaceVariant;
-  }
-
-  if (selected) {
-    return theme.colors.primary;
-  }
-  return theme.colors.onSurfaceVariant;
-};
-
-export const getIconButtonColor = ({
-  theme,
-  disabled,
-  mode,
-  selected,
-  customIconColor,
-  customContainerColor,
-}: {
-  theme: InternalTheme;
-  disabled?: boolean;
-  selected?: boolean;
-  mode?: IconButtonMode;
-  customIconColor?: ColorValue;
-  customContainerColor?: ColorValue;
-}): {
+export type IconButtonColors = {
   iconColor: ColorValue;
   iconOpacity: number;
   backgroundColor: ColorValue | undefined;
-  borderColor: ColorValue;
   backgroundOpacity: number;
-} => {
-  const isMode = (modeToCompare: IconButtonMode) => {
-    return mode === modeToCompare;
-  };
+  borderColor: ColorValue;
+  borderWidth: number;
+};
 
-  const baseIconColorProps = {
-    theme,
-    isMode,
-    disabled,
-    selected,
-  };
+export type IconButtonDimensions = {
+  width: number;
+  height: number;
+  iconSize: number;
+  outlineWidth: number;
+  restingRadius: number;
+  pressedRadius: number;
+};
 
-  const iconColor = getIconColor({
-    ...baseIconColorProps,
-    customIconColor,
-  });
+const colorSetFor = (mode: Mode, selected: boolean | undefined): ColorSet => {
+  if (selected === true) {
+    return IconButtonTokens.modes[mode].selected;
+  }
+  if (selected === false) {
+    return IconButtonTokens.modes[mode].unselected;
+  }
+  return IconButtonTokens.modes[mode].default;
+};
 
+const hasDisabledContainer = (
+  mode: Mode,
+  selected: boolean | undefined
+): boolean => {
+  if (mode === 'filled' || mode === 'tonal') {
+    return true;
+  }
+  return mode === 'outlined' && selected === true;
+};
+
+/**
+ * Resolve container, icon, and outline colors for an icon button.
+ *
+ * A disabled button always takes the disabled icon color, whatever
+ * `customIconColor` says.
+ *
+ * `selected` is a tri-state: `undefined` is the default (non-toggle)
+ * appearance; `true`/`false` are the toggle-ON / toggle-OFF color sets.
+ */
+export const getIconButtonColor = ({
+  theme,
+  disabled,
+  mode = 'standard',
+  selected,
+  customIconColor,
+  customContainerColor,
+  outlineWidth = 0,
+}: {
+  theme: InternalTheme;
+  disabled?: boolean;
+  mode?: Mode;
+  selected?: boolean;
+  customIconColor?: ColorValue;
+  customContainerColor?: ColorValue;
+  outlineWidth?: number;
+}): IconButtonColors => {
   const iconOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
+  const usesDisabledContainer =
+    Boolean(disabled) && hasDisabledContainer(mode, selected);
 
-  const backgroundColor = getBackgroundColor({
-    ...baseIconColorProps,
-    customContainerColor,
-  });
+  if (usesDisabledContainer) {
+    return {
+      iconColor: theme.colors[IconButtonTokens.disabled.icon],
+      iconOpacity,
+      backgroundColor: theme.colors[IconButtonTokens.disabled.container],
+      backgroundOpacity: IconButtonTokens.disabled.containerOpacity,
+      borderColor: theme.colors[IconButtonTokens.disabled.outline],
+      borderWidth: 0,
+    };
+  }
 
-  const backgroundOpacity =
-    disabled && (isMode('contained') || isMode('contained-tonal'))
-      ? stateOpacity.disabled
-      : stateOpacity.enabled;
+  const set = colorSetFor(mode, selected);
 
   return {
-    iconColor,
+    iconColor: disabled
+      ? theme.colors[IconButtonTokens.disabled.icon]
+      : (customIconColor ?? theme.colors[set.icon]),
     iconOpacity,
-    backgroundColor,
-    borderColor: theme.colors.outlineVariant,
-    backgroundOpacity,
+    backgroundColor:
+      customContainerColor ??
+      (set.container ? theme.colors[set.container] : undefined),
+    backgroundOpacity: stateOpacity.enabled,
+    borderColor: theme.colors[set.outline ?? 'outlineVariant'],
+    borderWidth: set.outline ? outlineWidth : 0,
+  };
+};
+
+/**
+ * Resting container shape. Toggle-ON inverts round↔square; pressed uses
+ * the shared pressed shape (same for round and square).
+ */
+export const resolveShapeToken = ({
+  size = 'small',
+  shape = 'round',
+  selected,
+  pressed = false,
+}: {
+  size?: Size;
+  shape?: Shape;
+  selected?: boolean;
+  pressed?: boolean;
+}): ShapeToken => {
+  const spec = IconButtonTokens.sizes[size];
+  if (pressed) {
+    return spec.pressedShape;
+  }
+  const inverted = selected === true;
+  if (shape === 'round') {
+    return inverted ? spec.squareShape : 'full';
+  }
+  return inverted ? 'full' : spec.squareShape;
+};
+
+export const getDimensions = ({
+  theme,
+  size = 'small',
+  width = 'default',
+  shape = 'round',
+  selected,
+  iconSize,
+}: {
+  theme: InternalTheme;
+  size?: Size;
+  width?: Width;
+  shape?: Shape;
+  selected?: boolean;
+  iconSize?: number;
+}): IconButtonDimensions => {
+  const spec = IconButtonTokens.sizes[size];
+  const padding = spec.widths[width];
+  const resolvedIcon = iconSize ?? spec.icon;
+  const height = spec.containerHeight;
+  // From the spec icon, not `iconSize`: the container keeps the scale of its
+  // `size` and a `default` width stays square when the glyph is resized.
+  const containerWidth = spec.icon + padding.leading + padding.trailing;
+
+  const restingToken = resolveShapeToken({
+    size,
+    shape,
+    selected,
+    pressed: false,
+  });
+  const pressedToken = resolveShapeToken({
+    size,
+    shape,
+    selected,
+    pressed: true,
+  });
+
+  const roundRadius = height / 2;
+  const resolveRadius = (token: ShapeToken) =>
+    token === 'full' ? roundRadius : resolveCornerRadius(theme, token);
+
+  return {
+    width: containerWidth,
+    height,
+    iconSize: resolvedIcon,
+    outlineWidth: spec.outlineWidth,
+    restingRadius: resolveRadius(restingToken),
+    pressedRadius: resolveRadius(pressedToken),
   };
 };
