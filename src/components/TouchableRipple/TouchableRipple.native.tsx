@@ -163,14 +163,16 @@ const TouchableRipple = ({
   }
 
   if (TouchableRipple.supported) {
-    const androidRipple =
-      rippleEffectEnabled && isInteractive
-        ? (background ?? {
-            color: calculatedRippleColor,
-            borderless,
-            foreground: useForeground,
-          })
-        : undefined;
+    // Kept while disabled: a disabled view never presses, so it shows no
+    // ripple, but a press that disables the touchable is only cleared by the
+    // ripple's own press out. Without it the pressed layer stays drawn.
+    const androidRipple = rippleEffectEnabled
+      ? (background ?? {
+          color: calculatedRippleColor,
+          borderless,
+          foreground: useForeground,
+        })
+      : undefined;
 
     return (
       <Pressable
