@@ -10,12 +10,13 @@ import {
   useTooltipFade,
   useTouchFocusGuard,
 } from './hooks';
-import { takeSingletonSlot } from './registry';
+import { releaseSingletonSlot, takeSingletonSlot } from './registry';
 import { Tokens } from './tokens';
 import { getTooltipPosition, isPointerInside } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
 
@@ -116,6 +117,20 @@ const Tooltip = ({
   const hide = React.useCallback(() => setVisible(false), []);
 
   useHideOnDimensionsChange(hide);
+
+  React.useEffect(() => {
+    if (!visible) {
+      return undefined;
+    }
+    return () => releaseSingletonSlot(hide);
+  }, [visible, hide]);
+
+  // Web: Escape closes it, as focus alone keeps it open
+  useOverlayDismiss({
+    enabled: visible && Platform.OS === 'web',
+    dismissable: true,
+    onDismiss: hide,
+  });
 
   const show = React.useCallback(() => {
     showTimer.clear();

@@ -3,8 +3,10 @@ import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TargetedEvent,
   ViewStyle,
 } from 'react-native';
 
@@ -96,6 +98,14 @@ export type ShellProps = {
    */
   delayLongPress?: number;
   /**
+   * Function to execute when the element receives focus.
+   */
+  onFocus?: (e: NativeSyntheticEvent<TargetedEvent>) => void;
+  /**
+   * Function to execute when the element loses focus.
+   */
+  onBlur?: (e: NativeSyntheticEvent<TargetedEvent>) => void;
+  /**
    * Whether the shell can't be pressed. Turns a control off without removing
    * `onPress`, which would render another element and remount the content.
    */
@@ -121,6 +131,10 @@ export type ShellProps = {
    * Indicates whether the element's controlled content is expanded.
    */
   'aria-expanded'?: boolean;
+  /**
+   * Id of the element that describes this one, e.g. a tooltip.
+   */
+  'aria-describedby'?: string;
   /**
    * Largest scale the label font can reach (auto-built content only).
    */
@@ -208,12 +222,15 @@ const Shell = ({
   onLongPress,
   onPressOut,
   delayLongPress,
+  onFocus,
+  onBlur,
   disabled,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
   'aria-busy': ariaBusy,
   'aria-expanded': ariaExpanded,
+  'aria-describedby': ariaDescribedBy,
   labelMaxFontSizeMultiplier,
   labelAnimatedStyle,
   background,
@@ -475,16 +492,25 @@ const Shell = ({
                       previous instanceof HTMLElement ? previous : null;
                   }
                   focusTarget.onFocus?.(event);
+                  onFocus?.(event);
                 }
               : undefined
           }
-          onBlur={focusTarget.onBlur}
+          onBlur={
+            onBlur
+              ? (event) => {
+                  focusTarget.onBlur?.();
+                  onBlur(event);
+                }
+              : focusTarget.onBlur
+          }
           aria-label={ariaLabel}
           role={isWebImage ? 'img' : 'button'}
           aria-checked={ariaChecked}
           aria-selected={ariaSelected}
           aria-busy={ariaBusy}
           aria-expanded={ariaExpanded}
+          aria-describedby={ariaDescribedBy}
           testID={testID}
           style={[children ? styles.fill : null, ...focusTarget.style]}
         >

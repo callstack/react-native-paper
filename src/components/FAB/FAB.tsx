@@ -3,8 +3,10 @@ import { View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TargetedEvent,
   ViewStyle,
 } from 'react-native';
 
@@ -58,6 +60,14 @@ export type Props = {
    */
   delayLongPress?: number;
   /**
+   * Function to execute when the element receives focus.
+   */
+  onFocus?: (e: NativeSyntheticEvent<TargetedEvent>) => void;
+  /**
+   * Function to execute when the element loses focus.
+   */
+  onBlur?: (e: NativeSyntheticEvent<TargetedEvent>) => void;
+  /**
    * Accessibility label. Falls back to nothing if unset.
    */
   'aria-label'?: string;
@@ -78,6 +88,10 @@ export type Props = {
    * Indicates whether the element's controlled content is expanded.
    */
   'aria-expanded'?: boolean;
+  /**
+   * Id of the element that describes this one, e.g. a tooltip.
+   */
+  'aria-describedby'?: string;
   /**
    * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
@@ -137,6 +151,8 @@ const FAB = ({
   onLongPress,
   onPressOut,
   delayLongPress,
+  onFocus,
+  onBlur,
   containerColor,
   contentColor,
   'aria-label': ariaLabel,
@@ -144,6 +160,7 @@ const FAB = ({
   'aria-selected': ariaSelected,
   'aria-busy': ariaBusy,
   'aria-expanded': ariaExpanded,
+  'aria-describedby': ariaDescribedBy,
   background,
   style,
   testID,
@@ -160,6 +177,8 @@ const FAB = ({
     onLongPress={onLongPress}
     onPressOut={onPressOut}
     delayLongPress={delayLongPress}
+    onFocus={onFocus}
+    onBlur={onBlur}
     containerColor={containerColor}
     contentColor={contentColor}
     aria-label={ariaLabel}
@@ -167,6 +186,7 @@ const FAB = ({
     aria-selected={ariaSelected}
     aria-busy={ariaBusy}
     aria-expanded={ariaExpanded}
+    aria-describedby={ariaDescribedBy}
     background={background}
     style={style}
     testID={testID}

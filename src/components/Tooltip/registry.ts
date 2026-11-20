@@ -10,6 +10,12 @@ export const takeSingletonSlot = (dismiss: () => void) => {
   dismissCurrentTooltip = dismiss;
 };
 
+export const releaseSingletonSlot = (dismiss: () => void) => {
+  if (dismissCurrentTooltip === dismiss) {
+    dismissCurrentTooltip = null;
+  }
+};
+
 // Mobile backdrop hit-forwarding: each RichTooltip registers its trigger's
 // screen rect so the backdrop can forward presses that land on another trigger
 // rather than consuming them. This allows one-tap switching between tooltips.

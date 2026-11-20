@@ -21,6 +21,7 @@ import {
   forwardPressToTriggerAt,
   refreshRichTriggers,
   registerRichTrigger,
+  releaseSingletonSlot,
   subscribeToTriggerRefresh,
   takeSingletonSlot,
   unregisterRichTrigger,
@@ -200,13 +201,22 @@ const RichTooltip = ({
   const hideTimer = useTimeout();
   const focusTimer = useTimeout();
 
+  const dismissFromSlot = React.useCallback(() => setVisible(false), []);
+
   const show = React.useCallback(() => {
     showTimer.clear();
     hideTimer.clear();
-    takeSingletonSlot(() => setVisible(false));
+    takeSingletonSlot(dismissFromSlot);
     refreshRichTriggers();
     setVisible(true);
-  }, [showTimer, hideTimer]);
+  }, [showTimer, hideTimer, dismissFromSlot]);
+
+  React.useEffect(() => {
+    if (!visible) {
+      return undefined;
+    }
+    return () => releaseSingletonSlot(dismissFromSlot);
+  }, [visible, dismissFromSlot]);
 
   const hide = React.useCallback(() => {
     showTimer.clear();

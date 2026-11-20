@@ -125,7 +125,9 @@ describe('Appbar context', () => {
     await render(
       <Appbar dark>
         <Tooltip title="Menu">
-          <Appbar.Action icon={ColorIcon} aria-label="Menu" />
+          {(props) => (
+            <Appbar.Action {...props} icon={ColorIcon} aria-label="Menu" />
+          )}
         </Tooltip>
         <View>
           <Appbar.Content title="Title" />
@@ -613,15 +615,18 @@ describe('Appbar layout', () => {
         <Appbar mode={mode} dark>
           <Appbar.Content title="Title" />
           <Tooltip title="Menu">
-            <View>
-              <Appbar.Action
-                icon={({ color }) => (
-                  <NativeText testID="icon-color">{String(color)}</NativeText>
-                )}
-                aria-label="Menu"
-                onPress={() => {}}
-              />
-            </View>
+            {(props) => (
+              <View>
+                <Appbar.Action
+                  {...props}
+                  icon={({ color }) => (
+                    <NativeText testID="icon-color">{String(color)}</NativeText>
+                  )}
+                  aria-label="Menu"
+                  onPress={() => {}}
+                />
+              </View>
+            )}
           </Tooltip>
         </Appbar>
       );

@@ -30,6 +30,8 @@ import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import TooltipCompound from '../Tooltip';
+import * as registry from '../Tooltip/registry';
+import { releaseSingletonSlot, takeSingletonSlot } from '../Tooltip/registry';
 import Tooltip, { type TooltipTriggerProps } from '../Tooltip/Tooltip';
 
 const ViewPrototype: React.ComponentRef<typeof View> = View.prototype;
@@ -658,6 +660,51 @@ describe('Tooltip', () => {
         });
 
         expect(queryByText('some tooltip text')).toBeNull();
+      });
+
+      it('hides the tooltip on Escape while the trigger keeps focus', async () => {
+        const listeners: Array<
+          (event: { key: string; defaultPrevented: boolean }) => void
+        > = [];
+        Reflect.defineProperty(globalThis, 'document', {
+          value: {
+            addEventListener: (
+              type: string,
+              listener: (event: {
+                key: string;
+                defaultPrevented: boolean;
+              }) => void
+            ) => {
+              if (type === 'keydown') listeners.push(listener);
+            },
+            removeEventListener: () => {},
+          },
+          configurable: true,
+          writable: true,
+        });
+
+        try {
+          const {
+            wrapper: { getByText, queryByText },
+          } = await setup({ leaveTouchDelay: 0 });
+
+          await act(async () => {
+            await fireEvent(getTrigger(), 'focus');
+          });
+          expect(getByText('some tooltip text')).toBeOnTheScreen();
+
+          await act(() => {
+            listeners.forEach((listener) =>
+              listener({ key: 'Escape', defaultPrevented: false })
+            );
+          });
+          await runTimers();
+          await runTimers();
+
+          expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
+        } finally {
+          Reflect.deleteProperty(globalThis, 'document');
+        }
       });
     });
 
@@ -1688,4 +1735,84 @@ describe('Tooltip.Rich', () => {
       }
     });
   });
+});
+
+describe('singleton slot', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('dismisses the tooltip holding the slot when another takes it', () => {
+    const first = jest.fn();
+    takeSingletonSlot(first);
+    takeSingletonSlot(jest.fn());
+
+    expect(first).toHaveBeenCalledTimes(1);
+  });
+
+  it('forgets a released tooltip', () => {
+    const first = jest.fn();
+    takeSingletonSlot(first);
+    releaseSingletonSlot(first);
+    takeSingletonSlot(jest.fn());
+
+    expect(first).not.toHaveBeenCalled();
+  });
+
+  it("keeps the slot when a tooltip that doesn't hold it releases", () => {
+    const first = jest.fn();
+    const second = jest.fn();
+    takeSingletonSlot(first);
+    releaseSingletonSlot(second);
+    takeSingletonSlot(jest.fn());
+
+    expect(first).toHaveBeenCalledTimes(1);
+  });
+
+  type Trigger = (props: TooltipTriggerProps) => React.ReactElement;
+
+  it.each<[string, (children: Trigger) => React.ReactElement]>([
+    [
+      'Tooltip',
+      (children) => <Tooltip title="some tooltip text">{children}</Tooltip>,
+    ],
+    [
+      'Tooltip.Rich',
+      (children) => (
+        <TooltipCompound.Rich content="some tooltip text">
+          {children}
+        </TooltipCompound.Rich>
+      ),
+    ],
+  ])(
+    '%s releases the slot it took when it unmounts',
+    async (_, renderTooltip) => {
+      jest.replaceProperty(Platform, 'OS', 'web');
+      jest
+        .spyOn(ViewPrototype, 'measure')
+        .mockImplementation((cb) => cb(0, 0, 80, 50, 220, 200));
+      const take = jest.spyOn(registry, 'takeSingletonSlot');
+      const release = jest.spyOn(registry, 'releaseSingletonSlot');
+
+      const { unmount } = await render(
+        <PaperProvider>
+          {renderTooltip((props) => (
+            <DummyComponent {...props} />
+          ))}
+        </PaperProvider>
+      );
+
+      await act(async () => {
+        await fireEvent(
+          screen.getByTestId('trigger', { includeHiddenElements: true }),
+          'focus'
+        );
+      });
+
+      expect(take).toHaveBeenCalledTimes(1);
+      await act(() => unmount());
+
+      expect(release).toHaveBeenCalledWith(take.mock.calls[0][0]);
+    }
+  );
 });
