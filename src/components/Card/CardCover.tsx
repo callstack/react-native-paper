@@ -7,11 +7,11 @@ import type { ThemeProp } from '../../theme/types';
 export type Props = Omit<ImageProps, 'style'> & {
   /**
    * Width-to-height ratio of the cover, for example `16 / 9`. When set, the
-   * cover drops its default height of 195 and resizes with the Card's width.
+   * cover drops its default height of 194 and resizes with the Card's width.
    */
   aspectRatio?: number;
   /**
-   * Style for the cover image. The default size is full width by 195. Consumer
+   * Style for the cover image. The default size is full width by 194. Consumer
    * styles are applied after these defaults.
    */
   style?: StyleProp<ImageStyle>;
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   defaultHeight: {
-    height: 195,
+    height: 194,
   },
   autoHeight: {
     height: 'auto',
