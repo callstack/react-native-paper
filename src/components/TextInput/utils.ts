@@ -418,7 +418,7 @@ export const getFilledTextInputData = (
       flex: 1,
       color: onSurface,
       fontSize: INPUT_FONT_SIZE,
-      textAlign: hasSuffix === shared.isRTL ? 'left' : 'right',
+      textAlign: shared.isRTL ? 'right' : 'left',
       writingDirection: shared.isRTL ? 'rtl' : 'ltr',
     },
     textInputProps.multiline && {
@@ -538,7 +538,7 @@ export const getOutlinedTextInputData = (
       flex: 1,
       color: onSurface,
       fontSize: INPUT_FONT_SIZE,
-      textAlign: hasSuffix === shared.isRTL ? 'left' : 'right',
+      textAlign: shared.isRTL ? 'right' : 'left',
       writingDirection: shared.isRTL ? 'rtl' : 'ltr',
     },
     textInputProps.multiline && {
