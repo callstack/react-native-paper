@@ -117,12 +117,10 @@ const AppbarAction = ({
       (isLeading ? colors.onSurface : colors.onSurfaceVariant))
     : iconColor;
 
-  // A filled or tonal action is an icon button in the matching mode, so
-  // `variant` takes over `mode`. `selected` goes through as it is: without it
-  // the action is no toggle and has the default container color.
-  const variantProps = isStandard
-    ? { mode }
-    : { mode: variantIconButtonModes[variant] };
+  // `filled` and `tonal` are also modes of the icon button, so `variant` takes
+  // over `mode`. `selected` goes through as it is: without it the action is no
+  // toggle and has the default container color.
+  const iconButtonMode = isStandard ? mode : variant;
 
   return (
     <IconButton
@@ -131,7 +129,7 @@ const AppbarAction = ({
       icon={icon}
       disabled={disabled}
       aria-label={ariaLabel}
-      mode={variantProps.mode}
+      mode={iconButtonMode}
       selected={selected}
       width={isStandard ? undefined : width}
       style={style}
@@ -142,11 +140,6 @@ const AppbarAction = ({
     />
   );
 };
-
-const variantIconButtonModes = {
-  filled: 'filled',
-  tonal: 'tonal',
-} as const;
 
 AppbarAction.displayName = 'Appbar.Action';
 
