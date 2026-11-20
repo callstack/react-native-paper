@@ -119,7 +119,7 @@ module.exports = function (api) {
 };
 ```
 
-The plugin only works if you are importing the library using ES2015 import statements and not with `require`.
+The plugin only works if you are importing the library using ES2015 import statements and not with `require`. It rewrites named imports, such as `import { Button } from 'react-native-paper'`. A namespace import, such as `import * as Paper from 'react-native-paper'`, still loads the whole library.
 
 If your `babel.config.js` also lists `react-native-worklets/plugin`, as Reanimated requires for Community CLI projects, keep it in the top-level `plugins`. Babel adds the `env.production` plugins after it, which is fine because `react-native-paper/babel` only rewrites `import` statements.
 
