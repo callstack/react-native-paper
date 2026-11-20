@@ -44,7 +44,7 @@ const TooltipExample = () => {
     navigation.setOptions({
       header: () => (
         <Appbar.Header elevated>
-          <Tooltip title="Go back">
+          <Tooltip title="Go back" titleAsAriaLabel>
             {(props) => (
               <Appbar.BackAction
                 {...props}
@@ -53,17 +53,17 @@ const TooltipExample = () => {
             )}
           </Tooltip>
           <Appbar.Content title="Tooltips" />
-          <Tooltip title="Print ⌘ + P">
+          <Tooltip title="Print ⌘ + P" titleAsAriaLabel>
             {(props) => (
               <Appbar.Action {...props} icon="printer" onPress={() => {}} />
             )}
           </Tooltip>
-          <Tooltip title="Search">
+          <Tooltip title="Search" titleAsAriaLabel>
             {(props) => (
               <Appbar.Action {...props} icon="magnify" onPress={() => {}} />
             )}
           </Tooltip>
-          <Tooltip title="More options">
+          <Tooltip title="More options" titleAsAriaLabel>
             {(props) => (
               <Appbar.Action {...props} icon={MORE_ICON} onPress={() => {}} />
             )}
@@ -90,6 +90,7 @@ const TooltipExample = () => {
               <Tooltip
                 key={index}
                 title={transport.title}
+                titleAsAriaLabel
                 enterTouchDelay={transport.enterTouchDelay}
                 leaveTouchDelay={transport.leaveTouchDelay}
               >
@@ -107,7 +108,7 @@ const TooltipExample = () => {
         </List.Section>
         <List.Section title="Icon toggles">
           <View style={styles.toggleRow}>
-            <Tooltip title="Align left">
+            <Tooltip title="Align left" titleAsAriaLabel>
               {(props) => (
                 <IconButton
                   {...props}
@@ -118,7 +119,7 @@ const TooltipExample = () => {
                 />
               )}
             </Tooltip>
-            <Tooltip title="Align center">
+            <Tooltip title="Align center" titleAsAriaLabel>
               {(props) => (
                 <IconButton
                   {...props}
@@ -129,7 +130,7 @@ const TooltipExample = () => {
                 />
               )}
             </Tooltip>
-            <Tooltip title="Align right">
+            <Tooltip title="Align right" titleAsAriaLabel>
               {(props) => (
                 <IconButton
                   {...props}
@@ -245,7 +246,7 @@ const TooltipExample = () => {
         </List.Section>
       </ScreenWrapper>
       <View style={styles.fabContainer}>
-        <Tooltip title="Press Me">
+        <Tooltip title="Press Me" titleAsAriaLabel>
           {(props) => <FAB {...props} icon="plus" onPress={() => {}} />}
         </Tooltip>
       </View>

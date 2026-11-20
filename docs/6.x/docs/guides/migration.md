@@ -577,7 +577,7 @@ The tooltip now follows the Material Design 3 plain tooltip:
 - It fades in and out, and appears 4dp away from the trigger, below it or above it when there's no room. It keeps at least 8dp from the left and right screen edges, and from the top one when it's too tall for either side.
 - In right-to-left layouts it is placed from the trailing edge.
 
-On web, the tooltip also opens when the trigger gets keyboard focus, and the trigger is described by the tooltip through `aria-describedby`. On iOS and Android, the trigger gets the title as its `aria-label`, unless you pass your own `aria-label` after the spread.
+On web, the tooltip also opens when the trigger gets keyboard focus, and the trigger is described by the tooltip through `aria-describedby`. On iOS and Android, the trigger gets the title as its `accessibilityHint`. For a trigger without a visible label, such as an icon button, set `titleAsAriaLabel` so the title becomes its `aria-label` on every platform instead.
 
 `Tooltip.Rich` is new. It shows an optional title, supporting text and action buttons, and uses the same render function for its trigger. Pressing the trigger toggles the tooltip, so the trigger's own `onPress` replaces it. Use a trigger without an `onPress`, or call both:
 

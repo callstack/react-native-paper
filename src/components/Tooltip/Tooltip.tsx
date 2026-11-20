@@ -32,6 +32,7 @@ export type TooltipTriggerProps = {
   onBlur?: () => void;
   'aria-label'?: string;
   'aria-describedby'?: string;
+  accessibilityHint?: string;
 };
 
 export type Props = {
@@ -40,7 +41,7 @@ export type Props = {
    * tooltip's show/hide behavior and must be spread onto the returned element:
    *
    * ```js
-   * <Tooltip title="Selected Camera">
+   * <Tooltip title="Selected Camera" titleAsAriaLabel>
    *   {(props) => <IconButton {...props} icon="camera" selected size={24} onPress={() => {}} />}
    * </Tooltip>
    * ```
@@ -58,6 +59,12 @@ export type Props = {
    * Tooltip title
    */
   title: string;
+  /**
+   * Uses the title as the trigger's accessible name instead of its description.
+   * Set it for a trigger without a visible label, such as an icon button. Leave
+   * it off when the trigger has its own name, or the title replaces it.
+   */
+  titleAsAriaLabel?: boolean;
   /**
    * Specifies the largest possible scale a title font can reach.
    */
@@ -85,7 +92,7 @@ export type Props = {
  * import { IconButton, Tooltip } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Tooltip title="Selected Camera">
+ *   <Tooltip title="Selected Camera" titleAsAriaLabel>
  *     {(props) => <IconButton {...props} icon="camera" selected size={24} onPress={() => {}} />}
  *   </Tooltip>
  * );
@@ -98,6 +105,7 @@ const Tooltip = ({
   enterTouchDelay = 500,
   leaveTouchDelay = 1500,
   title,
+  titleAsAriaLabel = false,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier,
   testID,
@@ -206,9 +214,13 @@ const Tooltip = ({
             if (!touchFocusGuard.consumeTouchFocus()) show();
           },
           onBlur: handleTouchEnd,
-          'aria-describedby': tooltipId,
         }
-      : { 'aria-label': title }),
+      : {}),
+    ...(titleAsAriaLabel
+      ? { 'aria-label': title }
+      : Platform.OS === 'web'
+        ? { 'aria-describedby': tooltipId }
+        : { accessibilityHint: title }),
   };
 
   return (
@@ -232,7 +244,7 @@ const Tooltip = ({
             ]}
           >
             <Text
-              // web announces it through the trigger's `aria-describedby`
+              // web announces it through the trigger's `aria-describedby` or `aria-label`
               aria-live={Platform.OS === 'web' ? undefined : 'polite'}
               numberOfLines={Tokens.plain.maxLines}
               selectable={false}

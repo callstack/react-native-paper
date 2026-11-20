@@ -223,10 +223,13 @@ describe('Tooltip', () => {
     });
 
     describe('accessibility', () => {
-      it('names the trigger with the title so it is announceable', async () => {
+      it('describes the trigger with the title so it is announceable', async () => {
         await setup();
 
-        expect(getTrigger()).toHaveAccessibleName('some tooltip text');
+        expect(getTrigger()).toHaveProp(
+          'accessibilityHint',
+          'some tooltip text'
+        );
 
         await user.longPress(getTrigger());
 
@@ -247,6 +250,17 @@ describe('Tooltip', () => {
         });
 
         expect(getTrigger()).toHaveAccessibleName('Own label');
+        expect(getTrigger()).toHaveProp(
+          'accessibilityHint',
+          'some tooltip text'
+        );
+      });
+
+      it('names the trigger with the title when titleAsAriaLabel is set', async () => {
+        await setup({ titleAsAriaLabel: true });
+
+        expect(getTrigger()).toHaveAccessibleName('some tooltip text');
+        expect(getTrigger()).not.toHaveProp('accessibilityHint');
       });
     });
 
@@ -729,6 +743,13 @@ describe('Tooltip', () => {
 
         expect(describedBy).toEqual(expect.any(String));
         expect(getTooltipContainer()).toHaveProp('nativeID', describedBy);
+      });
+
+      it('names the trigger with the title when titleAsAriaLabel is set', async () => {
+        await setup({ titleAsAriaLabel: true });
+
+        expect(getTrigger()).toHaveAccessibleName('some tooltip text');
+        expect(getTrigger()).not.toHaveProp('aria-describedby');
       });
     });
 
