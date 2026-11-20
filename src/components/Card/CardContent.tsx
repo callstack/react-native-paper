@@ -2,6 +2,8 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import { CardSpacing } from './tokens';
+
 export type Props = ViewProps & {
   /**
    * Items inside the `Card.Content`.
@@ -38,8 +40,8 @@ CardContent.displayName = 'Card.Content';
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingHorizontal: CardSpacing.horizontalPadding,
+    paddingVertical: CardSpacing.contentVerticalPadding,
   },
 });
 

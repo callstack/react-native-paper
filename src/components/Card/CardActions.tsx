@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import { CardSpacing } from './tokens';
 import type { ThemeProp } from '../../theme/types';
 
 export type Props = ViewProps & {
@@ -46,10 +47,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    // Material Card specs: 16dp left/right padding.
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    gap: 8,
+    paddingHorizontal: CardSpacing.horizontalPadding,
+    paddingVertical: CardSpacing.actionsVerticalPadding,
+    gap: CardSpacing.actionsGap,
   },
 });
 
