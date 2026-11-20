@@ -528,7 +528,9 @@ Using `Appbar` as a bottom bar is deprecated. Material Design 3 moves the bottom
 
 ### Avatar
 
-The `style` prop for `Avatar.Icon`, `Avatar.Image` and `Avatar.Text` no longer configures the background color. Use the `backgroundColor` prop instead. The text or icon color is still derived from the background color unless `color` is specified.
+The `style` prop for `Avatar.Icon`, `Avatar.Image` and `Avatar.Text` no longer configures the background color. Use the `backgroundColor` prop instead.
+
+The default background color is now `theme.colors.primaryContainer`, and the default icon or text color is `theme.colors.onPrimaryContainer`. `Avatar.Icon` and `Avatar.Text` no longer derive their icon or text color from the background color. Pass a matching `color` when you set a custom `backgroundColor`.
 
 e.g.:
 
@@ -537,6 +539,7 @@ e.g.:
   label="XD"
 - style={{ backgroundColor: 'red' }}
 + backgroundColor="red"
++ color="white"
 />
 ```
 

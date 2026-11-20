@@ -27,14 +27,18 @@ exports[`DataTable.Cell renders data table cell 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
-        undefined,
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 14,
+            "fontWeight": "400",
+            "letterSpacing": 0.25,
+            "lineHeight": 20,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -284,14 +288,18 @@ exports[`DataTable.Cell renders data table cell with text content 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
-        undefined,
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 14,
+            "fontWeight": "400",
+            "letterSpacing": 0.25,
+            "lineHeight": 20,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -329,14 +337,18 @@ exports[`DataTable.Cell renders right aligned data table cell 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
-        undefined,
+        [
+          {
+            "fontFamily": "System",
+            "fontSize": 14,
+            "fontWeight": "400",
+            "letterSpacing": 0.25,
+            "lineHeight": 20,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -385,28 +397,30 @@ exports[`DataTable.Header renders data table header 1`] = `
           },
           {
             "color": "rgba(29, 27, 32, 1)",
-            "fontFamily": "System",
-            "fontWeight": "400",
-            "letterSpacing": 0,
-          },
-          {
             "writingDirection": "ltr",
           },
           [
             {
-              "alignItems": "center",
+              "fontFamily": "System",
               "fontSize": 12,
               "fontWeight": "500",
-              "lineHeight": 24,
+              "letterSpacing": 0.5,
+              "lineHeight": 16,
             },
-            {
-              "maxHeight": 48,
-            },
-            {},
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            undefined,
+            [
+              {
+                "alignItems": "center",
+                "lineHeight": 24,
+              },
+              {
+                "maxHeight": 48,
+              },
+              {},
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              undefined,
+            ],
           ],
         ]
       }
@@ -438,28 +452,30 @@ exports[`DataTable.Header renders data table header 1`] = `
           },
           {
             "color": "rgba(29, 27, 32, 1)",
-            "fontFamily": "System",
-            "fontWeight": "400",
-            "letterSpacing": 0,
-          },
-          {
             "writingDirection": "ltr",
           },
           [
             {
-              "alignItems": "center",
+              "fontFamily": "System",
               "fontSize": 12,
               "fontWeight": "500",
-              "lineHeight": 24,
+              "letterSpacing": 0.5,
+              "lineHeight": 16,
             },
-            {
-              "maxHeight": 48,
-            },
-            {},
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            undefined,
+            [
+              {
+                "alignItems": "center",
+                "lineHeight": 24,
+              },
+              {
+                "maxHeight": 48,
+              },
+              {},
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              undefined,
+            ],
           ],
         ]
       }
@@ -496,21 +512,24 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
+            "fontFamily": "System",
             "fontSize": 12,
-            "marginRight": 16,
+            "fontWeight": "400",
+            "letterSpacing": 0.4,
+            "lineHeight": 16,
           },
-          {
-            "color": "rgba(73, 69, 79, 1)",
-          },
+          [
+            {
+              "marginRight": 16,
+            },
+            {
+              "color": "rgba(73, 69, 79, 1)",
+            },
+          ],
         ],
       ]
     }
@@ -798,21 +817,24 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
+            "fontFamily": "System",
             "fontSize": 12,
-            "marginRight": 16,
+            "fontWeight": "400",
+            "letterSpacing": 0.4,
+            "lineHeight": 16,
           },
-          {
-            "color": "rgba(73, 69, 79, 1)",
-          },
+          [
+            {
+              "marginRight": 16,
+            },
+            {
+              "color": "rgba(73, 69, 79, 1)",
+            },
+          ],
         ],
       ]
     }
@@ -1348,21 +1370,24 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
+            "fontFamily": "System",
             "fontSize": 12,
-            "marginRight": 16,
+            "fontWeight": "400",
+            "letterSpacing": 0.4,
+            "lineHeight": 16,
           },
-          {
-            "color": "rgba(73, 69, 79, 1)",
-          },
+          [
+            {
+              "marginRight": 16,
+            },
+            {
+              "color": "rgba(73, 69, 79, 1)",
+            },
+          ],
         ],
       ]
     }
@@ -1662,21 +1687,24 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           },
           {
             "color": "rgba(29, 27, 32, 1)",
-            "fontFamily": "System",
-            "fontWeight": "400",
-            "letterSpacing": 0,
-          },
-          {
             "writingDirection": "ltr",
           },
           [
             {
+              "fontFamily": "System",
               "fontSize": 12,
-              "marginRight": 16,
+              "fontWeight": "400",
+              "letterSpacing": 0.4,
+              "lineHeight": 16,
             },
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
+            [
+              {
+                "marginRight": 16,
+              },
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+            ],
           ],
         ]
       }
@@ -1963,21 +1991,24 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
+            "fontFamily": "System",
             "fontSize": 12,
-            "marginRight": 16,
+            "fontWeight": "400",
+            "letterSpacing": 0.4,
+            "lineHeight": 16,
           },
-          {
-            "color": "rgba(73, 69, 79, 1)",
-          },
+          [
+            {
+              "marginRight": 16,
+            },
+            {
+              "color": "rgba(73, 69, 79, 1)",
+            },
+          ],
         ],
       ]
     }
@@ -2588,28 +2619,30 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
-            "alignItems": "center",
+            "fontFamily": "System",
             "fontSize": 12,
             "fontWeight": "500",
-            "lineHeight": 24,
+            "letterSpacing": 0.5,
+            "lineHeight": 16,
           },
-          {
-            "maxHeight": 48,
-          },
-          {},
-          {
-            "marginLeft": 8,
-          },
-          undefined,
+          [
+            {
+              "alignItems": "center",
+              "lineHeight": 24,
+            },
+            {
+              "maxHeight": 48,
+            },
+            {},
+            {
+              "marginLeft": 8,
+            },
+            undefined,
+          ],
         ],
       ]
     }
@@ -2692,28 +2725,30 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
-            "alignItems": "center",
+            "fontFamily": "System",
             "fontSize": 12,
             "fontWeight": "500",
-            "lineHeight": 24,
+            "letterSpacing": 0.5,
+            "lineHeight": 16,
           },
-          {
-            "maxHeight": 48,
-          },
-          {},
-          {
-            "marginLeft": 8,
-          },
-          undefined,
+          [
+            {
+              "alignItems": "center",
+              "lineHeight": 24,
+            },
+            {
+              "maxHeight": 48,
+            },
+            {},
+            {
+              "marginLeft": 8,
+            },
+            undefined,
+          ],
         ],
       ]
     }
@@ -2750,28 +2785,30 @@ exports[`DataTable.Title renders right aligned data table title 1`] = `
         },
         {
           "color": "rgba(29, 27, 32, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
           "writingDirection": "ltr",
         },
         [
           {
-            "alignItems": "center",
+            "fontFamily": "System",
             "fontSize": 12,
             "fontWeight": "500",
-            "lineHeight": 24,
+            "letterSpacing": 0.5,
+            "lineHeight": 16,
           },
-          {
-            "maxHeight": 48,
-          },
-          {},
-          {
-            "color": "rgba(73, 69, 79, 1)",
-          },
-          undefined,
+          [
+            {
+              "alignItems": "center",
+              "lineHeight": 24,
+            },
+            {
+              "maxHeight": 48,
+            },
+            {},
+            {
+              "color": "rgba(73, 69, 79, 1)",
+            },
+            undefined,
+          ],
         ],
       ]
     }

@@ -7,13 +7,11 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { DEFAULT_SIZE } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
-import getContrastingColor from '../../utils/getContrastingColor';
 import Text from '../Typography/Text';
-
-const defaultSize = 64;
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**
@@ -33,7 +31,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   backgroundColor?: ColorValue;
   /**
-   * Style for text container
+   * Style for the text container.
    *
    * Background color should be specified via the `backgroundColor` prop instead.
    */
@@ -67,7 +65,7 @@ export type Props = Omit<ViewProps, 'style'> & {
  */
 const AvatarText = ({
   label,
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   style,
   labelStyle,
   color: customColor,
@@ -77,10 +75,6 @@ const AvatarText = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const backgroundColor = customBackgroundColor ?? theme.colors.primary;
-  const textColor =
-    customColor ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
   const { fontScale } = useWindowDimensions();
 
   return (
@@ -89,19 +83,24 @@ const AvatarText = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
+          borderRadius: cornerFull,
         },
         styles.container,
         style,
-        { backgroundColor },
+        {
+          backgroundColor:
+            customBackgroundColor ?? theme.colors.primaryContainer,
+        },
       ]}
       {...rest}
     >
       <Text
+        variant="titleMedium"
+        theme={themeOverrides}
         style={[
           styles.text,
           {
-            color: textColor,
+            color: customColor ?? theme.colors.onPrimaryContainer,
             fontSize: size / 2,
             lineHeight: size / fontScale,
           },
