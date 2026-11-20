@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
@@ -216,6 +216,25 @@ it('should execute onPressOut', () => {
   );
   fireEvent(getByTestId('button'), 'onPressOut');
   expect(onPressOutMock).toHaveBeenCalledTimes(1);
+});
+
+it('passes the touchable to a callback touchableRef', () => {
+  const touchableRef = jest.fn<
+    void,
+    [React.ComponentRef<typeof View> | null]
+  >();
+
+  const { unmount } = render(
+    <Button onPress={() => {}} touchableRef={touchableRef} testID="button">
+      Text Button
+    </Button>
+  );
+
+  expect(touchableRef).toHaveBeenLastCalledWith(
+    expect.objectContaining({ measure: expect.any(Function) })
+  );
+  unmount();
+  expect(touchableRef).toHaveBeenLastCalledWith(null);
 });
 
 describe('button text styles', () => {
