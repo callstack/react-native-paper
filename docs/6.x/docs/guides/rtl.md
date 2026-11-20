@@ -26,6 +26,8 @@ Then, let `react-native-paper` know about it by using the `direction` prop on `P
 The `direction` prop informs React Native Paper about the text direction in the app i.e. it doesn't change the text direction by itself. If you intend to support RTL languages, it's important to set this prop to the correct value that's configured in the app. If it doesn't match the actual text direction, the layout might be incorrect.
 :::
 
+On the web, `Text` aligns to the start of the writing direction, so it aligns right when `direction` is `rtl`. On Android and iOS, React Native already aligns `left` text to the right in a right-to-left layout. A `textAlign` in `style` still wins.
+
 ## Setting direction for the whole app
 
 Pass the `direction` prop to `PaperProvider`. Defaults to `'rtl'` when `I18nManager.getConstants().isRTL` returns `true`, otherwise `'ltr'`.
