@@ -1,11 +1,22 @@
 import * as React from 'react';
 import type { ViewStyle } from 'react-native';
 
-import { linear, type CSSStyle } from 'react-native-reanimated';
+import {
+  linear,
+  type CSSStyle,
+  type CSSTransitionTimingFunction,
+} from 'react-native-reanimated';
 
 import { getButtonShapeCurvePoints } from './utils';
 import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import type { InternalTheme } from '../../theme/types';
+
+type ShapeMorph = {
+  duration: number;
+  timingFunction: CSSTransitionTimingFunction;
+  outerStyle: CSSStyle<ViewStyle>;
+  innerStyle: CSSStyle<ViewStyle>;
+};
 
 /**
  * Corner morph shared by Button and IconButton: a CSS transition shaped like
@@ -27,7 +38,7 @@ export const useShapeMorph = ({
   largestRadius: number;
   borderWidth: number;
   animate: boolean;
-}) => {
+}): ShapeMorph => {
   const spring = React.useMemo(
     () => toSpringCurve(theme.motion.spring.fast.spatial),
     [theme.motion.spring.fast.spatial]
@@ -59,7 +70,6 @@ export const useShapeMorph = ({
   return {
     duration,
     timingFunction,
-    innerRadius,
     outerStyle: { ...transitionStyle, borderRadius: radius },
     innerStyle: { ...transitionStyle, borderRadius: innerRadius },
   };
