@@ -40,6 +40,9 @@ export const styles = StyleSheet.create({
     opacity: 0,
     pointerEvents: 'none',
   },
+  addendumSpacer: {
+    flex: 1,
+  },
   supportingText: {
     flex: 1,
     marginTop: SUPPORTING_TEXT_MARGIN_TOP,
@@ -71,6 +74,14 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginStart: TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
+  },
+  leadingAccessoryRTL: {
+    marginStart: 0,
+    marginRight: TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
+  },
+  trailingAccessoryRTL: {
+    marginEnd: 0,
+    marginLeft: TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
   },
   disabled: {
     opacity: tokens.md.sys.state.opacity.disabled,

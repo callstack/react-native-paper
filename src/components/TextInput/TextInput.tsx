@@ -527,7 +527,7 @@ function TextInput({
       </View>
 
       <View style={styles.addendum}>
-        {!!supportingText && (
+        {supportingText ? (
           <Text
             key={hasError ? 'error' : 'supporting'}
             {...accessibilityProps.supportingText}
@@ -535,7 +535,12 @@ function TextInput({
           >
             {supportingText}
           </Text>
-        )}
+        ) : hasCounter ? (
+          <View
+            testID="text-input-addendum-spacer"
+            style={styles.addendumSpacer}
+          />
+        ) : null}
 
         {hasCounter && (
           <Text {...accessibilityProps.counter} style={counterStyles}>
