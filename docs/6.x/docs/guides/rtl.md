@@ -51,17 +51,28 @@ export default function Main() {
 
 ## Overriding direction for a subtree
 
-Use `LocaleProvider` to override the direction for a specific part of the tree without affecting the rest of the app:
+Use `LocaleProvider` to override the writing direction for a specific part of the tree without affecting the rest of the app. This updates Paper's components (such as text alignment and directional icons) to the specified direction.
+
+Note that `LocaleProvider` does not alter the layout engine's direction by itself. To mirror the layout of a subtree as well:
+
+- On **Web**, wrap the subtree in a `View` with `dir="rtl"` (or `dir="ltr"`).
+- On **iOS**, set `direction: 'rtl'` (or `'ltr'`) in the `style` of a wrapping `View`.
+- On **Android**, React Native does not support mixed-direction subtrees; layout direction is controlled globally via `I18nManager`.
 
 ```js
 import * as React from 'react';
+import { Platform, View } from 'react-native';
 import { LocaleProvider } from 'react-native-paper';
 
 export default function ArabicSection({ children }) {
   return (
     <LocaleProvider direction="rtl">
-      {/* Components here will use RTL layout */}
-      {children}
+      <View
+        style={Platform.OS === 'ios' ? { direction: 'rtl' } : undefined}
+        {...(Platform.OS === 'web' ? { dir: 'rtl' } : {})}
+      >
+        {children}
+      </View>
     </LocaleProvider>
   );
 }
