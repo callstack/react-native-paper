@@ -41,7 +41,12 @@ const { opacity } = systemTokens.md.sys.state;
 /**
  * Material 3 Card variant-by-state tokens.
  *
- * Rechecked 2026-09-23 against the Material 3 Card specification and the
+ * Rechecked 2026-11-20 against the live `md.comp.*-card` tokens on
+ * https://m3.material.io/components/cards/specs: every container color,
+ * outline color and opacity, elevation and state layer opacity below
+ * matches, as do the 1dp outline width and the `corner.medium` shape.
+ *
+ * Checked 2026-09-23 against the Material 3 Card specification and the
  * current AndroidX generated Card tokens at commit
  * 8c85cbb3ccccbaf5ca40c45527e2028ced01e472:
  * https://m3.material.io/components/cards/specs
