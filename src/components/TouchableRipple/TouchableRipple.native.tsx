@@ -31,19 +31,6 @@ export type Props = PressableProps & {
   background?: PressableAndroidRippleConfig;
   centered?: boolean;
   disabled?: boolean;
-  /**
-   * Where to draw the MD3 keyboard focus indicator.
-   *
-   * - `outward` - just outside the bounds. The MD3 default.
-   * - `inward` - just inside, for controls a clipping ancestor would trim or
-   *   that sit flush against a neighbour.
-   * - `none` - no indicator. On web the browser's own focus outline still
-   *   shows, so a control that draws its own indicator also needs
-   *   `outline: 'none'` there.
-   *
-   * The ring shows only while the touchable can be pressed: not when it is
-   * disabled or has no touch handler. There is no ring on iOS.
-   */
   focusRing?: FocusRingPlacement;
   onPress?: (e: GestureResponderEvent) => void | null;
   onLongPress?: (e: GestureResponderEvent) => void;
@@ -83,24 +70,11 @@ const TouchableRipple = ({
     onPressOut,
   });
 
-  // With no touch handler and no explicit disabled this is not a control, so it
-  // renders as a plain View. A Pressable is wrong here either way: keep the old
-  // disabled flag and it gets announced as a disabled control, drop the flag and
-  // it starts claiming the touch, swallowing taps meant for whatever wraps it.
   const isControl = hasPassedTouchHandler || Boolean(disabledProp);
   const isInteractive = hasPassedTouchHandler && !disabledProp;
 
-  // A touch target only for something that can be pressed, as on web. Android
-  // never makes a disabled view a touch target, but iOS does, and the plain
-  // View would take touches in its slop on both.
   const effectiveHitSlop = isInteractive ? hitSlop : undefined;
 
-  // Called above the non-control early return, so the hook runs on every
-  // render. Keyed off `!isInteractive`: on the Pressable that is `disabled`,
-  // and when the touchable drops to the plain View it resets the focus state.
-  // A focused Pressable that unmounts sends no blur here, so without the reset
-  // the ring would come back with the handler. The plain View takes neither
-  // the ring's focus handlers nor its style.
   const { target, ring } = useFocusRing(
     !isInteractive,
     theme.colors.secondary,
@@ -122,16 +96,9 @@ const TouchableRipple = ({
       underlayColor,
     });
 
-  // Use foreground ripple on Android P+ to ensure visibility.
-  // Background ripple requires the view to have a background drawable,
-  // which isn't always present. Foreground ripple needs overflow: 'hidden'
-  // to stay within bounds.
-  // https://github.com/facebook/react-native/issues/6480
   const useForeground =
     Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
 
-  // Keep the static form when possible: `Pressable` only tracks the pressed
-  // state when `children` or `style` is a function.
   const resolveStyle = (
     baseStyle: StyleProp<ViewStyle>
   ): PressableProps['style'] =>
@@ -163,9 +130,6 @@ const TouchableRipple = ({
   }
 
   if (TouchableRipple.supported) {
-    // Kept while disabled: a disabled view never presses, so it shows no
-    // ripple, but a press that disables the touchable is only cleared by the
-    // ripple's own press out. Without it the pressed layer stays drawn.
     const androidRipple = rippleEffectEnabled
       ? (background ?? {
           color: calculatedRippleColor,
