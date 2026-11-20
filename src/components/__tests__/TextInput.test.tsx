@@ -1460,6 +1460,9 @@ describe('on web in RTL', () => {
       />
     );
 
+    expect(
+      screen.queryByTestId('text-input-addendum-spacer', includeHiddenElements)
+    ).not.toBeOnTheScreen();
     expect(screen.getByText('Helper', includeHiddenElements)).toHaveStyle({
       textAlign: 'right',
     });
@@ -1479,6 +1482,9 @@ describe('on web in RTL', () => {
       />
     );
 
+    expect(
+      screen.getByTestId('text-input-addendum-spacer', includeHiddenElements)
+    ).toBeOnTheScreen();
     expect(screen.getByText('2/10', includeHiddenElements)).toBeOnTheScreen();
   });
 });

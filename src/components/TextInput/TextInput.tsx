@@ -536,7 +536,10 @@ function TextInput({
             {supportingText}
           </Text>
         ) : hasCounter ? (
-          <View style={styles.addendumSpacer} />
+          <View
+            testID="text-input-addendum-spacer"
+            style={styles.addendumSpacer}
+          />
         ) : null}
 
         {hasCounter && (
