@@ -258,6 +258,7 @@ const Tooltip = ({
         <Pressable
           ref={childrenWrapperRef}
           collapsable={false}
+          accessible={false}
           style={styles.pressContainer}
           onLongPress={handleTouchStart}
           onPressOut={handleTouchEnd}

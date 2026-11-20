@@ -233,6 +233,12 @@ describe('Tooltip', () => {
         expect(getTooltipContainer()).toHaveProp('role', 'tooltip');
       });
 
+      it("doesn't merge the trigger into its wrapper", async () => {
+        await setup();
+
+        expect(getTrigger().parent).toHaveProp('accessible', false);
+      });
+
       it('keeps the label the consumer writes after the spread', async () => {
         await setup({
           children: (props: TooltipTriggerProps) => (
