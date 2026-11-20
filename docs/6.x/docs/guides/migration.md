@@ -678,6 +678,15 @@ Use the `aspectRatio` prop to size a cover responsively. It replaces the default
 
 The Card clips media to its shape, so a `Card.Cover` in the `media` slot follows the Card's corners without its own border radius.
 
+`Card.Cover` no longer wraps its image in a `View`. Its `style` is now typed as `ImageStyle` and applies to the `Image` itself instead of a wrapper `View`. To style the area around the cover, wrap the cover in your own `View`:
+
+```diff
+- <Card.Cover source={cover} style={{ padding: 8 }} />
++ <View style={{ padding: 8 }}>
++   <Card.Cover source={cover} />
++ </View>
+```
+
 #### `Card.Actions` no longer styles its buttons
 
 `Card.Actions` no longer assigns `mode="outlined"` to its first button, `mode="contained"` (now `mode="filled"`) to the rest, or `compact` to any of them. It only lays its children out in a row; set each `Button`'s `mode` explicitly to keep the old look. `compact` was removed from `Button`; see [`Button`](#button) for its `size` replacement:
