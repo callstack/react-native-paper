@@ -411,7 +411,7 @@ In a disabled `TextInput`, every `TextInput.Icon` takes the disabled color, also
 
 Interactive components now draw the Material Design 3 keyboard focus indicator: a 3dp ring in `theme.colors.secondary`, 2dp outside the component. On web it shows when an element gets focus from the keyboard (`:focus-visible`), and on Android when it gets focus from a hardware keyboard or D-pad. Clicking or touching an element shows no ring. iOS shows no ring.
 
-`Snackbar` rings its action and close button in `theme.colors.inversePrimary`, the color of its action label, because `secondary` barely shows on its `inverseSurface` background. If a component's background is the ring color, such as an `Appbar` with a `secondary` background, the rings of the controls on it don't show: give those controls a `theme` with a contrasting `secondary`. An `Appbar` passes its own `theme` on to the `Appbar.Action`, `Appbar.BackAction` and `Appbar.Content` placed directly in it.
+`Snackbar` rings its action and close button in `theme.colors.inversePrimary`, the color of its action label, because `secondary` barely shows on its `inverseSurface` background. If a component's background is the ring color, such as an `Appbar` with a `secondary` background, the rings of the controls on it don't show: give those controls a `theme` with a contrasting `secondary`. `Appbar.Action`, `Appbar.BackAction` and `Appbar.Content` read the `theme` of the `Appbar` they are rendered in from context, and the actions get it inside a `Tooltip` or a `View` too, so you can give that `theme` to the `Appbar` instead of to each control. See [Parts read from the `Appbar`](#parts-read-from-the-appbar).
 
 Components that fill a clipping container or touch their neighbours draw the ring 3dp inside their edge instead: `List.Item`, `List.Accordion`, `Checkbox.Item`, `RadioButton.Item`, `Menu.Item`, the `FAB.Menu` items, `Drawer.Item`, the `BottomNavigation` tabs, `DataTable.Row`, `DataTable.Cell`, `DataTable.Title` and `SegmentedButtons`. `Drawer.CollapsedItem` draws it around its icon and label, 2dp clear of the active indicator. `FAB` and `Switch` draw this ring instead of their own, and `Checkbox` keeps its circular ring around the state layer.
 
@@ -695,10 +695,14 @@ const buttonRef = React.useRef<React.ComponentRef<typeof View>>(null);
 
 ```diff
 -<Portal>
--  <Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
+-  <Dialog visible={visible} onDismiss={hideDialog}>
+-    <Dialog.Title>Alert</Dialog.Title>
+-  </Dialog>
 -</Portal>
 +<Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 ```
+
+`Dialog.Title` and the other parts move to props, as [Prop-based API](#prop-based-api) shows.
 
 The dialog now has the `dialog` role. Its accessible name is set automatically from the `title` prop. A string title is used as the `aria-label` on all platforms. Any other title is linked through `aria-labelledby`, which applies on web only, so on iOS and Android the dialog has no name unless you set `aria-label`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
 
@@ -720,7 +724,7 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 #### Prop-based API
 
-The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialog layouts. If your dialog previously composed `Dialog.Title`, `Dialog.Content`, and `Dialog.Actions` via `children`, migrate to the dedicated `icon`, `title`, `content`, and `actions` props.
+`Dialog` no longer takes `children`. The `icon`, `title`, `content` and `actions` props are the only way to build a dialog, so move each `Dialog.Icon`, `Dialog.Title`, `Dialog.Content` and `Dialog.Actions` to its prop.
 
 **Removed**
 
@@ -767,7 +771,7 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
   title="Alert"
   content="This is a simple dialog"
   actions={[
-    <Button key="done" onPress={hideDialog}>
+    <Button key="done" mode="text" onPress={hideDialog}>
       Done
     </Button>,
   ]}
@@ -792,6 +796,93 @@ The dialog no longer injects `compact` on its action buttons, and the default [`
     </Button>,
   ]}
 />
+```
+
+The actions row takes no `style`, so a `style` passed to `Dialog.Actions` has no replacement. The row places the actions at its end, 8dp apart, with 24dp of padding at the sides and the bottom.
+
+#### Scrollable content
+
+`Dialog.ScrollArea` becomes the `scrollable` prop. The dialog renders its own `ScrollView`, so the children of your `ScrollView` move to `content`, its props to `scrollViewProps`, and the scroll area's `style` to `scrollAreaProps`:
+
+```tsx
+// Before (v5)
+<Dialog visible={visible} onDismiss={hideDialog}>
+  <Dialog.Title>Terms</Dialog.Title>
+  <Dialog.ScrollArea style={{ paddingHorizontal: 0 }}>
+    <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+      <Text variant="bodyMedium">{terms}</Text>
+    </ScrollView>
+  </Dialog.ScrollArea>
+</Dialog>
+
+// After (v6)
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  title="Terms"
+  content={terms}
+  scrollable
+  scrollAreaProps={{ style: { paddingHorizontal: 0 } }}
+  scrollViewProps={{ contentContainerStyle: { paddingHorizontal: 24 } }}
+/>
+```
+
+A scroll area that held a `FlatList` or another list component has no replacement, since `scrollable` always renders a `ScrollView`.
+
+#### Icon color and size
+
+The icon is 24dp, in `theme.colors.secondary`. `Dialog.Icon`'s `color` and `size` have no matching props: to change them, pass a function to `icon` that renders an `Icon`:
+
+```tsx
+// Before (v5)
+<Dialog.Icon icon="alert" color={colors.error} size={32} />
+
+// After (v6)
+<Dialog
+  icon={() => <Icon source="alert" color={colors.error} size={32} />}
+/>
+```
+
+#### Layout
+
+- The dialog is now 280dp to 560dp wide and centered. In 5.x it took the full width of the screen less the side inset, so on tablets and the web it is now narrower.
+- With an `icon`, the title is centered under it. Set `textAlign` in `titleProps.style` to align it differently.
+- The dividers of the scroll area use `outlineVariant` instead of `surfaceVariant`.
+- The side inset of at least 26dp is now padding on the wrapper around the dialog, not a horizontal margin on the dialog, so a `marginHorizontal` in `style` adds to it instead of replacing it.
+- If your app was written for a 6.0 alpha build: the 24dp space at the top now belongs to the first part (the icon, title or content) instead of being padding on the dialog, so a `paddingTop` in `style` adds to it instead of replacing it, as in 5.x.
+
+#### Parts outside a `Dialog`
+
+`Dialog.Content` and `Dialog.Actions` also worked outside a `Dialog`, for example in a `Modal`. There, use a `View` with their 5.x styles instead, and add `mode="text"` to the buttons as [Dialog actions](#dialog-actions) explains:
+
+```tsx
+// Before (v5)
+<Dialog.Content>
+  <Text variant="bodyMedium">Delete this file?</Text>
+</Dialog.Content>
+<Dialog.Actions>
+  <Button onPress={hide}>Cancel</Button>
+  <Button onPress={remove}>Delete</Button>
+</Dialog.Actions>
+
+// After (v6)
+<View style={{ paddingHorizontal: 24, paddingBottom: 24 }}>
+  <Text variant="bodyMedium">Delete this file?</Text>
+</View>
+<View
+  style={{
+    flexDirection: 'row',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    columnGap: 8,
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+  }}
+>
+  <Button mode="text" onPress={hide}>Cancel</Button>
+  <Button mode="text" onPress={remove}>Delete</Button>
+</View>
 ```
 
 ### Menu
@@ -1008,7 +1099,9 @@ Android and iOS in the hint. The input no longer sets `aria-valuenow` and
 
 When no label or explicit accessible name is supplied, the placeholder names the
 field, including after text is entered. A disabled field always exposes its
-disabled state, even when `aria-disabled={false}` is supplied.
+disabled state, even when `aria-disabled={false}` is supplied. It is also always
+read-only, even with `readOnly={false}`, which in 5.x left a disabled field
+editable.
 
 On web, error supporting text uses `role="alert"`. On Android and iOS, a new or
 changed error message is announced through `AccessibilityInfo` once it has
@@ -1024,6 +1117,10 @@ field changes from `error` to `onErrorContainer`. Focus takes precedence over
 hover and uses `primary`, or `error` for an invalid field. A disabled field uses
 the disabled colors even when `error` is set. On web it keeps `aria-invalid`; on
 Android and iOS the error text stays in its hint.
+
+If your app was written for a 6.0 alpha build: the input text, prefix and suffix
+of a disabled field were dimmed twice there. They are now dimmed once, to 38%
+opacity as in 5.x, so they are more visible than in the alpha builds.
 
 #### Removed props
 
@@ -1617,6 +1714,16 @@ TypeScript reports an error for each of them, and in JavaScript they're ignored.
 +  contentColor="white"
 +  onPress={onPress}
 +/>
+```
+
+#### `visible`
+
+A FAB with `visible={false}` is now hidden from assistive technology (`aria-hidden`), can't be focused and takes no press. In 5.x it only stopped taking touches, so screen readers and the keyboard could still reach it. This applies to `FAB.Extended` and the `FAB.Menu` trigger too. On web, hiding a FAB that has keyboard focus moves focus back to the element that had it before, if that element is still on the page.
+
+Tests that find a hidden FAB by its role, label or test ID stop finding it, because React Native Testing Library skips hidden elements. Pass `includeHiddenElements` to find it:
+
+```tsx
+screen.getByTestId('compose', { includeHiddenElements: true });
 ```
 
 #### `FAB.Extended`
