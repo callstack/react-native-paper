@@ -130,6 +130,9 @@ const pages = {
     SegmentedButtons: 'SegmentedButtons/SegmentedButtons',
   },
   Snackbar: 'Snackbar',
+  SplitButton: {
+    SplitButton: 'SplitButton/SplitButton',
+  },
   Surface: 'Surface',
   Switch: {
     Switch: 'Switch/Switch',
