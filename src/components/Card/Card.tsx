@@ -711,31 +711,39 @@ const Card = ({
 
   const layers = (
     <>
-      <View
-        pointerEvents="none"
-        style={[
-          StyleSheet.absoluteFill,
-          shapeStyle,
-          {
-            backgroundColor: visuals.containerColor,
-            opacity: visuals.containerOpacity,
-          },
-        ]}
-      />
+      {/* The visual node paints an opaque container itself. Only a disabled
+          Card needs its own layer, to fade the container but not the content. */}
+      {visuals.containerOpacity !== 1 ? (
+        <View
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            shapeStyle,
+            {
+              backgroundColor: visuals.containerColor,
+              opacity: visuals.containerOpacity,
+            },
+          ]}
+        />
+      ) : null}
       {content}
-      {/* Material draws state layers over the whole Card, media included. */}
-      <Animated.View
-        pointerEvents="none"
-        style={[
-          StyleSheet.absoluteFill,
-          shapeStyle,
-          {
-            backgroundColor: visuals.stateLayerColor,
-            opacity: stateLayerOpacity,
-          },
-          stateLayerTransitionStyle,
-        ]}
-      />
+      {/* Material draws state layers over the whole Card, media included. A
+          neutral Card has no hover, focus or press, so it needs one only for
+          the dragged state, which then appears and clears without a fade. */}
+      {hasPassedTouchHandler || dragged ? (
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            shapeStyle,
+            {
+              backgroundColor: visuals.stateLayerColor,
+              opacity: stateLayerOpacity,
+            },
+            stateLayerTransitionStyle,
+          ]}
+        />
+      ) : null}
       {visuals.outlineWidth > 0 ? (
         <Animated.View
           pointerEvents="none"
