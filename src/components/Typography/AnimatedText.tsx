@@ -1,11 +1,11 @@
 import * as React from 'react';
 import type { ReactNode } from 'react';
-import { Platform, StyleSheet } from 'react-native';
 
 import Animated from 'react-native-reanimated';
 
 import { useIsNestedText, markChildrenAsNested } from './NestedTextContext';
 import type { VariantProp } from './types';
+import { getTextAlignStyle } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -49,12 +49,7 @@ function AnimatedText({
   const theme = useInternalTheme(themeOverrides);
 
   const { direction: writingDirection } = useLocale();
-  // A `left` alignment follows the layout direction on Android and iOS, but
-  // stays physical on web, so right-to-left text aligns right there.
-  const alignStyle =
-    Platform.OS === 'web' && writingDirection === 'rtl'
-      ? styles.textRTLWeb
-      : styles.text;
+  const alignStyle = getTextAlignStyle(writingDirection);
   // Nested text inherits the parent's style unless it has its own theme
   const inheritsStyle = useIsNestedText() && !themeOverrides;
 
@@ -112,15 +107,6 @@ function AnimatedText({
 
   return markChildrenAsNested(element, rest.children);
 }
-
-const styles = StyleSheet.create({
-  text: {
-    textAlign: 'left',
-  },
-  textRTLWeb: {
-    textAlign: 'right',
-  },
-});
 
 export const customAnimatedText = <T,>() =>
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion

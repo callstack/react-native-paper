@@ -1,11 +1,12 @@
 import * as React from 'react';
 import type { ReactNode } from 'react';
-import { Platform, StyleSheet, Text as NativeText } from 'react-native';
+import { Text as NativeText } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import AnimatedText from './AnimatedText';
 import { useIsNestedText, markChildrenAsNested } from './NestedTextContext';
 import type { VariantProp } from './types';
+import { getTextAlignStyle } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -90,12 +91,7 @@ const Text = ({
   const root = React.useRef<React.ComponentRef<typeof NativeText> | null>(null);
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();
-  // A `left` alignment follows the layout direction on Android and iOS, but
-  // stays physical on web, so right-to-left text aligns right there.
-  const alignStyle =
-    Platform.OS === 'web' && writingDirection === 'rtl'
-      ? styles.textRTLWeb
-      : styles.text;
+  const alignStyle = getTextAlignStyle(writingDirection);
   // Nested text inherits the parent's style unless it has its own theme
   const inheritsStyle = useIsNestedText() && !initialTheme;
 
@@ -190,15 +186,6 @@ const Text = ({
 
   return markChildrenAsNested(element, rest.children);
 };
-
-const styles = StyleSheet.create({
-  text: {
-    textAlign: 'left',
-  },
-  textRTLWeb: {
-    textAlign: 'right',
-  },
-});
 
 type TextComponent<T> = (props: Props<T>) => ReactNode;
 

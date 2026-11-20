@@ -1395,6 +1395,8 @@ A `Text` nested in another `Text` now inherits the parent's font and color, as R
 
 On iOS and Android, nesting follows React Native: a `Text` inside React Native's own `Text` inherits from it as well, and a `Text` inside a `View` isn't nested, so it renders like a top-level `Text`.
 
+On the web, a `Text` under `direction="rtl"` (on `PaperProvider` or `LocaleProvider`) now aligns right by default. In 5.x it stayed left. A `textAlign` in `style` still wins.
+
 ### ToggleButton
 
 `ToggleButton`, `ToggleButton.Group` and `ToggleButton.Row` were removed. For an
