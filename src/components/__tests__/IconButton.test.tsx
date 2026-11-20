@@ -12,7 +12,13 @@ import {
 import color from 'color';
 
 import PaperProvider from '../../core/PaperProvider';
-import { fireEvent, render, screen, userEvent } from '../../test-utils';
+import {
+  fireEvent,
+  render,
+  screen,
+  transitionOf,
+  userEvent,
+} from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -846,9 +852,7 @@ describe('shape morph', () => {
       throw new Error('Expected the touchable to be wrapped in the clip view.');
     }
 
-    // Reanimated's Jest setup keeps CSS transitions out of `style`.
-    // eslint-disable-next-line no-restricted-syntax
-    return StyleSheet.flatten(clip.props.jestInlineStyle).transitionDuration;
+    return transitionOf(clip).transitionDuration;
   };
 
   it('runs on the fast spatial spring', async () => {
@@ -868,15 +872,6 @@ describe('shape morph', () => {
 
     expect(transitionDuration()).toBe(0);
   });
-
-  // Reanimated's Jest setup keeps CSS transitions out of `style`.
-  const transitionOf = (element: ReturnType<typeof screen.getByTestId>) => {
-    const { transitionDuration, transitionTimingFunction } = StyleSheet.flatten(
-      // eslint-disable-next-line no-restricted-syntax -- see the comment above.
-      element.props.jestInlineStyle
-    );
-    return { transitionDuration, transitionTimingFunction };
-  };
 
   it('morphs the touchable inside the outline in step with the outline', async () => {
     const { pressedRadius, outlineWidth } = getDimensions({

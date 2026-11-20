@@ -40,8 +40,8 @@ type ShapeMorph = {
 };
 
 /**
- * Corner morph shared by Button and IconButton: a CSS transition shaped like
- * the MD3 fast spatial spring.
+ * Corner morph for a component with an optional outline: a CSS transition
+ * shaped like the MD3 fast spatial spring.
  *
  * The curve is capped against the inner corner (inside the outline), so a
  * bouncy spring can't push that corner below 0. The outer corner takes the

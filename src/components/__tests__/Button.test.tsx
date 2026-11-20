@@ -5,7 +5,7 @@ import { fireEvent } from '@testing-library/react-native';
 
 import { LocaleProvider } from '../../core/locale';
 import PaperProvider from '../../core/PaperProvider';
-import { render, screen } from '../../test-utils';
+import { render, screen, transitionOf } from '../../test-utils';
 import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import { pink500, white } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
@@ -1374,15 +1374,6 @@ describe('shape morph animation', () => {
     expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 20 });
   });
 
-  // Reanimated's Jest setup keeps CSS transitions out of `style`.
-  const transitionOf = (element: ReturnType<typeof screen.getByTestId>) => {
-    const { transitionDuration, transitionTimingFunction } = StyleSheet.flatten(
-      // eslint-disable-next-line no-restricted-syntax -- see the comment above.
-      element.props.jestInlineStyle
-    );
-    return { transitionDuration, transitionTimingFunction };
-  };
-
   it('morphs the ripple inside the outline in step with the outline', async () => {
     await render(
       <Button mode="outlined" size="large" onPress={() => {}} testID="button">
@@ -1459,13 +1450,10 @@ describe('with reduce motion', () => {
       'the clip'
     );
 
-  // Reanimated's Jest setup keeps CSS transitions out of `style`, and
-  // `getAnimatedStyle` can't read the container's nested style arrays. The
-  // container transitions its background and three shadow properties, then
-  // its corner.
+  // The container transitions its background and three shadow properties,
+  // then its corner.
   const containerTransitionDuration = () =>
-    // eslint-disable-next-line no-restricted-syntax -- see the comment above.
-    StyleSheet.flatten(containerOf().props.jestInlineStyle).transitionDuration;
+    transitionOf(containerOf()).transitionDuration;
 
   const renderButton = (reduceMotion: 'on' | 'off') =>
     render(

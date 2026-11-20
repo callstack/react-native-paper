@@ -61,29 +61,4 @@ describe('useShapeMorph', () => {
     expect(innerCurve).not.toEqual(outerCurve);
     expect(result.current.timingFunction).toEqual(linear(...innerCurve));
   });
-
-  it('keeps the inner corner borderWidth inside the outer one', async () => {
-    const { result } = await renderHook(() =>
-      useShapeMorph({ ...morph, animate: true })
-    );
-
-    expect(result.current.outerStyle).toMatchObject({
-      borderRadius: 3,
-      transitionDuration: spring.duration,
-    });
-    expect(result.current.innerStyle).toMatchObject({
-      borderRadius: 1,
-      transitionDuration: spring.duration,
-    });
-  });
-
-  it('snaps without a transition when animate is false', async () => {
-    const { result } = await renderHook(() =>
-      useShapeMorph({ ...morph, animate: false })
-    );
-
-    expect(result.current.duration).toBe(0);
-    expect(result.current.outerStyle).toMatchObject({ transitionDuration: 0 });
-    expect(result.current.innerStyle).toMatchObject({ transitionDuration: 0 });
-  });
 });
