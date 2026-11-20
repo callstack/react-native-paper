@@ -31,6 +31,7 @@ So you can use Reanimated's `useSharedValue` and `useAnimatedStyle` to animate t
 
 ```tsx
 import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { Card, Text } from 'react-native-paper';
 
 const MyComponent = () => {
   const opacity = useSharedValue(1);
@@ -38,7 +39,7 @@ const MyComponent = () => {
     opacity: opacity.value,
   }));
 
-  return <Card style={animatedStyle}>Button</Card>;
+  return <Card content={<Text>Animated Card</Text>} style={animatedStyle} />;
 };
 ```
 
@@ -75,7 +76,7 @@ To follow the same preference in your own components, use the `useReduceMotion()
 The `elevation` prop no longer accepts a React Native `Animated.Value` in the following components:
 
 - `Banner`
-- `Card`
+- `Card` (`variant="elevated"` only)
 - `Searchbar`
 - `Snackbar`
 - `Surface`
@@ -556,6 +557,184 @@ e.g.:
 +   </Tooltip>
 + </View>
 ```
+
+### Card
+
+Paper 6 replaces the Card's `mode` and arbitrary-children interfaces with Material 3 variants and explicit slots. These interfaces were removed; they are not deprecated APIs. Migrate each Card directly to the new contract.
+
+#### Variants and default
+
+Replace `mode` with `variant`:
+
+| Paper 5            | Paper 6              |
+| ------------------ | -------------------- |
+| `mode="contained"` | `variant="filled"`   |
+| `mode="elevated"`  | `variant="elevated"` |
+| `mode="outlined"`  | `variant="outlined"` |
+
+The default also changed. A Paper 5 Card without `mode` was elevated; a Paper 6 Card without `variant` is filled and has no resting shadow. Add `variant="elevated"` if you need to preserve the old default emphasis. The `elevation` prop is accepted only with `variant="elevated"`.
+
+#### Replace nested composition with slots
+
+Arbitrary Card children were removed. Paper 6 renders the explicit regions in the deterministic order `media`, header, `content`, and `actions`, regardless of the order in which props are written. Arrays, fragments, conditional values, and custom wrappers can be passed inside a slot without changing region placement.
+
+For the common header form, move `Card.Title` values to `title`, `subtitle`, `leading`, and `trailing`. Move the remaining regions to their corresponding slots:
+
+```tsx
+// Before (v5)
+<Card mode="contained" onPress={openDetails}>
+  <Card.Cover source={{ uri: coverUri }} />
+  <Card.Title title="Weekend trip" subtitle="2 days" />
+  <Card.Content>
+    <Text variant="bodyMedium">View the itinerary.</Text>
+  </Card.Content>
+</Card>
+
+// After (v6)
+<Card
+  accessibilityLabel="Open weekend trip details"
+  onPress={openDetails}
+  media={<Card.Cover source={{ uri: coverUri }} />}
+  title="Weekend trip"
+  subtitle="2 days"
+  content={
+    <Card.Content>
+      <Text variant="bodyMedium">View the itinerary.</Text>
+    </Card.Content>
+  }
+/>
+```
+
+Use `header` when the complete header is custom. It is mutually exclusive with `title`, `subtitle`, `leading`, and `trailing`:
+
+```tsx
+<Card
+  variant="outlined"
+  header={<TripHeader trip={trip} />}
+  content={
+    <Card.Content>
+      <Text>{trip.summary}</Text>
+    </Card.Content>
+  }
+/>
+```
+
+`Card.Content`, `Card.Cover`, `Card.Title`, and `Card.Actions` remain available as layout helpers inside the new slots. They are not arbitrary Card children.
+
+#### `Card.Content` padding
+
+`Card.Content` no longer changes its padding based on its neighbors. In Paper 5 it added top padding only when it came first and bottom padding only when it came last. It now always uses `16dp` on every side. A `Card.Content` followed by `Card.Actions` gets `24dp` between the text and the buttons (`16dp` from `Card.Content` and `8dp` from `Card.Actions`). Override the padding with the `style` prop of `Card.Content` to keep a tighter layout:
+
+```tsx
+<Card
+  title="Weekend trip"
+  content={
+    <Card.Content style={{ paddingBottom: 0 }}>
+      <Text>View the itinerary.</Text>
+    </Card.Content>
+  }
+  actions={
+    <Card.Actions>
+      <Button onPress={openDetails}>Open</Button>
+    </Card.Actions>
+  }
+/>
+```
+
+#### Horizontal layout
+
+To place the regions in a row, set `flexDirection` in `contentStyle`, which styles the wrapper around the slots:
+
+```tsx
+<Card
+  contentStyle={{ flexDirection: 'row' }}
+  media={<Card.Cover source={cover} style={{ width: 72, height: 72 }} />}
+  title="Card title"
+/>
+```
+
+#### Outline color
+
+The `borderColor` in `style` no longer changes the outline color of an outlined Card. Use the `borderColor` prop instead. It is accepted only with `variant="outlined"`:
+
+```diff
+<Card
+- mode="outlined"
+- style={{ borderColor: 'red' }}
++ variant="outlined"
++ borderColor="red"
+  title="Card title"
+/>
+```
+
+#### `Card.Cover`
+
+Use the `aspectRatio` prop to size a cover responsively. It replaces the default height of `194`:
+
+```tsx
+<Card media={<Card.Cover source={cover} aspectRatio={16 / 9} />} />
+```
+
+The Card clips media to its shape, so a `Card.Cover` in the `media` slot follows the Card's corners without its own border radius.
+
+`Card.Cover` no longer wraps its image in a `View`. Its `style` is now typed as `ImageStyle` and applies to the `Image` itself instead of a wrapper `View`. To style the area around the cover, wrap the cover in your own `View`:
+
+```diff
+- <Card.Cover source={cover} style={{ padding: 8 }} />
++ <View style={{ padding: 8 }}>
++   <Card.Cover source={cover} />
++ </View>
+```
+
+#### `Card.Actions` no longer styles its buttons
+
+`Card.Actions` no longer assigns `mode="outlined"` to its first button, `mode="contained"` (now `mode="filled"`) to the rest, or `compact` to any of them. It only lays its children out in a row; set each `Button`'s `mode` explicitly to keep the old look. `compact` was removed from `Button`; see [`Button`](#button) for its `size` replacement:
+
+```tsx
+// Before (v5) — Card.Actions styled the buttons automatically
+<Card.Actions>
+  <Button onPress={discard}>Discard</Button>
+  <Button onPress={save}>Save</Button>
+</Card.Actions>
+
+// After (v6) — set mode explicitly
+<Card.Actions>
+  <Button mode="outlined" onPress={discard}>Discard</Button>
+  <Button mode="filled" onPress={save}>Save</Button>
+</Card.Actions>
+```
+
+`Card.Actions` also has **16dp** of padding at the start and end, the Material Design 3 Card padding, instead of 8dp, and 8dp above and below. To keep the 5.x spacing, pass `style={{ paddingHorizontal: 8, paddingTop: 0 }}`.
+
+#### Choose one interaction model
+
+Give the Card an interaction handler when the whole Card represents one action. It becomes one accessibility target with button semantics by default, so do not place independent controls in its `actions` slot.
+
+When buttons or other controls perform independent actions, keep the Card itself neutral and put those controls in `actions`:
+
+```tsx
+<Card
+  variant="elevated"
+  title="Draft itinerary"
+  content={
+    <Card.Content>
+      <Text>Review before saving.</Text>
+    </Card.Content>
+  }
+  actions={
+    <Card.Actions>
+      <Button onPress={discard}>Discard</Button>
+      <Button mode="filled" onPress={save}>
+        Save
+      </Button>
+    </Card.Actions>
+  }
+/>
+```
+
+Paper 6 warns in development if whole-Card interaction handlers and a populated `actions` slot are combined. A neutral Card remains a grouping container unless you provide accessibility semantics explicitly. The `dragged` prop controls the Material dragged presentation only; drag gestures and lifecycle remain application responsibilities.
+
+Card refs and test IDs now target documented nodes: `ref` targets the outer shell, `touchableRef` targets the actionable interaction node, and `testID` targets the interaction node for actionable Cards or the slot-content node for neutral Cards.
 
 ### Surface
 
@@ -1223,125 +1402,6 @@ These need no code change, but the rendering differs:
   mode. In 5.x, the label margins were **24dp** for `filled`, `tonal`,
   `elevated` and `outlined`, and **12dp** for `text` (**16dp** with an icon).
   Existing buttons change width.
-
-### Card
-
-#### `Card` layout
-
-`Card` and its related components have been reworked. Instead of injecting padding to its children, the `Card` component now adds a padding (`16dp`) around its content as well as a gap (`16dp`) between its children.
-
-For the related components:
-
-- `Card.Cover` and `Card.Actions` now apply negative margins to extend into the Card's edges:
-  - `Card.Cover` applies top, left and right margins for vertical cards and left, top, and bottom margins for horizontal cards.
-  - `Card.Actions` applies bottom, left, and right margins for vertical cards and left, bottom, and right margins for horizontal cards.
-- `Card.Title` and `Card.Content` no longer apply padding around them.
-
-This means, in a typical card layout, the Card will automatically apply the necessary spacing between these sections:
-
-```tsx
-<Card>
-  <Card.Cover source={cover} />
-  <Card.Title title="Card title" />
-  <Card.Content>
-    <Text>Card content</Text>
-  </Card.Content>
-  <Card.Actions>
-    <Button mode="filled">Action</Button>
-    <Button mode="outlined">Another Action</Button>
-  </Card.Actions>
-</Card>
-```
-
-So your existing layouts with the following structure will continue to work as before:
-
-- `Card` without `Card.Cover` or `Card.Actions`.
-- `Card` with `Card.Cover` at the top and/or `Card.Actions` at the bottom.
-
-If you have `Card.Cover` or `Card.Actions` in positions other than the top and bottom respectively, you will need to adjust their margins. For example, for a `Card.Cover` in the middle of the Card, you would need to set its top and bottom margins to zero:
-
-```tsx
-<Card>
-  <Card.Title title="Card title" />
-  <Card.Cover source={cover} style={{ marginTop: 0, marginBottom: 0 }} />
-  <Card.Content>
-    <Text>Card content</Text>
-  </Card.Content>
-</Card>
-```
-
-We have also added a `direction` prop to the `Card` component, which lets you arrange its items horizontally instead of the default vertical layout. So if you have custom `flexDirection` styles on the Card, you should replace them with the `direction` prop.
-
-```tsx
-// Before (v5)
-<Card style={{ flexDirection: 'row' }}>
-  <Card.Cover source={cover} style={{ width: 72, height: 72 }} />
-  <Card.Title title="Card title" />
-  <Card.Content>
-    <Text>Card content</Text>
-  </Card.Content>
-  <Card.Actions>
-    <Button mode="contained">Action</Button>
-    <Button mode="outlined">Another Action</Button>
-  </Card.Actions>
-</Card>
-
-// After (v6)
-<Card direction="horizontal">
-  <Card.Cover source={cover} style={{ width: 72, height: 72 }} />
-  <Card.Title title="Card title" />
-  <Card.Content>
-    <Text>Card content</Text>
-  </Card.Content>
-  <Card.Actions>
-    <Button mode="filled">Action</Button>
-    <Button mode="outlined">Another Action</Button>
-  </Card.Actions>
-</Card>
-```
-
-#### Outline color
-
-The `borderColor` in `style` no longer changes the outline color in `outlined` mode. Use the `borderColor` prop instead:
-
-```diff
-<Card
-  mode="outlined"
-- style={{ borderColor: 'red' }}
-+ borderColor="red"
->
-  <Card.Content>...</Card.Content>
-</Card>
-```
-
-#### `Card.Cover`
-
-The `style` prop of `Card.Cover` is now typed as a `View` style. Image style properties such as `resizeMode` or `tintColor` were never applied, so pass them as `Image` props instead:
-
-```diff
-- <Card.Cover source={cover} style={{ resizeMode: 'contain' }} />
-+ <Card.Cover source={cover} resizeMode="contain" />
-```
-
-`Card.Cover` no longer applies the border radius from `style` to the image directly. The image is clipped by the container, so any border radius passed in `style` still applies.
-
-#### `Card.Actions`
-
-`Card.Actions` no longer injects `mode` on the buttons. To keep the previous behavior, you need to set `mode="outlined"` on the first button and `mode="filled"` (formerly `contained`) on the rest:
-
-```tsx
-// Before (v5)
-<Card.Actions>
-  <Button>Cancel</Button>
-  <Button>Ok</Button>
-</Card.Actions>
-
-// After (v6)
-<Card.Actions>
-  <Button mode="outlined">Cancel</Button>
-  <Button mode="filled">Ok</Button>
-</Card.Actions>
-```
 
 ### List
 

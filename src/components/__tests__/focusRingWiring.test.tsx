@@ -491,11 +491,7 @@ describe('focus ring wiring', () => {
   });
 
   it('Card rings outward', async () => {
-    await render(
-      <Card onPress={() => {}}>
-        <Text>card</Text>
-      </Card>
-    );
+    await render(<Card onPress={() => {}} content={<Text>card</Text>} />);
 
     await focusFirstFocusable();
 
@@ -507,9 +503,11 @@ describe('focus ring wiring', () => {
   // Pressable would stop at the content's height and sit inside the padding.
   it('Card rings its own box, whatever its size and padding', async () => {
     await render(
-      <Card onPress={() => {}} style={{ height: 200, padding: 12 }}>
-        <Text>card</Text>
-      </Card>
+      <Card
+        onPress={() => {}}
+        style={{ height: 200, padding: 12 }}
+        content={<Text>card</Text>}
+      />
     );
 
     await focusFirstFocusable();
@@ -772,12 +770,8 @@ describe('focus ring after the handler goes away and comes back', () => {
 
   it('Card shows no ring until it is focused again', async () => {
     await dropAndRestore(
-      <Card onPress={() => {}}>
-        <Text>card</Text>
-      </Card>,
-      <Card>
-        <Text>card</Text>
-      </Card>
+      <Card onPress={() => {}} content={<Text>card</Text>} />,
+      <Card content={<Text>card</Text>} />
     );
 
     expect(ringOffset()).toBeUndefined();
@@ -935,9 +929,12 @@ describe('focus ring wiring (web)', () => {
 
   it("Card marks its own box as the ring and leaves the Pressable's outline to the stylesheet", async () => {
     await render(
-      <Card testID="card" onPress={() => {}} style={{ height: 200 }}>
-        <Text>card</Text>
-      </Card>
+      <Card
+        testID="card"
+        onPress={() => {}}
+        style={{ height: 200 }}
+        content={<Text>card</Text>}
+      />
     );
 
     const pressable = screen.getByTestId('card');

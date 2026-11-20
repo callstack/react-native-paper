@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
+import { CardSpacing } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import type { TypescaleKey, ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
@@ -143,8 +144,14 @@ const CardTitle = ({
 }: Props) => {
   useInternalTheme(themeOverrides);
 
+  const minHeight =
+    subtitle || left || right
+      ? CardSpacing.titleWithSupportingMinHeight
+      : CardSpacing.titleMinHeight;
+  const marginBottom = subtitle ? 0 : CardSpacing.titleBottomMargin;
+
   return (
-    <View style={[styles.container, style]} testID={testID}>
+    <View style={[styles.container, { minHeight }, style]} testID={testID}>
       {left ? (
         <View style={[styles.left, leftStyle]}>
           {left({
@@ -156,7 +163,7 @@ const CardTitle = ({
       <View style={[styles.titles]}>
         {title && (
           <Text
-            style={titleStyle}
+            style={[styles.title, { marginBottom }, titleStyle]}
             numberOfLines={titleNumberOfLines}
             variant={titleVariant}
             maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
@@ -166,7 +173,7 @@ const CardTitle = ({
         )}
         {subtitle && (
           <Text
-            style={subtitleStyle}
+            style={[styles.subtitle, subtitleStyle]}
             numberOfLines={subtitleNumberOfLines}
             variant={subtitleVariant}
             maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
@@ -187,17 +194,34 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 16,
+    paddingLeft: CardSpacing.horizontalPadding,
   },
+
   left: {
     justifyContent: 'center',
+    marginRight: CardSpacing.titleLeadingGap,
     height: LEFT_SIZE,
     width: LEFT_SIZE,
   },
+
   titles: {
-    flex: 1,
+    // Not `flex: 1`: its zero basis gives the titles no width when a Card
+    // lays its regions out in a row, as with `contentStyle={{ flexDirection: 'row' }}`.
+    flexGrow: 1,
+    flexShrink: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+
+  title: {
+    minHeight: CardSpacing.titleTextMinHeight,
+    paddingRight: CardSpacing.horizontalPadding,
+  },
+
+  subtitle: {
+    minHeight: CardSpacing.subtitleTextMinHeight,
+    marginVertical: 0,
+    paddingRight: CardSpacing.horizontalPadding,
   },
 });
 

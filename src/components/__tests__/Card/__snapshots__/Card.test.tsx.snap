@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card renders an outlined card 1`] = `
+exports[`Card renders the enabled elevated appearance 1`] = `
 <View
   collapsable={false}
   style={
@@ -9,7 +9,7 @@ exports[`Card renders an outlined card 1`] = `
       undefined,
       {},
       {
-        "backgroundColor": "rgba(254, 247, 255, 1)",
+        "backgroundColor": "transparent",
       },
       {
         "borderBottomEndRadius": undefined,
@@ -30,11 +30,11 @@ exports[`Card renders an outlined card 1`] = `
       {
         "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
-          "height": 0,
+          "height": 0.55,
           "width": 0,
         },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
+        "shadowOpacity": 0.19,
+        "shadowRadius": 0.79,
       },
     ]
   }
@@ -56,7 +56,7 @@ exports[`Card renders an outlined card 1`] = `
         {},
         {},
         {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
+          "backgroundColor": "transparent",
         },
         {
           "borderBottomEndRadius": undefined,
@@ -80,28 +80,8 @@ exports[`Card renders an outlined card 1`] = `
             "height": 0,
             "width": 0,
           },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
-        },
-      ]
-    }
-  />
-  <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "borderColor": "rgba(121, 116, 126, 1)",
-        },
-        {
-          "borderWidth": 1,
-          "height": "100%",
-          "position": "absolute",
-          "width": "100%",
-          "zIndex": 2,
-        },
-        {
-          "borderRadius": 12,
+          "shadowOpacity": 0.039,
+          "shadowRadius": 0.25,
         },
       ]
     }
@@ -114,25 +94,36 @@ exports[`Card renders an outlined card 1`] = `
           "overflow": "hidden",
         },
         {
+          "borderCurve": "continuous",
           "borderRadius": 12,
         },
         {
-          "flexDirection": "column",
-        },
-        undefined,
-        {
-          "gap": 16,
-          "padding": 16,
+          "backgroundColor": "rgba(247, 242, 250, 1)",
         },
       ]
     }
-  />
+  >
+    <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          {
+            "opacity": 1,
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+  </View>
 </View>
 `;
 
-exports[`Card renders an outlined card with a custom outline color 1`] = `
+exports[`Card renders the enabled filled appearance 1`] = `
 <View
-  accessibilityLabel="card"
   collapsable={false}
   style={
     [
@@ -140,7 +131,7 @@ exports[`Card renders an outlined card with a custom outline color 1`] = `
       undefined,
       {},
       {
-        "backgroundColor": "rgba(254, 247, 255, 1)",
+        "backgroundColor": "transparent",
       },
       {
         "borderBottomEndRadius": undefined,
@@ -187,7 +178,7 @@ exports[`Card renders an outlined card with a custom outline color 1`] = `
         {},
         {},
         {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
+          "backgroundColor": "transparent",
         },
         {
           "borderBottomEndRadius": undefined,
@@ -218,26 +209,6 @@ exports[`Card renders an outlined card with a custom outline color 1`] = `
     }
   />
   <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "borderColor": "purple",
-        },
-        {
-          "borderWidth": 1,
-          "height": "100%",
-          "position": "absolute",
-          "width": "100%",
-          "zIndex": 2,
-        },
-        {
-          "borderRadius": 12,
-        },
-      ]
-    }
-  />
-  <View
     style={
       [
         {
@@ -245,23 +216,35 @@ exports[`Card renders an outlined card with a custom outline color 1`] = `
           "overflow": "hidden",
         },
         {
+          "borderCurve": "continuous",
           "borderRadius": 12,
         },
         {
-          "flexDirection": "column",
-        },
-        undefined,
-        {
-          "gap": 16,
-          "padding": 16,
+          "backgroundColor": "rgba(230, 224, 233, 1)",
         },
       ]
     }
-  />
+  >
+    <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          {
+            "opacity": 1,
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+  </View>
 </View>
 `;
 
-exports[`Card renders the outline with the color passed to borderColor prop 1`] = `
+exports[`Card renders the enabled outlined appearance 1`] = `
 <View
   collapsable={false}
   style={
@@ -270,7 +253,7 @@ exports[`Card renders the outline with the color passed to borderColor prop 1`] 
       undefined,
       {},
       {
-        "backgroundColor": "rgba(254, 247, 255, 1)",
+        "backgroundColor": "transparent",
       },
       {
         "borderBottomEndRadius": undefined,
@@ -317,7 +300,7 @@ exports[`Card renders the outline with the color passed to borderColor prop 1`] 
         {},
         {},
         {
-          "backgroundColor": "rgba(254, 247, 255, 1)",
+          "backgroundColor": "transparent",
         },
         {
           "borderBottomEndRadius": undefined,
@@ -348,26 +331,6 @@ exports[`Card renders the outline with the color passed to borderColor prop 1`] 
     }
   />
   <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "borderColor": "red",
-        },
-        {
-          "borderWidth": 1,
-          "height": "100%",
-          "position": "absolute",
-          "width": "100%",
-          "zIndex": 2,
-        },
-        {
-          "borderRadius": 12,
-        },
-      ]
-    }
-  />
-  <View
     style={
       [
         {
@@ -375,18 +338,55 @@ exports[`Card renders the outline with the color passed to borderColor prop 1`] 
           "overflow": "hidden",
         },
         {
+          "borderCurve": "continuous",
           "borderRadius": 12,
         },
         {
-          "flexDirection": "column",
-        },
-        undefined,
-        {
-          "gap": 16,
-          "padding": 16,
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
-  />
+  >
+    <View
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "position": "relative",
+          },
+          {
+            "opacity": 1,
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "borderCurve": "continuous",
+            "borderRadius": 12,
+          },
+          {
+            "borderColor": "rgba(202, 196, 208, 1)",
+            "borderWidth": 1,
+            "opacity": 1,
+          },
+          {},
+        ]
+      }
+    />
+  </View>
 </View>
 `;

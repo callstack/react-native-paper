@@ -45,7 +45,6 @@ For React Native Paper theme to work, we need to use `PaperProvider` also at the
 ```js
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { TouchableOpacity } from 'react-native';
 import { Card, Text, List, PaperProvider } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
@@ -54,21 +53,21 @@ const title = 'Card title';
 const content = 'Card content';
 
 const HomeScreen = ({ navigation }) => (
-  <TouchableOpacity
+  <Card
+    accessibilityLabel={`Open ${title}`}
     onPress={() =>
       navigation?.push('Details', {
         title,
         content,
       })
     }
-  >
-    <Card>
+    title={title}
+    content={
       <Card.Content>
-        <Text variant="titleLarge">{title}</Text>
         <Text variant="bodyMedium">{content}</Text>
       </Card.Content>
-    </Card>
-  </TouchableOpacity>
+    }
+  />
 );
 
 const DetailsScreen = (props) => {

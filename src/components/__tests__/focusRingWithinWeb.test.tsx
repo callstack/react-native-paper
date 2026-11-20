@@ -70,9 +70,12 @@ describe('focus ring `within` structure (web)', () => {
     ],
     [
       'Card',
-      <Card key="card" testID="focusable" onPress={() => {}}>
-        <Text>card</Text>
-      </Card>,
+      <Card
+        key="card"
+        testID="focusable"
+        onPress={() => {}}
+        content={<Text>card</Text>}
+      />,
     ],
     [
       'Chip',
@@ -123,12 +126,19 @@ describe('focus ring `within` structure (web)', () => {
   // must not light the Card's ring as well.
   it("does not hold a Card's nested controls directly inside the Card's ring", async () => {
     await render(
-      <Card testID="card" onPress={() => {}}>
-        <TextInput testID="input" />
-        <Card.Actions>
-          <Button onPress={() => {}}>OK</Button>
-        </Card.Actions>
-      </Card>
+      <Card
+        testID="card"
+        // Without its own label the Card would take its name from the
+        // Button's text, and there would be two buttons named "OK".
+        accessibilityLabel="Album"
+        onPress={() => {}}
+        content={
+          <>
+            <TextInput testID="input" />
+            <Button onPress={() => {}}>OK</Button>
+          </>
+        }
+      />
     );
 
     const [cardRing] = withinRings();
