@@ -3,7 +3,7 @@ import { Image, Platform } from 'react-native';
 import type { ColorValue } from 'react-native';
 import type { ImageSourcePropType } from 'react-native';
 
-import { accessibilityProps } from './MaterialCommunityIcon';
+import { getAccessibilityProps } from './MaterialCommunityIcon';
 import { useLocale } from '../core/locale';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { useInternalTheme } from '../core/theming';
@@ -149,7 +149,7 @@ const Icon = ({
             tintColor: color,
           },
         ]}
-        {...accessibilityProps}
+        {...getAccessibilityProps()}
         accessibilityIgnoresInvertColors
       />
     );
