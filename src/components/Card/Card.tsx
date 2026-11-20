@@ -532,6 +532,8 @@ const Card = ({
     'within'
   );
   const hasWarnedAboutActions = React.useRef(false);
+  // `React.Children` is used only so an empty slot (`[]`, `null`, `false`)
+  // does not trigger the warning below; layout never depends on it.
   const hasActions = React.Children.toArray(actions).length > 0;
 
   React.useEffect(() => {
@@ -646,6 +648,8 @@ const Card = ({
   };
   const neutralAccessibilityProps = {
     ...accessibilityProps,
+    // When enabled, pass the user's value through unchanged, so a neutral
+    // Card without `aria-disabled` does not render `aria-disabled={false}`.
     'aria-disabled': isDisabled || ariaDisabled,
   };
   const handlePressIn = React.useCallback(
