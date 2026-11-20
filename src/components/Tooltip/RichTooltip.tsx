@@ -192,6 +192,8 @@ const RichTooltip = ({
   const contentId = React.useId();
   // Web only: a non-touch pointer sits on the trigger
   const hoveringRef = React.useRef(false);
+  // Web only: the trigger's keyboard focus opened the tooltip
+  const focusOpenedRef = React.useRef(false);
   const tooltipRef = React.useRef<TooltipHostElement>(null);
   // Web only: set while dismiss is returning focus to the trigger
   const refocusAfterDismissRef = React.useRef(false);
@@ -213,6 +215,7 @@ const RichTooltip = ({
 
   React.useEffect(() => {
     if (!visible) {
+      focusOpenedRef.current = false;
       return undefined;
     }
     return () => releaseSingletonSlot(dismissFromSlot);
@@ -279,18 +282,24 @@ const RichTooltip = ({
       refocusAfterDismissRef.current = false;
       return;
     }
+    focusOpenedRef.current = true;
     show();
   };
 
   const handleBlur = () => {
     refocusAfterDismissRef.current = false;
+    focusOpenedRef.current = false;
     scheduleHide();
   };
 
-  // On web a press on the hovered trigger keeps the tooltip open, as the hover
-  // already opened it.
+  // On web a press on the hovered or keyboard-focused trigger keeps the
+  // tooltip open, as the hover or the focus already opened it.
   const handlePress = useLatestCallback(() => {
-    if (Platform.OS === 'web' && visible && hoveringRef.current) {
+    if (
+      Platform.OS === 'web' &&
+      visible &&
+      (hoveringRef.current || focusOpenedRef.current)
+    ) {
       showTimer.clear();
       hideTimer.clear();
     } else if (visible) {

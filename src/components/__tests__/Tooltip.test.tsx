@@ -1338,6 +1338,33 @@ describe('Tooltip.Rich', () => {
       expect(queryByText('Body text')).toBeNull();
     });
 
+    it('keeps the tooltip open when the keyboard-focused trigger is pressed', async () => {
+      const {
+        wrapper: { getByText, queryByText },
+      } = await setup({ leaveTouchDelay: 500 });
+
+      const trigger = getTrigger();
+      await act(async () => {
+        await fireEvent(trigger, 'focus');
+      });
+      expect(getByText('Body text')).toBeTruthy();
+
+      // Enter on a focused button presses it, which mustn't close the tooltip
+      // the focus opened
+      await user.press(trigger);
+      await runTimers();
+
+      expect(getByText('Body text')).toBeTruthy();
+
+      await act(async () => {
+        await fireEvent(trigger, 'blur');
+      });
+      await runTimers(500);
+      await runTimers();
+
+      expect(queryByText('Body text')).toBeNull();
+    });
+
     it('keeps the tooltip open when the hovered trigger is pressed', async () => {
       const {
         wrapper: { getByText, queryByText },
