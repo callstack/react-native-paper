@@ -926,10 +926,10 @@ describe('loading', () => {
     expect(
       screen.getByRole('button', { name: 'Upload', busy: true })
     ).toBeOnTheScreen();
-    expect(screen.queryByRole('progressbar')).not.toBeOnTheScreen();
+    // Not even a hidden element: one would still be a keyboard stop on Android.
     expect(
-      screen.getByRole('progressbar', { includeHiddenElements: true })
-    ).toBeOnTheScreen();
+      screen.queryByRole('progressbar', { includeHiddenElements: true })
+    ).not.toBeOnTheScreen();
   });
 
   it('does not disable the button', async () => {
