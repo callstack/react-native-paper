@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
+import { CardSpacing } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import type { TypescaleKey, ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
@@ -143,8 +144,11 @@ const CardTitle = ({
 }: Props) => {
   useInternalTheme(themeOverrides);
 
-  const minHeight = subtitle || left || right ? 72 : 50;
-  const marginBottom = subtitle ? 0 : 2;
+  const minHeight =
+    subtitle || left || right
+      ? CardSpacing.titleWithSupportingMinHeight
+      : CardSpacing.titleMinHeight;
+  const marginBottom = subtitle ? 0 : CardSpacing.titleBottomMargin;
 
   return (
     <View style={[styles.container, { minHeight }, style]} testID={testID}>
@@ -190,12 +194,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingLeft: 16,
+    paddingLeft: CardSpacing.horizontalPadding,
   },
 
   left: {
     justifyContent: 'center',
-    marginRight: 16,
+    marginRight: CardSpacing.titleLeadingGap,
     height: LEFT_SIZE,
     width: LEFT_SIZE,
   },
@@ -210,14 +214,14 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    minHeight: 30,
-    paddingRight: 16,
+    minHeight: CardSpacing.titleTextMinHeight,
+    paddingRight: CardSpacing.horizontalPadding,
   },
 
   subtitle: {
-    minHeight: 20,
+    minHeight: CardSpacing.subtitleTextMinHeight,
     marginVertical: 0,
-    paddingRight: 16,
+    paddingRight: CardSpacing.horizontalPadding,
   },
 });
 
