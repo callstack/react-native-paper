@@ -128,13 +128,14 @@ describe('focus ring `within` structure (web)', () => {
     await render(
       <Card
         testID="card"
+        // Without its own label the Card would take its name from the
+        // Button's text, and there would be two buttons named "OK".
+        accessibilityLabel="Album"
         onPress={() => {}}
         content={
           <>
             <TextInput testID="input" />
-            <Button testID="ok" onPress={() => {}}>
-              OK
-            </Button>
+            <Button onPress={() => {}}>OK</Button>
           </>
         }
       />
@@ -143,7 +144,9 @@ describe('focus ring `within` structure (web)', () => {
     const [cardRing] = withinRings();
     expect(cardRing.children).toContain(screen.getByTestId('card'));
     expect(cardRing.children).not.toContain(screen.getByTestId('input'));
-    expect(cardRing.children).not.toContain(screen.getByTestId('ok'));
+    expect(cardRing.children).not.toContain(
+      screen.getByRole('button', { name: 'OK' })
+    );
   });
 
   // The chip's box draws the ring, so a ring on the ripple inside it would
