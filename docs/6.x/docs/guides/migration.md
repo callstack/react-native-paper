@@ -140,8 +140,7 @@ Hardcoded default test IDs have been removed for the components listed below:
 
 - `Appbar.Content`: `appbar-content`
 - `Appbar.Header`: `appbar-header`
-- `BottomNavigation`: `bottom-navigation`
-- `BottomNavigation.Bar`: `bottom-navigation-bar`
+- `BottomNavigation` and `BottomNavigation.Bar`: `bottom-navigation` and `bottom-navigation-bar`. Both components are removed, see [BottomNavigation](#bottomnavigation).
 - `Button`: `button`
 - `Card`: `card`
 - `Chip`: `chip`
@@ -165,7 +164,6 @@ If you were relying on internal test IDs, update your tests not to rely on inter
 
 Some components now accept explicit `testID` props for their interactable elements:
 
-- `BottomNavigation`: `barTestID` for the internal `BottomNavigation.Bar`, replacing the previous `${testID}-bar` derivation.
 - `Chip`: `closeIconTestID` for the close icon button.
 - `Dialog` and `Modal`: `overlayTestID` for the overlay displayed behind the content.
 - `Menu`: `overlayTestID` for the overlay displayed behind the menu.
@@ -359,7 +357,7 @@ Components now use React Native's `aria-*` props and `role` instead of the `acce
 
 Props that label a part of a component keep their names, e.g. `closeIconAccessibilityLabel` on `Chip` and `dismissAccessibilityLabel` on `Modal`.
 
-Keys inside data objects changed the same way: the `routes` of `BottomNavigation` and the `buttons` of `SegmentedButtons` now take `'aria-label'`. The old `accessibilityLabel` key is ignored, and TypeScript doesn't report it in `routes`.
+Keys inside data objects changed the same way: the `routes` of `NavigationBar` (`BottomNavigation` in 5.x) and the `buttons` of `SegmentedButtons` now take `'aria-label'`. The old `accessibilityLabel` key is ignored, and TypeScript doesn't report it in `routes`.
 
 ```diff
  <Checkbox.Item
@@ -412,7 +410,7 @@ Interactive components now draw the Material Design 3 keyboard focus indicator: 
 
 `Snackbar` rings its action and close button in `theme.colors.inversePrimary`, the color of its action label, because `secondary` barely shows on its `inverseSurface` background. If a component's background is the ring color, such as an `Appbar` with a `secondary` background, the rings of the controls on it don't show: give those controls a `theme` with a contrasting `secondary`. An `Appbar` passes its own `theme` on to the `Appbar.Action`, `Appbar.BackAction` and `Appbar.Content` placed directly in it.
 
-Components that fill a clipping container or touch their neighbours draw the ring 3dp inside their edge instead: `List.Item`, `List.Accordion`, `Checkbox.Item`, `RadioButton.Item`, `Menu.Item`, the `FAB.Menu` items, `Drawer.Item`, the `BottomNavigation` tabs, `DataTable.Row`, `DataTable.Cell`, `DataTable.Title` and `SegmentedButtons`. `Drawer.CollapsedItem` draws it around its icon and label, 2dp clear of the active indicator. `FAB` and `Switch` draw this ring instead of their own, and `Checkbox` keeps its circular ring around the state layer.
+Components that fill a clipping container or touch their neighbours draw the ring 3dp inside their edge instead: `List.Item`, `List.Accordion`, `Checkbox.Item`, `RadioButton.Item`, `Menu.Item`, the `FAB.Menu` items, `Drawer.Item`, the `NavigationBar` tabs, `DataTable.Row`, `DataTable.Cell`, `DataTable.Title` and `SegmentedButtons`. `Drawer.CollapsedItem` draws it around its icon and label, 2dp clear of the active indicator. `FAB` and `Switch` draw this ring instead of their own, and `Checkbox` keeps its circular ring around the state layer.
 
 A `TouchableRipple`, and every component built on it, rings only while it can be pressed. A disabled one shows no ring. One with no touch handler and no `disabled` is the plain view described in [TouchableRipple without a press handler](#touchableripple-without-a-press-handler): it isn't a keyboard stop, so it never rings. This applies to `TouchableRipple` only: a `Switch` or `Drawer.CollapsedItem` without a handler is still a keyboard stop and rings.
 
@@ -556,6 +554,82 @@ e.g.:
 +   </Tooltip>
 + </View>
 ```
+
+### BottomNavigation
+
+`BottomNavigation` has been removed. Paper no longer ships a component that owns your tab scenes; the Material 3 navigation bar is now `NavigationBar`, a standalone bar you render next to your own navigator (React Navigation, or your own state).
+
+| v5                                                                    | v6                                                                       |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `BottomNavigation`, `BottomNavigation.Bar`                            | `NavigationBar`                                                          |
+| `BottomNavigationProps`, `BottomNavigationRoute`                      | `NavigationBarProps`, `NavigationBarRoute`                               |
+| `BottomNavigation.SceneMap`, `renderScene`, `onIndexChange`           | render the active scene yourself, alongside the bar                      |
+| `getLazy`, `route.lazy`                                               | removed (the bar no longer owns the scenes)                              |
+| `sceneAnimationEnabled`, `sceneAnimationType`, `sceneAnimationEasing` | removed with the scene container                                         |
+| `shifting`                                                            | removed (including the active-icon shift and inactive-label transitions) |
+| `barStyle`                                                            | `style`                                                                  |
+| `style` (the whole `BottomNavigation`, scenes and bar)                | wrap your scenes and the bar in your own `View` (`style` styles the bar) |
+| `animationEasing`                                                     | removed (the indicator uses M3 motion from the theme)                    |
+| `barStyle` with `Animated.Value`                                      | `style` with static styles only                                          |
+| `barTestID`, `${testID}-bar`                                          | `testID` on `NavigationBar`                                              |
+| n/a                                                                   | new `variant` (`'stacked' \| 'horizontal'`) for the item layout          |
+
+The bar is 64dp tall instead of 80dp, which is the height of the M3 flexible navigation bar. If your app moves a `FAB` or a `Snackbar` up by the height of the bar, change that offset. The label of the active tab uses `secondary` instead of `onSurface`.
+
+```diff
++ const scenes = { home: HomeScreen, settings: SettingsScreen };
++ const ActiveScene = scenes[routes[index].key];
++
+- <BottomNavigation
+-   navigationState={{ index, routes }}
+-   onIndexChange={setIndex}
+-   renderScene={BottomNavigation.SceneMap(scenes)}
+- />
++ <>
++   <ActiveScene />
++   <NavigationBar
++     navigationState={{ index, routes }}
++     onTabPress={({ route }) => setIndex(routes.findIndex((r) => r.key === route.key))}
++   />
++ </>
+```
+
+This renders only the active route, so a screen unmounts when you leave its tab, unlike v5 which kept the visited screens mounted. If your app depends on that state, render `NavigationBar` as the [`tabBar` of React Navigation's bottom tabs](./navigation-bar#quick-example), which keeps screens mounted.
+
+`onTabPress` & `onTabLongPress` callbacks receive only pressed `route`. The v5 event object also carried `preventDefault()` & `defaultPrevented`, so code that reads them now throws `preventDefault is not a function`. The bar never navigates on its own, so navigator's own `tabPress` event decides whether press is handled:
+
+```diff
+  tabBar={({ navigation, state, descriptors, insets }) => (
+    <NavigationBar
+      navigationState={state}
+      safeAreaInsets={insets}
+-     onTabPress={({ route, preventDefault }) => {
++     onTabPress={({ route }) => {
+        const event = navigation.emit({
+          type: 'tabPress',
+          target: route.key,
+          canPreventDefault: true,
+        });
+
+-       if (event.defaultPrevented) {
+-         preventDefault();
+-       } else {
++       if (!event.defaultPrevented) {
+          navigation.dispatch({
+            ...CommonActions.navigate(route.name, route.params),
+            target: state.key,
+          });
+        }
+      }}
+    />
+  )}
+```
+
+The `animationEasing` prop is gone along with animation it configured. Active indicator now follows the motion from theme (`theme.motion`) and honors reduce motion preference.
+
+Unlike v5 `barStyle`, the `style` prop no longer accepts `Animated.Value` or `Animated.AnimatedInterpolation`. Pass static styles.
+
+`NavigationBar` also does not set a default `testID`. If your tests looked up `bottom-navigation-bar` (or its `-container` / `-content` / `-content-wrapper` children), pass a `testID` explicitly.
 
 ### Surface
 
@@ -1650,7 +1724,7 @@ const TertiarySwitch = ({ value, onValueChange }) => {
 
 `Icon`'s `source` prop is typed as `IconSource` instead of `any`, so a value that isn't an icon name, an image source or a render function, such as a boolean or `undefined`, is now a type error. `Icon` still renders nothing for those values.
 
-If you pass a field that can be `undefined`, such as an optional `focusedIcon` on a route in `BottomNavigation`'s `renderIcon`, check it first:
+If you pass a field that can be `undefined`, such as an optional `focusedIcon` on a route in `NavigationBar`'s `renderIcon`, check it first:
 
 ```diff
 -renderIcon={({ route, color }) => (

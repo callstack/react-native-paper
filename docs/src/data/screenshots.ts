@@ -19,8 +19,6 @@ export const screenshots = {
     dot: 'screenshots/badge-3.png',
   },
   Banner: 'screenshots/banner.gif',
-  BottomNavigation: 'screenshots/bottom-navigation.gif',
-  'BottomNavigation.Bar': 'screenshots/bottom-navigation-tabs.jpg',
   Button: {
     filled: 'screenshots/button-3.png',
     tonal: 'screenshots/button-5.png',
@@ -100,6 +98,7 @@ export const screenshots = {
   },
   'Menu.Item': 'screenshots/menu-item.png',
   Modal: 'screenshots/modal.gif',
+  NavigationBar: 'screenshots/navigation-bar.png',
   ProgressBar: 'screenshots/progress-bar.png',
   RadioButton: {
     'Android (enabled)': 'screenshots/radio-enabled.android.png',

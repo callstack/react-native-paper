@@ -11,7 +11,7 @@ import {
   SFSymbol,
   MaterialSymbol,
 } from '@react-navigation/native';
-import { Text, BottomNavigation } from 'react-native-paper';
+import { Text, NavigationBar } from 'react-native-paper';
 
 function HomeScreen() {
   return (
@@ -29,14 +29,14 @@ function SettingsScreen() {
   );
 }
 
-const BottomNavigationBarExample = createBottomTabNavigator({
+const NavigationBarReactNavigationExample = createBottomTabNavigator({
   screenOptions: {
     headerShown: false,
   },
   tabBar: ({ navigation, state, descriptors }) => (
-    <BottomNavigation.Bar
+    <NavigationBar
       navigationState={state}
-      onTabPress={({ route, preventDefault }) => {
+      onTabPress={({ route }) => {
         const isRepeatedPress = state.routes[state.index].key === route.key;
         const event = navigation.emit({
           type: 'tabPress',
@@ -50,9 +50,7 @@ const BottomNavigationBarExample = createBottomTabNavigator({
           },
         });
 
-        if (event.defaultPrevented) {
-          preventDefault();
-        } else {
+        if (!event.defaultPrevented) {
           // Custom tab bars must target the tab navigator state.
           navigation.dispatch({
             ...CommonActions.navigate(route.name, route.params),
@@ -125,8 +123,8 @@ const BottomNavigationBarExample = createBottomTabNavigator({
   },
 });
 
-export default Object.assign(BottomNavigationBarExample, {
-  title: 'Bottom Navigation Bar',
+export default Object.assign(NavigationBarReactNavigationExample, {
+  title: 'Navigation Bar (React Navigation)',
 });
 
 const styles = StyleSheet.create({
