@@ -64,7 +64,7 @@ In 5.x, `PaperProvider` set the `scale` itself and replaced any `scale` in the t
 
 If your app was written for a 6.0 alpha build, which also read a `scale` set on `PaperProvider`, remove it from that theme too.
 
-Other `scale` values, which made animations slower or faster, have no replacement in 6.0. A `scale` in a component's `theme` prop, such as `theme={{ animation: { scale: 2 } }}`, does nothing now, and it can no longer turn animations back on while reduce motion is on. Paper ignores an `animation` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider` or a component, or typed as `Theme`, but not in the `theme` prop of `ThemeProvider`, which accepts any value, or in an untyped variable that also holds other theme keys.
+Other `scale` values, which made animations slower or faster, have no replacement in 6.0. A `scale` in a component's `theme` prop, such as `theme={{ animation: { scale: 2 } }}`, does nothing now, and it can no longer turn animations back on while reduce motion is on. Paper ignores an `animation` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider`, `ThemeProvider` or a component, or typed as `Theme`, but not in an untyped variable that also holds other theme keys.
 
 In 5.x, `PaperProvider` also followed the device setting only when you passed no `theme`. In 6.x, `'auto'` follows the device setting with every theme, so if your app passes a custom theme, Paper's animations now stop when the user turns on reduce motion. 6.x also reads the setting when the app starts, while 5.x only reacted when it changed.
 
@@ -254,7 +254,7 @@ If you import it from Paper's type declarations instead, the path changed:
 
 #### `roundness`
 
-The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider` or a component, or typed as `Theme`, but not in the `theme` prop of `ThemeProvider`, which accepts any value, or in an untyped variable that also holds other theme keys.
+The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider`, `ThemeProvider` or a component, or typed as `Theme`, but not in an untyped variable that also holds other theme keys.
 
 In 5.x, each of these components multiplied `roundness` by a fixed number, and the 6.x defaults match the 5.x corners with the default `roundness` of 4. To port a custom `roundness`, set each role to your `roundness` times its multiplier:
 
@@ -330,6 +330,26 @@ As with `roundness`, Paper ignores these keys, and TypeScript reports them in th
 -const fonts = configureFonts({ config: fontConfig, isV3: true });
 +const fonts = configureFonts({ config: fontConfig });
 ```
+
+#### `ThemeProvider`
+
+`ThemeProvider` now merges its `theme` deeply onto the theme above it, as `PaperProvider` and a component's `theme` prop do, so a nested theme only needs the keys it changes. In 5.x it replaced the theme above it, so a partial theme made Paper's components throw when they rendered.
+
+```diff
+ <PaperProvider>
+   <ThemeProvider
+-    theme={{
+-      ...LightTheme,
+-      colors: { ...LightTheme.colors, primary: 'tomato' },
+-    }}
++    theme={{ colors: { primary: 'tomato' } }}
+   >
+     <App />
+   </ThemeProvider>
+ </PaperProvider>
+```
+
+A full theme, such as `DarkTheme` or the theme `useTheme()` returns, gives the same result as before, except that custom keys of the theme above it are kept. The `theme` prop is now typed as a partial `Theme`, as on `PaperProvider`, so TypeScript reports a value that isn't a theme, such as a number, and keys the theme doesn't have, such as `roundness`. The `theme` prop of a component returned by `withTheme` gets the same type, and the component you wrap must take a `Theme` in its `theme` prop. A `ThemeProvider` without a `theme` now passes the theme above it on. In 5.x it gave its children the default light theme. To keep that, pass `theme={LightTheme}`.
 
 ### Accessibility props
 
@@ -461,7 +481,50 @@ To keep the height of the content row when setting `height` in `style`, add the 
 </Appbar.Header>
 ```
 
-In `medium` and `large` mode, `Appbar` now passes its `theme` to `Appbar.BackAction`, `Appbar.Action` and `Appbar.Content`, as the `small` and `center-aligned` modes already did. These children of a medium or large bar with its own `theme` now take their colors, the title's font and their focus rings from that theme, not from the app's. In 5.x, a dark-themed bar in a light app drew dark icons and a dark title on its dark background.
+#### Parts read from the `Appbar`
+
+`Appbar` no longer inspects its children and clones them to pass `color`, `theme`, `mode` and `style`. `Appbar.BackAction`, `Appbar.Content` and `Appbar.Action` now read the `dark` and `theme` props and the `mode` of the `Appbar` they are rendered in from context. This means `Appbar.Action` and `Appbar.BackAction` can be wrapped in other components, for example in a `Tooltip` or a `View`, and still get the colors and the theme of the `Appbar`. `Appbar.Content` positions the title in the `Appbar`, so render it directly in the `Appbar`, not in a wrapper.
+
+Only these three parts read the colors and the theme of the `Appbar`. Other children, such as a custom icon or an inline SVG, never got them, and they still need an explicit `color` or `theme`. A `Tooltip` was the exception: the `Appbar` passed it its `theme`, and now it doesn't, so pass `theme` to a `Tooltip` that needs the theme of the `Appbar`.
+
+The parts are rendered in the order they are given, so render the leading actions first, then `Appbar.Content`, then the trailing actions. Previously, `Appbar.BackAction` and the actions with `isLeading` were moved before the rest. The `isLeading` prop now only selects the icon color of the action (`onSurface` instead of `onSurfaceVariant`).
+
+- `Appbar.Content` always has a `12dp` margin before its title. Previously, the margin was only added when the title was the first item after `Appbar.BackAction`.
+- The `mode` prop of `Appbar.Content`, which was for internal use, is removed.
+
+#### Layout of the modes
+
+- In the `medium` and `large` modes, `Appbar` now lays out the actions in a single row and `Appbar.Content` places the title below them, instead of the `Appbar` rendering a row for the actions and a row for the title. The actions of all modes are centered vertically in a `64dp` row, so those of `medium` moved down by `4dp` and those of `large` moved up by `6dp`.
+- In the `center-aligned` mode, the title is centered by measuring the width of the items on each side of it, so any actions, in any order, and custom children are taken into account. Previously, the actions before the title only counted as leading when they were `Appbar.BackAction` or had `isLeading`, and custom children were not counted. The title is centered when each side is at most two actions wide, as before.
+
+#### Theme
+
+`Appbar` now passes its `theme` to its parts in every mode. In 5.x, the `medium` and `large` modes didn't, so a bar with its own `theme` drew the icons, the title and the focus rings of these parts with the theme of the app. For example, a dark-themed bar in a light app drew dark icons and a dark title on its dark background.
+
+A `theme` set on a part is merged over the `theme` of the `Appbar`, so it takes precedence for the values it sets and the rest comes from the `Appbar`. In 5.x, the `theme` of the `Appbar` overrode it.
+
+#### Material 3 Expressive
+
+- The `mode` prop of `Appbar` and `Appbar.Header` accepts two new values: `medium-flexible` and `large-flexible`. Their height is the minimum height (`112` and `120`), and they grow when the title wraps onto a second line.
+- `Appbar.Action` has new `variant` and `width` props. `variant="filled"` and `variant="tonal"` render the action in a container, and `width="wide"` makes the container wider. A filled or tonal action is selected by default, and passing `selected={false}` shows the unselected container.
+- `Appbar` and `Appbar.Header` have a new `isScrolled` prop. Set it when the content below has scrolled, to switch the container to the `surfaceContainer` color. Unlike `elevated`, it doesn't add elevation.
+
+```tsx
+<Appbar.Header mode="large-flexible" isScrolled={isScrolled}>
+  <Appbar.BackAction onPress={() => {}} />
+  <Appbar.Content title="Photos" />
+  <Appbar.Action
+    icon="share"
+    variant="filled"
+    width="wide"
+    onPress={() => {}}
+  />
+</Appbar.Header>
+```
+
+#### Bottom bar
+
+Using `Appbar` as a bottom bar is deprecated. Material Design 3 moves the bottom bar to toolbars. It continues to work in 6.x, and will be replaced by the `Toolbar` component once it is available.
 
 ### Avatar
 
@@ -872,6 +935,8 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 - **`left` / `right`** → **`startAccessory` / `endAccessory`**
 - **`TextInput.Affix`** → **`prefix` / `suffix`**, or **`TextInput.Icon`**, or **`startAccessory` / `endAccessory`**
 
+`startAccessory` and `endAccessory` follow the writing direction. In RTL, `startAccessory` sits on the right on every platform, while v5's `left` stayed on the left on web.
+
 ```tsx
 // Before (v5)
 <TextInput
@@ -887,6 +952,41 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
   prefix="$"
   suffix="/100"
   counter
+/>
+```
+
+`TextInput.Icon` without a press handler is decorative: it is hidden from
+assistive technology and is not a keyboard focus stop. An icon with `onPress`,
+`onLongPress`, `onPressIn` or `onPressOut` requires an `aria-label` or
+`accessibilityLabel` that names its action, and warns in development without
+one:
+
+```tsx
+const [value, setValue] = React.useState('');
+
+// Before (v5)
+<TextInput
+  label="Search"
+  value={value}
+  onChangeText={setValue}
+  left={<TextInput.Icon icon="magnify" />}
+  right={<TextInput.Icon icon="close" onPress={() => setValue('')} />}
+/>
+
+// After (v6)
+<TextInput
+  label="Search"
+  value={value}
+  onChangeText={setValue}
+  startAccessory={(props) => <TextInput.Icon {...props} icon="magnify" />}
+  endAccessory={(props) => (
+    <TextInput.Icon
+      {...props}
+      icon="close"
+      aria-label="Clear search"
+      onPress={() => setValue('')}
+    />
+  )}
 />
 ```
 
@@ -936,6 +1036,39 @@ const GroupError = ({ visible }: { visible: boolean }) => {
   );
 };
 ```
+
+Supporting text, the character counter, `prefix` and `suffix` describe the field
+instead of becoming part of its accessible name, and the prefix and suffix are
+no longer read as separate text. On web, the input references them with
+`aria-describedby` (the prefix and suffix while they are shown), and IDs you
+pass in `aria-describedby` are kept. On Android and iOS, they are only exposed
+through `accessibilityHint`, alongside any hint you pass, and the visible text
+is hidden from assistive technology, so tests that find these texts with
+`getByText` need `{ includeHiddenElements: true }`. Users who turn hints off,
+for example with the VoiceOver Speak Hints setting, do not hear them. The
+placeholder of an empty field with a label stays blank until the label floats,
+so it describes the field as well: on web until the input shows it, and on
+Android and iOS in the hint. The input no longer sets `aria-valuenow` and
+`aria-valuemax` when the counter reaches `maxLength`.
+
+When no label or explicit accessible name is supplied, the placeholder names the
+field, including after text is entered. A disabled field always exposes its
+disabled state, even when `aria-disabled={false}` is supplied.
+
+On web, error supporting text uses `role="alert"`. On Android and iOS, a new or
+changed error message is announced through `AccessibilityInfo` once it has
+stayed the same for a second, so a message that changes on every keystroke is
+announced once it stops changing. An error that is already shown when the field
+mounts is not announced there. On web, explicit `aria-invalid` values are kept;
+when omitted, validity is derived from `error` and the character counter. Custom
+input renderers should forward the accessibility props they receive.
+
+The filled indicator uses `onSurfaceVariant` and the outlined border uses
+`outline` at rest. On web, both change to `onSurface` on hover, and an invalid
+field changes from `error` to `onErrorContainer`. Focus takes precedence over
+hover and uses `primary`, or `error` for an invalid field. A disabled field uses
+the disabled colors even when `error` is set. On web it keeps `aria-invalid`; on
+Android and iOS the error text stays in its hint.
 
 #### Removed props
 

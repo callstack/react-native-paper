@@ -81,7 +81,12 @@ const TextInputDemo = ({ variant }: TextInputDemoProps) => {
   );
 
   const trailingIcon = (props: TextInputAccessoryProps) => (
-    <TextInput.Icon {...props} icon="close" onPress={() => setValue('')} />
+    <TextInput.Icon
+      {...props}
+      icon="close"
+      aria-label="Clear text"
+      onPress={() => setValue('')}
+    />
   );
 
   const inputColor = theme.colors.onSurfaceVariant;
@@ -100,8 +105,8 @@ const TextInputDemo = ({ variant }: TextInputDemoProps) => {
     { label: 'Error', key: 'error' },
     { label: 'Disabled', key: 'disabled' },
     { label: 'Readonly', key: 'readOnly' },
-    { label: 'Leading icon', key: 'leadingIcon' },
-    { label: 'Trailing icon', key: 'trailingIcon' },
+    { label: 'Decorative leading icon', key: 'leadingIcon' },
+    { label: 'Clear text action', key: 'trailingIcon' },
     { label: 'Counter', key: 'counter' },
     { label: 'Prefix', key: 'showPrefix' },
     { label: 'Suffix', key: 'showSuffix' },
@@ -123,7 +128,11 @@ const TextInputDemo = ({ variant }: TextInputDemoProps) => {
         variant={variant}
         label={modifiers.label || undefined}
         placeholder={modifiers.placeholder || undefined}
-        supportingText={modifiers.helperText || undefined}
+        supportingText={
+          controls.error
+            ? 'Please check the entered text'
+            : modifiers.helperText || undefined
+        }
         error={controls.error}
         disabled={controls.disabled}
         editable={!controls.readOnly}
