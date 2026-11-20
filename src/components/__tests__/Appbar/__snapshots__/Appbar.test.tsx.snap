@@ -175,6 +175,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       >
         <View
           accessible={true}
+          aria-busy={false}
           aria-label="search"
           centered={true}
           collapsable={false}
@@ -333,7 +334,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             accessibilityLabel="clear"
             accessibilityState={
               {
-                "busy": undefined,
+                "busy": false,
                 "checked": undefined,
                 "disabled": false,
                 "expanded": undefined,
@@ -525,7 +526,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         accessibilityLabel="Back"
         accessibilityState={
           {
-            "busy": undefined,
+            "busy": false,
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
@@ -762,7 +763,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       <View
         accessibilityState={
           {
-            "busy": undefined,
+            "busy": false,
             "checked": undefined,
             "disabled": false,
             "expanded": undefined,
@@ -988,6 +989,7 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
     >
       <View
         accessible={true}
+        aria-busy={false}
         centered={true}
         collapsable={false}
         onBlur={[Function]}
@@ -1183,6 +1185,7 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
     >
       <View
         accessible={true}
+        aria-busy={false}
         centered={true}
         collapsable={false}
         onBlur={[Function]}
@@ -1378,6 +1381,7 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
     >
       <View
         accessible={true}
+        aria-busy={false}
         centered={true}
         collapsable={false}
         onBlur={[Function]}
@@ -1573,6 +1577,7 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
     >
       <View
         accessible={true}
+        aria-busy={false}
         aria-label="Back"
         centered={true}
         collapsable={false}

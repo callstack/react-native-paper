@@ -225,6 +225,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
         >
           <View
             accessible={true}
+            aria-busy={false}
             centered={true}
             collapsable={false}
             onBlur={[Function]}
@@ -410,7 +411,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             accessibilityLabel="Clear"
             accessibilityState={
               {
-                "busy": undefined,
+                "busy": false,
                 "checked": undefined,
                 "disabled": true,
                 "expanded": undefined,
@@ -712,6 +713,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         >
           <View
             accessible={true}
+            aria-busy={false}
             centered={true}
             collapsable={false}
             onBlur={[Function]}
@@ -887,6 +889,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
         >
           <View
             accessible={true}
+            aria-busy={false}
             centered={true}
             collapsable={false}
             onBlur={[Function]}
@@ -1165,6 +1168,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
         >
           <View
             accessible={true}
+            aria-busy={false}
             centered={true}
             collapsable={false}
             onBlur={[Function]}
@@ -1342,7 +1346,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             accessibilityLabel="Clear"
             accessibilityState={
               {
-                "busy": undefined,
+                "busy": false,
                 "checked": undefined,
                 "disabled": false,
                 "expanded": undefined,
@@ -1823,6 +1827,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         >
           <View
             accessible={true}
+            aria-busy={false}
             centered={true}
             collapsable={false}
             onBlur={[Function]}
@@ -1998,6 +2003,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         >
           <View
             accessible={true}
+            aria-busy={false}
             centered={true}
             collapsable={false}
             onBlur={[Function]}
@@ -2256,6 +2262,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         >
           <View
             accessible={true}
+            aria-busy={false}
             centered={true}
             collapsable={false}
             onBlur={[Function]}
@@ -2433,7 +2440,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             accessibilityLabel="Clear"
             accessibilityState={
               {
-                "busy": undefined,
+                "busy": false,
                 "checked": undefined,
                 "disabled": false,
                 "expanded": undefined,

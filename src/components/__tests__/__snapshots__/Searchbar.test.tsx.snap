@@ -130,6 +130,7 @@ exports[`activity indicator snapshot test 1`] = `
     >
       <View
         accessible={true}
+        aria-busy={false}
         aria-label="search"
         centered={true}
         collapsable={false}
@@ -559,6 +560,7 @@ exports[`renders searchbar in "view" mode 1`] = `
     >
       <View
         accessible={true}
+        aria-busy={false}
         aria-label="search"
         centered={true}
         collapsable={false}
@@ -717,7 +719,7 @@ exports[`renders searchbar in "view" mode 1`] = `
           accessibilityLabel="clear"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -975,6 +977,7 @@ exports[`renders with placeholder 1`] = `
     >
       <View
         accessible={true}
+        aria-busy={false}
         aria-label="search"
         centered={true}
         collapsable={false}
@@ -1133,7 +1136,7 @@ exports[`renders with placeholder 1`] = `
           accessibilityLabel="clear"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -1366,6 +1369,7 @@ exports[`renders with text 1`] = `
     >
       <View
         accessible={true}
+        aria-busy={false}
         aria-label="search"
         centered={true}
         collapsable={false}
@@ -1520,7 +1524,7 @@ exports[`renders with text 1`] = `
           accessibilityLabel="clear"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,

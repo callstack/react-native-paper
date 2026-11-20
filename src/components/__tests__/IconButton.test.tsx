@@ -911,3 +911,91 @@ describe('inner corner', () => {
     });
   });
 });
+
+describe('loading', () => {
+  it('marks the button busy and hides the indicator', async () => {
+    await render(
+      <IconButton
+        icon="camera"
+        aria-label="Upload"
+        loading
+        onPress={() => {}}
+      />
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'Upload', busy: true })
+    ).toBeOnTheScreen();
+    expect(screen.queryByRole('progressbar')).not.toBeOnTheScreen();
+    expect(
+      screen.getByRole('progressbar', { includeHiddenElements: true })
+    ).toBeOnTheScreen();
+  });
+
+  it('does not disable the button', async () => {
+    const onPress = jest.fn<() => void>();
+
+    await render(
+      <IconButton icon="camera" aria-label="Upload" loading onPress={onPress} />
+    );
+    await userEvent.press(screen.getByRole('button', { name: 'Upload' }));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  describe('on Android', () => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', 'android');
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('passes busy as false, not undefined, once loading ends', async () => {
+      const { rerender } = await render(
+        <IconButton
+          icon="camera"
+          aria-label="Upload"
+          testID="icon-button"
+          loading
+          onPress={() => {}}
+        />
+      );
+
+      expect(screen.getByTestId('icon-button')).toHaveProp(
+        'accessibilityState',
+        expect.objectContaining({ busy: true })
+      );
+
+      await rerender(
+        <IconButton
+          icon="camera"
+          aria-label="Upload"
+          testID="icon-button"
+          onPress={() => {}}
+        />
+      );
+
+      expect(screen.getByTestId('icon-button')).toHaveProp(
+        'accessibilityState',
+        expect.objectContaining({ busy: false })
+      );
+    });
+  });
+
+  it('lets a given aria-busy mark a button that is not loading', async () => {
+    await render(
+      <IconButton
+        icon="camera"
+        aria-label="Upload"
+        aria-busy
+        onPress={() => {}}
+      />
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'Upload', busy: true })
+    ).toBeOnTheScreen();
+  });
+});

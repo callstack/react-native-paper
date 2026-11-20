@@ -129,7 +129,9 @@ export type Props = Omit<
    */
   theme?: ThemeProp;
   /**
-   * Whether to show a loading indicator.
+   * Whether to show a loading indicator in place of the icon. The button is
+   * marked busy for assistive technology, but it is not disabled: pass
+   * `disabled` too if presses should be ignored while it loads.
    */
   loading?: boolean;
 };
@@ -174,6 +176,7 @@ const IconButton = ({
   theme: themeOverrides,
   testID,
   loading = false,
+  'aria-busy': ariaBusy,
   contentStyle,
   hitSlop,
   role = 'button',
@@ -302,6 +305,12 @@ const IconButton = ({
     focusTarget.onBlur?.();
   };
 
+  // The button is busy while it loads, so the indicator inside it is no
+  // progress element of its own. Always a boolean: on Android `undefined`
+  // leaves TalkBack saying "busy" after loading ends. As on React Native, an
+  // `aria-busy` prop wins over `accessibilityState.busy`.
+  const busy = loading || (ariaBusy ?? rest.accessibilityState?.busy) === true;
+
   // Announced like Button: `aria-pressed` on web, `aria-checked` on native.
   // `aria-selected` isn't valid on `role="button"`, so it would go unannounced.
   // React Native's types have no `aria-pressed`.
@@ -403,6 +412,7 @@ const IconButton = ({
           ]}
           role={isWebImage ? 'img' : role}
           aria-disabled={disabled}
+          aria-busy={busy}
           {...toggleStateProps}
           disabled={disabled}
           hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
@@ -411,7 +421,11 @@ const IconButton = ({
         >
           <View style={{ opacity: iconOpacity }}>
             {loading ? (
-              <ActivityIndicator size={dimensions.iconSize} color={iconColor} />
+              <ActivityIndicator
+                size={dimensions.iconSize}
+                color={iconColor}
+                aria-hidden
+              />
             ) : (
               <IconComponent
                 color={iconColor}

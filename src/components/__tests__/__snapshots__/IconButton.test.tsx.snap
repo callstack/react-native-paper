@@ -47,6 +47,7 @@ exports[`applies a static transform from style 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={false}
       centered={true}
       collapsable={false}
       onBlur={[Function]}
@@ -159,7 +160,7 @@ exports[`renders a square icon button 1`] = `
     <View
       accessibilityState={
         {
-          "busy": undefined,
+          "busy": false,
           "checked": undefined,
           "disabled": false,
           "expanded": undefined,
@@ -303,7 +304,7 @@ exports[`renders disabled icon button 1`] = `
     <View
       accessibilityState={
         {
-          "busy": undefined,
+          "busy": false,
           "checked": undefined,
           "disabled": true,
           "expanded": undefined,
@@ -437,6 +438,7 @@ exports[`renders extra-large icon button 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={false}
       centered={true}
       collapsable={false}
       onBlur={[Function]}
@@ -547,6 +549,7 @@ exports[`renders filled icon button 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={false}
       centered={true}
       collapsable={false}
       onBlur={[Function]}
@@ -657,6 +660,7 @@ exports[`renders icon button by default 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={false}
       centered={true}
       collapsable={false}
       onBlur={[Function]}
@@ -767,6 +771,7 @@ exports[`renders icon button with color 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={false}
       centered={true}
       collapsable={false}
       onBlur={[Function]}
@@ -877,6 +882,7 @@ exports[`renders icon change animated 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={false}
       centered={true}
       collapsable={false}
       onBlur={[Function]}
@@ -1025,6 +1031,7 @@ exports[`renders outlined icon button 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={false}
       centered={true}
       collapsable={false}
       onBlur={[Function]}
@@ -1135,6 +1142,7 @@ exports[`renders tonal icon button 1`] = `
   >
     <View
       accessible={true}
+      aria-busy={false}
       centered={true}
       collapsable={false}
       onBlur={[Function]}

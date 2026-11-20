@@ -564,7 +564,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           accessibilityLabel="chevron-left"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -705,7 +705,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           accessibilityLabel="chevron-right"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -904,7 +904,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           accessibilityLabel="page-first"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -1045,7 +1045,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           accessibilityLabel="chevron-left"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -1186,7 +1186,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           accessibilityLabel="chevron-right"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -1327,7 +1327,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           accessibilityLabel="page-last"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -1526,7 +1526,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           accessibilityLabel="chevron-left"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -1667,7 +1667,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           accessibilityLabel="chevron-right"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -2177,7 +2177,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           accessibilityLabel="page-first"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -2318,7 +2318,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           accessibilityLabel="chevron-left"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -2459,7 +2459,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           accessibilityLabel="chevron-right"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
@@ -2600,7 +2600,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           accessibilityLabel="page-last"
           accessibilityState={
             {
-              "busy": undefined,
+              "busy": false,
               "checked": undefined,
               "disabled": false,
               "expanded": undefined,
