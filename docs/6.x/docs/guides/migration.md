@@ -1401,7 +1401,7 @@ To set the glyph size in dp without changing the container scale, use `iconSize`
 ```
 
 ```tsx
-// After (v6) — named container sizes
+// After (v6): named container sizes
 <IconButton icon="plus" size="extra-small" onPress={onPress} />
 <IconButton icon="plus" size="small" onPress={onPress} />
 <IconButton icon="plus" size="medium" onPress={onPress} />
@@ -1450,13 +1450,13 @@ A disabled `filled` or `tonal` button, or a disabled selected `outlined` one, ta
 For `filled`, the default and toggle-on containers use `primary`. Toggle-off (`selected={false}`) uses `surfaceContainer` instead of `primary`.
 
 ```tsx
-// Before (v5) — selected={false} still used the default (non-toggle) colors
+// Before (v5): selected={false} still used the default (non-toggle) colors
 <IconButton icon="star-outline" mode="contained" selected={false} onPress={onPress} />
 
-// After (v6) — omit selected unless the button is a toggle
+// After (v6): omit selected unless the button is a toggle
 <IconButton icon="star-outline" mode="filled" onPress={onPress} />
 
-// After (v6) — explicit toggle off / on
+// After (v6): explicit toggle off / on
 <IconButton
   icon={isStarred ? 'star' : 'star-outline'}
   mode="filled"
@@ -1486,7 +1486,7 @@ For `filled`, the default and toggle-on containers use `primary`. Toggle-off (`s
 ```
 
 ```tsx
-// After (v6) — keep the 24dp glyph from Card.Title
+// After (v6): keep the 24dp glyph from Card.Title
 <Card.Title
   title="Card title"
   right={(props) => (

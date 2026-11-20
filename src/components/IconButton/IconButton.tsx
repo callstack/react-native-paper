@@ -51,10 +51,10 @@ export type Props = Omit<
   /**
    * Color style of the icon button.
    *
-   * - `standard` — no container fill (default)
-   * - `filled` — primary container
-   * - `tonal` — secondary-container fill
-   * - `outlined` — outline, no fill (selected uses inverse surface)
+   * - `standard`: no container fill (default)
+   * - `filled`: primary container
+   * - `tonal`: secondary-container fill
+   * - `outlined`: outline, no fill (selected uses inverse surface)
    */
   mode?: Mode;
   /**
