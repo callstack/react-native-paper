@@ -300,10 +300,8 @@ const Searchbar = ({
       {loading ? (
         <ActivityIndicator style={styles.v3Loader} />
       ) : (
-        // Clear icon should be always rendered within Searchbar – it's transparent,
-        // without touch events, when there is no value. It's done to avoid issues
-        // with the abruptly stopping ripple effect and changing bar width on web,
-        // when clearing the value.
+        // Keep the clear button mounted so its ripple can finish and clearing
+        // the value does not cause a layout shift on web.
         <View
           pointerEvents={value ? 'auto' : 'none'}
           style={[
@@ -313,9 +311,11 @@ const Searchbar = ({
         >
           <IconButton
             borderless
+            aria-hidden={value ? undefined : true}
             aria-label={clearAccessibilityLabel}
+            focusable={value ? undefined : false}
             iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-            onPress={handleClearPress}
+            onPress={value ? handleClearPress : undefined}
             icon={
               clearIcon ||
               (({ size, color }) => (
