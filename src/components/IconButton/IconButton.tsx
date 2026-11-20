@@ -21,14 +21,14 @@ import hasTouchHandler, {
   carriesToggleState,
 } from '../../utils/hasTouchHandler';
 import { useFocusRing } from '../../utils/useFocusRing';
+import { useShapeMorph } from '../../utils/useShapeMorph';
 import ActivityIndicator from '../ActivityIndicator';
-import { useShapeMorph } from '../Button/useShapeMorph';
-import { getButtonRippleColor } from '../Button/utils';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import { getRippleColorFromContent } from '../TouchableRipple/utils';
 
 const AnimatedTouchableRipple =
   Animated.createAnimatedComponent(TouchableRipple);
@@ -249,7 +249,7 @@ const IconButton = ({
     });
 
   // The state layer takes the icon color, as Button's takes its label color.
-  const rippleColor = getButtonRippleColor({ labelColor: iconColor });
+  const rippleColor = getRippleColorFromContent({ contentColor: iconColor });
 
   const handlePressIn = (e: GestureResponderEvent) => {
     setPressed(true);

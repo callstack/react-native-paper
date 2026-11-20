@@ -7,9 +7,30 @@ import {
   type CSSTransitionTimingFunction,
 } from 'react-native-reanimated';
 
-import { getButtonShapeCurvePoints } from './utils';
-import { toSpringCurve } from '../../theme/tokens/sys/motion';
-import type { InternalTheme } from '../../theme/types';
+import { toSpringCurve } from '../theme/tokens/sys/motion';
+import type { InternalTheme } from '../theme/types';
+
+/**
+ * Caps the spring curve so the corner can't overshoot below 0 on its way to
+ * `radius`, from any start up to `largestRadius`.
+ */
+export const getShapeCurvePoints = ({
+  points,
+  radius,
+  largestRadius,
+}: {
+  points: number[];
+  radius: number;
+  largestRadius: number;
+}): number[] => {
+  if (largestRadius <= radius) {
+    return points;
+  }
+
+  const maxProgress = largestRadius / (largestRadius - radius);
+
+  return points.map((point) => Math.min(point, maxProgress));
+};
 
 type ShapeMorph = {
   duration: number;
@@ -50,7 +71,7 @@ export const useShapeMorph = ({
   const timingFunction = React.useMemo(
     () =>
       linear(
-        ...getButtonShapeCurvePoints({
+        ...getShapeCurvePoints({
           points: spring.points,
           radius: innerRadius,
           largestRadius: largestInnerRadius,

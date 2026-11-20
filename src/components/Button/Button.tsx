@@ -13,14 +13,12 @@ import type {
 
 import Reanimated from 'react-native-reanimated';
 
-import { useShapeMorph } from './useShapeMorph';
 import {
   createIsMode,
   getButtonColors,
   getButtonContentBoxStyle,
   getButtonHitSlop,
   getButtonPressedRadius,
-  getButtonRippleColor,
   getButtonShapeRadius,
   getButtonSizeStyle,
   getButtonTransitionDuration,
@@ -32,6 +30,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { useFocusRing } from '../../utils/useFocusRing';
+import { useShapeMorph } from '../../utils/useShapeMorph';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
@@ -39,6 +38,7 @@ import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import { getRippleColorFromContent } from '../TouchableRipple/utils';
 import Text from '../Typography/Text';
 
 // Elevation levels (MD3) used by the `elevated` mode: level 1 at rest,
@@ -398,7 +398,7 @@ const Button = ({
   );
 
   const rippleColor = React.useMemo(
-    () => getButtonRippleColor({ labelColor }),
+    () => getRippleColorFromContent({ contentColor: labelColor }),
     [labelColor]
   );
 
