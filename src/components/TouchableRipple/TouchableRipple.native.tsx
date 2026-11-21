@@ -6,6 +6,8 @@ import type {
   ViewStyle,
   GestureResponderEvent,
   ColorValue,
+  NativeSyntheticEvent,
+  TargetedEvent,
 } from 'react-native';
 
 import type { PressableProps } from './Pressable';
@@ -18,6 +20,8 @@ import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler, {
   getNonControlA11yProps,
 } from '../../utils/hasTouchHandler';
+import type { FocusRingPlacement } from '../../utils/useFocusRing';
+import { useFocusRing } from '../../utils/useFocusRing';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -27,6 +31,7 @@ export type Props = PressableProps & {
   background?: PressableAndroidRippleConfig;
   centered?: boolean;
   disabled?: boolean;
+  focusRing?: FocusRingPlacement;
   onPress?: (e: GestureResponderEvent) => void | null;
   onLongPress?: (e: GestureResponderEvent) => void;
   onPressIn?: (e: GestureResponderEvent) => void;
@@ -46,6 +51,9 @@ const TouchableRipple = ({
   underlayColor,
   children,
   theme: themeOverrides,
+  focusRing = 'outward',
+  onFocus,
+  onBlur,
   hitSlop,
   ref,
   ...rest
@@ -62,17 +70,24 @@ const TouchableRipple = ({
     onPressOut,
   });
 
-  // With no touch handler and no explicit disabled this is not a control, so it
-  // renders as a plain View. A Pressable is wrong here either way: keep the old
-  // disabled flag and it gets announced as a disabled control, drop the flag and
-  // it starts claiming the touch, swallowing taps meant for whatever wraps it.
   const isControl = hasPassedTouchHandler || Boolean(disabledProp);
   const isInteractive = hasPassedTouchHandler && !disabledProp;
 
-  // A touch target only for something that can be pressed, as on web. Android
-  // never makes a disabled view a touch target, but iOS does, and the plain
-  // View would take touches in its slop on both.
   const effectiveHitSlop = isInteractive ? hitSlop : undefined;
+
+  const { target, ring } = useFocusRing(
+    !isInteractive,
+    theme.colors.secondary,
+    focusRing
+  );
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onFocus?.(e);
+    target.onFocus?.(e);
+  };
+  const handleBlur = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    onBlur?.(e);
+    target.onBlur?.();
+  };
 
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
@@ -81,22 +96,15 @@ const TouchableRipple = ({
       underlayColor,
     });
 
-  // Use foreground ripple on Android P+ to ensure visibility.
-  // Background ripple requires the view to have a background drawable,
-  // which isn't always present. Foreground ripple needs overflow: 'hidden'
-  // to stay within bounds.
-  // https://github.com/facebook/react-native/issues/6480
   const useForeground =
     Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
 
-  // Keep the static form when possible: `Pressable` only tracks the pressed
-  // state when `children` or `style` is a function.
   const resolveStyle = (
     baseStyle: StyleProp<ViewStyle>
   ): PressableProps['style'] =>
     typeof style === 'function'
-      ? (state) => [baseStyle, style(state)]
-      : [baseStyle, style];
+      ? (state) => [baseStyle, style(state), ...ring.style]
+      : [baseStyle, style, ...ring.style];
 
   if (!isControl) {
     const baseStyle = TouchableRipple.supported
@@ -107,6 +115,9 @@ const TouchableRipple = ({
       <View
         {...rest}
         ref={ref}
+        // taken out of `rest` for the ring, so passed on here unchanged
+        onFocus={onFocus}
+        onBlur={onBlur}
         {...getNonControlA11yProps(rest)}
         style={[
           baseStyle,
@@ -119,14 +130,13 @@ const TouchableRipple = ({
   }
 
   if (TouchableRipple.supported) {
-    const androidRipple =
-      rippleEffectEnabled && isInteractive
-        ? (background ?? {
-            color: calculatedRippleColor,
-            borderless,
-            foreground: useForeground,
-          })
-        : undefined;
+    const androidRipple = rippleEffectEnabled
+      ? (background ?? {
+          color: calculatedRippleColor,
+          borderless,
+          foreground: useForeground,
+        })
+      : undefined;
 
     return (
       <Pressable
@@ -134,6 +144,8 @@ const TouchableRipple = ({
         ref={ref}
         disabled={Boolean(disabledProp)}
         hitSlop={effectiveHitSlop}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         style={resolveStyle(useForeground && styles.overflowHidden)}
         android_ripple={androidRipple}
       >
@@ -150,6 +162,8 @@ const TouchableRipple = ({
       ref={ref}
       disabled={Boolean(disabledProp)}
       hitSlop={effectiveHitSlop}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       style={resolveStyle(borderless && styles.overflowHidden)}
     >
       {(state) => (

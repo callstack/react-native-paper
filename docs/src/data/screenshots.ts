@@ -62,11 +62,6 @@ export const screenshots = {
   'DataTable.Row': 'screenshots/data-table-row-cell.png',
   'DataTable.Title': 'screenshots/data-table-header.png',
   Dialog: 'screenshots/dialog-1.png',
-  'Dialog.Actions': 'screenshots/dialog-actions.png',
-  'Dialog.Content': 'screenshots/dialog-content.png',
-  'Dialog.Icon': 'screenshots/dialog-icon.png',
-  'Dialog.ScrollArea': 'screenshots/dialog-scroll-area.gif',
-  'Dialog.Title': 'screenshots/dialog-title.png',
   Divider: 'screenshots/divider.png',
   'Drawer.CollapsedItem': 'screenshots/drawer-collapsed.png',
   'Drawer.Item': 'screenshots/drawer-item.png',
@@ -81,10 +76,22 @@ export const screenshots = {
   'FAB.Group': 'screenshots/fab-group.gif',
   Icon: 'screenshots/icon.png',
   IconButton: {
-    default: 'screenshots/icon-button-1.png',
-    outlined: 'screenshots/icon-button-4.png',
-    contained: 'screenshots/icon-button-2.png',
-    'contained-tonal': 'screenshots/icon-button-3.png',
+    standard: {
+      Android: 'screenshots/icon-button-standard.android.png',
+      iOS: 'screenshots/icon-button-standard.ios.png',
+    },
+    filled: {
+      Android: 'screenshots/icon-button-filled.android.png',
+      iOS: 'screenshots/icon-button-filled.ios.png',
+    },
+    tonal: {
+      Android: 'screenshots/icon-button-tonal.android.png',
+      iOS: 'screenshots/icon-button-tonal.ios.png',
+    },
+    outlined: {
+      Android: 'screenshots/icon-button-outlined.android.png',
+      iOS: 'screenshots/icon-button-outlined.ios.png',
+    },
   },
   'List.Accordion': {
     'with left icon': 'screenshots/list-accordion-1.png',

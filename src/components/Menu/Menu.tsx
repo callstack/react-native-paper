@@ -32,6 +32,7 @@ import useLatestCallback from 'use-latest-callback';
 import MenuItem from './MenuItem';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
 import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
@@ -322,11 +323,15 @@ const Menu = ({
       return;
     }
 
+    scaleX.value = 0;
+    scaleY.value = 0;
     setMenuLayout({ width: 0, height: 0 });
     setRendered(false);
     isShownRef.current = false;
     focusFirstDOMNode(anchorRef.current);
   });
+
+  const getDuration = useMotionDuration();
 
   const show = React.useCallback(async () => {
     const windowLayoutResult = Dimensions.get('window');
@@ -383,10 +388,8 @@ const Menu = ({
         return;
       }
 
-      const { animation } = theme;
-
       const config = {
-        duration: ANIMATION_DURATION * animation.scale,
+        duration: getDuration(ANIMATION_DURATION),
         easing: EASING,
         reduceMotion: ReduceMotion.Never,
       };
@@ -401,30 +404,28 @@ const Menu = ({
   }, [
     anchor,
     attachListeners,
+    getDuration,
     handleShowAnimationFinished,
     measureAnchorLayout,
     opacity,
     scaleX,
     scaleY,
-    theme,
   ]);
 
   const hide = React.useCallback(() => {
     removeListeners();
     isShownRef.current = false;
 
-    const { animation } = theme;
-
     opacity.value = withTiming(
       0,
       {
-        duration: ANIMATION_DURATION * animation.scale,
+        duration: getDuration(ANIMATION_DURATION),
         easing: EASING,
         reduceMotion: ReduceMotion.Never,
       },
       (finished) => scheduleOnRN(handleHideAnimationFinished, finished ?? false)
     );
-  }, [handleHideAnimationFinished, opacity, removeListeners, theme]);
+  }, [getDuration, handleHideAnimationFinished, opacity, removeListeners]);
 
   const updateVisibility = React.useCallback(
     async (display: boolean) => {

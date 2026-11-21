@@ -1,4 +1,4 @@
-import { Platform, Pressable } from 'react-native';
+import { Platform, Pressable, StyleSheet } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
 import {
@@ -9,9 +9,10 @@ import {
   it,
   jest,
 } from '@jest/globals';
-import { userEvent } from '@testing-library/react-native';
+import { fireEvent, userEvent } from '@testing-library/react-native';
 import color from 'color';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -546,4 +547,38 @@ describe('hitSlop', () => {
 
     expect(screen.getByTestId('chip')).not.toHaveProp('hitSlop');
   });
+});
+
+describe('with reduce motion', () => {
+  // Reanimated's Jest setup keeps CSS transitions out of `style`, and
+  // `getAnimatedStyle` can't read the chip's nested style arrays. The chip's
+  // container is the touchable's parent.
+  const elevationTransitionDuration = () => {
+    const { parent } = screen.getByTestId('chip');
+    if (!parent) {
+      throw new Error('Expected the touchable to be inside the container.');
+    }
+    // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+    return StyleSheet.flatten(parent.props.jestInlineStyle).transitionDuration;
+  };
+
+  it.each([
+    { reduceMotion: 'off', rest: 150, pressed: 200 },
+    { reduceMotion: 'on', rest: 0, pressed: 0 },
+  ] as const)(
+    'moves its elevation in $rest ms, and $pressed ms while pressed, when reduceMotion is "$reduceMotion"',
+    async ({ reduceMotion, rest, pressed }) => {
+      await render(
+        <PaperProvider reduceMotion={reduceMotion}>
+          <Chip elevated onPress={() => {}} testID="chip">
+            Example Chip
+          </Chip>
+        </PaperProvider>
+      );
+      expect(elevationTransitionDuration()).toBe(rest);
+
+      await fireEvent(screen.getByTestId('chip'), 'pressIn');
+      expect(elevationTransitionDuration()).toBe(pressed);
+    }
+  );
 });
