@@ -44,11 +44,11 @@ const ListSubheader = ({
 
   const textColor = theme.colors.onSurfaceVariant;
 
-  const font = theme.fonts.bodyMedium;
+  const font = theme.fonts.titleSmall;
 
   return (
     <Text
-      variant="bodyMedium"
+      variant="titleSmall"
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
       {...rest}
