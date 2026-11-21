@@ -1,32 +1,48 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type { ColorValue, GestureResponderEvent } from 'react-native';
+import { Platform, ScrollView, StyleSheet, View } from 'react-native';
+import type {
+  ColorValue,
+  GestureResponderEvent,
+  ViewStyle,
+} from 'react-native';
 
 import Animated, {
+  cubicBezier,
   interpolate,
   ReduceMotion,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-  withDelay,
   withSpring,
 } from 'react-native-reanimated';
+import type { AnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Content from './Content';
+import { getFocusableElement } from './focus';
 import Shell from './Shell';
-import { MenuTokens, Tokens } from './tokens';
-import type { Size, Variant } from './tokens';
+import {
+  MenuTokens,
+  STATE_LAYER_OPACITY,
+  Tokens,
+  webNoHoverTint,
+} from './tokens';
+import type { Interaction, Size, Variant } from './tokens';
 import { resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
+import { tokens } from '../../theme/tokens';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import { useFocusRing } from '../../utils/useFocusRing';
+import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
+import { useOverlayFocus } from '../../utils/useOverlayFocus';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
+import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type MenuItemProps = {
@@ -82,7 +98,9 @@ export type MenuProps = {
    */
   expanded: boolean;
   /**
-   * Called when the user taps the close button or taps an item.
+   * Called when the menu should close: the user taps the close button, an
+   * item, or outside the menu, presses Escape (web), the hardware back button
+   * (Android) or performs the screen reader escape gesture (iOS).
    */
   onDismiss: () => void;
   /**
@@ -147,6 +165,15 @@ const getItemsVariant = (triggerVariant: Variant): Variant => {
 // fixed delay per index.
 const STAGGER_MS = 30;
 
+// Room the items scroll view keeps around the items, so it doesn't clip the
+// hover shadow. It stays as wide as it was when the focus ring was drawn
+// outside the items, so they don't move. Taps in this margin don't reach the
+// content below on Android, so keep it small.
+const { thickness: FOCUS_RING_THICKNESS, outerOffset: FOCUS_RING_OFFSET } =
+  tokens.md.sys.state.focusIndicator;
+const FOCUS_RING_FOOTPRINT = FOCUS_RING_OFFSET + FOCUS_RING_THICKNESS;
+const ITEMS_SCROLL_INSET = FOCUS_RING_FOOTPRINT + 4;
+
 type AnimatedItemProps = {
   expanded: boolean;
   index: number;
@@ -167,54 +194,34 @@ const AnimatedItem = ({
   children,
 }: AnimatedItemProps) => {
   const reduceMotion = useReduceMotion();
-  // Initial values match the resting state for the current `expanded` prop so
-  // first mount doesn't animate unexpectedly.
-  const scaleX = useSharedValue(expanded ? 1 : 0);
-  const alpha = useSharedValue(expanded ? 1 : 0);
+  const { duration, easing } = theme.motion;
 
-  React.useEffect(() => {
-    const target = expanded ? 1 : 0;
-    // Bottom-up on open, top-down on close (matches Compose).
-    const delay = expanded
-      ? (itemCount - 1 - index) * STAGGER_MS
-      : index * STAGGER_MS;
+  // Bottom-up on open, top-down on close (matches Compose).
+  const staggerIndex = expanded ? itemCount - 1 - index : index;
 
-    if (reduceMotion) {
-      scaleX.value = target;
-      alpha.value = target;
-      return;
-    }
-    scaleX.value = withDelay(
-      delay,
-      withSpring(target, {
-        ...toRawSpring(theme.motion.spring.fast.spatial),
-        reduceMotion: ReduceMotion.Never,
-      }),
-      ReduceMotion.Never
-    );
-    alpha.value = withDelay(
-      delay,
-      withSpring(target, {
-        ...toRawSpring(theme.motion.spring.fast.effects),
-        reduceMotion: ReduceMotion.Never,
-      }),
-      ReduceMotion.Never
-    );
-  }, [expanded, index, itemCount, theme, reduceMotion, scaleX, alpha]);
+  // Reduced motion keeps the opacity fade but drops the horizontal scale and
+  // the stagger.
+  const transitionStyle: AnimatedStyle<ViewStyle> = {
+    transitionProperty: ['opacity', 'transform'],
+    transitionDuration: [duration.short2, reduceMotion ? 0 : duration.short4],
+    transitionDelay: reduceMotion ? 0 : staggerIndex * STAGGER_MS,
+    transitionTimingFunction: cubicBezier(...easing.standard),
+  };
 
   // Only scaleX and opacity animate. Layout height stays at the item's
   // natural size — the items container is absolutely positioned above the
   // trigger, so this fixed height never affects the trigger's position.
-  const animStyle = useAnimatedStyle(() => ({
-    transform: [{ scaleX: scaleX.value }],
-    opacity: alpha.value,
-  }));
+  const stateStyle: AnimatedStyle<ViewStyle> = {
+    opacity: expanded ? 1 : 0,
+    transform: [{ scaleX: expanded ? 1 : 0 }],
+  };
 
   return (
     <Animated.View
       style={[
         { transformOrigin, marginBottom },
-        animStyle,
+        stateStyle,
+        transitionStyle,
         expanded ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
       importantForAccessibility={expanded ? 'yes' : 'no-hide-descendants'}
@@ -230,6 +237,19 @@ type ItemProps = {
   label: string;
   variant: Variant;
   theme: InternalTheme;
+  /**
+   * Whether the menu is open. Collapsed items are removed from the keyboard
+   * tab order.
+   */
+  expanded: boolean;
+  index: number;
+  /**
+   * Called with the item's index and its node when it mounts and unmounts.
+   */
+  registerRef: (
+    index: number,
+    node: React.ComponentRef<typeof View> | null
+  ) => void;
   onPress: (e: GestureResponderEvent) => void;
   /**
    * Accessibility label. Falls back to `label`.
@@ -240,15 +260,19 @@ type ItemProps = {
 
 /**
  * A single FAB Menu item. Visually a tonal pill with an icon and a label,
- * but it is not a floating action button: no shadow, no enter/exit scaling
- * of its own (the surrounding `AnimatedItem` handles entrance), and its
- * shape and dimensions come from the menu spec rather than FAB tokens.
+ * but it is not a floating action button: no enter/exit scaling of its own
+ * (the surrounding `AnimatedItem` handles entrance), and its shape and
+ * dimensions come from the menu spec rather than FAB tokens. It follows the
+ * FAB's state elevation and state layers.
  */
 const MenuItem = ({
   icon,
   label,
   variant,
   theme,
+  expanded,
+  index,
+  registerRef,
   onPress,
   'aria-label': ariaLabel,
   testID,
@@ -257,6 +281,35 @@ const MenuItem = ({
   const { height, iconSize, leading, trailing, iconLabelGap, shape } =
     MenuTokens.listItem;
   const borderRadius = resolveCornerRadius(theme, shape);
+
+  const [hovered, setHovered] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+
+  // Items stay mounted while collapsed. Drop their interaction state with the
+  // menu, otherwise a pointer left over an item shows its state layer again on
+  // the next open.
+  React.useEffect(() => {
+    if (!expanded) {
+      setHovered(false);
+      setFocused(false);
+      setPressed(false);
+    }
+  }, [expanded]);
+
+  const interaction: Interaction = pressed
+    ? 'pressed'
+    : focused
+      ? 'focus'
+      : hovered
+        ? 'hover'
+        : 'enabled';
+  const stateLayerStyle: AnimatedStyle<ViewStyle> = {
+    backgroundColor: colors.content,
+    opacity: STATE_LAYER_OPACITY[interaction],
+    transitionProperty: 'opacity',
+    transitionDuration: theme.motion.duration.short2,
+  };
 
   // `scope: 'within'`: the ring belongs on the pill below, not the inner
   // `TouchableRipple` that actually receives focus.
@@ -274,39 +327,74 @@ const MenuItem = ({
     'within'
   );
 
+  const itemRef = React.useCallback(
+    (node: React.ComponentRef<typeof View> | null) => registerRef(index, node),
+    [registerRef, index]
+  );
+
   return (
     <View style={styles.menuItemWrapper}>
-      <View
-        style={[
-          styles.menuItem,
-          { height, borderRadius, backgroundColor: colors.container },
-          ...focusRing.style,
-        ]}
-        {...focusRing.dataSetProps}
+      <Surface
+        backgroundColor={colors.container}
+        borderRadius={borderRadius}
+        elevation={MenuTokens.listItem.elevation[interaction]}
+        style={{ height }}
+        theme={theme}
       >
-        <TouchableRipple
-          borderless
-          focusRing="none"
-          onPress={onPress}
-          onFocus={focusTarget.onFocus}
-          onBlur={focusTarget.onBlur}
-          role="button"
-          aria-label={ariaLabel ?? label}
-          style={[{ borderRadius }, ...focusTarget.style]}
-          testID={testID}
+        <View
+          style={[
+            styles.menuItem,
+            { height, borderRadius },
+            ...focusRing.style,
+          ]}
+          {...focusRing.dataSetProps}
         >
-          <Content
-            icon={icon}
-            label={label}
-            contentColor={colors.content}
-            height={height}
-            iconSize={iconSize}
-            leading={leading}
-            trailing={trailing}
-            iconLabelGap={iconLabelGap}
-          />
-        </TouchableRipple>
-      </View>
+          <Animated.View style={[styles.stateLayer, stateLayerStyle]} />
+          <TouchableRipple
+            ref={itemRef}
+            borderless
+            onPress={onPress}
+            focusRing="none"
+            onFocus={(e) => {
+              focusTarget.onFocus?.(e);
+              setFocused(isKeyboardFocusEvent(e));
+            }}
+            onBlur={() => {
+              focusTarget.onBlur?.();
+              setFocused(false);
+            }}
+            onHoverIn={() => setHovered(true)}
+            onHoverOut={() => setHovered(false)}
+            onPressIn={() => setPressed(true)}
+            onPressOut={() => setPressed(false)}
+            role={Platform.OS === 'web' ? 'menuitem' : 'button'}
+            aria-label={ariaLabel ?? label}
+            // `aria-hidden` and `pointerEvents` don't take collapsed items
+            // out of the tab order.
+            focusable={expanded}
+            tabIndex={expanded ? 0 : -1}
+            style={[
+              { borderRadius },
+              ...focusTarget.style,
+              // The state layer replaces the hover tint of TouchableRipple.
+              Platform.OS === 'web' ? webNoHoverTint : null,
+            ]}
+            testID={testID}
+          >
+            <Content
+              icon={icon}
+              label={label}
+              contentColor={colors.content}
+              height={height}
+              iconSize={iconSize}
+              leading={leading}
+              trailing={trailing}
+              iconLabelGap={iconLabelGap}
+              labelTypescale={MenuTokens.listItem.labelTypescale}
+            />
+          </TouchableRipple>
+        </View>
+      </Surface>
     </View>
   );
 };
@@ -331,6 +419,7 @@ type MorphingTriggerProps = {
   'aria-label'?: string;
   theme: InternalTheme;
   testID?: string;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 const MorphingTrigger = ({
@@ -349,6 +438,7 @@ const MorphingTrigger = ({
   'aria-label': ariaLabel,
   theme,
   testID,
+  ref,
 }: MorphingTriggerProps) => {
   const reduceMotion = useReduceMotion();
 
@@ -415,23 +505,28 @@ const MorphingTrigger = ({
     [closedBorderRadius, openBorderRadius]
   );
 
-  const openPlaneStyle = useAnimatedStyle(() => ({
-    opacity: 1 - progress.value,
-  }));
-  const closePlaneStyle = useAnimatedStyle(() => ({
-    opacity: progress.value,
-  }));
+  // The morph itself (size, corner, icon position) is the spring above. The
+  // color and icon cross-fades are effects, so they are CSS transitions.
+  const fadeTransition: AnimatedStyle<ViewStyle> = {
+    transitionProperty: 'opacity',
+    transitionDuration: theme.motion.duration.short3,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.standard),
+  };
+  const openPlaneStyle: AnimatedStyle<ViewStyle> = {
+    opacity: expanded ? 0 : 1,
+  };
+  const closePlaneStyle: AnimatedStyle<ViewStyle> = {
+    opacity: expanded ? 1 : 0,
+  };
   const openIconAnimStyle = useAnimatedStyle(() => {
     const offset = (widthShared.value - closedIconSize) / 2;
     return {
-      opacity: 1 - progress.value,
       transform: [{ translateX: offset }, { translateY: offset }],
     };
   });
   const closeIconAnimStyle = useAnimatedStyle(() => {
     const offset = (widthShared.value - openIconSize) / 2;
     return {
-      opacity: progress.value,
       transform: [{ translateX: offset }, { translateY: offset }],
     };
   });
@@ -467,7 +562,10 @@ const MorphingTrigger = ({
         onPress={onPress}
         disabled={disabled}
         aria-label={ariaLabel}
+        aria-expanded={expanded}
+        aria-haspopup="menu"
         testID={testID}
+        buttonRef={ref}
         widthShared={widthShared}
         heightShared={heightShared}
         borderRadiusShared={borderRadiusShared}
@@ -482,6 +580,7 @@ const MorphingTrigger = ({
                 styles.colorPlane,
                 { backgroundColor: triggerColors.container },
                 openPlaneStyle,
+                fadeTransition,
               ]}
             />
             <Animated.View
@@ -489,6 +588,7 @@ const MorphingTrigger = ({
                 styles.colorPlane,
                 { backgroundColor: closeColors.container },
                 closePlaneStyle,
+                fadeTransition,
               ]}
             />
           </>
@@ -497,18 +597,22 @@ const MorphingTrigger = ({
       >
         <View style={styles.iconOrigin}>
           <Animated.View style={[styles.iconAbsolute, openIconAnimStyle]}>
-            <Icon
-              source={openIcon}
-              size={closedIconSize}
-              color={triggerColors.content}
-            />
+            <Animated.View style={[openPlaneStyle, fadeTransition]}>
+              <Icon
+                source={openIcon}
+                size={closedIconSize}
+                color={triggerColors.content}
+              />
+            </Animated.View>
           </Animated.View>
           <Animated.View style={[styles.iconAbsolute, closeIconAnimStyle]}>
-            <Icon
-              source={closeIcon}
-              size={openIconSize}
-              color={closeColors.content}
-            />
+            <Animated.View style={[closePlaneStyle, fadeTransition]}>
+              <Icon
+                source={closeIcon}
+                size={openIconSize}
+                color={closeColors.content}
+              />
+            </Animated.View>
           </Animated.View>
         </View>
       </Shell>
@@ -521,9 +625,12 @@ const MorphingTrigger = ({
  * items appear stacked above and the trigger morphs into the spec'd close
  * button (`shape: 'full'`, 56 dp, saturated role color).
  *
- * No visual backdrop and no outside-tap dismiss — that matches the MD3 spec
- * and lets the user keep interacting with the content underneath. Dismiss
- * via the close button or by tapping an item.
+ * There is no visual scrim. Pressing outside the menu, the close button or an
+ * item, pressing Escape (web), the hardware back button (Android) or the
+ * screen reader escape gesture (iOS) calls `onDismiss`. Focus moves to the
+ * first item when the menu opens and returns to the trigger when it closes.
+ * On web, the arrow keys, Home and End move focus between the items and the
+ * close button.
  *
  * ## Usage
  * ```tsx
@@ -567,11 +674,143 @@ const Menu = ({
 
   const effectiveExpanded = triggerVisible && expanded;
 
+  // Back (Android) and Escape (web) go through the overlay stack, so that a
+  // menu opened from a modal closes first and the modal stays.
+  useOverlayDismiss({
+    enabled: effectiveExpanded,
+    dismissable: true,
+    onDismiss,
+  });
+
+  const triggerRef = React.useRef<React.ComponentRef<typeof View>>(null);
+  const scrollRef = React.useRef<React.ComponentRef<typeof ScrollView>>(null);
+  const itemRefs = React.useRef<(React.ComponentRef<typeof View> | null)[]>([]);
+  const itemsRef = React.useRef<React.ComponentRef<typeof View>>(null);
+  const firstItemRef = React.useRef<React.ComponentRef<typeof View> | null>(
+    null
+  );
+
+  const [containerHeight, setContainerHeight] = React.useState<number>();
+
+  const registerItemRef = React.useCallback(
+    (index: number, node: React.ComponentRef<typeof View> | null) => {
+      itemRefs.current[index] = node;
+
+      if (index === 0) {
+        firstItemRef.current = node;
+      }
+    },
+    []
+  );
+
   const handleItemPress =
     (item: MenuItemProps) => (e: GestureResponderEvent) => {
       item.onPress(e);
       onDismiss();
     };
+
+  // Focus moves to the first item when the menu opens, and back to the trigger
+  // when it closes.
+  const { focusInitialTarget, restoreFocus } = useOverlayFocus({
+    visible: effectiveExpanded,
+    containerRef: itemsRef,
+    initialFocusRef: firstItemRef,
+    restoreFocusRef: triggerRef,
+  });
+
+  const reduceMotion = useReduceMotion();
+  const { duration } = theme.motion;
+
+  // Transparent views are not in the accessibility tree, so on iOS and Android
+  // focus waits for the first item to fade in: the items stagger, and the first
+  // one is the last to start. A browser can focus an item right away.
+  const focusDelay =
+    Platform.OS === 'web'
+      ? 0
+      : reduceMotion
+        ? duration.short2
+        : (items.length - 1) * STAGGER_MS + duration.short4;
+
+  React.useEffect(() => {
+    if (!effectiveExpanded) {
+      return undefined;
+    }
+
+    const timeout = setTimeout(focusInitialTarget, focusDelay);
+
+    return () => clearTimeout(timeout);
+  }, [effectiveExpanded, focusInitialTarget, focusDelay]);
+
+  React.useEffect(() => {
+    if (!effectiveExpanded) {
+      restoreFocus();
+    }
+  }, [effectiveExpanded, restoreFocus]);
+
+  // A long list scrolls, so start from the first item every time it opens.
+  React.useEffect(() => {
+    if (effectiveExpanded) {
+      scrollRef.current?.scrollTo({ y: 0, animated: false });
+    }
+  }, [effectiveExpanded]);
+
+  // Arrow keys, Home and End move focus between the items and the close
+  // button. Dismissing the menu is left to `useOverlayDismiss` above.
+  React.useEffect(() => {
+    if (
+      Platform.OS !== 'web' ||
+      !('document' in global) ||
+      !effectiveExpanded
+    ) {
+      return undefined;
+    }
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      // Something else, such as a dialog on top, already handled the key.
+      if (e.defaultPrevented) {
+        return;
+      }
+
+      if (
+        !['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(e.key) ||
+        e.altKey ||
+        e.ctrlKey ||
+        e.metaKey ||
+        e.shiftKey
+      ) {
+        return;
+      }
+
+      // Items are in visual order, top to bottom, followed by the close
+      // button.
+      const stops = [...itemRefs.current, triggerRef.current].flatMap(
+        (node) => getFocusableElement(node) ?? []
+      );
+      const current = stops.findIndex((el) => el === document.activeElement);
+
+      if (current === -1) {
+        return;
+      }
+
+      e.preventDefault();
+
+      const last = stops.length - 1;
+      const next =
+        e.key === 'Home'
+          ? 0
+          : e.key === 'End'
+            ? last
+            : e.key === 'ArrowDown'
+              ? (current + 1) % stops.length
+              : (current - 1 + stops.length) % stops.length;
+
+      stops[next].focus();
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [effectiveExpanded]);
 
   const flexAlign: 'flex-start' | 'center' | 'flex-end' =
     alignment === 'start'
@@ -592,21 +831,50 @@ const Menu = ({
 
   const triggerSlotSize = Tokens.sizes[size].container;
 
+  const paddingBottom = insets.bottom + 16;
+  // Space left above the trigger. The scroll inset is added back because the
+  // scroll view reserves room for the shadow and focus ring of every item.
+  const itemsMaxHeight =
+    containerHeight === undefined
+      ? undefined
+      : Math.max(
+          0,
+          containerHeight -
+            insets.top -
+            paddingBottom -
+            triggerSlotSize -
+            MenuTokens.spacing.closeToLastItem
+        ) +
+        ITEMS_SCROLL_INSET * 2;
+
+  // Only the items take touches, so taps next to them in the scroll view's
+  // margin reach the content below. When collapsed, nothing does. Android
+  // doesn't scroll with `box-none`.
+  const itemsPointerEvents = !effectiveExpanded
+    ? styles.pointerEventsNone
+    : Platform.OS === 'android'
+      ? null
+      : styles.pointerEventsBoxNone;
+
   return (
     <View
       style={[
         styles.container,
         {
           paddingTop: insets.top,
-          paddingBottom: insets.bottom + 16,
+          paddingBottom,
           paddingLeft: insets.left + 16,
           paddingRight: insets.right + 16,
         },
       ]}
+      onLayout={(e) => setContainerHeight(e.nativeEvent.layout.height)}
+      // The screen reader escape gesture (iOS).
+      onAccessibilityEscape={effectiveExpanded ? onDismiss : undefined}
       testID={testID}
     >
       <View style={[styles.stack, { alignItems: flexAlign }]}>
         <View
+          ref={itemsRef}
           style={[
             styles.items,
             alignment === 'start'
@@ -619,33 +887,54 @@ const Menu = ({
               alignItems: flexAlign,
             },
           ]}
+          // A menu without items would be announced as an empty one.
+          role={Platform.OS === 'web' && effectiveExpanded ? 'menu' : undefined}
         >
-          {items.map((item, index) => {
-            const isLast = index === items.length - 1;
-            return (
-              <AnimatedItem
-                key={index}
-                expanded={effectiveExpanded}
-                index={index}
-                itemCount={items.length}
-                theme={theme}
-                transformOrigin={itemTransformOrigin}
-                marginBottom={isLast ? 0 : MenuTokens.spacing.betweenItems}
-              >
-                <MenuItem
-                  icon={item.icon}
-                  label={item.label}
-                  variant={itemsVariant}
+          <ScrollView
+            ref={scrollRef}
+            keyboardShouldPersistTaps="handled"
+            style={[
+              styles.itemsScroll,
+              { maxHeight: itemsMaxHeight },
+              itemsPointerEvents,
+            ]}
+            contentContainerStyle={[
+              styles.itemsScrollContent,
+              { alignItems: flexAlign },
+              itemsPointerEvents,
+            ]}
+          >
+            {items.map((item, index) => {
+              const isLast = index === items.length - 1;
+              return (
+                <AnimatedItem
+                  key={index}
+                  expanded={effectiveExpanded}
+                  index={index}
+                  itemCount={items.length}
                   theme={theme}
-                  aria-label={item['aria-label'] ?? item.label}
-                  onPress={handleItemPress(item)}
-                  testID={item.testID}
-                />
-              </AnimatedItem>
-            );
-          })}
+                  transformOrigin={itemTransformOrigin}
+                  marginBottom={isLast ? 0 : MenuTokens.spacing.betweenItems}
+                >
+                  <MenuItem
+                    index={index}
+                    registerRef={registerItemRef}
+                    icon={item.icon}
+                    label={item.label}
+                    variant={itemsVariant}
+                    theme={theme}
+                    expanded={effectiveExpanded}
+                    aria-label={item['aria-label'] ?? item.label}
+                    onPress={handleItemPress(item)}
+                    testID={item.testID}
+                  />
+                </AnimatedItem>
+              );
+            })}
+          </ScrollView>
         </View>
         <MorphingTrigger
+          ref={triggerRef}
           triggerVariant={triggerVariant}
           closeVariant={closeVariant}
           triggerContainerColor={trigger.containerColor}
@@ -696,8 +985,21 @@ const styles = StyleSheet.create({
   itemsEnd: {
     right: 0,
   },
+  itemsScroll: {
+    flexGrow: 0,
+    // Cancels the padding below, so the scroll view doesn't clip the shadow of
+    // the items and the items keep their position.
+    margin: -ITEMS_SCROLL_INSET,
+  },
+  itemsScrollContent: {
+    padding: ITEMS_SCROLL_INSET,
+  },
   menuItemWrapper: {
     position: 'relative',
+  },
+  stateLayer: {
+    ...StyleSheet.absoluteFill,
+    pointerEvents: 'none',
   },
   menuItem: {
     overflow: 'hidden',

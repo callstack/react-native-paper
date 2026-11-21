@@ -1,3 +1,6 @@
+import type { ViewStyle } from 'react-native';
+
+import { tokens } from '../../theme/tokens';
 import type {
   ColorRole,
   Elevation,
@@ -97,6 +100,8 @@ const closeButton = {
   shape: 'full',
 } as const;
 
+export type Interaction = keyof typeof stateElevation;
+
 const listItem = {
   height: 56,
   shape: 'full',
@@ -104,6 +109,14 @@ const listItem = {
   leading: 24,
   trailing: 24,
   iconLabelGap: 8,
+  labelTypescale: 'titleMedium' satisfies TypescaleKey,
+  // Items are tonal, so they sit flat and lift on hover like tonal buttons.
+  elevation: {
+    enabled: 0,
+    hover: 1,
+    focus: 0,
+    pressed: 0,
+  } as const satisfies Record<Interaction, Elevation>,
 } as const;
 
 const spacing = {
@@ -116,3 +129,13 @@ export const MenuTokens = {
   listItem,
   spacing,
 };
+
+const stateOpacity = tokens.md.sys.state.opacity;
+export const STATE_LAYER_OPACITY = {
+  enabled: 0,
+  hover: stateOpacity.hovered,
+  focus: stateOpacity.focused,
+  pressed: stateOpacity.pressed,
+} as const satisfies Record<Interaction, number>;
+
+export const webNoHoverTint: ViewStyle = { backgroundColor: 'transparent' };
