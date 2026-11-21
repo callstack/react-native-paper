@@ -11,7 +11,12 @@ import color from 'color';
 
 import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { Pressable } from './Pressable';
-import { IDLE_STATE, getTouchableRippleColors, resolveChildren } from './utils';
+import {
+  IDLE_STATE,
+  getHoverStyle,
+  getTouchableRippleColors,
+  resolveChildren,
+} from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
@@ -352,12 +357,13 @@ const TouchableRipple = ({
       {...mergeDataSetProps(rest, ring.dataSetProps)}
       style={(state) => [
         styles.touchable,
+        !isInteractive && styles.disabled,
+        typeof style === 'function' ? style(state) : style,
+        // After `style`, so a background set there does not hide the hover.
+        state.hovered && isInteractive && getHoverStyle(hoverColor),
         // RNW's own `state.focused` fires for mouse clicks too, which is
         // exactly the distinction `:focus-visible` exists to make.
         // https://github.com/necolas/react-native-web/issues/1849
-        state.hovered && isInteractive && { backgroundColor: hoverColor },
-        !isInteractive && styles.disabled,
-        typeof style === 'function' ? style(state) : style,
         ...ring.style,
       ]}
     >
