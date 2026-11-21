@@ -1686,6 +1686,13 @@ A FAB without a `variant` keeps its 5.x colors.
 +<FAB icon="plus" variant="secondaryContainer" onPress={onPress} />
 ```
 
+If your app was written for a 6.0 alpha build, rename the `tonalPrimary`, `tonalSecondary` and `tonalTertiary` variants to `primaryContainer`, `secondaryContainer` and `tertiaryContainer`. The colors are the same. The old names have no aliases, so in JavaScript a `FAB`, a `FAB.Extended` or the `FAB.Menu` trigger with one of them throws at render. One that also sets `containerColor` renders, but a `FAB.Menu` then gives its close button and items the tertiary colors.
+
+```diff
+-<FAB icon="plus" variant="tonalSecondary" onPress={onPress} />
++<FAB icon="plus" variant="secondaryContainer" onPress={onPress} />
+```
+
 #### `size`
 
 - **`size="small"`** and **`small`** (40dp) were removed. The smallest FAB is now `size="default"` (56dp).
