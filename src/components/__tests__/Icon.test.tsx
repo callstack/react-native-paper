@@ -1,4 +1,4 @@
-import { Image } from 'react-native';
+import { Image, Platform } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
 
@@ -137,4 +137,30 @@ describe('Icon Component', () => {
       );
     }
   );
+
+  it('hides decorative icons from assistive technology on web instead of role="img"', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(
+      <>
+        <Icon source="camera" size={ICON_SIZE} testID="glyph-icon" />
+        <Icon
+          source={{ uri: 'https://picsum.photos/700' }}
+          size={ICON_SIZE}
+          testID="img-icon"
+        />
+      </>
+    );
+
+    const glyphIcon = screen.getByTestId('glyph-icon', {
+      includeHiddenElements: true,
+    });
+    const imgIcon = screen.getByTestId('img-icon', {
+      includeHiddenElements: true,
+    });
+
+    expect(glyphIcon).toHaveProp('aria-hidden', true);
+    expect(glyphIcon).not.toHaveProp('role', 'img');
+    expect(imgIcon).toHaveProp('aria-hidden', true);
+    expect(imgIcon).not.toHaveProp('role', 'img');
+  });
 });

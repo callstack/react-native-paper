@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Text } from 'react-native';
-import type { ColorValue, Role, ViewProps } from 'react-native';
+import type { ColorValue, ViewProps } from 'react-native';
 
 import { black } from '../theme/colors';
 
@@ -15,7 +15,7 @@ export type IconProps = {
 
 type AccessibilityProps =
   | {
-      role?: Role;
+      'aria-hidden'?: boolean;
       focusable?: boolean;
     }
   | {
@@ -23,16 +23,18 @@ type AccessibilityProps =
       importantForAccessibility?: 'auto' | 'yes' | 'no' | 'no-hide-descendants';
     };
 
-export const accessibilityProps: AccessibilityProps =
+export const getAccessibilityProps = (): AccessibilityProps =>
   Platform.OS === 'web'
     ? {
-        role: 'img',
+        'aria-hidden': true,
         focusable: false,
       }
     : {
         accessibilityElementsHidden: true,
         importantForAccessibility: 'no-hide-descendants',
       };
+
+export const accessibilityProps: AccessibilityProps = getAccessibilityProps();
 
 const loadIconModule = () => {
   try {
@@ -104,7 +106,7 @@ const DefaultIcon = ({
       pointerEvents="none"
       selectable={false}
       testID={testID}
-      {...accessibilityProps}
+      {...getAccessibilityProps()}
     />
   );
 };
