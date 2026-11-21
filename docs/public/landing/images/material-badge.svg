@@ -1,0 +1,37 @@
+
+<svg width="225px" height="195px" viewBox="0 0 225 195" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="MaterialDesignBadge2" transform="translate(0.000000, 2.000000)">
+            <g id="Group">
+                <g id="Group-2">
+                    <rect id="Rectangle-Copy" fill="#00C4AD" x="0" y="94.8787879" width="34" height="44.1212121"></rect>
+                    <rect id="Rectangle-Copy-2" fill="#00C4AD" x="191" y="94.8787879" width="34" height="44.1212121"></rect>
+                    <polygon id="Path-3-Copy" fill="#00AB97" transform="translate(23.000000, 111.000000) scale(-1, 1) translate(-23.000000, -111.000000) " points="12 139 34 127.121212 34 83 12 83"></polygon>
+                    <polygon id="Path-3" fill="#00AB97" points="191 139 213 127.121212 213 83 191 83"></polygon>
+                    <g id="Group-3" transform="translate(16.000000, 0.000000)">
+                        <circle id="Oval" stroke="#FFFFFF" stroke-width="3" fill="#171717" cx="95.5" cy="95.5" r="95.5"></circle>
+                        <g id="Google_Material_Design_Logo" transform="translate(29.500000, 29.000000)"></g>
+                        <g id="Google_Material_Design_Logo" transform="translate(84.000000, 11.000000)">
+                            <circle id="Oval" fill="#757575" fill-rule="nonzero" cx="13" cy="13" r="13"></circle>
+                            <polygon id="Path" fill="#BDBDBD" fill-rule="nonzero" points="3.88059701 3.88059701 22.119403 3.88059701 22.119403 22.119403 3.88059701 22.119403"></polygon>
+                            <polygon id="Path" fill="#FFFFFF" fill-rule="nonzero" points="22.119403 3.88059701 13 22.119403 3.88059701 3.88059701"></polygon>
+                            <polygon id="Path" points="0 0 26 0 26 26 0 26"></polygon>
+                        </g>
+                        <text id="Material-Design" font-family="Helvetica" font-size="11" font-weight="normal" line-spacing="20" letter-spacing="1.3" fill="#FFFFFF">
+                            <tspan x="41.15625" y="67">MATERIAL DESIGN</tspan>
+                        </text>
+                        <text id="Compliant" font-family="Helvetica" font-size="11" font-weight="normal" line-spacing="20" letter-spacing="1.3" fill="#FFFFFF">
+                            <tspan x="61.1611328" y="150">COMPLIANT</tspan>
+                        </text>
+                    </g>
+                    <g id="Group-4" transform="translate(12.000000, 82.000000)">
+                        <rect id="Rectangle" fill="#00DEC4" x="0" y="0" width="201" height="44.1212121"></rect>
+                        <text id="react-native-paper" font-family="Helvetica" font-size="15" font-weight="bold" line-spacing="20" fill="#000000">
+                            <tspan x="41.6357422" y="26.2121212">react-native-paper</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
