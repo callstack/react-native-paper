@@ -219,13 +219,14 @@ export default function Main() {
 ## Creating dynamic theme colors
 
 Dynamic Color Themes allows for generating two color schemes lightScheme and darkScheme, based on the provided source color.
-Created schemes are following the Material Design 3 color system and covering colors structure from the Paper theme. User may generate these schemes using the following tool:
+Created schemes are built with Material's dynamic color scheme and contain every color role of the Paper theme. User may generate these schemes using the following tool:
 
-<DynamicColorTheme />
+<DynamicColorTheme version="6.x" />
 
 <br />
 
 Passed source color into the util is translated into tones to automatically provide the range of tones that map to color roles.
+By default, the colors follow Material's default scheme, which tones down the chroma of the picked colors. Turn on **Match input colors** to keep the generated colors, such as `primaryContainer`, close to the picked colors, like the color match option of the [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/).
 
 ![customColors](../../../public/screenshots/custom-colors.png)
 
@@ -233,7 +234,7 @@ _Source: [Material You Color System](https://m3.material.io/styles/color/the-col
 
 ### Using schemes
 
-Once we have copied the color schemes from the generated JSON above, we can use by passing it to the colors in `theme` object as below:
+Once we have copied the color schemes from the generated JSON above, we can use by passing it to the colors in `theme` object as below. Use `LightTheme` with the light scheme and `DarkTheme` with the dark scheme:
 
 ```jsx
 import * as React from 'react';
@@ -242,7 +243,7 @@ import App from './src/App';
 
 const theme = {
   ...LightTheme,
-  colors: yourGeneratedLightOrDarkScheme.colors, // Copy it from the color codes scheme and then use it here
+  colors: yourGeneratedLightScheme.colors, // Copy it from the color codes scheme and then use it here
 };
 
 export default function Main() {

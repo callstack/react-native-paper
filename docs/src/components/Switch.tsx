@@ -1,10 +1,11 @@
 interface SwitchProps {
+  id: string;
   value: boolean;
   onValueChange?: () => void;
   color: string;
 }
 
-const Switch = ({ value, onValueChange, color }: SwitchProps) => {
+const Switch = ({ id, value, onValueChange, color }: SwitchProps) => {
   const background = value ? color : 'none';
   return (
     <>
@@ -12,14 +13,10 @@ const Switch = ({ value, onValueChange, color }: SwitchProps) => {
         checked={value}
         onChange={onValueChange}
         className="react-switch-checkbox"
-        id={`react-switch-new`}
+        id={id}
         type="checkbox"
       />
-      <label
-        style={{ background }}
-        className="react-switch-label"
-        htmlFor={`react-switch-new`}
-      >
+      <label style={{ background }} className="react-switch-label" htmlFor={id}>
         <span className={`react-switch-button`} />
       </label>
     </>
