@@ -167,6 +167,40 @@ it('renders not visible menu', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('hides content behind an open menu from screen readers until it closes', async () => {
+  const PAST_ANIMATION_MS = 300;
+
+  const makeMenu = (visible: boolean) => (
+    <Portal.Host>
+      <Menu
+        visible={visible}
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+        <Menu.Item onPress={jest.fn()} title="Redo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  const { rerender, toJSON } = await render(makeMenu(false));
+
+  const rootProps = () => {
+    const json = toJSON();
+    return json && !Array.isArray(json) ? json.props : {};
+  };
+
+  expect(rootProps()['aria-hidden']).toBeUndefined();
+
+  await rerender(makeMenu(true));
+  await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+  expect(rootProps()['aria-hidden']).toBe(true);
+
+  await rerender(makeMenu(false));
+  await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+  expect(rootProps()['aria-hidden']).toBeUndefined();
+});
+
 const ViewPrototype: ComponentRef<typeof View> = View.prototype;
 
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];

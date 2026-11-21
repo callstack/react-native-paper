@@ -214,6 +214,7 @@ exports[`renders not visible menu 1`] = `
 exports[`renders visible menu 1`] = `
 <>
   <View
+    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -883,6 +884,7 @@ exports[`renders visible menu 1`] = `
 exports[`respects anchorPosition bottom 1`] = `
 <>
   <View
+    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={
@@ -1554,6 +1556,7 @@ exports[`respects anchorPosition bottom 1`] = `
 exports[`uses the default anchorPosition of top 1`] = `
 <>
   <View
+    aria-hidden={true}
     collapsable={false}
     pointerEvents="box-none"
     style={

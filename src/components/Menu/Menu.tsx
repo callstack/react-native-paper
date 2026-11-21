@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {
+  AccessibilityInfo,
   Dimensions,
+  findNodeHandle,
   Keyboard,
   Platform,
   Pressable,
@@ -123,10 +125,13 @@ const getKeyboardHeight = (fallback: number) =>
 const DEFAULT_ELEVATION: Elevation = 2;
 const DEFAULT_MODE = 'elevated';
 
-const focusFirstDOMNode = (
+const focusFirstNode = (
   el: React.ComponentRef<typeof View> | null | undefined
 ) => {
-  if (el && Platform.OS === 'web') {
+  if (!el) {
+    return;
+  }
+  if (Platform.OS === 'web') {
     // When in the browser, we want to focus the first focusable item on toggle
     // For example, when menu is shown, focus the first item in the menu
     // And when menu is dismissed, send focus back to the button to resume tabbing
@@ -136,6 +141,13 @@ const focusFirstDOMNode = (
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       )?.focus();
     }
+    return;
+  }
+  // On native, move the screen reader focus to the menu when it opens and
+  // back to the anchor when it closes, matching the web behavior above.
+  const node = findNodeHandle(el);
+  if (node) {
+    AccessibilityInfo.setAccessibilityFocus(node);
   }
 };
 
@@ -315,7 +327,7 @@ const Menu = ({
     }
 
     isShownRef.current = true;
-    focusFirstDOMNode(menuRef.current);
+    focusFirstNode(menuRef.current);
   });
 
   const handleHideAnimationFinished = useLatestCallback((finished: boolean) => {
@@ -328,7 +340,7 @@ const Menu = ({
     setMenuLayout({ width: 0, height: 0 });
     setRendered(false);
     isShownRef.current = false;
-    focusFirstDOMNode(anchorRef.current);
+    focusFirstNode(anchorRef.current);
   });
 
   const getDuration = useMotionDuration();
@@ -674,7 +686,7 @@ const Menu = ({
     >
       {isCoordinate(anchor) ? null : anchor}
       {rendered ? (
-        <Portal>
+        <Portal modal={visible}>
           <Pressable
             aria-label={dismissAccessibilityLabel}
             role="button"
