@@ -6,11 +6,13 @@ import { createComponentParser } from './parser.ts';
 import { renderComponentPage } from './render.ts';
 import type { ComponentPageConfig } from './types.ts';
 import type { Page, Pages } from '../../component-docs.config.ts';
+import type { LiveExample } from '../../src/data/liveExamples.ts';
 
 type ComponentDocsPluginOptions = {
   customFields: {
     extendedExamples: Record<string, unknown>;
     knownIssues: Record<string, Record<string, string>>;
+    liveExamples: Record<string, LiveExample>;
     moreExamples: Record<string, Record<string, string>>;
     screenshots: Record<string, unknown>;
     themeColors: Record<string, unknown>;
