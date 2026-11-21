@@ -48,6 +48,8 @@ const AppbarExample = () => {
   const height = 80;
 
   const isCenterAlignedMode = appbarMode === 'center-aligned';
+  const isFlexibleMode =
+    appbarMode === 'medium-flexible' || appbarMode === 'large-flexible';
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -61,7 +63,11 @@ const AppbarExample = () => {
           {showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
           )}
-          <Appbar.Content title="Title" onPress={() => setShowSnackbar(true)} />
+          <Appbar.Content
+            title="Title"
+            subtitle={showSubtitle ? 'Subtitle' : undefined}
+            onPress={() => setShowSnackbar(true)}
+          />
           {isCenterAlignedMode
             ? false
             : showCalendarIcon && (
@@ -117,7 +123,11 @@ const AppbarExample = () => {
       </View>
       <View style={styles.row}>
         <Text>Subtitle</Text>
-        <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
+        <Switch
+          value={isFlexibleMode ? showSubtitle : false}
+          disabled={!isFlexibleMode}
+          onValueChange={setShowSubtitle}
+        />
       </View>
       <View style={styles.row}>
         <Text>Search icon</Text>

@@ -11,7 +11,10 @@ import type {
 
 import { useAppbarContext, useAppbarTheme } from './AppbarContext';
 import {
+  APPBAR_CONTROLS_HEIGHT,
   APPBAR_HORIZONTAL_PADDING,
+  flexibleModeHeightWithSubtitle,
+  flexibleModeSubtitleVariant,
   getAppbarColor,
   isFlexibleMode,
   modeTextVariant,
@@ -44,6 +47,19 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
    */
   titleRef?: React.RefObject<TextRef>;
   /**
+   * @supported Available in v6.x
+   *
+   * Text or component for the subtitle, shown below the title in the `medium-flexible` and `large-flexible` modes.
+   * The other modes don't show it. A subtitle raises the minimum height of the Appbar to `136` in the `medium-flexible` mode and to `152` in the `large-flexible` mode.
+   */
+  subtitle?: React.ReactNode;
+  /**
+   * @supported Available in v6.x
+   *
+   * Style for the subtitle, if `subtitle` is a string.
+   */
+  subtitleStyle?: StyleProp<TextStyle>;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -52,13 +68,19 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
    */
   disabled?: boolean;
   /**
-   * Custom color for the text.
+   * Custom color for the title and the subtitle.
    */
   color?: string;
   /**
    * Specifies the largest possible scale a title font can reach.
    */
   titleMaxFontSizeMultiplier?: number;
+  /**
+   * @supported Available in v6.x
+   *
+   * Specifies the largest possible scale a subtitle font can reach.
+   */
+  subtitleMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -86,6 +108,20 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
  *
  * export default MyComponent;
  * ```
+ *
+ * ### With a subtitle
+ * ```js
+ * import * as React from 'react';
+ * import { Appbar } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *   <Appbar.Header mode="medium-flexible">
+ *      <Appbar.Content title="Inbox" subtitle="3 unread messages" />
+ *   </Appbar.Header>
+ * );
+ *
+ * export default MyComponent;
+ * ```
  */
 const AppbarContent = ({
   color: titleColor,
@@ -96,6 +132,9 @@ const AppbarContent = ({
   titleStyle,
   title,
   titleMaxFontSizeMultiplier,
+  subtitle,
+  subtitleStyle,
+  subtitleMaxFontSizeMultiplier,
   theme: themeOverrides,
   testID,
   onLayout,
@@ -123,9 +162,22 @@ const AppbarContent = ({
   // callback changes, so the Appbar forgets the layout of a content that is gone
   React.useEffect(() => () => onContentLayout?.(null), [onContentLayout]);
 
-  const titleTextColor =
-    getAppbarColor({ color: titleColor, isDark: appbar?.dark ?? false }) ??
-    colors.onSurface;
+  const customTextColor = getAppbarColor({
+    color: titleColor,
+    isDark: appbar?.dark ?? false,
+  });
+  const titleTextColor = customTextColor ?? colors.onSurface;
+
+  // Only the flexible modes show the subtitle. The Appbar grows with the content,
+  // so the content takes up the space that the subtitle adds to the minimum height.
+  const subtitleLayout =
+    isFlexibleMode(mode) && subtitle
+      ? {
+          variant: flexibleModeSubtitleVariant[mode],
+          minHeight:
+            flexibleModeHeightWithSubtitle[mode] - APPBAR_CONTROLS_HEIGHT,
+        }
+      : null;
 
   // The `medium` and `large` modes show the title below the actions, and the flexible modes
   // grow with the title, so the title is positioned at the bottom of the Appbar
@@ -142,6 +194,7 @@ const AppbarContent = ({
     mode === 'medium' && styles.mediumBottom,
     mode === 'large' && styles.largeBottom,
     isFlexible && styles.flexibleBottom,
+    subtitleLayout && { minHeight: subtitleLayout.minHeight },
   ];
 
   const variant = modeTextVariant[mode];
@@ -195,6 +248,26 @@ const AppbarContent = ({
       ) : (
         title
       )}
+      {subtitleLayout ? (
+        typeof subtitle === 'string' ? (
+          <Text
+            variant={subtitleLayout.variant}
+            style={[
+              {
+                color: customTextColor ?? colors.onSurfaceVariant,
+                ...fonts[subtitleLayout.variant],
+              },
+              subtitleStyle,
+            ]}
+            numberOfLines={1}
+            maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
+          >
+            {subtitle}
+          </Text>
+        ) : (
+          subtitle
+        )
+      ) : null}
     </>
   );
 
@@ -262,6 +335,7 @@ const styles = StyleSheet.create({
     paddingBottom: 28,
   },
   flexibleBottom: {
+    justifyContent: 'flex-end',
     paddingBottom: 12,
   },
 });
