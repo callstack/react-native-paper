@@ -87,6 +87,8 @@ jest.mock('react-native', () => {
   RN.Animated.loop = loop;
   RN.Animated.parallel = parallel;
 
+  RN.AccessibilityInfo.sendAccessibilityEvent = jest.fn();
+
   return RN;
 });
 

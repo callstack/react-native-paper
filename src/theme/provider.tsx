@@ -5,18 +5,24 @@ import type { $DeepPartial } from '@callstack/react-theme-provider';
 import isEqual from 'fast-deep-equal';
 
 import { DarkTheme, LightTheme } from './schemes';
-import type { Theme, NavigationTheme } from './types';
+import type { Theme, ThemeProp, NavigationTheme } from './types';
 
 const {
-  ThemeProvider,
+  // Puts its `theme` into context as it is, so it takes a full theme. It's for
+  // providers that have merged the theme already, such as `PaperProvider`.
+  ThemeProvider: InternalThemeProvider,
   withTheme,
   useTheme: useThemeBase,
-} = createTheming<unknown>(LightTheme);
+} = createTheming<Theme>(LightTheme);
 
-export { ThemeProvider, withTheme };
+export { InternalThemeProvider, withTheme };
 
 export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
-  return useThemeBase<T>(overrides);
+  const safeOverrides = React.useMemo(
+    () => withoutUnsafeKeys(overrides),
+    [overrides]
+  );
+  return useThemeBase<T>(safeOverrides);
 }
 
 // Upstream `deepmerge` corrupts PlatformColor objects, so we recurse manually
@@ -31,7 +37,40 @@ export const isPlatformColorSentinel = (v: unknown): boolean =>
 
 const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
 
+const isPlainObject = (value: unknown): value is Record<string, unknown> =>
+  !!value &&
+  typeof value === 'object' &&
+  [Object.prototype, null].includes(Object.getPrototypeOf(value));
+
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
+// Drops unsafe keys at any depth of nested plain objects and arrays. A value
+// with nothing to drop is returned as is, so the app's objects keep their
+// identity. PlatformColor values are walked too, since any object can carry a
+// sentinel key; a real one has nothing to drop and comes back as is.
+export const withoutUnsafeKeys = <T,>(value: T): T => {
+  if (Array.isArray(value)) {
+    const items = value.map((item: unknown) => withoutUnsafeKeys(item));
+    return items.some((item, index) => item !== value[index])
+      ? (items as T)
+      : value;
+  }
+  if (!isPlainObject(value)) {
+    return value;
+  }
+  let changed = false;
+  const entries: Array<[string, unknown]> = [];
+  for (const [key, child] of Object.entries(value)) {
+    if (UNSAFE_KEYS.has(key)) {
+      changed = true;
+      continue;
+    }
+    const safeChild = withoutUnsafeKeys(child);
+    changed ||= safeChild !== child;
+    entries.push([key, safeChild]);
+  }
+  return changed ? (Object.fromEntries(entries) as T) : value;
+};
+
 export const safeMerge = <T,>(base: T, overrides: unknown): T => {
   if (
     !base ||
@@ -44,7 +83,7 @@ export const safeMerge = <T,>(base: T, overrides: unknown): T => {
     isPlatformColorSentinel(overrides)
   ) {
     // leaf: override wins, fall back to base
-    return (overrides ?? base) as T;
+    return (withoutUnsafeKeys(overrides) ?? base) as T;
   }
   const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
   for (const key of Object.keys(overrides)) {
@@ -76,20 +115,37 @@ export const useInternalTheme = (
   );
 };
 
+type ThemeProviderProps = {
+  children: React.ReactNode;
+  /**
+   * Theme for the components below it, merged deeply onto the theme above it.
+   */
+  theme?: ThemeProp;
+};
+
+export const ThemeProvider = ({
+  children,
+  theme: themeOverrides,
+}: ThemeProviderProps) => {
+  const theme = useInternalTheme(themeOverrides);
+
+  return (
+    <InternalThemeProvider theme={theme}>{children}</InternalThemeProvider>
+  );
+};
+
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationLight: T;
   materialLight?: Theme;
 }): {
   LightTheme: T;
 };
-// eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationDark: T;
   materialDark?: Theme;
 }): {
   DarkTheme: T;
 };
-// eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<
   TLight extends NavigationTheme,
   TDark extends NavigationTheme,
@@ -99,7 +155,6 @@ export function adaptNavigationTheme<
   materialLight?: Theme;
   materialDark?: Theme;
 }): { LightTheme: TLight; DarkTheme: TDark };
-// eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: any) {
   const {
     reactNavigationLight,

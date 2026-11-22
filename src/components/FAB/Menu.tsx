@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { ColorValue, GestureResponderEvent } from 'react-native';
 
 import Animated, {
   interpolate,
+  ReduceMotion,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -14,15 +15,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Content from './Content';
 import Shell from './Shell';
-import {
-  MenuTokens,
-  Tokens,
-  FOCUS_RING_INSET,
-  FOCUS_RING_THICKNESS,
-  webNoOutline,
-} from './tokens';
+import { MenuTokens, Tokens } from './tokens';
 import type { Size, Variant } from './tokens';
-import { useFocusRing } from './useFocusRing';
 import { resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
@@ -30,6 +24,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
+import { useFocusRing } from '../../utils/useFocusRing';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -122,23 +117,29 @@ export type MenuProps = {
  * tonal (container) role color.
  */
 const getCloseVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
     return 'primary';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
     return 'secondary';
   }
   return 'tertiary';
 };
 
 const getItemsVariant = (triggerVariant: Variant): Variant => {
-  if (triggerVariant === 'primary' || triggerVariant === 'tonalPrimary') {
-    return 'tonalPrimary';
+  if (triggerVariant === 'primary' || triggerVariant === 'primaryContainer') {
+    return 'primaryContainer';
   }
-  if (triggerVariant === 'secondary' || triggerVariant === 'tonalSecondary') {
-    return 'tonalSecondary';
+  if (
+    triggerVariant === 'secondary' ||
+    triggerVariant === 'secondaryContainer'
+  ) {
+    return 'secondaryContainer';
   }
-  return 'tonalTertiary';
+  return 'tertiaryContainer';
 };
 
 // Per-item delay used by the stagger. Compose uses a single SlowEffects-driven
@@ -185,11 +186,19 @@ const AnimatedItem = ({
     }
     scaleX.value = withDelay(
       delay,
-      withSpring(target, toRawSpring(theme.motion.spring.fast.spatial))
+      withSpring(target, {
+        ...toRawSpring(theme.motion.spring.fast.spatial),
+        reduceMotion: ReduceMotion.Never,
+      }),
+      ReduceMotion.Never
     );
     alpha.value = withDelay(
       delay,
-      withSpring(target, toRawSpring(theme.motion.spring.fast.effects))
+      withSpring(target, {
+        ...toRawSpring(theme.motion.spring.fast.effects),
+        reduceMotion: ReduceMotion.Never,
+      }),
+      ReduceMotion.Never
     );
   }, [expanded, index, itemCount, theme, reduceMotion, scaleX, alpha]);
 
@@ -249,10 +258,21 @@ const MenuItem = ({
     MenuTokens.listItem;
   const borderRadius = resolveCornerRadius(theme, shape);
 
-  const { focusedSV, onFocus, onBlur } = useFocusRing();
-  const focusRingStyle = useAnimatedStyle(() => ({
-    opacity: focusedSV.value ? 1 : 0,
-  }));
+  // `scope: 'within'`: the ring belongs on the pill below, not the inner
+  // `TouchableRipple` that actually receives focus.
+  //
+  // Inward, as in the MD3 FAB menu spec: items are only
+  // `MenuTokens.spacing.betweenItems` (4dp) apart, so an outward ring (2dp gap
+  // plus 3dp thickness) would run into the neighbouring item.
+  //
+  // `undefined` disabled: menu items have no `disabled` prop today. Wire the
+  // real value through here if that ever changes.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    undefined,
+    theme.colors.secondary,
+    'inward',
+    'within'
+  );
 
   return (
     <View style={styles.menuItemWrapper}>
@@ -260,19 +280,19 @@ const MenuItem = ({
         style={[
           styles.menuItem,
           { height, borderRadius, backgroundColor: colors.container },
+          ...focusRing.style,
         ]}
+        {...focusRing.dataSetProps}
       >
         <TouchableRipple
           borderless
+          focusRing="none"
           onPress={onPress}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={focusTarget.onFocus}
+          onBlur={focusTarget.onBlur}
           role="button"
           aria-label={ariaLabel ?? label}
-          style={[
-            { borderRadius },
-            Platform.OS === 'web' ? webNoOutline : null,
-          ]}
+          style={[{ borderRadius }, ...focusTarget.style]}
           testID={testID}
         >
           <Content
@@ -287,16 +307,6 @@ const MenuItem = ({
           />
         </TouchableRipple>
       </View>
-      <Animated.View
-        style={[
-          styles.menuItemFocusRing,
-          {
-            borderColor: theme.colors.secondary,
-            borderRadius: borderRadius + FOCUS_RING_INSET,
-          },
-          focusRingStyle,
-        ]}
-      />
     </View>
   );
 };
@@ -314,6 +324,7 @@ type MorphingTriggerProps = {
   visible: boolean;
   alignment: 'start' | 'center' | 'end';
   onPress?: (e: GestureResponderEvent) => void;
+  disabled?: boolean;
   /**
    * Accessibility label for the trigger button.
    */
@@ -334,6 +345,7 @@ const MorphingTrigger = ({
   visible,
   alignment,
   onPress,
+  disabled,
   'aria-label': ariaLabel,
   theme,
   testID,
@@ -372,10 +384,10 @@ const MorphingTrigger = ({
     // Compose's ToggleFloatingActionButton uses a single FastSpatial spring
     // for the full open/close progress (size, corner, color, icon all share
     // one timeline).
-    progress.value = withSpring(
-      expanded ? 1 : 0,
-      toRawSpring(theme.motion.spring.fast.spatial)
-    );
+    progress.value = withSpring(expanded ? 1 : 0, {
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: ReduceMotion.Never,
+    });
   }, [expanded, theme, reduceMotion, progress]);
 
   // Derived shared values for the morph shape. Passing them to Shell as
@@ -453,6 +465,7 @@ const MorphingTrigger = ({
         contentColor={triggerContentColor}
         visible={visible}
         onPress={onPress}
+        disabled={disabled}
         aria-label={ariaLabel}
         testID={testID}
         widthShared={widthShared}
@@ -544,7 +557,7 @@ const Menu = ({
   const isRTL = direction === 'rtl';
   const insets = useSafeAreaInsets();
 
-  const triggerVariant: Variant = trigger.variant ?? 'tonalPrimary';
+  const triggerVariant: Variant = trigger.variant ?? 'primaryContainer';
   const size: Size = trigger.size ?? 'default';
   const openIcon: IconSource = trigger.icon;
   const openOnPress = trigger.onPress;
@@ -644,6 +657,9 @@ const Menu = ({
           visible={triggerVisible}
           alignment={alignment}
           onPress={effectiveExpanded ? onDismiss : openOnPress}
+          // Off, not handler-less, while closed with nothing to open it:
+          // dropping the handler would swap elements on every open and close
+          disabled={!effectiveExpanded && openOnPress === undefined}
           aria-label={trigger['aria-label']}
           theme={theme}
           testID={trigger.testID}
@@ -685,15 +701,6 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     overflow: 'hidden',
-  },
-  menuItemFocusRing: {
-    position: 'absolute',
-    top: -FOCUS_RING_INSET,
-    left: -FOCUS_RING_INSET,
-    right: -FOCUS_RING_INSET,
-    bottom: -FOCUS_RING_INSET,
-    borderWidth: FOCUS_RING_THICKNESS,
-    pointerEvents: 'none',
   },
   triggerSlot: {
     justifyContent: 'flex-start',

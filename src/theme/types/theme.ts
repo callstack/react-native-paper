@@ -8,9 +8,6 @@ import type { Typescale } from './typography';
 
 export type Theme = {
   dark: boolean;
-  animation: {
-    scale: number;
-  };
   colors: ThemeColors;
   fonts: Typescale;
   shapes: ThemeShapes;

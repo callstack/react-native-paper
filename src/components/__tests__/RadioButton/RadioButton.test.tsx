@@ -1,3 +1,5 @@
+import type { GestureResponderEvent } from 'react-native';
+
 import {
   beforeAll,
   describe,
@@ -5,8 +7,9 @@ import {
   it,
   jest as mockJest,
 } from '@jest/globals';
+import { userEvent } from '@testing-library/react-native';
 
-import { render } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 import RadioButton from '../../RadioButton';
 import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 
@@ -80,6 +83,53 @@ describe('RadioButton', () => {
       ).toJSON();
 
       expect(tree).toMatchSnapshot();
+    });
+  });
+
+  // Both variants are reached through their own component, so neither depends on
+  // which platform the file mocking `Platform.select` above runs on.
+  describe.each([
+    { label: 'RadioButton.Android', Button: RadioButton.Android },
+    { label: 'RadioButton.IOS', Button: RadioButton.IOS },
+  ])('$label', ({ Button }) => {
+    it('calls onPress when pressed', async () => {
+      const onPress = mockJest.fn<(e: GestureResponderEvent) => void>();
+      await render(<Button value="first" onPress={onPress} />);
+
+      await userEvent.press(screen.getByRole('radio'));
+
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
+
+    it('is a disabled control and ignores presses when disabled', async () => {
+      const onPress = mockJest.fn<(e: GestureResponderEvent) => void>();
+      await render(<Button value="first" disabled onPress={onPress} />);
+
+      const radio = screen.getByRole('radio');
+
+      expect(radio).toBeDisabled();
+
+      await userEvent.press(radio);
+
+      expect(onPress).not.toHaveBeenCalled();
+    });
+
+    it('keeps the same element when it gets disabled', async () => {
+      const onPress = mockJest.fn<(e: GestureResponderEvent) => void>();
+      const { rerender } = await render(
+        <Button value="first" onPress={onPress} />
+      );
+
+      const enabled = screen.getByRole('radio');
+
+      // a disabled radio that switched element would drop focus and any state a
+      // child holds, so `disabled` has to be what switches it off
+      await rerender(<Button value="first" disabled onPress={onPress} />);
+
+      const disabled = screen.getByRole('radio');
+
+      expect(disabled).toBeDisabled();
+      expect(disabled).toBe(enabled);
     });
   });
 });
