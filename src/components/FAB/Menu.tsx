@@ -447,6 +447,11 @@ type MorphingTriggerProps = {
   onPress?: (e: GestureResponderEvent) => void;
   disabled?: boolean;
   /**
+   * Whether the open menu is exposed as a `menu`, which the trigger then
+   * announces. Otherwise it says nothing about a popup.
+   */
+  hasMenuPopup: boolean;
+  /**
    * Accessibility label for the trigger button.
    */
   'aria-label'?: string;
@@ -468,6 +473,7 @@ const MorphingTrigger = ({
   alignment,
   onPress,
   disabled,
+  hasMenuPopup,
   'aria-label': ariaLabel,
   theme,
   testID,
@@ -596,7 +602,7 @@ const MorphingTrigger = ({
         disabled={disabled}
         aria-label={ariaLabel}
         aria-expanded={expanded}
-        aria-haspopup="menu"
+        aria-haspopup={hasMenuPopup ? 'menu' : undefined}
         testID={testID}
         buttonRef={ref}
         widthShared={widthShared}
@@ -997,6 +1003,7 @@ const Menu = ({
           // Off, not handler-less, while closed with nothing to open it:
           // dropping the handler would swap elements on every open and close
           disabled={!effectiveExpanded && openOnPress === undefined}
+          hasMenuPopup={isMenu}
           aria-label={trigger['aria-label']}
           theme={theme}
           testID={trigger.testID}

@@ -566,11 +566,12 @@ describe('dismissing the menu', () => {
         <FAB.Menu
           expanded
           onDismiss={jest.fn()}
-          trigger={{ icon: 'plus', 'aria-label': 'Actions' }}
+          trigger={{ icon: 'plus', 'aria-label': 'Actions', testID: 'trigger' }}
           items={makeItems()}
         />
       );
 
+      expect(screen.getByTestId('trigger')).toHaveProp('aria-haspopup', 'menu');
       expect(screen.getByTestId('item-0')).toHaveProp('role', 'menuitem');
       expect(screen.getByTestId('item-1')).toHaveProp('role', 'menuitem');
     });
@@ -580,11 +581,12 @@ describe('dismissing the menu', () => {
         <FAB.Menu
           expanded
           onDismiss={jest.fn()}
-          trigger={{ icon: 'plus' }}
+          trigger={{ icon: 'plus', testID: 'trigger' }}
           items={makeItems()}
         />
       );
 
+      expect(screen.getByTestId('trigger')).not.toHaveProp('aria-haspopup');
       expect(screen.getByTestId('item-0')).toHaveProp('role', 'button');
     });
 
