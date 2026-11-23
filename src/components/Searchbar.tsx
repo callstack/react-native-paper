@@ -145,7 +145,7 @@ export type Props = Omit<TextInputProps, 'style'> & {
 };
 
 type TextInputHandles = Pick<
-  TextInput,
+  React.ComponentRef<typeof TextInput>,
   'setNativeProps' | 'isFocused' | 'clear' | 'blur' | 'focus' | 'setSelection'
 >;
 
@@ -207,7 +207,7 @@ const Searchbar = ({
   const { direction } = useLocale();
   const { colors, fonts } = theme;
 
-  const root = React.useRef<TextInput>(null);
+  const root = React.useRef<React.ComponentRef<typeof TextInput>>(null);
 
   React.useImperativeHandle(ref, () => ({
     focus: () => root.current?.focus(),

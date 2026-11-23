@@ -172,58 +172,86 @@ function DrawerItems() {
 
           <Drawer.Section title="Preferences">
             {dynamicThemeSupported ? (
-              <TouchableRipple onPress={toggleShouldUseDynamicTheme}>
+              <TouchableRipple
+                onPress={toggleShouldUseDynamicTheme}
+                role="switch"
+                aria-checked={shouldUseDynamicTheme}
+              >
                 <View style={[styles.preference, styles.v3Preference]}>
                   <Text variant="labelLarge">Use Dynamic Theme</Text>
                   <View pointerEvents="none">
-                    <Switch value={shouldUseDynamicTheme} />
+                    <Switch
+                      value={shouldUseDynamicTheme}
+                      readOnly
+                      aria-hidden
+                    />
                   </View>
                 </View>
               </TouchableRipple>
             ) : null}
-            <TouchableRipple onPress={toggleTheme}>
+            <TouchableRipple
+              onPress={toggleTheme}
+              role="switch"
+              aria-checked={isDarkTheme}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Dark Theme</Text>
                 <View pointerEvents="none">
-                  <Switch value={isDarkTheme} />
+                  <Switch value={isDarkTheme} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={_handleToggleRTL}>
+            <TouchableRipple
+              onPress={_handleToggleRTL}
+              role="switch"
+              aria-checked={isRTL}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">RTL</Text>
                 <View pointerEvents="none">
-                  <Switch value={isRTL} />
+                  <Switch value={isRTL} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={toggleCollapsed}>
+            <TouchableRipple
+              onPress={toggleCollapsed}
+              role="switch"
+              aria-checked={collapsed}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Collapsed drawer *</Text>
                 <View pointerEvents="none">
-                  <Switch value={collapsed} />
+                  <Switch value={collapsed} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={toggleCustomFont}>
+            <TouchableRipple
+              onPress={toggleCustomFont}
+              role="switch"
+              aria-checked={customFontLoaded}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Custom font *</Text>
                 <View pointerEvents="none">
-                  <Switch value={customFontLoaded} />
+                  <Switch value={customFontLoaded} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={toggleRippleEffect}>
+            <TouchableRipple
+              onPress={toggleRippleEffect}
+              role="switch"
+              aria-checked={rippleEffectEnabled}
+            >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">
                   {Platform.OS === 'ios' ? 'Highlight' : 'Ripple'} effect *
                 </Text>
                 <View pointerEvents="none">
-                  <Switch value={rippleEffectEnabled} />
+                  <Switch value={rippleEffectEnabled} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
@@ -239,9 +267,11 @@ function DrawerItems() {
           </Text>
         </>
       )}
-      <Dialog visible={showRTLDialog} onDismiss={_handleDismissRTLDialog}>
-        <Dialog.Title>Changing to RTL</Dialog.Title>
-        <Dialog.Content>
+      <Dialog
+        visible={showRTLDialog}
+        onDismiss={_handleDismissRTLDialog}
+        title="Changing to RTL"
+        content={
           <Text variant="bodyMedium">
             Due to Expo Go limitations it is impossible to change RTL
             dynamically. To do so, you need to create a development build of
@@ -250,11 +280,13 @@ function DrawerItems() {
             <Text variant="labelMedium">app.json</Text> within{' '}
             <Text variant="labelMedium">example</Text> directory.
           </Text>
-          <Dialog.Actions>
-            <Button onPress={_handleDismissRTLDialog}>Ok</Button>
-          </Dialog.Actions>
-        </Dialog.Content>
-      </Dialog>
+        }
+        actions={[
+          <Button key="ok-btn" onPress={_handleDismissRTLDialog}>
+            Ok
+          </Button>,
+        ]}
+      />
     </DrawerContentScrollView>
   );
 }

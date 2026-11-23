@@ -11,6 +11,9 @@ import Checkbox from './Checkbox';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, TypescaleKey } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
+import hasTouchHandler from '../../utils/hasTouchHandler';
+import { useFocusRing } from '../../utils/useFocusRing';
+import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -142,24 +145,52 @@ const CheckboxItem = ({
   const isLeading = position === 'leading';
   // The outer TouchableRipple below is the interactable element + a11y
   // checkbox; the inner Checkbox is purely visual, so we exclude it from
-  // the accessibility tree to avoid duplicate `checked` states.
-  const checkbox = <Checkbox {...checkboxProps} accessible={false} />;
+  // the accessibility tree to avoid duplicate `checked` states. The row is the
+  // touch target, so the checkbox's own 48dp target only needs 40dp of room.
+  const checkbox = (
+    <Checkbox {...checkboxProps} accessible={false} style={styles.checkbox} />
+  );
 
   const textAlign = isLeading ? 'right' : 'left';
+
+  // The row is the focusable checkbox, so it takes the Space key itself.
+  const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
+    useSpaceKeyPress({ onPress: disabled ? undefined : onPress });
 
   const computedStyle: TextStyle = {
     ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
     textAlign,
   };
 
+  // A full-width row: an outward ring would run into the rows around it. Inward,
+  // the ring goes on a childless overlay painted last (`'descendant'`): drawn
+  // on the row itself, it would sit under the content view, and a background
+  // set through `style` would hide it. Off
+  // whenever the row can't be pressed, as on TouchableRipple.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !hasTouchHandler({ onPress, onLongPress }),
+    theme.colors.secondary,
+    'inward',
+    'descendant'
+  );
+
   return (
     <TouchableRipple
       aria-label={ariaLabel}
+      focusRing="none"
       role="checkbox"
       aria-checked={status === 'indeterminate' ? 'mixed' : status === 'checked'}
       aria-disabled={disabled}
       onPress={onPress}
       onLongPress={onLongPress}
+      onFocus={focusTarget.onFocus}
+      onBlur={(e) => {
+        handleSpaceKeyBlur(e);
+        focusTarget.onBlur?.();
+      }}
+      {...spaceKeyHandlers}
+      {...focusTarget.dataSetProps}
+      style={focusTarget.style}
       testID={testID}
       disabled={disabled}
       theme={theme}
@@ -181,6 +212,11 @@ const CheckboxItem = ({
         </Text>
         {!isLeading && checkbox}
       </View>
+      <View
+        pointerEvents="none"
+        style={[StyleSheet.absoluteFill, ...focusRing.style]}
+        {...focusRing.dataSetProps}
+      />
     </TouchableRipple>
   );
 };
@@ -203,5 +239,8 @@ const styles = StyleSheet.create({
   label: {
     flexShrink: 1,
     flexGrow: 1,
+  },
+  checkbox: {
+    margin: -4,
   },
 });

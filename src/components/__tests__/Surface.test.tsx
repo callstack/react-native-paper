@@ -20,6 +20,7 @@ import {
   useSharedValue,
 } from 'react-native-reanimated';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import Surface from '../Surface';
@@ -84,6 +85,26 @@ describe('Surface', () => {
     await jest.runAllTimersAsync();
 
     expect(getAnimatedStyle(surface)).toMatchObject({ opacity: 1 });
+  });
+
+  describe('with reduce motion', () => {
+    it.each([
+      { reduceMotion: 'off', duration: 150 },
+      { reduceMotion: 'on', duration: 0 },
+    ] as const)(
+      'transitions its background and elevation in $duration ms when reduceMotion is "$reduceMotion"',
+      async ({ reduceMotion, duration }) => {
+        await render(
+          <PaperProvider reduceMotion={reduceMotion}>
+            <Surface testID="surface-test">{null}</Surface>
+          </PaperProvider>
+        );
+
+        expect(
+          getAnimatedStyle(screen.getByTestId('surface-test'))
+        ).toMatchObject({ transitionDuration: duration });
+      }
+    );
   });
 
   describe('on iOS', () => {

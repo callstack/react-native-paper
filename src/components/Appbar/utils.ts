@@ -1,40 +1,38 @@
-import React from 'react';
-import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { I18nManager } from 'react-native';
+import type { ColorValue } from 'react-native';
 
 import { white } from '../../theme/colors';
-import type { InternalTheme, ThemeProp } from '../../theme/types';
+import type { InternalTheme } from '../../theme/types';
 
-export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
+export type AppbarModes =
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'center-aligned'
+  | 'medium-flexible'
+  | 'large-flexible';
 
-export type AppbarChildProps = {
-  isLeading?: boolean;
-  color: string;
-  style?: StyleProp<ViewStyle>;
-};
+export const APPBAR_HORIZONTAL_PADDING = 4;
 
-const borderStyleProperties = [
-  'borderRadius',
-  'borderBottomEndRadius',
-  'borderBottomStartRadius',
-  'borderEndEndRadius',
-  'borderEndStartRadius',
-  'borderStartEndRadius',
-  'borderStartStartRadius',
-  'borderTopEndRadius',
-  'borderTopStartRadius',
-  'borderTopLeftRadius',
-  'borderTopRightRadius',
-  'borderBottomRightRadius',
-  'borderBottomLeftRadius',
-  'borderCurve',
-] satisfies readonly (keyof ViewStyle)[];
+// Width of an icon button with its margin.
+export const APPBAR_ACTION_WIDTH = 52;
+
+// Height of the row with the controls of the `medium`, `large` and flexible modes.
+export const APPBAR_CONTROLS_HEIGHT = 64;
+
+// Space above the controls of these modes, which centers them in the row,
+// at the same height as in the `small` mode.
+export const APPBAR_CONTROLS_OFFSET =
+  (APPBAR_CONTROLS_HEIGHT - APPBAR_ACTION_WIDTH) / 2;
+
+export const isFlexibleMode = (mode: AppbarModes) =>
+  mode === 'medium-flexible' || mode === 'large-flexible';
 
 export const getAppbarBackgroundColor = (
   theme: InternalTheme,
   elevated: boolean,
   customBackground?: ColorValue
-) => {
+): ColorValue => {
   const { colors } = theme;
   if (customBackground) {
     return customBackground;
@@ -50,7 +48,10 @@ export const getAppbarBackgroundColor = (
 export const getAppbarColor = ({
   color,
   isDark,
-}: BaseProps & { color: string }) => {
+}: {
+  color?: ColorValue;
+  isDark: boolean;
+}): ColorValue | undefined => {
   if (typeof color !== 'undefined') {
     return color;
   }
@@ -62,41 +63,20 @@ export const getAppbarColor = ({
   return undefined;
 };
 
-export const getAppbarBorders = (style: ViewStyle) => {
-  let borders: ViewStyle = {};
-
-  for (const property of borderStyleProperties) {
-    const value = style[property];
-
-    if (typeof value === 'number' || typeof value === 'string') {
-      borders = { ...borders, [property]: value };
-    }
-  }
-
-  return borders;
-};
-
-type BaseProps = {
-  isDark: boolean;
-};
-
-type RenderAppbarContentProps = BaseProps & {
-  children: React.ReactNode;
-  shouldCenterContent?: boolean;
-  renderOnly?: (string | boolean)[];
-  renderExcept?: string[];
-  mode?: AppbarModes;
-  theme?: ThemeProp;
-};
-
 export const DEFAULT_APPBAR_HEIGHT = 56;
 const MD3_DEFAULT_APPBAR_HEIGHT = 64;
 
+/**
+ * Height of the content area of the Appbar, without the safe area insets.
+ * The flexible modes use it as the minimum height.
+ */
 export const modeAppbarHeight = {
   small: MD3_DEFAULT_APPBAR_HEIGHT,
   medium: 112,
   large: 152,
   'center-aligned': MD3_DEFAULT_APPBAR_HEIGHT,
+  'medium-flexible': 112,
+  'large-flexible': 120,
 };
 
 export const modeTextVariant = {
@@ -104,82 +84,39 @@ export const modeTextVariant = {
   medium: 'headlineSmall',
   large: 'headlineMedium',
   'center-aligned': 'titleLarge',
+  'medium-flexible': 'headlineMedium',
+  'large-flexible': 'displaySmall',
 } as const;
 
-export const filterAppbarActions = (
-  children: React.ReactNode,
-  isLeading = false
+/**
+ * Margins that center the title of the `center-aligned` Appbar,
+ * from the width of the actions on each side of it. Wider actions on one side
+ * than room for two actions leave the title off-center, as there is not
+ * enough space to center it.
+ */
+export const getCenteringMargins = (
+  sides: { left: number; right: number } | null
 ) => {
-  return React.Children.toArray(children).filter((child) => {
-    if (!React.isValidElement<AppbarChildProps>(child)) return false;
-    return isLeading ? child.props.isLeading : !child.props.isLeading;
-  });
+  if (!sides) {
+    return { left: 0, right: 0 };
+  }
+
+  const { left, right } = sides;
+
+  if (Math.max(left, right) > 2 * APPBAR_ACTION_WIDTH) {
+    return { left: 0, right: 0 };
+  }
+
+  return { left: Math.max(0, right - left), right: Math.max(0, left - right) };
 };
 
-export const renderAppbarContent = ({
-  children,
-  isDark,
-  shouldCenterContent = false,
-  renderOnly,
-  renderExcept,
-  mode = 'small',
-  theme,
-}: RenderAppbarContentProps) => {
-  return React.Children.toArray(children)
-    .filter((child) => child != null && typeof child !== 'boolean')
-    .filter((child) =>
-      // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
-      renderExcept ? !renderExcept.includes(child.type.displayName) : child
-    )
-    .filter((child) =>
-      // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
-      renderOnly ? renderOnly.includes(child.type.displayName) : child
-    )
-    .map((child, i) => {
-      if (
-        !React.isValidElement<AppbarChildProps>(child) ||
-        ![
-          'Appbar.Content',
-          'Appbar.Action',
-          'Appbar.BackAction',
-          'Tooltip',
-        ].includes(
-          // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
-          child.type.displayName
-        )
-      ) {
-        return child;
-      }
+/**
+ * Whether React Native swaps the left and right of the styles, which it does in RTL,
+ * so they apply to the right and the left of the screen. The layout it reports
+ * is not swapped.
+ */
+export const isLeftRightSwapped = () => {
+  const constants = I18nManager.getConstants?.();
 
-      const props: {
-        color?: string;
-        style?: StyleProp<ViewStyle>;
-        mode?: AppbarModes;
-        theme?: ThemeProp;
-      } = {
-        theme,
-        color: getAppbarColor({ color: child.props.color, isDark }),
-      };
-
-      // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
-      if (child.type.displayName === 'Appbar.Content') {
-        props.mode = mode;
-        props.style = [
-          i === 0 && !shouldCenterContent && styles.v3Spacing,
-          shouldCenterContent && styles.centerAlignedContent,
-          child.props.style,
-        ];
-        props.color;
-      }
-      return React.cloneElement(child, props);
-    });
+  return !!constants?.isRTL && !!constants.doLeftAndRightSwapInRTL;
 };
-
-const styles = StyleSheet.create({
-  centerAlignedContent: {
-    alignItems: 'center',
-  },
-  v3Spacing: {
-    marginLeft: 12,
-  },
-});

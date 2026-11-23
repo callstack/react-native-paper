@@ -3,7 +3,8 @@ import type { ColorValue, StyleProp, View, ViewStyle } from 'react-native';
 
 import type { AnimatedStyle } from 'react-native-reanimated';
 
-import { useInternalTheme } from '../../core/theming';
+import { useAppbarContext, useAppbarTheme } from './AppbarContext';
+import { getAppbarColor } from './utils';
 import type { ThemeProp } from '../../theme/types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
@@ -19,10 +20,6 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
    */
   icon: IconSource;
   /**
-   * Optional icon size.
-   */
-  size?: number;
-  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -37,11 +34,33 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
   /**
    * @supported Available in v5.x with theme version 3
    *
-   * Whether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons.
+   * Whether it's the leading button: it takes the `onSurface` icon color instead of `onSurfaceVariant`.
+   * It does not reorder the action, the parts are laid out in the order they are rendered.
    */
   isLeading?: boolean;
+  /**
+   * @supported Available in v6.x
+   *
+   * Visual variant of the action.
+   * - `standard` - Icon without a container.
+   * - `filled` - Icon in a container with the primary color.
+   * - `tonal` - Icon in a container with the secondary container color.
+   *
+   * The `filled` and `tonal` variants set the `mode` of the icon button, so its `mode` prop is ignored.
+   * Without `selected` they show the primary or the secondary container color. `selected` makes the action a
+   * toggle, with the selected and unselected colors of the icon button.
+   */
+  variant?: 'standard' | 'filled' | 'tonal';
+  /**
+   * @supported Available in v6.x
+   *
+   * Width of the container of a `filled` or `tonal` action. It has no effect on a `standard` action.
+   * - `default` - Square container.
+   * - `wide` - Wide container.
+   */
+  width?: 'default' | 'wide';
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */
@@ -61,7 +80,7 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
  *
  * const MyComponent = () => (
  *   <Appbar.Header>
- *      <Appbar.Content title="Title" subtitle={'Subtitle'} />
+ *      <Appbar.Content title="Title" />
  *       <Appbar.Action icon="magnify" onPress={() => {}} />
  *       <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
  *   </Appbar.Header>
@@ -71,35 +90,51 @@ export type Props = React.PropsWithoutRef<IconButtonProps> & {
  * ```
  */
 const AppbarAction = ({
-  size = 24,
   color: iconColor,
   icon,
   disabled,
   onPress,
   'aria-label': ariaLabel,
   isLeading,
+  variant = 'standard',
+  width = 'default',
+  mode,
+  selected,
+  style,
   theme: themeOverrides,
   ref,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const appbar = useAppbarContext();
+  const theme = useAppbarTheme(themeOverrides);
   const { colors } = theme;
 
-  const actionIconColor = iconColor
-    ? iconColor
-    : isLeading
-      ? colors.onSurface
-      : colors.onSurfaceVariant;
+  const isStandard = variant === 'standard';
+
+  // The icon of a filled or tonal action takes the color of its container
+  const actionIconColor = isStandard
+    ? (getAppbarColor({ color: iconColor, isDark: appbar?.dark ?? false }) ??
+      (isLeading ? colors.onSurface : colors.onSurfaceVariant))
+    : iconColor;
+
+  // `filled` and `tonal` are also modes of the icon button, so `variant` takes
+  // over `mode`. `selected` goes through as it is: without it the action is no
+  // toggle and has the default container color.
+  const iconButtonMode = isStandard ? mode : variant;
 
   return (
     <IconButton
-      size={size}
       onPress={onPress}
       iconColor={actionIconColor}
       icon={icon}
       disabled={disabled}
       aria-label={ariaLabel}
+      mode={iconButtonMode}
+      selected={selected}
+      width={isStandard ? undefined : width}
+      style={style}
       animated
+      theme={theme}
       ref={ref}
       {...rest}
     />
