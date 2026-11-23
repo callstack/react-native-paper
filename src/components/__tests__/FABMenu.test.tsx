@@ -456,6 +456,8 @@ describe('dismissing the menu', () => {
   describe('on the web', () => {
     let platform: { restore(): void };
     let keyDownListeners = new Set<(event: unknown) => void>();
+    // The arrow keys listen in the bubble phase, after the page's own handlers.
+    let arrowKeyListeners = new Set<(event: unknown) => void>();
 
     beforeAll(() => {
       platform = jest.replaceProperty(Platform, 'OS', 'web');
@@ -477,6 +479,8 @@ describe('dismissing the menu', () => {
           ) => {
             if (type === 'keydown' && capture === true) {
               keyDownListeners.add(listener);
+            } else if (type === 'keydown') {
+              arrowKeyListeners.add(listener);
             }
           },
           removeEventListener: (
@@ -484,6 +488,7 @@ describe('dismissing the menu', () => {
             listener: (event: unknown) => void
           ) => {
             keyDownListeners.delete(listener);
+            arrowKeyListeners.delete(listener);
           },
         },
       });
@@ -497,6 +502,7 @@ describe('dismissing the menu', () => {
 
     beforeEach(() => {
       keyDownListeners = new Set();
+      arrowKeyListeners = new Set();
     });
 
     const pressEscape = async () => {
@@ -574,6 +580,48 @@ describe('dismissing the menu', () => {
 
       expect(screen.getByTestId('item-0')).toHaveProp('tabIndex', -1);
       expect(screen.getByTestId('item-1')).toHaveProp('tabIndex', 0);
+    });
+
+    it('listens for the arrow keys only while open', async () => {
+      const menu = (expanded: boolean) => (
+        <FAB.Menu
+          expanded={expanded}
+          onDismiss={jest.fn()}
+          trigger={{ icon: 'plus' }}
+          items={makeItems()}
+        />
+      );
+      const { rerender } = await render(menu(false));
+
+      expect(arrowKeyListeners.size).toBe(0);
+
+      await rerender(menu(true));
+
+      expect(arrowKeyListeners.size).toBe(1);
+
+      await rerender(menu(false));
+
+      expect(arrowKeyListeners.size).toBe(0);
+    });
+
+    it('leaves the arrow keys to the page when focus is outside the items', async () => {
+      await render(
+        <FAB.Menu
+          expanded
+          onDismiss={jest.fn()}
+          trigger={{ icon: 'plus' }}
+          items={makeItems()}
+        />
+      );
+      const event = {
+        key: 'ArrowDown',
+        defaultPrevented: false,
+        preventDefault: jest.fn(),
+      };
+
+      arrowKeyListeners.forEach((listener) => listener(event));
+
+      expect(event.preventDefault).not.toHaveBeenCalled();
     });
 
     it('ignores Escape while closed', async () => {

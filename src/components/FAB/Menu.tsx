@@ -23,7 +23,7 @@ import Content from './Content';
 import Shell from './Shell';
 import { MenuTokens, STATE_LAYER_OPACITY, Tokens } from './tokens';
 import type { Interaction, Size, Variant } from './tokens';
-import { resolveColors } from './utils';
+import { getNextStopIndex, resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
@@ -816,39 +816,23 @@ const Menu = ({
         return;
       }
 
-      if (
-        !['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(e.key) ||
-        e.altKey ||
-        e.ctrlKey ||
-        e.metaKey ||
-        e.shiftKey
-      ) {
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
         return;
       }
 
-      // Items are in visual order, top to bottom.
-      // Each ref is the focusable element itself. A `tabindex` of -1 still
-      // takes focus from a script.
+      // Items are in visual order, top to bottom. Each ref is the focusable
+      // element itself. A `tabindex` of -1 still takes focus from a script.
       const stops = itemRefs.current.flatMap((node) =>
         node instanceof HTMLElement ? [node] : []
       );
       const current = stops.findIndex((el) => el === document.activeElement);
+      const next = getNextStopIndex(e.key, current, stops.length);
 
-      if (current === -1) {
+      if (current === -1 || next === null) {
         return;
       }
 
       e.preventDefault();
-
-      const last = stops.length - 1;
-      const next =
-        e.key === 'Home'
-          ? 0
-          : e.key === 'End'
-            ? last
-            : e.key === 'ArrowDown'
-              ? (current + 1) % stops.length
-              : (current - 1 + stops.length) % stops.length;
 
       stops[next].focus();
     };
