@@ -12,7 +12,7 @@ import {
   Platform,
   TextInput as NativeTextInput,
 } from 'react-native';
-import type { BlurEvent, FocusEvent } from 'react-native';
+import type { BlurEvent, FocusEvent, TextStyle } from 'react-native';
 
 import { cubicBezier } from 'react-native-reanimated';
 
@@ -69,17 +69,21 @@ const useTextInputAnimation = ({
   // Track when the label has fully left its resting place, so the placeholder
   // does not show under the resting label. CSS transitions report no end, so
   // wait out the float transition's duration.
-  const floatDuration = reduceMotion ? 0 : theme.motion.duration.short3;
+  const duration = reduceMotion ? 0 : theme.motion.duration.short3;
   useEffect(() => {
     if (!isFloating) {
       setIsLabelFloated(false);
       return;
     }
 
-    const timeout = setTimeout(() => setIsLabelFloated(true), floatDuration);
+    const timeout = setTimeout(() => setIsLabelFloated(true), duration);
 
     return () => clearTimeout(timeout);
-  }, [isFloating, floatDuration]);
+  }, [isFloating, duration]);
+
+  const transition = (
+    property: Parameters<typeof getTransition<TextStyle>>[1]
+  ) => getTransition(theme, property, 'short3', 'standard', reduceMotion);
 
   const { activeTop, inactiveTop, translateXEnd } = getTextInputAnimationLayout(
     {
@@ -95,24 +99,18 @@ const useTextInputAnimation = ({
     variant === 'filled'
       ? {
           top,
-          ...getTransition(theme, 'top', 'short3', 'standard', reduceMotion),
+          ...transition('top'),
         }
       : {
           top,
           transform: [{ translateX: isFloating ? translateXEnd : 0 }],
-          ...getTransition(
-            theme,
-            ['top', 'transform'],
-            'short3',
-            'standard',
-            reduceMotion
-          ),
+          ...transition(['top', 'transform']),
         };
 
   const animatedLabelTextStyle: TextInputAnimationState['animatedLabelTextStyle'] =
     {
       fontSize: isFloating ? ACTIVE_LABEL_FONT_SIZE : INACTIVE_LABEL_FONT_SIZE,
-      ...getTransition(theme, 'fontSize', 'short3', 'standard', reduceMotion),
+      ...transition('fontSize'),
     };
 
   // The resting label covers the prefix and suffix, so they fade in as it
@@ -120,17 +118,17 @@ const useTextInputAnimation = ({
   // mount, so the fade is a CSS animation. Affixes shown from the first
   // render, before the label ever rested, don't fade in. This opacity replaces
   // the static one, so it carries the disabled dim of the affix styles too.
-  const [hasLabelRested, setHasLabelRested] = useState(!isFloating);
-  if (!isFloating && !hasLabelRested) {
-    setHasLabelRested(true);
+  const [shouldFadeInAffix, setShouldFadeInAffix] = useState(!isFloating);
+  if (!isFloating && !shouldFadeInAffix) {
+    setShouldFadeInAffix(true);
   }
 
   const affixOpacity = isDisabled ? tokens.md.sys.state.opacity.disabled : 1;
   const animatedAffixStyle: TextInputAnimationState['animatedAffixStyle'] = {
     opacity: affixOpacity,
-    ...(hasLabelRested && {
+    ...(shouldFadeInAffix && {
       animationName: { from: { opacity: 0 } },
-      animationDuration: reduceMotion ? 0 : theme.motion.duration.short3,
+      animationDuration: duration,
       animationTimingFunction: cubicBezier(...theme.motion.easing.standard),
     }),
   };
@@ -139,13 +137,7 @@ const useTextInputAnimation = ({
     variant === 'filled'
       ? {
           transform: [{ scaleX: isFocused ? 1 : 0 }],
-          ...getTransition(
-            theme,
-            'transform',
-            'short3',
-            'standard',
-            reduceMotion
-          ),
+          ...transition('transform'),
         }
       : undefined;
 
