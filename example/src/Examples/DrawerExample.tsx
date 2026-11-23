@@ -67,6 +67,13 @@ const Destinations = () => {
 
 const DrawerExample = () => {
   const [collapsed, setCollapsed] = React.useState('inbox');
+  // The destinations in the sections below share one active destination, so
+  // each of them can be pressed and focused like a real one.
+  const [selected, setSelected] = React.useState<string>();
+  const destination = (key: string) => ({
+    active: selected === key,
+    onPress: () => setSelected(key),
+  });
 
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
@@ -76,10 +83,11 @@ const DrawerExample = () => {
 
       <Section title="Without an icon, and with a truncated label">
         <Drawer.Section showDivider={false}>
-          <Drawer.Item label="No icon" />
+          <Drawer.Item label="No icon" {...destination('no-icon')} />
           <Drawer.Item
             icon="delete"
             label="A very long destination label that will be truncated"
+            {...destination('truncated')}
           />
         </Drawer.Section>
       </Section>
@@ -103,10 +111,12 @@ const DrawerExample = () => {
             icon="alert"
             label="Badge"
             right={() => <Badge visible style={styles.badge} />}
+            {...destination('badge')}
           />
           <Drawer.Item
             icon="palette"
             label="Coloured dot"
+            {...destination('dot')}
             right={({ color }: { color: ColorValue }) => (
               <Badge
                 visible
@@ -119,10 +129,14 @@ const DrawerExample = () => {
 
       <Section title="Sections separated by a divider">
         <Drawer.Section title="Mailboxes">
-          <Drawer.Item icon="inbox" label="Inbox" />
+          <Drawer.Item
+            icon="inbox"
+            label="Inbox"
+            {...destination('mailboxes-inbox')}
+          />
         </Drawer.Section>
         <Drawer.Section title="Labels" showDivider={false}>
-          <Drawer.Item icon="tag" label="Work" />
+          <Drawer.Item icon="tag" label="Work" {...destination('work')} />
         </Drawer.Section>
       </Section>
 

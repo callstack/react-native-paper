@@ -38,6 +38,10 @@ const itemColors = {
   inactiveLabelTextColor: 'onSurfaceVariant',
   inactiveFocusIconColor: 'onSurface',
   inactiveFocusLabelTextColor: 'onSurface',
+  inactiveHoverIconColor: 'onSurface',
+  inactiveHoverLabelTextColor: 'onSurface',
+  inactivePressedIconColor: 'onSurface',
+  inactivePressedLabelTextColor: 'onSurface',
 } as const satisfies Record<string, ColorRole>;
 
 export const DrawerItemTokens = {

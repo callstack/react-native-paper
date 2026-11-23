@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -12,6 +12,7 @@ import type {
 } from 'react-native';
 
 import { DrawerItemTokens } from './tokens';
+import { getDestinationA11yProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
@@ -112,6 +113,7 @@ const DrawerItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [focused, setFocused] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
 
   const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
     if (isKeyboardFocusEvent(e)) {
@@ -124,18 +126,42 @@ const DrawerItem = ({
   const backgroundColor = active
     ? theme.colors[DrawerItemTokens.activeIndicatorColor]
     : undefined;
-  const inactiveIconColor = isFocused
-    ? DrawerItemTokens.inactiveFocusIconColor
-    : DrawerItemTokens.inactiveIconColor;
-  const inactiveLabelTextColor = isFocused
-    ? DrawerItemTokens.inactiveFocusLabelTextColor
-    : DrawerItemTokens.inactiveLabelTextColor;
-  const contentColor = active
-    ? theme.colors[DrawerItemTokens.activeIconColor]
-    : theme.colors[inactiveIconColor];
-  const labelColor = active
-    ? theme.colors[DrawerItemTokens.activeLabelTextColor]
-    : theme.colors[inactiveLabelTextColor];
+
+  const getContentColors = (pressed: boolean) => {
+    if (active) {
+      return {
+        iconColor: theme.colors[DrawerItemTokens.activeIconColor],
+        labelColor: theme.colors[DrawerItemTokens.activeLabelTextColor],
+      };
+    }
+
+    const interactive = !disabled;
+    const [iconToken, labelToken] =
+      interactive && pressed
+        ? [
+            DrawerItemTokens.inactivePressedIconColor,
+            DrawerItemTokens.inactivePressedLabelTextColor,
+          ]
+        : interactive && hovered
+          ? [
+              DrawerItemTokens.inactiveHoverIconColor,
+              DrawerItemTokens.inactiveHoverLabelTextColor,
+            ]
+          : isFocused
+            ? [
+                DrawerItemTokens.inactiveFocusIconColor,
+                DrawerItemTokens.inactiveFocusLabelTextColor,
+              ]
+            : [
+                DrawerItemTokens.inactiveIconColor,
+                DrawerItemTokens.inactiveLabelTextColor,
+              ];
+
+    return {
+      iconColor: theme.colors[iconToken],
+      labelColor: theme.colors[labelToken],
+    };
+  };
 
   const borderRadius = resolveCornerRadius(
     theme,
@@ -159,46 +185,51 @@ const DrawerItem = ({
         onPress={onPress}
         onFocus={handleFocus}
         onBlur={() => setFocused(false)}
+        onHoverIn={() => setHovered(true)}
+        onHoverOut={() => setHovered(false)}
         style={[styles.container, { backgroundColor, borderRadius }, style]}
-        // `aria-selected` is only announced on a tab, and iOS has no tab role
-        // outside a tab bar, like BottomNavigation.
-        role={Platform.OS === 'ios' ? 'button' : 'tab'}
-        aria-selected={active}
+        role="button"
+        {...getDestinationA11yProps(active)}
         aria-label={ariaLabel}
         theme={theme}
         hitSlop={hitSlop}
         testID={testID}
       >
-        <View style={[styles.wrapper, { opacity }]}>
-          <View style={styles.content}>
-            {icon ? (
-              <Icon
-                source={icon}
-                size={DrawerItemTokens.iconSize}
-                color={contentColor}
-              />
-            ) : null}
-            <Text
-              variant={
-                active
-                  ? DrawerItemTokens.activeLabelText
-                  : DrawerItemTokens.labelText
-              }
-              selectable={false}
-              numberOfLines={1}
-              style={[
-                styles.label,
-                icon ? styles.labelWithIcon : null,
-                { color: labelColor },
-              ]}
-              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            >
-              {label}
-            </Text>
-          </View>
+        {({ pressed }) => {
+          const { iconColor, labelColor } = getContentColors(pressed);
+          return (
+            <View style={[styles.wrapper, { opacity }]}>
+              <View style={styles.content}>
+                {icon ? (
+                  <Icon
+                    source={icon}
+                    size={DrawerItemTokens.iconSize}
+                    color={iconColor}
+                  />
+                ) : null}
+                <Text
+                  variant={
+                    active
+                      ? DrawerItemTokens.activeLabelText
+                      : DrawerItemTokens.labelText
+                  }
+                  selectable={false}
+                  numberOfLines={1}
+                  style={[
+                    styles.label,
+                    icon ? styles.labelWithIcon : null,
+                    { color: labelColor },
+                  ]}
+                  maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+                >
+                  {label}
+                </Text>
+              </View>
 
-          {right?.({ color: contentColor })}
-        </View>
+              {right?.({ color: iconColor })}
+            </View>
+          );
+        }}
       </TouchableRipple>
     </View>
   );

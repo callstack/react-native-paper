@@ -948,6 +948,7 @@ The `Drawer` API is unchanged in Paper 6.x — no props were renamed, removed, o
 - **Section divider colour.** `Drawer.Section` drew its divider in a fixed grey that ignored the theme and was wrong in dark mode. It now uses `theme.colors.outlineVariant`, like every other `Divider`.
 - **Focus indicator.** `Drawer.Item` and `Drawer.CollapsedItem` gain a keyboard focus ring in `theme.colors.secondary`. It appears only on keyboard focus, not on press.
 - **Disabled state.** Disabled `Drawer.Item` and `Drawer.CollapsedItem` destinations are now dimmed to 38% opacity. In 5.x they looked the same as enabled ones.
+- **Active destination on web.** On web, the active `Drawer.Item` or `Drawer.CollapsedItem` is marked with `aria-current="page"` instead of `aria-selected`, which isn't valid on a button. iOS and Android still use `aria-selected`.
 
 If you were pixel-matching a drawer against Paper 5.x, the first two points are the ones that will shift your layout.
 

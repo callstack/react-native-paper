@@ -991,7 +991,7 @@ describe('focus ring wiring (web)', () => {
       />
     );
 
-    const pressable = screen.getByRole('tab');
+    const pressable = screen.getByRole('button');
     expect(pressable.props.dataSet).toEqual({ focusRingTarget: 'true' });
 
     const ringed = walk(

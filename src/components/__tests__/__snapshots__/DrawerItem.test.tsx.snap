@@ -6,6 +6,8 @@ exports[`renders DrawerItem with icon 1`] = `
     accessible={true}
     onBlur={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={[Function]}
     role="none"
     style={
       [
@@ -277,6 +279,8 @@ exports[`renders active DrawerItem 1`] = `
     aria-selected={true}
     onBlur={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={[Function]}
     role="none"
     style={
       [

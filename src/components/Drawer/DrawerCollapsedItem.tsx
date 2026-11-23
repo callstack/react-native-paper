@@ -18,6 +18,7 @@ import Animated, {
 import useLatestCallback from 'use-latest-callback';
 
 import { DrawerCollapsedItemTokens } from './tokens';
+import { getDestinationA11yProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
@@ -230,10 +231,8 @@ const DrawerCollapsedItem = ({
         onPress={onPress}
         onPressOut={onPress ? expandOutline : undefined}
         disabled={disabled}
-        // `aria-selected` is only announced on a tab, and iOS has no tab role
-        // outside a tab bar, like BottomNavigation.
-        role={Platform.OS === 'ios' ? 'button' : 'tab'}
-        aria-selected={active}
+        role="button"
+        {...getDestinationA11yProps(active)}
         aria-label={ariaLabel}
         testID={testID}
         // Like Switch: a ripple drawable owns the focused state, so Android does

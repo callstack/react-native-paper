@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
 import { act, render, screen, userEvent } from '../../../test-utils';
@@ -139,6 +140,45 @@ describe('DrawerCollapsedItem', () => {
 
     expect(screen.getByRole('button')).not.toHaveStyle({
       opacity: stateOpacity.disabled,
+    });
+  });
+
+  describe('active destination', () => {
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it.each(['ios', 'android'] as const)(
+      'is a selected button on %s',
+      async (os) => {
+        jest.replaceProperty(Platform, 'OS', os);
+        await render(
+          <DrawerCollapsedItem
+            label="Inbox"
+            focusedIcon="inbox"
+            active
+            onPress={() => {}}
+          />
+        );
+
+        expect(screen.getByRole('button')).toBeSelected();
+      }
+    );
+
+    it('is a button marked as the current page on web', async () => {
+      jest.replaceProperty(Platform, 'OS', 'web');
+      await render(
+        <DrawerCollapsedItem
+          label="Inbox"
+          focusedIcon="inbox"
+          active
+          onPress={() => {}}
+        />
+      );
+
+      const destination = screen.getByRole('button');
+      expect(destination).toHaveProp('aria-current', 'page');
+      expect(destination).not.toHaveProp('aria-selected');
     });
   });
 });

@@ -90,7 +90,7 @@ function DrawerItems() {
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  const { colors } = useTheme();
+  const { colors, shapes } = useTheme();
   const expoGoExecution =
     Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
 
@@ -137,6 +137,10 @@ function DrawerItems() {
         styles.drawerContent,
         {
           backgroundColor: colors.surfaceContainerLow,
+          // This view paints over the navigator's container, so it repeats
+          // the MD3 container's rounded ending edge.
+          borderTopEndRadius: shapes.corner.large,
+          borderBottomEndRadius: shapes.corner.large,
         },
       ]}
     >
