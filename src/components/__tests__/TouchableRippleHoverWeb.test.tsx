@@ -13,6 +13,7 @@ import color from 'color';
 
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
+import type { PressableProps } from '../TouchableRipple/Pressable';
 // The bare specifier resolves to .native under the jest preset, so the web file
 // needs the extension or it never runs.
 import TouchableRipple from '../TouchableRipple/TouchableRipple.tsx';
@@ -26,7 +27,10 @@ jest.mock('../TouchableRipple/Pressable', () => {
 
   return {
     Pressable: React.forwardRef(
-      ({ style, children, ...rest }: any, ref: React.Ref<unknown>) => (
+      (
+        { style, children, ...rest }: PressableProps,
+        ref: React.Ref<unknown>
+      ) => (
         <View
           {...rest}
           ref={ref}
