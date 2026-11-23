@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import { DEFAULT_SIZE } from './utils';
+import { DEFAULT_SIZE, getAvatarRole } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
@@ -60,6 +60,8 @@ const Avatar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const hasLabel =
+    rest.accessibilityLabel !== undefined || rest['aria-label'] !== undefined;
 
   return (
     <View
@@ -76,6 +78,10 @@ const Avatar = ({
             customBackgroundColor ?? theme.colors.primaryContainer,
         },
       ]}
+      {...(hasLabel && {
+        accessible: true,
+        ...getAvatarRole(rest.accessibilityRole),
+      })}
       {...rest}
     >
       <Icon
