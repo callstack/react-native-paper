@@ -73,14 +73,9 @@ const getOuterTextInputPressable = (root: TestInstance | null) => {
 };
 
 /**
- * The label's animated wrapper has no public testID — it's marked
- * `aria-hidden`, like other non-accessible decorative elements (e.g. the
- * error icon wrapper), so the lookup also requires the CSS-transition style
- * that's unique to the animated label wrapper. Reanimated's CSS-transition
- * props (`transitionProperty` et al.) are stripped from the plain `style`
- * prop by the time it reaches a host component in tests, so `getAnimatedStyle`
- * — the library's own jest helper (already used this way in Surface.test.tsx)
- * — is needed to see them.
+ * The label wrapper has no testID and other `aria-hidden` nodes exist, so
+ * match on its CSS transition. Reanimated strips transition props from
+ * `style` in tests, hence `getAnimatedStyle`.
  */
 const getLabelWrapper = (root: TestInstance | null) => {
   const [wrapper] =
@@ -1619,8 +1614,8 @@ it.each([
       getAnimatedStyle(screen.getByText(text, includeHiddenElements))
     ).toMatchObject({
       opacity: 1,
-      transitionProperty: 'opacity',
-      transitionDuration: LightTheme.motion.duration.short3,
+      animationName: { from: { opacity: 0 } },
+      animationDuration: LightTheme.motion.duration.short3,
     });
   }
 );

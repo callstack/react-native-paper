@@ -14,6 +14,8 @@ import {
 } from 'react-native';
 import type { BlurEvent, FocusEvent } from 'react-native';
 
+import { cubicBezier } from 'react-native-reanimated';
+
 import {
   ACTIVE_LABEL_FONT_SIZE,
   ERROR_ANNOUNCEMENT_DELAY_MS,
@@ -41,10 +43,8 @@ import { tokens } from '../../theme/tokens';
 import { getTransition } from '../../theme/tokens/sys/motion';
 import type { InternalTheme } from '../../theme/types';
 
-// The label float (top/translateX/fontSize), the affix fade and the filled
-// variant's active indicator (scaleX) are each driven by a single boolean
-// state (focus/blur, or text appearing/disappearing), so each is a plain
-// Reanimated CSS transition between two fixed values, with no shared value.
+// Each of these follows a single boolean state (focus/blur, or text
+// appearing/disappearing), so CSS transitions are enough here.
 const useTextInputAnimation = ({
   variant,
   isRTL,
@@ -116,12 +116,23 @@ const useTextInputAnimation = ({
     };
 
   // The resting label covers the prefix and suffix, so they fade in as it
-  // floats. This opacity replaces the static one, so it carries the disabled
-  // dim of the prefix and suffix styles too.
+  // floats. They mount at that moment, and a CSS transition doesn't run on
+  // mount, so the fade is a CSS animation. Affixes shown from the first
+  // render, before the label ever rested, don't fade in. This opacity replaces
+  // the static one, so it carries the disabled dim of the affix styles too.
+  const [hasLabelRested, setHasLabelRested] = useState(!isFloating);
+  if (!isFloating && !hasLabelRested) {
+    setHasLabelRested(true);
+  }
+
   const affixOpacity = isDisabled ? tokens.md.sys.state.opacity.disabled : 1;
   const animatedAffixStyle: TextInputAnimationState['animatedAffixStyle'] = {
-    opacity: isFloating ? affixOpacity : 0,
-    ...getTransition(theme, 'opacity', 'short3', 'standard', reduceMotion),
+    opacity: affixOpacity,
+    ...(hasLabelRested && {
+      animationName: { from: { opacity: 0 } },
+      animationDuration: reduceMotion ? 0 : theme.motion.duration.short3,
+      animationTimingFunction: cubicBezier(...theme.motion.easing.standard),
+    }),
   };
 
   const animatedActiveOutlineStyle: TextInputAnimationState['animatedActiveOutlineStyle'] =
@@ -355,10 +366,6 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     hasAccessory
   );
 
-  // `isFloating` is derived every render from `isFocused`/`hasValue` (itself
-  // reconciled with a controlled `value` by `useTextInputInput`), so the
-  // label float and active-border animations below stay in sync with
-  // programmatic value changes with no extra effect needed.
   const animation = useTextInputAnimation({
     variant,
     isRTL,
