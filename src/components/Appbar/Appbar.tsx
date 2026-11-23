@@ -14,6 +14,7 @@ import {
   APPBAR_CONTROLS_HEIGHT,
   APPBAR_CONTROLS_OFFSET,
   APPBAR_HORIZONTAL_PADDING,
+  APPBAR_TITLE_TOP,
   getAppbarBackgroundColor,
   getCenteringMargins,
   isFlexibleMode,
@@ -45,8 +46,8 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
      *
      * Mode of the Appbar.
      * - `small` - Appbar with default height (64).
-     * - `medium` - Appbar with medium height (112).
-     * - `large` - Appbar with large height (152).
+     * - `medium` - Appbar with medium height (112). It grows when the title would reach the actions, e.g. at larger text sizes.
+     * - `large` - Appbar with large height (152). It grows when the title would reach the actions, e.g. at larger text sizes.
      * - `center-aligned` - Appbar with default height and center-aligned title.
      * - `medium-flexible` - Available in v6.x. Material 3 Expressive Appbar with a larger title and a minimum height of 112. It grows when the title wraps onto a second line.
      * - `large-flexible` - Available in v6.x. Material 3 Expressive Appbar with a prominent title and a minimum height of 120. It grows when the title wraps onto a second line.
@@ -306,15 +307,24 @@ const Appbar = ({
 
   // The safe area insets are applied as padding, so they need to be included in the height
   const verticalInsets = insets.top + insets.bottom;
+  const contentHeight = content?.layout.height ?? 0;
   const heightStyle = isFlexible
     ? {
         minHeight:
           Math.max(
             modeAppbarHeight[mode],
-            APPBAR_CONTROLS_HEIGHT + (content?.layout.height ?? 0)
+            APPBAR_CONTROLS_HEIGHT + contentHeight
           ) + verticalInsets,
       }
-    : { height: modeAppbarHeight[mode] + verticalInsets };
+    : {
+        // The title of the `medium` and `large` modes grows upward from the bottom of the bar,
+        // so the bar grows with a title that would otherwise reach the actions,
+        // e.g. at larger text sizes
+        height:
+          (isTopAligned
+            ? Math.max(modeAppbarHeight[mode], APPBAR_TITLE_TOP + contentHeight)
+            : modeAppbarHeight[mode]) + verticalInsets,
+      };
 
   return (
     <AppbarContext.Provider value={appbarContext}>
