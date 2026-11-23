@@ -179,8 +179,12 @@ function DrawerItems() {
               >
                 <View style={[styles.preference, styles.v3Preference]}>
                   <Text variant="labelLarge">Use Dynamic Theme</Text>
-                  <View pointerEvents="none" aria-hidden>
-                    <Switch value={shouldUseDynamicTheme} readOnly />
+                  <View pointerEvents="none">
+                    <Switch
+                      value={shouldUseDynamicTheme}
+                      readOnly
+                      aria-hidden
+                    />
                   </View>
                 </View>
               </TouchableRipple>
@@ -192,8 +196,8 @@ function DrawerItems() {
             >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Dark Theme</Text>
-                <View pointerEvents="none" aria-hidden>
-                  <Switch value={isDarkTheme} readOnly />
+                <View pointerEvents="none">
+                  <Switch value={isDarkTheme} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
@@ -205,8 +209,8 @@ function DrawerItems() {
             >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">RTL</Text>
-                <View pointerEvents="none" aria-hidden>
-                  <Switch value={isRTL} readOnly />
+                <View pointerEvents="none">
+                  <Switch value={isRTL} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
@@ -218,8 +222,8 @@ function DrawerItems() {
             >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Collapsed drawer *</Text>
-                <View pointerEvents="none" aria-hidden>
-                  <Switch value={collapsed} readOnly />
+                <View pointerEvents="none">
+                  <Switch value={collapsed} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
@@ -231,8 +235,8 @@ function DrawerItems() {
             >
               <View style={[styles.preference, styles.v3Preference]}>
                 <Text variant="labelLarge">Custom font *</Text>
-                <View pointerEvents="none" aria-hidden>
-                  <Switch value={customFontLoaded} readOnly />
+                <View pointerEvents="none">
+                  <Switch value={customFontLoaded} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
@@ -246,8 +250,8 @@ function DrawerItems() {
                 <Text variant="labelLarge">
                   {Platform.OS === 'ios' ? 'Highlight' : 'Ripple'} effect *
                 </Text>
-                <View pointerEvents="none" aria-hidden>
-                  <Switch value={rippleEffectEnabled} readOnly />
+                <View pointerEvents="none">
+                  <Switch value={rippleEffectEnabled} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>

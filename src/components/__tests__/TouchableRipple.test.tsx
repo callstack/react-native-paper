@@ -242,6 +242,31 @@ describe('TouchableRipple', () => {
       expect(plain).toHaveProp('collapsable', false);
     });
 
+    // The press that disables the touchable is only cleared by the ripple's
+    // own press out, so dropping the ripple then would leave it drawn.
+    it('keeps its ripple when disabled, so a press that disables it ends', async () => {
+      jest.replaceProperty(TouchableRipple, 'supported', true);
+      jest.spyOn(Platform, 'Version', 'get').mockReturnValue(34);
+      const ripple = expect.objectContaining({ type: 'RippleAndroid' });
+      const renderRipple = (disabled: boolean) => (
+        <TouchableRipple testID="ripple" disabled={disabled} onPress={() => {}}>
+          <Text>Press</Text>
+        </TouchableRipple>
+      );
+
+      await render(renderRipple(false));
+      expect(screen.getByTestId('ripple')).toHaveProp(
+        'nativeForegroundAndroid',
+        ripple
+      );
+
+      await screen.rerender(renderRipple(true));
+      expect(screen.getByTestId('ripple')).toHaveProp(
+        'nativeForegroundAndroid',
+        ripple
+      );
+    });
+
     it('is a keyboard stop when the consumer passes accessible', async () => {
       await render(
         <TouchableRipple testID="plain" accessible>

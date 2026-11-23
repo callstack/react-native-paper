@@ -1,10 +1,14 @@
 import * as React from 'react';
 
-import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
+import {
+  DirectionProvider,
+  getDefaultDirection,
+  type Direction,
+} from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider } from './settings';
 import type { Settings } from './settings';
-import { safeMerge, ThemeProvider } from './theming';
+import { InternalThemeProvider, safeMerge } from './theming';
 import {
   useResolvedReduceMotion,
   type ReduceMotionPreference,
@@ -68,9 +72,11 @@ const PaperProvider = (props: Props) => {
       <PortalHost>
         <SettingsProvider value={settingsValue}>
           <ReduceMotionContext.Provider value={resolvedReduceMotion}>
-            <LocaleProvider direction={direction}>
-              <ThemeProvider theme={theme}>{children}</ThemeProvider>
-            </LocaleProvider>
+            <DirectionProvider direction={direction}>
+              <InternalThemeProvider theme={theme}>
+                {children}
+              </InternalThemeProvider>
+            </DirectionProvider>
           </ReduceMotionContext.Provider>
         </SettingsProvider>
       </PortalHost>
