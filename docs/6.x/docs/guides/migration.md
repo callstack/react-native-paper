@@ -544,6 +544,15 @@ e.g.:
 />
 ```
 
+### Banner
+
+Showing and hiding use the `standardDecelerate` and `standardAccelerate` easing curves instead of ease-in-out.
+
+### DataTable
+
+- `DataTable.Title` text has a letter spacing of 0.5, and its sort icon rotates with the `standard` easing curve instead of ease-in-out.
+- `DataTable.Pagination` labels use the `bodySmall` type style: a line height of 16 and a letter spacing of 0.4.
+
 ### Tooltip
 
 `Tooltip` no longer reads positioning styles such as `position: 'absolute'` from the `style` of the wrapped element. Apply them to a parent `View` wrapping the `Tooltip` instead.

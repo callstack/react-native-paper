@@ -167,7 +167,9 @@ const Banner = ({
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
   const getDuration = useMotionDuration();
-  const { duration, easing } = theme.motion;
+  const { medium1: showDuration, short4: hideDuration } = theme.motion.duration;
+  const { standardDecelerate: showEasing, standardAccelerate: hideEasing } =
+    theme.motion.easing;
 
   React.useEffect(() => {
     const callback = visible ? showCallback : hideCallback;
@@ -175,19 +177,21 @@ const Banner = ({
     position.value = withTiming(
       visible ? 1 : 0,
       {
-        duration: getDuration(visible ? duration.medium1 : duration.short4),
-        easing: Easing.bezier(...easing.standard),
+        duration: getDuration(visible ? showDuration : hideDuration),
+        easing: Easing.bezier(...(visible ? showEasing : hideEasing)),
         reduceMotion: ReduceMotion.Never,
       },
       (finished) => scheduleOnRN(callback, { finished: finished ?? false })
     );
   }, [
-    duration,
-    easing,
     getDuration,
     hideCallback,
+    hideDuration,
+    hideEasing,
     position,
     showCallback,
+    showDuration,
+    showEasing,
     visible,
   ]);
 

@@ -122,15 +122,16 @@ const DataTableTitle = ({
 
   const spin = useSharedValue(sortDirection === 'ascending' ? 0 : 180);
 
-  const { duration, easing } = theme.motion;
+  const { short3: sortDuration } = theme.motion.duration;
+  const { standard: sortEasing } = theme.motion.easing;
 
   React.useEffect(() => {
     spin.value = withTiming(sortDirection === 'ascending' ? 0 : 180, {
-      duration: duration.short3,
-      easing: Easing.bezier(...easing.standard),
+      duration: sortDuration,
+      easing: Easing.bezier(...sortEasing),
       reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
     });
-  }, [duration, easing, reduceMotion, sortDirection, spin]);
+  }, [reduceMotion, sortDirection, sortDuration, sortEasing, spin]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${spin.value}deg` }],

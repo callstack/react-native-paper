@@ -1,12 +1,12 @@
 import { StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
+import { DEFAULT_SIZE } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
-import { DEFAULT_SIZE } from './utils';
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**
@@ -20,7 +20,7 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Custom color for the icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Background color of the avatar.
    */
