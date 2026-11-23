@@ -410,6 +410,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     ...(Platform.OS === 'web' && {
       cursor: 'pointer',
+      // Eases a `backgroundColor` change from `style`, such as a row that
+      // becomes selected. The hover layer is a gradient, which CSS can't
+      // transition, so hover shows at once, as in Material Web (15ms).
       transition: '150ms background-color',
     }),
   },

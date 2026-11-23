@@ -1024,7 +1024,7 @@ The close button (`onClose`) now fills the trailing 34dp column reserved for it,
 
 `TouchableRipple` draws the keyboard focus ring and takes a new `focusRing` prop. See [Focus indicator](#focus-indicator).
 
-On web, the hover layer is now a CSS background image. It paints on top of a `backgroundColor` that you set through `style`. While the touchable is hovered, it replaces a `backgroundImage`, such as a gradient, that you set through `style`.
+On web, the hover layer is now a CSS background image. It paints on top of a `backgroundColor` that you set through `style`. While the touchable is hovered, it replaces a `backgroundImage`, such as a gradient, that you set through `style`. The hover layer no longer fades in and out. It shows and hides at once, as in Material Web.
 
 ### Drawer
 
