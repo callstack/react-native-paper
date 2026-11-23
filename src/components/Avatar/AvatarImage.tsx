@@ -81,6 +81,8 @@ export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Text describing the image for assistive technology. `aria-label` and
    * `accessibilityLabel` are treated the same way.
+   * Leave it out when the name is already shown next to the avatar, such as
+   * a `List.Item` title, or screen readers read the name twice.
    */
   alt?: string;
   /**
@@ -134,7 +136,8 @@ export type Props = Omit<ViewProps, 'style'> & {
  *
  * Pass `alt` to describe the image to assistive technology — `aria-label` and
  * `accessibilityLabel` work the same way. Avatars without a description are
- * treated as decorative and skipped by screen readers.
+ * treated as decorative and skipped by screen readers, so leave `alt` out when
+ * the name is already shown next to the avatar.
  *
  * Show another avatar when the image fails to load:
  * ```js
