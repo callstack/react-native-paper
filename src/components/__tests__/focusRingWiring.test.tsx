@@ -972,10 +972,14 @@ describe('focus ring wiring (web)', () => {
       </>
     );
 
-    expect(screen.getByTestId('table').props.dataSet).toEqual({
-      qa: 'title',
-      focusRing: 'inward',
-    });
+    // On the web a sortable title is a column header holding a button, and the
+    // button is what takes focus and the caller's props.
+    expect(screen.getByRole('button', { name: 'title' }).props.dataSet).toEqual(
+      {
+        qa: 'title',
+        focusRing: 'inward',
+      }
+    );
     expect(screen.getByTestId('appbar').props.dataSet).toEqual({
       qa: 'title',
       focusRing: 'outward',
