@@ -1,4 +1,4 @@
-import { Pressable } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 
 import { describe, expect, it, jest } from '@jest/globals';
@@ -6,7 +6,7 @@ import { fireEvent, userEvent } from '@testing-library/react-native';
 import color from 'color';
 
 import PaperProvider from '../../core/PaperProvider';
-import { render, screen, transitionOf } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import Chip from '../Chip/Chip';
@@ -403,13 +403,16 @@ describe('hitSlop', () => {
 });
 
 describe('with reduce motion', () => {
-  // The chip's container is the touchable's parent.
+  // Reanimated's Jest setup keeps CSS transitions out of `style`, and
+  // `getAnimatedStyle` can't read the chip's nested style arrays. The chip's
+  // container is the touchable's parent.
   const elevationTransitionDuration = () => {
     const { parent } = screen.getByTestId('chip');
     if (!parent) {
       throw new Error('Expected the touchable to be inside the container.');
     }
-    return transitionOf(parent).transitionDuration;
+    // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+    return StyleSheet.flatten(parent.props.jestInlineStyle).transitionDuration;
   };
 
   it.each([

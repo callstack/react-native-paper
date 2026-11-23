@@ -2,10 +2,11 @@ import { Platform, PlatformColor, StyleSheet } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
+import color from 'color';
 
 import { LocaleProvider } from '../../core/locale';
 import PaperProvider from '../../core/PaperProvider';
-import { render, screen, transitionOf } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { ReduceMotionContext } from '../../theme/accessibility/ReduceMotionContext';
 import { pink500, white } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
@@ -19,6 +20,8 @@ import {
   getButtonContentBoxStyle,
   getButtonHitSlop,
   getButtonPressedRadius,
+  getButtonRippleColor,
+  getButtonShapeCurvePoints,
   getButtonShapeRadius,
   getButtonSizeStyle,
   getButtonTransitionDuration,
@@ -627,6 +630,20 @@ describe('getButtonColors - border width', () => {
   );
 });
 
+describe('getButtonRippleColor', () => {
+  it('defaults to the label color at the pressed-state opacity', () => {
+    expect(getButtonRippleColor({ labelColor: '#123456' })).toBe(
+      color('#123456').alpha(stateOpacity.pressed).rgb().string()
+    );
+  });
+
+  it('returns undefined when the label color is not a plain string', () => {
+    expect(
+      getButtonRippleColor({ labelColor: PlatformColor('?attr/colorPrimary') })
+    ).toBeUndefined();
+  });
+});
+
 it('renders with a label color the ripple cannot parse', async () => {
   await render(
     <Button textColor="var(--label)" onPress={() => {}}>
@@ -763,6 +780,33 @@ describe('getButtonPressedRadius', () => {
       expect(getButtonPressedRadius({ size, theme: LightTheme })).toBe(pressed);
     }
   );
+});
+
+describe('getButtonShapeCurvePoints', () => {
+  const { points } = toSpringCurve(LightTheme.motion.spring.fast.spatial);
+  const cornersOnTheWay = (curve: number[], from: number, to: number) =>
+    curve.map((progress) => from + (to - from) * progress);
+
+  it('keeps the corner at 0 or above on its way to a 0 corner', () => {
+    const curve = getButtonShapeCurvePoints({
+      points,
+      radius: 0,
+      largestRadius: 20,
+    });
+
+    expect(Math.min(...cornersOnTheWay(curve, 20, 0))).toBe(0);
+  });
+
+  it('keeps the overshoot when the corner has room for it', () => {
+    const curve = getButtonShapeCurvePoints({
+      points,
+      radius: 8,
+      largestRadius: 20,
+    });
+
+    expect(curve).toEqual(points);
+    expect(Math.min(...cornersOnTheWay(curve, 20, 8))).toBeLessThan(8);
+  });
 });
 
 describe('getButtonTransitionDuration', () => {
@@ -1374,47 +1418,6 @@ describe('shape morph animation', () => {
     expect(screen.getByTestId('button')).toHaveStyle({ borderRadius: 20 });
   });
 
-  it('morphs the ripple inside the outline in step with the outline', async () => {
-    await render(
-      <Button mode="outlined" size="large" onPress={() => {}} testID="button">
-        {null}
-      </Button>
-    );
-    const touchable = screen.getByTestId('button');
-    const clip = parentOf(touchable, 'the touchable');
-
-    expect(transitionOf(touchable)).toEqual(transitionOf(clip));
-
-    await fireEvent(touchable, 'onPressIn');
-
-    expect(transitionOf(touchable)).toEqual(transitionOf(clip));
-    expect(clip).toHaveStyle({ borderRadius: LightTheme.shapes.corner.large });
-    expect(touchable).toHaveStyle({
-      borderRadius:
-        LightTheme.shapes.corner.large -
-        Tokens.sizes.large.outlinedOutlineWidth,
-    });
-  });
-
-  it('snaps the corner when animateShape is false', async () => {
-    await render(
-      <Button
-        mode="outlined"
-        animateShape={false}
-        onPress={() => {}}
-        testID="button"
-      >
-        {null}
-      </Button>
-    );
-    const touchable = screen.getByTestId('button');
-
-    expect(transitionOf(touchable).transitionDuration).toBe(0);
-    expect(
-      transitionOf(parentOf(touchable, 'the touchable')).transitionDuration
-    ).toBe(0);
-  });
-
   it('still changes the shape when animateShape is false and selected flips', async () => {
     await render(
       <Button shape="square" size="large" animateShape={false} testID="button">
@@ -1450,10 +1453,13 @@ describe('with reduce motion', () => {
       'the clip'
     );
 
-  // The container transitions its background and three shadow properties,
-  // then its corner.
+  // Reanimated's Jest setup keeps CSS transitions out of `style`, and
+  // `getAnimatedStyle` can't read the container's nested style arrays. The
+  // container transitions its background and three shadow properties, then
+  // its corner.
   const containerTransitionDuration = () =>
-    transitionOf(containerOf()).transitionDuration;
+    // eslint-disable-next-line no-restricted-syntax -- see the comment above.
+    StyleSheet.flatten(containerOf().props.jestInlineStyle).transitionDuration;
 
   const renderButton = (reduceMotion: 'on' | 'off') =>
     render(

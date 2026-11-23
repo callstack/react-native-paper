@@ -1,10 +1,20 @@
+import { StyleSheet } from 'react-native';
+
 import { describe, expect, it } from '@jest/globals';
 
 import Chip from '../../components/Chip/Chip';
 import Surface from '../../components/Surface';
-import { render, screen, transitionOf } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import PaperProvider from '../PaperProvider';
+
+// Reanimated's jest setup keeps CSS transition props off `style`, on the host
+// view's `jestInlineStyle` prop.
+const getTransitionDuration = (
+  element: ReturnType<typeof screen.getByTestId> | null
+) =>
+  // eslint-disable-next-line no-restricted-syntax -- CSS transitions are only readable from this Reanimated test prop.
+  StyleSheet.flatten(element?.props.jestInlineStyle)?.transitionDuration;
 
 // A full theme passed to a component, such as a built-in scheme, overrides
 // what PaperProvider puts in the theme, so reduce motion has to reach the
@@ -32,9 +42,9 @@ describe.each([
         </PaperProvider>
       );
 
-      expect(
-        transitionOf(screen.getByTestId('surface')).transitionDuration
-      ).toBe(duration);
+      expect(getTransitionDuration(screen.getByTestId('surface'))).toBe(
+        duration
+      );
     }
   );
 
@@ -50,9 +60,9 @@ describe.each([
       );
 
       // The Chip's Surface is the container of its pressable body.
-      expect(
-        transitionOf(screen.getByRole('button').parent).transitionDuration
-      ).toBe(duration);
+      expect(getTransitionDuration(screen.getByRole('button').parent)).toBe(
+        duration
+      );
     }
   );
 });
