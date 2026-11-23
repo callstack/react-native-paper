@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import type { AccessibilityRole } from 'react-native';
 
 import type { AvatarImageSource } from './AvatarImage';
@@ -11,6 +12,20 @@ export const DEFAULT_SIZE = 64;
  */
 export const getAvatarRole = (accessibilityRole?: AccessibilityRole) =>
   accessibilityRole === undefined ? { role: 'img' as const } : {};
+
+/**
+ * Props that let a labelled avatar announce its label.
+ * iOS reads a label only from an accessibility element, and merges one inside
+ * a pressable parent into the parent. Android reads the label without
+ * `accessible`, and `accessible` would make the avatar a second TalkBack stop
+ * inside a pressable parent, so Android leaves it out.
+ */
+export const getLabelledAvatarProps = (
+  accessibilityRole?: AccessibilityRole
+) => ({
+  ...(Platform.OS !== 'android' && { accessible: true as const }),
+  ...getAvatarRole(accessibilityRole),
+});
 
 /**
  * Identity for retrying a failed avatar image.

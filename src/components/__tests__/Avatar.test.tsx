@@ -1,7 +1,14 @@
-import { Image } from 'react-native';
+import { Image, Platform } from 'react-native';
 import type { ImageProps } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
@@ -353,6 +360,74 @@ it('shows the full text avatar label', async () => {
         children: ['+12'],
       },
     ],
+  });
+});
+
+describe('on Android', () => {
+  // `accessible` makes a node its own TalkBack stop, so a labelled avatar in a
+  // pressable row would be announced apart from the row. Android reads the
+  // label without it.
+  beforeEach(() => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('labels a text avatar without making it focusable', async () => {
+    const tree = (
+      await render(<Avatar.Text label="JD" aria-label="Jane Doe" />)
+    ).toJSON();
+
+    expect(tree).toMatchObject({
+      props: { 'aria-label': 'Jane Doe', role: 'img' },
+    });
+    expect(tree).not.toMatchObject({ props: { accessible: true } });
+  });
+
+  it('labels an icon avatar without making it focusable', async () => {
+    const tree = (
+      await render(<Avatar.Icon icon="folder" aria-label="Folder" />)
+    ).toJSON();
+
+    expect(tree).toMatchObject({
+      props: { 'aria-label': 'Folder', role: 'img' },
+    });
+    expect(tree).not.toMatchObject({ props: { accessible: true } });
+  });
+
+  it('labels the image with aria-label instead of alt', async () => {
+    const tree = (
+      await render(
+        <Avatar.Image source={{ uri: 'avatar.png' }} alt="Jane Doe" />
+      )
+    ).toJSON();
+
+    expect(tree).toMatchObject({
+      children: [{ props: { 'aria-label': 'Jane Doe' } }],
+    });
+    expect(tree).not.toMatchObject({
+      children: [{ props: { alt: 'Jane Doe' } }],
+    });
+  });
+
+  it('labels the fallback host without making it focusable', async () => {
+    const { toJSON } = await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={{ uri: 'avatar.png' }}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        alt="Jane Doe"
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    expect(toJSON()).toMatchObject({
+      props: { 'aria-label': 'Jane Doe', role: 'img' },
+    });
+    expect(toJSON()).not.toMatchObject({ props: { accessible: true } });
   });
 });
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   ImageProps,
@@ -9,7 +9,11 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import { DEFAULT_SIZE, getAvatarImageSourceKey, getAvatarRole } from './utils';
+import {
+  DEFAULT_SIZE,
+  getAvatarImageSourceKey,
+  getLabelledAvatarProps,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
@@ -20,8 +24,9 @@ export type AvatarImageSourceProps = {
   onError?: ImageProps['onError'];
   /**
    * Present when the host received a description through `alt`, `aria-label`
-   * or `accessibilityLabel`. Pass it to your image so it is announced by
-   * assistive technology.
+   * or `accessibilityLabel`, except on Android, where `aria-label` alone is
+   * announced. Pass it to your image so it is announced by assistive
+   * technology.
    */
   alt?: string;
   /**
@@ -181,10 +186,14 @@ const AvatarImage = ({
     borderRadius: cornerFull,
   };
   const description = alt ?? ariaLabel ?? accessibilityLabel;
+  // `Image` makes `alt` an accessibility element, which on Android is a second
+  // TalkBack stop inside a pressable parent. Android reads `aria-label` alone.
   const imageA11y =
     description === undefined
       ? { accessible: false as const }
-      : { alt: description, 'aria-label': description };
+      : Platform.OS === 'android'
+        ? { 'aria-label': description }
+        : { alt: description, 'aria-label': description };
   const sourceKey = getAvatarImageSourceKey(source, sourceKeyProp);
   const [failedSource, setFailedSource] = React.useState<{ key: unknown }>();
   const hasError =
@@ -201,9 +210,8 @@ const AvatarImage = ({
     ? { accessible: false, importantForAccessibility: 'no' as const }
     : description !== undefined
       ? {
-          accessible: true,
           'aria-label': description,
-          ...getAvatarRole(rest.accessibilityRole),
+          ...getLabelledAvatarProps(rest.accessibilityRole),
         }
       : {};
 

@@ -7,7 +7,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import { DEFAULT_SIZE, getAvatarRole } from './utils';
+import { DEFAULT_SIZE, getLabelledAvatarProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
@@ -94,10 +94,7 @@ const AvatarText = ({
             customBackgroundColor ?? theme.colors.primaryContainer,
         },
       ]}
-      {...(hasCustomLabel && {
-        accessible: true,
-        ...getAvatarRole(rest.accessibilityRole),
-      })}
+      {...(hasCustomLabel && getLabelledAvatarProps(rest.accessibilityRole))}
       {...rest}
     >
       <Text
