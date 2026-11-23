@@ -121,10 +121,7 @@ const useTextInputAnimation = ({
   const affixOpacity = isDisabled ? tokens.md.sys.state.opacity.disabled : 1;
   const animatedAffixStyle: TextInputAnimationState['animatedAffixStyle'] = {
     opacity: isFloating ? affixOpacity : 0,
-    // Opacity is exempt from reduced motion (see `useReduceMotion`'s
-    // contract), so this always animates — pass `false`, not
-    // `reduceMotion`.
-    ...getTransition(theme, 'opacity', 'short3', 'standard', false),
+    ...getTransition(theme, 'opacity', 'short3', 'standard', reduceMotion),
   };
 
   const animatedActiveOutlineStyle: TextInputAnimationState['animatedActiveOutlineStyle'] =

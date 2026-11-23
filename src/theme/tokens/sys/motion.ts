@@ -177,19 +177,15 @@ export function toSpringCurve(spring: SpringConfig): {
  * hand.
  *
  * `reduceMotion` sets the duration to 0, because Reanimated's `ReduceMotion`
- * option (the imperative tier's mechanism) has no effect on CSS transitions.
- * Per `useReduceMotion`'s contract (see `ReduceMotionContext.tsx`), only pass
- * `true` here for a motion property (translation, scale, transform) — for an
- * opacity/color-only transition, pass `false` so it keeps animating under
- * reduced motion, as that contract requires.
+ * option has no effect on CSS transitions.
  *
  * @example
+ * const reduceMotion = useReduceMotion();
+ *
  * <Animated.View
  *   style={[
  *     { opacity: visible ? 1 : 0 },
- *     // Opacity: exempt from reduced motion, so pass `false` here, not
- *     // `reduceMotion`.
- *     getTransition(theme, 'opacity', 'short3', 'standard', false),
+ *     getTransition(theme, 'opacity', 'short3', 'standard', reduceMotion),
  *   ]}
  * />
  */

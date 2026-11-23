@@ -228,15 +228,12 @@ const Checkbox = ({
   // A disabled ripple effect asks for no press at all.
   const ownsPress = isInteractive && Boolean(rippleEffectEnabled);
 
-  // Opacity is exempt from reduced motion (see `useReduceMotion`'s
-  // contract), so the fill/outline cross-fade always animates — pass
-  // `false`, not `reduceMotion`.
   const fillTransition = getTransition<ViewStyle>(
     theme,
     ['opacity'],
     'short2',
     'standard',
-    false
+    reduceMotion
   );
 
   const checkTransition = getTransition<ViewStyle>(
