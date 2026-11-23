@@ -48,6 +48,9 @@ export const SUPPORTING_TEXT_MARGIN_TOP = 4;
 
 export const ANIMATION_DURATION_MS = motionDuration.short3;
 
+// How long an error must stay unchanged before Android and iOS announce it.
+export const ERROR_ANNOUNCEMENT_DELAY_MS = 1000;
+
 export const ACTIVE_INDICATOR_SIZE = 2;
 export const INACTIVE_INDICATOR_SIZE = 1;
 
