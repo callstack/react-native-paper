@@ -75,7 +75,9 @@ export type MenuTriggerProps = {
   visible?: boolean;
   onPress?: (e: GestureResponderEvent) => void;
   /**
-   * Accessibility label for the trigger FAB.
+   * Accessibility label for the trigger FAB. On web it also names the open
+   * menu, so set it when the trigger shows only an icon. Without it, the
+   * trigger and the menu have no accessible name.
    */
   'aria-label'?: string;
   testID?: string;
