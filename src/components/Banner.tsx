@@ -168,8 +168,8 @@ const Banner = ({
 
   const getDuration = useMotionDuration();
   const { medium1: showDuration, short4: hideDuration } = theme.motion.duration;
-  const { standardDecelerate: showEasing, standardAccelerate: hideEasing } =
-    theme.motion.easing;
+  const { standardDecelerate, standardAccelerate } = theme.motion.easing;
+  const [x1, y1, x2, y2] = visible ? standardDecelerate : standardAccelerate;
 
   React.useEffect(() => {
     const callback = visible ? showCallback : hideCallback;
@@ -178,7 +178,7 @@ const Banner = ({
       visible ? 1 : 0,
       {
         duration: getDuration(visible ? showDuration : hideDuration),
-        easing: Easing.bezier(...(visible ? showEasing : hideEasing)),
+        easing: Easing.bezier(x1, y1, x2, y2),
         reduceMotion: ReduceMotion.Never,
       },
       (finished) => scheduleOnRN(callback, { finished: finished ?? false })
@@ -187,12 +187,14 @@ const Banner = ({
     getDuration,
     hideCallback,
     hideDuration,
-    hideEasing,
     position,
     showCallback,
     showDuration,
-    showEasing,
     visible,
+    x1,
+    x2,
+    y1,
+    y2,
   ]);
 
   const surfaceStyle = useAnimatedStyle(() => ({
