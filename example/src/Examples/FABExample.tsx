@@ -155,8 +155,8 @@ const FABExample = () => {
           role="switch"
           aria-checked={showFab}
           right={() => (
-            <View pointerEvents="none" aria-hidden>
-              <Switch value={showFab} readOnly />
+            <View pointerEvents="none">
+              <Switch value={showFab} readOnly aria-hidden />
             </View>
           )}
           onPress={() => setShowFab((v) => !v)}

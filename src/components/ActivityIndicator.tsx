@@ -141,11 +141,15 @@ const ActivityIndicator = ({
     overflow: 'hidden' as const,
   };
 
+  // A hidden indicator, such as the one in a loading IconButton, is no element
+  // of its own. Left accessible, Android would still make it a keyboard stop.
+  const isHidden = rest['aria-hidden'] === true;
+
   return (
     <View
       style={[styles.container, style]}
       {...rest}
-      accessible
+      accessible={!isHidden}
       role="progressbar"
       aria-busy={animating}
     >

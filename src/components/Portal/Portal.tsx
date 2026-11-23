@@ -2,7 +2,11 @@ import * as React from 'react';
 
 import PortalConsumer from './PortalConsumer';
 import PortalHost, { PortalContext } from './PortalHost';
-import { LocaleProvider, useLocale } from '../../core/locale';
+import {
+  DirectionProvider,
+  SubtreeDirectionContext,
+  useLocale,
+} from '../../core/locale';
 import {
   SettingsContext,
   Provider as SettingsProvider,
@@ -51,6 +55,7 @@ export type Props = {
 const Portal = ({ children, modal, theme: themeOverrides }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
+  const setsLayout = React.useContext(SubtreeDirectionContext);
   const settings = React.useContext(SettingsContext);
   const manager = React.useContext(PortalContext);
   const reduceMotion = React.useContext(ReduceMotionContext);
@@ -59,11 +64,11 @@ const Portal = ({ children, modal, theme: themeOverrides }: Props) => {
     <PortalConsumer manager={manager} modal={modal}>
       <SettingsProvider value={settings}>
         <ReduceMotionContext.Provider value={reduceMotion}>
-          <LocaleProvider direction={direction}>
+          <DirectionProvider direction={direction} setsLayout={setsLayout}>
             <InternalThemeProvider theme={theme}>
               {children}
             </InternalThemeProvider>
-          </LocaleProvider>
+          </DirectionProvider>
         </ReduceMotionContext.Provider>
       </SettingsProvider>
     </PortalConsumer>

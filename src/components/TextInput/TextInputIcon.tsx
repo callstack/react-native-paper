@@ -26,7 +26,7 @@ export type TextInputAccessoryProps = {
 };
 
 export type TextInputIconProps = TextInputAccessoryProps &
-  Omit<IconButtonProps, keyof TextInputAccessoryProps>;
+  Omit<IconButtonProps, keyof TextInputAccessoryProps | 'size'>;
 
 /**
  * A component to render a leading / trailing icon in the TextInput
@@ -74,7 +74,7 @@ export type TextInputIconProps = TextInputAccessoryProps &
 const TextInputIcon = ({
   icon,
   iconColor,
-  size,
+  iconSize = ACCESSORY_SIZE,
   style,
   error,
   disabled,
@@ -85,8 +85,6 @@ const TextInputIcon = ({
   ...rest
 }: TextInputIconProps) => {
   const theme = useInternalTheme(themeOverride);
-
-  const iconSize = size ?? ACCESSORY_SIZE;
 
   const color = getIconColor({
     theme,
@@ -132,7 +130,7 @@ const TextInputIcon = ({
         hitSlop={hitSlop !== undefined ? hitSlop : ACCESSORY_HIT_SLOP}
         icon={icon}
         iconColor={color}
-        size={iconSize}
+        iconSize={iconSize}
         theme={themeOverride}
         style={[
           styles.icon,

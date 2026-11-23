@@ -822,10 +822,10 @@ it('preserves decorative loading and content styles without accessible controls'
     />
   );
   expect(screen.queryAllByRole('button')).toHaveLength(0);
-  expect(screen.queryByRole('progressbar')).toBeNull();
+  // The indicator is no element at all, not even a hidden one.
   expect(
-    screen.getByRole('progressbar', { includeHiddenElements: true })
-  ).toBeOnTheScreen();
+    screen.queryByRole('progressbar', { includeHiddenElements: true })
+  ).toBeNull();
   expect(
     screen.getByTestId('search-decoration', { includeHiddenElements: true })
   ).toHaveStyle({ padding: 2 });
