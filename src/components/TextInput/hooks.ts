@@ -465,9 +465,14 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const renderLeadingAccessory = props.startAccessory;
   const renderTrailingAccessory = props.endAccessory;
 
-  // A space keeps the iOS multiline placeholder updating:
-  // https://github.com/facebook/react-native/issues/31573
-  const placeholder = isPlaceholderShown ? props.placeholder : ' ';
+  // The hidden placeholder is empty: a blank is read as the field's text
+  // (TalkBack says "Space, edit box" instead of the label, iOS reports it as
+  // the value). Only iOS multiline fields keep a space, which keeps their
+  // placeholder updating: https://github.com/facebook/react-native/issues/31573
+  const hiddenPlaceholder = Platform.OS === 'ios' && props.multiline ? ' ' : '';
+  const placeholder = isPlaceholderShown
+    ? props.placeholder
+    : hiddenPlaceholder;
 
   return {
     input,
