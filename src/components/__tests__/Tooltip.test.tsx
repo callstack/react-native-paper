@@ -509,5 +509,24 @@ describe('Tooltip', () => {
         });
       });
     });
+
+    it('does not wrap child in a pressable wrapper', async () => {
+      const onPress = jest.fn();
+      const {
+        wrapper: { getByText },
+      } = await setup({
+        children: <DummyComponent onPress={onPress} />,
+      });
+
+      const wrapperView = getTrigger(getByText).parent;
+      expect(wrapperView).toBeTruthy();
+      if (wrapperView) {
+        await userEvent.press(wrapperView);
+      }
+      expect(onPress).not.toHaveBeenCalled();
+
+      await userEvent.press(getTrigger(getByText));
+      expect(onPress).toHaveBeenCalledTimes(1);
+    });
   });
 });
