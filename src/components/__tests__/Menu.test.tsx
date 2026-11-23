@@ -586,3 +586,47 @@ it.each([
     }
   }
 );
+
+it('positions menu using left on web even in rtl direction', async () => {
+  const originalOS = Platform.OS;
+  const originalHTMLElement = (globalThis as { HTMLElement?: unknown })
+    .HTMLElement;
+  Platform.OS = 'web';
+  (globalThis as { HTMLElement?: unknown }).HTMLElement = class {};
+  const measureSpy = jest
+    .spyOn(ViewPrototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(1133, 40, 130, 36));
+  const dimensionsSpy = jest
+    .spyOn(Dimensions, 'get')
+    .mockReturnValue({ width: 1280, height: 800, scale: 1, fontScale: 1 });
+
+  try {
+    await render(
+      <PaperProvider direction="rtl">
+        <Portal.Host>
+          <Menu
+            visible
+            onDismiss={jest.fn()}
+            anchor={<Button mode="outlined">Open menu</Button>}
+            testID="rtl-web-menu"
+          >
+            <Menu.Item onPress={jest.fn()} title="Copy" />
+          </Menu>
+        </Portal.Host>
+      </PaperProvider>
+    );
+
+    await act(async () => {
+      await jest.advanceTimersByTimeAsync(500);
+    });
+
+    const menu = screen.getByTestId('rtl-web-menu');
+    expect(menu.parent?.parent).toHaveStyle({ left: 1133 });
+    expect(menu.parent?.parent).not.toHaveStyle({ right: 1133 });
+  } finally {
+    Platform.OS = originalOS;
+    (globalThis as { HTMLElement?: unknown }).HTMLElement = originalHTMLElement;
+    measureSpy.mockRestore();
+    dimensionsSpy.mockRestore();
+  }
+});

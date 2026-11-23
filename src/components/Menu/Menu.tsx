@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Dimensions,
+  I18nManager,
   Keyboard,
   Platform,
   Pressable,
@@ -30,7 +31,6 @@ import { scheduleOnRN } from 'react-native-worklets';
 import useLatestCallback from 'use-latest-callback';
 
 import MenuItem from './MenuItem';
-import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../../theme/types';
@@ -209,8 +209,6 @@ const Menu = ({
   keyboardShouldPersistTaps,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-
-  const { direction } = useLocale();
   const insets = useSafeAreaInsets();
 
   const [rendered, setRendered] = React.useState(visible);
@@ -658,7 +656,7 @@ const Menu = ({
     top: isCoordinate(anchor)
       ? topTransformation
       : topTransformation + additionalVerticalValue,
-    ...(direction === 'rtl'
+    ...(Platform.OS !== 'web' && I18nManager.isRTL
       ? { right: leftTransformation }
       : { left: leftTransformation }),
   };
