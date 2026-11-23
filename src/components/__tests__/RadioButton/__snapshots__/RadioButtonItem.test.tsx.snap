@@ -6,6 +6,7 @@ exports[`can render leading radio button control 1`] = `
   aria-checked={false}
   aria-label="Default with leading control"
   focusable={false}
+  onBlur={[Function]}
   role="radio"
   style={
     [
@@ -188,6 +189,7 @@ exports[`renders unchecked 1`] = `
   aria-checked={false}
   aria-label="Unchecked Button"
   focusable={false}
+  onBlur={[Function]}
   role="radio"
   style={
     [

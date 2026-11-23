@@ -1,6 +1,12 @@
-import type { GestureResponderEvent } from 'react-native';
+import { type GestureResponderEvent, Platform } from 'react-native';
 
-import { describe, expect, it, jest as mockJest } from '@jest/globals';
+import {
+  afterEach,
+  describe,
+  expect,
+  it,
+  jest as mockJest,
+} from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
@@ -283,4 +289,62 @@ describe('RadioButton with reduce motion', () => {
       ).toMatchObject({ transitionDuration: duration });
     }
   );
+});
+
+describe('RadioButton Space key on web', () => {
+  afterEach(() => {
+    mockJest.restoreAllMocks();
+  });
+
+  it('presses the radio once on Space release', async () => {
+    mockJest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = mockJest.fn<(e: GestureResponderEvent) => void>();
+    const preventDefault = mockJest.fn();
+    await render(<RadioButton value="first" onPress={onPress} />);
+    const radio = screen.getByRole('radio');
+
+    await fireEvent(radio, 'keyDown', {
+      nativeEvent: { key: ' ' },
+      preventDefault,
+    });
+
+    expect(preventDefault).toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
+
+    await fireEvent(radio, 'keyUp', {
+      nativeEvent: { key: ' ' },
+      preventDefault,
+    });
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('selects its value in a group on Space release', async () => {
+    mockJest.replaceProperty(Platform, 'OS', 'web');
+    const onValueChange = mockJest.fn<(value: string) => void>();
+    const space = { nativeEvent: { key: ' ' }, preventDefault: mockJest.fn() };
+    await render(
+      <RadioButton.Group value="first" onValueChange={onValueChange}>
+        <RadioButton value="second" />
+      </RadioButton.Group>
+    );
+    const radio = screen.getByRole('radio');
+
+    await fireEvent(radio, 'keyDown', space);
+    await fireEvent(radio, 'keyUp', space);
+
+    expect(onValueChange).toHaveBeenCalledWith('second');
+  });
+
+  it('leaves Space to the page on a read-only radio', async () => {
+    mockJest.replaceProperty(Platform, 'OS', 'web');
+    const space = { nativeEvent: { key: ' ' }, preventDefault: mockJest.fn() };
+    await render(<RadioButton value="first" />);
+    const radio = screen.getByRole('radio');
+
+    await fireEvent(radio, 'keyDown', space);
+    await fireEvent(radio, 'keyUp', space);
+
+    expect(space.preventDefault).not.toHaveBeenCalled();
+  });
 });

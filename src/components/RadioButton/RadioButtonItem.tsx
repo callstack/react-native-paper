@@ -15,6 +15,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, TypescaleKey } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
 import { useFocusRing } from '../../utils/useFocusRing';
+import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -207,28 +208,37 @@ const RadioButtonItem = ({
     'descendant'
   );
 
+  const handleRowPress =
+    onPress || context?.onValueChange
+      ? (event: GestureResponderEvent) =>
+          handlePress({
+            onPress,
+            onValueChange: context?.onValueChange,
+            value,
+            event,
+          })
+      : undefined;
+
+  // The row is the focusable radio, so it takes the Space key itself.
+  const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
+    useSpaceKeyPress({ onPress: disabled ? undefined : handleRowPress });
+
   return (
     <TouchableRipple
       focusRing="none"
       onFocus={focusTarget.onFocus}
-      onBlur={focusTarget.onBlur}
+      onBlur={(e) => {
+        handleSpaceKeyBlur(e);
+        focusTarget.onBlur?.();
+      }}
+      {...spaceKeyHandlers}
       {...focusTarget.dataSetProps}
       style={focusTarget.style}
       // A row with nothing to call (no `onPress` and no `RadioButton.Group`)
       // is read only and gets no handler, so it never takes a press meant for
       // its parent. A live row is turned off with `disabled`, which keeps the
       // same element instead of remounting it.
-      onPress={
-        onPress || context?.onValueChange
-          ? (event) =>
-              handlePress({
-                onPress: onPress,
-                onValueChange: context?.onValueChange,
-                value,
-                event,
-              })
-          : undefined
-      }
+      onPress={handleRowPress}
       onLongPress={onLongPress}
       aria-label={ariaLabel}
       role="radio"

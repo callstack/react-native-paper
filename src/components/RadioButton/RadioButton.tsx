@@ -25,6 +25,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import type { PressableStateCallbackType } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
@@ -241,14 +242,6 @@ const RadioButton = ({
     [disabled, onFocus]
   );
 
-  const handleBlur = React.useCallback(
-    (e: NativeSyntheticEvent<TargetedEvent>) => {
-      setFocused(false);
-      onBlur?.(e);
-    },
-    [onBlur]
-  );
-
   const handleHoverIn = React.useCallback(
     (e: MouseEvent) => {
       setHovered(true);
@@ -281,6 +274,35 @@ const RadioButton = ({
       onPressOut?.(e);
     },
     [onPressOut]
+  );
+
+  const handleRadioPress = isPressable
+    ? (event: GestureResponderEvent) => {
+        handlePress({
+          onPress,
+          onValueChange: context?.onValueChange,
+          value,
+          event,
+        });
+      }
+    : undefined;
+
+  // React Native Web presses on Space only for `role="button"`, so the radio
+  // handles Space itself.
+  const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
+    useSpaceKeyPress({
+      onPress: disabled ? undefined : handleRadioPress,
+      onPressIn: handlePressIn,
+      onPressOut: handlePressOut,
+    });
+
+  const handleBlur = React.useCallback(
+    (e: NativeSyntheticEvent<TargetedEvent>) => {
+      setFocused(false);
+      handleSpaceKeyBlur(e);
+      onBlur?.(e);
+    },
+    [handleSpaceKeyBlur, onBlur]
   );
 
   // When `accessible={false}` is passed (typically by `RadioButton.Item`,
@@ -324,18 +346,8 @@ const RadioButton = ({
       // its parent. A live radio is turned off with `disabled`, which keeps the
       // same element instead of remounting it. A read-only one still swaps
       // elements when `disabled` toggles.
-      onPress={
-        isPressable
-          ? (event) => {
-              handlePress({
-                onPress,
-                onValueChange: context?.onValueChange,
-                value,
-                event,
-              });
-            }
-          : undefined
-      }
+      onPress={handleRadioPress}
+      {...spaceKeyHandlers}
       disabled={disabled}
       {...accessibilityProps}
       style={combinedStyle}

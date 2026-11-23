@@ -1,8 +1,14 @@
-import { expect, it, jest } from '@jest/globals';
+import { Platform } from 'react-native';
+
+import { afterEach, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../../test-utils';
+import { fireEvent, render, screen } from '../../../test-utils';
 import RadioButton from '../../RadioButton';
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 it('renders unchecked', async () => {
   const tree = (
@@ -57,4 +63,48 @@ it('should execute onLongPress', async () => {
   await userEvent.longPress(screen.getByTestId('radio-button-item'));
 
   expect(onLongPress).toHaveBeenCalledTimes(1);
+});
+
+it('selects the row in a group on Space release on web', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  const onValueChange = jest.fn<(value: string) => void>();
+  const preventDefault = jest.fn();
+  await render(
+    <RadioButton.Group value="first" onValueChange={onValueChange}>
+      <RadioButton.Item label="First" value="first" />
+      <RadioButton.Item label="Second" value="second" />
+    </RadioButton.Group>
+  );
+  const row = screen.getByRole('radio', { name: 'Second' });
+
+  await fireEvent(row, 'keyDown', {
+    nativeEvent: { key: ' ' },
+    preventDefault,
+  });
+
+  expect(preventDefault).toHaveBeenCalled();
+  expect(onValueChange).not.toHaveBeenCalled();
+
+  await fireEvent(row, 'keyUp', { nativeEvent: { key: ' ' }, preventDefault });
+
+  expect(onValueChange).toHaveBeenCalledTimes(1);
+  expect(onValueChange).toHaveBeenCalledWith('second');
+});
+
+it('ignores Space on a disabled row on web', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  const onValueChange = jest.fn<(value: string) => void>();
+  const space = { nativeEvent: { key: ' ' }, preventDefault: jest.fn() };
+  await render(
+    <RadioButton.Group value="first" onValueChange={onValueChange}>
+      <RadioButton.Item label="Second" value="second" disabled />
+    </RadioButton.Group>
+  );
+  const row = screen.getByRole('radio', { name: 'Second' });
+
+  await fireEvent(row, 'keyDown', space);
+  await fireEvent(row, 'keyUp', space);
+
+  expect(space.preventDefault).not.toHaveBeenCalled();
+  expect(onValueChange).not.toHaveBeenCalled();
 });
