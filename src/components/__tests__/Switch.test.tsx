@@ -7,7 +7,6 @@ import type { JsonElement, JsonNode } from 'test-renderer';
 import { fireEvent, render, screen, userEvent } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
-import { webNoOutlineStyle } from '../../utils/useFocusRing';
 import Switch from '../Switch/Switch';
 
 const { colors } = LightTheme;
@@ -430,13 +429,6 @@ describe('Switch operability', () => {
     await render(<Switch value onValueChange={() => {}} />);
 
     expect(screen.getByRole('switch')).not.toHaveProp('aria-readonly');
-  });
-
-  it('hides the browser focus outline on a read-only switch on web', async () => {
-    jest.replaceProperty(Platform, 'OS', 'web');
-    await render(<Switch value readOnly />);
-
-    expect(screen.getByRole('switch')).toHaveStyle(webNoOutlineStyle);
   });
 
   it('exposes a missing-handler fallback as read-only on web', async () => {

@@ -30,7 +30,7 @@ import { toRawSpring } from '../../theme/tokens/sys/motion';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { StateOpacityKey, ThemeProp } from '../../theme/types';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
-import { useFocusRing, webNoOutlineStyle } from '../../utils/useFocusRing';
+import { useFocusRing } from '../../utils/useFocusRing';
 import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import Icon, { type IconSource } from '../Icon';
 
@@ -504,11 +504,8 @@ const Switch = ({
             // A read-only switch stays enabled on web, where React Native Web's
             // Pressable would take the press and stop the click from reaching a
             // row that owns it. Native platforms disable the Pressable instead.
-            // A switch that has focus when it stops being interactive keeps DOM
-            // focus, and the focus ring no longer hides the browser's outline,
-            // so this hides it too.
             Platform.OS === 'web' && !isInteractive
-              ? [styles.nonInteractiveTouchable, webNoOutlineStyle]
+              ? styles.nonInteractiveTouchable
               : undefined,
           ]}
           {...focusTarget.dataSetProps}

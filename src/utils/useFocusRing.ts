@@ -99,7 +99,7 @@ const EMPTY: FocusRingResult = {
  * `scope: 'within'` leaves that to the stylesheet below instead.
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-export const webNoOutlineStyle = { outline: 'none' } as unknown as ViewStyle;
+const webNoOutlineStyle = { outline: 'none' } as unknown as ViewStyle;
 
 /**
  * MD3 keyboard focus indicator, from one hook shared by every component built
