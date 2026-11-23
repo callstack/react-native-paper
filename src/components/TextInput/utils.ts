@@ -95,11 +95,11 @@ export const getLabelColor = ({
     colors: { error, primary, onSurface, onSurfaceVariant },
   } = theme;
 
-  if (hasError) {
-    return error;
-  }
   if (isDisabled) {
     return onSurface;
+  }
+  if (hasError) {
+    return error;
   }
   if (isFocused) {
     return primary;
@@ -120,11 +120,11 @@ export const getSupportingTextColor = ({
     colors: { error, onSurface, onSurfaceVariant },
   } = theme;
 
-  if (hasError) {
-    return error;
-  }
   if (isDisabled) {
     return onSurface;
+  }
+  if (hasError) {
+    return error;
   }
   return onSurfaceVariant;
 };
@@ -170,37 +170,33 @@ export const getIconColor = ({
 };
 
 /**
- * Returns the raw outline color for a filled field. The disabled state's
- * alpha is intentionally NOT baked in here — it is applied via the `opacity`
- * style on the (childless) outline View so the value can be a `PlatformColor`
- * on Android, which the `color` library cannot parse at runtime.
+ * Resolve the filled indicator or outlined border color. Disabled opacity is
+ * applied by the outline View so native PlatformColor values stay intact.
  */
 export const getOutlineColor = ({
   theme,
   hasError,
   isFocused,
   isDisabled,
+  isHovered = false,
+  variant = 'outlined',
 }: {
   theme: InternalTheme;
   isFocused: boolean;
   hasError: boolean;
   isDisabled: boolean;
+  isHovered?: boolean;
+  variant?: TextInputVariant;
 }): ColorValue => {
-  const {
-    colors: { error, onSurface, primary, outline },
-  } = theme;
+  const { colors } = theme;
 
+  if (isDisabled) return colors.onSurface;
   if (hasError) {
-    return error;
+    return isHovered && !isFocused ? colors.onErrorContainer : colors.error;
   }
-  if (isDisabled) {
-    return onSurface;
-  }
-  if (isFocused) {
-    return primary;
-  }
-
-  return outline;
+  if (isFocused) return colors.primary;
+  if (isHovered) return colors.onSurface;
+  return variant === 'filled' ? colors.onSurfaceVariant : colors.outline;
 };
 
 /**
@@ -316,6 +312,7 @@ export const getFilledTextInputData = (
     isDisabled,
     hasAccessory,
     hasError,
+    isHovered,
     animatedLabelWrapperStyle,
     animatedActiveOutlineStyle,
   } = api;
@@ -332,6 +329,8 @@ export const getFilledTextInputData = (
     hasError,
     isFocused: false,
     isDisabled,
+    variant: 'filled',
+    isHovered,
   });
 
   const activeOutlineColor = getOutlineColor({
@@ -353,22 +352,21 @@ export const getFilledTextInputData = (
    * Variant-specific styles
    */
 
+  const filledLabelOffset = hasAccessory
+    ? FILLED_LABEL_START_OFFSET_WITH_ACCESSORY
+    : LABEL_START_OFFSET_WITHOUT_ACCESSORY;
+
   const animatedLabelWrapperStyles: StyleProp<
     AnimatedStyle<StyleProp<ViewStyle>>
   > = [
     filledStyles.labelWrapper,
-    {
-      left: hasAccessory
-        ? FILLED_LABEL_START_OFFSET_WITH_ACCESSORY
-        : LABEL_START_OFFSET_WITHOUT_ACCESSORY,
-    },
+    Platform.OS === 'web' && shared.isRTL
+      ? { right: filledLabelOffset }
+      : { start: filledLabelOffset },
     animatedLabelWrapperStyle,
   ];
 
-  const containerStyles: StyleProp<ViewStyle> = [
-    filledStyles.container,
-    isDisabled && styles.disabled,
-  ];
+  const containerStyles = filledStyles.container;
 
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
@@ -420,7 +418,7 @@ export const getFilledTextInputData = (
       flex: 1,
       color: onSurface,
       fontSize: INPUT_FONT_SIZE,
-      textAlign: hasSuffix === shared.isRTL ? 'left' : 'right',
+      textAlign: shared.isRTL ? 'right' : 'left',
       writingDirection: shared.isRTL ? 'rtl' : 'ltr',
     },
     textInputProps.multiline && {
@@ -465,6 +463,7 @@ export const getOutlinedTextInputData = (
     hasAccessory,
     hasError,
     hasSuffix,
+    isHovered,
     animatedLabelWrapperStyle,
   } = api;
 
@@ -481,6 +480,7 @@ export const getOutlinedTextInputData = (
     isDisabled,
     isFocused,
     hasError,
+    isHovered,
   });
 
   /**
@@ -493,10 +493,7 @@ export const getOutlinedTextInputData = (
    * Variant-specific styles
    */
 
-  const containerStyles: StyleProp<ViewStyle> = [
-    outlinedStyles.container,
-    isDisabled && styles.disabled,
-  ];
+  const containerStyles = outlinedStyles.container;
 
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
@@ -518,14 +515,18 @@ export const getOutlinedTextInputData = (
     isDisabled && { opacity: OUTLINED_DISABLED_OUTLINE_OPACITY },
   ];
 
+  const outlinedLabelOffset = hasAccessory
+    ? OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY
+    : LABEL_START_OFFSET_WITHOUT_ACCESSORY;
+
   const animatedLabelWrapperStyles: StyleProp<
     AnimatedStyle<StyleProp<ViewStyle>>
   > = [
     outlinedStyles.labelWrapper,
     {
-      left: hasAccessory
-        ? OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY
-        : LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+      ...(Platform.OS === 'web' && shared.isRTL
+        ? { right: outlinedLabelOffset }
+        : { start: outlinedLabelOffset }),
       backgroundColor: labelBackgroundColor,
     },
     animatedLabelWrapperStyle,
@@ -537,7 +538,7 @@ export const getOutlinedTextInputData = (
       flex: 1,
       color: onSurface,
       fontSize: INPUT_FONT_SIZE,
-      textAlign: hasSuffix === shared.isRTL ? 'left' : 'right',
+      textAlign: shared.isRTL ? 'right' : 'left',
       writingDirection: shared.isRTL ? 'rtl' : 'ltr',
     },
     textInputProps.multiline && {
@@ -570,65 +571,111 @@ export const getOutlinedTextInputData = (
 
 export const getAccessibilityData = ({
   data,
+  id,
   hasError,
   hasCounter,
+  hasPrefix,
+  hasSuffix,
   isDisabled,
+  isPlaceholderShown,
   inputLength,
 }: GetAccessibilityDataProps): GetAccessibilityDataReturn => {
-  const { label, supportingText, ...props } = data;
-
-  const maxLength = props.maxLength;
-  const shouldEvaluateCounter = !!maxLength && hasCounter;
-  const isEmptyString = inputLength === 0;
-  const isCounterExceeded = shouldEvaluateCounter && inputLength > maxLength;
-  const isCounterReached = shouldEvaluateCounter && inputLength === maxLength;
-  const isInvalid = hasError || isCounterExceeded;
-  const isSupportingTextHidden = !!(supportingText && !hasError);
-
-  const chunks: string[] = [];
-
-  if (label) {
-    chunks.push(label);
-  }
-
-  if (isSupportingTextHidden) {
-    chunks.push(supportingText);
-  }
-
-  if (isEmptyString && props.placeholder && !hasError) {
-    chunks.push(props.placeholder);
-  }
-
-  const ariaLabel = chunks.length > 0 ? chunks.join(', ') : label;
-
-  let hint: string | undefined;
-
-  if (isCounterExceeded && !(hasError && supportingText)) {
-    hint = `Character limit exceeded ${inputLength} of ${maxLength}`;
-  }
-
-  const counterAccessibilityLabel = shouldEvaluateCounter
+  const { label, supportingText, maxLength, prefix, suffix, ...props } = data;
+  const isCounterExceeded =
+    hasCounter && maxLength != null && inputLength > maxLength;
+  const counterAccessibilityLabel = hasCounter
     ? isCounterExceeded
       ? `Character limit exceeded ${inputLength} of ${maxLength}`
       : `Characters entered ${inputLength} of ${maxLength}`
     : undefined;
 
+  // A labelled field blanks its placeholder until the label floats away, so
+  // assistive technology moving to the empty field would not hear it.
+  const placeholderDescription =
+    label && inputLength === 0 ? props.placeholder : undefined;
+
+  // Generated IDs only link the label and descriptions on web.
+  const labelId = Platform.OS === 'web' ? `${id}-label` : undefined;
+  // The input exposes its own placeholder once it shows it, so only describe
+  // the field with it before then. Otherwise it is read twice.
+  const placeholderId =
+    Platform.OS === 'web' && placeholderDescription && !isPlaceholderShown
+      ? `${id}-placeholder`
+      : undefined;
+  const prefixId =
+    Platform.OS === 'web' && hasPrefix ? `${id}-prefix` : undefined;
+  const suffixId =
+    Platform.OS === 'web' && hasSuffix ? `${id}-suffix` : undefined;
+  const supportingTextId =
+    Platform.OS === 'web' && supportingText
+      ? `${id}-supporting-text`
+      : undefined;
+  const counterId =
+    Platform.OS === 'web' && hasCounter ? `${id}-counter` : undefined;
+  const describedBy =
+    [
+      props['aria-describedby'],
+      placeholderId,
+      prefixId,
+      suffixId,
+      supportingTextId,
+      counterId,
+    ]
+      .filter(Boolean)
+      .join(' ') || undefined;
+  const explicitLabel = props['aria-label'] ?? props.accessibilityLabel;
+  const labelledBy =
+    props['aria-labelledby'] ??
+    (label && explicitLabel == null && !props.accessibilityLabelledBy
+      ? labelId
+      : undefined);
+
+  // React Native 0.88 does not implement described-by relationships on native.
+  // Expose the same description as a hint without changing the field's name.
+  const hint =
+    Platform.OS === 'web'
+      ? props.accessibilityHint
+      : [
+          props.accessibilityHint,
+          placeholderDescription,
+          prefix?.trim(),
+          suffix?.trim(),
+          supportingText,
+          counterAccessibilityLabel,
+        ]
+          .filter(Boolean)
+          .join(', ') || undefined;
+
   return {
     input: {
-      'aria-label': ariaLabel,
-      'aria-valuemax': isCounterReached ? maxLength : undefined,
-      'aria-valuenow': isCounterReached ? inputLength : undefined,
-      'aria-disabled': isDisabled,
-      'aria-invalid': isInvalid,
+      'aria-label': explicitLabel ?? label ?? props.placeholder,
+      'aria-labelledby': labelledBy,
+      'aria-describedby': describedBy,
+      'aria-disabled': isDisabled || (props['aria-disabled'] ?? false),
+      'aria-invalid': props['aria-invalid'] ?? (hasError || isCounterExceeded),
       accessibilityHint: hint,
     },
+    label: { nativeID: labelId },
+    placeholder: { nativeID: placeholderId, 'aria-hidden': true },
+    // The prefix and suffix describe the value, so they are read with the
+    // field instead of as separate text next to it.
+    prefix: { nativeID: prefixId, 'aria-hidden': true },
+    suffix: { nativeID: suffixId, 'aria-hidden': true },
+    // On native, the hint above already contains these texts. Hide their nodes
+    // so they are not read twice or merged into the field wrapper's label.
     supportingText: {
-      'aria-hidden': isSupportingTextHidden,
-      'aria-live': hasError && supportingText ? 'polite' : undefined,
+      nativeID: supportingTextId,
+      'aria-hidden': Platform.OS !== 'web',
+      role:
+        Platform.OS === 'web' && hasError && supportingText
+          ? 'alert'
+          : undefined,
     },
     counter: {
+      nativeID: counterId,
+      'aria-hidden': Platform.OS !== 'web',
       'aria-label': counterAccessibilityLabel,
-      'aria-live': 'polite',
+      'aria-live': Platform.OS === 'web' ? 'polite' : undefined,
     },
   };
 };

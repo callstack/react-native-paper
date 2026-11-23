@@ -1,11 +1,12 @@
 import * as React from 'react';
 import type { ReactNode } from 'react';
-import { StyleSheet, Text as NativeText } from 'react-native';
+import { Text as NativeText } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
 
 import AnimatedText from './AnimatedText';
 import { useIsNestedText, markChildrenAsNested } from './NestedTextContext';
 import type { VariantProp } from './types';
+import { getTextAlignStyle } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -90,6 +91,7 @@ const Text = ({
   const root = React.useRef<React.ComponentRef<typeof NativeText> | null>(null);
   const theme = useInternalTheme(initialTheme);
   const { direction: writingDirection } = useLocale();
+  const alignStyle = getTextAlignStyle(writingDirection);
   // Nested text inherits the parent's style unless it has its own theme
   const inheritsStyle = useIsNestedText() && !initialTheme;
 
@@ -157,7 +159,7 @@ const Text = ({
           inheritsStyle
             ? textStyle
             : [
-                styles.text,
+                alignStyle,
                 { writingDirection, color: theme.colors.onSurface },
                 textStyle,
               ]
@@ -177,19 +179,13 @@ const Text = ({
       <NativeText
         {...rest}
         ref={root}
-        style={[styles.text, textStyle, { writingDirection }, style]}
+        style={[alignStyle, textStyle, { writingDirection }, style]}
       />
     );
   }
 
   return markChildrenAsNested(element, rest.children);
 };
-
-const styles = StyleSheet.create({
-  text: {
-    textAlign: 'left',
-  },
-});
 
 type TextComponent<T> = (props: Props<T>) => ReactNode;
 

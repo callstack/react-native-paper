@@ -93,6 +93,7 @@ The following component style props no longer support overriding their backgroun
 - `Card`
 - `Chip`
 - `Dialog`
+- `IconButton`
 - `Menu`: `contentStyle`
 - `Searchbar`
 - `Snackbar`
@@ -410,7 +411,7 @@ In a disabled `TextInput`, every `TextInput.Icon` takes the disabled color, also
 
 Interactive components now draw the Material Design 3 keyboard focus indicator: a 3dp ring in `theme.colors.secondary`, 2dp outside the component. On web it shows when an element gets focus from the keyboard (`:focus-visible`), and on Android when it gets focus from a hardware keyboard or D-pad. Clicking or touching an element shows no ring. iOS shows no ring.
 
-`Snackbar` rings its action and close button in `theme.colors.inversePrimary`, the color of its action label, because `secondary` barely shows on its `inverseSurface` background. If a component's background is the ring color, such as an `Appbar` with a `secondary` background, the rings of the controls on it don't show: give those controls a `theme` with a contrasting `secondary`. An `Appbar` passes its own `theme` on to the `Appbar.Action`, `Appbar.BackAction` and `Appbar.Content` placed directly in it.
+`Snackbar` rings its action and close button in `theme.colors.inversePrimary`, the color of its action label, because `secondary` barely shows on its `inverseSurface` background. If a component's background is the ring color, such as an `Appbar` with a `secondary` background, the rings of the controls on it don't show: give those controls a `theme` with a contrasting `secondary`. `Appbar.Action`, `Appbar.BackAction` and `Appbar.Content` read the `theme` of the `Appbar` they are rendered in from context, and the actions get it inside a `Tooltip` or a `View` too, so you can give that `theme` to the `Appbar` instead of to each control. See [Parts read from the `Appbar`](#parts-read-from-the-appbar).
 
 Components that fill a clipping container or touch their neighbours draw the ring 3dp inside their edge instead: `List.Item`, `List.Accordion`, `Checkbox.Item`, `RadioButton.Item`, `Menu.Item`, the `FAB.Menu` items, `Drawer.Item`, the `BottomNavigation` tabs, `DataTable.Row`, `DataTable.Cell`, `DataTable.Title` and `SegmentedButtons`. `Drawer.CollapsedItem` draws it around its icon and label, 2dp clear of the active indicator. `FAB` and `Switch` draw this ring instead of their own, and `Checkbox` keeps its circular ring around the state layer.
 
@@ -481,7 +482,50 @@ To keep the height of the content row when setting `height` in `style`, add the 
 </Appbar.Header>
 ```
 
-In `medium` and `large` mode, `Appbar` now passes its `theme` to `Appbar.BackAction`, `Appbar.Action` and `Appbar.Content`, as the `small` and `center-aligned` modes already did. These children of a medium or large bar with its own `theme` now take their colors, the title's font and their focus rings from that theme, not from the app's. In 5.x, a dark-themed bar in a light app drew dark icons and a dark title on its dark background.
+#### Parts read from the `Appbar`
+
+`Appbar` no longer inspects its children and clones them to pass `color`, `theme`, `mode` and `style`. `Appbar.BackAction`, `Appbar.Content` and `Appbar.Action` now read the `dark` and `theme` props and the `mode` of the `Appbar` they are rendered in from context. This means `Appbar.Action` and `Appbar.BackAction` can be wrapped in other components, for example in a `Tooltip` or a `View`, and still get the colors and the theme of the `Appbar`. `Appbar.Content` positions the title in the `Appbar`, so render it directly in the `Appbar`, not in a wrapper.
+
+Only these three parts read the colors and the theme of the `Appbar`. Other children, such as a custom icon or an inline SVG, never got them, and they still need an explicit `color` or `theme`. A `Tooltip` was the exception: the `Appbar` passed it its `theme`, and now it doesn't, so pass `theme` to a `Tooltip` that needs the theme of the `Appbar`.
+
+The parts are rendered in the order they are given, so render the leading actions first, then `Appbar.Content`, then the trailing actions. Previously, `Appbar.BackAction` and the actions with `isLeading` were moved before the rest. The `isLeading` prop now only selects the icon color of the action (`onSurface` instead of `onSurfaceVariant`).
+
+- `Appbar.Content` always has a `12dp` margin before its title. Previously, the margin was only added when the title was the first item after `Appbar.BackAction`.
+- The `mode` prop of `Appbar.Content`, which was for internal use, is removed.
+
+#### Layout of the modes
+
+- In the `medium` and `large` modes, `Appbar` now lays out the actions in a single row and `Appbar.Content` places the title below them, instead of the `Appbar` rendering a row for the actions and a row for the title. The actions of all modes are centered vertically in a `64dp` row, so those of `medium` moved down by `4dp` and those of `large` moved up by `6dp`.
+- In the `center-aligned` mode, the title is centered by measuring the width of the items on each side of it, so any actions, in any order, and custom children are taken into account. Previously, the actions before the title only counted as leading when they were `Appbar.BackAction` or had `isLeading`, and custom children were not counted. The title is centered when each side is at most two actions wide, as before.
+
+#### Theme
+
+`Appbar` now passes its `theme` to its parts in every mode. In 5.x, the `medium` and `large` modes didn't, so a bar with its own `theme` drew the icons, the title and the focus rings of these parts with the theme of the app. For example, a dark-themed bar in a light app drew dark icons and a dark title on its dark background.
+
+A `theme` set on a part is merged over the `theme` of the `Appbar`, so it takes precedence for the values it sets and the rest comes from the `Appbar`. In 5.x, the `theme` of the `Appbar` overrode it.
+
+#### Material 3 Expressive
+
+- The `mode` prop of `Appbar` and `Appbar.Header` accepts two new values: `medium-flexible` and `large-flexible`. Their height is the minimum height (`112` and `120`), and they grow when the title wraps onto a second line.
+- `Appbar.Action` has new `variant` and `width` props. `variant="filled"` and `variant="tonal"` render the action in a container, and `width="wide"` makes the container wider. Without `selected` the action shows the primary or the secondary container color. Pass `selected` to make it a toggle, with the selected and unselected colors of the icon button.
+- `Appbar` and `Appbar.Header` have a new `isScrolled` prop. Set it when the content below has scrolled, to switch the container to the `surfaceContainer` color. Unlike `elevated`, it doesn't add elevation.
+
+```tsx
+<Appbar.Header mode="large-flexible" isScrolled={isScrolled}>
+  <Appbar.BackAction onPress={() => {}} />
+  <Appbar.Content title="Photos" />
+  <Appbar.Action
+    icon="share"
+    variant="filled"
+    width="wide"
+    onPress={() => {}}
+  />
+</Appbar.Header>
+```
+
+#### Bottom bar
+
+Using `Appbar` as a bottom bar is deprecated. Material Design 3 moves the bottom bar to toolbars. It continues to work in 6.x, and will be replaced by the `Toolbar` component once it is available.
 
 ### Avatar
 
@@ -654,10 +698,14 @@ const buttonRef = React.useRef<React.ComponentRef<typeof View>>(null);
 
 ```diff
 -<Portal>
--  <Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
+-  <Dialog visible={visible} onDismiss={hideDialog}>
+-    <Dialog.Title>Alert</Dialog.Title>
+-  </Dialog>
 -</Portal>
 +<Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 ```
+
+`Dialog.Title` and the other parts move to props, as [Prop-based API](#prop-based-api) shows.
 
 The dialog now has the `dialog` role. Its accessible name is set automatically from the `title` prop. A string title is used as the `aria-label` on all platforms. Any other title is linked through `aria-labelledby`, which applies on web only, so on iOS and Android the dialog has no name unless you set `aria-label`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
 
@@ -679,7 +727,7 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 #### Prop-based API
 
-The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialog layouts. If your dialog previously composed `Dialog.Title`, `Dialog.Content`, and `Dialog.Actions` via `children`, migrate to the dedicated `icon`, `title`, `content`, and `actions` props.
+`Dialog` no longer takes `children`. The `icon`, `title`, `content` and `actions` props are the only way to build a dialog, so move each `Dialog.Icon`, `Dialog.Title`, `Dialog.Content` and `Dialog.Actions` to its prop.
 
 **Removed**
 
@@ -726,7 +774,7 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
   title="Alert"
   content="This is a simple dialog"
   actions={[
-    <Button key="done" onPress={hideDialog}>
+    <Button key="done" mode="text" onPress={hideDialog}>
       Done
     </Button>,
   ]}
@@ -751,6 +799,93 @@ The dialog no longer injects `compact` on its action buttons, and the default [`
     </Button>,
   ]}
 />
+```
+
+The actions row takes no `style`, so a `style` passed to `Dialog.Actions` has no replacement. The row places the actions at its end, 8dp apart, with 24dp of padding at the sides and the bottom.
+
+#### Scrollable content
+
+`Dialog.ScrollArea` becomes the `scrollable` prop. The dialog renders its own `ScrollView`, so the children of your `ScrollView` move to `content`, its props to `scrollViewProps`, and the scroll area's `style` to `scrollAreaProps`:
+
+```tsx
+// Before (v5)
+<Dialog visible={visible} onDismiss={hideDialog}>
+  <Dialog.Title>Terms</Dialog.Title>
+  <Dialog.ScrollArea style={{ paddingHorizontal: 0 }}>
+    <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+      <Text variant="bodyMedium">{terms}</Text>
+    </ScrollView>
+  </Dialog.ScrollArea>
+</Dialog>
+
+// After (v6)
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  title="Terms"
+  content={terms}
+  scrollable
+  scrollAreaProps={{ style: { paddingHorizontal: 0 } }}
+  scrollViewProps={{ contentContainerStyle: { paddingHorizontal: 24 } }}
+/>
+```
+
+A scroll area that held a `FlatList` or another list component has no replacement, since `scrollable` always renders a `ScrollView`.
+
+#### Icon color and size
+
+The icon is 24dp, in `theme.colors.secondary`. `Dialog.Icon`'s `color` and `size` have no matching props: to change them, pass a function to `icon` that renders an `Icon`:
+
+```tsx
+// Before (v5)
+<Dialog.Icon icon="alert" color={colors.error} size={32} />
+
+// After (v6)
+<Dialog
+  icon={() => <Icon source="alert" color={colors.error} size={32} />}
+/>
+```
+
+#### Layout
+
+- The dialog is now 280dp to 560dp wide and centered. In 5.x it took the full width of the screen less the side inset, so on tablets and the web it is now narrower.
+- With an `icon`, the title is centered under it. Set `textAlign` in `titleProps.style` to align it differently.
+- The dividers of the scroll area use `outlineVariant` instead of `surfaceVariant`.
+- The side inset of at least 26dp is now padding on the wrapper around the dialog, not a horizontal margin on the dialog, so a `marginHorizontal` in `style` adds to it instead of replacing it.
+- If your app was written for a 6.0 alpha build: the 24dp space at the top now belongs to the first part (the icon, title or content) instead of being padding on the dialog, so a `paddingTop` in `style` adds to it instead of replacing it, as in 5.x.
+
+#### Parts outside a `Dialog`
+
+`Dialog.Content` and `Dialog.Actions` also worked outside a `Dialog`, for example in a `Modal`. There, use a `View` with their 5.x styles instead, and add `mode="text"` to the buttons as [Dialog actions](#dialog-actions) explains:
+
+```tsx
+// Before (v5)
+<Dialog.Content>
+  <Text variant="bodyMedium">Delete this file?</Text>
+</Dialog.Content>
+<Dialog.Actions>
+  <Button onPress={hide}>Cancel</Button>
+  <Button onPress={remove}>Delete</Button>
+</Dialog.Actions>
+
+// After (v6)
+<View style={{ paddingHorizontal: 24, paddingBottom: 24 }}>
+  <Text variant="bodyMedium">Delete this file?</Text>
+</View>
+<View
+  style={{
+    flexDirection: 'row',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    columnGap: 8,
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+  }}
+>
+  <Button mode="text" onPress={hide}>Cancel</Button>
+  <Button mode="text" onPress={remove}>Delete</Button>
+</View>
 ```
 
 ### Menu
@@ -799,10 +934,6 @@ The misspelled `traileringIcon` props have been renamed:
 
 The close button (`onClose`) now fills the trailing 34dp column reserved for it, instead of only the 26x18 area around its icon, and its touch target extends to 48dp in height. Taps in that column that used to activate the chip's `onPress` now activate `onClose`.
 
-### IconButton
-
-Corner radii set through `style` no longer shape the press, hover and disabled feedback.
-
 ### TouchableRipple
 
 `borderless` has no effect on web. The web ripple is always clipped to the touchable's shape, including when `centered` is set, and the touchable no longer clips its own content. A child that needs a clipped or rounded shape should carry that shape itself.
@@ -841,6 +972,8 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
 - **`left` / `right`** → **`startAccessory` / `endAccessory`**
 - **`TextInput.Affix`** → **`prefix` / `suffix`**, or **`TextInput.Icon`**, or **`startAccessory` / `endAccessory`**
 
+`startAccessory` and `endAccessory` follow the writing direction. In RTL, `startAccessory` sits on the right on every platform, while v5's `left` stayed on the left on web.
+
 ```tsx
 // Before (v5)
 <TextInput
@@ -857,6 +990,53 @@ import { TextInput, type TextInputProps } from 'react-native-paper';
   suffix="/100"
   counter
 />
+```
+
+`TextInput.Icon` without a press handler is decorative: it is hidden from
+assistive technology and is not a keyboard focus stop. An icon with `onPress`,
+`onLongPress`, `onPressIn` or `onPressOut` requires an `aria-label` or
+`accessibilityLabel` that names its action, and warns in development without
+one:
+
+```tsx
+const [value, setValue] = React.useState('');
+
+// Before (v5)
+<TextInput
+  label="Search"
+  value={value}
+  onChangeText={setValue}
+  left={<TextInput.Icon icon="magnify" />}
+  right={<TextInput.Icon icon="close" onPress={() => setValue('')} />}
+/>
+
+// After (v6)
+<TextInput
+  label="Search"
+  value={value}
+  onChangeText={setValue}
+  startAccessory={(props) => <TextInput.Icon {...props} icon="magnify" />}
+  endAccessory={(props) => (
+    <TextInput.Icon
+      {...props}
+      icon="close"
+      aria-label="Clear search"
+      onPress={() => setValue('')}
+    />
+  )}
+/>
+```
+
+#### Icon size
+
+`TextInput.Icon`'s `size` is renamed `iconSize`, as on `IconButton`, where `size` is now a named container scale.
+
+```tsx
+// Before (v5)
+<TextInput.Icon icon="magnify" size={20} />
+
+// After (v6)
+<TextInput.Icon icon="magnify" iconSize={20} />
 ```
 
 #### Label and supporting text
@@ -905,6 +1085,45 @@ const GroupError = ({ visible }: { visible: boolean }) => {
   );
 };
 ```
+
+Supporting text, the character counter, `prefix` and `suffix` describe the field
+instead of becoming part of its accessible name, and the prefix and suffix are
+no longer read as separate text. On web, the input references them with
+`aria-describedby` (the prefix and suffix while they are shown), and IDs you
+pass in `aria-describedby` are kept. On Android and iOS, they are only exposed
+through `accessibilityHint`, alongside any hint you pass, and the visible text
+is hidden from assistive technology, so tests that find these texts with
+`getByText` need `{ includeHiddenElements: true }`. Users who turn hints off,
+for example with the VoiceOver Speak Hints setting, do not hear them. The
+placeholder of an empty field with a label stays blank until the label floats,
+so it describes the field as well: on web until the input shows it, and on
+Android and iOS in the hint. The input no longer sets `aria-valuenow` and
+`aria-valuemax` when the counter reaches `maxLength`.
+
+When no label or explicit accessible name is supplied, the placeholder names the
+field, including after text is entered. A disabled field always exposes its
+disabled state, even when `aria-disabled={false}` is supplied. It is also always
+read-only, even with `readOnly={false}`, which in 5.x left a disabled field
+editable.
+
+On web, error supporting text uses `role="alert"`. On Android and iOS, a new or
+changed error message is announced through `AccessibilityInfo` once it has
+stayed the same for a second, so a message that changes on every keystroke is
+announced once it stops changing. An error that is already shown when the field
+mounts is not announced there. On web, explicit `aria-invalid` values are kept;
+when omitted, validity is derived from `error` and the character counter. Custom
+input renderers should forward the accessibility props they receive.
+
+The filled indicator uses `onSurfaceVariant` and the outlined border uses
+`outline` at rest. On web, both change to `onSurface` on hover, and an invalid
+field changes from `error` to `onErrorContainer`. Focus takes precedence over
+hover and uses `primary`, or `error` for an invalid field. A disabled field uses
+the disabled colors even when `error` is set. On web it keeps `aria-invalid`; on
+Android and iOS the error text stays in its hint.
+
+If your app was written for a 6.0 alpha build: the input text, prefix and suffix
+of a disabled field were dimmed twice there. They are now dimmed once, to 38%
+opacity as in 5.x, so they are more visible than in the alpha builds.
 
 #### Removed props
 
@@ -1257,6 +1476,154 @@ An accordion with a `left` element now indents only its `List.Item` children. An
 
 `theme` set on `List.Accordion` no longer reaches its children either. Pass it to the child that needs the override.
 
+### IconButton
+
+`IconButton` now follows the Material 3 Expressive spec. The color modes, size API, and toggle `selected` behavior have changed. Passing the old numeric `size` (for example `size={24}`) crashes at runtime, because `size` is now a named token and `IconButtonTokens.sizes[24]` is `undefined`.
+
+#### Mode names
+
+- **`contained`** → **`filled`**
+- **`contained-tonal`** → **`tonal`**
+- Unspecified mode is now **`standard`** (no container fill), which matches the previous default.
+
+```tsx
+// Before (v5)
+<IconButton icon="camera" mode="contained" onPress={onPress} />
+<IconButton icon="camera" mode="contained-tonal" onPress={onPress} />
+
+// After (v6)
+<IconButton icon="camera" mode="filled" onPress={onPress} />
+<IconButton icon="camera" mode="tonal" onPress={onPress} />
+```
+
+#### Size
+
+`size` is a named scale: `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`, the same names as `Button`. It defaults to `'small'`, which still uses a 24dp icon.
+
+To set the glyph size in dp without changing the container scale, use `iconSize`. The container keeps the size of its `size` (a square 40dp for the default), so a glyph larger than it is clipped. Pick a larger `size` instead.
+
+```tsx
+// Before (v5)
+<IconButton icon="camera" size={24} onPress={onPress} />
+<IconButton icon="camera" size={32} onPress={onPress} />
+
+// After (v6)
+<IconButton icon="camera" onPress={onPress} />
+<IconButton icon="camera" iconSize={32} onPress={onPress} />
+```
+
+The container no longer follows the icon. In v5 it was the icon plus 8dp on each side, so `size={20}` drew a 36dp button and `size={32}` a 48dp one. Moving the number to `iconSize` keeps the glyph but puts it in the container of the named `size`, 40dp for the default, so a button you migrate this way can grow or shrink. Check rows and headers that depend on its width. For a smaller button, use `size="extra-small"` (32dp with a 20dp icon). To take the same space as before, lower the 6dp margin around the button.
+
+```tsx
+// Before (v5): a 36dp button, 48dp with its margin
+<IconButton icon="star" size={20} onPress={onPress} />
+
+// After (v6): a 32dp button, 44dp with its margin
+<IconButton icon="star" size="extra-small" onPress={onPress} />
+
+// After (v6): a 40dp button, 48dp with a 4dp margin
+<IconButton icon="star" iconSize={20} style={{ margin: 4 }} onPress={onPress} />
+```
+
+```tsx
+// After (v6): named container sizes
+<IconButton icon="plus" size="extra-small" onPress={onPress} />
+<IconButton icon="plus" size="small" onPress={onPress} />
+<IconButton icon="plus" size="medium" onPress={onPress} />
+<IconButton icon="plus" size="large" onPress={onPress} />
+<IconButton icon="plus" size="extra-large" onPress={onPress} />
+```
+
+#### Shape
+
+`style.borderRadius` no longer overrides the container corner or shapes the press, hover and disabled feedback. Use `shape`: `'round'` (default) or `'square'`. Toggle-ON inverts the resting shape; press uses a shared corner for both. Arbitrary radii from `style` are not supported.
+
+```tsx
+// Before (v5)
+<IconButton icon="camera" style={{ borderRadius: 0 }} onPress={onPress} />
+
+// After (v6)
+<IconButton icon="camera" shape="square" onPress={onPress} />
+```
+
+#### Touch target
+
+An `IconButton` with a touch handler reaches the 48dp minimum target through hit slop, without changing what is drawn. This applies to `extra-small` and `small`, whose containers are smaller than 48dp. Pass `hitSlop` to override it, or `hitSlop={0}` to opt out. A disabled button, or one with no touch handler, gets no extra target.
+
+#### `Appbar.Action` and `Appbar.BackAction`
+
+`size` is no longer a numeric prop on `Appbar.Action` or `Appbar.BackAction`. They inherit `IconButton`'s named `size` (default `'small'`). Drop `size={24}`. For a custom glyph size, pass `iconSize`.
+
+```tsx
+// Before (v5)
+<Appbar.Action icon="magnify" size={24} onPress={onPress} />
+<Appbar.BackAction size={24} onPress={onPress} />
+
+// After (v6)
+<Appbar.Action icon="magnify" onPress={onPress} />
+<Appbar.BackAction onPress={onPress} />
+```
+
+#### `containerColor` while disabled
+
+A disabled `filled` or `tonal` button, or a disabled selected `outlined` one, takes the disabled container color, `onSurface` at 0.10 opacity, and ignores `containerColor`. As in 5.x, a disabled button doesn't keep the color passed for its container, just as `iconColor` doesn't apply either.
+
+#### `selected={false}` uses toggle-off colors
+
+`selected` is tri-state. Omit it for the default (non-toggle) colors. Pass `true` / `false` only for a toggle.
+
+For `filled`, the default and toggle-on containers use `primary`. Toggle-off (`selected={false}`) uses `surfaceContainer` instead of `primary`.
+
+```tsx
+// Before (v5): selected={false} still used the default (non-toggle) colors
+<IconButton icon="star-outline" mode="contained" selected={false} onPress={onPress} />
+
+// After (v6): omit selected unless the button is a toggle
+<IconButton icon="star-outline" mode="filled" onPress={onPress} />
+
+// After (v6): explicit toggle off / on
+<IconButton
+  icon={isStarred ? 'star' : 'star-outline'}
+  mode="filled"
+  selected={isStarred}
+  onPress={toggleStarred}
+/>
+```
+
+#### `Card.Title` `right` props
+
+`Card.Title` still calls `right({ size: 24 })`. Do not spread those props onto `IconButton`: `size` is no longer a number. Ignore the callback argument, or pass it as `iconSize`.
+
+```tsx
+// Before (v5)
+<Card.Title
+  title="Card title"
+  right={(props) => (
+    <IconButton {...props} icon="dots-vertical" onPress={onPress} />
+  )}
+/>
+
+// After (v6)
+<Card.Title
+  title="Card title"
+  right={() => <IconButton icon="dots-vertical" onPress={onPress} />}
+/>
+```
+
+```tsx
+// After (v6): keep the 24dp glyph from Card.Title
+<Card.Title
+  title="Card title"
+  right={(props) => (
+    <IconButton
+      icon="dots-vertical"
+      iconSize={props.size}
+      onPress={onPress}
+    />
+  )}
+/>
+```
+
 ### Typography components
 
 The Material Design 2 typography components were removed. Use `Text` with the matching `variant` instead:
@@ -1284,6 +1651,8 @@ In JavaScript, the old components import as `undefined`, so the app builds but f
 A `Text` nested in another `Text` now inherits the parent's font and color, as React Native's own `Text` does. In 5.x it reset them to the theme's default font and `onSurface`, so a `Text` with a variant inside a contained `Button` lost the button's label color, and a plain `Text` inside a `Chip` lost the chip's font. A nested `Text` with a `variant` still takes that variant's font, and its own `style` still wins over the parent's. To give a nested `Text` its own color, set `color` in its `style`, or pass it a `theme`, which makes it render like a top-level `Text`.
 
 On iOS and Android, nesting follows React Native: a `Text` inside React Native's own `Text` inherits from it as well, and a `Text` inside a `View` isn't nested, so it renders like a top-level `Text`.
+
+On the web, a `Text` under `direction="rtl"` (on `PaperProvider` or `LocaleProvider`) now aligns right by default. In 5.x it stayed left. A `textAlign` in `style` still wins.
 
 ### ToggleButton
 
@@ -1333,6 +1702,13 @@ A FAB without a `variant` keeps its 5.x colors.
 +<FAB icon="plus" variant="secondaryContainer" onPress={onPress} />
 ```
 
+If your app was written for a 6.0 alpha build, rename the `tonalPrimary`, `tonalSecondary` and `tonalTertiary` variants to `primaryContainer`, `secondaryContainer` and `tertiaryContainer`. The colors are the same. The old names have no aliases, so in JavaScript a `FAB`, a `FAB.Extended` or the `FAB.Menu` trigger with one of them throws at render. One that also sets `containerColor` renders, but a `FAB.Menu` then gives its close button and items the tertiary colors.
+
+```diff
+-<FAB icon="plus" variant="tonalSecondary" onPress={onPress} />
++<FAB icon="plus" variant="secondaryContainer" onPress={onPress} />
+```
+
 #### `size`
 
 - **`size="small"`** and **`small`** (40dp) were removed. The smallest FAB is now `size="default"` (56dp).
@@ -1361,6 +1737,16 @@ TypeScript reports an error for each of them, and in JavaScript they're ignored.
 +  contentColor="white"
 +  onPress={onPress}
 +/>
+```
+
+#### `visible`
+
+A FAB with `visible={false}` is now hidden from assistive technology (`aria-hidden`), can't be focused and takes no press. In 5.x it only stopped taking touches, so screen readers and the keyboard could still reach it. This applies to `FAB.Extended` and the `FAB.Menu` trigger too. On web, hiding a FAB that has keyboard focus moves focus back to the element that had it before, if that element is still on the page.
+
+Tests that find a hidden FAB by its role, label or test ID stop finding it, because React Native Testing Library skips hidden elements. Pass `includeHiddenElements` to find it:
+
+```tsx
+screen.getByTestId('compose', { includeHiddenElements: true });
 ```
 
 #### `FAB.Extended`
@@ -1485,7 +1871,7 @@ A `Switch` with no `onValueChange` used to render as an enabled, focusable contr
 
 A read-only switch keeps its enabled appearance and exposes its on/off state to screen readers, but it cannot be focused with a keyboard or pressed. On web it exposes `aria-readonly`. On iOS and Android it exposes a disabled accessibility state, because React Native has no read-only state for switches. Use `disabled` when you also want the disabled appearance.
 
-This most often shows up where the switch sits inside a row that owns the press. Give the row the switch role and state, and hide the inner switch from assistive technology, so screen readers announce the row as one switch with its on/off state:
+This most often shows up where the switch sits inside a row that owns the press. Give the row the switch role and state, and set `aria-hidden` on the inner switch, so screen readers announce the row as one switch with its on/off state. A hidden read-only switch renders with no role and cannot take focus, so the row does not nest a second interactive control:
 
 ```diff
 -<TouchableRipple onPress={toggleTheme}>
@@ -1496,10 +1882,9 @@ This most often shows up where the switch sits inside a row that owns the press.
 +>
    <View style={styles.row}>
      <Text>Dark Theme</Text>
--    <View pointerEvents="none">
+     <View pointerEvents="none">
 -      <Switch value={isDarkTheme} />
-+    <View pointerEvents="none" aria-hidden>
-+      <Switch value={isDarkTheme} readOnly />
++      <Switch value={isDarkTheme} readOnly aria-hidden />
      </View>
    </View>
  </TouchableRipple>
