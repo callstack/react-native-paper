@@ -699,7 +699,7 @@ const Menu = ({
             >
               <Surface
                 mode={mode}
-                container="surfaceContainer"
+                backgroundColor={theme.colors.surfaceContainer}
                 borderRadius={theme.shapes.corner.extraSmall}
                 style={[
                   styles.shadowMenuContainer,

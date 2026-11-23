@@ -359,9 +359,6 @@ export const themeColors = {
     elevated: {
       backgroundColor: 'theme.colors.elevation[elevation]',
     },
-    'with container': {
-      backgroundColor: 'theme.colors[container]',
-    },
   },
   Text: {
     '-': {

@@ -212,7 +212,7 @@ const Banner = ({
       {...rest}
       style={[surfaceStyle, style]}
       theme={theme}
-      container="surfaceContainerLow"
+      backgroundColor={colors.surfaceContainerLow}
       elevation={elevation}
     >
       <View style={[styles.wrapper, contentStyle]}>
