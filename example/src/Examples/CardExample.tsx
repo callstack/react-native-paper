@@ -108,9 +108,8 @@ const CardExample = () => {
         title="Berries that are trimmed at the end"
         subtitle="Omega Ruby"
         leading={(props) => <Avatar.Icon {...props} icon="folder" />}
-        trailing={(props) => (
+        trailing={() => (
           <IconButton
-            {...props}
             accessibilityLabel="More options"
             icon="dots-vertical"
             onPress={() => showMessage('More options')}
@@ -177,13 +176,13 @@ const CardExample = () => {
         }
         title="Just Strawberries"
         subtitle="... and only Strawberries"
-        trailing={(props) => (
+        trailing={() => (
           <IconButton
-            {...props}
             accessibilityLabel={
               isFavorite ? 'Remove from favorites' : 'Add to favorites'
             }
             icon={isFavorite ? 'heart' : 'heart-outline'}
+            selected={isFavorite}
             onPress={() => setIsFavorite(!isFavorite)}
           />
         )}
