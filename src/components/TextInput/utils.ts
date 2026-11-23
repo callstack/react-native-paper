@@ -429,7 +429,7 @@ export const getFilledTextInputData = (
     Platform.OS === 'web' && {
       outlineStyle: 'none' as const,
     },
-    isDisabled && styles.disabled,
+    isDisabled && Platform.OS !== 'android' && styles.disabled,
     inputStyleOverride,
   ];
 
@@ -550,7 +550,7 @@ export const getOutlinedTextInputData = (
     Platform.OS === 'web' && {
       outlineStyle: 'none' as const,
     },
-    isDisabled && styles.disabled,
+    isDisabled && Platform.OS !== 'android' && styles.disabled,
     inputStyleOverride,
   ];
 
