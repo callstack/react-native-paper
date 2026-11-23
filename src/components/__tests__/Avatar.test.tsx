@@ -303,7 +303,7 @@ it('reads the full label from the text of an unlabelled text avatar', async () =
     children: [
       {
         props: { 'aria-label': 'ABC', role: 'img' },
-        children: ['AB'],
+        children: ['ABC'],
       },
     ],
   });
@@ -344,13 +344,13 @@ it('leaves an unlabelled icon avatar decorative', async () => {
   expect(tree).not.toMatchObject({ props: { accessible: true } });
 });
 
-it('bounds text avatar initials by grapheme', async () => {
-  const tree = (await render(<Avatar.Text label="👨‍👩‍👧X" />)).toJSON();
+it('shows the full text avatar label', async () => {
+  const tree = (await render(<Avatar.Text label="+12" />)).toJSON();
 
   expect(tree).toMatchObject({
     children: [
       {
-        children: ['👨‍👩‍👧X'],
+        children: ['+12'],
       },
     ],
   });

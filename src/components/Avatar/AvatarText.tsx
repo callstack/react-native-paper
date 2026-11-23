@@ -11,7 +11,6 @@ import { DEFAULT_SIZE, getAvatarRole } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
-import { takeGraphemes } from '../../utils/takeGraphemes';
 import Text from '../Typography/Text';
 
 export type Props = Omit<ViewProps, 'style'> & {
@@ -77,7 +76,6 @@ const AvatarText = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { fontScale } = useWindowDimensions();
-  const avatarInitials = takeGraphemes(label, 2);
   const hasCustomLabel =
     rest.accessibilityLabel !== undefined || rest['aria-label'] !== undefined;
 
@@ -120,7 +118,7 @@ const AvatarText = ({
           ? { 'aria-hidden': true }
           : { 'aria-label': label, role: 'img' as const })}
       >
-        {avatarInitials}
+        {label}
       </Text>
     </View>
   );
