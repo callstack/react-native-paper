@@ -1,13 +1,17 @@
 import * as React from 'react';
 
+import type { Props as MenuProps } from './Menu';
 import type { MenuColorScheme } from './tokens';
 
 /**
- * Root menu state: color scheme.
- * Provided by `Menu`; consumed by layout helpers and items.
+ * Root menu state: color scheme, and `Menu` itself so an item can render a
+ * submenu without importing it (`Menu` imports `MenuItem`, so importing back
+ * would be circular).
+ * Provided by `Menu`; consumed by items.
  */
-export type MenuRootContextValue = {
+type MenuRootContextValue = {
   colorScheme: MenuColorScheme;
+  MenuComponent: React.ComponentType<MenuProps>;
 };
 
 export const MenuRootContext = React.createContext<MenuRootContextValue | null>(
@@ -16,20 +20,4 @@ export const MenuRootContext = React.createContext<MenuRootContextValue | null>(
 
 export function useMenuRoot() {
   return React.useContext(MenuRootContext);
-}
-
-/**
- * Where an item sits in the menu, so first / last can round their outer
- * corners. `Menu` derives it from child order; no props reach the children.
- */
-export type MenuItemPositionContextValue = {
-  roundedTop: boolean;
-  roundedBottom: boolean;
-};
-
-export const MenuItemPositionContext =
-  React.createContext<MenuItemPositionContextValue | null>(null);
-
-export function useMenuItemPosition() {
-  return React.useContext(MenuItemPositionContext);
 }

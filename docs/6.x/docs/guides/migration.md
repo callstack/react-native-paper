@@ -261,7 +261,7 @@ In 5.x, each of these components multiplied `roundness` by a fixed number, and t
 
 | Role             | Default | 5.x multiplier | Components                                          |
 | ---------------- | ------- | -------------- | --------------------------------------------------- |
-| `extraSmall`     | 4       | 1              | `Menu`, `Snackbar`, `Tooltip`                       |
+| `extraSmall`     | 4       | 1              | `Snackbar`, `Tooltip`                               |
 | `small`          | 8       | 2              | `Chip`                                              |
 | `medium`         | 12      | 3              | `Card`                                              |
 | `largeIncreased` | 20      | 5              | `SegmentedButtons`                                  |
@@ -920,6 +920,10 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
   <Menu.Item title="Item" />
 </Menu>
 ```
+
+`Menu` and `Menu.Item` now follow the Material Design 3 menu specs. The surface is `surfaceContainerLow` instead of `theme.colors.elevation.level2`. The `elevation` prop is unchanged but now only sets the shadow; it no longer changes the fill color. Its corners are 16dp instead of 4dp. To change the fill, override `surfaceContainerLow` in your theme. Item titles use `labelLarge` instead of `bodyLarge`, and items have 4dp corners, or 12dp when `selected`.
+
+New: `Menu` takes `colorScheme` (`standard` or `vibrant`), and `Menu.Item` takes `selected`, `supportingText`, `trailingSupportingText` and `submenu`.
 
 On web, a menu now closes on the Escape key when it is pressed down, instead of when it is released. Back and Escape dismiss only the topmost overlay, so a menu opened from a `Modal` or `Dialog` closes first and leaves the modal open.
 
@@ -1685,11 +1689,7 @@ For `tonal`, toggle-on draws `secondary` with an `onSecondary` icon, and toggle-
 <Card.Title
   title="Card title"
   right={(props) => (
-    <IconButton
-      icon="dots-vertical"
-      iconSize={props.size}
-      onPress={onPress}
-    />
+    <IconButton icon="dots-vertical" iconSize={props.size} onPress={onPress} />
   )}
 />
 ```

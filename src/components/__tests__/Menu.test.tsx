@@ -270,10 +270,7 @@ it('inherits the vibrant color scheme for items rendered inside a wrapper', asyn
   });
 });
 
-it('rounds first and last item corners from child order', async () => {
-  const theme = LightTheme;
-  const radius = theme.shapes.corner.medium;
-
+it('rounds items at rest to corner.extra-small', async () => {
   await render(
     <Portal.Host>
       <Menu
@@ -282,87 +279,17 @@ it('rounds first and last item corners from child order', async () => {
         anchor={<Button mode="outlined">Open menu</Button>}
       >
         <Menu.Item onPress={jest.fn()} title="First" testID="first-item" />
-        <Menu.Item onPress={jest.fn()} title="Middle" testID="mid-item" />
         <Menu.Item onPress={jest.fn()} title="Last" testID="last-item" />
       </Menu>
     </Portal.Host>
   );
 
-  expect(screen.getByTestId('first-item')).toHaveStyle({
-    borderTopLeftRadius: radius,
-    borderTopRightRadius: radius,
-  });
-  expect(screen.getByTestId('last-item')).toHaveStyle({
-    borderBottomLeftRadius: radius,
-    borderBottomRightRadius: radius,
-  });
-  expect(screen.getByTestId('mid-item')).not.toHaveStyle({
-    borderRadius: radius,
-  });
-});
-
-it('applies medium corners from explicit roundedTop / roundedBottom props', async () => {
-  const theme = LightTheme;
-  const radius = theme.shapes.corner.medium;
-
-  await render(
-    <Portal.Host>
-      <Menu
-        visible
-        onDismiss={jest.fn()}
-        anchor={<Button mode="outlined">Open menu</Button>}
-      >
-        <Menu.Item
-          onPress={jest.fn()}
-          title="First"
-          testID="first-item"
-          roundedTop
-        />
-        <Menu.Item onPress={jest.fn()} title="Middle" testID="mid-item" />
-        <Menu.Item
-          onPress={jest.fn()}
-          title="Last"
-          testID="last-item"
-          roundedBottom
-        />
-      </Menu>
-    </Portal.Host>
-  );
+  const radius = LightTheme.shapes.corner.extraSmall;
 
   expect(screen.getByTestId('first-item')).toHaveStyle({
-    borderTopLeftRadius: radius,
-    borderTopRightRadius: radius,
-  });
-  expect(screen.getByTestId('last-item')).toHaveStyle({
-    borderBottomLeftRadius: radius,
-    borderBottomRightRadius: radius,
-  });
-  expect(screen.getByTestId('mid-item')).not.toHaveStyle({
     borderRadius: radius,
   });
-});
-
-it('inherits the vibrant color scheme without a React.Children walk', async () => {
-  const theme = LightTheme;
-
-  await render(
-    <Portal.Host>
-      <Menu
-        visible
-        colorScheme="vibrant"
-        onDismiss={jest.fn()}
-        anchor={<Button mode="outlined">Open menu</Button>}
-      >
-        <View>
-          <Menu.Item onPress={jest.fn()} title="Undo" testID="nested-item" />
-        </View>
-      </Menu>
-    </Portal.Host>
-  );
-
-  expect(screen.getByText('Undo')).toHaveStyle({
-    color: theme.colors.onTertiaryContainer,
-  });
+  expect(screen.getByTestId('last-item')).toHaveStyle({ borderRadius: radius });
 });
 
 it('still renders Divider between items', async () => {

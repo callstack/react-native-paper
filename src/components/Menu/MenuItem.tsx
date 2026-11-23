@@ -11,7 +11,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { useMenuItemPosition, useMenuRoot } from './context';
+import { useMenuRoot } from './context';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import {
   getContentMaxWidth,
@@ -54,6 +54,13 @@ export type Props = {
    */
   trailingIcon?: IconSource;
   /**
+   * Items of a submenu. Pressing the item opens them in a nested `Menu` at its
+   * right edge, instead of calling `onPress`, and a `menu-right` trailing icon
+   * is shown unless `trailingIcon` is set. The submenu closes with its parent;
+   * to close it from one of its items, close the parent `Menu`.
+   */
+  submenu?: React.ReactNode;
+  /**
    * Whether the item is selected / active. Applies MD3 selected colors
    * (`tertiaryContainer` / `onTertiaryContainer` in the standard scheme)
    * and `corner.medium` rounding.
@@ -76,20 +83,11 @@ export type Props = {
   /**
    * @supported Available in v5.x with theme version 3
    *
-   * Sets min height with densed layout.
+   * Sets min height with dense layout.
    */
   dense?: boolean;
   /**
-   * Round the top corners (`corner.medium`). Used for the first item in a menu.
-   * Prefer letting the parent `Menu` set this via context when possible.
-   */
-  roundedTop?: boolean;
-  /**
-   * Round the bottom corners (`corner.medium`). Used for the last item in a menu.
-   */
-  roundedBottom?: boolean;
-  /**
-   * Type of background drawabale to display the feedback (Android).
+   * Type of background drawable to display the feedback (Android).
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
@@ -98,17 +96,10 @@ export type Props = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
-   * Specifies the largest possible scale a title font can reach.
+   * Specifies the largest possible scale the title font can reach. Also applies to
+   * the supporting and trailing supporting text.
    */
   titleMaxFontSizeMultiplier?: number;
-  /**
-   * Specifies the largest possible scale the supporting text font can reach.
-   */
-  supportingTextMaxFontSizeMultiplier?: number;
-  /**
-   * Specifies the largest possible scale the trailing supporting text font can reach.
-   */
-  trailingSupportingTextMaxFontSizeMultiplier?: number;
   /**
    * Style that is passed to the root TouchableRipple container.
    * @optional
@@ -173,6 +164,26 @@ export type Props = {
   'aria-expanded'?: boolean;
 };
 
+// Native keeps plain `menuitem`: Android drops the role description for a
+// value it cannot map, and iOS ignores all of them anyway.
+const getRole = (
+  ariaChecked: Props['aria-checked'],
+  selected: Props['selected']
+): Role => {
+  if (Platform.OS !== 'web') {
+    return 'menuitem';
+  }
+  if (ariaChecked !== undefined) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- valid ARIA role missing from RN's union
+    return 'menuitemcheckbox' as Role;
+  }
+  if (selected !== undefined) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- valid ARIA role missing from RN's union
+    return 'menuitemradio' as Role;
+  }
+  return 'menuitem';
+};
+
 /**
  * A component to show a single list item inside a Menu.
  *
@@ -213,11 +224,10 @@ const MenuItem = ({
   title,
   supportingText,
   trailingSupportingText,
+  submenu,
   selected: selectedProp,
   colorScheme: colorSchemeProp,
   disabled,
-  roundedTop: roundedTopProp,
-  roundedBottom: roundedBottomProp,
   background,
   onPress,
   style,
@@ -234,35 +244,36 @@ const MenuItem = ({
   'aria-expanded': ariaExpanded,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
-  supportingTextMaxFontSizeMultiplier = 1.5,
-  trailingSupportingTextMaxFontSizeMultiplier = 1.5,
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const root = useMenuRoot();
-  const position = useMenuItemPosition();
   const selected = selectedProp ?? false;
 
-  // Native keeps plain `menuitem`: Android drops the role description for a
-  // value it cannot map, and iOS ignores all of them anyway.
-  const role: Role = React.useMemo(() => {
-    if (Platform.OS !== 'web') {
-      return 'menuitem';
+  const [submenuVisible, setSubmenuVisible] = React.useState(false);
+  const [submenuAnchor, setSubmenuAnchor] = React.useState({ x: 0, y: 0 });
+  const itemRef = React.useRef<React.ComponentRef<typeof View>>(null);
+  const MenuComponent = root?.MenuComponent;
+  const hasSubmenu = Boolean(submenu) && MenuComponent !== undefined;
+
+  // The submenu opens at the item's right edge, level with its top.
+  const handlePress = (event: GestureResponderEvent) => {
+    if (!hasSubmenu) {
+      onPress?.(event);
+      return;
     }
-    if (ariaChecked !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- valid ARIA role missing from RN's union
-      return 'menuitemcheckbox' as Role;
-    }
-    if (selectedProp !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- valid ARIA role missing from RN's union
-      return 'menuitemradio' as Role;
-    }
-    return 'menuitem';
-  }, [ariaChecked, selectedProp]);
+
+    itemRef.current?.measureInWindow((x, y, width) => {
+      setSubmenuAnchor({ x: x + width, y });
+      setSubmenuVisible(true);
+    });
+  };
+  const resolvedTrailingIcon =
+    trailingIcon ?? (hasSubmenu ? 'menu-right' : undefined);
+
+  const role = getRole(ariaChecked, selectedProp);
 
   const colorScheme = colorSchemeProp ?? root?.colorScheme ?? 'standard';
-  const roundedTop = roundedTopProp ?? position?.roundedTop ?? false;
-  const roundedBottom = roundedBottomProp ?? position?.roundedBottom ?? false;
 
   const {
     titleColor,
@@ -297,7 +308,7 @@ const MenuItem = ({
   const contentMaxWidth = getContentMaxWidth({
     iconWidth: iconSize,
     leadingIcon,
-    trailingIcon,
+    trailingIcon: resolvedTrailingIcon,
     hasTrailingSupportingText,
   });
 
@@ -316,116 +327,129 @@ const MenuItem = ({
     ...theme.fonts[MenuTokens.typography.trailingSupporting],
   };
 
-  const borderRadiusStyle = getMenuItemBorderRadius({
-    theme,
-    selected,
-    roundedTop,
-    roundedBottom,
-  });
-
   return (
-    <TouchableRipple
-      // Items fill the menu's scroll view edge to edge with no gap, which
-      // clips an outward ring and runs it into the neighbouring items.
-      focusRing="inward"
-      theme={theme}
-      style={[
-        styles.container,
-        {
-          paddingHorizontal: itemPaddingHorizontal,
-          minWidth,
-          maxWidth,
-          minHeight: dense ? denseItemHeight : itemHeight,
-          ...(hasSupportingText || hasTrailingSupportingText
-            ? { paddingVertical: 8 }
-            : { height: dense ? denseItemHeight : itemHeight }),
-        },
-        borderRadiusStyle,
-        containerColor ? { backgroundColor: containerColor } : null,
-        style,
-      ]}
-      onPress={onPress}
-      disabled={disabled}
-      testID={testID}
-      background={background}
-      aria-label={ariaLabel}
-      role={role}
-      aria-disabled={disabled}
-      aria-checked={ariaChecked ?? (selected == null ? undefined : selected)}
-      aria-selected={ariaSelected}
-      aria-busy={ariaBusy}
-      aria-expanded={ariaExpanded}
-      hitSlop={hitSlop}
-    >
-      <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
-        {leadingIcon ? (
-          <View
-            style={[{ width: iconSize }, styles.leadingIcon]}
-            pointerEvents="box-none"
-          >
-            <Icon source={leadingIcon} size={iconSize} color={iconColor} />
-          </View>
-        ) : null}
-        <View
-          style={[
-            styles.content,
-            {
-              maxWidth: contentMaxWidth,
-            },
-            leadingIcon
-              ? { marginLeft: iconLabelGap }
-              : { marginLeft: noLeadingIconStart },
-            contentStyle,
-          ]}
-          pointerEvents="none"
-        >
-          <Text
-            variant={MenuTokens.typography.label}
-            selectable={false}
-            numberOfLines={1}
-            style={[titleTextStyle, titleStyle]}
-            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-          >
-            {title}
-          </Text>
-          {hasSupportingText ? (
-            <Text
-              variant={MenuTokens.typography.supporting}
-              selectable={false}
-              numberOfLines={1}
-              style={[supportingTextStyleResolved, supportingTextStyle]}
-              maxFontSizeMultiplier={supportingTextMaxFontSizeMultiplier}
+    <>
+      <TouchableRipple
+        ref={itemRef}
+        // Items fill the menu's scroll view edge to edge with no gap, which
+        // clips an outward ring and runs it into the neighbouring items.
+        focusRing="inward"
+        theme={theme}
+        style={[
+          styles.container,
+          {
+            paddingHorizontal: itemPaddingHorizontal,
+            minWidth,
+            maxWidth,
+            minHeight: dense ? denseItemHeight : itemHeight,
+            ...(hasSupportingText || hasTrailingSupportingText
+              ? { paddingVertical: 8 }
+              : { height: dense ? denseItemHeight : itemHeight }),
+          },
+          getMenuItemBorderRadius({ theme, selected }),
+          containerColor ? { backgroundColor: containerColor } : null,
+          style,
+        ]}
+        onPress={onPress || hasSubmenu ? handlePress : undefined}
+        disabled={disabled}
+        testID={testID}
+        background={background}
+        aria-label={ariaLabel}
+        role={role}
+        aria-disabled={disabled}
+        aria-checked={ariaChecked ?? selectedProp}
+        aria-selected={ariaSelected}
+        aria-busy={ariaBusy}
+        aria-expanded={
+          ariaExpanded ?? (hasSubmenu ? submenuVisible : undefined)
+        }
+        hitSlop={hitSlop}
+      >
+        <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
+          {leadingIcon ? (
+            <View
+              style={[{ width: iconSize }, styles.leadingIcon]}
+              pointerEvents="box-none"
             >
-              {supportingText}
-            </Text>
+              <Icon source={leadingIcon} size={iconSize} color={iconColor} />
+            </View>
           ) : null}
-        </View>
-        {hasTrailingSupportingText ? (
-          <Text
-            variant={MenuTokens.typography.trailingSupporting}
-            selectable={false}
-            numberOfLines={1}
+          <View
             style={[
-              styles.trailingSupporting,
-              trailingSupportingTextStyleResolved,
-              trailingSupportingTextStyle,
+              styles.content,
+              {
+                maxWidth: contentMaxWidth,
+              },
+              leadingIcon
+                ? { marginLeft: iconLabelGap }
+                : { marginLeft: noLeadingIconStart },
+              contentStyle,
             ]}
-            maxFontSizeMultiplier={trailingSupportingTextMaxFontSizeMultiplier}
             pointerEvents="none"
           >
-            {trailingSupportingText}
-          </Text>
-        ) : null}
-        {trailingIcon ? (
-          <View
-            style={[{ width: iconSize }, styles.trailingIcon]}
-            pointerEvents="box-none"
-          >
-            <Icon source={trailingIcon} size={iconSize} color={iconColor} />
+            <Text
+              variant={MenuTokens.typography.label}
+              selectable={false}
+              numberOfLines={1}
+              style={[titleTextStyle, titleStyle]}
+              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+            >
+              {title}
+            </Text>
+            {hasSupportingText ? (
+              <Text
+                variant={MenuTokens.typography.supporting}
+                selectable={false}
+                numberOfLines={1}
+                style={[supportingTextStyleResolved, supportingTextStyle]}
+                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+              >
+                {supportingText}
+              </Text>
+            ) : null}
           </View>
-        ) : null}
-      </View>
-    </TouchableRipple>
+          {hasTrailingSupportingText ? (
+            <Text
+              variant={MenuTokens.typography.trailingSupporting}
+              selectable={false}
+              numberOfLines={1}
+              style={[
+                styles.trailingSupporting,
+                trailingSupportingTextStyleResolved,
+                trailingSupportingTextStyle,
+              ]}
+              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+              pointerEvents="none"
+            >
+              {trailingSupportingText}
+            </Text>
+          ) : null}
+          {resolvedTrailingIcon ? (
+            <View
+              style={[{ width: iconSize }, styles.trailingIcon]}
+              pointerEvents="box-none"
+            >
+              <Icon
+                source={resolvedTrailingIcon}
+                size={iconSize}
+                color={iconColor}
+              />
+            </View>
+          ) : null}
+        </View>
+      </TouchableRipple>
+      {hasSubmenu ? (
+        <MenuComponent
+          visible={submenuVisible}
+          onDismiss={() => setSubmenuVisible(false)}
+          anchor={submenuAnchor}
+          colorScheme={colorScheme}
+          theme={themeOverrides}
+        >
+          {submenu}
+        </MenuComponent>
+      ) : null}
+    </>
   );
 };
 

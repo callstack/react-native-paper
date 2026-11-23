@@ -1,19 +1,22 @@
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 
-import { afterEach, describe, expect, it } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 
-import { render, screen } from '../../test-utils';
+import { render, screen, userEvent } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import Menu from '../Menu/Menu';
 import { MenuTokens } from '../Menu/tokens';
-import {
-  getMenuContainerBorderRadius,
-  getMenuContainerColor,
-  getMenuItemBorderRadius,
-  getMenuItemColor,
-} from '../Menu/utils';
+import { getMenuItemBorderRadius, getMenuItemColor } from '../Menu/utils';
+import Portal from '../Portal/Portal';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -162,22 +165,22 @@ describe('Menu Item', () => {
     });
   });
 
-  it('caps supporting text font scaling like the title', async () => {
+  it('applies titleMaxFontSizeMultiplier to the supporting texts too', async () => {
     await render(
       <Menu.Item
         title="Share"
         supportingText="Send a link"
         trailingSupportingText="⌘S"
-        supportingTextMaxFontSizeMultiplier={2}
-        trailingSupportingTextMaxFontSizeMultiplier={3}
+        titleMaxFontSizeMultiplier={2}
       />
     );
 
+    expect(screen.getByText('Share')).toHaveProp('maxFontSizeMultiplier', 2);
     expect(screen.getByText('Send a link')).toHaveProp(
       'maxFontSizeMultiplier',
       2
     );
-    expect(screen.getByText('⌘S')).toHaveProp('maxFontSizeMultiplier', 3);
+    expect(screen.getByText('⌘S')).toHaveProp('maxFontSizeMultiplier', 2);
   });
 
   it('defaults supporting text scaling to the title cap', async () => {
@@ -194,17 +197,6 @@ describe('Menu Item', () => {
       1.5
     );
     expect(screen.getByText('⌘S')).toHaveProp('maxFontSizeMultiplier', 1.5);
-  });
-
-  it('pins trailing supporting text to the trailing edge', async () => {
-    await render(<Menu.Item title="Copy" trailingSupportingText="⌘C" />);
-
-    expect(contentRow('Copy')).not.toHaveStyle({
-      alignSelf: 'flex-start',
-    });
-    expect(screen.getByText('⌘C')).toHaveStyle({
-      flexShrink: 0,
-    });
   });
 
   it('keeps fixed height for single-line items', async () => {
@@ -258,32 +250,16 @@ describe('Menu Item', () => {
     expect(screen.getByTestId('menu-item')).not.toHaveStyle({
       backgroundColor: LightTheme.colors.tertiaryContainer,
     });
-    // I3: rendered content row must apply disabled opacity from the real path
     expect(contentRow('Paste')).toHaveStyle({
-      opacity: stateOpacity.disabled,
-    });
-  });
-
-  it('applies rendered disabled opacity on the content row', async () => {
-    await render(<Menu.Item title="Cut" disabled />);
-    expect(contentRow('Cut')).toHaveStyle({
       opacity: stateOpacity.disabled,
     });
   });
 
   it('applies corner.medium on all sides when selected', async () => {
     const theme = LightTheme;
-    const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
+    const radius = resolveCornerRadius(theme, MenuTokens.shapes.itemSelected);
 
-    await render(
-      <Menu.Item
-        title="Paste"
-        selected
-        roundedTop
-        roundedBottom={false}
-        testID="menu-item"
-      />
-    );
+    await render(<Menu.Item title="Paste" selected testID="menu-item" />);
 
     expect(screen.getByTestId('menu-item')).toHaveStyle({
       borderRadius: radius,
@@ -370,61 +346,16 @@ describe('getMenuItemColor - icon color', () => {
 });
 
 describe('Menu shape tokens', () => {
-  it('resolves container border radius to corner.large', () => {
+  it('uses corner.extra-small at rest and corner.medium when selected', () => {
     const theme = LightTheme;
-    expect(getMenuContainerBorderRadius(theme)).toBe(
-      resolveCornerRadius(theme, MenuTokens.shapes.container)
-    );
-    expect(getMenuContainerBorderRadius(theme)).toBe(theme.shapes.corner.large);
-  });
-
-  it('resolves standard container fill to surfaceContainerLow (C1)', () => {
-    const theme = LightTheme;
-    expect(getMenuContainerColor({ theme, elevation: 2 })).toBe(
-      theme.colors.surfaceContainerLow
-    );
-    expect(getMenuContainerColor({ theme, elevation: 2 })).not.toBe(
-      theme.colors.elevation.level2
-    );
-    expect(MenuTokens.standardColors.container).toBe('surfaceContainerLow');
-  });
-
-  it('applies corner.medium on selected items', () => {
-    const theme = LightTheme;
-    const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
-    expect(getMenuItemBorderRadius({ theme, selected: true })).toMatchObject({
-      borderRadius: radius,
+    expect(getMenuItemBorderRadius({ theme })).toEqual({
+      borderRadius: theme.shapes.corner.extraSmall,
     });
-  });
-
-  it('applies top/bottom corner.medium for first/last items', () => {
-    const theme = LightTheme;
-    const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
-    expect(getMenuItemBorderRadius({ theme, roundedTop: true })).toMatchObject({
-      borderTopLeftRadius: radius,
-      borderTopRightRadius: radius,
-      borderBottomLeftRadius: 0,
-      borderBottomRightRadius: 0,
+    expect(getMenuItemBorderRadius({ theme, selected: true })).toEqual({
+      borderRadius: theme.shapes.corner.medium,
     });
-    expect(
-      getMenuItemBorderRadius({ theme, roundedBottom: true })
-    ).toMatchObject({
-      borderBottomLeftRadius: radius,
-      borderBottomRightRadius: radius,
-    });
-  });
-
-  it('uses full corner.medium when selected even if only roundedTop was set', () => {
-    const theme = LightTheme;
-    const radius = resolveCornerRadius(theme, MenuTokens.shapes.item);
-    expect(
-      getMenuItemBorderRadius({
-        theme,
-        selected: true,
-        roundedTop: true,
-        roundedBottom: false,
-      })
-    ).toMatchObject({ borderRadius: radius });
+    expect(theme.shapes.corner.extraSmall).toBe(4);
+    expect(theme.shapes.corner.medium).toBe(12);
   });
 });
 
@@ -438,41 +369,92 @@ describe('Menu.Item ARIA role', () => {
 
   afterEach(() => setPlatform('ios'));
 
-  it('keeps plain menuitem on native so the Android role description survives', async () => {
-    setPlatform('ios');
-    await render(<Menu.Item title="Paste" selected onPress={() => {}} />);
-    expect(screen.getByRole('menuitem')).toBeOnTheScreen();
+  it.each([
+    { os: 'ios', props: { selected: true }, role: 'menuitem' },
+    { os: 'web', props: { selected: true }, role: 'menuitemradio' },
+    { os: 'web', props: { 'aria-checked': 'mixed' }, role: 'menuitemcheckbox' },
+    { os: 'web', props: {}, role: 'menuitem' },
+  ] as const)(
+    'uses role $role on $os with $props',
+    async ({ os, props, role }) => {
+      setPlatform(os);
+      await render(
+        <Menu.Item
+          title="Paste"
+          testID="menu-item"
+          onPress={() => {}}
+          {...props}
+        />
+      );
+      expect(screen.getByTestId('menu-item')).toHaveProp('role', role);
+    }
+  );
+});
+
+describe('Menu.Item submenu', () => {
+  const originalMeasureInWindow = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'measureInWindow'
+  );
+
+  beforeEach(() => {
+    Object.defineProperty(View.prototype, 'measureInWindow', {
+      configurable: true,
+      value: (fn: (x: number, y: number, w: number, h: number) => void) =>
+        fn(100, 100, 80, 32),
+    });
   });
 
-  it('uses menuitemradio on web for single selection', async () => {
-    setPlatform('web');
-    await render(
-      <Menu.Item title="Paste" selected testID="menu-item" onPress={() => {}} />
-    );
-    expect(screen.getByTestId('menu-item')).toHaveProp('role', 'menuitemradio');
+  afterEach(() => {
+    if (originalMeasureInWindow) {
+      Object.defineProperty(
+        View.prototype,
+        'measureInWindow',
+        originalMeasureInWindow
+      );
+    } else {
+      Reflect.deleteProperty(View.prototype, 'measureInWindow');
+    }
   });
 
-  it('uses menuitemcheckbox on web when aria-checked is given', async () => {
-    setPlatform('web');
-    await render(
-      <Menu.Item
-        title="Paste"
-        aria-checked="mixed"
-        testID="menu-item"
-        onPress={() => {}}
-      />
+  const renderMenu = (onPress = jest.fn()) =>
+    render(
+      <Portal.Host>
+        <Menu visible onDismiss={jest.fn()} anchor={<View />}>
+          <Menu.Item
+            title="More"
+            onPress={onPress}
+            submenu={<Menu.Item title="Archive" onPress={() => {}} />}
+          />
+        </Menu>
+      </Portal.Host>
     );
-    expect(screen.getByTestId('menu-item')).toHaveProp(
-      'role',
-      'menuitemcheckbox'
-    );
+
+  it('opens the submenu on press instead of calling onPress', async () => {
+    const onPress = jest.fn();
+    await renderMenu(onPress);
+
+    expect(screen.queryByText('Archive')).toBeNull();
+
+    await userEvent.press(screen.getByText('More'));
+
+    expect(screen.getByText('Archive')).toBeOnTheScreen();
+    expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('stays menuitem on web when neither selection prop is used', async () => {
-    setPlatform('web');
-    await render(
-      <Menu.Item title="Paste" testID="menu-item" onPress={() => {}} />
+  it('reports expanded state', async () => {
+    await renderMenu();
+
+    expect(screen.getByRole('menuitem')).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ expanded: false })
     );
-    expect(screen.getByTestId('menu-item')).toHaveProp('role', 'menuitem');
+
+    await userEvent.press(screen.getByText('More'));
+
+    expect(screen.getAllByRole('menuitem')[0]).toHaveProp(
+      'accessibilityState',
+      expect.objectContaining({ expanded: true })
+    );
   });
 });

@@ -6,7 +6,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": false,
+        "checked": undefined,
         "disabled": false,
         "expanded": undefined,
         "selected": undefined,
@@ -51,10 +51,7 @@ exports[`Menu Item renders menu item 1`] = `
             "paddingHorizontal": 12,
           },
           {
-            "borderBottomLeftRadius": 0,
-            "borderBottomRightRadius": 0,
-            "borderTopLeftRadius": 0,
-            "borderTopRightRadius": 0,
+            "borderRadius": 4,
           },
           null,
           undefined,
@@ -82,7 +79,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "width": 24,
+              "width": 20,
             },
             {
               "flexShrink": 0,
@@ -99,11 +96,11 @@ exports[`Menu Item renders menu item 1`] = `
             [
               {
                 "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 24,
+                "fontSize": 20,
               },
               [
                 {
-                  "lineHeight": 24,
+                  "lineHeight": 20,
                   "transform": [
                     {
                       "scaleX": 1,
@@ -130,10 +127,10 @@ exports[`Menu Item renders menu item 1`] = `
               "justifyContent": "center",
             },
             {
-              "maxWidth": 232,
+              "maxWidth": 240,
             },
             {
-              "marginLeft": 12,
+              "marginLeft": 8,
             },
             undefined,
           ]
@@ -184,7 +181,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": false,
+        "checked": undefined,
         "disabled": false,
         "expanded": undefined,
         "selected": undefined,
@@ -229,10 +226,7 @@ exports[`Menu Item renders menu item 1`] = `
             "paddingHorizontal": 12,
           },
           {
-            "borderBottomLeftRadius": 0,
-            "borderBottomRightRadius": 0,
-            "borderTopLeftRadius": 0,
-            "borderTopRightRadius": 0,
+            "borderRadius": 4,
           },
           null,
           undefined,
@@ -260,7 +254,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "width": 24,
+              "width": 20,
             },
             {
               "flexShrink": 0,
@@ -277,11 +271,11 @@ exports[`Menu Item renders menu item 1`] = `
             [
               {
                 "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 24,
+                "fontSize": 20,
               },
               [
                 {
-                  "lineHeight": 24,
+                  "lineHeight": 20,
                   "transform": [
                     {
                       "scaleX": 1,
@@ -308,10 +302,10 @@ exports[`Menu Item renders menu item 1`] = `
               "justifyContent": "center",
             },
             {
-              "maxWidth": 232,
+              "maxWidth": 240,
             },
             {
-              "marginLeft": 12,
+              "marginLeft": 8,
             },
             undefined,
           ]
@@ -362,7 +356,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": false,
+        "checked": undefined,
         "disabled": true,
         "expanded": undefined,
         "selected": undefined,
@@ -407,10 +401,7 @@ exports[`Menu Item renders menu item 1`] = `
             "paddingHorizontal": 12,
           },
           {
-            "borderBottomLeftRadius": 0,
-            "borderBottomRightRadius": 0,
-            "borderTopLeftRadius": 0,
-            "borderTopRightRadius": 0,
+            "borderRadius": 4,
           },
           null,
           undefined,
@@ -438,7 +429,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "width": 24,
+              "width": 20,
             },
             {
               "flexShrink": 0,
@@ -455,11 +446,11 @@ exports[`Menu Item renders menu item 1`] = `
             [
               {
                 "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 24,
+                "fontSize": 20,
               },
               [
                 {
-                  "lineHeight": 24,
+                  "lineHeight": 20,
                   "transform": [
                     {
                       "scaleX": 1,
@@ -486,10 +477,10 @@ exports[`Menu Item renders menu item 1`] = `
               "justifyContent": "center",
             },
             {
-              "maxWidth": 232,
+              "maxWidth": 240,
             },
             {
-              "marginLeft": 12,
+              "marginLeft": 8,
             },
             undefined,
           ]
@@ -540,7 +531,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": false,
+        "checked": undefined,
         "disabled": true,
         "expanded": undefined,
         "selected": undefined,
@@ -585,10 +576,7 @@ exports[`Menu Item renders menu item 1`] = `
             "paddingHorizontal": 12,
           },
           {
-            "borderBottomLeftRadius": 0,
-            "borderBottomRightRadius": 0,
-            "borderTopLeftRadius": 0,
-            "borderTopRightRadius": 0,
+            "borderRadius": 4,
           },
           null,
           undefined,
@@ -616,7 +604,7 @@ exports[`Menu Item renders menu item 1`] = `
         style={
           [
             {
-              "width": 24,
+              "width": 20,
             },
             {
               "flexShrink": 0,
@@ -633,11 +621,11 @@ exports[`Menu Item renders menu item 1`] = `
             [
               {
                 "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 24,
+                "fontSize": 20,
               },
               [
                 {
-                  "lineHeight": 24,
+                  "lineHeight": 20,
                   "transform": [
                     {
                       "scaleX": 1,
@@ -664,10 +652,10 @@ exports[`Menu Item renders menu item 1`] = `
               "justifyContent": "center",
             },
             {
-              "maxWidth": 232,
+              "maxWidth": 240,
             },
             {
-              "marginLeft": 12,
+              "marginLeft": 8,
             },
             undefined,
           ]
@@ -718,7 +706,7 @@ exports[`Menu Item renders menu item 1`] = `
     accessibilityState={
       {
         "busy": undefined,
-        "checked": false,
+        "checked": undefined,
         "disabled": false,
         "expanded": undefined,
         "selected": undefined,
@@ -763,10 +751,7 @@ exports[`Menu Item renders menu item 1`] = `
             "paddingHorizontal": 12,
           },
           {
-            "borderBottomLeftRadius": 0,
-            "borderBottomRightRadius": 0,
-            "borderTopLeftRadius": 0,
-            "borderTopRightRadius": 0,
+            "borderRadius": 4,
           },
           null,
           undefined,

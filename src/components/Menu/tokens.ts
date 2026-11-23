@@ -17,13 +17,17 @@ const sizes = {
   /** Horizontal padding inside an item. */
   itemPaddingHorizontal: 12,
   /** Leading icon size. */
-  iconSize: 24,
+  iconSize: 20,
   /** Gap between leading icon and label. */
-  iconLabelGap: 12,
+  iconLabelGap: 8,
   /** Extra start inset when there is no leading icon. */
   noLeadingIconStart: 4,
+  /** Vertical margin of the menu surface. */
+  containerMarginVertical: 2,
   /** Vertical padding of the menu surface. */
-  containerPaddingVertical: 8,
+  containerPaddingVertical: 2,
+  /** Horizontal padding of the menu surface. */
+  containerPaddingHorizontal: 4,
   /** Min distance from screen edge. */
   screenIndent: 8,
 } as const;
@@ -31,8 +35,10 @@ const sizes = {
 const shapes = {
   /** Menu surface corner. Spec: corner.large (16dp). */
   container: 'large',
-  /** First / last / selected item corners. Spec: corner.medium. */
-  item: 'medium',
+  /** Item corners at rest. Spec: corner.extra-small. */
+  item: 'extraSmall',
+  /** Selected item corners. Spec: corner.medium. */
+  itemSelected: 'medium',
 } as const satisfies Record<string, ShapeToken>;
 
 const typography = {

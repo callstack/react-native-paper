@@ -85,8 +85,6 @@ export const getMenuContainerColor = ({
   colorScheme = 'standard',
 }: {
   theme: InternalTheme;
-  /** @deprecated Ignored for fill; elevation still sets Surface shadow. Kept for call-site compat. */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5;
   colorScheme?: MenuColorScheme;
 }): ColorValue => {
   if (colorScheme === 'vibrant') {
@@ -116,33 +114,21 @@ export const getContentMaxWidth = ({
 };
 
 /**
- * Per-item corner radii for first / last / selected items.
- * Spec: corner.medium on the relevant corners; selected uses medium all around.
+ * Per-item corner radius. Spec: corner.extra-small at rest, corner.medium when
+ * selected.
  */
 export const getMenuItemBorderRadius = ({
   theme,
   selected,
-  roundedTop,
-  roundedBottom,
 }: {
   theme: InternalTheme;
   selected?: boolean;
-  roundedTop?: boolean;
-  roundedBottom?: boolean;
-}): ViewStyle => {
-  const medium = resolveCornerRadius(theme, MenuTokens.shapes.item);
-
-  if (selected) {
-    return { borderRadius: medium };
-  }
-
-  return {
-    borderTopLeftRadius: roundedTop ? medium : 0,
-    borderTopRightRadius: roundedTop ? medium : 0,
-    borderBottomLeftRadius: roundedBottom ? medium : 0,
-    borderBottomRightRadius: roundedBottom ? medium : 0,
-  };
-};
+}): ViewStyle => ({
+  borderRadius: resolveCornerRadius(
+    theme,
+    selected ? MenuTokens.shapes.itemSelected : MenuTokens.shapes.item
+  ),
+});
 
 export const getMenuContainerBorderRadius = (theme: InternalTheme): number =>
   resolveCornerRadius(theme, MenuTokens.shapes.container);

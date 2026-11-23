@@ -621,7 +621,9 @@ exports[`renders visible menu 1`] = `
             style={
               [
                 {
-                  "paddingVertical": 8,
+                  "marginVertical": 2,
+                  "paddingHorizontal": 4,
+                  "paddingVertical": 2,
                 },
                 false,
                 undefined,
@@ -632,7 +634,7 @@ exports[`renders visible menu 1`] = `
               accessibilityState={
                 {
                   "busy": undefined,
-                  "checked": false,
+                  "checked": undefined,
                   "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
@@ -677,10 +679,7 @@ exports[`renders visible menu 1`] = `
                       "paddingHorizontal": 12,
                     },
                     {
-                      "borderBottomLeftRadius": 0,
-                      "borderBottomRightRadius": 0,
-                      "borderTopLeftRadius": 12,
-                      "borderTopRightRadius": 12,
+                      "borderRadius": 4,
                     },
                     null,
                     undefined,
@@ -767,7 +766,7 @@ exports[`renders visible menu 1`] = `
               accessibilityState={
                 {
                   "busy": undefined,
-                  "checked": false,
+                  "checked": undefined,
                   "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
@@ -812,10 +811,7 @@ exports[`renders visible menu 1`] = `
                       "paddingHorizontal": 12,
                     },
                     {
-                      "borderBottomLeftRadius": 12,
-                      "borderBottomRightRadius": 12,
-                      "borderTopLeftRadius": 0,
-                      "borderTopRightRadius": 0,
+                      "borderRadius": 4,
                     },
                     null,
                     undefined,
@@ -1318,7 +1314,9 @@ exports[`respects anchorPosition bottom 1`] = `
             style={
               [
                 {
-                  "paddingVertical": 8,
+                  "marginVertical": 2,
+                  "paddingHorizontal": 4,
+                  "paddingVertical": 2,
                 },
                 false,
                 undefined,
@@ -1329,7 +1327,7 @@ exports[`respects anchorPosition bottom 1`] = `
               accessibilityState={
                 {
                   "busy": undefined,
-                  "checked": false,
+                  "checked": undefined,
                   "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
@@ -1374,10 +1372,7 @@ exports[`respects anchorPosition bottom 1`] = `
                       "paddingHorizontal": 12,
                     },
                     {
-                      "borderBottomLeftRadius": 0,
-                      "borderBottomRightRadius": 0,
-                      "borderTopLeftRadius": 12,
-                      "borderTopRightRadius": 12,
+                      "borderRadius": 4,
                     },
                     null,
                     undefined,
@@ -1464,7 +1459,7 @@ exports[`respects anchorPosition bottom 1`] = `
               accessibilityState={
                 {
                   "busy": undefined,
-                  "checked": false,
+                  "checked": undefined,
                   "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
@@ -1509,10 +1504,7 @@ exports[`respects anchorPosition bottom 1`] = `
                       "paddingHorizontal": 12,
                     },
                     {
-                      "borderBottomLeftRadius": 12,
-                      "borderBottomRightRadius": 12,
-                      "borderTopLeftRadius": 0,
-                      "borderTopRightRadius": 0,
+                      "borderRadius": 4,
                     },
                     null,
                     undefined,
@@ -2015,7 +2007,9 @@ exports[`uses the default anchorPosition of top 1`] = `
             style={
               [
                 {
-                  "paddingVertical": 8,
+                  "marginVertical": 2,
+                  "paddingHorizontal": 4,
+                  "paddingVertical": 2,
                 },
                 false,
                 undefined,
@@ -2026,7 +2020,7 @@ exports[`uses the default anchorPosition of top 1`] = `
               accessibilityState={
                 {
                   "busy": undefined,
-                  "checked": false,
+                  "checked": undefined,
                   "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
@@ -2071,10 +2065,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                       "paddingHorizontal": 12,
                     },
                     {
-                      "borderBottomLeftRadius": 0,
-                      "borderBottomRightRadius": 0,
-                      "borderTopLeftRadius": 12,
-                      "borderTopRightRadius": 12,
+                      "borderRadius": 4,
                     },
                     null,
                     undefined,
@@ -2161,7 +2152,7 @@ exports[`uses the default anchorPosition of top 1`] = `
               accessibilityState={
                 {
                   "busy": undefined,
-                  "checked": false,
+                  "checked": undefined,
                   "disabled": false,
                   "expanded": undefined,
                   "selected": undefined,
@@ -2206,10 +2197,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                       "paddingHorizontal": 12,
                     },
                     {
-                      "borderBottomLeftRadius": 12,
-                      "borderBottomRightRadius": 12,
-                      "borderTopLeftRadius": 0,
-                      "borderTopRightRadius": 0,
+                      "borderRadius": 4,
                     },
                     null,
                     undefined,
