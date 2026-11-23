@@ -1903,6 +1903,29 @@ it('notifies the parent via onChangeText when clear() is called on a controlled 
   expect(onChangeText).toHaveBeenCalledTimes(1);
 });
 
+it('keeps the label floated when clear() is called on a controlled field whose parent keeps the value', async () => {
+  const ref = React.createRef<TextInputHandles>();
+  await render(
+    <TextInput
+      ref={ref}
+      label="Email"
+      value="test@example.com"
+      onChangeText={() => {}}
+    />
+  );
+
+  await act(() => {
+    ref.current?.clear();
+  });
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: FILLED_ACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(screen.getByText('Email', includeHiddenElements)).toHaveStyle({
+    fontSize: ACTIVE_LABEL_FONT_SIZE,
+  });
+});
+
 it('hides prefix/suffix when blurring after clear() was called while focused', async () => {
   const ref = React.createRef<TextInputHandles>();
   await render(
