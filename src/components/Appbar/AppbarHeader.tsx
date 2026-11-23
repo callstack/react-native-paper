@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Appbar } from './Appbar';
 import type { Props as AppbarProps } from './Appbar';
+import type { AppbarModes } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import type { SurfaceStyle } from '../Surface';
@@ -16,10 +17,9 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    */
   dark?: boolean;
   /**
-   * Extra padding to add at the top of header to account for translucent status bar.
-   * This is automatically handled on iOS >= 11 including iPhone X using `SafeAreaView`.
-   * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
-   * Pass `0` or a custom value to disable the default behaviour, and customize the height.
+   * Padding at the top of the header, to keep its content clear of the status bar.
+   * By default, the header uses the top safe area inset, on every platform.
+   * Pass a number, such as `0`, to use that padding instead.
    */
   statusBarHeight?: number;
   /**
@@ -34,13 +34,22 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    * - `medium` - Appbar with medium height (112).
    * - `large` - Appbar with large height (152).
    * - `center-aligned` - Appbar with default height and center-aligned title.
+   * - `medium-flexible` - Available in v6.x. Material 3 Expressive Appbar with a larger title and a minimum height of 112. It grows when the title wraps onto a second line.
+   * - `large-flexible` - Available in v6.x. Material 3 Expressive Appbar with a prominent title and a minimum height of 120. It grows when the title wraps onto a second line.
    */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  mode?: AppbarModes;
   /**
    * @supported Available in v5.x with theme version 3
    * Whether Appbar background should have the elevation along with primary color pigment.
    */
   elevated?: boolean;
+  /**
+   * @supported Available in v6.x
+   *
+   * Whether the content below the header has scrolled. A scrolled header uses the `surfaceContainer` color for its background,
+   * without elevation. An `elevated` header keeps its shadow when it is scrolled. Overridden by `backgroundColor`.
+   */
+  isScrolled?: boolean;
   /**
    * @optional
    */
@@ -84,7 +93,7 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
  * ```
  */
 const AppbarHeader = ({
-  // Don't use default props since we check it to know whether we should use SafeAreaView
+  // No default, because `undefined` falls back to the top safe area inset
   statusBarHeight,
   style,
   dark,

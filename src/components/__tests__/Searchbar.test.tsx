@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import { expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
@@ -70,8 +72,8 @@ it('exposes the clear button only while there is a search value', async () => {
 
   expect(screen.queryByRole('button', { name: 'clear' })).toBeNull();
   expect(
-    screen.getByRole('button', { name: 'clear', includeHiddenElements: true })
-  ).toHaveProp('focusable', false);
+    screen.getByLabelText('clear', { includeHiddenElements: true })
+  ).toHaveProp('aria-hidden', true);
 
   await rerender(<Searchbar value="query" />);
 
@@ -170,4 +172,16 @@ it('renders searchbar in "view" mode', async () => {
   const tree = (await render(<Searchbar value={''} mode="view" />)).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('names its search icon as an image on web when it has no onIconPress', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+
+  try {
+    await render(<Searchbar value="" onChangeText={() => {}} />);
+
+    expect(screen.getByRole('img', { name: 'search' })).toBeOnTheScreen();
+  } finally {
+    jest.restoreAllMocks();
+  }
 });

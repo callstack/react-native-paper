@@ -1,21 +1,30 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import type { ColorValue, StyleProp, ViewProps } from 'react-native';
+import { StyleSheet } from 'react-native';
+import type {
+  ColorValue,
+  LayoutChangeEvent,
+  LayoutRectangle,
+  StyleProp,
+  ViewProps,
+} from 'react-native';
 
-import AppbarContent from './AppbarContent';
+import { AppbarContext } from './AppbarContext';
+import type { AppbarContextType } from './AppbarContext';
 import {
+  APPBAR_CONTROLS_HEIGHT,
+  APPBAR_CONTROLS_OFFSET,
+  APPBAR_HORIZONTAL_PADDING,
   getAppbarBackgroundColor,
+  getCenteringMargins,
+  isFlexibleMode,
+  isLeftRightSwapped,
   modeAppbarHeight,
-  renderAppbarContent,
-  filterAppbarActions,
 } from './utils';
-import type { AppbarModes, AppbarChildProps } from './utils';
+import type { AppbarModes } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
 import Surface from '../Surface';
 import type { SurfaceStyle, SurfaceVisualProps } from '../Surface';
-
-const APPBAR_HORIZONTAL_PADDING = 4;
 
 export type Props = Omit<Partial<ViewProps>, 'style'> &
   Omit<SurfaceVisualProps, 'backgroundColor'> & {
@@ -39,15 +48,26 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
      * - `medium` - Appbar with medium height (112).
      * - `large` - Appbar with large height (152).
      * - `center-aligned` - Appbar with default height and center-aligned title.
+     * - `medium-flexible` - Available in v6.x. Material 3 Expressive Appbar with a larger title and a minimum height of 112. It grows when the title wraps onto a second line.
+     * - `large-flexible` - Available in v6.x. Material 3 Expressive Appbar with a prominent title and a minimum height of 120. It grows when the title wraps onto a second line.
      */
-    mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+    mode?: AppbarModes;
     /**
      * @supported Available in v5.x with theme version 3
      * Whether Appbar background should have the elevation along with primary color pigment.
      */
     elevated?: boolean;
     /**
-     * Safe area insets for the Appbar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
+     * @supported Available in v6.x
+     *
+     * Whether the content below the Appbar has scrolled. A scrolled Appbar uses the `surfaceContainer` color for its background,
+     * without elevation. An `elevated` Appbar keeps its shadow when it is scrolled. Overridden by `backgroundColor`.
+     */
+    isScrolled?: boolean;
+    /**
+     * Safe area insets for the Appbar. This can be used to avoid elements like the status bar and the camera cutout.
+     *
+     * Using `bottom` to build a bottom bar is deprecated.
      */
     safeAreaInsets?: {
       bottom?: number;
@@ -68,9 +88,15 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
   };
 
 /**
- * A component to display action items in a bar. It can be placed at the top or bottom.
- * The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
- * The bottom bar usually provides access to a drawer and up to four actions.
+ * A component to display action items in a bar. It is usually placed at the top of the screen
+ * and contains the screen title and controls such as navigation buttons, menu button etc.
+ *
+ * Its parts, `Appbar.BackAction`, `Appbar.Content` and `Appbar.Action`, read the colors and the theme from the `Appbar`
+ * they are rendered in. `Appbar.Action` and `Appbar.BackAction` can be wrapped in other components, for example in a `Tooltip` or a `Menu`.
+ * `Appbar.Content` positions the title in the `Appbar`, so render it directly in the `Appbar`, not in a wrapper.
+ * Only these parts read the colors and the theme of the `Appbar`. A custom child, such as an icon or a `Tooltip`, doesn't get them,
+ * so pass it the `color` or the `theme` it needs.
+ * The parts are laid out in the order they are rendered: render the leading actions first, then the content, then the trailing actions.
  *
  * ## Usage
  * ### Top bar
@@ -91,6 +117,10 @@ export type Props = Omit<Partial<ViewProps>, 'style'> &
  * ```
  *
  * ### Bottom bar
+ *
+ * Using `Appbar` as a bottom bar is deprecated. Material Design 3 moves the bottom bar to toolbars,
+ * and it will be replaced by the `Toolbar` component once it is available.
+ *
  * ```js
  * import * as React from 'react';
  * import { StyleSheet } from 'react-native';
@@ -148,150 +178,165 @@ const Appbar = ({
   style,
   mode = 'small',
   elevated = false,
+  isScrolled = false,
   safeAreaInsets,
   theme: themeOverrides,
   backgroundColor: customBackground,
+  onLayout,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
+  const [barWidth, setBarWidth] = React.useState(0);
+  // The layout of `Appbar.Content`, with the margins it was measured with.
+  // It is recorded in every mode, so the Appbar can use it when the mode changes.
+  const [content, setContent] = React.useState<{
+    layout: LayoutRectangle;
+    spacers: { left: number; right: number };
+  } | null>(null);
+
   const backgroundColor = getAppbarBackgroundColor(
     theme,
-    elevated,
+    elevated || isScrolled,
     customBackground
   );
 
-  const isMode = (modeToCompare: AppbarModes) => {
-    return mode === modeToCompare;
-  };
-
   const isDark = typeof dark === 'boolean' ? dark : false;
-
-  const isCenterAlignedMode = isMode('center-aligned');
-
-  let shouldCenterContent = false;
-  let shouldAddLeftSpacing = false;
-  let shouldAddRightSpacing = false;
-  if (isCenterAlignedMode) {
-    let hasAppbarContent = false;
-    let leftItemsCount = 0;
-    let rightItemsCount = 0;
-
-    React.Children.forEach(children, (child) => {
-      if (React.isValidElement<AppbarChildProps>(child)) {
-        const isLeading = child.props.isLeading === true;
-
-        if (child.type === AppbarContent) {
-          hasAppbarContent = true;
-        } else if (isLeading || !hasAppbarContent) {
-          leftItemsCount++;
-        } else {
-          rightItemsCount++;
-        }
-      }
-    });
-
-    shouldCenterContent =
-      hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 3;
-    shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
-    shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
-  }
-
-  const spacingStyle = styles.v3Spacing;
+  const isCenterAlignedMode = mode === 'center-aligned';
+  const isFlexible = isFlexibleMode(mode);
+  const isTopAligned = mode === 'medium' || mode === 'large' || isFlexible;
 
   const insets = {
-    paddingBottom: safeAreaInsets?.bottom,
-    paddingTop: safeAreaInsets?.top,
-    paddingLeft: (safeAreaInsets?.left ?? 0) + APPBAR_HORIZONTAL_PADDING,
-    paddingRight: (safeAreaInsets?.right ?? 0) + APPBAR_HORIZONTAL_PADDING,
+    top: safeAreaInsets?.top ?? 0,
+    bottom: safeAreaInsets?.bottom ?? 0,
+    left: safeAreaInsets?.left ?? 0,
+    right: safeAreaInsets?.right ?? 0,
+  };
+
+  const paddingLeft = insets.left + APPBAR_HORIZONTAL_PADDING;
+  const paddingRight = insets.right + APPBAR_HORIZONTAL_PADDING;
+
+  // In RTL, React Native applies the left of a style to the right, and the other way round.
+  // The layout it reports and the sides below are not swapped, so the styles are mapped to them.
+  const isSwapped = isLeftRightSwapped();
+
+  // The title is centered by adding a margin to it on the side with less actions.
+  // The width of the actions on each side is what is left of the bar around the
+  // content, after taking the margins it was measured with out.
+  const sides =
+    isCenterAlignedMode && content && barWidth > 0
+      ? {
+          left: Math.round(
+            content.layout.x -
+              (isSwapped ? paddingRight : paddingLeft) -
+              content.spacers.left
+          ),
+          right: Math.round(
+            barWidth -
+              (isSwapped ? paddingLeft : paddingRight) -
+              (content.layout.x + content.layout.width) -
+              content.spacers.right
+          ),
+        }
+      : null;
+  const spacers = getCenteringMargins(sides);
+
+  // The margins as styles
+  const marginLeft = isSwapped ? spacers.right : spacers.left;
+  const marginRight = isSwapped ? spacers.left : spacers.right;
+
+  // The margins the content was last measured with
+  const spacersRef = React.useRef(spacers);
+
+  React.useLayoutEffect(() => {
+    spacersRef.current = spacers;
+  });
+
+  // The layout handlers are passed in every mode: on the web, an element is only
+  // observed if it has `onLayout` when it mounts, so one added when the mode changes would never be called
+  const handleContentLayout = React.useCallback(
+    (layout: LayoutRectangle | null) => {
+      setContent(layout && { layout, spacers: spacersRef.current });
+    },
+    []
+  );
+
+  const handleLayout = (event: LayoutChangeEvent) => {
+    setBarWidth(event.nativeEvent.layout.width);
+    onLayout?.(event);
+  };
+
+  const appbarContext = React.useMemo<AppbarContextType>(
+    () => ({
+      mode,
+      dark: isDark,
+      insets: {
+        top: insets.top,
+        bottom: insets.bottom,
+        left: insets.left,
+        right: insets.right,
+      },
+      theme: themeOverrides,
+      onContentLayout: handleContentLayout,
+      contentMargins: isCenterAlignedMode
+        ? { left: marginLeft, right: marginRight }
+        : undefined,
+    }),
+    [
+      mode,
+      isDark,
+      insets.top,
+      insets.bottom,
+      insets.left,
+      insets.right,
+      themeOverrides,
+      isCenterAlignedMode,
+      handleContentLayout,
+      marginLeft,
+      marginRight,
+    ]
+  );
+
+  const paddingStyle = {
+    paddingBottom: insets.bottom,
+    paddingTop: insets.top + (isTopAligned ? APPBAR_CONTROLS_OFFSET : 0),
+    paddingLeft,
+    paddingRight,
   };
 
   // The safe area insets are applied as padding, so they need to be included in the height
-  const height =
-    modeAppbarHeight[mode] +
-    (safeAreaInsets?.top ?? 0) +
-    (safeAreaInsets?.bottom ?? 0);
+  const verticalInsets = insets.top + insets.bottom;
+  const heightStyle = isFlexible
+    ? {
+        minHeight:
+          Math.max(
+            modeAppbarHeight[mode],
+            APPBAR_CONTROLS_HEIGHT + (content?.layout.height ?? 0)
+          ) + verticalInsets,
+      }
+    : { height: modeAppbarHeight[mode] + verticalInsets };
 
   return (
-    <Surface
-      backgroundColor={backgroundColor}
-      style={[{ height }, styles.appbar, insets, style]}
-      elevation={elevated ? 2 : 0}
-      {...rest}
-      theme={theme}
-    >
-      {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
-      {(isMode('small') || isMode('center-aligned')) && (
-        <>
-          {/* Render only the back action at first place  */}
-          {renderAppbarContent({
-            children,
-            isDark,
-            theme,
-            renderOnly: ['Appbar.BackAction'],
-            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
-          })}
-          {/* Render the rest of the content except the back action */}
-          {renderAppbarContent({
-            // Filter appbar actions - first leading icons, then trailing icons
-            children: [
-              ...filterAppbarActions(children, true),
-              ...filterAppbarActions(children),
-            ],
-            isDark,
-            theme,
-            renderExcept: ['Appbar.BackAction'],
-            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
-          })}
-        </>
-      )}
-      {(isMode('medium') || isMode('large')) && (
-        <View
-          style={[
-            styles.columnContainer,
-            isMode('center-aligned') && styles.centerAlignedContainer,
-          ]}
-        >
-          {/* Appbar top row with controls */}
-          <View style={styles.controlsRow}>
-            {/* Left side of row container, can contain AppbarBackAction or AppbarAction if it's leading icon  */}
-            {renderAppbarContent({
-              children,
-              isDark,
-              renderOnly: ['Appbar.BackAction'],
-              mode,
-            })}
-            {renderAppbarContent({
-              children: filterAppbarActions(children, true),
-              isDark,
-              renderOnly: ['Appbar.Action'],
-              mode,
-            })}
-            {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
-            <View style={styles.rightActionControls}>
-              {renderAppbarContent({
-                children: filterAppbarActions(children),
-                isDark,
-                renderExcept: [
-                  'Appbar',
-                  'Appbar.BackAction',
-                  'Appbar.Content',
-                  'Appbar.Header',
-                ],
-                mode,
-              })}
-            </View>
-          </View>
-          {renderAppbarContent({
-            children,
-            isDark,
-            renderOnly: ['Appbar.Content'],
-            mode,
-          })}
-        </View>
-      )}
-      {shouldAddRightSpacing ? <View style={spacingStyle} /> : null}
-    </Surface>
+    <AppbarContext.Provider value={appbarContext}>
+      <Surface
+        backgroundColor={backgroundColor}
+        style={[
+          heightStyle,
+          styles.appbar,
+          isTopAligned && styles.topAligned,
+          paddingStyle,
+          style,
+        ]}
+        elevation={elevated ? 2 : 0}
+        // The flat mode renders a single view, so an animated `style` is visible on iOS
+        mode={elevated ? 'elevated' : 'flat'}
+        {...rest}
+        onLayout={handleLayout}
+        theme={theme}
+      >
+        {children}
+      </Surface>
+    </AppbarContext.Provider>
   );
 };
 
@@ -300,27 +345,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  v3Spacing: {
-    width: 52,
-  },
-  controlsRow: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  rightActionControls: {
-    flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  columnContainer: {
-    flexDirection: 'column',
-    flex: 1,
-    paddingTop: 8,
-  },
-  centerAlignedContainer: {
-    paddingTop: 0,
+  topAligned: {
+    alignItems: 'flex-start',
   },
 });
 

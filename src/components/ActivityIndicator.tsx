@@ -4,6 +4,7 @@ import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
 import type { ColorValue, StyleProp, ViewProps, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
+import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../theme/types';
 
 export type Props = ViewProps & {
@@ -69,14 +70,12 @@ const ActivityIndicator = ({
     undefined
   );
 
-  const {
-    animation: { scale },
-  } = theme;
+  const getDuration = useMotionDuration();
 
   const startRotation = React.useCallback(() => {
     // Show indicator
     Animated.timing(fade, {
-      duration: 200 * scale,
+      duration: getDuration(200),
       toValue: 1,
       isInteraction: false,
       useNativeDriver: true,
@@ -88,7 +87,7 @@ const ActivityIndicator = ({
       // $FlowFixMe
       Animated.loop(rotation.current).start();
     }
-  }, [scale, fade, timer]);
+  }, [getDuration, fade, timer]);
 
   const stopRotation = () => {
     if (rotation.current) {
@@ -114,7 +113,7 @@ const ActivityIndicator = ({
     } else if (hidesWhenStopped) {
       // Hide indicator first and then stop rotation
       Animated.timing(fade, {
-        duration: 200 * scale,
+        duration: getDuration(200),
         toValue: 0,
         useNativeDriver: true,
         isInteraction: false,
@@ -122,7 +121,7 @@ const ActivityIndicator = ({
     } else {
       stopRotation();
     }
-  }, [animating, fade, hidesWhenStopped, startRotation, scale, timer]);
+  }, [animating, fade, hidesWhenStopped, startRotation, getDuration, timer]);
 
   const color = indicatorColor || theme.colors?.primary;
   const size =
@@ -142,11 +141,15 @@ const ActivityIndicator = ({
     overflow: 'hidden' as const,
   };
 
+  // A hidden indicator, such as the one in a loading IconButton, is no element
+  // of its own. Left accessible, Android would still make it a keyboard stop.
+  const isHidden = rest['aria-hidden'] === true;
+
   return (
     <View
       style={[styles.container, style]}
       {...rest}
-      accessible
+      accessible={!isHidden}
       role="progressbar"
       aria-busy={animating}
     >

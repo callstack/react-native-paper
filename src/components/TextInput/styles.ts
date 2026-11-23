@@ -31,6 +31,15 @@ export const styles = StyleSheet.create({
   addendum: {
     flexDirection: 'row',
   },
+  // Keeps the placeholder in the DOM for aria-describedby without showing it.
+  placeholderDescription: {
+    position: 'absolute',
+    width: 1,
+    height: 1,
+    overflow: 'hidden',
+    opacity: 0,
+    pointerEvents: 'none',
+  },
   supportingText: {
     flex: 1,
     marginTop: SUPPORTING_TEXT_MARGIN_TOP,
@@ -69,9 +78,13 @@ export const styles = StyleSheet.create({
   iconWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 1,
   },
   icon: {
     margin: 0,
+  },
+  notDimmed: {
+    opacity: 1,
   },
 });
 

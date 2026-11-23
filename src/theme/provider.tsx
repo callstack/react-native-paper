@@ -5,15 +5,17 @@ import type { $DeepPartial } from '@callstack/react-theme-provider';
 import isEqual from 'fast-deep-equal';
 
 import { DarkTheme, LightTheme } from './schemes';
-import type { Theme, NavigationTheme } from './types';
+import type { Theme, ThemeProp, NavigationTheme } from './types';
 
 const {
-  ThemeProvider,
+  // Puts its `theme` into context as it is, so it takes a full theme. It's for
+  // providers that have merged the theme already, such as `PaperProvider`.
+  ThemeProvider: InternalThemeProvider,
   withTheme,
   useTheme: useThemeBase,
-} = createTheming<unknown>(LightTheme);
+} = createTheming<Theme>(LightTheme);
 
-export { ThemeProvider, withTheme };
+export { InternalThemeProvider, withTheme };
 
 export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
   const safeOverrides = React.useMemo(
@@ -113,20 +115,37 @@ export const useInternalTheme = (
   );
 };
 
+type ThemeProviderProps = {
+  children: React.ReactNode;
+  /**
+   * Theme for the components below it, merged deeply onto the theme above it.
+   */
+  theme?: ThemeProp;
+};
+
+export const ThemeProvider = ({
+  children,
+  theme: themeOverrides,
+}: ThemeProviderProps) => {
+  const theme = useInternalTheme(themeOverrides);
+
+  return (
+    <InternalThemeProvider theme={theme}>{children}</InternalThemeProvider>
+  );
+};
+
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationLight: T;
   materialLight?: Theme;
 }): {
   LightTheme: T;
 };
-// eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationDark: T;
   materialDark?: Theme;
 }): {
   DarkTheme: T;
 };
-// eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<
   TLight extends NavigationTheme,
   TDark extends NavigationTheme,
@@ -136,7 +155,6 @@ export function adaptNavigationTheme<
   materialLight?: Theme;
   materialDark?: Theme;
 }): { LightTheme: TLight; DarkTheme: TDark };
-// eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: any) {
   const {
     reactNavigationLight,

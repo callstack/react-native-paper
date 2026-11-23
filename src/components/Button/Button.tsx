@@ -32,6 +32,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { useFocusRing } from '../../utils/useFocusRing';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
@@ -85,7 +86,9 @@ export type Props = Omit<ViewProps, 'style'> & {
    * `false` the shape still changes, it just snaps instead of animating, and
    * there is no press morph at all.
    *
-   * The press morph is skipped when the OS reduce-motion setting is on.
+   * Under reduce motion the shape behaves as with `false`. Reduce motion
+   * comes from the `reduceMotion` prop of `PaperProvider`, which follows the
+   * OS setting by default.
    */
   animateShape?: boolean;
   /**
@@ -347,9 +350,7 @@ const Button = ({
     () => toSpringCurve(theme.motion.spring.fast.spatial),
     [theme.motion.spring.fast.spatial]
   );
-  const shapeTransitionDuration = animatesShape
-    ? shapeSpring.duration * theme.animation.scale
-    : 0;
+  const shapeTransitionDuration = animatesShape ? shapeSpring.duration : 0;
 
   const tracksPress = animatesShape || isElevationEntitled;
 
@@ -421,6 +422,7 @@ const Button = ({
   const surfaceTransitionDuration = getButtonTransitionDuration({
     theme,
     pressed,
+    reduceMotion,
     containerColor,
     previousContainerColor: committedContainerColor,
   });
@@ -446,14 +448,18 @@ const Button = ({
   // The clip carries the same radius transition as the `Surface`, so the
   // ripple and the disabled overlay follow the morph.
   //
-  // TODO: revisit the focus ring's placement once #5084 lands.
-  // https://github.com/callstack/react-native-paper/pull/5084 adds MD3 keyboard
-  // focus indicators to every `TouchableRipple` consumer, so Button gets one
-  // with no code here. Deliberately not implemented locally: a second ring here
-  // would double up with it. The catch is placement — that PR defaults to
-  // `focusRing="outward"` and warns an outward ring is trimmed by "any clipping
-  // ancestor sized to its content", which is exactly this view. Button will
-  // likely need `focusRing="inward"`, or the ring on the outer view.
+  // The keyboard focus ring goes on the clip (`scope: 'within'`, as on FAB),
+  // not on the ripple that takes focus: the ripple sits inside the outline's
+  // border, so a ring measured from it would lose the border width from its
+  // 2dp gap, and overlap a thick outline. Neither this view nor the `Surface`
+  // sets `overflow`, so nothing here trims it. Off whenever the button can't
+  // be pressed, as on TouchableRipple.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !hasPassedTouchHandler,
+    theme.colors.secondary,
+    'outward',
+    'within'
+  );
   const shapeTransitionStyle = {
     transitionProperty: 'borderRadius',
     transitionDuration: shapeTransitionDuration,
@@ -496,7 +502,10 @@ const Button = ({
       shapeTransitionTimingFunction={shapeTimingFunction}
       style={[styles.button, style]}
     >
-      <Reanimated.View style={[styles.clip, outlineStyle, clipStyle]}>
+      <Reanimated.View
+        style={[styles.clip, outlineStyle, clipStyle, ...focusRing.style]}
+        {...focusRing.dataSetProps}
+      >
         {backgroundOpacity < 1 && (
           <Reanimated.View
             pointerEvents="none"
@@ -509,7 +518,10 @@ const Button = ({
         )}
         <AnimatedTouchableRipple
           borderless
-          style={innerClipStyle}
+          focusRing="none"
+          onFocus={focusTarget.onFocus}
+          onBlur={focusTarget.onBlur}
+          style={[innerClipStyle, ...focusTarget.style]}
           background={background}
           rippleColor={rippleColor}
           onPress={onPress}

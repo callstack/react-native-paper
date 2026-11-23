@@ -165,6 +165,8 @@ export default defineConfig(
   {
     files: ['**/*.{ts,tsx}'],
     rules: {
+      // TypeScript reports real redeclarations, and the base rule flags overloads
+      'no-redeclare': 'off',
       '@typescript-eslint/no-non-null-assertion': 'error',
       '@typescript-eslint/no-unsafe-type-assertion': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
