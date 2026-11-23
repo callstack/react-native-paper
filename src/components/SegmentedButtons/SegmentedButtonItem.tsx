@@ -135,21 +135,18 @@ const SegmentedButtonItem = ({
 
   const checkScale = useSharedValue(0);
 
-  const checkSpringConfig = React.useMemo(
-    () => ({
-      ...toRawSpring(theme.motion.spring.fast.spatial),
-      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
-    }),
-    [theme.motion.spring.fast.spatial, reduceMotion]
-  );
+  const checkSpring = theme.motion.spring.fast.spatial;
 
   React.useEffect(() => {
     if (!showSelectedCheck) {
       return;
     }
 
-    checkScale.value = withSpring(checked ? 1 : 0, checkSpringConfig);
-  }, [checked, checkScale, checkSpringConfig, showSelectedCheck]);
+    checkScale.value = withSpring(checked ? 1 : 0, {
+      ...toRawSpring(checkSpring),
+      reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
+    });
+  }, [checked, checkScale, checkSpring, reduceMotion, showSelectedCheck]);
 
   const checkAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: checkScale.value }],
