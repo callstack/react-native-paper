@@ -9,33 +9,26 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Animated, {
-  type AnimatedStyle,
-  linear,
-  type CSSStyle,
-} from 'react-native-reanimated';
+import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 
 import type { Mode, Shape, Size, Width } from './tokens';
 import { getDimensions, getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler, {
   carriesToggleState,
 } from '../../utils/hasTouchHandler';
 import { useFocusRing } from '../../utils/useFocusRing';
+import { useShapeMorph } from '../../utils/useShapeMorph';
 import ActivityIndicator from '../ActivityIndicator';
-import {
-  getButtonRippleColor,
-  getButtonShapeCurvePoints,
-} from '../Button/utils';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import { getRippleColorFromContent } from '../TouchableRipple/utils';
 
 const AnimatedTouchableRipple =
   Animated.createAnimatedComponent(TouchableRipple);
@@ -242,38 +235,21 @@ const IconButton = ({
   const borderRadius = isPressed
     ? dimensions.pressedRadius
     : dimensions.restingRadius;
-  // The morph follows the MD3 fast spatial spring, as on Button. The curve is
-  // capped so a bouncy spring can't push the corner below 0 on its way back
-  // from the largest radius (the round one).
-  const shapeSpring = React.useMemo(
-    () => toSpringCurve(theme.motion.spring.fast.spatial),
-    [theme.motion.spring.fast.spatial]
-  );
-  const largestRadius = Math.max(
-    dimensions.height / 2,
-    dimensions.restingRadius,
-    dimensions.pressedRadius
-  );
-  const shapeTimingFunction = React.useMemo(
-    () =>
-      linear(
-        ...getButtonShapeCurvePoints({
-          points: shapeSpring.points,
-          radius: borderRadius,
-          largestRadius,
-        })
+  const { outerStyle: radiusStyle, innerStyle: innerRadiusStyle } =
+    useShapeMorph({
+      theme,
+      radius: borderRadius,
+      largestRadius: Math.max(
+        dimensions.height / 2,
+        dimensions.restingRadius,
+        dimensions.pressedRadius
       ),
-    [shapeSpring.points, borderRadius, largestRadius]
-  );
-  const radiusStyle: CSSStyle<ViewStyle> = {
-    borderRadius,
-    transitionProperty: ['borderRadius'],
-    transitionDuration: reduceMotion ? 0 : shapeSpring.duration,
-    transitionTimingFunction: shapeTimingFunction,
-  };
+      borderWidth,
+      animate: !reduceMotion,
+    });
 
   // The state layer takes the icon color, as Button's takes its label color.
-  const rippleColor = getButtonRippleColor({ labelColor: iconColor });
+  const rippleColor = getRippleColorFromContent({ contentColor: iconColor });
 
   const handlePressIn = (e: GestureResponderEvent) => {
     setPressed(true);
@@ -345,16 +321,6 @@ const IconButton = ({
     !hasPassedTouchHandler &&
     !carriesToggleState({ ...rest, ...toggleStateProps });
 
-  // The touchable and the disabled layer sit inside the outline, so their
-  // corner is the container's less the outline, and they morph with it. The
-  // touchable clips its own ripple to it, though not on web, where
-  // `overflow: 'hidden'` would also clip the hit slop target; there the ripple
-  // container follows the touchable's corner.
-  const innerRadiusStyle: CSSStyle<ViewStyle> = {
-    ...radiusStyle,
-    borderRadius: Math.max(0, borderRadius - borderWidth),
-  };
-
   return (
     <Animated.View
       ref={ref}
@@ -407,6 +373,8 @@ const IconButton = ({
           style={[
             styles.touchable,
             innerRadiusStyle,
+            // Not on web, where `overflow: 'hidden'` would also clip the hit
+            // slop target; there the ripple container follows the corner.
             Platform.OS !== 'web' && styles.clipToShape,
             contentStyle,
           ]}
