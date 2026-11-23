@@ -77,7 +77,8 @@ export type MenuTriggerProps = {
   /**
    * Accessibility label for the trigger FAB. On web it also names the open
    * menu, so set it when the trigger shows only an icon. Without it, the
-   * trigger and the menu have no accessible name.
+   * trigger has no accessible name, and the web menu is not exposed as a
+   * `menu`: its items are buttons.
    */
   'aria-label'?: string;
   testID?: string;
@@ -263,6 +264,11 @@ type ItemProps = {
   ) => void;
   onPress: (e: GestureResponderEvent) => void;
   /**
+   * Whether the item sits in a `role="menu"` on the web, which makes it a
+   * `menuitem`. Otherwise it is a button.
+   */
+  inMenu: boolean;
+  /**
    * Accessibility label. Falls back to `label`.
    */
   'aria-label'?: string;
@@ -287,6 +293,7 @@ const MenuItem = ({
   onFocusItem,
   registerRef,
   onPress,
+  inMenu,
   'aria-label': ariaLabel,
   testID,
 }: ItemProps) => {
@@ -341,7 +348,7 @@ const MenuItem = ({
   );
 
   // React Native Web presses on Space only for `role="button"`, and the item is
-  // a `menuitem` on the web.
+  // a `menuitem` in a web menu. A button needs no help, and would press twice.
   const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
     useSpaceKeyPress({
       onPress,
@@ -387,12 +394,12 @@ const MenuItem = ({
               focusTarget.onBlur?.();
               setFocused(false);
             }}
-            {...spaceKeyHandlers}
+            {...(inMenu ? spaceKeyHandlers : null)}
             onHoverIn={() => setHovered(true)}
             onHoverOut={() => setHovered(false)}
             onPressIn={() => setPressed(true)}
             onPressOut={() => setPressed(false)}
-            role={Platform.OS === 'web' ? 'menuitem' : 'button'}
+            role={inMenu ? 'menuitem' : 'button'}
             aria-label={ariaLabel ?? label}
             // `aria-hidden` and `pointerEvents` don't take collapsed items
             // out of the tab order. An open menu has one tab stop, as the
@@ -700,6 +707,11 @@ const Menu = ({
 
   const effectiveExpanded = triggerVisible && expanded;
 
+  // On web the open menu is named after the trigger. An unnamed `role="menu"`
+  // is announced with no context, so without a label the items stay buttons.
+  const triggerLabel = trigger['aria-label'];
+  const isMenu = Platform.OS === 'web' && !!triggerLabel;
+
   // A hidden trigger closes the menu, so tell the parent. Otherwise `expanded`
   // stays true, and the menu opens again by itself when the trigger comes back.
   const dismissWhenTriggerHides = useLatestCallback(onDismiss);
@@ -918,13 +930,10 @@ const Menu = ({
             },
           ]}
           // A menu without items would be announced as an empty one. It is
-          // named after the trigger that opens it.
-          role={Platform.OS === 'web' && effectiveExpanded ? 'menu' : undefined}
-          aria-label={
-            Platform.OS === 'web' && effectiveExpanded
-              ? trigger['aria-label']
-              : undefined
-          }
+          // named after the trigger that opens it, and without a name the
+          // items are plain buttons instead.
+          role={isMenu && effectiveExpanded ? 'menu' : undefined}
+          aria-label={isMenu && effectiveExpanded ? triggerLabel : undefined}
         >
           <ScrollView
             ref={scrollRef}
@@ -962,6 +971,7 @@ const Menu = ({
                     variant={itemsVariant}
                     theme={theme}
                     expanded={effectiveExpanded}
+                    inMenu={isMenu}
                     aria-label={item['aria-label'] ?? item.label}
                     onPress={handleItemPress(item)}
                     testID={item.testID}

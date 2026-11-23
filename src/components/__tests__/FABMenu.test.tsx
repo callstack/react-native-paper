@@ -542,7 +542,7 @@ describe('dismissing the menu', () => {
         <FAB.Menu
           expanded
           onDismiss={onDismiss}
-          trigger={{ icon: 'plus' }}
+          trigger={{ icon: 'plus', 'aria-label': 'Actions' }}
           items={makeItems(onItemPress)}
         />
       );
@@ -559,6 +559,33 @@ describe('dismissing the menu', () => {
       expect(space.preventDefault).toHaveBeenCalled();
       expect(onItemPress).toHaveBeenCalledTimes(1);
       expect(onDismiss).toHaveBeenCalledTimes(1);
+    });
+
+    it('makes the items menu items when the trigger has a label', async () => {
+      await render(
+        <FAB.Menu
+          expanded
+          onDismiss={jest.fn()}
+          trigger={{ icon: 'plus', 'aria-label': 'Actions' }}
+          items={makeItems()}
+        />
+      );
+
+      expect(screen.getByTestId('item-0')).toHaveProp('role', 'menuitem');
+      expect(screen.getByTestId('item-1')).toHaveProp('role', 'menuitem');
+    });
+
+    it('leaves items as buttons when the trigger has no label', async () => {
+      await render(
+        <FAB.Menu
+          expanded
+          onDismiss={jest.fn()}
+          trigger={{ icon: 'plus' }}
+          items={makeItems()}
+        />
+      );
+
+      expect(screen.getByTestId('item-0')).toHaveProp('role', 'button');
     });
 
     it('keeps one item in the tab order and moves it with focus', async () => {
