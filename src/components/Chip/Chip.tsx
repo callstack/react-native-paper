@@ -228,6 +228,8 @@ const Chip = ({
   disabled = false,
   background,
   'aria-label': ariaLabel,
+  'aria-checked': ariaChecked,
+  accessibilityState,
   role = 'button',
   closeIconAccessibilityLabel = 'Close',
   closeIconTestID,
@@ -378,6 +380,8 @@ const Chip = ({
         delayLongPress={delayLongPress}
         disabled={disabled}
         aria-label={ariaLabel}
+        aria-checked={ariaChecked ?? accessibilityState?.checked}
+        accessibilityState={accessibilityState}
         role={role}
         aria-selected={selected}
         aria-disabled={disabled}
