@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   I18nManager,
+  Platform,
   StyleSheet,
   TextInput as NativeTextInput,
   View,
@@ -11,6 +12,8 @@ import {
   afterAll,
   afterEach,
   beforeAll,
+  beforeEach,
+  describe,
   expect,
   it,
   jest,
@@ -26,9 +29,12 @@ import {
   ACTIVE_LABEL_FONT_SIZE,
   FILLED_ACTIVE_LABEL_TOP_POSITION,
   FILLED_INACTIVE_LABEL_TOP_POSITION,
+  FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
   INACTIVE_LABEL_FONT_SIZE,
+  LABEL_START_OFFSET_WITHOUT_ACCESSORY,
   OUTLINED_ACTIVE_LABEL_TOP_POSITION,
   OUTLINED_INACTIVE_LABEL_TOP_POSITION,
+  OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
   OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY,
 } from '../TextInput/constants';
 import type {
@@ -200,7 +206,12 @@ it('renders filled TextInput with TextInput.Icon accessories when error is true'
           <TextInput.Icon {...props} icon="magnify" />
         )}
         endAccessory={(props: TextInputAccessoryProps) => (
-          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+          <TextInput.Icon
+            {...props}
+            icon="close"
+            aria-label="Clear"
+            onPress={() => {}}
+          />
         )}
       />
     )
@@ -222,7 +233,12 @@ it('renders outlined TextInput with TextInput.Icon accessories when error is tru
           <TextInput.Icon {...props} icon="magnify" />
         )}
         endAccessory={(props: TextInputAccessoryProps) => (
-          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+          <TextInput.Icon
+            {...props}
+            icon="close"
+            aria-label="Clear"
+            onPress={() => {}}
+          />
         )}
       />
     )
@@ -266,10 +282,20 @@ it('disables TextInput.Icon when the field is disabled', async () => {
       onChangeText={() => {}}
       disabled
       startAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="magnify" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="magnify"
+          aria-label="Search"
+          onPress={() => {}}
+        />
       )}
       endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          aria-label="Clear"
+          onPress={() => {}}
+        />
       )}
     />
   );
@@ -293,6 +319,7 @@ it('does not expose a handler-less TextInput.Icon as a control when the field is
         <TextInput.Icon
           {...props}
           icon="close"
+          aria-label="Clear"
           onPress={() => {}}
           testID="clear"
         />
@@ -300,7 +327,7 @@ it('does not expose a handler-less TextInput.Icon as a control when the field is
     />
   );
 
-  const decorative = screen.getByTestId('decorative');
+  const decorative = screen.getByTestId('decorative', includeHiddenElements);
   expect(decorative).toHaveProp('role', 'none');
   expect(decorative).not.toBeDisabled();
 
@@ -326,7 +353,12 @@ it('dims a disabled TextInput with TextInput.Icon accessories exactly once', asy
           <TextInput.Icon {...props} icon="magnify" />
         )}
         endAccessory={(props: TextInputAccessoryProps) => (
-          <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+          <TextInput.Icon
+            {...props}
+            icon="close"
+            aria-label="Clear"
+            onPress={() => {}}
+          />
         )}
       />
     )
@@ -347,7 +379,12 @@ it('uses the disabled color for every TextInput.Icon of a disabled field with an
         <TextInput.Icon {...props} icon="magnify" />
       )}
       endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          aria-label="Clear"
+          onPress={() => {}}
+        />
       )}
     />
   );
@@ -374,6 +411,7 @@ it('uses the disabled color over iconColor for every TextInput.Icon of a disable
           {...props}
           icon="close"
           iconColor="#6750A4"
+          aria-label="Clear"
           onPress={() => {}}
         />
       )}
@@ -399,6 +437,7 @@ it('disables a TextInput.Icon that only has onLongPress when the field is disabl
         <TextInput.Icon
           {...props}
           icon="close"
+          aria-label="Clear"
           onLongPress={onLongPress}
           testID="long"
         />
@@ -424,10 +463,20 @@ it('does not disable TextInput.Icon when the field is read-only (editable false)
       onChangeText={() => {}}
       editable={false}
       startAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="magnify" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="magnify"
+          aria-label="Search"
+          onPress={() => {}}
+        />
       )}
       endAccessory={(props: TextInputAccessoryProps) => (
-        <TextInput.Icon {...props} icon="close" onPress={() => {}} />
+        <TextInput.Icon
+          {...props}
+          icon="close"
+          aria-label="Clear"
+          onPress={() => {}}
+        />
       )}
     />
   );
@@ -452,7 +501,7 @@ it('renders supporting text below the field', async () => {
   ).toBeOnTheScreen();
 });
 
-it('uses polite aria-live on error supporting text', async () => {
+it('marks the input invalid and describes the error supporting text', async () => {
   await render(
     <TextInput
       label="Email"
@@ -464,8 +513,9 @@ it('uses polite aria-live on error supporting text', async () => {
     />
   );
 
-  expect(screen.getByText('Invalid')).toHaveProp('aria-live', 'polite');
-  expect(screen.getByLabelText('Email')).toHaveProp('aria-invalid', true);
+  const input = screen.getByLabelText('Email');
+  expect(input).toHaveProp('aria-invalid', true);
+  expect(input).toHaveProp('accessibilityHint', 'Invalid');
 });
 
 it('marks the input invalid when error is true without supporting text', async () => {
@@ -484,7 +534,7 @@ it('marks the input invalid when error is true without supporting text', async (
   expect(input).not.toHaveProp('accessibilityHint');
 });
 
-it('hides helper supporting text from the accessibility tree and omits aria-live', async () => {
+it('describes helper supporting text without including it in the field name', async () => {
   await render(
     <TextInput
       label="Email"
@@ -495,13 +545,16 @@ it('hides helper supporting text from the accessibility tree and omits aria-live
     />
   );
 
-  const supportingText = screen.getByText('Optional', includeHiddenElements);
-  expect(supportingText).toHaveProp('aria-hidden', true);
-  expect(supportingText).not.toHaveProp('aria-live');
-  expect(screen.getByLabelText('Email, Optional')).toBeOnTheScreen();
+  expect(screen.getByLabelText('Email')).toHaveProp(
+    'accessibilityHint',
+    'Optional'
+  );
+  expect(screen.getByText('Optional', includeHiddenElements)).not.toHaveProp(
+    'aria-live'
+  );
 });
 
-it('includes supporting text in aria-label when label is omitted', async () => {
+it('keeps supporting text separate when label is omitted', async () => {
   await render(
     <TextInput
       value=""
@@ -511,7 +564,10 @@ it('includes supporting text in aria-label when label is omitted', async () => {
     />
   );
 
-  expect(screen.getByLabelText('Helper only')).toBeOnTheScreen();
+  expect(screen.getByTestId('tf-input')).not.toHaveProp('aria-label');
+  expect(
+    screen.getByText('Helper only', includeHiddenElements)
+  ).toBeOnTheScreen();
 });
 
 it('does not mark the input as aria-disabled when editable is false (read-only)', async () => {
@@ -696,8 +752,10 @@ it('shows a character counter when counter is true and maxLength is set (filled)
     />
   );
 
-  expect(screen.getByText('5/100')).toBeOnTheScreen();
-  expect(screen.queryByText('0/100')).not.toBeOnTheScreen();
+  expect(screen.getByText('5/100', includeHiddenElements)).toBeOnTheScreen();
+  expect(
+    screen.queryByText('0/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 });
 
 it('shows a character counter when counter is true and maxLength is set (outlined)', async () => {
@@ -712,7 +770,7 @@ it('shows a character counter when counter is true and maxLength is set (outline
     />
   );
 
-  expect(screen.getByText('0/50')).toBeOnTheScreen();
+  expect(screen.getByText('0/50', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('updates the character counter when the value changes', async () => {
@@ -726,7 +784,7 @@ it('updates the character counter when the value changes', async () => {
     />
   );
 
-  expect(screen.getByText('1/10')).toBeOnTheScreen();
+  expect(screen.getByText('1/10', includeHiddenElements)).toBeOnTheScreen();
 
   await rerender(
     <TextInput
@@ -738,7 +796,7 @@ it('updates the character counter when the value changes', async () => {
     />
   );
 
-  expect(screen.getByText('4/10')).toBeOnTheScreen();
+  expect(screen.getByText('4/10', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('does not show a character counter when counter is false', async () => {
@@ -751,7 +809,9 @@ it('does not show a character counter when counter is false', async () => {
     />
   );
 
-  expect(screen.queryByText('5/100')).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('5/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 });
 
 it('does not show a character counter when maxLength is missing', async () => {
@@ -759,8 +819,10 @@ it('does not show a character counter when maxLength is missing', async () => {
     <TextInput label="Bio" value="hello" onChangeText={() => {}} counter />
   );
 
-  expect(screen.queryByText('5/100')).not.toBeOnTheScreen();
-  expect(screen.queryByText(/\//)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('5/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
+  expect(screen.queryByText(/\//, includeHiddenElements)).not.toBeOnTheScreen();
 });
 
 it('invokes onFocus and onBlur on the TextInput', async () => {
@@ -1034,7 +1096,7 @@ it('renders the counter as a Text child', async () => {
     />
   );
 
-  expect(screen.getByText('2/80')).toBeOnTheScreen();
+  expect(screen.getByText('2/80', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('renders supporting text and counter separately when both are shown', async () => {
@@ -1052,7 +1114,7 @@ it('renders supporting text and counter separately when both are shown', async (
   expect(
     screen.getByText('Help text', includeHiddenElements)
   ).toBeOnTheScreen();
-  expect(screen.getByText('1/10')).toBeOnTheScreen();
+  expect(screen.getByText('1/10', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('applies RTL text alignment and writing direction to the TextInput (filled)', async () => {
@@ -1109,7 +1171,7 @@ it('applies RTL writing direction to supporting text', async () => {
   });
 });
 
-it('places EndAccessory before StartAccessory in the tree when RTL', async () => {
+it('renders StartAccessory before EndAccessory in RTL', async () => {
   I18nManager.isRTL = true;
 
   function StartAccessory() {
@@ -1132,9 +1194,9 @@ it('places EndAccessory before StartAccessory in the tree when RTL', async () =>
   );
 
   const tree = toJSON();
-  expect(firstIndexOfTestIdInTree(tree, 'rtl-acc-from-end-prop')).toBeLessThan(
+  expect(
     firstIndexOfTestIdInTree(tree, 'rtl-acc-from-start-prop')
-  );
+  ).toBeLessThan(firstIndexOfTestIdInTree(tree, 'rtl-acc-from-end-prop'));
 });
 
 it('places StartAccessory before EndAccessory in the tree when LTR', async () => {
@@ -1197,7 +1259,7 @@ it('shows placeholder when unfocused and no label is given', async () => {
   );
 });
 
-it('shows placeholder when the TextInput is focused', async () => {
+it('shows placeholder when the TextInput is focused, once the label floats away', async () => {
   await render(
     <TextInput
       label="Email"
@@ -1210,13 +1272,19 @@ it('shows placeholder when the TextInput is focused', async () => {
 
   await fireEvent(screen.getByTestId('tf-input'), 'focus');
 
+  // The label still rests over the input when the field takes focus.
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
+
+  await act(() => jest.advanceTimersByTimeAsync(1000));
+
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(screen.getByTestId('tf-input').props.placeholder).toBe(
     'e.g. user@example.com'
   );
 });
 
-it('shows placeholder on multiline TextInput when focused', async () => {
+it('shows placeholder on multiline TextInput when focused, once the label floats away', async () => {
   await render(
     <TextInput
       label="Notes"
@@ -1234,9 +1302,39 @@ it('shows placeholder on multiline TextInput when focused', async () => {
   await fireEvent(screen.getByTestId('tf-multiline'), 'focus');
 
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+  expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(' ');
+
+  await act(() => jest.advanceTimersByTimeAsync(1000));
+
+  // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(
     'Add a note…'
   );
+});
+
+it('shows placeholder at once when a focused TextInput with a floated label is cleared', async () => {
+  const { rerender } = await render(
+    <TextInput
+      label="Email"
+      value="user@example.com"
+      onChangeText={() => {}}
+      placeholder="e.g. user@example.com"
+    />
+  );
+
+  await fireEvent(screen.getByLabelText('Email'), 'focus');
+  await rerender(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      placeholder="e.g. user@example.com"
+    />
+  );
+
+  expect(
+    screen.getByPlaceholderText('e.g. user@example.com')
+  ).toBeOnTheScreen();
 });
 
 it.each(['filled', 'outlined'] as const)(
@@ -1255,17 +1353,23 @@ it.each(['filled', 'outlined'] as const)(
   }
 );
 
-it('hides the input of an empty, unfocused TextInput while its label rests in place', async () => {
+it('keeps the input of an empty, unfocused TextInput visible with a blank placeholder while its label rests in place', async () => {
   await render(
     <TextInput
       label="Email"
       value=""
       onChangeText={() => {}}
+      placeholder="e.g. user@example.com"
       testID="tf-input"
     />
   );
 
-  expect(screen.getByTestId('tf-input')).not.toBeVisible();
+  // Fading the input out would also remove it from the native accessibility
+  // tree, so the resting label covers a blank placeholder instead.
+  expect(screen.getByTestId('tf-input')).toBeVisible();
+  expect(
+    screen.queryByPlaceholderText('e.g. user@example.com')
+  ).not.toBeOnTheScreen();
 });
 
 it('does not expose the placeholder string again after the TextInput loses focus', async () => {
@@ -1286,7 +1390,7 @@ it('does not expose the placeholder string again after the TextInput loses focus
   expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
 });
 
-it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order)', async () => {
+it('keeps a lone StartAccessory before the input in both LTR and RTL (tree order)', async () => {
   function LoneStartAccessory() {
     return <View testID="lone-start-acc" />;
   }
@@ -1321,9 +1425,121 @@ it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order
   );
 
   const rtlTree = toJsonRtl();
-  expect(firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')).toBeLessThan(
-    firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')
+  expect(firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')).toBeLessThan(
+    firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')
   );
+});
+
+it('shows the error icon in RTL when only a StartAccessory is set', async () => {
+  I18nManager.isRTL = true;
+
+  function StartAccessory() {
+    return <View testID="rtl-error-start-acc" />;
+  }
+
+  await render(
+    <TextInput
+      label="Email"
+      value=""
+      error
+      onChangeText={() => {}}
+      startAccessory={StartAccessory}
+    />
+  );
+
+  expect(
+    screen.getByText('alert-circle', includeHiddenElements)
+  ).toBeOnTheScreen();
+});
+
+it('keeps the label at the field edge in RTL when only an EndAccessory is set', async () => {
+  I18nManager.isRTL = true;
+
+  function EndAccessory() {
+    return <View testID="rtl-lone-end-acc" />;
+  }
+
+  await render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      endAccessory={EndAccessory}
+    />
+  );
+
+  expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle({
+    start: LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+  });
+});
+
+// React Native Web resolves `start` from a `dir` prop on its own Views, not
+// from `<html dir>`, so on web the label takes its side from Paper's direction.
+describe('on web in RTL', () => {
+  let platformOS: { restore(): void } | undefined;
+
+  beforeEach(() => {
+    platformOS = jest.replaceProperty(Platform, 'OS', 'web');
+    I18nManager.isRTL = true;
+  });
+
+  afterEach(() => {
+    platformOS?.restore();
+  });
+
+  it.each([
+    {
+      variant: 'filled' as const,
+      offset: FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
+    },
+    {
+      variant: 'outlined' as const,
+      offset: OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
+    },
+  ])(
+    'places the $variant label next to the StartAccessory on the right',
+    async ({ variant, offset }) => {
+      function StartAccessory() {
+        return <View testID="web-rtl-start-acc" />;
+      }
+
+      await render(
+        <TextInput
+          variant={variant}
+          label="Email"
+          value=""
+          onChangeText={() => {}}
+          startAccessory={StartAccessory}
+        />
+      );
+
+      const labelWrapper = screen.getByText(
+        'Email',
+        includeHiddenElements
+      ).parent;
+      expect(labelWrapper).toHaveStyle({ right: offset });
+      expect(labelWrapper).not.toHaveStyle({ start: offset });
+    }
+  );
+
+  it('keeps the label on the right, clear of a lone EndAccessory', async () => {
+    function EndAccessory() {
+      return <View testID="web-rtl-end-acc" />;
+    }
+
+    await render(
+      <TextInput
+        label="Email"
+        value=""
+        onChangeText={() => {}}
+        endAccessory={EndAccessory}
+      />
+    );
+
+    expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle(
+      { right: LABEL_START_OFFSET_WITHOUT_ACCESSORY }
+    );
+  });
 });
 
 it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', async () => {
@@ -1338,8 +1554,8 @@ it('shows prefix and suffix when the field is floating and hides them after valu
     />
   );
 
-  expect(screen.getByText('$')).toBeOnTheScreen();
-  expect(screen.getByText('/100')).toBeOnTheScreen();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText('/100', includeHiddenElements)).toBeOnTheScreen();
 
   await rerender(
     <TextInput
@@ -1352,8 +1568,10 @@ it('shows prefix and suffix when the field is floating and hides them after valu
     />
   );
 
-  expect(screen.queryByText('$')).not.toBeOnTheScreen();
-  expect(screen.queryByText('/100')).not.toBeOnTheScreen();
+  expect(screen.queryByText('$', includeHiddenElements)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
   expect(screen.getByTestId('tf-ps')).toBeOnTheScreen();
 });
 
@@ -1369,13 +1587,62 @@ it('renders prefix and suffix while focused even when value is empty', async () 
     />
   );
 
-  expect(screen.queryByText('$')).not.toBeOnTheScreen();
-  expect(screen.queryByText(' kg')).not.toBeOnTheScreen();
+  expect(screen.queryByText('$', includeHiddenElements)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText(' kg', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 
   await fireEvent(screen.getByTestId('tf-ps-focus'), 'focus');
 
-  expect(screen.getByText('$')).toBeOnTheScreen();
-  expect(screen.getByText(' kg')).toBeOnTheScreen();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText(' kg', includeHiddenElements)).toBeOnTheScreen();
+});
+
+it.each([
+  { affix: 'prefix', text: '$' },
+  { affix: 'suffix', text: ' kg' },
+] as const)(
+  'fades the $affix in as the label floats away from it',
+  async ({ affix, text }) => {
+    await render(
+      <TextInput
+        label="Amount"
+        value=""
+        onChangeText={() => {}}
+        {...{ [affix]: text }}
+      />
+    );
+
+    await fireEvent(screen.getByLabelText('Amount'), 'focus');
+
+    expect(
+      getAnimatedStyle(screen.getByText(text, includeHiddenElements))
+    ).toMatchObject({
+      opacity: 1,
+      transitionProperty: 'opacity',
+      transitionDuration: LightTheme.motion.duration.short3,
+    });
+  }
+);
+
+it('keeps the disabled dim on the prefix and suffix of a labelled field', async () => {
+  await render(
+    <TextInput
+      label="Amount"
+      value="5"
+      onChangeText={() => {}}
+      prefix="$"
+      suffix=" kg"
+      disabled
+    />
+  );
+
+  expect(screen.getByText('$', includeHiddenElements)).toHaveStyle({
+    opacity: stateOpacity.disabled,
+  });
+  expect(screen.getByText(' kg', includeHiddenElements)).toHaveStyle({
+    opacity: stateOpacity.disabled,
+  });
 });
 
 it('places prefix Text before the TextInput and suffix Text after it', async () => {
@@ -1399,24 +1666,25 @@ it('places prefix Text before the TextInput and suffix Text after it', async () 
   );
 });
 
-it('aligns input text toward the suffix when suffix is active (LTR)', async () => {
+it('start-aligns input text even when suffix is active (LTR)', async () => {
   await render(
     <TextInput
       label="Label"
       value="5"
       onChangeText={() => {}}
+      prefix="$"
       suffix="/100"
       testID="tf-suffix-align-ltr"
     />
   );
 
   expect(screen.getByTestId('tf-suffix-align-ltr')).toHaveStyle({
-    textAlign: 'right',
+    textAlign: 'left',
     writingDirection: 'ltr',
   });
 });
 
-it('aligns input text toward the suffix when suffix is active (RTL)', async () => {
+it('start-aligns input text even when suffix is active (RTL)', async () => {
   I18nManager.isRTL = true;
 
   await render(
@@ -1424,13 +1692,14 @@ it('aligns input text toward the suffix when suffix is active (RTL)', async () =
       label="Label"
       value="5"
       onChangeText={() => {}}
+      prefix="$"
       suffix="/100"
       testID="tf-suffix-align-rtl"
     />
   );
 
   expect(screen.getByTestId('tf-suffix-align-rtl')).toHaveStyle({
-    textAlign: 'left',
+    textAlign: 'right',
     writingDirection: 'rtl',
   });
 });
@@ -1470,10 +1739,18 @@ it('does not apply the TextInput style prop to prefix or suffix Text', async () 
     letterSpacing: 9,
   });
 
-  expect(screen.getByText('$')).not.toHaveStyle({ fontSize: 40 });
-  expect(screen.getByText('$')).not.toHaveStyle({ letterSpacing: 9 });
-  expect(screen.getByText(']')).not.toHaveStyle({ fontSize: 40 });
-  expect(screen.getByText(']')).not.toHaveStyle({ letterSpacing: 9 });
+  expect(screen.getByText('$', includeHiddenElements)).not.toHaveStyle({
+    fontSize: 40,
+  });
+  expect(screen.getByText('$', includeHiddenElements)).not.toHaveStyle({
+    letterSpacing: 9,
+  });
+  expect(screen.getByText(']', includeHiddenElements)).not.toHaveStyle({
+    fontSize: 40,
+  });
+  expect(screen.getByText(']', includeHiddenElements)).not.toHaveStyle({
+    letterSpacing: 9,
+  });
 });
 
 it('passes defaultValue to the native input when uncontrolled without counter', async () => {
@@ -1507,12 +1784,12 @@ it('updates the character counter for an uncontrolled field with counter enabled
     />
   );
 
-  expect(screen.getByText('1/10')).toBeOnTheScreen();
+  expect(screen.getByText('1/10', includeHiddenElements)).toBeOnTheScreen();
 
   await user.type(screen.getByTestId('tf-uncontrolled-counter'), 'bcd');
 
   expect(onChangeText).toHaveBeenCalledWith('abcd');
-  expect(screen.getByText('4/10')).toBeOnTheScreen();
+  expect(screen.getByText('4/10', includeHiddenElements)).toBeOnTheScreen();
 });
 
 it('resets counter and hides prefix/suffix when clear() is called on uncontrolled field while blurred', async () => {
@@ -1529,17 +1806,19 @@ it('resets counter and hides prefix/suffix when clear() is called on uncontrolle
     />
   );
 
-  expect(screen.getByText('3/200')).toBeOnTheScreen();
-  expect(screen.getByText('$')).toBeOnTheScreen();
-  expect(screen.getByText('/100')).toBeOnTheScreen();
+  expect(screen.getByText('3/200', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText('$', includeHiddenElements)).toBeOnTheScreen();
+  expect(screen.getByText('/100', includeHiddenElements)).toBeOnTheScreen();
 
   await act(() => {
     ref.current?.clear();
   });
 
   expect(screen.getByText('0/200', includeHiddenElements)).toBeOnTheScreen();
-  expect(screen.queryByText('$')).not.toBeOnTheScreen();
-  expect(screen.queryByText('/100')).not.toBeOnTheScreen();
+  expect(screen.queryByText('$', includeHiddenElements)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 });
 
 it('resets counter but keeps prefix/suffix visible when clear() is called on uncontrolled field while focused', async () => {
@@ -1626,8 +1905,10 @@ it('hides prefix/suffix when blurring after clear() was called while focused', a
   await fireEvent(screen.getByTestId('tf-clear-then-blur'), 'blur');
 
   // After blur with no text, prefix/suffix should be hidden
-  expect(screen.queryByText('$')).not.toBeOnTheScreen();
-  expect(screen.queryByText('/100')).not.toBeOnTheScreen();
+  expect(screen.queryByText('$', includeHiddenElements)).not.toBeOnTheScreen();
+  expect(
+    screen.queryByText('/100', includeHiddenElements)
+  ).not.toBeOnTheScreen();
 });
 
 it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined', async () => {
@@ -1640,6 +1921,7 @@ it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined',
         <TextInput.Icon
           {...props}
           icon="close"
+          aria-label="Clear"
           onPress={() => {}}
           hitSlop={undefined}
           testID="clear-icon"
@@ -1654,4 +1936,46 @@ it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined',
     left: 12,
     right: 12,
   });
+});
+
+it('sizes the TextInput.Icon glyph with `iconSize`', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value=""
+      startAccessory={(props) => (
+        <TextInput.Icon
+          {...props}
+          iconSize={12}
+          icon={({ size }) => (
+            <View testID="glyph" style={{ width: size, height: size }} />
+          )}
+        />
+      )}
+    />
+  );
+
+  expect(screen.getByTestId('glyph', includeHiddenElements)).toHaveStyle({
+    width: 12,
+    height: 12,
+  });
+});
+
+it('rejects the named `size` on TextInput.Icon', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value=""
+      startAccessory={(props) => (
+        <TextInput.Icon
+          {...props}
+          icon="magnify"
+          // @ts-expect-error `size` is not a TextInput.Icon prop
+          size="small"
+        />
+      )}
+    />
+  );
+
+  expect(screen.getByLabelText('Search')).toBeOnTheScreen();
 });

@@ -13,6 +13,7 @@ import useLatestCallback from 'use-latest-callback';
 import BottomNavigationBar from './BottomNavigationBar';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import { useInternalTheme } from '../../core/theming';
+import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
@@ -342,7 +343,7 @@ const BottomNavigation = <Route extends BaseRoute>({
   getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
-  const { scale } = theme.animation;
+  const getDuration = useMotionDuration();
   const compact = compactProp ?? false;
   let shifting = shiftingProp ?? false;
 
@@ -393,7 +394,7 @@ const BottomNavigation = <Route extends BaseRoute>({
         ...navigationState.routes.map((_, i) =>
           Animated.timing(tabsPositionAnims[i], {
             toValue: i === index ? 0 : i >= index ? 1 : -1,
-            duration: 150 * scale,
+            duration: getDuration(150),
             useNativeDriver: true,
             easing: sceneAnimationEasing,
           })
@@ -415,7 +416,7 @@ const BottomNavigation = <Route extends BaseRoute>({
     [
       navigationState.routes,
       offsetsAnims,
-      scale,
+      getDuration,
       tabsPositionAnims,
       sceneAnimationEasing,
     ]

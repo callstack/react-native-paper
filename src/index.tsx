@@ -9,6 +9,8 @@ export {
 
 export { useLocale, LocaleProvider } from './core/locale';
 
+export { useReduceMotion } from './theme/accessibility/ReduceMotionContext';
+
 export * from './theme/schemes';
 
 export { default as Provider } from './core/PaperProvider';
@@ -103,6 +105,12 @@ export type {
   Size as FABSize,
 } from './components/FAB/tokens';
 export type { Props as IconButtonProps } from './components/IconButton/IconButton';
+export type {
+  Mode as IconButtonMode,
+  Size as IconButtonSize,
+  Width as IconButtonWidth,
+  Shape as IconButtonShape,
+} from './components/IconButton/tokens';
 export type { Props as ListAccordionProps } from './components/List/ListAccordion';
 export type { Props as ListAccordionGroupProps } from './components/List/ListAccordionGroup';
 export type { Props as ListIconProps } from './components/List/ListIcon';
@@ -142,3 +150,4 @@ export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
 
 export { type TypescaleKey, type Theme, type Elevation } from './theme/types';
+export type { ReduceMotionPreference } from './core/useResolvedReduceMotion';

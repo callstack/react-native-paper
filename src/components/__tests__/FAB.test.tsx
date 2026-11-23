@@ -1,4 +1,6 @@
-import { Platform } from 'react-native';
+import * as React from 'react';
+import { Platform, View } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 import {
   afterEach,
@@ -9,9 +11,30 @@ import {
   jest,
 } from '@jest/globals';
 import { fireEvent, userEvent } from '@testing-library/react-native';
+import * as Reanimated from 'react-native-reanimated';
+import { getAnimatedStyle } from 'react-native-reanimated';
 
-import { render, screen } from '../../test-utils';
+import PaperProvider from '../../core/PaperProvider';
+import { act, render, screen } from '../../test-utils';
 import FAB from '../FAB';
+import Tooltip from '../Tooltip/Tooltip';
+
+jest.mock('react-native-reanimated', () => {
+  const ReanimatedModule = jest.requireActual<
+    typeof import('react-native-reanimated')
+  >('react-native-reanimated');
+
+  return {
+    __esModule: true,
+    ...ReanimatedModule,
+    default: ReanimatedModule.default,
+    withSpring: jest.fn(ReanimatedModule.withSpring),
+  };
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 it('renders FAB with default props', async () => {
   const tree = (await render(<FAB icon="plus" />)).toJSON();
@@ -33,16 +56,16 @@ it('renders FAB with tertiary variant', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders FAB with tonalSecondary variant', async () => {
+it('renders FAB with secondaryContainer variant', async () => {
   const tree = (
-    await render(<FAB icon="plus" variant="tonalSecondary" />)
+    await render(<FAB icon="plus" variant="secondaryContainer" />)
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('renders FAB with tonalTertiary variant', async () => {
+it('renders FAB with tertiaryContainer variant', async () => {
   const tree = (
-    await render(<FAB icon="plus" variant="tonalTertiary" />)
+    await render(<FAB icon="plus" variant="tertiaryContainer" />)
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
@@ -94,6 +117,37 @@ it('renders FAB transitioning to visible', async () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
+it('keeps the visibility springs on with reduceMotion="off" whatever the device setting', async () => {
+  const { rerender } = await render(
+    <PaperProvider reduceMotion="off">
+      <FAB icon="plus" />
+    </PaperProvider>
+  );
+  jest.mocked(Reanimated.withSpring).mockClear();
+
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB icon="plus" visible={false} />
+    </PaperProvider>
+  );
+  await rerender(
+    <PaperProvider reduceMotion="off">
+      <FAB icon="plus" visible />
+    </PaperProvider>
+  );
+
+  expect(
+    jest
+      .mocked(Reanimated.withSpring)
+      .mock.calls.map(([, config]) => config?.reduceMotion)
+  ).toEqual([
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+    Reanimated.ReduceMotion.Never,
+  ]);
+});
+
 it('calls onPress when FAB is pressed', async () => {
   const user = userEvent.setup();
   const onPress = jest.fn();
@@ -109,6 +163,39 @@ it('forwards event object to onPress', async () => {
     key: 'value',
   });
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
+});
+
+it('calls onLongPress and onPressOut when FAB is long pressed', async () => {
+  const user = userEvent.setup();
+  const onLongPress = jest.fn();
+  const onPressOut = jest.fn();
+  await render(
+    <FAB
+      icon="plus"
+      aria-label="Add item"
+      onLongPress={onLongPress}
+      onPressOut={onPressOut}
+      delayLongPress={300}
+    />
+  );
+  await user.longPress(screen.getByRole('button', { name: 'Add item' }), {
+    duration: 400,
+  });
+  expect(onLongPress).toHaveBeenCalledTimes(1);
+  expect(onPressOut).toHaveBeenCalledTimes(1);
+});
+
+it('shows Tooltip when FAB is long pressed', async () => {
+  const user = userEvent.setup();
+  await render(
+    <PaperProvider>
+      <Tooltip title="Press Me">
+        <FAB icon="plus" aria-label="Add item" onPress={() => {}} />
+      </Tooltip>
+    </PaperProvider>
+  );
+  await user.longPress(screen.getByRole('button', { name: 'Add item' }));
+  expect(screen.getByText('Press Me')).toBeOnTheScreen();
 });
 
 describe('without a touch handler', () => {
@@ -154,18 +241,12 @@ describe('without a touch handler', () => {
       );
     });
 
-    it('stays a button with a touch handler', async () => {
-      await render(
-        <FAB icon="star" aria-label="Favorite" onPress={() => {}} />
-      );
-
-      expect(
-        screen.getByRole('button', { name: 'Favorite' })
-      ).toBeOnTheScreen();
-    });
-
-    it('stays a button while it reports a toggle state', async () => {
-      await render(<FAB icon="star" aria-label="Favorite" aria-checked />);
+    it.each([
+      ['with only onPress', { onPress: () => {} }],
+      ['with only onLongPress', { onLongPress: () => {} }],
+      ['while it reports a toggle state', { 'aria-checked': true }],
+    ])('stays a button %s', async (_, props) => {
+      await render(<FAB icon="star" aria-label="Favorite" {...props} />);
 
       expect(
         screen.getByRole('button', { name: 'Favorite' })
@@ -197,5 +278,554 @@ describe('without a touch handler', () => {
         screen.getByRole('button', { name: 'Open actions' })
       ).toBeDisabled();
     });
+  });
+});
+
+const getStyle = (
+  ref: React.RefObject<React.ComponentRef<typeof View> | null>
+) => {
+  if (!ref.current) throw new Error('Expected FAB ref to be attached');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+  const animatedComponent = ref.current as unknown as {
+    props: Record<string, unknown>;
+  };
+  return getAnimatedStyle(animatedComponent);
+};
+
+// Android exposes elevation as a plain number, so the direction is checkable
+// without the shadow tokens.
+const getElevation = (
+  ref: React.RefObject<React.ComponentRef<typeof View> | null>
+) => {
+  const style = getStyle(ref);
+  if (!('elevation' in style) || typeof style.elevation !== 'number') {
+    throw new Error('Expected a numeric elevation');
+  }
+  return style.elevation;
+};
+
+it('does not turn a FAB without a touch handler into a button', async () => {
+  await render(<FAB icon="plus" aria-label="Create" />);
+  expect(screen.getByLabelText('Create')).toBeOnTheScreen();
+  expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+});
+
+it('hides an invisible FAB from accessibility and keyboard navigation without marking it disabled', async () => {
+  const onPress = jest.fn();
+  await render(
+    <FAB
+      icon="plus"
+      testID="create"
+      aria-label="Create"
+      onPress={onPress}
+      visible={false}
+    />
+  );
+  expect(screen.queryByRole('button', { name: 'Create' })).toBeNull();
+  const fab = screen.getByTestId('create', { includeHiddenElements: true });
+  expect(fab).not.toBeDisabled();
+  expect(fab).toHaveProp('accessible', false);
+  expect(fab).toHaveProp('focusable', false);
+  expect(fab).toHaveProp('tabIndex', -1);
+  await userEvent.press(fab);
+  await fireEvent(fab, 'click', { nativeEvent: {} });
+  expect(onPress).not.toHaveBeenCalled();
+});
+
+// Drives Pressability itself, so the press is held through its timers.
+const touch = {
+  nativeEvent: { touches: [], changedTouches: [], identifier: 1 },
+  currentTarget: { measure: () => {} },
+  persist: () => {},
+};
+
+it('ignores a long press once the FAB hides mid-press but still reports the release', async () => {
+  const onPress = jest.fn();
+  const onLongPress = jest.fn();
+  const onPressOut = jest.fn();
+  const fabProps = {
+    icon: 'plus',
+    'aria-label': 'Create',
+    onPress,
+    onLongPress,
+    onPressOut,
+    delayLongPress: 300,
+  };
+  const { rerender } = await render(<FAB {...fabProps} />);
+  const fab = screen.getByRole('button', { name: 'Create' });
+
+  await fireEvent(fab, 'responderGrant', touch);
+  await rerender(<FAB {...fabProps} visible={false} />);
+  await act(() => jest.advanceTimersByTime(500));
+  await fireEvent(fab, 'responderRelease', touch);
+  await act(() => jest.advanceTimersByTime(500));
+
+  expect(onLongPress).not.toHaveBeenCalled();
+  expect(onPress).not.toHaveBeenCalled();
+  expect(onPressOut).toHaveBeenCalledTimes(1);
+});
+
+it.each([
+  ['loses its action', { onPress: undefined }],
+  ['hides', { visible: false }],
+])(
+  'shows the hover elevation again after a FAB that %s mid-press comes back',
+  async (_, interruption) => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const fabProps = {
+      ref,
+      style: {},
+      icon: 'plus',
+      'aria-label': 'Create',
+      onPress: () => {},
+    };
+    const { rerender } = await render(<FAB {...fabProps} />);
+    const resting = getStyle(ref);
+
+    // The interruption ends the press without a release.
+    await fireEvent(
+      screen.getByRole('button', { name: 'Create' }),
+      'responderGrant',
+      touch
+    );
+    await rerender(<FAB {...fabProps} {...interruption} />);
+    await rerender(<FAB {...fabProps} />);
+    await fireEvent(screen.getByRole('button', { name: 'Create' }), 'hoverIn');
+
+    expect(getStyle(ref)).not.toEqual(resting);
+  }
+);
+
+it('clears interaction elevation when a FAB is hidden and shown again', async () => {
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
+  const onPress = jest.fn();
+  const { rerender } = await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={onPress}
+    />
+  );
+  const resting = getStyle(ref);
+  await fireEvent(screen.getByRole('button', { name: 'Create' }), 'hoverIn');
+  expect(getStyle(ref)).not.toEqual(resting);
+  await rerender(
+    <FAB ref={ref} style={{}} icon="plus" onPress={onPress} visible={false} />
+  );
+  await rerender(<FAB ref={ref} style={{}} icon="plus" onPress={onPress} />);
+  expect(getStyle(ref)).toEqual(resting);
+});
+
+it('uses the shared FAB hover elevation for the menu trigger', async () => {
+  const { toJSON } = await render(
+    <FAB.Menu
+      expanded={false}
+      onDismiss={() => {}}
+      trigger={{ icon: 'plus', 'aria-label': 'Create', onPress: () => {} }}
+      items={[
+        { label: 'First', onPress: () => {} },
+        { label: 'Second', onPress: () => {} },
+      ]}
+    />
+  );
+  const before = JSON.stringify(toJSON());
+  await fireEvent(screen.getByRole('button', { name: 'Create' }), 'hoverIn');
+  const hovered = JSON.stringify(toJSON());
+  expect(hovered).not.toBe(before);
+  await fireEvent(screen.getByRole('button', { name: 'Create' }), 'hoverOut');
+  expect(JSON.stringify(toJSON())).toBe(before);
+});
+
+// React Native 0.88 sends no hover events on iOS or Android by default. These
+// only check that the elevation logic itself has no platform check.
+it.each(['ios', 'android'] as const)(
+  'keeps the resting elevation on focus and follows hover and press events when Platform.OS is %s',
+  async (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform);
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    await render(
+      <FAB
+        ref={ref}
+        style={{}}
+        icon="plus"
+        aria-label="Create"
+        onPress={() => {}}
+      />
+    );
+    const fab = screen.getByRole('button', { name: 'Create' });
+    const resting = getStyle(ref);
+
+    await fireEvent(fab, 'focus', { nativeEvent: {} });
+    expect(getStyle(ref)).toEqual(resting);
+    await fireEvent(fab, 'hoverIn');
+    const hovered = getStyle(ref);
+    expect(hovered).not.toEqual(resting);
+    await fireEvent(fab, 'focus', { nativeEvent: {} });
+    expect(getStyle(ref)).toEqual(hovered);
+    await fireEvent(fab, 'pressIn');
+    expect(getStyle(ref)).toEqual(resting);
+    await fireEvent(fab, 'pressOut');
+    expect(getStyle(ref)).toEqual(hovered);
+    await fireEvent(fab, 'hoverOut');
+    expect(getStyle(ref)).toEqual(resting);
+  }
+);
+
+it('does not re-render the FAB shell for a press without hover', async () => {
+  const onRender = jest.fn();
+  await render(
+    <React.Profiler id="fab" onRender={onRender}>
+      <FAB icon="plus" aria-label="Create" onPress={() => {}} />
+    </React.Profiler>
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+  onRender.mockClear();
+
+  // fireEvent calls the shell's press handlers directly. On iOS a real tap
+  // still re-renders the touchable for its own press feedback.
+  await fireEvent(fab, 'pressIn');
+  await fireEvent(fab, 'pressOut', { nativeEvent: {} });
+
+  expect(onRender).not.toHaveBeenCalled();
+});
+
+// react-native-web runs both press handlers before a render when a click
+// takes less than 50 ms, e.g. a tap-to-click on a trackpad.
+it('returns a hovered FAB to its hover elevation after a quick click', async () => {
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
+  await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={() => {}}
+    />
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+  await fireEvent(fab, 'hoverIn');
+  const hovered = getStyle(ref);
+
+  // The outer act holds the render back until both handlers have run, as
+  // react-native-web does for a quick click.
+  await act(async () => {
+    await fireEvent(fab, 'pressIn');
+    await fireEvent(fab, 'pressOut', { nativeEvent: {} });
+  });
+
+  expect(getStyle(ref)).toEqual(hovered);
+});
+
+it('shows the pressed elevation when the pointer arrives during a press', async () => {
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
+  await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={() => {}}
+    />
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+  const resting = getStyle(ref);
+
+  // e.g. a keyboard press, with the mouse moving onto the FAB before release
+  await fireEvent(fab, 'pressIn');
+  await fireEvent(fab, 'hoverIn');
+  expect(getStyle(ref)).toEqual(resting);
+  await fireEvent(fab, 'pressOut', { nativeEvent: {} });
+  expect(getStyle(ref)).not.toEqual(resting);
+});
+
+it('calls onPressOut and drops the pressed elevation when a hovered FAB is released', async () => {
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
+  const onPressOut = jest.fn();
+  await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={() => {}}
+      onPressOut={onPressOut}
+    />
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+
+  await fireEvent(fab, 'hoverIn');
+  const hovered = getStyle(ref);
+  await fireEvent(fab, 'pressIn');
+  expect(getStyle(ref)).not.toEqual(hovered);
+  await fireEvent(fab, 'pressOut', { nativeEvent: {} });
+
+  expect(onPressOut).toHaveBeenCalledWith({ nativeEvent: {} });
+  expect(getStyle(ref)).toEqual(hovered);
+});
+
+it('raises the elevation while hovered and lowers it while pressed when Platform.OS is android', async () => {
+  jest.replaceProperty(Platform, 'OS', 'android');
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
+  await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={() => {}}
+    />
+  );
+  const fab = screen.getByRole('button', { name: 'Create' });
+  const resting = getElevation(ref);
+
+  await fireEvent(fab, 'hoverIn');
+  expect(getElevation(ref)).toBeGreaterThan(resting);
+  await fireEvent(fab, 'pressIn');
+  expect(getElevation(ref)).toBe(resting);
+});
+
+it('restores the resting elevation when a hovered FAB loses its action', async () => {
+  const ref = React.createRef<React.ComponentRef<typeof View>>();
+  const { rerender } = await render(
+    <FAB
+      ref={ref}
+      style={{}}
+      icon="plus"
+      aria-label="Create"
+      onPress={() => {}}
+    />
+  );
+  const resting = getStyle(ref);
+  await fireEvent(screen.getByRole('button', { name: 'Create' }), 'hoverIn');
+  expect(getStyle(ref)).not.toEqual(resting);
+  await rerender(<FAB ref={ref} style={{}} icon="plus" aria-label="Create" />);
+  expect(getStyle(ref)).toEqual(resting);
+  expect(
+    screen.queryByRole('button', { name: 'Create' })
+  ).not.toBeOnTheScreen();
+  await rerender(<FAB ref={ref} style={{}} icon="plus" onPress={() => {}} />);
+  expect(getStyle(ref)).toEqual(resting);
+});
+
+describe('on web', () => {
+  const originalHTMLElement = Object.getOwnPropertyDescriptor(
+    globalThis,
+    'HTMLElement'
+  );
+  const originalDocument = Object.getOwnPropertyDescriptor(
+    globalThis,
+    'document'
+  );
+  const originalMatches = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'matches'
+  );
+  const originalComponentDidMount = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'componentDidMount'
+  );
+  let activeElement: unknown;
+  let focusVisible: boolean;
+  // The jest View mock is a class component, so its instances have props.
+  type ViewMockInstance = { props: ViewProps; blur: () => void };
+  let fabElement: ViewMockInstance | undefined;
+
+  beforeEach(() => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    activeElement = null;
+    focusVisible = true;
+    fabElement = undefined;
+    // Native View refs stand in for DOM elements in the native test renderer.
+    Object.defineProperty(globalThis, 'HTMLElement', {
+      configurable: true,
+      value: View,
+    });
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: {
+        get activeElement() {
+          return activeElement;
+        },
+      },
+    });
+    Object.defineProperty(View.prototype, 'matches', {
+      configurable: true,
+      value: (selectors: string) =>
+        selectors === ':focus-visible' && focusVisible,
+    });
+    // The pressable view with the FAB's testID is the element that takes focus.
+    Object.defineProperty(View.prototype, 'componentDidMount', {
+      configurable: true,
+      value(this: ViewMockInstance) {
+        if (this.props.testID === 'create') {
+          fabElement = this;
+        }
+      },
+    });
+  });
+
+  afterEach(() => {
+    for (const [target, key, descriptor] of [
+      [globalThis, 'HTMLElement', originalHTMLElement],
+      [globalThis, 'document', originalDocument],
+      [View.prototype, 'matches', originalMatches],
+      [View.prototype, 'componentDidMount', originalComponentDidMount],
+    ] as const) {
+      if (descriptor) {
+        Object.defineProperty(target, key, descriptor);
+      } else {
+        Reflect.deleteProperty(target, key);
+      }
+    }
+  });
+
+  const createElement = ({
+    isConnected = true,
+    focusable = true,
+    hiddenBy,
+  }: {
+    isConnected?: boolean;
+    focusable?: boolean;
+    hiddenBy?: string;
+  } = {}) => {
+    // Inherits from the View mock to pass the HTMLElement instanceof check.
+    const element: object = Object.create(View.prototype);
+    return Object.assign(element, {
+      isConnected,
+      closest: (selectors: string) =>
+        hiddenBy && selectors.includes(hiddenBy) ? {} : null,
+      // Like browsers, focus() does nothing on an element that can't take it.
+      focus: jest.fn(() => {
+        if (isConnected && focusable) {
+          activeElement = element;
+        }
+      }),
+    });
+  };
+
+  const renderFocusedFAB = async (relatedTarget: unknown) => {
+    const fab = (visible: boolean) => (
+      <FAB
+        icon="plus"
+        testID="create"
+        aria-label="Create"
+        onPress={() => {}}
+        visible={visible}
+      />
+    );
+    const { rerender } = await render(fab(true));
+    if (!fabElement) throw new Error('Expected the FAB to mount');
+    activeElement = fabElement;
+    // The View mock shares one `blur` mock across instances.
+    const blur = jest.fn();
+    fabElement.blur = blur;
+    await fireEvent(screen.getByRole('button', { name: 'Create' }), 'focus', {
+      nativeEvent: { relatedTarget },
+    });
+    return { blur, hide: () => rerender(fab(false)) };
+  };
+
+  it.each(['icon', 'extended'] as const)(
+    'keeps the %s FAB at rest on focus, changes its elevation while hovered and restores it while pressed',
+    async (type) => {
+      const ref = React.createRef<React.ComponentRef<typeof View>>();
+      await render(
+        type === 'icon' ? (
+          <FAB
+            ref={ref}
+            style={{}}
+            icon="plus"
+            aria-label="Create"
+            onPress={() => {}}
+          />
+        ) : (
+          <FAB.Extended
+            ref={ref}
+            style={{}}
+            expanded
+            icon="plus"
+            label="Create"
+            onPress={() => {}}
+          />
+        )
+      );
+      const fab = screen.getByRole('button', { name: 'Create' });
+      const resting = getStyle(ref);
+
+      await fireEvent(fab, 'focus', { nativeEvent: {} });
+      expect(getStyle(ref)).toEqual(resting);
+      await fireEvent(fab, 'hoverIn');
+      const hovered = getStyle(ref);
+      expect(hovered).not.toEqual(resting);
+      await fireEvent(fab, 'focus', { nativeEvent: {} });
+      expect(getStyle(ref)).toEqual(hovered);
+      await fireEvent(fab, 'pressIn');
+      expect(getStyle(ref)).toEqual(resting);
+      await fireEvent(fab, 'pressOut');
+      expect(getStyle(ref)).toEqual(hovered);
+      await fireEvent(fab, 'hoverOut');
+      expect(getStyle(ref)).toEqual(resting);
+    }
+  );
+
+  it('moves focus back to the previous element when a keyboard-focused FAB hides', async () => {
+    const previous = createElement();
+    const { blur, hide } = await renderFocusedFAB(previous);
+
+    await hide();
+
+    expect(previous.focus).toHaveBeenCalledWith({ preventScroll: true });
+    expect(blur).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ['inside an aria-hidden subtree', { hiddenBy: '[aria-hidden="true"]' }],
+    ['inside an inert subtree', { hiddenBy: '[inert]' }],
+    ['disconnected', { isConnected: false }],
+  ])(
+    'blurs a keyboard-focused FAB that hides when the previous element is %s',
+    async (_, options) => {
+      const previous = createElement(options);
+      const { blur, hide } = await renderFocusedFAB(previous);
+
+      await hide();
+
+      expect(previous.focus).not.toHaveBeenCalled();
+      expect(blur).toHaveBeenCalledTimes(1);
+    }
+  );
+
+  it("blurs a keyboard-focused FAB that hides when the previous element can't take focus", async () => {
+    const previous = createElement({ focusable: false });
+    const { blur, hide } = await renderFocusedFAB(previous);
+
+    await hide();
+
+    expect(previous.focus).toHaveBeenCalledWith({ preventScroll: true });
+    expect(blur).toHaveBeenCalledTimes(1);
+  });
+
+  it('blurs a FAB focused by a mouse click instead of moving focus back', async () => {
+    focusVisible = false;
+    const previous = createElement();
+    const { blur, hide } = await renderFocusedFAB(previous);
+
+    await hide();
+
+    expect(previous.focus).not.toHaveBeenCalled();
+    expect(blur).toHaveBeenCalledTimes(1);
+  });
+
+  it('leaves focus alone when a FAB that lost focus hides', async () => {
+    const previous = createElement();
+    const { blur, hide } = await renderFocusedFAB(previous);
+    activeElement = createElement();
+
+    await hide();
+
+    expect(previous.focus).not.toHaveBeenCalled();
+    expect(blur).not.toHaveBeenCalled();
   });
 });

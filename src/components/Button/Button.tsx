@@ -86,7 +86,9 @@ export type Props = Omit<ViewProps, 'style'> & {
    * `false` the shape still changes, it just snaps instead of animating, and
    * there is no press morph at all.
    *
-   * The press morph is skipped when the OS reduce-motion setting is on.
+   * Under reduce motion the shape behaves as with `false`. Reduce motion
+   * comes from the `reduceMotion` prop of `PaperProvider`, which follows the
+   * OS setting by default.
    */
   animateShape?: boolean;
   /**
@@ -348,9 +350,7 @@ const Button = ({
     () => toSpringCurve(theme.motion.spring.fast.spatial),
     [theme.motion.spring.fast.spatial]
   );
-  const shapeTransitionDuration = animatesShape
-    ? shapeSpring.duration * theme.animation.scale
-    : 0;
+  const shapeTransitionDuration = animatesShape ? shapeSpring.duration : 0;
 
   const tracksPress = animatesShape || isElevationEntitled;
 
@@ -422,6 +422,7 @@ const Button = ({
   const surfaceTransitionDuration = getButtonTransitionDuration({
     theme,
     pressed,
+    reduceMotion,
     containerColor,
     previousContainerColor: committedContainerColor,
   });

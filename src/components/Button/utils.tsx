@@ -122,20 +122,24 @@ export const getButtonShapeRadius = ({
 /**
  * Duration of `Surface`'s background and elevation transition.
  *
- * Snaps when either color is transparent or not a plain string.
+ * Snaps under reduce motion, or when either color is transparent or not a
+ * plain string.
  */
 export const getButtonTransitionDuration = ({
   theme,
   pressed,
+  reduceMotion,
   containerColor,
   previousContainerColor,
 }: {
   theme: InternalTheme;
   pressed: boolean;
+  reduceMotion: boolean;
   containerColor: ColorValue;
   previousContainerColor: ColorValue;
 }): number => {
   if (
+    reduceMotion ||
     typeof containerColor !== 'string' ||
     typeof previousContainerColor !== 'string' ||
     containerColor === 'transparent' ||
@@ -144,9 +148,7 @@ export const getButtonTransitionDuration = ({
     return 0;
   }
 
-  return (
-    theme.motion.duration[pressed ? 'short4' : 'short3'] * theme.animation.scale
-  );
+  return theme.motion.duration[pressed ? 'short4' : 'short3'];
 };
 
 /**

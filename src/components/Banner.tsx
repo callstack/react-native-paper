@@ -26,6 +26,7 @@ import Surface from './Surface';
 import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useInternalTheme } from '../core/theming';
+import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../theme/types';
 
 const DEFAULT_MAX_WIDTH = 960;
@@ -165,8 +166,7 @@ const Banner = ({
   const showCallback = useLatestCallback(onShowAnimationFinished);
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
-  const { scale } = theme.animation;
-  const animationDuration = (visible ? 250 : 200) * scale;
+  const getDuration = useMotionDuration();
 
   React.useEffect(() => {
     const callback = visible ? showCallback : hideCallback;
@@ -174,13 +174,13 @@ const Banner = ({
     position.value = withTiming(
       visible ? 1 : 0,
       {
-        duration: animationDuration,
+        duration: getDuration(visible ? 250 : 200),
         easing: Easing.inOut(Easing.ease),
         reduceMotion: ReduceMotion.Never,
       },
       (finished) => scheduleOnRN(callback, { finished: finished ?? false })
     );
-  }, [animationDuration, hideCallback, position, showCallback, visible]);
+  }, [getDuration, hideCallback, position, showCallback, visible]);
 
   const surfaceStyle = useAnimatedStyle(() => ({
     opacity: interpolate(position.value, [0, 0.1, 1], [0, 1, 1]),

@@ -134,14 +134,58 @@ A theme usually contains the following properties:
     - `fontWeight`
     - `lineHeight`
     - `fontSize`
-- `animation` (`object`)
-  - `scale` - scale for all animations
 
-When creating a custom theme, you will need to provide all of these properties.
+When creating a custom theme, you only need to provide the properties you change. `PaperProvider` merges your theme deeply with the default one, so a nested object such as `shapes` or `motion` keeps every key you leave out.
 
-If you don't use a custom theme, Paper will automatically turn animations on/off, depending on device settings.
+Paper merges a custom theme onto `DarkTheme` when it sets `dark: true`, and onto `LightTheme` otherwise. The examples on this page still spread `LightTheme` or `DarkTheme`: that sets `dark`, and in TypeScript it gives the theme object the full `Theme` shape. Without TypeScript, nested spreads such as `...LightTheme.colors` are optional.
 
-Otherwise, your custom theme will need to handle it manually, using React Native's [AccessibilityInfo API](https://reactnative.dev/docs/accessibilityinfo).
+## Reduce motion
+
+`PaperProvider` takes a `reduceMotion` prop, typed `ReduceMotionPreference`, that turns Paper's animations on or off:
+
+- `'auto'` (default): follows the reduce motion setting of the device, read with React Native's [AccessibilityInfo API](https://reactnative.dev/docs/accessibilityinfo).
+- `'on'`: turns Paper's animations off.
+- `'off'`: keeps Paper's animations on, even when the device setting is on.
+
+It works the same whether or not you pass a custom `theme`. With `'auto'`, Paper starts from the setting the device had when the app launched and follows every change after that.
+
+When reduce motion is on, Paper's components skip their animations. A few still move: the `ActivityIndicator` rotation, the indeterminate `ProgressBar` and the `TouchableRipple` ripple on web. The `TextInput` label and active indicator follow only the device setting: they don't read the `reduceMotion` prop.
+
+To turn Paper's animations off in tests and screenshots, whatever the device setting, pass `reduceMotion="on"`:
+
+```js
+import * as React from 'react';
+import { PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+export default function Main() {
+  return (
+    <PaperProvider reduceMotion="on">
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+To follow the same preference in your own components, use the `useReduceMotion()` hook. It returns `true` when reduce motion is on. Reanimated's animations follow the device setting on their own too, so give them `ReduceMotion.Never` to leave the choice to the hook:
+
+```js
+import * as React from 'react';
+import { useReduceMotion } from 'react-native-paper';
+import Animated, { ReduceMotion, SlideInDown } from 'react-native-reanimated';
+
+const slideIn = SlideInDown.reduceMotion(ReduceMotion.Never);
+
+export default function Toast({ children }) {
+  const reduceMotion = useReduceMotion();
+
+  return (
+    <Animated.View entering={reduceMotion ? undefined : slideIn}>
+      {children}
+    </Animated.View>
+  );
+}
+```
 
 ## Extending the theme
 
@@ -351,14 +395,11 @@ import App from './src/App';
 const theme = {
   ...LightTheme, // or DarkTheme
   shapes: {
-    ...LightTheme.shapes,
     corner: {
-      ...LightTheme.shapes.corner,
       largeIncreased: 10,
     },
   },
   colors: {
-    ...LightTheme.colors,
     primary: '#3498db',
     secondary: '#f1c40f',
     tertiary: '#a1b2c3',
@@ -461,6 +502,26 @@ export default function HomeScreen() {
 ## Material Design 3
 
 React Native Paper ships with Material Design 3 (Material You) only. Customize the default experience by extending `LightTheme` or `DarkTheme` (see [Extending the theme](#extending-the-theme) and [Advanced theme overrides](#advanced-theme-overrides)).
+
+## Applying a theme to part of the app
+
+To change the theme of every component in one part of your app, wrap that part in `ThemeProvider`. Like a component's `theme` prop, its `theme` is merged deeply onto the theme above it, so pass only the keys you change:
+
+```js
+import * as React from 'react';
+import { Button, ThemeProvider } from 'react-native-paper';
+
+export default function CheckoutActions() {
+  return (
+    <ThemeProvider theme={{ colors: { primary: 'tomato' } }}>
+      <Button>Pay</Button>
+      <Button mode="outlined">Cancel</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+Unlike `PaperProvider`, `ThemeProvider` doesn't choose between `LightTheme` and `DarkTheme` from `dark`. To show part of the app in the dark theme, pass `DarkTheme` itself.
 
 ## Applying a theme to a paper component
 

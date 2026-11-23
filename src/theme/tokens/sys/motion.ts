@@ -127,11 +127,12 @@ const SPRING_SAMPLE_COUNT = 30;
  * with the time the spring takes to settle in milliseconds.
  *
  * @example
+ * const reduceMotion = useReduceMotion();
  * const { points, duration } = toSpringCurve(theme.motion.spring.fast.spatial);
  *
  * const style = {
  *   transitionProperty: 'borderRadius',
- *   transitionDuration: duration * theme.animation.scale,
+ *   transitionDuration: reduceMotion ? 0 : duration,
  *   transitionTimingFunction: linear(...points),
  * };
  */
@@ -173,10 +174,7 @@ export function toSpringCurve(spring: SpringConfig): {
 /**
  * Builds the three Reanimated CSS-transition style props (duration, easing,
  * property) from theme motion tokens, so components don't re-derive them by
- * hand. `theme.animation.scale` is applied the same way `Surface`, `Chip` and
- * `Button` apply it (a general speed multiplier used in tests/screenshots,
- * e.g. `scale: 0` to freeze animations) — it's unrelated to accessibility
- * reduced motion.
+ * hand.
  *
  * `reduceMotion` sets the duration to 0, because Reanimated's `ReduceMotion`
  * option (the imperative tier's mechanism) has no effect on CSS transitions.
@@ -198,7 +196,7 @@ export function toSpringCurve(spring: SpringConfig): {
 export function getTransition<
   S extends object = ViewStyle & TextStyle & ImageStyle,
 >(
-  theme: { motion: MotionConfig; animation: { scale: number } },
+  theme: { motion: MotionConfig },
   property: NonNullable<CSSTransitionProperties<S>['transitionProperty']>,
   durationToken: keyof MotionDuration,
   easingToken: keyof MotionEasing,
@@ -207,9 +205,7 @@ export function getTransition<
   CSSTransitionProperties<S> {
   return {
     transitionProperty: property,
-    transitionDuration: reduceMotion
-      ? 0
-      : theme.motion.duration[durationToken] * theme.animation.scale,
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration[durationToken],
     transitionTimingFunction: cubicBezier(...theme.motion.easing[easingToken]),
   };
 }
