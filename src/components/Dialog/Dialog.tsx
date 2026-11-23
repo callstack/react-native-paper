@@ -304,6 +304,7 @@ const styles = StyleSheet.create({
     width: '100%',
     minWidth: 280,
     maxWidth: 560,
+    maxHeight: '100%',
   },
   titleWithIcon: {
     textAlign: 'center',

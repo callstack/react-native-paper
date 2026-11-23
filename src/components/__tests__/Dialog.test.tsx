@@ -577,6 +577,33 @@ describe('DialogActions', () => {
     expect(cancelButtonProps).toHaveProperty('style', styles.spacing);
     expect(okButtonProps).toHaveProperty('style', styles.noSpacing);
   });
+
+  it('bounds dialog height and wraps action buttons for large text sizes', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          testID="dialog-root"
+          title="Dialog"
+          content="Body"
+          actions={[
+            <Button key="no" mode="text" onPress={jest.fn()}>
+              Disagree
+            </Button>,
+            <Button key="yes" mode="text" onPress={jest.fn()}>
+              Agree
+            </Button>,
+          ]}
+        />
+      </Portal.Host>
+    );
+
+    const dialog = screen.getByLabelText('Dialog');
+    expect(dialog).toHaveStyle({ maxHeight: '100%' });
+
+    expect(screen.getByText('Disagree')).toBeOnTheScreen();
+    expect(screen.getByText('Agree')).toBeOnTheScreen();
+  });
 });
 
 const styles = StyleSheet.create({
