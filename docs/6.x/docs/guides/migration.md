@@ -394,7 +394,7 @@ On web, an `IconButton` or icon-only `FAB` labelled with `aria-label`, with no h
 
 `hitSlop` applies only to a touchable that can be pressed. Without a handler, or with `disabled`, a touchable takes no touches outside its bounds, so it doesn't take them from its neighbors.
 
-`RadioButton`, `RadioButton.Android`, `RadioButton.IOS` and `RadioButton.Item` with no press handler and no `RadioButton.Group` no longer take the press. They stay read-only radios, a row around them gets the press, and on web they're no longer a tab stop.
+`RadioButton` and `RadioButton.Item` with no press handler and no `RadioButton.Group` no longer take the press. They stay read-only radios, a row around them gets the press, and on web they're no longer a tab stop.
 
 To have something look and announce disabled, pass `disabled`, which keeps the control and its role. Pass it to switch interactivity off at runtime too, instead of removing `onPress`. A touchable renders another element whenever it goes between having a handler or `disabled` and having neither, so its children remount and lose their state and focus. That includes toggling `disabled` on a touchable with no handler. `FAB.Menu` does this for its trigger: a trigger without `onPress` is a disabled button while the menu is closed, so it keeps its element when the menu opens.
 
@@ -904,6 +904,28 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 On web, a menu now closes on the Escape key when it is pressed down, instead of when it is released. Back and Escape dismiss only the topmost overlay, so a menu opened from a `Modal` or `Dialog` closes first and leaves the modal open.
 
 On Android, an open menu now also keeps the back press: it calls `onDismiss`, and the screen behind no longer goes back. Previously the press reached that screen as well. Without an `onDismiss`, the menu leaves the press to whatever is underneath, so pass one to close the menu on back.
+
+### RadioButton
+
+`RadioButton` renders one Material 3 circular radio control on every platform. The platform-specific components and their prop types are gone. On iOS checked controls no longer render a checkmark; they use the same ring-and-dot indicator as other platforms. `RadioButton` now also forwards `TouchableRipple` props (`accessible`, `onFocus`, `onBlur`, `borderless`, `rippleColor`, ...).
+
+The control now occupies a 48×48dp layout box instead of 36×36dp, so rows containing it may become 12dp taller. The 20dp radio indicator is unchanged. `RadioButton.Item` rows grow from 52dp to 64dp.
+
+#### Interaction state colors
+
+Interaction states are now painted as a Material Design 3 state layer on every platform, so the tint follows the spec: hover & focus fill a flat 40dp layer behind the indicator with `primary` when checked and `onSurface` when not, and press inverts the two. An `error` radio stays on `error` throughout and `color`/`uncheckedColor` replace the role they already override on the ring, so custom radio no longer picks up `primary` halo. The platform ripple is turned off to make room for it; passing `rippleColor` on any platform, `background` on Android or `underlayColor` on iOS turns it back on and disables the built-in press. Setting `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider` still suppresses both.
+
+| v5                                               | v6                                                                       |
+| ------------------------------------------------ | ------------------------------------------------------------------------ |
+| `RadioButton.Android`, `RadioButton.IOS`         | `RadioButton`                                                            |
+| `RadioButtonAndroidProps`, `RadioButtonIOSProps` | `RadioButtonProps`                                                       |
+| `RadioButton.Item` `mode="android" \| "ios"`     | `mode` removed; `RadioButton.Item` always renders `RadioButton`          |
+| n/a                                              | new `error` (uses `theme.colors.error`) and `style` (touch-target style) |
+
+```diff
+- <RadioButton.IOS value="first" status="checked" onPress={select} />
++ <RadioButton value="first" status="checked" onPress={select} />
+```
 
 ### Searchbar
 

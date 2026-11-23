@@ -9,10 +9,7 @@ import type {
 } from 'react-native';
 
 import RadioButton from './RadioButton';
-import RadioButtonAndroid from './RadioButtonAndroid';
 import { RadioButtonContext } from './RadioButtonGroup';
-import type { RadioButtonContextType } from './RadioButtonGroup';
-import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, TypescaleKey } from '../../theme/types';
@@ -67,6 +64,11 @@ export type Props = {
    */
   status?: 'checked' | 'unchecked';
   /**
+   * Whether the radio button is in an error state. When true, the control
+   * uses `theme.colors.error`.
+   */
+  error?: boolean;
+  /**
    * Additional styles for container View.
    */
   style?: StyleProp<ViewStyle>;
@@ -103,11 +105,6 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
-  /**
-   * Whether `<RadioButton.Android />` or `<RadioButton.IOS />` should be used.
-   * Left undefined `<RadioButton />` will be used.
-   */
-  mode?: 'android' | 'ios';
   /**
    * Radio button control position.
    */
@@ -151,17 +148,18 @@ const RadioButtonItem = ({
   color,
   uncheckedColor,
   status,
+  error,
   theme: themeOverrides,
   background,
   'aria-label': ariaLabel = label,
   testID,
-  mode,
   position = 'trailing',
   labelVariant = 'bodyLarge',
-  labelMaxFontSizeMultiplier,
+  labelMaxFontSizeMultiplier = 1.5,
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const context = React.useContext(RadioButtonContext);
   const radioButtonProps = {
     value,
     disabled,
@@ -169,17 +167,20 @@ const RadioButtonItem = ({
     color,
     theme,
     uncheckedColor,
+    error,
   };
   const isLeading = position === 'leading';
-  let radioButton: any;
-
-  if (mode === 'android') {
-    radioButton = <RadioButtonAndroid {...radioButtonProps} />;
-  } else if (mode === 'ios') {
-    radioButton = <RadioButtonIOS {...radioButtonProps} />;
-  } else {
-    radioButton = <RadioButton {...radioButtonProps} />;
-  }
+  // The outer TouchableRipple is the interactable element + a11y radio; the
+  // inner control is purely visual, so exclude it from the a11y tree to
+  // avoid duplicate `checked` states.
+  const radioButton = (
+    <RadioButton
+      {...radioButtonProps}
+      accessible={false}
+      focusable={false}
+      tabIndex={-1}
+    />
+  );
 
   const textAlign = isLeading ? 'right' : 'left';
 
@@ -188,83 +189,79 @@ const RadioButtonItem = ({
     textAlign,
   };
 
+  const checked =
+    isChecked({
+      contextValue: context?.value,
+      status,
+      value,
+    }) === 'checked';
+
   // Rows stack edge to edge, so the ring is inward. It goes on a childless
   // overlay painted last (`'descendant'`): drawn on the row itself, it would
   // sit under the content view, and a background set through `style` would
   // hide it. Off whenever the row can't be pressed, as on TouchableRipple.
-  // The hook needs the group above the consumer below.
-  const group = React.useContext(RadioButtonContext);
   const { target: focusTarget, ring: focusRing } = useFocusRing(
-    disabled || !(onPress || group?.onValueChange || onLongPress),
+    disabled || !(onPress || context?.onValueChange || onLongPress),
     theme.colors.secondary,
     'inward',
     'descendant'
   );
 
   return (
-    <RadioButtonContext.Consumer>
-      {(context: RadioButtonContextType | null) => {
-        const checked =
-          isChecked({
-            contextValue: context?.value,
-            status,
-            value,
-          }) === 'checked';
-        return (
-          <TouchableRipple
-            focusRing="none"
-            onFocus={focusTarget.onFocus}
-            onBlur={focusTarget.onBlur}
-            {...focusTarget.dataSetProps}
-            style={focusTarget.style}
-            // A row with nothing to call (no `onPress` and no
-            // `RadioButton.Group`) is read only and gets no handler, so it never
-            // takes a press meant for its parent. A live row is turned off with
-            // `disabled`, which keeps the same element instead of remounting it.
-            // Outside a `RadioButton.Group` the radio inside has no handler of
-            // its own, so it still swaps elements when `disabled` toggles.
-            onPress={
-              onPress || context?.onValueChange
-                ? (event) =>
-                    handlePress({
-                      onPress: onPress,
-                      onValueChange: context?.onValueChange,
-                      value,
-                      event,
-                    })
-                : undefined
-            }
-            onLongPress={onLongPress}
-            aria-label={ariaLabel}
-            role="radio"
-            aria-checked={checked}
-            aria-disabled={disabled}
-            testID={testID}
-            disabled={disabled}
-            background={background}
-            theme={theme}
-            hitSlop={hitSlop}
-          >
-            <View style={[styles.container, style]} pointerEvents="none">
-              {isLeading && radioButton}
-              <Text
-                variant={labelVariant}
-                style={[styles.label, computedStyle, labelStyle]}
-                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-              >
-                {label}
-              </Text>
-              {!isLeading && radioButton}
-            </View>
-            <View
-              pointerEvents="none"
-              style={[StyleSheet.absoluteFill, ...focusRing.style]}
-              {...focusRing.dataSetProps}
-            />
-          </TouchableRipple>
-        );
-      }}
-    </RadioButtonContext.Consumer>
+    <TouchableRipple
+      focusRing="none"
+      onFocus={focusTarget.onFocus}
+      onBlur={focusTarget.onBlur}
+      {...focusTarget.dataSetProps}
+      style={focusTarget.style}
+      // A row with nothing to call (no `onPress` and no `RadioButton.Group`)
+      // is read only and gets no handler, so it never takes a press meant for
+      // its parent. A live row is turned off with `disabled`, which keeps the
+      // same element instead of remounting it.
+      onPress={
+        onPress || context?.onValueChange
+          ? (event) =>
+              handlePress({
+                onPress: onPress,
+                onValueChange: context?.onValueChange,
+                value,
+                event,
+              })
+          : undefined
+      }
+      onLongPress={onLongPress}
+      aria-label={ariaLabel}
+      role="radio"
+      aria-checked={checked}
+      aria-disabled={disabled}
+      testID={testID}
+      disabled={disabled}
+      background={background}
+      theme={theme}
+      hitSlop={hitSlop}
+    >
+      <View
+        style={[styles.container, style]}
+        pointerEvents="none"
+        importantForAccessibility="no-hide-descendants"
+      >
+        {isLeading && radioButton}
+        <Text
+          variant={labelVariant}
+          testID={testID ? `${testID}-text` : undefined}
+          style={[styles.label, computedStyle, labelStyle]}
+          maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+        >
+          {label}
+        </Text>
+        {!isLeading && radioButton}
+      </View>
+      <View
+        pointerEvents="none"
+        style={[StyleSheet.absoluteFill, ...focusRing.style]}
+        {...focusRing.dataSetProps}
+      />
+    </TouchableRipple>
   );
 };
 
