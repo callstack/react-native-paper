@@ -1,8 +1,9 @@
-import { View } from 'react-native';
-import type { Text as NativeText } from 'react-native';
+import { Platform, View } from 'react-native';
+import type { Text as NativeText, TextStyle } from 'react-native';
 
-import { expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
+import { LocaleProvider, type Direction } from '../../../core/locale';
 import PaperProvider from '../../../core/PaperProvider';
 import { render, screen } from '../../../test-utils';
 import configureFonts from '../../../theme/fonts';
@@ -325,6 +326,92 @@ it("detects nesting like React Native's own Text and View", async () => {
   expect(screen.getByTestId('view-child-text')).toHaveStyle({
     ...LightTheme.fonts.default,
     color: LightTheme.colors.onSurface,
+  });
+});
+
+describe('text alignment', () => {
+  let platformOS: { restore(): void } | undefined;
+
+  afterEach(() => {
+    platformOS?.restore();
+    platformOS = undefined;
+  });
+
+  const textIDs = [
+    'text',
+    'variant-text',
+    'animated-text',
+    'animated-variant-text',
+  ];
+
+  const renderTexts = (direction: Direction, style?: TextStyle) =>
+    render(
+      <LocaleProvider direction={direction}>
+        <Text testID="text" style={style}>
+          {content}
+        </Text>
+        <Text testID="variant-text" variant="bodyLarge" style={style}>
+          {content}
+        </Text>
+        <AnimatedText testID="animated-text" style={style}>
+          {content}
+        </AnimatedText>
+        <AnimatedText
+          testID="animated-variant-text"
+          variant="bodyLarge"
+          style={style}
+        >
+          {content}
+        </AnimatedText>
+      </LocaleProvider>
+    );
+
+  it('aligns right-to-left text to the right on web', async () => {
+    platformOS = jest.replaceProperty(Platform, 'OS', 'web');
+
+    await renderTexts('rtl');
+
+    textIDs.forEach((testID) => {
+      expect(screen.getByTestId(testID)).toHaveStyle({
+        textAlign: 'right',
+        writingDirection: 'rtl',
+      });
+    });
+  });
+
+  it('aligns left-to-right text to the left on web', async () => {
+    platformOS = jest.replaceProperty(Platform, 'OS', 'web');
+
+    await renderTexts('ltr');
+
+    textIDs.forEach((testID) => {
+      expect(screen.getByTestId(testID)).toHaveStyle({ textAlign: 'left' });
+    });
+  });
+
+  // React Native aligns `left` text to the right when the layout is
+  // right-to-left, so Android and iOS keep it.
+  it.each(['android', 'ios'] as const)(
+    'keeps the left alignment for right-to-left text on %s',
+    async (os) => {
+      platformOS = jest.replaceProperty(Platform, 'OS', os);
+
+      await renderTexts('rtl');
+
+      textIDs.forEach((testID) => {
+        expect(screen.getByTestId(testID)).toHaveStyle({ textAlign: 'left' });
+      });
+    }
+  );
+
+  it('keeps an alignment set in style for right-to-left text on web', async () => {
+    platformOS = jest.replaceProperty(Platform, 'OS', 'web');
+
+    await renderTexts('rtl', { textAlign: 'center' });
+
+    textIDs.forEach((testID) => {
+      expect(screen.getByTestId(testID)).toHaveStyle({ textAlign: 'center' });
+    });
   });
 });
 
