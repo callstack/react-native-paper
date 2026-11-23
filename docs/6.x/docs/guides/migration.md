@@ -311,8 +311,10 @@ message as a string. The `contentStyle` prop was renamed to `messageStyle`, and
 it styles the message text rather than a wrapper around arbitrary children.
 
 The Snackbar now renders in a `Portal` on its own, so it overlays all other
-content. Wrapping it in a `Portal` is no longer needed — and would render it
-twice. Set `portal={false}` to keep it inside the parent instead.
+content, and you no longer need to wrap it in a `Portal`. Set
+`portal={false}` to keep it inside the parent instead — for example when the
+Snackbar should appear above a React Native `Modal`, which sits above the root
+Portal host.
 
 ```diff
 -<Portal>

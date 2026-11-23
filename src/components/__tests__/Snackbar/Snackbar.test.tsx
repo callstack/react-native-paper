@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import { act, userEvent } from '@testing-library/react-native';
+import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../../test-utils';
 import Portal from '../../Portal/Portal';
@@ -83,6 +83,36 @@ describe('Snackbar', () => {
 
     await renderSnackbar({ onDismiss, action: { label: 'Undo', onPress } });
     await settle();
+
+    await userEvent.press(screen.getByRole('button', { name: 'Undo' }));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+
+  it('ignores a second press on the action after it was pressed once', async () => {
+    const onPress = jest.fn();
+    const onDismiss = jest.fn();
+
+    const { rerender } = await renderSnackbar({
+      onDismiss,
+      action: { label: 'Undo', onPress },
+    });
+    await settle();
+
+    await userEvent.press(screen.getByRole('button', { name: 'Undo' }));
+
+    await rerender(
+      <Portal.Host>
+        <Snackbar
+          visible={false}
+          onDismiss={onDismiss}
+          message="Snackbar content"
+          duration={Infinity}
+          action={{ label: 'Undo', onPress }}
+        />
+      </Portal.Host>
+    );
 
     await userEvent.press(screen.getByRole('button', { name: 'Undo' }));
 
@@ -186,5 +216,117 @@ describe('Snackbar', () => {
     await settle();
 
     expect(screen.queryByText('Snackbar content')).toBeNull();
+  });
+
+  it('keeps itself mounted when visible turns true again during the exit animation', async () => {
+    const onDismiss = jest.fn();
+    const { rerender } = await renderSnackbar({
+      onDismiss,
+      duration: 1000,
+      testID: 'snackbar',
+    });
+    await settle();
+
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+
+    await rerender(
+      <Portal.Host>
+        <Snackbar
+          visible={false}
+          onDismiss={onDismiss}
+          message="Snackbar content"
+          duration={1000}
+          testID="snackbar"
+        />
+      </Portal.Host>
+    );
+
+    await rerender(
+      <Portal.Host>
+        <Snackbar
+          visible
+          onDismiss={onDismiss}
+          message="Snackbar content"
+          duration={1000}
+          testID="snackbar"
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('snackbar')).toBeOnTheScreen();
+
+    await settle();
+
+    expect(onDismiss).toHaveBeenCalledTimes(2);
+  });
+
+  it('renders next to its siblings when portal is false', async () => {
+    await render(
+      <View>
+        <Text>Sibling</Text>
+        <Snackbar
+          visible
+          portal={false}
+          onDismiss={jest.fn()}
+          message="Snackbar content"
+          duration={Infinity}
+          testID="snackbar"
+        />
+      </View>
+    );
+    await settle();
+
+    expect(screen.getByText('Sibling')).toBeOnTheScreen();
+    expect(screen.getByTestId('snackbar')).toBeOnTheScreen();
+  });
+
+  it('renders in the portal host above sibling content by default', async () => {
+    await render(
+      <Portal.Host>
+        <Text>Sibling</Text>
+        <Snackbar
+          visible
+          onDismiss={jest.fn()}
+          message="Snackbar content"
+          duration={Infinity}
+          testID="snackbar"
+        />
+      </Portal.Host>
+    );
+    await settle();
+
+    const tree = screen.toJSON();
+    const serialized = JSON.stringify(tree);
+
+    expect(serialized.indexOf('Sibling')).toBeLessThan(
+      serialized.indexOf('Snackbar content')
+    );
+    expect(screen.getByTestId('snackbar')).toBeOnTheScreen();
+  });
+
+  it('stacks the action under a multiline message when the action is too wide', async () => {
+    await renderSnackbar({
+      message: 'Snackbar with longer message which does not fit in one line',
+      action: { label: 'Toggle theme', onPress: jest.fn() },
+      testID: 'snackbar',
+    });
+    await settle();
+
+    await fireEvent(
+      screen.getByText(/Snackbar with longer message/),
+      'textLayout',
+      {
+        nativeEvent: {
+          lines: [{ text: 'line 1' }, { text: 'line 2' }],
+        },
+      }
+    );
+    await fireEvent(screen.getByTestId('snackbar-actions'), 'layout', {
+      nativeEvent: { layout: { width: 160, height: 40, x: 0, y: 0 } },
+    });
+
+    expect(screen.getByTestId('snackbar')).toHaveStyle({
+      flexDirection: 'column',
+    });
   });
 });

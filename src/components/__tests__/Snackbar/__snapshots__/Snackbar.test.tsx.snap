@@ -25,7 +25,6 @@ exports[`Snackbar renders a message with an action and a close icon button 1`] =
     }
   >
     <View
-      pointerEvents="box-none"
       style={
         [
           {
@@ -38,7 +37,7 @@ exports[`Snackbar renders a message with an action and a close icon button 1`] =
           },
           {
             "paddingBottom": 0,
-            "paddingHorizontal": 0,
+            "paddingHorizontal": 8,
           },
           {
             "paddingBottom": 16,
@@ -53,14 +52,15 @@ exports[`Snackbar renders a message with an action and a close icon button 1`] =
           [
             {},
             {
-              "flexDirection": "row",
-              "flexWrap": "wrap",
-              "justifyContent": "flex-end",
-              "margin": 8,
+              "marginVertical": 8,
               "maxWidth": 600,
               "minHeight": 48,
               "pointerEvents": "box-none",
               "width": "100%",
+            },
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
             },
             {
               "opacity": 0,
@@ -154,6 +154,8 @@ exports[`Snackbar renders a message with an action and a close icon button 1`] =
           }
         />
         <Text
+          numberOfLines={2}
+          onTextLayout={[Function]}
           style={
             [
               {
@@ -173,11 +175,16 @@ exports[`Snackbar renders a message with an action and a close icon button 1`] =
                 },
                 [
                   {
-                    "flexBasis": "60%",
-                    "flexGrow": 1,
-                    "marginEnd": 8,
                     "marginStart": 16,
                     "marginVertical": 14,
+                  },
+                  {
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                  false,
+                  {
+                    "marginEnd": 4,
                   },
                   {
                     "color": "rgba(245, 239, 247, 1)",
@@ -193,14 +200,21 @@ exports[`Snackbar renders a message with an action and a close icon button 1`] =
           Snackbar content
         </Text>
         <View
+          onLayout={[Function]}
           style={
-            {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "flexDirection": "row",
-              "marginEnd": 8,
-            }
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "flexShrink": 0,
+              },
+              false,
+              {
+                "marginEnd": 0,
+              },
+            ]
           }
+          testID="snackbar-actions"
         >
           <View
             collapsable={false}

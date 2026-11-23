@@ -4,10 +4,11 @@ import type { ShapeToken } from '../../theme/utils/shape';
 /**
  * MD3 Snackbar spec dimensions.
  * @see https://m3.material.io/components/snackbar/specs
+ * @see https://www.figma.com/design/2Q84OViMCVDu4UBaJv38Eq/Material-3-Design-Kit--Community-?node-id=55141-14256
  */
 const sizes = {
   /** Corner radius of the container: `md.sys.shape.corner.extra-small`. */
-  containerShape: 'extraSmall' as ShapeToken,
+  containerShape: 'extraSmall' satisfies ShapeToken,
   /** Height of a single-line Snackbar, which is also its minimum height. */
   minHeight: 48,
   /** Gap between the container and the edges of the window. */
@@ -17,21 +18,28 @@ const sizes = {
   /** Gap between the message and the leading edge of the container. */
   messageSpacing: 16,
   /**
-   * Gap between the message and the trailing edge of the container, which also
-   * separates it from an action on the same line.
+   * Gap between the message and the trailing edge when the Snackbar has no
+   * action or close icon.
    */
-  messageTrailingSpacing: 8,
+  messageTrailingSpacing: 16,
   /** Top and bottom padding of the message, which yields the single-line height. */
   messageVerticalSpacing: 14,
+  /** Gap between the message and the action when they share a line. */
+  messageActionGap: 4,
   /**
-   * Share of the container the message starts with. An action which doesn't fit
-   * in what's left — a long action label on a narrow screen — moves onto its own
-   * line below the message, as the "two lines with longer action" configuration
-   * of the spec asks for.
+   * Widest an action may be before a multiline message forces it onto its own
+   * line. Matches Material Components Android's `design_snackbar_action_inline_max_width`.
    */
-  messageInlineBasis: '60%' as const,
+  maxInlineActionWidth: 128,
+  /** Longest the supporting text may grow, matching the Figma two-line layouts. */
+  messageMaxLines: 2,
   /** Gap between the action area and the trailing edge of the container. */
   actionSpacing: 8,
+  /**
+   * Bottom padding of a stacked action row. Keeps the text button from growing
+   * the container past the Figma longer-action height.
+   */
+  actionBottomSpacing: 4,
   /** Size of the icon inside the trailing icon button. */
   iconSize: 24,
 } as const;

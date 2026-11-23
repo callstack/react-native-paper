@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { AccessibilityInfo, Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  LayoutChangeEvent,
+  NativeSyntheticEvent,
   StyleProp,
+  TextLayoutEventData,
   TextStyle,
   ViewProps,
   ViewStyle,
@@ -24,7 +27,7 @@ import useLatestCallback from 'use-latest-callback';
 import { SnackbarTokens } from './tokens';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, Theme, ThemeProp } from '../../theme/types';
+import type { Elevation, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import Button from '../Button/Button';
 import type { IconSource } from '../Icon';
@@ -110,7 +113,7 @@ export type Props = Omit<ViewProps, 'children' | 'style'> & {
    * Whether the Snackbar is rendered in a `Portal`, so that it overlays all
    * other content no matter where it sits in the tree. Set it to `false` to
    * render it within the parent, for example when it should be constrained to
-   * a part of the screen.
+   * a part of the screen or shown above a React Native `Modal`.
    */
   portal?: boolean;
   /**
@@ -153,43 +156,17 @@ const {
   messageSpacing,
   messageTrailingSpacing,
   messageVerticalSpacing,
-  messageInlineBasis,
+  messageActionGap,
+  maxInlineActionWidth,
+  messageMaxLines,
   actionSpacing,
+  actionBottomSpacing,
   iconSize,
   containerColor,
   messageColor,
   actionColor,
   iconColor,
 } = SnackbarTokens;
-
-type ActionButtonProps = {
-  action: SnackbarAction;
-  color: ColorValue;
-  theme: Theme;
-  onDismiss: () => void;
-};
-
-const ActionButton = ({
-  action,
-  color,
-  theme,
-  onDismiss,
-}: ActionButtonProps) => (
-  <Button
-    aria-label={action.accessibilityLabel ?? action.label}
-    mode="text"
-    onPress={(event) => {
-      action.onPress?.(event);
-      onDismiss();
-    }}
-    style={action.style}
-    testID={action.testID}
-    theme={theme}
-    textColor={color}
-  >
-    {action.label}
-  </Button>
-);
 
 /**
  * Snackbars provide brief feedback about an operation through a message at the
@@ -247,7 +224,7 @@ const Snackbar = ({
   iconTestID,
   duration = DURATION_MEDIUM,
   onDismiss,
-  elevation = 2,
+  elevation = 3,
   portal = true,
   maxFontSizeMultiplier,
   wrapperStyle,
@@ -268,6 +245,12 @@ const Snackbar = ({
   );
 
   const [mounted, setMounted] = React.useState(visible);
+  const [isMultiline, setIsMultiline] = React.useState(false);
+  const [actionWidth, setActionWidth] = React.useState(0);
+
+  if (visible && !mounted) {
+    setMounted(true);
+  }
 
   const clearHideTimeout = React.useCallback(() => {
     if (hideTimeout.current) {
@@ -312,8 +295,6 @@ const Snackbar = ({
       return;
     }
 
-    setMounted(true);
-
     opacity.value = withTiming(
       1,
       {
@@ -339,11 +320,25 @@ const Snackbar = ({
     visible,
   ]);
 
+  // `aria-live` only reaches Android and web; VoiceOver needs an explicit
+  // announcement when the Snackbar appears.
+  React.useEffect(() => {
+    if (visible && Platform.OS === 'ios') {
+      AccessibilityInfo.announceForAccessibility?.(message);
+    }
+  }, [message, visible]);
+
   React.useEffect(() => clearHideTimeout, [clearHideTimeout]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
-    transform: [{ scale: interpolate(opacity.value, [0, 1], [0.9, 1]) }],
+    // Scale only on enter. Material Components Android fades out without
+    // shrinking the bar.
+    transform: [
+      {
+        scale: visible ? interpolate(opacity.value, [0, 1], [0.9, 1]) : 1,
+      },
+    ],
   }));
 
   // Kept stable across renders, so that the icon isn't remounted on every update.
@@ -360,21 +355,56 @@ const Snackbar = ({
     [direction]
   );
 
+  const handleMessageTextLayout = React.useCallback(
+    (event: NativeSyntheticEvent<TextLayoutEventData>) => {
+      setIsMultiline(event.nativeEvent.lines.length > 1);
+    },
+    []
+  );
+
+  const handleActionsLayout = React.useCallback((event: LayoutChangeEvent) => {
+    setActionWidth(event.nativeEvent.layout.width);
+  }, []);
+
+  const isIconButton = Boolean(onIconPress);
+  const hasActions = Boolean(action) || isIconButton;
+  // Match Material Components Android: stack the action only when the message
+  // already wraps and the action is wider than the inline limit.
+  const stacked =
+    Boolean(action) && isMultiline && actionWidth > maxInlineActionWidth;
+
+  const handleActionPress = (event: GestureResponderEvent) => {
+    if (!visible) {
+      return;
+    }
+
+    action?.onPress?.(event);
+    onDismiss();
+  };
+
+  const handleIconPress = () => {
+    if (!visible) {
+      return;
+    }
+
+    onIconPress?.();
+  };
+
   if (!mounted) {
     return null;
   }
 
   const { colors } = theme;
-  const isIconButton = Boolean(onIconPress);
 
   const snackbar = (
     <View
-      pointerEvents="box-none"
       style={[
         styles.wrapper,
         {
           paddingBottom: bottom,
-          paddingHorizontal: Math.max(left, right),
+          // Screen-edge margin lives on the wrapper so `width: '100%'` on the
+          // container cannot push the 8dp gap outside the viewport.
+          paddingHorizontal: Math.max(left, right) + screenMargin,
         },
         wrapperStyle,
       ]}
@@ -384,7 +414,12 @@ const Snackbar = ({
         theme={theme}
         backgroundColor={colors[containerColor]}
         borderRadius={resolveCornerRadius(theme, containerShape)}
-        style={[styles.container, animatedStyle, style]}
+        style={[
+          styles.container,
+          stacked ? styles.containerStacked : styles.containerInline,
+          animatedStyle,
+          style,
+        ]}
         testID={testID}
         elevation={elevation}
         {...rest}
@@ -393,29 +428,55 @@ const Snackbar = ({
           variant="bodyMedium"
           style={[
             styles.message,
+            stacked ? styles.messageStacked : styles.messageInline,
+            !hasActions && styles.messageAlone,
+            // Figma puts a 4dp gap only between the message and an action; a
+            // close icon alone sits flush against the trailing edge.
+            !stacked && action ? styles.messageWithAction : null,
             { color: colors[messageColor] },
             messageStyle,
           ]}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
+          numberOfLines={messageMaxLines}
+          onTextLayout={handleMessageTextLayout}
         >
           {message}
         </Text>
-        {action || isIconButton ? (
-          <View style={styles.actions}>
+        {hasActions ? (
+          <View
+            style={[
+              styles.actions,
+              stacked && styles.actionsStacked,
+              // The close affordance is itself 48dp wide and owns the trailing
+              // edge; without it the action keeps an 8dp trailing inset.
+              isIconButton
+                ? styles.actionsWithClose
+                : stacked
+                  ? styles.actionsStackedTrailing
+                  : styles.actionsTrailing,
+            ]}
+            onLayout={handleActionsLayout}
+            testID={testID ? `${testID}-actions` : undefined}
+          >
             {action ? (
-              <ActionButton
-                action={action}
-                color={colors[actionColor]}
+              <Button
+                aria-label={action.accessibilityLabel ?? action.label}
+                mode="text"
+                onPress={handleActionPress}
+                style={action.style}
+                testID={action.testID}
                 theme={theme}
-                onDismiss={onDismiss}
-              />
+                textColor={colors[actionColor]}
+              >
+                {action.label}
+              </Button>
             ) : null}
             {isIconButton ? (
               <IconButton
                 role="button"
                 borderless
                 size={iconSize}
-                onPress={onIconPress}
+                onPress={handleIconPress}
                 iconColor={colors[iconColor]}
                 theme={theme}
                 icon={icon ?? closeIcon}
@@ -460,33 +521,56 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     maxWidth: containerMaxWidth,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    // Lines are trailing-aligned, so an action wrapped onto its own line sits
-    // at the trailing edge below the message.
-    justifyContent: 'flex-end',
-    margin: screenMargin,
+    marginVertical: screenMargin,
     minHeight,
     pointerEvents: 'box-none',
   },
+  containerInline: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  containerStacked: {
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  },
   message: {
-    // The message takes the space the action doesn't need, and claims only
-    // `messageInlineBasis` up front, so an action which doesn't fit next to it
-    // wraps onto its own line.
-    flexBasis: messageInlineBasis,
-    flexGrow: 1,
     marginStart: messageSpacing,
-    marginEnd: messageTrailingSpacing,
     marginVertical: messageVerticalSpacing,
+  },
+  messageInline: {
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+  messageWithAction: {
+    marginEnd: messageActionGap,
+  },
+  messageStacked: {
+    alignSelf: 'stretch',
+    marginEnd: messageSpacing,
+    // The Figma longer-action layout puts the vertical gap between the message
+    // block and the action row, not under the message itself.
+    marginBottom: 0,
+  },
+  messageAlone: {
+    marginEnd: messageTrailingSpacing,
   },
   actions: {
     flexDirection: 'row',
     alignItems: 'center',
-    // The actions are shorter than the message line they share, and than the
-    // message itself once they wrap onto their own line, so they stay centered
-    // against it either way.
-    alignSelf: 'center',
+    flexShrink: 0,
+  },
+  actionsTrailing: {
     marginEnd: actionSpacing,
+  },
+  actionsWithClose: {
+    marginEnd: 0,
+  },
+  actionsStacked: {
+    paddingStart: actionSpacing,
+  },
+  actionsStackedTrailing: {
+    paddingEnd: actionSpacing,
+    paddingBottom: actionBottomSpacing,
   },
   icon: {
     margin: 0,

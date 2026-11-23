@@ -83,7 +83,9 @@ const SnackbarExample = () => {
       </ScreenWrapper>
       <Snackbar
         visible={showSnackbar}
-        onDismiss={() => toggleOption('showSnackbar')}
+        onDismiss={() =>
+          setOptions((prev) => ({ ...prev, showSnackbar: false }))
+        }
         message={showLongerMessage ? LONG_MESSAGE : SHORT_MESSAGE}
         action={
           showAction
@@ -96,7 +98,9 @@ const SnackbarExample = () => {
             : undefined
         }
         onIconPress={
-          showCloseIcon ? () => toggleOption('showSnackbar') : undefined
+          showCloseIcon
+            ? () => setOptions((prev) => ({ ...prev, showSnackbar: false }))
+            : undefined
         }
         portal={showInPortal}
         duration={Snackbar.DURATION_MEDIUM}
