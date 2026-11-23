@@ -17,16 +17,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import useLatestCallback from 'use-latest-callback';
 
 import Content from './Content';
-import { getFocusableElement } from './focus';
 import Shell from './Shell';
-import {
-  MenuTokens,
-  STATE_LAYER_OPACITY,
-  Tokens,
-  webNoHoverTint,
-} from './tokens';
+import { MenuTokens, STATE_LAYER_OPACITY, Tokens } from './tokens';
 import type { Interaction, Size, Variant } from './tokens';
 import { resolveColors } from './utils';
 import { useLocale } from '../../core/locale';
@@ -40,6 +35,7 @@ import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import { useFocusRing } from '../../utils/useFocusRing';
 import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
 import { useOverlayFocus } from '../../utils/useOverlayFocus';
+import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -98,9 +94,10 @@ export type MenuProps = {
    */
   expanded: boolean;
   /**
-   * Called when the menu should close: the user taps the close button, an
-   * item, or outside the menu, presses Escape (web), the hardware back button
-   * (Android) or performs the screen reader escape gesture (iOS).
+   * Called when the menu should close: the user taps the close button or an
+   * item, presses Escape (web), the hardware back button (Android) or performs
+   * the screen reader escape gesture (iOS). It is also called when the trigger
+   * is hidden while the menu is open.
    */
   onDismiss: () => void;
   /**
@@ -174,6 +171,10 @@ const { thickness: FOCUS_RING_THICKNESS, outerOffset: FOCUS_RING_OFFSET } =
 const FOCUS_RING_FOOTPRINT = FOCUS_RING_OFFSET + FOCUS_RING_THICKNESS;
 const ITEMS_SCROLL_INSET = FOCUS_RING_FOOTPRINT + 4;
 
+// The state layer of an item replaces the hover tint of `TouchableRipple`,
+// which is only there on web.
+const webNoHoverTint: ViewStyle = { backgroundColor: 'transparent' };
+
 type AnimatedItemProps = {
   expanded: boolean;
   index: number;
@@ -244,6 +245,14 @@ type ItemProps = {
   expanded: boolean;
   index: number;
   /**
+   * Whether the item is the menu's one tab stop on web. The arrow keys move it.
+   */
+  tabbable: boolean;
+  /**
+   * Called with the item's index when it takes focus.
+   */
+  onFocusItem: (index: number) => void;
+  /**
    * Called with the item's index and its node when it mounts and unmounts.
    */
   registerRef: (
@@ -272,6 +281,8 @@ const MenuItem = ({
   theme,
   expanded,
   index,
+  tabbable,
+  onFocusItem,
   registerRef,
   onPress,
   'aria-label': ariaLabel,
@@ -327,6 +338,15 @@ const MenuItem = ({
     'within'
   );
 
+  // React Native Web presses on Space only for `role="button"`, and the item is
+  // a `menuitem` on the web.
+  const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
+    useSpaceKeyPress({
+      onPress,
+      onPressIn: () => setPressed(true),
+      onPressOut: () => setPressed(false),
+    });
+
   const itemRef = React.useCallback(
     (node: React.ComponentRef<typeof View> | null) => registerRef(index, node),
     [registerRef, index]
@@ -358,11 +378,14 @@ const MenuItem = ({
             onFocus={(e) => {
               focusTarget.onFocus?.(e);
               setFocused(isKeyboardFocusEvent(e));
+              onFocusItem(index);
             }}
-            onBlur={() => {
+            onBlur={(e) => {
+              handleSpaceKeyBlur(e);
               focusTarget.onBlur?.();
               setFocused(false);
             }}
+            {...spaceKeyHandlers}
             onHoverIn={() => setHovered(true)}
             onHoverOut={() => setHovered(false)}
             onPressIn={() => setPressed(true)}
@@ -370,9 +393,10 @@ const MenuItem = ({
             role={Platform.OS === 'web' ? 'menuitem' : 'button'}
             aria-label={ariaLabel ?? label}
             // `aria-hidden` and `pointerEvents` don't take collapsed items
-            // out of the tab order.
+            // out of the tab order. An open menu has one tab stop, as the
+            // menu pattern asks, and the arrow keys move it.
             focusable={expanded}
-            tabIndex={expanded ? 0 : -1}
+            tabIndex={expanded && (Platform.OS !== 'web' || tabbable) ? 0 : -1}
             style={[
               { borderRadius },
               ...focusTarget.style,
@@ -625,12 +649,12 @@ const MorphingTrigger = ({
  * items appear stacked above and the trigger morphs into the spec'd close
  * button (`shape: 'full'`, 56 dp, saturated role color).
  *
- * There is no visual scrim. Pressing outside the menu, the close button or an
- * item, pressing Escape (web), the hardware back button (Android) or the
- * screen reader escape gesture (iOS) calls `onDismiss`. Focus moves to the
- * first item when the menu opens and returns to the trigger when it closes.
- * On web, the arrow keys, Home and End move focus between the items and the
- * close button.
+ * There is no visual scrim, and pressing outside the menu does not close it.
+ * Pressing the close button or an item, pressing Escape (web), the hardware
+ * back button (Android) or the screen reader escape gesture (iOS) calls
+ * `onDismiss`. Focus moves to the first item when the menu opens and returns to
+ * the trigger when it closes. On web, the items are one tab stop: the arrow
+ * keys, Home and End move focus between them.
  *
  * ## Usage
  * ```tsx
@@ -674,6 +698,16 @@ const Menu = ({
 
   const effectiveExpanded = triggerVisible && expanded;
 
+  // A hidden trigger closes the menu, so tell the parent. Otherwise `expanded`
+  // stays true, and the menu opens again by itself when the trigger comes back.
+  const dismissWhenTriggerHides = useLatestCallback(onDismiss);
+
+  React.useEffect(() => {
+    if (expanded && !triggerVisible) {
+      dismissWhenTriggerHides();
+    }
+  }, [expanded, triggerVisible, dismissWhenTriggerHides]);
+
   // Back (Android) and Escape (web) go through the overlay stack, so that a
   // menu opened from a modal closes first and the modal stays.
   useOverlayDismiss({
@@ -691,6 +725,14 @@ const Menu = ({
   );
 
   const [containerHeight, setContainerHeight] = React.useState<number>();
+  // The item that is the menu's one tab stop on web. The arrow keys move it.
+  const [activeIndex, setActiveIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!effectiveExpanded) {
+      setActiveIndex(0);
+    }
+  }, [effectiveExpanded]);
 
   const registerItemRef = React.useCallback(
     (index: number, node: React.ComponentRef<typeof View> | null) => {
@@ -754,8 +796,9 @@ const Menu = ({
     }
   }, [effectiveExpanded]);
 
-  // Arrow keys, Home and End move focus between the items and the close
-  // button. Dismissing the menu is left to `useOverlayDismiss` above.
+  // Arrow keys, Home and End move focus between the items. The close button is
+  // outside the menu, so they leave it alone. Dismissing the menu is left to
+  // `useOverlayDismiss` above.
   React.useEffect(() => {
     if (
       Platform.OS !== 'web' ||
@@ -781,10 +824,11 @@ const Menu = ({
         return;
       }
 
-      // Items are in visual order, top to bottom, followed by the close
-      // button.
-      const stops = [...itemRefs.current, triggerRef.current].flatMap(
-        (node) => getFocusableElement(node) ?? []
+      // Items are in visual order, top to bottom.
+      // Each ref is the focusable element itself. A `tabindex` of -1 still
+      // takes focus from a script.
+      const stops = itemRefs.current.flatMap((node) =>
+        node instanceof HTMLElement ? [node] : []
       );
       const current = stops.findIndex((el) => el === document.activeElement);
 
@@ -887,8 +931,14 @@ const Menu = ({
               alignItems: flexAlign,
             },
           ]}
-          // A menu without items would be announced as an empty one.
+          // A menu without items would be announced as an empty one. It is
+          // named after the trigger that opens it.
           role={Platform.OS === 'web' && effectiveExpanded ? 'menu' : undefined}
+          aria-label={
+            Platform.OS === 'web' && effectiveExpanded
+              ? trigger['aria-label']
+              : undefined
+          }
         >
           <ScrollView
             ref={scrollRef}
@@ -918,6 +968,8 @@ const Menu = ({
                 >
                   <MenuItem
                     index={index}
+                    tabbable={index === Math.min(activeIndex, items.length - 1)}
+                    onFocusItem={setActiveIndex}
                     registerRef={registerItemRef}
                     icon={item.icon}
                     label={item.label}

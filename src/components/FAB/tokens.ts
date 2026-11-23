@@ -1,5 +1,3 @@
-import type { ViewStyle } from 'react-native';
-
 import { tokens } from '../../theme/tokens';
 import type {
   ColorRole,
@@ -137,5 +135,3 @@ export const STATE_LAYER_OPACITY = {
   focus: stateOpacity.focused,
   pressed: stateOpacity.pressed,
 } as const satisfies Record<Interaction, number>;
-
-export const webNoHoverTint: ViewStyle = { backgroundColor: 'transparent' };

@@ -529,6 +529,53 @@ describe('dismissing the menu', () => {
       expect(onDismiss).toHaveBeenCalledTimes(1);
     });
 
+    it('presses a focused item with Space', async () => {
+      const onItemPress = jest.fn<(event?: unknown) => void>();
+      const onDismiss = jest.fn();
+      await render(
+        <FAB.Menu
+          expanded
+          onDismiss={onDismiss}
+          trigger={{ icon: 'plus' }}
+          items={makeItems(onItemPress)}
+        />
+      );
+      const item = screen.getByTestId('item-0');
+      const space = { nativeEvent: { key: ' ' }, preventDefault: jest.fn() };
+
+      await fireEvent(item, 'keyDown', space);
+
+      // Pressed on release, as with Enter.
+      expect(onItemPress).not.toHaveBeenCalled();
+
+      await fireEvent(item, 'keyUp', space);
+
+      expect(space.preventDefault).toHaveBeenCalled();
+      expect(onItemPress).toHaveBeenCalledTimes(1);
+      expect(onDismiss).toHaveBeenCalledTimes(1);
+    });
+
+    it('keeps one item in the tab order and moves it with focus', async () => {
+      await render(
+        <FAB.Menu
+          expanded
+          onDismiss={jest.fn()}
+          trigger={{ icon: 'plus' }}
+          items={makeItems()}
+        />
+      );
+
+      expect(screen.getByTestId('item-0')).toHaveProp('tabIndex', 0);
+      expect(screen.getByTestId('item-1')).toHaveProp('tabIndex', -1);
+
+      await fireEvent(screen.getByTestId('item-1'), 'focus', {
+        nativeEvent: {},
+      });
+
+      expect(screen.getByTestId('item-0')).toHaveProp('tabIndex', -1);
+      expect(screen.getByTestId('item-1')).toHaveProp('tabIndex', 0);
+    });
+
     it('ignores Escape while closed', async () => {
       const onDismiss = jest.fn();
       await render(
@@ -544,6 +591,43 @@ describe('dismissing the menu', () => {
 
       expect(onDismiss).not.toHaveBeenCalled();
     });
+  });
+});
+
+describe('hiding the trigger', () => {
+  const renderMenu = (visible: boolean, onDismiss = jest.fn()) => (
+    <FAB.Menu
+      expanded
+      onDismiss={onDismiss}
+      trigger={{ icon: 'plus', visible }}
+      items={makeItems()}
+    />
+  );
+
+  it('dismisses an open menu, so the parent does not keep it open', async () => {
+    const onDismiss = jest.fn();
+    const { rerender } = await render(renderMenu(true, onDismiss));
+
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    await rerender(renderMenu(false, onDismiss));
+
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not dismiss a menu that is closed', async () => {
+    const onDismiss = jest.fn();
+
+    await render(
+      <FAB.Menu
+        expanded={false}
+        onDismiss={onDismiss}
+        trigger={{ icon: 'plus', visible: false }}
+        items={makeItems()}
+      />
+    );
+
+    expect(onDismiss).not.toHaveBeenCalled();
   });
 });
 
@@ -563,14 +647,10 @@ describe('moving focus', () => {
 
   // The screen reader is sent to an element, which the test can only tell
   // apart by the `testID` it was given.
-  const focusedTestID = () => {
-    const [target] = sendAccessibilityEvent.mock.calls[0] ?? [];
-
-    return typeof target === 'object' && target !== null && 'props' in target
-      ? // eslint-disable-next-line no-restricted-syntax, @typescript-eslint/no-unsafe-type-assertion
-        (target.props as { testID?: string }).testID
-      : undefined;
-  };
+  const focusedElement = (testID: string) =>
+    expect.objectContaining({
+      props: expect.objectContaining({ testID }),
+    });
 
   beforeEach(() => {
     sendAccessibilityEvent.mockClear();
@@ -589,10 +669,9 @@ describe('moving focus', () => {
 
     expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
     expect(sendAccessibilityEvent).toHaveBeenCalledWith(
-      expect.anything(),
+      focusedElement('item-0'),
       'focus'
     );
-    expect(focusedTestID()).toBe('item-0');
   });
 
   it('moves the screen reader into the menu each time it opens', async () => {
@@ -627,10 +706,9 @@ describe('moving focus', () => {
 
     expect(sendAccessibilityEvent).toHaveBeenCalledTimes(1);
     expect(sendAccessibilityEvent).toHaveBeenCalledWith(
-      expect.anything(),
+      focusedElement('trigger'),
       'focus'
     );
-    expect(focusedTestID()).toBe('trigger');
   });
 
   it('leaves the screen reader alone when it closes before it moved any in', async () => {
