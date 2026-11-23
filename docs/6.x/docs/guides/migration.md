@@ -104,9 +104,11 @@ Components no longer read values from the `style` prop to derive other styles, s
 
 - `Appbar` and `Appbar.Header`: `backgroundColor` and the border radius props (`borderRadius`, `borderTopLeftRadius` etc.) replace `style.backgroundColor` and the border radius in `style`
 - `Avatar.Icon`, `Avatar.Image` and `Avatar.Text`: `backgroundColor` replaces `style.backgroundColor`
+- `Banner`: `backgroundColor` replaces `style.backgroundColor`
 - `Button`: `iconSize` replaces `labelStyle.fontSize` for the size of the icon and the loading indicator
 - `Button`: `textColor` replaces `labelStyle.color` for the color of the icon and the loading indicator
 - `Card`: `borderColor` replaces `style.borderColor` for the outline color
+- `Menu`: `backgroundColor` replaces `contentStyle.backgroundColor`
 
 `Tooltip` no longer reads positioning styles from the wrapped element. Apply them to a parent `View` wrapping the `Tooltip`, see [Tooltip](#tooltip).
 
@@ -560,11 +562,21 @@ e.g.:
 
 ### Banner
 
-The banner background is now always `theme.colors.surfaceContainerLow` and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level1` to change the banner background, customize `theme.colors.surfaceContainerLow` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `1` is unchanged. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the banner now uses the system surface color.
+The banner background is now `theme.colors.surfaceContainerLow` by default and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level1` to change the banner background, customize `theme.colors.surfaceContainerLow` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `1` is unchanged. A banner with `elevation={0}` is no longer transparent. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the banner now uses the system surface color. To change the background of a single banner, use the new `backgroundColor` prop.
 
-### Menu
-
-The menu background is now always `theme.colors.surfaceContainer`, following the Material Design 3 spec, and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level2` to change the menu background, customize `theme.colors.surfaceContainer` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `2` is unchanged. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the menu now uses the system surface color.
+```diff
+const theme = {
+  ...LightTheme,
+  colors: {
+    ...LightTheme.colors,
+-   elevation: {
+-     ...LightTheme.colors.elevation,
+-     level1: '#ffd8e4',
+-   },
++   surfaceContainerLow: '#ffd8e4',
+  },
+};
+```
 
 ### Surface
 
@@ -894,6 +906,22 @@ The icon is 24dp, in `theme.colors.secondary`. `Dialog.Icon`'s `color` and `size
 ```
 
 ### Menu
+
+The menu background is now `theme.colors.surfaceContainer` by default, following the Material Design 3 spec, and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level2` to change the menu background, customize `theme.colors.surfaceContainer` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `2` is unchanged. A menu with `elevation={0}` is no longer transparent. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the menu now uses the system surface color. To change the background of a single menu, use the new `backgroundColor` prop.
+
+```diff
+const theme = {
+  ...LightTheme,
+  colors: {
+    ...LightTheme.colors,
+-   elevation: {
+-     ...LightTheme.colors.elevation,
+-     level2: '#ffd8e4',
+-   },
++   surfaceContainer: '#ffd8e4',
+  },
+};
+```
 
 The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 

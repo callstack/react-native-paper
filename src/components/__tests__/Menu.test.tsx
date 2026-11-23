@@ -15,6 +15,7 @@ import * as Reanimated from 'react-native-reanimated';
 import PaperProvider from '../../core/PaperProvider';
 import { render } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
+import { Palette } from '../../theme/tokens';
 import type { Elevation } from '../../theme/types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
@@ -172,7 +173,7 @@ const ViewPrototype: ComponentRef<typeof View> = View.prototype;
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
 elevations.forEach((elevation) =>
-  it(`renders menu with surfaceContainer background regardless of elevation value = ${elevation}`, async () => {
+  it(`keeps the same menu background at elevation ${elevation}`, async () => {
     const testID = 'menu-with-elevation';
 
     await render(
@@ -196,6 +197,29 @@ elevations.forEach((elevation) =>
     });
   })
 );
+
+it('renders menu with a custom background color', async () => {
+  const testID = 'menu-with-background-color';
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+        mode="flat"
+        backgroundColor={Palette.error60}
+        testID={testID}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    backgroundColor: Palette.error60,
+  });
+});
 
 it('uses the default anchorPosition of top', async () => {
   const testID = 'top-positioned-menu';

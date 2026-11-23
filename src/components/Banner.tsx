@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type {
+  ColorValue,
   LayoutChangeEvent,
   StyleProp,
   ViewProps,
@@ -71,6 +72,10 @@ export type Props = Omit<ViewProps, 'style'> & {
    * `theme.colors.surfaceContainerLow` and is not affected by `elevation`.
    */
   elevation?: Elevation;
+  /**
+   * Background color of the banner. Overrides `theme.colors.surfaceContainerLow`.
+   */
+  backgroundColor?: ColorValue;
   /**
    * Specifies the largest possible scale a text font can reach.
    */
@@ -144,6 +149,7 @@ const Banner = ({
   actions = [],
   contentStyle,
   elevation = 1,
+  backgroundColor,
   style,
   theme: themeOverrides,
   onShowAnimationFinished = () => {},
@@ -212,7 +218,7 @@ const Banner = ({
       {...rest}
       style={[surfaceStyle, style]}
       theme={theme}
-      backgroundColor={colors.surfaceContainerLow}
+      backgroundColor={backgroundColor ?? colors.surfaceContainerLow}
       elevation={elevation}
     >
       <View style={[styles.wrapper, contentStyle]}>

@@ -15,6 +15,7 @@ import * as Reanimated from 'react-native-reanimated';
 import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
+import { Palette } from '../../theme/tokens';
 import Banner from '../Banner';
 
 jest.mock('react-native-reanimated', () => {
@@ -120,7 +121,7 @@ it('renders visible banner, with action buttons and with image', async () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders banner with surfaceContainerLow background', async () => {
+it('renders banner on the theme surface container background', async () => {
   await render(
     <Banner visible testID="banner">
       Text
@@ -129,6 +130,18 @@ it('renders banner with surfaceContainerLow background', async () => {
 
   expect(screen.getByTestId('banner')).toHaveStyle({
     backgroundColor: LightTheme.colors.surfaceContainerLow,
+  });
+});
+
+it('renders banner with a custom background color', async () => {
+  await render(
+    <Banner visible testID="banner" backgroundColor={Palette.error60}>
+      Text
+    </Banner>
+  );
+
+  expect(screen.getByTestId('banner')).toHaveStyle({
+    backgroundColor: Palette.error60,
   });
 });
 

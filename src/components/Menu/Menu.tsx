@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import type { KeyboardEvent as RNKeyboardEvent } from 'react-native';
 import type {
+  ColorValue,
   EmitterSubscription,
   LayoutRectangle,
   NativeEventSubscription,
@@ -87,6 +88,10 @@ export type Props = {
    * @supported Available in v5.x with theme version 3
    */
   elevation?: Elevation;
+  /**
+   * Background color of the menu's content. Overrides `theme.colors.surfaceContainer`.
+   */
+  backgroundColor?: ColorValue;
   /**
    * Mode of the menu's content.
    * - `elevated` - Surface with a shadow corresponding to set `elevation` value.
@@ -203,6 +208,7 @@ const Menu = ({
   contentStyle,
   style,
   elevation = DEFAULT_ELEVATION,
+  backgroundColor,
   mode = DEFAULT_MODE,
   children,
   theme: themeOverrides,
@@ -699,7 +705,9 @@ const Menu = ({
             >
               <Surface
                 mode={mode}
-                backgroundColor={theme.colors.surfaceContainer}
+                backgroundColor={
+                  backgroundColor ?? theme.colors.surfaceContainer
+                }
                 borderRadius={theme.shapes.corner.extraSmall}
                 style={[
                   styles.shadowMenuContainer,
