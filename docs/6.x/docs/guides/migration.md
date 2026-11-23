@@ -1509,6 +1509,19 @@ To set the glyph size in dp without changing the container scale, use `iconSize`
 <IconButton icon="camera" iconSize={32} onPress={onPress} />
 ```
 
+The container no longer follows the icon. In v5 it was the icon plus 8dp on each side, so `size={20}` drew a 36dp button and `size={32}` a 48dp one. Moving the number to `iconSize` keeps the glyph but puts it in the container of the named `size`, 40dp for the default, so a button you migrate this way can grow or shrink. Check rows and headers that depend on its width. For a smaller button, use `size="extra-small"` (32dp with a 20dp icon). To take the same space as before, lower the 6dp margin around the button.
+
+```tsx
+// Before (v5): a 36dp button, 48dp with its margin
+<IconButton icon="star" size={20} onPress={onPress} />
+
+// After (v6): a 32dp button, 44dp with its margin
+<IconButton icon="star" size="extra-small" onPress={onPress} />
+
+// After (v6): a 40dp button, 48dp with a 4dp margin
+<IconButton icon="star" iconSize={20} style={{ margin: 4 }} onPress={onPress} />
+```
+
 ```tsx
 // After (v6): named container sizes
 <IconButton icon="plus" size="extra-small" onPress={onPress} />
