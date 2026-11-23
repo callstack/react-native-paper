@@ -87,7 +87,7 @@ const DrawerSection = ({
               style={[
                 {
                   color: titleColor,
-                  marginLeft: titleMargin,
+                  marginStart: titleMargin,
                   ...font,
                 },
               ]}

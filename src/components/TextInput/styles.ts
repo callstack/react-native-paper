@@ -46,7 +46,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL,
     fontSize: SUPPORTING_TEXT_FONT_SIZE,
     fontWeight: bodySmall.fontWeight,
-    textAlign: 'left',
   },
   counter: {
     marginTop: SUPPORTING_TEXT_MARGIN_TOP,

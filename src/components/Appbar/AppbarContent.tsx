@@ -243,7 +243,7 @@ AppbarContent.displayName = 'Appbar.Content';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft: 12,
+    marginStart: 12,
   },
   centerAligned: {
     flex: 1,
