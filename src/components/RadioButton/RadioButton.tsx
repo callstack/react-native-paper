@@ -124,6 +124,8 @@ const RadioButton = ({
   status,
   testID,
   error,
+  color,
+  uncheckedColor,
   onFocus,
   onBlur,
   onHoverIn,
@@ -158,8 +160,8 @@ const RadioButton = ({
       disabled,
       checked,
       error,
-      customColor: rest.color,
-      customUncheckedColor: rest.uncheckedColor,
+      customColor: color,
+      customUncheckedColor: uncheckedColor,
     });
 
   const dotStyle: CSSStyle<ViewStyle> = {
@@ -207,8 +209,8 @@ const RadioButton = ({
     checked,
     disabled,
     error,
-    customColor: rest.color,
-    customUncheckedColor: rest.uncheckedColor,
+    customColor: color,
+    customUncheckedColor: uncheckedColor,
   };
 
   const stateLayer = getSelectionStateLayer({
@@ -292,6 +294,9 @@ const RadioButton = ({
           role: 'radio' as const,
           'aria-disabled': !!disabled,
           'aria-checked': checked,
+          // Announces a `status` change that comes from outside the radio,
+          // such as a `RadioButton.Group` value set elsewhere.
+          'aria-live': 'polite' as const,
         };
 
   const { style: restStyle, ...restProps } = rest;

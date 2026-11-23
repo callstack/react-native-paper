@@ -5,6 +5,7 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
   accessible={true}
   aria-checked={false}
   aria-disabled={false}
+  aria-live="polite"
   focusable={false}
   onBlur={[Function]}
   onFocus={[Function]}
@@ -109,6 +110,7 @@ exports[`RadioButton renders properly 1`] = `
   accessible={true}
   aria-checked={false}
   aria-disabled={false}
+  aria-live="polite"
   focusable={false}
   onBlur={[Function]}
   onFocus={[Function]}
@@ -208,6 +210,7 @@ exports[`RadioButton renders properly 1`] = `
 
 exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider renders properly 1`] = `
 <View
+  accessibilityLiveRegion="polite"
   accessibilityState={
     {
       "busy": undefined,

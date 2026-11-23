@@ -4,6 +4,7 @@ import { describe, expect, it, jest as mockJest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 import { getAnimatedStyle } from 'react-native-reanimated';
 
+import PaperProvider from '../../../core/PaperProvider';
 import { fireEvent, render, screen } from '../../../test-utils';
 import { LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';
@@ -38,6 +39,15 @@ describe('RadioButton', () => {
       width: 56,
       height: 56,
     });
+  });
+
+  it('announces status changes politely', async () => {
+    await render(<RadioButton value="first" onPress={() => {}} />);
+
+    expect(screen.getByRole('radio')).toHaveProp(
+      'accessibilityLiveRegion',
+      'polite'
+    );
   });
 
   describe('when RadioButton is wrapped by RadioButtonContext.Provider', () => {
@@ -253,4 +263,24 @@ describe('RadioButton state layer', () => {
       transitionProperty: 'opacity',
     });
   });
+});
+
+describe('RadioButton with reduce motion', () => {
+  it.each([
+    { reduceMotion: 'off', duration: LightTheme.motion.duration.short2 },
+    { reduceMotion: 'on', duration: 0 },
+  ] as const)(
+    'fades the state layer in $duration ms when reduceMotion is "$reduceMotion"',
+    async ({ reduceMotion, duration }) => {
+      await render(
+        <PaperProvider reduceMotion={reduceMotion}>
+          <RadioButton value="first" testID="radio" onPress={() => {}} />
+        </PaperProvider>
+      );
+
+      expect(
+        getAnimatedStyle(screen.getByTestId('radio-state-layer'))
+      ).toMatchObject({ transitionDuration: duration });
+    }
+  );
 });
