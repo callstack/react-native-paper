@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Pressable, View } from 'react-native';
+import {
+  AccessibilityInfo,
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import Animated, {
@@ -263,13 +269,15 @@ function Modal({
 
     // Transparent views are not in the accessibility tree, so focus has to
     // wait for the fade to finish.
-    const timeout = setTimeout(
-      focusInitialTarget,
-      getDuration(DEFAULT_DURATION)
-    );
+    const timeout = setTimeout(() => {
+      focusInitialTarget();
+      if (Platform.OS === 'ios' && ariaLabel) {
+        AccessibilityInfo.announceForAccessibility(ariaLabel);
+      }
+    }, getDuration(DEFAULT_DURATION));
 
     return () => clearTimeout(timeout);
-  }, [animatedVisible, focusInitialTarget, getDuration]);
+  }, [animatedVisible, ariaLabel, focusInitialTarget, getDuration]);
 
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
