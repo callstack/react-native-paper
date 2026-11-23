@@ -197,8 +197,7 @@ export function getTransition<
   durationToken: keyof MotionDuration,
   easingToken: keyof MotionEasing,
   reduceMotion: boolean
-): Required<Pick<CSSTransitionProperties<S>, 'transitionProperty'>> &
-  CSSTransitionProperties<S> {
+): CSSTransitionProperties<S> {
   return {
     transitionProperty: property,
     transitionDuration: reduceMotion ? 0 : theme.motion.duration[durationToken],

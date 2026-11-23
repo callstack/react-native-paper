@@ -14,7 +14,10 @@ import {
 } from 'react-native';
 import type { BlurEvent, FocusEvent, TextStyle } from 'react-native';
 
-import { cubicBezier } from 'react-native-reanimated';
+import {
+  cubicBezier,
+  type CSSTransitionProperties,
+} from 'react-native-reanimated';
 
 import {
   ACTIVE_LABEL_FONT_SIZE,
@@ -82,7 +85,9 @@ const useTextInputAnimation = ({
   }, [isFloating, duration]);
 
   const transition = (
-    property: Parameters<typeof getTransition<TextStyle>>[1]
+    property: NonNullable<
+      CSSTransitionProperties<TextStyle>['transitionProperty']
+    >
   ) => getTransition(theme, property, 'short3', 'standard', reduceMotion);
 
   const { activeTop, inactiveTop, translateXEnd } = getTextInputAnimationLayout(

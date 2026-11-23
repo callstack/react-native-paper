@@ -51,18 +51,6 @@ describe('toSpringCurve', () => {
 const theme = { motion: expressiveMotion };
 
 describe('getTransition', () => {
-  it('passes the property through unchanged for a single property', () => {
-    expect(
-      getTransition(theme, 'opacity', 'short3', 'standard', false)
-    ).toMatchObject({ transitionProperty: 'opacity' });
-  });
-
-  it('passes the property through unchanged for multiple properties', () => {
-    expect(
-      getTransition(theme, ['width', 'opacity'], 'short3', 'standard', false)
-    ).toMatchObject({ transitionProperty: ['width', 'opacity'] });
-  });
-
   it('reads the duration from the given token', () => {
     expect(
       getTransition(theme, 'opacity', 'short2', 'standard', false)

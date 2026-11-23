@@ -73,21 +73,8 @@ const getOuterTextInputPressable = (root: TestInstance | null) => {
   return pressable;
 };
 
-/**
- * The label wrapper has no testID and other `aria-hidden` nodes exist, so
- * match on its CSS transition. Reanimated strips transition props from
- * `style` in tests, hence `getAnimatedStyle`.
- */
-const getLabelWrapper = (root: TestInstance | null) => {
-  const [wrapper] =
-    // eslint-disable-next-line no-restricted-syntax -- TODO: replace non-accessible label wrapper lookup with a public behavior assertion.
-    root?.queryAll(
-      (instance) =>
-        // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-        instance.props['aria-hidden'] === true &&
-        'transitionProperty' in getAnimatedStyle(instance),
-      { includeSelf: true }
-    ) ?? [];
+const getLabelWrapper = (label: string) => {
+  const wrapper = screen.getByText(label, includeHiddenElements).parent;
 
   if (!wrapper) {
     throw new Error('Expected label wrapper');
@@ -844,7 +831,7 @@ it('invokes onFocus and onBlur on the TextInput', async () => {
 });
 
 it('floats the label up and shrinks it on focus, and back down on blur when empty (filled)', async () => {
-  const { root } = await render(
+  await render(
     <TextInput
       label="Email"
       value=""
@@ -856,28 +843,28 @@ it('floats the label up and shrinks it on focus, and back down on blur when empt
   const input = screen.getByTestId('tf-input');
   const label = screen.getByText('Email', includeHiddenElements);
 
-  expect(getLabelWrapper(root)).toHaveStyle({
+  expect(getLabelWrapper('Email')).toHaveStyle({
     top: FILLED_INACTIVE_LABEL_TOP_POSITION,
   });
   expect(label).toHaveStyle({ fontSize: INACTIVE_LABEL_FONT_SIZE });
 
   await fireEvent(input, 'focus');
 
-  expect(getLabelWrapper(root)).toHaveStyle({
+  expect(getLabelWrapper('Email')).toHaveStyle({
     top: FILLED_ACTIVE_LABEL_TOP_POSITION,
   });
   expect(label).toHaveStyle({ fontSize: ACTIVE_LABEL_FONT_SIZE });
 
   await fireEvent(input, 'blur');
 
-  expect(getLabelWrapper(root)).toHaveStyle({
+  expect(getLabelWrapper('Email')).toHaveStyle({
     top: FILLED_INACTIVE_LABEL_TOP_POSITION,
   });
   expect(label).toHaveStyle({ fontSize: INACTIVE_LABEL_FONT_SIZE });
 });
 
 it('keeps the label floated after blur when the field already has a value (filled)', async () => {
-  const { root } = await render(
+  await render(
     <TextInput
       label="Email"
       value="a@b.co"
@@ -891,7 +878,7 @@ it('keeps the label floated after blur when the field already has a value (fille
   await fireEvent(input, 'focus');
   await fireEvent(input, 'blur');
 
-  expect(getLabelWrapper(root)).toHaveStyle({
+  expect(getLabelWrapper('Email')).toHaveStyle({
     top: FILLED_ACTIVE_LABEL_TOP_POSITION,
   });
   expect(screen.getByText('Email', includeHiddenElements)).toHaveStyle({
@@ -900,7 +887,7 @@ it('keeps the label floated after blur when the field already has a value (fille
 });
 
 it('floats the label up and slides it into the outline gap on focus (outlined)', async () => {
-  const { root } = await render(
+  await render(
     <TextInput
       variant="outlined"
       label="Email"
@@ -912,14 +899,14 @@ it('floats the label up and slides it into the outline gap on focus (outlined)',
 
   const input = screen.getByTestId('tf-input');
 
-  expect(getLabelWrapper(root)).toHaveStyle({
+  expect(getLabelWrapper('Email')).toHaveStyle({
     top: OUTLINED_INACTIVE_LABEL_TOP_POSITION,
     transform: [{ translateX: 0 }],
   });
 
   await fireEvent(input, 'focus');
 
-  expect(getLabelWrapper(root)).toHaveStyle({
+  expect(getLabelWrapper('Email')).toHaveStyle({
     top: OUTLINED_ACTIVE_LABEL_TOP_POSITION,
     transform: [
       { translateX: -OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY },
@@ -1638,7 +1625,7 @@ describe('with reduce motion', () => {
   ] as const)(
     'floats the $variant label and fades the prefix in in $duration ms when reduceMotion is "$reduceMotion"',
     async ({ variant, reduceMotion, duration }) => {
-      const { root } = await render(
+      await render(
         <PaperProvider reduceMotion={reduceMotion}>
           <TextInput
             variant={variant}
@@ -1652,7 +1639,7 @@ describe('with reduce motion', () => {
 
       await fireEvent(screen.getByLabelText('Amount'), 'focus');
 
-      expect(getAnimatedStyle(getLabelWrapper(root))).toMatchObject({
+      expect(getAnimatedStyle(getLabelWrapper('Amount'))).toMatchObject({
         transitionDuration: duration,
       });
       expect(
