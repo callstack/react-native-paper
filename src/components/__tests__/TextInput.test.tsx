@@ -21,6 +21,7 @@ import {
 import { getAnimatedStyle } from 'react-native-reanimated';
 import type { TestInstance } from 'test-renderer';
 
+import PaperProvider from '../../core/PaperProvider';
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -1619,6 +1620,50 @@ it.each([
     });
   }
 );
+
+describe('with reduce motion', () => {
+  it.each([
+    {
+      variant: 'filled',
+      reduceMotion: 'off',
+      duration: LightTheme.motion.duration.short3,
+    },
+    { variant: 'filled', reduceMotion: 'on', duration: 0 },
+    {
+      variant: 'outlined',
+      reduceMotion: 'off',
+      duration: LightTheme.motion.duration.short3,
+    },
+    { variant: 'outlined', reduceMotion: 'on', duration: 0 },
+  ] as const)(
+    'floats the $variant label and fades the prefix in in $duration ms when reduceMotion is "$reduceMotion"',
+    async ({ variant, reduceMotion, duration }) => {
+      const { root } = await render(
+        <PaperProvider reduceMotion={reduceMotion}>
+          <TextInput
+            variant={variant}
+            label="Amount"
+            value=""
+            onChangeText={() => {}}
+            prefix="$"
+          />
+        </PaperProvider>
+      );
+
+      await fireEvent(screen.getByLabelText('Amount'), 'focus');
+
+      expect(getAnimatedStyle(getLabelWrapper(root))).toMatchObject({
+        transitionDuration: duration,
+      });
+      expect(
+        getAnimatedStyle(screen.getByText('Amount', includeHiddenElements))
+      ).toMatchObject({ transitionDuration: duration });
+      expect(
+        getAnimatedStyle(screen.getByText('$', includeHiddenElements))
+      ).toMatchObject({ animationDuration: duration });
+    }
+  );
+});
 
 it('keeps the disabled dim on the prefix and suffix of a labelled field', async () => {
   await render(
