@@ -21,7 +21,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
   }
   accessible={false}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -535,7 +535,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
   }
   accessible={false}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -990,7 +990,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
   }
   accessible={false}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -1478,7 +1478,7 @@ exports[`renders filled TextInput with label and value 1`] = `
   }
   accessible={false}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -1669,7 +1669,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
   }
   accessible={false}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -2104,7 +2104,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
   }
   accessible={false}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -2572,7 +2572,7 @@ exports[`renders outlined TextInput with label and value 1`] = `
   }
   accessible={false}
   collapsable={false}
-  focusable={true}
+  focusable={false}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}

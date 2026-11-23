@@ -404,6 +404,8 @@ function TextInput({
       onHoverIn={Platform.OS === 'web' ? undefined : onHoverIn}
       onHoverOut={Platform.OS === 'web' ? undefined : onHoverOut}
       accessible={false}
+      focusable={false}
+      tabIndex={Platform.OS === 'web' ? -1 : undefined}
       role="none"
     >
       <View
