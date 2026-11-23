@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Image } from 'react-native';
 import type { StyleProp, ImageSourcePropType, ImageStyle } from 'react-native';
 
+import { ListItemContext } from './ListItemContext';
 import { ListTokens } from './tokens';
 import { ListRowContext } from './utils';
 import type { ThemeProp } from '../../theme/types';
@@ -46,6 +47,9 @@ const ListImage = ({
   theme: _theme,
 }: Props) => {
   const { verticalPadding } = React.useContext(ListRowContext);
+  // The `leading` slot adds the leading space around the image, but a video
+  // thumbnail sits flush with the row's start edge
+  const inLeadingSlot = React.useContext(ListItemContext)?.slot === 'leading';
 
   const getStyles = () => {
     if (variant === 'video') {
@@ -55,6 +59,7 @@ const ListImage = ({
         {
           marginVertical: ListTokens.threeLineVerticalPadding - verticalPadding,
         },
+        inLeadingSlot && styles.videoInLeadingSlot,
       ];
     }
 
@@ -80,6 +85,9 @@ const styles = StyleSheet.create({
     width: 114,
     height: 64,
     marginLeft: 0,
+  },
+  videoInLeadingSlot: {
+    marginLeft: -ListTokens.leadingSpace,
   },
 });
 

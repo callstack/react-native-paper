@@ -7,15 +7,17 @@ exports[`renders list item with custom content style 1`] = `
     [
       false,
       [
-        {
-          "justifyContent": "center",
-          "paddingRight": 16,
-          "paddingVertical": 8,
-        },
-        {
-          "minHeight": 72,
-        },
-        false,
+        [
+          {
+            "justifyContent": "center",
+            "paddingRight": 16,
+            "paddingVertical": 8,
+          },
+          {
+            "minHeight": 72,
+          },
+          false,
+        ],
         false,
         {
           "backgroundColor": undefined,
@@ -33,6 +35,7 @@ exports[`renders list item with custom content style 1`] = `
           "flexDirection": "row",
           "width": "100%",
         },
+        null,
         undefined,
       ]
     }
@@ -131,15 +134,17 @@ exports[`renders list item with custom description 1`] = `
     [
       false,
       [
-        {
-          "justifyContent": "center",
-          "paddingRight": 16,
-          "paddingVertical": 8,
-        },
-        {
-          "minHeight": 72,
-        },
-        false,
+        [
+          {
+            "justifyContent": "center",
+            "paddingRight": 16,
+            "paddingVertical": 8,
+          },
+          {
+            "minHeight": 72,
+          },
+          false,
+        ],
         false,
         {
           "backgroundColor": undefined,
@@ -157,6 +162,7 @@ exports[`renders list item with custom description 1`] = `
           "flexDirection": "row",
           "width": "100%",
         },
+        null,
         undefined,
       ]
     }
@@ -501,15 +507,17 @@ exports[`renders list item with custom title and description styles 1`] = `
     [
       false,
       [
-        {
-          "justifyContent": "center",
-          "paddingRight": 16,
-          "paddingVertical": 8,
-        },
-        {
-          "minHeight": 72,
-        },
-        false,
+        [
+          {
+            "justifyContent": "center",
+            "paddingRight": 16,
+            "paddingVertical": 8,
+          },
+          {
+            "minHeight": 72,
+          },
+          false,
+        ],
         false,
         {
           "backgroundColor": undefined,
@@ -527,6 +535,7 @@ exports[`renders list item with custom title and description styles 1`] = `
           "flexDirection": "row",
           "width": "100%",
         },
+        null,
         undefined,
       ]
     }
@@ -627,15 +636,17 @@ exports[`renders list item with left and right items 1`] = `
     [
       false,
       [
-        {
-          "justifyContent": "center",
-          "paddingRight": 16,
-          "paddingVertical": 8,
-        },
-        {
-          "minHeight": 72,
-        },
-        false,
+        [
+          {
+            "justifyContent": "center",
+            "paddingRight": 16,
+            "paddingVertical": 8,
+          },
+          {
+            "minHeight": 72,
+          },
+          false,
+        ],
         false,
         {
           "backgroundColor": undefined,
@@ -653,6 +664,7 @@ exports[`renders list item with left and right items 1`] = `
           "flexDirection": "row",
           "width": "100%",
         },
+        null,
         undefined,
       ]
     }
@@ -798,15 +810,17 @@ exports[`renders list item with left item 1`] = `
     [
       false,
       [
-        {
-          "justifyContent": "center",
-          "paddingRight": 16,
-          "paddingVertical": 8,
-        },
-        {
-          "minHeight": 56,
-        },
-        false,
+        [
+          {
+            "justifyContent": "center",
+            "paddingRight": 16,
+            "paddingVertical": 8,
+          },
+          {
+            "minHeight": 56,
+          },
+          false,
+        ],
         false,
         {
           "backgroundColor": undefined,
@@ -824,6 +838,7 @@ exports[`renders list item with left item 1`] = `
           "flexDirection": "row",
           "width": "100%",
         },
+        null,
         undefined,
       ]
     }
@@ -934,15 +949,17 @@ exports[`renders list item with right item 1`] = `
     [
       false,
       [
-        {
-          "justifyContent": "center",
-          "paddingRight": 16,
-          "paddingVertical": 8,
-        },
-        {
-          "minHeight": 56,
-        },
-        false,
+        [
+          {
+            "justifyContent": "center",
+            "paddingRight": 16,
+            "paddingVertical": 8,
+          },
+          {
+            "minHeight": 56,
+          },
+          false,
+        ],
         false,
         {
           "backgroundColor": undefined,
@@ -960,6 +977,7 @@ exports[`renders list item with right item 1`] = `
           "flexDirection": "row",
           "width": "100%",
         },
+        null,
         undefined,
       ]
     }
@@ -1026,15 +1044,17 @@ exports[`renders list item with title and description 1`] = `
     [
       false,
       [
-        {
-          "justifyContent": "center",
-          "paddingRight": 16,
-          "paddingVertical": 8,
-        },
-        {
-          "minHeight": 72,
-        },
-        false,
+        [
+          {
+            "justifyContent": "center",
+            "paddingRight": 16,
+            "paddingVertical": 8,
+          },
+          {
+            "minHeight": 72,
+          },
+          false,
+        ],
         false,
         {
           "backgroundColor": undefined,
@@ -1052,6 +1072,7 @@ exports[`renders list item with title and description 1`] = `
           "flexDirection": "row",
           "width": "100%",
         },
+        null,
         undefined,
       ]
     }
@@ -1148,15 +1169,17 @@ exports[`renders with a description with typeof number 1`] = `
     [
       false,
       [
-        {
-          "justifyContent": "center",
-          "paddingRight": 16,
-          "paddingVertical": 8,
-        },
-        {
-          "minHeight": 72,
-        },
-        false,
+        [
+          {
+            "justifyContent": "center",
+            "paddingRight": 16,
+            "paddingVertical": 8,
+          },
+          {
+            "minHeight": 72,
+          },
+          false,
+        ],
         false,
         {
           "backgroundColor": undefined,
@@ -1174,6 +1197,7 @@ exports[`renders with a description with typeof number 1`] = `
           "flexDirection": "row",
           "width": "100%",
         },
+        null,
         undefined,
       ]
     }

@@ -29,6 +29,27 @@ const ListItemExample = () => {
     <ScreenWrapper>
       <SelectableSection />
 
+      <List.Section title="Disabled">
+        <List.Item
+          title="Headline"
+          description="Supporting text"
+          disabled
+          onPress={() => {}}
+          leading={<List.Icon icon="account-outline" />}
+          trailing={<List.Icon icon="chevron-right" />}
+        />
+        <List.Item
+          title="Headline"
+          description="Selected"
+          selected
+          disabled
+          onPress={() => {}}
+          leading={<List.Icon icon="account-outline" />}
+          trailing={<List.Icon icon="chevron-right" />}
+        />
+        <Divider />
+      </List.Section>
+
       <List.Section title="Text-only">
         <List.Item title="Headline" />
         <List.Item title="Headline" description="Supporting text" />
@@ -39,35 +60,17 @@ const ListItemExample = () => {
         <Divider />
         <List.Item
           title="Headline"
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>
@@ -75,53 +78,35 @@ const ListItemExample = () => {
       <List.Section title="With icon">
         <List.Item
           title="Headline"
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
+          leading={<List.Icon icon="account-outline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
+          leading={<List.Icon icon="account-outline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
+          leading={<List.Icon icon="account-outline" />}
         />
         <Divider />
         <List.Item
           title="Headline"
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          leading={<List.Icon icon="account-outline" />}
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          leading={<List.Icon icon="account-outline" />}
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          leading={<List.Icon icon="account-outline" />}
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>
@@ -129,65 +114,35 @@ const ListItemExample = () => {
       <List.Section title="With avatar">
         <List.Item
           title="Headline"
-          left={(props) => (
-            <Avatar.Text style={props.style} label="A" size={40} />
-          )}
+          leading={<Avatar.Text label="A" size={40} />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => (
-            <Avatar.Text style={props.style} label="A" size={40} />
-          )}
+          leading={<Avatar.Text label="A" size={40} />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => (
-            <Avatar.Text style={props.style} label="A" size={40} />
-          )}
+          leading={<Avatar.Text label="A" size={40} />}
         />
         <Divider />
         <List.Item
           title="Headline"
-          left={(props) => (
-            <Avatar.Text style={props.style} label="A" size={40} />
-          )}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          leading={<Avatar.Text label="A" size={40} />}
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => (
-            <Avatar.Text style={props.style} label="A" size={40} />
-          )}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          leading={<Avatar.Text label="A" size={40} />}
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => (
-            <Avatar.Text style={props.style} label="A" size={40} />
-          )}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          leading={<Avatar.Text label="A" size={40} />}
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>
@@ -195,83 +150,59 @@ const ListItemExample = () => {
       <List.Section title="With image">
         <List.Item
           title="Headline"
-          left={(props) => (
+          leading={
             <List.Image
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
+          }
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => (
+          leading={
             <List.Image
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
+          }
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => (
+          leading={
             <List.Image
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
+          }
         />
         <Divider />
         <List.Item
           title="Headline"
-          left={(props) => (
+          leading={
             <List.Image
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          }
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => (
+          leading={
             <List.Image
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          }
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => (
+          leading={
             <List.Image
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          }
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>
@@ -279,125 +210,98 @@ const ListItemExample = () => {
       <List.Section title="With video">
         <List.Item
           title="Headline"
-          left={(props) => (
+          leading={
             <List.Image
               variant="video"
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
+          }
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => (
+          leading={
             <List.Image
               variant="video"
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
+          }
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => (
+          leading={
             <List.Image
               variant="video"
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
+          }
         />
         <Divider />
         <List.Item
           title="Headline"
-          left={(props) => (
+          leading={
             <List.Image
               variant="video"
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          }
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => (
+          leading={
             <List.Image
               variant="video"
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          }
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => (
+          leading={
             <List.Image
               variant="video"
-              style={props.style}
               source={require('../../../example/assets/images/strawberries.jpg')}
             />
-          )}
-          right={(props) => (
-            <Checkbox
-              status="checked"
-              aria-label="Headline"
-              style={props.style}
-            />
-          )}
+          }
+          trailing={<Checkbox status="checked" aria-label="Headline" />}
         />
         <Divider />
       </List.Section>
 
       <List.Section title="With switch">
-        <List.Item
-          title="Headline"
-          right={(props) => <Switch disabled style={props.style} />}
-        />
+        <List.Item title="Headline" trailing={<Switch disabled />} />
         <List.Item
           title="Headline"
           description="Supporting text"
-          right={(props) => <Switch disabled style={props.style} />}
+          trailing={<Switch disabled />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          right={(props) => <Switch disabled style={props.style} />}
+          trailing={<Switch disabled />}
         />
         <Divider />
         <List.Item
           title="Headline"
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
-          right={(props) => <Switch disabled style={props.style} />}
+          leading={<List.Icon icon="account-outline" />}
+          trailing={<Switch disabled />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
-          right={(props) => <Switch disabled style={props.style} />}
+          leading={<List.Icon icon="account-outline" />}
+          trailing={<Switch disabled />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => <List.Icon {...props} icon="account-outline" />}
-          right={(props) => <Switch disabled style={props.style} />}
+          leading={<List.Icon icon="account-outline" />}
+          trailing={<Switch disabled />}
         />
         <Divider />
       </List.Section>

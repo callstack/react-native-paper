@@ -2,7 +2,7 @@ import type { GestureResponderEvent } from 'react-native';
 import { Platform, StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
 import { fireEvent, render, screen } from '../../test-utils';
@@ -27,6 +27,10 @@ const styles = StyleSheet.create({
 });
 
 const testID = 'list-item';
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 it('renders list item with title and description', async () => {
   const tree = (
@@ -149,7 +153,7 @@ it('renders with a description with typeof number', async () => {
 });
 
 it('calling onPress on ListItem right component', async () => {
-  Platform.OS = 'web';
+  jest.replaceProperty(Platform, 'OS', 'web');
   const onPress = jest.fn<(event: GestureResponderEvent) => void>();
 
   await render(
@@ -424,4 +428,141 @@ it('lets a caller override the role and the selected state', async () => {
   );
 
   expect(screen.getByRole('link', { name: 'First Item' })).not.toBeSelected();
+});
+
+it('puts a video thumbnail in the leading slot flush with the start edge', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      leading={
+        <ListImage
+          variant="video"
+          source={{ uri: 'https://picsum.photos/228/128' }}
+          testID="video-thumbnail"
+        />
+      }
+    />
+  );
+
+  // The slot adds 16dp of leading space and the video takes it back
+  expect(screen.getByTestId('video-thumbnail').parent).toHaveStyle({
+    marginLeft: 16,
+  });
+  expect(screen.getByTestId('video-thumbnail')).toHaveStyle({
+    marginLeft: -16,
+  });
+});
+
+it('keeps a video thumbnail from the left render prop flush with the start edge', async () => {
+  await render(
+    <ListItem
+      title="First Item"
+      left={(props) => (
+        <ListImage
+          variant="video"
+          style={props.style}
+          source={{ uri: 'https://picsum.photos/228/128' }}
+          testID="video-thumbnail"
+        />
+      )}
+    />
+  );
+
+  expect(screen.getByTestId('video-thumbnail')).toHaveStyle({ marginLeft: 0 });
+});
+
+it.each([
+  ['a disabled item', false],
+  ['a selected, disabled item', true],
+])(
+  'renders the content of %s in onSurface at 38%% opacity',
+  async (_label, selected) => {
+    await render(
+      <ListItem
+        title="First Item"
+        description="Item description"
+        leading={<ListIcon icon="folder" />}
+        trailing={<View testID="trailing" />}
+        selected={selected}
+        disabled
+        testID={testID}
+      />
+    );
+
+    expect(screen.getByText('First Item')).toHaveStyle({
+      color: LightTheme.colors.onSurface,
+    });
+    expect(screen.getByText('Item description')).toHaveStyle({
+      color: LightTheme.colors.onSurface,
+    });
+    expect(
+      screen.getByText('folder', { includeHiddenElements: true })
+    ).toHaveStyle({ color: LightTheme.colors.onSurface });
+    // The row that holds the slots, title and description
+    expect(screen.getByTestId('trailing').parent?.parent).toHaveStyle({
+      opacity: 0.38,
+    });
+  }
+);
+
+it('does not fade the content of an enabled item', async () => {
+  await render(
+    <ListItem title="First Item" trailing={<View testID="trailing" />} />
+  );
+
+  expect(screen.getByTestId('trailing').parent?.parent).not.toHaveStyle({
+    opacity: 0.38,
+  });
+});
+
+it('puts a selected, disabled item on an onSurface layer at 38% opacity', async () => {
+  await render(
+    <ListItem title="First Item" selected disabled testID={testID} />
+  );
+
+  const item = screen.getByTestId(testID);
+
+  expect(item).toHaveStyle({ backgroundColor: undefined });
+  expect(item.children[0]).toHaveStyle({
+    backgroundColor: LightTheme.colors.onSurface,
+    opacity: 0.38,
+  });
+});
+
+it('does not call onPress on a disabled item and announces it as disabled', async () => {
+  const onPress = jest.fn<(event: GestureResponderEvent) => void>();
+  await render(<ListItem title="First Item" onPress={onPress} disabled />);
+
+  const item = screen.getByRole('button', { name: 'First Item' });
+
+  expect(item).toBeDisabled();
+
+  await userEvent.press(item);
+
+  expect(onPress).not.toHaveBeenCalled();
+});
+
+describe('selected state on web', () => {
+  it('announces a selected button item with aria-pressed, which fits a button', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(<ListItem title="First Item" onPress={() => {}} selected />);
+
+    const item = screen.getByRole('button', { name: 'First Item' });
+
+    expect(item).toHaveProp('aria-pressed', true);
+    expect(item).not.toBeSelected();
+  });
+
+  it('keeps aria-selected when a caller gives the item another role', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(
+      <ListItem title="First Item" onPress={() => {}} selected role="option" />
+    );
+
+    const item = screen.getByRole('option', { name: 'First Item' });
+
+    // React Native moves `aria-selected` into `accessibilityState`
+    expect(item).toBeSelected();
+    expect(item).not.toHaveProp('aria-pressed');
+  });
 });

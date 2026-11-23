@@ -1,6 +1,6 @@
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
-import { describe, expect, it, jest } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import { red500 } from '../../theme/colors';
@@ -9,6 +9,10 @@ import ListAccordion from '../List/ListAccordion';
 import ListAccordionGroup from '../List/ListAccordionGroup';
 import ListIcon from '../List/ListIcon';
 import ListItem from '../List/ListItem';
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 const styles = StyleSheet.create({
   coloring: {
@@ -364,5 +368,69 @@ describe('ListAccordion', () => {
     expect(
       screen.getByRole('button', { name: /^Accordion item 1/ })
     ).toBeSelected();
+  });
+
+  it('announces a selected accordion with aria-pressed on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(
+      <ListAccordion title="Accordion item 1" selected>
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    const header = screen.getByRole('button', { name: /^Accordion item 1/ });
+
+    expect(header).toHaveProp('aria-pressed', true);
+    expect(header).not.toBeSelected();
+  });
+
+  it('renders a disabled accordion header in onSurface at 38% opacity', async () => {
+    await render(
+      <ListAccordion
+        title="Accordion item 1"
+        description="Supporting"
+        left={(props) => <ListIcon {...props} icon="folder" />}
+        selected
+        disabled
+      >
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    for (const text of ['Accordion item 1', 'Supporting']) {
+      expect(screen.getByText(text)).toHaveStyle({
+        color: LightTheme.colors.onSurface,
+      });
+    }
+    for (const icon of ['folder', 'chevron-down']) {
+      expect(
+        screen.getByText(icon, { includeHiddenElements: true })
+      ).toHaveStyle({ color: LightTheme.colors.onSurface });
+    }
+    // The name also holds the glyph name the icon mock renders
+    expect(
+      screen.getByRole('button', { name: /Accordion item 1/ }).children[0]
+    ).toHaveStyle({ opacity: 0.38 });
+  });
+
+  it('does not expand a disabled accordion and announces it as disabled', async () => {
+    const onPress = jest.fn();
+    await render(
+      <ListAccordion title="Accordion item 1" onPress={onPress} disabled>
+        <ListItem title="List item 1" />
+      </ListAccordion>
+    );
+
+    const header = screen.getByRole('button', { name: /^Accordion item 1/ });
+
+    expect(header).toBeDisabled();
+
+    await userEvent.press(header);
+
+    expect(onPress).not.toHaveBeenCalled();
+    expect(
+      screen.getByRole('button', { name: /^Accordion item 1/ })
+    ).toBeCollapsed();
+    expect(screen.queryByText('List item 1')).not.toBeOnTheScreen();
   });
 });

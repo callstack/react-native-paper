@@ -54,11 +54,11 @@ const ListAccordionExample = () => {
           title="Accordion item 1"
         >
           <List.Item
-            left={(props) => <List.Icon {...props} icon="thumb-up" />}
+            leading={<List.Icon icon="thumb-up" />}
             title="List item 1"
           />
           <List.Item
-            left={(props) => <List.Icon {...props} icon="thumb-down" />}
+            leading={<List.Icon icon="thumb-down" />}
             title="List item 2"
           />
         </List.Accordion>

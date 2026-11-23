@@ -4,7 +4,6 @@ import type {
   ColorValue,
   GestureResponderEvent,
   StyleProp,
-  TextLayoutEvent,
   TextProps,
   TextStyle,
   ViewStyle,
@@ -12,8 +11,18 @@ import type {
 
 import { ListAccordionContext } from './ListAccordionContext';
 import { ListItemContext } from './ListItemContext';
+import ListSelectedDisabledLayer from './ListSelectedDisabledLayer';
 import { ListTokens } from './tokens';
-import { ListRowContext, getLeftStyles, getRightStyles } from './utils';
+import {
+  ListRowContext,
+  getAccessoryStyles,
+  getListColors,
+  getRowContainerStyles,
+  getRowContentStyle,
+  getSelectedContainerColor,
+  getSelectedStateProps,
+  useListRow,
+} from './utils';
 import type { Style } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -73,6 +82,11 @@ export type Props = Omit<
    * Whether to highlight the list item as selected.
    */
   selected?: boolean;
+  /**
+   * Whether the list item is disabled. A disabled item does not respond to
+   * presses, and its content is shown at 38% opacity.
+   */
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
@@ -167,6 +181,7 @@ const ListItem = ({
   title,
   description,
   selected,
+  disabled,
   onPress,
   theme: themeOverrides,
   style,
@@ -187,20 +202,20 @@ const ListItem = ({
   const theme = useInternalTheme(themeOverrides);
   const { hasLeft } = React.useContext(ListAccordionContext);
   const shouldIndent = hasLeft && !left && !right && !leading && !trailing;
-  const [isDescriptionMultiline, setIsDescriptionMultiline] =
-    React.useState(false);
+  const { isDescriptionMultiline, onDescriptionTextLayout, rowContext } =
+    useListRow();
 
-  const onDescriptionTextLayout = (event: TextLayoutEvent) => {
-    const { nativeEvent } = event;
-    setIsDescriptionMultiline(nativeEvent.lines.length >= 2);
-  };
-
-  const backgroundColor = selected
-    ? theme.colors[ListTokens.selectedContainerColor]
-    : undefined;
-  const titleColor = selected
-    ? theme.colors[ListTokens.selectedContentColor]
-    : theme.colors[ListTokens.headlineColor];
+  const backgroundColor = getSelectedContainerColor({
+    theme,
+    selected,
+    disabled,
+  });
+  const {
+    titleColor,
+    descriptionColor,
+    leadingIconColor: leadingColor,
+    trailingIconColor: trailingColor,
+  } = getListColors({ theme, selected, disabled });
 
   const renderDescription = (
     descriptionColor: ColorValue,
@@ -252,37 +267,20 @@ const ListItem = ({
     );
   };
 
-  const descriptionColor = selected
-    ? theme.colors[ListTokens.selectedContentColor]
-    : theme.colors[ListTokens.supportingTextColor];
-
-  const rowContext = React.useMemo(
-    () => ({
-      verticalPadding: isDescriptionMultiline
-        ? ListTokens.threeLineVerticalPadding
-        : ListTokens.verticalPadding,
-    }),
-    [isDescriptionMultiline]
-  );
-
-  const leadingColor = selected
-    ? theme.colors[ListTokens.selectedContentColor]
-    : theme.colors[ListTokens.leadingIconColor];
-  const trailingColor = selected
-    ? theme.colors[ListTokens.selectedContentColor]
-    : theme.colors[ListTokens.trailingIconColor];
-
   const leadingContext = React.useMemo(
-    () => ({ color: leadingColor }),
+    () => ({ color: leadingColor, slot: 'leading' as const }),
     [leadingColor]
   );
   const trailingContext = React.useMemo(
-    () => ({ color: trailingColor }),
+    () => ({ color: trailingColor, slot: 'trailing' as const }),
     [trailingColor]
   );
 
   const renderLeading = () => {
-    const accessoryStyle = getLeftStyles(isDescriptionMultiline, description);
+    const accessoryStyle = getAccessoryStyles(
+      isDescriptionMultiline,
+      description
+    );
 
     if (leading) {
       return (
@@ -296,7 +294,10 @@ const ListItem = ({
   };
 
   const renderTrailing = () => {
-    const accessoryStyle = getRightStyles(isDescriptionMultiline, description);
+    const accessoryStyle = getAccessoryStyles(
+      isDescriptionMultiline,
+      description
+    );
 
     if (trailing) {
       return (
@@ -311,28 +312,36 @@ const ListItem = ({
       : null;
   };
 
+  // A caller's own role wins, so the selected state follows it
+  const role = rest.role ?? (onPress ? 'button' : undefined);
+
   return (
     <ListRowContext.Provider value={rowContext}>
       <TouchableRipple
         // Before `rest`, so a caller's own value wins
         focusRing="inward"
-        role={onPress ? 'button' : undefined}
-        aria-selected={selected}
+        role={role}
+        {...getSelectedStateProps({ selected, role })}
+        aria-disabled={disabled}
         {...rest}
         ref={ref}
         style={[
-          styles.container,
-          description ? styles.containerTwoLine : styles.containerOneLine,
-          isDescriptionMultiline && styles.containerThreeLine,
+          getRowContainerStyles(!!description, isDescriptionMultiline),
           shouldIndent && styles.indent,
           { backgroundColor },
           style,
         ]}
         onPress={onPress}
+        disabled={disabled}
         theme={theme}
         testID={testID}
       >
-        <View style={[styles.row, containerStyle]}>
+        {selected && disabled ? (
+          <ListSelectedDisabledLayer theme={theme} />
+        ) : null}
+        <View
+          style={[styles.row, getRowContentStyle(disabled), containerStyle]}
+        >
           {renderLeading()}
           <View style={[styles.item, styles.content, contentStyle]}>
             {renderTitle()}
@@ -351,20 +360,6 @@ const ListItem = ({
 ListItem.displayName = 'List.Item';
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: ListTokens.verticalPadding,
-    paddingRight: ListTokens.trailingSpace,
-    justifyContent: 'center',
-  },
-  containerOneLine: {
-    minHeight: ListTokens.oneLineContainerHeight,
-  },
-  containerTwoLine: {
-    minHeight: ListTokens.twoLineContainerHeight,
-  },
-  containerThreeLine: {
-    paddingVertical: ListTokens.threeLineVerticalPadding,
-  },
   indent: {
     paddingLeft: 40,
   },

@@ -456,15 +456,17 @@ exports[`renders list section with custom title style 1`] = `
       [
         false,
         [
-          {
-            "justifyContent": "center",
-            "paddingRight": 16,
-            "paddingVertical": 8,
-          },
-          {
-            "minHeight": 56,
-          },
-          false,
+          [
+            {
+              "justifyContent": "center",
+              "paddingRight": 16,
+              "paddingVertical": 8,
+            },
+            {
+              "minHeight": 56,
+            },
+            false,
+          ],
           false,
           {
             "backgroundColor": undefined,
@@ -482,6 +484,7 @@ exports[`renders list section with custom title style 1`] = `
             "flexDirection": "row",
             "width": "100%",
           },
+          null,
           undefined,
         ]
       }
@@ -589,15 +592,17 @@ exports[`renders list section with custom title style 1`] = `
       [
         false,
         [
-          {
-            "justifyContent": "center",
-            "paddingRight": 16,
-            "paddingVertical": 8,
-          },
-          {
-            "minHeight": 56,
-          },
-          false,
+          [
+            {
+              "justifyContent": "center",
+              "paddingRight": 16,
+              "paddingVertical": 8,
+            },
+            {
+              "minHeight": 56,
+            },
+            false,
+          ],
           false,
           {
             "backgroundColor": undefined,
@@ -615,6 +620,7 @@ exports[`renders list section with custom title style 1`] = `
             "flexDirection": "row",
             "width": "100%",
           },
+          null,
           undefined,
         ]
       }
@@ -1173,15 +1179,17 @@ exports[`renders list section with subheader 1`] = `
       [
         false,
         [
-          {
-            "justifyContent": "center",
-            "paddingRight": 16,
-            "paddingVertical": 8,
-          },
-          {
-            "minHeight": 56,
-          },
-          false,
+          [
+            {
+              "justifyContent": "center",
+              "paddingRight": 16,
+              "paddingVertical": 8,
+            },
+            {
+              "minHeight": 56,
+            },
+            false,
+          ],
           false,
           {
             "backgroundColor": undefined,
@@ -1199,6 +1207,7 @@ exports[`renders list section with subheader 1`] = `
             "flexDirection": "row",
             "width": "100%",
           },
+          null,
           undefined,
         ]
       }
@@ -1306,15 +1315,17 @@ exports[`renders list section with subheader 1`] = `
       [
         false,
         [
-          {
-            "justifyContent": "center",
-            "paddingRight": 16,
-            "paddingVertical": 8,
-          },
-          {
-            "minHeight": 56,
-          },
-          false,
+          [
+            {
+              "justifyContent": "center",
+              "paddingRight": 16,
+              "paddingVertical": 8,
+            },
+            {
+              "minHeight": 56,
+            },
+            false,
+          ],
           false,
           {
             "backgroundColor": undefined,
@@ -1332,6 +1343,7 @@ exports[`renders list section with subheader 1`] = `
             "flexDirection": "row",
             "width": "100%",
           },
+          null,
           undefined,
         ]
       }
@@ -1850,15 +1862,17 @@ exports[`renders list section without subheader 1`] = `
       [
         false,
         [
-          {
-            "justifyContent": "center",
-            "paddingRight": 16,
-            "paddingVertical": 8,
-          },
-          {
-            "minHeight": 56,
-          },
-          false,
+          [
+            {
+              "justifyContent": "center",
+              "paddingRight": 16,
+              "paddingVertical": 8,
+            },
+            {
+              "minHeight": 56,
+            },
+            false,
+          ],
           false,
           {
             "backgroundColor": undefined,
@@ -1876,6 +1890,7 @@ exports[`renders list section without subheader 1`] = `
             "flexDirection": "row",
             "width": "100%",
           },
+          null,
           undefined,
         ]
       }
@@ -1983,15 +1998,17 @@ exports[`renders list section without subheader 1`] = `
       [
         false,
         [
-          {
-            "justifyContent": "center",
-            "paddingRight": 16,
-            "paddingVertical": 8,
-          },
-          {
-            "minHeight": 56,
-          },
-          false,
+          [
+            {
+              "justifyContent": "center",
+              "paddingRight": 16,
+              "paddingVertical": 8,
+            },
+            {
+              "minHeight": 56,
+            },
+            false,
+          ],
           false,
           {
             "backgroundColor": undefined,
@@ -2009,6 +2026,7 @@ exports[`renders list section without subheader 1`] = `
             "flexDirection": "row",
             "width": "100%",
           },
+          null,
           undefined,
         ]
       }

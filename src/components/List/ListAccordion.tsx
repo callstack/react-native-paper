@@ -6,7 +6,6 @@ import type {
   LayoutChangeEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  TextLayoutEvent,
   TextStyle,
   ViewProps,
   ViewStyle,
@@ -25,9 +24,19 @@ import { scheduleOnRN } from 'react-native-worklets';
 
 import { ListAccordionContext } from './ListAccordionContext';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
+import ListSelectedDisabledLayer from './ListSelectedDisabledLayer';
 import { ListTokens } from './tokens';
 import type { Style } from './utils';
-import { ListRowContext, getAccordionColors, getLeftStyles } from './utils';
+import {
+  ListRowContext,
+  getAccessoryStyles,
+  getListColors,
+  getRowContainerStyles,
+  getRowContentStyle,
+  getSelectedContainerColor,
+  getSelectedStateProps,
+  useListRow,
+} from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
@@ -66,6 +75,11 @@ export type Props = {
    * Whether to highlight the accordion as selected.
    */
   selected?: boolean;
+  /**
+   * Whether the accordion is disabled. A disabled accordion does not expand or
+   * collapse on press, and its header content is shown at 38% opacity.
+   */
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
@@ -211,6 +225,7 @@ const ListAccordion = ({
   delayLongPress,
   expanded: expandedProp,
   selected,
+  disabled,
   'aria-label': ariaLabel,
   pointerEvents = 'none',
   titleMaxFontSizeMultiplier,
@@ -222,13 +237,8 @@ const ListAccordion = ({
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
-  const [isDescriptionMultiline, setIsDescriptionMultiline] =
-    React.useState(false);
-
-  const onDescriptionTextLayout = (event: TextLayoutEvent) => {
-    const { nativeEvent } = event;
-    setIsDescriptionMultiline(nativeEvent.lines.length >= 2);
-  };
+  const { isDescriptionMultiline, onDescriptionTextLayout, rowContext } =
+    useListRow();
 
   const handlePressAction = (e: GestureResponderEvent) => {
     onPress?.(e);
@@ -336,26 +346,13 @@ const ListAccordion = ({
     contentHeight.value = event.nativeEvent.layout.height;
   };
 
-  const {
-    descriptionColor,
-    titleTextColor,
-    leadingIconColor,
-    trailingIconColor,
-  } = getAccordionColors({ theme, selected });
+  const { titleColor, descriptionColor, leadingIconColor, expandIconColor } =
+    getListColors({ theme, selected, disabled });
 
   const handlePress =
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
       : handlePressAction;
-
-  const rowContext = React.useMemo(
-    () => ({
-      verticalPadding: isDescriptionMultiline
-        ? ListTokens.threeLineVerticalPadding
-        : ListTokens.verticalPadding,
-    }),
-    [isDescriptionMultiline]
-  );
 
   const hasLeft = left != null;
   const accordionContext = React.useMemo(() => ({ hasLeft }), [hasLeft]);
@@ -364,28 +361,31 @@ const ListAccordion = ({
     <View>
       <View
         style={{
-          backgroundColor: selected
-            ? theme.colors[ListTokens.selectedContainerColor]
-            : theme.colors[ListTokens.containerColor],
+          backgroundColor:
+            getSelectedContainerColor({ theme, selected, disabled }) ??
+            theme.colors[ListTokens.containerColor],
         }}
       >
+        {selected && disabled ? (
+          <ListSelectedDisabledLayer theme={theme} />
+        ) : null}
         <ListRowContext.Provider value={rowContext}>
           <TouchableRipple
             style={[
-              styles.container,
-              description ? styles.containerTwoLine : styles.containerOneLine,
-              isDescriptionMultiline && styles.containerThreeLine,
+              getRowContainerStyles(!!description, isDescriptionMultiline),
               style,
             ]}
             // A full-width row, like List.Item: an outward ring would run into
             // the rows around it.
             focusRing="inward"
             onPress={handlePress}
+            disabled={disabled}
             onLongPress={onLongPress}
             delayLongPress={delayLongPress}
             role="button"
             aria-expanded={isExpanded}
-            aria-selected={selected}
+            {...getSelectedStateProps({ selected, role: 'button' })}
+            aria-disabled={disabled}
             aria-label={ariaLabel}
             testID={testID}
             theme={theme}
@@ -394,13 +394,16 @@ const ListAccordion = ({
             hitSlop={hitSlop}
           >
             <View
-              style={[styles.row, containerStyle]}
+              style={[styles.row, getRowContentStyle(disabled), containerStyle]}
               pointerEvents={pointerEvents}
             >
               {left
                 ? left({
                     color: leadingIconColor,
-                    style: getLeftStyles(isDescriptionMultiline, description),
+                    style: getAccessoryStyles(
+                      isDescriptionMultiline,
+                      description
+                    ),
                   })
                 : null}
               <View style={[styles.contentItem, styles.content, contentStyle]}>
@@ -411,7 +414,7 @@ const ListAccordion = ({
                   numberOfLines={titleNumberOfLines}
                   style={[
                     {
-                      color: titleTextColor,
+                      color: titleColor,
                     },
                     titleStyle,
                   ]}
@@ -447,7 +450,7 @@ const ListAccordion = ({
                   <Animated.View style={chevronStyle}>
                     <MaterialCommunityIcon
                       name="chevron-down"
-                      color={trailingIconColor}
+                      color={expandIconColor}
                       size={24}
                       direction={direction}
                     />
@@ -487,20 +490,6 @@ const ListAccordion = ({
 ListAccordion.displayName = 'List.Accordion';
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: ListTokens.verticalPadding,
-    paddingRight: ListTokens.trailingSpace,
-    justifyContent: 'center',
-  },
-  containerOneLine: {
-    minHeight: ListTokens.oneLineContainerHeight,
-  },
-  containerTwoLine: {
-    minHeight: ListTokens.twoLineContainerHeight,
-  },
-  containerThreeLine: {
-    paddingVertical: ListTokens.threeLineVerticalPadding,
-  },
   row: {
     flexDirection: 'row',
   },

@@ -9,42 +9,42 @@ const ListSectionExample = () => {
       <List.Section>
         <List.Subheader>Single line</List.Subheader>
         <List.Item
-          left={(props) => <List.Icon {...props} icon="calendar" />}
+          leading={<List.Icon icon="calendar" />}
           title="List item 1"
         />
         <List.Item
-          left={(props) => <List.Icon {...props} icon="wallet-giftcard" />}
+          leading={<List.Icon icon="wallet-giftcard" />}
           title="List item 2"
         />
         <List.Item
           title="List item 3"
-          left={(props) => <List.Icon {...props} icon="folder" />}
-          right={(props) => <List.Icon {...props} icon="equal" />}
+          leading={<List.Icon icon="folder" />}
+          trailing={<List.Icon icon="equal" />}
         />
       </List.Section>
       <Divider />
       <List.Section>
         <List.Subheader>Two line</List.Subheader>
         <List.Item
-          left={() => (
+          leading={
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
-          )}
+          }
           title="List item 1"
           description="Describes item 1"
         />
         <List.Item
-          left={() => (
+          leading={
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
-          )}
-          right={(props) => <List.Icon {...props} icon="information" />}
+          }
+          trailing={<List.Icon icon="information" />}
           title="List item 2"
           description="Describes item 2"
         />
@@ -53,25 +53,25 @@ const ListSectionExample = () => {
       <List.Section>
         <List.Subheader>Three line</List.Subheader>
         <List.Item
-          left={() => (
+          leading={
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
-          )}
+          }
           title="List item 1"
           description="Describes item 1. Example of a very very long description."
         />
         <List.Item
-          left={() => (
+          leading={
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
-          )}
-          right={(props) => <List.Icon {...props} icon="star-outline" />}
+          }
+          trailing={<List.Icon icon="star-outline" />}
           title="List item 2"
           description="Describes item 2. Example of a very very long description."
         />
@@ -80,14 +80,14 @@ const ListSectionExample = () => {
       <List.Section>
         <List.Subheader>Custom title and description</List.Subheader>
         <List.Item
-          left={() => (
+          leading={
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
-          )}
-          right={(props) => <List.Icon {...props} icon="star-outline" />}
+          }
+          trailing={<List.Icon icon="star-outline" />}
           title={({ ellipsizeMode, color: titleColor, fontSize }) => (
             <View style={[styles.container, styles.row, styles.customTitle]}>
               <Text
@@ -138,7 +138,6 @@ const styles = StyleSheet.create({
   image: {
     height: 40,
     width: 40,
-    margin: 8,
   },
   row: {
     flexDirection: 'row',

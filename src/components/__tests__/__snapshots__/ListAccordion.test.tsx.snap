@@ -46,15 +46,17 @@ exports[`renders expanded accordion 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "justifyContent": "center",
-              "paddingRight": 16,
-              "paddingVertical": 8,
-            },
-            {
-              "minHeight": 56,
-            },
-            false,
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 56,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -67,6 +69,7 @@ exports[`renders expanded accordion 1`] = `
             {
               "flexDirection": "row",
             },
+            null,
             undefined,
           ]
         }
@@ -196,15 +199,17 @@ exports[`renders expanded accordion 1`] = `
           [
             false,
             [
-              {
-                "justifyContent": "center",
-                "paddingRight": 16,
-                "paddingVertical": 8,
-              },
-              {
-                "minHeight": 56,
-              },
-              false,
+              [
+                {
+                  "justifyContent": "center",
+                  "paddingRight": 16,
+                  "paddingVertical": 8,
+                },
+                {
+                  "minHeight": 56,
+                },
+                false,
+              ],
               false,
               {
                 "backgroundColor": undefined,
@@ -221,6 +226,7 @@ exports[`renders expanded accordion 1`] = `
                 "flexDirection": "row",
                 "width": "100%",
               },
+              null,
               undefined,
             ]
           }
@@ -326,15 +332,17 @@ exports[`renders list accordion with children 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "justifyContent": "center",
-              "paddingRight": 16,
-              "paddingVertical": 8,
-            },
-            {
-              "minHeight": 56,
-            },
-            false,
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 56,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -347,6 +355,7 @@ exports[`renders list accordion with children 1`] = `
             {
               "flexDirection": "row",
             },
+            null,
             undefined,
           ]
         }
@@ -550,15 +559,17 @@ exports[`renders list accordion with custom title and description styles 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "justifyContent": "center",
-              "paddingRight": 16,
-              "paddingVertical": 8,
-            },
-            {
-              "minHeight": 72,
-            },
-            false,
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 72,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -571,6 +582,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
             {
               "flexDirection": "row",
             },
+            null,
             undefined,
           ]
         }
@@ -764,15 +776,17 @@ exports[`renders list accordion with left items 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "justifyContent": "center",
-              "paddingRight": 16,
-              "paddingVertical": 8,
-            },
-            {
-              "minHeight": 56,
-            },
-            false,
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 56,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -785,6 +799,7 @@ exports[`renders list accordion with left items 1`] = `
             {
               "flexDirection": "row",
             },
+            null,
             undefined,
           ]
         }
@@ -988,15 +1003,17 @@ exports[`renders multiline list accordion 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "justifyContent": "center",
-              "paddingRight": 16,
-              "paddingVertical": 8,
-            },
-            {
-              "minHeight": 72,
-            },
-            false,
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 72,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -1009,6 +1026,7 @@ exports[`renders multiline list accordion 1`] = `
             {
               "flexDirection": "row",
             },
+            null,
             undefined,
           ]
         }

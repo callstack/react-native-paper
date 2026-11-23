@@ -1,3 +1,4 @@
+import { tokens } from '../../theme/tokens';
 import type { ColorRole } from '../../theme/types';
 
 const sizes = {
@@ -9,6 +10,11 @@ const sizes = {
   trailingSpace: 16,
 } as const;
 
+const opacities = {
+  disabledContentOpacity: tokens.md.sys.state.opacity.disabled,
+  selectedDisabledContainerOpacity: tokens.md.sys.state.opacity.disabled,
+} as const;
+
 const colors = {
   containerColor: 'surface',
   headlineColor: 'onSurface',
@@ -18,6 +24,8 @@ const colors = {
   expandTrailingIconColor: 'onSurface',
   selectedContainerColor: 'secondaryContainer',
   selectedContentColor: 'onSecondaryContainer',
+  disabledContentColor: 'onSurface',
+  selectedDisabledContainerColor: 'onSurface',
 } as const satisfies Record<string, ColorRole>;
 
-export const ListTokens = { ...sizes, ...colors };
+export const ListTokens = { ...sizes, ...opacities, ...colors };

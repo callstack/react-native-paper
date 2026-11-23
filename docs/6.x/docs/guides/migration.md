@@ -1481,7 +1481,7 @@ To keep the 24dp trailing space of 5.x, set it in `style`:
 
 A `List.Item` with `onPress` now has the `button` role, so screen readers announce it as a button. If your tests find elements with `getByRole('button')`, these rows now match too.
 
-`List.Item` and `List.Accordion` have a new `selected` prop. A selected row uses `secondaryContainer` for its background and `onSecondaryContainer` for its title, description and icons. Screen readers announce it as selected. If you highlighted a row with your own `style` and `titleStyle`, you can use `selected` instead:
+`List.Item` and `List.Accordion` have a new `selected` prop. A selected row uses `secondaryContainer` for its background and `onSecondaryContainer` for its title, description and icons. Screen readers announce it as selected. On web, `aria-selected` is not valid on the `button` role, so a row with that role uses `aria-pressed` instead. If you highlighted a row with your own `style` and `titleStyle`, you can use `selected` instead:
 
 ```diff
 <List.Item
@@ -1491,6 +1491,8 @@ A `List.Item` with `onPress` now has the `button` role, so screen readers announ
 + selected
 />
 ```
+
+A disabled `List.Item` now looks disabled. In 5.x, `disabled` only stopped presses. The title, description and the icons in `leading` and `trailing` are `onSurface`, and the row content is at 38% opacity. A selected, disabled row has an `onSurface` background at 38% opacity instead of `secondaryContainer`. `List.Accordion` has a new `disabled` prop that works the same way and also stops the accordion from expanding or collapsing.
 
 #### `List.Accordion`
 
