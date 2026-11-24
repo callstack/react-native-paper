@@ -89,6 +89,11 @@ export type Props = {
    */
   showSelectedCheck?: boolean;
   /**
+   * Icon shown with `showSelectedCheck` while this button is checked.
+   * Defaults to `check`.
+   */
+  checkedIcon?: IconSource;
+  /**
    * Density is applied to the height, to allow usage in denser UIs.
    */
   density?: 'regular' | 'small' | 'medium' | 'high';
@@ -122,6 +127,7 @@ const SegmentedButtonItem = ({
   style,
   labelStyle,
   showSelectedCheck,
+  checkedIcon = 'check',
   checkedColor,
   uncheckedColor,
   background,
@@ -234,7 +240,7 @@ const SegmentedButtonItem = ({
         >
           {showCheckedIcon ? (
             <Animated.View style={[iconStyle, checkAnimatedStyle]}>
-              <Icon source={'check'} size={iconSize} color={textColor} />
+              <Icon source={checkedIcon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           {showIcon && icon ? (
