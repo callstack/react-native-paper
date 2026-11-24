@@ -71,7 +71,23 @@ export default function ArabicSection({ children }) {
 
 On the Web, `LocaleProvider` also lays out its part of the tree in that direction, including menus, dialogs and other content it opens in a `Portal`. It renders a wrapper with the `dir` attribute that doesn't take part in the layout, so you don't need to set `dir` yourself.
 
-On Android and iOS, `I18nManager` sets the layout direction for the whole app, and `LocaleProvider` doesn't change it. It only changes the direction that Paper's components read, so rows and `start`/`end` styles in the subtree keep the app's direction.
+On Android and iOS, `I18nManager` sets the layout direction for the whole app, and `LocaleProvider` doesn't change it. It only changes the direction that Paper's components read, so rows and `start`/`end` styles in the subtree keep the app's direction. To lay out the subtree in the same direction, also wrap it in a `View` with the [`direction`](https://reactnative.dev/docs/layout-props#direction) style:
+
+```js
+import * as React from 'react';
+import { View } from 'react-native';
+import { LocaleProvider } from 'react-native-paper';
+
+export default function ArabicSection({ children }) {
+  return (
+    <LocaleProvider direction="rtl">
+      <View style={{ direction: 'rtl' }}>{children}</View>
+    </LocaleProvider>
+  );
+}
+```
+
+This works in both directions, so `direction: 'ltr'` lays out a left-to-right subtree in a right-to-left app.
 
 ## Reading the current direction
 
