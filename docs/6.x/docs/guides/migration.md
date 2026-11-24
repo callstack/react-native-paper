@@ -350,13 +350,13 @@ As with `roundness`, Paper ignores these keys, and TypeScript reports them in th
  </PaperProvider>
 ```
 
-A full theme, such as `DarkTheme` or the theme `useTheme()` returns, gives the same result as before, except that custom keys of the theme above it are kept. The `theme` prop is now typed as a partial `Theme`, as on `PaperProvider`, so TypeScript reports a value that isn't a theme, such as a number, and keys the theme doesn't have, such as `roundness`. The `theme` prop of a component returned by `withTheme` gets the same type, and the component you wrap must take a `Theme` in its `theme` prop. A `ThemeProvider` without a `theme` now passes the theme above it on. In 5.x it gave its children the default light theme. To keep that, pass `theme={LightTheme}`.
+A full theme, such as `DarkTheme` or the theme `useTheme()` returns, gives the same result as before, except that custom keys of the theme above it are kept. The `theme` prop is now typed as a partial `Theme`, as on `PaperProvider`, so TypeScript reports a value that isn't a theme, such as a number, and keys the theme doesn't have, such as `roundness`. To keep a partial theme in a variable, type it as [Simple built-in theme overrides](./theming#simple-built-in-theme-overrides) shows. The `theme` prop of a component returned by `withTheme` gets the same type, and the component you wrap must take a `Theme` in its `theme` prop. A `ThemeProvider` without a `theme` now passes the theme above it on. In 5.x it gave its children the default light theme. To keep that, pass `theme={LightTheme}`.
 
 ### Accessibility props
 
 Components now use React Native's `aria-*` props and `role` instead of the `accessibility*` props. `accessibilityLabel` is now `aria-label`, the `accessibilityRole` of `Button` is now `role`, and the `accessibilityState` of `FAB` and `Menu.Item` is now `aria-checked` and `aria-selected`.
 
-`Checkbox.Item`, `RadioButton.Item`, `FAB`, `Menu.Item`, `List.Accordion` and `Switch` no longer accept `accessibilityLabel`, so TypeScript reports an error. Components whose props extend React Native's view props, such as `Button`, `Chip` and `DataTable.Pagination`, still compile with the old props, but pass them to their outer container instead of the element they used to label.
+`Checkbox.Item`, `RadioButton.Item`, `FAB`, `Menu.Item`, `List.Accordion` and `Switch` no longer accept `accessibilityLabel`, so TypeScript reports an error. Components whose props extend React Native's view props, such as `Button`, `Chip`, `DataTable.Pagination`, `Drawer.Item` and `Drawer.CollapsedItem`, still compile with the old props, but pass them to their outer container instead of the element they used to label.
 
 Props that label a part of a component keep their names, e.g. `closeIconAccessibilityLabel` on `Chip` and `dismissAccessibilityLabel` on `Modal`.
 
@@ -905,6 +905,8 @@ The icon is 24dp, in `theme.colors.secondary`. `Dialog.Icon`'s `color` and `size
 </View>
 ```
 
+If your 5.x style set its own `gap`, drop `columnGap` from the copied style or set it to your value. On Android and iOS, `columnGap` wins over `gap`, so a `{ gap: 12 }` added after it still leaves 8dp between the buttons there. On the web the later of the two wins, so the same style gives 12.
+
 ### Menu
 
 The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
@@ -1096,9 +1098,11 @@ const [value, setValue] = React.useState('');
   label="Email"
   error={hasError}
   disabled={isDisabled}
-  supportingText="Enter a valid email"
+  supportingText={hasError ? 'Enter a valid email' : undefined}
 />
 ```
+
+`supportingText` has no `visible` prop: it shows whenever you pass it, whatever `error` is, so pass the message only while it applies. The field then grows by a line when the message appears, where a hidden 5.x `HelperText` kept its height. An empty string doesn't keep that line either.
 
 A `HelperText` that isn't tied to one input, such as an error under a group of inputs, has no `supportingText` to move to. Render a `Text` in the theme's error color instead:
 
@@ -1154,6 +1158,10 @@ field changes from `error` to `onErrorContainer`. Focus takes precedence over
 hover and uses `primary`, or `error` for an invalid field. A disabled field uses
 the disabled colors even when `error` is set. On web it keeps `aria-invalid`; on
 Android and iOS the error text stays in its hint.
+
+With `error` and no `endAccessory`, the field draws an `alert-circle` icon in
+the error color at its end, which takes room from the input. 5.x drew no icon
+there. Any `endAccessory` replaces it, even one that renders nothing.
 
 If your app was written for a 6.0 alpha build: the input text, prefix and suffix
 of a disabled field were dimmed twice there. They are now dimmed once, to 38%
@@ -1553,7 +1561,15 @@ The colors at rest changed too. In 5.x, a `contained` or `contained-tonal` butto
 
 #### Size
 
-`size` is a named scale: `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`, the same names as `Button`. It defaults to `'small'`, which still uses a 24dp icon.
+`size` is a named scale: `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`, the same names as `Button`. It defaults to `'small'`, which still uses a 24dp icon. Each size sets the height of the container and the default icon size, and the container is square at the default `width`:
+
+| `size`          | Container | Icon |
+| --------------- | --------- | ---- |
+| `'extra-small'` | 32dp      | 20dp |
+| `'small'`       | 40dp      | 24dp |
+| `'medium'`      | 56dp      | 24dp |
+| `'large'`       | 96dp      | 32dp |
+| `'extra-large'` | 136dp     | 40dp |
 
 To set the glyph size in dp without changing the container scale, use `iconSize`. The container keeps the size of its `size` (a square 40dp for the default), so a glyph larger than it is clipped. Pick a larger `size` instead.
 
@@ -1580,6 +1596,16 @@ The container no longer follows the icon. In v5 it was the icon plus 8dp on each
 <IconButton icon="star" iconSize={20} style={{ margin: 4 }} onPress={onPress} />
 ```
 
+To map any other 5.x number, pass it as `iconSize` and pick the `size` whose container comes closest to the 5.x button without clipping the icon. `size={80}` drew a 96dp button, so it becomes `size="large"` with `iconSize={80}`, 96dp as in 5.x:
+
+```tsx
+// Before (v5): a 96dp button
+<IconButton icon="camera" size={80} onPress={onPress} />
+
+// After (v6): a 96dp button
+<IconButton icon="camera" size="large" iconSize={80} onPress={onPress} />
+```
+
 ```tsx
 // After (v6): named container sizes
 <IconButton icon="plus" size="extra-small" onPress={onPress} />
@@ -1604,6 +1630,8 @@ The container no longer follows the icon. In v5 it was the icon plus 8dp on each
 #### Touch target
 
 An `IconButton` with a touch handler reaches the 48dp minimum target through hit slop, without changing what is drawn. This applies to `extra-small` and `small`, whose containers are smaller than 48dp. Pass `hitSlop` to override it, or `hitSlop={0}` to opt out. A disabled button, or one with no touch handler, gets no extra target.
+
+The hit slop is worked out from the container of the named `size`, not from the size the button is laid out at. A button made smaller through `style`, such as `style={{ width: 30, height: 30 }}` on the default `small`, still gets 4dp on each side, a 38dp target, so pass its own `hitSlop`: `hitSlop={9}` for a 30dp button.
 
 #### `Appbar.Action` and `Appbar.BackAction`
 
