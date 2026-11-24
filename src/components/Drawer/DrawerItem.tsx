@@ -178,7 +178,10 @@ const styles = StyleSheet.create({
   },
   v3Container: {
     justifyContent: 'center',
-    height: 56,
+    // A minimum rather than a fixed height, so the item and its active
+    // indicator grow with the label at large text sizes instead of clipping it.
+    minHeight: 56,
+    paddingVertical: 8,
     marginLeft: 12,
     marginRight: 12,
     marginVertical: 0,
