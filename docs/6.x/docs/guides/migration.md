@@ -415,7 +415,7 @@ Interactive components now draw the Material Design 3 keyboard focus indicator: 
 
 Components that fill a clipping container or touch their neighbours draw the ring 3dp inside their edge instead: `List.Item`, `List.Accordion`, `Checkbox.Item`, `RadioButton.Item`, `Menu.Item`, the `FAB.Menu` items, `Drawer.Item`, the `BottomNavigation` tabs, `DataTable.Row`, `DataTable.Cell`, `DataTable.Title` and `SegmentedButtons`. `Drawer.CollapsedItem` draws it around its icon and label, 2dp clear of the active indicator. `FAB` and `Switch` draw this ring instead of their own, and `Checkbox` keeps its circular ring around the state layer.
 
-A `TouchableRipple`, and every component built on it, rings only while it can be pressed. A disabled one shows no ring. One with no touch handler and no `disabled` is the plain view described in [TouchableRipple without a press handler](#touchableripple-without-a-press-handler): it isn't a keyboard stop, so it never rings. This applies to `TouchableRipple` only: a `Switch` or `Drawer.CollapsedItem` without a handler is still a keyboard stop and rings.
+A `TouchableRipple`, and every component built on it, rings only while it can be pressed. A disabled one shows no ring. One with no touch handler and no `disabled` is the plain view described in [TouchableRipple without a press handler](#touchableripple-without-a-press-handler): it isn't a keyboard stop, so it never rings. This applies to `TouchableRipple` only: a `Drawer.CollapsedItem` without `onPress` is still a keyboard stop and rings. A `Switch` without `onValueChange` is read-only, so it isn't a keyboard stop and never rings, as [Switches without `onValueChange`](#switches-without-onvaluechange) explains.
 
 An outward ring sits outside the component, so a scroll view or a container with `overflow: 'hidden'` clips it, and a neighbour that touches the component can cover it. Chips in a horizontal `ScrollView`, or a `TouchableRipple` that fills the width of a scroll view, show only part of the ring. Give the container 5dp of padding, or pass `focusRing="inward"` where the component takes it:
 
@@ -778,6 +778,8 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
 />
 ```
 
+A dialog without `content` still renders the content area with its 24dp bottom padding, so a dialog with only a `title` and `actions` has 40dp between them instead of 16dp in 5.x, and one with only `actions` places them 48dp below the top of the dialog instead of 24dp. To keep the 5.x spacing, pass `contentProps={{ style: { paddingBottom: 0 } }}`.
+
 #### Dialog actions
 
 The dialog no longer injects `compact` on its action buttons, and the default [`Button`](#button) mode is now `filled`. Add `mode="text"` to each button. At the default `small` size, the buttons are **40dp** tall, the Material Design 3 size for dialog actions. The `compact` text buttons in 5.x were **38dp** tall. For a more compact look, also add `size="extra-small"`, which is **32dp** tall:
@@ -1043,10 +1045,14 @@ const [value, setValue] = React.useState('');
 
 ```tsx
 // Before (v5)
-<TextInput.Icon icon="magnify" size={20} />
+<TextInput right={<TextInput.Icon icon="magnify" size={20} />} />
 
 // After (v6)
-<TextInput.Icon icon="magnify" iconSize={20} />
+<TextInput
+  endAccessory={(props) => (
+    <TextInput.Icon {...props} icon="magnify" iconSize={20} />
+  )}
+/>
 ```
 
 #### Label and supporting text
@@ -1506,6 +1512,25 @@ An accordion with a `left` element now indents only its `List.Item` children. An
 <IconButton icon="camera" mode="tonal" onPress={onPress} />
 ```
 
+The colors at rest changed too. In 5.x, a `contained` or `contained-tonal` button that wasn't `selected` drew a `surfaceVariant` container, with a `primary` icon for `contained` and an `onSurfaceVariant` icon for `contained-tonal`. Only a selected one drew `primary` with an `onPrimary` icon, or `secondaryContainer` with an `onSecondaryContainer` icon. In 6.x, `filled` and `tonal` draw those colors at rest. To keep the 5.x look, pass the 5.x colors as `containerColor` and `iconColor`:
+
+```tsx
+<IconButton
+  icon="camera"
+  mode="filled"
+  containerColor={colors.surfaceVariant}
+  iconColor={colors.primary}
+  onPress={onPress}
+/>
+<IconButton
+  icon="camera"
+  mode="tonal"
+  containerColor={colors.surfaceVariant}
+  iconColor={colors.onSurfaceVariant}
+  onPress={onPress}
+/>
+```
+
 #### Size
 
 `size` is a named scale: `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`, the same names as `Button`. It defaults to `'small'`, which still uses a 24dp icon.
@@ -1599,6 +1624,8 @@ For `filled`, the default and toggle-on containers use `primary`. Toggle-off (`s
   onPress={toggleStarred}
 />
 ```
+
+Neither keeps the 5.x look, a `surfaceVariant` container with a `primary` icon: `filled` draws `primary` at rest and `surfaceContainer` when toggled off, so pass `containerColor` and `iconColor` as in [Mode names](#mode-names), on a toggle only while it is off.
 
 #### `Card.Title` `right` props
 
