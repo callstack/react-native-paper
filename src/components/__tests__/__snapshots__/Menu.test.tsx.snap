@@ -703,7 +703,7 @@ exports[`renders visible menu 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -825,7 +825,7 @@ exports[`renders visible menu 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -1374,7 +1374,7 @@ exports[`respects anchorPosition bottom 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -1496,7 +1496,7 @@ exports[`respects anchorPosition bottom 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -2045,7 +2045,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -2167,7 +2167,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]

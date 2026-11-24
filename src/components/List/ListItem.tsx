@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   indent: {
-    paddingLeft: 40,
+    paddingStart: 40,
   },
   row: {
     width: '100%',
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   item: {
-    paddingLeft: 16,
+    paddingStart: 16,
   },
   content: {
     flexShrink: 1,
