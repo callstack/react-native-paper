@@ -941,7 +941,7 @@ The close button (`onClose`) now fills the trailing 34dp column reserved for it,
 
 ### Drawer
 
-The `Drawer` API is unchanged in Paper 6.x — no props were renamed, removed, or given new defaults. `Drawer.Item`, `Drawer.CollapsedItem` and `Drawer.Section` were realigned with the current Material Design 3 navigation drawer spec, so their appearance changes:
+The `Drawer` API is unchanged in Paper 6.x. No props were renamed, removed, or given new defaults. `Drawer.Item`, `Drawer.CollapsedItem` and `Drawer.Section` were realigned with the current Material Design 3 navigation drawer spec, so their appearance changes:
 
 - **Trailing padding.** `Drawer.Item` reserved 36dp between the drawer edge and its content on the trailing side, and 28dp on the leading side. Both are now 28dp, as the spec requires. The active indicator keeps its size. The label and the `right` content get 8dp more room.
 - **Active label weight.** The label of an active `Drawer.Item` now uses the prominent `labelLargeEmphasized` weight (700). Inactive labels are unchanged at 500.
