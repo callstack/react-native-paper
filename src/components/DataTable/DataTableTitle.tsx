@@ -326,18 +326,25 @@ const DataTableTitle = ({
     <>
       {icon}
 
-      <Text
-        style={[
-          styles.cell,
-          alignStyles.text,
-          sortDirection ? styles.sorted : { color: alphaTextColor },
-          textStyle,
-        ]}
-        numberOfLines={lines}
-        maxFontSizeMultiplier={maxFontSizeMultiplier}
-      >
-        {children}
-      </Text>
+      {React.isValidElement(children) ? (
+        // An element, such as a select-all Checkbox, renders as written, like
+        // in DataTable.Cell. Inside a Text it would be inlined into the text:
+        // clipped by `numberOfLines` and unreachable on iOS.
+        children
+      ) : (
+        <Text
+          style={[
+            styles.cell,
+            alignStyles.text,
+            sortDirection ? styles.sorted : { color: alphaTextColor },
+            textStyle,
+          ]}
+          numberOfLines={lines}
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
+        >
+          {children}
+        </Text>
+      )}
     </>
   );
 

@@ -570,6 +570,30 @@ describe('DataTable.Title', () => {
     expect(screen.getByTestId('plain')).toHaveProp('accessible', true);
   });
 
+  it('renders element content outside a text container', async () => {
+    await render(
+      <DataTable.Header>
+        <DataTable.Title testID="title" numberOfLines={1}>
+          <Checkbox
+            status="checked"
+            testID="select-all"
+            aria-label="Select all"
+          />
+        </DataTable.Title>
+      </DataTable.Header>
+    );
+
+    // Inside a Text the checkbox is inlined into the text: Android clips it to
+    // `numberOfLines` and iOS exposes it as an attachment, not a checkbox.
+    let node = screen.getByTestId('select-all').parent;
+    while (node && node !== screen.getByTestId('title')) {
+      expect(node.type).not.toBe('Text');
+      node = node.parent;
+    }
+
+    expect(screen.getByRole('checkbox', { name: 'Select all' })).toBeChecked();
+  });
+
   it('lets a control inside a column header keep its own stop', async () => {
     await render(
       <DataTable.Header>
