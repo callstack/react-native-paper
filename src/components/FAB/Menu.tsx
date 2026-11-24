@@ -467,6 +467,7 @@ const MorphingTrigger = ({
         onPress={onPress}
         disabled={disabled}
         aria-label={ariaLabel}
+        aria-expanded={expanded}
         testID={testID}
         widthShared={widthShared}
         heightShared={heightShared}
