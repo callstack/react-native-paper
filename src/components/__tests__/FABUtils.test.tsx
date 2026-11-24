@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { DarkTheme, LightTheme } from '../../theme/schemes';
+import type { Variant } from '../FAB/tokens';
 import { getDimensions, resolveColors } from '../FAB/utils';
 
 describe('resolveColors', () => {
@@ -125,6 +126,19 @@ describe('resolveColors', () => {
     });
     expect(colors.container).toBe(LightTheme.colors.primary);
     expect(colors.content).toBe('#custom');
+  });
+
+  describe('removed 5.x / 6.0-alpha variant values', () => {
+    it('falls back instead of crashing on a removed variant value', () => {
+      expect(
+        resolveColors({
+          theme: LightTheme,
+          variant: 'tonalPrimary' as unknown as Variant,
+        })
+      ).toEqual(
+        resolveColors({ theme: LightTheme, variant: 'primaryContainer' })
+      );
+    });
   });
 });
 

@@ -20,7 +20,7 @@ import type { AnimatedStyle } from 'react-native-reanimated';
 import Content from './Content';
 import { Tokens } from './tokens';
 import type { Size, Variant } from './tokens';
-import { getDimensions, resolveColors } from './utils';
+import { getDimensions, resolveColors, resolveVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
@@ -256,6 +256,18 @@ const Shell = ({
     () => resolveColors({ theme, variant, containerColor, contentColor }),
     [theme, variant, containerColor, contentColor]
   );
+
+  React.useEffect(() => {
+    if (
+      process.env.NODE_ENV === 'production' ||
+      resolveVariant(variant) === variant
+    ) {
+      return;
+    }
+    console.warn(
+      `FAB: variant "${variant}" is not valid. Falling back to the default "primaryContainer" variant.`
+    );
+  }, [variant]);
 
   const reduceMotion = useReduceMotion();
 

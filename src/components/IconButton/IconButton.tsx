@@ -12,7 +12,12 @@ import type {
 import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 
 import type { Mode, Shape, Size, Width } from './tokens';
-import { getDimensions, getIconButtonColor } from './utils';
+import {
+  getDimensions,
+  getIconButtonColor,
+  resolveMode,
+  resolveSize,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
@@ -186,6 +191,24 @@ const IconButton = ({
   const [pressed, setPressed] = React.useState(false);
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
+
+  React.useEffect(() => {
+    if (process.env.NODE_ENV === 'production' || resolveMode(mode) === mode) {
+      return;
+    }
+    console.warn(
+      `IconButton: mode "${mode}" is not valid. Falling back to the default "standard" mode.`
+    );
+  }, [mode]);
+
+  React.useEffect(() => {
+    if (process.env.NODE_ENV === 'production' || resolveSize(size) === size) {
+      return;
+    }
+    console.warn(
+      `IconButton: size "${size}" is not valid. Falling back to the default "small" size.`
+    );
+  }, [size]);
 
   const dimensions = getDimensions({
     theme,
