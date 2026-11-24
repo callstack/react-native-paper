@@ -71,6 +71,10 @@ export type Props = {
    */
   'aria-label'?: string;
   /**
+   * ID of the element that names the switch, e.g. a `Text` with a `nativeID`.
+   */
+  'aria-labelledby'?: string;
+  /**
    * Hides a non-interactive (`readOnly` or `disabled`) switch from assistive
    * technology, so it renders with no role and cannot take focus. Use it when
    * the switch only shows the state of a row that has the switch role itself.
@@ -150,6 +154,7 @@ const Switch = ({
   testID,
   theme: themeOverrides,
   'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   'aria-hidden': ariaHidden,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -497,6 +502,7 @@ const Switch = ({
           role="switch"
           aria-checked={checked}
           aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
           testID={testID}
           style={[
             styles.touchable,

@@ -165,6 +165,23 @@ it('forwards event object to onPress', async () => {
   expect(onPress).toHaveBeenCalledWith({ key: 'value' });
 });
 
+it('forwards accessibilityActions and onAccessibilityAction to the button', async () => {
+  const actions = [{ name: 'newNote', label: 'New note' }] as const;
+  const onAccessibilityAction = jest.fn();
+  await render(
+    <FAB
+      icon="plus"
+      aria-label="Add item"
+      onPress={jest.fn()}
+      accessibilityActions={actions}
+      onAccessibilityAction={onAccessibilityAction}
+    />
+  );
+  const button = screen.getByRole('button', { name: 'Add item' });
+  expect(button).toHaveProp('accessibilityActions', actions);
+  expect(button).toHaveProp('onAccessibilityAction', onAccessibilityAction);
+});
+
 it('calls onLongPress and onPressOut when FAB is long pressed', async () => {
   const user = userEvent.setup();
   const onLongPress = jest.fn();

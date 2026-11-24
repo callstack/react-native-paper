@@ -129,6 +129,17 @@ describe('Switch accessibility', () => {
     expect(screen.getByRole('switch')).toBeOnTheScreen();
   });
 
+  it('forwards aria-labelledby to the switch', async () => {
+    await render(
+      <Switch value onValueChange={jest.fn()} aria-labelledby="enabledLabel" />
+    );
+
+    expect(screen.getByRole('switch')).toHaveProp(
+      'aria-labelledby',
+      'enabledLabel'
+    );
+  });
+
   it('exposes a touch target meeting the 48dp minimum', async () => {
     await render(<Switch value={false} onValueChange={jest.fn()} />);
 
