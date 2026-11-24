@@ -557,7 +557,7 @@ Showing and hiding use the `standardDecelerate` and `standardAccelerate` easing 
 - `DataTable.Cell` text uses the `bodyMedium` type style: a line height of 20 and a letter spacing of 0.25.
 - `DataTable.Header` and `DataTable.Row` draw their bottom border with `theme.colors.outlineVariant` instead of `theme.colors.surfaceVariant`.
 
-`Avatar.Text`, `DataTable.Title`, `DataTable.Cell` and `DataTable.Pagination` use the plain font family instead of `theme.fonts.default`. If you configure a custom brand font, these texts no longer use it.
+`Avatar.Text`, `DataTable.Title`, `DataTable.Cell` and `DataTable.Pagination` now read `theme.fonts.titleMedium`, `theme.fonts.labelMedium`, `theme.fonts.bodyMedium` and `theme.fonts.bodySmall`, respectively, instead of `theme.fonts.default`. These variants use the plain font family by default. Customizing only `theme.fonts.default` no longer affects these texts; customize the corresponding variants instead. A font family applied to all variants with `configureFonts({ config: { fontFamily: 'YourFont' } })` still applies to these components.
 
 ### Tooltip
 
