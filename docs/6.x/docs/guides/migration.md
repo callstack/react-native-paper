@@ -923,9 +923,11 @@ The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 
 `Menu` and `Menu.Item` now follow the Material Design 3 menu specs. The surface is `surfaceContainerLow` instead of `theme.colors.elevation.level2`. The `elevation` prop is unchanged but now only sets the shadow; it no longer changes the fill color. Its corners are 16dp instead of 4dp. To change the fill, override `surfaceContainerLow` in your theme. Item titles use `labelLarge` instead of `bodyLarge`, and items have 4dp corners, or 12dp when `selected`.
 
-New: `Menu` takes `colorScheme` (`standard` or `vibrant`), and `Menu.Item` takes `selected`, `supportingText`, `trailingSupportingText` and `submenu`.
+New: `Menu` takes `colorScheme` (`standard` or `vibrant`), and `Menu.Item` takes `selected`, `supportingText` and `trailingSupportingText`.
 
 On web, a menu now closes on the Escape key when it is pressed down, instead of when it is released. Back and Escape dismiss only the topmost overlay, so a menu opened from a `Modal` or `Dialog` closes first and leaves the modal open.
+
+On Android, opening a menu now moves screen reader focus to its first enabled item, and closing it moves focus back to the anchor. With a hardware keyboard, the Up and Down arrow keys move between the enabled items and skip disabled ones. Moving keyboard focus into the menu when it opens also needs React Native's `enableImperativeFocus` feature flag, which is off by default; without it, TalkBack still works, but the keyboard focus stays where it was.
 
 On Android, an open menu now also keeps the back press: it calls `onDismiss`, and the screen behind no longer goes back. Previously the press reached that screen as well. Without an `onDismiss`, the menu leaves the press to whatever is underneath, so pass one to close the menu on back.
 

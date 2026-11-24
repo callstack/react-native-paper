@@ -703,7 +703,7 @@ exports[`renders visible menu 1`] = `
                 }
               >
                 <View
-                  pointerEvents="none"
+                  pointerEvents="box-none"
                   style={
                     [
                       {
@@ -835,7 +835,7 @@ exports[`renders visible menu 1`] = `
                 }
               >
                 <View
-                  pointerEvents="none"
+                  pointerEvents="box-none"
                   style={
                     [
                       {
@@ -1396,7 +1396,7 @@ exports[`respects anchorPosition bottom 1`] = `
                 }
               >
                 <View
-                  pointerEvents="none"
+                  pointerEvents="box-none"
                   style={
                     [
                       {
@@ -1528,7 +1528,7 @@ exports[`respects anchorPosition bottom 1`] = `
                 }
               >
                 <View
-                  pointerEvents="none"
+                  pointerEvents="box-none"
                   style={
                     [
                       {
@@ -2089,7 +2089,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                 }
               >
                 <View
-                  pointerEvents="none"
+                  pointerEvents="box-none"
                   style={
                     [
                       {
@@ -2221,7 +2221,7 @@ exports[`uses the default anchorPosition of top 1`] = `
                 }
               >
                 <View
-                  pointerEvents="none"
+                  pointerEvents="box-none"
                   style={
                     [
                       {

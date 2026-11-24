@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  AccessibilityInfo,
   Dimensions,
   Keyboard,
   Platform,
@@ -29,7 +30,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
 import useLatestCallback from 'use-latest-callback';
 
-import { MenuRootContext } from './context';
+import { MenuRootContext, type MenuItemRef } from './context';
 import MenuItem from './MenuItem';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import { getMenuContainerBorderRadius, getMenuContainerColor } from './utils';
@@ -151,6 +152,21 @@ const focusFirstDOMNode = (
   }
 };
 
+const focusNativeNode = (
+  el: React.ComponentRef<typeof View> | null | undefined
+) => {
+  if (el && Platform.OS !== 'web') {
+    // Moves TalkBack / VoiceOver focus; the native node may not be
+    // accessible yet right after the animation, so defer one frame.
+    requestAnimationFrame(() => {
+      AccessibilityInfo.sendAccessibilityEvent(el, 'focus');
+      // Input focus for a hardware keyboard. A no-op unless the app enables
+      // RN's `enableImperativeFocus` feature flag, and absent on older RN.
+      el.focus?.();
+    });
+  }
+};
+
 const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
   !React.isValidElement(anchor) &&
   typeof anchor?.x === 'number' &&
@@ -162,6 +178,12 @@ const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
  * Follows [Material Design 3 menus](https://m3.material.io/components/menus/specs): container
  * `corner.large`, fill `surfaceContainerLow` (elevation controls shadow only), item label
  * `labelLarge`, selected items use `tertiaryContainer` / `onTertiaryContainer`.
+ *
+ * ## Accessibility
+ * When the menu opens, screen reader focus moves to its first enabled item, and it returns to
+ * the anchor when the menu closes. On Android, the Up and Down arrow keys move between the
+ * enabled items and skip disabled ones. Moving keyboard focus into the menu on open also needs
+ * React Native's `enableImperativeFocus` feature flag, which is off by default.
  *
  * ## Usage
  * ```js
@@ -265,6 +287,11 @@ const Menu = ({
   const anchorRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
   const menuRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
   const isShownRef = React.useRef(false);
+  const [items, setItems] = React.useState<MenuItemRef[]>([]);
+  const registerItem = React.useCallback((item: MenuItemRef) => {
+    setItems((prev) => [...prev, item]);
+    return () => setItems((prev) => prev.filter((it) => it !== item));
+  }, []);
 
   const keyboardDidShow = React.useCallback((e: RNKeyboardEvent) => {
     const keyboardHeight = e.endCoordinates.height;
@@ -346,6 +373,7 @@ const Menu = ({
 
     isShownRef.current = true;
     focusFirstDOMNode(menuRef.current);
+    focusNativeNode(items[0]?.current);
   });
 
   const handleHideAnimationFinished = useLatestCallback((finished: boolean) => {
@@ -359,6 +387,7 @@ const Menu = ({
     setRendered(false);
     isShownRef.current = false;
     focusFirstDOMNode(anchorRef.current);
+    focusNativeNode(anchorRef.current);
   });
 
   const getDuration = useMotionDuration();
@@ -696,8 +725,8 @@ const Menu = ({
   const pointerEvents = visible ? 'box-none' : 'none';
 
   const rootContext = React.useMemo(
-    () => ({ colorScheme, MenuComponent: Menu }),
-    [colorScheme]
+    () => ({ colorScheme, registerItem, items }),
+    [colorScheme, registerItem, items]
   );
 
   const surfaceBackground = getMenuContainerColor({ theme, colorScheme });

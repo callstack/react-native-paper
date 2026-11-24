@@ -1,22 +1,14 @@
-import { Platform, View } from 'react-native';
+import { Platform } from 'react-native';
 
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  jest,
-} from '@jest/globals';
+import { afterEach, describe, expect, it } from '@jest/globals';
 
-import { render, screen, userEvent } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import { resolveCornerRadius } from '../../theme/utils/shape';
 import Menu from '../Menu/Menu';
 import { MenuTokens } from '../Menu/tokens';
 import { getMenuItemBorderRadius, getMenuItemColor } from '../Menu/utils';
-import Portal from '../Portal/Portal';
 
 const stateOpacity = tokens.md.sys.state.opacity;
 
@@ -389,72 +381,4 @@ describe('Menu.Item ARIA role', () => {
       expect(screen.getByTestId('menu-item')).toHaveProp('role', role);
     }
   );
-});
-
-describe('Menu.Item submenu', () => {
-  const originalMeasureInWindow = Object.getOwnPropertyDescriptor(
-    View.prototype,
-    'measureInWindow'
-  );
-
-  beforeEach(() => {
-    Object.defineProperty(View.prototype, 'measureInWindow', {
-      configurable: true,
-      value: (fn: (x: number, y: number, w: number, h: number) => void) =>
-        fn(100, 100, 80, 32),
-    });
-  });
-
-  afterEach(() => {
-    if (originalMeasureInWindow) {
-      Object.defineProperty(
-        View.prototype,
-        'measureInWindow',
-        originalMeasureInWindow
-      );
-    } else {
-      Reflect.deleteProperty(View.prototype, 'measureInWindow');
-    }
-  });
-
-  const renderMenu = (onPress = jest.fn()) =>
-    render(
-      <Portal.Host>
-        <Menu visible onDismiss={jest.fn()} anchor={<View />}>
-          <Menu.Item
-            title="More"
-            onPress={onPress}
-            submenu={<Menu.Item title="Archive" onPress={() => {}} />}
-          />
-        </Menu>
-      </Portal.Host>
-    );
-
-  it('opens the submenu on press instead of calling onPress', async () => {
-    const onPress = jest.fn();
-    await renderMenu(onPress);
-
-    expect(screen.queryByText('Archive')).toBeNull();
-
-    await userEvent.press(screen.getByText('More'));
-
-    expect(screen.getByText('Archive')).toBeOnTheScreen();
-    expect(onPress).not.toHaveBeenCalled();
-  });
-
-  it('reports expanded state', async () => {
-    await renderMenu();
-
-    expect(screen.getByRole('menuitem')).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ expanded: false })
-    );
-
-    await userEvent.press(screen.getByText('More'));
-
-    expect(screen.getAllByRole('menuitem')[0]).toHaveProp(
-      'accessibilityState',
-      expect.objectContaining({ expanded: true })
-    );
-  });
 });

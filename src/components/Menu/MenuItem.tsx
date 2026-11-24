@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  findNodeHandle,
   Platform,
   StyleSheet,
   View,
@@ -11,7 +12,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { useMenuRoot } from './context';
+import { useMenuRoot, type MenuItemRef } from './context';
 import { MenuTokens, type MenuColorScheme } from './tokens';
 import {
   getContentMaxWidth,
@@ -53,13 +54,6 @@ export type Props = {
    * Trailing icon to display for the `MenuItem`.
    */
   trailingIcon?: IconSource;
-  /**
-   * Items of a submenu. Pressing the item opens them in a nested `Menu` at its
-   * right edge, instead of calling `onPress`, and a `menu-right` trailing icon
-   * is shown unless `trailingIcon` is set. The submenu closes with its parent;
-   * to close it from one of its items, close the parent `Menu`.
-   */
-  submenu?: React.ReactNode;
   /**
    * Whether the item is selected / active. Applies MD3 selected colors
    * (`tertiaryContainer` / `onTertiaryContainer` in the standard scheme)
@@ -164,6 +158,25 @@ export type Props = {
   'aria-expanded'?: boolean;
 };
 
+// Android's own directional search skips disabled items and can jump out of
+// the menu, so link each enabled item to its neighbours for Up / Down. The
+// ends are left to the default search; Tab stays native and is not trapped.
+const getNextFocusProps = (
+  order: MenuItemRef[] | undefined,
+  self: MenuItemRef
+) => {
+  const index = order?.indexOf(self) ?? -1;
+
+  if (Platform.OS !== 'android' || !order || index < 0) {
+    return null;
+  }
+
+  const tagAt = (i: number) =>
+    (order[i] && findNodeHandle(order[i].current)) || undefined;
+
+  return { nextFocusDown: tagAt(index + 1), nextFocusUp: tagAt(index - 1) };
+};
+
 // Native keeps plain `menuitem`: Android drops the role description for a
 // value it cannot map, and iOS ignores all of them anyway.
 const getRole = (
@@ -224,7 +237,6 @@ const MenuItem = ({
   title,
   supportingText,
   trailingSupportingText,
-  submenu,
   selected: selectedProp,
   colorScheme: colorSchemeProp,
   disabled,
@@ -250,26 +262,14 @@ const MenuItem = ({
   const root = useMenuRoot();
   const selected = selectedProp ?? false;
 
-  const [submenuVisible, setSubmenuVisible] = React.useState(false);
-  const [submenuAnchor, setSubmenuAnchor] = React.useState({ x: 0, y: 0 });
   const itemRef = React.useRef<React.ComponentRef<typeof View>>(null);
-  const MenuComponent = root?.MenuComponent;
-  const hasSubmenu = Boolean(submenu) && MenuComponent !== undefined;
-
-  // The submenu opens at the item's right edge, level with its top.
-  const handlePress = (event: GestureResponderEvent) => {
-    if (!hasSubmenu) {
-      onPress?.(event);
-      return;
-    }
-
-    itemRef.current?.measureInWindow((x, y, width) => {
-      setSubmenuAnchor({ x: x + width, y });
-      setSubmenuVisible(true);
-    });
-  };
-  const resolvedTrailingIcon =
-    trailingIcon ?? (hasSubmenu ? 'menu-right' : undefined);
+  const nextFocusProps = getNextFocusProps(root?.items, itemRef);
+  const registerItem = root?.registerItem;
+  // Only enabled items can take focus, so only they register.
+  React.useEffect(
+    () => (disabled ? undefined : registerItem?.(itemRef)),
+    [disabled, registerItem]
+  );
 
   const role = getRole(ariaChecked, selectedProp);
 
@@ -308,7 +308,7 @@ const MenuItem = ({
   const contentMaxWidth = getContentMaxWidth({
     iconWidth: iconSize,
     leadingIcon,
-    trailingIcon: resolvedTrailingIcon,
+    trailingIcon,
     hasTrailingSupportingText,
   });
 
@@ -328,128 +328,110 @@ const MenuItem = ({
   };
 
   return (
-    <>
-      <TouchableRipple
-        ref={itemRef}
-        // Items fill the menu's scroll view edge to edge with no gap, which
-        // clips an outward ring and runs it into the neighbouring items.
-        focusRing="inward"
-        theme={theme}
-        style={[
-          styles.container,
-          {
-            paddingHorizontal: itemPaddingHorizontal,
-            minWidth,
-            maxWidth,
-            minHeight: dense ? denseItemHeight : itemHeight,
-            ...(hasSupportingText || hasTrailingSupportingText
-              ? { paddingVertical: 8 }
-              : { height: dense ? denseItemHeight : itemHeight }),
-          },
-          getMenuItemBorderRadius({ theme, selected }),
-          containerColor ? { backgroundColor: containerColor } : null,
-          style,
-        ]}
-        onPress={onPress || hasSubmenu ? handlePress : undefined}
-        disabled={disabled}
-        testID={testID}
-        background={background}
-        aria-label={ariaLabel}
-        role={role}
-        aria-disabled={disabled}
-        aria-checked={ariaChecked ?? selectedProp}
-        aria-selected={ariaSelected}
-        aria-busy={ariaBusy}
-        aria-expanded={
-          ariaExpanded ?? (hasSubmenu ? submenuVisible : undefined)
-        }
-        hitSlop={hitSlop}
-      >
-        <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
-          {leadingIcon ? (
-            <View
-              style={[{ width: iconSize }, styles.leadingIcon]}
-              pointerEvents="box-none"
-            >
-              <Icon source={leadingIcon} size={iconSize} color={iconColor} />
-            </View>
-          ) : null}
+    <TouchableRipple
+      ref={itemRef}
+      {...nextFocusProps}
+      // Items fill the menu's scroll view edge to edge with no gap, which
+      // clips an outward ring and runs it into the neighbouring items.
+      focusRing="inward"
+      theme={theme}
+      style={[
+        styles.container,
+        {
+          paddingHorizontal: itemPaddingHorizontal,
+          minWidth,
+          maxWidth,
+          minHeight: dense ? denseItemHeight : itemHeight,
+          ...(hasSupportingText || hasTrailingSupportingText
+            ? { paddingVertical: 8 }
+            : { height: dense ? denseItemHeight : itemHeight }),
+        },
+        getMenuItemBorderRadius({ theme, selected }),
+        containerColor ? { backgroundColor: containerColor } : null,
+        style,
+      ]}
+      onPress={onPress}
+      disabled={disabled}
+      testID={testID}
+      background={background}
+      aria-label={ariaLabel}
+      role={role}
+      aria-disabled={disabled}
+      aria-checked={ariaChecked ?? selectedProp}
+      aria-selected={ariaSelected}
+      aria-busy={ariaBusy}
+      aria-expanded={ariaExpanded}
+      hitSlop={hitSlop}
+    >
+      <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
+        {leadingIcon ? (
           <View
-            style={[
-              styles.content,
-              {
-                maxWidth: contentMaxWidth,
-              },
-              leadingIcon
-                ? { marginLeft: iconLabelGap }
-                : { marginLeft: noLeadingIconStart },
-              contentStyle,
-            ]}
-            pointerEvents="none"
+            style={[{ width: iconSize }, styles.leadingIcon]}
+            pointerEvents="box-none"
           >
-            <Text
-              variant={MenuTokens.typography.label}
-              selectable={false}
-              numberOfLines={1}
-              style={[titleTextStyle, titleStyle]}
-              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-            >
-              {title}
-            </Text>
-            {hasSupportingText ? (
-              <Text
-                variant={MenuTokens.typography.supporting}
-                selectable={false}
-                numberOfLines={1}
-                style={[supportingTextStyleResolved, supportingTextStyle]}
-                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-              >
-                {supportingText}
-              </Text>
-            ) : null}
+            <Icon source={leadingIcon} size={iconSize} color={iconColor} />
           </View>
-          {hasTrailingSupportingText ? (
+        ) : null}
+        <View
+          style={[
+            styles.content,
+            {
+              maxWidth: contentMaxWidth,
+            },
+            leadingIcon
+              ? { marginLeft: iconLabelGap }
+              : { marginLeft: noLeadingIconStart },
+            contentStyle,
+          ]}
+          pointerEvents="box-none"
+        >
+          <Text
+            variant={MenuTokens.typography.label}
+            selectable={false}
+            numberOfLines={1}
+            style={[titleTextStyle, titleStyle]}
+            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+          >
+            {title}
+          </Text>
+          {hasSupportingText ? (
             <Text
-              variant={MenuTokens.typography.trailingSupporting}
+              variant={MenuTokens.typography.supporting}
               selectable={false}
               numberOfLines={1}
-              style={[
-                styles.trailingSupporting,
-                trailingSupportingTextStyleResolved,
-                trailingSupportingTextStyle,
-              ]}
+              style={[supportingTextStyleResolved, supportingTextStyle]}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-              pointerEvents="none"
             >
-              {trailingSupportingText}
+              {supportingText}
             </Text>
-          ) : null}
-          {resolvedTrailingIcon ? (
-            <View
-              style={[{ width: iconSize }, styles.trailingIcon]}
-              pointerEvents="box-none"
-            >
-              <Icon
-                source={resolvedTrailingIcon}
-                size={iconSize}
-                color={iconColor}
-              />
-            </View>
           ) : null}
         </View>
-      </TouchableRipple>
-      {hasSubmenu ? (
-        <MenuComponent
-          visible={submenuVisible}
-          onDismiss={() => setSubmenuVisible(false)}
-          anchor={submenuAnchor}
-          colorScheme={colorScheme}
-          theme={themeOverrides}
-        >
-          {submenu}
-        </MenuComponent>
-      ) : null}
-    </>
+        {hasTrailingSupportingText ? (
+          <Text
+            variant={MenuTokens.typography.trailingSupporting}
+            selectable={false}
+            numberOfLines={1}
+            style={[
+              styles.trailingSupporting,
+              trailingSupportingTextStyleResolved,
+              trailingSupportingTextStyle,
+            ]}
+            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+            pointerEvents="box-none"
+          >
+            {trailingSupportingText}
+          </Text>
+        ) : null}
+        {trailingIcon ? (
+          <View
+            style={[{ width: iconSize }, styles.trailingIcon]}
+            pointerEvents="box-none"
+          >
+            <Icon source={trailingIcon} size={iconSize} color={iconColor} />
+          </View>
+        ) : null}
+      </View>
+    </TouchableRipple>
   );
 };
 

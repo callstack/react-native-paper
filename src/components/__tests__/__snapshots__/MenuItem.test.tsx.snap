@@ -118,7 +118,7 @@ exports[`Menu Item renders menu item 1`] = `
         </Text>
       </View>
       <View
-        pointerEvents="none"
+        pointerEvents="box-none"
         style={
           [
             {
@@ -293,7 +293,7 @@ exports[`Menu Item renders menu item 1`] = `
         </Text>
       </View>
       <View
-        pointerEvents="none"
+        pointerEvents="box-none"
         style={
           [
             {
@@ -468,7 +468,7 @@ exports[`Menu Item renders menu item 1`] = `
         </Text>
       </View>
       <View
-        pointerEvents="none"
+        pointerEvents="box-none"
         style={
           [
             {
@@ -643,7 +643,7 @@ exports[`Menu Item renders menu item 1`] = `
         </Text>
       </View>
       <View
-        pointerEvents="none"
+        pointerEvents="box-none"
         style={
           [
             {
@@ -775,7 +775,7 @@ exports[`Menu Item renders menu item 1`] = `
       }
     >
       <View
-        pointerEvents="none"
+        pointerEvents="box-none"
         style={
           [
             {

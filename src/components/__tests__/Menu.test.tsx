@@ -1,5 +1,12 @@
 import type { ComponentRef } from 'react';
-import { Dimensions, Keyboard, Platform, StyleSheet, View } from 'react-native';
+import {
+  AccessibilityInfo,
+  Dimensions,
+  Keyboard,
+  Platform,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import {
   afterEach,
@@ -127,6 +134,119 @@ describe('web focus', () => {
     await render(makeMenu(true));
     await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
     expect(focus).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('screen reader focus', () => {
+  const PAST_ANIMATION_MS = 300;
+  // The focus call is deferred one frame past the animation.
+  const PAST_FRAME_MS = 32;
+  let sendEvent: jest.SpiedFunction<
+    typeof AccessibilityInfo.sendAccessibilityEvent
+  >;
+
+  const originalMeasureInWindow = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'measureInWindow'
+  );
+
+  beforeEach(() => {
+    // Measuring never resolves in the test renderer, which blocks showing.
+    const measureInWindow: ComponentRef<typeof View>['measureInWindow'] = (
+      fn
+    ) => fn(100, 100, 80, 32);
+    Object.defineProperty(View.prototype, 'measureInWindow', {
+      configurable: true,
+      value: measureInWindow,
+    });
+    sendEvent = jest
+      .spyOn(AccessibilityInfo, 'sendAccessibilityEvent')
+      .mockImplementation(() => undefined);
+  });
+
+  afterEach(() => {
+    if (originalMeasureInWindow) {
+      Object.defineProperty(
+        View.prototype,
+        'measureInWindow',
+        originalMeasureInWindow
+      );
+    } else {
+      Reflect.deleteProperty(View.prototype, 'measureInWindow');
+    }
+    sendEvent.mockRestore();
+  });
+
+  const makeMenu = (visible: boolean, disabled: string[] = []) => (
+    <Portal.Host>
+      <Menu visible={visible} anchor={<Button>Open menu</Button>}>
+        {['undo', 'redo', 'copy'].map((id) => (
+          <Menu.Item
+            key={id}
+            title={id}
+            testID={id}
+            disabled={disabled.includes(id)}
+          />
+        ))}
+      </Menu>
+    </Portal.Host>
+  );
+
+  const finishAnimation = async () => {
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    await act(() => jest.advanceTimersByTime(PAST_FRAME_MS));
+  };
+
+  // The focus event receives the host ref, which in the test renderer is the
+  // mocked `View` instance. There is no user-visible way to identify it, so
+  // read its testID and compare ids to keep failure output small.
+  const focusedTestIDs = () =>
+    sendEvent.mock.calls.map(([node]) => {
+      if (typeof node !== 'object' || node === null || !('props' in node)) {
+        return undefined;
+      }
+      const { props } = node;
+      return typeof props === 'object' && props !== null && 'testID' in props
+        ? props.testID
+        : undefined;
+    });
+
+  it('focuses the first enabled item after the show animation, skipping a disabled one', async () => {
+    const { rerender } = await render(makeMenu(false, ['undo']));
+    await rerender(makeMenu(true, ['undo']));
+    await finishAnimation();
+
+    expect(focusedTestIDs()).toEqual(['redo']);
+    expect(sendEvent.mock.calls[0][1]).toBe('focus');
+  });
+
+  it('returns focus to the anchor after the hide animation', async () => {
+    const { rerender } = await render(makeMenu(true));
+    await finishAnimation();
+    sendEvent.mockClear();
+
+    await rerender(makeMenu(false));
+    await finishAnimation();
+
+    expect(sendEvent).toHaveBeenCalledTimes(1);
+    expect(focusedTestIDs()).not.toContain('undo');
+  });
+
+  it('stops targeting an item once it becomes disabled', async () => {
+    const { rerender } = await render(makeMenu(false));
+    await rerender(makeMenu(true));
+    await rerender(makeMenu(true, ['undo']));
+    await finishAnimation();
+
+    expect(focusedTestIDs()).toEqual(['redo']);
+  });
+
+  it('sends no focus event to an item when every item is disabled', async () => {
+    const { rerender } = await render(makeMenu(false));
+    await rerender(makeMenu(true, ['undo', 'redo', 'copy']));
+    await finishAnimation();
+
+    expect(sendEvent).not.toHaveBeenCalled();
   });
 });
 
