@@ -152,6 +152,10 @@ export type Props = Omit<ViewProps, 'pointerEvents' | 'style'> &
      * TestID used for testing purposes
      */
     testID?: string;
+    /**
+     * NativeWind class name forwarded to the underlying view.
+     */
+    className?: string;
     ref?: React.Ref<React.ComponentRef<typeof View>>;
   };
 

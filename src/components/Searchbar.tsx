@@ -138,6 +138,10 @@ export type Props = Omit<TextInputProps, 'style'> & {
    */
   testID?: string;
   /**
+   * NativeWind class name. Applied to the outer surface and the text input.
+   */
+  className?: string;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -199,6 +203,7 @@ const Searchbar = ({
   value,
   loading = false,
   testID,
+  className,
   ref,
   ...rest
 }: Props) => {
@@ -252,6 +257,7 @@ const Searchbar = ({
       style={[styles.container, style]}
       elevation={elevation}
       theme={theme}
+      {...(className != null ? { className } : null)}
     >
       <IconButton
         role="button"
@@ -296,6 +302,7 @@ const Searchbar = ({
         value={value}
         testID={testID}
         {...rest}
+        {...(className != null ? { className } : null)}
       />
       {loading ? (
         <ActivityIndicator style={styles.v3Loader} />

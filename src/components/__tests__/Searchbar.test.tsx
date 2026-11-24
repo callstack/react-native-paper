@@ -168,3 +168,14 @@ it('names its search icon as an image on web when it has no onIconPress', async 
     jest.restoreAllMocks();
   }
 });
+
+it('applies className on the searchbar surface as well', async () => {
+  await render(
+    <Searchbar placeholder="Search" value="" className="bg-red-500" />
+  );
+
+  const input = screen.getByPlaceholderText('Search');
+
+  expect(input).toHaveProp('className', 'bg-red-500');
+  expect(input.parent).toHaveProp('className', 'bg-red-500');
+});
