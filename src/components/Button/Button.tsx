@@ -261,6 +261,11 @@ const Button = ({
   children,
   'aria-label': ariaLabel,
   'aria-expanded': ariaExpanded,
+  'aria-busy': ariaBusy,
+  'aria-checked': ariaChecked,
+  'aria-selected': ariaSelected,
+  accessibilityLabel,
+  accessibilityState,
   accessibilityHint,
   role = 'button',
   hitSlop,
@@ -317,11 +322,48 @@ const Button = ({
   // toggle colors, no shape flip, and no toggle state. Every other use of
   // the toggle state goes through this value.
   const toggleSelected = isMode('text') ? undefined : selected;
-  // React Native's types have no `aria-pressed`.
+
+  // As on React Native itself, an `aria-*` prop wins over the same
+  // `accessibilityState` field. Both are passed on as `aria-*` props, since
+  // react-native-web does not support `accessibilityState`.
+  const busy = loading || (ariaBusy ?? accessibilityState?.busy);
+  const checked = ariaChecked ?? accessibilityState?.checked;
+
+  // Android only: TalkBack reads the content description React Native builds
+  // from the label and the busy state ("Save draft, busy"), instead of the
+  // text inside the button. React Native rewrites that description only when
+  // it has text to write, so without a label a busy button would read "busy"
+  // and keep reading it once it is no longer busy. The button's own text is
+  // therefore always its label there, and `busy` always a boolean. When the
+  // content is not only text (strings and numbers, e.g.
+  // `Uploading {count} files`), it cannot be read here: the button is not
+  // marked busy, so TalkBack still reads the content.
+  const needsAndroidBusyLabel =
+    Platform.OS === 'android' &&
+    ariaLabel === undefined &&
+    accessibilityLabel === undefined;
+  const childrenParts = React.Children.toArray(children);
+  const childrenText =
+    childrenParts.length > 0 &&
+    childrenParts.every(
+      (part) => typeof part === 'string' || typeof part === 'number'
+    )
+      ? childrenParts.join('')
+      : undefined;
+  const pressableLabel = needsAndroidBusyLabel ? childrenText : ariaLabel;
+  const pressableBusy =
+    Platform.OS === 'android'
+      ? needsAndroidBusyLabel && childrenText === undefined
+        ? false
+        : busy === true
+      : busy;
+
+  // React Native's types have no `aria-pressed`. A given `checked` state
+  // still applies where the toggle state is not exposed as checked.
   const toggleStateProps =
     Platform.OS === 'web'
-      ? { 'aria-pressed': toggleSelected }
-      : { 'aria-checked': toggleSelected };
+      ? { 'aria-pressed': toggleSelected, 'aria-checked': checked }
+      : { 'aria-checked': toggleSelected ?? checked };
 
   // When the button is `selected`, flip the requested shape so the
   // unselected/selected pair contrasts visually (round ↔ square).
@@ -511,8 +553,11 @@ const Button = ({
           onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
           onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
           delayLongPress={delayLongPress}
-          aria-label={ariaLabel}
-          aria-expanded={ariaExpanded}
+          accessibilityLabel={accessibilityLabel}
+          aria-label={pressableLabel}
+          aria-expanded={ariaExpanded ?? accessibilityState?.expanded}
+          aria-busy={pressableBusy}
+          aria-selected={ariaSelected ?? accessibilityState?.selected}
           accessibilityHint={accessibilityHint}
           role={role}
           aria-disabled={disabled}
@@ -539,7 +584,13 @@ const Button = ({
               </View>
             ) : null}
             {loading ? (
-              <ActivityIndicator size={iconSize} color={labelColor} />
+              // The button itself is busy (`aria-busy`), so the indicator is
+              // not a separate progress element for assistive technology.
+              <ActivityIndicator
+                size={iconSize}
+                color={labelColor}
+                aria-hidden
+              />
             ) : null}
             <Text
               variant={sizeStyle.labelVariant}
