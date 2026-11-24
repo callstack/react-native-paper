@@ -687,6 +687,68 @@ describe('hitSlop', () => {
     });
   });
 
+  it('follows the laid-out size when `style` shrinks the button', async () => {
+    await render(
+      <IconButton
+        icon="menu-down"
+        iconSize={30}
+        aria-label="Expand title"
+        onPress={() => {}}
+        style={{ width: 30, height: 30 }}
+        testID="icon-button"
+      />
+    );
+
+    const touchable = screen.getByTestId('icon-button');
+    await fireEvent(touchable, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 30, height: 30 } },
+    });
+
+    expect(touchable).toHaveProp('hitSlop', {
+      top: 9,
+      bottom: 9,
+      left: 9,
+      right: 9,
+    });
+  });
+
+  it('drops the default once the laid-out size reaches 48dp', async () => {
+    await render(
+      <IconButton
+        icon="camera"
+        onPress={() => {}}
+        style={{ width: 56, height: 56 }}
+        testID="icon-button"
+      />
+    );
+
+    const touchable = screen.getByTestId('icon-button');
+    await fireEvent(touchable, 'layout', {
+      nativeEvent: { layout: { x: 0, y: 0, width: 56, height: 56 } },
+    });
+
+    expect(touchable).not.toHaveProp('hitSlop');
+  });
+
+  it('still calls a forwarded onLayout', async () => {
+    const onLayout = jest.fn();
+    await render(
+      <IconButton
+        icon="camera"
+        onPress={() => {}}
+        onLayout={onLayout}
+        testID="icon-button"
+      />
+    );
+
+    const event = {
+      nativeEvent: { layout: { x: 0, y: 0, width: 40, height: 40 } },
+    };
+    await fireEvent(screen.getByTestId('icon-button'), 'layout', event);
+
+    expect(onLayout).toHaveBeenCalledWith(event);
+  });
+
   it('takes `0` as an opt out', async () => {
     await render(
       <IconButton
