@@ -7,6 +7,7 @@ import { render, screen } from '@testing-library/react-native';
 import Button from '../../components/Button/Button';
 import Text from '../../components/Typography/Text';
 import PaperProvider from '../../core/PaperProvider';
+import type { ThemeProp as PackageThemeProp } from '../../index';
 import { ThemeProvider, useTheme } from '../provider';
 import { DarkTheme, LightTheme } from '../schemes';
 import type { Theme, ThemeProp } from '../types';
@@ -41,6 +42,31 @@ describe('ThemeProvider', () => {
     expect(onTheme.mock.lastCall?.[0]).toStrictEqual({
       ...DarkTheme,
       colors: { ...DarkTheme.colors, primary: 'red' },
+    });
+  });
+
+  it('applies a partial theme typed with the ThemeProp the package exports', async () => {
+    const theme: PackageThemeProp = {
+      colors: { primary: 'tomato' },
+      fonts: { bodyLarge: { fontSize: 18 } },
+    };
+    const onTheme = createOnTheme();
+
+    await render(
+      <PaperProvider theme={LightTheme} reduceMotion="off">
+        <ThemeProvider theme={theme}>
+          <ThemeReader onTheme={onTheme} />
+        </ThemeProvider>
+      </PaperProvider>
+    );
+
+    expect(onTheme.mock.lastCall?.[0]).toStrictEqual({
+      ...LightTheme,
+      colors: { ...LightTheme.colors, primary: 'tomato' },
+      fonts: {
+        ...LightTheme.fonts,
+        bodyLarge: { ...LightTheme.fonts.bodyLarge, fontSize: 18 },
+      },
     });
   });
 
