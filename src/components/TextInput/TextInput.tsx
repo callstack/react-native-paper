@@ -20,6 +20,7 @@ import type {
 import Animated from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
 
+import type { TextInputMetrics } from './constants';
 import { useTextInput } from './hooks';
 import { styles } from './styles';
 import TextInputErrorIcon from './TextInputErrorIcon';
@@ -88,6 +89,7 @@ export type TextInputVariant = 'filled' | 'outlined';
 export type TextInputSharedApi = {
   input: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
   theme: InternalTheme;
+  metrics: TextInputMetrics;
   isFocused: boolean;
   isHovered?: boolean;
   isRTL: boolean;
@@ -117,6 +119,7 @@ export type FilledTextInputHookData = SharedTextInputStyleData & {
   hasError: boolean;
   hasSuffix: boolean;
   animatedLabelWrapperStyles: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+  labelStyles: StyleProp<ViewStyle>;
   containerStyles: StyleProp<ViewStyle>;
   fieldStyles: StyleProp<ViewStyle>;
   disabledBackgroundStyles: StyleProp<ViewStyle> | undefined;
@@ -131,6 +134,7 @@ export type OutlinedTextInputHookData = SharedTextInputStyleData & {
   hasError: boolean;
   hasSuffix: boolean;
   animatedLabelWrapperStyles: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+  labelStyles: StyleProp<ViewStyle>;
   containerStyles: StyleProp<ViewStyle>;
   fieldStyles: StyleProp<ViewStyle>;
   disabledBackgroundStyles: undefined;
@@ -165,6 +169,7 @@ export type TextInputHookReturn = SharedTextInputStyleData & {
     | StyleProp<AnimatedStyle<StyleProp<TextStyle>>>
     | undefined;
   animatedLabelWrapperStyles: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+  labelStyles: StyleProp<ViewStyle>;
   containerStyles: StyleProp<ViewStyle>;
   fieldStyles: StyleProp<ViewStyle>;
   disabledBackgroundStyles: StyleProp<ViewStyle> | undefined;
@@ -360,6 +365,7 @@ function TextInput({
     outlineStyles,
     animatedActiveOutlineStyles,
     animatedLabelWrapperStyles,
+    labelStyles,
     animatedLabelTextStyles,
     animatedAffixStyle,
     containerStyles,
@@ -446,12 +452,15 @@ function TextInput({
 
         {!!label && (
           <Animated.View aria-hidden style={animatedLabelWrapperStyles}>
-            <Animated.Text
-              {...accessibilityProps.label}
-              style={animatedLabelTextStyles}
-            >
-              {label}
-            </Animated.Text>
+            <View style={labelStyles}>
+              <Animated.Text
+                {...accessibilityProps.label}
+                numberOfLines={1}
+                style={animatedLabelTextStyles}
+              >
+                {label}
+              </Animated.Text>
+            </View>
           </Animated.View>
         )}
 

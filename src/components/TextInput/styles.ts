@@ -8,9 +8,7 @@ import {
   SUPPORTING_TEXT_MARGIN_TOP,
   TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL,
   TEXT_INPUT_BORDER_RADIUS,
-  TEXT_INPUT_HEIGHT,
   TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL,
-  TEXT_INPUT_PADDING_VERTICAL,
 } from './constants';
 import { tokens } from '../../theme/tokens';
 
@@ -25,8 +23,15 @@ export const styles = StyleSheet.create({
   },
   field: {
     flexDirection: 'row',
-    minHeight: TEXT_INPUT_HEIGHT,
-    paddingVertical: TEXT_INPUT_PADDING_VERTICAL,
+  },
+  // Spans the space the label may take, so a long label ends in an ellipsis.
+  labelWrapper: {
+    position: 'absolute',
+    alignItems: 'flex-start',
+    pointerEvents: 'none',
+  },
+  label: {
+    maxWidth: '100%',
   },
   addendum: {
     flexDirection: 'row',
@@ -102,10 +107,6 @@ export const filledStyles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingHorizontal: TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL,
   },
-  labelWrapper: {
-    position: 'absolute',
-    pointerEvents: 'none',
-  },
   disabledBackground: {
     position: 'absolute',
     top: 0,
@@ -133,9 +134,7 @@ export const outlinedStyles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL,
   },
-  labelWrapper: {
-    position: 'absolute',
+  label: {
     paddingHorizontal: OUTLINED_LABEL_PADDING_HORIZONTAL,
-    pointerEvents: 'none',
   },
 });

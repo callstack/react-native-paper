@@ -38,15 +38,15 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
       [
         {
           "flexDirection": "row",
-          "minHeight": 112,
-          "paddingVertical": 16,
         },
         {
           "backgroundColor": undefined,
           "borderTopEndRadius": 4,
           "borderTopStartRadius": 4,
+          "minHeight": 56,
           "overflow": "hidden",
-          "paddingBottom": 19,
+          "paddingBottom": 11,
+          "paddingTop": 8,
         },
       ]
     }
@@ -123,6 +123,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
       style={
         [
           {
+            "alignItems": "flex-start",
             "pointerEvents": "none",
             "position": "absolute",
           },
@@ -130,35 +131,45 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             "start": 52,
           },
           {
-            "top": 16,
+            "end": 52,
+            "top": 8,
           },
         ]
       }
     >
-      <Text
-        collapsable={false}
+      <View
         style={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(29, 27, 32, 1)",
-            },
-            {
-              "fontSize": 12,
-            },
-            {
-              "opacity": 0.38,
-            },
-          ]
+          {
+            "maxWidth": "100%",
+          }
         }
       >
-        Search
-      </Text>
+        <Text
+          collapsable={false}
+          numberOfLines={1}
+          style={
+            [
+              {
+                "fontWeight": "400",
+                "includeFontPadding": false,
+                "paddingHorizontal": 0,
+                "paddingVertical": 0,
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+              },
+              {
+                "fontSize": 12,
+              },
+              {
+                "opacity": 0.38,
+              },
+            ]
+          }
+        >
+          Search
+        </Text>
+      </View>
     </View>
     <View
       aria-hidden={true}
@@ -552,15 +563,15 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       [
         {
           "flexDirection": "row",
-          "minHeight": 112,
-          "paddingVertical": 16,
         },
         {
           "backgroundColor": "rgba(230, 224, 233, 1)",
           "borderTopEndRadius": 4,
           "borderTopStartRadius": 4,
+          "minHeight": 56,
           "overflow": "hidden",
-          "paddingBottom": 19,
+          "paddingBottom": 11,
+          "paddingTop": 8,
         },
       ]
     }
@@ -615,6 +626,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
       style={
         [
           {
+            "alignItems": "flex-start",
             "pointerEvents": "none",
             "position": "absolute",
           },
@@ -622,33 +634,43 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             "start": 52,
           },
           {
-            "top": 16,
+            "end": 52,
+            "top": 8,
           },
         ]
       }
     >
-      <Text
-        collapsable={false}
+      <View
         style={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            {
-              "fontSize": 12,
-            },
-            false,
-          ]
+          {
+            "maxWidth": "100%",
+          }
         }
       >
-        Search
-      </Text>
+        <Text
+          collapsable={false}
+          numberOfLines={1}
+          style={
+            [
+              {
+                "fontWeight": "400",
+                "includeFontPadding": false,
+                "paddingHorizontal": 0,
+                "paddingVertical": 0,
+              },
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              {
+                "fontSize": 12,
+              },
+              false,
+            ]
+          }
+        >
+          Search
+        </Text>
+      </View>
     </View>
     <View
       aria-hidden={true}
@@ -1007,15 +1029,15 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       [
         {
           "flexDirection": "row",
-          "minHeight": 112,
-          "paddingVertical": 16,
         },
         {
           "backgroundColor": "rgba(230, 224, 233, 1)",
           "borderTopEndRadius": 4,
           "borderTopStartRadius": 4,
+          "minHeight": 56,
           "overflow": "hidden",
-          "paddingBottom": 19,
+          "paddingBottom": 11,
+          "paddingTop": 8,
         },
       ]
     }
@@ -1070,6 +1092,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
       style={
         [
           {
+            "alignItems": "flex-start",
             "pointerEvents": "none",
             "position": "absolute",
           },
@@ -1077,33 +1100,43 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             "start": 52,
           },
           {
-            "top": 16,
+            "end": 52,
+            "top": 8,
           },
         ]
       }
     >
-      <Text
-        collapsable={false}
+      <View
         style={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(179, 38, 30, 1)",
-            },
-            {
-              "fontSize": 12,
-            },
-            false,
-          ]
+          {
+            "maxWidth": "100%",
+          }
         }
       >
-        Search
-      </Text>
+        <Text
+          collapsable={false}
+          numberOfLines={1}
+          style={
+            [
+              {
+                "fontWeight": "400",
+                "includeFontPadding": false,
+                "paddingHorizontal": 0,
+                "paddingVertical": 0,
+              },
+              {
+                "color": "rgba(179, 38, 30, 1)",
+              },
+              {
+                "fontSize": 12,
+              },
+              false,
+            ]
+          }
+        >
+          Search
+        </Text>
+      </View>
     </View>
     <View
       aria-hidden={true}
@@ -1495,15 +1528,15 @@ exports[`renders filled TextInput with label and value 1`] = `
       [
         {
           "flexDirection": "row",
-          "minHeight": 112,
-          "paddingVertical": 16,
         },
         {
           "backgroundColor": "rgba(230, 224, 233, 1)",
           "borderTopEndRadius": 4,
           "borderTopStartRadius": 4,
+          "minHeight": 56,
           "overflow": "hidden",
-          "paddingBottom": 19,
+          "paddingBottom": 11,
+          "paddingTop": 8,
         },
       ]
     }
@@ -1558,6 +1591,7 @@ exports[`renders filled TextInput with label and value 1`] = `
       style={
         [
           {
+            "alignItems": "flex-start",
             "pointerEvents": "none",
             "position": "absolute",
           },
@@ -1565,33 +1599,43 @@ exports[`renders filled TextInput with label and value 1`] = `
             "start": 16,
           },
           {
-            "top": 16,
+            "end": 16,
+            "top": 8,
           },
         ]
       }
     >
-      <Text
-        collapsable={false}
+      <View
         style={
-          [
-            {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
-            },
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            {
-              "fontSize": 12,
-            },
-            false,
-          ]
+          {
+            "maxWidth": "100%",
+          }
         }
       >
-        Email
-      </Text>
+        <Text
+          collapsable={false}
+          numberOfLines={1}
+          style={
+            [
+              {
+                "fontWeight": "400",
+                "includeFontPadding": false,
+                "paddingHorizontal": 0,
+                "paddingVertical": 0,
+              },
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              {
+                "fontSize": 12,
+              },
+              false,
+            ]
+          }
+        >
+          Email
+        </Text>
+      </View>
     </View>
     <View
       style={
@@ -1686,11 +1730,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       [
         {
           "flexDirection": "row",
-          "minHeight": 112,
-          "paddingVertical": 16,
         },
         {
           "borderRadius": 4,
+          "minHeight": 56,
+          "paddingVertical": 8,
         },
         undefined,
       ]
@@ -1722,16 +1766,16 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
       style={
         [
           {
-            "paddingHorizontal": 4,
+            "alignItems": "flex-start",
             "pointerEvents": "none",
             "position": "absolute",
           },
           {
-            "backgroundColor": "rgba(254, 247, 255, 1)",
             "start": 48,
           },
           {
-            "top": -12,
+            "end": 12,
+            "top": -6,
             "transform": [
               {
                 "translateX": -36,
@@ -1741,28 +1785,45 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
         ]
       }
     >
-      <Text
-        collapsable={false}
+      <View
         style={
           [
             {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
+              "maxWidth": "100%",
             },
             {
-              "color": "rgba(73, 69, 79, 1)",
+              "paddingHorizontal": 4,
             },
             {
-              "fontSize": 12,
+              "backgroundColor": "rgba(254, 247, 255, 1)",
             },
-            false,
           ]
         }
       >
-        Search
-      </Text>
+        <Text
+          collapsable={false}
+          numberOfLines={1}
+          style={
+            [
+              {
+                "fontWeight": "400",
+                "includeFontPadding": false,
+                "paddingHorizontal": 0,
+                "paddingVertical": 0,
+              },
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              {
+                "fontSize": 12,
+              },
+              false,
+            ]
+          }
+        >
+          Search
+        </Text>
+      </View>
     </View>
     <View
       aria-hidden={true}
@@ -2121,11 +2182,11 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       [
         {
           "flexDirection": "row",
-          "minHeight": 112,
-          "paddingVertical": 16,
         },
         {
           "borderRadius": 4,
+          "minHeight": 56,
+          "paddingVertical": 8,
         },
         undefined,
       ]
@@ -2157,16 +2218,16 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
       style={
         [
           {
-            "paddingHorizontal": 4,
+            "alignItems": "flex-start",
             "pointerEvents": "none",
             "position": "absolute",
           },
           {
-            "backgroundColor": "rgba(254, 247, 255, 1)",
             "start": 48,
           },
           {
-            "top": -12,
+            "end": 12,
+            "top": -6,
             "transform": [
               {
                 "translateX": -36,
@@ -2176,28 +2237,45 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
         ]
       }
     >
-      <Text
-        collapsable={false}
+      <View
         style={
           [
             {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
+              "maxWidth": "100%",
             },
             {
-              "color": "rgba(179, 38, 30, 1)",
+              "paddingHorizontal": 4,
             },
             {
-              "fontSize": 12,
+              "backgroundColor": "rgba(254, 247, 255, 1)",
             },
-            false,
           ]
         }
       >
-        Search
-      </Text>
+        <Text
+          collapsable={false}
+          numberOfLines={1}
+          style={
+            [
+              {
+                "fontWeight": "400",
+                "includeFontPadding": false,
+                "paddingHorizontal": 0,
+                "paddingVertical": 0,
+              },
+              {
+                "color": "rgba(179, 38, 30, 1)",
+              },
+              {
+                "fontSize": 12,
+              },
+              false,
+            ]
+          }
+        >
+          Search
+        </Text>
+      </View>
     </View>
     <View
       aria-hidden={true}
@@ -2589,11 +2667,11 @@ exports[`renders outlined TextInput with label and value 1`] = `
       [
         {
           "flexDirection": "row",
-          "minHeight": 112,
-          "paddingVertical": 16,
         },
         {
           "borderRadius": 4,
+          "minHeight": 56,
+          "paddingVertical": 8,
         },
         undefined,
       ]
@@ -2625,16 +2703,16 @@ exports[`renders outlined TextInput with label and value 1`] = `
       style={
         [
           {
-            "paddingHorizontal": 4,
+            "alignItems": "flex-start",
             "pointerEvents": "none",
             "position": "absolute",
           },
           {
-            "backgroundColor": "rgba(254, 247, 255, 1)",
             "start": 16,
           },
           {
-            "top": -12,
+            "end": 8,
+            "top": -6,
             "transform": [
               {
                 "translateX": -4,
@@ -2644,28 +2722,45 @@ exports[`renders outlined TextInput with label and value 1`] = `
         ]
       }
     >
-      <Text
-        collapsable={false}
+      <View
         style={
           [
             {
-              "fontWeight": "400",
-              "includeFontPadding": false,
-              "paddingHorizontal": 0,
-              "paddingVertical": 0,
+              "maxWidth": "100%",
             },
             {
-              "color": "rgba(73, 69, 79, 1)",
+              "paddingHorizontal": 4,
             },
             {
-              "fontSize": 12,
+              "backgroundColor": "rgba(254, 247, 255, 1)",
             },
-            false,
           ]
         }
       >
-        Password
-      </Text>
+        <Text
+          collapsable={false}
+          numberOfLines={1}
+          style={
+            [
+              {
+                "fontWeight": "400",
+                "includeFontPadding": false,
+                "paddingHorizontal": 0,
+                "paddingVertical": 0,
+              },
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              {
+                "fontSize": 12,
+              },
+              false,
+            ]
+          }
+        >
+          Password
+        </Text>
+      </View>
     </View>
     <View
       style={

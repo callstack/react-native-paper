@@ -1,12 +1,8 @@
-import { PixelRatio } from 'react-native';
-
 import { Easing } from 'react-native-reanimated';
 
 import { tokens } from '../../theme/tokens';
 import { motionDuration, motionEasing } from '../../theme/tokens/sys/motion';
 import { defaultShapes } from '../../theme/tokens/sys/shape';
-
-export const fontScale = PixelRatio.getFontScale();
 
 /**
  * Common constants for the text input component.
@@ -17,13 +13,6 @@ export const BASELINE_TEXT_INPUT_PADDING_VERTICAL = 8;
 
 export const TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL = 16;
 export const TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL = 12;
-
-export const TEXT_INPUT_HEIGHT = Math.ceil(
-  BASELINE_TEXT_INPUT_HEIGHT * fontScale
-);
-export const TEXT_INPUT_PADDING_VERTICAL = Math.ceil(
-  BASELINE_TEXT_INPUT_PADDING_VERTICAL * fontScale
-);
 
 export const TEXT_INPUT_BORDER_RADIUS = defaultShapes.corner.extraSmall;
 
@@ -70,24 +59,7 @@ export const FILLED_LABEL_START_OFFSET_WITH_ACCESSORY =
   TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL +
   TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL;
 
-export const FILLED_ACTIVE_LABEL_TOP_POSITION = TEXT_INPUT_PADDING_VERTICAL;
-
-export const FILLED_INACTIVE_LABEL_TOP_POSITION = Math.ceil(
-  ((BASELINE_TEXT_INPUT_HEIGHT -
-    2 * BASELINE_TEXT_INPUT_PADDING_VERTICAL -
-    INPUT_FONT_SIZE) /
-    2 +
-    BASELINE_TEXT_INPUT_PADDING_VERTICAL) *
-    fontScale
-);
-
-export const FILLED_MULTILINE_PADDING_TOP =
-  Math.ceil(ACTIVE_LABEL_FONT_SIZE * fontScale) + TEXT_INPUT_PADDING_VERTICAL;
-
 export const FILLED_DISABLED_CONTAINER_OPACITY = 0.04;
-
-export const FILLED_PADDING_BOTTOM =
-  TEXT_INPUT_PADDING_VERTICAL + FILLED_LINE_HEIGHT_DELTA;
 
 /**
  * Constants for the outlined variant.
@@ -97,15 +69,6 @@ const OUTLINED_LINE_HEIGHT_DELTA = 2;
 
 export const OUTLINED_DISABLED_OUTLINE_OPACITY = 0.12;
 
-export const OUTLINED_MULTILINE_PADDING_TOP = Math.ceil(
-  ((BASELINE_TEXT_INPUT_HEIGHT -
-    2 * BASELINE_TEXT_INPUT_PADDING_VERTICAL -
-    INPUT_FONT_SIZE) /
-    2 -
-    OUTLINED_LINE_HEIGHT_DELTA) *
-    fontScale
-);
-
 export const OUTLINED_LABEL_PADDING_HORIZONTAL = 4;
 
 export const OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY =
@@ -113,21 +76,6 @@ export const OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY =
   TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL +
   TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL -
   OUTLINED_LABEL_PADDING_HORIZONTAL;
-
-export const OUTLINED_ACTIVE_LABEL_TOP_POSITION = Math.ceil(
-  (-BASELINE_TEXT_INPUT_PADDING_VERTICAL + OUTLINED_LINE_HEIGHT_DELTA) *
-    fontScale
-);
-
-export const OUTLINED_INACTIVE_LABEL_TOP_POSITION = Math.ceil(
-  ((BASELINE_TEXT_INPUT_HEIGHT -
-    2 * BASELINE_TEXT_INPUT_PADDING_VERTICAL -
-    INPUT_FONT_SIZE) /
-    2 +
-    BASELINE_TEXT_INPUT_PADDING_VERTICAL -
-    OUTLINED_LINE_HEIGHT_DELTA) *
-    fontScale
-);
 
 /** Positive distance; apply sign in animation using `isRTL` from `useLocale`. */
 export const OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY =
@@ -138,3 +86,64 @@ export const OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY =
 /** Positive distance; apply sign in animation using `isRTL` from `useLocale`. */
 export const OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY =
   OUTLINED_LABEL_PADDING_HORIZONTAL;
+
+/**
+ * Label end offsets, measured from the field's end edge to the end of the
+ * input text, so a long label is cut off where the text is.
+ */
+export const LABEL_END_OFFSET_WITHOUT_ACCESSORY =
+  TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL;
+
+export const LABEL_END_OFFSET_WITH_ACCESSORY =
+  ACCESSORY_SIZE +
+  TEXT_INPUT_ACCESSORY_MARGIN_HORIZONTAL +
+  TEXT_INPUT_INPUT_WRAPPER_PADDING_HORIZONTAL;
+
+// Space between the input text and the resting label, scaled with the text.
+const BASELINE_INACTIVE_LABEL_OFFSET =
+  (BASELINE_TEXT_INPUT_HEIGHT -
+    2 * BASELINE_TEXT_INPUT_PADDING_VERTICAL -
+    INPUT_FONT_SIZE) /
+    2 +
+  BASELINE_TEXT_INPUT_PADDING_VERTICAL;
+
+/**
+ * Sizes that grow with the user's text size. Read the current `fontScale`
+ * from `useWindowDimensions` so a text size change while the app runs resizes
+ * the field.
+ */
+export const getTextInputMetrics = (fontScale: number) => {
+  const paddingVertical = Math.ceil(
+    BASELINE_TEXT_INPUT_PADDING_VERTICAL * fontScale
+  );
+
+  return {
+    height: Math.ceil(BASELINE_TEXT_INPUT_HEIGHT * fontScale),
+    paddingVertical,
+    filled: {
+      activeLabelTop: paddingVertical,
+      inactiveLabelTop: Math.ceil(BASELINE_INACTIVE_LABEL_OFFSET * fontScale),
+      multilinePaddingTop:
+        Math.ceil(ACTIVE_LABEL_FONT_SIZE * fontScale) + paddingVertical,
+      paddingBottom: paddingVertical + FILLED_LINE_HEIGHT_DELTA,
+    },
+    outlined: {
+      activeLabelTop: Math.ceil(
+        (-BASELINE_TEXT_INPUT_PADDING_VERTICAL + OUTLINED_LINE_HEIGHT_DELTA) *
+          fontScale
+      ),
+      inactiveLabelTop: Math.ceil(
+        (BASELINE_INACTIVE_LABEL_OFFSET - OUTLINED_LINE_HEIGHT_DELTA) *
+          fontScale
+      ),
+      multilinePaddingTop: Math.ceil(
+        (BASELINE_INACTIVE_LABEL_OFFSET -
+          BASELINE_TEXT_INPUT_PADDING_VERTICAL -
+          OUTLINED_LINE_HEIGHT_DELTA) *
+          fontScale
+      ),
+    },
+  };
+};
+
+export type TextInputMetrics = ReturnType<typeof getTextInputMetrics>;
