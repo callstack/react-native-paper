@@ -345,14 +345,14 @@ import {
 
 const Stack = createNativeStackNavigator();
 
-const { LightTheme } = adaptNavigationTheme({
+const { LightTheme: NavigationLightTheme } = adaptNavigationTheme({
   reactNavigationLight: DefaultTheme,
 });
 
 export default function App() {
   return (
     <PaperProvider theme={PaperLightTheme}>
-      <NavigationContainer theme={LightTheme}>
+      <NavigationContainer theme={NavigationLightTheme}>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Details" component={DetailsScreen} />
@@ -597,7 +597,25 @@ The dark theme adds a white overlay with opacity depending on elevation of surfa
 
 If you don't use a custom theme, Paper will automatically change between the default theme and the default dark theme, depending on device settings.
 
-Otherwise, your custom theme will need to handle it manually, using React Native's [Appearance API](https://reactnative.dev/docs/appearance).
+`PaperProvider` follows the device setting only when it gets no `theme`. With a `theme`, it uses `DarkTheme` only when that theme sets `dark: true`, so a theme that only changes colors, such as `theme={{ colors: { primary: '#8E24AA' } }}`, stays light in dark mode. A nested `PaperProvider` with such a theme stays light inside a dark app too, because it doesn't read the theme above it. To follow the device setting with a custom theme, pick `LightTheme` or `DarkTheme` with React Native's [`useColorScheme()`](https://reactnative.dev/docs/usecolorscheme) and spread your colors over it:
+
+```tsx
+import * as React from 'react';
+import { useColorScheme } from 'react-native';
+import { DarkTheme, LightTheme, PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+export default function Main() {
+  const base = useColorScheme() === 'dark' ? DarkTheme : LightTheme;
+  const theme = { ...base, colors: { ...base.colors, primary: '#8E24AA' } };
+
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
 
 ## Gotchas
 

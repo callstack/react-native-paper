@@ -6,7 +6,7 @@ title: Migration from Paper 5.x to 6.x
 
 ### Animations
 
-React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-reanimated/) for most animations instead of the built-in React Native `Animated` API. So make sure to install `react-native-reanimated` 4.3.0 or later and `react-native-worklets` 0.8.1 or later, then complete the Reanimated setup. See the [getting started guide](./getting-started) for Expo and Community CLI instructions.
+React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-reanimated/) for most animations instead of the built-in React Native `Animated` API. So make sure to install the `react-native-reanimated` and `react-native-worklets` pair that matches your React Native version, as listed in [Reanimated and Worklets versions](./getting-started#reanimated-and-worklets-versions), then complete the Reanimated setup. See the [getting started guide](./getting-started) for Expo and Community CLI instructions.
 
 The following props now accept animated styles returned from `useAnimatedStyle`. They no longer accept `Animated.Value` or `Animated.AnimatedInterpolation` where these were previously supported:
 
@@ -40,6 +40,25 @@ const MyComponent = () => {
 
   return <Card style={animatedStyle}>Button</Card>;
 };
+```
+
+### `PaperProvider` is required
+
+In 5.x, most components rendered without a `PaperProvider` and used the default theme. In 6.x, most of them, such as `Text`, `Button`, `IconButton`, `TextInput`, `Icon` and `ProgressBar`, throw `useLocale must be used within a LocaleProvider` outside it. Wrap your app in `PaperProvider`, as [Usage](./getting-started#usage) in the getting started guide shows.
+
+`PaperProvider` also provides the safe area context, so outside it, `Appbar.Header` throws `No safe area value available` first, unless your app renders its own `SafeAreaProvider`.
+
+Tests that render a Paper component on its own fail the same way. Render it inside `PaperProvider`, for example with the `wrapper` option of React Native Testing Library:
+
+```tsx
+import { render, screen } from '@testing-library/react-native';
+import { PaperProvider } from 'react-native-paper';
+
+test('shows the greeting', async () => {
+  await render(<Greeting />, { wrapper: PaperProvider });
+
+  expect(screen.getByText('Hello')).toBeOnTheScreen();
+});
 ```
 
 ### Reduce motion
@@ -139,6 +158,7 @@ Components built on `TouchableRipple` that extend its props still take `rippleCo
 
 Hardcoded default test IDs have been removed for the components listed below:
 
+- `AnimatedFAB`: `animated-fab`
 - `Appbar.Content`: `appbar-content`
 - `Appbar.Header`: `appbar-header`
 - `BottomNavigation`: `bottom-navigation`
@@ -147,9 +167,7 @@ Hardcoded default test IDs have been removed for the components listed below:
 - `Card`: `card`
 - `Chip`: `chip`
 - `Drawer.CollapsedItem`: `drawer-collapsed-item`
-- `FAB`: `floating-action-button`
-- `FAB.Extended`: `extended-floating-action-button`
-- `FAB.Menu`: `floating-action-button-menu`
+- `FAB`: `fab`, also on the buttons of `FAB.Group`
 - `IconButton`: `icon-button`
 - `Menu`: `menu`
 - `Menu.Item`: `menu-item`
@@ -157,8 +175,9 @@ Hardcoded default test IDs have been removed for the components listed below:
 - `ProgressBar`: `progress-bar`
 - `Searchbar`: `search-bar`
 - `Surface`: `surface`
+- `TextInput`: `text-input-flat` or `text-input-outlined`, by `mode`
 
-You can specify a `testID` explicitly to restore each component's own test ID.
+You can specify a `testID` explicitly to restore each component's own test ID. On `TextInput`, the `testID` goes to the input. You can also find a field by its label, for example with `getByLabelText`.
 
 These components used to also derive test IDs for internal, implementation-only elements by appending a suffix to the `testID` prop (e.g. `${testID}-container`, `${testID}-icon`, `${testID}-outline`). They have been removed entirely.
 
@@ -217,6 +236,8 @@ In JavaScript, the old names import as `undefined` without an error: spreading `
 
 Watch for `DarkTheme` in particular. 5.x had no `DarkTheme` export, so in a JavaScript app an import of it was `undefined` and Paper used its default theme instead. In 6.x the same import is the Material Design 3 dark theme, so the app can look different after the upgrade. React Navigation and `adaptNavigationTheme` also use the names `LightTheme`, `DarkTheme` and `DefaultTheme`, so when a file uses both, import Paper's themes under other names, e.g. `LightTheme as PaperLightTheme`.
 
+If your app builds its Android dynamic colors from another library's scheme, such as `@pchmn/expo-material3-theme` (`{ ...LightTheme, colors: theme.light }`), it still type checks, but the scheme has none of the `*Fixed` roles that 6.x adds (see [Color roles](#color-roles)), so those roles keep Paper's default colors instead of the system's. Paper 6 has its own Android dynamic themes, `DynamicLightTheme` and `DynamicDarkTheme`, which map those roles to the system colors too. Use them instead, and `isDynamicColorSupported` to pick your own theme on devices without dynamic colors. See [Sync dynamic colors with system colors](./theming#sync-dynamic-colors-with-system-colors).
+
 The theme types were renamed too:
 
 - **`MD3Theme`** → **`Theme`**
@@ -253,6 +274,36 @@ If you import it from Paper's type declarations instead, the path changed:
 +const color = Palette.tertiary70;
 ```
 
+#### Color roles
+
+The 6.x color scheme has new roles, and three 5.x roles were removed:
+
+| Roles                                                                                                                           | In 6.x                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `surfaceContainerLowest`, `surfaceContainerLow`, `surfaceContainer`, `surfaceContainerHigh`, `surfaceContainerHighest`          | Added                                                       |
+| `surfaceDim`, `surfaceBright`                                                                                                   | Added                                                       |
+| `primaryFixed`, `primaryFixedDim`, `onPrimaryFixed`, `onPrimaryFixedVariant`, and the same roles for `secondary` and `tertiary` | Added                                                       |
+| `stateLayerPressed`                                                                                                             | Added: the default ripple color                             |
+| `surfaceDisabled`, `onSurfaceDisabled`                                                                                          | Removed: disabled states use `onSurface` at a lower opacity |
+| `backdrop`                                                                                                                      | Removed: the `Modal` overlay uses `scrim` at 32% opacity    |
+
+Components read the new roles: for example, a filled `TextInput` and the `Switch` track use `surfaceContainerHighest`, `Dialog` and `Searchbar` use `surfaceContainerHigh`, and the `BottomNavigation` bar uses `surfaceContainer`. `PaperProvider` fills a role your theme doesn't set from `LightTheme` or `DarkTheme`, without a warning, so in an app with its own 5.x color scheme these components take Paper's default colors. Regenerate your scheme with every role, for example with the [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/), or add the new roles to it.
+
+#### Color types
+
+Theme colors are typed `ColorValue` instead of `string`, because the colors of `DynamicLightTheme` and `DynamicDarkTheme` are `PlatformColor` values. So passing one to a prop or a variable typed `string` fails with `TS2322`. Type your own props and variables as `ColorValue`:
+
+```diff
++import type { ColorValue } from 'react-native';
++
+ type StatusDotProps = {
+-  color: string;
++  color: ColorValue;
+ };
+```
+
+If a library prop only takes a `string`, check which theme you pass. The colors of `LightTheme`, `DarkTheme` and themes built from them are strings at runtime, so you can cast them, e.g. `theme.colors.error as string`. The colors of `DynamicLightTheme` and `DynamicDarkTheme` are objects on Android 12 and later, so pass such a prop a color of your own instead.
+
 #### `roundness`
 
 The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider`, `ThemeProvider` or a component, or typed as `Theme`, but not in an untyped variable that also holds other theme keys.
@@ -264,6 +315,7 @@ In 5.x, each of these components multiplied `roundness` by a fixed number, and t
 | `extraSmall`     | 4       | 1              | `Menu`, `Snackbar`, `Tooltip`                       |
 | `small`          | 8       | 2              | `Chip`                                              |
 | `medium`         | 12      | 3              | `Card`                                              |
+| `large`          | 16      | 4              | `FAB` and `FAB.Extended` at the default `size`      |
 | `largeIncreased` | 20      | 5              | `SegmentedButtons`                                  |
 | `extraLarge`     | 28      | 7              | `Dialog`, `Drawer.Item`, `Searchbar` (`mode="bar"`) |
 
@@ -546,6 +598,15 @@ e.g.:
 
 `Avatar.Text` uses the `titleMedium` type style: a font weight of 500 and a letter spacing of 0.15. Its font size and line height still scale with `size`.
 
+### Badge
+
+`Badge` no longer takes `size`. Without children it is a 6dp dot, and with children a 16dp pill. In 5.x both were 20dp by default. TypeScript reports `size`, and in JavaScript it's ignored. There is no replacement for another size, so remove the prop:
+
+```diff
+-<Badge size={24}>3</Badge>
++<Badge>3</Badge>
+```
+
 ### Banner
 
 Showing and hiding use the `standardDecelerate` and `standardAccelerate` easing curves instead of ease-in-out.
@@ -617,6 +678,8 @@ e.g.:
 + </View>
 </Surface>
 ```
+
+TypeScript reports `backgroundColor` and the border radius keys only in a style object written inline in `style`. A style kept in a variable, such as one typed `ViewStyle` or a `StyleSheet.create` entry that also sets other keys, type checks, and `Surface` ignores its `backgroundColor` without a warning, and on Android and iOS its border radius too. The web still applies that border radius. Since TypeScript won't find these, search your app's `Surface` styles for them and move them to the props.
 
 ### Modal
 
@@ -1212,6 +1275,20 @@ const theme = {
 <TextInput theme={theme} style={{ fontSize: 16, color: '#1C1B1F' }} />;
 ```
 
+#### Layout styles
+
+In 5.x, `TextInput` applied `height` and the text styles to the input, and the rest of `style`, such as `width`, `margin*`, `alignSelf` and `flex`, to the field around it. In 6.x the whole `style` goes to the input inside the field, and there is no prop for the field's style. So `width` sizes the input instead of the field, and `marginBottom` adds space inside the field instead of below it. `height` sets the height of the input: the field grows to fit a taller input, but it is never shorter than 56dp. Move the layout styles to a `View` around the `TextInput`:
+
+```tsx
+// Before (v5)
+<TextInput label="Email" style={{ width: 250, marginBottom: 16 }} />
+
+// After (v6)
+<View style={{ width: 250, marginBottom: 16 }}>
+  <TextInput label="Email" />
+</View>
+```
+
 ### Button
 
 `Button` is modernized to Material Design 3 Expressive. The button modes were
@@ -1258,6 +1335,19 @@ see the appearance changes below.
 
 The container now also morphs its corner while pressed. Pass
 `animateShape={false}` to opt out.
+
+`style` goes to the container, so a `height` there doesn't resize the button.
+With `style={{ height: 56 }}`, the container is 56dp tall, but the label, the
+ripple and the pressable area keep the 40dp of the `small` size at its top, the
+bottom of the container doesn't respond to presses, and the corner stays 20dp
+instead of a full pill. Pick a `size` instead: `extra-small` is **32dp** tall,
+`small` **40dp**, `medium` **56dp**, `large` **96dp** and `extra-large`
+**136dp**. A larger size also has more padding and a larger label and icon.
+
+```diff
+-<Button style={{ height: 56 }}>Save</Button>
++<Button size="medium">Save</Button>
+```
 
 #### Toggle
 
@@ -1310,7 +1400,9 @@ a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
 - **Border color and width** are no longer set through `style`. An inner view
   draws the outline, so `borderColor` in `style` does not recolor it, and
   `borderWidth` adds a second border around it. To recolor the outline,
-  override `theme.colors.outlineVariant`.
+  override `theme.colors.outlineVariant`. Its width follows `size`: **1dp**
+  up to `medium`, **2dp** at `large` and **3dp** at `extra-large`. No prop or
+  theme value changes it, so drop `borderWidth`.
 - **Animated styles** must come from Reanimated. A React Native
   `Animated.Value` in `style` is not applied.
 
@@ -1334,7 +1426,8 @@ a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
 
 The content takes `minHeight`, `paddingStart` and `paddingEnd` from `size`.
 To change them in `contentStyle`, set these same properties. On Android and
-iOS, `padding` and `paddingHorizontal` do not override them, and a `height`
+iOS, `padding`, `paddingHorizontal`, `paddingLeft` and `paddingRight` do not
+override them, and on the web `paddingHorizontal` doesn't either. A `height`
 below `minHeight` has no effect.
 
 ```tsx
