@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PixelRatio, Pressable, StyleSheet, View } from 'react-native';
+import { PixelRatio, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableProps,
@@ -25,6 +25,7 @@ import hasTouchHandler, {
 } from '../../utils/hasTouchHandler';
 import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import { Pressable } from '../TouchableRipple/Pressable';
 import Text from '../Typography/Text';
 
 export type Props = PressableProps & {

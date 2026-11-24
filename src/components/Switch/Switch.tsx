@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Platform,
-  Pressable,
   StyleSheet,
   type StyleProp,
   View,
@@ -33,6 +32,7 @@ import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import { useFocusRing } from '../../utils/useFocusRing';
 import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import Icon, { type IconSource } from '../Icon';
+import { Pressable } from '../TouchableRipple/Pressable';
 
 export type Props = {
   /**
