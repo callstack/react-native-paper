@@ -12,7 +12,13 @@ import {
 import color from 'color';
 
 import PaperProvider from '../../core/PaperProvider';
-import { fireEvent, render, screen, userEvent } from '../../test-utils';
+import {
+  fireEvent,
+  render,
+  screen,
+  transitionOf,
+  userEvent,
+} from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -846,9 +852,7 @@ describe('shape morph', () => {
       throw new Error('Expected the touchable to be wrapped in the clip view.');
     }
 
-    // Reanimated's Jest setup keeps CSS transitions out of `style`.
-    // eslint-disable-next-line no-restricted-syntax
-    return StyleSheet.flatten(clip.props.jestInlineStyle).transitionDuration;
+    return transitionOf(clip).transitionDuration;
   };
 
   it('runs on the fast spatial spring', async () => {
@@ -867,6 +871,56 @@ describe('shape morph', () => {
     );
 
     expect(transitionDuration()).toBe(0);
+  });
+
+  it('morphs the touchable inside the outline in step with the outline', async () => {
+    const { pressedRadius, outlineWidth } = getDimensions({
+      theme,
+      size: 'extra-large',
+    });
+
+    await render(
+      <IconButton
+        icon="camera"
+        mode="outlined"
+        size="extra-large"
+        testID="icon-button"
+        onPress={() => {}}
+      />
+    );
+    const touchable = screen.getByTestId('icon-button');
+    const clip = touchable.parent;
+
+    if (!clip) {
+      throw new Error('Expected the touchable to be wrapped in the clip view.');
+    }
+
+    expect(transitionOf(touchable)).toEqual(transitionOf(clip));
+
+    await fireEvent(touchable, 'pressIn');
+
+    expect(transitionOf(touchable)).toEqual(transitionOf(clip));
+    expect(clip).toHaveStyle({ borderRadius: pressedRadius });
+    expect(touchable).toHaveStyle({
+      borderRadius: pressedRadius - outlineWidth,
+    });
+  });
+
+  it('snaps the touchable corner too under reduce motion', async () => {
+    await render(
+      <PaperProvider reduceMotion="on">
+        <IconButton
+          icon="camera"
+          mode="outlined"
+          testID="icon-button"
+          onPress={() => {}}
+        />
+      </PaperProvider>
+    );
+
+    expect(
+      transitionOf(screen.getByTestId('icon-button')).transitionDuration
+    ).toBe(0);
   });
 });
 
