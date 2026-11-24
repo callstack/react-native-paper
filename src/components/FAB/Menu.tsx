@@ -40,6 +40,7 @@ import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { getRippleColorFromContent } from '../TouchableRipple/utils';
 
 export type MenuItemProps = {
   /**
@@ -381,6 +382,10 @@ const MenuItem = ({
             borderless
             onPress={onPress}
             focusRing="none"
+            // The press matches the hover and focus layers, as in `Button`.
+            rippleColor={getRippleColorFromContent({
+              contentColor: colors.content,
+            })}
             onFocus={(e) => {
               focusTarget.onFocus?.(e);
               setFocused(isKeyboardFocusEvent(e));

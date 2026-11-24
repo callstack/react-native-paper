@@ -14,12 +14,16 @@ import {
   jest,
 } from '@jest/globals';
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
+import color from 'color';
 import * as Reanimated from 'react-native-reanimated';
 
 import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
+import { tokens } from '../../theme/tokens';
 import FAB from '../FAB';
 import type { MenuItemProps } from '../FAB/Menu';
+import * as rippleUtils from '../TouchableRipple/utils';
 
 type BackHandlerStatic = typeof RNBackHandler & {
   mockPressBack(): void;
@@ -249,6 +253,30 @@ it('leaves the press of an item to the ripple, which the settings can turn off',
   await fireEvent(item, 'pressIn');
 
   expect(stateLayer).toHaveStyle({ opacity: 0 });
+});
+
+it('presses an item with a ripple in its content color', async () => {
+  const spy = jest.spyOn(rippleUtils, 'getTouchableRippleColors');
+
+  await render(
+    <FAB.Menu
+      expanded
+      onDismiss={jest.fn()}
+      trigger={{ icon: 'plus' }}
+      items={makeItems()}
+    />
+  );
+
+  expect(spy).toHaveBeenCalledWith(
+    expect.objectContaining({
+      rippleColor: color(String(LightTheme.colors.onPrimaryContainer))
+        .alpha(tokens.md.sys.state.opacity.pressed)
+        .rgb()
+        .string(),
+    })
+  );
+
+  spy.mockRestore();
 });
 
 it('calls item onPress when menu item is pressed', async () => {
