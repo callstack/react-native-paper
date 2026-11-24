@@ -1,0 +1,9 @@
+
+<svg width="36px" height="25px" viewBox="0 0 36 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="ic/arrowline-right-white" stroke="rgba(33, 0, 93, 1)" stroke-width="2">
+            <path d="M1.125,12.5 L34.875,12.5" id="Path"></path>
+            <polyline id="Path" points="23.625 1.13636364 34.875 12.5 23.625 23.8636364"></polyline>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="111px" height="10px" viewBox="0 0 111 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Ornament</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="3.33066907e-14%" y1="100%" x2="100%" y2="1.73457102e-30%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="rgba(33, 0, 93, 1)" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home---12-March-2019" transform="translate(-1271.000000, -7533.000000)">
+            <g id="7-Contact" transform="translate(0.000000, 7423.000000)">
+                <g id="BG">
+                    <g id="Ornament" transform="translate(1328.000000, 115.000000) rotate(-315.000000) translate(-1328.000000, -115.000000) translate(1289.000000, 76.000000)">
+                        <path d="M0.77734375,77.2226562 L73,5" id="Line" stroke="url(#linearGradient-1)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle id="Oval" fill="rgba(33, 0, 93, 1)" cx="73" cy="5" r="5"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
