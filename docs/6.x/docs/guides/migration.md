@@ -1531,6 +1531,8 @@ The colors at rest changed too. In 5.x, a `contained` or `contained-tonal` butto
 />
 ```
 
+`outlined` keeps its name, but its outline uses `outlineVariant` instead of `outline`, and keeps it when disabled instead of switching to `surfaceDisabled`. A theme that set `colors.outline` to restyle outlined icon buttons sets `outlineVariant` now.
+
 #### Size
 
 `size` is a named scale: `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`, the same names as `Button`. It defaults to `'small'`, which still uses a 24dp icon.
@@ -1626,6 +1628,19 @@ For `filled`, the default and toggle-on containers use `primary`. Toggle-off (`s
 ```
 
 Neither keeps the 5.x look, a `surfaceVariant` container with a `primary` icon: `filled` draws `primary` at rest and `surfaceContainer` when toggled off, so pass `containerColor` and `iconColor` as in [Mode names](#mode-names), on a toggle only while it is off.
+
+For `tonal`, toggle-on draws `secondary` with an `onSecondary` icon, and toggle-off draws the default `secondaryContainer` with an `onSecondaryContainer` icon, the colors a selected 5.x `contained-tonal` button drew. So a 5.x tonal toggle that is off now looks like one that was on. To keep the 5.x colors, pass them for both states:
+
+```tsx
+<IconButton
+  icon="bell"
+  mode="tonal"
+  selected={isOn}
+  containerColor={isOn ? colors.secondaryContainer : colors.surfaceVariant}
+  iconColor={isOn ? colors.onSecondaryContainer : colors.onSurfaceVariant}
+  onPress={toggle}
+/>
+```
 
 #### `Card.Title` `right` props
 
