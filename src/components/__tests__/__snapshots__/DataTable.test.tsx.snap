@@ -367,7 +367,7 @@ exports[`DataTable.Header renders data table header 1`] = `
         "paddingHorizontal": 16,
       },
       {
-        "borderBottomColor": "rgba(231, 224, 236, 1)",
+        "borderBottomColor": "rgba(202, 196, 208, 1)",
       },
       undefined,
     ]

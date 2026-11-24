@@ -544,6 +544,8 @@ e.g.:
 />
 ```
 
+`Avatar.Text` uses the `titleMedium` type style: a font weight of 500 and a letter spacing of 0.15. Its font size and line height still scale with `size`.
+
 ### Banner
 
 Showing and hiding use the `standardDecelerate` and `standardAccelerate` easing curves instead of ease-in-out.
@@ -552,6 +554,10 @@ Showing and hiding use the `standardDecelerate` and `standardAccelerate` easing 
 
 - `DataTable.Title` text has a letter spacing of 0.5, and its sort icon rotates with the `standard` easing curve instead of ease-in-out.
 - `DataTable.Pagination` labels use the `bodySmall` type style: a line height of 16 and a letter spacing of 0.4.
+- `DataTable.Cell` text uses the `bodyMedium` type style: a line height of 20 and a letter spacing of 0.25.
+- `DataTable.Header` and `DataTable.Row` draw their bottom border with `theme.colors.outlineVariant` instead of `theme.colors.surfaceVariant`.
+
+`Avatar.Text`, `DataTable.Title`, `DataTable.Cell` and `DataTable.Pagination` use the plain font family instead of `theme.fonts.default`. If you configure a custom brand font, these texts no longer use it.
 
 ### Tooltip
 
