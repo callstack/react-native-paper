@@ -12,6 +12,13 @@ export type ResolvedColors = {
   content: ColorValue;
 };
 
+// A removed 6.0-alpha variant (`tonalPrimary`, `surface`, ...), or any other
+// value that isn't a current token key, used to crash here instead of
+// falling back. Pure: the component warns, in an effect, when this changes
+// the value.
+export const resolveVariant = (variant: Variant): Variant =>
+  Tokens.variants[variant] ? variant : 'primaryContainer';
+
 /**
  * Resolve container + content colors. Explicit overrides win; when only
  * `containerColor` is set, the content color is derived via
@@ -28,7 +35,7 @@ export const resolveColors = ({
   containerColor?: ColorValue;
   contentColor?: ColorValue;
 }): ResolvedColors => {
-  const roles = Tokens.variants[variant];
+  const roles = Tokens.variants[resolveVariant(variant)];
   const container = containerColor ?? theme.colors[roles.container];
   const content =
     contentColor ??

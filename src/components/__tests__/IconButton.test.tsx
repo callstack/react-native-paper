@@ -25,6 +25,7 @@ import { tokens } from '../../theme/tokens';
 import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import IconButton from '../IconButton/IconButton';
 import { IconButtonTokens } from '../IconButton/tokens';
+import type { Mode, Size } from '../IconButton/tokens';
 import {
   getDimensions,
   getIconButtonColor,
@@ -302,6 +303,50 @@ it('keeps handler-less content centered with custom container style', async () =
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  });
+});
+
+describe('removed 5.x prop values', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('falls back instead of crashing on a removed mode value', async () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(
+      <IconButton
+        icon="camera"
+        mode={'contained-tonal' as unknown as Mode}
+        onPress={() => {}}
+      />
+    );
+
+    expect(
+      getIconButtonColor({ theme, mode: 'contained-tonal' as unknown as Mode })
+    ).toEqual(getIconButtonColor({ theme, mode: 'standard' }));
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining('mode "contained-tonal" is not valid')
+    );
+  });
+
+  it('falls back instead of crashing on a numeric size value', async () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(
+      <IconButton
+        icon="camera"
+        size={24 as unknown as Size}
+        onPress={() => {}}
+      />
+    );
+
+    expect(getDimensions({ theme, size: 24 as unknown as Size })).toEqual(
+      getDimensions({ theme, size: 'small' })
+    );
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining('size "24" is not valid')
+    );
   });
 });
 

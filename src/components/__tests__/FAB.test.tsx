@@ -17,6 +17,7 @@ import { getAnimatedStyle } from 'react-native-reanimated';
 import PaperProvider from '../../core/PaperProvider';
 import { act, render, screen } from '../../test-utils';
 import FAB from '../FAB';
+import type { Variant } from '../FAB/tokens';
 import Tooltip from '../Tooltip/Tooltip';
 
 jest.mock('react-native-reanimated', () => {
@@ -68,6 +69,22 @@ it('renders FAB with tertiaryContainer variant', async () => {
     await render(<FAB icon="plus" variant="tertiaryContainer" />)
   ).toJSON();
   expect(tree).toMatchSnapshot();
+});
+
+it('falls back instead of crashing on a removed variant value', async () => {
+  const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+  await render(
+    <FAB
+      icon="plus"
+      variant={'tonalPrimary' as unknown as Variant}
+      onPress={() => {}}
+    />
+  );
+
+  expect(warnSpy).toHaveBeenCalledWith(
+    expect.stringContaining('variant "tonalPrimary" is not valid')
+  );
 });
 
 it('renders FAB with aria-label', async () => {

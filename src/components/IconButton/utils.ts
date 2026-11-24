@@ -27,6 +27,12 @@ export type IconButtonDimensions = {
   pressedRadius: number;
 };
 
+// 5.x's `contained` / `contained-tonal` modes, or any other value that isn't
+// a current token key, used to crash here instead of falling back. Pure: the
+// component warns, in an effect, when this changes the value.
+export const resolveMode = (mode: Mode): Mode =>
+  IconButtonTokens.modes[mode] ? mode : 'standard';
+
 const colorSetFor = (mode: Mode, selected: boolean | undefined): ColorSet => {
   if (selected === true) {
     return IconButtonTokens.modes[mode].selected;
@@ -73,9 +79,10 @@ export const getIconButtonColor = ({
   customContainerColor?: ColorValue;
   outlineWidth?: number;
 }): IconButtonColors => {
+  const resolvedMode = resolveMode(mode);
   const iconOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
   const usesDisabledContainer =
-    Boolean(disabled) && hasDisabledContainer(mode, selected);
+    Boolean(disabled) && hasDisabledContainer(resolvedMode, selected);
 
   if (usesDisabledContainer) {
     return {
@@ -88,7 +95,7 @@ export const getIconButtonColor = ({
     };
   }
 
-  const set = colorSetFor(mode, selected);
+  const set = colorSetFor(resolvedMode, selected);
 
   return {
     iconColor: disabled
@@ -130,6 +137,12 @@ export const resolveShapeToken = ({
   return inverted ? 'full' : spec.squareShape;
 };
 
+// A numeric 5.x `size`, or any other value that isn't a current token key,
+// used to crash here instead of falling back. Pure: the component warns, in
+// an effect, when this changes the value.
+export const resolveSize = (size: Size): Size =>
+  IconButtonTokens.sizes[size] ? size : 'small';
+
 export const getDimensions = ({
   theme,
   size = 'small',
@@ -145,7 +158,8 @@ export const getDimensions = ({
   selected?: boolean;
   iconSize?: number;
 }): IconButtonDimensions => {
-  const spec = IconButtonTokens.sizes[size];
+  const resolvedSize = resolveSize(size);
+  const spec = IconButtonTokens.sizes[resolvedSize];
   const padding = spec.widths[width];
   const resolvedIcon = iconSize ?? spec.icon;
   const height = spec.containerHeight;
@@ -154,13 +168,13 @@ export const getDimensions = ({
   const containerWidth = spec.icon + padding.leading + padding.trailing;
 
   const restingToken = resolveShapeToken({
-    size,
+    size: resolvedSize,
     shape,
     selected,
     pressed: false,
   });
   const pressedToken = resolveShapeToken({
-    size,
+    size: resolvedSize,
     shape,
     selected,
     pressed: true,
