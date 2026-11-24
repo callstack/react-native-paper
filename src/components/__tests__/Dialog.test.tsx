@@ -1,22 +1,23 @@
+import type { ComponentProps } from 'react';
 import {
   Text,
   StyleSheet,
   Platform,
   BackHandler as RNBackHandler,
 } from 'react-native';
-import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { act, userEvent } from '@testing-library/react-native';
 
 import Dialog from '../../components/Dialog/Dialog';
+import DialogActions from '../../components/Dialog/DialogActions';
 import { render, screen } from '../../test-utils';
 import Button from '../Button/Button';
 import Portal from '../Portal/Portal';
 
-interface BackHandlerStatic extends RNBackHandlerStatic {
+type BackHandlerStatic = typeof RNBackHandler & {
   mockPressBack(): void;
-}
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 const BackHandler = RNBackHandler as BackHandlerStatic;
@@ -26,12 +27,10 @@ afterEach(() => {
 });
 
 describe('Dialog', () => {
-  it('renders passed children', async () => {
+  it('should render passed content', async () => {
     await render(
       <Portal.Host>
-        <Dialog visible testID="dialog">
-          <Text>This is simple dialog</Text>
-        </Dialog>
+        <Dialog visible testID="dialog" content="This is simple dialog" />
       </Portal.Host>
     );
 
@@ -45,9 +44,12 @@ describe('Dialog', () => {
 
     await render(
       <Portal.Host>
-        <Dialog visible onDismiss={onDismiss} dismissable>
-          <Text>This is simple dialog</Text>
-        </Dialog>
+        <Dialog
+          visible
+          onDismiss={onDismiss}
+          dismissable
+          content="This is simple dialog"
+        />
       </Portal.Host>
     );
 
@@ -70,9 +72,8 @@ describe('Dialog', () => {
           onDismiss={onDismiss}
           dismissable={false}
           overlayTestID="backdrop"
-        >
-          <Text>This is simple dialog</Text>
-        </Dialog>
+          content="This is simple dialog"
+        />
       </Portal.Host>
     );
 
@@ -100,9 +101,8 @@ describe('Dialog', () => {
           dismissable={false}
           overlayTestID="backdrop"
           dismissableBackButton
-        >
-          <Text>This is simple dialog</Text>
-        </Dialog>
+          content="This is simple dialog"
+        />
       </Portal.Host>
     );
 
@@ -124,19 +124,111 @@ describe('Dialog', () => {
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('applies top margin to the first child', async () => {
+  it('does not add a top margin to a title-first dialog', async () => {
     await render(
       <Portal.Host>
-        <Dialog visible>
-          <Dialog.Title testID="dialog-content">
-            <Text>Test Dialog Content</Text>
-          </Dialog.Title>
-        </Dialog>
+        <Dialog
+          visible
+          title={<Text testID="dialog-title">This is simple dialog</Text>}
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    const element = screen.getByTestId('dialog-title').parent;
+
+    expect(element).toHaveStyle({
+      marginTop: 24,
+    });
+  });
+
+  it('adds a top padding to an icon-first dialog', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          icon={() => <Text testID="dialog-icon">Icon</Text>}
+          title="Alert"
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    const element = screen.getByTestId('dialog-icon').parent;
+
+    expect(element).toHaveStyle({ paddingTop: 24 });
+  });
+
+  it('does not add a top margin to the content of an icon dialog without a title', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          icon={() => <Text>Icon</Text>}
+          content="This is simple dialog"
+          contentProps={{ testID: 'dialog-content' }}
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('dialog-content')).not.toHaveStyle({
+      marginTop: 24,
+    });
+  });
+
+  it('centers the title of a dialog with an icon', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          icon={() => <Text>Icon</Text>}
+          title="Alert"
+          titleProps={{ testID: 'dialog-title' }}
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('dialog-title')).toHaveStyle({
+      textAlign: 'center',
+    });
+  });
+
+  it('passes titleProps to the title', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          title="Alert"
+          titleProps={{
+            testID: 'dialog-title',
+            numberOfLines: 2,
+            style: { color: 'red' },
+          }}
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    const title = screen.getByTestId('dialog-title');
+
+    expect(title).toHaveProp('numberOfLines', 2);
+    expect(title).toHaveStyle({ color: 'red' });
+  });
+
+  it('should keep the bottom padding on a content-first dialog', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          content={<Text>Test Dialog Content</Text>}
+          contentProps={{ testID: 'dialog-content' }}
+        />
       </Portal.Host>
     );
 
     expect(screen.getByTestId('dialog-content')).toHaveStyle({
-      marginTop: 24,
+      paddingBottom: 24,
     });
   });
 
@@ -145,10 +237,7 @@ describe('Dialog', () => {
 
     await render(
       <Portal.Host>
-        <Dialog visible>
-          <Dialog.Title>Alert</Dialog.Title>
-          <Text>This is simple dialog</Text>
-        </Dialog>
+        <Dialog visible title="Alert" content="This is simple dialog" />
       </Portal.Host>
     );
 
@@ -158,9 +247,12 @@ describe('Dialog', () => {
   it('uses aria-label over the title as the accessible name', async () => {
     await render(
       <Portal.Host>
-        <Dialog visible aria-label="Confirm deletion">
-          <Dialog.Title>Alert</Dialog.Title>
-        </Dialog>
+        <Dialog
+          visible
+          aria-label="Confirm deletion"
+          title="Alert"
+          content="This is simple dialog"
+        />
       </Portal.Host>
     );
 
@@ -170,15 +262,235 @@ describe('Dialog', () => {
     );
     expect(screen.queryByLabelText('Alert')).not.toBeOnTheScreen();
   });
+
+  it('labels the dialog by a non-string title on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          title={<Text>Custom title</Text>}
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    // No `aria-label` fallback exists for a node title, so the name can only
+    // come from `aria-labelledby` pointing at the rendered title.
+    expect(screen.getByLabelText('Custom title')).toHaveProp('role', 'dialog');
+  });
+
+  it('prefers an explicit aria-labelledby over the title on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Portal.Host>
+        <Text nativeID="external-heading">External heading</Text>
+        <Dialog
+          visible
+          aria-labelledby="external-heading"
+          title={<Text>Custom title</Text>}
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('External heading')).toHaveProp(
+      'role',
+      'dialog'
+    );
+    expect(screen.queryByLabelText('Custom title')).not.toBeOnTheScreen();
+  });
+
+  it('prefers aria-label over the title when both are set on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          aria-label="Confirm deletion"
+          title={<Text>Custom title</Text>}
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('Confirm deletion')).toHaveProp(
+      'role',
+      'dialog'
+    );
+    expect(screen.queryByLabelText('Custom title')).not.toBeOnTheScreen();
+  });
+
+  it('prefers an explicit aria-labelledby over a string title on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Portal.Host>
+        <Text nativeID="external-heading">External heading</Text>
+        <Dialog
+          visible
+          aria-labelledby="external-heading"
+          title="Alert"
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('External heading')).toHaveProp(
+      'role',
+      'dialog'
+    );
+  });
+
+  it('ignores aria-labelledby and uses a string title on native', async () => {
+    jest.replaceProperty(Platform, 'OS', 'ios');
+
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          aria-labelledby="external-heading"
+          title="Alert"
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('Alert')).toHaveProp('role', 'dialog');
+  });
+
+  it('prefers aria-labelledby over aria-label on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+
+    await render(
+      <Portal.Host>
+        <Text nativeID="external-heading">External heading</Text>
+        <Dialog
+          visible
+          aria-label="Confirm deletion"
+          aria-labelledby="external-heading"
+          title="Alert"
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('External heading')).toHaveProp(
+      'role',
+      'dialog'
+    );
+  });
+
+  it('ignores aria-labelledby and uses aria-label on native', async () => {
+    jest.replaceProperty(Platform, 'OS', 'ios');
+
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          aria-label="Confirm deletion"
+          aria-labelledby="external-heading"
+          title="Alert"
+          content="This is simple dialog"
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('Confirm deletion')).toHaveProp(
+      'role',
+      'dialog'
+    );
+    expect(screen.queryByLabelText('Alert')).not.toBeOnTheScreen();
+  });
+
+  it('uses the title as aria-label on native', async () => {
+    jest.replaceProperty(Platform, 'OS', 'ios');
+
+    await render(
+      <Portal.Host>
+        <Dialog visible title="Alert" content="This is simple dialog" />
+      </Portal.Host>
+    );
+
+    expect(screen.getByLabelText('Alert')).toHaveProp('role', 'dialog');
+  });
+
+  it('should render a content', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          content="Content"
+          actions={[
+            <Button key="ok" onPress={jest.fn()}>
+              Ok
+            </Button>,
+          ]}
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByText('Content')).toBeOnTheScreen();
+  });
+
+  it('should render string content in a scroll area', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          content="Scrollable content"
+          scrollable
+          scrollAreaProps={{ testID: 'dialog-scroll-area' }}
+          scrollViewProps={{ testID: 'dialog-scroll-view' }}
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('dialog-scroll-area')).toBeOnTheScreen();
+    expect(screen.getByTestId('dialog-scroll-view')).toBeOnTheScreen();
+    expect(screen.getByText('Scrollable content')).toBeOnTheScreen();
+  });
+
+  it('should render passed action', async () => {
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          content="This is simple dialog"
+          actions={[
+            <Button key="cancel" onPress={() => jest.fn()} testID="cancel-btn">
+              Cancel
+            </Button>,
+          ]}
+        />
+      </Portal.Host>
+    );
+
+    expect(screen.getByTestId('cancel-btn')).toBeOnTheScreen();
+  });
 });
 
 describe('DialogActions', () => {
-  it('renders passed children', async () => {
+  it('should render passed actions', async () => {
     await render(
-      <Dialog.Actions>
-        <Button testID="button-cancel">Cancel</Button>
-        <Button testID="button-ok">Ok</Button>
-      </Dialog.Actions>
+      <Portal.Host>
+        <Dialog
+          visible
+          testID="dialog"
+          content="This is simple dialog"
+          actions={[
+            <Button key="cancel" testID="button-cancel">
+              Cancel
+            </Button>,
+            <Button key="ok" testID="button-ok">
+              Ok
+            </Button>,
+          ]}
+        />
+      </Portal.Host>
     );
 
     expect(screen.getByTestId('button-cancel')).toBeOnTheScreen();
@@ -186,37 +498,84 @@ describe('DialogActions', () => {
   });
 
   it('applies default styles', async () => {
+    // The actions row isn't reachable through `Dialog`, so this renders the
+    // internal part directly.
     await render(
-      <Dialog.Actions testID="dialog-actions">
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
-      </Dialog.Actions>
+      <DialogActions testID="dialog-actions">
+        <Button testID="button-cancel">Cancel</Button>
+        <Button testID="button-ok">Ok</Button>
+      </DialogActions>
     );
 
     const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
 
     expect(dialogActionsContainer).toHaveStyle({
       paddingBottom: 24,
       paddingHorizontal: 24,
+      columnGap: 8,
     });
-    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
-    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
   });
 
-  it('applies custom styles', async () => {
+  it('does not inject button props into actions', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
     await render(
-      <Dialog.Actions testID="dialog-actions">
-        <Button style={styles.spacing}>Cancel</Button>
-        <Button style={styles.noSpacing}>Ok</Button>
-      </Dialog.Actions>
+      <Portal.Host>
+        <Dialog
+          visible
+          content="This is simple dialog"
+          actions={[
+            <ProbeButton key="cancel">Cancel</ProbeButton>,
+            <ProbeButton key="ok">Ok</ProbeButton>,
+          ]}
+        />
+      </Portal.Host>
     );
 
-    const dialogActionsContainer = screen.getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
+    const [cancelButtonProps] = buttonProps.mock.calls[0];
+    const [okButtonProps] = buttonProps.mock.calls[1];
 
-    expect(dialogActionButtons[0]).toHaveStyle({ margin: 10 });
-    expect(dialogActionButtons[1]).toHaveStyle({ margin: 0 });
+    expect(cancelButtonProps).not.toHaveProperty('compact');
+    expect(cancelButtonProps).not.toHaveProperty('uppercase');
+    expect(okButtonProps).not.toHaveProperty('compact');
+    expect(okButtonProps).not.toHaveProperty('uppercase');
+  });
+
+  it('should not override custom button styles', async () => {
+    const buttonProps = jest.fn();
+    const ProbeButton = (props: ComponentProps<typeof Button>) => {
+      buttonProps(props);
+
+      return <Button {...props} />;
+    };
+
+    await render(
+      <Portal.Host>
+        <Dialog
+          visible
+          content="This is simple dialog"
+          actions={[
+            <ProbeButton key="cancel" style={styles.spacing}>
+              Cancel
+            </ProbeButton>,
+            <ProbeButton key="ok" style={styles.noSpacing}>
+              Ok
+            </ProbeButton>,
+          ]}
+        />
+      </Portal.Host>
+    );
+
+    const [cancelButtonProps] = buttonProps.mock.calls[0];
+    const [okButtonProps] = buttonProps.mock.calls[1];
+
+    expect(cancelButtonProps).toHaveProperty('style', styles.spacing);
+    expect(okButtonProps).toHaveProperty('style', styles.noSpacing);
   });
 });
 

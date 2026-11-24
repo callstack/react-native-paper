@@ -74,8 +74,12 @@ const CardExample = () => {
         <Card style={styles.card} mode={selectedMode}>
           <Card.Cover source={require('../../assets/images/forest.jpg')} />
           <Card.Actions>
-            <Button onPress={() => {}}>Share</Button>
-            <Button onPress={() => {}}>Explore</Button>
+            <Button mode="outlined" onPress={() => {}}>
+              Share
+            </Button>
+            <Button mode="filled" onPress={() => {}}>
+              Explore
+            </Button>
           </Card.Actions>
         </Card>
         <Card style={styles.card} mode={selectedMode}>
@@ -83,9 +87,7 @@ const CardExample = () => {
             title="Berries that are trimmed at the end"
             subtitle="Omega Ruby"
             left={(props: any) => <Avatar.Icon {...props} icon="folder" />}
-            right={(props: any) => (
-              <IconButton {...props} icon="dots-vertical" onPress={() => {}} />
-            )}
+            right={() => <IconButton icon="dots-vertical" onPress={() => {}} />}
           />
           <Card.Content>
             <Text variant="bodyMedium">
@@ -104,13 +106,17 @@ const CardExample = () => {
           <Card.Title title="Custom Button styles" />
           <Card.Actions>
             <Button
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+              mode="outlined"
+              shape="square"
+              theme={{ shapes: { corner: { medium: 12 } } }}
               onPress={() => {}}
             >
               Share
             </Button>
             <Button
-              theme={{ shapes: { corner: { largeIncreased: 12 } } }}
+              mode="filled"
+              shape="square"
+              theme={{ shapes: { corner: { medium: 12 } } }}
               onPress={() => {}}
             >
               Explore
@@ -128,7 +134,7 @@ const CardExample = () => {
           />
           <Card.Cover
             source={require('../../assets/images/artist-2.jpg')}
-            style={styles.customCoverRadius}
+            style={[styles.customCoverRadius, styles.bottomCover]}
           />
         </Card>
         <Card style={styles.card} mode={selectedMode}>
@@ -138,10 +144,10 @@ const CardExample = () => {
           <Card.Title
             title="Just Strawberries"
             subtitle="... and only Strawberries"
-            right={(props: any) => (
+            right={() => (
               <IconButton
-                {...props}
                 icon={isSelected ? 'heart' : 'heart-outline'}
+                selected={isSelected}
                 onPress={() => setIsSelected(!isSelected)}
               />
             )}
@@ -232,6 +238,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     borderBottomRightRadius: 24,
+  },
+  bottomCover: {
+    marginTop: 0,
+    marginBottom: -16,
   },
 });
 

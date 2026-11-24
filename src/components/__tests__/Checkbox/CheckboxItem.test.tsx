@@ -1,8 +1,14 @@
-import { expect, it, jest } from '@jest/globals';
+import { type GestureResponderEvent, Platform } from 'react-native';
+
+import { afterEach, expect, it, jest } from '@jest/globals';
 import { userEvent } from '@testing-library/react-native';
 
-import { render, screen } from '../../../test-utils';
+import { fireEvent, render, screen } from '../../../test-utils';
 import Checkbox from '../../Checkbox';
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 it('renders unchecked', async () => {
   const tree = (
@@ -83,4 +89,51 @@ it('should execute onLongPress', async () => {
   await userEvent.longPress(screen.getByTestId('checkbox-item'));
 
   expect(onLongPress).toHaveBeenCalledTimes(1);
+});
+
+it('toggles the row once on Space release on web', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+  const preventDefault = jest.fn();
+  await render(
+    <Checkbox.Item label="Notify me" status="unchecked" onPress={onPress} />
+  );
+  const row = screen.getByRole('checkbox', { name: 'Notify me' });
+
+  await fireEvent(row, 'keyDown', {
+    nativeEvent: { key: ' ' },
+    preventDefault,
+  });
+
+  expect(preventDefault).toHaveBeenCalled();
+  expect(onPress).not.toHaveBeenCalled();
+
+  await fireEvent(row, 'keyUp', { nativeEvent: { key: ' ' }, preventDefault });
+
+  expect(onPress).toHaveBeenCalledTimes(1);
+});
+
+it('does not toggle on a release after the row was disabled mid press', async () => {
+  jest.replaceProperty(Platform, 'OS', 'web');
+  const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+  const space = { nativeEvent: { key: ' ' }, preventDefault: jest.fn() };
+  await render(
+    <Checkbox.Item label="Notify me" status="unchecked" onPress={onPress} />
+  );
+
+  await fireEvent(screen.getByRole('checkbox'), 'keyDown', space);
+  await screen.rerender(
+    <Checkbox.Item
+      label="Notify me"
+      status="unchecked"
+      onPress={onPress}
+      disabled
+    />
+  );
+  await screen.rerender(
+    <Checkbox.Item label="Notify me" status="unchecked" onPress={onPress} />
+  );
+  await fireEvent(screen.getByRole('checkbox'), 'keyUp', space);
+
+  expect(onPress).not.toHaveBeenCalled();
 });

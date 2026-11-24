@@ -1,5 +1,7 @@
-import { expect, it } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
+import { getAnimatedStyle } from 'react-native-reanimated';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import Badge from '../Badge';
@@ -64,4 +66,24 @@ it('does not apply typography or padding to dot badge', async () => {
 
   expect(screen.getByTestId('badge')).not.toHaveStyle({ paddingHorizontal: 4 });
   expect(screen.getByTestId('badge')).not.toHaveStyle({ fontSize: 11 });
+});
+
+describe('with reduce motion', () => {
+  it.each([
+    { reduceMotion: 'off', duration: 150 },
+    { reduceMotion: 'on', duration: 0 },
+  ] as const)(
+    'fades in and out in $duration ms when reduceMotion is "$reduceMotion"',
+    async ({ reduceMotion, duration }) => {
+      await render(
+        <PaperProvider reduceMotion={reduceMotion}>
+          <Badge testID="badge">3</Badge>
+        </PaperProvider>
+      );
+
+      expect(getAnimatedStyle(screen.getByTestId('badge'))).toMatchObject({
+        transitionDuration: duration,
+      });
+    }
+  );
 });

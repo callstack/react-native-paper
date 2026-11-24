@@ -4,9 +4,8 @@ import type {
   ColorValue,
   GestureResponderEvent,
   LayoutChangeEvent,
-  NativeSyntheticEvent,
   StyleProp,
-  TextLayoutEventData,
+  TextLayoutEvent,
   TextStyle,
   ViewProps,
   ViewStyle,
@@ -27,8 +26,10 @@ import useLatestCallback from 'use-latest-callback';
 import { SnackbarTokens } from './tokens';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
+import { FocusRingColorContext } from '../../utils/useFocusRing';
 import Button from '../Button/Button';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
@@ -133,7 +134,7 @@ export type Props = Omit<ViewProps, 'children' | 'style'> & {
    * Style for the container of the Snackbar.
    */
   style?: StyleProp<SurfaceStyle>;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */
@@ -270,9 +271,9 @@ const Snackbar = ({
   });
 
   const {
-    animation: { scale },
     motion: { duration: motionDuration, easing },
   } = theme;
+  const getDuration = useMotionDuration();
 
   React.useEffect(() => {
     clearHideTimeout();
@@ -281,7 +282,7 @@ const Snackbar = ({
       opacity.value = withTiming(
         0,
         {
-          duration: motionDuration.short4 * scale,
+          duration: getDuration(motionDuration.short4),
           easing: Easing.bezier(...easing.emphasizedAccelerate),
           reduceMotion: ReduceMotion.Never,
         },
@@ -298,7 +299,7 @@ const Snackbar = ({
     opacity.value = withTiming(
       1,
       {
-        duration: motionDuration.medium2 * scale,
+        duration: getDuration(motionDuration.medium2),
         easing: Easing.bezier(...easing.emphasizedDecelerate),
         reduceMotion: ReduceMotion.Never,
       },
@@ -312,11 +313,11 @@ const Snackbar = ({
     clearHideTimeout,
     easing.emphasizedAccelerate,
     easing.emphasizedDecelerate,
+    getDuration,
     handleShown,
     motionDuration.medium2,
     motionDuration.short4,
     opacity,
-    scale,
     visible,
   ]);
 
@@ -356,7 +357,7 @@ const Snackbar = ({
   );
 
   const handleMessageTextLayout = React.useCallback(
-    (event: NativeSyntheticEvent<TextLayoutEventData>) => {
+    (event: TextLayoutEvent) => {
       setIsMultiline(event.nativeEvent.lines.length > 1);
     },
     []
@@ -443,49 +444,52 @@ const Snackbar = ({
           {message}
         </Text>
         {hasActions ? (
-          <View
-            style={[
-              styles.actions,
-              stacked && styles.actionsStacked,
-              // The close affordance is itself 48dp wide and owns the trailing
-              // edge; without it the action keeps an 8dp trailing inset.
-              isIconButton
-                ? styles.actionsWithClose
-                : stacked
-                  ? styles.actionsStackedTrailing
-                  : styles.actionsTrailing,
-            ]}
-            onLayout={handleActionsLayout}
-            testID={testID ? `${testID}-actions` : undefined}
-          >
-            {action ? (
-              <Button
-                aria-label={action.accessibilityLabel ?? action.label}
-                mode="text"
-                onPress={handleActionPress}
-                style={action.style}
-                testID={action.testID}
-                theme={theme}
-                textColor={colors[actionColor]}
-              >
-                {action.label}
-              </Button>
-            ) : null}
-            {isIconButton ? (
-              <IconButton
-                role="button"
-                borderless
-                size={iconSize}
-                onPress={handleIconPress}
-                iconColor={colors[iconColor]}
-                theme={theme}
-                icon={icon ?? closeIcon}
-                aria-label={iconAccessibilityLabel}
-                style={styles.icon}
-                testID={iconTestID}
-              />
-            ) : null}
-          </View>
+          // `secondary` barely shows on `inverseSurface`, so the action and
+          // close button ring in `inversePrimary`, the action label's color.
+          <FocusRingColorContext.Provider value={colors[actionColor]}>
+            <View
+              style={[
+                styles.actions,
+                stacked && styles.actionsStacked,
+                // The close affordance is itself 48dp wide and owns the trailing
+                // edge; without it the action keeps an 8dp trailing inset.
+                isIconButton
+                  ? styles.actionsWithClose
+                  : stacked
+                    ? styles.actionsStackedTrailing
+                    : styles.actionsTrailing,
+              ]}
+              onLayout={handleActionsLayout}
+              testID={testID ? `${testID}-actions` : undefined}
+            >
+              {action ? (
+                <Button
+                  aria-label={action.accessibilityLabel ?? action.label}
+                  mode="text"
+                  onPress={handleActionPress}
+                  style={action.style}
+                  testID={action.testID}
+                  theme={theme}
+                  textColor={colors[actionColor]}
+                >
+                  {action.label}
+                </Button>
+              ) : null}
+              {isIconButton ? (
+                <IconButton
+                  role="button"
+                  iconSize={iconSize}
+                  onPress={handleIconPress}
+                  iconColor={colors[iconColor]}
+                  theme={theme}
+                  icon={icon ?? closeIcon}
+                  aria-label={iconAccessibilityLabel}
+                  style={styles.icon}
+                  testID={iconTestID}
+                />
+              ) : null}
+            </View>
+          </FocusRingColorContext.Provider>
         ) : null}
       </Surface>
     </View>

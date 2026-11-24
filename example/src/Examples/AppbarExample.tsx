@@ -17,7 +17,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
+type AppbarModes =
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'center-aligned'
+  | 'medium-flexible'
+  | 'large-flexible';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const MEDIUM_FAB_HEIGHT = 56;
@@ -33,6 +39,8 @@ const AppbarExample = () => {
   const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [showFilledAction, setShowFilledAction] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
 
   const theme = useTheme();
@@ -45,9 +53,10 @@ const AppbarExample = () => {
     navigation.setOptions({
       header: () => (
         <Appbar.Header
-          style={showCustomColor ? styles.customColor : null}
+          backgroundColor={showCustomColor ? Palette.secondary80 : undefined}
           mode={appbarMode}
           elevated={showElevated}
+          isScrolled={isScrolled}
         >
           {showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
@@ -60,6 +69,14 @@ const AppbarExample = () => {
               )}
           {showSearchIcon && (
             <Appbar.Action icon="magnify" onPress={() => {}} />
+          )}
+          {showFilledAction && (
+            <Appbar.Action
+              icon="share-variant"
+              variant="filled"
+              width="wide"
+              onPress={() => {}}
+            />
           )}
           {showMoreIcon && (
             <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
@@ -78,6 +95,8 @@ const AppbarExample = () => {
     showCalendarIcon,
     isCenterAlignedMode,
     showElevated,
+    isScrolled,
+    showFilledAction,
   ]);
 
   const renderFAB = () => {
@@ -124,6 +143,14 @@ const AppbarExample = () => {
         <Text>Elevated</Text>
         <Switch value={showElevated} onValueChange={setShowElevated} />
       </View>
+      <View style={styles.row}>
+        <Text>Scrolled</Text>
+        <Switch value={isScrolled} onValueChange={setIsScrolled} />
+      </View>
+      <View style={styles.row}>
+        <Text>Filled action</Text>
+        <Switch value={showFilledAction} onValueChange={setShowFilledAction} />
+      </View>
     </>
   );
 
@@ -160,6 +187,14 @@ const AppbarExample = () => {
               <Text>Center-aligned</Text>
               <RadioButton value="center-aligned" />
             </View>
+            <View style={styles.row}>
+              <Text>Medium flexible</Text>
+              <RadioButton value="medium-flexible" />
+            </View>
+            <View style={styles.row}>
+              <Text>Large flexible</Text>
+              <RadioButton value="large-flexible" />
+            </View>
           </RadioButton.Group>
         </List.Section>
       </ScreenWrapper>
@@ -169,10 +204,8 @@ const AppbarExample = () => {
           {
             height: height + bottom,
           },
-          {
-            backgroundColor: theme.colors.surfaceContainerHigh,
-          },
         ]}
+        backgroundColor={theme.colors.surfaceContainerHigh}
         safeAreaInsets={{ bottom, left, right }}
       >
         <Appbar.Action icon="archive" onPress={() => {}} />
@@ -215,8 +248,5 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     right: 16,
-  },
-  customColor: {
-    backgroundColor: Palette.secondary80,
   },
 });

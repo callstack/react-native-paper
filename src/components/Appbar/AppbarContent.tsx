@@ -2,15 +2,22 @@ import * as React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import type {
   GestureResponderEvent,
+  LayoutChangeEvent,
   StyleProp,
   TextStyle,
   ViewStyle,
   ViewProps,
 } from 'react-native';
 
-import { modeTextVariant } from './utils';
-import { useInternalTheme } from '../../core/theming';
+import { useAppbarContext, useAppbarTheme } from './AppbarContext';
+import {
+  APPBAR_HORIZONTAL_PADDING,
+  getAppbarColor,
+  isFlexibleMode,
+  modeTextVariant,
+} from './utils';
 import type { ThemeProp } from '../../theme/types';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
 
@@ -52,10 +59,6 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
    * Specifies the largest possible scale a title font can reach.
    */
   titleMaxFontSizeMultiplier?: number;
-  /**
-   * @internal
-   */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -93,30 +96,80 @@ const AppbarContent = ({
   titleStyle,
   title,
   titleMaxFontSizeMultiplier,
-  mode = 'small',
   theme: themeOverrides,
   testID,
+  onLayout,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const appbar = useAppbarContext();
+  const theme = useAppbarTheme(themeOverrides);
   const { colors, fonts } = theme;
 
-  const titleTextColor = titleColor ? titleColor : colors.onSurface;
+  // With `onPress` the title is a button, so it gets the keyboard focus ring
+  // (MD3: interactive elements in an app bar have focus rings). It is a plain
+  // `Pressable`, so it calls the hook directly. Outward, the default.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !onPress,
+    colors.secondary
+  );
 
-  const modeContainerStyles = {
-    small: styles.v3DefaultContainer,
-    medium: styles.v3MediumContainer,
-    large: styles.v3LargeContainer,
-    'center-aligned': styles.v3DefaultContainer,
-  };
+  const mode = appbar?.mode ?? 'small';
+  const insets = appbar?.insets;
+  const onContentLayout = appbar?.onContentLayout;
+  const contentMargins = appbar?.contentMargins;
+  const isFlexible = isFlexibleMode(mode);
+
+  // The cleanup of the effect runs when the content unmounts, and when the
+  // callback changes, so the Appbar forgets the layout of a content that is gone
+  React.useEffect(() => () => onContentLayout?.(null), [onContentLayout]);
+
+  const titleTextColor =
+    getAppbarColor({ color: titleColor, isDark: appbar?.dark ?? false }) ??
+    colors.onSurface;
+
+  // The `medium` and `large` modes show the title below the actions, and the flexible modes
+  // grow with the title, so the title is positioned at the bottom of the Appbar
+  // and the content only takes up the space between the actions.
+  const isBottomAligned = mode === 'medium' || mode === 'large' || isFlexible;
+
+  const bottomStyle = [
+    styles.bottom,
+    {
+      left: (insets?.left ?? 0) + APPBAR_HORIZONTAL_PADDING + 12,
+      right: (insets?.right ?? 0) + APPBAR_HORIZONTAL_PADDING + 12,
+      bottom: insets?.bottom ?? 0,
+    },
+    mode === 'medium' && styles.mediumBottom,
+    mode === 'large' && styles.largeBottom,
+    isFlexible && styles.flexibleBottom,
+  ];
 
   const variant = modeTextVariant[mode];
 
   const contentWrapperProps = {
     pointerEvents: 'box-none',
-    style: [styles.container, modeContainerStyles[mode], style],
+    style: [
+      isBottomAligned
+        ? bottomStyle
+        : mode === 'center-aligned'
+          ? [
+              styles.centerAligned,
+              contentMargins && {
+                marginLeft: contentMargins.left,
+                marginRight: contentMargins.right,
+              },
+            ]
+          : styles.container,
+      style,
+    ],
     testID,
     ...rest,
+    // The Appbar grows with the title, or centers it, based on its layout. The
+    // handler is always set, as on the web it is only called if it is set when the content mounts.
+    onLayout: (event: LayoutChangeEvent) => {
+      onContentLayout?.(event.nativeEvent.layout);
+      onLayout?.(event);
+    },
   } satisfies ViewProps;
 
   const content = (
@@ -132,7 +185,7 @@ const AppbarContent = ({
             },
             titleStyle,
           ]}
-          numberOfLines={1}
+          numberOfLines={isFlexible ? 2 : 1}
           accessible
           role={onPress ? 'none' : 'heading'}
           maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
@@ -145,21 +198,44 @@ const AppbarContent = ({
     </>
   );
 
-  if (onPress) {
+  const wrapper = onPress ? (
+    <Pressable
+      role="button"
+      aria-disabled={disabled}
+      onPress={onPress}
+      disabled={disabled}
+      {...contentWrapperProps}
+      // Like Switch: a ripple drawable owns the focused state, so Android does
+      // not add its grey default focus highlight on top of the ring.
+      android_ripple={{ color: 'transparent' }}
+      onFocus={(e) => {
+        focusTarget.onFocus?.(e);
+        rest.onFocus?.(e);
+      }}
+      onBlur={(e) => {
+        focusTarget.onBlur?.();
+        rest.onBlur?.(e);
+      }}
+      {...mergeDataSetProps(rest, focusRing.dataSetProps)}
+      style={[...contentWrapperProps.style, ...focusRing.style]}
+    >
+      {content}
+    </Pressable>
+  ) : (
+    <View {...contentWrapperProps}>{content}</View>
+  );
+
+  if (isBottomAligned) {
     return (
-      <Pressable
-        role="button"
-        aria-disabled={disabled}
-        onPress={onPress}
-        disabled={disabled}
-        {...contentWrapperProps}
-      >
-        {content}
-      </Pressable>
+      <>
+        {/* Takes up the space between the actions, so the trailing actions stay at the end */}
+        <View style={styles.spacer} />
+        {wrapper}
+      </>
     );
   }
 
-  return <View {...contentWrapperProps}>{content}</View>;
+  return wrapper;
 };
 
 AppbarContent.displayName = 'Appbar.Content';
@@ -167,21 +243,26 @@ AppbarContent.displayName = 'Appbar.Content';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 12,
+    marginLeft: 12,
   },
-  v3DefaultContainer: {
-    paddingHorizontal: 0,
+  centerAligned: {
+    flex: 1,
+    alignItems: 'center',
   },
-  v3MediumContainer: {
-    paddingHorizontal: 0,
-    justifyContent: 'flex-end',
+  spacer: {
+    flex: 1,
+  },
+  bottom: {
+    position: 'absolute',
+  },
+  mediumBottom: {
     paddingBottom: 24,
   },
-  v3LargeContainer: {
-    paddingHorizontal: 0,
-    paddingTop: 36,
-    justifyContent: 'flex-end',
+  largeBottom: {
     paddingBottom: 28,
+  },
+  flexibleBottom: {
+    paddingBottom: 12,
   },
 });
 

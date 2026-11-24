@@ -20,7 +20,9 @@ export type Props = {
    */
   disabled?: boolean;
   /**
-   * Function to execute on press.
+   * Function to execute on press. Without it, and outside a
+   * `RadioButton.Group`, the radio is read only: it can't be pressed, and a
+   * press goes to its parent.
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**

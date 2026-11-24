@@ -338,13 +338,10 @@ If any component uses Paper's `Text` component, without specified <b>variant</b>
 
 - If there is a need to create a custom font variant, prepare its config object including required all fonts properties. After that, defined `fontConfig` has to be passed under the <b>`variant`</b> name as `config` into the params object:
 
-```js
+```tsx
 import * as React from 'react';
-import {
-  configureFonts,
-  MD3LightTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { Platform } from 'react-native';
+import { configureFonts, LightTheme, PaperProvider } from 'react-native-paper';
 import App from './App';
 
 const fontConfig = {
@@ -359,10 +356,10 @@ const fontConfig = {
     lineHeight: 22,
     fontSize: 20,
   },
-};
+} as const;
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
   fonts: configureFonts({ config: fontConfig }),
 };
 
@@ -388,11 +385,7 @@ export const Text = customText<'customVariant'>();
 
 ```js
 import * as React from 'react';
-import {
-  configureFonts,
-  MD3LightTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { configureFonts, LightTheme, PaperProvider } from 'react-native-paper';
 import App from './App';
 
 const fontConfig = {
@@ -404,7 +397,7 @@ const fontConfig = {
 };
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
   fonts: configureFonts({ config: fontConfig }),
 };
 
@@ -421,11 +414,7 @@ export default function Main() {
 
 ```js
 import * as React from 'react';
-import {
-  configureFonts,
-  MD3LightTheme,
-  PaperProvider,
-} from 'react-native-paper';
+import { configureFonts, LightTheme, PaperProvider } from 'react-native-paper';
 import App from './App';
 
 const fontConfig = {
@@ -433,7 +422,7 @@ const fontConfig = {
 };
 
 const theme = {
-  ...MD3LightTheme,
+  ...LightTheme,
   fonts: configureFonts({ config: fontConfig }),
 };
 

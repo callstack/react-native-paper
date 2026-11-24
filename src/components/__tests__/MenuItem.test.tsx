@@ -55,7 +55,9 @@ describe('Menu Item', () => {
   });
 
   it('accepts aria-checked prop', async () => {
-    await render(<Menu.Item aria-checked={true} title="Option 1" />);
+    await render(
+      <Menu.Item aria-checked={true} onPress={() => {}} title="Option 1" />
+    );
 
     expect(screen.getByRole('menuitem')).toHaveProp(
       'accessibilityState',

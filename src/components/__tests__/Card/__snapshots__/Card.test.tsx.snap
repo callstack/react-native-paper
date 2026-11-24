@@ -6,9 +6,6 @@ exports[`Card renders an outlined card 1`] = `
   style={
     [
       {},
-      {
-        "borderColor": "rgba(121, 116, 126, 1)",
-      },
       undefined,
       {},
       {
@@ -114,8 +111,19 @@ exports[`Card renders an outlined card 1`] = `
       [
         {
           "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "borderRadius": 12,
+        },
+        {
+          "flexDirection": "column",
         },
         undefined,
+        {
+          "gap": 16,
+          "padding": 16,
+        },
       ]
     }
   />
@@ -129,9 +137,6 @@ exports[`Card renders an outlined card with a custom outline color 1`] = `
   style={
     [
       {},
-      {
-        "borderColor": "purple",
-      },
       undefined,
       {},
       {
@@ -237,27 +242,32 @@ exports[`Card renders an outlined card with a custom outline color 1`] = `
       [
         {
           "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "borderRadius": 12,
+        },
+        {
+          "flexDirection": "column",
         },
         undefined,
+        {
+          "gap": 16,
+          "padding": 16,
+        },
       ]
     }
   />
 </View>
 `;
 
-exports[`Card renders an outlined card with custom border color 1`] = `
+exports[`Card renders the outline with the color passed to borderColor prop 1`] = `
 <View
-  accessibilityLabel="card"
   collapsable={false}
   style={
     [
       {},
-      {
-        "borderColor": "rgba(220, 54, 46, 1)",
-      },
-      {
-        "borderColor": "rgba(220, 54, 46, 1)",
-      },
+      undefined,
       {},
       {
         "backgroundColor": "rgba(254, 247, 255, 1)",
@@ -342,7 +352,7 @@ exports[`Card renders an outlined card with custom border color 1`] = `
     style={
       [
         {
-          "borderColor": "rgba(220, 54, 46, 1)",
+          "borderColor": "red",
         },
         {
           "borderWidth": 1,
@@ -362,8 +372,19 @@ exports[`Card renders an outlined card with custom border color 1`] = `
       [
         {
           "flexShrink": 1,
+          "overflow": "hidden",
+        },
+        {
+          "borderRadius": 12,
+        },
+        {
+          "flexDirection": "column",
         },
         undefined,
+        {
+          "gap": 16,
+          "padding": 16,
+        },
       ]
     }
   />
