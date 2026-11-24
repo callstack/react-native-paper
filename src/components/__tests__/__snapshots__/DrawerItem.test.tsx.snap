@@ -4,6 +4,10 @@ exports[`renders DrawerItem with icon 1`] = `
 <View>
   <View
     accessible={true}
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={[Function]}
     role="none"
     style={
       [
@@ -12,19 +16,13 @@ exports[`renders DrawerItem with icon 1`] = `
         },
         [
           {
-            "marginHorizontal": 10,
-            "marginVertical": 4,
-          },
-          {
             "height": 56,
             "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
+            "marginHorizontal": 12,
           },
           {
             "backgroundColor": undefined,
-            "borderRadius": 28,
+            "borderRadius": 9999,
           },
           undefined,
         ],
@@ -37,12 +35,10 @@ exports[`renders DrawerItem with icon 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
-            "padding": 8,
+            "marginHorizontal": 16,
           },
           {
-            "marginLeft": 16,
-            "marginRight": 24,
-            "padding": 0,
+            "opacity": 1,
           },
         ]
       }
@@ -107,16 +103,13 @@ exports[`renders DrawerItem with icon 1`] = `
                 },
                 [
                   {
-                    "marginRight": 32,
+                    "marginEnd": 32,
+                  },
+                  {
+                    "marginStart": 12,
                   },
                   {
                     "color": "rgba(73, 69, 79, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                    "marginLeft": 12,
                   },
                 ],
               ],
@@ -131,12 +124,39 @@ exports[`renders DrawerItem with icon 1`] = `
 </View>
 `;
 
-exports[`renders active DrawerItem 1`] = `
+exports[`renders a disabled active DrawerItem 1`] = `
 <View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": true,
+        "expanded": undefined,
+        "selected": true,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
-    aria-selected={true}
-    role="none"
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
         {
@@ -144,19 +164,13 @@ exports[`renders active DrawerItem 1`] = `
         },
         [
           {
-            "marginHorizontal": 10,
-            "marginVertical": 4,
-          },
-          {
             "height": 56,
             "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
+            "marginHorizontal": 12,
           },
           {
             "backgroundColor": "rgba(232, 222, 248, 1)",
-            "borderRadius": 28,
+            "borderRadius": 9999,
           },
           undefined,
         ],
@@ -169,12 +183,10 @@ exports[`renders active DrawerItem 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
-            "padding": 8,
+            "marginHorizontal": 16,
           },
           {
-            "marginLeft": 16,
-            "marginRight": 24,
-            "padding": 0,
+            "opacity": 0.38,
           },
         ]
       }
@@ -233,22 +245,144 @@ exports[`renders active DrawerItem 1`] = `
                 {
                   "fontFamily": "System",
                   "fontSize": 14,
-                  "fontWeight": "500",
+                  "fontWeight": "700",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
                 [
                   {
-                    "marginRight": 32,
+                    "marginEnd": 32,
+                  },
+                  {
+                    "marginStart": 12,
                   },
                   {
                     "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                    "marginLeft": 12,
+                  },
+                ],
+              ],
+            ]
+          }
+        >
+          Example item
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders active DrawerItem 1`] = `
+<View>
+  <View
+    accessible={true}
+    aria-selected={true}
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={[Function]}
+    role="none"
+    style={
+      [
+        {
+          "overflow": "hidden",
+        },
+        [
+          {
+            "height": 56,
+            "justifyContent": "center",
+            "marginHorizontal": 12,
+          },
+          {
+            "backgroundColor": "rgba(232, 222, 248, 1)",
+            "borderRadius": 9999,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginHorizontal": 16,
+          },
+          {
+            "opacity": 1,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 25, 43, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          information
+        </Text>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "700",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "marginEnd": 32,
+                  },
+                  {
+                    "marginStart": 12,
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
                   },
                 ],
               ],
@@ -303,19 +437,13 @@ exports[`renders basic DrawerItem 1`] = `
         },
         [
           {
-            "marginHorizontal": 10,
-            "marginVertical": 4,
-          },
-          {
             "height": 56,
             "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
+            "marginHorizontal": 12,
           },
           {
             "backgroundColor": undefined,
-            "borderRadius": 28,
+            "borderRadius": 9999,
           },
           undefined,
         ],
@@ -328,12 +456,10 @@ exports[`renders basic DrawerItem 1`] = `
           {
             "alignItems": "center",
             "flexDirection": "row",
-            "padding": 8,
+            "marginHorizontal": 16,
           },
           {
-            "marginLeft": 16,
-            "marginRight": 24,
-            "padding": 0,
+            "opacity": 1,
           },
         ]
       }
@@ -369,16 +495,11 @@ exports[`renders basic DrawerItem 1`] = `
                 },
                 [
                   {
-                    "marginRight": 32,
+                    "marginEnd": 32,
                   },
+                  null,
                   {
                     "color": "rgba(73, 69, 79, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                    "marginLeft": 0,
                   },
                 ],
               ],
