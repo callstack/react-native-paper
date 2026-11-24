@@ -290,6 +290,29 @@ describe('useTheme', () => {
     expect({}).not.toHaveProperty('polluted');
   });
 
+  it('replaces an array from overrides instead of joining it', async () => {
+    const standard = [0.2, 0, 0, 1] as const;
+
+    const { result } = await renderHook(() =>
+      useTheme<Theme>({ motion: { easing: { standard } } })
+    );
+
+    expect(result.current.motion.easing.standard).toEqual(standard);
+    expect(result.current.motion.easing.emphasized).toEqual(
+      LightTheme.motion.easing.emphasized
+    );
+  });
+
+  it('keeps platform colors from overrides as they are', async () => {
+    const primary = PlatformColor('label');
+
+    const { result } = await renderHook(() =>
+      useTheme<Theme>({ colors: { primary } })
+    );
+
+    expect(result.current.colors.primary).toBe(primary);
+  });
+
   it('keeps the theme reference while the overrides object stays the same', async () => {
     const overrides = { colors: { primary: '#123456' } };
     const { result, rerender } = await renderHook(() =>

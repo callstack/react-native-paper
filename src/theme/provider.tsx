@@ -1,8 +1,12 @@
 import * as React from 'react';
 
 import { createTheming } from '@callstack/react-theme-provider';
-import type { $DeepPartial } from '@callstack/react-theme-provider';
+import type {
+  $DeepPartial,
+  ThemingType,
+} from '@callstack/react-theme-provider';
 import isEqual from 'fast-deep-equal';
+import hoistNonReactStatics from 'hoist-non-react-statics';
 
 import { DarkTheme, LightTheme } from './schemes';
 import type { Theme, ThemeProp, NavigationTheme } from './types';
@@ -11,19 +15,43 @@ const {
   // Puts its `theme` into context as it is, so it takes a full theme. It's for
   // providers that have merged the theme already, such as `PaperProvider`.
   ThemeProvider: InternalThemeProvider,
-  withTheme,
   useTheme: useThemeBase,
 } = createTheming<Theme>(LightTheme);
 
-export { InternalThemeProvider, withTheme };
+export { InternalThemeProvider };
 
-export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
-  const safeOverrides = React.useMemo(
-    () => withoutUnsafeKeys(overrides),
-    [overrides]
+// The `useTheme` and `withTheme` of `createTheming` merge with `deepmerge`,
+// which joins arrays such as easing curves, so both merge with `safeMerge`.
+export function useTheme<T = Theme>(overrides?: $DeepPartial<T>): T {
+  const theme = useThemeBase<T>();
+  return React.useMemo(
+    () => (overrides ? safeMerge(theme, overrides) : theme),
+    [theme, overrides]
   );
-  return useThemeBase<T>(safeOverrides);
 }
+
+type WithThemeProps = {
+  theme?: $DeepPartial<Theme>;
+};
+
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
+export const withTheme = (<Props extends { theme: Theme }>(
+  Comp: React.ComponentType<Props>
+) => {
+  const ThemedComponent = React.forwardRef<unknown, WithThemeProps>(
+    ({ theme: overrides, ...rest }, ref) => {
+      const theme = useTheme<Theme>(overrides);
+      return React.createElement(Comp, {
+        ...(rest as Props),
+        theme,
+        ref,
+      });
+    }
+  );
+  ThemedComponent.displayName = `withTheme(${Comp.displayName || Comp.name})`;
+  return hoistNonReactStatics(ThemedComponent, Comp);
+}) as ThemingType<Theme>['withTheme'];
+/* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
 
 // Upstream `deepmerge` corrupts PlatformColor objects, so we recurse manually
 // and treat sentinels as leaves. Three shapes:
