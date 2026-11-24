@@ -77,7 +77,7 @@ const DrawerExample = () => {
 
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
-      <Section title="Destinations — tap to change the active one">
+      <Section title="Destinations: tap to change the active one">
         <Destinations />
       </Section>
 
