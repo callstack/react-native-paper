@@ -304,7 +304,6 @@ const MenuItem = ({
 
   const [hovered, setHovered] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
-  const [pressed, setPressed] = React.useState(false);
 
   // Items stay mounted while collapsed. Drop their interaction state with the
   // menu, otherwise a pointer left over an item shows its state layer again on
@@ -313,17 +312,16 @@ const MenuItem = ({
     if (!expanded) {
       setHovered(false);
       setFocused(false);
-      setPressed(false);
     }
   }, [expanded]);
 
-  const interaction: Interaction = pressed
-    ? 'pressed'
-    : focused
-      ? 'focus'
-      : hovered
-        ? 'hover'
-        : 'enabled';
+  // The press is left to the ripple of `TouchableRipple`: a flat layer for it
+  // would stack on the ripple, and show with the ripple effect turned off.
+  const interaction: Interaction = focused
+    ? 'focus'
+    : hovered
+      ? 'hover'
+      : 'enabled';
   const stateLayerStyle: AnimatedStyle<ViewStyle> = {
     backgroundColor: colors.content,
     opacity: STATE_LAYER_OPACITY[interaction],
@@ -350,11 +348,7 @@ const MenuItem = ({
   // React Native Web presses on Space only for `role="button"`, and the item is
   // a `menuitem` in a web menu. A button needs no help, and would press twice.
   const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =
-    useSpaceKeyPress({
-      onPress,
-      onPressIn: () => setPressed(true),
-      onPressOut: () => setPressed(false),
-    });
+    useSpaceKeyPress({ onPress });
 
   const itemRef = React.useCallback(
     (node: React.ComponentRef<typeof View> | null) => registerRef(index, node),
@@ -378,7 +372,10 @@ const MenuItem = ({
           ]}
           {...focusRing.dataSetProps}
         >
-          <Animated.View style={[styles.stateLayer, stateLayerStyle]} />
+          <Animated.View
+            style={[styles.stateLayer, stateLayerStyle]}
+            testID={testID ? `${testID}-state-layer` : undefined}
+          />
           <TouchableRipple
             ref={itemRef}
             borderless
@@ -397,8 +394,6 @@ const MenuItem = ({
             {...(inMenu ? spaceKeyHandlers : null)}
             onHoverIn={() => setHovered(true)}
             onHoverOut={() => setHovered(false)}
-            onPressIn={() => setPressed(true)}
-            onPressOut={() => setPressed(false)}
             role={inMenu ? 'menuitem' : 'button'}
             aria-label={ariaLabel ?? label}
             // `aria-hidden` and `pointerEvents` don't take collapsed items

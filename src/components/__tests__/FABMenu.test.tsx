@@ -224,6 +224,33 @@ it('renders FAB.Menu not expanded when trigger is not visible', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('leaves the press of an item to the ripple, which the settings can turn off', async () => {
+  await render(
+    <PaperProvider settings={{ rippleEffectEnabled: false }}>
+      <FAB.Menu
+        expanded
+        onDismiss={jest.fn()}
+        trigger={{ icon: 'plus' }}
+        items={makeItems()}
+      />
+    </PaperProvider>
+  );
+  const item = screen.getByTestId('item-0');
+  const stateLayer = screen.getByTestId('item-0-state-layer');
+
+  expect(stateLayer).toHaveStyle({ opacity: 0 });
+
+  // The layer does show for a state the ripple has no part in.
+  await fireEvent(item, 'hoverIn');
+
+  expect(stateLayer).not.toHaveStyle({ opacity: 0 });
+
+  await fireEvent(item, 'hoverOut');
+  await fireEvent(item, 'pressIn');
+
+  expect(stateLayer).toHaveStyle({ opacity: 0 });
+});
+
 it('calls item onPress when menu item is pressed', async () => {
   const onItemPress = jest.fn();
   await render(

@@ -235,6 +235,7 @@ exports[`renders FAB.Menu closed 1`] = `
                         },
                       ]
                     }
+                    testID="item-0-state-layer"
                   />
                   <View
                     accessibilityLabel="Send email"
@@ -496,6 +497,7 @@ exports[`renders FAB.Menu closed 1`] = `
                         },
                       ]
                     }
+                    testID="item-1-state-layer"
                   />
                   <View
                     accessibilityLabel="Set reminder"
@@ -1216,6 +1218,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                         },
                       ]
                     }
+                    testID="item-0-state-layer"
                   />
                   <View
                     accessibilityLabel="Send email"
@@ -1477,6 +1480,7 @@ exports[`renders FAB.Menu not expanded when trigger is not visible 1`] = `
                         },
                       ]
                     }
+                    testID="item-1-state-layer"
                   />
                   <View
                     accessibilityLabel="Set reminder"
@@ -2200,6 +2204,7 @@ exports[`renders FAB.Menu open 1`] = `
                         },
                       ]
                     }
+                    testID="item-0-state-layer"
                   />
                   <View
                     accessibilityLabel="Send email"
@@ -2461,6 +2466,7 @@ exports[`renders FAB.Menu open 1`] = `
                         },
                       ]
                     }
+                    testID="item-1-state-layer"
                   />
                   <View
                     accessibilityLabel="Set reminder"
@@ -3182,6 +3188,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         },
                       ]
                     }
+                    testID="item-0-state-layer"
                   />
                   <View
                     accessibilityLabel="Item 1"
@@ -3443,6 +3450,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         },
                       ]
                     }
+                    testID="item-1-state-layer"
                   />
                   <View
                     accessibilityLabel="Item 2"
@@ -3704,6 +3712,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         },
                       ]
                     }
+                    testID="item-2-state-layer"
                   />
                   <View
                     accessibilityLabel="Item 3"
@@ -3965,6 +3974,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         },
                       ]
                     }
+                    testID="item-3-state-layer"
                   />
                   <View
                     accessibilityLabel="Item 4"
@@ -4226,6 +4236,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         },
                       ]
                     }
+                    testID="item-4-state-layer"
                   />
                   <View
                     accessibilityLabel="Item 5"
@@ -4487,6 +4498,7 @@ exports[`renders FAB.Menu with 6 items 1`] = `
                         },
                       ]
                     }
+                    testID="item-5-state-layer"
                   />
                   <View
                     accessibilityLabel="Item 6"
@@ -5209,6 +5221,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                         },
                       ]
                     }
+                    testID="item-0-state-layer"
                   />
                   <View
                     accessibilityLabel="Send email"
@@ -5470,6 +5483,7 @@ exports[`renders FAB.Menu with center alignment 1`] = `
                         },
                       ]
                     }
+                    testID="item-1-state-layer"
                   />
                   <View
                     accessibilityLabel="Set reminder"
@@ -7233,6 +7247,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                         },
                       ]
                     }
+                    testID="item-0-state-layer"
                   />
                   <View
                     accessibilityLabel="Send email"
@@ -7494,6 +7509,7 @@ exports[`renders FAB.Menu with start alignment 1`] = `
                         },
                       ]
                     }
+                    testID="item-1-state-layer"
                   />
                   <View
                     accessibilityLabel="Set reminder"
