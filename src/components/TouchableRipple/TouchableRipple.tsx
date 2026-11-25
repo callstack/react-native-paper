@@ -7,11 +7,14 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { Pressable } from './Pressable';
-import { IDLE_STATE, getTouchableRippleColors, resolveChildren } from './utils';
+import {
+  IDLE_STATE,
+  getHoverColor,
+  getTouchableRippleColors,
+  resolveChildren,
+} from './utils';
 import { SettingsContext } from '../../core/settings';
 import type { Settings } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
@@ -81,7 +84,9 @@ export type Props = PressableProps & {
    */
   onPressOut?: (e: GestureResponderEvent) => void;
   /**
-   * Color of the ripple effect (Android >= 5.0 and Web).
+   * Color of the ripple effect (Android >= 5.0 and Web). On web, hovering
+   * shows this color at 0.8 times its opacity: the Material Design 3 ratio of
+   * the hovered to the pressed state layer.
    */
   rippleColor?: ColorValue;
   /**
@@ -153,12 +158,7 @@ const TouchableRipple = ({
     theme,
     rippleColor,
   });
-  // Web-only style. PlatformColor doesn't exist on web, so the calculated
-  // ripple color is effectively always a string here.
-  const hoverColor =
-    typeof calculatedRippleColor === 'string'
-      ? color(calculatedRippleColor).fade(0.5).rgb().string()
-      : calculatedRippleColor;
+  const hoverColor = getHoverColor(calculatedRippleColor);
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;

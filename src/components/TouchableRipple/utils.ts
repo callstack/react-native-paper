@@ -58,6 +58,28 @@ export const getTouchableRippleColors = ({
   };
 };
 
+/**
+ * Returns the web hover layer color for a ripple color. The ripple is the
+ * content color at the pressed-state opacity, so scaling its alpha by the
+ * hovered-to-pressed ratio gives the content color at the hovered-state
+ * opacity (per Material Design 3). A custom ripple color keeps that ratio.
+ *
+ * A color that is not a string (a `PlatformColor`, which web doesn't have) is
+ * returned as is.
+ */
+export const getHoverColor = (rippleColor: ColorValue): ColorValue => {
+  if (typeof rippleColor !== 'string') {
+    return rippleColor;
+  }
+
+  const ripple = color(rippleColor);
+
+  return ripple
+    .alpha((ripple.alpha() * stateOpacity.hovered) / stateOpacity.pressed)
+    .rgb()
+    .string();
+};
+
 // The plain View a touchable renders without a handler has nothing to press, so
 // its render prop and style function always see this idle state. Matches the
 // state shape Pressable passes.
