@@ -221,11 +221,7 @@ const AvatarImage = ({
   return (
     <View
       style={[
-        {
-          width: size,
-          height: size,
-          borderRadius: cornerFull,
-        },
+        imageStyle,
         styles.container,
         style,
         {
