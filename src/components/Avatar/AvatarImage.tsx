@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, View } from 'react-native';
 import type {
+  ColorValue,
   ImageProps,
   ImageSourcePropType,
   StyleProp,
@@ -8,16 +9,16 @@ import type {
   ViewStyle,
 } from 'react-native';
 
+import { DEFAULT_SIZE } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
-
-const defaultSize = 64;
 
 export type AvatarImageSource =
   | ImageSourcePropType
   | ((props: { size: number }) => React.ReactNode);
 
-export type Props = ViewProps & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Image to display for the `Avatar`.
    * It accepts a standard React Native Image `source` prop
@@ -28,7 +29,16 @@ export type Props = ViewProps & {
    * Size of the avatar.
    */
   size?: number;
-  style?: StyleProp<ViewStyle>;
+  /**
+   * Background color of the avatar.
+   */
+  backgroundColor?: ColorValue;
+  /**
+   * Style for the image container.
+   *
+   * Background color should be specified via the `backgroundColor` prop instead.
+   */
+  style?: StyleProp<Omit<ViewStyle, 'backgroundColor'>>;
   /**
    * Invoked on load error.
    */
@@ -74,7 +84,7 @@ export type Props = ViewProps & {
  * ```
  */
 const AvatarImage = ({
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   source,
   style,
   onError,
@@ -83,12 +93,12 @@ const AvatarImage = ({
   onLoadEnd,
   onLoadStart,
   onProgress,
+  backgroundColor: customBackgroundColor,
   theme: themeOverrides,
   testID,
   ...rest
 }: Props) => {
-  const { colors } = useInternalTheme(themeOverrides);
-  const { backgroundColor = colors?.primary } = StyleSheet.flatten(style) || {};
+  const theme = useInternalTheme(themeOverrides);
 
   return (
     <View
@@ -96,10 +106,13 @@ const AvatarImage = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
-          backgroundColor,
+          borderRadius: cornerFull,
         },
         style,
+        {
+          backgroundColor:
+            customBackgroundColor ?? theme.colors.primaryContainer,
+        },
       ]}
       {...rest}
     >
@@ -108,7 +121,7 @@ const AvatarImage = ({
         <Image
           testID={testID}
           source={source}
-          style={{ width: size, height: size, borderRadius: size / 2 }}
+          style={{ width: size, height: size, borderRadius: cornerFull }}
           onError={onError}
           onLayout={onLayout}
           onLoad={onLoad}

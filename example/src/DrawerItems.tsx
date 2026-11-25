@@ -90,7 +90,7 @@ function DrawerItems() {
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  const { colors } = useTheme();
+  const { colors, shapes } = useTheme();
   const expoGoExecution =
     Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
 
@@ -133,11 +133,14 @@ function DrawerItems() {
 
   return (
     <DrawerContentScrollView
-      alwaysBounceVertical={false}
       style={[
         styles.drawerContent,
         {
-          backgroundColor: colors.surface,
+          backgroundColor: colors.surfaceContainerLow,
+          // This view paints over the navigator's container, so it repeats
+          // the MD3 container's rounded ending edge.
+          borderTopEndRadius: shapes.corner.large,
+          borderBottomEndRadius: shapes.corner.large,
         },
       ]}
     >
@@ -172,58 +175,86 @@ function DrawerItems() {
 
           <Drawer.Section title="Preferences">
             {dynamicThemeSupported ? (
-              <TouchableRipple onPress={toggleShouldUseDynamicTheme}>
-                <View style={[styles.preference, styles.v3Preference]}>
+              <TouchableRipple
+                onPress={toggleShouldUseDynamicTheme}
+                role="switch"
+                aria-checked={shouldUseDynamicTheme}
+              >
+                <View style={styles.preference}>
                   <Text variant="labelLarge">Use Dynamic Theme</Text>
                   <View pointerEvents="none">
-                    <Switch value={shouldUseDynamicTheme} />
+                    <Switch
+                      value={shouldUseDynamicTheme}
+                      readOnly
+                      aria-hidden
+                    />
                   </View>
                 </View>
               </TouchableRipple>
             ) : null}
-            <TouchableRipple onPress={toggleTheme}>
-              <View style={[styles.preference, styles.v3Preference]}>
+            <TouchableRipple
+              onPress={toggleTheme}
+              role="switch"
+              aria-checked={isDarkTheme}
+            >
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Dark Theme</Text>
                 <View pointerEvents="none">
-                  <Switch value={isDarkTheme} />
+                  <Switch value={isDarkTheme} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={_handleToggleRTL}>
-              <View style={[styles.preference, styles.v3Preference]}>
+            <TouchableRipple
+              onPress={_handleToggleRTL}
+              role="switch"
+              aria-checked={isRTL}
+            >
+              <View style={styles.preference}>
                 <Text variant="labelLarge">RTL</Text>
                 <View pointerEvents="none">
-                  <Switch value={isRTL} />
+                  <Switch value={isRTL} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={toggleCollapsed}>
-              <View style={[styles.preference, styles.v3Preference]}>
+            <TouchableRipple
+              onPress={toggleCollapsed}
+              role="switch"
+              aria-checked={collapsed}
+            >
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Collapsed drawer *</Text>
                 <View pointerEvents="none">
-                  <Switch value={collapsed} />
+                  <Switch value={collapsed} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={toggleCustomFont}>
-              <View style={[styles.preference, styles.v3Preference]}>
+            <TouchableRipple
+              onPress={toggleCustomFont}
+              role="switch"
+              aria-checked={customFontLoaded}
+            >
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Custom font *</Text>
                 <View pointerEvents="none">
-                  <Switch value={customFontLoaded} />
+                  <Switch value={customFontLoaded} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={toggleRippleEffect}>
-              <View style={[styles.preference, styles.v3Preference]}>
+            <TouchableRipple
+              onPress={toggleRippleEffect}
+              role="switch"
+              aria-checked={rippleEffectEnabled}
+            >
+              <View style={styles.preference}>
                 <Text variant="labelLarge">
                   {Platform.OS === 'ios' ? 'Highlight' : 'Ripple'} effect *
                 </Text>
                 <View pointerEvents="none">
-                  <Switch value={rippleEffectEnabled} />
+                  <Switch value={rippleEffectEnabled} readOnly aria-hidden />
                 </View>
               </View>
             </TouchableRipple>
@@ -239,9 +270,11 @@ function DrawerItems() {
           </Text>
         </>
       )}
-      <Dialog visible={showRTLDialog} onDismiss={_handleDismissRTLDialog}>
-        <Dialog.Title>Changing to RTL</Dialog.Title>
-        <Dialog.Content>
+      <Dialog
+        visible={showRTLDialog}
+        onDismiss={_handleDismissRTLDialog}
+        title="Changing to RTL"
+        content={
           <Text variant="bodyMedium">
             Due to Expo Go limitations it is impossible to change RTL
             dynamically. To do so, you need to create a development build of
@@ -250,11 +283,13 @@ function DrawerItems() {
             <Text variant="labelMedium">app.json</Text> within{' '}
             <Text variant="labelMedium">example</Text> directory.
           </Text>
-          <Dialog.Actions>
-            <Button onPress={_handleDismissRTLDialog}>Ok</Button>
-          </Dialog.Actions>
-        </Dialog.Content>
-      </Dialog>
+        }
+        actions={[
+          <Button key="ok-btn" onPress={_handleDismissRTLDialog}>
+            Ok
+          </Button>,
+        ]}
+      />
     </DrawerContentScrollView>
   );
 }
@@ -267,10 +302,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  v3Preference: {
     height: 56,
     paddingHorizontal: 28,
   },

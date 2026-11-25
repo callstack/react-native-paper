@@ -74,17 +74,23 @@ const DataTableCell = ({
   numeric,
   maxFontSizeMultiplier,
   testID,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
   return (
     <TouchableRipple
+      // Cells fill rows that stack edge to edge, so an outward ring would run
+      // into the rows above and below, like DataTable.Row's.
+      focusRing="inward"
       {...rest}
       testID={testID}
+      theme={themeOverrides}
       style={[styles.container, numeric && styles.right, style]}
     >
       <CellContent
         textStyle={textStyle}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
+        theme={themeOverrides}
       >
         {children}
       </CellContent>
@@ -96,16 +102,22 @@ const CellContent = ({
   children,
   textStyle,
   maxFontSizeMultiplier,
-}: Pick<Props, 'children' | 'textStyle' | 'maxFontSizeMultiplier'>) => {
+  theme,
+}: Pick<
+  Props,
+  'children' | 'textStyle' | 'maxFontSizeMultiplier' | 'theme'
+>) => {
   if (React.isValidElement(children)) {
     return children;
   }
 
   return (
     <Text
+      variant="bodyMedium"
       style={textStyle}
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
+      theme={theme}
     >
       {children}
     </Text>

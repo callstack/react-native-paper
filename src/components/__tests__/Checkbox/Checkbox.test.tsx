@@ -1,11 +1,27 @@
-import { expect, it } from '@jest/globals';
+import {
+  type GestureResponderEvent,
+  Platform,
+  Pressable,
+  StyleSheet,
+} from 'react-native';
 
-import { render } from '../../../test-utils';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
+
+import { fireEvent, render, screen, userEvent } from '../../../test-utils';
+import { tokens } from '../../../theme/tokens';
 import Checkbox from '../../Checkbox';
+import { CheckboxTokens } from '../../Checkbox/tokens';
+import TouchableRipple from '../../TouchableRipple/TouchableRipple';
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 it('renders checked Checkbox with onPress', async () => {
   const tree = (
-    await render(<Checkbox status="checked" onPress={() => {}} />)
+    await render(
+      <Checkbox status="checked" onPress={() => {}} aria-label="Notify me" />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -13,7 +29,9 @@ it('renders checked Checkbox with onPress', async () => {
 
 it('renders unchecked Checkbox with onPress', async () => {
   const tree = (
-    await render(<Checkbox status="unchecked" onPress={() => {}} />)
+    await render(
+      <Checkbox status="unchecked" onPress={() => {}} aria-label="Notify me" />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -21,7 +39,13 @@ it('renders unchecked Checkbox with onPress', async () => {
 
 it('renders indeterminate Checkbox', async () => {
   const tree = (
-    await render(<Checkbox status="indeterminate" onPress={() => {}} />)
+    await render(
+      <Checkbox
+        status="indeterminate"
+        onPress={() => {}}
+        aria-label="Notify me"
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -29,7 +53,9 @@ it('renders indeterminate Checkbox', async () => {
 
 it('renders checked Checkbox with color', async () => {
   const tree = (
-    await render(<Checkbox status="checked" color="red" />)
+    await render(
+      <Checkbox status="checked" color="red" aria-label="Notify me" />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -37,7 +63,9 @@ it('renders checked Checkbox with color', async () => {
 
 it('renders unchecked Checkbox with color', async () => {
   const tree = (
-    await render(<Checkbox status="checked" color="red" />)
+    await render(
+      <Checkbox status="checked" color="red" aria-label="Notify me" />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -45,7 +73,9 @@ it('renders unchecked Checkbox with color', async () => {
 
 it('renders indeterminate Checkbox with color', async () => {
   const tree = (
-    await render(<Checkbox status="indeterminate" color="red" />)
+    await render(
+      <Checkbox status="indeterminate" color="red" aria-label="Notify me" />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -53,8 +83,561 @@ it('renders indeterminate Checkbox with color', async () => {
 
 it('renders Checkbox with custom testID', async () => {
   const tree = (
-    await render(<Checkbox status="checked" testID={'custom:testID'} />)
+    await render(
+      <Checkbox
+        status="checked"
+        testID={'custom:testID'}
+        aria-label="Notify me"
+      />
+    )
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+describe('Checkbox state', () => {
+  it.each([
+    { status: 'checked', checked: true },
+    { status: 'unchecked', checked: false },
+    { status: 'indeterminate', checked: 'mixed' },
+  ] as const)(
+    'reports $status as checked: $checked',
+    async ({ status, checked }) => {
+      await render(
+        <Checkbox status={status} onPress={() => {}} aria-label="Notify me" />
+      );
+
+      expect(
+        screen.getByRole('checkbox', { name: 'Notify me', checked })
+      ).toBeOnTheScreen();
+    }
+  );
+});
+
+describe('Checkbox press', () => {
+  it('calls onPress when pressed', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Checkbox status="unchecked" onPress={onPress} aria-label="Notify me" />
+    );
+
+    await userEvent.press(screen.getByRole('checkbox'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('is disabled and ignores presses when disabled', async () => {
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={onPress}
+        disabled
+        aria-label="Notify me"
+      />
+    );
+
+    await userEvent.press(screen.getByRole('checkbox'));
+
+    expect(screen.getByRole('checkbox')).toBeDisabled();
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('is an enabled read only checkbox without a press handler', async () => {
+    await render(<Checkbox status="checked" aria-label="Notify me" />);
+
+    // it keeps saying `checkbox`, and `checked`, to assistive tech
+    expect(screen.getByRole('checkbox', { checked: true })).not.toBeDisabled();
+  });
+
+  it('lets a press reach the row it sits in without a press handler', async () => {
+    const onRowPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Pressable onPress={onRowPress}>
+        <Checkbox status="checked" aria-label="Notify me" />
+      </Pressable>
+    );
+
+    await userEvent.press(screen.getByRole('checkbox', { checked: true }));
+
+    expect(onRowPress).toHaveBeenCalledTimes(1);
+  });
+
+  // `TouchableRipple.supported` is computed once at import, so the Android
+  // ripple has to be switched on by hand to render the `android_ripple` path.
+  it.each([
+    { os: 'ios', supported: false },
+    { os: 'android', supported: true },
+  ] as const)(
+    'renders the same with rippleColor, background and underlayColor on $os',
+    async ({ os, supported }) => {
+      jest.replaceProperty(Platform, 'OS', os);
+      jest.replaceProperty(TouchableRipple, 'supported', supported);
+
+      // Held down, so the press the platform would paint is on screen.
+      const plain = JSON.stringify(
+        (
+          await render(
+            <Checkbox
+              status="checked"
+              onPress={() => {}}
+              aria-label="Notify me"
+              testOnly_pressed
+            />
+          )
+        ).toJSON()
+      );
+      const withPlatformPress = JSON.stringify(
+        (
+          await render(
+            <Checkbox
+              status="checked"
+              onPress={() => {}}
+              aria-label="Notify me"
+              testOnly_pressed
+              rippleColor="teal"
+              background={{ color: 'teal' }}
+              underlayColor="teal"
+            />
+          )
+        ).toJSON()
+      );
+
+      expect(withPlatformPress).toBe(plain);
+    }
+  );
+});
+
+describe('Checkbox Space key', () => {
+  const key = (name: string, repeat = false) => ({
+    nativeEvent: { key: name, repeat },
+    preventDefault: jest.fn(),
+  });
+
+  const renderCheckbox = (onPress: (e: GestureResponderEvent) => void) =>
+    render(
+      <Checkbox status="unchecked" onPress={onPress} aria-label="Notify me" />
+    );
+
+  it('toggles once on release on web, without scrolling the page', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await renderCheckbox(onPress);
+    const down = key(' ');
+    const held = key(' ', true);
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', down);
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', held);
+
+    expect(down.preventDefault).toHaveBeenCalled();
+    expect(held.preventDefault).toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('leaves a Space release without a pending press alone', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await renderCheckbox(onPress);
+    const up = key(' ');
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', up);
+
+    expect(up.preventDefault).not.toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('presses in on key down and presses out before toggling, like Enter', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const calls: string[] = [];
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPressIn={() => {
+          calls.push('pressIn');
+        }}
+        onPressOut={() => {
+          calls.push('pressOut');
+        }}
+        onPress={() => {
+          calls.push('press');
+        }}
+        aria-label="Notify me"
+      />
+    );
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+
+    expect(calls).toEqual(['pressIn']);
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(calls).toEqual(['pressIn', 'pressOut', 'press']);
+  });
+
+  it('leaves Enter to React Native Web on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    await renderCheckbox(onPress);
+    const enter = key('Enter');
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', enter);
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', enter);
+
+    expect(enter.preventDefault).not.toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('presses out without toggling when focus leaves before the release', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    const onPressOut = jest.fn<(e: GestureResponderEvent) => void>();
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={onPress}
+        onPressOut={onPressOut}
+        aria-label="Notify me"
+      />
+    );
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+    await fireEvent(screen.getByRole('checkbox'), 'blur');
+
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('presses out and does not toggle when disabled mid press', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    const onPressOut = jest.fn<(e: GestureResponderEvent) => void>();
+    const renderWith = (disabled: boolean) => (
+      <Checkbox
+        status="unchecked"
+        onPress={onPress}
+        onPressOut={onPressOut}
+        disabled={disabled}
+        aria-label="Notify me"
+      />
+    );
+    await render(renderWith(false));
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+    await screen.rerender(renderWith(true));
+    await screen.rerender(renderWith(false));
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('presses out and does not toggle when onPress goes away mid press', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+    const onLongPress = jest.fn<(e: GestureResponderEvent) => void>();
+    const onPressOut = jest.fn<(e: GestureResponderEvent) => void>();
+    const renderWith = (handler?: (e: GestureResponderEvent) => void) => (
+      <Checkbox
+        status="unchecked"
+        onPress={handler}
+        onLongPress={onLongPress}
+        onPressOut={onPressOut}
+        aria-label="Notify me"
+      />
+    );
+    await render(renderWith(onPress));
+
+    await fireEvent(screen.getByRole('checkbox'), 'keyDown', key(' '));
+    // Still interactive through `onLongPress`, but Space has nothing to press.
+    await screen.rerender(renderWith(undefined));
+    await screen.rerender(renderWith(onPress));
+    await fireEvent(screen.getByRole('checkbox'), 'keyUp', key(' '));
+
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it.each(['ios', 'android'] as const)(
+    'leaves the key alone on %s',
+    async (os) => {
+      jest.replaceProperty(Platform, 'OS', os);
+      const onPress = jest.fn<(e: GestureResponderEvent) => void>();
+      await renderCheckbox(onPress);
+      const space = key(' ');
+
+      await fireEvent(screen.getByRole('checkbox'), 'keyDown', space);
+      await fireEvent(screen.getByRole('checkbox'), 'keyUp', space);
+
+      expect(space.preventDefault).not.toHaveBeenCalled();
+      expect(onPress).not.toHaveBeenCalled();
+    }
+  );
+});
+
+describe('Checkbox focus ring', () => {
+  const { thickness, outerOffset } = tokens.md.sys.state.focusIndicator;
+  const ringSize =
+    CheckboxTokens.stateLayerSize + 2 * (outerOffset + thickness);
+
+  /* eslint-disable testing-library/no-node-access, no-restricted-syntax --
+     Checkbox draws its ring as an unnamed view beside the pressable, with no
+     role or testID to query it by, so the outer container's children have to
+     be read to count it. */
+  const ringCount = () =>
+    (screen.root?.children ?? []).filter((child) => {
+      if (typeof child === 'string') return false;
+      const { width, height, borderWidth } =
+        StyleSheet.flatten(child.props.style) ?? {};
+      return (
+        width === ringSize && height === ringSize && borderWidth === thickness
+      );
+    }).length;
+  /* eslint-enable testing-library/no-node-access, no-restricted-syntax */
+
+  // A display-only checkbox is not exposed as a checkbox, so it is found by
+  // testID.
+  const Box = ({ onPress }: { onPress?: () => void }) => (
+    <Checkbox
+      status="unchecked"
+      onPress={onPress}
+      aria-label="Notify me"
+      testID="checkbox"
+    />
+  );
+
+  // On Android a TouchableRipple without a handler renders a plain View, so
+  // the focused Pressable is destroyed and its blur never reaches JS.
+  const renderOnAndroid = async (onPress?: () => void) => {
+    jest.replaceProperty(Platform, 'OS', 'android');
+    jest.replaceProperty(TouchableRipple, 'supported', true);
+    await render(<Box onPress={onPress} />);
+  };
+
+  it('draws one ring on keyboard focus', async () => {
+    await renderOnAndroid(() => {});
+    await fireEvent(screen.getByTestId('checkbox'), 'focus');
+
+    expect(ringCount()).toBe(1);
+  });
+
+  it('drops the ring when onPress is removed', async () => {
+    const onPress = () => {};
+    await renderOnAndroid(onPress);
+    const pressable = screen.getByTestId('checkbox');
+    await fireEvent(screen.getByTestId('checkbox'), 'focus');
+
+    await screen.rerender(<Box />);
+
+    // The focused Pressable was replaced, not just left without a handler.
+    expect(screen.getByTestId('checkbox')).not.toBe(pressable);
+    expect(ringCount()).toBe(0);
+  });
+
+  it('shows no ring when onPress comes back until it is focused again', async () => {
+    const onPress = () => {};
+    await renderOnAndroid(onPress);
+    await fireEvent(screen.getByTestId('checkbox'), 'focus');
+
+    await screen.rerender(<Box />);
+    await screen.rerender(<Box onPress={onPress} />);
+
+    expect(ringCount()).toBe(0);
+  });
+});
+
+describe('Checkbox touch target', () => {
+  it('meets the 48dp minimum', async () => {
+    await render(
+      <Checkbox status="unchecked" onPress={() => {}} aria-label="Notify me" />
+    );
+
+    expect(screen.getByRole('checkbox')).toHaveStyle({
+      width: 48,
+      height: 48,
+    });
+  });
+
+  it('takes the custom style on the outer container, not the pressable', async () => {
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={() => {}}
+        aria-label="Notify me"
+        style={{ marginTop: 12 }}
+      />
+    );
+
+    // On the pressable the style would miss the focus ring beside it, and
+    // could shrink the touch target back below 48dp.
+    expect(screen.root).toHaveStyle({ marginTop: 12 });
+    expect(screen.getByRole('checkbox')).not.toHaveStyle({ marginTop: 12 });
+  });
+
+  it('sizes its outer container to the touch target', async () => {
+    await render(
+      <Checkbox status="unchecked" onPress={() => {}} aria-label="Notify me" />
+    );
+
+    // Without a definite size, a column's default `alignItems: 'stretch'`
+    // widens the container and centers the checkbox in the column.
+    expect(screen.root).toHaveStyle({ width: 48, height: 48 });
+  });
+
+  it('reports the layout of the whole checkbox, not its pressable', async () => {
+    const onLayout = jest.fn();
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={() => {}}
+        aria-label="Notify me"
+        style={{ marginLeft: 24 }}
+        onLayout={onLayout}
+      />
+    );
+
+    // `style` positions the outer container, so its frame is the checkbox's.
+    // The pressable inside it always sits at x 0.
+    expect(screen.root).toHaveProp('onLayout', onLayout);
+    expect(screen.getByRole('checkbox')).not.toHaveProp('onLayout');
+  });
+
+  it('keeps the 48dp touch target under a negative margin', async () => {
+    await render(
+      <Checkbox
+        status="unchecked"
+        onPress={() => {}}
+        aria-label="Notify me"
+        style={{ margin: -4 }}
+      />
+    );
+
+    expect(screen.root).toHaveStyle({ margin: -4 });
+    expect(screen.getByRole('checkbox')).toHaveStyle({
+      width: 48,
+      height: 48,
+    });
+  });
+});
+
+describe('Checkbox accessible name', () => {
+  it('warns when a standalone checkbox has no accessible name', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(<Checkbox status="checked" onPress={() => {}} />);
+
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining('aria-label')
+    );
+  });
+
+  it('does not warn in production', async () => {
+    jest.replaceProperty(process.env, 'NODE_ENV', 'production');
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(<Checkbox status="checked" onPress={() => {}} />);
+
+    expect(console.warn).not.toHaveBeenCalled();
+  });
+
+  it('is named by aria-label', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(
+      <Checkbox status="checked" onPress={() => {}} aria-label="Notify me" />
+    );
+
+    expect(screen.getByLabelText('Notify me')).toBeOnTheScreen();
+    expect(console.warn).not.toHaveBeenCalled();
+  });
+
+  it('does not warn for the checkbox inside a labelled Checkbox.Item', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    await render(<Checkbox.Item label="Notify me" status="checked" />);
+
+    expect(console.warn).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    { os: 'ios', hidden: { 'aria-hidden': true } },
+    { os: 'android', hidden: { 'aria-hidden': true } },
+    { os: 'web', hidden: { 'aria-hidden': true } },
+    { os: 'ios', hidden: { accessibilityElementsHidden: true } },
+    { os: 'android', hidden: { importantForAccessibility: 'no' } },
+    {
+      os: 'android',
+      hidden: { importantForAccessibility: 'no-hide-descendants' },
+    },
+  ] as const)(
+    'does not warn on $os for a checkbox hidden with $hidden',
+    async ({ os, hidden }) => {
+      jest.replaceProperty(Platform, 'OS', os);
+      jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      await render(
+        <Checkbox status="checked" onPress={() => {}} {...hidden} />
+      );
+
+      expect(console.warn).not.toHaveBeenCalled();
+    }
+  );
+
+  // Each of these props hides a view on one platform only, so elsewhere the
+  // checkbox stays exposed and still needs a name.
+  it.each([
+    { os: 'ios', hidden: { importantForAccessibility: 'no-hide-descendants' } },
+    { os: 'web', hidden: { importantForAccessibility: 'no-hide-descendants' } },
+    { os: 'android', hidden: { accessibilityElementsHidden: true } },
+    { os: 'web', hidden: { accessibilityElementsHidden: true } },
+  ] as const)(
+    'still warns on $os when only $hidden hides it',
+    async ({ os, hidden }) => {
+      jest.replaceProperty(Platform, 'OS', os);
+      jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      await render(
+        <Checkbox status="checked" onPress={() => {}} {...hidden} />
+      );
+
+      expect(console.warn).toHaveBeenCalledWith(
+        expect.stringContaining('aria-label')
+      );
+    }
+  );
+
+  it('warns on iOS when only aria-labelledby names it', async () => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    // iOS does not name an element after the one it is labelled by.
+    await render(
+      <Checkbox status="checked" onPress={() => {}} aria-labelledby="label" />
+    );
+
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining('aria-label')
+    );
+  });
+
+  it.each(['android', 'web'] as const)(
+    'is named by aria-labelledby on %s',
+    async (os) => {
+      jest.replaceProperty(Platform, 'OS', os);
+      jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      await render(
+        <Checkbox status="checked" onPress={() => {}} aria-labelledby="label" />
+      );
+
+      expect(console.warn).not.toHaveBeenCalled();
+    }
+  );
 });

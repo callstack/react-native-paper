@@ -1,15 +1,19 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
-import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
+import type {
+  ColorValue,
+  StyleProp,
+  TextStyle,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
 
+import { DEFAULT_SIZE } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../theme/colors';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
-import getContrastingColor from '../../utils/getContrastingColor';
 import Text from '../Typography/Text';
 
-const defaultSize = 64;
-
-export type Props = ViewProps & {
+export type Props = Omit<ViewProps, 'style'> & {
   /**
    * Initials to show as the text in the `Avatar`.
    */
@@ -21,11 +25,17 @@ export type Props = ViewProps & {
   /**
    * Custom color for the text.
    */
-  color?: string;
+  color?: ColorValue;
   /**
-   * Style for text container
+   * Background color of the avatar.
    */
-  style?: StyleProp<ViewStyle>;
+  backgroundColor?: ColorValue;
+  /**
+   * Style for the text container.
+   *
+   * Background color should be specified via the `backgroundColor` prop instead.
+   */
+  style?: StyleProp<Omit<ViewStyle, 'backgroundColor'>>;
   /**
    * Style for the title.
    */
@@ -55,20 +65,16 @@ export type Props = ViewProps & {
  */
 const AvatarText = ({
   label,
-  size = defaultSize,
+  size = DEFAULT_SIZE,
   style,
   labelStyle,
   color: customColor,
+  backgroundColor: customBackgroundColor,
   theme: themeOverrides,
   maxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
-    StyleSheet.flatten(style) || {};
-  const textColor =
-    customColor ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
   const { fontScale } = useWindowDimensions();
 
   return (
@@ -77,19 +83,24 @@ const AvatarText = ({
         {
           width: size,
           height: size,
-          borderRadius: size / 2,
-          backgroundColor,
+          borderRadius: cornerFull,
         },
         styles.container,
-        restStyle,
+        style,
+        {
+          backgroundColor:
+            customBackgroundColor ?? theme.colors.primaryContainer,
+        },
       ]}
       {...rest}
     >
       <Text
+        variant="titleMedium"
+        theme={themeOverrides}
         style={[
           styles.text,
           {
-            color: textColor,
+            color: customColor ?? theme.colors.onPrimaryContainer,
             fontSize: size / 2,
             lineHeight: size / fontScale,
           },

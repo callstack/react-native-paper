@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Platform,
   Pressable,
   Text,
   TextInput as NativeTextInput,
@@ -28,8 +29,9 @@ import type { InternalTheme, ThemeProp } from '../../theme/types';
 export type TextInputAnimationState = {
   animatedLabelWrapperStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   animatedLabelTextStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
-  animatedContainerStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+  animatedAffixStyle: StyleProp<AnimatedStyle<StyleProp<TextStyle>>>;
   animatedActiveOutlineStyle?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+  isLabelFloated: boolean;
 };
 
 export type TextInputAnimationHandlers = {
@@ -57,25 +59,37 @@ export type TextInputColors = {
 };
 
 export type GetAccessibilityDataReturn = {
-  input: AccessibilityProps & { 'aria-invalid'?: boolean };
-  supportingText: AccessibilityProps;
-  counter: AccessibilityProps;
+  input: AccessibilityProps & {
+    'aria-invalid'?: TextInputProps['aria-invalid'];
+    'aria-describedby'?: string;
+  };
+  label: { nativeID?: string };
+  placeholder: AccessibilityProps & { nativeID?: string };
+  prefix: AccessibilityProps & { nativeID?: string };
+  suffix: AccessibilityProps & { nativeID?: string };
+  supportingText: AccessibilityProps & { nativeID?: string };
+  counter: AccessibilityProps & { nativeID?: string };
 };
 
 export type GetAccessibilityDataProps = {
   data: TextInputProps;
+  id: string;
   inputLength: number;
   hasError: boolean;
   hasCounter: boolean;
+  hasPrefix: boolean;
+  hasSuffix: boolean;
   isDisabled: boolean;
+  isPlaceholderShown: boolean;
 };
 
 export type TextInputVariant = 'filled' | 'outlined';
 
 export type TextInputSharedApi = {
-  input: React.RefObject<NativeTextInput | null>;
+  input: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
   theme: InternalTheme;
   isFocused: boolean;
+  isHovered?: boolean;
   isRTL: boolean;
   isDisabled: boolean;
   hasAccessory: boolean;
@@ -98,7 +112,7 @@ export type SharedTextInputStyleData = {
 };
 
 export type FilledTextInputHookData = SharedTextInputStyleData & {
-  input: React.RefObject<NativeTextInput | null>;
+  input: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
   isDisabled: boolean;
   hasError: boolean;
   hasSuffix: boolean;
@@ -112,7 +126,7 @@ export type FilledTextInputHookData = SharedTextInputStyleData & {
 };
 
 export type OutlinedTextInputHookData = SharedTextInputStyleData & {
-  input: React.RefObject<NativeTextInput | null>;
+  input: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
   isDisabled: boolean;
   hasError: boolean;
   hasSuffix: boolean;
@@ -134,7 +148,7 @@ export type TextInputLayoutState = Omit<
 >;
 
 export type TextInputHookReturn = SharedTextInputStyleData & {
-  input: React.RefObject<NativeTextInput | null>;
+  input: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
   isDisabled: boolean;
   isEditable: boolean | undefined;
   hasPrefix: boolean;
@@ -147,7 +161,9 @@ export type TextInputHookReturn = SharedTextInputStyleData & {
   animatedActiveOutlineStyles:
     | StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>
     | undefined;
-  animatedContainerStyle: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
+  animatedAffixStyle:
+    | StyleProp<AnimatedStyle<StyleProp<TextStyle>>>
+    | undefined;
   animatedLabelWrapperStyles: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
   containerStyles: StyleProp<ViewStyle>;
   fieldStyles: StyleProp<ViewStyle>;
@@ -167,20 +183,36 @@ export type TextInputHookReturn = SharedTextInputStyleData & {
   onFocus: (e: FocusEvent) => void;
   onBlur: (e: BlurEvent) => void;
   focusInput: () => void;
+  onHoverIn: () => void;
+  onHoverOut: () => void;
 };
 
 export type TextInputRenderProps = React.ComponentPropsWithoutRef<
   typeof NativeTextInput
 > & {
-  ref?: React.RefObject<NativeTextInput | null>;
+  ref?: React.RefObject<React.ComponentRef<typeof NativeTextInput> | null>;
+  'aria-describedby'?: string;
+  'aria-invalid'?: TextInputProps['aria-invalid'];
 };
 
 export type TextInputHandles = Pick<
-  NativeTextInput,
+  React.ComponentRef<typeof NativeTextInput>,
   'focus' | 'clear' | 'blur' | 'isFocused' | 'setNativeProps' | 'setSelection'
 >;
 
 export type TextInputProps = NativeTextInputProps & {
+  /**
+   * Overrides the field's invalid state on web, including grammar or spelling
+   * errors. Defaults to the error state or an exceeded character counter.
+   */
+  'aria-invalid'?: React.AriaAttributes['aria-invalid'];
+  /**
+   * Space-separated IDs of additional descriptions on web. The IDs of the
+   * rendered prefix, suffix, supporting text and character counter, and of the
+   * placeholder while the label covers it, are appended automatically.
+   * On Android and iOS, provide external descriptions with `accessibilityHint`.
+   */
+  'aria-describedby'?: string;
   /**
    * Imperative handle exposing a subset of native `TextInput` methods
    * with side-effect handling (e.g. `clear()` syncs internal state and animations).
@@ -204,11 +236,16 @@ export type TextInputProps = NativeTextInputProps & {
   label?: string;
   /**
    * Supporting text to display below the input (Material Design 3).
+   * Associated with the field through `aria-describedby` on web and included
+   * in the native accessibility hint. When `error` is true, a new or changed
+   * message is announced. It does not become part of the field's accessible
+   * name.
    */
   supportingText?: string;
   /**
    * When `true`, displays a character counter below the input on the trailing
    * side, showing `currentLength/maxLength`. Requires `maxLength` to be set.
+   * Associated with the field alongside supporting text.
    */
   counter?: boolean;
   /**
@@ -324,7 +361,7 @@ function TextInput({
     animatedActiveOutlineStyles,
     animatedLabelWrapperStyles,
     animatedLabelTextStyles,
-    animatedContainerStyle,
+    animatedAffixStyle,
     containerStyles,
     inputStyles,
     prefixStyles,
@@ -343,6 +380,8 @@ function TextInput({
     onChangeText,
     onFocus,
     onBlur,
+    onHoverIn,
+    onHoverOut,
   } = useTextInput({
     ref,
     error,
@@ -360,8 +399,32 @@ function TextInput({
   });
 
   return (
-    <Pressable onPress={focusInput} accessible={false} role="none">
-      <View style={fieldStyles}>
+    <Pressable
+      onPress={focusInput}
+      onHoverIn={Platform.OS === 'web' ? undefined : onHoverIn}
+      onHoverOut={Platform.OS === 'web' ? undefined : onHoverOut}
+      accessible={false}
+      role="none"
+    >
+      <View
+        style={fieldStyles}
+        // Nested web Pressables contain hover events; track the whole field.
+        // Touches don't hover, so they neither set nor clear a mouse hover.
+        onPointerEnter={
+          Platform.OS === 'web'
+            ? (event) => {
+                if (event.nativeEvent.pointerType !== 'touch') onHoverIn();
+              }
+            : undefined
+        }
+        onPointerLeave={
+          Platform.OS === 'web'
+            ? (event) => {
+                if (event.nativeEvent.pointerType !== 'touch') onHoverOut();
+              }
+            : undefined
+        }
+      >
         {/* Disabled tint overlay — filled variant only. A childless
           absolutely-positioned View whose translucent fill is applied via the
           `opacity` style, so it never affects label/input rendering and works
@@ -383,10 +446,22 @@ function TextInput({
 
         {!!label && (
           <Animated.View aria-hidden style={animatedLabelWrapperStyles}>
-            <Animated.Text style={animatedLabelTextStyles}>
+            <Animated.Text
+              {...accessibilityProps.label}
+              style={animatedLabelTextStyles}
+            >
               {label}
             </Animated.Text>
           </Animated.View>
+        )}
+
+        {!!accessibilityProps.placeholder.nativeID && (
+          <Text
+            {...accessibilityProps.placeholder}
+            style={styles.placeholderDescription}
+          >
+            {rest.placeholder}
+          </Text>
         )}
 
         {renderLeadingAccessory
@@ -398,17 +473,26 @@ function TextInput({
             })
           : null}
 
-        <Animated.View style={[containerStyles, animatedContainerStyle]}>
-          {hasPrefix && <Text style={prefixStyles}>{prefix}</Text>}
+        {/* Keep the field visible to native accessibility even before focus. */}
+        <View style={containerStyles}>
+          {hasPrefix && (
+            <Animated.Text
+              {...accessibilityProps.prefix}
+              style={[prefixStyles, animatedAffixStyle]}
+            >
+              {prefix}
+            </Animated.Text>
+          )}
 
           {render({
             ref: input,
             selectionColor,
             cursorColor,
             placeholderTextColor,
-            ...accessibilityProps.input,
             ...rest,
+            ...accessibilityProps.input,
             editable: isEditable,
+            readOnly: disabled ? true : rest.readOnly,
             placeholder,
             style: inputStyles,
             onChangeText,
@@ -416,8 +500,15 @@ function TextInput({
             onBlur,
           })}
 
-          {hasSuffix && <Text style={suffixStyles}>{suffix}</Text>}
-        </Animated.View>
+          {hasSuffix && (
+            <Animated.Text
+              {...accessibilityProps.suffix}
+              style={[suffixStyles, animatedAffixStyle]}
+            >
+              {suffix}
+            </Animated.Text>
+          )}
+        </View>
 
         {renderTrailingAccessory ? (
           renderTrailingAccessory({
@@ -427,13 +518,18 @@ function TextInput({
             multiline: !!rest.multiline,
           })
         ) : hasError ? (
-          <TextInputErrorIcon style={trailingAccessoryStyles} theme={theme} />
+          <TextInputErrorIcon
+            style={trailingAccessoryStyles}
+            disabled={isDisabled}
+            theme={theme}
+          />
         ) : null}
       </View>
 
       <View style={styles.addendum}>
         {!!supportingText && (
           <Text
+            key={hasError ? 'error' : 'supporting'}
             {...accessibilityProps.supportingText}
             style={supportingTextStyles}
           >

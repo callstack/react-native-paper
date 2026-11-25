@@ -24,7 +24,9 @@ import type { SurfaceStyle } from './Surface';
 import Text from './Typography/Text';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
+import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../theme/types';
+import { FocusRingColorContext } from '../utils/useFocusRing';
 
 export type Props = Omit<ViewProps, 'style'> & {
   /**
@@ -87,7 +89,7 @@ export type Props = Omit<ViewProps, 'style'> & {
    */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<SurfaceStyle>;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
    * @optional
    */
@@ -182,7 +184,7 @@ const Snackbar = ({
 
   const [hidden, setHidden] = React.useState(!visible);
 
-  const { scale } = theme.animation;
+  const getDuration = useMotionDuration();
 
   if (visible && hidden) {
     setHidden(false);
@@ -211,7 +213,7 @@ const Snackbar = ({
     opacity.value = withTiming(
       visible ? 1 : 0,
       {
-        duration: (visible ? 200 : 100) * scale,
+        duration: getDuration(visible ? 200 : 100),
         easing: visible ? Easing.out(Easing.ease) : Easing.inOut(Easing.ease),
         reduceMotion: ReduceMotion.Never,
       },
@@ -223,7 +225,7 @@ const Snackbar = ({
         }
       }
     );
-  }, [handleShowAnimationFinished, opacity, scale, visible]);
+  }, [getDuration, handleShowAnimationFinished, opacity, visible]);
 
   React.useEffect(() => {
     isMounted.current = true;
@@ -305,49 +307,52 @@ const Snackbar = ({
       >
         {content}
         {(action || isIconButton) && (
-          <View style={[styles.actionsContainer, { marginLeft }]}>
-            {action ? (
-              <Button
-                onPress={(event) => {
-                  onPressAction?.(event);
-                  onDismiss();
-                }}
-                style={[styles.button, actionStyle]}
-                textColor={buttonTextColor}
-                compact={false}
-                mode="text"
-                theme={theme}
-                {...actionProps}
-              >
-                {actionLabel}
-              </Button>
-            ) : null}
-            {isIconButton ? (
-              <IconButton
-                role="button"
-                borderless
-                onPress={onIconPress}
-                iconColor={colors.inverseOnSurface}
-                theme={theme}
-                icon={
-                  icon ||
-                  (({ size, color }) => {
-                    return (
-                      <MaterialCommunityIcon
-                        name="close"
-                        color={color}
-                        size={size}
-                        direction={direction}
-                      />
-                    );
-                  })
-                }
-                aria-label={iconAccessibilityLabel}
-                style={styles.icon}
-                testID={iconTestID}
-              />
-            ) : null}
-          </View>
+          // `secondary` barely shows on `inverseSurface`, so the action and
+          // close button ring in `inversePrimary`, the action label's color.
+          <FocusRingColorContext.Provider value={colors.inversePrimary}>
+            <View style={[styles.actionsContainer, { marginLeft }]}>
+              {action ? (
+                <Button
+                  onPress={(event) => {
+                    onPressAction?.(event);
+                    onDismiss();
+                  }}
+                  style={[styles.button, actionStyle]}
+                  textColor={buttonTextColor}
+                  mode="text"
+                  theme={theme}
+                  {...actionProps}
+                >
+                  {actionLabel}
+                </Button>
+              ) : null}
+              {isIconButton ? (
+                <IconButton
+                  role="button"
+                  borderless
+                  onPress={onIconPress}
+                  iconColor={colors.inverseOnSurface}
+                  theme={theme}
+                  icon={
+                    icon ||
+                    (({ size, color }) => {
+                      return (
+                        <MaterialCommunityIcon
+                          name="close"
+                          color={color}
+                          size={size}
+                          direction={direction}
+                        />
+                      );
+                    })
+                  }
+                  aria-label={iconAccessibilityLabel}
+                  style={styles.icon}
+                  testID={iconTestID}
+                />
+              ) : null}
+            </View>
+          </FocusRingColorContext.Provider>
         )}
       </Surface>
     </View>

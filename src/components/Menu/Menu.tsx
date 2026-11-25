@@ -32,9 +32,10 @@ import useLatestCallback from 'use-latest-callback';
 import MenuItem from './MenuItem';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
 import type { Elevation, ThemeProp } from '../../theme/types';
 import { addEventListener } from '../../utils/addEventListener';
-import { BackHandler } from '../../utils/BackHandler/BackHandler';
+import { useOverlayDismiss } from '../../utils/useOverlayDismiss';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
@@ -122,7 +123,9 @@ const getKeyboardHeight = (fallback: number) =>
 const DEFAULT_ELEVATION: Elevation = 2;
 const DEFAULT_MODE = 'elevated';
 
-const focusFirstDOMNode = (el: View | null | undefined) => {
+const focusFirstDOMNode = (
+  el: React.ComponentRef<typeof View> | null | undefined
+) => {
   if (el && Platform.OS === 'web') {
     // When in the browser, we want to focus the first focusable item on toggle
     // For example, when menu is shown, focus the first item in the menu
@@ -229,8 +232,8 @@ const Menu = ({
 
   const keyboardHeightRef = React.useRef(0);
   const prevVisible = React.useRef(visible);
-  const anchorRef = React.useRef<View | null>(null);
-  const menuRef = React.useRef<View | null>(null);
+  const anchorRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
+  const menuRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
   const isShownRef = React.useRef(false);
 
   const keyboardDidShow = React.useCallback((e: RNKeyboardEvent) => {
@@ -249,9 +252,6 @@ const Menu = ({
     EmitterSubscription | undefined
   > = React.useRef(undefined);
 
-  const backHandlerSubscriptionRef: React.RefObject<
-    NativeEventSubscription | undefined
-  > = React.useRef(undefined);
   const dimensionsSubscriptionRef: React.RefObject<
     NativeEventSubscription | undefined
   > = React.useRef(undefined);
@@ -262,37 +262,26 @@ const Menu = ({
     }
   }, [onDismiss, visible]);
 
-  const handleKeypress = React.useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onDismiss?.();
-      }
-    },
-    [onDismiss]
-  );
+  // Back and Escape go through the overlay stack, so that a menu opened from a
+  // modal closes first and the modal stays. Without `onDismiss` there is
+  // nothing to close, and the press is left to whatever is underneath.
+  useOverlayDismiss({
+    enabled: visible && onDismiss !== undefined,
+    dismissable: true,
+    onDismiss,
+  });
 
   const removeListeners = React.useCallback(() => {
-    backHandlerSubscriptionRef.current?.remove();
     dimensionsSubscriptionRef.current?.remove();
-
-    if (Platform.OS === 'web' && 'document' in global) {
-      document.removeEventListener('keyup', handleKeypress);
-    }
-  }, [handleKeypress]);
+  }, []);
 
   const attachListeners = React.useCallback(() => {
-    backHandlerSubscriptionRef.current = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      handleDismiss
-    );
     dimensionsSubscriptionRef.current = addEventListener(
       Dimensions,
       'change',
       handleDismiss
     );
-    Platform.OS === 'web' && document.addEventListener('keyup', handleKeypress);
-  }, [handleDismiss, handleKeypress]);
+  }, [handleDismiss]);
 
   const measureMenuLayout = () =>
     new Promise<LayoutRectangle>((resolve) => {
@@ -334,11 +323,15 @@ const Menu = ({
       return;
     }
 
+    scaleX.value = 0;
+    scaleY.value = 0;
     setMenuLayout({ width: 0, height: 0 });
     setRendered(false);
     isShownRef.current = false;
     focusFirstDOMNode(anchorRef.current);
   });
+
+  const getDuration = useMotionDuration();
 
   const show = React.useCallback(async () => {
     const windowLayoutResult = Dimensions.get('window');
@@ -395,10 +388,8 @@ const Menu = ({
         return;
       }
 
-      const { animation } = theme;
-
       const config = {
-        duration: ANIMATION_DURATION * animation.scale,
+        duration: getDuration(ANIMATION_DURATION),
         easing: EASING,
         reduceMotion: ReduceMotion.Never,
       };
@@ -413,30 +404,28 @@ const Menu = ({
   }, [
     anchor,
     attachListeners,
+    getDuration,
     handleShowAnimationFinished,
     measureAnchorLayout,
     opacity,
     scaleX,
     scaleY,
-    theme,
   ]);
 
   const hide = React.useCallback(() => {
     removeListeners();
     isShownRef.current = false;
 
-    const { animation } = theme;
-
     opacity.value = withTiming(
       0,
       {
-        duration: ANIMATION_DURATION * animation.scale,
+        duration: getDuration(ANIMATION_DURATION),
         easing: EASING,
         reduceMotion: ReduceMotion.Never,
       },
       (finished) => scheduleOnRN(handleHideAnimationFinished, finished ?? false)
     );
-  }, [handleHideAnimationFinished, opacity, removeListeners, theme]);
+  }, [getDuration, handleHideAnimationFinished, opacity, removeListeners]);
 
   const updateVisibility = React.useCallback(
     async (display: boolean) => {

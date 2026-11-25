@@ -83,7 +83,6 @@ const TooltipExample = () => {
               >
                 <IconButton
                   icon={transport.title.split(' ')[0].toLowerCase()}
-                  size={24}
                   onPress={() => {}}
                 />
               </Tooltip>
@@ -95,7 +94,7 @@ const TooltipExample = () => {
             <Tooltip title="Align left">
               <IconButton
                 icon="format-align-left"
-                mode="contained-tonal"
+                mode="tonal"
                 selected={textAlign === 'left'}
                 onPress={() => setTextAlign('left')}
               />
@@ -103,7 +102,7 @@ const TooltipExample = () => {
             <Tooltip title="Align center">
               <IconButton
                 icon="format-align-center"
-                mode="contained-tonal"
+                mode="tonal"
                 selected={textAlign === 'center'}
                 onPress={() => setTextAlign('center')}
               />
@@ -111,7 +110,7 @@ const TooltipExample = () => {
             <Tooltip title="Align right">
               <IconButton
                 icon="format-align-right"
-                mode="contained-tonal"
+                mode="tonal"
                 selected={textAlign === 'right'}
                 disabled
                 onPress={() => setTextAlign('right')}

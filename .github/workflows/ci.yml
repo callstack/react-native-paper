@@ -36,6 +36,10 @@ jobs:
       - name: Check types
         run: yarn typecheck
 
+      # React Native < 0.87 still uses its legacy types by default
+      - name: Check types against legacy React Native types
+        run: yarn tsc -p tsconfig.build.json --noEmit --customConditions react-native-paper-source,react-native-legacy-deep-imports
+
   unit-tests:
     name: Unit tests
     strategy:

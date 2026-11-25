@@ -50,12 +50,16 @@ const ProgressBarExample = () => {
 
       <View style={styles.row}>
         <Text variant="bodyMedium">Default ProgressBar</Text>
-        <ProgressBar progress={progress} visible={visible} />
+        <ProgressBar
+          progress={progress}
+          visible={visible}
+          aria-label="Progress"
+        />
       </View>
 
       <View style={styles.row}>
         <Text variant="bodyMedium">Indeterminate ProgressBar</Text>
-        <ProgressBar indeterminate visible={visible} />
+        <ProgressBar indeterminate visible={visible} aria-label="Loading" />
       </View>
 
       <View style={styles.row}>
@@ -64,6 +68,7 @@ const ProgressBarExample = () => {
           progress={progress}
           visible={visible}
           color={Palette.error50}
+          aria-label="Progress"
         />
       </View>
 
@@ -78,6 +83,7 @@ const ProgressBarExample = () => {
           style={{
             backgroundColor: Palette.secondary50,
           }}
+          aria-label="Progress"
         />
       </View>
 
@@ -87,6 +93,7 @@ const ProgressBarExample = () => {
           progress={progress}
           visible={visible}
           style={styles.customHeight}
+          aria-label="Progress"
         />
       </View>
 
@@ -97,6 +104,7 @@ const ProgressBarExample = () => {
           style={styles.progressBar}
           animatedValue={progressBarValue}
           theme={theme}
+          aria-label="Progress"
         />
       </View>
 
@@ -108,6 +116,7 @@ const ProgressBarExample = () => {
           style={styles.customPercentageHeight}
           indeterminate
           visible={visible}
+          aria-label="Loading"
         />
       </View>
     </ScreenWrapper>

@@ -1,4 +1,4 @@
-import { Image } from 'react-native';
+import { AccessibilityInfo, Image } from 'react-native';
 
 import {
   afterAll,
@@ -10,9 +10,26 @@ import {
   jest,
 } from '@jest/globals';
 import { act } from '@testing-library/react-native';
+import * as Reanimated from 'react-native-reanimated';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
+import type { Theme } from '../../theme/types';
 import Banner from '../Banner';
+
+jest.mock('react-native-reanimated', () => {
+  const ReanimatedModule = jest.requireActual<
+    typeof import('react-native-reanimated')
+  >('react-native-reanimated');
+
+  return {
+    __esModule: true,
+    ...ReanimatedModule,
+    default: ReanimatedModule.default,
+    withTiming: jest.fn(ReanimatedModule.withTiming),
+  };
+});
 
 it('renders hidden banner, without action buttons and without image', async () => {
   const tree = (
@@ -259,6 +276,56 @@ describe('animations', () => {
     });
   });
 
+  describe('when the theme changes while the component is mounted', () => {
+    const themeWithSurface = (surface: string): Theme => ({
+      ...LightTheme,
+      colors: { ...LightTheme.colors, surface },
+      motion: {
+        ...LightTheme.motion,
+        easing: {
+          ...LightTheme.motion.easing,
+          standardDecelerate: [...LightTheme.motion.easing.standardDecelerate],
+          standardAccelerate: [...LightTheme.motion.easing.standardAccelerate],
+        },
+      },
+    });
+
+    it('should not cause another open/close animation', async () => {
+      const view = await render(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+          theme={themeWithSurface('white')}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      await act(() => {
+        jest.runAllTimers();
+      });
+      expect(showCallback).toHaveBeenCalledTimes(1);
+
+      await view.rerender(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+          theme={themeWithSurface('black')}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      await act(() => {
+        jest.runAllTimers();
+      });
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).not.toHaveBeenCalled();
+    });
+  });
+
   describe('when the callbacks change while the component is mounted', () => {
     it('should not cause another open/close animation', async () => {
       const view = await render(
@@ -355,5 +422,80 @@ describe('animations', () => {
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
       expect(nextHideCallback).toHaveBeenCalledTimes(1);
     });
+  });
+
+  describe('with reduce motion', () => {
+    it.each([
+      { reduceMotion: 'off', show: 250, hide: 200 },
+      { reduceMotion: 'on', show: 0, hide: 0 },
+    ] as const)(
+      'should open in $show ms and close in $hide ms when reduceMotion is "$reduceMotion"',
+      async ({ reduceMotion, show, hide }) => {
+        const withTiming = jest.mocked(Reanimated.withTiming);
+        const makeBanner = (visible: boolean) => (
+          <PaperProvider reduceMotion={reduceMotion}>
+            <Banner visible={visible}>Text</Banner>
+          </PaperProvider>
+        );
+
+        const view = await render(makeBanner(false));
+        withTiming.mockClear();
+
+        await view.rerender(makeBanner(true));
+        await view.rerender(makeBanner(false));
+
+        expect(
+          withTiming.mock.calls.map(([, config]) => config?.duration)
+        ).toEqual([show, hide]);
+      }
+    );
+
+    it.each([
+      { state: 'visible', visible: true },
+      { state: 'hidden', visible: false },
+    ])(
+      'should not call the callbacks of a $state banner again when the OS setting changes',
+      async ({ visible }) => {
+        const addEventListener = jest.mocked(
+          AccessibilityInfo.addEventListener
+        );
+        const reduceMotionListeners = () =>
+          addEventListener.mock.calls
+            .filter(([eventName]) => eventName === 'reduceMotionChanged')
+            .map(([, listener]) => listener);
+        addEventListener.mockClear();
+
+        await render(
+          <PaperProvider>
+            <Banner
+              onShowAnimationFinished={showCallback}
+              onHideAnimationFinished={hideCallback}
+              visible={visible}
+            >
+              Text
+            </Banner>
+          </PaperProvider>
+        );
+
+        await act(() => {
+          jest.runAllTimers();
+        });
+        expect(showCallback).toHaveBeenCalledTimes(visible ? 1 : 0);
+        expect(hideCallback).toHaveBeenCalledTimes(visible ? 0 : 1);
+        expect(reduceMotionListeners()).not.toHaveLength(0);
+
+        for (const enabled of [true, false]) {
+          await act(() => {
+            reduceMotionListeners().forEach((listener) => listener(enabled));
+          });
+          await act(() => {
+            jest.runAllTimers();
+          });
+        }
+
+        expect(showCallback).toHaveBeenCalledTimes(visible ? 1 : 0);
+        expect(hideCallback).toHaveBeenCalledTimes(visible ? 0 : 1);
+      }
+    );
   });
 });

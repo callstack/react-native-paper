@@ -23,8 +23,10 @@ On the Web, the RTL value is not set globally, unlike native platforms. `I18nMan
 Then, let `react-native-paper` know about it by using the `direction` prop on `PaperProvider` or the `LocaleProvider` component to match the writing direction in your app.
 
 :::note
-The `direction` prop informs React Native Paper about the text direction in the app i.e. it doesn't change the text direction by itself. If you intend to support RTL languages, it's important to set this prop to the correct value that's configured in the app. If it doesn't match the actual text direction, the layout might be incorrect.
+The `direction` prop of `PaperProvider` informs React Native Paper about the text direction in the app i.e. it doesn't change the text direction by itself. If you intend to support RTL languages, it's important to set this prop to the correct value that's configured in the app. If it doesn't match the actual text direction, the layout might be incorrect.
 :::
+
+On the web, `Text` aligns to the start of the writing direction, so it aligns right when `direction` is `rtl`. On Android and iOS, React Native already aligns `left` text to the right in a right-to-left layout. A `textAlign` in `style` still wins.
 
 ## Setting direction for the whole app
 
@@ -49,6 +51,8 @@ export default function Main() {
 }
 ```
 
+A `PaperProvider` inside another one doesn't take the direction of the one above it. Without its own `direction`, it falls back to `I18nManager`, which is always left-to-right on the Web, so Paper's components inside it use the left-to-right direction. Pass `direction` to the nested `PaperProvider` too, or use [`ThemeProvider`](./theming#applying-a-theme-to-part-of-the-app) when that part of the app only needs a different theme.
+
 ## Overriding direction for a subtree
 
 Use `LocaleProvider` to override the direction for a specific part of the tree without affecting the rest of the app:
@@ -57,14 +61,19 @@ Use `LocaleProvider` to override the direction for a specific part of the tree w
 import * as React from 'react';
 import { LocaleProvider } from 'react-native-paper';
 
-export default function ArabicSection() {
+export default function ArabicSection({ children }) {
   return (
     <LocaleProvider direction="rtl">
-      {/* Components here will use RTL layout */}
+      {/* Paper's components here use the RTL direction */}
+      {children}
     </LocaleProvider>
   );
 }
 ```
+
+On the Web, `LocaleProvider` also lays out its part of the tree in that direction, including menus, dialogs and other content it opens in a `Portal`. It renders a wrapper with the `dir` attribute that doesn't take part in the layout, so you don't need to set `dir` yourself.
+
+On Android and iOS, `I18nManager` sets the layout direction for the whole app, and `LocaleProvider` doesn't change it. It only changes the direction that Paper's components read, so rows and `start`/`end` styles in the subtree keep the app's direction.
 
 ## Reading the current direction
 

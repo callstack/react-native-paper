@@ -1,3 +1,4 @@
+import type { ComponentRef } from 'react';
 import { Dimensions, Keyboard, Platform, StyleSheet, View } from 'react-native';
 
 import {
@@ -9,13 +10,28 @@ import {
   jest,
 } from '@jest/globals';
 import { act, screen, waitFor } from '@testing-library/react-native';
+import * as Reanimated from 'react-native-reanimated';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import type { Elevation } from '../../theme/types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
+
+jest.mock('react-native-reanimated', () => {
+  const ReanimatedModule = jest.requireActual<
+    typeof import('react-native-reanimated')
+  >('react-native-reanimated');
+
+  return {
+    __esModule: true,
+    ...ReanimatedModule,
+    default: ReanimatedModule.default,
+    withTiming: jest.fn(ReanimatedModule.withTiming),
+  };
+});
 
 describe('web focus', () => {
   const PAST_ANIMATION_MS = 300;
@@ -57,8 +73,9 @@ describe('web focus', () => {
       configurable: true,
       value: () => ({ focus }),
     });
-    const measureInWindow: View['measureInWindow'] = (fn) =>
-      fn(100, 100, 80, 32);
+    const measureInWindow: ComponentRef<typeof View>['measureInWindow'] = (
+      fn
+    ) => fn(100, 100, 80, 32);
     Object.defineProperty(View.prototype, 'measureInWindow', {
       configurable: true,
       value: measureInWindow,
@@ -150,6 +167,8 @@ it('renders not visible menu', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+const ViewPrototype: ComponentRef<typeof View> = View.prototype;
+
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
 elevations.forEach((elevation) =>
@@ -187,7 +206,7 @@ it('uses the default anchorPosition of top', async () => {
     fontScale: 2,
   });
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
@@ -243,7 +262,7 @@ it('respects anchorPosition bottom', async () => {
     fontScale: 2,
   });
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
@@ -354,7 +373,7 @@ it('accounts for a keyboard that is already open when the menu mounts', async ()
 
   let measureCalls = 0;
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => {
       measureCalls += 1;
       if (measureCalls % 2 === 1) {
@@ -416,7 +435,7 @@ it('does not crash when Keyboard.metrics is unavailable (react-native-web)', asy
     fontScale: 2,
   });
   const measureSpy = jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(ViewPrototype, 'measureInWindow')
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
@@ -453,3 +472,117 @@ it('does not crash when Keyboard.metrics is unavailable (react-native-web)', asy
     dimensionsSpy.mockRestore();
   }
 });
+
+it('scales in again when reopened at the same anchor', async () => {
+  const testID = 'reopened-menu';
+  const measureSpy = jest
+    .spyOn(ViewPrototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={jest.fn()}
+          anchor={<Button mode="outlined">Open menu</Button>}
+          testID={testID}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  const openAndSample = async () => {
+    await act(async () => {
+      await screen.rerender(makeMenu(true));
+    });
+    await act(() => jest.advanceTimersByTimeAsync(100));
+    const style = Reanimated.getAnimatedStyle(screen.getByTestId(testID));
+    await act(() => jest.advanceTimersByTimeAsync(500));
+    return style;
+  };
+
+  try {
+    await render(makeMenu(false));
+
+    const firstOpen = await openAndSample();
+    // Partway through the first open, the menu is still growing.
+    expect(firstOpen).not.toMatchObject({
+      transform: [{ scaleX: 1 }, { scaleY: 1 }],
+    });
+
+    await act(async () => {
+      await screen.rerender(makeMenu(false));
+    });
+    await act(() => jest.advanceTimersByTimeAsync(500));
+    expect(screen.queryByTestId(testID)).toBeNull();
+
+    const secondOpen = await openAndSample();
+    expect(secondOpen).toEqual(firstOpen);
+  } finally {
+    measureSpy.mockRestore();
+  }
+});
+
+it.each([
+  { reduceMotion: 'off', duration: 250 },
+  { reduceMotion: 'on', duration: 0 },
+] as const)(
+  'opens and closes in $duration ms when reduceMotion is "$reduceMotion"',
+  async ({ reduceMotion, duration }) => {
+    const withTiming = jest.mocked(Reanimated.withTiming);
+    const durations = () =>
+      withTiming.mock.calls.map(([, config]) => config?.duration);
+    const measureSpy = jest
+      .spyOn(ViewPrototype, 'measureInWindow')
+      .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+    function makeMenu(visible: boolean) {
+      return (
+        <PaperProvider reduceMotion={reduceMotion}>
+          <Menu
+            visible={visible}
+            onDismiss={jest.fn()}
+            anchor={<Button mode="outlined">Open menu</Button>}
+          >
+            <Menu.Item onPress={jest.fn()} title="Undo" />
+          </Menu>
+        </PaperProvider>
+      );
+    }
+
+    try {
+      const { rerender } = await render(makeMenu(false));
+      // Earlier tests can leave a menu waiting for an animation frame to open.
+      await act(async () => {
+        await jest.runOnlyPendingTimersAsync();
+      });
+      withTiming.mockClear();
+
+      await act(async () => {
+        await rerender(makeMenu(true));
+        // Menu waits a tick for Portal refs to be up-to-date.
+        await Promise.resolve();
+      });
+      // The open animation starts on the next animation frame.
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(50);
+      });
+
+      // Width, height and opacity.
+      expect(durations()).toEqual([duration, duration, duration]);
+
+      withTiming.mockClear();
+      await act(async () => {
+        await rerender(makeMenu(false));
+        await Promise.resolve();
+      });
+
+      expect(durations()).toEqual([duration]);
+    } finally {
+      measureSpy.mockRestore();
+    }
+  }
+);

@@ -9,6 +9,7 @@ import type {
 } from 'react-native';
 
 import Animated, {
+  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -17,20 +18,16 @@ import type { SharedValue } from 'react-native-reanimated';
 import type { AnimatedStyle } from 'react-native-reanimated';
 
 import Content from './Content';
-import {
-  Tokens,
-  FOCUS_RING_INSET,
-  FOCUS_RING_THICKNESS,
-  webNoOutline,
-} from './tokens';
+import { Tokens } from './tokens';
 import type { Size, Variant } from './tokens';
-import { useFocusRing } from './useFocusRing';
 import { getDimensions, resolveColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { toRawSpring } from '../../theme/tokens/sys/motion';
-import type { Elevation, ThemeProp } from '../../theme/types';
+import type { ThemeProp } from '../../theme/types';
 import type { ShapeToken } from '../../theme/utils/shape';
+import hasTouchHandler from '../../utils/hasTouchHandler';
+import { useFocusRing } from '../../utils/useFocusRing';
 import type { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -46,7 +43,7 @@ export type ShellProps = {
    */
   label?: string;
   /**
-   * Role-color preset. Defaults to `tonalPrimary`.
+   * Role-color preset. Defaults to `primaryContainer`.
    */
   variant?: Variant;
   /**
@@ -78,11 +75,6 @@ export type ShellProps = {
    */
   trailing?: number;
   /**
-   * Resting elevation level. Defaults to the FAB's enabled-state elevation.
-   * Pass `0` to disable the shadow entirely.
-   */
-  elevation?: Elevation;
-  /**
    * When `false`, the shell animates out (scale + alpha) and stops accepting
    * touches.
    */
@@ -91,6 +83,23 @@ export type ShellProps = {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
+   * Whether the shell can't be pressed. Turns a control off without removing
+   * `onPress`, which would render another element and remount the content.
+   */
+  disabled?: boolean;
   /**
    * Accessibility label. Falls back to `label` if unset.
    */
@@ -112,6 +121,10 @@ export type ShellProps = {
    * Indicates whether the element's controlled content is expanded.
    */
   'aria-expanded'?: boolean;
+  /**
+   * Indicates that the element opens a popup, such as a menu.
+   */
+  'aria-haspopup'?: boolean | 'menu';
   /**
    * Largest scale the label font can reach (auto-built content only).
    */
@@ -171,7 +184,11 @@ export type ShellProps = {
    * @optional
    */
   theme?: ThemeProp;
-  ref?: React.Ref<View>;
+  ref?: React.Ref<React.ComponentRef<typeof View>>;
+  /**
+   * Ref to the pressable inside the shell, the element that receives focus.
+   */
+  buttonRef?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -186,7 +203,7 @@ export type ShellProps = {
 const Shell = ({
   icon,
   label,
-  variant = 'tonalPrimary',
+  variant = 'primaryContainer',
   size = 'default',
   containerColor,
   contentColor,
@@ -194,14 +211,18 @@ const Shell = ({
   iconSize,
   leading,
   trailing,
-  elevation = Tokens.stateElevation.enabled,
   visible = true,
   onPress,
+  onLongPress,
+  onPressOut,
+  delayLongPress,
+  disabled,
   'aria-label': ariaLabel = label,
   'aria-checked': ariaChecked,
   'aria-selected': ariaSelected,
   'aria-busy': ariaBusy,
   'aria-expanded': ariaExpanded,
+  'aria-haspopup': ariaHasPopup,
   labelMaxFontSizeMultiplier,
   labelAnimatedStyle,
   background,
@@ -215,8 +236,42 @@ const Shell = ({
   testID,
   theme: themeOverrides,
   ref,
+  buttonRef,
 }: ShellProps) => {
   const theme = useInternalTheme(themeOverrides);
+  const [hovered, setHovered] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+  const touchableRef = React.useRef<React.ComponentRef<typeof View> | null>(
+    null
+  );
+  // The touchable is the element the web focus handling below looks at, and
+  // the one `buttonRef` hands to the caller, so a single ref feeds both.
+  const setTouchableRef = React.useCallback(
+    (node: React.ComponentRef<typeof View> | null) => {
+      touchableRef.current = node;
+
+      if (typeof buttonRef === 'function') {
+        buttonRef(node);
+      } else if (buttonRef) {
+        buttonRef.current = node;
+      }
+    },
+    [buttonRef]
+  );
+  const previousFocusedElement = React.useRef<HTMLElement | null>(null);
+  const hoveredRef = React.useRef(false);
+  const pressingRef = React.useRef(false);
+
+  const hasHandler = hasTouchHandler({ onPress, onLongPress, onPressOut });
+
+  const resolvedElevation =
+    visible && hasHandler
+      ? pressed
+        ? Tokens.stateElevation.pressed
+        : hovered
+          ? Tokens.stateElevation.hover
+          : Tokens.stateElevation.enabled
+      : Tokens.stateElevation.enabled;
 
   const dimensions = React.useMemo(
     () => getDimensions({ theme, size, shape, iconSize, leading, trailing }),
@@ -242,21 +297,21 @@ const Shell = ({
       return;
     }
 
-    scale.value = withSpring(
-      target,
-      toRawSpring(theme.motion.spring.fast.spatial)
-    );
+    scale.value = withSpring(target, {
+      ...toRawSpring(theme.motion.spring.fast.spatial),
+      reduceMotion: ReduceMotion.Never,
+    });
 
-    alpha.value = withSpring(
-      target,
-      toRawSpring(theme.motion.spring.fast.effects)
-    );
+    alpha.value = withSpring(target, {
+      ...toRawSpring(theme.motion.spring.fast.effects),
+      reduceMotion: ReduceMotion.Never,
+    });
   }, [visible, theme, reduceMotion, scale, alpha]);
 
   // Fallback shared values track the static size-driven dimensions. Consumers
   // that don't supply their own animated shared values get these. Keeping
   // everything as a shared value means there's exactly one animated style
-  // per view — no static-vs-animated merge surprises.
+  // per view: no static-vs-animated merge surprises.
   const fallbackWidth = useSharedValue(dimensions.width);
   const fallbackHeight = useSharedValue(dimensions.height);
   const fallbackBorderRadius = useSharedValue(dimensions.borderRadius);
@@ -297,19 +352,106 @@ const Shell = ({
     [borderRadius, containerBg]
   );
 
-  const { focusedSV, onFocus, onBlur } = useFocusRing();
-
-  const focusRingStyle = useAnimatedStyle(
-    () => ({
-      opacity: focusedSV.value ? 1 : 0,
-      borderRadius: borderRadius.value + FOCUS_RING_INSET,
-    }),
-    [borderRadius]
+  // `scope: 'within'`: the ring is drawn on the clip view below, not the
+  // inner `TouchableRipple` that actually receives focus. On web the shared
+  // stylesheet hides the browser's own outline there, so only the clip view's
+  // ring shows, or only the outline in a browser without `:has()`.
+  //
+  // Off when `disabled` or without a touch handler: the inner TouchableRipple
+  // is then a plain View, and a focused one unmounts without a blur reaching
+  // the hook. The public FAB has no `disabled`, so dropping the handlers is how
+  // an app turns it off. Also off while hidden, which clears the focus state on
+  // native when the FAB hides while focused.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    disabled || !hasHandler || !visible,
+    theme.colors.secondary,
+    'outward',
+    'within'
   );
+
+  React.useEffect(() => {
+    if (!visible) {
+      if (Platform.OS === 'web') {
+        const target: unknown = touchableRef.current;
+        if (
+          target instanceof HTMLElement &&
+          target === document.activeElement
+        ) {
+          const previous = previousFocusedElement.current;
+          // Only restore keyboard focus. A mouse click or tap also focuses the
+          // FAB, and moving focus back could jump into an earlier text field.
+          if (
+            target.matches(':focus-visible') &&
+            previous?.isConnected &&
+            !previous.closest('[aria-hidden="true"], [inert]')
+          ) {
+            previous.focus({ preventScroll: true });
+          }
+          // Blur when focus didn't move back, e.g. after a mouse click or when
+          // the previous element is gone or can't take focus.
+          if (target === document.activeElement) target.blur();
+        }
+      }
+      hoveredRef.current = false;
+      pressingRef.current = false;
+      setHovered(false);
+      setPressed(false);
+    }
+  }, [visible]);
+
+  React.useEffect(() => {
+    if (!hasHandler) {
+      hoveredRef.current = false;
+      pressingRef.current = false;
+      setHovered(false);
+      setPressed(false);
+    }
+  }, [hasHandler]);
+
+  // The pressed elevation matches the resting one, so a press only shows on a
+  // hovered FAB, and `pressed` is set only then. iOS and Android send no hover
+  // events by default, so a tap there doesn't re-render the FAB itself. The
+  // refs hold the pointer state between events: a quick click on web runs both
+  // press handlers before a render, and a press can start before the hover.
+  const handleHoverIn = () => {
+    hoveredRef.current = true;
+    setHovered(true);
+    if (pressingRef.current) setPressed(true);
+  };
+
+  const handleHoverOut = () => {
+    hoveredRef.current = false;
+    setHovered(false);
+    setPressed(false);
+  };
+
+  const handlePressIn = () => {
+    pressingRef.current = true;
+    if (hoveredRef.current) setPressed(true);
+  };
+
+  const handlePressOut = (event: GestureResponderEvent) => {
+    pressingRef.current = false;
+    if (hoveredRef.current) setPressed(false);
+    onPressOut?.(event);
+  };
+
+  // Without a handler the touchable drops the button role, and on web that
+  // renders role="presentation", which can't carry a name. A labelled
+  // icon-only FAB that does nothing is an image there, named by its label.
+  const isWebImage =
+    Platform.OS === 'web' &&
+    !hasHandler &&
+    !disabled &&
+    label === undefined &&
+    children === undefined &&
+    ariaLabel !== undefined &&
+    ariaChecked === undefined;
 
   return (
     <Surface
       ref={ref}
+      aria-hidden={visible ? undefined : true}
       backgroundColor={containerBg}
       borderRadius={borderRadius}
       style={[
@@ -318,28 +460,60 @@ const Shell = ({
         outerStyle,
         visible ? styles.pointerEventsAuto : styles.pointerEventsNone,
       ]}
-      elevation={elevation}
+      elevation={resolvedElevation}
       theme={theme}
     >
-      <Animated.View style={[styles.clip, clipStyle]}>
+      <Animated.View
+        style={[styles.clip, clipStyle, ...focusRing.style]}
+        {...focusRing.dataSetProps}
+      >
         {overlay}
         <TouchableRipple
+          ref={setTouchableRef}
           borderless
           background={background}
-          onPress={onPress}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          focusRing="none"
+          onPress={visible ? onPress : undefined}
+          onLongPress={visible ? onLongPress : undefined}
+          delayLongPress={delayLongPress}
+          disabled={disabled}
+          accessible={visible ? undefined : false}
+          focusable={visible ? undefined : false}
+          tabIndex={visible ? undefined : -1}
+          // Only with a touch handler: a FAB without one is a plain View that
+          // takes no focus, and the press handlers alone would make it a
+          // control. They also keep a hidden FAB's touchable mounted without
+          // `onPress` or `onLongPress`, so the effect above still finds the
+          // focused element.
+          onHoverIn={hasHandler ? handleHoverIn : undefined}
+          onHoverOut={hasHandler ? handleHoverOut : undefined}
+          onPressIn={hasHandler ? handlePressIn : undefined}
+          onPressOut={hasHandler ? handlePressOut : undefined}
+          onFocus={
+            hasHandler
+              ? (event) => {
+                  if (Platform.OS === 'web') {
+                    const previous =
+                      'relatedTarget' in event.nativeEvent
+                        ? event.nativeEvent.relatedTarget
+                        : null;
+                    previousFocusedElement.current =
+                      previous instanceof HTMLElement ? previous : null;
+                  }
+                  focusTarget.onFocus?.(event);
+                }
+              : undefined
+          }
+          onBlur={focusTarget.onBlur}
           aria-label={ariaLabel}
-          role="button"
+          role={isWebImage ? 'img' : 'button'}
           aria-checked={ariaChecked}
           aria-selected={ariaSelected}
           aria-busy={ariaBusy}
           aria-expanded={ariaExpanded}
+          aria-haspopup={ariaHasPopup}
           testID={testID}
-          style={[
-            children ? styles.fill : null,
-            Platform.OS === 'web' ? webNoOutline : null,
-          ]}
+          style={[children ? styles.fill : null, ...focusTarget.style]}
         >
           {children ?? (
             <Content
@@ -360,13 +534,6 @@ const Shell = ({
           )}
         </TouchableRipple>
       </Animated.View>
-      <Animated.View
-        style={[
-          styles.focusRing,
-          { borderColor: theme.colors.secondary },
-          focusRingStyle,
-        ]}
-      />
     </Surface>
   );
 };
@@ -387,15 +554,6 @@ const styles = StyleSheet.create({
     pointerEvents: 'auto',
   },
   pointerEventsNone: {
-    pointerEvents: 'none',
-  },
-  focusRing: {
-    position: 'absolute',
-    top: -FOCUS_RING_INSET,
-    left: -FOCUS_RING_INSET,
-    right: -FOCUS_RING_INSET,
-    bottom: -FOCUS_RING_INSET,
-    borderWidth: FOCUS_RING_THICKNESS,
     pointerEvents: 'none',
   },
 });

@@ -11,7 +11,7 @@ import Tabs from '@docs/components/Tabs';
 
 React Native Paper 6.x requires React 19 and React Native's New Architecture.
 
-Open a Terminal in your project's folder and install the library:
+Open a Terminal in your project's folder and install the library. In a Community CLI app, install Reanimated and Worklets first, as the Community CLI tab below explains:
 
 ```bash npm2yarn
 npm install react-native-paper@alpha
@@ -30,9 +30,12 @@ npx expo install react-native-safe-area-context react-native-reanimated react-na
 
 Minimum requirements:
 
+- `react-native` **≥ 0.81**
 - `react-native-reanimated` **≥ 4.3.0**
 - `react-native-worklets` **≥ 0.8.1**
-- `react-native-safe-area-context` — version compatible with your React Native toolchain.
+- `react-native-safe-area-context`: a version compatible with your React Native toolchain.
+
+`npx expo install` installs the versions that your Expo SDK includes. SDK 56 is the first whose Reanimated and Worklets meet these minimums (SDK 55 has Reanimated 4.2.1 and Worklets 0.7.4), so on an older SDK, upgrade Expo first.
 
 You also need to install [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons), because some components use these icons internally:
 
@@ -46,18 +49,30 @@ Follow the [React Native Reanimated installation guide](https://docs.swmansion.c
 
 If you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
 
+The app runs in Expo Go, with no development build: Expo Go includes Reanimated, Worklets and the safe area context, and loads the icon font when the app starts.
+
   </TabItem>
   <TabItem value="community-cli" label="Community CLI">
 
+Install the Reanimated and Worklets pair for your React Native version from [Reanimated and Worklets versions](#reanimated-and-worklets-versions), pinned with `~`, before `react-native-paper`. For example, on React Native 0.81:
+
 ```bash npm2yarn
-npm install react-native-safe-area-context react-native-reanimated react-native-worklets
+npm install react-native-reanimated@~4.3.0 react-native-worklets@~0.8.1
+```
+
+Without `~`, or when you install Paper first, npm picks the newest Reanimated, which may not support your React Native version, and the install fails with `ERESOLVE`.
+
+Then install the safe area context:
+
+```bash npm2yarn
+npm install react-native-safe-area-context
 ```
 
 Minimum requirements:
 
-- `react-native-reanimated` **≥ 4.3.0**
-- `react-native-worklets` **≥ 0.8.1**
-- `react-native-safe-area-context` — version compatible with your React Native toolchain.
+- `react-native` **≥ 0.81**
+- `react-native-reanimated` **≥ 4.3.0** and `react-native-worklets` **≥ 0.8.1**, in the pair that supports your React Native version
+- `react-native-safe-area-context`: a version compatible with your React Native toolchain.
 
 Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
 
@@ -86,13 +101,26 @@ If you don't want to install vector icons, leave the package out. Components the
   </TabItem>
 </Tabs>
 
+### Reanimated and Worklets versions
+
+Each Reanimated release supports a few React Native versions and needs a matching Worklets version. The newest pair for each React Native version:
+
+| React Native | `react-native-reanimated` | `react-native-worklets` |
+| ------------ | ------------------------- | ----------------------- |
+| 0.81, 0.82   | 4.3.x                     | 0.8.x (0.8.1 or later)  |
+| 0.83 to 0.85 | 4.6.x                     | 0.12.x                  |
+| 0.86         | 4.7.x                     | 0.13.x                  |
+| 0.87 to 0.89 | 4.8.x                     | 0.14.x                  |
+
+For other pairs, see Reanimated's [compatibility table](https://docs.swmansion.com/react-native-reanimated/docs/guides/compatibility/).
+
 ### Bundle size optimization
 
 To get smaller bundle size by excluding modules you don't use, you can use our optional babel plugin. The plugin automatically rewrites the import statements so that only the modules you use are imported instead of the whole library. Add `react-native-paper/babel` to the `plugins` section in your `babel.config.js` for production environment. It should look like this:
 
 ```js
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: ['module:@react-native/babel-preset'],
   env: {
     production: {
       plugins: ['react-native-paper/babel'],
@@ -101,7 +129,7 @@ module.exports = {
 };
 ```
 
-If you created your project using Expo, it'll look something like this. New Expo projects don't include a `babel.config.js`, so create it in the project root if it's missing:
+If you created your project using Expo, it'll look something like this. New Expo projects don't have a `babel.config.js`, so create one with `npx expo customize babel.config.js`, which also installs `babel-preset-expo`. Then add the `env` block:
 
 ```js
 module.exports = function (api) {
@@ -121,22 +149,9 @@ The plugin only works if you are importing the library using ES2015 import state
 
 If your `babel.config.js` also lists `react-native-worklets/plugin`, as Reanimated requires for Community CLI projects, keep it in the top-level `plugins`. Babel adds the `env.production` plugins after it, which is fine because `react-native-paper/babel` only rewrites `import` statements.
 
-:::note
-The above examples are for the latest `react-native` using Babel 7. If you have `react-native <= 0.55`, you'll have a `.babelrc` file instead of a `babel.config.js` file and the content of the file will be different.
-:::
-
-If you're using Flow for typechecking your code, you need to add the following under the `[options]` section in your `.flowconfig`:
-
-```ini
-module.file_ext=.js
-module.file_ext=.native.js
-module.file_ext=.android.js
-module.file_ext=.ios.js
-```
-
 ## Usage
 
-Wrap your root component in `PaperProvider` from `react-native-paper`(if you are using versions prior to 5.8.0 you need to use `Provider`). If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to `AppRegistry.registerComponent`. This will usually be in the `index.js` file. If you have an Expo project that uses Expo Router (the default for new Expo projects), wrap the content of your root layout, `app/_layout.tsx` (or `src/app/_layout.tsx`). In an Expo project without Expo Router, you can do this inside the exported component in the `App.js` file.
+Wrap your root component in `PaperProvider` from `react-native-paper`. If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to `AppRegistry.registerComponent`. This will usually be in the `index.js` file. If you have an Expo project that uses Expo Router (the default for new Expo projects), wrap the content of your root layout, `app/_layout.tsx` (or `src/app/_layout.tsx`). In an Expo project without Expo Router, you can do this inside the exported component in the `App.js` file.
 
 Example:
 
@@ -197,7 +212,7 @@ export default function Main() {
 
 ## Customization
 
-You can provide a custom theme to customize the colors, typescales etc. with the `Provider` component. Check the [Material Design 3 default theme](https://github.com/callstack/react-native-paper/blob/main/src/theme/schemes/LightTheme.tsx) to see what customization options are supported.
+You can provide a custom theme to customize the colors, typescales etc. with the `PaperProvider` component. Check the [Material Design 3 default theme](https://github.com/callstack/react-native-paper/blob/main/src/theme/schemes/LightTheme.tsx) to see what customization options are supported.
 
 Example:
 
