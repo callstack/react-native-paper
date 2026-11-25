@@ -256,7 +256,7 @@ const MessageRow = ({
         <IconButton
           icon={message.starred ? 'star' : 'star-outline'}
           selected={message.starred}
-          size={20}
+          size="extra-small"
           aria-label={
             message.starred
               ? `Unstar message from ${message.sender}`

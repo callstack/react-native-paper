@@ -345,14 +345,14 @@ import {
 
 const Stack = createNativeStackNavigator();
 
-const { LightTheme } = adaptNavigationTheme({
+const { LightTheme: NavigationLightTheme } = adaptNavigationTheme({
   reactNavigationLight: DefaultTheme,
 });
 
 export default function App() {
   return (
     <PaperProvider theme={PaperLightTheme}>
-      <NavigationContainer theme={LightTheme}>
+      <NavigationContainer theme={NavigationLightTheme}>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Details" component={DetailsScreen} />
@@ -414,6 +414,30 @@ export default function Main() {
   );
 }
 ```
+
+`Theme` requires every key, so it doesn't fit a partial theme kept in a variable. Type the variable with `ProviderProps['theme']`, the type that the `theme` props of `PaperProvider`, `ThemeProvider` and Paper's components take:
+
+```tsx
+import * as React from 'react';
+import { PaperProvider, type ProviderProps } from 'react-native-paper';
+import App from './src/App';
+
+const theme: ProviderProps['theme'] = {
+  colors: {
+    primary: 'tomato',
+  },
+};
+
+export default function Main() {
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+The type includes `undefined`. If the variable must always hold a theme, type it with `NonNullable<ProviderProps['theme']>`.
 
 ### Advanced theme overrides
 
@@ -503,6 +527,26 @@ export default function HomeScreen() {
 
 React Native Paper ships with Material Design 3 (Material You) only. Customize the default experience by extending `LightTheme` or `DarkTheme` (see [Extending the theme](#extending-the-theme) and [Advanced theme overrides](#advanced-theme-overrides)).
 
+## Applying a theme to part of the app
+
+To change the theme of every component in one part of your app, wrap that part in `ThemeProvider`. Like a component's `theme` prop, its `theme` is merged deeply onto the theme above it, so pass only the keys you change:
+
+```js
+import * as React from 'react';
+import { Button, ThemeProvider } from 'react-native-paper';
+
+export default function CheckoutActions() {
+  return (
+    <ThemeProvider theme={{ colors: { primary: 'tomato' } }}>
+      <Button>Pay</Button>
+      <Button mode="outlined">Cancel</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+Unlike `PaperProvider`, `ThemeProvider` doesn't choose between `LightTheme` and `DarkTheme` from `dark`. To show part of the app in the dark theme, pass `DarkTheme` itself.
+
 ## Applying a theme to a paper component
 
 If you want to change the theme for a certain component from the library, you can directly pass the `theme` prop to the component. The theme passed as the prop is merged with the theme from the `PaperProvider`:
@@ -553,7 +597,25 @@ The dark theme adds a white overlay with opacity depending on elevation of surfa
 
 If you don't use a custom theme, Paper will automatically change between the default theme and the default dark theme, depending on device settings.
 
-Otherwise, your custom theme will need to handle it manually, using React Native's [Appearance API](https://reactnative.dev/docs/appearance).
+`PaperProvider` follows the device setting only when it gets no `theme`. With a `theme`, it uses `DarkTheme` only when that theme sets `dark: true`, so a theme that only changes colors, such as `theme={{ colors: { primary: '#8E24AA' } }}`, stays light in dark mode. A nested `PaperProvider` with such a theme stays light inside a dark app too, because it doesn't read the theme above it. To follow the device setting with a custom theme, pick `LightTheme` or `DarkTheme` with React Native's [`useColorScheme()`](https://reactnative.dev/docs/usecolorscheme) and spread your colors over it:
+
+```tsx
+import * as React from 'react';
+import { useColorScheme } from 'react-native';
+import { DarkTheme, LightTheme, PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+export default function Main() {
+  const base = useColorScheme() === 'dark' ? DarkTheme : LightTheme;
+  const theme = { ...base, colors: { ...base.colors, primary: '#8E24AA' } };
+
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
 
 ## Gotchas
 

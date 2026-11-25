@@ -70,6 +70,13 @@ export type Props = {
    * Accessibility label for the switch. This is read by the screen reader when the user focuses the switch.
    */
   'aria-label'?: string;
+  /**
+   * Hides a non-interactive (`readOnly` or `disabled`) switch from assistive
+   * technology, so it renders with no role and cannot take focus. Use it when
+   * the switch only shows the state of a row that has the switch role itself.
+   * It has no effect on an interactive switch.
+   */
+  'aria-hidden'?: boolean;
 };
 
 const {
@@ -143,6 +150,7 @@ const Switch = ({
   testID,
   theme: themeOverrides,
   'aria-label': ariaLabel,
+  'aria-hidden': ariaHidden,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
@@ -171,6 +179,10 @@ const Switch = ({
   // Native accessibility has no read-only switch state. Disable the Pressable
   // there to expose non-operability, while keeping colors tied to `disabled`.
   const isAnnouncedReadOnly = !isDisabled && !isInteractive;
+  // React Native Web's Pressable always sets a `tabIndex`, and any role or
+  // `tabIndex` inside a row that owns the switch role nests interactive
+  // controls, so a hidden switch renders a plain view instead.
+  const isHidden = !!ariaHidden && !isInteractive;
   const iconSource = checked ? checkedIcon : uncheckedIcon;
   const hasIcon = iconSource !== undefined;
 
@@ -434,57 +446,73 @@ const Switch = ({
       }
     : null;
 
+  const track = (
+    <View
+      style={[
+        styles.track,
+        { backgroundColor: paint.track, opacity: trackOpacityValue },
+        ...focusRing.style,
+      ]}
+      {...focusRing.dataSetProps}
+    >
+      {showOutline ? (
+        <View style={[styles.outline, { borderColor: paint.border }]} />
+      ) : null}
+    </View>
+  );
+
   return (
-    <View style={[styles.wrapper, style]}>
-      <Pressable
-        disabled={Platform.OS === 'web' ? isDisabled : !isInteractive}
-        tabIndex={isInteractive ? 0 : -1}
-        aria-readonly={Platform.OS === 'web' ? isAnnouncedReadOnly : undefined}
-        onFocus={(e) => {
-          // Not the ring - it's real CSS on web now. This drives the
-          // handle's own separate focused-visual animation, native and web
-          // alike, so it keeps its own keyboard-vs-pointer check. It is
-          // tracked while the switch is not interactive, too, and shown only
-          // while it is (`isFocusShownSV`).
-          focusTarget.onFocus?.(e);
-          if (isKeyboardFocusEvent(e)) focusedSV.value = 1;
-        }}
-        onBlur={(e) => {
-          focusTarget.onBlur?.();
-          handleSpaceKeyBlur(e);
-          focusedSV.value = 0;
-        }}
-        {...interactionProps}
-        android_ripple={{ color: 'transparent' }}
-        role="switch"
-        aria-checked={checked}
-        aria-label={ariaLabel}
-        testID={testID}
-        style={[
-          styles.touchable,
-          ...focusTarget.style,
-          // A read-only switch stays enabled on web, where React Native Web's
-          // Pressable would take the press and stop the click from reaching a
-          // row that owns it. Native platforms disable the Pressable instead.
-          Platform.OS === 'web' && !isInteractive
-            ? styles.nonInteractiveTouchable
-            : undefined,
-        ]}
-        {...focusTarget.dataSetProps}
-      >
-        <View
-          style={[
-            styles.track,
-            { backgroundColor: paint.track, opacity: trackOpacityValue },
-            ...focusRing.style,
-          ]}
-          {...focusRing.dataSetProps}
-        >
-          {showOutline ? (
-            <View style={[styles.outline, { borderColor: paint.border }]} />
-          ) : null}
+    <View
+      style={[styles.wrapper, style]}
+      aria-hidden={isHidden || undefined}
+      testID={isHidden ? testID : undefined}
+    >
+      {isHidden ? (
+        <View style={[styles.touchable, styles.nonInteractiveTouchable]}>
+          {track}
         </View>
-      </Pressable>
+      ) : (
+        <Pressable
+          disabled={Platform.OS === 'web' ? isDisabled : !isInteractive}
+          tabIndex={isInteractive ? 0 : -1}
+          aria-readonly={
+            Platform.OS === 'web' && isAnnouncedReadOnly ? true : undefined
+          }
+          onFocus={(e) => {
+            // Not the ring - it's real CSS on web now. This drives the
+            // handle's own separate focused-visual animation, native and web
+            // alike, so it keeps its own keyboard-vs-pointer check. It is
+            // tracked while the switch is not interactive, too, and shown only
+            // while it is (`isFocusShownSV`).
+            focusTarget.onFocus?.(e);
+            if (isKeyboardFocusEvent(e)) focusedSV.value = 1;
+          }}
+          onBlur={(e) => {
+            focusTarget.onBlur?.();
+            handleSpaceKeyBlur(e);
+            focusedSV.value = 0;
+          }}
+          {...interactionProps}
+          android_ripple={{ color: 'transparent' }}
+          role="switch"
+          aria-checked={checked}
+          aria-label={ariaLabel}
+          testID={testID}
+          style={[
+            styles.touchable,
+            ...focusTarget.style,
+            // A read-only switch stays enabled on web, where React Native Web's
+            // Pressable would take the press and stop the click from reaching a
+            // row that owns it. Native platforms disable the Pressable instead.
+            Platform.OS === 'web' && !isInteractive
+              ? styles.nonInteractiveTouchable
+              : undefined,
+          ]}
+          {...focusTarget.dataSetProps}
+        >
+          {track}
+        </Pressable>
+      )}
 
       <Animated.View
         style={[

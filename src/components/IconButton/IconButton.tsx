@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import type {
+  BlurEvent,
   ColorValue,
+  FocusEvent,
   GestureResponderEvent,
   StyleProp,
   ViewStyle,
@@ -9,54 +11,81 @@ import type {
 
 import Animated, { type AnimatedStyle } from 'react-native-reanimated';
 
-import { getIconButtonColor } from './utils';
+import type { Mode, Shape, Size, Width } from './tokens';
+import { getDimensions, getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSlop';
 import hasTouchHandler, {
   carriesToggleState,
 } from '../../utils/hasTouchHandler';
+import { useFocusRing } from '../../utils/useFocusRing';
+import { useShapeMorph } from '../../utils/useShapeMorph';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import { getRippleColorFromContent } from '../TouchableRipple/utils';
 
-const PADDING = 8;
-
-type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
+const AnimatedTouchableRipple =
+  Animated.createAnimatedComponent(TouchableRipple);
 
 export type Props = Omit<
   React.PropsWithoutRef<TouchableRippleProps>,
-  'children' | 'style'
+  'children' | 'style' | 'onPress'
 > & {
   /**
    * Icon to display.
    */
   icon: IconSource;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Mode of the icon button. By default there is no specified mode - only pressable icon will be rendered.
+   * Color style of the icon button.
+   *
+   * - `standard`: no container fill (default)
+   * - `filled`: primary container
+   * - `tonal`: secondary-container fill
+   * - `outlined`: outline, no fill (selected uses inverse surface)
    */
-  mode?: IconButtonMode;
+  mode?: Mode;
   /**
    * @renamed Renamed from 'color' to 'iconColor' in v5.x
    * Color of the icon.
    */
   iconColor?: ColorValue;
   /**
-   * Background color of the icon container.
+   * Background color of the icon container. A disabled `filled` or `tonal`
+   * button, or a disabled selected `outlined` one, takes the disabled
+   * container color instead.
    */
   containerColor?: ColorValue;
   /**
-   * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.
+   * Toggle state. Omit for the default (non-toggle) color set;
+   * `true` / `false` use the toggle-ON / toggle-OFF color sets and invert
+   * the resting shape. Screen readers announce the toggle state: `aria-pressed`
+   * on web, `aria-checked` on native.
    */
   selected?: boolean;
   /**
-   * Size of the icon.
+   * Named size on the MD3 Expressive scale. Defaults to `small`.
    */
-  size?: number;
+  size?: Size;
+  /**
+   * Horizontal padding around the icon: `narrow`, `default`, or `wide`.
+   * Uniform (`default`) sizes are square.
+   */
+  width?: Width;
+  /**
+   * Resting container shape. Toggle-ON inverts round ↔ square. Pressed
+   * uses a shared corner for both shapes.
+   */
+  shape?: Shape;
+  /**
+   * Icon size override in dp. Defaults to the size token.
+   */
+  iconSize?: number;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -71,13 +100,17 @@ export type Props = Omit<
   'aria-label'?: string;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width or to set a custom padding`.
+   * Use this prop to apply custom height and width or to set a custom padding.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Style of the button container, for positioning and size. The corner comes
+   * from `shape`, so a `borderRadius` here is ignored.
+   */
   style?: StyleProp<AnimatedStyle<ViewStyle>>;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
   /**
@@ -89,7 +122,9 @@ export type Props = Omit<
    */
   theme?: ThemeProp;
   /**
-   * Whether to show a loading indicator.
+   * Whether to show a loading indicator in place of the icon. The button is
+   * marked busy for assistive technology, but it is not disabled: pass
+   * `disabled` too if presses should be ignored while it loads.
    */
   loading?: boolean;
 };
@@ -106,7 +141,7 @@ export type Props = Omit<
  *   <IconButton
  *     icon="camera"
  *     iconColor={Palette.error50}
- *     size={20}
+ *     size="small"
  *     onPress={() => console.log('Pressed')}
  *   />
  * );
@@ -120,26 +155,46 @@ const IconButton = ({
   icon,
   iconColor: customIconColor,
   containerColor: customContainerColor,
-  size = 24,
+  size = 'small',
+  width = 'default',
+  shape = 'round',
+  iconSize,
   'aria-label': ariaLabel,
   disabled,
   onPress,
-  selected = false,
+  selected,
   animated = false,
-  mode,
+  mode = 'standard',
   style,
   theme: themeOverrides,
   testID,
   loading = false,
+  'aria-busy': ariaBusy,
   contentStyle,
   hitSlop,
   role = 'button',
+  focusRing: focusRingPlacement = 'outward',
   ref,
+  onPressIn: onPressInProp,
+  onPressOut: onPressOutProp,
+  onFocus: onFocusProp,
+  onBlur: onBlurProp,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
+  const [pressed, setPressed] = React.useState(false);
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
+
+  const dimensions = getDimensions({
+    theme,
+    size,
+    width,
+    shape,
+    selected,
+    iconSize,
+  });
 
   const {
     iconColor,
@@ -147,6 +202,7 @@ const IconButton = ({
     backgroundColor,
     borderColor,
     backgroundOpacity,
+    borderWidth,
   } = getIconButtonColor({
     theme,
     disabled,
@@ -154,27 +210,104 @@ const IconButton = ({
     mode,
     customIconColor,
     customContainerColor,
+    outlineWidth: dimensions.outlineWidth,
   });
 
-  const buttonSize = size + 2 * PADDING;
-  const borderWidth = mode === 'outlined' && !selected ? 1 : 0;
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress: rest.onLongPress,
+    onPressIn: onPressInProp,
+    onPressOut: onPressOutProp,
+  });
 
-  const shapeStyle = { borderRadius: buttonSize / 2 };
+  const canBePressed = hasPassedTouchHandler && !disabled;
 
-  const borderStyles = {
-    borderWidth,
-    borderColor,
-    ...shapeStyle,
+  // The handlers that reset `pressed` are only attached while the button can be
+  // pressed, so a stale `pressed` must not outlive that.
+  const isPressed = pressed && canBePressed;
+  React.useEffect(() => {
+    // Clears it too, so the shape doesn't snap back to pressed if the handler
+    // returns.
+    if (!canBePressed) {
+      setPressed(false);
+    }
+  }, [canBePressed]);
+  const borderRadius = isPressed
+    ? dimensions.pressedRadius
+    : dimensions.restingRadius;
+  const { outerStyle: radiusStyle, innerStyle: innerRadiusStyle } =
+    useShapeMorph({
+      theme,
+      radius: borderRadius,
+      largestRadius: Math.max(
+        dimensions.height / 2,
+        dimensions.restingRadius,
+        dimensions.pressedRadius
+      ),
+      borderWidth,
+      animate: !reduceMotion,
+    });
+
+  // The state layer takes the icon color, as Button's takes its label color.
+  const rippleColor = getRippleColorFromContent({ contentColor: iconColor });
+
+  const handlePressIn = (e: GestureResponderEvent) => {
+    setPressed(true);
+    onPressInProp?.(e);
   };
 
-  const touchableSize = buttonSize - 2 * borderWidth;
+  const handlePressOut = (e: GestureResponderEvent) => {
+    setPressed(false);
+    onPressOutProp?.(e);
+  };
 
-  const defaultHitSlop = disabled
-    ? undefined
-    : getMinInteractiveSizeHitSlop({
-        width: touchableSize,
-        height: touchableSize,
-      });
+  // The ring goes on the clip view, around the outline, rather than on the
+  // touchable inside it. Off whenever the button can't be pressed, as on
+  // TouchableRipple.
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    !canBePressed,
+    theme.colors.secondary,
+    focusRingPlacement,
+    'within'
+  );
+
+  const handleFocus = (e: FocusEvent) => {
+    onFocusProp?.(e);
+    focusTarget.onFocus?.(e);
+  };
+
+  const handleBlur = (e: BlurEvent) => {
+    onBlurProp?.(e);
+    focusTarget.onBlur?.();
+  };
+
+  // The button is busy while it loads, so the indicator inside it is no
+  // progress element of its own. Always a boolean: on Android `undefined`
+  // leaves TalkBack saying "busy" after loading ends. As on React Native, an
+  // `aria-busy` prop wins over `accessibilityState.busy`.
+  const busy = loading || (ariaBusy ?? rest.accessibilityState?.busy) === true;
+
+  // Announced like Button: `aria-pressed` on web, `aria-checked` on native.
+  // `aria-selected` isn't valid on `role="button"`, so it would go unannounced.
+  // React Native's types have no `aria-pressed`.
+  const toggleStateProps =
+    selected === undefined
+      ? {}
+      : Platform.OS === 'web'
+        ? { 'aria-pressed': selected }
+        : { 'aria-checked': selected };
+
+  // The touchable sits inside the outline, so it is smaller than the container.
+  const touchableWidth = dimensions.width - 2 * borderWidth;
+  const touchableHeight = dimensions.height - 2 * borderWidth;
+
+  // Disabled and handler-less buttons get no extra target.
+  const defaultHitSlop = canBePressed
+    ? getMinInteractiveSizeHitSlop({
+        width: touchableWidth,
+        height: touchableHeight,
+      })
+    : undefined;
 
   // Without a handler the touchable drops the button role, and on web that
   // renders role="presentation", which can't carry a name. A labelled icon
@@ -185,13 +318,8 @@ const IconButton = ({
     role === 'button' &&
     !disabled &&
     ariaLabel !== undefined &&
-    !hasTouchHandler({
-      onPress,
-      onLongPress: rest.onLongPress,
-      onPressIn: rest.onPressIn,
-      onPressOut: rest.onPressOut,
-    }) &&
-    !carriesToggleState(rest);
+    !hasPassedTouchHandler &&
+    !carriesToggleState({ ...rest, ...toggleStateProps });
 
   return (
     <Animated.View
@@ -199,53 +327,83 @@ const IconButton = ({
       style={[
         styles.container,
         {
-          backgroundColor: backgroundOpacity < 1 ? undefined : backgroundColor,
-          width: buttonSize,
-          height: buttonSize,
+          width: dimensions.width,
+          height: dimensions.height,
         },
-        borderStyles,
         style,
+        radiusStyle,
       ]}
     >
-      {backgroundOpacity < 1 && (
-        <View
-          pointerEvents="none"
-          style={[
-            StyleSheet.absoluteFill,
-            { backgroundColor, opacity: backgroundOpacity },
-            shapeStyle,
-          ]}
-        />
-      )}
-      <TouchableRipple
-        borderless
-        centered
-        onPress={onPress}
-        theme={theme}
-        aria-label={ariaLabel}
+      <Animated.View
         style={[
-          styles.touchable,
-          shapeStyle,
-          // Clip the ripple to the button shape. Not on web, where
-          // `overflow: 'hidden'` would also clip the hit slop target.
-          Platform.OS !== 'web' && styles.clipToShape,
-          contentStyle,
+          styles.clip,
+          {
+            backgroundColor:
+              backgroundOpacity < 1 ? undefined : backgroundColor,
+            borderWidth,
+            borderColor,
+          },
+          radiusStyle,
+          ...focusRing.style,
         ]}
-        role={isWebImage ? 'img' : role}
-        aria-disabled={disabled}
-        disabled={disabled}
-        testID={testID}
-        hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
-        {...rest}
+        {...focusRing.dataSetProps}
       >
-        <View style={{ opacity: iconOpacity }}>
-          {loading ? (
-            <ActivityIndicator size={size} color={iconColor} />
-          ) : (
-            <IconComponent color={iconColor} source={icon} size={size} />
-          )}
-        </View>
-      </TouchableRipple>
+        {backgroundOpacity < 1 && (
+          <Animated.View
+            style={[
+              StyleSheet.absoluteFill,
+              styles.overlay,
+              innerRadiusStyle,
+              { backgroundColor, opacity: backgroundOpacity },
+            ]}
+          />
+        )}
+        <AnimatedTouchableRipple
+          borderless
+          centered
+          onPress={onPress}
+          onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
+          onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
+          focusRing="none"
+          rippleColor={rippleColor}
+          theme={theme}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          aria-label={ariaLabel}
+          style={[
+            styles.touchable,
+            innerRadiusStyle,
+            // Not on web, where `overflow: 'hidden'` would also clip the hit
+            // slop target; there the ripple container follows the corner.
+            Platform.OS !== 'web' && styles.clipToShape,
+            contentStyle,
+          ]}
+          role={isWebImage ? 'img' : role}
+          aria-disabled={disabled}
+          aria-busy={busy}
+          {...toggleStateProps}
+          disabled={disabled}
+          hitSlop={hitSlop !== undefined ? hitSlop : defaultHitSlop}
+          testID={testID}
+          {...rest}
+        >
+          <View style={{ opacity: iconOpacity }}>
+            {loading ? (
+              <ActivityIndicator
+                size={dimensions.iconSize}
+                color={iconColor}
+                aria-hidden
+              />
+            ) : (
+              <IconComponent
+                color={iconColor}
+                source={icon}
+                size={dimensions.iconSize}
+              />
+            )}
+          </View>
+        </AnimatedTouchableRipple>
+      </Animated.View>
     </Animated.View>
   );
 };
@@ -253,11 +411,21 @@ const IconButton = ({
 const styles = StyleSheet.create({
   container: {
     margin: 6,
+    overflow: 'visible',
+  },
+  // No `overflow: 'hidden'`: it would clip the touchable's hit slop. The
+  // background and outline follow the radius on their own.
+  clip: {
+    width: '100%',
+    height: '100%',
   },
   touchable: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  overlay: {
+    pointerEvents: 'none',
   },
   clipToShape: {
     overflow: 'hidden',

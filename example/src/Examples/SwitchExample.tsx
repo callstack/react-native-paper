@@ -90,7 +90,7 @@ const SwitchExample = () => {
       </Row>
 
       <Row label="Read-only">
-        <Switch value={defaultOn} readOnly />
+        <Switch value={defaultOn} readOnly aria-label="Read-only" />
       </Row>
 
       <View

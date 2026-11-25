@@ -37,6 +37,7 @@ applyTo: '**/*.{ts,tsx,js,jsx}'
 - Verify that components forward relevant native props and events without changing their meaning.
 - Ensure controlled values have callbacks to update them. Support uncontrolled input when controlled rendering causes a demonstrated performance or reliability problem.
 - Merge consumer styles after defaults for supported overrides. Check that computed styles preserve supplied padding, colors, dimensions, and other supported values.
+- Name size props by what they size: `size` for the whole component (a named scale such as `'small'` or a number), `iconSize` for only the icon glyph inside it. A component that is itself an icon, such as `Icon`, uses `size`.
 - Expose test IDs for public interaction or content. Avoid IDs on internal wrappers solely for tests and default IDs that can collide across component instances.
 
 ## Design and Accessibility
