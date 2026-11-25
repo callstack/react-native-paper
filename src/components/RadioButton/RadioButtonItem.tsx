@@ -181,7 +181,8 @@ const RadioButtonItem = ({
     radioButton = <RadioButton {...radioButtonProps} />;
   }
 
-  const textAlign = isLeading ? 'right' : 'left';
+  // Leading puts the control on the left. Keep the label beside it.
+  const textAlign = 'left';
 
   const computedStyle: TextStyle = {
     ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
