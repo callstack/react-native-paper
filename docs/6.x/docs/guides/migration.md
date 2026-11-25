@@ -495,6 +495,8 @@ A library that reads `theme.animation.scale` to turn its own animations off shou
 
 ## Components
 
+### Chip
+
 #### Default mode
 
 - The default **`mode`** changed from **`"flat"`** to **`"outlined"`**.
