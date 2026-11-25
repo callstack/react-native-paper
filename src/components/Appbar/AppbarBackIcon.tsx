@@ -23,7 +23,7 @@ const AppbarBackIcon = ({
   // The bundled chevron is only kept while the default icon renderer is in
   // place, so a renderer configured through `PaperProvider` wins on iOS too.
   const shouldUseIOSAsset =
-    Platform.OS === 'ios' && (!icon || icon === MaterialCommunityIcon);
+    Platform.OS === 'ios' && icon === MaterialCommunityIcon;
 
   return shouldUseIOSAsset ? (
     <View
