@@ -179,6 +179,13 @@ const ChipExample = () => {
             >
               Custom color
             </Chip>
+            <Chip
+              onPress={() => {}}
+              style={styles.chip}
+              textStyle={styles.tiny}
+            >
+              With custom size
+            </Chip>
             <Chip onPress={() => {}} borderRadius={16} style={styles.chip}>
               Rounded
             </Chip>
@@ -209,6 +216,10 @@ const styles = StyleSheet.create({
   },
   chip: {
     margin: 4,
+  },
+  tiny: {
+    lineHeight: 19,
+    paddingVertical: 0,
   },
   avatar: {
     width: 24,

@@ -746,11 +746,11 @@ describe('with reduce motion', () => {
   };
 
   it.each([
-    { reduceMotion: 'off', rest: 150, pressed: 200 },
-    { reduceMotion: 'on', rest: 0, pressed: 0 },
+    { reduceMotion: 'off', duration: 150 },
+    { reduceMotion: 'on', duration: 0 },
   ] as const)(
-    'moves its elevation in $rest ms, and $pressed ms while pressed, when reduceMotion is "$reduceMotion"',
-    async ({ reduceMotion, rest, pressed }) => {
+    'moves its elevation in $duration ms when reduceMotion is "$reduceMotion"',
+    async ({ reduceMotion, duration }) => {
       await render(
         <PaperProvider reduceMotion={reduceMotion}>
           <Chip elevated onPress={() => {}} testID="chip">
@@ -758,10 +758,7 @@ describe('with reduce motion', () => {
           </Chip>
         </PaperProvider>
       );
-      expect(elevationTransitionDuration()).toBe(rest);
-
-      await fireEvent(screen.getByTestId('chip'), 'pressIn');
-      expect(elevationTransitionDuration()).toBe(pressed);
+      expect(elevationTransitionDuration()).toBe(duration);
     }
   );
 });

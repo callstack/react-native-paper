@@ -17,6 +17,7 @@ const sizes = {
   trailingIconPadding: 8,
   leadingLabelGap: 8,
   labelTypescale: 'labelLarge' as TypescaleKey,
+  labelVerticalPadding: 5,
 
   disabledContentOpacity: 0.38,
 

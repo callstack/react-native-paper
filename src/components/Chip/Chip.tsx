@@ -377,9 +377,7 @@ const Chip = ({
         style={[
           { borderRadius },
           styles.touchable,
-          Platform.OS === 'web' && focused
-            ? { backgroundColor: focusedColor }
-            : undefined,
+          focused ? { backgroundColor: focusedColor } : undefined,
           ...bodyFocusTarget.style,
         ]}
         focusRing="none"
@@ -509,14 +507,12 @@ const Chip = ({
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: ChipTokens.containerHeight,
     borderWidth: ChipTokens.outlineWidth,
     borderStyle: 'solid',
     justifyContent: 'center',
     alignSelf: 'flex-start',
   },
   touchable: {
-    minHeight: ChipTokens.containerHeight,
     flexShrink: 1,
     alignSelf: 'stretch',
     justifyContent: 'center',
@@ -551,6 +547,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     includeFontPadding: false,
     flexShrink: 1,
+    paddingVertical: ChipTokens.labelVerticalPadding,
   },
   trailingIconWrapper: {
     position: 'absolute',

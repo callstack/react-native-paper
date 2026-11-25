@@ -11,7 +11,6 @@ exports[`prefers icon over avatar when both are specified 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
@@ -118,7 +117,6 @@ exports[`prefers icon over avatar when both are specified 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -208,6 +206,7 @@ exports[`prefers icon over avatar when both are specified 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -237,7 +236,6 @@ exports[`prefers trailingIcon over the close icon when both trailingIcon and onC
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
@@ -344,7 +342,6 @@ exports[`prefers trailingIcon over the close icon when both trailingIcon and onC
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -393,6 +390,7 @@ exports[`prefers trailingIcon over the close icon when both trailingIcon and onC
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -489,7 +487,6 @@ exports[`renders chip with a generic trailing icon 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
@@ -596,7 +593,6 @@ exports[`renders chip with a generic trailing icon 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -686,6 +682,7 @@ exports[`renders chip with a generic trailing icon 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -782,7 +779,6 @@ exports[`renders chip with avatar 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
@@ -889,7 +885,6 @@ exports[`renders chip with avatar 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -929,7 +924,7 @@ exports[`renders chip with avatar 1`] = `
           style={
             [
               {
-                "borderRadius": 12,
+                "borderRadius": 9999,
                 "height": 24,
                 "width": 24,
               },
@@ -939,7 +934,7 @@ exports[`renders chip with avatar 1`] = `
               },
               undefined,
               {
-                "backgroundColor": "rgba(103, 80, 164, 1)",
+                "backgroundColor": "rgba(234, 221, 255, 1)",
               },
             ]
           }
@@ -953,24 +948,28 @@ exports[`renders chip with avatar 1`] = `
                 },
                 {
                   "color": "rgba(29, 27, 32, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
-                    "textAlign": "center",
-                    "textAlignVertical": "center",
-                  },
-                  {
-                    "color": "#ffffff",
-                    "fontSize": 12,
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
                     "lineHeight": 24,
                   },
-                  undefined,
+                  [
+                    {
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    },
+                    {
+                      "color": "rgba(33, 0, 93, 1)",
+                      "fontSize": 12,
+                      "lineHeight": 24,
+                    },
+                    undefined,
+                  ],
                 ],
               ]
             }
@@ -1003,6 +1002,7 @@ exports[`renders chip with avatar 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -1032,7 +1032,6 @@ exports[`renders chip with close button 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
@@ -1139,7 +1138,6 @@ exports[`renders chip with close button 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -1229,6 +1227,7 @@ exports[`renders chip with close button 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -1361,7 +1360,6 @@ exports[`renders chip with custom close button 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
@@ -1468,7 +1466,6 @@ exports[`renders chip with custom close button 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -1558,6 +1555,7 @@ exports[`renders chip with custom close button 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -1690,7 +1688,6 @@ exports[`renders chip with icon 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
@@ -1797,7 +1794,6 @@ exports[`renders chip with icon 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -1887,6 +1883,7 @@ exports[`renders chip with icon 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -1916,7 +1913,6 @@ exports[`renders chip with onPress 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
@@ -2051,7 +2047,6 @@ exports[`renders chip with onPress 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -2100,6 +2095,7 @@ exports[`renders chip with onPress 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -2129,7 +2125,6 @@ exports[`renders outlined disabled chip 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "rgba(202, 196, 208, 1)",
@@ -2258,7 +2253,6 @@ exports[`renders outlined disabled chip 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -2307,6 +2301,7 @@ exports[`renders outlined disabled chip 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -2336,7 +2331,6 @@ exports[`renders selected chip 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "transparent",
@@ -2443,7 +2437,6 @@ exports[`renders selected chip 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -2533,6 +2526,7 @@ exports[`renders selected chip 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {
@@ -2562,7 +2556,6 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
         "borderStyle": "solid",
         "borderWidth": 1,
         "justifyContent": "center",
-        "minHeight": 32,
       },
       {
         "borderColor": "transparent",
@@ -2669,7 +2662,6 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
             "alignSelf": "stretch",
             "flexShrink": 1,
             "justifyContent": "center",
-            "minHeight": 32,
           },
           undefined,
         ],
@@ -2709,7 +2701,7 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
           style={
             [
               {
-                "borderRadius": 12,
+                "borderRadius": 9999,
                 "height": 24,
                 "width": 24,
               },
@@ -2719,7 +2711,7 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
               },
               undefined,
               {
-                "backgroundColor": "rgba(103, 80, 164, 1)",
+                "backgroundColor": "rgba(234, 221, 255, 1)",
               },
             ]
           }
@@ -2733,24 +2725,28 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
                 },
                 {
                   "color": "rgba(29, 27, 32, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
-                    "textAlign": "center",
-                    "textAlignVertical": "center",
-                  },
-                  {
-                    "color": "#ffffff",
-                    "fontSize": 12,
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
                     "lineHeight": 24,
                   },
-                  undefined,
+                  [
+                    {
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    },
+                    {
+                      "color": "rgba(33, 0, 93, 1)",
+                      "fontSize": 12,
+                      "lineHeight": 24,
+                    },
+                    undefined,
+                  ],
                 ],
               ]
             }
@@ -2831,6 +2827,7 @@ exports[`renders selected chip with avatar and a check overlay 1`] = `
                 {
                   "flexShrink": 1,
                   "includeFontPadding": false,
+                  "paddingVertical": 5,
                   "textAlignVertical": "center",
                 },
                 {

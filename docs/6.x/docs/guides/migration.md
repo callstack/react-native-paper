@@ -509,7 +509,7 @@ A library that reads `theme.animation.scale` to turn its own animations off shou
 
 #### Removed props
 
-- **`compact`** The chip always uses the MD3 32dp height; to change the size, use `style`.
+- **`compact`** The chip is 32dp tall by default (the label's 20dp line height, 5dp of vertical padding above and below it, and the 1dp border). To change the size, set `lineHeight` and `paddingVertical` in `textStyle`.
 - **`showSelectedOverlay`** A selected chip shows a check icon (`showSelectedCheck`, on by default). With an `avatar`, the check is drawn over the avatar automatically.
 - **`avatar`** is rendered as is inside a clipped 24dp circle; Chip no longer injects a `style` into it. Size the avatar to 24dp yourself.
 
@@ -532,6 +532,7 @@ A library that reads `theme.animation.scale` to turn its own animations off shou
 - An unselected `flat` chip uses `surfaceContainerLow` instead of `secondaryContainer`, with an `onSurfaceVariant` label and a `primary` leading icon.
 - A selected chip uses the `secondaryContainer` color in both modes (outlined chips used to stay on `surface`), and `elevated` chips use `surfaceContainerLow`.
 - Disabled chips use the `stateLayerPressed` container color.
+- A focused chip body uses the focus state layer color on every platform.
 
 #### Close button and touch targets
 

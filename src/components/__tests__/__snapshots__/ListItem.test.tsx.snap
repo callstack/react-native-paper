@@ -212,7 +212,6 @@ exports[`renders list item with custom description 1`] = `
                   "borderStyle": "solid",
                   "borderWidth": 1,
                   "justifyContent": "center",
-                  "minHeight": 32,
                 },
                 {
                   "borderColor": "rgba(202, 196, 208, 1)",
@@ -347,7 +346,6 @@ exports[`renders list item with custom description 1`] = `
                       "alignSelf": "stretch",
                       "flexShrink": 1,
                       "justifyContent": "center",
-                      "minHeight": 32,
                     },
                     undefined,
                   ],
@@ -437,6 +435,7 @@ exports[`renders list item with custom description 1`] = `
                           {
                             "flexShrink": 1,
                             "includeFontPadding": false,
+                            "paddingVertical": 5,
                             "textAlignVertical": "center",
                           },
                           {
