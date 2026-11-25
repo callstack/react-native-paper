@@ -7,6 +7,15 @@ describe('getAvatarImageSourceKey', () => {
     expect(getAvatarImageSourceKey({ uri: 'a.png' })).toBe('a.png');
   });
 
+  it('keys array sources by their uris', () => {
+    expect(
+      getAvatarImageSourceKey([{ uri: 'a@1x.png' }, { uri: 'a@2x.png' }])
+    ).toBe(getAvatarImageSourceKey([{ uri: 'a@1x.png' }, { uri: 'a@2x.png' }]));
+    expect(getAvatarImageSourceKey([{ uri: 'a@1x.png' }])).not.toBe(
+      getAvatarImageSourceKey([{ uri: 'b@1x.png' }])
+    );
+  });
+
   it('is stable for function sources', () => {
     expect(getAvatarImageSourceKey(() => null)).toBe('function');
     expect(getAvatarImageSourceKey(() => null)).toBe(

@@ -35,7 +35,8 @@ export const getLabelledAvatarProps = (
 /**
  * Identity for retrying a failed avatar image.
  * Function sources use `sourceKey`, or one stable key without it, so inline
- * renderers do not reset state.
+ * renderers do not reset state. `uri` and array sources are keyed by their
+ * URIs for the same reason.
  */
 export const getAvatarImageSourceKey = (
   source: AvatarImageSource,
@@ -52,6 +53,11 @@ export const getAvatarImageSourceKey = (
     'uri' in source
   ) {
     return source.uri;
+  }
+
+  // An inline array is a new object on every render, so key it by its URIs.
+  if (Array.isArray(source)) {
+    return source.map((item) => item.uri).join('|');
   }
 
   return source;

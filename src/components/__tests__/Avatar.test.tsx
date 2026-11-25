@@ -527,6 +527,35 @@ describe('AvatarImage fallback', () => {
     expect(screen.getByText('JD', hidden)).toBeTruthy();
   });
 
+  it('keeps the fallback when an array source identity changes', async () => {
+    const { rerender } = await render(
+      <Avatar.Image
+        testID="avatar-image"
+        source={[
+          { uri: 'bad@1x.png', width: 40 },
+          { uri: 'bad@2x.png', width: 80 },
+        ]}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    await fireEvent(screen.getByTestId('avatar-image'), 'onError');
+
+    await rerender(
+      <Avatar.Image
+        testID="avatar-image"
+        source={[
+          { uri: 'bad@1x.png', width: 40 },
+          { uri: 'bad@2x.png', width: 80 },
+        ]}
+        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+      />
+    );
+
+    expect(screen.getByText('JD', hidden)).toBeTruthy();
+    expect(screen.queryByTestId('avatar-image')).toBeNull();
+  });
+
   it('passes host size, style, and a11y to a function source', async () => {
     const source = jest.fn(({ style }: AvatarImageSourceProps) => (
       <Image
