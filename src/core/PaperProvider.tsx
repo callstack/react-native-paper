@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
+import {
+  DirectionProvider,
+  getDefaultDirection,
+  type Direction,
+} from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider } from './settings';
 import type { Settings } from './settings';
@@ -68,11 +72,11 @@ const PaperProvider = (props: Props) => {
       <PortalHost>
         <SettingsProvider value={settingsValue}>
           <ReduceMotionContext.Provider value={resolvedReduceMotion}>
-            <LocaleProvider direction={direction}>
+            <DirectionProvider direction={direction}>
               <InternalThemeProvider theme={theme}>
                 {children}
               </InternalThemeProvider>
-            </LocaleProvider>
+            </DirectionProvider>
           </ReduceMotionContext.Provider>
         </SettingsProvider>
       </PortalHost>

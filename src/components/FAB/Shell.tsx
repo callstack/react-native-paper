@@ -136,6 +136,10 @@ export type ShellProps = {
    */
   'aria-describedby'?: string;
   /**
+   * Indicates that the element opens a popup, such as a menu.
+   */
+  'aria-haspopup'?: boolean | 'menu';
+  /**
    * Largest scale the label font can reach (auto-built content only).
    */
   labelMaxFontSizeMultiplier?: number;
@@ -195,6 +199,10 @@ export type ShellProps = {
    */
   theme?: ThemeProp;
   ref?: React.Ref<React.ComponentRef<typeof View>>;
+  /**
+   * Ref to the pressable inside the shell, the element that receives focus.
+   */
+  buttonRef?: React.Ref<React.ComponentRef<typeof View>>;
 };
 
 /**
@@ -231,6 +239,7 @@ const Shell = ({
   'aria-busy': ariaBusy,
   'aria-expanded': ariaExpanded,
   'aria-describedby': ariaDescribedBy,
+  'aria-haspopup': ariaHasPopup,
   labelMaxFontSizeMultiplier,
   labelAnimatedStyle,
   background,
@@ -244,11 +253,28 @@ const Shell = ({
   testID,
   theme: themeOverrides,
   ref,
+  buttonRef,
 }: ShellProps) => {
   const theme = useInternalTheme(themeOverrides);
   const [hovered, setHovered] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
-  const touchableRef = React.useRef<React.ComponentRef<typeof View>>(null);
+  const touchableRef = React.useRef<React.ComponentRef<typeof View> | null>(
+    null
+  );
+  // The touchable is the element the web focus handling below looks at, and
+  // the one `buttonRef` hands to the caller, so a single ref feeds both.
+  const setTouchableRef = React.useCallback(
+    (node: React.ComponentRef<typeof View> | null) => {
+      touchableRef.current = node;
+
+      if (typeof buttonRef === 'function') {
+        buttonRef(node);
+      } else if (buttonRef) {
+        buttonRef.current = node;
+      }
+    },
+    [buttonRef]
+  );
   const previousFocusedElement = React.useRef<HTMLElement | null>(null);
   const hoveredRef = React.useRef(false);
   const pressingRef = React.useRef(false);
@@ -460,7 +486,7 @@ const Shell = ({
       >
         {overlay}
         <TouchableRipple
-          ref={Platform.OS === 'web' ? touchableRef : undefined}
+          ref={setTouchableRef}
           borderless
           background={background}
           focusRing="none"
@@ -511,6 +537,7 @@ const Shell = ({
           aria-busy={ariaBusy}
           aria-expanded={ariaExpanded}
           aria-describedby={ariaDescribedBy}
+          aria-haspopup={ariaHasPopup}
           testID={testID}
           style={[children ? styles.fill : null, ...focusTarget.style]}
         >

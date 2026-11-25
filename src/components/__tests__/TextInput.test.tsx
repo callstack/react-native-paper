@@ -1119,9 +1119,9 @@ it('does not expose the placeholder string when the TextInput is not focused', a
     />
   );
 
-  /* Sentinel space avoids iOS multiline UITextView not updating placeholder from nil (react-native#31573). */
+  /* Empty, not a blank: a blank is read as the field's text. */
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe('');
 });
 
 it('shows placeholder when unfocused and no label is given', async () => {
@@ -1155,7 +1155,7 @@ it('shows placeholder when the TextInput is focused, once the label floats away'
 
   // The label still rests over the input when the field takes focus.
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe('');
 
   await act(() => jest.advanceTimersByTimeAsync(1000));
 
@@ -1177,6 +1177,7 @@ it('shows placeholder on multiline TextInput when focused, once the label floats
     />
   );
 
+  // iOS multiline fields keep a blank (react-native#31573).
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
   expect(screen.getByTestId('tf-multiline').props.placeholder).toBe(' ');
 
@@ -1192,6 +1193,40 @@ it('shows placeholder on multiline TextInput when focused, once the label floats
     'Add a note…'
   );
 });
+
+// TalkBack reads an empty field's text, even ' ', in place of its label.
+it.each([false, true])(
+  'keeps the hidden placeholder empty on Android (multiline: %s)',
+  async (multiline) => {
+    const platformOS = jest.replaceProperty(Platform, 'OS', 'android');
+
+    try {
+      await render(
+        <TextInput
+          label="Email"
+          value=""
+          onChangeText={() => {}}
+          placeholder="e.g. user@example.com"
+          multiline={multiline}
+          testID="tf-input"
+        />
+      );
+
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      expect(screen.getByTestId('tf-input').props.placeholder).toBe('');
+
+      await fireEvent(screen.getByTestId('tf-input'), 'focus');
+      await act(() => jest.advanceTimersByTimeAsync(1000));
+
+      // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
+      expect(screen.getByTestId('tf-input').props.placeholder).toBe(
+        'e.g. user@example.com'
+      );
+    } finally {
+      platformOS.restore();
+    }
+  }
+);
 
 it('shows placeholder at once when a focused TextInput with a floated label is cleared', async () => {
   const { rerender } = await render(
@@ -1268,7 +1303,7 @@ it('does not expose the placeholder string again after the TextInput loses focus
   await fireEvent(screen.getByTestId('tf-input'), 'blur');
 
   // eslint-disable-next-line no-restricted-syntax -- TODO: replace TestInstance props access with a user-visible assertion.
-  expect(screen.getByTestId('tf-input').props.placeholder).toBe(' ');
+  expect(screen.getByTestId('tf-input').props.placeholder).toBe('');
 });
 
 it('keeps a lone StartAccessory before the input in both LTR and RTL (tree order)', async () => {
@@ -1824,14 +1859,41 @@ it('keeps the 48dp TextInput.Icon target when a forwarded hitSlop is undefined',
   });
 });
 
-it('takes the glyph size from `size`, not `iconSize`', async () => {
+it('sizes the TextInput.Icon glyph with `iconSize`', async () => {
   await render(
     <TextInput
       label="Search"
       value=""
       startAccessory={(props) => (
-        // @ts-expect-error `iconSize` is not a TextInput.Icon prop
-        <TextInput.Icon {...props} icon="magnify" size={30} iconSize={12} />
+        <TextInput.Icon
+          {...props}
+          iconSize={12}
+          icon={({ size }) => (
+            <View testID="glyph" style={{ width: size, height: size }} />
+          )}
+        />
+      )}
+    />
+  );
+
+  expect(screen.getByTestId('glyph', includeHiddenElements)).toHaveStyle({
+    width: 12,
+    height: 12,
+  });
+});
+
+it('rejects the named `size` on TextInput.Icon', async () => {
+  await render(
+    <TextInput
+      label="Search"
+      value=""
+      startAccessory={(props) => (
+        <TextInput.Icon
+          {...props}
+          icon="magnify"
+          // @ts-expect-error `size` is not a TextInput.Icon prop
+          size="small"
+        />
       )}
     />
   );

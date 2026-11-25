@@ -37,6 +37,8 @@ const DURATION = 2400;
  * Activity indicator is used to present progress of some activity in the app.
  * It can be used as a drop-in replacement for the ActivityIndicator shipped with React Native.
  *
+ * Pass `aria-label` to name the indicator for assistive technology, e.g. `aria-label="Loading"`.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';

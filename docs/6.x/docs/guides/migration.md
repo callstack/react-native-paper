@@ -6,7 +6,7 @@ title: Migration from Paper 5.x to 6.x
 
 ### Animations
 
-React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-reanimated/) for most animations instead of the built-in React Native `Animated` API. So make sure to install `react-native-reanimated` 4.3.0 or later and `react-native-worklets` 0.8.1 or later, then complete the Reanimated setup. See the [getting started guide](./getting-started) for Expo and Community CLI instructions.
+React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-reanimated/) for most animations instead of the built-in React Native `Animated` API. So make sure to install the `react-native-reanimated` and `react-native-worklets` pair that matches your React Native version, as listed in [Reanimated and Worklets versions](./getting-started#reanimated-and-worklets-versions), then complete the Reanimated setup. See the [getting started guide](./getting-started) for Expo and Community CLI instructions.
 
 The following props now accept animated styles returned from `useAnimatedStyle`. They no longer accept `Animated.Value` or `Animated.AnimatedInterpolation` where these were previously supported:
 
@@ -40,6 +40,25 @@ const MyComponent = () => {
 
   return <Card style={animatedStyle}>Button</Card>;
 };
+```
+
+### `PaperProvider` is required
+
+In 5.x, most components rendered without a `PaperProvider` and used the default theme. In 6.x, most of them, such as `Text`, `Button`, `IconButton`, `TextInput`, `Icon` and `ProgressBar`, throw `useLocale must be used within a LocaleProvider` outside it. Wrap your app in `PaperProvider`, as [Usage](./getting-started#usage) in the getting started guide shows.
+
+`PaperProvider` also provides the safe area context, so outside it, `Appbar.Header` throws `No safe area value available` first, unless your app renders its own `SafeAreaProvider`.
+
+Tests that render a Paper component on its own fail the same way. Render it inside `PaperProvider`, for example with the `wrapper` option of React Native Testing Library:
+
+```tsx
+import { render, screen } from '@testing-library/react-native';
+import { PaperProvider } from 'react-native-paper';
+
+test('shows the greeting', async () => {
+  await render(<Greeting />, { wrapper: PaperProvider });
+
+  expect(screen.getByText('Hello')).toBeOnTheScreen();
+});
 ```
 
 ### Reduce motion
@@ -139,6 +158,7 @@ Components built on `TouchableRipple` that extend its props still take `rippleCo
 
 Hardcoded default test IDs have been removed for the components listed below:
 
+- `AnimatedFAB`: `animated-fab`
 - `Appbar.Content`: `appbar-content`
 - `Appbar.Header`: `appbar-header`
 - `BottomNavigation`: `bottom-navigation`
@@ -147,9 +167,7 @@ Hardcoded default test IDs have been removed for the components listed below:
 - `Card`: `card`
 - `Chip`: `chip`
 - `Drawer.CollapsedItem`: `drawer-collapsed-item`
-- `FAB`: `floating-action-button`
-- `FAB.Extended`: `extended-floating-action-button`
-- `FAB.Menu`: `floating-action-button-menu`
+- `FAB`: `fab`, also on the buttons of `FAB.Group`
 - `IconButton`: `icon-button`
 - `Menu`: `menu`
 - `Menu.Item`: `menu-item`
@@ -157,8 +175,9 @@ Hardcoded default test IDs have been removed for the components listed below:
 - `ProgressBar`: `progress-bar`
 - `Searchbar`: `search-bar`
 - `Surface`: `surface`
+- `TextInput`: `text-input-flat` or `text-input-outlined`, by `mode`
 
-You can specify a `testID` explicitly to restore each component's own test ID.
+You can specify a `testID` explicitly to restore each component's own test ID. On `TextInput`, the `testID` goes to the input. You can also find a field by its label, for example with `getByLabelText`.
 
 These components used to also derive test IDs for internal, implementation-only elements by appending a suffix to the `testID` prop (e.g. `${testID}-container`, `${testID}-icon`, `${testID}-outline`). They have been removed entirely.
 
@@ -217,6 +236,8 @@ In JavaScript, the old names import as `undefined` without an error: spreading `
 
 Watch for `DarkTheme` in particular. 5.x had no `DarkTheme` export, so in a JavaScript app an import of it was `undefined` and Paper used its default theme instead. In 6.x the same import is the Material Design 3 dark theme, so the app can look different after the upgrade. React Navigation and `adaptNavigationTheme` also use the names `LightTheme`, `DarkTheme` and `DefaultTheme`, so when a file uses both, import Paper's themes under other names, e.g. `LightTheme as PaperLightTheme`.
 
+If your app builds its Android dynamic colors from another library's scheme, such as `@pchmn/expo-material3-theme` (`{ ...LightTheme, colors: theme.light }`), it still type checks, but the scheme has none of the `*Fixed` roles that 6.x adds (see [Color roles](#color-roles)), so those roles keep Paper's default colors instead of the system's. Paper 6 has its own Android dynamic themes, `DynamicLightTheme` and `DynamicDarkTheme`, which map those roles to the system colors too. Use them instead, and `isDynamicColorSupported` to pick your own theme on devices without dynamic colors. See [Sync dynamic colors with system colors](./theming#sync-dynamic-colors-with-system-colors).
+
 The theme types were renamed too:
 
 - **`MD3Theme`** → **`Theme`**
@@ -253,6 +274,36 @@ If you import it from Paper's type declarations instead, the path changed:
 +const color = Palette.tertiary70;
 ```
 
+#### Color roles
+
+The 6.x color scheme has new roles, and three 5.x roles were removed:
+
+| Roles                                                                                                                           | In 6.x                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `surfaceContainerLowest`, `surfaceContainerLow`, `surfaceContainer`, `surfaceContainerHigh`, `surfaceContainerHighest`          | Added                                                       |
+| `surfaceDim`, `surfaceBright`                                                                                                   | Added                                                       |
+| `primaryFixed`, `primaryFixedDim`, `onPrimaryFixed`, `onPrimaryFixedVariant`, and the same roles for `secondary` and `tertiary` | Added                                                       |
+| `stateLayerPressed`                                                                                                             | Added: the default ripple color                             |
+| `surfaceDisabled`, `onSurfaceDisabled`                                                                                          | Removed: disabled states use `onSurface` at a lower opacity |
+| `backdrop`                                                                                                                      | Removed: the `Modal` overlay uses `scrim` at 32% opacity    |
+
+Components read the new roles: for example, a filled `TextInput` and the `Switch` track use `surfaceContainerHighest`, `Dialog` and `Searchbar` use `surfaceContainerHigh`, and the `BottomNavigation` bar uses `surfaceContainer`. `PaperProvider` fills a role your theme doesn't set from `LightTheme` or `DarkTheme`, without a warning, so in an app with its own 5.x color scheme these components take Paper's default colors. Regenerate your scheme with every role, for example with the [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/), or add the new roles to it.
+
+#### Color types
+
+Theme colors are typed `ColorValue` instead of `string`, because the colors of `DynamicLightTheme` and `DynamicDarkTheme` are `PlatformColor` values. So passing one to a prop or a variable typed `string` fails with `TS2322`. Type your own props and variables as `ColorValue`:
+
+```diff
++import type { ColorValue } from 'react-native';
++
+ type StatusDotProps = {
+-  color: string;
++  color: ColorValue;
+ };
+```
+
+If a library prop only takes a `string`, check which theme you pass. The colors of `LightTheme`, `DarkTheme` and themes built from them are strings at runtime, so you can cast them, e.g. `theme.colors.error as string`. The colors of `DynamicLightTheme` and `DynamicDarkTheme` are objects on Android 12 and later, so pass such a prop a color of your own instead.
+
 #### `roundness`
 
 The `roundness` theme property was removed. Corner radii are now set in `theme.shapes.corner`, a scale of roles from `extraSmall` (4) to `extraExtraLarge` (48), and each component uses one fixed role. Paper ignores a `roundness` left in your theme. TypeScript reports it in a theme object written inline in the `theme` prop of `PaperProvider`, `ThemeProvider` or a component, or typed as `Theme`, but not in an untyped variable that also holds other theme keys.
@@ -264,6 +315,7 @@ In 5.x, each of these components multiplied `roundness` by a fixed number, and t
 | `extraSmall`     | 4       | 1              | `Menu`, `Snackbar`, `Tooltip`                       |
 | `small`          | 8       | 2              | `Chip`                                              |
 | `medium`         | 12      | 3              | `Card`                                              |
+| `large`          | 16      | 4              | `FAB` and `FAB.Extended` at the default `size`      |
 | `largeIncreased` | 20      | 5              | `SegmentedButtons`                                  |
 | `extraLarge`     | 28      | 7              | `Dialog`, `Drawer.Item`, `Searchbar` (`mode="bar"`) |
 
@@ -350,13 +402,13 @@ As with `roundness`, Paper ignores these keys, and TypeScript reports them in th
  </PaperProvider>
 ```
 
-A full theme, such as `DarkTheme` or the theme `useTheme()` returns, gives the same result as before, except that custom keys of the theme above it are kept. The `theme` prop is now typed as a partial `Theme`, as on `PaperProvider`, so TypeScript reports a value that isn't a theme, such as a number, and keys the theme doesn't have, such as `roundness`. The `theme` prop of a component returned by `withTheme` gets the same type, and the component you wrap must take a `Theme` in its `theme` prop. A `ThemeProvider` without a `theme` now passes the theme above it on. In 5.x it gave its children the default light theme. To keep that, pass `theme={LightTheme}`.
+A full theme, such as `DarkTheme` or the theme `useTheme()` returns, gives the same result as before, except that custom keys of the theme above it are kept. The `theme` prop is now typed as a partial `Theme`, as on `PaperProvider`, so TypeScript reports a value that isn't a theme, such as a number, and keys the theme doesn't have, such as `roundness`. To keep a partial theme in a variable, type it as [Simple built-in theme overrides](./theming#simple-built-in-theme-overrides) shows. The `theme` prop of a component returned by `withTheme` gets the same type, and the component you wrap must take a `Theme` in its `theme` prop. A `ThemeProvider` without a `theme` now passes the theme above it on. In 5.x it gave its children the default light theme. To keep that, pass `theme={LightTheme}`.
 
 ### Accessibility props
 
 Components now use React Native's `aria-*` props and `role` instead of the `accessibility*` props. `accessibilityLabel` is now `aria-label`, the `accessibilityRole` of `Button` is now `role`, and the `accessibilityState` of `FAB` and `Menu.Item` is now `aria-checked` and `aria-selected`.
 
-`Checkbox.Item`, `RadioButton.Item`, `FAB`, `Menu.Item`, `List.Accordion` and `Switch` no longer accept `accessibilityLabel`, so TypeScript reports an error. Components whose props extend React Native's view props, such as `Button`, `Chip` and `DataTable.Pagination`, still compile with the old props, but pass them to their outer container instead of the element they used to label.
+`Checkbox.Item`, `RadioButton.Item`, `FAB`, `Menu.Item`, `List.Accordion` and `Switch` no longer accept `accessibilityLabel`, so TypeScript reports an error. Components whose props extend React Native's view props, such as `Button`, `Chip`, `DataTable.Pagination`, `Drawer.Item` and `Drawer.CollapsedItem`, still compile with the old props, but pass them to their outer container instead of the element they used to label.
 
 Props that label a part of a component keep their names, e.g. `closeIconAccessibilityLabel` on `Chip` and `dismissAccessibilityLabel` on `Modal`.
 
@@ -411,11 +463,11 @@ In a disabled `TextInput`, every `TextInput.Icon` takes the disabled color, also
 
 Interactive components now draw the Material Design 3 keyboard focus indicator: a 3dp ring in `theme.colors.secondary`, 2dp outside the component. On web it shows when an element gets focus from the keyboard (`:focus-visible`), and on Android when it gets focus from a hardware keyboard or D-pad. Clicking or touching an element shows no ring. iOS shows no ring.
 
-`Snackbar` rings its action and close button in `theme.colors.inversePrimary`, the color of its action label, because `secondary` barely shows on its `inverseSurface` background. If a component's background is the ring color, such as an `Appbar` with a `secondary` background, the rings of the controls on it don't show: give those controls a `theme` with a contrasting `secondary`. An `Appbar` passes its own `theme` on to the `Appbar.Action`, `Appbar.BackAction` and `Appbar.Content` placed directly in it.
+`Snackbar` rings its action and close button in `theme.colors.inversePrimary`, the color of its action label, because `secondary` barely shows on its `inverseSurface` background. If a component's background is the ring color, such as an `Appbar` with a `secondary` background, the rings of the controls on it don't show: give those controls a `theme` with a contrasting `secondary`. `Appbar.Action`, `Appbar.BackAction` and `Appbar.Content` read the `theme` of the `Appbar` they are rendered in from context, and the actions get it inside a `Tooltip` or a `View` too, so you can give that `theme` to the `Appbar` instead of to each control. See [Parts read from the `Appbar`](#parts-read-from-the-appbar).
 
 Components that fill a clipping container or touch their neighbours draw the ring 3dp inside their edge instead: `List.Item`, `List.Accordion`, `Checkbox.Item`, `RadioButton.Item`, `Menu.Item`, the `FAB.Menu` items, `Drawer.Item`, the `BottomNavigation` tabs, `DataTable.Row`, `DataTable.Cell`, `DataTable.Title` and `SegmentedButtons`. `Drawer.CollapsedItem` draws it around its icon and label, 2dp clear of the active indicator. `FAB` and `Switch` draw this ring instead of their own, and `Checkbox` keeps its circular ring around the state layer.
 
-A `TouchableRipple`, and every component built on it, rings only while it can be pressed. A disabled one shows no ring. One with no touch handler and no `disabled` is the plain view described in [TouchableRipple without a press handler](#touchableripple-without-a-press-handler): it isn't a keyboard stop, so it never rings. This applies to `TouchableRipple` only: a `Switch` or `Drawer.CollapsedItem` without a handler is still a keyboard stop and rings.
+A `TouchableRipple`, and every component built on it, rings only while it can be pressed. A disabled one shows no ring. One with no touch handler and no `disabled` is the plain view described in [TouchableRipple without a press handler](#touchableripple-without-a-press-handler): it isn't a keyboard stop, so it never rings. This applies to `TouchableRipple` only: a `Drawer.CollapsedItem` without `onPress` is still a keyboard stop and rings. A `Switch` without `onValueChange` is read-only, so it isn't a keyboard stop and never rings, as [Switches without `onValueChange`](#switches-without-onvaluechange) explains.
 
 An outward ring sits outside the component, so a scroll view or a container with `overflow: 'hidden'` clips it, and a neighbour that touches the component can cover it. Chips in a horizontal `ScrollView`, or a `TouchableRipple` that fills the width of a scroll view, show only part of the ring. Give the container 5dp of padding, or pass `focusRing="inward"` where the component takes it:
 
@@ -529,7 +581,9 @@ Using `Appbar` as a bottom bar is deprecated. Material Design 3 moves the bottom
 
 ### Avatar
 
-The `style` prop for `Avatar.Icon`, `Avatar.Image` and `Avatar.Text` no longer configures the background color. Use the `backgroundColor` prop instead. The text or icon color is still derived from the background color unless `color` is specified.
+The `style` prop for `Avatar.Icon`, `Avatar.Image` and `Avatar.Text` no longer configures the background color. Use the `backgroundColor` prop instead.
+
+The default background color is now `theme.colors.primaryContainer`, and the default icon or text color is `theme.colors.onPrimaryContainer`. `Avatar.Icon` and `Avatar.Text` no longer derive their icon or text color from the background color. Pass a matching `color` when you set a custom `backgroundColor`.
 
 e.g.:
 
@@ -538,8 +592,33 @@ e.g.:
   label="XD"
 - style={{ backgroundColor: 'red' }}
 + backgroundColor="red"
++ color="white"
 />
 ```
+
+`Avatar.Text` uses the `titleMedium` type style: a font weight of 500 and a letter spacing of 0.15. Its font size and line height still scale with `size`.
+
+### Badge
+
+`Badge` no longer takes `size`. Without children it is a 6dp dot, and with children a 16dp pill. In 5.x both were 20dp by default. TypeScript reports `size`, and in JavaScript it's ignored. There is no replacement for another size, so remove the prop:
+
+```diff
+-<Badge size={24}>3</Badge>
++<Badge>3</Badge>
+```
+
+### Banner
+
+Showing and hiding use the `standardDecelerate` and `standardAccelerate` easing curves instead of ease-in-out.
+
+### DataTable
+
+- `DataTable.Title` text has a letter spacing of 0.5, and its sort icon rotates with the `standard` easing curve instead of ease-in-out.
+- `DataTable.Pagination` labels use the `bodySmall` type style: a line height of 16 and a letter spacing of 0.4.
+- `DataTable.Cell` text uses the `bodyMedium` type style: a line height of 20 and a letter spacing of 0.25.
+- `DataTable.Header` and `DataTable.Row` draw their bottom border with `theme.colors.outlineVariant` instead of `theme.colors.surfaceVariant`.
+
+`Avatar.Text`, `DataTable.Title`, `DataTable.Cell` and `DataTable.Pagination` now read `theme.fonts.titleMedium`, `theme.fonts.labelMedium`, `theme.fonts.bodyMedium` and `theme.fonts.bodySmall`, respectively, instead of `theme.fonts.default`. These variants use the plain font family by default. Customizing only `theme.fonts.default` no longer affects these texts; customize the corresponding variants instead. A font family applied to all variants with `configureFonts({ config: { fontFamily: 'YourFont' } })` still applies to these components.
 
 ### Tooltip
 
@@ -654,6 +733,8 @@ e.g.:
 </Surface>
 ```
 
+TypeScript reports `backgroundColor` and the border radius keys only in a style object written inline in `style`. A style kept in a variable, such as one typed `ViewStyle` or a `StyleSheet.create` entry that also sets other keys, type checks, and `Surface` ignores its `backgroundColor` without a warning, and on Android and iOS its border radius too. The web still applies that border radius. Since TypeScript won't find these, search your app's `Surface` styles for them and move them to the props.
+
 ### Modal
 
 `Modal` now uses a `Portal` internally and doesn't require an explicit `Portal` wrapper. So you need to remove any existing `Portal` wrappers around `Modal`:
@@ -749,10 +830,14 @@ const buttonRef = React.useRef<React.ComponentRef<typeof View>>(null);
 
 ```diff
 -<Portal>
--  <Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
+-  <Dialog visible={visible} onDismiss={hideDialog}>
+-    <Dialog.Title>Alert</Dialog.Title>
+-  </Dialog>
 -</Portal>
 +<Dialog visible={visible} onDismiss={hideDialog} title="Alert" />
 ```
+
+`Dialog.Title` and the other parts move to props, as [Prop-based API](#prop-based-api) shows.
 
 The dialog now has the `dialog` role. Its accessible name is set automatically from the `title` prop. A string title is used as the `aria-label` on all platforms. Any other title is linked through `aria-labelledby`, which applies on web only, so on iOS and Android the dialog has no name unless you set `aria-label`. You can specify a different name with the new `aria-label` prop, e.g. when the dialog has no title:
 
@@ -774,7 +859,7 @@ When the dialog is `dismissable`, screen reader users can dismiss it with a visu
 
 #### Prop-based API
 
-The Paper 6.x `Dialog` now supports a simplified prop-based API for common dialog layouts. If your dialog previously composed `Dialog.Title`, `Dialog.Content`, and `Dialog.Actions` via `children`, migrate to the dedicated `icon`, `title`, `content`, and `actions` props.
+`Dialog` no longer takes `children`. The `icon`, `title`, `content` and `actions` props are the only way to build a dialog, so move each `Dialog.Icon`, `Dialog.Title`, `Dialog.Content` and `Dialog.Actions` to its prop.
 
 **Removed**
 
@@ -821,12 +906,14 @@ The new **`actions`** prop is more customizable because it accepts **`React.Reac
   title="Alert"
   content="This is a simple dialog"
   actions={[
-    <Button key="done" onPress={hideDialog}>
+    <Button key="done" mode="text" onPress={hideDialog}>
       Done
     </Button>,
   ]}
 />
 ```
+
+A dialog without `content` still renders the content area with its 24dp bottom padding, so a dialog with only a `title` and `actions` has 40dp between them instead of 16dp in 5.x, and one with only `actions` places them 48dp below the top of the dialog instead of 24dp. To keep the 5.x spacing, pass `contentProps={{ style: { paddingBottom: 0 } }}`.
 
 #### Dialog actions
 
@@ -847,6 +934,95 @@ The dialog no longer injects `compact` on its action buttons, and the default [`
   ]}
 />
 ```
+
+The actions row takes no `style`, so a `style` passed to `Dialog.Actions` has no replacement. The row places the actions at its end, 8dp apart, with 24dp of padding at the sides and the bottom.
+
+#### Scrollable content
+
+`Dialog.ScrollArea` becomes the `scrollable` prop. The dialog renders its own `ScrollView`, so the children of your `ScrollView` move to `content`, its props to `scrollViewProps`, and the scroll area's `style` to `scrollAreaProps`:
+
+```tsx
+// Before (v5)
+<Dialog visible={visible} onDismiss={hideDialog}>
+  <Dialog.Title>Terms</Dialog.Title>
+  <Dialog.ScrollArea style={{ paddingHorizontal: 0 }}>
+    <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+      <Text variant="bodyMedium">{terms}</Text>
+    </ScrollView>
+  </Dialog.ScrollArea>
+</Dialog>
+
+// After (v6)
+<Dialog
+  visible={visible}
+  onDismiss={hideDialog}
+  title="Terms"
+  content={terms}
+  scrollable
+  scrollAreaProps={{ style: { paddingHorizontal: 0 } }}
+  scrollViewProps={{ contentContainerStyle: { paddingHorizontal: 24 } }}
+/>
+```
+
+A scroll area that held a `FlatList` or another list component has no replacement, since `scrollable` always renders a `ScrollView`.
+
+#### Icon color and size
+
+The icon is 24dp, in `theme.colors.secondary`. `Dialog.Icon`'s `color` and `size` have no matching props: to change them, pass a function to `icon` that renders an `Icon`:
+
+```tsx
+// Before (v5)
+<Dialog.Icon icon="alert" color={colors.error} size={32} />
+
+// After (v6)
+<Dialog
+  icon={() => <Icon source="alert" color={colors.error} size={32} />}
+/>
+```
+
+#### Layout
+
+- The dialog is now 280dp to 560dp wide and centered. In 5.x it took the full width of the screen less the side inset, so on tablets and the web it is now narrower.
+- With an `icon`, the title is centered under it. Set `textAlign` in `titleProps.style` to align it differently.
+- The dividers of the scroll area use `outlineVariant` instead of `surfaceVariant`.
+- The side inset of at least 26dp is now padding on the wrapper around the dialog, not a horizontal margin on the dialog, so a `marginHorizontal` in `style` adds to it instead of replacing it.
+- If your app was written for a 6.0 alpha build: the 24dp space at the top now belongs to the first part (the icon, title or content) instead of being padding on the dialog, so a `paddingTop` in `style` adds to it instead of replacing it, as in 5.x.
+
+#### Parts outside a `Dialog`
+
+`Dialog.Content` and `Dialog.Actions` also worked outside a `Dialog`, for example in a `Modal`. There, use a `View` with their 5.x styles instead, and add `mode="text"` to the buttons as [Dialog actions](#dialog-actions) explains:
+
+```tsx
+// Before (v5)
+<Dialog.Content>
+  <Text variant="bodyMedium">Delete this file?</Text>
+</Dialog.Content>
+<Dialog.Actions>
+  <Button onPress={hide}>Cancel</Button>
+  <Button onPress={remove}>Delete</Button>
+</Dialog.Actions>
+
+// After (v6)
+<View style={{ paddingHorizontal: 24, paddingBottom: 24 }}>
+  <Text variant="bodyMedium">Delete this file?</Text>
+</View>
+<View
+  style={{
+    flexDirection: 'row',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    columnGap: 8,
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+  }}
+>
+  <Button mode="text" onPress={hide}>Cancel</Button>
+  <Button mode="text" onPress={remove}>Delete</Button>
+</View>
+```
+
+If your 5.x style set its own `gap`, drop `columnGap` from the copied style or set it to your value. On Android and iOS, `columnGap` wins over `gap`, so a `{ gap: 12 }` added after it still leaves 8dp between the buttons there. On the web the later of the two wins, so the same style gives 12.
 
 ### Menu
 
@@ -901,6 +1077,21 @@ The close button (`onClose`) now fills the trailing 34dp column reserved for it,
 `hitSlop` now works on web: the touchable renders an invisible target that extends past its bounds. An ancestor with `overflow: 'hidden'` or a scroll view clips it, as on Android.
 
 `TouchableRipple` draws the keyboard focus ring and takes a new `focusRing` prop. See [Focus indicator](#focus-indicator).
+
+On web, the hover layer is now a CSS background image. It paints on top of a `backgroundColor` that you set through `style`. While the touchable is hovered, it replaces a `backgroundImage`, such as a gradient, that you set through `style`. The hover layer no longer fades in and out. It shows and hides at once, as in Material Web.
+
+### Drawer
+
+The `Drawer` API is unchanged in Paper 6.x. No props were renamed, removed, or given new defaults. `Drawer.Item`, `Drawer.CollapsedItem` and `Drawer.Section` were realigned with the current Material Design 3 navigation drawer spec, so their appearance changes:
+
+- **Trailing padding.** `Drawer.Item` reserved 36dp between the drawer edge and its content on the trailing side, and 28dp on the leading side. Both are now 28dp, as the spec requires. The active indicator keeps its size. The label and the `right` content get 8dp more room.
+- **Active label weight.** The label of an active `Drawer.Item` now uses the prominent `labelLargeEmphasized` weight (700). Inactive labels are unchanged at 500.
+- **Section divider colour.** `Drawer.Section` drew its divider in a fixed grey that ignored the theme and was wrong in dark mode. It now uses `theme.colors.outlineVariant`, like every other `Divider`.
+- **Focus indicator.** `Drawer.Item` and `Drawer.CollapsedItem` gain a keyboard focus ring in `theme.colors.secondary`. It appears only on keyboard focus, not on press.
+- **Disabled state.** Disabled `Drawer.Item` and `Drawer.CollapsedItem` destinations are now dimmed to 38% opacity. In 5.x they looked the same as enabled ones.
+- **Active destination on web.** On web, the active `Drawer.Item` or `Drawer.CollapsedItem` is marked with `aria-current="page"` instead of `aria-selected`, which isn't valid on a button. iOS and Android still use `aria-selected`.
+
+If you were pixel-matching a drawer against Paper 5.x, the first two points are the ones that will shift your layout.
 
 ### TextInput
 
@@ -987,6 +1178,22 @@ const [value, setValue] = React.useState('');
 />
 ```
 
+#### Icon size
+
+`TextInput.Icon`'s `size` is renamed `iconSize`, as on `IconButton`, where `size` is now a named container scale.
+
+```tsx
+// Before (v5)
+<TextInput right={<TextInput.Icon icon="magnify" size={20} />} />
+
+// After (v6)
+<TextInput
+  endAccessory={(props) => (
+    <TextInput.Icon {...props} icon="magnify" iconSize={20} />
+  )}
+/>
+```
+
 #### Label and supporting text
 
 - **`label: React.Element | string`** → **`string`**
@@ -1010,9 +1217,11 @@ const [value, setValue] = React.useState('');
   label="Email"
   error={hasError}
   disabled={isDisabled}
-  supportingText="Enter a valid email"
+  supportingText={hasError ? 'Enter a valid email' : undefined}
 />
 ```
+
+`supportingText` has no `visible` prop: it shows whenever you pass it, whatever `error` is, so pass the message only while it applies. The field then grows by a line when the message appears, where a hidden 5.x `HelperText` kept its height. An empty string doesn't keep that line either.
 
 A `HelperText` that isn't tied to one input, such as an error under a group of inputs, has no `supportingText` to move to. Render a `Text` in the theme's error color instead:
 
@@ -1050,7 +1259,9 @@ Android and iOS in the hint. The input no longer sets `aria-valuenow` and
 
 When no label or explicit accessible name is supplied, the placeholder names the
 field, including after text is entered. A disabled field always exposes its
-disabled state, even when `aria-disabled={false}` is supplied.
+disabled state, even when `aria-disabled={false}` is supplied. It is also always
+read-only, even with `readOnly={false}`, which in 5.x left a disabled field
+editable.
 
 On web, error supporting text uses `role="alert"`. On Android and iOS, a new or
 changed error message is announced through `AccessibilityInfo` once it has
@@ -1066,6 +1277,14 @@ field changes from `error` to `onErrorContainer`. Focus takes precedence over
 hover and uses `primary`, or `error` for an invalid field. A disabled field uses
 the disabled colors even when `error` is set. On web it keeps `aria-invalid`; on
 Android and iOS the error text stays in its hint.
+
+With `error` and no `endAccessory`, the field draws an `alert-circle` icon in
+the error color at its end, which takes room from the input. 5.x drew no icon
+there. Any `endAccessory` replaces it, even one that renders nothing.
+
+If your app was written for a 6.0 alpha build: the input text, prefix and suffix
+of a disabled field were dimmed twice there. They are now dimmed once, to 38%
+opacity as in 5.x, so they are more visible than in the alpha builds.
 
 #### Removed props
 
@@ -1110,6 +1329,20 @@ const theme = {
 
 // After (v6)
 <TextInput theme={theme} style={{ fontSize: 16, color: '#1C1B1F' }} />;
+```
+
+#### Layout styles
+
+In 5.x, `TextInput` applied `height` and the text styles to the input, and the rest of `style`, such as `width`, `margin*`, `alignSelf` and `flex`, to the field around it. In 6.x the whole `style` goes to the input inside the field, and there is no prop for the field's style. So `width` sizes the input instead of the field, and `marginBottom` adds space inside the field instead of below it. `height` sets the height of the input: the field grows to fit a taller input, but it is never shorter than 56dp. Move the layout styles to a `View` around the `TextInput`:
+
+```tsx
+// Before (v5)
+<TextInput label="Email" style={{ width: 250, marginBottom: 16 }} />
+
+// After (v6)
+<View style={{ width: 250, marginBottom: 16 }}>
+  <TextInput label="Email" />
+</View>
 ```
 
 ### Button
@@ -1158,6 +1391,19 @@ see the appearance changes below.
 
 The container now also morphs its corner while pressed. Pass
 `animateShape={false}` to opt out.
+
+`style` goes to the container, so a `height` there doesn't resize the button.
+With `style={{ height: 56 }}`, the container is 56dp tall, but the label, the
+ripple and the pressable area keep the 40dp of the `small` size at its top, the
+bottom of the container doesn't respond to presses, and the corner stays 20dp
+instead of a full pill. Pick a `size` instead: `extra-small` is **32dp** tall,
+`small` **40dp**, `medium` **56dp**, `large` **96dp** and `extra-large`
+**136dp**. A larger size also has more padding and a larger label and icon.
+
+```diff
+-<Button style={{ height: 56 }}>Save</Button>
++<Button size="medium">Save</Button>
+```
 
 #### Toggle
 
@@ -1210,7 +1456,9 @@ a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
 - **Border color and width** are no longer set through `style`. An inner view
   draws the outline, so `borderColor` in `style` does not recolor it, and
   `borderWidth` adds a second border around it. To recolor the outline,
-  override `theme.colors.outlineVariant`.
+  override `theme.colors.outlineVariant`. Its width follows `size`: **1dp**
+  up to `medium`, **2dp** at `large` and **3dp** at `extra-large`. No prop or
+  theme value changes it, so drop `borderWidth`.
 - **Animated styles** must come from Reanimated. A React Native
   `Animated.Value` in `style` is not applied.
 
@@ -1234,7 +1482,8 @@ a plain button. It is ignored on `mode="text"`, which MD3 gives no toggle.
 
 The content takes `minHeight`, `paddingStart` and `paddingEnd` from `size`.
 To change them in `contentStyle`, set these same properties. On Android and
-iOS, `padding` and `paddingHorizontal` do not override them, and a `height`
+iOS, `padding`, `paddingHorizontal`, `paddingLeft` and `paddingRight` do not
+override them, and on the web `paddingHorizontal` doesn't either. A `height`
 below `minHeight` has no effect.
 
 ```tsx
@@ -1438,9 +1687,38 @@ An accordion with a `left` element now indents only its `List.Item` children. An
 <IconButton icon="camera" mode="tonal" onPress={onPress} />
 ```
 
+The colors at rest changed too. In 5.x, a `contained` or `contained-tonal` button that wasn't `selected` drew a `surfaceVariant` container, with a `primary` icon for `contained` and an `onSurfaceVariant` icon for `contained-tonal`. Only a selected one drew `primary` with an `onPrimary` icon, or `secondaryContainer` with an `onSecondaryContainer` icon. In 6.x, `filled` and `tonal` draw those colors at rest. To keep the 5.x look, pass the 5.x colors as `containerColor` and `iconColor`:
+
+```tsx
+<IconButton
+  icon="camera"
+  mode="filled"
+  containerColor={colors.surfaceVariant}
+  iconColor={colors.primary}
+  onPress={onPress}
+/>
+<IconButton
+  icon="camera"
+  mode="tonal"
+  containerColor={colors.surfaceVariant}
+  iconColor={colors.onSurfaceVariant}
+  onPress={onPress}
+/>
+```
+
+`outlined` keeps its name, but its outline uses `outlineVariant` instead of `outline`, and keeps it when disabled instead of switching to `surfaceDisabled`. A theme that set `colors.outline` to restyle outlined icon buttons sets `outlineVariant` now.
+
 #### Size
 
-`size` is a named scale: `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`, the same names as `Button`. It defaults to `'small'`, which still uses a 24dp icon.
+`size` is a named scale: `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`, the same names as `Button`. It defaults to `'small'`, which still uses a 24dp icon. Each size sets the height of the container and the default icon size, and the container is square at the default `width`:
+
+| `size`          | Container | Icon |
+| --------------- | --------- | ---- |
+| `'extra-small'` | 32dp      | 20dp |
+| `'small'`       | 40dp      | 24dp |
+| `'medium'`      | 56dp      | 24dp |
+| `'large'`       | 96dp      | 32dp |
+| `'extra-large'` | 136dp     | 40dp |
 
 To set the glyph size in dp without changing the container scale, use `iconSize`. The container keeps the size of its `size` (a square 40dp for the default), so a glyph larger than it is clipped. Pick a larger `size` instead.
 
@@ -1452,6 +1730,29 @@ To set the glyph size in dp without changing the container scale, use `iconSize`
 // After (v6)
 <IconButton icon="camera" onPress={onPress} />
 <IconButton icon="camera" iconSize={32} onPress={onPress} />
+```
+
+The container no longer follows the icon. In v5 it was the icon plus 8dp on each side, so `size={20}` drew a 36dp button and `size={32}` a 48dp one. Moving the number to `iconSize` keeps the glyph but puts it in the container of the named `size`, 40dp for the default, so a button you migrate this way can grow or shrink. Check rows and headers that depend on its width. For a smaller button, use `size="extra-small"` (32dp with a 20dp icon). To take the same space as before, lower the 6dp margin around the button.
+
+```tsx
+// Before (v5): a 36dp button, 48dp with its margin
+<IconButton icon="star" size={20} onPress={onPress} />
+
+// After (v6): a 32dp button, 44dp with its margin
+<IconButton icon="star" size="extra-small" onPress={onPress} />
+
+// After (v6): a 40dp button, 48dp with a 4dp margin
+<IconButton icon="star" iconSize={20} style={{ margin: 4 }} onPress={onPress} />
+```
+
+To map any other 5.x number, pass it as `iconSize` and pick the `size` whose container comes closest to the 5.x button without clipping the icon. `size={80}` drew a 96dp button, so it becomes `size="large"` with `iconSize={80}`, 96dp as in 5.x:
+
+```tsx
+// Before (v5): a 96dp button
+<IconButton icon="camera" size={80} onPress={onPress} />
+
+// After (v6): a 96dp button
+<IconButton icon="camera" size="large" iconSize={80} onPress={onPress} />
 ```
 
 ```tsx
@@ -1478,6 +1779,8 @@ To set the glyph size in dp without changing the container scale, use `iconSize`
 #### Touch target
 
 An `IconButton` with a touch handler reaches the 48dp minimum target through hit slop, without changing what is drawn. This applies to `extra-small` and `small`, whose containers are smaller than 48dp. Pass `hitSlop` to override it, or `hitSlop={0}` to opt out. A disabled button, or one with no touch handler, gets no extra target.
+
+The hit slop is worked out from the container of the named `size`, not from the size the button is laid out at. A button made smaller through `style`, such as `style={{ width: 30, height: 30 }}` on the default `small`, still gets 4dp on each side, a 38dp target, so pass its own `hitSlop`: `hitSlop={9}` for a 30dp button.
 
 #### `Appbar.Action` and `Appbar.BackAction`
 
@@ -1516,6 +1819,21 @@ For `filled`, the default and toggle-on containers use `primary`. Toggle-off (`s
   mode="filled"
   selected={isStarred}
   onPress={toggleStarred}
+/>
+```
+
+Neither keeps the 5.x look, a `surfaceVariant` container with a `primary` icon: `filled` draws `primary` at rest and `surfaceContainer` when toggled off, so pass `containerColor` and `iconColor` as in [Mode names](#mode-names), on a toggle only while it is off.
+
+For `tonal`, toggle-on draws `secondary` with an `onSecondary` icon, and toggle-off draws the default `secondaryContainer` with an `onSecondaryContainer` icon, the colors a selected 5.x `contained-tonal` button drew. So a 5.x tonal toggle that is off now looks like one that was on. To keep the 5.x colors, pass them for both states:
+
+```tsx
+<IconButton
+  icon="bell"
+  mode="tonal"
+  selected={isOn}
+  containerColor={isOn ? colors.secondaryContainer : colors.surfaceVariant}
+  iconColor={isOn ? colors.onSecondaryContainer : colors.onSurfaceVariant}
+  onPress={toggle}
 />
 ```
 
@@ -1631,6 +1949,13 @@ A FAB without a `variant` keeps its 5.x colors.
 +<FAB icon="plus" variant="secondaryContainer" onPress={onPress} />
 ```
 
+If your app was written for a 6.0 alpha build, rename the `tonalPrimary`, `tonalSecondary` and `tonalTertiary` variants to `primaryContainer`, `secondaryContainer` and `tertiaryContainer`. The colors are the same. The old names have no aliases, so in JavaScript a `FAB`, a `FAB.Extended` or the `FAB.Menu` trigger with one of them throws at render. One that also sets `containerColor` renders, but a `FAB.Menu` then gives its close button and items the tertiary colors.
+
+```diff
+-<FAB icon="plus" variant="tonalSecondary" onPress={onPress} />
++<FAB icon="plus" variant="secondaryContainer" onPress={onPress} />
+```
+
 #### `size`
 
 - **`size="small"`** and **`small`** (40dp) were removed. The smallest FAB is now `size="default"` (56dp).
@@ -1661,6 +1986,16 @@ TypeScript reports an error for each of them, and in JavaScript they're ignored.
 +/>
 ```
 
+#### `visible`
+
+A FAB with `visible={false}` is now hidden from assistive technology (`aria-hidden`), can't be focused and takes no press. In 5.x it only stopped taking touches, so screen readers and the keyboard could still reach it. This applies to `FAB.Extended` and the `FAB.Menu` trigger too. On web, hiding a FAB that has keyboard focus moves focus back to the element that had it before, if that element is still on the page.
+
+Tests that find a hidden FAB by its role, label or test ID stop finding it, because React Native Testing Library skips hidden elements. Pass `includeHiddenElements` to find it:
+
+```tsx
+screen.getByTestId('compose', { includeHiddenElements: true });
+```
+
 #### `FAB.Extended`
 
 `FAB.Extended` replaces `AnimatedFAB`. `extended` is now `expanded`, and changing it animates the width and the label. `iconMode` and `animateFrom` were removed, and so were the props listed above for `FAB`. In JavaScript, `AnimatedFAB` imports as `undefined`, so the app builds but fails to render with "Element type is invalid".
@@ -1680,7 +2015,7 @@ TypeScript reports an error for each of them, and in JavaScript they're ignored.
 
 `FAB.Menu` replaces `FAB.Group`. It takes `expanded` and `onDismiss` instead of `open` and `onStateChange`, the main button's props move into `trigger`, and `actions` are now `items`, 2 to 6 of them. Items take `icon`, `label`, `onPress`, `aria-label` and `testID`: the color, style and size props of an action were removed, and so were `backdropColor`, `fabStyle` and the long-press props.
 
-`FAB.Menu` has no backdrop and doesn't close on a tap outside it. It closes when the user presses its close button or an item, which calls `onDismiss`.
+`FAB.Menu` has no backdrop and doesn't close on a tap outside it. It calls `onDismiss` when the user presses its close button or an item, presses Escape (web), uses the hardware back button (Android) or the screen reader escape gesture (iOS), or when the trigger is hidden while the menu is open.
 
 ```diff
 -<FAB.Group
@@ -1783,7 +2118,7 @@ A `Switch` with no `onValueChange` used to render as an enabled, focusable contr
 
 A read-only switch keeps its enabled appearance and exposes its on/off state to screen readers, but it cannot be focused with a keyboard or pressed. On web it exposes `aria-readonly`. On iOS and Android it exposes a disabled accessibility state, because React Native has no read-only state for switches. Use `disabled` when you also want the disabled appearance.
 
-This most often shows up where the switch sits inside a row that owns the press. Give the row the switch role and state, and hide the inner switch from assistive technology, so screen readers announce the row as one switch with its on/off state:
+This most often shows up where the switch sits inside a row that owns the press. Give the row the switch role and state, and set `aria-hidden` on the inner switch, so screen readers announce the row as one switch with its on/off state. A hidden read-only switch renders with no role and cannot take focus, so the row does not nest a second interactive control:
 
 ```diff
 -<TouchableRipple onPress={toggleTheme}>
@@ -1794,10 +2129,9 @@ This most often shows up where the switch sits inside a row that owns the press.
 +>
    <View style={styles.row}>
      <Text>Dark Theme</Text>
--    <View pointerEvents="none">
+     <View pointerEvents="none">
 -      <Switch value={isDarkTheme} />
-+    <View pointerEvents="none" aria-hidden>
-+      <Switch value={isDarkTheme} readOnly />
++      <Switch value={isDarkTheme} readOnly aria-hidden />
      </View>
    </View>
  </TouchableRipple>
@@ -1812,7 +2146,13 @@ When selected, an icon set with `checkedIcon` uses `onPrimaryContainer`. If you 
 ```tsx
 import { Switch, useTheme } from 'react-native-paper';
 
-const TertiarySwitch = ({ value, onValueChange }) => {
+const TertiarySwitch = ({
+  value,
+  onValueChange,
+}: {
+  value: boolean;
+  onValueChange: (value: boolean) => void;
+}) => {
   const theme = useTheme();
   const switchTheme = {
     colors: {
