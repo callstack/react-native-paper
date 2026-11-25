@@ -122,13 +122,16 @@ const DataTableTitle = ({
 
   const spin = useSharedValue(sortDirection === 'ascending' ? 0 : 180);
 
+  const { short3: sortDuration } = theme.motion.duration;
+  const [x1, y1, x2, y2] = theme.motion.easing.standard;
+
   React.useEffect(() => {
     spin.value = withTiming(sortDirection === 'ascending' ? 0 : 180, {
-      duration: 150,
-      easing: Easing.inOut(Easing.ease),
+      duration: sortDuration,
+      easing: Easing.bezier(x1, y1, x2, y2),
       reduceMotion: reduceMotion ? ReduceMotion.Always : ReduceMotion.Never,
     });
-  }, [reduceMotion, sortDirection, spin]);
+  }, [reduceMotion, sortDirection, sortDuration, spin, x1, x2, y1, y2]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${spin.value}deg` }],
@@ -195,6 +198,8 @@ const DataTableTitle = ({
       {icon}
 
       <Text
+        variant="labelMedium"
+        theme={themeOverrides}
         style={cellStyle}
         numberOfLines={numberOfLines}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
@@ -279,10 +284,8 @@ const styles = StyleSheet.create({
   },
 
   cell: {
-    lineHeight: 24,
-    fontSize: 12,
-    fontWeight: '500',
     alignItems: 'center',
+    lineHeight: 24,
   },
 
   sorted: {
