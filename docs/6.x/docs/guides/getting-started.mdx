@@ -11,7 +11,7 @@ import Tabs from '@docs/components/Tabs';
 
 React Native Paper 6.x requires React 19 and React Native's New Architecture.
 
-Open a Terminal in your project's folder and install the library:
+Open a Terminal in your project's folder and install the library. In a Community CLI app, install Reanimated and Worklets first, as the Community CLI tab below explains:
 
 ```bash npm2yarn
 npm install react-native-paper@alpha
@@ -35,6 +35,8 @@ Minimum requirements:
 - `react-native-worklets` **≥ 0.8.1**
 - `react-native-safe-area-context`: a version compatible with your React Native toolchain.
 
+`npx expo install` installs the versions that your Expo SDK includes. SDK 56 is the first whose Reanimated and Worklets meet these minimums (SDK 55 has Reanimated 4.2.1 and Worklets 0.7.4), so on an older SDK, upgrade Expo first.
+
 You also need to install [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons), because some components use these icons internally:
 
 ```bash
@@ -47,18 +49,29 @@ Follow the [React Native Reanimated installation guide](https://docs.swmansion.c
 
 If you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
 
+The app runs in Expo Go, with no development build: Expo Go includes Reanimated, Worklets and the safe area context, and loads the icon font when the app starts.
+
   </TabItem>
   <TabItem value="community-cli" label="Community CLI">
 
+Install the Reanimated and Worklets pair for your React Native version from [Reanimated and Worklets versions](#reanimated-and-worklets-versions), pinned with `~`, before `react-native-paper`. For example, on React Native 0.81:
+
 ```bash npm2yarn
-npm install react-native-safe-area-context react-native-reanimated react-native-worklets
+npm install react-native-reanimated@~4.3.0 react-native-worklets@~0.8.1
+```
+
+Without `~`, or when you install Paper first, npm picks the newest Reanimated, which may not support your React Native version, and the install fails with `ERESOLVE`.
+
+Then install the safe area context:
+
+```bash npm2yarn
+npm install react-native-safe-area-context
 ```
 
 Minimum requirements:
 
 - `react-native` **≥ 0.81**
-- `react-native-reanimated` **≥ 4.3.0**
-- `react-native-worklets` **≥ 0.8.1**
+- `react-native-reanimated` **≥ 4.3.0** and `react-native-worklets` **≥ 0.8.1**, in the pair that supports your React Native version
 - `react-native-safe-area-context`: a version compatible with your React Native toolchain.
 
 Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
@@ -87,6 +100,19 @@ If you don't want to install vector icons, leave the package out. Components the
 
   </TabItem>
 </Tabs>
+
+### Reanimated and Worklets versions
+
+Each Reanimated release supports a few React Native versions and needs a matching Worklets version. The newest pair for each React Native version:
+
+| React Native | `react-native-reanimated` | `react-native-worklets` |
+| ------------ | ------------------------- | ----------------------- |
+| 0.81, 0.82   | 4.3.x                     | 0.8.x (0.8.1 or later)  |
+| 0.83 to 0.85 | 4.6.x                     | 0.12.x                  |
+| 0.86         | 4.7.x                     | 0.13.x                  |
+| 0.87 to 0.89 | 4.8.x                     | 0.14.x                  |
+
+For other pairs, see Reanimated's [compatibility table](https://docs.swmansion.com/react-native-reanimated/docs/guides/compatibility/).
 
 ### Bundle size optimization
 

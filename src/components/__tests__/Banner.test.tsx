@@ -16,6 +16,7 @@ import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { Palette } from '../../theme/tokens';
+import type { Theme } from '../../theme/types';
 import Banner from '../Banner';
 
 jest.mock('react-native-reanimated', () => {
@@ -297,6 +298,56 @@ describe('animations', () => {
       });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('when the theme changes while the component is mounted', () => {
+    const themeWithSurface = (surface: string): Theme => ({
+      ...LightTheme,
+      colors: { ...LightTheme.colors, surface },
+      motion: {
+        ...LightTheme.motion,
+        easing: {
+          ...LightTheme.motion.easing,
+          standardDecelerate: [...LightTheme.motion.easing.standardDecelerate],
+          standardAccelerate: [...LightTheme.motion.easing.standardAccelerate],
+        },
+      },
+    });
+
+    it('should not cause another open/close animation', async () => {
+      const view = await render(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+          theme={themeWithSurface('white')}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      await act(() => {
+        jest.runAllTimers();
+      });
+      expect(showCallback).toHaveBeenCalledTimes(1);
+
+      await view.rerender(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+          theme={themeWithSurface('black')}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      await act(() => {
+        jest.runAllTimers();
+      });
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).not.toHaveBeenCalled();
     });
   });
 

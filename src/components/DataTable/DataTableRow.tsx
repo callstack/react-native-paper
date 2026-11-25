@@ -66,7 +66,7 @@ const DataTableRow = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const borderBottomColor = theme.colors.surfaceVariant;
+  const borderBottomColor = theme.colors.outlineVariant;
 
   return (
     <TouchableRipple

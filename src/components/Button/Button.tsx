@@ -11,7 +11,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import Reanimated, { linear } from 'react-native-reanimated';
+import Reanimated from 'react-native-reanimated';
 
 import {
   createIsMode,
@@ -19,8 +19,6 @@ import {
   getButtonContentBoxStyle,
   getButtonHitSlop,
   getButtonPressedRadius,
-  getButtonRippleColor,
-  getButtonShapeCurvePoints,
   getButtonShapeRadius,
   getButtonSizeStyle,
   getButtonTransitionDuration,
@@ -29,10 +27,10 @@ import {
 import { getDefaultDirection, useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { toSpringCurve } from '../../theme/tokens/sys/motion';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { useFocusRing } from '../../utils/useFocusRing';
+import { useShapeMorph } from '../../utils/useShapeMorph';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
@@ -40,6 +38,7 @@ import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import { getRippleColorFromContent } from '../TouchableRipple/utils';
 import Text from '../Typography/Text';
 
 // Elevation levels (MD3) used by the `elevated` mode: level 1 at rest,
@@ -346,12 +345,6 @@ const Button = ({
     animatesShape && pressed
       ? getButtonPressedRadius({ size, theme })
       : restingRadius;
-  const shapeSpring = React.useMemo(
-    () => toSpringCurve(theme.motion.spring.fast.spatial),
-    [theme.motion.spring.fast.spatial]
-  );
-  const shapeTransitionDuration = animatesShape ? shapeSpring.duration : 0;
-
   const tracksPress = animatesShape || isElevationEntitled;
 
   const handlePressIn = React.useCallback(
@@ -405,7 +398,7 @@ const Button = ({
   );
 
   const rippleColor = React.useMemo(
-    () => getButtonRippleColor({ labelColor }),
+    () => getRippleColorFromContent({ contentColor: labelColor }),
     [labelColor]
   );
 
@@ -427,23 +420,22 @@ const Button = ({
     previousContainerColor: committedContainerColor,
   });
 
-  const innerRadius = Math.max(0, radius - borderWidth);
-  const largestRadius = Math.max(
-    sizeStyle.minHeight / 2,
-    getButtonShapeRadius({ size, shape: 'square', theme }),
-    getButtonPressedRadius({ size, theme })
-  );
-  const shapeTimingFunction = React.useMemo(
-    () =>
-      linear(
-        ...getButtonShapeCurvePoints({
-          points: shapeSpring.points,
-          radius: innerRadius,
-          largestRadius: Math.max(0, largestRadius - borderWidth),
-        })
-      ),
-    [shapeSpring.points, innerRadius, largestRadius, borderWidth]
-  );
+  const {
+    duration: shapeTransitionDuration,
+    timingFunction: shapeTimingFunction,
+    outerStyle: clipStyle,
+    innerStyle: innerClipStyle,
+  } = useShapeMorph({
+    theme,
+    radius,
+    largestRadius: Math.max(
+      sizeStyle.minHeight / 2,
+      getButtonShapeRadius({ size, shape: 'square', theme }),
+      getButtonPressedRadius({ size, theme })
+    ),
+    borderWidth,
+    animate: animatesShape,
+  });
 
   // The clip carries the same radius transition as the `Surface`, so the
   // ripple and the disabled overlay follow the morph.
@@ -460,16 +452,6 @@ const Button = ({
     'outward',
     'within'
   );
-  const shapeTransitionStyle = {
-    transitionProperty: 'borderRadius',
-    transitionDuration: shapeTransitionDuration,
-    transitionTimingFunction: shapeTimingFunction,
-  } as const;
-
-  const clipStyle = { ...shapeTransitionStyle, borderRadius: radius };
-
-  const innerClipStyle = { ...shapeTransitionStyle, borderRadius: innerRadius };
-
   const outlineStyle = React.useMemo(
     () => ({ borderColor, borderWidth }),
     [borderColor, borderWidth]
