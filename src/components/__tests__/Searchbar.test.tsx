@@ -326,6 +326,29 @@ it('renders results below the Searchbar', async () => {
   });
 });
 
+it('renders full-width square results below a divided Searchbar', async () => {
+  await render(
+    <Searchbar.Results mode="divided" testID="results">
+      <Text>Result</Text>
+    </Searchbar.Results>
+  );
+
+  expect(screen.getByTestId('results')).toHaveStyle({
+    borderRadius: 0,
+    marginHorizontal: undefined,
+  });
+});
+
+it('lets a style margin replace the contained results margin', async () => {
+  await render(
+    <Searchbar.Results testID="results" style={{ marginHorizontal: 0 }}>
+      <Text>Result</Text>
+    </Searchbar.Results>
+  );
+
+  expect(screen.getByTestId('results')).toHaveStyle({ marginHorizontal: 0 });
+});
+
 it('shrinks its horizontal margin while the input is focused', async () => {
   await render(<Searchbar value="" />);
 

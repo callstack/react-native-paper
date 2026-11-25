@@ -13,6 +13,11 @@ import {
 
 import ScreenWrapper from '../ScreenWrapper';
 
+const FRUITS = ['Apple', 'Apricot', 'Avocado', 'Banana', 'Blueberry'];
+
+const filterFruits = (query: string) =>
+  FRUITS.filter((fruit) => fruit.toLowerCase().includes(query.toLowerCase()));
+
 const SearchExample = () => {
   const navigation = useNavigation('Searchbar');
 
@@ -30,7 +35,10 @@ const SearchExample = () => {
     clickableDrawer: '',
     clickableLoading: '',
     withResults: '',
+    dividedWithResults: '',
   });
+
+  const [isResultsBarFocused, setIsResultsBarFocused] = React.useState(false);
 
   const { colors } = useTheme();
 
@@ -121,7 +129,7 @@ const SearchExample = () => {
             trailingIcon={'microphone'}
           />
         </List.Section>
-        <List.Section title="Divided mode (deprecated)">
+        <List.Section title="Divided mode">
           <Searchbar
             placeholder="Search"
             onChangeText={(query) =>
@@ -160,6 +168,45 @@ const SearchExample = () => {
             mode="divided"
             loading
           />
+        </List.Section>
+        <List.Section title="With results">
+          <Searchbar
+            placeholder="Search fruit"
+            onChangeText={(query) =>
+              setSearchQuery({ ...searchQueries, withResults: query })
+            }
+            value={searchQueries.withResults}
+            onFocus={() => setIsResultsBarFocused(true)}
+            onBlur={() => setIsResultsBarFocused(false)}
+            style={styles.searchbar}
+            mode="contained"
+          />
+          {/* Contained results line up with the focused bar, so they show only
+              while it has focus. */}
+          {isResultsBarFocused && searchQueries.withResults ? (
+            <Searchbar.Results>
+              <List.Subheader>Results</List.Subheader>
+              {filterFruits(searchQueries.withResults).map((fruit) => (
+                <List.Item key={fruit} title={fruit} />
+              ))}
+            </Searchbar.Results>
+          ) : null}
+          <Searchbar
+            placeholder="Search fruit"
+            onChangeText={(query) =>
+              setSearchQuery({ ...searchQueries, dividedWithResults: query })
+            }
+            value={searchQueries.dividedWithResults}
+            mode="divided"
+          />
+          {searchQueries.dividedWithResults ? (
+            <Searchbar.Results mode="divided">
+              <List.Subheader>Results</List.Subheader>
+              {filterFruits(searchQueries.dividedWithResults).map((fruit) => (
+                <List.Item key={fruit} title={fruit} />
+              ))}
+            </Searchbar.Results>
+          ) : null}
         </List.Section>
         <List.Section title="Clickable icon">
           <Searchbar
@@ -209,30 +256,6 @@ const SearchExample = () => {
             loading
             style={styles.searchbar}
           />
-        </List.Section>
-        <List.Section title="With results">
-          <Searchbar
-            placeholder="Search fruit"
-            onChangeText={(query) =>
-              setSearchQuery({ ...searchQueries, withResults: query })
-            }
-            value={searchQueries.withResults}
-            style={styles.searchbar}
-            mode="contained"
-          />
-          {searchQueries.withResults ? (
-            <Searchbar.Results style={styles.searchbar}>
-              {['Apple', 'Apricot', 'Avocado', 'Banana', 'Blueberry']
-                .filter((fruit) =>
-                  fruit
-                    .toLowerCase()
-                    .includes(searchQueries.withResults.toLowerCase())
-                )
-                .map((fruit) => (
-                  <List.Item key={fruit} title={fruit} />
-                ))}
-            </Searchbar.Results>
-          ) : null}
         </List.Section>
       </ScreenWrapper>
       <Snackbar

@@ -23,14 +23,14 @@ const shape = {
   contained: 'extraLarge',
   /** Divided search view: square corners. */
   divided: 'none',
-  /** Contained docked results: medium corners (12dp). */
+  /** Results below a contained bar: medium corners (12dp). */
   results: 'medium',
+  /** Results below a divided bar: square corners. */
+  dividedResults: 'none',
 } as const satisfies Record<string, ShapeToken>;
 
 const colors = {
   container: 'surfaceContainerHigh',
-  // Input/placeholder colors per MD3 — previously swapped in the legacy
-  // component (input was onSurfaceVariant, placeholder was onSurface).
   input: 'onSurface',
   placeholder: 'onSurfaceVariant',
   leadingIcon: 'onSurface',

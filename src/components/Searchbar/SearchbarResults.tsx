@@ -16,6 +16,16 @@ export type Props = {
    */
   children: React.ReactNode;
   /**
+   * Match the `mode` of the `Searchbar` above, the default value is
+   * "contained".
+   * - `contained` - rounded corners and the 12dp horizontal margin of a
+   *   focused contained bar, so the two line up.
+   * - `divided` - full width with square corners, continuing the divided bar
+   *   below its `Divider` as in the MD3 full-screen layout. For a docked
+   *   layout, set its width and margins through `style`.
+   */
+  mode?: 'contained' | 'divided';
+  /**
    * Changes the container's shadow and background.
    */
   elevation?: Elevation;
@@ -33,9 +43,13 @@ export type Props = {
 /**
  * A container for the search results / suggestions list shown below a
  * `Searchbar` (MD3 search anatomy element 6). It only provides the surface;
- * grouping results with gaps is left to the consumer. It carries the
- * horizontal margin of a focused contained bar, so the two line up the way the
- * MD3 docked search view does; pass a margin through `style` to change that.
+ * the content, such as `List.Item`s, and grouping results with gaps are left
+ * to the consumer. Set `mode` to the `Searchbar`'s `mode` so the two line up.
+ * In `contained` mode it carries the horizontal margin of a focused bar; pass
+ * a margin through `style` to change that.
+ *
+ * For accessibility, MD3 recommends showing that the list holds results, for
+ * example with a "Results" label at its top, such as a `List.Subheader`.
  *
  * ## Usage
  * ```js
@@ -49,6 +63,7 @@ export type Props = {
  *     <>
  *       <Searchbar value={query} onChangeText={setQuery} placeholder="Search" />
  *       <Searchbar.Results>
+ *         <List.Subheader>Results</List.Subheader>
  *         <List.Item title="Result 1" />
  *         <List.Item title="Result 2" />
  *       </Searchbar.Results>
@@ -61,6 +76,7 @@ export type Props = {
  */
 const SearchbarResults = ({
   children,
+  mode = 'contained',
   elevation = 0,
   style,
   theme: themeOverrides,
@@ -71,14 +87,18 @@ const SearchbarResults = ({
     () => getSearchbarColors(theme),
     [theme]
   );
-  const borderRadius = resolveCornerRadius(theme, SearchbarTokens.results);
+  const isContained = mode === 'contained';
+  const borderRadius = resolveCornerRadius(
+    theme,
+    isContained ? SearchbarTokens.results : SearchbarTokens.dividedResults
+  );
 
   return (
     <Surface
       backgroundColor={resultsContainerColor}
       borderRadius={borderRadius}
       elevation={elevation}
-      style={[styles.container, style]}
+      style={[isContained && styles.contained, style]}
       theme={theme}
       testID={testID}
     >
@@ -88,7 +108,7 @@ const SearchbarResults = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
+  contained: {
     // Margin rather than width: a width would add to it and overflow.
     marginHorizontal: SearchbarTokens.marginFocused,
   },

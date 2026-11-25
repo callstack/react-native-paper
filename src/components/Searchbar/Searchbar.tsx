@@ -109,7 +109,7 @@ export type Props = Omit<TextInputProps, 'style'> & {
    *   margin on that side, so the bar keeps it. The `margin` shorthand does
    *   not, since a per-axis margin takes precedence over it.
    * - `divided` - a full-bleed search view with square corners and a bottom
-   *   `Divider`. Deprecated in M3 Expressive in favor of `contained`.
+   *   `Divider`. Not recommended in M3 Expressive; use `contained`.
    */
   mode?: 'contained' | 'divided';
   /**

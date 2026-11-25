@@ -17,8 +17,6 @@ export type SearchbarColors = {
 
 /**
  * Resolve the Searchbar color-role tokens to concrete theme color values.
- * Note `inputColor` is `onSurface` and `placeholderColor` is
- * `onSurfaceVariant` — the MD3 spec order, fixing the legacy swap.
  */
 export function getSearchbarColors(theme: InternalTheme): SearchbarColors {
   const t = SearchbarTokens;
@@ -37,7 +35,7 @@ export function getSearchbarColors(theme: InternalTheme): SearchbarColors {
 
 /**
  * Resolve the input font from the `bodyLarge` typescale, zeroing `lineHeight`
- * on iOS to avoid vertical clipping (mirrors the legacy behaviour).
+ * on iOS to avoid vertical clipping.
  */
 export function getSearchbarInputFont(theme: InternalTheme): TextStyle {
   const { bodyLarge } = theme.fonts;
