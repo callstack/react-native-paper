@@ -575,6 +575,10 @@ A `theme` set on a part is merged over the `theme` of the `Appbar`, so it takes 
 </Appbar.Header>
 ```
 
+#### Back icon
+
+`Appbar.BackAction` now renders its icon through the `icon` in `PaperProvider`'s `settings`. On Android and web it always does, and on iOS only when you set a custom `icon`, otherwise the bundled chevron is kept. A custom renderer now receives `name: 'arrow-left'` for it, so make sure your icon set handles that name.
+
 #### Bottom bar
 
 Using `Appbar` as a bottom bar is deprecated. Material Design 3 moves the bottom bar to toolbars. It continues to work in 6.x, and will be replaced by the `Toolbar` component once it is available.
