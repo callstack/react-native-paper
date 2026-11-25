@@ -37,6 +37,23 @@ it('renders colored indicator', async () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('is a progress bar for assistive technology', async () => {
+  await render(<ActivityIndicator />);
+
+  expect(screen.getByRole('progressbar', { busy: true })).toBeOnTheScreen();
+});
+
+it('is no accessible element when hidden, so no keyboard stop either', async () => {
+  await render(<ActivityIndicator testID="indicator" aria-hidden />);
+
+  expect(
+    screen.queryByRole('progressbar', { includeHiddenElements: true })
+  ).not.toBeOnTheScreen();
+  expect(
+    screen.getByTestId('indicator', { includeHiddenElements: true })
+  ).toHaveProp('accessible', false);
+});
+
 describe('with reduce motion', () => {
   it.each([
     { reduceMotion: 'off', fade: 200 },

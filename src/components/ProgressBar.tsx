@@ -57,6 +57,8 @@ const INDETERMINATE_MAX_WIDTH = 0.6;
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.
  *
+ * Pass `aria-label` to name the indicator for assistive technology, e.g. `aria-label="Upload progress"`.
+ *
  * ## Usage
  * ```js
  * import * as React from 'react';

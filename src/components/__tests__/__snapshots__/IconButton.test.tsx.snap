@@ -1,5 +1,267 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`applies a static transform from style 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+        "overflow": "visible",
+      },
+      {
+        "height": 40,
+        "width": 40,
+      },
+      {
+        "transform": [
+          {
+            "scale": 1,
+          },
+        ],
+      },
+      {
+        "borderRadius": 20,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "height": "100%",
+          "width": "100%",
+        },
+        {
+          "backgroundColor": undefined,
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      aria-busy={false}
+      centered={true}
+      collapsable={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
+      }
+      testID="icon-button"
+    >
+      <View
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          camera
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders a square icon button 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+        "overflow": "visible",
+      },
+      {
+        "height": 40,
+        "width": 40,
+      },
+      undefined,
+      {
+        "borderRadius": 12,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "height": "100%",
+          "width": "100%",
+        },
+        {
+          "backgroundColor": undefined,
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 12,
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": false,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+            },
+            {
+              "borderRadius": 12,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
+      }
+      testID="icon-button"
+    >
+      <View
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          camera
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders disabled icon button 1`] = `
 <View
   collapsable={false}
@@ -7,111 +269,351 @@ exports[`renders disabled icon button 1`] = `
     [
       {
         "margin": 6,
+        "overflow": "visible",
       },
       {
-        "backgroundColor": undefined,
         "height": 40,
         "width": 40,
       },
-      {
-        "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 20,
-        "borderWidth": 0,
-      },
       undefined,
+      {
+        "borderRadius": 20,
+      },
     ]
   }
 >
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    centered={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
-          "overflow": "hidden",
+          "height": "100%",
+          "width": "100%",
         },
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "justifyContent": "center",
-          },
-          {
-            "borderRadius": 20,
-          },
-          {
-            "overflow": "hidden",
-          },
-          undefined,
-        ],
+        {
+          "backgroundColor": undefined,
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
       ]
     }
   >
     <View
-      style={
+      accessibilityState={
         {
-          "opacity": 0.38,
+          "busy": false,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
-    >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
-        style={
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      role="button"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
           [
             {
-              "color": "rgba(29, 27, 32, 1)",
-              "fontSize": 24,
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
             },
-            [
-              {
-                "lineHeight": 24,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
-          ]
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "opacity": 0.38,
+          }
         }
       >
-        camera
-      </Text>
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          camera
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders extra-large icon button 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+        "overflow": "visible",
+      },
+      {
+        "height": 136,
+        "width": 136,
+      },
+      undefined,
+      {
+        "borderRadius": 68,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "height": "100%",
+          "width": "100%",
+        },
+        {
+          "backgroundColor": undefined,
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 68,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      aria-busy={false}
+      centered={true}
+      collapsable={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+            },
+            {
+              "borderRadius": 68,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 40,
+              },
+              [
+                {
+                  "lineHeight": 40,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          camera
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders filled icon button 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+        "overflow": "visible",
+      },
+      {
+        "height": 40,
+        "width": 40,
+      },
+      undefined,
+      {
+        "borderRadius": 20,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "height": "100%",
+          "width": "100%",
+        },
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      aria-busy={false}
+      centered={true}
+      collapsable={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(255, 255, 255, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          camera
+        </Text>
+      </View>
     </View>
   </View>
 </View>
@@ -124,83 +626,105 @@ exports[`renders icon button by default 1`] = `
     [
       {
         "margin": 6,
+        "overflow": "visible",
       },
       {
-        "backgroundColor": undefined,
         "height": 40,
         "width": 40,
       },
-      {
-        "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 20,
-        "borderWidth": 0,
-      },
       undefined,
+      {
+        "borderRadius": 20,
+      },
     ]
   }
 >
   <View
-    accessible={true}
-    centered={true}
-    role="none"
+    collapsable={false}
     style={
       [
         {
-          "overflow": "hidden",
+          "height": "100%",
+          "width": "100%",
         },
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "justifyContent": "center",
-          },
-          {
-            "borderRadius": 20,
-          },
-          {
-            "overflow": "hidden",
-          },
-          undefined,
-        ],
+        {
+          "backgroundColor": undefined,
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
       ]
     }
   >
     <View
+      accessible={true}
+      aria-busy={false}
+      centered={true}
+      collapsable={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
       style={
-        {
-          "opacity": 1,
-        }
-      }
-    >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
-        style={
+        [
+          {
+            "overflow": "hidden",
+          },
           [
             {
-              "color": "rgba(73, 69, 79, 1)",
-              "fontSize": 24,
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
             },
-            [
-              {
-                "lineHeight": 24,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
-          ]
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "opacity": 1,
+          }
         }
       >
-        camera
-      </Text>
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          camera
+        </Text>
+      </View>
     </View>
   </View>
 </View>
@@ -213,412 +737,105 @@ exports[`renders icon button with color 1`] = `
     [
       {
         "margin": 6,
+        "overflow": "visible",
       },
       {
-        "backgroundColor": undefined,
         "height": 40,
         "width": 40,
       },
+      undefined,
       {
-        "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
-        "borderWidth": 0,
-      },
-      undefined,
-    ]
-  }
->
-  <View
-    accessible={true}
-    centered={true}
-    role="none"
-    style={
-      [
-        {
-          "overflow": "hidden",
-        },
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "justifyContent": "center",
-          },
-          {
-            "borderRadius": 20,
-          },
-          {
-            "overflow": "hidden",
-          },
-          undefined,
-        ],
-      ]
-    }
-  >
-    <View
-      style={
-        {
-          "opacity": 1,
-        }
-      }
-    >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
-        style={
-          [
-            {
-              "color": "#e91e63",
-              "fontSize": 24,
-            },
-            [
-              {
-                "lineHeight": 24,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
-          ]
-        }
-      >
-        camera
-      </Text>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders icon button with custom border radius 1`] = `
-<View
-  collapsable={false}
-  style={
-    [
-      {
-        "margin": 6,
-      },
-      {
-        "backgroundColor": undefined,
-        "height": 52,
-        "width": 52,
-      },
-      {
-        "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 26,
-        "borderWidth": 0,
-      },
-      {
-        "borderRadius": 0,
       },
     ]
   }
 >
   <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": false,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    centered={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
-          "overflow": "hidden",
+          "height": "100%",
+          "width": "100%",
         },
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "justifyContent": "center",
-          },
-          {
-            "borderRadius": 26,
-          },
-          {
-            "overflow": "hidden",
-          },
-          undefined,
-        ],
-      ]
-    }
-    testID="icon-button"
-  >
-    <View
-      style={
         {
-          "opacity": 1,
-        }
-      }
-    >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
-        style={
-          [
-            {
-              "color": "rgba(73, 69, 79, 1)",
-              "fontSize": 36,
-            },
-            [
-              {
-                "lineHeight": 36,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
-          ]
-        }
-      >
-        camera
-      </Text>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders icon button with size 1`] = `
-<View
-  collapsable={false}
-  style={
-    [
-      {
-        "margin": 6,
-      },
-      {
-        "backgroundColor": undefined,
-        "height": 46,
-        "width": 46,
-      },
-      {
-        "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 23,
-        "borderWidth": 0,
-      },
-      undefined,
-    ]
-  }
->
-  <View
-    accessible={true}
-    centered={true}
-    role="none"
-    style={
-      [
-        {
-          "overflow": "hidden",
+          "backgroundColor": undefined,
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 0,
         },
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "justifyContent": "center",
-          },
-          {
-            "borderRadius": 23,
-          },
-          {
-            "overflow": "hidden",
-          },
-          undefined,
-        ],
+        {
+          "borderRadius": 20,
+        },
       ]
     }
   >
     <View
+      accessible={true}
+      aria-busy={false}
+      centered={true}
+      collapsable={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
       style={
-        {
-          "opacity": 1,
-        }
-      }
-    >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
-        style={
-          [
-            {
-              "color": "rgba(73, 69, 79, 1)",
-              "fontSize": 30,
-            },
-            [
-              {
-                "lineHeight": 30,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
-          ]
-        }
-      >
-        camera
-      </Text>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders icon button with small border radius 1`] = `
-<View
-  collapsable={false}
-  style={
-    [
-      {
-        "margin": 6,
-      },
-      {
-        "backgroundColor": undefined,
-        "height": 52,
-        "width": 52,
-      },
-      {
-        "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 26,
-        "borderWidth": 0,
-      },
-      {
-        "borderRadius": 4,
-      },
-    ]
-  }
->
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": false,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    centered={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    role="button"
-    style={
-      [
-        {
-          "overflow": "hidden",
-        },
         [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "justifyContent": "center",
-          },
-          {
-            "borderRadius": 26,
-          },
           {
             "overflow": "hidden",
           },
-          undefined,
-        ],
-      ]
-    }
-    testID="icon-button"
-  >
-    <View
-      style={
-        {
-          "opacity": 1,
-        }
-      }
-    >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
-        style={
           [
             {
-              "color": "rgba(73, 69, 79, 1)",
-              "fontSize": 36,
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
             },
-            [
-              {
-                "lineHeight": 36,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
-          ]
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "opacity": 1,
+          }
         }
       >
-        camera
-      </Text>
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "#e91e63",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          camera
+        </Text>
+      </View>
     </View>
   </View>
 </View>
@@ -631,120 +848,364 @@ exports[`renders icon change animated 1`] = `
     [
       {
         "margin": 6,
+        "overflow": "visible",
       },
       {
-        "backgroundColor": undefined,
         "height": 40,
         "width": 40,
       },
-      {
-        "borderColor": "rgba(202, 196, 208, 1)",
-        "borderRadius": 20,
-        "borderWidth": 0,
-      },
       undefined,
+      {
+        "borderRadius": 20,
+      },
     ]
   }
 >
   <View
-    accessible={true}
-    centered={true}
-    role="none"
+    collapsable={false}
     style={
       [
         {
-          "overflow": "hidden",
+          "height": "100%",
+          "width": "100%",
         },
-        [
-          {
-            "alignItems": "center",
-            "flex": 1,
-            "justifyContent": "center",
-          },
-          {
-            "borderRadius": 20,
-          },
-          {
-            "overflow": "hidden",
-          },
-          undefined,
-        ],
+        {
+          "backgroundColor": undefined,
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
       ]
     }
   >
     <View
+      accessible={true}
+      aria-busy={false}
+      centered={true}
+      collapsable={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
       style={
-        {
-          "opacity": 1,
-        }
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
       }
     >
       <View
         style={
-          [
-            {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            {
-              "height": 24,
-              "width": 24,
-            },
-          ]
+          {
+            "opacity": 1,
+          }
         }
       >
         <View
-          collapsable={false}
           style={
             [
               {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
+                "alignItems": "center",
+                "justifyContent": "center",
               },
               {
-                "opacity": 1,
-                "transform": [
-                  {
-                    "rotate": "0deg",
-                  },
-                ],
+                "height": 24,
+                "width": 24,
               },
             ]
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
+                {
+                  "opacity": 1,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
+                },
               ]
             }
           >
-            camera
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              camera
+            </Text>
+          </View>
         </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders outlined icon button 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+        "overflow": "visible",
+      },
+      {
+        "height": 40,
+        "width": 40,
+      },
+      undefined,
+      {
+        "borderRadius": 20,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "height": "100%",
+          "width": "100%",
+        },
+        {
+          "backgroundColor": undefined,
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 1,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      aria-busy={false}
+      centered={true}
+      collapsable={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+            },
+            {
+              "borderRadius": 19,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          camera
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders tonal icon button 1`] = `
+<View
+  collapsable={false}
+  style={
+    [
+      {
+        "margin": 6,
+        "overflow": "visible",
+      },
+      {
+        "height": 40,
+        "width": 40,
+      },
+      undefined,
+      {
+        "borderRadius": 20,
+      },
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "height": "100%",
+          "width": "100%",
+        },
+        {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "rgba(202, 196, 208, 1)",
+          "borderWidth": 0,
+        },
+        {
+          "borderRadius": 20,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      aria-busy={false}
+      centered={true}
+      collapsable={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      role="none"
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          [
+            {
+              "alignItems": "center",
+              "flex": 1,
+              "justifyContent": "center",
+            },
+            {
+              "borderRadius": 20,
+            },
+            {
+              "overflow": "hidden",
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 25, 43, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          camera
+        </Text>
       </View>
     </View>
   </View>

@@ -185,7 +185,6 @@ const TouchableRipple = ({
         const { centered } = rest;
 
         const button = e.currentTarget;
-        const style = window.getComputedStyle(button);
         const dimensions = button.getBoundingClientRect();
 
         let touchX;
@@ -222,10 +221,9 @@ const TouchableRipple = ({
           left: '0',
           right: '0',
           bottom: '0',
-          borderTopLeftRadius: style.borderTopLeftRadius,
-          borderTopRightRadius: style.borderTopRightRadius,
-          borderBottomRightRadius: style.borderBottomRightRadius,
-          borderBottomLeftRadius: style.borderBottomLeftRadius,
+          // Follows the touchable's corner, which can animate while the
+          // ripple is held, rather than the one it had when pressed.
+          borderRadius: 'inherit',
           overflow: 'hidden',
         });
 

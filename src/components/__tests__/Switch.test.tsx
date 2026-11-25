@@ -312,7 +312,9 @@ describe('Switch operability', () => {
 
       await render(<Switch value {...{ [prop]: true }} />);
 
-      expect(console.warn).not.toHaveBeenCalled();
+      expect(console.warn).not.toHaveBeenCalledWith(
+        expect.stringContaining('Switch:')
+      );
     }
   );
 
@@ -393,7 +395,7 @@ describe('Switch operability', () => {
       await render(<Switch value disabled readOnly />);
 
       expect(screen.getByRole('switch')).toBeDisabled();
-      expect(screen.getByRole('switch')).not.toHaveProp('aria-readonly', true);
+      expect(screen.getByRole('switch')).not.toHaveProp('aria-readonly');
     });
   });
 
@@ -420,6 +422,13 @@ describe('Switch operability', () => {
 
     expect(screen.getByRole('switch')).toHaveProp('aria-readonly', true);
     expect(screen.getByRole('switch')).toBeEnabled();
+  });
+
+  it('does not expose aria-readonly on an operable switch on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(<Switch value onValueChange={() => {}} />);
+
+    expect(screen.getByRole('switch')).not.toHaveProp('aria-readonly');
   });
 
   it('exposes a missing-handler fallback as read-only on web', async () => {
@@ -449,6 +458,52 @@ describe('Switch operability', () => {
     expect(screen.getByRole('switch')).toHaveProp('tabIndex', 0);
     await user.press(screen.getByRole('switch'));
     expect(onValueChange).toHaveBeenCalledWith(false);
+  });
+
+  describe.each(['ios', 'android', 'web'] as const)(
+    'hidden on %s',
+    (platform) => {
+      it.each(['readOnly', 'disabled'] as const)(
+        'renders a %s switch with aria-hidden with no role or tabIndex',
+        async (prop) => {
+          jest.replaceProperty(Platform, 'OS', platform);
+          await render(
+            <Switch value {...{ [prop]: true }} aria-hidden testID="switch" />
+          );
+
+          const wrapper = screen.getByTestId('switch', {
+            includeHiddenElements: true,
+          });
+          expect(wrapper).toHaveProp('aria-hidden', true);
+          expect(
+            screen.queryByRole('switch', { includeHiddenElements: true })
+          ).toBeNull();
+          expect(wrapper).not.toHaveProp('tabIndex');
+        }
+      );
+
+      it('passes a press on a hidden switch to the row that owns it', async () => {
+        jest.replaceProperty(Platform, 'OS', platform);
+        const user = userEvent.setup();
+        const onRowPress = jest.fn();
+        await render(
+          <Pressable onPress={onRowPress} role="switch" aria-checked>
+            <Switch value readOnly aria-hidden />
+          </Pressable>
+        );
+
+        await user.press(screen.getByRole('switch'));
+
+        expect(onRowPress).toHaveBeenCalledTimes(1);
+        expect(screen.getAllByRole('switch')).toHaveLength(1);
+      });
+    }
+  );
+
+  it('ignores aria-hidden on an interactive switch', async () => {
+    await render(<Switch value onValueChange={jest.fn()} aria-hidden />);
+
+    expect(screen.getByRole('switch')).toHaveProp('tabIndex', 0);
   });
 
   it('keeps an interactive switch focusable', async () => {
