@@ -1,5 +1,4 @@
 import { Image, Platform } from 'react-native';
-import type { ImageProps } from 'react-native';
 
 import {
   afterEach,
@@ -15,6 +14,7 @@ import { render, screen } from '../../test-utils';
 import { red500 } from '../../theme/colors';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import * as Avatar from '../Avatar/Avatar';
+import type { AvatarImageSourceProps } from '../Avatar/AvatarImage';
 
 const hidden = { includeHiddenElements: true };
 
@@ -528,21 +528,14 @@ describe('AvatarImage fallback', () => {
   });
 
   it('passes host size, style, and a11y to a function source', async () => {
-    const source = jest.fn(
-      ({
-        style,
-      }: {
-        size: number;
-        style: { width: number; height: number; borderRadius: number };
-      }) => (
-        <Image
-          testID="custom-image"
-          source={{ uri: 'avatar.png' }}
-          style={style}
-          accessibilityIgnoresInvertColors
-        />
-      )
-    );
+    const source = jest.fn(({ style }: AvatarImageSourceProps) => (
+      <Image
+        testID="custom-image"
+        source={{ uri: 'avatar.png' }}
+        style={style}
+        accessibilityIgnoresInvertColors
+      />
+    ));
 
     await render(<Avatar.Image size={48} source={source} />);
 
@@ -556,23 +549,15 @@ describe('AvatarImage fallback', () => {
   });
 
   it('passes alt to a function source', async () => {
-    const source = jest.fn(
-      ({
-        style,
-        ...a11y
-      }: {
-        size: number;
-        style: { width: number; height: number; borderRadius: number };
-      }) => (
-        <Image
-          testID="custom-image"
-          source={{ uri: 'avatar.png' }}
-          style={style}
-          accessibilityIgnoresInvertColors
-          {...a11y}
-        />
-      )
-    );
+    const source = jest.fn(({ style, ...a11y }: AvatarImageSourceProps) => (
+      <Image
+        testID="custom-image"
+        source={{ uri: 'avatar.png' }}
+        style={style}
+        accessibilityIgnoresInvertColors
+        {...a11y}
+      />
+    ));
 
     await render(<Avatar.Image size={48} source={source} alt="Jane Doe" />);
 
@@ -607,13 +592,7 @@ describe('AvatarImage fallback', () => {
   });
 
   it('retries a failed function source when sourceKey changes', async () => {
-    const renderSource = ({
-      style,
-      onError,
-    }: {
-      style: object;
-      onError?: ImageProps['onError'];
-    }) => (
+    const renderSource = ({ style, onError }: AvatarImageSourceProps) => (
       <Image
         testID="custom-image"
         source={{ uri: 'avatar.png' }}

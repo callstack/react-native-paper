@@ -62,7 +62,10 @@ export type { Props as AppbarBackActionProps } from './components/Appbar/AppbarB
 export type { Props as AppbarContentProps } from './components/Appbar/AppbarContent';
 export type { Props as AppbarHeaderProps } from './components/Appbar/AppbarHeader';
 export type { Props as AvatarIconProps } from './components/Avatar/AvatarIcon';
-export type { Props as AvatarImageProps } from './components/Avatar/AvatarImage';
+export type {
+  Props as AvatarImageProps,
+  AvatarImageSourceProps,
+} from './components/Avatar/AvatarImage';
 export type { Props as AvatarTextProps } from './components/Avatar/AvatarText';
 export type { Props as BadgeProps } from './components/Badge';
 export type { Props as BannerProps } from './components/Banner';
