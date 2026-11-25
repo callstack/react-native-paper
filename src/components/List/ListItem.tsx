@@ -203,7 +203,7 @@ const ListItem = ({
   const { hasLeft } = React.useContext(ListAccordionContext);
   const shouldIndent = hasLeft && !left && !right && !leading && !trailing;
   const { isDescriptionMultiline, onDescriptionTextLayout, rowContext } =
-    useListRow();
+    useListRow(!!description);
 
   const backgroundColor = getSelectedContainerColor({
     theme,

@@ -238,7 +238,7 @@ const ListAccordion = ({
     expandedProp || false
   );
   const { isDescriptionMultiline, onDescriptionTextLayout, rowContext } =
-    useListRow();
+    useListRow(!!description);
 
   const handlePressAction = (e: GestureResponderEvent) => {
     onPress?.(e);

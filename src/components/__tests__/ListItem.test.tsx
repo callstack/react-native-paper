@@ -217,6 +217,39 @@ it('hits the two and three line container heights without measuring', async () =
   });
 });
 
+it('drops the three line padding when a wrapped description goes away', async () => {
+  const renderItem = (description?: string) => (
+    <ListItem
+      title="First Item"
+      description={description}
+      leading={
+        <ListImage
+          variant="video"
+          source={{ uri: 'https://picsum.photos/228/128' }}
+          testID="video-thumbnail"
+        />
+      }
+      testID={testID}
+    />
+  );
+
+  await render(renderItem('Item description'));
+
+  await fireEvent(screen.getByText('Item description'), 'textLayout', {
+    nativeEvent: { lines: [{}, {}] },
+  });
+
+  await screen.rerender(renderItem());
+
+  expect(screen.getByTestId(testID)).toHaveStyle({
+    minHeight: 56,
+    paddingVertical: 8,
+  });
+  expect(screen.getByTestId('video-thumbnail')).toHaveStyle({
+    marginVertical: 4,
+  });
+});
+
 // The row is 88dp tall: 2 * padding + 2 * margin + the 64dp thumbnail.
 it.each([
   ['one line', undefined, false, 8, 4],

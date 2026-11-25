@@ -134,13 +134,16 @@ export const getSelectedStateProps = ({
 /**
  * Tracks whether the description wraps to more lines, which changes the
  * row's vertical padding and where its leading and trailing elements sit.
+ *
+ * A removed description sends no layout event, so the row is multiline only
+ * while it has a description.
  */
-export const useListRow = () => {
-  const [isDescriptionMultiline, setIsDescriptionMultiline] =
-    React.useState(false);
+export const useListRow = (hasDescription: boolean) => {
+  const [isDescriptionWrapped, setIsDescriptionWrapped] = React.useState(false);
+  const isDescriptionMultiline = hasDescription && isDescriptionWrapped;
 
   const onDescriptionTextLayout = (event: TextLayoutEvent) => {
-    setIsDescriptionMultiline(event.nativeEvent.lines.length >= 2);
+    setIsDescriptionWrapped(event.nativeEvent.lines.length >= 2);
   };
 
   const rowContext = React.useMemo(
