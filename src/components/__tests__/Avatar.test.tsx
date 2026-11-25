@@ -17,6 +17,9 @@ import * as Avatar from '../Avatar/Avatar';
 import type { AvatarImageSourceProps } from '../Avatar/AvatarImage';
 
 const hidden = { includeHiddenElements: true };
+const fallback = ({ size }: { size: number }) => (
+  <Avatar.Text size={size} label="JD" />
+);
 
 it('renders avatar with text', async () => {
   const tree = (await render(<Avatar.Text label="XD" />)).toJSON();
@@ -417,7 +420,7 @@ describe('on Android', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
         alt="Jane Doe"
       />
     );
@@ -437,7 +440,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -453,7 +456,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
         onError={onError}
       />
     );
@@ -486,7 +489,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'bad.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -497,7 +500,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'good.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -510,7 +513,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'bad.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -520,7 +523,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'bad.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -535,7 +538,7 @@ describe('AvatarImage fallback', () => {
           { uri: 'bad@1x.png', width: 40 },
           { uri: 'bad@2x.png', width: 80 },
         ]}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -548,7 +551,7 @@ describe('AvatarImage fallback', () => {
           { uri: 'bad@1x.png', width: 40 },
           { uri: 'bad@2x.png', width: 80 },
         ]}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -610,7 +613,7 @@ describe('AvatarImage fallback', () => {
             accessibilityIgnoresInvertColors
           />
         )}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -629,9 +632,6 @@ describe('AvatarImage fallback', () => {
         onError={onError}
         accessibilityIgnoresInvertColors
       />
-    );
-    const fallback = ({ size }: { size: number }) => (
-      <Avatar.Text size={size} label="JD" />
     );
     const { rerender } = await render(
       <Avatar.Image
@@ -676,7 +676,7 @@ describe('AvatarImage fallback', () => {
             accessibilityIgnoresInvertColors
           />
         )}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -693,7 +693,7 @@ describe('AvatarImage fallback', () => {
             accessibilityIgnoresInvertColors
           />
         )}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -706,7 +706,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
         alt="Jane Doe"
       />
     );
@@ -727,7 +727,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
         alt="Jane Doe"
       />
     );
@@ -743,7 +743,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
@@ -757,7 +757,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
         accessibilityLabel="Jane Doe"
       />
     );
@@ -777,7 +777,7 @@ describe('AvatarImage fallback', () => {
       <Avatar.Image
         testID="avatar-image"
         source={{ uri: 'avatar.png' }}
-        fallback={({ size }) => <Avatar.Text size={size} label="JD" />}
+        fallback={fallback}
       />
     );
 
