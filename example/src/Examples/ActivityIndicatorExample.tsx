@@ -18,7 +18,11 @@ const ActivityIndicatorExample = () => {
       </View>
 
       <List.Section title="Default">
-        <ActivityIndicator animating={animating} hidesWhenStopped={false} />
+        <ActivityIndicator
+          animating={animating}
+          hidesWhenStopped={false}
+          aria-label="Loading"
+        />
       </List.Section>
 
       <List.Section title="Large">
@@ -26,6 +30,7 @@ const ActivityIndicatorExample = () => {
           animating={animating}
           size="large"
           hidesWhenStopped={false}
+          aria-label="Loading"
         />
       </List.Section>
 
@@ -34,6 +39,7 @@ const ActivityIndicatorExample = () => {
           animating={animating}
           size={100}
           hidesWhenStopped={false}
+          aria-label="Loading"
         />
       </List.Section>
 
@@ -42,6 +48,7 @@ const ActivityIndicatorExample = () => {
           animating={animating}
           color={Palette.error20}
           hidesWhenStopped={false}
+          aria-label="Loading"
         />
       </List.Section>
     </ScreenWrapper>

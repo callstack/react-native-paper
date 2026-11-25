@@ -51,7 +51,6 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
           [
             {
               "alignItems": "center",
-              "borderRadius": 28,
               "height": 32,
               "justifyContent": "center",
               "width": 56,
@@ -61,6 +60,7 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
             },
             {
               "backgroundColor": "rgba(232, 222, 248, 1)",
+              "borderRadius": 9999,
             },
             undefined,
             {
@@ -98,6 +98,9 @@ exports[`DrawerCollapsedItem should display focused icon in active state 1`] = `
             },
             {
               "top": 16,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }
@@ -188,7 +191,6 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
           [
             {
               "alignItems": "center",
-              "borderRadius": 28,
               "height": 32,
               "justifyContent": "center",
               "width": 56,
@@ -198,6 +200,7 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
             },
             {
               "backgroundColor": "transparent",
+              "borderRadius": 9999,
             },
             undefined,
             {
@@ -235,6 +238,9 @@ exports[`DrawerCollapsedItem should display focused icon in inactive state, if u
             },
             {
               "top": 16,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }
@@ -325,7 +331,6 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
           [
             {
               "alignItems": "center",
-              "borderRadius": 28,
               "height": 32,
               "justifyContent": "center",
               "width": 56,
@@ -335,6 +340,7 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
             },
             {
               "backgroundColor": "transparent",
+              "borderRadius": 9999,
             },
             undefined,
             {
@@ -372,6 +378,9 @@ exports[`DrawerCollapsedItem should display unfocused icon in inactive state, if
             },
             {
               "top": 16,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }
@@ -462,7 +471,6 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
           [
             {
               "alignItems": "center",
-              "borderRadius": 28,
               "height": 32,
               "justifyContent": "center",
               "width": 56,
@@ -470,6 +478,7 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
             false,
             {
               "backgroundColor": "transparent",
+              "borderRadius": 9999,
             },
             undefined,
             {
@@ -507,6 +516,9 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
             },
             {
               "top": 4,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }
@@ -577,6 +589,9 @@ exports[`DrawerCollapsedItem should have regular outline if label is specified 1
                   "letterSpacing": 0.5,
                   "lineHeight": 16,
                 },
+                {
+                  "opacity": 1,
+                },
               ],
             ],
           ]
@@ -640,7 +655,6 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
           [
             {
               "alignItems": "center",
-              "borderRadius": 28,
               "height": 32,
               "justifyContent": "center",
               "width": 56,
@@ -650,6 +664,7 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
             },
             {
               "backgroundColor": "transparent",
+              "borderRadius": 9999,
             },
             undefined,
             {
@@ -687,6 +702,9 @@ exports[`DrawerCollapsedItem should have rounded outline if label is not specifi
             },
             {
               "top": 16,
+            },
+            {
+              "opacity": 1,
             },
           ]
         }
