@@ -6,12 +6,14 @@ import type { AvatarImageSource } from './AvatarImage';
 export const DEFAULT_SIZE = 64;
 
 /**
- * `role="img"` for a labelled avatar, because web does not expose a name on
- * an element without a role. `role` wins over `accessibilityRole`, so a
- * custom `accessibilityRole` is kept.
+ * Whether the avatar received its own label through `accessibilityLabel` or
+ * `aria-label`.
  */
-export const getAvatarRole = (accessibilityRole?: AccessibilityRole) =>
-  accessibilityRole === undefined ? { role: 'img' as const } : {};
+export const hasCustomLabel = (props: {
+  accessibilityLabel?: string;
+  'aria-label'?: string;
+}) =>
+  props.accessibilityLabel !== undefined || props['aria-label'] !== undefined;
 
 /**
  * Props that let a labelled avatar announce its label.
@@ -19,12 +21,15 @@ export const getAvatarRole = (accessibilityRole?: AccessibilityRole) =>
  * a pressable parent into the parent. Android reads the label without
  * `accessible`, and `accessible` would make the avatar a second TalkBack stop
  * inside a pressable parent, so Android leaves it out.
+ * `role="img"` gives the label a name on web, which ignores a label on an
+ * element without a role. A custom `accessibilityRole` is kept, because `role`
+ * would override it.
  */
 export const getLabelledAvatarProps = (
   accessibilityRole?: AccessibilityRole
 ) => ({
   ...(Platform.OS !== 'android' && { accessible: true as const }),
-  ...getAvatarRole(accessibilityRole),
+  ...(accessibilityRole === undefined && { role: 'img' as const }),
 });
 
 /**

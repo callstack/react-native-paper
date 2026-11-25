@@ -7,7 +7,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import { DEFAULT_SIZE, getLabelledAvatarProps } from './utils';
+import { DEFAULT_SIZE, getLabelledAvatarProps, hasCustomLabel } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { ThemeProp } from '../../theme/types';
@@ -76,8 +76,7 @@ const AvatarText = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { fontScale } = useWindowDimensions();
-  const hasCustomLabel =
-    rest.accessibilityLabel !== undefined || rest['aria-label'] !== undefined;
+  const hasLabel = hasCustomLabel(rest);
 
   return (
     <View
@@ -94,7 +93,7 @@ const AvatarText = ({
             customBackgroundColor ?? theme.colors.primaryContainer,
         },
       ]}
-      {...(hasCustomLabel && getLabelledAvatarProps(rest.accessibilityRole))}
+      {...(hasLabel && getLabelledAvatarProps(rest.accessibilityRole))}
       {...rest}
     >
       <Text
@@ -111,7 +110,7 @@ const AvatarText = ({
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
-        {...(hasCustomLabel
+        {...(hasLabel
           ? { 'aria-hidden': true }
           : { 'aria-label': label, role: 'img' as const })}
       >
