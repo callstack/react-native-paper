@@ -914,6 +914,38 @@ it('floats the label up and slides it into the outline gap on focus (outlined)',
   });
 });
 
+it('transitions the outlined label inset with its translateX, so a new StartAccessory does not make it jump', async () => {
+  function StartAccessory() {
+    return <View />;
+  }
+
+  const { rerender } = await render(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value="a@b.co"
+      onChangeText={() => {}}
+    />
+  );
+
+  await rerender(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value="a@b.co"
+      onChangeText={() => {}}
+      startAccessory={StartAccessory}
+    />
+  );
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    start: OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
+  });
+  expect(getAnimatedStyle(getLabelWrapper('Email'))).toMatchObject({
+    transitionProperty: expect.arrayContaining(['transform', 'start']),
+  });
+});
+
 it('focuses the TextInput when the outer Pressable is pressed', async () => {
   const user = userEvent.setup();
   const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
@@ -1687,6 +1719,27 @@ describe('with reduce motion', () => {
   );
 });
 
+it('fades the prefix in when the label floats again, but not on first render', async () => {
+  const { rerender } = await render(
+    <TextInput label="Amount" value="1" onChangeText={() => {}} prefix="$" />
+  );
+
+  expect(
+    getAnimatedStyle(screen.getByText('$', includeHiddenElements))
+  ).not.toHaveProperty('animationName');
+
+  await rerender(
+    <TextInput label="Amount" value="" onChangeText={() => {}} prefix="$" />
+  );
+  await rerender(
+    <TextInput label="Amount" value="2" onChangeText={() => {}} prefix="$" />
+  );
+
+  expect(
+    getAnimatedStyle(screen.getByText('$', includeHiddenElements))
+  ).toMatchObject({ animationName: { from: { opacity: 0 } } });
+});
+
 it('keeps the disabled dim on the prefix and suffix of a labelled field', async () => {
   await render(
     <TextInput
@@ -1958,6 +2011,33 @@ it('keeps the label floated when clear() is called on a controlled field whose p
   });
   expect(screen.getByText('Email', includeHiddenElements)).toHaveStyle({
     fontSize: ACTIVE_LABEL_FONT_SIZE,
+  });
+});
+
+it('drops the label on blur when an uncontrolled field clears itself from onChangeText', async () => {
+  const ref = React.createRef<TextInputHandles>();
+  await render(
+    <TextInput
+      ref={ref}
+      label="Email"
+      onChangeText={(text) => {
+        if (text) {
+          ref.current?.clear();
+        }
+      }}
+      testID="tf-self-clear"
+    />
+  );
+
+  const user = userEvent.setup();
+
+  await user.type(screen.getByTestId('tf-self-clear'), 'a');
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: FILLED_INACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(screen.getByText('Email', includeHiddenElements)).toHaveStyle({
+    fontSize: INACTIVE_LABEL_FONT_SIZE,
   });
 });
 

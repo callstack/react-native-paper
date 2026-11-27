@@ -71,7 +71,9 @@ const useTextInputAnimation = ({
 
   // Track when the label has fully left its resting place, so the placeholder
   // does not show under the resting label. CSS transitions report no end, so
-  // wait out the float transition's duration.
+  // wait out the float transition's duration. The timer runs on the JS thread,
+  // so a busy thread can show the placeholder late, and with reduce motion it
+  // still flips one tick after the label jumps. Both only delay the placeholder.
   const duration = reduceMotion ? 0 : theme.motion.duration.short3;
   useEffect(() => {
     if (!isFloating) {
@@ -100,6 +102,13 @@ const useTextInputAnimation = ({
 
   const top = isFloating ? activeTop : inactiveTop;
 
+  // The outlined label's inset (set in `getOutlinedTextInputData`) and its
+  // translateX both change with `hasAccessory` and cancel out when floating, so
+  // they must transition together. On web the inset is a physical edge, since
+  // a CSS transition can't target `start` there.
+  const outlinedLabelInset =
+    Platform.OS === 'web' ? (isRTL ? 'right' : 'left') : 'start';
+
   const animatedLabelWrapperStyle: TextInputAnimationState['animatedLabelWrapperStyle'] =
     variant === 'filled'
       ? {
@@ -109,7 +118,7 @@ const useTextInputAnimation = ({
       : {
           top,
           transform: [{ translateX: isFloating ? translateXEnd : 0 }],
-          ...transition(['top', 'transform']),
+          ...transition(['top', 'transform', outlinedLabelInset]),
         };
 
   const animatedLabelTextStyle: TextInputAnimationState['animatedLabelTextStyle'] =
@@ -185,9 +194,9 @@ const useTextInputInput = (
         setCharCount(text.length);
       }
 
-      if (next !== hasValue) {
-        setHasValue(next);
-      }
+      // Unconditional: a nested `onChangeText` (e.g. `clear()` called from the
+      // parent's handler) runs with this render's stale `hasValue`.
+      setHasValue(next);
     }
 
     props.onChangeText?.(text);
