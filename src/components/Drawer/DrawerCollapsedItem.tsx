@@ -20,7 +20,10 @@ import useLatestCallback from 'use-latest-callback';
 import { DrawerCollapsedItemTokens } from './tokens';
 import { getDestinationA11yProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
+import {
+  useMotionDuration,
+  useReduceMotion,
+} from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
 import type { ThemeProp } from '../../theme/types';
 import { resolveCornerRadius } from '../../theme/utils/shape';
@@ -125,6 +128,7 @@ const DrawerCollapsedItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const reduceMotion = useReduceMotion();
   const getDuration = useMotionDuration();
 
   // MD3 rings a navigation rail item as a whole (icon and label) with a
@@ -149,7 +153,16 @@ const DrawerCollapsedItem = ({
 
   const outlineScale = useSharedValue(active ? 1 : 0.5);
 
+  if (reduceMotion) {
+    outlineScale.value = active ? 1 : 0.5;
+  }
+
   const expandOutline = useLatestCallback(() => {
+    if (reduceMotion) {
+      outlineScale.value = 1;
+      return;
+    }
+
     outlineScale.value = withTiming(1, {
       duration: getDuration(
         theme.motion.duration[DrawerCollapsedItemTokens.activeIndicatorDuration]

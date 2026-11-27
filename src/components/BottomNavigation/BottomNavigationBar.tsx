@@ -16,7 +16,10 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
+import {
+  useMotionDuration,
+  useReduceMotion,
+} from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
@@ -335,6 +338,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme;
   const { bottom, left, right } = useSafeAreaInsets();
+  const reduceMotion = useReduceMotion();
   const getDuration = useMotionDuration();
   const compact = compactProp ?? false;
   let shifting = shiftingProp ?? false;
@@ -392,6 +396,11 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   const animateToIndex = React.useCallback(
     (index: number) => {
+      if (reduceMotion) {
+        tabsAnims.forEach((tab, i) => tab.setValue(i === index ? 1 : 0));
+        return;
+      }
+
       Animated.parallel(
         navigationState.routes.map((_, i) =>
           Animated.timing(tabsAnims[i], {
@@ -406,7 +415,13 @@ const BottomNavigationBar = <Route extends BaseRoute>({
         tabsAnims.map((tab, i) => tab.setValue(i === index ? 1 : 0));
       });
     },
-    [getDuration, navigationState.routes, tabsAnims, animationEasing]
+    [
+      getDuration,
+      navigationState.routes,
+      reduceMotion,
+      tabsAnims,
+      animationEasing,
+    ]
   );
 
   React.useEffect(() => {

@@ -26,27 +26,33 @@ beforeEach(() => {
   withTiming.mockClear();
 });
 
-it.each([
-  { reduceMotion: 'off', duration: 200 },
-  { reduceMotion: 'on', duration: 0 },
-] as const)(
-  'cross-fades to a new icon in $duration ms when reduceMotion is "$reduceMotion"',
-  async ({ reduceMotion, duration }) => {
-    const makeIcon = (source: string) => (
-      <PaperProvider reduceMotion={reduceMotion}>
-        <CrossFadeIcon source={source} color="black" size={24} />
-      </PaperProvider>
-    );
+it('cross-fades to a new icon in 200 ms when reduceMotion is "off"', async () => {
+  const makeIcon = (source: string) => (
+    <PaperProvider reduceMotion="off">
+      <CrossFadeIcon source={source} color="black" size={24} />
+    </PaperProvider>
+  );
 
-    await render(makeIcon('plus'));
-    expect(withTiming).not.toHaveBeenCalled();
+  await render(makeIcon('plus'));
+  expect(withTiming).not.toHaveBeenCalled();
 
-    await screen.rerender(makeIcon('minus'));
-    expect(withTiming.mock.calls.map(([, config]) => config?.duration)).toEqual(
-      [duration]
-    );
-  }
-);
+  await screen.rerender(makeIcon('minus'));
+  expect(withTiming.mock.calls.map(([, config]) => config?.duration)).toEqual([
+    200,
+  ]);
+});
+
+it('switches immediately without animating when reduceMotion is "on"', async () => {
+  const makeIcon = (source: string) => (
+    <PaperProvider reduceMotion="on">
+      <CrossFadeIcon source={source} color="black" size={24} />
+    </PaperProvider>
+  );
+
+  await render(makeIcon('plus'));
+  await screen.rerender(makeIcon('minus'));
+  expect(withTiming).not.toHaveBeenCalled();
+});
 
 it('does not replay the last icon change when the OS setting changes', async () => {
   const addEventListener = jest.mocked(AccessibilityInfo.addEventListener);

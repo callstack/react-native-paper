@@ -14,7 +14,10 @@ import Animated, {
 import Icon, { isEqualIcon, isValidIcon } from './Icon';
 import type { IconSource } from './Icon';
 import { useInternalTheme } from '../core/theming';
-import { useMotionDuration } from '../theme/accessibility/ReduceMotionContext';
+import {
+  useMotionDuration,
+  useReduceMotion,
+} from '../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../theme/types';
 
 type Props = {
@@ -58,14 +61,22 @@ const CrossFadeIcon = ({
 
   const fade = useSharedValue(1);
 
+  const reduceMotion = useReduceMotion();
+  const reduceMotionRef = React.useRef(reduceMotion);
+  reduceMotionRef.current = reduceMotion;
   const getDuration = useMotionDuration();
 
   if (currentIcon !== source) {
-    setPreviousIcon(() => currentIcon);
+    setPreviousIcon(() => (reduceMotion ? null : currentIcon));
     setCurrentIcon(() => source);
   }
 
   React.useEffect(() => {
+    if (reduceMotionRef.current) {
+      fade.value = 0;
+      return;
+    }
+
     if (isValidIcon(previousIcon) && !isEqualIcon(previousIcon, currentIcon)) {
       fade.value = 1;
 
