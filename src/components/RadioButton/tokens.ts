@@ -17,7 +17,6 @@ const colors = {
   uncheckedColor: 'onSurfaceVariant',
   disabledColor: 'onSurface',
   errorColor: 'error',
-  // hover & focus tint by selection; pressing inverts it
   checkedHoverStateLayerColor: 'primary',
   checkedFocusStateLayerColor: 'primary',
   checkedPressedStateLayerColor: 'onSurface',

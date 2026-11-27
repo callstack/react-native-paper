@@ -117,7 +117,6 @@ export const screenshots = {
     enabled: 'screenshots/radio-enabled.android.png',
     disabled: 'screenshots/radio-disabled.android.png',
   },
-  // The iOS radio assets show a checkmark that 6.x no longer draws.
   'RadioButton.Group': 'screenshots/radio-button-group-android.gif',
   Searchbar: {
     bar: 'screenshots/searchbar.png',
