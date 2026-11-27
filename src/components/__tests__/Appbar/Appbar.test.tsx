@@ -1,4 +1,4 @@
-import { I18nManager, Text as NativeText, View } from 'react-native';
+import { I18nManager, Platform, Text as NativeText, View } from 'react-native';
 import type { ColorValue } from 'react-native';
 
 import {
@@ -16,6 +16,8 @@ import {
 } from 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import PaperProvider from '../../../core/PaperProvider';
+import type { Settings } from '../../../core/settings';
 import { fireEvent, render, screen, userEvent } from '../../../test-utils';
 import { DarkTheme, LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';
@@ -1052,6 +1054,34 @@ describe('getAppbarColors', () => {
   it('returns the dark surface container color for an elevated appbar', () => {
     expect(getAppbarBackgroundColor(DarkTheme, elevated)).toBe(
       tokens.md.ref.palette.neutral12
+    );
+  });
+});
+
+describe('Appbar.BackAction icon', () => {
+  describe.each(['ios', 'android', 'web'] as const)('on %s', (os) => {
+    beforeEach(() => {
+      jest.replaceProperty(Platform, 'OS', os);
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it.each(['ltr', 'rtl'] as const)(
+      'draws the icon from the settings in a %s layout',
+      async (direction) => {
+        const icon = jest.fn<NonNullable<Settings['icon']>>(() => null);
+        await render(
+          <PaperProvider direction={direction} settings={{ icon }}>
+            <Appbar.BackAction onPress={() => {}} />
+          </PaperProvider>
+        );
+
+        expect(icon).toHaveBeenCalledWith(
+          expect.objectContaining({ name: 'arrow-left', direction })
+        );
+      }
     );
   });
 });
