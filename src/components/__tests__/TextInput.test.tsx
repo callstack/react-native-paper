@@ -653,6 +653,40 @@ it('applies disabled opacity to the TextInput when disabled is true (outlined)',
   });
 });
 
+it('does not apply extra disabled opacity to the TextInput on Android', async () => {
+  const platformOS = jest.replaceProperty(Platform, 'OS', 'android');
+  try {
+    await render(
+      <>
+        <TextInput
+          label="Filled"
+          value="x"
+          onChangeText={() => {}}
+          disabled
+          testID="tf-input-dis-android"
+        />
+        <TextInput
+          variant="outlined"
+          label="Outlined"
+          value="x"
+          onChangeText={() => {}}
+          disabled
+          testID="tf-input-dis-out-android"
+        />
+      </>
+    );
+
+    expect(screen.getByTestId('tf-input-dis-android')).not.toHaveStyle({
+      opacity: stateOpacity.disabled,
+    });
+    expect(screen.getByTestId('tf-input-dis-out-android')).not.toHaveStyle({
+      opacity: stateOpacity.disabled,
+    });
+  } finally {
+    platformOS.restore();
+  }
+});
+
 it('forwards TextInput props such as testID', async () => {
   await render(
     <TextInput
