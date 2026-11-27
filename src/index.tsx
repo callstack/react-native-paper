@@ -104,6 +104,7 @@ export type {
   Variant as FABVariant,
   Size as FABSize,
 } from './components/FAB/tokens';
+export type { IconSource, IconProps } from './components/Icon';
 export type { Props as IconButtonProps } from './components/IconButton/IconButton';
 export type {
   Mode as IconButtonMode,

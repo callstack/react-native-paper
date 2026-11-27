@@ -5,13 +5,20 @@ import { describe, expect, it, jest } from '@jest/globals';
 import type { Direction } from '../../core/locale';
 import PaperProvider from '../../core/PaperProvider';
 import type { Settings } from '../../core/settings';
+import type { IconProps, IconSource } from '../../index';
 import { render, screen } from '../../test-utils';
 import Icon from '../Icon';
-import type { IconSource } from '../Icon';
 
 const ICON_SIZE = 24;
 
 describe('Icon Component', () => {
+  it('exports IconSource and IconProps types from root index', () => {
+    const iconSource: IconSource = 'camera';
+    const iconProps: IconProps = { size: 24 };
+    expect(iconSource).toBe('camera');
+    expect(iconProps.size).toBe(24);
+  });
+
   it('renders correctly with image source', async () => {
     const source = { uri: 'https://picsum.photos/700' };
     await render(<Icon source={source} size={ICON_SIZE} testID="image-icon" />);
