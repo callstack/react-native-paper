@@ -6,6 +6,7 @@ exports[`can render leading radio button control 1`] = `
   aria-checked={false}
   aria-label="Default with leading control"
   focusable={false}
+  onBlur={[Function]}
   role="radio"
   style={
     [
@@ -15,6 +16,7 @@ exports[`can render leading radio button control 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       [
@@ -30,63 +32,117 @@ exports[`can render leading radio button control 1`] = `
     }
   >
     <View
-      accessible={true}
-      aria-checked={false}
-      aria-live="polite"
+      accessible={false}
       focusable={false}
-      role="radio"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onHoverIn={[Function]}
+      onHoverOut={[Function]}
       style={
         [
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 18,
-            "padding": 6,
-          },
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 24,
+              "height": 48,
+              "justifyContent": "center",
+              "width": 48,
+            },
+            undefined,
+          ],
         ]
       }
+      tabIndex={-1}
     >
       <View
+        pointerEvents="none"
         style={
           {
-            "opacity": 0,
+            "alignItems": "center",
+            "borderRadius": 20,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 40,
           }
         }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
+        <View
+          collapsable={false}
           pointerEvents="none"
-          selectable={false}
           style={
             [
               {
-                "color": "rgba(103, 80, 164, 1)",
-                "fontSize": 24,
+                "borderRadius": 20,
+                "height": 40,
+                "position": "absolute",
+                "width": 40,
               },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
+              {
+                "backgroundColor": "rgba(29, 27, 32, 1)",
+                "opacity": 0,
+              },
+            ]
+          }
+        />
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "borderRadius": 10,
+                "borderWidth": 2,
+                "height": 20,
+                "justifyContent": "center",
+                "width": 20,
+              },
+              {
+                "borderColor": "rgba(73, 69, 79, 1)",
+                "opacity": 1,
+              },
             ]
           }
         >
-          check
-        </Text>
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "borderRadius": 5,
+                  "height": 10,
+                  "width": 10,
+                },
+                {
+                  "backgroundColor": "rgba(73, 69, 79, 1)",
+                  "transform": [
+                    {
+                      "scale": 0,
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+        </View>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "borderRadius": 10,
+                "height": 20,
+                "position": "absolute",
+                "width": 20,
+              },
+            ]
+          }
+        />
       </View>
     </View>
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {
@@ -140,270 +196,13 @@ exports[`can render leading radio button control 1`] = `
 </View>
 `;
 
-exports[`can render the Android radio button on different platforms 1`] = `
-<View
-  accessible={true}
-  aria-checked={false}
-  aria-label="iOS Checkbox"
-  focusable={false}
-  role="radio"
-  style={
-    [
-      false,
-      [],
-    ]
-  }
->
-  <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingHorizontal": 16,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ]
-    }
-  >
-    <Text
-      style={
-        [
-          {
-            "textAlign": "left",
-          },
-          {
-            "color": "rgba(29, 27, 32, 1)",
-            "writingDirection": "ltr",
-          },
-          [
-            {
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": "400",
-              "letterSpacing": 0.5,
-              "lineHeight": 24,
-            },
-            [
-              {
-                "flexGrow": 1,
-                "flexShrink": 1,
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "opacity": 1,
-                "textAlign": "left",
-              },
-              undefined,
-            ],
-          ],
-        ]
-      }
-    >
-      iOS Checkbox
-    </Text>
-    <View
-      accessible={true}
-      aria-checked={false}
-      aria-live="polite"
-      focusable={false}
-      role="radio"
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 18,
-          },
-        ]
-      }
-    >
-      <View
-        collapsable={false}
-        style={
-          {
-            "borderColor": "rgba(73, 69, 79, 1)",
-            "borderRadius": 10,
-            "borderWidth": 2,
-            "height": 20,
-            "margin": 8,
-            "width": 20,
-          }
-        }
-      />
-    </View>
-  </View>
-  <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-      ]
-    }
-  />
-</View>
-`;
-
-exports[`can render the iOS radio button on different platforms 1`] = `
-<View
-  accessible={false}
-  aria-checked={false}
-  aria-label="iOS Radio button"
-  collapsable={false}
-  focusable={false}
-  role="radio"
-  screenReaderFocusable={true}
-  style={
-    [
-      false,
-      [],
-    ]
-  }
->
-  <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "paddingHorizontal": 16,
-          "paddingVertical": 8,
-        },
-        undefined,
-      ]
-    }
-  >
-    <Text
-      style={
-        [
-          {
-            "textAlign": "left",
-          },
-          {
-            "color": "rgba(29, 27, 32, 1)",
-            "writingDirection": "ltr",
-          },
-          [
-            {
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": "400",
-              "letterSpacing": 0.5,
-              "lineHeight": 24,
-            },
-            [
-              {
-                "flexGrow": 1,
-                "flexShrink": 1,
-              },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "opacity": 1,
-                "textAlign": "left",
-              },
-              undefined,
-            ],
-          ],
-        ]
-      }
-    >
-      iOS Radio button
-    </Text>
-    <View
-      accessible={false}
-      aria-checked={false}
-      aria-live="polite"
-      collapsable={false}
-      focusable={false}
-      role="radio"
-      screenReaderFocusable={true}
-      style={
-        [
-          {
-            "overflow": "hidden",
-          },
-          {
-            "borderRadius": 18,
-            "padding": 6,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          {
-            "opacity": 0,
-          }
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            [
-              {
-                "color": "rgba(103, 80, 164, 1)",
-                "fontSize": 24,
-              },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
-            ]
-          }
-        >
-          check
-        </Text>
-      </View>
-    </View>
-  </View>
-  <View
-    pointerEvents="none"
-    style={
-      [
-        {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-      ]
-    }
-  />
-</View>
-`;
-
 exports[`renders unchecked 1`] = `
 <View
   accessible={true}
   aria-checked={false}
   aria-label="Unchecked Button"
   focusable={false}
+  onBlur={[Function]}
   role="radio"
   style={
     [
@@ -413,6 +212,7 @@ exports[`renders unchecked 1`] = `
   }
 >
   <View
+    importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
       [
@@ -428,6 +228,7 @@ exports[`renders unchecked 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {
@@ -464,60 +265,113 @@ exports[`renders unchecked 1`] = `
       Unchecked Button
     </Text>
     <View
-      accessible={true}
-      aria-checked={false}
-      aria-live="polite"
+      accessible={false}
       focusable={false}
-      role="radio"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onHoverIn={[Function]}
+      onHoverOut={[Function]}
       style={
         [
           {
             "overflow": "hidden",
           },
-          {
-            "borderRadius": 18,
-            "padding": 6,
-          },
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 24,
+              "height": 48,
+              "justifyContent": "center",
+              "width": 48,
+            },
+            undefined,
+          ],
         ]
       }
+      tabIndex={-1}
     >
       <View
+        pointerEvents="none"
         style={
           {
-            "opacity": 0,
+            "alignItems": "center",
+            "borderRadius": 20,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 40,
           }
         }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
+        <View
+          collapsable={false}
           pointerEvents="none"
-          selectable={false}
           style={
             [
               {
-                "color": "rgba(103, 80, 164, 1)",
-                "fontSize": 24,
+                "borderRadius": 20,
+                "height": 40,
+                "position": "absolute",
+                "width": 40,
               },
-              [
-                {
-                  "lineHeight": 24,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
+              {
+                "backgroundColor": "rgba(29, 27, 32, 1)",
+                "opacity": 0,
+              },
+            ]
+          }
+        />
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "borderRadius": 10,
+                "borderWidth": 2,
+                "height": 20,
+                "justifyContent": "center",
+                "width": 20,
+              },
+              {
+                "borderColor": "rgba(73, 69, 79, 1)",
+                "opacity": 1,
+              },
             ]
           }
         >
-          check
-        </Text>
+          <View
+            collapsable={false}
+            style={
+              [
+                {
+                  "borderRadius": 5,
+                  "height": 10,
+                  "width": 10,
+                },
+                {
+                  "backgroundColor": "rgba(73, 69, 79, 1)",
+                  "transform": [
+                    {
+                      "scale": 0,
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+        </View>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "borderRadius": 10,
+                "height": 20,
+                "position": "absolute",
+                "width": 20,
+              },
+            ]
+          }
+        />
       </View>
     </View>
   </View>

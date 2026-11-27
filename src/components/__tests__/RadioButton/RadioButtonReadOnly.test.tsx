@@ -15,21 +15,17 @@ type RadioProps = {
   onPress?: (event: GestureResponderEvent) => void;
 };
 
-// `RadioButton.Item` is a row: it wraps a radio of its own, so it exposes two
-// radio nodes and the queries below take the first one, which is the row. The
-// other two variants render a single node, which makes it the row as well.
-// `Item` names its row, hence the label only it takes.
+// `RadioButton.Item` is a row. Its inner radio is hidden from assistive tech,
+// so it exposes one radio node, which is the row. `RadioButton` renders a single
+// node, which makes it the row as well. `Item` names its row, hence the label
+// only it takes.
 const radios: {
   label: string;
   Radio: (props: RadioProps) => React.ReactElement;
 }[] = [
   {
-    label: 'RadioButton.Android',
-    Radio: (props) => <RadioButton.Android {...props} />,
-  },
-  {
-    label: 'RadioButton.IOS',
-    Radio: (props) => <RadioButton.IOS {...props} />,
+    label: 'RadioButton',
+    Radio: (props) => <RadioButton {...props} />,
   },
   {
     label: 'RadioButton.Item',

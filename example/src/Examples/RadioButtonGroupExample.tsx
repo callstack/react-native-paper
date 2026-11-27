@@ -20,15 +20,15 @@ const RadioButtonGroupExample = () => {
         >
           <View style={styles.row}>
             <Text>First</Text>
-            <RadioButton value="first" />
+            <RadioButton value="first" aria-label="First" />
           </View>
           <View style={styles.row}>
             <Text>Second</Text>
-            <RadioButton.Android value="second" />
+            <RadioButton value="second" aria-label="Second" />
           </View>
           <View style={styles.row}>
             <Text>Third</Text>
-            <RadioButton.IOS value="third" />
+            <RadioButton value="third" aria-label="Third" />
           </View>
         </RadioButton.Group>
       </List.Section>
