@@ -371,8 +371,15 @@ export const themeColors = {
   },
   Tooltip: {
     '-': {
-      backgroundColor: 'theme.colors.onSurface',
-      textColor: 'theme.colors.surface',
+      backgroundColor: 'theme.colors.inverseSurface',
+      textColor: 'theme.colors.inverseOnSurface',
+    },
+  },
+  'Tooltip.Rich': {
+    '-': {
+      backgroundColor: 'theme.colors.surfaceContainer',
+      'title textColor': 'theme.colors.onSurfaceVariant',
+      textColor: 'theme.colors.onSurfaceVariant',
     },
   },
 };
