@@ -35,6 +35,7 @@ const rich = {
   titleTypescale: 'titleSmall',
   contentTypescale: 'bodyMedium',
   gap: 4,
+  actionsTopSpace: 12,
 } as const;
 
 /**

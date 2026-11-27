@@ -31,6 +31,7 @@ import { getActiveElement, getTooltipPosition } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import { Tokens as ButtonTokens } from '../Button/tokens';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import Text from '../Typography/Text';
@@ -76,11 +77,18 @@ export type Props = {
   content: string | React.ReactElement;
   /**
    * Render function for the action buttons (and/or links) shown in a row below
+   * the content. Use `extra-small` text buttons, so their labels line up with
    * the content. Call `dismiss` from an action to hide the tooltip:
    *
    * ```js
    * actions={({ dismiss }) => (
-   *   <Button onPress={() => { doThing(); dismiss(); }}>Learn more</Button>
+   *   <Button
+   *     mode="text"
+   *     size="extra-small"
+   *     onPress={() => { doThing(); dismiss(); }}
+   *   >
+   *     Learn more
+   *   </Button>
    * )}
    * ```
    */
@@ -148,7 +156,7 @@ export type Props = {
  *     title="Add to library"
  *     content="Save this item to read it later."
  *     actions={({ dismiss }) => (
- *       <Button mode="text" onPress={dismiss}>
+ *       <Button mode="text" size="extra-small" onPress={dismiss}>
  *         Learn more
  *       </Button>
  *     )}
@@ -459,6 +467,9 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginTop: Tokens.rich.actionsTopSpace - Tokens.rich.gap,
+    // Aligns the labels of `extra-small` text buttons with the content
+    marginStart: -ButtonTokens.sizes['extra-small'].leadingSpace,
   },
   // RN types `cursor` as 'auto' | 'pointer', but RN Web accepts any CSS cursor
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
