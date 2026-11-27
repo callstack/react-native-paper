@@ -285,6 +285,23 @@ const Button = ({
   const { direction } = useLocale();
   const isMode = createIsMode(mode);
 
+  React.useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      return;
+    }
+
+    const rawMode = mode as string;
+    if (rawMode === 'contained') {
+      console.warn(
+        'Button: `mode="contained"` was removed in 6.x; use `mode="filled"` instead.'
+      );
+    } else if (rawMode === 'contained-tonal') {
+      console.warn(
+        'Button: `mode="contained-tonal"` was removed in 6.x; use `mode="tonal"` instead.'
+      );
+    }
+  }, [mode]);
+
   const requestedTrailingIcon = iconPosition === 'trailing';
   // On web, the browser already mirrors the row under `dir="rtl"`.
   const shouldFlipForRTL =
