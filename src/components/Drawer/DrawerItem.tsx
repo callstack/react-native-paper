@@ -3,14 +3,20 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   StyleProp,
+  TargetedEvent,
   ViewProps,
   ViewStyle,
 } from 'react-native';
 
+import { DrawerItemTokens } from './tokens';
+import { getDestinationA11yProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
+import { resolveCornerRadius } from '../../theme/utils/shape';
+import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -31,7 +37,7 @@ export type Props = ViewProps & {
    */
   active?: boolean;
   /**
-   * Whether the item is disabled.
+   * Whether the item is disabled. Disabled items are dimmed and don't respond to touch.
    */
   disabled?: boolean;
   /**
@@ -106,15 +112,66 @@ const DrawerItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const [focused, setFocused] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
 
-  const backgroundColor = active ? theme.colors.secondaryContainer : undefined;
-  const contentColor = active
-    ? theme.colors.onSecondaryContainer
-    : theme.colors.onSurfaceVariant;
+  const handleFocus = (e: NativeSyntheticEvent<TargetedEvent>) => {
+    if (isKeyboardFocusEvent(e)) {
+      setFocused(true);
+    }
+  };
 
-  const labelMargin = icon ? 12 : 0;
-  const borderRadius = theme.shapes.corner.extraLarge;
-  const font = theme.fonts.labelLarge;
+  const isFocused = Boolean(focused && !disabled);
+
+  const backgroundColor = active
+    ? theme.colors[DrawerItemTokens.activeIndicatorColor]
+    : undefined;
+
+  const getContentColors = (pressed: boolean) => {
+    if (active) {
+      return {
+        iconColor: theme.colors[DrawerItemTokens.activeIconColor],
+        labelColor: theme.colors[DrawerItemTokens.activeLabelTextColor],
+      };
+    }
+
+    const interactive = !disabled;
+    const [iconToken, labelToken] =
+      interactive && pressed
+        ? [
+            DrawerItemTokens.inactivePressedIconColor,
+            DrawerItemTokens.inactivePressedLabelTextColor,
+          ]
+        : interactive && hovered
+          ? [
+              DrawerItemTokens.inactiveHoverIconColor,
+              DrawerItemTokens.inactiveHoverLabelTextColor,
+            ]
+          : isFocused
+            ? [
+                DrawerItemTokens.inactiveFocusIconColor,
+                DrawerItemTokens.inactiveFocusLabelTextColor,
+              ]
+            : [
+                DrawerItemTokens.inactiveIconColor,
+                DrawerItemTokens.inactiveLabelTextColor,
+              ];
+
+    return {
+      iconColor: theme.colors[iconToken],
+      labelColor: theme.colors[labelToken],
+    };
+  };
+
+  const borderRadius = resolveCornerRadius(
+    theme,
+    DrawerItemTokens.indicatorShape
+  );
+  // Dims the content only, like Menu.Item: the active indicator keeps its
+  // color, so a disabled active destination still reads as active.
+  const opacity = disabled
+    ? DrawerItemTokens.stateOpacity.disabled
+    : DrawerItemTokens.stateOpacity.enabled;
 
   return (
     <View {...rest}>
@@ -126,44 +183,53 @@ const DrawerItem = ({
         disabled={disabled}
         background={background}
         onPress={onPress}
-        style={[
-          styles.container,
-          styles.v3Container,
-          { backgroundColor, borderRadius },
-          style,
-        ]}
+        onFocus={handleFocus}
+        onBlur={() => setFocused(false)}
+        onHoverIn={() => setHovered(true)}
+        onHoverOut={() => setHovered(false)}
+        style={[styles.container, { backgroundColor, borderRadius }, style]}
         role="button"
-        aria-selected={active}
+        {...getDestinationA11yProps(active)}
         aria-label={ariaLabel}
         theme={theme}
         hitSlop={hitSlop}
         testID={testID}
       >
-        <View style={[styles.wrapper, styles.v3Wrapper]}>
-          <View style={styles.content}>
-            {icon ? (
-              <Icon source={icon} size={24} color={contentColor} />
-            ) : null}
-            <Text
-              variant="labelLarge"
-              selectable={false}
-              numberOfLines={1}
-              style={[
-                styles.label,
-                {
-                  color: contentColor,
-                  marginLeft: labelMargin,
-                  ...font,
-                },
-              ]}
-              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-            >
-              {label}
-            </Text>
-          </View>
+        {({ pressed }) => {
+          const { iconColor, labelColor } = getContentColors(pressed);
+          return (
+            <View style={[styles.wrapper, { opacity }]}>
+              <View style={styles.content}>
+                {icon ? (
+                  <Icon
+                    source={icon}
+                    size={DrawerItemTokens.iconSize}
+                    color={iconColor}
+                  />
+                ) : null}
+                <Text
+                  variant={
+                    active
+                      ? DrawerItemTokens.activeLabelText
+                      : DrawerItemTokens.labelText
+                  }
+                  selectable={false}
+                  numberOfLines={1}
+                  style={[
+                    styles.label,
+                    icon ? styles.labelWithIcon : null,
+                    { color: labelColor },
+                  ]}
+                  maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+                >
+                  {label}
+                </Text>
+              </View>
 
-          {right?.({ color: contentColor })}
-        </View>
+              {right?.({ color: iconColor })}
+            </View>
+          );
+        }}
       </TouchableRipple>
     </View>
   );
@@ -173,25 +239,14 @@ DrawerItem.displayName = 'Drawer.Item';
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
-    marginVertical: 4,
-  },
-  v3Container: {
+    height: DrawerItemTokens.height,
     justifyContent: 'center',
-    height: 56,
-    marginLeft: 12,
-    marginRight: 12,
-    marginVertical: 0,
+    marginHorizontal: DrawerItemTokens.indicatorInset,
   },
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
-  },
-  v3Wrapper: {
-    marginLeft: 16,
-    marginRight: 24,
-    padding: 0,
+    marginHorizontal: DrawerItemTokens.contentInset,
   },
   content: {
     flex: 1,
@@ -199,7 +254,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    marginRight: 32,
+    marginEnd: DrawerItemTokens.labelTrailingGap,
+  },
+  labelWithIcon: {
+    marginStart: DrawerItemTokens.iconLabelGap,
   },
 });
 

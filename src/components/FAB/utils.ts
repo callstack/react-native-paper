@@ -82,3 +82,28 @@ export const getDimensions = ({
     labelTypescale: spec.labelTypescale,
   };
 };
+
+/**
+ * Where keyboard focus goes inside the open menu. Arrow keys wrap around,
+ * Home and End jump to the first and last item.
+ *
+ * @returns The index to focus, or `null` for a key that doesn't move focus.
+ */
+export const getNextStopIndex = (
+  key: string,
+  current: number,
+  count: number
+): number | null => {
+  switch (key) {
+    case 'Home':
+      return 0;
+    case 'End':
+      return count - 1;
+    case 'ArrowDown':
+      return (current + 1) % count;
+    case 'ArrowUp':
+      return (current - 1 + count) % count;
+    default:
+      return null;
+  }
+};
