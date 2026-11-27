@@ -51,6 +51,8 @@ export default function Main() {
 }
 ```
 
+A `PaperProvider` inside another one doesn't take the direction of the one above it. Without its own `direction`, it falls back to `I18nManager`, which is always left-to-right on the Web, so Paper's components inside it use the left-to-right direction. Pass `direction` to the nested `PaperProvider` too, or use [`ThemeProvider`](./theming#applying-a-theme-to-part-of-the-app) when that part of the app only needs a different theme.
+
 ## Overriding direction for a subtree
 
 Use `LocaleProvider` to override the direction for a specific part of the tree without affecting the rest of the app:

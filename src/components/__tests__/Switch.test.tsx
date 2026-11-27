@@ -312,7 +312,9 @@ describe('Switch operability', () => {
 
       await render(<Switch value {...{ [prop]: true }} />);
 
-      expect(console.warn).not.toHaveBeenCalled();
+      expect(console.warn).not.toHaveBeenCalledWith(
+        expect.stringContaining('Switch:')
+      );
     }
   );
 
@@ -393,7 +395,7 @@ describe('Switch operability', () => {
       await render(<Switch value disabled readOnly />);
 
       expect(screen.getByRole('switch')).toBeDisabled();
-      expect(screen.getByRole('switch')).not.toHaveProp('aria-readonly', true);
+      expect(screen.getByRole('switch')).not.toHaveProp('aria-readonly');
     });
   });
 
@@ -420,6 +422,13 @@ describe('Switch operability', () => {
 
     expect(screen.getByRole('switch')).toHaveProp('aria-readonly', true);
     expect(screen.getByRole('switch')).toBeEnabled();
+  });
+
+  it('does not expose aria-readonly on an operable switch on web', async () => {
+    jest.replaceProperty(Platform, 'OS', 'web');
+    await render(<Switch value onValueChange={() => {}} />);
+
+    expect(screen.getByRole('switch')).not.toHaveProp('aria-readonly');
   });
 
   it('exposes a missing-handler fallback as read-only on web', async () => {

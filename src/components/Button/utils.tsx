@@ -1,7 +1,5 @@
 import type { ColorValue, Insets } from 'react-native';
 
-import color from 'color';
-
 import { Tokens } from './tokens';
 import type { ButtonToggleMode } from './tokens';
 import { black, white } from '../../theme/colors';
@@ -149,28 +147,6 @@ export const getButtonTransitionDuration = ({
   }
 
   return theme.motion.duration[pressed ? 'short4' : 'short3'];
-};
-
-/**
- * Caps the spring curve so the corner can't overshoot below 0 on its way to
- * `radius`, from any start up to `largestRadius`.
- */
-export const getButtonShapeCurvePoints = ({
-  points,
-  radius,
-  largestRadius,
-}: {
-  points: number[];
-  radius: number;
-  largestRadius: number;
-}): number[] => {
-  if (largestRadius <= radius) {
-    return points;
-  }
-
-  const maxProgress = largestRadius / (largestRadius - radius);
-
-  return points.map((point) => Math.min(point, maxProgress));
 };
 
 /** Corner the container morphs to while pressed. */
@@ -448,29 +424,4 @@ export const getButtonColors = ({
     borderWidth,
     backgroundOpacity,
   };
-};
-
-/**
- * Returns the color used for the button's ripple / state layer: the label
- * color at the pressed-state opacity (per Material Design 3).
- *
- * When the label color is not a plain string (e.g. an Android Material You
- * `PlatformColor`), or is a string `color` can't parse (e.g. `var(--x)` or
- * `currentColor` on web), `undefined` is returned so `TouchableRipple` falls
- * back to its own default state-layer color.
- */
-export const getButtonRippleColor = ({
-  labelColor,
-}: {
-  labelColor: ColorValue;
-}): ColorValue | undefined => {
-  if (typeof labelColor !== 'string') {
-    return undefined;
-  }
-
-  try {
-    return color(labelColor).alpha(stateOpacity.pressed).rgb().string();
-  } catch {
-    return undefined;
-  }
 };
