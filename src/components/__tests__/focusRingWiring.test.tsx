@@ -41,7 +41,7 @@ import ListItem from '../List/ListItem';
 import MenuItem from '../Menu/MenuItem';
 import RadioButtonItem from '../RadioButton/RadioButtonItem';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
-import Snackbar from '../Snackbar';
+import Snackbar from '../Snackbar/Snackbar';
 import Switch from '../Switch/Switch';
 import TextInputIcon from '../TextInput/TextInputIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple.native';
@@ -773,16 +773,14 @@ describe.each([
     render(
       <Snackbar
         visible
+        portal={false}
         onDismiss={() => {}}
+        message="Saved"
         action={{ label: 'Undo', onPress: () => {} }}
         onIconPress={() => {}}
         iconAccessibilityLabel="Close"
         theme={theme}
-      >
-        <Button onPress={() => {}} theme={theme}>
-          Details
-        </Button>
-      </Snackbar>
+      />
     );
 
   const ringColors = () => {
@@ -804,20 +802,6 @@ describe.each([
     });
 
     expect(ringColors()).toEqual([theme.colors.inversePrimary]);
-  });
-
-  it('rings a control in the message in secondary', async () => {
-    await renderSnackbar();
-
-    await act(async () => {
-      await fireEvent(
-        screen.getByRole('button', { name: 'Details' }),
-        'focus',
-        ownFocusEvent()
-      );
-    });
-
-    expect(ringColors()).toEqual([theme.colors.secondary]);
   });
 });
 

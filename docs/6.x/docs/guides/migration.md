@@ -1015,6 +1015,53 @@ The misspelled `traileringIcon` props have been renamed:
 />
 ```
 
+### Snackbar
+
+The message is passed via the `message` prop instead of `children`, and the
+`action` prop takes a narrow set of options instead of every `Button` prop:
+
+```diff
+<Snackbar
+  visible={visible}
+  onDismiss={onDismiss}
++ message="Changes saved"
+  action={{ label: 'Undo', onPress: () => {} }}
+->
+-  Changes saved
+-</Snackbar>
++/>
+```
+
+Passing arbitrary nodes as the message is no longer supported, so compose the
+message as a string. The `contentStyle` prop was renamed to `messageStyle`, and
+it styles the message text rather than a wrapper around arbitrary children.
+
+The Snackbar now renders in a `Portal` on its own, so it overlays all other
+content, and you no longer need to wrap it in a `Portal`. Set
+`portal={false}` to keep it inside the parent instead — for example when the
+Snackbar should appear above a React Native `Modal`, which sits above the root
+Portal host.
+
+```diff
+-<Portal>
+-  <Snackbar visible={visible} onDismiss={onDismiss} message="Changes saved" />
+-</Portal>
++<Snackbar visible={visible} onDismiss={onDismiss} message="Changes saved" />
+```
+
+The action dismisses the Snackbar on its own, so calling `onDismiss` from
+`action.onPress` is no longer needed:
+
+```diff
+<Snackbar
+  visible={visible}
+  onDismiss={onDismiss}
+  message="Changes saved"
+- action={{ label: 'Undo', onPress: () => { doUndo(); onDismiss(); } }}
++ action={{ label: 'Undo', onPress: () => doUndo() }}
+/>
+```
+
 ### Chip
 
 The close button (`onClose`) now fills the trailing 34dp column reserved for it, instead of only the 26x18 area around its icon, and its touch target extends to 48dp in height. Taps in that column that used to activate the chip's `onPress` now activate `onClose`.
