@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import type {
+  ColorValue,
   GestureResponderEvent,
   LayoutChangeEvent,
   StyleProp,
@@ -54,7 +55,7 @@ export type Props = Omit<React.PropsWithoutRef<ViewProps>, 'children'> & {
   /**
    * Custom color for the text.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Specifies the largest possible scale a title font can reach.
    */

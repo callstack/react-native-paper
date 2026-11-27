@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import type {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   TextStyle,
@@ -63,8 +64,8 @@ export type Props<T extends string = string> = {
     icon?: IconSource;
     disabled?: boolean;
     'aria-label'?: string;
-    checkedColor?: string;
-    uncheckedColor?: string;
+    checkedColor?: ColorValue;
+    uncheckedColor?: ColorValue;
     onPress?: (event: GestureResponderEvent) => void;
     label?: string;
     showSelectedCheck?: boolean;

@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import type {
+  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -51,11 +52,11 @@ export type Props = {
   /**
    * Custom color for unchecked checkbox.
    */
-  uncheckedColor?: string;
+  uncheckedColor?: ColorValue;
   /**
    * Custom color for checkbox.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Additional styles for container View.
    */

@@ -13,7 +13,7 @@ const getUnderlayColor = ({
   underlayColor,
 }: {
   calculatedRippleColor: ColorValue;
-  underlayColor?: string;
+  underlayColor?: ColorValue;
 }) => {
   if (underlayColor != null) {
     return underlayColor;
@@ -43,7 +43,7 @@ export const getTouchableRippleColors = ({
 }: {
   theme: InternalTheme;
   rippleColor?: ColorValue;
-  underlayColor?: string;
+  underlayColor?: ColorValue;
 }): {
   calculatedRippleColor: ColorValue;
   calculatedUnderlayColor: ColorValue;
