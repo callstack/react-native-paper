@@ -23,7 +23,6 @@ import Appbar from '../Appbar/Appbar';
 import AppbarAction from '../Appbar/AppbarAction';
 import AppbarBackAction from '../Appbar/AppbarBackAction';
 import AppbarContent from '../Appbar/AppbarContent';
-import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import Button from '../Button/Button';
 import Card from '../Card/Card';
 import CheckboxItem from '../Checkbox/CheckboxItem';
@@ -39,6 +38,7 @@ import IconButton from '../IconButton/IconButton';
 import ListAccordion from '../List/ListAccordion';
 import ListItem from '../List/ListItem';
 import MenuItem from '../Menu/MenuItem';
+import NavigationBar from '../NavigationBar/NavigationBar';
 import RadioButtonItem from '../RadioButton/RadioButtonItem';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import Snackbar from '../Snackbar';
@@ -150,9 +150,9 @@ describe('focus ring wiring', () => {
   // The bar clips (`overflow: 'hidden'`) and tabs fill it edge to edge, so an
   // outward ring loses its top and bottom. Rendered through a custom
   // `renderTouchable` so the test runs the ring path on every platform.
-  it('BottomNavigation.Bar rings its tabs inward', async () => {
+  it('NavigationBar rings its tabs inward', async () => {
     await render(
-      <BottomNavigation.Bar
+      <NavigationBar
         navigationState={{
           index: 0,
           routes: [
@@ -704,8 +704,8 @@ describe('focus ring color follows the theme prop', () => {
       </DataTableRow>,
     ],
     [
-      'BottomNavigation.Bar',
-      <BottomNavigation.Bar
+      'NavigationBar',
+      <NavigationBar
         key="bar"
         navigationState={{
           index: 0,

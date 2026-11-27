@@ -1,5 +1,7 @@
 {
   "next": {
+    "/docs/components/BottomNavigation/BottomNavigation": "/6.x/docs/components/NavigationBar/NavigationBar",
+    "/docs/components/BottomNavigation/BottomNavigationBar": "/6.x/docs/components/NavigationBar/NavigationBar",
     "/docs/components/Checkbox/CheckboxAndroid": "/6.x/docs/components/Checkbox/Checkbox",
     "/docs/components/Checkbox/CheckboxIOS": "/6.x/docs/components/Checkbox/Checkbox",
     "/docs/components/Dialog/DialogActions": "/6.x/docs/components/Dialog/Dialog",
@@ -14,12 +16,15 @@
     "/docs/components/ToggleButton/ToggleButton": "/6.x/docs/guides/migration#togglebutton",
     "/docs/components/ToggleButton/ToggleButtonGroup": "/6.x/docs/guides/migration#togglebutton",
     "/docs/components/ToggleButton/ToggleButtonRow": "/6.x/docs/guides/migration#togglebutton",
+    "/docs/guides/bottom-navigation": "/6.x/docs/guides/navigation-bar",
     "/docs/guides/migration-guide-to-5.0": "/6.x/docs/guides/migration"
   },
   "stable": {
     "/6.x/docs/components/FAB/FABExtended": "/docs/components/FAB/FAB",
     "/6.x/docs/components/FAB/FABMenu": "/docs/components/FAB/FAB",
+    "/6.x/docs/components/NavigationBar/NavigationBar": "/docs/components/BottomNavigation/BottomNavigationBar",
     "/6.x/docs/guides/migration": "/docs/guides/migration-guide-to-5.0",
+    "/6.x/docs/guides/navigation-bar": "/docs/guides/bottom-navigation",
     "/6.x/docs/guides/rtl": "/"
   }
 }
