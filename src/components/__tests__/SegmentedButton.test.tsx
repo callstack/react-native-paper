@@ -422,7 +422,7 @@ describe('should have `accessibilityState={ checked: true }` when selected', () 
       />
     );
 
-    const buttons = screen.getAllByRole('button');
+    const buttons = screen.getAllByRole('checkbox');
 
     expect(buttons[0]).toHaveProp(
       'accessibilityState',
@@ -513,5 +513,98 @@ describe('labelStyle is handled', () => {
     expect(screen.getByText('Walking')).toHaveStyle({
       fontSize: 14,
     });
+  });
+});
+
+describe('accessibility roles', () => {
+  it('exposes single select segments as radios inside a radiogroup', async () => {
+    await render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'ride', label: 'Riding' },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(screen.root).toHaveProp('role', 'radiogroup');
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+    expect(screen.getByRole('radio', { name: 'Walking' })).toBeChecked();
+    expect(screen.getByRole('radio', { name: 'Riding' })).not.toBeChecked();
+  });
+
+  it('exposes multi select segments as checkboxes', async () => {
+    await render(
+      <SegmentedButtons<string>
+        multiSelect
+        value={['walk']}
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'ride', label: 'Riding' },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(screen.root).not.toHaveProp('role');
+    expect(screen.queryByRole('button')).not.toBeOnTheScreen();
+    expect(screen.getByRole('checkbox', { name: 'Walking' })).toBeChecked();
+    expect(screen.getByRole('checkbox', { name: 'Riding' })).not.toBeChecked();
+  });
+
+  it('names the single select radiogroup with aria-label', async () => {
+    await render(
+      <SegmentedButtons
+        value={'walk'}
+        aria-label="Transport mode"
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'ride', label: 'Riding' },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(screen.root).toHaveProp('role', 'radiogroup');
+    expect(screen.root).toHaveProp('aria-label', 'Transport mode');
+  });
+
+  it('names the single select radiogroup with aria-labelledby', async () => {
+    await render(
+      <SegmentedButtons
+        value={'walk'}
+        aria-labelledby="transport-heading"
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'ride', label: 'Riding' },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(screen.root).toHaveProp('role', 'radiogroup');
+    expect(screen.root).toHaveProp('aria-labelledby', 'transport-heading');
+  });
+
+  it('does not put group naming props on the multi select wrapper', async () => {
+    await render(
+      <SegmentedButtons<string>
+        multiSelect
+        value={['walk']}
+        aria-label="Transport mode"
+        aria-labelledby="transport-heading"
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'ride', label: 'Riding' },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(screen.root).not.toHaveProp('role');
+    expect(screen.root).not.toHaveProp('aria-label');
+    expect(screen.root).not.toHaveProp('aria-labelledby');
   });
 });

@@ -76,6 +76,16 @@ export type Props<T extends string = string> = {
    * Density is applied to the height, to allow usage in denser UIs
    */
   density?: 'regular' | 'small' | 'medium' | 'high';
+  /**
+   * Accessible name for the group of buttons. Only applied when `multiSelect` is not set,
+   * where the buttons are exposed as a `radiogroup`.
+   */
+  'aria-label'?: string;
+  /**
+   * Identifier of the element that labels the group of buttons. Only applied when `multiSelect` is not set,
+   * where the buttons are exposed as a `radiogroup`.
+   */
+  'aria-labelledby'?: string;
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
 } & ConditionalValue<T>;
@@ -97,6 +107,7 @@ export type Props<T extends string = string> = {
  *       <SegmentedButtons
  *         value={value}
  *         onValueChange={setValue}
+ *         aria-label="Transport mode"
  *         buttons={[
  *           {
  *             value: 'walk',
@@ -131,11 +142,21 @@ const SegmentedButtons = <T extends string = string>({
   density,
   style,
   theme: themeOverrides,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
 }: Props<T>) => {
   const theme = useInternalTheme(themeOverrides);
 
+  const groupProps = multiSelect
+    ? undefined
+    : {
+        role: 'radiogroup' as const,
+        'aria-label': ariaLabel,
+        'aria-labelledby': ariaLabelledBy,
+      };
+
   return (
-    <View style={[styles.row, style]}>
+    <View {...groupProps} style={[styles.row, style]}>
       {buttons.map((item, i) => {
         const disabledChildStyle = getDisabledSegmentedButtonStyle({
           theme,
@@ -169,6 +190,7 @@ const SegmentedButtons = <T extends string = string>({
             {...item}
             key={i}
             checked={checked}
+            multiSelect={multiSelect}
             segment={segment}
             density={density}
             onPress={onPress}
