@@ -188,13 +188,13 @@ const RadioButton = ({
     isPressable || hasTouchHandler({ onLongPress, onPressIn, onPressOut });
   const isInteractive = !disabled && hasHandler;
 
-  // The MD3 focus indicator wraps the 40dp state layer, not the 48dp touch
-  // target, so the ring is drawn inward on a child of the state layer
-  // (`'descendant'`).
+  // The MD3 focus indicator hugs the 20dp radio, not the 48dp touch target,
+  // so the ring is drawn outward on a child the size of the radio
+  // (`'descendant'`). With the focus tokens that makes a 30dp ring.
   const { target: focusTarget, ring: focusRing } = useFocusRing(
     !isInteractive,
     theme.colors.secondary,
-    'inward',
+    'outward',
     'descendant'
   );
 
@@ -349,7 +349,7 @@ const RadioButton = ({
       {...restProps}
       {...mergeDataSetProps(restProps, focusTarget.dataSetProps)}
       borderless
-      // The radio draws its own ring around the 40dp state layer.
+      // The radio draws its own ring around the 20dp radio.
       focusRing="none"
       onFocus={handleFocus}
       onBlur={handleBlur}
@@ -394,7 +394,7 @@ const RadioButton = ({
         <View
           pointerEvents="none"
           testID={testID ? `${testID}-focus-ring` : undefined}
-          style={[styles.stateLayerFill, ...focusRing.style]}
+          style={[styles.focusRing, ...focusRing.style]}
           {...focusRing.dataSetProps}
         />
       </View>
@@ -424,6 +424,12 @@ const styles = StyleSheet.create({
     width: stateLayerSize,
     height: stateLayerSize,
     borderRadius: stateLayerSize / 2,
+  },
+  focusRing: {
+    position: 'absolute',
+    width: ringSize,
+    height: ringSize,
+    borderRadius: ringSize / 2,
   },
   radio: {
     height: ringSize,

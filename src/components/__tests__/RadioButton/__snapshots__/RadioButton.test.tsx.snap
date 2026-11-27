@@ -106,10 +106,10 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
       style={
         [
           {
-            "borderRadius": 20,
-            "height": 40,
+            "borderRadius": 10,
+            "height": 20,
             "position": "absolute",
-            "width": 40,
+            "width": 20,
           },
         ]
       }
@@ -223,10 +223,10 @@ exports[`RadioButton renders properly 1`] = `
       style={
         [
           {
-            "borderRadius": 20,
-            "height": 40,
+            "borderRadius": 10,
+            "height": 20,
             "position": "absolute",
-            "width": 40,
+            "width": 20,
           },
         ]
       }
@@ -360,10 +360,10 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
       style={
         [
           {
-            "borderRadius": 20,
-            "height": 40,
+            "borderRadius": 10,
+            "height": 20,
             "position": "absolute",
-            "width": 40,
+            "width": 20,
           },
         ]
       }

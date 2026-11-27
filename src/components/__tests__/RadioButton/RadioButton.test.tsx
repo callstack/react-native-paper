@@ -359,8 +359,8 @@ describe('RadioButton Space key on web', () => {
 });
 
 describe('RadioButton focus ring', () => {
-  const { thickness } = tokens.md.sys.state.focusIndicator;
-  const ringOutline = { outlineWidth: thickness, outlineOffset: -thickness };
+  const { thickness, outerOffset } = tokens.md.sys.state.focusIndicator;
+  const ringOutline = { outlineWidth: thickness, outlineOffset: outerOffset };
 
   const ring = () => screen.getByTestId('radio-focus-ring');
   const radio = () => screen.getByRole('radio');
@@ -369,14 +369,14 @@ describe('RadioButton focus ring', () => {
     mockJest.restoreAllMocks();
   });
 
-  it('draws an inward ring on the 40dp state layer on keyboard focus', async () => {
+  it('draws an outward ring around the 20dp radio on keyboard focus', async () => {
     await render(
       <RadioButton value="first" testID="radio" onPress={() => {}} />
     );
 
     await fireEvent(radio(), 'focus');
 
-    expect(ring()).toHaveStyle({ width: 40, height: 40, ...ringOutline });
+    expect(ring()).toHaveStyle({ width: 20, height: 20, ...ringOutline });
     expect(radio()).not.toHaveStyle({ outlineWidth: thickness });
   });
 
@@ -408,7 +408,7 @@ describe('RadioButton focus ring', () => {
       <RadioButton value="first" testID="radio" onPress={() => {}} />
     );
 
-    expect(ring()).toHaveProp('dataSet', { focusRingDescendant: 'inward' });
+    expect(ring()).toHaveProp('dataSet', { focusRingDescendant: 'outward' });
     expect(radio()).toHaveProp('dataSet', { focusRingTarget: 'true' });
   });
 });

@@ -128,10 +128,10 @@ exports[`RadioButtonGroup renders properly 1`] = `
         style={
           [
             {
-              "borderRadius": 20,
-              "height": 40,
+              "borderRadius": 10,
+              "height": 20,
               "position": "absolute",
-              "width": 40,
+              "width": 20,
             },
           ]
         }
