@@ -43,6 +43,18 @@ describe('addEventListener', () => {
       handler
     );
   });
+
+  // Jest presets often omit AccessibilityInfo (#4373). PaperProvider subscribes
+  // during mount, so a missing module must not throw.
+  it('does not throw when the native module is missing', () => {
+    const subscription = addEventListener(
+      undefined,
+      'reduceMotionChanged',
+      handler
+    );
+
+    expect(() => subscription.remove()).not.toThrow();
+  });
 });
 
 describe('addListener', () => {
