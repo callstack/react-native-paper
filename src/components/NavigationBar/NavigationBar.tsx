@@ -480,11 +480,10 @@ const NavigationBarItem = <Route extends BaseRoute>({
       </Text>
     );
 
+  // No `pointerEvents="none"` on the content wrappers. On Android it also stops
+  // hover events, so TalkBack explore by touch could not focus the tab.
   const stackedContent = (
-    <View
-      pointerEvents="none"
-      style={labeled ? styles.stackedContainer : styles.noLabelContainer}
-    >
+    <View style={labeled ? styles.stackedContainer : styles.noLabelContainer}>
       <View
         style={[
           styles.iconContainer,
@@ -514,7 +513,7 @@ const NavigationBarItem = <Route extends BaseRoute>({
   );
 
   const horizontalContent = (
-    <View pointerEvents="none" style={styles.horizontalContainer}>
+    <View style={styles.horizontalContainer}>
       <View style={styles.horizontalItem}>
         <Animated.View
           style={[

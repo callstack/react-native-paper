@@ -47,7 +47,6 @@ exports[`only shows the focus state layer for keyboard focus on web: keyboard-fo
   testID="tab"
 >
   <View
-    pointerEvents="none"
     style={
       {
         "height": 64,
@@ -313,7 +312,6 @@ exports[`only shows the focus state layer for keyboard focus on web: pointer-foc
   testID="tab"
 >
   <View
-    pointerEvents="none"
     style={
       {
         "height": 64,
@@ -574,7 +572,6 @@ exports[`renders the MD3 state layer for hover, focus and press: focused 1`] = `
   testID="tab"
 >
   <View
-    pointerEvents="none"
     style={
       {
         "height": 64,
@@ -835,7 +832,6 @@ exports[`renders the MD3 state layer for hover, focus and press: hovered 1`] = `
   testID="tab"
 >
   <View
-    pointerEvents="none"
     style={
       {
         "height": 64,
@@ -1096,7 +1092,6 @@ exports[`renders the MD3 state layer for hover, focus and press: idle 1`] = `
   testID="tab"
 >
   <View
-    pointerEvents="none"
     style={
       {
         "height": 64,
@@ -1354,7 +1349,6 @@ exports[`renders the MD3 state layer for hover, focus and press: pressed 1`] = `
   testID="tab"
 >
   <View
-    pointerEvents="none"
     style={
       {
         "height": 64,
@@ -1615,7 +1609,6 @@ exports[`renders the MD3 state layer for hover, focus and press: released 1`] = 
   testID="tab"
 >
   <View
-    pointerEvents="none"
     style={
       {
         "height": 64,
@@ -1920,7 +1913,6 @@ exports[`renders the horizontal (flexible) variant 1`] = `
         }
       >
         <View
-          pointerEvents="none"
           style={
             {
               "alignItems": "center",
@@ -2170,7 +2162,6 @@ exports[`renders the horizontal (flexible) variant 1`] = `
         }
       >
         <View
-          pointerEvents="none"
           style={
             {
               "alignItems": "center",
@@ -2420,7 +2411,6 @@ exports[`renders the horizontal (flexible) variant 1`] = `
         }
       >
         <View
-          pointerEvents="none"
           style={
             {
               "alignItems": "center",
