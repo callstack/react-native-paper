@@ -105,3 +105,21 @@ it('uses the disabled colors for a disabled invalid field and keeps it invalid o
   }
   expect(screen.getByLabelText('Email')).toHaveProp('aria-invalid', true);
 });
+
+it('keeps the start icon onSurfaceVariant while the end icon uses the error color', async () => {
+  await render(
+    <TextInput
+      label="Email"
+      error
+      startAccessory={(props) => <TextInput.Icon {...props} icon="email" />}
+      endAccessory={(props) => <TextInput.Icon {...props} icon="close" />}
+    />
+  );
+
+  expect(
+    screen.getByText('email', { includeHiddenElements: true })
+  ).toHaveStyle({ color: theme.colors.onSurfaceVariant });
+  expect(
+    screen.getByText('close', { includeHiddenElements: true })
+  ).toHaveStyle({ color: theme.colors.error });
+});

@@ -23,7 +23,10 @@ import type { AnimatedStyle } from 'react-native-reanimated';
 import { useTextInput } from './hooks';
 import { styles } from './styles';
 import TextInputErrorIcon from './TextInputErrorIcon';
-import type { TextInputAccessoryProps } from './TextInputIcon';
+import {
+  TextInputAccessoryPlacementContext,
+  type TextInputAccessoryProps,
+} from './TextInputIcon';
 import type { InternalTheme, ThemeProp } from '../../theme/types';
 
 export type TextInputAnimationState = {
@@ -464,14 +467,16 @@ function TextInput({
           </Text>
         )}
 
-        {renderLeadingAccessory
-          ? renderLeadingAccessory({
+        {renderLeadingAccessory ? (
+          <TextInputAccessoryPlacementContext.Provider value="start">
+            {renderLeadingAccessory({
               style: leadingAccessoryStyles,
               error: hasError,
               disabled: isDisabled,
               multiline: !!rest.multiline,
-            })
-          : null}
+            })}
+          </TextInputAccessoryPlacementContext.Provider>
+        ) : null}
 
         {/* Keep the field visible to native accessibility even before focus. */}
         <View style={containerStyles}>
