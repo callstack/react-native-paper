@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Pressable, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -28,6 +28,7 @@ import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
+import { Pressable } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';

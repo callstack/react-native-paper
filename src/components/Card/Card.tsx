@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Pressable, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
@@ -22,6 +22,7 @@ import hasTouchHandler from '../../utils/hasTouchHandler';
 import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import Surface from '../Surface';
 import type { SurfaceStyle } from '../Surface';
+import { Pressable } from '../TouchableRipple/Pressable';
 
 type OutlinedCardProps = {
   mode: 'outlined';

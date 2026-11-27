@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, Pressable, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   StyleProp,
@@ -28,6 +28,7 @@ import { useFocusRing } from '../../utils/useFocusRing';
 import Badge from '../Badge';
 import Icon from '../Icon';
 import type { IconSource } from '../Icon';
+import { Pressable } from '../TouchableRipple/Pressable';
 import Text from '../Typography/Text';
 
 export type Props = ViewProps & {

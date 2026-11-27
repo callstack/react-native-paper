@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Pressable, View } from 'react-native';
+import {
+  Platform,
+  Pressable as NativePressable,
+  StyleSheet,
+  View,
+} from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import Animated, {
@@ -12,6 +17,7 @@ import useLatestCallback from 'use-latest-callback';
 import Portal from './Portal/Portal';
 import Surface from './Surface';
 import type { Props as SurfaceProps, SurfaceStyle } from './Surface';
+import { Pressable } from './TouchableRipple/Pressable';
 import { useInternalTheme } from '../core/theming';
 import {
   useMotionDuration,
@@ -139,7 +145,7 @@ const DEFAULT_DURATION = 220;
 // Having the handler at all keeps the screen reader escape gesture on this
 // modal, instead of passing it on to the modal behind it.
 const absorbAccessibilityEscape = () => {};
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+const AnimatedPressable = Animated.createAnimatedComponent(NativePressable);
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.

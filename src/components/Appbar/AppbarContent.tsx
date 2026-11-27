@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Pressable, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   LayoutChangeEvent,
@@ -18,6 +18,7 @@ import {
 } from './utils';
 import type { ThemeProp } from '../../theme/types';
 import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
+import { Pressable } from '../TouchableRipple/Pressable';
 import Text from '../Typography/Text';
 import type { TextRef } from '../Typography/Text';
 
