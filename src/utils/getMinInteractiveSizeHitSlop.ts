@@ -4,7 +4,7 @@ import type { Insets } from 'react-native';
  * Minimum size of an interactive target.
  * @see https://m3.material.io/foundations/designing/structure
  */
-const MIN_INTERACTIVE_SIZE = 48;
+export const MIN_INTERACTIVE_SIZE = 48;
 
 /**
  * Hit slop needed to bring a fixed-size element up to the 48dp minimum

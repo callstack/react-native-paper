@@ -272,6 +272,49 @@ describe('Appbar modes', () => {
     }
   );
 
+  it.each([
+    { mode: 'medium', height: 112, contentHeight: 56 },
+    { mode: 'large', height: 152, contentHeight: 64 },
+  ] as const)(
+    'keeps the $mode height while the title stays below the actions',
+    async ({ mode, height, contentHeight }) => {
+      await render(
+        <Appbar mode={mode} safeAreaInsets={{ top: 20 }} testID="appbar">
+          <Appbar.Content title="Title" testID="content" />
+        </Appbar>
+      );
+
+      // the default title with its padding
+      await fireEvent(screen.getByTestId('content'), 'layout', {
+        nativeEvent: { layout: { width: 300, height: contentHeight } },
+      });
+
+      expect(screen.getByTestId('appbar')).toHaveStyle({ height: height + 20 });
+    }
+  );
+
+  it.each(['medium', 'large'] as const)(
+    'grows the %s Appbar so the title does not cover the actions',
+    async (mode) => {
+      await render(
+        <Appbar mode={mode} safeAreaInsets={{ top: 20 }} testID="appbar">
+          <Appbar.BackAction />
+          <Appbar.Content title="Title" testID="content" />
+        </Appbar>
+      );
+
+      // a title at a larger text size
+      await fireEvent(screen.getByTestId('content'), 'layout', {
+        nativeEvent: { layout: { width: 300, height: 120 } },
+      });
+
+      // the bottom of the touch targets of the actions, the content and the safe area inset
+      expect(screen.getByTestId('appbar')).toHaveStyle({
+        height: 56 + 120 + 20,
+      });
+    }
+  );
+
   it('allows the title of a flexible Appbar to wrap onto two lines', async () => {
     await render(
       <Appbar mode="large-flexible">

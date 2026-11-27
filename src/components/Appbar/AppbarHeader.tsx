@@ -31,8 +31,8 @@ export type Props = Omit<AppbarProps, 'safeAreaInsets' | 'style'> & {
    *
    * Mode of the Appbar.
    * - `small` - Appbar with default height (64).
-   * - `medium` - Appbar with medium height (112).
-   * - `large` - Appbar with large height (152).
+   * - `medium` - Appbar with medium height (112). It grows when the title would reach the actions, e.g. at larger text sizes.
+   * - `large` - Appbar with large height (152). It grows when the title would reach the actions, e.g. at larger text sizes.
    * - `center-aligned` - Appbar with default height and center-aligned title.
    * - `medium-flexible` - Available in v6.x. Material 3 Expressive Appbar with a larger title and a minimum height of 112. It grows when the title wraps onto a second line.
    * - `large-flexible` - Available in v6.x. Material 3 Expressive Appbar with a prominent title and a minimum height of 120. It grows when the title wraps onto a second line.

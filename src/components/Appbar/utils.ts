@@ -3,6 +3,7 @@ import type { ColorValue } from 'react-native';
 
 import { white } from '../../theme/colors';
 import type { InternalTheme } from '../../theme/types';
+import { MIN_INTERACTIVE_SIZE } from '../../utils/getMinInteractiveSizeHitSlop';
 
 export type AppbarModes =
   | 'small'
@@ -24,6 +25,12 @@ export const APPBAR_CONTROLS_HEIGHT = 64;
 // at the same height as in the `small` mode.
 export const APPBAR_CONTROLS_OFFSET =
   (APPBAR_CONTROLS_HEIGHT - APPBAR_ACTION_WIDTH) / 2;
+
+// Top of the title in the `medium` and `large` modes: the bottom of the touch
+// targets of the actions, which are centered in the row with the controls.
+// A title that reaches higher would take the presses of the actions.
+export const APPBAR_TITLE_TOP =
+  (APPBAR_CONTROLS_HEIGHT + MIN_INTERACTIVE_SIZE) / 2;
 
 export const isFlexibleMode = (mode: AppbarModes) =>
   mode === 'medium-flexible' || mode === 'large-flexible';
