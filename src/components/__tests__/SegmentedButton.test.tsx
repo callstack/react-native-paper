@@ -1,5 +1,6 @@
 import { describe, expect, it, jest } from '@jest/globals';
 
+import PaperProvider from '../../core/PaperProvider';
 import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
@@ -403,6 +404,31 @@ describe('should not render icon when', () => {
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
+  });
+
+  it('uses checkedIcon for the selected check', async () => {
+    const icon = jest.fn(() => null);
+
+    await render(
+      <PaperProvider settings={{ icon }}>
+        <SegmentedButtons
+          value="walk"
+          onValueChange={() => {}}
+          buttons={[
+            {
+              value: 'walk',
+              label: 'Walking',
+              showSelectedCheck: true,
+              checkedIcon: 'star',
+            },
+          ]}
+        />
+      </PaperProvider>
+    );
+
+    expect(icon).toHaveBeenCalledWith(
+      expect.objectContaining({ name: 'star' })
+    );
   });
 });
 

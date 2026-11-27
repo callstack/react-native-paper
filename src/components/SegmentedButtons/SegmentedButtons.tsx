@@ -55,6 +55,7 @@ export type Props<T extends string = string> = {
    * - `onPress`: callback that is called when button is pressed
    * - `label`: label text of the button
    * - `showSelectedCheck`: show optional check icon to indicate selected state
+   * - `checkedIcon`: icon shown with `showSelectedCheck` while the button is checked. Defaults to `check`
    * - `style`: pass additional styles for the button
    * - `testID`: testID to be used on tests
    */
@@ -68,6 +69,7 @@ export type Props<T extends string = string> = {
     onPress?: (event: GestureResponderEvent) => void;
     label?: string;
     showSelectedCheck?: boolean;
+    checkedIcon?: IconSource;
     style?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
     testID?: string;
