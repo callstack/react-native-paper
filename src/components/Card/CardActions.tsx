@@ -5,6 +5,7 @@ import type { ThemeProp } from 'src/types';
 
 import { CardActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import flattenChildren from '../../utils/flattenChildren';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -45,7 +46,7 @@ const CardActions = ({ theme, style, children, ...rest }: Props) => {
 
   return (
     <View {...rest} style={containerStyle}>
-      {React.Children.map(children, (child, index) => {
+      {flattenChildren(children).map((child, index) => {
         if (!React.isValidElement<CardActionChildProps>(child)) {
           return child;
         }

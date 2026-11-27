@@ -5,6 +5,7 @@ import type { ThemeProp } from 'src/types';
 
 import { DialogActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import flattenChildren from '../../utils/flattenChildren';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -48,14 +49,15 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  */
 const DialogActions = (props: Props) => {
   const { isV3 } = useInternalTheme(props.theme);
-  const actionsLength = React.Children.toArray(props.children).length;
+  const children = flattenChildren(props.children);
+  const actionsLength = children.length;
 
   return (
     <View
       {...props}
       style={[isV3 ? styles.v3Container : styles.container, props.style]}
     >
-      {React.Children.map(props.children, (child, i) =>
+      {children.map((child, i) =>
         React.isValidElement<DialogActionChildProps>(child)
           ? React.cloneElement(child, {
               compact: true,

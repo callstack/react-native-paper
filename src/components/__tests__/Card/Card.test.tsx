@@ -92,6 +92,25 @@ describe('Card', () => {
     expect(getByTestId('card')).toHaveStyle(styles.contentStyle);
   });
 
+  it('passes layout props to children wrapped in a fragment', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation();
+
+    const { getByTestId } = render(
+      <Card>
+        <>
+          <Card.Content testID="card-content">
+            <Text>Content</Text>
+          </Card.Content>
+        </>
+      </Card>
+    );
+
+    expect(getByTestId('card-content')).toHaveStyle({ paddingVertical: 16 });
+    expect(consoleError).not.toHaveBeenCalled();
+
+    consoleError.mockRestore();
+  });
+
   it('does not render a disabled accessibility state', () => {
     const { getByTestId } = render(<Card>{null}</Card>);
 
@@ -161,6 +180,30 @@ describe('CardActions', () => {
     expect(getByTestId('card-actions-button')).toHaveStyle({
       borderRadius: 32,
     });
+  });
+
+  it('applies default modes and styles to buttons wrapped in a fragment', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation();
+
+    const { getByTestId } = render(
+      <Card>
+        <Card.Actions testID="card-actions">
+          <>
+            <Button>Cancel</Button>
+            <Button>Ok</Button>
+          </>
+        </Card.Actions>
+      </Card>
+    );
+
+    const [cancelButton, okButton] = getByTestId('card-actions').props.children;
+
+    expect(cancelButton.props.mode).toBe('outlined');
+    expect(okButton.props.mode).toBe('contained');
+    expect(cancelButton.props.style).toContainEqual({ marginLeft: 8 });
+    expect(consoleError).not.toHaveBeenCalled();
+
+    consoleError.mockRestore();
   });
 });
 
