@@ -613,6 +613,22 @@ e.g.:
 
 Showing and hiding use the `standardDecelerate` and `standardAccelerate` easing curves instead of ease-in-out.
 
+The banner background is now `theme.colors.surfaceContainerLow` by default and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level1` to change the banner background, customize `theme.colors.surfaceContainerLow` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `1` is unchanged. A banner with `elevation={0}` is no longer transparent. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 14 and newer, the banner now uses the system surface color. On Android 12 and 13, only the `DynamicDarkTheme` banner does. To change the background of a single banner, use the new `backgroundColor` prop.
+
+```diff
+const theme = {
+  ...LightTheme,
+  colors: {
+    ...LightTheme.colors,
+-   elevation: {
+-     ...LightTheme.colors.elevation,
+-     level1: '#ffd8e4',
+-   },
++   surfaceContainerLow: '#ffd8e4',
+  },
+};
+```
+
 ### DataTable
 
 - `DataTable.Title` text has a letter spacing of 0.5, and its sort icon rotates with the `standard` easing curve instead of ease-in-out.
@@ -637,24 +653,6 @@ e.g.:
 +     <FAB icon="plus" />
 +   </Tooltip>
 + </View>
-```
-
-### Banner
-
-The banner background is now `theme.colors.surfaceContainerLow` by default and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level1` to change the banner background, customize `theme.colors.surfaceContainerLow` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `1` is unchanged. A banner with `elevation={0}` is no longer transparent. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the banner now uses the system surface color. To change the background of a single banner, use the new `backgroundColor` prop.
-
-```diff
-const theme = {
-  ...LightTheme,
-  colors: {
-    ...LightTheme.colors,
--   elevation: {
--     ...LightTheme.colors.elevation,
--     level1: '#ffd8e4',
--   },
-+   surfaceContainerLow: '#ffd8e4',
-  },
-};
 ```
 
 ### Surface
@@ -992,7 +990,7 @@ If your 5.x style set its own `gap`, drop `columnGap` from the copied style or s
 
 ### Menu
 
-The menu background is now `theme.colors.surfaceContainer` by default, following the Material Design 3 spec, and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level2` to change the menu background, customize `theme.colors.surfaceContainer` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `2` is unchanged. A menu with `elevation={0}` is no longer transparent. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 12 and newer, the menu now uses the system surface color. To change the background of a single menu, use the new `backgroundColor` prop.
+The menu background is now `theme.colors.surfaceContainer` by default, following the Material Design 3 spec, and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level2` to change the menu background, customize `theme.colors.surfaceContainer` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `2` is unchanged. A menu with `elevation={0}` is no longer transparent. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 14 and newer, the menu now uses the system surface color. To change the background of a single menu, use the new `backgroundColor` prop.
 
 ```diff
 const theme = {
