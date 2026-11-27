@@ -60,6 +60,17 @@ const pages = {
     CardCover: 'Card/CardCover',
     CardTitle: 'Card/CardTitle',
   },
+  Carousel: {
+    Carousel: 'Carousel/Carousel',
+    CarouselItem: {
+      source: 'Carousel/CarouselItem',
+      component: 'CarouselItem',
+    },
+    CarouselItemContent: {
+      source: 'Carousel/CarouselItem',
+      component: 'CarouselItemContent',
+    },
+  },
   Checkbox: {
     Checkbox: 'Checkbox/Checkbox',
     CheckboxItem: 'Checkbox/CheckboxItem',

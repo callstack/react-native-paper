@@ -13,6 +13,7 @@ import BottomNavigationBarExample from './Examples/BottomNavigationBarExample';
 import BottomNavigationExample from './Examples/BottomNavigationExample';
 import ButtonExample from './Examples/ButtonExample';
 import CardExample from './Examples/CardExample';
+import CarouselExample from './Examples/CarouselExample';
 import CheckboxExample from './Examples/CheckboxExample';
 import CheckboxItemExample from './Examples/CheckboxItemExample';
 import ChipExample from './Examples/ChipExample';
@@ -58,6 +59,7 @@ export const mainExamples = {
   BottomNavigation: BottomNavigationExample,
   Button: ButtonExample,
   Card: CardExample,
+  Carousel: CarouselExample,
   Checkbox: CheckboxExample,
   CheckboxItem: CheckboxItemExample,
   Chip: ChipExample,
