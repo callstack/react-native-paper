@@ -1014,6 +1014,22 @@ describe('Tooltip.Rich', () => {
       expect(queryByText('Body text')).toBeNull();
     });
 
+    it('applies actionsStyle to the actions container', async () => {
+      const {
+        wrapper: { getByText },
+      } = await setup({
+        actions: () => <Text>Learn more</Text>,
+        actionsStyle: { marginStart: -12 },
+      });
+
+      await user.press(getTrigger());
+
+      expect(getByText('Learn more').parent).toHaveStyle({
+        flexDirection: 'row',
+        marginStart: -12,
+      });
+    });
+
     it('is a dialog named by its title when it has actions', async () => {
       await setup({
         title: 'Heading',

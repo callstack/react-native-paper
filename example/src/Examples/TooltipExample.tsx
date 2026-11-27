@@ -190,6 +190,7 @@ const TooltipExample = () => {
             <Tooltip.Rich
               title="Add to library"
               content="Save this item to read it later from any of your devices."
+              actionsStyle={styles.richTooltipActions}
               actions={({ dismiss }) => (
                 <>
                   <Button mode="text" size="extra-small" onPress={dismiss}>
@@ -216,6 +217,7 @@ const TooltipExample = () => {
             </Tooltip.Rich>
             <Tooltip.Rich
               content="A rich tooltip without a title, with a link as its action."
+              actionsStyle={styles.richTooltipActions}
               actions={({ dismiss }) => (
                 <Button
                   mode="text"
@@ -281,5 +283,8 @@ const styles = StyleSheet.create({
   iconButtonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  richTooltipActions: {
+    marginStart: -12,
   },
 });

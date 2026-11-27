@@ -666,7 +666,7 @@ On web, the tooltip also opens when the trigger gets keyboard focus, and the tri
   title="Add to library"
   content="Save this item to read it later."
   actions={({ dismiss }) => (
-    <Button mode="text" size="extra-small" onPress={dismiss}>
+    <Button mode="text" onPress={dismiss}>
       Learn more
     </Button>
   )}

@@ -3,6 +3,7 @@ import { View, StyleSheet, Platform, Pressable } from 'react-native';
 import type {
   GestureResponderEvent,
   NativeSyntheticEvent,
+  StyleProp,
   ViewStyle,
 } from 'react-native';
 
@@ -31,7 +32,6 @@ import { getActiveElement, getTooltipPosition } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
-import { Tokens as ButtonTokens } from '../Button/tokens';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import Text from '../Typography/Text';
@@ -77,22 +77,19 @@ export type Props = {
   content: string | React.ReactElement;
   /**
    * Render function for the action buttons (and/or links) shown in a row below
-   * the content. Use `extra-small` text buttons, so their labels line up with
    * the content. Call `dismiss` from an action to hide the tooltip:
    *
    * ```js
    * actions={({ dismiss }) => (
-   *   <Button
-   *     mode="text"
-   *     size="extra-small"
-   *     onPress={() => { doThing(); dismiss(); }}
-   *   >
-   *     Learn more
-   *   </Button>
+   *   <Button onPress={() => { doThing(); dismiss(); }}>Learn more</Button>
    * )}
    * ```
    */
   actions?: (props: { dismiss: () => void }) => React.ReactNode;
+  /**
+   * Style for the container of the actions.
+   */
+  actionsStyle?: StyleProp<ViewStyle>;
   /**
    * Called whenever the tooltip closes, whichever way it was dismissed: an
    * outside tap, re-pressing the trigger, an action calling `dismiss`, the
@@ -156,7 +153,7 @@ export type Props = {
  *     title="Add to library"
  *     content="Save this item to read it later."
  *     actions={({ dismiss }) => (
- *       <Button mode="text" size="extra-small" onPress={dismiss}>
+ *       <Button mode="text" onPress={dismiss}>
  *         Learn more
  *       </Button>
  *     )}
@@ -173,6 +170,7 @@ const RichTooltip = ({
   title,
   content,
   actions,
+  actionsStyle,
   onDismiss,
   enterTouchDelay = 100,
   leaveTouchDelay = 1500,
@@ -429,7 +427,7 @@ const RichTooltip = ({
                   <View nativeID={contentId}>{content}</View>
                 )}
                 {actions ? (
-                  <View style={styles.actions}>
+                  <View style={[styles.actions, actionsStyle]}>
                     {actions({ dismiss: hideAndRestoreFocus })}
                   </View>
                 ) : null}
@@ -468,8 +466,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: Tokens.rich.actionsTopSpace - Tokens.rich.gap,
-    // Aligns the labels of `extra-small` text buttons with the content
-    marginStart: -ButtonTokens.sizes['extra-small'].leadingSpace,
   },
   // RN types `cursor` as 'auto' | 'pointer', but RN Web accepts any CSS cursor
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
