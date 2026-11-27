@@ -19,15 +19,16 @@ However, to simplify adapting React Navigation theme colors, to use the ones fro
 
 ```ts
 import {
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as ReactNavigationDarkTheme,
+  DefaultTheme as ReactNavigationDefaultTheme,
 } from '@react-navigation/native';
 import { adaptNavigationTheme } from 'react-native-paper';
 
-const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  reactNavigationLight: NavigationDefaultTheme,
-  reactNavigationDark: NavigationDarkTheme,
-});
+const { LightTheme: NavigationLightTheme, DarkTheme: NavigationDarkTheme } =
+  adaptNavigationTheme({
+    reactNavigationLight: ReactNavigationDefaultTheme,
+    reactNavigationDark: ReactNavigationDarkTheme,
+  });
 ```
 
 Library exports also Material Design 3 themes in both modes:
@@ -104,8 +105,8 @@ We can merge them with object spread. React Navigation 7 themes also have `fonts
 ```js
 import {
   NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as ReactNavigationDarkTheme,
+  DefaultTheme as ReactNavigationDefaultTheme,
 } from '@react-navigation/native';
 import {
   DarkTheme as PaperDarkTheme,
@@ -113,33 +114,34 @@ import {
   adaptNavigationTheme,
 } from 'react-native-paper';
 
-const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  reactNavigationLight: NavigationDefaultTheme,
-  reactNavigationDark: NavigationDarkTheme,
-});
+const { LightTheme: NavigationLightTheme, DarkTheme: NavigationDarkTheme } =
+  adaptNavigationTheme({
+    reactNavigationLight: ReactNavigationDefaultTheme,
+    reactNavigationDark: ReactNavigationDarkTheme,
+  });
 
 const CombinedDefaultTheme = {
   ...PaperLightTheme,
-  ...LightTheme,
+  ...NavigationLightTheme,
   colors: {
     ...PaperLightTheme.colors,
-    ...LightTheme.colors,
+    ...NavigationLightTheme.colors,
   },
   fonts: {
     ...PaperLightTheme.fonts,
-    ...LightTheme.fonts,
+    ...NavigationLightTheme.fonts,
   },
 };
 const CombinedDarkTheme = {
   ...PaperDarkTheme,
-  ...DarkTheme,
+  ...NavigationDarkTheme,
   colors: {
     ...PaperDarkTheme.colors,
-    ...DarkTheme.colors,
+    ...NavigationDarkTheme.colors,
   },
   fonts: {
     ...PaperDarkTheme.fonts,
-    ...DarkTheme.fonts,
+    ...NavigationDarkTheme.fonts,
   },
 };
 ```

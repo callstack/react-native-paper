@@ -476,7 +476,7 @@ const Switch = ({
           disabled={Platform.OS === 'web' ? isDisabled : !isInteractive}
           tabIndex={isInteractive ? 0 : -1}
           aria-readonly={
-            Platform.OS === 'web' ? isAnnouncedReadOnly : undefined
+            Platform.OS === 'web' && isAnnouncedReadOnly ? true : undefined
           }
           onFocus={(e) => {
             // Not the ring - it's real CSS on web now. This drives the

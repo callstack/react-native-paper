@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import { DarkTheme, LightTheme } from '../../theme/schemes';
-import { getDimensions, resolveColors } from '../FAB/utils';
+import { getDimensions, getNextStopIndex, resolveColors } from '../FAB/utils';
 
 describe('resolveColors', () => {
   it.each([false, true])(
@@ -181,5 +181,33 @@ describe('getDimensions', () => {
     });
     expect(dims.leading).toBe(20);
     expect(dims.trailing).toBe(24);
+  });
+});
+
+describe('getNextStopIndex', () => {
+  it('moves down and wraps from the last item to the first', () => {
+    expect(getNextStopIndex('ArrowDown', 0, 3)).toBe(1);
+    expect(getNextStopIndex('ArrowDown', 2, 3)).toBe(0);
+  });
+
+  it('moves up and wraps from the first item to the last', () => {
+    expect(getNextStopIndex('ArrowUp', 2, 3)).toBe(1);
+    expect(getNextStopIndex('ArrowUp', 0, 3)).toBe(2);
+  });
+
+  it('jumps to the first item with Home and to the last with End', () => {
+    expect(getNextStopIndex('Home', 2, 3)).toBe(0);
+    expect(getNextStopIndex('End', 0, 3)).toBe(2);
+  });
+
+  it('stays on the only item', () => {
+    expect(getNextStopIndex('ArrowDown', 0, 1)).toBe(0);
+    expect(getNextStopIndex('ArrowUp', 0, 1)).toBe(0);
+    expect(getNextStopIndex('End', 0, 1)).toBe(0);
+  });
+
+  it('leaves other keys alone', () => {
+    expect(getNextStopIndex('Tab', 0, 3)).toBeNull();
+    expect(getNextStopIndex('a', 0, 3)).toBeNull();
   });
 });
