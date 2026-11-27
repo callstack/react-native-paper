@@ -1,0 +1,74 @@
+{
+  "about": "Excerpts from the XCUITest / UiAutomator trees captured 2026-09-10 with `npx agent-device@0.21.0 snapshot --raw --force-full --json`. The full trees (13,500 lines) are on branch poc/agent-device-visual-runner under example/visual/evidence/a11y/. Test id at the time: surface-elevated (renamed surface-example-elevated later; the rename changes no pixel).",
+  "ios": {
+    "with_accessible": {
+      "total_nodes": 115,
+      "elevation_labelled_nodes": 2,
+      "surface_section_node": [
+        {
+          "type": "Other",
+          "role": "RCTViewComponentView",
+          "identifier": "surface-elevated",
+          "label": "Elevated surface, Elevation 0, Elevation 1, Elevation 2, Elevation 3, Elevation 4, Elevation 5, Vertical scroll bar, 3 pages",
+          "rect": {
+            "x": 0,
+            "y": 134,
+            "width": 402,
+            "height": 214
+          }
+        }
+      ]
+    },
+    "testID_only": {
+      "total_nodes": 177,
+      "elevation_labelled_nodes": 26,
+      "surface_section_node": [
+        {
+          "type": "Other",
+          "role": "RCTViewComponentView",
+          "identifier": "surface-elevated",
+          "rect": {
+            "x": 0,
+            "y": 134,
+            "width": 402,
+            "height": 214
+          }
+        }
+      ]
+    }
+  },
+  "android": {
+    "with_accessible": {
+      "total_nodes": 217,
+      "elevation_labelled_nodes": 13,
+      "surface_section_node": [
+        {
+          "type": "android.view.ViewGroup",
+          "identifier": "surface-elevated",
+          "rect": {
+            "x": 0,
+            "y": 372,
+            "width": 1280,
+            "height": 642
+          }
+        }
+      ]
+    },
+    "testID_only": {
+      "total_nodes": 217,
+      "elevation_labelled_nodes": 13,
+      "surface_section_node": [
+        {
+          "type": "android.view.ViewGroup",
+          "identifier": "surface-elevated",
+          "rect": {
+            "x": 0,
+            "y": 372,
+            "width": 1280,
+            "height": 642
+          }
+        }
+      ]
+    }
+  }
+}
