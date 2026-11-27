@@ -10,8 +10,8 @@ export const ReduceMotionContext = React.createContext<boolean>(false);
  * The value comes from the `reduceMotion` prop of the nearest `PaperProvider`:
  * `'on'` and `'off'` set it, and `'auto'` (the default) follows the OS setting
  * reported by `AccessibilityInfo`. Outside a `PaperProvider` it is `false`.
- * Paper's own components read it too: when it is `true`, their transitions
- * jump to the end state instead of animating.
+ * Paper's own components read it too: when it is `true`, all their transitions,
+ * opacity and color included, jump to the end state instead of animating.
  *
  * Use it to keep your own components in line with the user's choice. Reduce
  * motion is about movement, so when it is `true`, skip animations that slide,

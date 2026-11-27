@@ -12,27 +12,21 @@ import {
   Platform,
   TextInput as NativeTextInput,
 } from 'react-native';
-import type { BlurEvent, FocusEvent } from 'react-native';
+import type { BlurEvent, FocusEvent, TextStyle } from 'react-native';
 
 import {
-  interpolate,
-  useAnimatedReaction,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
+  cubicBezier,
+  type CSSTransitionProperties,
 } from 'react-native-reanimated';
-import { scheduleOnRN } from 'react-native-worklets';
 
 import {
   ACTIVE_LABEL_FONT_SIZE,
   ERROR_ANNOUNCEMENT_DELAY_MS,
   INACTIVE_LABEL_FONT_SIZE,
-  TIMING_CONFIG,
 } from './constants';
 import type {
   TextInputAnimationState,
   TextInputFlags,
-  TextInputAnimationHandlers,
   TextInputHookReturn,
   TextInputLayoutState,
   TextInputProps,
@@ -47,40 +41,56 @@ import {
 } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import { tokens } from '../../theme/tokens';
+import { getTransition } from '../../theme/tokens/sys/motion';
 import type { InternalTheme } from '../../theme/types';
 
+// Each of these follows a single boolean state (focus/blur, or text
+// appearing/disappearing), so CSS transitions are enough here.
 const useTextInputAnimation = ({
   variant,
   isRTL,
   isDisabled,
   hasAccessory,
-  value,
-  defaultValue,
+  isFloating,
+  isFocused,
+  theme,
+  reduceMotion,
 }: {
   variant: TextInputVariant;
   isRTL: boolean;
   isDisabled: boolean;
   hasAccessory: boolean;
-  value: string | undefined;
-  defaultValue: string | undefined;
-}): TextInputAnimationState & TextInputAnimationHandlers => {
-  const initialText = value ?? defaultValue ?? '';
+  isFloating: boolean;
+  isFocused: boolean;
+  theme: InternalTheme;
+  reduceMotion: boolean;
+}): TextInputAnimationState => {
+  const [isLabelFloated, setIsLabelFloated] = useState(isFloating);
 
-  const focusSV = useSharedValue(0);
-  const floatSV = useSharedValue(initialText.length > 0 ? 1 : 0);
-  const [isLabelFloated, setIsLabelFloated] = useState(initialText.length > 0);
-
-  // Track when the label has fully left its resting place, whichever animation
-  // moved it, so the placeholder does not show under the resting label.
-  useAnimatedReaction(
-    () => floatSV.value === 1,
-    (floated, previous) => {
-      if (previous !== null && floated !== previous) {
-        scheduleOnRN(setIsLabelFloated, floated);
-      }
+  // Track when the label has fully left its resting place, so the placeholder
+  // does not show under the resting label. CSS transitions report no end, so
+  // wait out the float transition's duration. The timer runs on the JS thread,
+  // so a busy thread can show the placeholder late, and with reduce motion it
+  // still flips one tick after the label jumps. Both only delay the placeholder.
+  const duration = reduceMotion ? 0 : theme.motion.duration.short3;
+  useEffect(() => {
+    if (!isFloating) {
+      setIsLabelFloated(false);
+      return;
     }
-  );
+
+    const timeout = setTimeout(() => setIsLabelFloated(true), duration);
+
+    return () => clearTimeout(timeout);
+  }, [isFloating, duration]);
+
+  const transition = (
+    property: NonNullable<
+      CSSTransitionProperties<TextStyle>['transitionProperty']
+    >
+  ) => getTransition(theme, property, 'short3', 'standard', reduceMotion);
 
   const { activeTop, inactiveTop, translateXEnd } = getTextInputAnimationLayout(
     {
@@ -90,69 +100,67 @@ const useTextInputAnimation = ({
     }
   );
 
-  const runFocusAnimation = (hasText: boolean) => {
-    focusSV.value = withTiming(1, TIMING_CONFIG);
+  const top = isFloating ? activeTop : inactiveTop;
 
-    if (!hasText) {
-      floatSV.value = withTiming(1, TIMING_CONFIG);
-    }
-  };
+  // The outlined label's inset (set in `getOutlinedTextInputData`) and its
+  // translateX both change with `hasAccessory` and cancel out when floating, so
+  // they must transition together. On web the inset is a physical edge, since
+  // a CSS transition can't target `start` there.
+  const outlinedLabelInset =
+    Platform.OS === 'web' ? (isRTL ? 'right' : 'left') : 'start';
 
-  const runBlurAnimation = (hasText: boolean) => {
-    focusSV.value = withTiming(0, TIMING_CONFIG);
+  const animatedLabelWrapperStyle: TextInputAnimationState['animatedLabelWrapperStyle'] =
+    variant === 'filled'
+      ? {
+          top,
+          ...transition('top'),
+        }
+      : {
+          top,
+          transform: [{ translateX: isFloating ? translateXEnd : 0 }],
+          ...transition(['top', 'transform', outlinedLabelInset]),
+        };
 
-    floatSV.value = withTiming(hasText ? 1 : 0, TIMING_CONFIG);
-  };
-
-  const syncFloatToValue = (hasText: boolean) => {
-    floatSV.value = withTiming(hasText ? 1 : 0, TIMING_CONFIG);
-  };
-
-  const animatedLabelWrapperStyle = useAnimatedStyle(() => {
-    const top = interpolate(floatSV.value, [0, 1], [inactiveTop, activeTop]);
-
-    if (variant === 'filled') {
-      return { top };
-    }
-
-    return {
-      top,
-      transform: [
-        { translateX: interpolate(floatSV.value, [0, 1], [0, translateXEnd]) },
-      ],
+  const animatedLabelTextStyle: TextInputAnimationState['animatedLabelTextStyle'] =
+    {
+      fontSize: isFloating ? ACTIVE_LABEL_FONT_SIZE : INACTIVE_LABEL_FONT_SIZE,
+      ...transition('fontSize'),
     };
-  });
-
-  const animatedLabelTextStyle = useAnimatedStyle(() => ({
-    fontSize: interpolate(
-      floatSV.value,
-      [0, 1],
-      [INACTIVE_LABEL_FONT_SIZE, ACTIVE_LABEL_FONT_SIZE]
-    ),
-  }));
 
   // The resting label covers the prefix and suffix, so they fade in as it
-  // floats. This opacity replaces the static one, so it carries the disabled
-  // dim of the prefix and suffix styles too.
-  const affixOpacity = isDisabled ? tokens.md.sys.state.opacity.disabled : 1;
-  const animatedAffixStyle = useAnimatedStyle(() => ({
-    opacity: floatSV.value * affixOpacity,
-  }));
+  // floats. They mount at that moment, and a CSS transition doesn't run on
+  // mount, so the fade is a CSS animation. Affixes shown from the first
+  // render, before the label ever rested, don't fade in. This opacity replaces
+  // the static one, so it carries the disabled dim of the affix styles too.
+  const [shouldFadeInAffix, setShouldFadeInAffix] = useState(!isFloating);
+  if (!isFloating && !shouldFadeInAffix) {
+    setShouldFadeInAffix(true);
+  }
 
-  const animatedActiveOutlineStyle = useAnimatedStyle(() => ({
-    transform: [{ scaleX: focusSV.value }],
-  }));
+  const affixOpacity = isDisabled ? tokens.md.sys.state.opacity.disabled : 1;
+  const animatedAffixStyle: TextInputAnimationState['animatedAffixStyle'] = {
+    opacity: affixOpacity,
+    ...(shouldFadeInAffix && {
+      animationName: { from: { opacity: 0 } },
+      animationDuration: duration,
+      animationTimingFunction: cubicBezier(...theme.motion.easing.standard),
+    }),
+  };
+
+  const animatedActiveOutlineStyle: TextInputAnimationState['animatedActiveOutlineStyle'] =
+    variant === 'filled'
+      ? {
+          transform: [{ scaleX: isFocused ? 1 : 0 }],
+          ...transition('transform'),
+        }
+      : undefined;
 
   return {
     animatedLabelWrapperStyle,
     animatedLabelTextStyle,
     animatedAffixStyle,
-    animatedActiveOutlineStyle:
-      variant === 'filled' ? animatedActiveOutlineStyle : undefined,
+    animatedActiveOutlineStyle,
     isLabelFloated,
-    runFocusAnimation,
-    runBlurAnimation,
-    syncFloatToValue,
   };
 };
 
@@ -167,8 +175,6 @@ const useTextInputInput = (
 
   const initialText = isControlled ? props.value : props.defaultValue;
 
-  const ref = useRef(initialText ?? '');
-
   const [hasValue, setHasValue] = useState(!!initialText);
   const [charCount, setCharCount] = useState(initialText?.length ?? 0);
 
@@ -180,17 +186,7 @@ const useTextInputInput = (
         ? 1
         : 0;
 
-  const getHasText = () => {
-    if (isControlled) {
-      return !!props.value;
-    }
-
-    return ref.current.length > 0;
-  };
-
   const onChangeText = (text: string) => {
-    ref.current = text;
-
     if (!isControlled) {
       const next = text.length > 0;
 
@@ -198,9 +194,9 @@ const useTextInputInput = (
         setCharCount(text.length);
       }
 
-      if (next !== hasValue) {
-        setHasValue(next);
-      }
+      // Unconditional: a nested `onChangeText` (e.g. `clear()` called from the
+      // parent's handler) runs with this render's stale `hasValue`.
+      setHasValue(next);
     }
 
     props.onChangeText?.(text);
@@ -209,7 +205,6 @@ const useTextInputInput = (
   return {
     hasValue: isControlled ? !!props.value : hasValue,
     inputLength,
-    getHasText,
     onChangeText,
   };
 };
@@ -217,9 +212,7 @@ const useTextInputInput = (
 const useTextInputFocus = (
   props: Pick<TextInputProps, 'onFocus' | 'onBlur'>,
   input: RefObject<ComponentRef<typeof NativeTextInput> | null>,
-  isDisabled: boolean,
-  { runFocusAnimation, runBlurAnimation }: TextInputAnimationHandlers,
-  getHasText: () => boolean
+  isDisabled: boolean
 ) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -227,16 +220,12 @@ const useTextInputFocus = (
     props.onFocus?.(e);
 
     setIsFocused(true);
-
-    runFocusAnimation(getHasText());
   };
 
   const onBlur = (e: BlurEvent) => {
     props.onBlur?.(e);
 
     setIsFocused(false);
-
-    runBlurAnimation(getHasText());
   };
 
   const focusInput = () => {
@@ -358,34 +347,21 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
   const input = useRef<ComponentRef<typeof NativeTextInput>>(null);
   const id = useId();
   const [isHovered, setIsHovered] = useState(false);
-  const init = useRef(false);
 
   const theme = useInternalTheme(themeOverride);
+  const reduceMotion = useReduceMotion();
 
   const { direction } = useLocale();
 
-  const isControlled = props.value !== undefined;
   const isRTL = direction === 'rtl';
   const hasAccessory = !!props.startAccessory;
 
-  const { hasValue, inputLength, getHasText, onChangeText } =
-    useTextInputInput(props);
-
-  const animation = useTextInputAnimation({
-    variant,
-    isRTL,
-    isDisabled: !!props.disabled,
-    hasAccessory,
-    value: props.value,
-    defaultValue: props.defaultValue,
-  });
+  const { hasValue, inputLength, onChangeText } = useTextInputInput(props);
 
   const { isFocused, onFocus, onBlur, focusInput } = useTextInputFocus(
     props,
     input,
-    !!props.disabled,
-    animation,
-    getHasText
+    !!props.disabled
   );
 
   const flags = useTextInputFlags(
@@ -396,24 +372,16 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     hasAccessory
   );
 
-  /**
-   * Edge case: a controlled `value` can change programmatically.
-   * Reconcile the float animation with the new text here.
-   * While focused the label is always floated, so we skip to avoid fighting the
-   * focus animation, and depend only on `value` to avoid re-running on
-   * focus/blur transitions (those are already handled by their own handlers)
-   */
-  useEffect(() => {
-    if (!init.current) {
-      init.current = true;
-      return;
-    }
-
-    if (isControlled && !isFocused) {
-      animation.syncFloatToValue(!!props.value);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- [props.value] is the only dep that should act as a trigger
-  }, [props.value]);
+  const animation = useTextInputAnimation({
+    variant,
+    isRTL,
+    isDisabled: !!props.disabled,
+    hasAccessory,
+    isFloating: flags.isFloating,
+    isFocused,
+    theme,
+    reduceMotion,
+  });
 
   useImperativeHandle(ref, () => ({
     focus: () => {
@@ -425,10 +393,6 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
       input.current?.clear();
 
       onChangeText('');
-
-      if (!input.current?.isFocused()) {
-        animation.runBlurAnimation(false);
-      }
     },
     blur: () => input.current?.blur(),
     isFocused: () => input.current?.isFocused() || false,

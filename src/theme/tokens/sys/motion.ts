@@ -1,3 +1,10 @@
+import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
+
+import {
+  cubicBezier,
+  type CSSTransitionProperties,
+} from 'react-native-reanimated';
+
 import type {
   MotionConfig,
   MotionDuration,
@@ -162,4 +169,38 @@ export function toSpringCurve(spring: SpringConfig): {
   );
 
   return { points, duration: settleTime * 1000 };
+}
+
+/**
+ * Builds the three Reanimated CSS-transition style props (duration, easing,
+ * property) from theme motion tokens, so components don't re-derive them by
+ * hand.
+ *
+ * `reduceMotion` sets the duration to 0, because Reanimated's `ReduceMotion`
+ * option has no effect on CSS transitions.
+ *
+ * @example
+ * const reduceMotion = useReduceMotion();
+ *
+ * <Animated.View
+ *   style={[
+ *     { opacity: visible ? 1 : 0 },
+ *     getTransition(theme, 'opacity', 'short3', 'standard', reduceMotion),
+ *   ]}
+ * />
+ */
+export function getTransition<
+  S extends object = ViewStyle & TextStyle & ImageStyle,
+>(
+  theme: { motion: MotionConfig },
+  property: NonNullable<CSSTransitionProperties<S>['transitionProperty']>,
+  durationToken: keyof MotionDuration,
+  easingToken: keyof MotionEasing,
+  reduceMotion: boolean
+): CSSTransitionProperties<S> {
+  return {
+    transitionProperty: property,
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration[durationToken],
+    transitionTimingFunction: cubicBezier(...theme.motion.easing[easingToken]),
+  };
 }

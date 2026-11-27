@@ -21,14 +21,22 @@ import {
 import { getAnimatedStyle } from 'react-native-reanimated';
 import type { TestInstance } from 'test-renderer';
 
+import PaperProvider from '../../core/PaperProvider';
 import { act, fireEvent, render, screen, userEvent } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import TextInput from '../TextInput';
 import {
+  ACTIVE_LABEL_FONT_SIZE,
+  FILLED_ACTIVE_LABEL_TOP_POSITION,
+  FILLED_INACTIVE_LABEL_TOP_POSITION,
   FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
+  INACTIVE_LABEL_FONT_SIZE,
   LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+  OUTLINED_ACTIVE_LABEL_TOP_POSITION,
+  OUTLINED_INACTIVE_LABEL_TOP_POSITION,
   OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
+  OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY,
 } from '../TextInput/constants';
 import type {
   TextInputRenderProps,
@@ -63,6 +71,16 @@ const getOuterTextInputPressable = (root: TestInstance | null) => {
   }
 
   return pressable;
+};
+
+const getLabelWrapper = (label: string) => {
+  const wrapper = screen.getByText(label, includeHiddenElements).parent;
+
+  if (!wrapper) {
+    throw new Error('Expected label wrapper');
+  }
+
+  return wrapper;
 };
 
 const getConstantsOriginal = I18nManager.getConstants.bind(I18nManager);
@@ -812,6 +830,122 @@ it('invokes onFocus and onBlur on the TextInput', async () => {
   expect(onBlur).toHaveBeenCalledTimes(1);
 });
 
+it('floats the label up and shrinks it on focus, and back down on blur when empty (filled)', async () => {
+  await render(
+    <TextInput
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  const input = screen.getByTestId('tf-input');
+  const label = screen.getByText('Email', includeHiddenElements);
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: FILLED_INACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(label).toHaveStyle({ fontSize: INACTIVE_LABEL_FONT_SIZE });
+
+  await fireEvent(input, 'focus');
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: FILLED_ACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(label).toHaveStyle({ fontSize: ACTIVE_LABEL_FONT_SIZE });
+
+  await fireEvent(input, 'blur');
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: FILLED_INACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(label).toHaveStyle({ fontSize: INACTIVE_LABEL_FONT_SIZE });
+});
+
+it('keeps the label floated after blur when the field already has a value (filled)', async () => {
+  await render(
+    <TextInput
+      label="Email"
+      value="a@b.co"
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  const input = screen.getByTestId('tf-input');
+
+  await fireEvent(input, 'focus');
+  await fireEvent(input, 'blur');
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: FILLED_ACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(screen.getByText('Email', includeHiddenElements)).toHaveStyle({
+    fontSize: ACTIVE_LABEL_FONT_SIZE,
+  });
+});
+
+it('floats the label up and slides it into the outline gap on focus (outlined)', async () => {
+  await render(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value=""
+      onChangeText={() => {}}
+      testID="tf-input"
+    />
+  );
+
+  const input = screen.getByTestId('tf-input');
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: OUTLINED_INACTIVE_LABEL_TOP_POSITION,
+    transform: [{ translateX: 0 }],
+  });
+
+  await fireEvent(input, 'focus');
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: OUTLINED_ACTIVE_LABEL_TOP_POSITION,
+    transform: [
+      { translateX: -OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY },
+    ],
+  });
+});
+
+it('transitions the outlined label inset with its translateX, so a new StartAccessory does not make it jump', async () => {
+  function StartAccessory() {
+    return <View />;
+  }
+
+  const { rerender } = await render(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value="a@b.co"
+      onChangeText={() => {}}
+    />
+  );
+
+  await rerender(
+    <TextInput
+      variant="outlined"
+      label="Email"
+      value="a@b.co"
+      onChangeText={() => {}}
+      startAccessory={StartAccessory}
+    />
+  );
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    start: OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
+  });
+  expect(getAnimatedStyle(getLabelWrapper('Email'))).toMatchObject({
+    transitionProperty: expect.arrayContaining(['transform', 'start']),
+  });
+});
+
 it('focuses the TextInput when the outer Pressable is pressed', async () => {
   const user = userEvent.setup();
   const focusSpy = jest.spyOn(NativeTextInput.prototype, 'focus');
@@ -1531,20 +1665,80 @@ it.each([
 
     await fireEvent(screen.getByLabelText('Amount'), 'focus');
 
-    // The label still rests over it when the field takes focus.
-    expect(
-      getAnimatedStyle(screen.getByText(text, includeHiddenElements))
-    ).toMatchObject({ opacity: 0 });
-
-    await act(() => jest.advanceTimersByTimeAsync(1000));
-
     expect(
       getAnimatedStyle(screen.getByText(text, includeHiddenElements))
     ).toMatchObject({
       opacity: 1,
+      animationName: { from: { opacity: 0 } },
+      animationDuration: LightTheme.motion.duration.short3,
     });
   }
 );
+
+describe('with reduce motion', () => {
+  it.each([
+    {
+      variant: 'filled',
+      reduceMotion: 'off',
+      duration: LightTheme.motion.duration.short3,
+    },
+    { variant: 'filled', reduceMotion: 'on', duration: 0 },
+    {
+      variant: 'outlined',
+      reduceMotion: 'off',
+      duration: LightTheme.motion.duration.short3,
+    },
+    { variant: 'outlined', reduceMotion: 'on', duration: 0 },
+  ] as const)(
+    'floats the $variant label and fades the prefix in in $duration ms when reduceMotion is "$reduceMotion"',
+    async ({ variant, reduceMotion, duration }) => {
+      await render(
+        <PaperProvider reduceMotion={reduceMotion}>
+          <TextInput
+            variant={variant}
+            label="Amount"
+            value=""
+            onChangeText={() => {}}
+            prefix="$"
+          />
+        </PaperProvider>
+      );
+
+      await fireEvent(screen.getByLabelText('Amount'), 'focus');
+
+      expect(getAnimatedStyle(getLabelWrapper('Amount'))).toMatchObject({
+        transitionDuration: duration,
+      });
+      expect(
+        getAnimatedStyle(screen.getByText('Amount', includeHiddenElements))
+      ).toMatchObject({ transitionDuration: duration });
+      expect(
+        getAnimatedStyle(screen.getByText('$', includeHiddenElements))
+      ).toMatchObject({ animationDuration: duration });
+    }
+  );
+});
+
+it('fades the prefix in when the label floats again, but not on first render', async () => {
+  const { rerender } = await render(
+    <TextInput label="Amount" value="1" onChangeText={() => {}} prefix="$" />
+  );
+
+  expect(
+    getAnimatedStyle(screen.getByText('$', includeHiddenElements))
+  ).not.toHaveProperty('animationName');
+
+  await rerender(
+    <TextInput label="Amount" value="" onChangeText={() => {}} prefix="$" />
+  );
+  await rerender(
+    <TextInput label="Amount" value="2" onChangeText={() => {}} prefix="$" />
+  );
+
+  expect(
+    getAnimatedStyle(screen.getByText('$', includeHiddenElements))
+  ).toMatchObject({ animationName: { from: { opacity: 0 } } });
+});
 
 it('keeps the disabled dim on the prefix and suffix of a labelled field', async () => {
   await render(
@@ -1795,6 +1989,56 @@ it('notifies the parent via onChangeText when clear() is called on a controlled 
 
   expect(onChangeText).toHaveBeenCalledWith('');
   expect(onChangeText).toHaveBeenCalledTimes(1);
+});
+
+it('keeps the label floated when clear() is called on a controlled field whose parent keeps the value', async () => {
+  const ref = React.createRef<TextInputHandles>();
+  await render(
+    <TextInput
+      ref={ref}
+      label="Email"
+      value="test@example.com"
+      onChangeText={() => {}}
+    />
+  );
+
+  await act(() => {
+    ref.current?.clear();
+  });
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: FILLED_ACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(screen.getByText('Email', includeHiddenElements)).toHaveStyle({
+    fontSize: ACTIVE_LABEL_FONT_SIZE,
+  });
+});
+
+it('drops the label on blur when an uncontrolled field clears itself from onChangeText', async () => {
+  const ref = React.createRef<TextInputHandles>();
+  await render(
+    <TextInput
+      ref={ref}
+      label="Email"
+      onChangeText={(text) => {
+        if (text) {
+          ref.current?.clear();
+        }
+      }}
+      testID="tf-self-clear"
+    />
+  );
+
+  const user = userEvent.setup();
+
+  await user.type(screen.getByTestId('tf-self-clear'), 'a');
+
+  expect(getLabelWrapper('Email')).toHaveStyle({
+    top: FILLED_INACTIVE_LABEL_TOP_POSITION,
+  });
+  expect(screen.getByText('Email', includeHiddenElements)).toHaveStyle({
+    fontSize: INACTIVE_LABEL_FONT_SIZE,
+  });
 });
 
 it('hides prefix/suffix when blurring after clear() was called while focused', async () => {

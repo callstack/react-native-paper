@@ -524,8 +524,10 @@ export const getOutlinedTextInputData = (
   > = [
     outlinedStyles.labelWrapper,
     {
-      ...(Platform.OS === 'web' && shared.isRTL
-        ? { right: outlinedLabelOffset }
+      ...(Platform.OS === 'web'
+        ? shared.isRTL
+          ? { right: outlinedLabelOffset }
+          : { left: outlinedLabelOffset }
         : { start: outlinedLabelOffset }),
       backgroundColor: labelBackgroundColor,
     },

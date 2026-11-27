@@ -62,6 +62,7 @@ applyTo: '**/*.{ts,tsx,js,jsx}'
 - Prefer animating only `transform` and `opacity` unless another property is required.
 - Verify that animations handle rapid state changes, gestures, interruption, and cancellation. Stale completion callbacks must not leave rendered state, focus, or component callbacks inconsistent.
 - Check that duration and easing feel appropriate for the platform and interaction.
+- Gate every Paper animation on `useReduceMotion()`, opacity and color included: when it is `true`, jump to the end state. With `getTransition`, pass `reduceMotion`; with Reanimated, also set `reduceMotion: ReduceMotion.Never` so the OS setting doesn't override `reduceMotion="off"`.
 - Keep continuous gesture work off the JavaScript thread when responsiveness requires it, using Gesture Handler and Reanimated where appropriate.
 - Measure dimensions near animation start when this provides current values and avoids extra state.
 - Verify text and UI elements do not overlap or overflow at supported screen sizes.

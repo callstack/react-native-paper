@@ -149,7 +149,7 @@ Paper merges a custom theme onto `DarkTheme` when it sets `dark: true`, and onto
 
 It works the same whether or not you pass a custom `theme`. With `'auto'`, Paper starts from the setting the device had when the app launched and follows every change after that.
 
-When reduce motion is on, Paper's components skip their animations. A few still move: the `ActivityIndicator` rotation, the indeterminate `ProgressBar` and the `TouchableRipple` ripple on web. The `TextInput` label and active indicator follow only the device setting: they don't read the `reduceMotion` prop.
+When reduce motion is on, Paper's components skip their animations. A few still move: the `ActivityIndicator` rotation, the indeterminate `ProgressBar` and the `TouchableRipple` ripple on web.
 
 To turn Paper's animations off in tests and screenshots, whatever the device setting, pass `reduceMotion="on"`:
 

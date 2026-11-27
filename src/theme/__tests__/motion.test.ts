@@ -2,6 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 
 import {
   expressiveMotion,
+  getTransition,
   standardMotion,
   toSpringCurve,
 } from '../tokens/sys/motion';
@@ -44,5 +45,37 @@ describe('toSpringCurve', () => {
     expect(
       toSpringCurve(standardMotion.spring.fast.spatial).duration
     ).toBeLessThan(toSpringCurve(spring.fast.spatial).duration);
+  });
+});
+
+const theme = { motion: expressiveMotion };
+
+describe('getTransition', () => {
+  it('reads the duration from the given token', () => {
+    expect(
+      getTransition(theme, 'opacity', 'short2', 'standard', false)
+        .transitionDuration
+    ).toBe(expressiveMotion.duration.short2);
+  });
+
+  it('zeroes the duration when reduceMotion is set, regardless of the token', () => {
+    expect(
+      getTransition(theme, 'opacity', 'short2', 'standard', true)
+        .transitionDuration
+    ).toBe(0);
+  });
+
+  it('builds a cubicBezier timing function from the given easing token', () => {
+    const { transitionTimingFunction } = getTransition(
+      theme,
+      'opacity',
+      'short3',
+      'standardAccelerate',
+      false
+    );
+
+    expect(transitionTimingFunction?.toString()).toBe(
+      `cubicBezier(${expressiveMotion.easing.standardAccelerate.join(', ')})`
+    );
   });
 });
