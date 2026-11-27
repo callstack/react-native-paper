@@ -46,10 +46,17 @@ exports[`renders expanded accordion 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "paddingRight": 24,
-              "paddingVertical": 8,
-            },
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 56,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -61,8 +68,8 @@ exports[`renders expanded accordion 1`] = `
           [
             {
               "flexDirection": "row",
-              "marginVertical": 6,
             },
+            null,
             undefined,
           ]
         }
@@ -91,21 +98,22 @@ exports[`renders expanded accordion 1`] = `
                 },
                 {
                   "color": "rgba(29, 27, 32, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
+                    "fontFamily": "System",
                     "fontSize": 16,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.5,
+                    "lineHeight": 24,
                   },
-                  {
-                    "color": "rgba(103, 80, 164, 1)",
-                  },
-                  undefined,
+                  [
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                    },
+                    undefined,
+                  ],
                 ],
               ]
             }
@@ -115,121 +123,163 @@ exports[`renders expanded accordion 1`] = `
         </View>
         <View
           style={
-            [
-              {
-                "marginVertical": 6,
-                "paddingLeft": 8,
-              },
-              undefined,
-            ]
+            {
+              "alignSelf": "center",
+              "paddingLeft": 16,
+            }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "180deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-up
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>
   </View>
   <View
-    accessible={true}
+    collapsable={false}
     style={
       [
         false,
-        [
-          {
-            "paddingRight": 24,
-            "paddingVertical": 8,
-          },
-          undefined,
-        ],
+        {
+          "height": "auto",
+          "opacity": 1,
+        },
       ]
     }
   >
     <View
-      style={
-        [
-          {
-            "flexDirection": "row",
-            "marginVertical": 6,
-            "width": "100%",
-          },
-          undefined,
-        ]
-      }
+      onLayout={[Function]}
+      style={null}
     >
       <View
+        accessible={true}
         style={
           [
-            {
-              "paddingLeft": 16,
-            },
-            {
-              "flexGrow": 1,
-              "flexShrink": 1,
-              "justifyContent": "center",
-            },
-            undefined,
+            false,
+            [
+              [
+                {
+                  "justifyContent": "center",
+                  "paddingRight": 16,
+                  "paddingVertical": 8,
+                },
+                {
+                  "minHeight": 56,
+                },
+                false,
+              ],
+              false,
+              {
+                "backgroundColor": undefined,
+              },
+              undefined,
+            ],
           ]
         }
       >
-        <Text
-          numberOfLines={1}
-          selectable={false}
+        <View
           style={
             [
               {
-                "textAlign": "left",
+                "flexDirection": "row",
+                "width": "100%",
               },
-              {
-                "color": "rgba(29, 27, 32, 1)",
-                "fontFamily": "System",
-                "fontWeight": "400",
-                "letterSpacing": 0,
-              },
-              {
-                "writingDirection": "ltr",
-              },
-              [
-                {
-                  "fontSize": 16,
-                },
-                {
-                  "color": "rgba(29, 27, 32, 1)",
-                },
-                undefined,
-              ],
+              null,
+              undefined,
             ]
           }
         >
-          List item 1
-        </Text>
+          <View
+            style={
+              [
+                {
+                  "paddingLeft": 16,
+                },
+                {
+                  "flexGrow": 1,
+                  "flexShrink": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              selectable={false}
+              style={
+                [
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "writingDirection": "ltr",
+                  },
+                  [
+                    {
+                      "fontFamily": "System",
+                      "fontSize": 16,
+                      "fontWeight": "400",
+                      "letterSpacing": 0.5,
+                      "lineHeight": 24,
+                    },
+                    [
+                      {
+                        "color": "rgba(29, 27, 32, 1)",
+                      },
+                      undefined,
+                    ],
+                  ],
+                ]
+              }
+            >
+              List item 1
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </View>
@@ -282,10 +332,17 @@ exports[`renders list accordion with children 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "paddingRight": 24,
-              "paddingVertical": 8,
-            },
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 56,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -297,8 +354,8 @@ exports[`renders list accordion with children 1`] = `
           [
             {
               "flexDirection": "row",
-              "marginVertical": 6,
             },
+            null,
             undefined,
           ]
         }
@@ -374,21 +431,22 @@ exports[`renders list accordion with children 1`] = `
                 },
                 {
                   "color": "rgba(29, 27, 32, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
+                    "fontFamily": "System",
                     "fontSize": 16,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.5,
+                    "lineHeight": 24,
                   },
-                  {
-                    "color": "rgba(29, 27, 32, 1)",
-                  },
-                  undefined,
+                  [
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                    },
+                    undefined,
+                  ],
                 ],
               ]
             }
@@ -398,44 +456,56 @@ exports[`renders list accordion with children 1`] = `
         </View>
         <View
           style={
-            [
-              {
-                "marginVertical": 6,
-                "paddingLeft": 8,
-              },
-              undefined,
-            ]
+            {
+              "alignSelf": "center",
+              "paddingLeft": 16,
+            }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-down
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -489,10 +559,17 @@ exports[`renders list accordion with custom title and description styles 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "paddingRight": 24,
-              "paddingVertical": 8,
-            },
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 72,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -504,8 +581,8 @@ exports[`renders list accordion with custom title and description styles 1`] = `
           [
             {
               "flexDirection": "row",
-              "marginVertical": 6,
             },
+            null,
             undefined,
           ]
         }
@@ -534,23 +611,24 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                 },
                 {
                   "color": "rgba(29, 27, 32, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
+                    "fontFamily": "System",
                     "fontSize": 16,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.5,
+                    "lineHeight": 24,
                   },
-                  {
-                    "color": "rgba(29, 27, 32, 1)",
-                  },
-                  {
-                    "color": "#f44336",
-                  },
+                  [
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                    },
+                    {
+                      "color": "#f44336",
+                    },
+                  ],
                 ],
               ]
             }
@@ -568,23 +646,24 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                 },
                 {
                   "color": "rgba(29, 27, 32, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
+                    "fontFamily": "System",
                     "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
                   },
-                  {
-                    "color": "rgba(73, 69, 79, 1)",
-                  },
-                  {
-                    "color": "#f44336",
-                  },
+                  [
+                    {
+                      "color": "rgba(73, 69, 79, 1)",
+                    },
+                    {
+                      "color": "#f44336",
+                    },
+                  ],
                 ],
               ]
             }
@@ -594,48 +673,56 @@ exports[`renders list accordion with custom title and description styles 1`] = `
         </View>
         <View
           style={
-            [
-              {
-                "marginVertical": 6,
-                "paddingLeft": 8,
-              },
-              {
-                "alignItems": "center",
-                "height": 40,
-                "justifyContent": "center",
-              },
-            ]
+            {
+              "alignSelf": "center",
+              "paddingLeft": 16,
+            }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-down
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -689,10 +776,17 @@ exports[`renders list accordion with left items 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "paddingRight": 24,
-              "paddingVertical": 8,
-            },
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 56,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -704,8 +798,8 @@ exports[`renders list accordion with left items 1`] = `
           [
             {
               "flexDirection": "row",
-              "marginVertical": 6,
             },
+            null,
             undefined,
           ]
         }
@@ -781,21 +875,22 @@ exports[`renders list accordion with left items 1`] = `
                 },
                 {
                   "color": "rgba(29, 27, 32, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
+                    "fontFamily": "System",
                     "fontSize": 16,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.5,
+                    "lineHeight": 24,
                   },
-                  {
-                    "color": "rgba(29, 27, 32, 1)",
-                  },
-                  undefined,
+                  [
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                    },
+                    undefined,
+                  ],
                 ],
               ]
             }
@@ -805,44 +900,56 @@ exports[`renders list accordion with left items 1`] = `
         </View>
         <View
           style={
-            [
-              {
-                "marginVertical": 6,
-                "paddingLeft": 8,
-              },
-              undefined,
-            ]
+            {
+              "alignSelf": "center",
+              "paddingLeft": 16,
+            }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-down
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -896,10 +1003,17 @@ exports[`renders multiline list accordion 1`] = `
             "overflow": "hidden",
           },
           [
-            {
-              "paddingRight": 24,
-              "paddingVertical": 8,
-            },
+            [
+              {
+                "justifyContent": "center",
+                "paddingRight": 16,
+                "paddingVertical": 8,
+              },
+              {
+                "minHeight": 72,
+              },
+              false,
+            ],
             undefined,
           ],
         ]
@@ -911,8 +1025,8 @@ exports[`renders multiline list accordion 1`] = `
           [
             {
               "flexDirection": "row",
-              "marginVertical": 6,
             },
+            null,
             undefined,
           ]
         }
@@ -941,21 +1055,22 @@ exports[`renders multiline list accordion 1`] = `
                 },
                 {
                   "color": "rgba(29, 27, 32, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
+                    "fontFamily": "System",
                     "fontSize": 16,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.5,
+                    "lineHeight": 24,
                   },
-                  {
-                    "color": "rgba(29, 27, 32, 1)",
-                  },
-                  undefined,
+                  [
+                    {
+                      "color": "rgba(29, 27, 32, 1)",
+                    },
+                    undefined,
+                  ],
                 ],
               ]
             }
@@ -973,21 +1088,22 @@ exports[`renders multiline list accordion 1`] = `
                 },
                 {
                   "color": "rgba(29, 27, 32, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
+                    "fontFamily": "System",
                     "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
                   },
-                  {
-                    "color": "rgba(73, 69, 79, 1)",
-                  },
-                  undefined,
+                  [
+                    {
+                      "color": "rgba(73, 69, 79, 1)",
+                    },
+                    undefined,
+                  ],
                 ],
               ]
             }
@@ -997,48 +1113,56 @@ exports[`renders multiline list accordion 1`] = `
         </View>
         <View
           style={
-            [
-              {
-                "marginVertical": 6,
-                "paddingLeft": 8,
-              },
-              {
-                "alignItems": "center",
-                "height": 40,
-                "justifyContent": "center",
-              },
-            ]
+            {
+              "alignSelf": "center",
+              "paddingLeft": 16,
+            }
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
+            collapsable={false}
             style={
               [
                 {
-                  "color": "rgba(73, 69, 79, 1)",
-                  "fontSize": 24,
+                  "transform": [
+                    {
+                      "rotate": "0deg",
+                    },
+                  ],
                 },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
               ]
             }
           >
-            chevron-down
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-down
+            </Text>
+          </View>
         </View>
       </View>
     </View>

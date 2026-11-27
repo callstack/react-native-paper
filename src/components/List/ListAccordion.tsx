@@ -3,25 +3,50 @@ import { StyleSheet, View } from 'react-native';
 import type {
   ColorValue,
   GestureResponderEvent,
+  LayoutChangeEvent,
   PressableAndroidRippleConfig,
   StyleProp,
-  TextLayoutEvent,
   TextStyle,
   ViewProps,
   ViewStyle,
 } from 'react-native';
 
+import Animated, {
+  Easing,
+  ReduceMotion,
+  cubicBezier,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  type CSSStyle,
+} from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
+
 import { ListAccordionContext } from './ListAccordionContext';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
+import ListSelectedDisabledLayer from './ListSelectedDisabledLayer';
+import { ListTokens } from './tokens';
 import type { Style } from './utils';
-import { getAccordionColors, getLeftStyles } from './utils';
+import {
+  ListRowContext,
+  getAccessoryStyles,
+  getListColors,
+  getRowContainerStyles,
+  getRowContentStyle,
+  getSelectedContainerColor,
+  getSelectedStateProps,
+  useListRow,
+} from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
+import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+
+type ContentPhase = 'collapsed' | 'expanding' | 'expanded' | 'collapsing';
 
 export type Props = {
   /**
@@ -46,6 +71,15 @@ export type Props = {
    * You'll need to update this prop when you want to toggle the component or on `onPress`.
    */
   expanded?: boolean;
+  /**
+   * Whether to highlight the accordion as selected.
+   */
+  selected?: boolean;
+  /**
+   * Whether the accordion is disabled. A disabled accordion does not expand or
+   * collapse on press, and its header content is shown at 38% opacity.
+   */
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
@@ -190,6 +224,8 @@ const ListAccordion = ({
   onLongPress,
   delayLongPress,
   expanded: expandedProp,
+  selected,
+  disabled,
   'aria-label': ariaLabel,
   pointerEvents = 'none',
   titleMaxFontSizeMultiplier,
@@ -201,12 +237,8 @@ const ListAccordion = ({
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
-  const [alignToTop, setAlignToTop] = React.useState(false);
-
-  const onDescriptionTextLayout = (event: TextLayoutEvent) => {
-    const { nativeEvent } = event;
-    setAlignToTop(nativeEvent.lines.length >= 2);
-  };
+  const { isDescriptionMultiline, onDescriptionTextLayout, rowContext } =
+    useListRow(!!description);
 
   const handlePressAction = (e: GestureResponderEvent) => {
     onPress?.(e);
@@ -230,10 +262,92 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
-  const { descriptionColor, titleTextColor } = getAccordionColors({
-    theme,
-    isExpanded,
-  });
+  const reduceMotion = useReduceMotion();
+  const reanimatedReduceMotion = reduceMotion
+    ? ReduceMotion.Always
+    : ReduceMotion.Never;
+
+  const timingConfig = React.useMemo(
+    () => ({
+      duration: theme.motion.duration.medium2,
+      easing: Easing.bezier(...theme.motion.easing.emphasized),
+      reduceMotion: reanimatedReduceMotion,
+    }),
+    [
+      theme.motion.duration.medium2,
+      theme.motion.easing.emphasized,
+      reanimatedReduceMotion,
+    ]
+  );
+
+  const chevronStyle: CSSStyle<ViewStyle> = {
+    transform: [{ rotate: isExpanded ? '180deg' : '0deg' }],
+    transitionProperty: ['transform'],
+    transitionDuration: reduceMotion ? 0 : theme.motion.duration.medium2,
+    transitionTimingFunction: cubicBezier(...theme.motion.easing.emphasized),
+  };
+
+  const [contentPhase, setContentPhase] = React.useState<ContentPhase>(
+    isExpanded ? 'expanded' : 'collapsed'
+  );
+  // A shared value, so a nested accordion that animates does not re-render
+  // this one on every frame
+  const contentHeight = useSharedValue(0);
+
+  if (
+    isExpanded &&
+    (contentPhase === 'collapsed' || contentPhase === 'collapsing')
+  ) {
+    setContentPhase('expanding');
+  } else if (
+    !isExpanded &&
+    (contentPhase === 'expanded' || contentPhase === 'expanding')
+  ) {
+    setContentPhase('collapsing');
+  }
+
+  const contentProgress = useSharedValue(isExpanded ? 1 : 0);
+
+  React.useEffect(() => {
+    const finishTransition = (finished: boolean) => {
+      if (!finished) {
+        return;
+      }
+
+      setContentPhase((phase) => {
+        if (isExpanded && phase === 'expanding') {
+          return 'expanded';
+        }
+
+        if (!isExpanded && phase === 'collapsing') {
+          return 'collapsed';
+        }
+
+        return phase;
+      });
+    };
+
+    contentProgress.value = withTiming(
+      isExpanded ? 1 : 0,
+      timingConfig,
+      (finished) => scheduleOnRN(finishTransition, finished ?? false)
+    );
+  }, [isExpanded, contentProgress, timingConfig]);
+
+  const contentTransitionStyle = useAnimatedStyle(() => ({
+    height:
+      contentPhase === 'expanded'
+        ? 'auto'
+        : contentProgress.value * contentHeight.value,
+    opacity: contentProgress.value,
+  }));
+
+  const onContentLayout = (event: LayoutChangeEvent) => {
+    contentHeight.value = event.nativeEvent.layout.height;
+  };
+
+  const { titleColor, descriptionColor, leadingIconColor, expandIconColor } =
+    getListColors({ theme, selected, disabled });
 
   const handlePress =
     groupContext && id !== undefined
@@ -245,94 +359,129 @@ const ListAccordion = ({
 
   return (
     <View>
-      <View style={{ backgroundColor: theme?.colors?.background }}>
-        <TouchableRipple
-          style={[styles.container, style]}
-          // A full-width row, like List.Item: an outward ring would run into
-          // the rows around it.
-          focusRing="inward"
-          onPress={handlePress}
-          onLongPress={onLongPress}
-          delayLongPress={delayLongPress}
-          role="button"
-          aria-expanded={isExpanded}
-          aria-label={ariaLabel}
-          testID={testID}
-          theme={theme}
-          background={background}
-          borderless
-          hitSlop={hitSlop}
-        >
-          <View
-            style={[styles.row, containerStyle]}
-            pointerEvents={pointerEvents}
+      <View
+        style={{
+          backgroundColor:
+            getSelectedContainerColor({ theme, selected, disabled }) ??
+            theme.colors[ListTokens.containerColor],
+        }}
+      >
+        {selected && disabled ? (
+          <ListSelectedDisabledLayer theme={theme} />
+        ) : null}
+        <ListRowContext.Provider value={rowContext}>
+          <TouchableRipple
+            style={[
+              getRowContainerStyles(!!description, isDescriptionMultiline),
+              style,
+            ]}
+            // A full-width row, like List.Item: an outward ring would run into
+            // the rows around it.
+            focusRing="inward"
+            onPress={handlePress}
+            disabled={disabled}
+            onLongPress={onLongPress}
+            delayLongPress={delayLongPress}
+            role="button"
+            aria-expanded={isExpanded}
+            {...getSelectedStateProps({ selected, role: 'button' })}
+            aria-disabled={disabled}
+            aria-label={ariaLabel}
+            testID={testID}
+            theme={theme}
+            background={background}
+            borderless
+            hitSlop={hitSlop}
           >
-            {left
-              ? left({
-                  color: isExpanded ? theme.colors?.primary : descriptionColor,
-                  style: getLeftStyles(alignToTop, description),
-                })
-              : null}
-            <View style={[styles.contentItem, styles.content, contentStyle]}>
-              <Text
-                selectable={false}
-                numberOfLines={titleNumberOfLines}
-                style={[
-                  styles.title,
-                  {
-                    color: titleTextColor,
-                  },
-                  titleStyle,
-                ]}
-                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-              >
-                {title}
-              </Text>
-              {description ? (
-                <Text
-                  selectable={false}
-                  numberOfLines={descriptionNumberOfLines}
-                  style={[
-                    styles.description,
-                    {
-                      color: descriptionColor,
-                    },
-                    descriptionStyle,
-                  ]}
-                  onTextLayout={onDescriptionTextLayout}
-                  maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
-                >
-                  {description}
-                </Text>
-              ) : null}
-            </View>
             <View
-              style={[
-                styles.trailingItem,
-                description ? styles.multiline : undefined,
-              ]}
+              style={[styles.row, getRowContentStyle(disabled), containerStyle]}
+              pointerEvents={pointerEvents}
             >
-              {right ? (
-                right({
-                  isExpanded: isExpanded,
-                })
-              ) : (
-                <MaterialCommunityIcon
-                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  color={descriptionColor}
-                  size={24}
-                  direction={direction}
-                />
-              )}
+              {left
+                ? left({
+                    color: leadingIconColor,
+                    style: getAccessoryStyles(
+                      isDescriptionMultiline,
+                      description
+                    ),
+                  })
+                : null}
+              <View style={[styles.contentItem, styles.content, contentStyle]}>
+                <Text
+                  variant="bodyLarge"
+                  theme={theme}
+                  selectable={false}
+                  numberOfLines={titleNumberOfLines}
+                  style={[
+                    {
+                      color: titleColor,
+                    },
+                    titleStyle,
+                  ]}
+                  maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+                >
+                  {title}
+                </Text>
+                {description ? (
+                  <Text
+                    variant="bodyMedium"
+                    theme={theme}
+                    selectable={false}
+                    numberOfLines={descriptionNumberOfLines}
+                    style={[
+                      {
+                        color: descriptionColor,
+                      },
+                      descriptionStyle,
+                    ]}
+                    onTextLayout={onDescriptionTextLayout}
+                    maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
+                  >
+                    {description}
+                  </Text>
+                ) : null}
+              </View>
+              <View style={styles.trailingItem}>
+                {right ? (
+                  right({
+                    isExpanded: isExpanded,
+                  })
+                ) : (
+                  <Animated.View style={chevronStyle}>
+                    <MaterialCommunityIcon
+                      name="chevron-down"
+                      color={expandIconColor}
+                      size={24}
+                      direction={direction}
+                    />
+                  </Animated.View>
+                )}
+              </View>
             </View>
-          </View>
-        </TouchableRipple>
+          </TouchableRipple>
+        </ListRowContext.Provider>
       </View>
 
-      {isExpanded ? (
-        <ListAccordionContext.Provider value={accordionContext}>
-          {children}
-        </ListAccordionContext.Provider>
+      {contentPhase !== 'collapsed' ? (
+        <Animated.View
+          style={[
+            // Clip only while animating, so shadows and badges in the
+            // expanded content are not cut off
+            contentPhase !== 'expanded' && styles.transitioningClip,
+            contentTransitionStyle,
+          ]}
+        >
+          <View
+            onLayout={onContentLayout}
+            style={
+              contentPhase === 'expanded' ? null : styles.transitioningContent
+            }
+          >
+            <ListAccordionContext.Provider value={accordionContext}>
+              {children}
+            </ListAccordionContext.Provider>
+          </View>
+        </Animated.View>
       ) : null}
     </View>
   );
@@ -341,31 +490,24 @@ const ListAccordion = ({
 ListAccordion.displayName = 'List.Accordion';
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 8,
-    paddingRight: 24,
-  },
   row: {
     flexDirection: 'row',
-    marginVertical: 6,
-  },
-  multiline: {
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 16,
-  },
-  description: {
-    fontSize: 14,
   },
   contentItem: {
-    paddingLeft: 16,
+    paddingLeft: ListTokens.leadingSpace,
   },
   trailingItem: {
-    marginVertical: 6,
-    paddingLeft: 8,
+    alignSelf: 'center',
+    paddingLeft: ListTokens.leadingSpace,
+  },
+  transitioningClip: {
+    overflow: 'hidden',
+  },
+  transitioningContent: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
   },
   content: {
     flex: 1,

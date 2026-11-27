@@ -4,14 +4,25 @@ import type {
   ColorValue,
   GestureResponderEvent,
   StyleProp,
-  TextLayoutEvent,
   TextProps,
   TextStyle,
   ViewStyle,
 } from 'react-native';
 
 import { ListAccordionContext } from './ListAccordionContext';
-import { getLeftStyles, getRightStyles } from './utils';
+import { ListItemContext } from './ListItemContext';
+import ListSelectedDisabledLayer from './ListSelectedDisabledLayer';
+import { ListTokens } from './tokens';
+import {
+  ListRowContext,
+  getAccessoryStyles,
+  getListColors,
+  getRowContainerStyles,
+  getRowContentStyle,
+  getSelectedContainerColor,
+  getSelectedStateProps,
+  useListRow,
+} from './utils';
 import type { Style } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../theme/types';
@@ -50,13 +61,32 @@ export type Props = Omit<
    */
   description?: Description;
   /**
+   * Element to display in the leading slot. Takes precedence over `left`.
+   */
+  leading?: React.ReactNode;
+  /**
+   * Element to display in the trailing slot. Takes precedence over `right`.
+   */
+  trailing?: React.ReactNode;
+  /**
    * Callback which returns a React element to display on the left side.
+   * @deprecated Use `leading` instead. `left` will be removed in 7.0.
    */
   left?: (props: { color: ColorValue; style: Style }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
+   * @deprecated Use `trailing` instead. `right` will be removed in 7.0.
    */
   right?: (props: { color: ColorValue; style?: Style }) => React.ReactNode;
+  /**
+   * Whether to highlight the list item as selected.
+   */
+  selected?: boolean;
+  /**
+   * Whether the list item is disabled. A disabled item does not respond to
+   * presses, and its content is shown at 38% opacity.
+   */
+  disabled?: boolean;
   /**
    * Function to execute on press.
    */
@@ -134,7 +164,7 @@ export type Props = Omit<
  *   <List.Item
  *     title="First Item"
  *     description="Item description"
- *     left={props => <List.Icon {...props} icon="folder" />}
+ *     leading={<List.Icon icon="folder" />}
  *   />
  * );
  *
@@ -146,8 +176,12 @@ export type Props = Omit<
 const ListItem = ({
   left,
   right,
+  leading,
+  trailing,
   title,
   description,
+  selected,
+  disabled,
   onPress,
   theme: themeOverrides,
   style,
@@ -167,13 +201,21 @@ const ListItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { hasLeft } = React.useContext(ListAccordionContext);
-  const shouldIndent = hasLeft && !left && !right;
-  const [alignToTop, setAlignToTop] = React.useState(false);
+  const shouldIndent = hasLeft && !left && !right && !leading && !trailing;
+  const { isDescriptionMultiline, onDescriptionTextLayout, rowContext } =
+    useListRow(!!description);
 
-  const onDescriptionTextLayout = (event: TextLayoutEvent) => {
-    const { nativeEvent } = event;
-    setAlignToTop(nativeEvent.lines.length >= 2);
-  };
+  const backgroundColor = getSelectedContainerColor({
+    theme,
+    selected,
+    disabled,
+  });
+  const {
+    titleColor,
+    descriptionColor,
+    leadingIconColor: leadingColor,
+    trailingIconColor: trailingColor,
+  } = getListColors({ theme, selected, disabled });
 
   const renderDescription = (
     descriptionColor: ColorValue,
@@ -184,18 +226,16 @@ const ListItem = ({
         selectable: false,
         ellipsizeMode: descriptionEllipsizeMode,
         color: descriptionColor,
-        fontSize: styles.description.fontSize,
+        fontSize: theme.fonts.bodyMedium.fontSize,
       })
     ) : (
       <Text
+        variant="bodyMedium"
+        theme={theme}
         selectable={false}
         numberOfLines={descriptionNumberOfLines}
         ellipsizeMode={descriptionEllipsizeMode}
-        style={[
-          styles.description,
-          { color: descriptionColor },
-          descriptionStyle,
-        ]}
+        style={[{ color: descriptionColor }, descriptionStyle]}
         onTextLayout={onDescriptionTextLayout}
         maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
       >
@@ -205,21 +245,21 @@ const ListItem = ({
   };
 
   const renderTitle = () => {
-    const titleColor = theme.colors.onSurface;
-
     return typeof title === 'function' ? (
       title({
         selectable: false,
         ellipsizeMode: titleEllipsizeMode,
         color: titleColor,
-        fontSize: styles.title.fontSize,
+        fontSize: theme.fonts.bodyLarge.fontSize,
       })
     ) : (
       <Text
+        variant="bodyLarge"
+        theme={theme}
         selectable={false}
         ellipsizeMode={titleEllipsizeMode}
         numberOfLines={titleNumberOfLines}
-        style={[styles.title, { color: titleColor }, titleStyle]}
+        style={[{ color: titleColor }, titleStyle]}
         maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
       >
         {title}
@@ -227,71 +267,108 @@ const ListItem = ({
     );
   };
 
-  const descriptionColor = theme.colors.onSurfaceVariant;
+  const leadingContext = React.useMemo(
+    () => ({ color: leadingColor, slot: 'leading' as const }),
+    [leadingColor]
+  );
+  const trailingContext = React.useMemo(
+    () => ({ color: trailingColor, slot: 'trailing' as const }),
+    [trailingColor]
+  );
+
+  const renderLeading = () => {
+    const accessoryStyle = getAccessoryStyles(
+      isDescriptionMultiline,
+      description
+    );
+
+    if (leading) {
+      return (
+        <ListItemContext.Provider value={leadingContext}>
+          <View style={accessoryStyle}>{leading}</View>
+        </ListItemContext.Provider>
+      );
+    }
+
+    return left ? left({ color: leadingColor, style: accessoryStyle }) : null;
+  };
+
+  const renderTrailing = () => {
+    const accessoryStyle = getAccessoryStyles(
+      isDescriptionMultiline,
+      description
+    );
+
+    if (trailing) {
+      return (
+        <ListItemContext.Provider value={trailingContext}>
+          <View style={accessoryStyle}>{trailing}</View>
+        </ListItemContext.Provider>
+      );
+    }
+
+    return right
+      ? right({ color: trailingColor, style: accessoryStyle })
+      : null;
+  };
+
+  // A caller's own role wins, so the selected state follows it
+  const role = rest.role ?? (onPress ? 'button' : undefined);
 
   return (
-    <TouchableRipple
-      // Before `rest`, so a caller's `focusRing` wins
-      focusRing="inward"
-      {...rest}
-      ref={ref}
-      style={
-        shouldIndent
-          ? [styles.container, styles.indent, style]
-          : [styles.container, style]
-      }
-      onPress={onPress}
-      theme={theme}
-      testID={testID}
-    >
-      <View style={[styles.row, containerStyle]}>
-        {left
-          ? left({
-              color: descriptionColor,
-              style: getLeftStyles(alignToTop, description),
-            })
-          : null}
-        <View style={[styles.item, styles.content, contentStyle]}>
-          {renderTitle()}
+    <ListRowContext.Provider value={rowContext}>
+      <TouchableRipple
+        // Before `rest`, so a caller's own value wins
+        focusRing="inward"
+        role={role}
+        {...getSelectedStateProps({ selected, role })}
+        aria-disabled={disabled}
+        {...rest}
+        ref={ref}
+        style={[
+          getRowContainerStyles(!!description, isDescriptionMultiline),
+          shouldIndent && styles.indent,
+          { backgroundColor },
+          style,
+        ]}
+        onPress={onPress}
+        disabled={disabled}
+        theme={theme}
+        testID={testID}
+      >
+        {selected && disabled ? (
+          <ListSelectedDisabledLayer theme={theme} />
+        ) : null}
+        <View
+          style={[styles.row, getRowContentStyle(disabled), containerStyle]}
+        >
+          {renderLeading()}
+          <View style={[styles.item, styles.content, contentStyle]}>
+            {renderTitle()}
 
-          {description
-            ? renderDescription(descriptionColor, description)
-            : null}
+            {description
+              ? renderDescription(descriptionColor, description)
+              : null}
+          </View>
+          {renderTrailing()}
         </View>
-        {right
-          ? right({
-              color: descriptionColor,
-              style: getRightStyles(alignToTop, description),
-            })
-          : null}
-      </View>
-    </TouchableRipple>
+      </TouchableRipple>
+    </ListRowContext.Provider>
   );
 };
 
 ListItem.displayName = 'List.Item';
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 8,
-    paddingRight: 24,
-  },
   indent: {
     paddingLeft: 40,
   },
   row: {
     width: '100%',
     flexDirection: 'row',
-    marginVertical: 6,
-  },
-  title: {
-    fontSize: 16,
-  },
-  description: {
-    fontSize: 14,
   },
   item: {
-    paddingLeft: 16,
+    paddingLeft: ListTokens.leadingSpace,
   },
   content: {
     flexShrink: 1,
