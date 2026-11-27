@@ -4,6 +4,7 @@ import {
   Platform,
   StyleSheet,
   TextInput as NativeTextInput,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
@@ -27,8 +28,12 @@ import { tokens } from '../../theme/tokens';
 import TextInput from '../TextInput';
 import {
   FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
+  LABEL_END_OFFSET_WITHOUT_ACCESSORY,
+  LABEL_END_OFFSET_WITH_ACCESSORY,
   LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+  OUTLINED_LABEL_PADDING_HORIZONTAL,
   OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
+  OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY,
 } from '../TextInput/constants';
 import type {
   TextInputRenderProps,
@@ -81,6 +86,22 @@ afterAll(() => {
 afterEach(() => {
   I18nManager.isRTL = defaultI18nIsRTL;
 });
+
+/** The positioned box around the label, which bounds how wide the label gets. */
+const getLabelWrapper = (label: string) => {
+  const wrapper = screen.getByText(label, includeHiddenElements).parent?.parent;
+
+  if (!wrapper) {
+    throw new Error(`Expected a wrapper around the "${label}" label`);
+  }
+
+  return wrapper;
+};
+
+const mockFontScale = (fontScale: number) =>
+  jest
+    .mocked(useWindowDimensions)
+    .mockReturnValue({ fontScale, width: 750, height: 1334, scale: 2 });
 
 function firstIndexOfTestIdInTree(tree: unknown, testID: string): number {
   const serialized = JSON.stringify(tree);
@@ -1384,7 +1405,7 @@ it('keeps the label at the field edge in RTL when only an EndAccessory is set', 
     />
   );
 
-  expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle({
+  expect(getLabelWrapper('Email')).toHaveStyle({
     start: LABEL_START_OFFSET_WITHOUT_ACCESSORY,
   });
 });
@@ -1429,10 +1450,7 @@ describe('on web in RTL', () => {
         />
       );
 
-      const labelWrapper = screen.getByText(
-        'Email',
-        includeHiddenElements
-      ).parent;
+      const labelWrapper = getLabelWrapper('Email');
       expect(labelWrapper).toHaveStyle({ right: offset });
       expect(labelWrapper).not.toHaveStyle({ start: offset });
     }
@@ -1452,10 +1470,172 @@ describe('on web in RTL', () => {
       />
     );
 
-    expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle(
-      { right: LABEL_START_OFFSET_WITHOUT_ACCESSORY }
-    );
+    expect(getLabelWrapper('Email')).toHaveStyle({
+      right: LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+    });
   });
+
+  it('cuts a long label off before the EndAccessory on the left', async () => {
+    function EndAccessory() {
+      return <View testID="web-rtl-end-acc" />;
+    }
+
+    await render(
+      <TextInput
+        label="Email"
+        value=""
+        onChangeText={() => {}}
+        endAccessory={EndAccessory}
+      />
+    );
+
+    expect(getAnimatedStyle(getLabelWrapper('Email'))).toMatchObject({
+      left: LABEL_END_OFFSET_WITH_ACCESSORY,
+    });
+  });
+});
+
+describe('with a long label', () => {
+  it('shows the label on one line, so it ends in an ellipsis', async () => {
+    await render(
+      <TextInput
+        label="Confirm the new password you chose for your account"
+        value=""
+        onChangeText={() => {}}
+      />
+    );
+
+    expect(
+      screen.getByText(
+        'Confirm the new password you chose for your account',
+        includeHiddenElements
+      )
+    ).toHaveProp('numberOfLines', 1);
+  });
+
+  it.each([
+    {
+      variant: 'filled' as const,
+      endAccessory: false,
+      error: false,
+      end: LABEL_END_OFFSET_WITHOUT_ACCESSORY,
+    },
+    {
+      variant: 'filled' as const,
+      endAccessory: true,
+      error: false,
+      end: LABEL_END_OFFSET_WITH_ACCESSORY,
+    },
+    {
+      variant: 'filled' as const,
+      endAccessory: false,
+      error: true,
+      end: LABEL_END_OFFSET_WITH_ACCESSORY,
+    },
+    {
+      variant: 'outlined' as const,
+      endAccessory: true,
+      error: false,
+      end: LABEL_END_OFFSET_WITH_ACCESSORY - OUTLINED_LABEL_PADDING_HORIZONTAL,
+    },
+  ])(
+    'ends the $variant label where the input text ends (end accessory: $endAccessory, error: $error)',
+    async ({ variant, endAccessory, error, end }) => {
+      function EndAccessory() {
+        return <View testID="long-label-end-acc" />;
+      }
+
+      await render(
+        <TextInput
+          variant={variant}
+          label="Email"
+          value=""
+          error={error}
+          onChangeText={() => {}}
+          endAccessory={endAccessory ? EndAccessory : undefined}
+        />
+      );
+
+      expect(getAnimatedStyle(getLabelWrapper('Email'))).toMatchObject({
+        end,
+      });
+    }
+  );
+
+  it('keeps the end of a floated outlined label in place as it moves to the start', async () => {
+    function StartAccessory() {
+      return <View testID="long-label-start-acc" />;
+    }
+
+    await render(
+      <TextInput
+        variant="outlined"
+        label="Email"
+        value=""
+        onChangeText={() => {}}
+        startAccessory={StartAccessory}
+      />
+    );
+
+    const restingEnd =
+      LABEL_END_OFFSET_WITHOUT_ACCESSORY - OUTLINED_LABEL_PADDING_HORIZONTAL;
+    expect(getAnimatedStyle(getLabelWrapper('Email'))).toMatchObject({
+      end: restingEnd,
+    });
+
+    await fireEvent(screen.getByLabelText('Email'), 'focus');
+    await act(() => jest.advanceTimersByTimeAsync(1000));
+
+    // The box grows toward the end by as much as it moves toward the start.
+    expect(getAnimatedStyle(getLabelWrapper('Email'))).toMatchObject({
+      end: restingEnd - OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY,
+      transform: [
+        { translateX: -OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY },
+      ],
+    });
+  });
+});
+
+describe('when the text size changes while the field is shown', () => {
+  afterEach(() => {
+    mockFontScale(1);
+  });
+
+  it.each(['filled', 'outlined'] as const)(
+    'resizes the %s field like a field first shown at that size',
+    async (variant) => {
+      mockFontScale(1);
+
+      // A new element each time, so React renders it again.
+      const field = () => (
+        <TextInput
+          variant={variant}
+          label="Email"
+          value=""
+          onChangeText={() => {}}
+        />
+      );
+
+      await render(field());
+      const getField = () =>
+        getOuterTextInputPressable(screen.root).children[0];
+      expect(getField()).toHaveStyle({ minHeight: 56 });
+
+      mockFontScale(2);
+      await screen.rerender(field());
+      await act(() => jest.advanceTimersByTimeAsync(100));
+
+      expect(getField()).toHaveStyle({ minHeight: 112 });
+      const resizedLabelTop = getAnimatedStyle(getLabelWrapper('Email')).top;
+
+      await screen.unmount();
+      await render(field());
+
+      expect(getAnimatedStyle(getLabelWrapper('Email')).top).toBe(
+        resizedLabelTop
+      );
+    }
+  );
 });
 
 it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', async () => {

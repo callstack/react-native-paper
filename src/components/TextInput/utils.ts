@@ -5,25 +5,22 @@ import type { AnimatedStyle } from 'react-native-reanimated';
 
 import {
   ACTIVE_INDICATOR_SIZE,
-  FILLED_ACTIVE_LABEL_TOP_POSITION,
-  FILLED_INACTIVE_LABEL_TOP_POSITION,
   FILLED_LABEL_START_OFFSET_WITH_ACCESSORY,
-  FILLED_MULTILINE_PADDING_TOP,
   INACTIVE_INDICATOR_SIZE,
   INPUT_FONT_SIZE,
+  LABEL_END_OFFSET_WITHOUT_ACCESSORY,
+  LABEL_END_OFFSET_WITH_ACCESSORY,
   LABEL_START_OFFSET_WITHOUT_ACCESSORY,
-  OUTLINED_ACTIVE_LABEL_TOP_POSITION,
   OUTLINED_DISABLED_OUTLINE_OPACITY,
-  OUTLINED_INACTIVE_LABEL_TOP_POSITION,
+  OUTLINED_LABEL_PADDING_HORIZONTAL,
   OUTLINED_LABEL_START_OFFSET_WITH_ACCESSORY,
   OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY,
   OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY,
-  OUTLINED_MULTILINE_PADDING_TOP,
   PREFIX_END_PADDING,
   SUFFIX_START_PADDING,
   TEXT_INPUT_BORDER_RADIUS,
-  FILLED_PADDING_BOTTOM,
 } from './constants';
+import type { TextInputMetrics } from './constants';
 import { filledStyles, outlinedStyles, styles } from './styles';
 import type {
   FilledTextInputHookData,
@@ -39,30 +36,54 @@ import type { InternalTheme } from '../../theme/types';
 
 export const getTextInputAnimationLayout = ({
   variant,
+  metrics,
   hasAccessory,
+  hasEndAccessory,
   isRTL,
 }: {
   variant: TextInputVariant;
+  metrics: TextInputMetrics;
   hasAccessory: boolean;
+  hasEndAccessory: boolean;
   isRTL: boolean;
 }) => {
-  const activeTop =
-    variant === 'filled'
-      ? FILLED_ACTIVE_LABEL_TOP_POSITION
-      : OUTLINED_ACTIVE_LABEL_TOP_POSITION;
+  const { activeLabelTop: activeTop, inactiveLabelTop: inactiveTop } =
+    variant === 'filled' ? metrics.filled : metrics.outlined;
 
-  const inactiveTop =
+  // The outlined label's padding sits outside its text, like at the start.
+  const textEnd = hasEndAccessory
+    ? LABEL_END_OFFSET_WITH_ACCESSORY
+    : LABEL_END_OFFSET_WITHOUT_ACCESSORY;
+  const inactiveEnd =
     variant === 'filled'
-      ? FILLED_INACTIVE_LABEL_TOP_POSITION
-      : OUTLINED_INACTIVE_LABEL_TOP_POSITION;
+      ? textEnd
+      : textEnd - OUTLINED_LABEL_PADDING_HORIZONTAL;
 
-  const distance = hasAccessory
-    ? OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY
-    : OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY;
+  const distance =
+    variant === 'filled'
+      ? 0
+      : hasAccessory
+        ? OUTLINED_LABEL_TRANSLATE_DISTANCE_WITH_ACCESSORY
+        : OUTLINED_LABEL_TRANSLATE_DISTANCE_WITHOUT_ACCESSORY;
 
   const translateXEnd = (isRTL ? 1 : -1) * distance;
 
-  return { activeTop, inactiveTop, translateXEnd };
+  // The floated outlined label moves toward the start, so its box grows by the
+  // same distance to keep its end where the resting label's end is.
+  const activeEnd = inactiveEnd - distance;
+
+  // On web the label is placed with `right` in RTL, so its end is `left`.
+  const endKey: 'end' | 'left' =
+    Platform.OS === 'web' && isRTL ? 'left' : 'end';
+
+  return {
+    activeTop,
+    inactiveTop,
+    translateXEnd,
+    activeEnd,
+    inactiveEnd,
+    endKey,
+  };
 };
 
 export const getAccentColors = ({
@@ -308,6 +329,7 @@ export const getFilledTextInputData = (
   const {
     input,
     theme,
+    metrics,
     hasSuffix,
     isDisabled,
     hasAccessory,
@@ -359,19 +381,23 @@ export const getFilledTextInputData = (
   const animatedLabelWrapperStyles: StyleProp<
     AnimatedStyle<StyleProp<ViewStyle>>
   > = [
-    filledStyles.labelWrapper,
+    styles.labelWrapper,
     Platform.OS === 'web' && shared.isRTL
-      ? { right: filledLabelOffset }
+      ? { right: filledLabelOffset, alignItems: 'flex-end' }
       : { start: filledLabelOffset },
     animatedLabelWrapperStyle,
   ];
+
+  const labelStyles: StyleProp<ViewStyle> = styles.label;
 
   const containerStyles = filledStyles.container;
 
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
     {
-      paddingBottom: FILLED_PADDING_BOTTOM,
+      minHeight: metrics.height,
+      paddingTop: metrics.paddingVertical,
+      paddingBottom: metrics.filled.paddingBottom,
       backgroundColor: fieldBackgroundColor,
       borderTopStartRadius: TEXT_INPUT_BORDER_RADIUS,
       borderTopEndRadius: TEXT_INPUT_BORDER_RADIUS,
@@ -423,7 +449,7 @@ export const getFilledTextInputData = (
     },
     textInputProps.multiline && {
       height: 'auto',
-      paddingTop: FILLED_MULTILINE_PADDING_TOP,
+      paddingTop: metrics.filled.multilinePaddingTop,
     },
     //@ts-expect-error - RN’s defs are narrower than CSS and RNW does not ship TS extensions that fix that
     Platform.OS === 'web' && {
@@ -439,6 +465,7 @@ export const getFilledTextInputData = (
     hasError,
     hasSuffix,
     animatedLabelWrapperStyles,
+    labelStyles,
     containerStyles,
     fieldStyles,
     disabledBackgroundStyles,
@@ -458,6 +485,7 @@ export const getOutlinedTextInputData = (
   const {
     input,
     theme,
+    metrics,
     isFocused,
     isDisabled,
     hasAccessory,
@@ -498,6 +526,8 @@ export const getOutlinedTextInputData = (
   const fieldStyles: StyleProp<ViewStyle> = [
     styles.field,
     {
+      minHeight: metrics.height,
+      paddingVertical: metrics.paddingVertical,
       borderRadius: TEXT_INPUT_BORDER_RADIUS,
     },
     textInputProps.multiline && { alignItems: 'flex-start' },
@@ -522,14 +552,19 @@ export const getOutlinedTextInputData = (
   const animatedLabelWrapperStyles: StyleProp<
     AnimatedStyle<StyleProp<ViewStyle>>
   > = [
-    outlinedStyles.labelWrapper,
-    {
-      ...(Platform.OS === 'web' && shared.isRTL
-        ? { right: outlinedLabelOffset }
-        : { start: outlinedLabelOffset }),
-      backgroundColor: labelBackgroundColor,
-    },
+    styles.labelWrapper,
+    Platform.OS === 'web' && shared.isRTL
+      ? { right: outlinedLabelOffset, alignItems: 'flex-end' }
+      : { start: outlinedLabelOffset },
     animatedLabelWrapperStyle,
+  ];
+
+  // The background sits on the label itself rather than on its full-width
+  // wrapper, so it only cuts the outline as wide as the label.
+  const labelStyles: StyleProp<ViewStyle> = [
+    styles.label,
+    outlinedStyles.label,
+    { backgroundColor: labelBackgroundColor },
   ];
 
   const inputStyles: StyleProp<TextStyle> = [
@@ -544,7 +579,7 @@ export const getOutlinedTextInputData = (
     textInputProps.multiline && {
       height: 'auto',
       textAlignVertical: 'top',
-      paddingTop: OUTLINED_MULTILINE_PADDING_TOP,
+      paddingTop: metrics.outlined.multilinePaddingTop,
     },
     //@ts-expect-error - RN’s defs are narrower than CSS and RNW does not ship TS extensions that fix that
     Platform.OS === 'web' && {
@@ -560,6 +595,7 @@ export const getOutlinedTextInputData = (
     hasError,
     hasSuffix,
     animatedLabelWrapperStyles,
+    labelStyles,
     containerStyles,
     fieldStyles,
     disabledBackgroundStyles: undefined,

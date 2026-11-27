@@ -11,6 +11,7 @@ import {
   AccessibilityInfo,
   Platform,
   TextInput as NativeTextInput,
+  useWindowDimensions,
 } from 'react-native';
 import type { BlurEvent, FocusEvent } from 'react-native';
 
@@ -26,9 +27,11 @@ import { scheduleOnRN } from 'react-native-worklets';
 import {
   ACTIVE_LABEL_FONT_SIZE,
   ERROR_ANNOUNCEMENT_DELAY_MS,
+  getTextInputMetrics,
   INACTIVE_LABEL_FONT_SIZE,
   TIMING_CONFIG,
 } from './constants';
+import type { TextInputMetrics } from './constants';
 import type {
   TextInputAnimationState,
   TextInputFlags,
@@ -52,16 +55,20 @@ import type { InternalTheme } from '../../theme/types';
 
 const useTextInputAnimation = ({
   variant,
+  metrics,
   isRTL,
   isDisabled,
   hasAccessory,
+  hasEndAccessory,
   value,
   defaultValue,
 }: {
   variant: TextInputVariant;
+  metrics: TextInputMetrics;
   isRTL: boolean;
   isDisabled: boolean;
   hasAccessory: boolean;
+  hasEndAccessory: boolean;
   value: string | undefined;
   defaultValue: string | undefined;
 }): TextInputAnimationState & TextInputAnimationHandlers => {
@@ -82,13 +89,20 @@ const useTextInputAnimation = ({
     }
   );
 
-  const { activeTop, inactiveTop, translateXEnd } = getTextInputAnimationLayout(
-    {
-      variant,
-      hasAccessory,
-      isRTL,
-    }
-  );
+  const {
+    activeTop,
+    inactiveTop,
+    translateXEnd,
+    activeEnd,
+    inactiveEnd,
+    endKey,
+  } = getTextInputAnimationLayout({
+    variant,
+    metrics,
+    hasAccessory,
+    hasEndAccessory,
+    isRTL,
+  });
 
   const runFocusAnimation = (hasText: boolean) => {
     focusSV.value = withTiming(1, TIMING_CONFIG);
@@ -110,13 +124,15 @@ const useTextInputAnimation = ({
 
   const animatedLabelWrapperStyle = useAnimatedStyle(() => {
     const top = interpolate(floatSV.value, [0, 1], [inactiveTop, activeTop]);
+    const end = interpolate(floatSV.value, [0, 1], [inactiveEnd, activeEnd]);
 
     if (variant === 'filled') {
-      return { top };
+      return { top, [endKey]: end };
     }
 
     return {
       top,
+      [endKey]: end,
       transform: [
         { translateX: interpolate(floatSV.value, [0, 1], [0, translateXEnd]) },
       ],
@@ -280,6 +296,7 @@ const useTextInputLayout = ({
   props,
   input,
   theme,
+  metrics,
   flags,
   isFocused,
   isHovered,
@@ -289,6 +306,7 @@ const useTextInputLayout = ({
   props: TextInputProps;
   input: RefObject<ComponentRef<typeof NativeTextInput> | null>;
   theme: InternalTheme;
+  metrics: TextInputMetrics;
   flags: TextInputFlags;
   isFocused: boolean;
   isHovered: boolean;
@@ -313,6 +331,7 @@ const useTextInputLayout = ({
         {
           input,
           theme,
+          metrics,
           isFocused,
           isHovered,
           isRTL,
@@ -330,6 +349,7 @@ const useTextInputLayout = ({
         {
           input,
           theme,
+          metrics,
           isFocused,
           isHovered,
           isRTL,
@@ -364,6 +384,11 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
 
   const { direction } = useLocale();
 
+  // Read the text size on every render, so a change while the app runs
+  // resizes the field.
+  const { fontScale } = useWindowDimensions();
+  const metrics = getTextInputMetrics(fontScale);
+
   const isControlled = props.value !== undefined;
   const isRTL = direction === 'rtl';
   const hasAccessory = !!props.startAccessory;
@@ -373,9 +398,12 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
 
   const animation = useTextInputAnimation({
     variant,
+    metrics,
     isRTL,
     isDisabled: !!props.disabled,
     hasAccessory,
+    // The error icon takes the end accessory's place when there is none.
+    hasEndAccessory: !!props.endAccessory || !!props.error,
     value: props.value,
     defaultValue: props.defaultValue,
   });
@@ -450,6 +478,7 @@ export const useTextInput = (props: TextInputProps): TextInputHookReturn => {
     props,
     input,
     theme,
+    metrics,
     flags,
     isFocused,
     isHovered,
