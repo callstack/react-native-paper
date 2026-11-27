@@ -36,8 +36,8 @@ exports[`TouchableRipple (web) does not clip its content when borderless 1`] = `
       {
         "position": "relative",
       },
-      undefined,
       false,
+      undefined,
       undefined,
     ]
   }
@@ -84,8 +84,8 @@ exports[`TouchableRipple (web) renders a touch target behind the children sized 
       {
         "position": "relative",
       },
-      undefined,
       false,
+      undefined,
       undefined,
     ]
   }
@@ -144,8 +144,8 @@ exports[`TouchableRipple (web) renders a touch target behind the children sized 
       {
         "position": "relative",
       },
-      undefined,
       false,
+      undefined,
       undefined,
     ]
   }
@@ -204,8 +204,8 @@ exports[`TouchableRipple (web) renders no touch target when it is disabled 1`] =
       {
         "position": "relative",
       },
-      undefined,
       {},
+      undefined,
       undefined,
     ]
   }
@@ -270,8 +270,8 @@ exports[`TouchableRipple (web) renders no touch target when there is no hitSlop 
       {
         "position": "relative",
       },
-      undefined,
       false,
+      undefined,
       undefined,
     ]
   }

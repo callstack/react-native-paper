@@ -1028,6 +1028,8 @@ The close button (`onClose`) now fills the trailing 34dp column reserved for it,
 
 `TouchableRipple` draws the keyboard focus ring and takes a new `focusRing` prop. See [Focus indicator](#focus-indicator).
 
+On web, the hover layer is now a CSS background image. It paints on top of a `backgroundColor` that you set through `style`. While the touchable is hovered, it replaces a `backgroundImage`, such as a gradient, that you set through `style`. The hover layer no longer fades in and out. It shows and hides at once, as in Material Web.
+
 ### Drawer
 
 The `Drawer` API is unchanged in Paper 6.x. No props were renamed, removed, or given new defaults. `Drawer.Item`, `Drawer.CollapsedItem` and `Drawer.Section` were realigned with the current Material Design 3 navigation drawer spec, so their appearance changes:
@@ -1963,7 +1965,7 @@ screen.getByTestId('compose', { includeHiddenElements: true });
 
 `FAB.Menu` replaces `FAB.Group`. It takes `expanded` and `onDismiss` instead of `open` and `onStateChange`, the main button's props move into `trigger`, and `actions` are now `items`, 2 to 6 of them. Items take `icon`, `label`, `onPress`, `aria-label` and `testID`: the color, style and size props of an action were removed, and so were `backdropColor`, `fabStyle` and the long-press props.
 
-`FAB.Menu` has no backdrop and doesn't close on a tap outside it. It closes when the user presses its close button or an item, which calls `onDismiss`.
+`FAB.Menu` has no backdrop and doesn't close on a tap outside it. It calls `onDismiss` when the user presses its close button or an item, presses Escape (web), uses the hardware back button (Android) or the screen reader escape gesture (iOS), or when the trigger is hidden while the menu is open.
 
 ```diff
 -<FAB.Group
