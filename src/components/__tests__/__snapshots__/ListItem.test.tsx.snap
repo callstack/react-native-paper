@@ -208,20 +208,18 @@ exports[`renders list item with custom description 1`] = `
               [
                 {},
                 {
+                  "alignSelf": "flex-start",
                   "borderStyle": "solid",
-                  "borderWidth": 0.5,
-                  "flexDirection": "column",
-                },
-                {
                   "borderWidth": 1,
+                  "justifyContent": "center",
                 },
                 {
-                  "borderColor": "transparent",
+                  "borderColor": "rgba(202, 196, 208, 1)",
                 },
                 undefined,
                 {},
                 {
-                  "backgroundColor": "rgba(232, 222, 248, 1)",
+                  "backgroundColor": "rgba(254, 247, 255, 1)",
                 },
                 {
                   "borderBottomEndRadius": undefined,
@@ -268,7 +266,7 @@ exports[`renders list item with custom description 1`] = `
                   {},
                   {},
                   {
-                    "backgroundColor": "rgba(232, 222, 248, 1)",
+                    "backgroundColor": "rgba(254, 247, 255, 1)",
                   },
                   {
                     "borderBottomEndRadius": undefined,
@@ -322,8 +320,6 @@ exports[`renders list item with custom description 1`] = `
               hitSlop={
                 {
                   "bottom": 8,
-                  "left": 0,
-                  "right": 0,
                   "top": 8,
                 }
               }
@@ -347,8 +343,11 @@ exports[`renders list item with custom description 1`] = `
                       "borderRadius": 8,
                     },
                     {
-                      "width": "100%",
+                      "alignSelf": "stretch",
+                      "flexShrink": 1,
+                      "justifyContent": "center",
                     },
+                    undefined,
                   ],
                 ]
               }
@@ -359,34 +358,27 @@ exports[`renders list item with custom description 1`] = `
                     {
                       "alignItems": "center",
                       "flexDirection": "row",
-                      "paddingLeft": 4,
+                      "flexShrink": 1,
+                      "overflow": "hidden",
                       "position": "relative",
                     },
                     {
-                      "paddingLeft": 0,
-                    },
-                    {
                       "opacity": 1,
-                    },
-                    {
-                      "paddingRight": 0,
+                      "paddingLeft": 8,
+                      "paddingRight": 16,
                     },
                   ]
                 }
               >
                 <View
                   style={
-                    [
-                      {
-                        "alignSelf": "center",
-                        "padding": 4,
-                      },
-                      {
-                        "paddingLeft": 8,
-                        "paddingRight": 0,
-                      },
-                      null,
-                    ]
+                    {
+                      "alignItems": "center",
+                      "height": 18,
+                      "justifyContent": "center",
+                      "marginRight": 8,
+                      "width": 18,
+                    }
                   }
                 >
                   <Text
@@ -442,20 +434,12 @@ exports[`renders list item with custom description 1`] = `
                         [
                           {
                             "flexShrink": 1,
-                            "marginVertical": 6,
+                            "includeFontPadding": false,
+                            "paddingVertical": 5,
                             "textAlignVertical": "center",
                           },
                           {
-                            "color": "rgba(29, 25, 43, 1)",
-                            "fontFamily": "System",
-                            "fontSize": 14,
-                            "fontWeight": "500",
-                            "letterSpacing": 0.1,
-                            "lineHeight": 20,
-                          },
-                          {
-                            "marginLeft": 8,
-                            "marginRight": 16,
+                            "color": "rgba(73, 69, 79, 1)",
                           },
                           undefined,
                         ],
