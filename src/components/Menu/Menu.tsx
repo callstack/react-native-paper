@@ -111,6 +111,8 @@ export type Props = {
 
 // Minimum padding between the edge of the screen and the menu
 const SCREEN_INDENT = 8;
+// A desktop scrollbar is about 15px. That change is not a rotation.
+const SCROLLBAR_DIMENSION_SLOP = 24;
 // From https://material.io/design/motion/speed.html#duration
 const ANIMATION_DURATION = 250;
 // From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
@@ -262,6 +264,33 @@ const Menu = ({
     }
   }, [onDismiss, visible]);
 
+  const lastWindowRef = React.useRef({
+    width: WINDOW_LAYOUT.width,
+    height: WINDOW_LAYOUT.height,
+  });
+
+  const handleDimensionChange = React.useCallback(
+    (event?: { window?: { width: number; height: number } }) => {
+      const next = event?.window;
+      const prev = lastWindowRef.current;
+      if (next) {
+        lastWindowRef.current = { width: next.width, height: next.height };
+        const widthDelta = Math.abs(next.width - prev.width);
+        const heightDelta = Math.abs(next.height - prev.height);
+        // Opening a menu that overflows the page shows a scrollbar and fires
+        // this listener. Dismissing then makes the menu flash closed (#3854).
+        if (
+          widthDelta < SCROLLBAR_DIMENSION_SLOP &&
+          heightDelta < SCROLLBAR_DIMENSION_SLOP
+        ) {
+          return;
+        }
+      }
+      handleDismiss();
+    },
+    [handleDismiss]
+  );
+
   // Back and Escape go through the overlay stack, so that a menu opened from a
   // modal closes first and the modal stays. Without `onDismiss` there is
   // nothing to close, and the press is left to whatever is underneath.
@@ -276,12 +305,14 @@ const Menu = ({
   }, []);
 
   const attachListeners = React.useCallback(() => {
+    const current = Dimensions.get('window');
+    lastWindowRef.current = { width: current.width, height: current.height };
     dimensionsSubscriptionRef.current = addEventListener(
       Dimensions,
       'change',
-      handleDismiss
+      handleDimensionChange
     );
-  }, [handleDismiss]);
+  }, [handleDimensionChange]);
 
   const measureMenuLayout = () =>
     new Promise<LayoutRectangle>((resolve) => {

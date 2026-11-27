@@ -586,3 +586,76 @@ it.each([
     }
   }
 );
+
+it('does not dismiss when a scrollbar changes the window by a few pixels', async () => {
+  const onDismiss = jest.fn();
+  const handlers: Function[] = [];
+  const addSpy = jest
+    .spyOn(Dimensions, 'addEventListener')
+    .mockImplementation((type, handler) => {
+      if (type === 'change') {
+        handlers.push(handler);
+      }
+      return { remove: jest.fn() };
+    });
+  const dimensionsSpy = jest.spyOn(Dimensions, 'get').mockReturnValue({
+    width: 400,
+    height: 800,
+    scale: 1,
+    fontScale: 1,
+  });
+  const measureSpy = jest
+    .spyOn(ViewPrototype, 'measureInWindow')
+    .mockImplementation((fn) => fn(100, 100, 80, 32));
+
+  const size = (width: number, height: number) => ({
+    width,
+    height,
+    scale: 1,
+    fontScale: 1,
+  });
+
+  function makeMenu(visible: boolean) {
+    return (
+      <Portal.Host>
+        <Menu
+          visible={visible}
+          onDismiss={onDismiss}
+          anchor={<Button mode="outlined">Open menu</Button>}
+          testID="scrollbar-menu"
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+        </Menu>
+      </Portal.Host>
+    );
+  }
+
+  try {
+    const { rerender } = await render(makeMenu(false));
+    await act(async () => {
+      await rerender(makeMenu(true));
+      await Promise.resolve();
+    });
+    await waitFor(() => {
+      expect(handlers.length).toBeGreaterThan(0);
+    });
+
+    const scrollbar = size(385, 800);
+    await act(() => {
+      handlers
+        .at(-1)
+        ?.call(undefined, { window: scrollbar, screen: scrollbar });
+    });
+    expect(onDismiss).not.toHaveBeenCalled();
+
+    const rotated = size(800, 400);
+    await act(() => {
+      handlers.at(-1)?.call(undefined, { window: rotated, screen: rotated });
+    });
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  } finally {
+    addSpy.mockRestore();
+    dimensionsSpy.mockRestore();
+    measureSpy.mockRestore();
+  }
+});
