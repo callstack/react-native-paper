@@ -431,4 +431,30 @@ describe('with reduce motion', () => {
       expect(elevationTransitionDuration()).toBe(pressed);
     }
   );
+
+  it('forwards aria-checked and accessibilityState to the interactive node', async () => {
+    await render(
+      <Chip
+        selected
+        role="checkbox"
+        aria-checked={true}
+        accessibilityState={{ checked: true }}
+        testID="chip"
+      >
+        Checked Chip
+      </Chip>
+    );
+
+    expect(screen.getByRole('checkbox', { checked: true })).toBeOnTheScreen();
+  });
+
+  it('derives aria-checked from accessibilityState.checked when aria-checked is omitted', async () => {
+    await render(
+      <Chip role="radio" accessibilityState={{ checked: false }} testID="chip">
+        Unchecked Chip
+      </Chip>
+    );
+
+    expect(screen.getByRole('radio', { checked: false })).toBeOnTheScreen();
+  });
 });
