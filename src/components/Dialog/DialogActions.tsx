@@ -65,10 +65,12 @@ DialogActions.displayName = 'Dialog.Actions';
 const styles = StyleSheet.create({
   v3Container: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
     columnGap: 8,
+    rowGap: 8,
     paddingBottom: 24,
     paddingHorizontal: 24,
   },
