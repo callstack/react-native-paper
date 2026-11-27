@@ -48,11 +48,21 @@ const RadioButtonExample = () => {
       />
       <View style={styles.row}>
         <Text>Error (Checked)</Text>
-        <RadioButton value="error" status="checked" error />
+        <RadioButton
+          value="error"
+          status="checked"
+          error
+          aria-label="Error (Checked)"
+        />
       </View>
       <View style={styles.row}>
         <Text>Error (Unchecked)</Text>
-        <RadioButton value="error-unchecked" status="unchecked" error />
+        <RadioButton
+          value="error-unchecked"
+          status="unchecked"
+          error
+          aria-label="Error (Unchecked)"
+        />
       </View>
       <RadioButton.Item
         label="Error - Item (Checked)"
@@ -68,11 +78,21 @@ const RadioButtonExample = () => {
       />
       <View style={styles.row}>
         <Text style={styles.disabledLabel}>Checked (Disabled)</Text>
-        <RadioButton value="first" status="checked" disabled />
+        <RadioButton
+          value="first"
+          status="checked"
+          disabled
+          aria-label="Checked (Disabled)"
+        />
       </View>
       <View style={styles.row}>
         <Text style={styles.disabledLabel}>Unchecked (Disabled)</Text>
-        <RadioButton value="second" status="unchecked" disabled />
+        <RadioButton
+          value="second"
+          status="unchecked"
+          disabled
+          aria-label="Unchecked (Disabled)"
+        />
       </View>
       <RadioButton.Item
         label="Checked - Item (Disabled)"
