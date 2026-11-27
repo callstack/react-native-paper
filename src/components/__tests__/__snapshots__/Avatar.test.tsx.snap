@@ -106,12 +106,17 @@ exports[`renders avatar with icon and custom background color 1`] = `
 
 exports[`renders avatar with image 1`] = `
 <View
+  accessible={false}
+  importantForAccessibility="no"
   style={
     [
       {
         "borderRadius": 9999,
         "height": 64,
         "width": 64,
+      },
+      {
+        "overflow": "hidden",
       },
       undefined,
       {
@@ -122,6 +127,8 @@ exports[`renders avatar with image 1`] = `
 >
   <Image
     accessibilityIgnoresInvertColors={true}
+    accessible={false}
+    onError={[Function]}
     source={
       {
         "uri": "avatar.png",
@@ -159,7 +166,9 @@ exports[`renders avatar with text 1`] = `
   }
 >
   <Text
+    aria-label="XD"
     numberOfLines={1}
+    role="img"
     style={
       [
         {
@@ -219,7 +228,9 @@ exports[`renders avatar with text and custom background color 1`] = `
   }
 >
   <Text
+    aria-label="XD"
     numberOfLines={1}
+    role="img"
     style={
       [
         {
@@ -279,7 +290,9 @@ exports[`renders avatar with text and custom colors 1`] = `
   }
 >
   <Text
+    aria-label="XD"
     numberOfLines={1}
+    role="img"
     style={
       [
         {
@@ -339,7 +352,9 @@ exports[`renders avatar with text and custom size 1`] = `
   }
 >
   <Text
+    aria-label="XD"
     numberOfLines={1}
+    role="img"
     style={
       [
         {
