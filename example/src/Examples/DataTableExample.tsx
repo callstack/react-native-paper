@@ -73,43 +73,47 @@ const DataTableExample = () => {
 
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
-      <Card>
-        <DataTable>
-          <DataTable.Header>
-            <DataTable.Title
-              sortDirection={sortAscending ? 'ascending' : 'descending'}
-              onPress={() => setSortAscending(!sortAscending)}
-              style={styles.first}
-            >
-              Dessert
-            </DataTable.Title>
-            <DataTable.Title numberOfLines={2} numeric>
-              Calories per piece
-            </DataTable.Title>
-            <DataTable.Title numeric>Fat (g)</DataTable.Title>
-          </DataTable.Header>
+      <Card
+        content={
+          <DataTable>
+            <DataTable.Header>
+              <DataTable.Title
+                sortDirection={sortAscending ? 'ascending' : 'descending'}
+                onPress={() => setSortAscending(!sortAscending)}
+                style={styles.first}
+              >
+                Dessert
+              </DataTable.Title>
+              <DataTable.Title numberOfLines={2} numeric>
+                Calories per piece
+              </DataTable.Title>
+              <DataTable.Title numeric>Fat (g)</DataTable.Title>
+            </DataTable.Header>
 
-          {sortedItems.slice(from, to).map((item) => (
-            <DataTable.Row key={item.key}>
-              <DataTable.Cell style={styles.first}>{item.name}</DataTable.Cell>
-              <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-              <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
-            </DataTable.Row>
-          ))}
+            {sortedItems.slice(from, to).map((item) => (
+              <DataTable.Row key={item.key}>
+                <DataTable.Cell style={styles.first}>
+                  {item.name}
+                </DataTable.Cell>
+                <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
+                <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+              </DataTable.Row>
+            ))}
 
-          <DataTable.Pagination
-            page={page}
-            numberOfPages={Math.ceil(sortedItems.length / itemsPerPage)}
-            onPageChange={(page) => setPage(page)}
-            label={`${from + 1}-${to} of ${sortedItems.length}`}
-            numberOfItemsPerPageList={numberOfItemsPerPageList}
-            numberOfItemsPerPage={itemsPerPage}
-            onItemsPerPageChange={onItemsPerPageChange}
-            showFastPaginationControls
-            selectPageDropdownLabel={'Rows per page'}
-          />
-        </DataTable>
-      </Card>
+            <DataTable.Pagination
+              page={page}
+              numberOfPages={Math.ceil(sortedItems.length / itemsPerPage)}
+              onPageChange={(page) => setPage(page)}
+              label={`${from + 1}-${to} of ${sortedItems.length}`}
+              numberOfItemsPerPageList={numberOfItemsPerPageList}
+              numberOfItemsPerPage={itemsPerPage}
+              onItemsPerPageChange={onItemsPerPageChange}
+              showFastPaginationControls
+              selectPageDropdownLabel={'Rows per page'}
+            />
+          </DataTable>
+        }
+      />
     </ScreenWrapper>
   );
 };

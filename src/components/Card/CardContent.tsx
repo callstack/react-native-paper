@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
+
+import { CardSpacing } from './tokens';
 
 export type Props = ViewProps & {
   /**
@@ -19,21 +21,28 @@ export type Props = ViewProps & {
  * import { Card, Text } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Card>
- *     <Card.Content>
+ *   <Card
+ *     content={<Card.Content>
  *       <Text variant="titleLarge">Card title</Text>
  *       <Text variant="bodyMedium">Card content</Text>
- *     </Card.Content>
- *   </Card>
+ *     </Card.Content>}
+ *   />
  * );
  *
  * export default MyComponent;
  * ```
  */
 const CardContent = ({ style, ...rest }: Props) => (
-  <View {...rest} style={style} />
+  <View {...rest} style={[styles.container, style]} />
 );
 
 CardContent.displayName = 'Card.Content';
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: CardSpacing.horizontalPadding,
+    paddingTop: CardSpacing.regionGap,
+  },
+});
 
 export default CardContent;

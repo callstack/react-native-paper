@@ -2,8 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, ViewProps, ViewStyle } from 'react-native';
 
-import { CardContext } from './CardContext';
-import { useInternalTheme } from '../../core/theming';
+import { CardSpacing } from './tokens';
 import type { ThemeProp } from '../../theme/types';
 
 export type Props = ViewProps & {
@@ -24,48 +23,22 @@ export type Props = ViewProps & {
  * import { Card, Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Card>
- *     <Card.Actions>
- *       <Button mode="outlined">Cancel</Button>
- *       <Button mode="filled">Ok</Button>
- *     </Card.Actions>
- *   </Card>
+ *   <Card
+ *     actions={<Card.Actions>
+ *       <Button>Cancel</Button>
+ *       <Button>Ok</Button>
+ *     </Card.Actions>}
+ *   />
  * );
  *
  * export default MyComponent;
  * ```
  */
-const CardActions = ({ theme, style, children, ...rest }: Props) => {
-  useInternalTheme(theme);
-  const cardContext = React.useContext(CardContext);
-
-  const cardMarginStyle = cardContext
-    ? cardContext.direction === 'horizontal'
-      ? {
-          marginTop: -cardContext.padding,
-          marginRight: -cardContext.padding,
-          marginBottom: -cardContext.padding,
-        }
-      : {
-          marginLeft: -cardContext.padding,
-          marginRight: -cardContext.padding,
-          marginBottom: -cardContext.padding,
-        }
-    : null;
-
-  const containerStyle = [
-    styles.container,
-    cardMarginStyle,
-    { justifyContent: 'flex-end' } satisfies ViewStyle,
-    style,
-  ];
-
-  return (
-    <View {...rest} style={containerStyle}>
-      {children}
-    </View>
-  );
-};
+const CardActions = ({ style, children, theme: _theme, ...rest }: Props) => (
+  <View {...rest} style={[styles.container, style]}>
+    {children}
+  </View>
+);
 
 CardActions.displayName = 'Card.Actions';
 
@@ -73,9 +46,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    columnGap: 8,
-    paddingHorizontal: 8,
-    paddingBottom: 8,
+    justifyContent: 'flex-end',
+    paddingHorizontal: CardSpacing.horizontalPadding,
+    paddingTop: CardSpacing.regionGap,
+    paddingBottom: CardSpacing.actionsBottomPadding,
+    gap: CardSpacing.actionsGap,
   },
 });
 

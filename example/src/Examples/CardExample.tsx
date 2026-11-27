@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, Platform, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Platform, StyleSheet, View } from 'react-native';
 
 import {
   Avatar,
@@ -14,40 +14,58 @@ import {
 import { PreferencesContext } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
 
-type Mode = 'elevated' | 'outlined' | 'contained';
+type Variant = 'filled' | 'elevated' | 'outlined';
+
+const variants: Variant[] = ['filled', 'elevated', 'outlined'];
+
+const showMessage = (message: string) => {
+  if (Platform.OS === 'web') {
+    alert(message);
+  } else {
+    Alert.alert(message);
+  }
+};
+
+const CustomHeader = () => (
+  <View style={styles.customHeader}>
+    <Avatar.Icon icon="leaf" size={40} />
+    <View style={styles.customHeaderText}>
+      <Text variant="titleMedium">Custom header</Text>
+      <Text variant="bodySmall">Any React node in the header slot</Text>
+    </View>
+  </View>
+);
 
 const CardExample = () => {
   const { colors } = useTheme();
-  const [selectedMode, setSelectedMode] = React.useState<Mode>('elevated');
-  const [isSelected, setIsSelected] = React.useState(false);
+  const [variant, setVariant] = React.useState<Variant>('filled');
+  const [isFavorite, setIsFavorite] = React.useState(false);
   const preferences = React.useContext(PreferencesContext);
 
-  const modes: Mode[] = ['elevated', 'outlined', 'contained'];
-
   return (
-    <ScreenWrapper contentContainerStyle={styles.content}>
-      <View style={styles.preference}>
-        {modes.map((mode) => (
+    <ScreenWrapper contentContainerStyle={styles.screen}>
+      <View style={styles.variants}>
+        {variants.map((item) => (
           <Chip
-            key={mode}
-            selected={selectedMode === mode}
+            key={item}
+            selected={variant === item}
             mode="outlined"
-            onPress={() => setSelectedMode(mode)}
-            style={styles.chip}
+            onPress={() => setVariant(item)}
           >
-            {mode}
+            {item}
           </Chip>
         ))}
       </View>
-      <ScrollView
-        style={[styles.container, { backgroundColor: colors?.background }]}
-        contentContainerStyle={styles.content}
-      >
-        <Card style={styles.card} mode={selectedMode}>
+
+      <Card
+        variant={variant}
+        media={
           <Card.Cover
             source={require('../../assets/images/wrecked-ship.jpg')}
           />
-          <Card.Title title="Abandoned Ship" />
+        }
+        title="Abandoned Ship"
+        content={
           <Card.Content>
             <Text variant="bodyMedium">
               The Abandoned Ship is a wrecked ship located on Route 108 in
@@ -56,60 +74,74 @@ const CardExample = () => {
               the Scanner.
             </Text>
           </Card.Content>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover source={require('../../assets/images/bridge.jpg')} />
+        }
+      />
+
+      <Card
+        variant={variant}
+        media={
+          <Card.Cover
+            source={require('../../assets/images/bridge.jpg')}
+            aspectRatio={16 / 9}
+          />
+        }
+        header={
           <Card.Title
             title="Title variant"
             subtitle="Subtitle variant"
             titleVariant="headlineMedium"
             subtitleVariant="bodyLarge"
           />
+        }
+        content={
           <Card.Content>
             <Text variant="bodyMedium">
-              This is a card using title and subtitle with specified variants.
+              A responsive 16:9 cover with a title and subtitle in custom
+              variants.
             </Text>
           </Card.Content>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover source={require('../../assets/images/forest.jpg')} />
-          <Card.Actions>
-            <Button mode="outlined" onPress={() => {}}>
-              Share
-            </Button>
-            <Button mode="filled" onPress={() => {}}>
-              Explore
-            </Button>
-          </Card.Actions>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
-          <Card.Title
-            title="Berries that are trimmed at the end"
-            subtitle="Omega Ruby"
-            left={(props: any) => <Avatar.Icon {...props} icon="folder" />}
-            right={() => <IconButton icon="dots-vertical" onPress={() => {}} />}
+        }
+      />
+
+      <Card
+        variant={variant}
+        title="Berries that are trimmed at the end"
+        subtitle="Omega Ruby"
+        leading={(props) => <Avatar.Icon {...props} icon="folder" />}
+        trailing={() => (
+          <IconButton
+            accessibilityLabel="More options"
+            icon="dots-vertical"
+            onPress={() => showMessage('More options')}
           />
+        )}
+        content={
           <Card.Content>
             <Text variant="bodyMedium">
               Dotted around the Hoenn region, you will find loamy soil, many of
               which are housing berries. Once you have picked the berries, then
               you have the ability to use that loamy soil to grow your own
-              berries. These can be any berry and will require attention to get
-              the best crop.
+              berries.
             </Text>
           </Card.Content>
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
+        }
+      />
+
+      <Card
+        variant={variant}
+        media={
           <Card.Cover
             source={require('../../assets/images/restaurant-1.jpg')}
           />
-          <Card.Title title="Custom Button styles" />
+        }
+        title="Custom Button styles"
+        actions={
           <Card.Actions>
             <Button
               mode="outlined"
               shape="square"
               theme={{ shapes: { corner: { medium: 12 } } }}
-              onPress={() => {}}
+              onPress={() => showMessage('Shared')}
             >
               Share
             </Button>
@@ -117,98 +149,216 @@ const CardExample = () => {
               mode="filled"
               shape="square"
               theme={{ shapes: { corner: { medium: 12 } } }}
-              onPress={() => {}}
+              onPress={() => showMessage('Explored')}
             >
               Explore
             </Button>
           </Card.Actions>
-        </Card>
-        <Card
-          style={styles.card}
-          mode={selectedMode}
-          theme={{ shapes: { corner: { medium: 24 } } }}
-        >
-          <Card.Title
-            title="Custom border radius"
-            subtitle="... for card and cover"
-          />
-          <Card.Cover
-            source={require('../../assets/images/artist-2.jpg')}
-            style={[styles.customCoverRadius, styles.bottomCover]}
-          />
-        </Card>
-        <Card style={styles.card} mode={selectedMode}>
+        }
+      />
+
+      <Card
+        variant={variant}
+        theme={{ shapes: { corner: { medium: 24 } } }}
+        media={
+          <Card.Cover source={require('../../assets/images/artist-2.jpg')} />
+        }
+        title="Custom border radius"
+        subtitle="The Card clips the cover to its shape"
+      />
+
+      <Card
+        variant={variant}
+        media={
           <Card.Cover
             source={require('../../assets/images/strawberries.jpg')}
           />
-          <Card.Title
-            title="Just Strawberries"
-            subtitle="... and only Strawberries"
-            right={() => (
-              <IconButton
-                icon={isSelected ? 'heart' : 'heart-outline'}
-                selected={isSelected}
-                onPress={() => setIsSelected(!isSelected)}
-              />
-            )}
+        }
+        title="Just Strawberries"
+        subtitle="... and only Strawberries"
+        trailing={() => (
+          <IconButton
+            accessibilityLabel={
+              isFavorite ? 'Remove from favorites' : 'Add to favorites'
+            }
+            icon={isFavorite ? 'heart' : 'heart-outline'}
+            selected={isFavorite}
+            onPress={() => setIsFavorite(!isFavorite)}
           />
-        </Card>
-        <Card
-          style={styles.card}
-          onPress={() => {
-            Platform.OS === 'web'
-              ? alert('The Chameleon is Pressed')
-              : Alert.alert('The Chameleon is Pressed');
-          }}
-          mode={selectedMode}
-        >
+        )}
+      />
+
+      <Card
+        variant={variant}
+        accessibilityLabel="Pressable Chameleon"
+        onPress={() => showMessage('The Chameleon is Pressed')}
+        media={
           <Card.Cover source={require('../../assets/images/chameleon.jpg')} />
-          <Card.Title title="Pressable Chameleon" />
+        }
+        title="Pressable Chameleon"
+        content={
           <Card.Content>
             <Text variant="bodyMedium">
-              This is a pressable chameleon. If you press me, I will alert.
+              The whole Card is one target. If you press me, I will alert.
             </Text>
           </Card.Content>
-        </Card>
-        <Card
-          style={styles.card}
-          onLongPress={() => {
-            Platform.OS === 'web'
-              ? alert('The City is Long Pressed')
-              : Alert.alert('The City is Long Pressed');
-          }}
-          mode={selectedMode}
-        >
-          <Card.Cover source={require('../../assets/images/city.jpg')} />
-          <Card.Title
-            title="Long Pressable City"
-            left={(props) => <Avatar.Icon {...props} icon="city" />}
-          />
+        }
+      />
+
+      <Card
+        variant={variant}
+        accessibilityLabel="Long Pressable City"
+        onLongPress={() => showMessage('The City is Long Pressed')}
+        media={<Card.Cover source={require('../../assets/images/city.jpg')} />}
+        title="Long Pressable City"
+        leading={(props) => <Avatar.Icon {...props} icon="city" />}
+        content={
           <Card.Content>
             <Text variant="bodyMedium">
               This is a long press only city. If you long press me, I will
               alert.
             </Text>
           </Card.Content>
-        </Card>
-        <Card
-          style={styles.card}
-          onPress={() => {
-            preferences?.toggleTheme();
-          }}
-          mode={selectedMode}
-        >
-          <Card.Title
-            title="Pressable Theme Change"
-            left={(props) => <Avatar.Icon {...props} icon="format-paint" />}
-          />
+        }
+      />
+
+      <Card
+        variant={variant}
+        accessibilityLabel="Switch the theme"
+        onPress={() => preferences?.toggleTheme()}
+        title="Pressable Theme Change"
+        leading={(props) => <Avatar.Icon {...props} icon="format-paint" />}
+        content={
           <Card.Content>
             <Text variant="bodyMedium">
-              This is pressable card. If you press me, I will switch the theme.
+              This is a pressable Card. If you press me, I will switch the
+              theme.
             </Text>
           </Card.Content>
-        </Card>
-      </ScrollView>
+        }
+      />
+
+      <Text variant="titleMedium" style={styles.sectionTitle}>
+        States and customization
+      </Text>
+
+      <Card
+        variant={variant}
+        media={
+          <Card.Cover source={require('../../assets/images/forest.jpg')} />
+        }
+        actions={
+          <Card.Actions>
+            <Button mode="outlined" onPress={() => showMessage('Shared')}>
+              Share
+            </Button>
+            <Button mode="filled" onPress={() => showMessage('Explored')}>
+              Explore
+            </Button>
+          </Card.Actions>
+        }
+      />
+
+      <Card
+        variant={variant}
+        disabled
+        onPress={() => showMessage('Disabled Card pressed')}
+        title="Disabled"
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">Not focusable or pressable.</Text>
+          </Card.Content>
+        }
+      />
+
+      <Card
+        variant={variant}
+        dragged
+        title="Dragged"
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              The dragged look is controlled by the app.
+            </Text>
+          </Card.Content>
+        }
+      />
+
+      <Card
+        variant="elevated"
+        elevation={3}
+        title="Custom elevation"
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              Set with the elevation prop. Only elevated Cards accept it.
+            </Text>
+          </Card.Content>
+        }
+      />
+
+      <Card
+        variant="outlined"
+        borderColor={colors.primary}
+        title="Custom outline color"
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">Set with the borderColor prop.</Text>
+          </Card.Content>
+        }
+      />
+
+      <Card
+        variant={variant}
+        borderTopLeftRadius={4}
+        borderTopRightRadius={32}
+        borderBottomRightRadius={8}
+        borderBottomLeftRadius={24}
+        media={
+          <Card.Cover
+            source={require('../../assets/images/beach.jpg')}
+            aspectRatio={2}
+          />
+        }
+        title="Asymmetric shape"
+      />
+
+      <Card
+        variant={variant}
+        contentStyle={styles.horizontal}
+        media={
+          <Card.Cover
+            source={require('../../assets/images/forest.jpg')}
+            style={styles.horizontalCover}
+          />
+        }
+        title="Horizontal layout"
+        subtitle="Set flexDirection in contentStyle"
+      />
+
+      <Card
+        variant={variant}
+        header={<CustomHeader />}
+        content={
+          <Card.Content>
+            <Text variant="bodyMedium">
+              A neutral Card with independent actions.
+            </Text>
+          </Card.Content>
+        }
+        actions={
+          <Card.Actions>
+            <IconButton
+              accessibilityLabel="Save"
+              icon="bookmark-outline"
+              onPress={() => showMessage('Saved')}
+            />
+            <Button mode="tonal" onPress={() => showMessage('Opened')}>
+              Open
+            </Button>
+          </Card.Actions>
+        }
+      />
     </ScreenWrapper>
   );
 };
@@ -216,32 +366,37 @@ const CardExample = () => {
 CardExample.title = 'Card';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  screen: {
+    gap: 8,
+    padding: 8,
   },
-  content: {
-    padding: 4,
+  variants: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    paddingVertical: 4,
   },
-  card: {
-    margin: 4,
+  sectionTitle: {
+    marginTop: 16,
   },
-  chip: {
-    margin: 4,
+  horizontal: {
+    flexDirection: 'row',
+    // The cover reaches the bottom edge, so the row needs no closing space.
+    paddingBottom: 0,
   },
-  preference: {
+  horizontalCover: {
+    height: 80,
+    width: 80,
+  },
+  customHeader: {
     alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: 12,
-    paddingHorizontal: 8,
+    gap: 12,
+    paddingHorizontal: 16,
+    paddingTop: 16,
   },
-  customCoverRadius: {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 24,
-  },
-  bottomCover: {
-    marginTop: 0,
-    marginBottom: -16,
+  customHeaderText: {
+    flex: 1,
   },
 });
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { StyleProp, TextStyle, ViewProps, ViewStyle } from 'react-native';
 
+import { CardSpacing } from './tokens';
 import { useInternalTheme } from '../../core/theming';
 import type { TypescaleKey, ThemeProp } from '../../theme/types';
 import Text from '../Typography/Text';
@@ -175,7 +176,7 @@ const CardTitle = ({
           </Text>
         )}
       </View>
-      <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
+      {right ? <View style={rightStyle}>{right({ size: 24 })}</View> : null}
     </View>
   );
 };
@@ -187,15 +188,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 16,
+    gap: CardSpacing.titleGap,
+    paddingHorizontal: CardSpacing.horizontalPadding,
+    paddingTop: CardSpacing.regionGap,
   },
+
   left: {
     justifyContent: 'center',
     height: LEFT_SIZE,
     width: LEFT_SIZE,
   },
+
   titles: {
-    flex: 1,
+    // Not `flex: 1`: its zero basis gives the titles no width when a Card
+    // lays its regions out in a row, as with `contentStyle={{ flexDirection: 'row' }}`.
+    flexGrow: 1,
+    flexShrink: 1,
     flexDirection: 'column',
     justifyContent: 'center',
   },
