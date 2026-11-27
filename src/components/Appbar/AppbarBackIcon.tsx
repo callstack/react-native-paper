@@ -22,6 +22,8 @@ const AppbarBackIcon = ({
 
   // The bundled chevron is only kept while the default icon renderer is in
   // place, so a renderer configured through `PaperProvider` wins on iOS too.
+  // This is a reference check: any wrapper, even around the default renderer
+  // (e.g. `React.memo(MaterialCommunityIcon)`), counts as a custom renderer.
   const shouldUseIOSAsset =
     Platform.OS === 'ios' && icon === MaterialCommunityIcon;
 
