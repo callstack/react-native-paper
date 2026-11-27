@@ -133,6 +133,7 @@ describe('resolveColors', () => {
       expect(
         resolveColors({
           theme: LightTheme,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
           variant: 'tonalPrimary' as unknown as Variant,
         })
       ).toEqual(

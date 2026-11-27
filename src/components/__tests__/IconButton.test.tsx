@@ -317,13 +317,18 @@ describe('removed 5.x prop values', () => {
     await render(
       <IconButton
         icon="camera"
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
         mode={'contained-tonal' as unknown as Mode}
         onPress={() => {}}
       />
     );
 
     expect(
-      getIconButtonColor({ theme, mode: 'contained-tonal' as unknown as Mode })
+      getIconButtonColor({
+        theme,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+        mode: 'contained-tonal' as unknown as Mode,
+      })
     ).toEqual(getIconButtonColor({ theme, mode: 'standard' }));
     expect(warnSpy).toHaveBeenCalledWith(
       expect.stringContaining('mode "contained-tonal" is not valid')
@@ -336,14 +341,16 @@ describe('removed 5.x prop values', () => {
     await render(
       <IconButton
         icon="camera"
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
         size={24 as unknown as Size}
         onPress={() => {}}
       />
     );
 
-    expect(getDimensions({ theme, size: 24 as unknown as Size })).toEqual(
-      getDimensions({ theme, size: 'small' })
-    );
+    expect(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      getDimensions({ theme, size: 24 as unknown as Size })
+    ).toEqual(getDimensions({ theme, size: 'small' }));
     expect(warnSpy).toHaveBeenCalledWith(
       expect.stringContaining('size "24" is not valid')
     );
