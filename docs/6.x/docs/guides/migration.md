@@ -6,7 +6,10 @@ title: Migration from Paper 5.x to 6.x
 
 ### Animations
 
-React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-reanimated/) for most animations instead of the built-in React Native `Animated` API. So make sure to install the `react-native-reanimated` and `react-native-worklets` pair that matches your React Native version, as listed in [Reanimated and Worklets versions](./getting-started#reanimated-and-worklets-versions), then complete the Reanimated setup. See the [getting started guide](./getting-started) for Expo and Community CLI instructions.
+React Native Paper 6 uses [Reanimated](https://docs.swmansion.com/react-native-reanimated/) for most animations instead of the built-in React Native `Animated` API. So make sure to install `react-native-reanimated` and `react-native-worklets`, then complete the Reanimated setup:
+
+- In an Expo app, follow the Expo tab under [Installation](./getting-started#installation): upgrade to Expo SDK 56 or later, the first SDK whose versions meet Paper's minimums, then install both with `npx expo install`.
+- In a Community CLI app, install the pair that matches your React Native version, as listed in [Reanimated and Worklets versions](./getting-started#reanimated-and-worklets-versions).
 
 The following props now accept animated styles returned from `useAnimatedStyle`. They no longer accept `Animated.Value` or `Animated.AnimatedInterpolation` where these were previously supported:
 
