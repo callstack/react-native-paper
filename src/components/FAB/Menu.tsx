@@ -1013,7 +1013,7 @@ const Menu = ({
   );
 };
 
-Menu.displayName = 'Menu';
+Menu.displayName = 'FAB.Menu';
 
 const styles = StyleSheet.create({
   container: {

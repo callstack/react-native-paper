@@ -1,5 +1,12 @@
 import type { ComponentRef } from 'react';
-import { Dimensions, Keyboard, Platform, StyleSheet, View } from 'react-native';
+import {
+  AccessibilityInfo,
+  Dimensions,
+  Keyboard,
+  Platform,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import {
   afterEach,
@@ -17,6 +24,7 @@ import { render } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
 import type { Elevation } from '../../theme/types';
 import Button from '../Button/Button';
+import Divider from '../Divider';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
 
@@ -129,6 +137,119 @@ describe('web focus', () => {
   });
 });
 
+describe('screen reader focus', () => {
+  const PAST_ANIMATION_MS = 300;
+  // The focus call is deferred one frame past the animation.
+  const PAST_FRAME_MS = 32;
+  let sendEvent: jest.SpiedFunction<
+    typeof AccessibilityInfo.sendAccessibilityEvent
+  >;
+
+  const originalMeasureInWindow = Object.getOwnPropertyDescriptor(
+    View.prototype,
+    'measureInWindow'
+  );
+
+  beforeEach(() => {
+    // Measuring never resolves in the test renderer, which blocks showing.
+    const measureInWindow: ComponentRef<typeof View>['measureInWindow'] = (
+      fn
+    ) => fn(100, 100, 80, 32);
+    Object.defineProperty(View.prototype, 'measureInWindow', {
+      configurable: true,
+      value: measureInWindow,
+    });
+    sendEvent = jest
+      .spyOn(AccessibilityInfo, 'sendAccessibilityEvent')
+      .mockImplementation(() => undefined);
+  });
+
+  afterEach(() => {
+    if (originalMeasureInWindow) {
+      Object.defineProperty(
+        View.prototype,
+        'measureInWindow',
+        originalMeasureInWindow
+      );
+    } else {
+      Reflect.deleteProperty(View.prototype, 'measureInWindow');
+    }
+    sendEvent.mockRestore();
+  });
+
+  const makeMenu = (visible: boolean, disabled: string[] = []) => (
+    <Portal.Host>
+      <Menu visible={visible} anchor={<Button>Open menu</Button>}>
+        {['undo', 'redo', 'copy'].map((id) => (
+          <Menu.Item
+            key={id}
+            title={id}
+            testID={id}
+            disabled={disabled.includes(id)}
+          />
+        ))}
+      </Menu>
+    </Portal.Host>
+  );
+
+  const finishAnimation = async () => {
+    await act(() => jest.advanceTimersByTime(PAST_ANIMATION_MS));
+    await act(() => jest.advanceTimersByTime(PAST_FRAME_MS));
+  };
+
+  // The focus event receives the host ref, which in the test renderer is the
+  // mocked `View` instance. There is no user-visible way to identify it, so
+  // read its testID and compare ids to keep failure output small.
+  const focusedTestIDs = () =>
+    sendEvent.mock.calls.map(([node]) => {
+      if (typeof node !== 'object' || node === null || !('props' in node)) {
+        return undefined;
+      }
+      const { props } = node;
+      return typeof props === 'object' && props !== null && 'testID' in props
+        ? props.testID
+        : undefined;
+    });
+
+  it('focuses the first enabled item after the show animation, skipping a disabled one', async () => {
+    const { rerender } = await render(makeMenu(false, ['undo']));
+    await rerender(makeMenu(true, ['undo']));
+    await finishAnimation();
+
+    expect(focusedTestIDs()).toEqual(['redo']);
+    expect(sendEvent.mock.calls[0][1]).toBe('focus');
+  });
+
+  it('returns focus to the anchor after the hide animation', async () => {
+    const { rerender } = await render(makeMenu(true));
+    await finishAnimation();
+    sendEvent.mockClear();
+
+    await rerender(makeMenu(false));
+    await finishAnimation();
+
+    expect(sendEvent).toHaveBeenCalledTimes(1);
+    expect(focusedTestIDs()).not.toContain('undo');
+  });
+
+  it('stops targeting an item once it becomes disabled', async () => {
+    const { rerender } = await render(makeMenu(false));
+    await rerender(makeMenu(true));
+    await rerender(makeMenu(true, ['undo']));
+    await finishAnimation();
+
+    expect(focusedTestIDs()).toEqual(['redo']);
+  });
+
+  it('sends no focus event to an item when every item is disabled', async () => {
+    const { rerender } = await render(makeMenu(false));
+    await rerender(makeMenu(true, ['undo', 'redo', 'copy']));
+    await finishAnimation();
+
+    expect(sendEvent).not.toHaveBeenCalled();
+  });
+});
+
 it('renders visible menu', async () => {
   const tree = (
     await render(
@@ -172,7 +293,8 @@ const ViewPrototype: ComponentRef<typeof View> = View.prototype;
 const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
 
 elevations.forEach((elevation) =>
-  it(`renders menu with background color based on elevation value = ${elevation}`, async () => {
+  it(`uses surfaceContainerLow fill independent of elevation value = ${elevation}`, async () => {
+    const theme = LightTheme;
     const testID = 'menu-with-elevation';
 
     await render(
@@ -191,11 +313,121 @@ elevations.forEach((elevation) =>
       </Portal.Host>
     );
 
+    // C1: MD3 menu fill is surfaceContainerLow, not elevation.levelN
+    // (level2 is surfaceContainer tones in this theme — a different color).
     expect(screen.getByTestId(testID)).toHaveStyle({
-      backgroundColor: LightTheme.colors.elevation[`level${elevation}`],
+      backgroundColor: theme.colors.surfaceContainerLow,
     });
+    expect(theme.colors.surfaceContainerLow).not.toBe(
+      theme.colors.elevation.level2
+    );
   })
 );
+
+it('uses corner.large for the menu surface', async () => {
+  const theme = LightTheme;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        testID="menu-surface"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    borderRadius: theme.shapes.corner.large,
+  });
+});
+
+it('uses tertiaryContainer for vibrant color scheme', async () => {
+  const theme = LightTheme;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        testID="menu-surface"
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByTestId('menu-surface')).toHaveStyle({
+    backgroundColor: theme.colors.tertiaryContainer,
+  });
+});
+
+it('inherits the vibrant color scheme for items rendered inside a wrapper', async () => {
+  const theme = LightTheme;
+
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        colorScheme="vibrant"
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <View>
+          <Menu.Item onPress={jest.fn()} title="Undo" testID="wrapped-item" />
+        </View>
+      </Menu>
+    </Portal.Host>
+  );
+
+  expect(screen.getByText('Undo')).toHaveStyle({
+    color: theme.colors.onTertiaryContainer,
+  });
+});
+
+it('rounds items at rest to corner.extra-small', async () => {
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="First" testID="first-item" />
+        <Menu.Item onPress={jest.fn()} title="Last" testID="last-item" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  const radius = LightTheme.shapes.corner.extraSmall;
+
+  expect(screen.getByTestId('first-item')).toHaveStyle({
+    borderRadius: radius,
+  });
+  expect(screen.getByTestId('last-item')).toHaveStyle({ borderRadius: radius });
+});
+
+it('still renders Divider between items', async () => {
+  await render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="A" />
+        <Divider testID="menu-divider" />
+        <Menu.Item onPress={jest.fn()} title="B" />
+      </Menu>
+    </Portal.Host>
+  );
+  expect(screen.getByTestId('menu-divider')).toBeOnTheScreen();
+});
 
 it('uses the default anchorPosition of top', async () => {
   const testID = 'top-positioned-menu';
@@ -439,6 +671,7 @@ it('does not crash when Keyboard.metrics is unavailable (react-native-web)', asy
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   function makeMenu(visible: boolean) {
+    // PaperProvider reduceMotion="on" is the real product path for reduce-motion.
     return (
       <Portal.Host>
         <Menu

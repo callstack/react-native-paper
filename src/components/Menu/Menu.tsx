@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  AccessibilityInfo,
   Dimensions,
   Keyboard,
   Platform,
@@ -29,7 +30,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
 import useLatestCallback from 'use-latest-callback';
 
+import { MenuRootContext, type MenuItemRef } from './context';
 import MenuItem from './MenuItem';
+import { MenuTokens, type MenuColorScheme } from './tokens';
+import { getMenuContainerBorderRadius, getMenuContainerColor } from './utils';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import { useMotionDuration } from '../../theme/accessibility/ReduceMotionContext';
@@ -83,18 +87,27 @@ export type Props = {
   contentStyle?: StyleProp<SurfaceStyle>;
   style?: StyleProp<ViewStyle>;
   /**
-   * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
+   * Elevation level of the menu's content. Controls shadow only.
+   * Default fill is MD3 `surfaceContainerLow` (standard scheme) regardless of
+   * elevation — Paper's `elevation.levelN` tones are not the same as that role.
+   * By default equals `2`.
    * @supported Available in v5.x with theme version 3
    */
   elevation?: Elevation;
   /**
    * Mode of the menu's content.
-   * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
-   * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
+   * - `elevated` - Surface with a shadow; fill from MD3 menu container role.
+   * - `flat` - Surface without a shadow; same fill role.
    *
    * @supported Available in v5.x with theme version 3
    */
   mode?: 'flat' | 'elevated';
+  /**
+   * Color scheme for the menu surface and its items.
+   * - `standard` (default) — `surfaceContainerLow` fill + onSurface content
+   * - `vibrant` — M3 Expressive tertiary roles
+   */
+  colorScheme?: MenuColorScheme;
   /**
    * @optional
    */
@@ -110,7 +123,7 @@ export type Props = {
 };
 
 // Minimum padding between the edge of the screen and the menu
-const SCREEN_INDENT = 8;
+const SCREEN_INDENT = MenuTokens.sizes.screenIndent;
 // From https://material.io/design/motion/speed.html#duration
 const ANIMATION_DURATION = 250;
 // From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
@@ -120,7 +133,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
 
 const getKeyboardHeight = (fallback: number) =>
   Keyboard.metrics?.()?.height ?? fallback;
-const DEFAULT_ELEVATION: Elevation = 2;
+const DEFAULT_ELEVATION: Elevation = MenuTokens.elevation.default;
 const DEFAULT_MODE = 'elevated';
 
 const focusFirstDOMNode = (
@@ -139,6 +152,21 @@ const focusFirstDOMNode = (
   }
 };
 
+const focusNativeNode = (
+  el: React.ComponentRef<typeof View> | null | undefined
+) => {
+  if (el && Platform.OS !== 'web') {
+    // Moves TalkBack / VoiceOver focus; the native node may not be
+    // accessible yet right after the animation, so defer one frame.
+    requestAnimationFrame(() => {
+      AccessibilityInfo.sendAccessibilityEvent(el, 'focus');
+      // Input focus for a hardware keyboard. A no-op unless the app enables
+      // RN's `enableImperativeFocus` feature flag, and absent on older RN.
+      el.focus?.();
+    });
+  }
+};
+
 const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
   !React.isValidElement(anchor) &&
   typeof anchor?.x === 'number' &&
@@ -146,6 +174,16 @@ const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
 
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
+ *
+ * Follows [Material Design 3 menus](https://m3.material.io/components/menus/specs): container
+ * `corner.large`, fill `surfaceContainerLow` (elevation controls shadow only), item label
+ * `labelLarge`, selected items use `tertiaryContainer` / `onTertiaryContainer`.
+ *
+ * ## Accessibility
+ * When the menu opens, screen reader focus moves to its first enabled item, and it returns to
+ * the anchor when the menu closes. On Android, the Up and Down arrow keys move between the
+ * enabled items and skip disabled ones. Moving keyboard focus into the menu on open also needs
+ * React Native's `enableImperativeFocus` feature flag, which is off by default.
  *
  * ## Usage
  * ```js
@@ -172,10 +210,24 @@ const isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
  *           visible={visible}
  *           onDismiss={closeMenu}
  *           anchor={<Button onPress={openMenu}>Show menu</Button>}>
- *           <Menu.Item onPress={() => {}} title="Item 1" />
- *           <Menu.Item onPress={() => {}} title="Item 2" />
+ *           <Menu.Item
+ *             leadingIcon="content-paste"
+ *             onPress={() => {}}
+ *             title="Paste"
+ *             supportingText="Insert clipboard"
+ *             trailingSupportingText="⌘V"
+ *             selected
+ *           />
+ *           <Menu.Item onPress={() => {}} title="Undo" />
  *           <Divider />
- *           <Menu.Item onPress={() => {}} title="Item 3" />
+ *           <Menu.Item onPress={() => {}} title="Share" dense />
+ *         </Menu>
+ *         <Menu
+ *           visible={false}
+ *           onDismiss={() => {}}
+ *           colorScheme="vibrant"
+ *           anchor={<Button onPress={() => {}}>Vibrant</Button>}>
+ *           <Menu.Item onPress={() => {}} title="Featured" selected />
  *         </Menu>
  *       </View>
  *     </PaperProvider>
@@ -204,6 +256,7 @@ const Menu = ({
   style,
   elevation = DEFAULT_ELEVATION,
   mode = DEFAULT_MODE,
+  colorScheme = 'standard',
   children,
   theme: themeOverrides,
   keyboardShouldPersistTaps,
@@ -212,7 +265,6 @@ const Menu = ({
 
   const { direction } = useLocale();
   const insets = useSafeAreaInsets();
-
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
@@ -235,6 +287,11 @@ const Menu = ({
   const anchorRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
   const menuRef = React.useRef<React.ComponentRef<typeof View> | null>(null);
   const isShownRef = React.useRef(false);
+  const [items, setItems] = React.useState<MenuItemRef[]>([]);
+  const registerItem = React.useCallback((item: MenuItemRef) => {
+    setItems((prev) => [...prev, item]);
+    return () => setItems((prev) => prev.filter((it) => it !== item));
+  }, []);
 
   const keyboardDidShow = React.useCallback((e: RNKeyboardEvent) => {
     const keyboardHeight = e.endCoordinates.height;
@@ -316,6 +373,7 @@ const Menu = ({
 
     isShownRef.current = true;
     focusFirstDOMNode(menuRef.current);
+    focusNativeNode(items[0]?.current);
   });
 
   const handleHideAnimationFinished = useLatestCallback((finished: boolean) => {
@@ -329,6 +387,7 @@ const Menu = ({
     setRendered(false);
     isShownRef.current = false;
     focusFirstDOMNode(anchorRef.current);
+    focusNativeNode(anchorRef.current);
   });
 
   const getDuration = useMotionDuration();
@@ -665,6 +724,13 @@ const Menu = ({
 
   const pointerEvents = visible ? 'box-none' : 'none';
 
+  const rootContext = React.useMemo(
+    () => ({ colorScheme, registerItem, items }),
+    [colorScheme, registerItem, items]
+  );
+
+  const surfaceBackground = getMenuContainerColor({ theme, colorScheme });
+
   return (
     <View
       ref={(ref) => {
@@ -699,7 +765,8 @@ const Menu = ({
             >
               <Surface
                 mode={mode}
-                borderRadius={theme.shapes.corner.extraSmall}
+                borderRadius={getMenuContainerBorderRadius(theme)}
+                backgroundColor={surfaceBackground}
                 style={[
                   styles.shadowMenuContainer,
                   { pointerEvents },
@@ -717,13 +784,15 @@ const Menu = ({
                     contentStyle,
                   ]}
                 >
-                  {(scrollableMenuHeight && (
-                    <ScrollView
-                      keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-                    >
-                      {children}
-                    </ScrollView>
-                  )) || <React.Fragment>{children}</React.Fragment>}
+                  <MenuRootContext.Provider value={rootContext}>
+                    {(scrollableMenuHeight && (
+                      <ScrollView
+                        keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                      >
+                        {children}
+                      </ScrollView>
+                    )) || <React.Fragment>{children}</React.Fragment>}
+                  </MenuRootContext.Provider>
                 </Animated.View>
               </Surface>
             </Animated.View>
@@ -744,7 +813,9 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   menuContent: {
-    paddingVertical: 8,
+    paddingHorizontal: MenuTokens.sizes.containerPaddingHorizontal,
+    paddingVertical: MenuTokens.sizes.containerPaddingVertical,
+    marginVertical: MenuTokens.sizes.containerMarginVertical,
   },
   fill: {
     height: '100%',
