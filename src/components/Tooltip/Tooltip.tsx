@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  View,
-  StyleSheet,
-  Platform,
-  Pressable,
-} from 'react-native';
+import { Dimensions, View, StyleSheet, Platform } from 'react-native';
 import type { LayoutChangeEvent, ViewStyle } from 'react-native';
 
 import { getTooltipPosition } from './utils';
@@ -231,16 +225,16 @@ const Tooltip = ({
           </View>
         </Portal>
       )}
-      <Pressable
+      <View
         ref={childrenWrapperRef}
+        collapsable={false}
         style={styles.pressContainer}
-        {...(Platform.OS === 'web' ? webPressProps : mobilePressProps)}
       >
         {React.cloneElement(children, {
           ...rest,
           ...(Platform.OS === 'web' ? webPressProps : mobilePressProps),
         })}
-      </Pressable>
+      </View>
     </>
   );
 };
