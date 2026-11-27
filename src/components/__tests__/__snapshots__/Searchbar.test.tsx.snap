@@ -716,46 +716,16 @@ exports[`renders searchbar in "view" mode 1`] = `
         }
       >
         <View
-          accessibilityLabel="clear"
-          accessibilityState={
-            {
-              "busy": false,
-              "checked": undefined,
-              "disabled": false,
-              "expanded": undefined,
-              "selected": undefined,
-            }
-          }
-          accessibilityValue={
-            {
-              "max": undefined,
-              "min": undefined,
-              "now": undefined,
-              "text": undefined,
-            }
-          }
           accessible={true}
+          aria-busy={false}
+          aria-hidden={true}
+          aria-label="clear"
           centered={true}
           collapsable={false}
-          focusable={true}
-          hitSlop={
-            {
-              "bottom": 4,
-              "left": 4,
-              "right": 4,
-              "top": 4,
-            }
-          }
+          focusable={false}
           onBlur={[Function]}
-          onClick={[Function]}
           onFocus={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          role="button"
+          role="none"
           style={
             [
               {
@@ -1133,46 +1103,16 @@ exports[`renders with placeholder 1`] = `
         }
       >
         <View
-          accessibilityLabel="clear"
-          accessibilityState={
-            {
-              "busy": false,
-              "checked": undefined,
-              "disabled": false,
-              "expanded": undefined,
-              "selected": undefined,
-            }
-          }
-          accessibilityValue={
-            {
-              "max": undefined,
-              "min": undefined,
-              "now": undefined,
-              "text": undefined,
-            }
-          }
           accessible={true}
+          aria-busy={false}
+          aria-hidden={true}
+          aria-label="clear"
           centered={true}
           collapsable={false}
-          focusable={true}
-          hitSlop={
-            {
-              "bottom": 4,
-              "left": 4,
-              "right": 4,
-              "top": 4,
-            }
-          }
+          focusable={false}
           onBlur={[Function]}
-          onClick={[Function]}
           onFocus={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          role="button"
+          role="none"
           style={
             [
               {
