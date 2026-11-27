@@ -123,6 +123,19 @@ exports[`RadioButtonGroup renders properly 1`] = `
           }
         />
       </View>
+      <View
+        pointerEvents="none"
+        style={
+          [
+            {
+              "borderRadius": 20,
+              "height": 40,
+              "position": "absolute",
+              "width": 40,
+            },
+          ]
+        }
+      />
     </View>
   </View>
 </View>

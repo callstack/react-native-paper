@@ -101,6 +101,20 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
         }
       />
     </View>
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+        ]
+      }
+      testID="custom:testID-focus-ring"
+    />
   </View>
 </View>
 `;
@@ -204,6 +218,19 @@ exports[`RadioButton renders properly 1`] = `
         }
       />
     </View>
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+        ]
+      }
+    />
   </View>
 </View>
 `;
@@ -328,6 +355,19 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
         }
       />
     </View>
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 20,
+            "height": 40,
+            "position": "absolute",
+            "width": 40,
+          },
+        ]
+      }
+    />
   </View>
 </View>
 `;

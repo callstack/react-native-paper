@@ -105,6 +105,15 @@ describe('RadioButton', () => {
       expect(onPress).not.toHaveBeenCalled();
     });
 
+    it('calls onLongPress on a long press', async () => {
+      const onLongPress = mockJest.fn<(e: GestureResponderEvent) => void>();
+      await render(<RadioButton value="first" onLongPress={onLongPress} />);
+
+      await userEvent.longPress(screen.getByRole('radio'));
+
+      expect(onLongPress).toHaveBeenCalledTimes(1);
+    });
+
     it('keeps the same element when it gets disabled', async () => {
       const onPress = mockJest.fn<(e: GestureResponderEvent) => void>();
       const { rerender } = await render(
@@ -346,5 +355,60 @@ describe('RadioButton Space key on web', () => {
     await fireEvent(radio, 'keyUp', space);
 
     expect(space.preventDefault).not.toHaveBeenCalled();
+  });
+});
+
+describe('RadioButton focus ring', () => {
+  const { thickness } = tokens.md.sys.state.focusIndicator;
+  const ringOutline = { outlineWidth: thickness, outlineOffset: -thickness };
+
+  const ring = () => screen.getByTestId('radio-focus-ring');
+  const radio = () => screen.getByRole('radio');
+
+  afterEach(() => {
+    mockJest.restoreAllMocks();
+  });
+
+  it('draws an inward ring on the 40dp state layer on keyboard focus', async () => {
+    await render(
+      <RadioButton value="first" testID="radio" onPress={() => {}} />
+    );
+
+    await fireEvent(radio(), 'focus');
+
+    expect(ring()).toHaveStyle({ width: 40, height: 40, ...ringOutline });
+    expect(radio()).not.toHaveStyle({ outlineWidth: thickness });
+  });
+
+  it('removes the ring on blur', async () => {
+    await render(
+      <RadioButton value="first" testID="radio" onPress={() => {}} />
+    );
+
+    await fireEvent(radio(), 'focus');
+    await fireEvent(radio(), 'blur');
+
+    expect(ring()).not.toHaveStyle({ outlineWidth: thickness });
+  });
+
+  it.each([
+    ['disabled', { disabled: true, onPress: () => {} }],
+    ['read only', {}],
+  ])('draws no ring on a %s radio', async (_, props) => {
+    await render(<RadioButton value="first" testID="radio" {...props} />);
+
+    await fireEvent(radio(), 'focus');
+
+    expect(ring()).not.toHaveStyle({ outlineWidth: thickness });
+  });
+
+  it('marks the ring for the shared stylesheet on web', async () => {
+    mockJest.replaceProperty(Platform, 'OS', 'web');
+    await render(
+      <RadioButton value="first" testID="radio" onPress={() => {}} />
+    );
+
+    expect(ring()).toHaveProp('dataSet', { focusRingDescendant: 'inward' });
+    expect(radio()).toHaveProp('dataSet', { focusRingTarget: 'true' });
   });
 });

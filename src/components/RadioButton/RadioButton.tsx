@@ -25,6 +25,7 @@ import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
 import type { ThemeProp } from '../../theme/types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { isKeyboardFocusEvent } from '../../utils/isKeyboardFocusEvent';
+import { mergeDataSetProps, useFocusRing } from '../../utils/useFocusRing';
 import { useSpaceKeyPress } from '../../utils/useSpaceKeyPress';
 import type { PressableStateCallbackType } from '../TouchableRipple/Pressable';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -131,6 +132,7 @@ const RadioButton = ({
   onBlur,
   onHoverIn,
   onHoverOut,
+  onLongPress,
   onPressIn,
   onPressOut,
   rippleColor,
@@ -183,9 +185,18 @@ const RadioButton = ({
   // A handler-less radio would claim the touch and do nothing with it, so the
   // press handlers stay off unless there is something to call.
   const hasHandler =
-    isPressable ||
-    hasTouchHandler({ onLongPress: rest.onLongPress, onPressIn, onPressOut });
+    isPressable || hasTouchHandler({ onLongPress, onPressIn, onPressOut });
   const isInteractive = !disabled && hasHandler;
+
+  // The MD3 focus indicator wraps the 40dp state layer, not the 48dp touch
+  // target, so the ring is drawn inward on a child of the state layer
+  // (`'descendant'`).
+  const { target: focusTarget, ring: focusRing } = useFocusRing(
+    !isInteractive,
+    theme.colors.secondary,
+    'inward',
+    'descendant'
+  );
 
   const ownsPress =
     isInteractive && !platformOwnsPress && Boolean(rippleEffectEnabled);
@@ -237,9 +248,10 @@ const RadioButton = ({
       if (!disabled && isKeyboardFocusEvent(e)) {
         setFocused(true);
       }
+      focusTarget.onFocus?.(e);
       onFocus?.(e);
     },
-    [disabled, onFocus]
+    [disabled, focusTarget, onFocus]
   );
 
   const handleHoverIn = React.useCallback(
@@ -299,10 +311,11 @@ const RadioButton = ({
   const handleBlur = React.useCallback(
     (e: NativeSyntheticEvent<TargetedEvent>) => {
       setFocused(false);
+      focusTarget.onBlur?.();
       handleSpaceKeyBlur(e);
       onBlur?.(e);
     },
-    [handleSpaceKeyBlur, onBlur]
+    [focusTarget, handleSpaceKeyBlur, onBlur]
   );
 
   // When `accessible={false}` is passed (typically by `RadioButton.Item`,
@@ -327,19 +340,24 @@ const RadioButton = ({
       ? (state: PressableStateCallbackType) => [
           styles.container,
           restStyle(state),
+          ...focusTarget.style,
         ]
-      : [styles.container, restStyle];
+      : [styles.container, restStyle, ...focusTarget.style];
 
   return (
     <TouchableRipple
       {...restProps}
+      {...mergeDataSetProps(restProps, focusTarget.dataSetProps)}
       borderless
+      // The radio draws its own ring around the 40dp state layer.
+      focusRing="none"
       onFocus={handleFocus}
       onBlur={handleBlur}
       onHoverIn={handleHoverIn}
       onHoverOut={handleHoverOut}
       onPressIn={hasHandler ? handlePressIn : undefined}
       onPressOut={hasHandler ? handlePressOut : undefined}
+      onLongPress={onLongPress}
       {...platformPressProps}
       // A radio with nothing to call (no `onPress` and no `RadioButton.Group`)
       // is read only and gets no handler, so it never takes a press meant for
@@ -371,6 +389,14 @@ const RadioButton = ({
         >
           <Animated.View style={[styles.dot, dotStyle]} />
         </View>
+        {/* The ring is painted last, so the state layer and the radio do not
+            cover it. */}
+        <View
+          pointerEvents="none"
+          testID={testID ? `${testID}-focus-ring` : undefined}
+          style={[styles.stateLayerFill, ...focusRing.style]}
+          {...focusRing.dataSetProps}
+        />
       </View>
     </TouchableRipple>
   );

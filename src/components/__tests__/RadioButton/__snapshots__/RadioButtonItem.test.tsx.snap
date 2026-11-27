@@ -126,6 +126,19 @@ exports[`can render leading radio button control 1`] = `
             }
           />
         </View>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "borderRadius": 20,
+                "height": 40,
+                "position": "absolute",
+                "width": 40,
+              },
+            ]
+          }
+        />
       </View>
     </View>
     <Text
@@ -346,6 +359,19 @@ exports[`renders unchecked 1`] = `
             }
           />
         </View>
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "borderRadius": 20,
+                "height": 40,
+                "position": "absolute",
+                "width": 40,
+              },
+            ]
+          }
+        />
       </View>
     </View>
   </View>
