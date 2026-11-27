@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -8,6 +8,7 @@ import type {
 } from 'react-native';
 
 import Checkbox from './Checkbox';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, TypescaleKey } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
@@ -141,6 +142,7 @@ const CheckboxItem = ({
   ...props
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const checkboxProps = { ...props, status, theme, disabled };
   const isLeading = position === 'leading';
   // The outer TouchableRipple below is the interactable element + a11y
@@ -151,7 +153,8 @@ const CheckboxItem = ({
     <Checkbox {...checkboxProps} accessible={false} style={styles.checkbox} />
   );
 
-  const textAlign = isLeading ? 'right' : 'left';
+  const textAlign =
+    Platform.OS === 'web' && direction === 'rtl' ? 'right' : 'left';
 
   // The row is the focusable checkbox, so it takes the Space key itself.
   const { keyHandlers: spaceKeyHandlers, onBlur: handleSpaceKeyBlur } =

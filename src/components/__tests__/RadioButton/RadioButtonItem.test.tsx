@@ -84,3 +84,33 @@ it('should execute onLongPress', async () => {
 
   expect(onLongPress).toHaveBeenCalledTimes(1);
 });
+
+it('start-aligns the label with position="leading" in LTR and web RTL', async () => {
+  const { Platform } = require('react-native');
+  const { LocaleProvider } = require('../../../core/locale');
+
+  await render(
+    <RadioButton.Item
+      label="Leading item"
+      value="first"
+      position="leading"
+      status="checked"
+      onPress={() => {}}
+    />
+  );
+  expect(screen.getByText('Leading item')).toHaveStyle({ textAlign: 'left' });
+
+  jest.replaceProperty(Platform, 'OS', 'web');
+  await render(
+    <LocaleProvider direction="rtl">
+      <RadioButton.Item
+        label="Leading RTL"
+        value="first"
+        position="leading"
+        status="checked"
+        onPress={() => {}}
+      />
+    </LocaleProvider>
+  );
+  expect(screen.getByText('Leading RTL')).toHaveStyle({ textAlign: 'right' });
+});

@@ -137,3 +137,33 @@ it('does not toggle on a release after the row was disabled mid press', async ()
 
   expect(onPress).not.toHaveBeenCalled();
 });
+
+it('start-aligns the label with position="leading" in LTR and web RTL', async () => {
+  await render(
+    <Checkbox.Item
+      label="Leading item"
+      position="leading"
+      status="checked"
+      onPress={() => {}}
+    />
+  );
+  expect(
+    screen.getByText('Leading item', { includeHiddenElements: true })
+  ).toHaveStyle({ textAlign: 'left' });
+
+  jest.replaceProperty(Platform, 'OS', 'web');
+  const { LocaleProvider } = require('../../../core/locale');
+  await render(
+    <LocaleProvider direction="rtl">
+      <Checkbox.Item
+        label="Leading RTL"
+        position="leading"
+        status="checked"
+        onPress={() => {}}
+      />
+    </LocaleProvider>
+  );
+  expect(
+    screen.getByText('Leading RTL', { includeHiddenElements: true })
+  ).toHaveStyle({ textAlign: 'right' });
+});

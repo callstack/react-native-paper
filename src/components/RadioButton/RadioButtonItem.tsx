@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type {
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -14,6 +14,7 @@ import { RadioButtonContext } from './RadioButtonGroup';
 import type { RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, TypescaleKey } from '../../theme/types';
 import { getStateLayer } from '../../theme/utils/state';
@@ -162,6 +163,7 @@ const RadioButtonItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const radioButtonProps = {
     value,
     disabled,
@@ -181,7 +183,8 @@ const RadioButtonItem = ({
     radioButton = <RadioButton {...radioButtonProps} />;
   }
 
-  const textAlign = isLeading ? 'right' : 'left';
+  const textAlign =
+    Platform.OS === 'web' && direction === 'rtl' ? 'right' : 'left';
 
   const computedStyle: TextStyle = {
     ...getStateLayer(theme, 'onSurface', disabled ? 'disabled' : 'enabled'),
