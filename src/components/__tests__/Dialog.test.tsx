@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react';
 import {
+  AccessibilityInfo,
   Text,
   StyleSheet,
   Platform,
@@ -416,6 +417,28 @@ describe('Dialog', () => {
     );
 
     expect(screen.getByLabelText('Alert')).toHaveProp('role', 'dialog');
+  });
+
+  it('announces the dialog name on iOS when opening', async () => {
+    jest.useFakeTimers();
+    jest.replaceProperty(Platform, 'OS', 'ios');
+    const announceSpy = jest
+      .spyOn(AccessibilityInfo, 'announceForAccessibility')
+      .mockImplementation(() => {});
+
+    await render(
+      <Portal.Host>
+        <Dialog visible onDismiss={jest.fn()} title="Alert" content="Body" />
+      </Portal.Host>
+    );
+
+    await act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(announceSpy).toHaveBeenCalledWith('Alert');
+    announceSpy.mockRestore();
+    jest.useRealTimers();
   });
 
   it('should render a content', async () => {
