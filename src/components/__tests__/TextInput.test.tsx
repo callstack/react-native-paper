@@ -1035,7 +1035,7 @@ it('applies RTL text alignment and writing direction to the TextInput (outlined)
   });
 });
 
-it('applies RTL writing direction to supporting text', async () => {
+it('uses left text alignment and rtl writing direction for supporting text in RTL on native', async () => {
   I18nManager.isRTL = true;
 
   await render(
@@ -1048,6 +1048,7 @@ it('applies RTL writing direction to supporting text', async () => {
   );
 
   expect(screen.getByText('Hint', includeHiddenElements)).toHaveStyle({
+    textAlign: 'left',
     writingDirection: 'rtl',
   });
 });
@@ -1455,6 +1456,71 @@ describe('on web in RTL', () => {
     expect(screen.getByText('Email', includeHiddenElements).parent).toHaveStyle(
       { right: LABEL_START_OFFSET_WITHOUT_ACCESSORY }
     );
+  });
+
+  it('uses physical margins for the accessories', async () => {
+    await render(
+      <TextInput
+        label="Email"
+        value=""
+        onChangeText={() => {}}
+        startAccessory={({ style }) => (
+          <View testID="web-rtl-leading" style={style} />
+        )}
+        endAccessory={({ style }) => (
+          <View testID="web-rtl-trailing" style={style} />
+        )}
+      />
+    );
+
+    expect(screen.getByTestId('web-rtl-leading')).toHaveStyle({
+      marginStart: 0,
+      marginRight: 12,
+    });
+    expect(screen.getByTestId('web-rtl-trailing')).toHaveStyle({
+      marginEnd: 0,
+      marginLeft: 12,
+    });
+  });
+
+  it('aligns supporting text to the right and the counter to the left', async () => {
+    await render(
+      <TextInput
+        label="Email"
+        value="ab"
+        maxLength={10}
+        counter
+        supportingText="Helper"
+        onChangeText={() => {}}
+      />
+    );
+
+    expect(
+      screen.queryByTestId('text-input-addendum-spacer', includeHiddenElements)
+    ).not.toBeOnTheScreen();
+    expect(screen.getByText('Helper', includeHiddenElements)).toHaveStyle({
+      textAlign: 'right',
+    });
+    expect(screen.getByText('2/10', includeHiddenElements)).toHaveStyle({
+      textAlign: 'left',
+    });
+  });
+
+  it('renders the counter without supporting text', async () => {
+    await render(
+      <TextInput
+        label="Email"
+        value="ab"
+        maxLength={10}
+        counter
+        onChangeText={() => {}}
+      />
+    );
+
+    expect(
+      screen.getByTestId('text-input-addendum-spacer', includeHiddenElements)
+    ).toBeOnTheScreen();
+    expect(screen.getByText('2/10', includeHiddenElements)).toBeOnTheScreen();
   });
 });
 

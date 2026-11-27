@@ -194,6 +194,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
               "marginStart": 12,
               "width": 24,
             },
+            false,
             {
               "opacity": 0.38,
             },
@@ -376,6 +377,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
               "marginEnd": 12,
               "width": 24,
             },
+            false,
             {
               "opacity": 0.38,
             },
@@ -685,6 +687,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "width": 24,
             },
             false,
+            false,
             null,
             {
               "borderRadius": 20,
@@ -860,6 +863,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
               "marginEnd": 12,
               "width": 24,
             },
+            false,
             false,
             null,
             {
@@ -1140,6 +1144,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "width": 24,
             },
             false,
+            false,
             null,
             {
               "borderRadius": 20,
@@ -1315,6 +1320,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
               "marginEnd": 12,
               "width": 24,
             },
+            false,
             false,
             null,
             {
@@ -1799,6 +1805,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "width": 24,
             },
             false,
+            false,
             null,
             {
               "borderRadius": 20,
@@ -1974,6 +1981,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
               "marginEnd": 12,
               "width": 24,
             },
+            false,
             false,
             null,
             {
@@ -2234,6 +2242,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "width": 24,
             },
             false,
+            false,
             null,
             {
               "borderRadius": 20,
@@ -2409,6 +2418,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
               "marginEnd": 12,
               "width": 24,
             },
+            false,
             false,
             null,
             {
