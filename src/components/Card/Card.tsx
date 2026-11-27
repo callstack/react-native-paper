@@ -18,6 +18,7 @@ import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
+import flattenChildren from '../../utils/flattenChildren';
 import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
@@ -243,8 +244,9 @@ const Card = (
     runElevationAnimation('out');
   });
 
-  const total = React.Children.count(children);
-  const siblings = React.Children.map(children, (child) =>
+  const flattenedChildren = flattenChildren(children);
+  const total = flattenedChildren.length;
+  const siblings = flattenedChildren.map((child) =>
     React.isValidElement(child) && child.type
       ? (child.type as any).displayName
       : null
@@ -273,7 +275,7 @@ const Card = (
 
   const content = (
     <View style={[styles.innerContainer, contentStyle]} testID={testID}>
-      {React.Children.map(children, (child, index) =>
+      {flattenedChildren.map((child, index) =>
         React.isValidElement(child)
           ? React.cloneElement(child as React.ReactElement<any>, {
               index,

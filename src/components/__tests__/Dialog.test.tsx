@@ -151,6 +151,27 @@ describe('DialogActions', () => {
     expect(dialogActionButtons[0]).toHaveStyle({ margin: 10 });
     expect(dialogActionButtons[1]).toHaveStyle({ margin: 0 });
   });
+
+  it('should apply default styles to buttons wrapped in a fragment', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation();
+
+    const { getByTestId } = render(
+      <Dialog.Actions testID="dialog-actions">
+        <>
+          <Button>Cancel</Button>
+          <Button>Ok</Button>
+        </>
+      </Dialog.Actions>
+    );
+
+    const dialogActionButtons = getByTestId('dialog-actions').children;
+
+    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
+    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
+    expect(consoleError).not.toHaveBeenCalled();
+
+    consoleError.mockRestore();
+  });
 });
 
 const styles = StyleSheet.create({
