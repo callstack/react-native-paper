@@ -52,6 +52,7 @@ exports[`applies a static transform from style 1`] = `
       collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       role="none"
       style={
         [
@@ -190,6 +191,7 @@ exports[`renders a square icon button 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -326,6 +328,7 @@ exports[`renders disabled icon button 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -443,6 +446,7 @@ exports[`renders extra-large icon button 1`] = `
       collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       role="none"
       style={
         [
@@ -554,6 +558,7 @@ exports[`renders filled icon button 1`] = `
       collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       role="none"
       style={
         [
@@ -665,6 +670,7 @@ exports[`renders icon button by default 1`] = `
       collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       role="none"
       style={
         [
@@ -776,6 +782,7 @@ exports[`renders icon button with color 1`] = `
       collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       role="none"
       style={
         [
@@ -887,6 +894,7 @@ exports[`renders icon change animated 1`] = `
       collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       role="none"
       style={
         [
@@ -1036,6 +1044,7 @@ exports[`renders outlined icon button 1`] = `
       collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       role="none"
       style={
         [
@@ -1147,6 +1156,7 @@ exports[`renders tonal icon button 1`] = `
       collapsable={false}
       onBlur={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       role="none"
       style={
         [

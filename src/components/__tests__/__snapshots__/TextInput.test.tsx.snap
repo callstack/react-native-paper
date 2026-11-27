@@ -230,6 +230,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             collapsable={false}
             onBlur={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             role="none"
             style={
               [
@@ -433,6 +434,7 @@ exports[`dims a disabled TextInput with TextInput.Icon accessories exactly once 
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -718,6 +720,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             collapsable={false}
             onBlur={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             role="none"
             style={
               [
@@ -894,6 +897,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories 1`] = `
             collapsable={false}
             onBlur={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             role="none"
             style={
               [
@@ -1173,6 +1177,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             collapsable={false}
             onBlur={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             role="none"
             style={
               [
@@ -1376,6 +1381,7 @@ exports[`renders filled TextInput with TextInput.Icon accessories when error is 
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -1832,6 +1838,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             collapsable={false}
             onBlur={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             role="none"
             style={
               [
@@ -2008,6 +2015,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories 1`] = `
             collapsable={false}
             onBlur={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             role="none"
             style={
               [
@@ -2267,6 +2275,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             collapsable={false}
             onBlur={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             role="none"
             style={
               [
@@ -2470,6 +2479,7 @@ exports[`renders outlined TextInput with TextInput.Icon accessories when error i
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}

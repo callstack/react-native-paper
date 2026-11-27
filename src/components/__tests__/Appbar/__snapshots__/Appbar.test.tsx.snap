@@ -181,6 +181,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           collapsable={false}
           onBlur={[Function]}
           onFocus={[Function]}
+          onLayout={[Function]}
           role="none"
           style={
             [
@@ -364,6 +365,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
+            onLayout={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -556,6 +558,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
+        onLayout={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -793,6 +796,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
+        onLayout={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -994,6 +998,7 @@ exports[`AppbarAction should be rendered with custom color 1`] = `
         collapsable={false}
         onBlur={[Function]}
         onFocus={[Function]}
+        onLayout={[Function]}
         role="none"
         style={
           [
@@ -1190,6 +1195,7 @@ exports[`AppbarAction should be rendered with default theme color 1`] = `
         collapsable={false}
         onBlur={[Function]}
         onFocus={[Function]}
+        onLayout={[Function]}
         role="none"
         style={
           [
@@ -1386,6 +1392,7 @@ exports[`AppbarAction should be rendered with specific theme color if is leading
         collapsable={false}
         onBlur={[Function]}
         onFocus={[Function]}
+        onLayout={[Function]}
         role="none"
         style={
           [
@@ -1583,6 +1590,7 @@ exports[`AppbarAction should render AppbarBackAction with custom color 1`] = `
         collapsable={false}
         onBlur={[Function]}
         onFocus={[Function]}
+        onLayout={[Function]}
         role="none"
         style={
           [

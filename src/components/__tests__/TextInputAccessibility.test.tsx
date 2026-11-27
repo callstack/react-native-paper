@@ -928,5 +928,10 @@ it('forwards decorative accessory layout callbacks and native IDs', async () => 
     includeHiddenElements: true,
   });
   expect(icon).toHaveProp('nativeID', 'search-icon');
-  expect(icon).toHaveProp('onLayout', onLayout);
+
+  const event = {
+    nativeEvent: { layout: { x: 0, y: 0, width: 40, height: 40 } },
+  };
+  await fireEvent(icon, 'layout', event);
+  expect(onLayout).toHaveBeenCalledWith(event);
 });

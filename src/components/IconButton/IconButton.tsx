@@ -5,6 +5,7 @@ import type {
   ColorValue,
   FocusEvent,
   GestureResponderEvent,
+  LayoutChangeEvent,
   StyleProp,
   ViewStyle,
 } from 'react-native';
@@ -20,6 +21,7 @@ import getMinInteractiveSizeHitSlop from '../../utils/getMinInteractiveSizeHitSl
 import hasTouchHandler, {
   carriesToggleState,
 } from '../../utils/hasTouchHandler';
+import { roundLayoutSize } from '../../utils/roundLayoutSize';
 import { useFocusRing } from '../../utils/useFocusRing';
 import { useShapeMorph } from '../../utils/useShapeMorph';
 import ActivityIndicator from '../ActivityIndicator';
@@ -179,11 +181,19 @@ const IconButton = ({
   onPressOut: onPressOutProp,
   onFocus: onFocusProp,
   onBlur: onBlurProp,
+  onLayout: onLayoutProp,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const reduceMotion = useReduceMotion();
   const [pressed, setPressed] = React.useState(false);
+  // Laid-out size of the touchable. `style` and `contentStyle` can resize the
+  // button away from its named `size`, so the hit slop is read from this once
+  // it is known.
+  const [touchableLayout, setTouchableLayout] = React.useState<{
+    width: number;
+    height: number;
+  } | null>(null);
 
   const IconComponent = animated ? CrossFadeIcon : Icon;
 
@@ -297,9 +307,23 @@ const IconButton = ({
         ? { 'aria-pressed': selected }
         : { 'aria-checked': selected };
 
+  const handleLayout = (e: LayoutChangeEvent) => {
+    onLayoutProp?.(e);
+    const width = roundLayoutSize(e.nativeEvent.layout.width);
+    const height = roundLayoutSize(e.nativeEvent.layout.height);
+    setTouchableLayout((current) =>
+      current?.width === width && current.height === height
+        ? current
+        : { width, height }
+    );
+  };
+
   // The touchable sits inside the outline, so it is smaller than the container.
-  const touchableWidth = dimensions.width - 2 * borderWidth;
-  const touchableHeight = dimensions.height - 2 * borderWidth;
+  // Until it is laid out, the size comes from the `size` tokens.
+  const touchableWidth =
+    touchableLayout?.width ?? dimensions.width - 2 * borderWidth;
+  const touchableHeight =
+    touchableLayout?.height ?? dimensions.height - 2 * borderWidth;
 
   // Disabled and handler-less buttons get no extra target.
   const defaultHitSlop = canBePressed
@@ -369,6 +393,7 @@ const IconButton = ({
           theme={theme}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          onLayout={handleLayout}
           aria-label={ariaLabel}
           style={[
             styles.touchable,
