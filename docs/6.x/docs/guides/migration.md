@@ -123,9 +123,11 @@ Components no longer read values from the `style` prop to derive other styles, s
 
 - `Appbar` and `Appbar.Header`: `backgroundColor` and the border radius props (`borderRadius`, `borderTopLeftRadius` etc.) replace `style.backgroundColor` and the border radius in `style`
 - `Avatar.Icon`, `Avatar.Image` and `Avatar.Text`: `backgroundColor` replaces `style.backgroundColor`
+- `Banner`: `backgroundColor` replaces `style.backgroundColor`
 - `Button`: `iconSize` replaces `labelStyle.fontSize` for the size of the icon and the loading indicator
 - `Button`: `textColor` replaces `labelStyle.color` for the color of the icon and the loading indicator
 - `Card`: `borderColor` replaces `style.borderColor` for the outline color
+- `Menu`: `backgroundColor` replaces `contentStyle.backgroundColor`
 
 `Tooltip` no longer reads positioning styles from the wrapped element. Apply them to a parent `View` wrapping the `Tooltip`, see [Tooltip](#tooltip).
 
@@ -611,6 +613,22 @@ e.g.:
 
 Showing and hiding use the `standardDecelerate` and `standardAccelerate` easing curves instead of ease-in-out.
 
+The banner background is now `theme.colors.surfaceContainerLow` by default and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level1` to change the banner background, customize `theme.colors.surfaceContainerLow` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `1` is unchanged. A banner with `elevation={0}` is no longer transparent. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 14 and newer, the banner now uses the system surface color. On Android 12 and 13, only the `DynamicDarkTheme` banner does. To change the background of a single banner, use the new `backgroundColor` prop.
+
+```diff
+const theme = {
+  ...LightTheme,
+  colors: {
+    ...LightTheme.colors,
+-   elevation: {
+-     ...LightTheme.colors.elevation,
+-     level1: '#ffd8e4',
+-   },
++   surfaceContainerLow: '#ffd8e4',
+  },
+};
+```
+
 ### DataTable
 
 - `DataTable.Title` text has a letter spacing of 0.5, and its sort icon rotates with the `standard` easing curve instead of ease-in-out.
@@ -971,6 +989,22 @@ The icon is 24dp, in `theme.colors.secondary`. `Dialog.Icon`'s `color` and `size
 If your 5.x style set its own `gap`, drop `columnGap` from the copied style or set it to your value. On Android and iOS, `columnGap` wins over `gap`, so a `{ gap: 12 }` added after it still leaves 8dp between the buttons there. On the web the later of the two wins, so the same style gives 12.
 
 ### Menu
+
+The menu background is now `theme.colors.surfaceContainer` by default, following the Material Design 3 spec, and no longer depends on the `elevation` prop, which only controls the shadow. If you customized `theme.colors.elevation.level2` to change the menu background, customize `theme.colors.surfaceContainer` instead. With `LightTheme` and `DarkTheme`, the rendered color at the default `elevation` of `2` is unchanged. A menu with `elevation={0}` is no longer transparent. With `DynamicLightTheme` and `DynamicDarkTheme` on Android 14 and newer, the menu now uses the system surface color. To change the background of a single menu, use the new `backgroundColor` prop.
+
+```diff
+const theme = {
+  ...LightTheme,
+  colors: {
+    ...LightTheme.colors,
+-   elevation: {
+-     ...LightTheme.colors.elevation,
+-     level2: '#ffd8e4',
+-   },
++   surfaceContainer: '#ffd8e4',
+  },
+};
+```
 
 The `overlayAccessibilityLabel` prop was renamed to `dismissAccessibilityLabel`:
 

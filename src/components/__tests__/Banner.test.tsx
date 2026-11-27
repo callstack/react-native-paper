@@ -13,9 +13,10 @@ import { act } from '@testing-library/react-native';
 import * as Reanimated from 'react-native-reanimated';
 
 import PaperProvider from '../../core/PaperProvider';
-import { render } from '../../test-utils';
+import { render, screen } from '../../test-utils';
 import { LightTheme } from '../../theme/schemes';
-import type { Theme } from '../../theme/types';
+import { Palette } from '../../theme/tokens';
+import type { Elevation, Theme } from '../../theme/types';
 import Banner from '../Banner';
 
 jest.mock('react-native-reanimated', () => {
@@ -119,6 +120,34 @@ it('renders visible banner, with action buttons and with image', async () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+const elevations: Elevation[] = [0, 1, 2, 3, 4, 5];
+
+elevations.forEach((elevation) =>
+  it(`keeps the banner background at elevation ${elevation}`, async () => {
+    await render(
+      <Banner visible elevation={elevation} testID="banner">
+        Text
+      </Banner>
+    );
+
+    expect(screen.getByTestId('banner')).toHaveStyle({
+      backgroundColor: LightTheme.colors.surfaceContainerLow,
+    });
+  })
+);
+
+it('renders banner with a custom background color', async () => {
+  await render(
+    <Banner visible testID="banner" backgroundColor={Palette.error60}>
+      Text
+    </Banner>
+  );
+
+  expect(screen.getByTestId('banner')).toHaveStyle({
+    backgroundColor: Palette.error60,
+  });
 });
 
 it('render visible banner, with custom theme', async () => {

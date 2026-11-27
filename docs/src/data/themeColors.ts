@@ -35,6 +35,7 @@ export const themeColors = {
   },
   Banner: {
     '-': {
+      backgroundColor: 'theme.colors.surfaceContainerLow',
       textColor: 'theme.colors.onSurface',
       'action textColor': 'theme.colors.primary',
     },
@@ -295,7 +296,7 @@ export const themeColors = {
   },
   Menu: {
     '-': {
-      backgroundColor: 'theme.colors.elevation.level2',
+      backgroundColor: 'theme.colors.surfaceContainer',
     },
   },
   'Menu.Item': {
