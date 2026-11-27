@@ -453,14 +453,14 @@ export default function Main() {
 }
 ```
 
-`Theme` requires every key, so it doesn't fit a partial theme kept in a variable. Type the variable with `ProviderProps['theme']`, the type that the `theme` props of `PaperProvider`, `ThemeProvider` and Paper's components take:
+`Theme` requires every key, so it doesn't fit a partial theme kept in a variable. Type the variable with `ThemeProp`, the partial theme type that the `theme` props of `PaperProvider`, `ThemeProvider` and Paper's components take:
 
 ```tsx
 import * as React from 'react';
-import { PaperProvider, type ProviderProps } from 'react-native-paper';
+import { PaperProvider, type ThemeProp } from 'react-native-paper';
 import App from './src/App';
 
-const theme: ProviderProps['theme'] = {
+const theme: ThemeProp = {
   colors: {
     primary: 'tomato',
   },
@@ -475,7 +475,7 @@ export default function Main() {
 }
 ```
 
-The type includes `undefined`. If the variable must always hold a theme, type it with `NonNullable<ProviderProps['theme']>`.
+Every key in `ThemeProp` is optional at every level, so you can override a single color or font without restating the rest of the theme.
 
 ### Advanced theme overrides
 
