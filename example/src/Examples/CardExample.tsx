@@ -87,7 +87,13 @@ const CardExample = () => {
             title="Berries that are trimmed at the end"
             subtitle="Omega Ruby"
             left={(props: any) => <Avatar.Icon {...props} icon="folder" />}
-            right={() => <IconButton icon="dots-vertical" onPress={() => {}} />}
+            right={() => (
+              <IconButton
+                icon="dots-vertical"
+                aria-label="More options for berries"
+                onPress={() => {}}
+              />
+            )}
           />
           <Card.Content>
             <Text variant="bodyMedium">
@@ -147,6 +153,7 @@ const CardExample = () => {
             right={() => (
               <IconButton
                 icon={isSelected ? 'heart' : 'heart-outline'}
+                aria-label="Favorite strawberries"
                 selected={isSelected}
                 onPress={() => setIsSelected(!isSelected)}
               />
